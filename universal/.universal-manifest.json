@@ -1,0 +1,477 @@
+{
+  "version": "1.3.0",
+  "generated": "2025-10-07T18:15:09.603728+00:00",
+  "generator_version": "1.0.0",
+  "files": {
+    "standards/ai-safety/credential-file-protection.md": {
+      "checksum": "sha256:15954141f1aa847354a4eaf68013fef9818fe4aa58ffe445044b98c7433ab209",
+      "size": 7644,
+      "last_updated": "2025-10-04"
+    },
+    "standards/ai-safety/date-usage-policy.md": {
+      "checksum": "sha256:ed9e0a4a4659d541fb73e3bdc47ed1faf7f305240117b29de730546dfd194024",
+      "size": 5438,
+      "last_updated": "2025-10-05"
+    },
+    "standards/ai-safety/git-safety-rules.md": {
+      "checksum": "sha256:1addae7ad45f39a45975f3e49344157e8ac6af6721a4b6cdf360d1c8bd155f93",
+      "size": 6890,
+      "last_updated": "2025-10-04"
+    },
+    "standards/ai-safety/import-verification-rules.md": {
+      "checksum": "sha256:a241a96e47a0042312cd4c4cac8fb822c0cbc09a26431b195279f60f04f15015",
+      "size": 9577,
+      "last_updated": "2025-10-04"
+    },
+    "standards/ai-safety/production-code-checklist.md": {
+      "checksum": "sha256:dc46fafbe7fc7074fb90504f54b4eafd37c0e652fa4882b2340d717a54809653",
+      "size": 15865,
+      "last_updated": "2025-10-06"
+    },
+    "standards/architecture/api-design-principles.md": {
+      "checksum": "sha256:f18aec51053dc9291033ceb640e62140d63eb9f1e8a720ce0404badda4c0c832",
+      "size": 14019,
+      "last_updated": "2025-10-04"
+    },
+    "standards/architecture/dependency-injection.md": {
+      "checksum": "sha256:44ecff212cef5c5711835dfc4fc0ae375b103eb6f9a9a11a05a5dde12dff1f31",
+      "size": 13444,
+      "last_updated": "2025-10-04"
+    },
+    "standards/architecture/separation-of-concerns.md": {
+      "checksum": "sha256:2edef33d2836a01777a434a6b8b17e78a246974fa171eef53bf43c18737c3b5c",
+      "size": 17044,
+      "last_updated": "2025-10-04"
+    },
+    "standards/architecture/solid-principles.md": {
+      "checksum": "sha256:c57bc21f679f6964fc62fd51e25467340f88e4589a9310ca06a5c09099c04c1a",
+      "size": 12537,
+      "last_updated": "2025-10-04"
+    },
+    "standards/concurrency/deadlocks.md": {
+      "checksum": "sha256:d2eb38e83f41bff051a356f3b1298f6ac1b5184bcadf091061374a8d20539d8d",
+      "size": 7551,
+      "last_updated": "2025-10-04"
+    },
+    "standards/concurrency/locking-strategies.md": {
+      "checksum": "sha256:5948a1c0b6f0a45215e4468a9ede3e26155d74a1ac20c937f93a9ae9e9aae90b",
+      "size": 12900,
+      "last_updated": "2025-10-04"
+    },
+    "standards/concurrency/race-conditions.md": {
+      "checksum": "sha256:a983f6c96d9fdc9924df190d58ce09ffbc0e1b1e2876912881334faeaad5fd71",
+      "size": 4722,
+      "last_updated": "2025-10-04"
+    },
+    "standards/concurrency/shared-state-analysis.md": {
+      "checksum": "sha256:311cdf1fcf2e72f091c2be04dfa6940673d522593967889e0bf74eef6d605227",
+      "size": 14321,
+      "last_updated": "2025-10-04"
+    },
+    "standards/database/database-patterns.md": {
+      "checksum": "sha256:9049454bf1564fc039a38d6e7fad9834741e160423a2a2547ea784352edd24cc",
+      "size": 12604,
+      "last_updated": "2025-10-04"
+    },
+    "standards/development/mcp-tool-design-best-practices.md": {
+      "checksum": "sha256:cbc8f29af7667c1850db6d4dda176e383a924698004db1b7543065d3cbe1d6d9",
+      "size": 4672,
+      "last_updated": "2025-10-06"
+    },
+    "standards/documentation/api-documentation.md": {
+      "checksum": "sha256:b2d7cbb6de035dc999dc483959ec392601f88bd7e8276feaefd7f3d4fdb76091",
+      "size": 16849,
+      "last_updated": "2025-10-04"
+    },
+    "standards/documentation/code-comments.md": {
+      "checksum": "sha256:1a0b19550d4f3b5c081ff427ce169366031b439d33754cfb7df4c54851aa46ec",
+      "size": 11948,
+      "last_updated": "2025-10-04"
+    },
+    "standards/documentation/readme-templates.md": {
+      "checksum": "sha256:8e5c99b9e91e7cf270eaef8483469743fc69e06a61d6fe126a348c9d0659cd1e",
+      "size": 15462,
+      "last_updated": "2025-10-04"
+    },
+    "standards/failure-modes/circuit-breakers.md": {
+      "checksum": "sha256:80cd062bc97ddb8250b8754e4098813e1acaf30a2be338852efb2d6ee145b375",
+      "size": 11684,
+      "last_updated": "2025-10-04"
+    },
+    "standards/failure-modes/graceful-degradation.md": {
+      "checksum": "sha256:9f6e1dc2e68fea50f2f3ffd66ff65f49f435bf28fb0be2c8d2e7d6d416453546",
+      "size": 7163,
+      "last_updated": "2025-10-04"
+    },
+    "standards/failure-modes/retry-strategies.md": {
+      "checksum": "sha256:2373e3643072f84e49cf463d224fb4883fb02f83348808d038c9d65de6c8e97a",
+      "size": 9421,
+      "last_updated": "2025-10-04"
+    },
+    "standards/failure-modes/timeout-patterns.md": {
+      "checksum": "sha256:663d92c00336614b7d2096201246ed9558616f186dff3d158b2e20b275ef5c1f",
+      "size": 12066,
+      "last_updated": "2025-10-04"
+    },
+    "standards/installation/update-procedures.md": {
+      "checksum": "sha256:c0f9defd659c310c22a891dceaaf459d641ec6165f8e191ce6eb47312f8d58fd",
+      "size": 13193,
+      "last_updated": "2025-10-06"
+    },
+    "standards/meta-framework/command-language.md": {
+      "checksum": "sha256:d8f0214c323c087df37304a852a219e74cfea748462802bbaff85cb1a6855e6c",
+      "size": 9693,
+      "last_updated": "2025-10-05"
+    },
+    "standards/meta-framework/framework-creation-principles.md": {
+      "checksum": "sha256:1adac66d9ff7128555e4bfdc878557b4fc8e516352abc6e27fa34ff92eabdb70",
+      "size": 8608,
+      "last_updated": "2025-10-05"
+    },
+    "standards/meta-framework/horizontal-decomposition.md": {
+      "checksum": "sha256:33255c6491e71d0b9969668df7f33a87f9cfea77e7d44339508820d796b1a38e",
+      "size": 4246,
+      "last_updated": "2025-10-05"
+    },
+    "standards/meta-framework/three-tier-architecture.md": {
+      "checksum": "sha256:d4a399f26b5f14f2e5989cf3b94e61b9a3682661c4f6d8f9dc474763e9862584",
+      "size": 8570,
+      "last_updated": "2025-10-05"
+    },
+    "standards/meta-framework/validation-gates.md": {
+      "checksum": "sha256:97d43d861dea8b00cf20d676f8b105dd8fecf7b9a2f86cade66a5cf41132a3b5",
+      "size": 4759,
+      "last_updated": "2025-10-05"
+    },
+    "standards/performance/optimization-patterns.md": {
+      "checksum": "sha256:a5b59422a7cec297986ba7d8b3327651035663211e842924420f8ac26bacf983",
+      "size": 12446,
+      "last_updated": "2025-10-04"
+    },
+    "standards/security/security-patterns.md": {
+      "checksum": "sha256:b8fe42a16181e43f3684ba398b7299f6b0fc8c1fdbd1392eae334ae02c4b73a9",
+      "size": 13504,
+      "last_updated": "2025-10-04"
+    },
+    "standards/testing/integration-testing.md": {
+      "checksum": "sha256:60f7ba0cd7fc13a452743012d4ef71fa40f4c855d9b5c97976df69d2c6f6e14e",
+      "size": 15010,
+      "last_updated": "2025-10-04"
+    },
+    "standards/testing/property-based-testing.md": {
+      "checksum": "sha256:35f0da55bf5911d766b138a595143c9d8851e560df3cb536a364c013e1cface5",
+      "size": 15170,
+      "last_updated": "2025-10-04"
+    },
+    "standards/testing/test-doubles.md": {
+      "checksum": "sha256:73688ee6efba552560bbc67cc380dc6a7874a5410dd6dfaea597e3a2a2103c15",
+      "size": 12979,
+      "last_updated": "2025-10-04"
+    },
+    "standards/testing/test-pyramid.md": {
+      "checksum": "sha256:12ad8b57fe45fbe785128dbd6fbc0f34467ecdd65b037a7054ee32af50ecd2f5",
+      "size": 5003,
+      "last_updated": "2025-10-04"
+    },
+    "standards/workflows/mcp-rag-configuration.md": {
+      "checksum": "sha256:4aa9dd6ca53d6399f3b7ab13cefccb5c3e3aaad3369bbedc89553115f85dc70d",
+      "size": 12146,
+      "last_updated": "2025-10-06"
+    },
+    "standards/workflows/workflow-construction-standards.md": {
+      "checksum": "sha256:d3d400ce6308d7cae2aad0ee08e90eac5ab73034b1244406652040eb137a5ee3",
+      "size": 8773,
+      "last_updated": "2025-10-07"
+    },
+    "standards/workflows/workflow-metadata-standards.md": {
+      "checksum": "sha256:7e8b052514cf6e1cc8c8641c86d95c899c50d60147e7faa83cbc8147fbe2d703",
+      "size": 11688,
+      "last_updated": "2025-10-06"
+    },
+    "standards/workflows/workflow-system-overview.md": {
+      "checksum": "sha256:316cb187152fbdd0ef7dfe33bf2074aba43500d5dba324acd3d88544518fbb36",
+      "size": 13385,
+      "last_updated": "2025-10-07"
+    },
+    "usage/agent-os-update-guide.md": {
+      "checksum": "sha256:79e9ac5f91c20dbbdb390ef12ac69c1dfc39721671c02b5c830ff5b1061478b1",
+      "size": 12446,
+      "last_updated": "2025-10-06"
+    },
+    "usage/creating-specs.md": {
+      "checksum": "sha256:2e55b8fdd829b4b2775a253b5abb8d5d96f6cb41ac36b8d30b2a782e989ebae6",
+      "size": 13508,
+      "last_updated": "2025-10-05"
+    },
+    "usage/mcp-server-update-guide.md": {
+      "checksum": "sha256:3a5a7c6111aeb5db6fef28fc3314258d63ef1904ff2705223eadfc934399c564",
+      "size": 12627,
+      "last_updated": "2025-10-06"
+    },
+    "usage/mcp-usage-guide.md": {
+      "checksum": "sha256:24eee64efc0282a8891c125ac79e4e1c54c0a65837e5f060b526da3dfcba7a08",
+      "size": 11849,
+      "last_updated": "2025-10-07"
+    },
+    "usage/operating-model.md": {
+      "checksum": "sha256:53e77c2acdfb6c45dcd2c7355bb4d31e25c4e6822ffe5adbdc881e1880eed1cf",
+      "size": 4198,
+      "last_updated": "2025-10-05"
+    },
+    "workflows/production_code_v2/metadata.json": {
+      "checksum": "sha256:090f3c1485c28cd2c7f929207f38cea299671a367f9ab6c48e6e873f03cb36a9",
+      "size": 3100,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_creation_v1/core/architecture-diagrams.md": {
+      "checksum": "sha256:46ddcf720c8e66047d13cb856d96f809fb15cebe8606e3c4164accb8d3326188",
+      "size": 9039,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/core/implementation-template.md": {
+      "checksum": "sha256:9e3e19e92134de1a14bf6a2bca12146eca0b2bb6401fcb3ab04910d2cdf0853b",
+      "size": 5746,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/core/readme-template.md": {
+      "checksum": "sha256:8eff374ba18c12d79576d312bf239c4fbfe78e5dc7b23b4a62b6ad21a8df12bb",
+      "size": 8782,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/core/specs-template.md": {
+      "checksum": "sha256:05ea3ea178b27c6b0028ece3d16440aeec2b8dec031a38378ad12acf09d8b622",
+      "size": 5068,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/core/srd-template.md": {
+      "checksum": "sha256:cf2a3039a5bc0560abceb11b7c5053539cf5410dc2181c4875539882772fda1c",
+      "size": 6062,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/core/tasks-template.md": {
+      "checksum": "sha256:98e91e60b50b70c320778dd4c85abd8b5df4ec03ceb1e63034cf08eca0a5915d",
+      "size": 4911,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/metadata.json": {
+      "checksum": "sha256:485a2bcb9f08f62de35411b1438c6d414f22cfe821f7130a28dca28b161e4c3d",
+      "size": 2564,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/0/phase.md": {
+      "checksum": "sha256:d75b7a674820f8805191226c9cef0b99f4e11b7f393cb6d2bec6267fea492980",
+      "size": 2374,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/0/task-1-copy-documents.md": {
+      "checksum": "sha256:6282aeb2f35dcb8960b231d6316dcfb23d12c464cad57160c4eb8cdce708f9de",
+      "size": 3753,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/0/task-2-create-index.md": {
+      "checksum": "sha256:d07de4df4b8865ae3bce7fa3efd62fdbeae86257dc2804cac84878d75a7f1af3",
+      "size": 3658,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/0/task-3-extract-insights.md": {
+      "checksum": "sha256:2f7172a70bc3b155e4ee859a029ffda46b780aab5a0a3b888975e203cbec98f2",
+      "size": 4292,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/1/phase.md": {
+      "checksum": "sha256:4dc9bd35f8fabbf05fd0e0d0ad8c6474e92f07f63c2d1ed17313b3d365edef96",
+      "size": 2942,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/1/task-1-business-goals.md": {
+      "checksum": "sha256:3af779897a5004298e736d38d12198369729898d750cef2ac8b05e36adb448b4",
+      "size": 3251,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/1/task-2-user-stories.md": {
+      "checksum": "sha256:a395e7a03ba7a2553fa082bb52eb8ea48739eb202c84dea97cbce33830a20fc6",
+      "size": 3045,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/1/task-3-functional-requirements.md": {
+      "checksum": "sha256:75043c114af07a60426ce9c9845b6ca8422ad64510273cb16d80c8061ba3342a",
+      "size": 3412,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/1/task-4-nonfunctional-requirements.md": {
+      "checksum": "sha256:db7aeb9c0f809441cdacaeefd133e357811ddaa3dd91a228ce78288c9f8b0e4c",
+      "size": 3148,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/1/task-5-out-of-scope.md": {
+      "checksum": "sha256:819348b67f34dc97214f61113aacc5c151bf9be373351b6dd8d2dec84d415afc",
+      "size": 3007,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/phase.md": {
+      "checksum": "sha256:6b61b128a69790f4ce67e692b5a3c7d128a2634f420398439199a85fe5443431",
+      "size": 2861,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/task-1-architecture.md": {
+      "checksum": "sha256:165e7427cd8f466e61fa2ace413c297255dd32ed8bb5ebc296a0151203e713e1",
+      "size": 3775,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/task-2-components.md": {
+      "checksum": "sha256:a1f334efa9284b007207f61953cf42846bcc0d26a7056bee402e8c39547b47f5",
+      "size": 2393,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/task-3-apis.md": {
+      "checksum": "sha256:d28d5e4c5c5640a9d5a32ada77cf8d0404c8ff4454ad45940a666d505ac59375",
+      "size": 2337,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/task-4-data-models.md": {
+      "checksum": "sha256:51bdaaacd35a0ec0571d39df410a214e54e3959c04c6684416648b5503b0aeb1",
+      "size": 2071,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/task-5-security.md": {
+      "checksum": "sha256:de9c21a003bc521913bc152d17196c7944cab1e718e72b9a5a815f84403c4982",
+      "size": 2259,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/2/task-6-performance.md": {
+      "checksum": "sha256:b5544d662f79e79a3a8b4ec9345763e1822ebdce08f0d585fa9eb350b6a26b25",
+      "size": 2559,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/3/phase.md": {
+      "checksum": "sha256:cf9af9c3512c221e76715d4f62989ae6e36fbb3dce7b1e10f563ab0947d6d65b",
+      "size": 2518,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/3/task-1-identify-phases.md": {
+      "checksum": "sha256:6c3f0e0d319b8a7295f2fa9cddd80d6c625d80817eb96991c162cb93de63792a",
+      "size": 2393,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/3/task-2-break-down-tasks.md": {
+      "checksum": "sha256:fd301f968fcc32fe743faf640e019c2c1f00077018cff2333afb040d59a13fd4",
+      "size": 3491,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/3/task-3-acceptance-criteria.md": {
+      "checksum": "sha256:af14e3ed5c9f12621d51fc8adcb058c507b3ddc31b9bacbf471a7caedd54d3ac",
+      "size": 3723,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/3/task-4-map-dependencies.md": {
+      "checksum": "sha256:f65b6993c51da94e553601b136e0bcc3b73571ab8f7217b749e3b97bae184d77",
+      "size": 3088,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/3/task-5-validation-gates.md": {
+      "checksum": "sha256:175a688ce311c8e5f103d657925991a87434948357aad86ea1529d927580faa0",
+      "size": 3410,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/4/phase.md": {
+      "checksum": "sha256:0e54c5180df592fb8caaa1c3adf249bfb7f9a45f82283b889676d17b9c93b943",
+      "size": 2309,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/4/task-1-code-patterns.md": {
+      "checksum": "sha256:0288b716a7e97ddefd0c70a09012afc47bc7d369479b8b6223bc9ac7de1292d4",
+      "size": 2697,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/4/task-2-testing-strategy.md": {
+      "checksum": "sha256:df072a7dbb30b6a78f0c2de2fdc16facfbe5c11153b0dcfe888093d8ca48eda9",
+      "size": 2723,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/4/task-3-deployment.md": {
+      "checksum": "sha256:1008357f45cb18fbef6d809faccc8298bda1b8d05bcc7d4b8180577a9df03a84",
+      "size": 2979,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/4/task-4-troubleshooting.md": {
+      "checksum": "sha256:023dc1f00edeaae1db8a69faaf4b11f1f8da037e33188fd0944e1ccbe3eca119",
+      "size": 2396,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/5/phase.md": {
+      "checksum": "sha256:ea57df0a504ec39e10c85fcf76f216be91654630bf43c96d1629f29b965f9adc",
+      "size": 2069,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/5/task-1-completeness-review.md": {
+      "checksum": "sha256:b12dc00c6edb13861975ed6b70699ac8e86e240557157a6931007bc9436b8b47",
+      "size": 3705,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/5/task-2-consistency-review.md": {
+      "checksum": "sha256:9a85a6124549cd17913a93619d3fe6e084d57033eb114550c1ec5aa3ee5c596e",
+      "size": 3657,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_creation_v1/phases/5/task-3-final-package.md": {
+      "checksum": "sha256:ba8a221864da732b6749d23fab7985ad165b2582783ae86587c9271c68eb8f4b",
+      "size": 2184,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_execution_v1/core/dependency-resolver.md": {
+      "checksum": "sha256:d398f7137eeba3278de01248ed03d7d8cbd9fca9750c766e01bd715c8787941a",
+      "size": 5383,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/core/task-parser.md": {
+      "checksum": "sha256:37eaf84479845b85eaf2452e79bf124a5bfde32b799e3e3ca1996f8a20c4608c",
+      "size": 7452,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/core/validation-gates.md": {
+      "checksum": "sha256:ed12d4ab4225f0c2871609cf601f8b424d56d059e66a4cfd6ca61df43a8392a3",
+      "size": 7260,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/metadata.json": {
+      "checksum": "sha256:704b0556c79430a55685b1e82bd33630e3b9dad7737230bebf6bbe3490f74e1a",
+      "size": 6835,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/phases/0/phase.md": {
+      "checksum": "sha256:ab255ddc1add02611aaccb140dce0a11aa7c92496b52bc9cf1c1b5ef8cfe7fa7",
+      "size": 1971,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/phases/0/task-1-locate-spec.md": {
+      "checksum": "sha256:6b66e31a218cb110e1619b5f7c06712662c64071e49bc9dfbca5d22d3f73c026",
+      "size": 2831,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/phases/0/task-2-parse-tasks.md": {
+      "checksum": "sha256:770c99621825a18f0349836cda86088f045ade8360bddde281c77ecb32365e81",
+      "size": 3123,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/phases/0/task-3-build-plan.md": {
+      "checksum": "sha256:c12ffd34c97024c550dadf694727332db769aa6ee67788bfbe9023d97f06f56a",
+      "size": 4004,
+      "last_updated": "2025-10-06"
+    },
+    "workflows/spec_execution_v1/phases/dynamic/phase-template.md": {
+      "checksum": "sha256:eb389ef2d3d641f49afa20ac5b11f618ad1fa1fb8992e16c8f6e235495d1d3f0",
+      "size": 3308,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/spec_execution_v1/phases/dynamic/task-template.md": {
+      "checksum": "sha256:f93098ce55fddd5e226042a9b8748b38e9f52f40543d2d16f29040e3e44952b8",
+      "size": 3154,
+      "last_updated": "2025-10-07"
+    },
+    "workflows/test_generation_v3/metadata.json": {
+      "checksum": "sha256:5d157c0531ce5a4ee56837467d0dcb84dd71eba3f4eb81d4821955a414dcb6ea",
+      "size": 4051,
+      "last_updated": "2025-10-06"
+    }
+  }
+}
