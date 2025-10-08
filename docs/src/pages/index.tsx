@@ -195,31 +195,51 @@ function TheJourney() {
         </div>
         <div className={styles.journeyContent}>
           <div className={styles.journeyStory}>
-            <h3>🏗️ Built Upon Agent OS</h3>
+            <h3>🏗️ The Origins: BuilderMethods Agent OS</h3>
             <p>
-              Agent OS Enhanced is a fork of{' '}
+              It started with{' '}
               <a href="https://buildermethods.com/agent-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
                 BuilderMethods Agent OS
               </a>
-              , the groundbreaking framework that pioneered structured AI development workflows.
+              —a groundbreaking framework that pioneered spec-driven development with AI coding agents.
+              Universal standards, meta-framework patterns, and structured workflows became the foundation.
             </p>
             
-            <h3>🚀 Why Enhanced?</h3>
+            <h3>⚗️ Battle-Tested in Production</h3>
             <p>
-              While building production systems at HoneyHive, we discovered patterns that pushed beyond the original vision:
+              At{' '}
+              <a href="https://honeyhive.ai" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
+                HoneyHive
+              </a>
+              , we integrated Agent OS into our{' '}
+              <a href="https://honeyhiveai.github.io/python-sdk/development/agent-os-mcp-server.html" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
+                Python SDK development workflow
+              </a>
+              . As our AI-assisted codebase grew, we hit real-world scaling challenges that demanded evolution:
             </p>
             <ul className={styles.journeyList}>
-              <li><strong>MCP + RAG</strong>: Context reduction from 50KB→2-5KB (90% reduction)</li>
-              <li><strong>Persistent State</strong>: Workflows survive MCP server restarts</li>
-              <li><strong>Dynamic Loading</strong>: Zero-config workflow discovery</li>
-              <li><strong>Architectural Gating</strong>: Code-enforced phase compliance</li>
-              <li><strong>Production Observability</strong>: Full tracing and monitoring</li>
+              <li><strong>Context Overload</strong>: AI agents drowning in 50KB+ file dumps (4% relevant content)</li>
+              <li><strong>Lost State</strong>: Workflows breaking when MCP servers restarted</li>
+              <li><strong>Phase Bypassing</strong>: AI agents skipping critical architecture steps</li>
+              <li><strong>Zero Observability</strong>: No insight into what was working or failing</li>
+            </ul>
+
+            <h3>🚀 The Enhanced Evolution</h3>
+            <p>
+              After months of production use, the enhancements became significant enough to extract as a standalone project.
+              Agent OS Enhanced was born—battle-tested patterns that scale:
+            </p>
+            <ul className={styles.journeyList}>
+              <li><strong>MCP + RAG</strong>: 90% context reduction (50KB→2-5KB) with semantic search</li>
+              <li><strong>Persistent State</strong>: Workflows survive server restarts with session files</li>
+              <li><strong>Architectural Gating</strong>: Code-enforced phase compliance prevents shortcuts</li>
+              <li><strong>Dogfooded Observability</strong>: Full HoneyHive tracing on itself</li>
             </ul>
 
             <h3>🙏 Standing on Strong Foundations</h3>
             <p>
-              The core principles—universal standards, spec-driven development, meta-framework patterns—
-              all originate from BuilderMethods. Agent OS Enhanced extends these ideas for enterprise scale.
+              The core principles remain unchanged—universal standards, spec-driven development, meta-framework patterns.
+              Agent OS Enhanced extends BuilderMethods' vision with lessons learned from production AI development at scale.
             </p>
 
             <div className={styles.journeyLinks}>
