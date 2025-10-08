@@ -10,10 +10,21 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // OpenGraph metadata for social sharing
-  // https://docusaurus.io/docs/api/docusaurus-config#metadata
-  metadata: [
-    {property: 'og:image', content: 'https://honeyhiveai.github.io/agent-os-enhanced/img/agent-os-social-card.jpg'},
-    {property: 'twitter:card', content: 'summary_large_image'},
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image',
+        content: 'https://honeyhiveai.github.io/agent-os-enhanced/img/agent-os-social-card.jpg',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+    },
   ],
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
