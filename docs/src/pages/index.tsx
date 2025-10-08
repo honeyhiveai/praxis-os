@@ -195,51 +195,71 @@ function TheJourney() {
         </div>
         <div className={styles.journeyContent}>
           <div className={styles.journeyStory}>
-            <h3>🏗️ The Origins: BuilderMethods Agent OS</h3>
+            <h3>🏗️ The Starting Point: A Refactor Goal</h3>
             <p>
-              It started with{' '}
+              It started with a simple goal: refactor the HoneyHive Python SDK with <strong>AI as the code author</strong>, 
+              not just an assistant. As someone new to the AI development space, I looked for ways to improve the quality 
+              and consistency of AI-generated code.
+            </p>
+
+            <h3>💡 Discovery: BuilderMethods Agent OS</h3>
+            <p>
+              I discovered{' '}
               <a href="https://buildermethods.com/agent-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
                 BuilderMethods Agent OS
               </a>
-              —a groundbreaking framework that pioneered spec-driven development with AI coding agents.
-              Universal standards, meta-framework patterns, and structured workflows became the foundation.
+              —a 3-layer documentation structure (Standards/Product/Specs) that provided a systematic way to organize 
+              development context. Using <code>.cursorrules</code> for side-loaded context and discovery flows via READMEs 
+              in <code>.agent-os/standards</code>, <strong>quality and velocity dramatically improved</strong>. 
+              This enabled the initial workflow/framework methodology to emerge.
             </p>
-            
-            <h3>⚗️ Battle-Tested in Production</h3>
+
+            <h3>📈 Success... Then New Problems</h3>
             <p>
-              At{' '}
-              <a href="https://honeyhive.ai" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
-                HoneyHive
-              </a>
-              , we integrated Agent OS into our{' '}
+              The side-loaded context approach worked brilliantly—until it didn't. As we built more sophisticated 
+              workflows and richer standards:
+            </p>
+            <ul className={styles.journeyList}>
+              <li><strong>Diminishing Returns</strong>: More context didn't mean better output</li>
+              <li><strong>Cost Explosion</strong>: Context windows ballooning to 50KB+ per request</li>
+              <li><strong>AI Confusion</strong>: Too much context actually degraded quality (only 4% relevant)</li>
+              <li><strong>No Persistence</strong>: Complex workflows lost when conversations restarted</li>
+              <li><strong>No Enforcement</strong>: AI still skipping steps despite better documentation</li>
+            </ul>
+
+            <h3>🚀 The Infrastructure Evolution</h3>
+            <p>
+              Out of necessity, we built the infrastructure layer:
+            </p>
+            <ul className={styles.journeyList}>
+              <li><strong>MCP + RAG Server</strong>: Semantic search reducing context from 50KB→2-5KB (90% reduction), solving the cost and confusion problems</li>
+              <li><strong>Structured Workflows</strong>: Test generation V3 (65 phase files), production code V2—systematic, repeatable frameworks</li>
+              <li><strong>Persistent State</strong>: Session files surviving restarts and conversation breaks</li>
+              <li><strong>Architectural Gating</strong>: Code-enforced checkpoints preventing AI shortcuts</li>
+              <li><strong>Operating Model</strong>: Formalizing "AI as author" with clear roles (human: direction, AI: 100% implementation)</li>
+              <li><strong>Observability</strong>: HoneyHive tracing dogfooded on itself</li>
+            </ul>
+            <p>
+              Research documented:{' '}
               <a href="https://honeyhiveai.github.io/python-sdk/development/agent-os-mcp-server.html" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
-                Python SDK development workflow
+                LLM Workflow Engineering Methodology
               </a>
-              . As our AI-assisted codebase grew, we hit real-world scaling challenges that demanded evolution:
             </p>
-            <ul className={styles.journeyList}>
-              <li><strong>Context Overload</strong>: AI agents drowning in 50KB+ file dumps (4% relevant content)</li>
-              <li><strong>Lost State</strong>: Workflows breaking when MCP servers restarted</li>
-              <li><strong>Phase Bypassing</strong>: AI agents skipping critical architecture steps</li>
-              <li><strong>Zero Observability</strong>: No insight into what was working or failing</li>
-            </ul>
 
-            <h3>🚀 The Enhanced Evolution</h3>
+            <h3>📦 The Extraction: Agent OS Enhanced</h3>
             <p>
-              After months of production use, the enhancements became significant enough to extract as a standalone project.
-              Agent OS Enhanced was born—battle-tested patterns that scale:
+              After proving these patterns in production SDK development (<strong>2,777 tests, 10.0/10 Pylint, 
+              AI-authored: 2,500+ lines (100%), human-authored: 0 lines (0%)</strong>), we extracted the platform. 
+              Agent OS Enhanced transforms BuilderMethods' conceptual foundation into a complete AI development platform 
+              with enforcement, state management, and the infrastructure needed for production-grade AI authorship.
             </p>
-            <ul className={styles.journeyList}>
-              <li><strong>MCP + RAG</strong>: 90% context reduction (50KB→2-5KB) with semantic search</li>
-              <li><strong>Persistent State</strong>: Workflows survive server restarts with session files</li>
-              <li><strong>Architectural Gating</strong>: Code-enforced phase compliance prevents shortcuts</li>
-              <li><strong>Dogfooded Observability</strong>: Full HoneyHive tracing on itself</li>
-            </ul>
 
-            <h3>🙏 Standing on Strong Foundations</h3>
+            <h3>🙏 Standing on Giants</h3>
             <p>
-              The core principles remain unchanged—universal standards, spec-driven development, meta-framework patterns.
-              Agent OS Enhanced extends BuilderMethods' vision with lessons learned from production AI development at scale.
+              BuilderMethods provided the <strong>3-layer structure</strong> and philosophical foundation that made 
+              the initial breakthrough possible. Everything built on top—MCP+RAG, workflows, state management, enforcement, 
+              the operating model—emerged from solving real problems during production SDK development. 
+              They showed the path; we built the infrastructure to scale it.
             </p>
 
             <div className={styles.journeyLinks}>
