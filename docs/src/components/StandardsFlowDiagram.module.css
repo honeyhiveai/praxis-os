@@ -1,0 +1,165 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tier {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+}
+
+.tierTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  text-align: center;
+  color: var(--ifm-heading-color);
+}
+
+.tierSubtitle {
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.card {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 2px solid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cardBlue {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: #ff6b35;
+}
+
+.cardPurple {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: #ff6b35;
+}
+
+.cardGreen {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: #ff6b35;
+}
+
+.cardOrange {
+  background: rgba(255, 140, 93, 0.12);
+  border-color: #ff8c5d;
+}
+
+/* Dark mode - HoneyHive orange theme */
+[data-theme='dark'] .cardBlue {
+  background: rgba(255, 140, 93, 0.08);
+  border-color: #ff6b35;
+}
+
+[data-theme='dark'] .cardPurple {
+  background: rgba(255, 140, 93, 0.08);
+  border-color: #ff6b35;
+}
+
+[data-theme='dark'] .cardGreen {
+  background: rgba(255, 140, 93, 0.08);
+  border-color: #ff6b35;
+}
+
+[data-theme='dark'] .cardOrange {
+  background: rgba(255, 140, 93, 0.12);
+  border-color: #ff8c5d;
+}
+
+.cardIcon {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ifm-heading-color);
+  margin-bottom: 0.15rem;
+}
+
+.cardDetail {
+  font-size: 0.75rem;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  font-family: var(--ifm-font-family-monospace);
+  line-height: 1.3;
+}
+
+.arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 80px;
+}
+
+.arrowLine {
+  width: 60px;
+  height: 2px;
+  background: #ff8c5d;
+  position: relative;
+}
+
+.arrowLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ff8c5d;
+  white-space: nowrap;
+  background: var(--ifm-background-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  border: 2px solid #ff8c5d;
+}
+
+.arrowHead {
+  font-size: 1.5rem;
+  color: #ff8c5d;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 996px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .arrow {
+    transform: rotate(90deg);
+    margin: 1rem 0;
+  }
+  
+  .tier {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+

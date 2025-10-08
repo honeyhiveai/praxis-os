@@ -1,0 +1,104 @@
+/* Compact horizontal flow - BuilderMethods inspired */
+.compactFlow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  margin: 1.25rem auto;
+  max-width: 800px;
+  flex-wrap: wrap;
+}
+
+.flowBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 1rem;
+  border: 2px solid #ff6b35;
+  border-radius: 8px;
+  background: rgba(255, 140, 93, 0.08);
+  min-width: 100px;
+  transition: all 0.2s ease;
+}
+
+.flowBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  border-color: #ff8c5d;
+}
+
+.flowBoxWide {
+  min-width: 200px;
+  padding: 0;
+}
+
+.splitBox {
+  display: flex;
+  width: 100%;
+}
+
+.splitItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 0.75rem;
+}
+
+.splitDivider {
+  width: 1px;
+  background: #ff6b35;
+  opacity: 0.3;
+}
+
+.flowIcon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.flowLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.flowArrow {
+  font-size: 1.5rem;
+  color: #ff8c5d;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Dark mode */
+[data-theme='dark'] .flowBox {
+  background: rgba(255, 140, 93, 0.08);
+  border-color: #ff6b35;
+}
+
+[data-theme='dark'] .flowBox:hover {
+  border-color: #ff8c5d;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+}
+
+/* Mobile: stack vertically */
+@media screen and (max-width: 768px) {
+  .compactFlow {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .flowArrow {
+    transform: rotate(90deg);
+  }
+  
+  .flowBox, .flowBoxWide {
+    width: 100%;
+    min-width: unset;
+  }
+}
+

@@ -299,9 +299,9 @@ export default function Home(): JSX.Element {
       description="The open-source operating system for spec-driven development with AI coding agents">
       <HomepageHeader />
       <main>
+        <TheJourney />
         <QuickStart />
         <KeyFeatures />
-        <TheJourney />
         <WhyAgentOS />
       </main>
     </Layout>

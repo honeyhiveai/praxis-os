@@ -1,0 +1,338 @@
+/**
+ * HoneyHive Brand Theme for Agent OS Enhanced
+ * Matches https://docs.honeyhive.ai branding
+ * 
+ * Key Elements:
+ * - Inter font family (professional, clean)
+ * - Orange accent color (HoneyHive brand)
+ * - Dark mode by default
+ * - Premium, polished aesthetic
+ */
+
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Light mode: Clean and minimal (like HoneyHive) */
+:root {
+  /* HoneyHive Brand Orange */
+  --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-dark: #ff5518;
+  --ifm-color-primary-darker: #ff4a0d;
+  --ifm-color-primary-darkest: #e63800;
+  --ifm-color-primary-light: #ff8152;
+  --ifm-color-primary-lighter: #ff8c5d;
+  --ifm-color-primary-lightest: #ffa77e;
+  
+  /* Inter font (matching HoneyHive) */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ifm-font-family-monospace: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Dank Mono', 'Source Code Pro', monospace;
+  
+  /* Font rendering improvements */
+  --ifm-code-font-size: 95%;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.6;
+  
+  /* Light backgrounds */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8f9fa;
+  --ifm-card-background-color: #ffffff;
+  
+  /* Code blocks */
+  --docusaurus-highlighted-code-line-bg: rgba(255, 107, 53, 0.1);
+  
+  /* Navbar */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  
+  /* Spacing and rhythm */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-spacing-vertical: 1.5rem;
+}
+
+/* Dark mode: HoneyHive premium aesthetic (matching docs.honeyhive.ai) */
+[data-theme='dark'] {
+  /* HoneyHive Orange - vibrant on dark */
+  --ifm-color-primary: #ff8c5d;
+  --ifm-color-primary-dark: #ff7740;
+  --ifm-color-primary-darker: #ff6b35;
+  --ifm-color-primary-darkest: #ff5518;
+  --ifm-color-primary-light: #ffa17a;
+  --ifm-color-primary-lighter: #ffac8a;
+  --ifm-color-primary-lightest: #ffc7ad;
+  
+  /* Deep, rich backgrounds (HoneyHive style) */
+  --ifm-background-color: #0a0c10;
+  --ifm-background-surface-color: #13151a;
+  --ifm-card-background-color: #1a1d24;
+  
+  /* High contrast, readable text (matching HoneyHive's white text) */
+  --ifm-font-color-base: #ffffff;
+  --ifm-color-content: #ffffff;
+  --ifm-color-content-secondary: #a0a6b1;
+  --ifm-heading-color: #ffffff;
+  
+  /* Subtle borders and dividers */
+  --ifm-color-emphasis-100: #1a1d24;
+  --ifm-color-emphasis-200: #2d3139;
+  --ifm-color-emphasis-300: #3f4450;
+  --ifm-color-emphasis-600: #6b7280;
+  --ifm-color-emphasis-800: #9ca3af;
+  
+  /* Code blocks - sophisticated dark */
+  --ifm-code-background: #13151a;
+  --ifm-pre-background: #0a0c10;
+  --ifm-code-border-radius: 6px;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 93, 0.15);
+  
+  /* Navbar - professional dark (HoneyHive style) */
+  --ifm-navbar-background-color: rgba(10, 12, 16, 0.95);
+  --ifm-navbar-shadow: 0 1px 0 rgba(45, 49, 57, 0.5);
+  backdrop-filter: blur(12px);
+  
+  /* Links - HoneyHive orange accent */
+  --ifm-link-color: #ff8c5d;
+  --ifm-link-hover-color: #ffa17a;
+  --ifm-link-hover-decoration: none;
+  
+  /* Footer - matching main background */
+  --ifm-footer-background-color: #0a0c10;
+  --ifm-footer-color: #a0a6b1;
+  --ifm-footer-link-color: #ff8c5d;
+  
+  /* Tables */
+  --ifm-table-border-color: #2d3139;
+  --ifm-table-stripe-background: rgba(160, 166, 177, 0.05);
+  
+  /* Alerts/Admonitions - orange accented */
+  --ifm-alert-background-color: rgba(255, 140, 93, 0.1);
+  --ifm-alert-border-color: #ff8c5d;
+  
+  /* Sidebar - matches HoneyHive sidebar */
+  --ifm-menu-color: #a0a6b1;
+  --ifm-menu-color-active: #ffffff;
+  --ifm-menu-color-background-active: rgba(255, 140, 93, 0.15);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.05);
+}
+
+/* Typography improvements (matching HoneyHive's clean style) */
+body {
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings - Inter with proper weights */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* Dark mode refinements (HoneyHive style) */
+[data-theme='dark'] .navbar {
+  border-bottom: 1px solid rgba(45, 49, 57, 0.6);
+}
+
+[data-theme='dark'] code {
+  background-color: rgba(255, 140, 93, 0.12);
+  border: 1px solid rgba(255, 140, 93, 0.2);
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+  color: #ffac8a;
+}
+
+[data-theme='dark'] pre code {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+[data-theme='dark'] blockquote {
+  border-left: 4px solid #ff8c5d;
+  color: #a0a6b1;
+  background-color: rgba(255, 140, 93, 0.05);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+}
+
+/* Sidebar styling (HoneyHive inspired) */
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background-color: #0a0c10;
+  border-right: 1px solid #2d3139;
+}
+
+[data-theme='dark'] .menu__link {
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(255, 140, 93, 0.15);
+  color: #ffffff;
+  border-left: 3px solid #ff8c5d;
+  font-weight: 500;
+}
+
+/* Cards and content blocks */
+[data-theme='dark'] .card {
+  background-color: #1a1d24;
+  border: 1px solid #2d3139;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .card:hover {
+  border-color: #ff8c5d;
+  box-shadow: 0 4px 12px rgba(255, 140, 93, 0.15);
+}
+
+/* Search bar (HoneyHive style) */
+[data-theme='dark'] .navbar__search-input {
+  background-color: #13151a;
+  border: 1px solid #2d3139;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .navbar__search-input:focus {
+  border-color: #ff8c5d;
+  box-shadow: 0 0 0 2px rgba(255, 140, 93, 0.2);
+}
+
+/* Badges and pills */
+[data-theme='dark'] .badge {
+  background-color: rgba(255, 140, 93, 0.2);
+  color: #ffac8a;
+  border: 1px solid rgba(255, 140, 93, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Tables (HoneyHive refined) */
+[data-theme='dark'] table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #2d3139;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+[data-theme='dark'] th {
+  background-color: #13151a;
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom: 2px solid #ff8c5d;
+}
+
+[data-theme='dark'] tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Mermaid diagrams (HoneyHive orange accents) */
+[data-theme='dark'] .mermaid {
+  background-color: transparent !important;
+}
+
+[data-theme='dark'] .mermaid .node rect,
+[data-theme='dark'] .mermaid .node circle,
+[data-theme='dark'] .mermaid .node ellipse,
+[data-theme='dark'] .mermaid .node polygon {
+  fill: #1a1d24 !important;
+  stroke: #2d3139 !important;
+  stroke-width: 2px !important;
+}
+
+[data-theme='dark'] .mermaid .node .label,
+[data-theme='dark'] .mermaid text {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .mermaid .edgePath .path {
+  stroke: #ff8c5d !important;
+  stroke-width: 2px !important;
+}
+
+[data-theme='dark'] .mermaid .edgeLabel {
+  background-color: #13151a !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .mermaid .marker {
+  fill: #ff8c5d !important;
+  stroke: #ff8c5d !important;
+}
+
+/* Admonitions (Info, Warning, etc.) with HoneyHive styling */
+[data-theme='dark'] .admonition {
+  border-left: 4px solid #ff8c5d;
+  background-color: rgba(255, 140, 93, 0.08);
+  border-radius: 4px;
+}
+
+[data-theme='dark'] .admonition-heading {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Hero sections (for landing pages) */
+[data-theme='dark'] .hero {
+  background: linear-gradient(135deg, #0a0c10 0%, #13151a 100%);
+  border-bottom: 1px solid #2d3139;
+}
+
+[data-theme='dark'] .hero__title {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+[data-theme='dark'] .hero__subtitle {
+  color: #a0a6b1;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+/* Buttons (HoneyHive orange accent) */
+[data-theme='dark'] .button--primary {
+  background-color: #ff8c5d;
+  border-color: #ff8c5d;
+  color: #0a0c10;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background-color: #ffa17a;
+  border-color: #ffa17a;
+  color: #0a0c10;
+}
+
+/* Scrollbar styling (subtle, HoneyHive-like) */
+[data-theme='dark'] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #0a0c10;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #2d3139;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: #3f4450;
+}
