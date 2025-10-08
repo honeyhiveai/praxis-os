@@ -93,8 +93,8 @@ const config: Config = {
     mermaid: {
       theme: {light: 'base', dark: 'dark'},
     },
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // Social card for link previews
+    image: 'img/agent-os-social-card.jpg',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
