@@ -9,6 +9,13 @@ const config: Config = {
   tagline: 'Portable Multi-Agent Development Framework',
   favicon: 'img/favicon.ico',
 
+  // OpenGraph metadata for social sharing
+  // https://docusaurus.io/docs/api/docusaurus-config#metadata
+  metadata: [
+    {property: 'og:image', content: 'https://honeyhiveai.github.io/agent-os-enhanced/img/agent-os-social-card.jpg'},
+    {property: 'twitter:card', content: 'summary_large_image'},
+  ],
+
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
