@@ -1,0 +1,549 @@
+/**
+ * Mintlify-inspired design for Agent OS Enhanced (Docusaurus)
+ * Matches the premium aesthetic of HoneyHive docs with open-source tools
+ */
+
+/* ===== HERO SECTION (Two-column layout like Mintlify) ===== */
+.heroBanner {
+  padding: 3rem 0 4rem 0;
+  background: var(--ifm-background-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .heroBanner {
+  background: linear-gradient(135deg, #0a0c10 0%, #10121a 100%);
+  border-bottom: 1px solid #2d3139;
+}
+
+.heroContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.heroText {
+  padding-right: 2rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.1 !important;
+  margin-bottom: 1.5rem !important;
+  background: linear-gradient(135deg, var(--ifm-font-color-base) 0%, var(--ifm-color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='dark'] .heroTitle {
+  background: linear-gradient(135deg, #ffffff 0%, #ff8c5d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+[data-theme='dark'] .heroSubtitle {
+  color: #e6edf3;
+}
+
+.heroDescription {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+[data-theme='dark'] .heroDescription {
+  color: #a0a6b1;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.heroButtons .button {
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.heroButtons .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 140, 93, 0.3);
+}
+
+/* Code Example Visual (Mintlify style) */
+.heroVisual {
+  position: relative;
+}
+
+.codeExample {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] .codeExample {
+  background: #1a1d24;
+  border-color: #2d3139;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.codeHeader {
+  background: var(--ifm-background-surface-color);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .codeHeader {
+  background: #13151a;
+  border-bottom-color: #2d3139;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6b35;
+  opacity: 0.4;
+}
+
+.dot:nth-child(1) {
+  background: #ff6b35;
+  opacity: 1;
+}
+
+.dot:nth-child(2) {
+  background: #ffa17a;
+  opacity: 0.7;
+}
+
+.dot:nth-child(3) {
+  background: #ffac8a;
+  opacity: 0.5;
+}
+
+.codeTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.codeBody {
+  padding: 1.5rem;
+}
+
+.codeBody pre {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ifm-font-color-base);
+  font-family: var(--ifm-font-family-monospace);
+  white-space: pre-wrap;
+}
+
+[data-theme='dark'] .codeBody pre {
+  color: #e6edf3;
+}
+
+/* ===== SECTION HEADERS (Mintlify style) ===== */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.sectionHeader p {
+  font-size: 1.25rem;
+  opacity: 0.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+[data-theme='dark'] .sectionHeader p {
+  color: #a0a6b1;
+}
+
+/* ===== QUICK START SECTION (Mintlify card grid) ===== */
+.quickStart {
+  padding: 5rem 0;
+  background: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .quickStart {
+  background: #0a0c10;
+}
+
+.quickStartLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.quickStartCard {
+  background: var(--ifm-card-background-color);
+  border: 2px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme='dark'] .quickStartCard {
+  background: #13151a;
+  border-color: #2d3139;
+}
+
+.quickStartLink:hover .quickStartCard {
+  transform: translateY(-4px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 16px 40px rgba(255, 140, 93, 0.2);
+}
+
+[data-theme='dark'] .quickStartLink:hover .quickStartCard {
+  box-shadow: 0 16px 40px rgba(255, 140, 93, 0.3);
+}
+
+.quickStartIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.quickStartCard h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-font-color-base);
+}
+
+.quickStartCard p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+  flex: 1;
+  opacity: 0.8;
+}
+
+[data-theme='dark'] .quickStartCard p {
+  color: #a0a6b1;
+}
+
+.quickStartArrow {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--ifm-color-primary);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.quickStartLink:hover .quickStartArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== FEATURES SECTION (Icon-based cards) ===== */
+.features {
+  padding: 5rem 0;
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .features {
+  background: #10121a;
+}
+
+.featureCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  margin-bottom: 2rem;
+}
+
+.featureCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+[data-theme='dark'] .featureCard {
+  background: #1a1d24;
+  border-color: #2d3139;
+}
+
+.featureCardLink:hover .featureCard {
+  transform: translateY(-4px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 12px 28px rgba(255, 140, 93, 0.15);
+}
+
+[data-theme='dark'] .featureCardLink:hover .featureCard {
+  box-shadow: 0 12px 28px rgba(255, 140, 93, 0.25);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-color-primary);
+}
+
+.featureCard p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+  opacity: 0.85;
+}
+
+[data-theme='dark'] .featureCard p {
+  color: #a0a6b1;
+}
+
+/* ===== WHY SECTION (Stats cards - Mintlify style) ===== */
+.whySection {
+  padding: 5rem 0;
+  background: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .whySection {
+  background: #0a0c10;
+  border-top: 1px solid #2d3139;
+}
+
+.statCard {
+  text-align: center;
+  padding: 2rem;
+}
+
+.statNumber {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--ifm-color-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c5d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.statLabel {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-font-color-base);
+}
+
+.statDescription {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.75;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+[data-theme='dark'] .statDescription {
+  color: #a0a6b1;
+}
+
+/* ===== THE JOURNEY SECTION ===== */
+.journeySection {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, rgba(255, 107, 53, 0.03) 0%, rgba(255, 140, 93, 0.05) 100%);
+}
+
+[data-theme='dark'] .journeySection {
+  background: linear-gradient(180deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 140, 93, 0.08) 100%);
+}
+
+.journeyContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.journeyStory {
+  padding: 2rem;
+  background: var(--ifm-card-background-color);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.journeyStory h3 {
+  color: #ff6b35;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+}
+
+.journeyStory h3:first-child {
+  margin-top: 0;
+}
+
+.journeyStory p {
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: var(--ifm-font-color-base);
+}
+
+.journeyLink {
+  color: #ff6b35;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+  transition: all 0.2s ease;
+}
+
+.journeyLink:hover {
+  color: #ff8c5d;
+  border-bottom-color: #ff8c5d;
+}
+
+.journeyList {
+  margin: 1rem 0 1.5rem 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.journeyList li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.journeyList li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+.journeyList li strong {
+  color: #ff6b35;
+}
+
+.journeyLinks {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media screen and (max-width: 996px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .heroText {
+    padding-right: 0;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem !important;
+  }
+
+  .heroSubtitle {
+    font-size: 1.25rem;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
+  .sectionHeader h2 {
+    font-size: 2rem;
+  }
+
+  .sectionHeader p {
+    font-size: 1.1rem;
+  }
+
+  .statNumber {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .heroBanner {
+    padding: 2rem 0;
+  }
+
+  .heroTitle {
+    font-size: 2rem !important;
+  }
+
+  .heroSubtitle {
+    font-size: 1.125rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+  }
+
+  .heroButtons .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .quickStart,
+  .features,
+  .journeySection,
+  .whySection {
+    padding: 3rem 0;
+  }
+
+  .codeBody pre {
+    font-size: 0.8rem;
+  }
+}

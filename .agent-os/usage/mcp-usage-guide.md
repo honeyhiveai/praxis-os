@@ -17,6 +17,8 @@
 
 ## 🚀 Available MCP Tools
 
+**Tool Discovery:** The MCP protocol provides built-in tool introspection via `tools/list`, which returns all available tools with their parameter schemas. Cursor IDE handles this automatically when you invoke MCP tools.
+
 ### 1. `search_standards`
 
 **Purpose:** Semantic search over all Agent OS standards and documentation
@@ -52,9 +54,17 @@ mcp_agent-os-rag_search_standards(
 
 **Example:**
 ```python
+# Example 1: Test generation workflow
 session = mcp_agent-os-rag_start_workflow(
     workflow_type="test_generation_v3",
-    target_file="auth.py"
+    target_file="auth.py"  # File path for code workflows
+)
+
+# Example 2: Spec execution workflow (different pattern!)
+session = mcp_agent-os-rag_start_workflow(
+    workflow_type="spec_execution_v1",
+    target_file="my-feature-name",  # Simple identifier, NOT a path
+    options={"spec_path": ".agent-os/specs/2025-10-07-my-feature-name"}  # Full path in options
 )
 
 # NEW: Workflow overview included
@@ -68,6 +78,10 @@ for phase in overview["phases"]:
 ```
 
 **Returns:** Session ID, Phase 0 content, and complete workflow overview
+
+**Important:** The `target_file` parameter usage varies by workflow:
+- For code workflows (`test_generation_v3`, `production_code_v2`): Use file path (e.g., `"src/auth.py"`)
+- For spec workflows (`spec_execution_v1`): Use simple identifier (e.g., `"my-feature"`), put full path in `options.spec_path`
 
 **Discovery Tip:** Use `search_standards` to discover available workflows before starting:
 ```python
@@ -257,6 +271,49 @@ mcp_agent-os-rag_create_workflow(
 ```
 
 **Returns:** Generated framework files and compliance report
+
+---
+
+### 8. `current_date`
+
+**Purpose:** Get current date/time to prevent AI date errors
+
+**When to use:**
+- Creating specs or documentation with dates
+- Generating timestamped directories or files
+- Any content requiring accurate current date
+
+**Example:**
+```python
+date_info = mcp_agent-os-rag_current_date()
+print(date_info["iso_date"])  # "2025-10-07"
+print(date_info["iso_datetime"])  # "2025-10-07T14:30:00-07:00"
+```
+
+**Returns:** Dictionary with current date/time in multiple formats
+
+---
+
+## 🔍 Tool Discovery
+
+### MCP Protocol Introspection
+
+The MCP protocol includes built-in tool discovery capabilities:
+
+1. **`tools/list`** - Returns all available MCP tools with:
+   - Tool name
+   - Description
+   - Parameter schema (names, types, required/optional)
+   - Return value schema
+
+2. **`resources/list`** - Returns available resources (use `list_mcp_resources` tool)
+
+3. **`prompts/list`** - Returns available prompts (if server exposes any)
+
+**Note:** Cursor IDE automatically handles these protocol-level calls. When you need to know what tools are available or what parameters they take, you can:
+- Check this documentation
+- Rely on Cursor's autocomplete (uses `tools/list` under the hood)
+- Use the MCP inspector in Cursor's dev tools
 
 ---
 

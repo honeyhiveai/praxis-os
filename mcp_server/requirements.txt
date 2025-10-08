@@ -18,6 +18,9 @@ watchdog>=3.0.0
 # Markdown AST parsing for dynamic workflow content
 mistletoe>=1.4.0
 
+# Browser automation (Phase 2 feature)
+playwright>=1.40.0
+
 # Optional: OpenAI embeddings for higher quality (~3-5% better)
 # openai>=1.0.0
 

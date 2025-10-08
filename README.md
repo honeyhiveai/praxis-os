@@ -11,6 +11,16 @@ Agent OS Enhanced is a portable development framework that combines:
 - **Specialized Sub-Agents**: Design validation, concurrency analysis, test generation
 - **Conversational Installation**: Cursor agent installs and configures everything
 
+## 📖 Documentation
+
+**Full documentation available at:** https://honeyhiveai.github.io/agent-os-enhanced/
+
+The documentation site includes:
+- Comprehensive guides and tutorials
+- Architecture deep-dives
+- Case studies on AI-authored development
+- API references and workflow documentation
+
 ## 🚀 Installation
 
 ### For Users (In Your Project)

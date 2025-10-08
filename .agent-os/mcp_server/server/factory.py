@@ -17,6 +17,7 @@ from ..rag_engine import RAGEngine
 from ..state_manager import StateManager
 from ..workflow_engine import WorkflowEngine
 from ..framework_generator import FrameworkGenerator
+from .browser_manager import BrowserManager
 from ..monitoring.watcher import AgentOSFileWatcher
 from .tools import register_all_tools
 
@@ -56,6 +57,7 @@ class ServerFactory:
         state_manager = self._create_state_manager()
         workflow_engine = self._create_workflow_engine(rag_engine, state_manager)
         framework_generator = self._create_framework_generator(rag_engine)
+        browser_manager = self._create_browser_manager()
         
         # Start file watchers
         self._start_file_watchers(rag_engine)
@@ -64,7 +66,8 @@ class ServerFactory:
         mcp = self._create_mcp_server(
             rag_engine=rag_engine,
             workflow_engine=workflow_engine,
-            framework_generator=framework_generator
+            framework_generator=framework_generator,
+            browser_manager=browser_manager
         )
         
         logger.info("✅ MCP server created successfully")
@@ -147,6 +150,19 @@ class ServerFactory:
         logger.info("Creating framework generator...")
         return FrameworkGenerator(rag_engine=rag_engine)
     
+    def _create_browser_manager(self) -> BrowserManager:
+        """
+        Create browser manager for Playwright automation.
+        
+        :return: BrowserManager instance
+        
+        Traceability:
+            FR-11 (ServerFactory integration)
+        """
+        logger.info("Creating browser manager...")
+        session_timeout = 3600  # 1 hour default
+        return BrowserManager(session_timeout=session_timeout)
+    
     def _start_file_watchers(self, rag_engine: RAGEngine) -> None:
         """Start file watchers for hot reload."""
         logger.info("Starting file watchers...")
@@ -183,7 +199,8 @@ class ServerFactory:
         self,
         rag_engine: RAGEngine,
         workflow_engine: WorkflowEngine,
-        framework_generator: FrameworkGenerator
+        framework_generator: FrameworkGenerator,
+        browser_manager: BrowserManager
     ) -> FastMCP:
         """Create and configure FastMCP server."""
         logger.info("Creating FastMCP server...")
@@ -197,6 +214,7 @@ class ServerFactory:
             rag_engine=rag_engine,
             workflow_engine=workflow_engine,
             framework_generator=framework_generator,
+            browser_manager=browser_manager,
             base_path=self.config.base_path,
             enabled_groups=self.config.mcp.enabled_tool_groups,
             max_tools_warning=self.config.mcp.max_tools_warning
@@ -206,9 +224,17 @@ class ServerFactory:
         
         return mcp
     
-    def shutdown(self) -> None:
-        """Shutdown file watchers and cleanup resources."""
+    async def shutdown(self, browser_manager: Optional[BrowserManager] = None) -> None:
+        """
+        Shutdown file watchers and cleanup resources.
+        
+        :param browser_manager: Optional BrowserManager to shutdown
+        """
         logger.info("Shutting down server factory...")
+        
+        # Shutdown browser manager if provided
+        if browser_manager:
+            await browser_manager.shutdown()
         
         for observer in self.observers:
             observer.stop()

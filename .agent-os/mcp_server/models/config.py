@@ -43,7 +43,7 @@ class RAGConfig:
 class MCPConfig:
     """MCP server-specific configuration."""
     
-    enabled_tool_groups: List[str] = field(default_factory=lambda: ["rag", "workflow"])
+    enabled_tool_groups: List[str] = field(default_factory=lambda: ["rag", "workflow", "browser"])
     max_tools_warning: int = 20
 
 

@@ -47,6 +47,7 @@ env/
 .coverage
 htmlcov/
 .tox/
+.benchmarks/
 
 # Documentation
 docs/build/

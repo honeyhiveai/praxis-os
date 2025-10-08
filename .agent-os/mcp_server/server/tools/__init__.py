@@ -10,6 +10,7 @@ from typing import List, Optional, Any
 
 from .rag_tools import register_rag_tools
 from .workflow_tools import register_workflow_tools
+from .browser_tools import register_browser_tools
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +20,7 @@ def register_all_tools(
     rag_engine: Any,
     workflow_engine: Any,
     framework_generator: Any,
+    browser_manager: Optional[Any] = None,
     base_path: Optional[Any] = None,
     enabled_groups: Optional[List[str]] = None,
     max_tools_warning: int = 20,
@@ -33,10 +35,14 @@ def register_all_tools(
     :param rag_engine: RAG engine for search tools
     :param workflow_engine: Workflow engine for workflow tools
     :param framework_generator: Generator for create_workflow tool
+    :param browser_manager: Optional BrowserManager for browser tools
     :param base_path: Base path for .agent-os (for create_workflow)
     :param enabled_groups: Tool groups to enable (None = default groups)
     :param max_tools_warning: Warning threshold for tool count (default 20)
     :return: Total number of registered tools
+    
+    Traceability:
+        FR-12 (Conditional tool loading)
     """
     if enabled_groups is None:
         enabled_groups = ["rag", "workflow"]  # Default: core tools only
@@ -52,6 +58,13 @@ def register_all_tools(
         count = register_workflow_tools(mcp, workflow_engine, framework_generator, base_path)
         tool_count += count
         logger.info(f"✅ Registered {count} workflow tool(s)")
+    
+    if "browser" in enabled_groups and browser_manager:
+        count = register_browser_tools(mcp, browser_manager)
+        tool_count += count
+        logger.info(f"✅ Registered {count} browser tool(s)")
+    elif "browser" in enabled_groups and not browser_manager:
+        logger.warning("⚠️  Browser tools requested but browser_manager not provided")
     
     # Future: sub-agent tools
     # if "design_validator" in enabled_groups:
@@ -76,4 +89,5 @@ __all__ = [
     "register_all_tools",
     "register_rag_tools",
     "register_workflow_tools",
+    "register_browser_tools",
 ]

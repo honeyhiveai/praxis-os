@@ -82,20 +82,36 @@ git pull origin main
 
 ### Step 2: Sync to Your Project
 
+**Option A: Safe Upgrade (Recommended)**
+
 ```bash
 cd /path/to/your-project
 
-# Sync standards
-rsync -av --delete /path/to/agent-os-enhanced/universal/standards/ .agent-os/standards/
+# Use manifest-based safe upgrade tool (never deletes customer content)
+python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
+  --source /path/to/agent-os-enhanced \
+  --target .agent-os
 
-# Sync usage docs
-rsync -av --delete /path/to/agent-os-enhanced/universal/usage/ .agent-os/usage/
-
-# Sync workflows (optional - only if you use them)
-rsync -av --delete /path/to/agent-os-enhanced/universal/workflows/ .agent-os/workflows/
+# See interactive prompts for conflicts
+# Creates automatic backup before changes
 ```
 
-**Note:** The `--delete` flag removes files in destination that don't exist in source. Use with caution if you have custom local files.
+**Option B: Manual Sync (for advanced users)**
+
+```bash
+cd /path/to/your-project
+
+# Sync standards (adds/updates only, never deletes)
+rsync -av /path/to/agent-os-enhanced/universal/standards/ .agent-os/standards/
+
+# Sync usage docs
+rsync -av /path/to/agent-os-enhanced/universal/usage/ .agent-os/usage/
+
+# Sync workflows (optional - only if you use them)
+rsync -av /path/to/agent-os-enhanced/universal/workflows/ .agent-os/workflows/
+```
+
+**Note:** Manual sync does NOT delete files. Old files remain. Use safe-upgrade.py for conflict detection.
 
 ### Step 3: RAG Index Auto-Updates
 
@@ -175,15 +191,11 @@ PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "🔄 Updating Agent OS content..."
 
-# Sync from universal (source) directory
-echo "📦 Syncing standards..."
-rsync -av --delete "$AGENT_OS_REPO/universal/standards/" "$PROJECT_ROOT/.agent-os/standards/"
-
-echo "📦 Syncing usage docs..."
-rsync -av --delete "$AGENT_OS_REPO/universal/usage/" "$PROJECT_ROOT/.agent-os/usage/"
-
-echo "📦 Syncing workflows..."
-rsync -av --delete "$AGENT_OS_REPO/universal/workflows/" "$PROJECT_ROOT/.agent-os/workflows/"
+# Use safe-upgrade tool (never deletes customer content)
+echo "📦 Running safe upgrade..."
+python "$AGENT_OS_REPO/scripts/safe-upgrade.py" \
+  --source "$AGENT_OS_REPO" \
+  --target "$PROJECT_ROOT/.agent-os"
 
 echo "✅ Agent OS content updated!"
 echo "💡 File watcher will automatically rebuild RAG index"
@@ -229,20 +241,12 @@ BACKUP_DIR="$PROJECT_ROOT/.agent-os.backup.$(date +%Y%m%d_%H%M%S)"
 echo "💾 Creating backup at $BACKUP_DIR"
 cp -r "$PROJECT_ROOT/.agent-os" "$BACKUP_DIR"
 
-# Sync content
-echo "🔄 Syncing from $AGENT_OS_REPO/universal/"
+# Use safe-upgrade tool (handles conflicts, never deletes customer content)
+echo "🔄 Running safe upgrade from $AGENT_OS_REPO/universal/"
 
-rsync -av --delete \
-    --exclude="rag_index/" \
-    --exclude=".mcp_state/" \
-    --exclude="scripts/" \
-    "$AGENT_OS_REPO/universal/standards/" "$PROJECT_ROOT/.agent-os/standards/"
-
-rsync -av --delete \
-    "$AGENT_OS_REPO/universal/usage/" "$PROJECT_ROOT/.agent-os/usage/"
-
-rsync -av --delete \
-    "$AGENT_OS_REPO/universal/workflows/" "$PROJECT_ROOT/.agent-os/workflows/"
+python "$AGENT_OS_REPO/scripts/safe-upgrade.py" \
+    --source "$AGENT_OS_REPO" \
+    --target "$PROJECT_ROOT/.agent-os"
 
 echo "✅ Update complete!"
 echo "📁 Backup saved to: $BACKUP_DIR"
@@ -293,6 +297,134 @@ EOF
 
 ---
 
+## 🛡️ Manifest-Based Safe Upgrade (v1.3.0+)
+
+**NEW in v1.3.0**: Automatic conflict detection and safe upgrades!
+
+The manifest-based upgrade system uses checksums to detect conflicts between local customizations and upstream changes, making upgrades much safer.
+
+### How It Works
+
+1. **Manifest Generation**: Each release includes a `.universal-manifest.json` file with SHA-256 checksums of all skeleton files
+2. **Conflict Detection**: The upgrade tool compares local files, upstream files, and the manifest to detect conflicts
+3. **Smart Decisions**: Files are auto-updated safely or prompt for conflicts
+
+### File States
+
+- **NEW**: File exists in upstream but not locally → Prompts to add
+- **UNCHANGED**: Both exist, no changes → Skipped silently
+- **AUTO_UPDATE**: Local unchanged, upstream changed → Auto-updated safely
+- **LOCAL_ONLY**: Local changed, upstream unchanged → Preserved automatically
+- **CONFLICT**: Both changed → Interactive prompt
+
+### Quick Start
+
+#### Dry-Run (Preview Only)
+
+```bash
+cd /path/to/your-project
+python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
+  --source /path/to/agent-os-enhanced \
+  --dry-run
+```
+
+**Output:**
+```
+📊 Analysis Summary:
+   New files: 15
+   Auto-update: 3
+   Unchanged: 42
+   Local-only changes: 2
+   Conflicts: 0
+   Errors: 0
+
+➕ New files to add:
+   + standards/ai-safety/new-standard.md
+   ...
+```
+
+#### Live Upgrade
+
+```bash
+# Run without --dry-run to execute
+python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
+  --source /path/to/agent-os-enhanced \
+  --target .agent-os
+```
+
+**What happens:**
+1. **Automatic backup** created (`.agent-os.backup.20251007_120000`)
+2. **New files** - Prompts to add each one
+3. **Auto-updates** - Safely updates unchanged files automatically
+4. **Conflicts** - Interactive prompts with diff viewer
+5. **Summary report** with rollback instructions
+
+### Interactive Prompts
+
+#### New File Prompt
+
+```
+➕ New file: standards/testing/new-standard.md (12.3 KB)
+   Add this file? [Y/n]: y
+   ✅ Added
+```
+
+#### Conflict Prompt
+
+```
+⚠️  CONFLICT: usage/mcp-usage-guide.md
+   Both local and universal versions have changed.
+
+   Local:     15,234 bytes
+   Universal: 15,891 bytes
+
+   [K] Keep local (preserve your changes)
+   [R] Replace with universal (lose local changes)
+   [D] Show diff
+   [S] Skip (decide later)
+
+   Choice: d
+```
+
+### Rollback
+
+If something goes wrong, rollback is simple:
+
+```bash
+# The tool shows these instructions after upgrade
+rm -rf .agent-os
+mv .agent-os.backup.20251007_120000 .agent-os
+```
+
+### Advantages over rsync
+
+| Feature | rsync | Manifest-Based |
+|---------|-------|----------------|
+| Conflict detection | ❌ None | ✅ Automatic |
+| Preserves local changes | ⚠️ Manual --exclude | ✅ Automatic |
+| Automatic backup | ❌ Manual | ✅ Automatic |
+| Diff viewer | ❌ None | ✅ Built-in |
+| Dry-run preview | ⚠️ Limited | ✅ Full analysis |
+| Rollback | ❌ Manual backup | ✅ One command |
+
+### Requirements
+
+- **agent-os-enhanced v1.3.0+** (includes manifest)
+- **Python 3.8+** (for upgrade script)
+- **Manifest file**: `universal/.universal-manifest.json`
+
+### Generate Manifest (Maintainers Only)
+
+If you're maintaining a fork:
+
+```bash
+cd agent-os-enhanced
+python scripts/generate-manifest.py --version 1.3.0
+# Creates universal/.universal-manifest.json
+```
+
+---
+
 ## 🚨 Common Mistakes to Avoid
 
 ### ❌ Mistake 1: Syncing from .agent-os
@@ -306,13 +438,19 @@ rsync -av agent-os-enhanced/.agent-os/ .agent-os/
 
 ### ❌ Mistake 2: Overwriting Custom Workflows
 
-If you have custom workflows, protect them:
+If you have custom workflows, the safe-upgrade tool will detect and preserve them:
 
 ```bash
-# Use --exclude to protect custom workflows
-rsync -av --delete \
-    --exclude="my_custom_workflow/" \
-    agent-os-enhanced/universal/workflows/ .agent-os/workflows/
+# Safe-upgrade automatically detects custom content
+python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
+  --source /path/to/agent-os-enhanced \
+  --target .agent-os
+
+# You'll be prompted:
+# ⚠️  CONFLICT: workflows/my_custom_workflow/
+#   [K] Keep local (your custom workflow)
+#   [R] Replace (not recommended)
+#   [S] Skip
 ```
 
 ### ❌ Mistake 3: Syncing MCP Server State
@@ -371,9 +509,11 @@ If you use custom paths via `config.json`, make sure your update script syncs to
 Update script should respect these paths:
 
 ```bash
-# Read config and use custom paths
-STANDARDS_PATH=$(jq -r '.rag_sources.standards_path // ".agent-os/standards"' config.json)
-rsync -av --delete "$AGENT_OS_REPO/universal/standards/" "$STANDARDS_PATH/"
+# Read config and use custom paths (if needed)
+# Safe-upgrade tool handles standard paths automatically
+python "$AGENT_OS_REPO/scripts/safe-upgrade.py" \
+  --source "$AGENT_OS_REPO" \
+  --target .agent-os
 ```
 
 ---
@@ -405,20 +545,21 @@ pkill -f "mcp.*agent-os-rag"
 python -m agent_os.scripts.build_rag_index
 ```
 
-### Issue: Sync Deleted Custom Files
+### Issue: Lost Custom Files After Upgrade
 
-**Cause:** Used `--delete` flag without excluding custom files
+**Cause:** Accidentally overwrote custom files during manual sync
 
 **Fix:**
 ```bash
-# Restore from backup
-cp -r .agent-os.backup.20251006_120000/* .agent-os/
+# Restore from backup (safe-upgrade creates these automatically)
+rm -rf .agent-os
+mv .agent-os.backup.20251006_120000 .agent-os
 
-# Re-sync with exclusions
-rsync -av --delete \
-    --exclude="my_custom_workflow/" \
-    --exclude="my_custom_standards/" \
-    agent-os-enhanced/universal/ .agent-os/
+# Next time, use safe-upgrade tool which detects conflicts
+python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
+    --source /path/to/agent-os-enhanced \
+    --target .agent-os
+# Will prompt before overwriting any custom content
 ```
 
 ### Issue: Conflicting Versions
@@ -427,10 +568,13 @@ rsync -av --delete \
 
 **Fix:**
 ```bash
-# Clean install from source
+# Clean install using safe-upgrade tool
 rm -rf .agent-os/
 mkdir -p .agent-os/
-rsync -av agent-os-enhanced/universal/ .agent-os/
+
+python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
+    --source /path/to/agent-os-enhanced \
+    --target .agent-os
 ```
 
 ---
