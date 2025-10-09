@@ -17,6 +17,7 @@ from ..rag_engine import RAGEngine
 from ..state_manager import StateManager
 from ..workflow_engine import WorkflowEngine
 from ..framework_generator import FrameworkGenerator
+from ..workflow_validator import WorkflowValidator
 from .browser_manager import BrowserManager
 from ..monitoring.watcher import AgentOSFileWatcher
 from .tools import register_all_tools
@@ -67,6 +68,7 @@ class ServerFactory:
             rag_engine=rag_engine,
             workflow_engine=workflow_engine,
             framework_generator=framework_generator,
+            workflow_validator=WorkflowValidator,
             browser_manager=browser_manager
         )
         
@@ -200,6 +202,7 @@ class ServerFactory:
         rag_engine: RAGEngine,
         workflow_engine: WorkflowEngine,
         framework_generator: FrameworkGenerator,
+        workflow_validator: type,
         browser_manager: BrowserManager
     ) -> FastMCP:
         """Create and configure FastMCP server."""
@@ -214,6 +217,7 @@ class ServerFactory:
             rag_engine=rag_engine,
             workflow_engine=workflow_engine,
             framework_generator=framework_generator,
+            workflow_validator=workflow_validator,
             browser_manager=browser_manager,
             base_path=self.config.base_path,
             enabled_groups=self.config.mcp.enabled_tool_groups,

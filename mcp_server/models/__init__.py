@@ -37,6 +37,19 @@ from .rag import (
     QueryMetrics,
 )
 
+# Upgrade workflow models
+from .upgrade_models import (
+    Phase0Evidence,
+    Phase1Evidence,
+    Phase2Evidence,
+    Phase3Evidence,
+    Phase4Evidence,
+    Phase5Evidence,
+    BackupManifest,
+    UpgradeReport,
+    UpgradeWorkflowSession,
+)
+
 __all__ = [
     # Config
     "RAGConfig",
@@ -56,4 +69,14 @@ __all__ = [
     "DocumentChunk",
     "SearchResult",
     "QueryMetrics",
+    # Upgrade
+    "Phase0Evidence",
+    "Phase1Evidence",
+    "Phase2Evidence",
+    "Phase3Evidence",
+    "Phase4Evidence",
+    "Phase5Evidence",
+    "BackupManifest",
+    "UpgradeReport",
+    "UpgradeWorkflowSession",
 ]

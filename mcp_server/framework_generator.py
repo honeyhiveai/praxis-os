@@ -86,8 +86,8 @@ class FrameworkGenerator:
         for phase_idx, phase_name in enumerate(phases):
             phase_dir = f"phases/{phase_idx}"
             
-            # Phase entry
-            files[f"{phase_dir}/README.md"] = self._generate_phase_entry(
+            # Phase entry (using phase.md per workflow-construction-standards.md)
+            files[f"{phase_dir}/phase.md"] = self._generate_phase_entry(
                 phase_idx, phase_name, workflow_type
             )
             
@@ -265,7 +265,7 @@ Commands create explicit, non-negotiable obligations:
 
 🛑 EXECUTE-NOW: Copy progress table from [core/progress-tracking.md](core/progress-tracking.md) to chat
 
-🎯 NEXT-MANDATORY: [phases/0/README.md](phases/0/README.md)
+🎯 NEXT-MANDATORY: [phases/0/phase.md](phases/0/phase.md)
 
 ---
 
@@ -359,7 +359,7 @@ Upon completing all tasks:
 
 🔄 UPDATE-TABLE: Progress Tracking
 
-🎯 NEXT-MANDATORY: [../{ phase_idx + 1}/README.md](../{phase_idx + 1}/README.md) (if exists)
+🎯 NEXT-MANDATORY: [../{phase_idx + 1}/phase.md](../{phase_idx + 1}/phase.md) (if exists)
 """
     
     def _generate_task_file(
@@ -421,7 +421,7 @@ Validate results:
 
 🔄 UPDATE-TABLE: Progress Tracking
 
-🎯 NEXT-MANDATORY: [../README.md](../README.md) (return to phase)
+🎯 NEXT-MANDATORY: [../phase.md](../phase.md) (return to phase)
 
 ---
 
