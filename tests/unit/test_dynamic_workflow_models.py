@@ -5,11 +5,8 @@ Tests DynamicTask, DynamicPhase, and DynamicWorkflowContent dataclasses.
 """
 
 import pytest
-from mcp_server.models.workflow import (
-    DynamicTask,
-    DynamicPhase,
-    DynamicWorkflowContent,
-)
+
+from mcp_server.models.workflow import DynamicPhase, DynamicTask, DynamicWorkflowContent
 
 
 class TestDynamicTask:
@@ -286,7 +283,9 @@ Next: Phase [NEXT_PHASE_NUMBER]
 [ACCEPTANCE_CRITERIA]
 """
 
-    def test_create_workflow_content(self, sample_phases, phase_template, task_template):
+    def test_create_workflow_content(
+        self, sample_phases, phase_template, task_template
+    ):
         """Test creating DynamicWorkflowContent."""
         content = DynamicWorkflowContent(
             source_path="/path/to/tasks.md",

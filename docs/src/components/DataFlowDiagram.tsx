@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CompactDiagram.module.css';
 
-export default function DataFlowDiagram(): JSX.Element {
+export default function DataFlowDiagram(): React.ReactElement {
   return (
     <div className={styles.compactFlow}>
       <div className={styles.flowBox}>

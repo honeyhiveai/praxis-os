@@ -4,13 +4,11 @@ Unit tests for source parsers.
 Tests SourceParser interface and SpecTasksParser implementation.
 """
 
-import pytest
 from pathlib import Path
-from mcp_server.core.parsers import (
-    ParseError,
-    SourceParser,
-    SpecTasksParser,
-)
+
+import pytest
+
+from mcp_server.core.parsers import ParseError, SourceParser, SpecTasksParser
 from mcp_server.models.workflow import DynamicPhase, DynamicTask
 
 
@@ -120,7 +118,10 @@ class TestSpecTasksParser:
         phases = parser.parse(sample_tasks_md)
         phase1 = phases[0]
 
-        assert phase1.description == "Create foundational components for dynamic workflow support without integration"
+        assert (
+            phase1.description
+            == "Create foundational components for dynamic workflow support without integration"
+        )
         assert phase1.estimated_duration == "6-8 hours"
         assert len(phase1.validation_gate) == 3
 
@@ -130,7 +131,7 @@ class TestSpecTasksParser:
         phase1 = phases[0]
 
         assert len(phase1.tasks) == 2
-        
+
         task1 = phase1.tasks[0]
         assert task1.task_id == "1.1"
         assert task1.task_name == "Create data models for dynamic workflows"
@@ -165,7 +166,7 @@ class TestSpecTasksParser:
     def test_parse_nonexistent_file(self, parser, tmp_path):
         """Test error on nonexistent file."""
         nonexistent = tmp_path / "does_not_exist.md"
-        
+
         with pytest.raises(ParseError, match="Source file not found"):
             parser.parse(nonexistent)
 
@@ -173,7 +174,7 @@ class TestSpecTasksParser:
         """Test error on empty file."""
         empty_file = tmp_path / "empty.md"
         empty_file.write_text("")
-        
+
         with pytest.raises(ParseError, match="Source file is empty"):
             parser.parse(empty_file)
 
@@ -181,7 +182,7 @@ class TestSpecTasksParser:
         """Test error when no phases found."""
         no_phases = tmp_path / "no_phases.md"
         no_phases.write_text("# Some content\nBut no phases")
-        
+
         with pytest.raises(ParseError, match="No phases found"):
             parser.parse(no_phases)
 
@@ -204,7 +205,7 @@ class TestSpecTasksParser:
 - [ ] Pass
 """
         tasks_file.write_text(content)
-        
+
         # Pass directory path, should find tasks.md
         phases = parser.parse(tmp_path)
         assert len(phases) == 1
@@ -233,10 +234,10 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "multi_dep.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
         task = phases[0].tasks[0]
-        
+
         assert task.dependencies == ["2.1", "2.2"]
 
     def test_parse_task_without_estimated_time(self, parser, tmp_path):
@@ -257,10 +258,10 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "no_time.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
         task = phases[0].tasks[0]
-        
+
         assert task.estimated_time == "Variable"
 
     def test_parse_phase_without_goal(self, parser, tmp_path):
@@ -280,9 +281,9 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "no_goal.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
-        
+
         assert phases[0].description == "Phase 1 objectives"
 
     def test_parse_task_dependencies_with_and(self, parser, tmp_path):
@@ -304,17 +305,17 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "and_deps.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
         task = phases[0].tasks[0]
-        
+
         assert "2.1" in task.dependencies
         assert "1.3" in task.dependencies
 
     def test_parse_multiple_phases(self, parser, sample_tasks_md):
         """Test parsing file with multiple phases."""
         phases = parser.parse(sample_tasks_md)
-        
+
         assert len(phases) == 2
         assert phases[0].phase_number == 1
         assert phases[1].phase_number == 2
@@ -342,10 +343,10 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "criteria.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
         task = phases[0].tasks[0]
-        
+
         assert len(task.acceptance_criteria) == 3
         assert task.acceptance_criteria[0] == "First criterion"
         assert "Second criterion" in task.acceptance_criteria[1]
@@ -372,9 +373,9 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "multi_gate.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
-        
+
         assert len(phases[0].validation_gate) == 4
         assert "All tests pass" in phases[0].validation_gate[0]
         assert "Code review approved" in phases[0].validation_gate[3]
@@ -404,9 +405,9 @@ class TestSpecTasksParser:
 """
         tasks_file = tmp_path / "task_ids.md"
         tasks_file.write_text(content)
-        
+
         phases = parser.parse(tasks_file)
         task = phases[0].tasks[0]
-        
+
         assert task.task_id == "3.10"
         assert task.dependencies == ["3.9"]

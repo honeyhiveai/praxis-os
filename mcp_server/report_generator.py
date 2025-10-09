@@ -6,8 +6,8 @@ Generates upgrade reports and updates documentation.
 
 import json
 import logging
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
@@ -43,11 +43,9 @@ class ReportGenerator:
         # Ensure cache directory exists
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-        logger.info(f"ReportGenerator initialized")
+        logger.info("ReportGenerator initialized")
 
-    def generate_upgrade_summary(
-        self, session_id: str, state: Dict
-    ) -> str:
+    def generate_upgrade_summary(self, session_id: str, state: Dict) -> str:
         """
         Generate human-readable upgrade summary in markdown.
 
@@ -58,7 +56,7 @@ class ReportGenerator:
         Returns:
             Path to generated report (as string)
         """
-        logger.info(f"Generating upgrade summary for session: {session_id}")
+        logger.info("Generating upgrade summary for session: %s", session_id)
 
         timestamp = datetime.now().strftime("%Y-%m-%d-%H%M%S")
         report_path = self.cache_dir / f"upgrade-summary-{timestamp}.md"
@@ -100,22 +98,22 @@ class ReportGenerator:
             content.append("")
 
         # Add footer
-        content.extend([
-            "---",
-            "",
-            f"_Report generated: {datetime.now().isoformat()}_",
-        ])
+        content.extend(
+            [
+                "---",
+                "",
+                f"_Report generated: {datetime.now().isoformat()}_",
+            ]
+        )
 
         # Write report
         report_path.write_text("\n".join(content))
 
-        logger.info(f"Upgrade summary generated: {report_path}")
+        logger.info("Upgrade summary generated: %s", report_path)
 
         return str(report_path)
 
-    def generate_validation_report(
-        self, validation_results: Dict
-    ) -> str:
+    def generate_validation_report(self, validation_results: Dict) -> str:
         """
         Generate JSON validation report.
 
@@ -137,16 +135,14 @@ class ReportGenerator:
         }
 
         # Write report
-        with open(report_path, "w") as f:
+        with open(report_path, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
 
-        logger.info(f"Validation report generated: {report_path}")
+        logger.info("Validation report generated: %s", report_path)
 
         return str(report_path)
 
-    def update_installation_summary(
-        self, upgrade_info: Dict
-    ) -> None:
+    def update_installation_summary(self, upgrade_info: Dict) -> None:
         """
         Update INSTALLATION_SUMMARY.md with upgrade details.
 
@@ -183,9 +179,7 @@ class ReportGenerator:
 
         logger.info("Installation summary updated")
 
-    def append_to_update_log(
-        self, version: str, changes: Dict
-    ) -> None:
+    def append_to_update_log(self, version: str, changes: Dict) -> None:
         """
         Append timestamped entry to UPDATE_LOG.txt.
 
@@ -193,7 +187,7 @@ class ReportGenerator:
             version: Version being upgraded to
             changes: Dictionary of changes made
         """
-        logger.info(f"Appending to update log: version {version}")
+        logger.info("Appending to update log: version %s", version)
 
         log_path = self.agent_os_dir / "UPDATE_LOG.txt"
 
@@ -226,4 +220,3 @@ class ReportGenerator:
         log_path.write_text(content)
 
         logger.info("Update log appended")
-

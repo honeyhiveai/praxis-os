@@ -1,0 +1,201 @@
+# Pre-commit hooks for Agent OS Enhanced
+# Adapted from HoneyHive Python SDK (the prototype for this paradigm)
+# See https://pre-commit.com for more information
+#
+# PARADIGM CONTEXT:
+# - Python-SDK: Prototype proving AI-assisted development platform
+# - Agent OS: Extracted reusable paradigm/framework
+# - These hooks enforce the battle-tested standards from python-sdk
+#
+# IMPORTANT: All code quality checks use tox environments to ensure consistency
+# between local development, pre-commit, and CI/CD environments.
+#
+# STRICT MODE: These hooks will BLOCK commits with ANY issues
+# Auto-fix runs first, then validation ensures no issues remain
+#
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Usage:
+#   pre-commit run --all-files  # Run all hooks on all files
+#   pre-commit run <hook-id>     # Run specific hook
+#   git commit --no-verify       # Bypass (NOT RECOMMENDED)
+---
+fail_fast: true  # Stop on first failure - no bypassing quality checks
+
+repos:
+  - repo: local
+    hooks:
+      # ============================================================
+      # PHASE 0: Structural Validation (Must Run First)
+      # ============================================================
+      - id: yaml-syntax-check
+        name: "YAML Syntax Validation"
+        entry: scripts/pre-commit/validate-yaml-syntax.sh
+        language: system
+        pass_filenames: false
+        files: '^.*\.(yaml|yml)$'
+        stages: [pre-commit]
+        verbose: true
+
+      - id: no-mocks-in-integration-tests
+        name: "No Mocks in Integration Tests (Structural Validation)"
+        entry: scripts/pre-commit/validate-no-mocks-integration.sh
+        language: system
+        pass_filenames: false
+        files: '^tests/integration/.*\.py$'
+        stages: [pre-commit]
+        verbose: true
+
+      - id: workflow-metadata-validation
+        name: "Workflow Metadata Validation"
+        entry: scripts/pre-commit/validate-workflow-metadata.sh
+        language: system
+        pass_filenames: false
+        files: '^universal/workflows/.*/metadata\.json$'
+        stages: [pre-commit]
+        verbose: true
+
+      - id: credential-safety
+        name: "Credential File Protection (AI Safety)"
+        entry: scripts/pre-commit/validate-credential-safety.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+        verbose: true
+
+      - id: git-safety
+        name: "Git Safety Rules (No Destructive Operations)"
+        entry: scripts/pre-commit/validate-git-safety.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+        verbose: true
+
+      - id: docstring-presence
+        name: "Docstring Presence Check (Production Code Requirement)"
+        entry: scripts/pre-commit/validate-docstrings.sh
+        language: system
+        pass_filenames: false
+        files: '^(mcp_server|scripts)/.*\.py$'
+        stages: [pre-commit]
+        verbose: true
+
+      # ============================================================
+      # PHASE 1: Code Formatting (Auto-fix)
+      # ============================================================
+      - id: tox-format
+        name: "Code Formatting (Black + isort)"
+        entry: tox -e format
+        language: system
+        pass_filenames: false
+        files: '^(mcp_server/.*\.py|scripts/.*\.py|tests/.*\.py)$'
+        stages: [pre-commit]
+        verbose: true
+
+      # ============================================================
+      # PHASE 2: Static Analysis (ZERO TOLERANCE)
+      # ============================================================
+      - id: tox-lint
+        name: "Code Quality (Pylint ≥8.0/10.0, Target: 10.0)"
+        entry: tox -e lint
+        language: system
+        pass_filenames: false
+        files: '^(mcp_server/.*\.py|scripts/.*\.py)$'
+        stages: [pre-commit]
+        verbose: true
+
+      - id: tox-type
+        name: "Type Safety (MyPy - ZERO ERRORS REQUIRED)"
+        entry: tox -e type
+        language: system
+        pass_filenames: false
+        files: '^(mcp_server/.*\.py|scripts/.*\.py)$'
+        stages: [pre-commit]
+        verbose: true
+
+      # ============================================================
+      # PHASE 3: Test Execution (100% Pass Rate)
+      # ============================================================
+      - id: unit-tests
+        name: "Unit Test Suite (Fast, Mocked)"
+        entry: tox -e unit
+        language: system
+        pass_filenames: false
+        files: '^(mcp_server/.*\.py|tests/unit/.*\.py)$'
+        stages: [pre-commit]
+        verbose: true
+
+      # Note: Integration tests can be added here if needed
+      # - id: integration-tests
+      #   entry: tox -e integration
+      #   files: '^(mcp_server/.*\.py|tests/integration/.*\.py)$'
+
+      # ============================================================
+      # PHASE 4: Documentation Validation
+      # ============================================================
+      # Note: Agent OS uses Docusaurus (not Sphinx like python-sdk)
+      # Docusaurus builds are handled separately (npm run build in docs/)
+      # Pre-commit focuses on content validation, not builds
+
+      - id: installation-docs-check
+        name: "Installation Documentation Completeness"
+        entry: scripts/pre-commit/validate-installation-docs.sh
+        language: system
+        pass_filenames: false
+        files: '^(installation/.*\.md|scripts/build_rag_index\.py)$'
+        stages: [pre-commit]
+        verbose: true
+
+# ============================================================
+# CONFIGURATION NOTES
+# ============================================================
+#
+# IMPORTANT: Script-Based Actions
+# - All validation actions use scripts (e.g., scripts/pre-commit/*.sh)
+# - NEVER embed multi-line commands in YAML (they behave badly)
+# - Keep YAML clean with simple script references
+# - This pattern ensures maintainability and reliability
+#
+# Documentation Note:
+# - Agent OS uses Docusaurus (not Sphinx like python-sdk)
+# - Docusaurus builds: cd docs && npm run build
+# - Pre-commit focuses on markdown content validation
+#
+# Paradigm Enforcement:
+# - These hooks enforce the Agent OS paradigm standards
+# - Proven through python-sdk prototype development
+# - Ensure AI-assisted development quality and safety
+#
+# Quality Standards (Enforced):
+# - Black: 88-character line length, automatic formatting
+# - isort: Black profile, sorted imports
+# - Pylint: ≥8.0/10.0 score (target: 10.0/10.0)
+# - MyPy: ZERO errors allowed (strictly enforced)
+# - Tests: 100% pass rate required
+#
+# Current Status:
+# - Pylint: 8.33/10.0 (passing enforcement, working toward 10.0)
+# - MyPy: Enforced (zero tolerance)
+# - Tests: All passing
+#
+# Path to 10.0/10.0 Pylint:
+# 1. Fix all Error (E) violations
+# 2. Fix all Warning (W) violations
+# 3. Fix Convention (C) violations
+# 4. Address Refactor (R) suggestions
+#
+# Bypass (NOT RECOMMENDED):
+#   git commit --no-verify
+#
+# Selective Hook Execution:
+#   pre-commit run tox-format --all-files
+#   pre-commit run tox-lint --all-files
+#   pre-commit run tox-type --all-files
+#
+# Standards Documentation:
+# - .agent-os/standards/development/code-quality.md
+# - .agent-os/standards/ai-assistant/code-generation/linters/README.md

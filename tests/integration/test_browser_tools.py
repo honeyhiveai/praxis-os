@@ -16,7 +16,7 @@ import pytest
 # Mark all tests in this module as requiring browser
 pytestmark = pytest.mark.skipif(
     "not config.getoption('--run-browser-tests')",
-    reason="Browser tests require --run-browser-tests flag and Playwright installed"
+    reason="Browser tests require --run-browser-tests flag and Playwright installed",
 )
 
 
@@ -28,7 +28,7 @@ pytestmark = pytest.mark.skipif(
 async def test_navigate_success():
     """
     Test navigate action to real URL.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-4
     """
@@ -40,7 +40,7 @@ async def test_navigate_success():
 async def test_emulate_dark_mode():
     """
     Test dark mode emulation.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-5
     """
@@ -52,7 +52,7 @@ async def test_emulate_dark_mode():
 async def test_screenshot_to_file():
     """
     Test screenshot capture to file.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-6
     """
@@ -67,7 +67,7 @@ async def test_screenshot_to_file():
 async def test_concurrent_sessions_isolated():
     """
     Test concurrent sessions don't interfere.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-2, NFR-5
     """
@@ -82,11 +82,13 @@ async def test_concurrent_sessions_isolated():
 async def test_docs_dark_mode_workflow():
     """
     Test complete docs testing workflow.
-    
+
     Requires: Playwright + Chromium installed + http://localhost:3000 running
     Traceability: FR-4, FR-5, FR-6
     """
-    pytest.skip("Integration test - requires playwright install chromium and local docs server")
+    pytest.skip(
+        "Integration test - requires playwright install chromium and local docs server"
+    )
 
 
 # ===== Additional Integration Tests =====
@@ -97,7 +99,7 @@ async def test_docs_dark_mode_workflow():
 async def test_click_type_fill_select():
     """
     Test element interaction actions.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-9, FR-10, FR-11, FR-12
     """
@@ -109,7 +111,7 @@ async def test_click_type_fill_select():
 async def test_wait_query_evaluate():
     """
     Test waiting and querying actions.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-13, FR-14, FR-15
     """
@@ -121,7 +123,7 @@ async def test_wait_query_evaluate():
 async def test_cookies_and_storage():
     """
     Test cookie and storage management.
-    
+
     Requires: Playwright + Chromium installed
     Traceability: FR-16, FR-17, FR-18
     """
@@ -137,7 +139,7 @@ def pytest_addoption(parser):
         "--run-browser-tests",
         action="store_true",
         default=False,
-        help="Run integration tests that require real browser"
+        help="Run integration tests that require real browser",
     )
 
 
@@ -146,4 +148,3 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "browser: mark test as requiring real browser installation"
     )
-

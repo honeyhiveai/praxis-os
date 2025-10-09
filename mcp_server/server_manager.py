@@ -4,10 +4,15 @@ Server Manager for Agent OS Upgrade Workflow.
 Manages MCP server restart and health verification.
 """
 
+# pylint: disable=broad-exception-caught,missing-raises-doc,consider-using-with
+# Justification: Server manager uses broad exceptions for robustness,
+# standard exception documentation in docstrings, and Popen without context manager
+# is intentional for background server process that must remain running
+
+import logging
 import subprocess
 import time
-import logging
-from typing import Dict, Optional
+from typing import Dict
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +71,7 @@ class ServerManager:
             subprocess.run(
                 ["pkill", "-f", "python -m mcp_server"],
                 timeout=10,
+                check=False,
             )
             logger.info("Sent stop signal to MCP server")
 
@@ -93,7 +99,7 @@ class ServerManager:
             )
 
             result["pid"] = process.pid
-            logger.info(f"Started MCP server with PID: {process.pid}")
+            logger.info("Started MCP server with PID: %s", process.pid)
 
             # Wait a moment for server to initialize
             time.sleep(3)
@@ -108,7 +114,7 @@ class ServerManager:
         # Calculate restart time
         result["restart_time_seconds"] = time.time() - start_time
 
-        logger.info(f"Server restarted in {result['restart_time_seconds']:.2f}s")
+        logger.info("Server restarted in %.2fs", result["restart_time_seconds"])
 
         return result
 
@@ -125,7 +131,7 @@ class ServerManager:
         Returns:
             True if server is ready, False if timeout
         """
-        logger.info(f"Waiting for server to be ready (timeout: {timeout}s)...")
+        logger.info("Waiting for server to be ready (timeout: %ss)...", timeout)
 
         start_time = time.time()
 
@@ -136,6 +142,7 @@ class ServerManager:
                     ["pgrep", "-f", "python -m mcp_server"],
                     capture_output=True,
                     timeout=5,
+                    check=False,
                 )
 
                 if result.returncode == 0:
@@ -143,11 +150,11 @@ class ServerManager:
                     return True
 
             except Exception as e:
-                logger.debug(f"Health check failed: {e}")
+                logger.debug("Health check failed: %s", e)
 
             time.sleep(1)
 
-        logger.error(f"Server not ready after {timeout}s")
+        logger.error("Server not ready after %ss", timeout)
         return False
 
     @staticmethod
@@ -164,12 +171,13 @@ class ServerManager:
             subprocess.run(
                 ["pkill", "-f", "python -m mcp_server"],
                 timeout=10,
+                check=False,
             )
             logger.info("Server stopped")
             return True
 
         except Exception as e:
-            logger.error(f"Failed to stop server: {e}")
+            logger.error("Failed to stop server: %s", e)
             return False
 
     @staticmethod
@@ -185,9 +193,9 @@ class ServerManager:
                 ["pgrep", "-f", "python -m mcp_server"],
                 capture_output=True,
                 timeout=5,
+                check=False,
             )
             return result.returncode == 0
 
         except Exception:
             return False
-

@@ -10,46 +10,40 @@ Switched from ChromaDB to LanceDB for:
 100% AI-authored via human orchestration.
 """
 
+# pylint: disable=too-many-instance-attributes
+# Justification: RAGEngine requires 12 attributes to manage vector DB connection,
+# embedding models, caching, and configuration - all essential state
+
+# pylint: disable=too-many-arguments,too-many-positional-arguments
+# Justification: __init__ needs 6 parameters for flexible configuration of
+# database path, embedding provider, model, dimension, cache, and LLM fallback
+
+# pylint: disable=import-outside-toplevel
+# Justification: Heavy ML dependencies (sentence-transformers, openai) loaded
+# lazily only when needed to reduce startup time and support optional features
+
+# pylint: disable=broad-exception-caught
+# Justification: RAG engine catches broad exceptions for robustness - vector
+# search failures fall back to grep, ensuring service availability
+
+# pylint: disable=too-many-locals
+# Justification: Complex search logic with filtering, ranking, and fallback
+# requires multiple intermediate variables for clarity
+
 import hashlib
 import json
 import logging
 import subprocess
 import threading
 import time
-from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 
 import lancedb
 
+from .models.rag import SearchResult
+
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class SearchResult:
-    """Results from RAG search."""
-
-    chunks: List[Dict[str, Any]]  # Retrieved chunks with content and metadata
-    total_tokens: int  # Total tokens in all chunks
-    retrieval_method: str  # "vector", "grep_fallback", or "cached"
-    query_time_ms: float  # Query latency in milliseconds
-    relevance_scores: List[float]  # Relevance scores for each chunk
-    cache_hit: bool = False  # Whether result was cached
-
-
-@dataclass
-class QueryMetrics:
-    """Metrics for observability."""
-
-    query: str
-    n_results: int
-    filters: Optional[Dict] = None
-    retrieval_method: str = "vector"
-    query_time_ms: float = 0.0
-    chunks_returned: int = 0
-    total_tokens: int = 0
-    cache_hit: bool = False
-    honeyhive_trace_id: Optional[str] = None
 
 
 class RAGEngine:
@@ -90,7 +84,7 @@ class RAGEngine:
 
         # Query cache: {query_hash: (result, timestamp)}
         self._query_cache: Dict[str, tuple] = {}
-        
+
         # Concurrency control for safe hot reload
         self._lock = threading.RLock()  # Reentrant lock for nested calls
         self._rebuilding = threading.Event()  # Signal when rebuild in progress
@@ -98,20 +92,21 @@ class RAGEngine:
         # Initialize embedding model
         if self.embedding_provider == "local":
             from sentence_transformers import SentenceTransformer
+
             self.local_model = SentenceTransformer(embedding_model)
         else:
             self.local_model = None
 
         # Initialize LanceDB connection
         try:
-            logger.info(f"Initializing RAG engine with index at {index_path}")
+            logger.info("Initializing RAG engine with index at %s", index_path)
             self.db = lancedb.connect(str(index_path))
             self.table = self.db.open_table("agent_os_standards")
             chunk_count = self.table.count_rows()
-            logger.info(f"LanceDB table loaded: {chunk_count} chunks")
+            logger.info("LanceDB table loaded: %s chunks", chunk_count)
             self.vector_search_available = True
         except Exception as e:
-            logger.warning(f"Failed to initialize LanceDB: {e}")
+            logger.warning("Failed to initialize LanceDB: %s", e)
             logger.warning("Vector search unavailable, grep fallback will be used")
             self.vector_search_available = False
             self.db = None
@@ -160,14 +155,14 @@ class RAGEngine:
             logger.debug("Waiting for index rebuild to complete...")
             if not self._rebuilding.wait(timeout=30):
                 logger.warning("Rebuild timeout, proceeding with current index")
-        
+
         start_time = time.time()
 
         # Check cache
         cache_key = self._generate_cache_key(query, n_results, filters)
         cached_result = self._check_cache(cache_key)
         if cached_result:
-            logger.debug(f"Cache hit for query: {query[:50]}...")
+            logger.debug("Cache hit for query: %s...", query[:50])
             return cached_result
 
         # Acquire read lock for safe concurrent access during index queries
@@ -183,13 +178,14 @@ class RAGEngine:
                     self._cache_result(cache_key, result)
 
                     logger.info(
-                        f"Vector search completed: {len(result.chunks)} chunks "
-                        f"in {elapsed_ms:.1f}ms"
+                        "Vector search completed: %s chunks in %.1fms",
+                        len(result.chunks),
+                        elapsed_ms,
                     )
                     return result
 
                 except Exception as e:
-                    logger.error(f"Vector search failed: {e}", exc_info=True)
+                    logger.error("Vector search failed: %s", e, exc_info=True)
                     logger.info("Falling back to grep search")
 
             # Grep fallback
@@ -198,8 +194,9 @@ class RAGEngine:
             result.query_time_ms = elapsed_ms
 
             logger.info(
-                f"Grep search completed: {len(result.chunks)} chunks "
-                f"in {elapsed_ms:.1f}ms"
+                "Grep search completed: %s chunks in %.1fms",
+                len(result.chunks),
+                elapsed_ms,
             )
             return result
 
@@ -220,7 +217,9 @@ class RAGEngine:
         # Generate query embedding
         query_embedding = self._generate_embedding(query)
 
-        # Build LanceDB query
+        # Build LanceDB query - table is guaranteed to be available here
+        if self.table is None:
+            raise RuntimeError("LanceDB table not available for vector search")
         search_query = self.table.search(query_embedding).limit(n_results * 2)
 
         # Apply filters using WHERE clauses (LanceDB's killer feature!)
@@ -260,7 +259,7 @@ class RAGEngine:
                 parent_headers = json.loads(result.get("parent_headers", "[]"))
                 tags = json.loads(result.get("tags", "[]"))
             except (json.JSONDecodeError, TypeError, KeyError) as e:
-                logger.debug(f"Failed to parse metadata fields: {e}")
+                logger.debug("Failed to parse metadata fields: %s", e)
                 parent_headers = []
                 tags = []
 
@@ -301,16 +300,18 @@ class RAGEngine:
             Embedding vector
         """
         if self.embedding_provider == "local":
+            if self.local_model is None:
+                raise RuntimeError("Local embedding model not initialized")
             embedding = self.local_model.encode(text, convert_to_numpy=True)
             return embedding.tolist()
-        elif self.embedding_provider == "openai":
+
+        if self.embedding_provider == "openai":
             import openai
-            response = openai.embeddings.create(
-                model=self.embedding_model, input=text
-            )
+
+            response = openai.embeddings.create(model=self.embedding_model, input=text)
             return response.data[0].embedding
-        else:
-            raise ValueError(f"Unknown embedding provider: {self.embedding_provider}")
+
+        raise ValueError(f"Unknown embedding provider: {self.embedding_provider}")
 
     def _grep_fallback(self, query: str, n_results: int) -> SearchResult:
         """
@@ -323,7 +324,7 @@ class RAGEngine:
         Returns:
             SearchResult with grep-retrieved chunks
         """
-        logger.info(f"Using grep fallback for query: {query[:50]}...")
+        logger.info("Using grep fallback for query: %s...", query[:50])
 
         try:
             # Extract search terms (simple word splitting)
@@ -348,6 +349,7 @@ class RAGEngine:
                     capture_output=True,
                     text=True,
                     timeout=5,
+                    check=False,
                 )
 
                 # Parse matched files
@@ -357,7 +359,7 @@ class RAGEngine:
 
                         # Read file content (up to first 1000 chars)
                         try:
-                            content = Path(line).read_text()[:1000]
+                            content = Path(line).read_text(encoding="utf-8")[:1000]
                             chunks.append(
                                 {
                                     "content": content,
@@ -367,7 +369,7 @@ class RAGEngine:
                                 }
                             )
                         except Exception as e:
-                            logger.debug(f"Could not read {line}: {e}")
+                            logger.debug("Could not read %s: %s", line, e)
 
                     if len(chunks) >= n_results:
                         break
@@ -387,7 +389,7 @@ class RAGEngine:
             )
 
         except Exception as e:
-            logger.error(f"Grep fallback failed: {e}")
+            logger.error("Grep fallback failed: %s", e)
             return SearchResult(
                 chunks=[],
                 total_tokens=0,
@@ -401,9 +403,9 @@ class RAGEngine:
         self, query: str, n_results: int, filters: Optional[Dict]
     ) -> str:
         """Generate cache key from query parameters.
-        
+
         Creates MD5 hash of query, n_results, and filters for cache lookup.
-        
+
         :param query: Search query text
         :type query: str
         :param n_results: Number of results requested
@@ -418,9 +420,9 @@ class RAGEngine:
 
     def _check_cache(self, cache_key: str) -> Optional[SearchResult]:
         """Check if cached result exists and is fresh.
-        
+
         Returns cached result if found and not expired, otherwise None.
-        
+
         :param cache_key: Cache key to look up
         :type cache_key: str
         :return: Cached search result if fresh, None otherwise
@@ -442,9 +444,9 @@ class RAGEngine:
 
     def _cache_result(self, cache_key: str, result: SearchResult) -> None:
         """Cache search result with timestamp.
-        
+
         Stores result in cache and triggers cleanup if cache grows too large.
-        
+
         :param cache_key: Cache key for storage
         :type cache_key: str
         :param result: Search result to cache
@@ -458,7 +460,7 @@ class RAGEngine:
 
     def _clean_cache(self) -> None:
         """Remove expired cache entries.
-        
+
         Iterates through cache and deletes entries that have exceeded
         the TTL threshold.
         """
@@ -488,8 +490,12 @@ class RAGEngine:
 
         if self.vector_search_available:
             try:
-                health["chunk_count"] = self.table.count_rows()
-                health["status"] = "healthy"
+                if self.table is not None:
+                    health["chunk_count"] = self.table.count_rows()
+                    health["status"] = "healthy"
+                else:
+                    health["status"] = "degraded"
+                    health["error"] = "Table not initialized"
             except Exception as e:
                 health["status"] = "degraded"
                 health["error"] = str(e)
@@ -500,26 +506,26 @@ class RAGEngine:
 
     def reload_index(self) -> None:
         """Reload LanceDB index for hot reload after rebuild.
-        
+
         Reconnects to LanceDB and reopens the table after index rebuild.
         Clears query cache to ensure fresh results. Unlike ChromaDB, LanceDB
         has no singleton conflicts making hot reload clean and simple.
-        
+
         **Thread Safety:**
-        
+
         Uses write lock to prevent concurrent queries during reload. Blocks
         all search operations until reload completes. Sets `_rebuilding` event
         to signal queries to wait.
-        
+
         **Example:**
-        
+
         .. code-block:: python
-        
+
             # After editing Agent OS content
             rag_engine.reload_index()  # Picks up new content immediately
-        
+
         **Note:**
-        
+
         This is typically called automatically by the file watcher when
         Agent OS content changes are detected.
         """
@@ -528,25 +534,25 @@ class RAGEngine:
             self._rebuilding.set()  # Signal rebuild in progress
             try:
                 logger.info("Reloading LanceDB index...")
-                
+
                 # Close old connections cleanly
-                if hasattr(self, 'table'):
+                if hasattr(self, "table"):
                     del self.table
-                if hasattr(self, 'db'):
+                if hasattr(self, "db"):
                     del self.db
-                
+
                 # Reconnect to index
                 self.db = lancedb.connect(str(self.index_path))
                 self.table = self.db.open_table("agent_os_standards")
                 chunk_count = self.table.count_rows()
-                logger.info(f"Index reloaded: {chunk_count} chunks")
+                logger.info("Index reloaded: %s chunks", chunk_count)
                 self.vector_search_available = True
-                
+
                 # Clear cache after reload
                 self._query_cache.clear()
-                
+
             except Exception as e:
-                logger.error(f"Failed to reload index: {e}")
+                logger.error("Failed to reload index: %s", e)
                 self.vector_search_available = False
             finally:
                 self._rebuilding.clear()  # Signal rebuild complete

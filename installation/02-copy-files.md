@@ -109,6 +109,32 @@ print("✅ Copied MCP server")
 
 ---
 
+### Copy #5: Scripts (CRITICAL - RAG Index Builder!)
+
+**Source**: `agent-os-enhanced/scripts/`  
+**Destination**: `.agent-os/scripts/`  
+**Contents**: ~3 Python files including `build_rag_index.py`
+
+⚠️ **DO NOT SKIP THIS!** Without `build_rag_index.py`, the MCP server cannot build the RAG index on first startup. AIs will try to create their own version, causing inconsistent implementations.
+
+```python
+shutil.copytree(
+    "agent-os-enhanced/scripts",
+    ".agent-os/scripts",
+    dirs_exist_ok=True
+)
+print("✅ Copied scripts")
+```
+
+**What's in there**:
+- `build_rag_index.py` - Canonical IndexBuilder implementation (CRITICAL!)
+- `generate-manifest.py` - Workflow manifest generator
+- `safe-upgrade.py` - Safe upgrade utilities
+
+**Why it's critical**: The MCP server's `factory.py` imports `IndexBuilder` from this script to build the RAG index when `.agent-os/.cache/vector_index/` doesn't exist. Without it, installation fails.
+
+---
+
 ## 🔨 Complete Copy Script
 
 **Run this Python script** to copy all files:
@@ -163,12 +189,19 @@ success4 = copy_with_status(
     "MCP server"
 )
 
-# Copy #5: .cursorrules (we'll handle merge in step 03, but copy for now)
+# Copy #5: Scripts (CRITICAL!)
+success5 = copy_with_status(
+    f"{AGENT_OS_SOURCE}/scripts",
+    ".agent-os/scripts",
+    "Scripts"
+)
+
+# Copy #6: .cursorrules (we'll handle merge in step 03, but copy for now)
 # This will be overwritten in step 03 if needed
 
 # Summary
 print("\n" + "="*50)
-if all([success1, success2, success3, success4]):
+if all([success1, success2, success3, success4, success5]):
     print("✅ ALL FILES COPIED SUCCESSFULLY")
     print(f"\n📝 Temp source still at: {AGENT_OS_SOURCE}")
     print("   (Will be deleted in step 05)")
@@ -185,6 +218,7 @@ Starting file copy operations...
 ✅ Usage documentation: 5 files copied
 ✅ Workflows: 47 files copied
 ✅ MCP server: 23 files copied
+✅ Scripts: 3 files copied
 
 ==================================================
 ✅ ALL FILES COPIED SUCCESSFULLY
@@ -215,6 +249,10 @@ critical_files = [
     # MCP Server
     ".agent-os/mcp_server/__main__.py",
     ".agent-os/mcp_server/requirements.txt",
+    
+    # Scripts (CRITICAL!)
+    ".agent-os/scripts/build_rag_index.py",  # Required for RAG index building!
+    ".agent-os/scripts/generate-manifest.py",
 ]
 
 missing = [f for f in critical_files if not os.path.exists(f)]
@@ -343,9 +381,10 @@ At this point you should have:
 - ✅ ~5 files in `.agent-os/usage/`
 - ✅ ~47 files in `.agent-os/workflows/` (across 2 workflows)
 - ✅ ~23 files in `.agent-os/mcp_server/`
+- ✅ ~3 files in `.agent-os/scripts/` (including `build_rag_index.py`!)
 - ✅ All validation checkpoints passed
 
-**Total**: ~106 files copied
+**Total**: ~109 files copied
 
 **If anything above is ❌, stop and fix before continuing.**
 

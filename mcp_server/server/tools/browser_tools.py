@@ -15,11 +15,32 @@ Traceability:
     NFR-7 (Error messages with remediation)
 """
 
-import logging
-from pathlib import Path
-from typing import Any, Dict, Optional, List
+# pylint: disable=too-many-lines,unused-argument
+# Justification: Comprehensive browser automation with 30+ actions requires
+# 1840 lines - splitting would reduce cohesion of related browser operations
+# _handle_console has page parameter for future console message collection
 
-from ..browser_manager import BrowserManager  # type: ignore
+# pylint: disable=too-many-arguments,too-many-positional-arguments
+# Justification: aos_browser unified interface accepts 36 parameters to support
+# all browser actions (navigation, interaction, inspection, etc.) in one tool
+
+# pylint: disable=too-many-locals
+# Justification: aos_browser dispatches to 30+ action handlers, requiring
+# local variables for each possible parameter type
+
+# pylint: disable=too-many-return-statements,too-many-branches
+# Justification: Action dispatcher pattern requires 26 return paths and
+# branches - one for each browser automation action
+
+# pylint: disable=broad-exception-caught
+# Justification: Browser automation catches broad exceptions for robustness,
+# returning structured error responses instead of crashing
+
+import logging
+import subprocess
+import uuid
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -158,8 +179,10 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
             value (str, optional): Value to fill/select
             button (str): Mouse button (left/right/middle)
             click_count (int): Number of clicks (1-3)
-            modifiers (List[str], optional): Keyboard modifiers (Alt, Control, Meta, Shift)
-            wait_for_state (str): State to wait for (visible/hidden/attached/detached)
+            modifiers (List[str], optional): Keyboard modifiers
+                (Alt, Control, Meta, Shift)
+            wait_for_state (str): State to wait for
+                (visible/hidden/attached/detached)
             wait_for_timeout (int): Wait timeout in milliseconds
             query_all (bool): Return all matching elements (vs first)
             script (str, optional): JavaScript to execute
@@ -184,15 +207,21 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
 
         Examples:
             >>> # Navigate and test dark mode
-            >>> aos_browser(action="navigate", url="http://localhost:3000", session_id="test-1")
-            >>> aos_browser(action="emulate_media", color_scheme="dark", session_id="test-1")
-            >>> aos_browser(action="screenshot", screenshot_path="/tmp/dark.png", session_id="test-1")
+            >>> aos_browser(action="navigate", url="http://localhost:3000",
+            ...             session_id="test-1")
+            >>> aos_browser(action="emulate_media", color_scheme="dark",
+            ...             session_id="test-1")
+            >>> aos_browser(action="screenshot",
+            ...             screenshot_path="/tmp/dark.png", session_id="test-1")
             >>> aos_browser(action="close", session_id="test-1")
             >>>
             >>> # Click and type
-            >>> aos_browser(action="click", selector="#login-button", session_id="test-2")
-            >>> aos_browser(action="type", selector="#username", text="user@example.com", session_id="test-2")
-            >>> aos_browser(action="fill", selector="#password", value="secret", session_id="test-2")
+            >>> aos_browser(action="click", selector="#login-button",
+            ...             session_id="test-2")
+            >>> aos_browser(action="type", selector="#username",
+            ...             text="user@example.com", session_id="test-2")
+            >>> aos_browser(action="fill", selector="#password",
+            ...             value="secret", session_id="test-2")
 
         Raises:
             ValueError: If required parameters missing for action
@@ -205,12 +234,16 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
         """
         try:
             sid = session_id or "default"
-            
+
             # DEBUG: Log all parameters with types
             logger.debug(
-                f"aos_browser called: action={action}, "
-                f"viewport_width={viewport_width} (type={type(viewport_width).__name__}), "
-                f"viewport_height={viewport_height} (type={type(viewport_height).__name__})"
+                "aos_browser called: action=%s, viewport_width=%s (type=%s), "
+                "viewport_height=%s (type=%s)",
+                action,
+                viewport_width,
+                type(viewport_width).__name__,
+                viewport_height,
+                type(viewport_height).__name__,
             )
 
             # Handle close action (doesn't need session)
@@ -223,7 +256,8 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
                     "message": "Session closed successfully",
                 }
 
-            # Get or create session for all other actions (with browser type and headless mode)
+            # Get or create session for all other actions
+            # (with browser type and headless mode)
             session = await browser_manager.get_session(
                 sid, browser_type=browser_type, headless=headless
             )
@@ -231,23 +265,21 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
 
             # ===== NAVIGATION ACTIONS =====
             if action == "navigate":
-                return await _handle_navigate(
-                    page, sid, url, wait_until, timeout
-                )
+                return await _handle_navigate(page, sid, url, wait_until, timeout)
 
             # ===== CONTEXT ACTIONS =====
-            elif action == "emulate_media":
+            if action == "emulate_media":
                 return await _handle_emulate_media(
                     page, sid, color_scheme, reduced_motion
                 )
 
-            elif action == "viewport":
+            if action == "viewport":
                 return await _handle_viewport(
                     page, sid, viewport_width, viewport_height
                 )
 
             # ===== INSPECTION ACTIONS =====
-            elif action == "screenshot":
+            if action == "screenshot":
                 return await _handle_screenshot(
                     page,
                     sid,
@@ -256,110 +288,109 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
                     screenshot_format,
                 )
 
-            elif action == "console":
+            if action == "console":
                 return await _handle_console(page, sid)
 
-            elif action == "query":
+            if action == "query":
                 return await _handle_query(page, sid, selector, query_all)
 
-            elif action == "evaluate":
+            if action == "evaluate":
                 return await _handle_evaluate(page, sid, script)
 
-            elif action == "get_cookies":
+            if action == "get_cookies":
                 return await _handle_get_cookies(page, sid, cookie_name)
 
-            elif action == "get_local_storage":
+            if action == "get_local_storage":
                 return await _handle_get_local_storage(page, sid, storage_key)
 
             # ===== INTERACTION ACTIONS =====
-            elif action == "click":
+            if action == "click":
                 return await _handle_click(
                     page, sid, selector, button, click_count, modifiers, timeout
                 )
 
-            elif action == "type":
+            if action == "type":
                 return await _handle_type(page, sid, selector, text, timeout)
 
-            elif action == "fill":
+            if action == "fill":
                 return await _handle_fill(page, sid, selector, value, timeout)
 
-            elif action == "select":
+            if action == "select":
                 return await _handle_select(page, sid, selector, value, timeout)
 
             # ===== WAITING ACTIONS =====
-            elif action == "wait":
+            if action == "wait":
                 return await _handle_wait(
                     page, sid, selector, wait_for_state, wait_for_timeout
                 )
 
             # ===== COOKIES/STORAGE ACTIONS =====
-            elif action == "set_cookies":
+            if action == "set_cookies":
                 return await _handle_set_cookies(page, sid, cookies)
 
             # ===== ADVANCED ACTIONS =====
-            elif action == "run_test":
+            if action == "run_test":
                 return await _handle_run_test(sid, test_file, test_config)
 
-            elif action == "intercept_network":
+            if action == "intercept_network":
                 return await _handle_intercept_network(
                     page, sid, route_pattern, route_handler, mock_response
                 )
 
-            elif action == "new_tab":
+            if action == "new_tab":
                 return await _handle_new_tab(session, sid, new_tab_url)
 
-            elif action == "switch_tab":
+            if action == "switch_tab":
                 return await _handle_switch_tab(session, sid, tab_id)
 
-            elif action == "close_tab":
+            if action == "close_tab":
                 return await _handle_close_tab(session, sid, tab_id)
 
-            elif action == "list_tabs":
+            if action == "list_tabs":
                 return await _handle_list_tabs(session, sid)
 
-            elif action == "upload_file":
+            if action == "upload_file":
                 return await _handle_upload_file(page, sid, selector, file_path)
 
-            elif action == "download_file":
+            if action == "download_file":
                 return await _handle_download_file(
                     page, sid, download_trigger_selector, file_path
                 )
 
             # Unknown action
-            else:
-                return {
-                    "status": "error",
-                    "error": f"Unknown action: {action}",
-                    "valid_actions": [
-                        "navigate",
-                        "emulate_media",
-                        "viewport",
-                        "screenshot",
-                        "console",
-                        "query",
-                        "evaluate",
-                        "get_cookies",
-                        "set_cookies",
-                        "get_local_storage",
-                        "click",
-                        "type",
-                        "fill",
-                        "select",
-                        "wait",
-                        "run_test",
-                        "intercept_network",
-                        "new_tab",
-                        "switch_tab",
-                        "close_tab",
-                        "list_tabs",
-                        "upload_file",
-                        "download_file",
-                        "close",
-                    ],
-                }
+            return {
+                "status": "error",
+                "error": f"Unknown action: {action}",
+                "valid_actions": [
+                    "navigate",
+                    "emulate_media",
+                    "viewport",
+                    "screenshot",
+                    "console",
+                    "query",
+                    "evaluate",
+                    "get_cookies",
+                    "set_cookies",
+                    "get_local_storage",
+                    "click",
+                    "type",
+                    "fill",
+                    "select",
+                    "wait",
+                    "run_test",
+                    "intercept_network",
+                    "new_tab",
+                    "switch_tab",
+                    "close_tab",
+                    "list_tabs",
+                    "upload_file",
+                    "download_file",
+                    "close",
+                ],
+            }
 
         except Exception as e:
-            logger.error(f"aos_browser action '{action}' failed: {e}", exc_info=True)
+            logger.error("aos_browser action '%s' failed: %s", action, e, exc_info=True)
             return {
                 "status": "error",
                 "error": str(e),
@@ -399,7 +430,10 @@ async def _handle_navigate(
             "error": "Missing required parameter: url",
             "action": "navigate",
             "session_id": session_id,
-            "remediation": "Provide url parameter, e.g., aos_browser(action='navigate', url='https://example.com')",
+            "remediation": (
+                "Provide url parameter, e.g., "
+                "aos_browser(action='navigate', url='https://example.com')"
+            ),
         }
 
     try:
@@ -422,7 +456,10 @@ async def _handle_navigate(
             "action": "navigate",
             "session_id": session_id,
             "url": url,
-            "remediation": "Check URL is valid, increase timeout parameter, or check network connectivity",
+            "remediation": (
+                "Check URL is valid, increase timeout parameter, "
+                "or check network connectivity"
+            ),
         }
 
 
@@ -453,7 +490,10 @@ async def _handle_emulate_media(
             "error": "Missing required parameter: color_scheme or reduced_motion",
             "action": "emulate_media",
             "session_id": session_id,
-            "remediation": "Provide at least one of: color_scheme='dark', reduced_motion='reduce'",
+            "remediation": (
+                "Provide at least one of: color_scheme='dark', "
+                "reduced_motion='reduce'"
+            ),
         }
 
     try:
@@ -482,7 +522,7 @@ async def _handle_screenshot(
     session_id: str,
     full_page: bool,
     path: Optional[str],
-    format: str,
+    img_format: str,
 ) -> Dict[str, Any]:
     """
     Handle screenshot action (FR-6).
@@ -492,7 +532,7 @@ async def _handle_screenshot(
         session_id: Session ID
         full_page: Capture full scrollable page
         path: File path to save screenshot
-        format: Image format (png/jpeg)
+        img_format: Image format (png/jpeg)
 
     Returns:
         Dict with status and screenshot metadata
@@ -508,7 +548,7 @@ async def _handle_screenshot(
             screenshot_path.parent.mkdir(parents=True, exist_ok=True)
 
         screenshot_bytes = await page.screenshot(
-            full_page=full_page, path=path, type=format
+            full_page=full_page, path=path, type=img_format
         )
 
         return {
@@ -516,7 +556,7 @@ async def _handle_screenshot(
             "action": "screenshot",
             "session_id": session_id,
             "path": path,
-            "format": format,
+            "format": img_format,
             "full_page": full_page,
             "size_bytes": len(screenshot_bytes),
         }
@@ -526,7 +566,10 @@ async def _handle_screenshot(
             "error": f"Screenshot failed: {e}",
             "action": "screenshot",
             "session_id": session_id,
-            "remediation": "Check path is writable, format is 'png' or 'jpeg', and page is loaded",
+            "remediation": (
+                "Check path is writable, format is 'png' or 'jpeg', "
+                "and page is loaded"
+            ),
         }
 
 
@@ -558,16 +601,21 @@ async def _handle_viewport(
             "error": f"Invalid viewport dimensions: width={width}, height={height}",
             "action": "viewport",
             "session_id": session_id,
-            "remediation": "Provide numeric viewport_width and viewport_height in pixels",
+            "remediation": (
+                "Provide numeric viewport_width and viewport_height in pixels"
+            ),
         }
-    
+
     if not width_int or not height_int:
         return {
             "status": "error",
             "error": "Missing required parameters: viewport_width and viewport_height",
             "action": "viewport",
             "session_id": session_id,
-            "remediation": "Provide both viewport_width and viewport_height in pixels, e.g., viewport_width=1920, viewport_height=1080",
+            "remediation": (
+                "Provide both viewport_width and viewport_height in pixels, "
+                "e.g., viewport_width=1920, viewport_height=1080"
+            ),
         }
 
     try:
@@ -589,7 +637,9 @@ async def _handle_viewport(
         }
 
 
-async def _handle_console(page: Any, session_id: str) -> Dict[str, Any]:
+async def _handle_console(
+    page: Any, session_id: str
+) -> Dict[str, Any]:  # pylint: disable=unused-argument
     """
     Handle console action (FR-8, stub for now).
 
@@ -652,28 +702,28 @@ async def _handle_query(
                 "count": count,
                 "texts": texts,
             }
-        else:
-            element = await page.query_selector(selector)
-            if element:
-                text = await element.text_content()
-                is_visible = await element.is_visible()
-                return {
-                    "status": "success",
-                    "action": "query",
-                    "session_id": session_id,
-                    "selector": selector,
-                    "found": True,
-                    "text": text,
-                    "visible": is_visible,
-                }
-            else:
-                return {
-                    "status": "success",
-                    "action": "query",
-                    "session_id": session_id,
-                    "selector": selector,
-                    "found": False,
-                }
+
+        element = await page.query_selector(selector)
+        if element:
+            text = await element.text_content()
+            is_visible = await element.is_visible()
+            return {
+                "status": "success",
+                "action": "query",
+                "session_id": session_id,
+                "selector": selector,
+                "found": True,
+                "text": text,
+                "visible": is_visible,
+            }
+
+        return {
+            "status": "success",
+            "action": "query",
+            "session_id": session_id,
+            "selector": selector,
+            "found": False,
+        }
     except Exception as e:
         return {
             "status": "error",
@@ -761,22 +811,22 @@ async def _handle_get_cookies(
                     "cookie_name": cookie_name,
                     "cookie": cookie,
                 }
-            else:
-                return {
-                    "status": "success",
-                    "action": "get_cookies",
-                    "session_id": session_id,
-                    "cookie_name": cookie_name,
-                    "found": False,
-                }
-        else:
+
             return {
                 "status": "success",
                 "action": "get_cookies",
                 "session_id": session_id,
-                "cookies": cookies,
-                "count": len(cookies),
+                "cookie_name": cookie_name,
+                "found": False,
             }
+
+        return {
+            "status": "success",
+            "action": "get_cookies",
+            "session_id": session_id,
+            "cookies": cookies,
+            "count": len(cookies),
+        }
     except Exception as e:
         return {
             "status": "error",
@@ -810,7 +860,11 @@ async def _handle_set_cookies(
             "error": "Missing required parameter: cookies",
             "action": "set_cookies",
             "session_id": session_id,
-            "remediation": "Provide cookies parameter as list of dicts, e.g., cookies=[{'name': 'session', 'value': 'abc123', 'domain': '.example.com'}]",
+            "remediation": (
+                "Provide cookies parameter as list of dicts, e.g., "
+                "cookies=[{'name': 'session', 'value': 'abc123', "
+                "'domain': '.example.com'}]"
+            ),
         }
 
     try:
@@ -936,7 +990,10 @@ async def _handle_click(
             "action": "click",
             "session_id": session_id,
             "selector": selector,
-            "remediation": "Check selector exists, element is visible and clickable, or increase timeout",
+            "remediation": (
+                "Check selector exists, element is visible and clickable, "
+                "or increase timeout"
+            ),
         }
 
 
@@ -997,7 +1054,10 @@ async def _handle_type(
             "action": "type",
             "session_id": session_id,
             "selector": selector,
-            "remediation": "Check selector exists, element is visible and focused, or increase timeout",
+            "remediation": (
+                "Check selector exists, element is visible and focused, "
+                "or increase timeout"
+            ),
         }
 
 
@@ -1057,7 +1117,10 @@ async def _handle_fill(
             "action": "fill",
             "session_id": session_id,
             "selector": selector,
-            "remediation": "Check selector exists, element is an input/textarea, or increase timeout",
+            "remediation": (
+                "Check selector exists, element is an input/textarea, "
+                "or increase timeout"
+            ),
         }
 
 
@@ -1118,7 +1181,10 @@ async def _handle_select(
             "action": "select",
             "session_id": session_id,
             "selector": selector,
-            "remediation": "Check selector exists, element is a <select>, option value exists, or increase timeout",
+            "remediation": (
+                "Check selector exists, element is a <select>, "
+                "option value exists, or increase timeout"
+            ),
         }
 
 
@@ -1151,7 +1217,9 @@ async def _handle_wait(
             "error": "Missing required parameter: selector",
             "action": "wait",
             "session_id": session_id,
-            "remediation": "Provide selector parameter, e.g., selector='#loading-spinner'",
+            "remediation": (
+                "Provide selector parameter, e.g., selector='#loading-spinner'"
+            ),
         }
 
     try:
@@ -1171,7 +1239,10 @@ async def _handle_wait(
             "session_id": session_id,
             "selector": selector,
             "state": state,
-            "remediation": "Check selector is valid, increase timeout, or verify element reaches expected state",
+            "remediation": (
+                "Check selector is valid, increase timeout, "
+                "or verify element reaches expected state"
+            ),
         }
 
 
@@ -1203,16 +1274,16 @@ async def _handle_run_test(
             "error": "Missing required parameter: test_file",
             "action": "run_test",
             "session_id": session_id,
-            "remediation": "Provide test_file parameter, e.g., test_file='tests/example.spec.ts'",
+            "remediation": (
+                "Provide test_file parameter, "
+                "e.g., test_file='tests/example.spec.ts'"
+            ),
         }
 
     try:
-        import subprocess
-        import json
-
         # Build test command
         cmd = ["npx", "playwright", "test", test_file]
-        
+
         # Add config options
         if test_config:
             if test_config.get("headed"):
@@ -1221,14 +1292,15 @@ async def _handle_run_test(
                 cmd.extend(["--project", test_config["project"]])
             if test_config.get("reporter"):
                 cmd.extend(["--reporter", test_config["reporter"]])
-        
+
         # Execute test
-        logger.info(f"Running test: {' '.join(cmd)}")
+        logger.info("Running test: %s", " ".join(cmd))
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=300,  # 5 minute timeout
+            check=False,
         )
 
         return {
@@ -1248,7 +1320,9 @@ async def _handle_run_test(
             "action": "run_test",
             "session_id": session_id,
             "test_file": test_file,
-            "remediation": "Check test file for infinite loops or reduce test complexity",
+            "remediation": (
+                "Check test file for infinite loops or reduce test complexity"
+            ),
         }
     except Exception as e:
         return {
@@ -1257,7 +1331,10 @@ async def _handle_run_test(
             "action": "run_test",
             "session_id": session_id,
             "test_file": test_file,
-            "remediation": "Ensure Playwright is installed (npm install -D @playwright/test) and test file exists",
+            "remediation": (
+                "Ensure Playwright is installed "
+                "(npm install -D @playwright/test) and test file exists"
+            ),
         }
 
 
@@ -1290,7 +1367,9 @@ async def _handle_intercept_network(
             "error": "Missing required parameter: route_pattern",
             "action": "intercept_network",
             "session_id": session_id,
-            "remediation": "Provide route_pattern parameter, e.g., route_pattern='**/api/**'",
+            "remediation": (
+                "Provide route_pattern parameter, e.g., route_pattern='**/api/**'"
+            ),
         }
 
     if not handler:
@@ -1299,7 +1378,10 @@ async def _handle_intercept_network(
             "error": "Missing required parameter: route_handler",
             "action": "intercept_network",
             "session_id": session_id,
-            "remediation": "Provide route_handler parameter, e.g., route_handler='block' or 'mock'",
+            "remediation": (
+                "Provide route_handler parameter, "
+                "e.g., route_handler='block' or 'mock'"
+            ),
         }
 
     try:
@@ -1314,23 +1396,27 @@ async def _handle_intercept_network(
                 "handler": "block",
                 "message": f"Blocking all requests matching: {pattern}",
             }
-        elif handler == "mock":
+
+        if handler == "mock":
             if not mock_response:
                 return {
                     "status": "error",
                     "error": "Missing mock_response for mock handler",
                     "action": "intercept_network",
                     "session_id": session_id,
-                    "remediation": "Provide mock_response parameter with status, contentType, and body",
+                    "remediation": (
+                        "Provide mock_response parameter with status, "
+                        "contentType, and body"
+                    ),
                 }
-            
+
             async def mock_handler(route):
                 await route.fulfill(
                     status=mock_response.get("status", 200),
                     content_type=mock_response.get("contentType", "application/json"),
                     body=mock_response.get("body", "{}"),
                 )
-            
+
             await page.route(pattern, mock_handler)
             return {
                 "status": "success",
@@ -1341,7 +1427,8 @@ async def _handle_intercept_network(
                 "mock_response": mock_response,
                 "message": f"Mocking requests matching: {pattern}",
             }
-        elif handler == "continue":
+
+        if handler == "continue":
             await page.route(pattern, lambda route: route.continue_())
             return {
                 "status": "success",
@@ -1351,14 +1438,14 @@ async def _handle_intercept_network(
                 "handler": "continue",
                 "message": f"Continuing requests matching: {pattern}",
             }
-        else:
-            return {
-                "status": "error",
-                "error": f"Invalid route_handler: {handler}",
-                "action": "intercept_network",
-                "session_id": session_id,
-                "remediation": "route_handler must be 'block', 'mock', or 'continue'",
-            }
+
+        return {
+            "status": "error",
+            "error": f"Invalid route_handler: {handler}",
+            "action": "intercept_network",
+            "session_id": session_id,
+            "remediation": "route_handler must be 'block', 'mock', or 'continue'",
+        }
     except Exception as e:
         return {
             "status": "error",
@@ -1390,23 +1477,22 @@ async def _handle_new_tab(
     try:
         # Create new page in same browser context
         new_page = await session.browser.new_page()
-        
+
         # Generate unique tab ID
-        import uuid
         tab_id = f"tab-{uuid.uuid4().hex[:8]}"
-        
+
         # Store in session tabs
         session.tabs[tab_id] = new_page
-        
+
         # Navigate if URL provided
         if url:
             await new_page.goto(url)
             title = await new_page.title()
         else:
             title = "about:blank"
-        
-        logger.info(f"Created new tab: {tab_id} (total tabs: {len(session.tabs)})")
-        
+
+        logger.info("Created new tab: %s (total tabs: %s)", tab_id, len(session.tabs))
+
         return {
             "status": "success",
             "action": "new_tab",
@@ -1422,7 +1508,9 @@ async def _handle_new_tab(
             "error": f"Create tab failed: {e}",
             "action": "new_tab",
             "session_id": session_id,
-            "remediation": "Check browser session is active and has sufficient resources",
+            "remediation": (
+                "Check browser session is active and has sufficient resources"
+            ),
         }
 
 
@@ -1449,7 +1537,9 @@ async def _handle_switch_tab(
             "error": "Missing required parameter: tab_id",
             "action": "switch_tab",
             "session_id": session_id,
-            "remediation": "Provide tab_id parameter from new_tab or list_tabs response",
+            "remediation": (
+                "Provide tab_id parameter from new_tab or list_tabs response"
+            ),
         }
 
     try:
@@ -1463,22 +1553,22 @@ async def _handle_switch_tab(
                 "available_tabs": list(session.tabs.keys()),
                 "remediation": "Use list_tabs to see available tab IDs",
             }
-        
+
         # Get the target tab
         target_page = session.tabs[tab_id]
-        
+
         # Bring tab to front (visual focus in browser)
         await target_page.bring_to_front()
-        
+
         # Update session.page to point to active tab (for subsequent operations)
         # All tabs stay in tabs dict with stable IDs - we just change which is active
         session.page = target_page
-        
+
         title = await target_page.title()
         url = target_page.url
-        
-        logger.info(f"Switched to tab: {tab_id}")
-        
+
+        logger.info("Switched to tab: %s", tab_id)
+
         return {
             "status": "success",
             "action": "switch_tab",
@@ -1494,7 +1584,7 @@ async def _handle_switch_tab(
             "action": "switch_tab",
             "session_id": session_id,
             "tab_id": tab_id,
-            "remediation": "Check tab_id is valid and tab is still open",
+            "remediation": ("Check tab_id is valid and tab is still open"),
         }
 
 
@@ -1521,7 +1611,9 @@ async def _handle_close_tab(
             "error": "Missing required parameter: tab_id",
             "action": "close_tab",
             "session_id": session_id,
-            "remediation": "Provide tab_id parameter from new_tab or list_tabs response",
+            "remediation": (
+                "Provide tab_id parameter from new_tab or list_tabs response"
+            ),
         }
 
     try:
@@ -1534,14 +1626,14 @@ async def _handle_close_tab(
                 "available_tabs": list(session.tabs.keys()),
                 "remediation": "Use list_tabs to see available tab IDs",
             }
-        
+
         # Close the tab
         tab_page = session.tabs[tab_id]
         await tab_page.close()
         del session.tabs[tab_id]
-        
-        logger.info(f"Closed tab: {tab_id} (remaining tabs: {len(session.tabs)})")
-        
+
+        logger.info("Closed tab: %s (remaining tabs: %s)", tab_id, len(session.tabs))
+
         return {
             "status": "success",
             "action": "close_tab",
@@ -1576,17 +1668,21 @@ async def _handle_list_tabs(session: Any, session_id: str) -> Dict[str, Any]:
     """
     try:
         tabs = []
-        
+
         # List all tabs (including primary which is now in tabs dict)
         # Primary page is the one stored in session.page
         for tab_id, tab_page in session.tabs.items():
-            tabs.append({
-                "tab_id": tab_id,
-                "url": tab_page.url,
-                "title": await tab_page.title(),
-                "is_primary": (tab_page == session.page),  # Check if this is the active page
-            })
-        
+            tabs.append(
+                {
+                    "tab_id": tab_id,
+                    "url": tab_page.url,
+                    "title": await tab_page.title(),
+                    "is_primary": (
+                        tab_page == session.page
+                    ),  # Check if this is the active page
+                }
+            )
+
         return {
             "status": "success",
             "action": "list_tabs",
@@ -1628,7 +1724,10 @@ async def _handle_upload_file(
             "error": "Missing required parameter: selector",
             "action": "upload_file",
             "session_id": session_id,
-            "remediation": "Provide selector parameter for file input, e.g., selector='input[type=file]'",
+            "remediation": (
+                "Provide selector parameter for file input, "
+                "e.g., selector='input[type=file]'"
+            ),
         }
 
     if not file_path:
@@ -1637,12 +1736,12 @@ async def _handle_upload_file(
             "error": "Missing required parameter: file_path",
             "action": "upload_file",
             "session_id": session_id,
-            "remediation": "Provide file_path parameter, e.g., file_path='/path/to/file.pdf'",
+            "remediation": (
+                "Provide file_path parameter, e.g., file_path='/path/to/file.pdf'"
+            ),
         }
 
     try:
-        from pathlib import Path
-        
         # Validate file exists
         file = Path(file_path)
         if not file.exists():
@@ -1653,10 +1752,10 @@ async def _handle_upload_file(
                 "session_id": session_id,
                 "remediation": "Ensure file_path points to an existing file",
             }
-        
+
         # Upload file
         await page.set_input_files(selector, str(file))
-        
+
         return {
             "status": "success",
             "action": "upload_file",
@@ -1674,7 +1773,9 @@ async def _handle_upload_file(
             "session_id": session_id,
             "selector": selector,
             "file_path": file_path,
-            "remediation": "Check selector targets a file input and file is accessible",
+            "remediation": (
+                "Check selector targets a file input and file is accessible"
+            ),
         }
 
 
@@ -1705,7 +1806,10 @@ async def _handle_download_file(
             "error": "Missing required parameter: download_trigger_selector",
             "action": "download_file",
             "session_id": session_id,
-            "remediation": "Provide download_trigger_selector parameter, e.g., download_trigger_selector='#download-btn'",
+            "remediation": (
+                "Provide download_trigger_selector parameter, "
+                "e.g., download_trigger_selector='#download-btn'"
+            ),
         }
 
     if not save_path:
@@ -1714,28 +1818,29 @@ async def _handle_download_file(
             "error": "Missing required parameter: file_path",
             "action": "download_file",
             "session_id": session_id,
-            "remediation": "Provide file_path parameter for save location, e.g., file_path='/tmp/download.pdf'",
+            "remediation": (
+                "Provide file_path parameter for save location, "
+                "e.g., file_path='/tmp/download.pdf'"
+            ),
         }
 
     try:
-        from pathlib import Path
-        
         # Ensure parent directory exists
         save_file = Path(save_path)
         save_file.parent.mkdir(parents=True, exist_ok=True)
-        
+
         # Start download and click trigger
         async with page.expect_download(timeout=60000) as download_info:
             await page.click(trigger_selector)
-        
+
         download = await download_info.value
-        
+
         # Save to specified path
         await download.save_as(save_path)
-        
+
         # Get file info
         file_size = save_file.stat().st_size if save_file.exists() else 0
-        
+
         return {
             "status": "success",
             "action": "download_file",
@@ -1752,6 +1857,8 @@ async def _handle_download_file(
             "action": "download_file",
             "session_id": session_id,
             "trigger_selector": trigger_selector,
-            "remediation": "Check trigger_selector initiates a download and save_path is writable. Increase timeout if download is slow.",
+            "remediation": (
+                "Check trigger_selector initiates a download and save_path "
+                "is writable. Increase timeout if download is slow."
+            ),
         }
-

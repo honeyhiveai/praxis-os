@@ -4,17 +4,14 @@ Unit tests for WorkflowSession.
 Tests session-scoped workflow execution and lifecycle management.
 """
 
-import pytest
-from pathlib import Path
 from datetime import datetime
-from unittest.mock import Mock, MagicMock
+from pathlib import Path
+from unittest.mock import MagicMock, Mock
+
+import pytest
 
 from mcp_server.core.session import WorkflowSession, WorkflowSessionError
-from mcp_server.models.workflow import (
-    WorkflowState,
-    WorkflowMetadata,
-    PhaseMetadata,
-)
+from mcp_server.models.workflow import PhaseMetadata, WorkflowMetadata, WorkflowState
 
 
 class TestWorkflowSession:
@@ -101,7 +98,12 @@ class TestWorkflowSession:
         return tmp_path / "workflows"
 
     def test_create_static_session(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test creating static workflow session."""
         session = WorkflowSession(
@@ -122,7 +124,12 @@ class TestWorkflowSession:
         assert not session._is_dynamic()
 
     def test_is_dynamic_static_workflow(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test _is_dynamic() returns False for static workflow."""
         session = WorkflowSession(
@@ -144,7 +151,12 @@ class TestWorkflowSession:
         assert dynamic_metadata.dynamic_phases is True
 
     def test_get_current_phase_static(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test getting current phase for static workflow."""
         session = WorkflowSession(
@@ -199,7 +211,12 @@ class TestWorkflowSession:
         assert "Workflow complete" in result["message"]
 
     def test_get_task_static(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test getting task for static workflow."""
         session = WorkflowSession(
@@ -252,7 +269,12 @@ class TestWorkflowSession:
             session.get_task(5, 1)
 
     def test_complete_phase(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test completing a phase."""
         session = WorkflowSession(
@@ -308,7 +330,12 @@ class TestWorkflowSession:
             session.complete_phase(0, {})
 
     def test_cleanup(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test cleanup method."""
         session = WorkflowSession(
@@ -326,7 +353,12 @@ class TestWorkflowSession:
         session.cleanup()
 
     def test_get_state(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test getting workflow state."""
         session = WorkflowSession(
@@ -346,7 +378,12 @@ class TestWorkflowSession:
         assert state.session_id == "test-session-123"
 
     def test_session_with_options(
-        self, mock_state, static_metadata, mock_rag_engine, mock_state_manager, workflows_base_path
+        self,
+        mock_state,
+        static_metadata,
+        mock_rag_engine,
+        mock_state_manager,
+        workflows_base_path,
     ):
         """Test session with custom options."""
         options = {"custom_option": "value", "debug": True}

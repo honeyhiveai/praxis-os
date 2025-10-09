@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './StandardsFlowDiagram.module.css';
 
-export default function StandardsFlowDiagram(): JSX.Element {
+export default function StandardsFlowDiagram(): React.ReactElement {
   return (
     <div className={styles.container}>
       <div className={styles.tier}>
