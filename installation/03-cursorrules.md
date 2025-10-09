@@ -318,19 +318,18 @@ You've handled the `.cursorrules` file safely. Now you need to:
 
 ## ➡️ NEXT STEP
 
-**Read file**: `installation/04-venv-mcp.md`
+**Read file**: `installation/04-gitignore.md`
 
 That file will:
-1. Create Python virtual environment in `.agent-os/venv/`
-2. Install MCP server dependencies
-3. Create `.cursor/mcp.json` with correct configuration
-4. Validate Python setup
-5. Direct you to step 05 (final validation and cleanup)
+1. Configure `.gitignore` to prevent committing 2.6GB of ephemeral files
+2. Add Agent OS entries (cache, backups, venv)
+3. Verify gitignore is working correctly
+4. Direct you to step 05 (venv and mcp setup)
 
 ---
 
 **Status**: Step 3 Complete ✅  
 **Handled**: .cursorrules (safely!)  
-**Next File**: `04-venv-mcp.md`  
-**Step**: 4 of 5
+**Next File**: `04-gitignore.md`  
+**Step**: 3 of 6
 

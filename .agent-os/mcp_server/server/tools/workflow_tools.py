@@ -1,14 +1,15 @@
 """
 Workflow management tools for MCP server.
 
-Provides 7 workflow tools:
+Provides 8 workflow tools:
 1. start_workflow - Initialize new workflow session
 2. get_current_phase - Get current phase content
 3. get_task - Get specific task content (horizontal scaling)
 4. complete_phase - Submit evidence and advance
 5. get_workflow_state - Get full workflow state
 6. create_workflow - Generate new workflow framework
-7. current_date - Get current date/time (prevents AI date errors)
+7. validate_workflow - Validate workflow structure against standards
+8. current_date - Get current date/time (prevents AI date errors)
 """
 
 import logging
@@ -33,6 +34,7 @@ def register_workflow_tools(
     mcp: Any,
     workflow_engine: Any,
     framework_generator: Any,
+    workflow_validator: Any,
     base_path: Optional[Path] = None
 ) -> int:
     """
@@ -41,6 +43,7 @@ def register_workflow_tools(
     :param mcp: FastMCP server instance
     :param workflow_engine: WorkflowEngine instance
     :param framework_generator: FrameworkGenerator instance
+    :param workflow_validator: WorkflowValidator class
     :param base_path: Base path for .agent-os (for create_workflow output)
     :return: Number of tools registered
     """
@@ -407,6 +410,69 @@ def register_workflow_tools(
 
     @mcp.tool()
     @tool_trace
+    async def validate_workflow(
+        workflow_path: str,
+    ) -> Dict[str, Any]:
+        """
+        Validate workflow structure against construction standards.
+        
+        Checks workflow directory structure, file naming conventions, and file sizes
+        against workflow-construction-standards.md requirements.
+        
+        Validates:
+        - Standard directory structure (phases/N/phase.md + task-N-name.md)
+        - File naming conventions (phase.md not README.md)
+        - File size guidelines (phase ~80 lines, tasks 100-170 lines)
+        - Required metadata.json presence and validity
+        
+        Args:
+            workflow_path: Path to workflow directory (e.g., "universal/workflows/my_workflow_v1")
+        
+        Returns:
+            Dictionary with compliance status, issues, warnings, and compliance score
+        """
+        try:
+            if HONEYHIVE_ENABLED:
+                enrich_span({
+                    "mcp.tool": "validate_workflow",
+                    "workflow.path": workflow_path,
+                })
+            
+            logger.info(f"validate_workflow: path='{workflow_path}'")
+            
+            # Create validator and run validation
+            validator = workflow_validator(Path(workflow_path))
+            result = validator.validate()
+            
+            if HONEYHIVE_ENABLED:
+                enrich_span({
+                    "workflow.compliant": result["compliant"],
+                    "workflow.compliance_score": result["compliance_score"],
+                    "workflow.issues_count": len(result["issues"]),
+                    "workflow.warnings_count": len(result["warnings"]),
+                })
+            
+            logger.info(
+                f"Workflow validation for '{workflow_path}': "
+                f"compliant={result['compliant']}, score={result['compliance_score']}, "
+                f"issues={len(result['issues'])}, warnings={len(result['warnings'])}"
+            )
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"validate_workflow failed: {e}", exc_info=True)
+            return {
+                "workflow_path": workflow_path,
+                "compliant": False,
+                "compliance_score": 0,
+                "issues": [{"type": "validation_error", "severity": "critical", "message": str(e)}],
+                "warnings": [],
+                "summary": f"❌ Validation failed: {str(e)}"
+            }
+
+    @mcp.tool()
+    @tool_trace
     async def current_date() -> Dict[str, Any]:
         """
         Get current date and time for preventing date errors in AI-generated content.
@@ -462,7 +528,7 @@ def register_workflow_tools(
             logger.error(f"current_date failed: {e}", exc_info=True)
             return {"error": str(e)}
     
-    return 7  # Seven tools registered
+    return 8  # Eight tools registered
 
 
 __all__ = ["register_workflow_tools"]

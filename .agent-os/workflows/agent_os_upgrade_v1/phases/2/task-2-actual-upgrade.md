@@ -112,4 +112,4 @@ echo "Workflows: $(find .agent-os/workflows -type f | wc -l) files"
 
 ## Next Step
 
-🎯 NEXT-MANDATORY: [task-3-verify-checksums.md](task-3-verify-checksums.md)
+🎯 NEXT-MANDATORY: [task-3-update-gitignore.md](task-3-update-gitignore.md)

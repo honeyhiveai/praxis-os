@@ -27,9 +27,11 @@ These files use **horizontal scaling** - each file is ~200-250 lines and chains 
     ↓
 03-cursorrules.md     Handle .cursorrules safely (don't overwrite!)
     ↓
-04-venv-mcp.md        Create Python venv + mcp.json
+04-gitignore.md       Configure .gitignore (prevent committing 2.6GB!)
     ↓
-05-validate.md        Validate + CLEANUP temp directory
+05-venv-mcp.md        Create Python venv + mcp.json
+    ↓
+06-validate.md        Validate + CLEANUP temp directory
     ↓
 COMPLETE! ✅
 ```
@@ -84,8 +86,9 @@ In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`. The entry poi
 - **01-directories.md** → Directory creation with validation
 - **02-copy-files.md** → File copying with validation  
 - **03-cursorrules.md** → Safe .cursorrules handling
-- **04-venv-mcp.md** → Python venv + mcp.json creation
-- **05-validate.md** → Final validation + cleanup
+- **04-gitignore.md** → Configure .gitignore to prevent commits of ephemeral files
+- **05-venv-mcp.md** → Python venv + mcp.json creation
+- **06-validate.md** → Final validation + cleanup
 
 ### For Deep Dives (if needed)
 
@@ -106,8 +109,9 @@ agent-os-enhanced/
 │   ├── 01-directories.md
 │   ├── 02-copy-files.md
 │   ├── 03-cursorrules.md
-│   ├── 04-venv-mcp.md
-│   └── 05-validate.md
+│   ├── 04-gitignore.md
+│   ├── 05-venv-mcp.md
+│   └── 06-validate.md
 ├── universal/             ← Content to copy
 │   ├── standards/
 │   ├── usage/

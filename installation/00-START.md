@@ -31,7 +31,7 @@ Install Agent OS Enhanced into the target project. This will:
 **What happens**: Python module not found error  
 **Wrong**: `"mcp_server.agent_os_rag"`  
 **Correct**: `"mcp_server"`  
-**Prevention**: Step 04 has the exact JSON to copy
+**Prevention**: Step 05 has the exact JSON to copy
 
 ### Mistake #3: Blindly Overwriting .cursorrules
 **What happens**: User's existing Cursor rules are destroyed  
@@ -52,8 +52,9 @@ You'll follow these files in order:
 01-directories.md     Create all required directories
 02-copy-files.md      Copy all content from source repo
 03-cursorrules.md     Handle .cursorrules safely (don't overwrite!)
-04-venv-mcp.md        Create venv and mcp.json
-05-validate.md        Final validation and cleanup temp files
+04-gitignore.md       Configure .gitignore (prevent committing 2.6GB!)
+05-venv-mcp.md        Create venv and mcp.json
+06-validate.md        Final validation and cleanup temp files
 ```
 
 Each file:

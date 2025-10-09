@@ -3,6 +3,8 @@
 .agent-os/venv/
 .agent-os/mcp_server/__pycache__/
 .agent-os/scripts/__pycache__/
+.agent-os.backup.*
+.agent-os/.upgrade_lock
 
 # Agent OS - Everything else is TRACKED as reference example for consumers
 # (.agent-os/ serves as dogfooding example of proper installation)

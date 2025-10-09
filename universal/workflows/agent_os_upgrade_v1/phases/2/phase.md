@@ -1,8 +1,8 @@
 # Phase 2: Content Upgrade
 
 **Purpose:** Content Upgrade  
-**Estimated Time:** 45s  
-**Total Tasks:** 3
+**Estimated Time:** 60s  
+**Total Tasks:** 4
 
 ---
 
@@ -21,7 +21,10 @@ Complete content upgrade for the upgrade workflow.
 **File:** [task-2-*.md](task-2-*.md)  
 
 ### Task 3: [See task file]
-**File:** [task-3-*.md](task-3-*.md)  
+**File:** [task-3-*.md](task-3-*.md)
+
+### Task 4: [See task file]
+**File:** [task-4-*.md](task-4-*.md)  
 
 ---
 

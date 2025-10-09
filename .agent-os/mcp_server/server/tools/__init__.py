@@ -20,6 +20,7 @@ def register_all_tools(
     rag_engine: Any,
     workflow_engine: Any,
     framework_generator: Any,
+    workflow_validator: Any,
     browser_manager: Optional[Any] = None,
     base_path: Optional[Any] = None,
     enabled_groups: Optional[List[str]] = None,
@@ -35,6 +36,7 @@ def register_all_tools(
     :param rag_engine: RAG engine for search tools
     :param workflow_engine: Workflow engine for workflow tools
     :param framework_generator: Generator for create_workflow tool
+    :param workflow_validator: WorkflowValidator class for validate_workflow tool
     :param browser_manager: Optional BrowserManager for browser tools
     :param base_path: Base path for .agent-os (for create_workflow)
     :param enabled_groups: Tool groups to enable (None = default groups)
@@ -55,7 +57,7 @@ def register_all_tools(
         logger.info(f"✅ Registered {count} RAG tool(s)")
     
     if "workflow" in enabled_groups:
-        count = register_workflow_tools(mcp, workflow_engine, framework_generator, base_path)
+        count = register_workflow_tools(mcp, workflow_engine, framework_generator, workflow_validator, base_path)
         tool_count += count
         logger.info(f"✅ Registered {count} workflow tool(s)")
     

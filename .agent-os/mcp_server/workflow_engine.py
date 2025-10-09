@@ -272,6 +272,67 @@ class CheckpointLoader:
         return cleaned.strip()
 
 
+# ============================================================================
+# Workflow Task Management Guidance
+# ============================================================================
+
+WORKFLOW_GUIDANCE_FIELDS = {
+    "⚠️_WORKFLOW_EXECUTION_MODE": "ACTIVE",
+    "🛑_DO_NOT_USE_EXTERNAL_TASK_TOOLS": (
+        "This workflow manages ALL tasks. DO NOT use todo_write or "
+        "external task lists. The workflow IS your task tracker."
+    ),
+    "execution_model": "Complete task → Submit evidence → Advance phase"
+}
+
+
+def add_workflow_guidance(response: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Inject task management guidance into workflow tool response.
+    
+    This decorator adds explicit guidance fields to inform AI assistants
+    that the workflow system manages task state and external task tools
+    (like todo_write) should not be used.
+    
+    Args:
+        response: Base response dict from workflow engine
+        
+    Returns:
+        Response dict with injected guidance fields (guidance fields first)
+        
+    Example:
+        >>> base = {"session_id": "123", "phase": 1}
+        >>> wrapped = add_workflow_guidance(base)
+        >>> "⚠️_WORKFLOW_EXECUTION_MODE" in wrapped
+        True
+        >>> wrapped["⚠️_WORKFLOW_EXECUTION_MODE"]
+        'ACTIVE'
+    
+    Note:
+        - Gracefully handles non-dict inputs (returns unchanged)
+        - Never raises exceptions (fail-safe design)
+        - Original response fields preserved (non-invasive)
+    """
+    # Input validation: only process dict responses
+    if not isinstance(response, dict):
+        logger.debug(
+            f"Skipping guidance injection for non-dict response: "
+            f"{type(response).__name__}"
+        )
+        return response
+    
+    try:
+        # Prepend guidance fields (dict unpacking ensures guidance appears first)
+        return {**WORKFLOW_GUIDANCE_FIELDS, **response}
+    except Exception as e:
+        # Fail-safe: return original response if injection fails
+        logger.warning(
+            f"Failed to inject workflow guidance: {e}. "
+            f"Returning original response."
+        )
+        return response
+
+
 class WorkflowEngine:
     """
     Workflow engine with architectural phase gating.
@@ -512,7 +573,7 @@ class WorkflowEngine:
             response = session.get_current_phase()
             # Add workflow overview to resumed session
             response["workflow_overview"] = workflow_metadata.to_dict()
-            return response
+            return add_workflow_guidance(response)
 
         # Create new session state (state_manager detects starting phase dynamically)
         state = self.state_manager.create_session(workflow_type, target_file, metadata)
@@ -547,7 +608,7 @@ class WorkflowEngine:
         response = session.get_current_phase()
         response["workflow_overview"] = workflow_metadata.to_dict()
         
-        return response
+        return add_workflow_guidance(response)
 
     def get_current_phase(self, session_id: str) -> Dict[str, Any]:
         """
@@ -568,7 +629,7 @@ class WorkflowEngine:
         session = self.get_session(session_id)
         
         # Delegate to session (handles dynamic registry if applicable)
-        return session.get_current_phase()
+        return add_workflow_guidance(session.get_current_phase())
 
     def get_phase_content(
         self, session_id: str, requested_phase: int
@@ -644,7 +705,7 @@ class WorkflowEngine:
             if session_id in self._sessions:
                 del self._sessions[session_id]
         
-        return result
+        return add_workflow_guidance(result)
 
     def get_workflow_state(self, session_id: str) -> Dict[str, Any]:
         """
@@ -660,7 +721,7 @@ class WorkflowEngine:
         if state is None:
             raise ValueError(f"Session {session_id} not found")
 
-        return {
+        return add_workflow_guidance({
             "session_id": state.session_id,
             "workflow_type": state.workflow_type,
             "target_file": state.target_file,
@@ -673,7 +734,7 @@ class WorkflowEngine:
             },
             "created_at": state.created_at.isoformat(),
             "updated_at": state.updated_at.isoformat(),
-        }
+        })
 
     def get_task(
         self, session_id: str, phase: int, task_number: int
@@ -695,7 +756,7 @@ class WorkflowEngine:
         session = self.get_session(session_id)
         
         # Delegate to session (handles dynamic registry if applicable)
-        return session.get_task(phase, task_number)
+        return add_workflow_guidance(session.get_task(phase, task_number))
 
     def _validate_checkpoint(
         self, workflow_type: str, phase: int, evidence: Dict[str, Any]

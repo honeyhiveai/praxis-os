@@ -76,10 +76,17 @@ Example locations:
 ### Starting a Workflow
 
 ```python
-# Use MCP tool to start workflow
+# Example 1: Code-based workflow (test generation)
 result = await mcp_agent-os-rag_start_workflow(
     workflow_type="test_generation_v3",
-    target_file="src/auth.py"
+    target_file="src/auth.py"  # File path for code workflows
+)
+
+# Example 2: Spec-based workflow (spec execution)
+result = await mcp_agent-os-rag_start_workflow(
+    workflow_type="spec_execution_v1",
+    target_file="manifest-upgrade-system",  # Simple identifier, NOT full path
+    options={"spec_path": ".agent-os/specs/2025-10-07-manifest-upgrade-system"}
 )
 
 # Response includes workflow overview
@@ -89,6 +96,11 @@ phases = overview["phases"]  # All phase metadata
 
 # Now you know the complete roadmap before starting!
 ```
+
+**Parameter Usage Note:**
+- `target_file` format depends on workflow type
+- Code workflows: Use actual file path (e.g., `"src/auth.py"`)
+- Spec workflows: Use simple identifier (e.g., `"feature-name"`), provide full path in `options`
 
 ### Key Benefits
 
