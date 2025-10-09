@@ -28,21 +28,25 @@ The documentation site includes:
 ```
 Open your project in Cursor and say:
 "Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
-
-The Cursor agent will:
-1. Analyze your project (detect language, frameworks)
-2. Copy universal standards (static CS fundamentals)
-3. Generate language-specific standards (tailored to your project)
-4. Install MCP server locally (.agent-os/mcp_server/)
-5. Configure Cursor (.cursor/mcp.json)
-6. Build RAG index
 ```
+
+The Cursor agent will follow the installation guide in `installation/` directory:
+1. Clone source to temp directory
+2. Create all required directories
+3. Copy universal standards, workflows, and MCP server
+4. Handle .cursorrules safely (won't overwrite existing!)
+5. Create Python venv and configure Cursor
+6. Clean up temp files
+
+**For LLMs**: Start at [`installation/00-START.md`](installation/00-START.md)
+
+**Total time**: ~5-10 minutes
 
 ### What Gets Installed
 
 ```
 your-project/
-├── .cursorrules              # Universal (27 lines, copied from repo)
+├── .cursorrules              # Universal (26 lines, copied from repo)
 ├── .agent-os/
 │   ├── standards/
 │   │   ├── universal/        # Copied from this repo
@@ -58,47 +62,56 @@ your-project/
 ```
 agent-os-enhanced/
 ├── README.md                     # This file
-├── .cursorrules                  # Universal behavioral triggers (27 lines)
-├── installation-guide.md         # Instructions for Cursor agent
+├── .cursorrules                  # Universal behavioral triggers (26 lines)
 │
-├── universal/                    # Static CS fundamentals (rarely changes)
-│   └── standards/
-│       ├── concurrency/          # Race conditions, deadlocks, locking
-│       ├── failure-modes/        # Graceful degradation, retries, circuit breakers
-│       ├── architecture/         # Dependency injection, API design, separation of concerns
-│       ├── testing/              # Test pyramid, test doubles, property-based testing
-│       └── documentation/        # Code comments, API docs, README templates
+├── installation/                 # Installation guides (start here for LLMs)
+│   ├── 00-START.md              # Entry point - clone to temp, setup
+│   ├── 01-directories.md        # Create all required directories
+│   ├── 02-copy-files.md         # Copy files from source
+│   ├── 03-cursorrules.md        # Safe .cursorrules handling
+│   ├── 04-venv-mcp.md           # Python venv + mcp.json
+│   ├── 05-validate.md           # Validate + cleanup temp files
+│   └── README.md                # Installation system overview
 │
-├── language-instructions/        # Instructions for LLM to generate language-specific content
-│   ├── python.md                 # How to generate Python-specific standards
-│   ├── go.md                     # How to generate Go-specific standards
-│   ├── javascript.md             # How to generate JavaScript-specific standards
-│   ├── typescript.md             # How to generate TypeScript-specific standards
-│   ├── rust.md                   # How to generate Rust-specific standards
-│   ├── java.md                   # How to generate Java-specific standards
-│   └── csharp.md                 # How to generate C#-specific standards
+├── universal/                    # Content copied to target projects
+│   ├── standards/               # Universal CS fundamentals
+│   │   ├── concurrency/         # Race conditions, deadlocks, locking
+│   │   ├── failure-modes/       # Graceful degradation, retries, circuit breakers
+│   │   ├── architecture/        # Dependency injection, API design, separation of concerns
+│   │   ├── testing/             # Test pyramid, test doubles, property-based testing
+│   │   └── documentation/       # Code comments, API docs, README templates
+│   ├── usage/                   # Agent OS usage documentation
+│   │   ├── creating-specs.md    # How to create specifications
+│   │   ├── operating-model.md   # AI-human collaboration model
+│   │   └── mcp-usage-guide.md   # MCP tool reference
+│   └── workflows/               # Phase-gated workflow definitions
+│       ├── spec_creation_v1/    # Spec creation workflow
+│       └── spec_execution_v1/   # Spec execution workflow
 │
-└── mcp_server/                   # MCP server implementation (gets updates)
-    ├── __main__.py               # Main MCP server entry point
-    ├── rag_engine.py             # LanceDB vector search
-    ├── workflow_engine.py        # Phase-gated workflows
-    ├── framework_generator.py    # Dynamic workflow creation
-    ├── config/                   # Configuration management
-    ├── models/                   # Data models
-    ├── server/                   # Server factory & tools
-    ├── requirements.txt          # MCP server dependencies
-    └── CHANGELOG.md              # Version history
+└── mcp_server/                   # MCP server (copied to target projects)
+   ├── __main__.py               # Main entry point
+   ├── rag_engine.py             # LanceDB vector search
+   ├── workflow_engine.py        # Phase-gated workflows
+   ├── framework_generator.py    # Dynamic workflow creation
+   ├── config/                   # Configuration management
+   ├── models/                   # Data models
+   ├── server/                   # Server factory & tools
+   ├── requirements.txt          # MCP server dependencies
+   └── CHANGELOG.md              # Version history
 ```
+
+**For AI Installing Agent OS**: Start at [`installation/00-START.md`](installation/00-START.md)
 
 ## 🎯 Design Philosophy
 
-### What's Universal (Static, Rarely Changes)
+### What's Universal (Copied to All Projects)
 
-- **`.cursorrules`**: Behavioral triggers and MCP routing (27 lines, language-agnostic)
+- **`.cursorrules`**: Behavioral triggers and MCP routing (26 lines, language-agnostic)
 - **`universal/standards/`**: CS fundamentals (race conditions, test pyramid, API design)
-- **`language-instructions/`**: Instructions for LLM to generate content (stable)
+- **`universal/workflows/`**: Phase-gated workflow definitions
+- **`universal/usage/`**: Agent OS usage documentation
 
-### What's Generated (Per Project, Context-Aware)
+### What's Generated (Optional, Context-Aware)
 
 - **`.agent-os/standards/development/`**: Language-specific standards (Python: GIL, Go: goroutines, etc.)
 - **Project context integration**: References your actual frameworks, tools, and patterns
@@ -106,6 +119,7 @@ agent-os-enhanced/
 ### What Gets Updated (Version Releases)
 
 - **`mcp_server/`**: New features, bug fixes, performance improvements
+- **`universal/`**: New standards, workflows, or usage docs
 
 ---
 
