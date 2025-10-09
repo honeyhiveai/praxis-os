@@ -16,12 +16,13 @@ A **horizontally-scaled installation guide system** that solves the bootstrappin
 ```
 installation/
 ├── README.md                      ← Overview and navigation
-├── 00-START.md                    ← Entry point (~160 lines)
+├── 00-START.md                    ← Entry point (~210 lines)
 ├── 01-directories.md              ← Create directories (~240 lines)
 ├── 02-copy-files.md               ← Copy files (~260 lines)
-├── 03-cursorrules.md              ← Handle .cursorrules (~230 lines)
-├── 04-venv-mcp.md                 ← Python venv + mcp.json (~250 lines)
-├── 05-validate.md                 ← Validate + cleanup (~230 lines)
+├── 03-cursorrules.md              ← Handle .cursorrules (~336 lines)
+├── 04-gitignore.md                ← Configure .gitignore (~322 lines) [NEW]
+├── 05-venv-mcp.md                 ← Python venv + mcp.json (~250 lines)
+├── 06-validate.md                 ← Validate + cleanup (~352 lines)
 ├── SYSTEM-SUMMARY.md              ← This file
 ├── installation-guide.md          ← Detailed reference (800+ lines)
 ├── CURSORRULES_MERGE_GUIDE.md     ← Merge protocol details
@@ -44,15 +45,17 @@ LLM reads: 02-copy-files.md
     ↓ (copies ~106 files)
 LLM reads: 03-cursorrules.md
     ↓ (handles .cursorrules safely)
-LLM reads: 04-venv-mcp.md
+LLM reads: 04-gitignore.md
+    ↓ (configures .gitignore from standards)
+LLM reads: 05-venv-mcp.md
     ↓ (creates venv + mcp.json)
-LLM reads: 05-validate.md
+LLM reads: 06-validate.md
     ↓ (validates + DELETES temp clone)
 COMPLETE! ✅
 ```
 
 **Each file**:
-- ~200-250 lines (manageable attention span)
+- ~200-350 lines (manageable attention span)
 - Explicit validation checkpoint
 - Clear "Next Step" navigation
 - Copy-paste ready code blocks
@@ -63,7 +66,7 @@ COMPLETE! ✅
 
 ### 1. Horizontal Scaling (Like Workflows)
 
-Instead of one 800-line file, we have 6 files of ~200-250 lines each. This matches how our workflow framework works - horizontal decomposition for manageable cognitive load.
+Instead of one 800-line file, we have 7 files of ~200-350 lines each. This matches how our workflow framework works - horizontal decomposition for manageable cognitive load.
 
 ### 2. No Git Repo Littering
 
@@ -95,10 +98,11 @@ Based on user feedback (Windows WSL2 Ubuntu installation failure):
 | Issue | Impact | Fix | File |
 |-------|--------|-----|------|
 | Missing workflows/ directory | MCP server won't start | Added to directory creation | 01-directories.md |
-| Wrong module name in mcp.json | Python module error | Use `"mcp_server"` not `"mcp_server.agent_os_rag"` | 04-venv-mcp.md |
+| Wrong module name in mcp.json | Python module error | Use `"mcp_server"` not `"mcp_server.agent_os_rag"` | 05-venv-mcp.md |
 | Missing workflow files | Empty workflows directory | Added explicit copy step | 02-copy-files.md |
 | Blindly overwriting .cursorrules | Destroys user's rules | Check and offer merge options | 03-cursorrules.md |
-| Git repo left in project | Litters consumer repo | Delete temp directory | 05-validate.md |
+| Missing .gitignore configuration | 2.7GB ephemeral files committed | Read from standards and append | 04-gitignore.md |
+| Git repo left in project | Litters consumer repo | Delete temp directory | 06-validate.md |
 
 ---
 
@@ -158,9 +162,10 @@ checks = {
 - **Checkpoint #1**: Directories created (step 01)
 - **Checkpoint #2**: Files copied (step 02)
 - **Checkpoint #3**: .cursorrules handled (step 03)
-- **Checkpoint #4A**: Python venv working (step 04)
-- **Checkpoint #4B**: MCP config valid (step 04)
-- **Final Validation**: All checks pass + cleanup (step 05)
+- **Checkpoint #4**: .gitignore configured (step 04)
+- **Checkpoint #5A**: Python venv working (step 05)
+- **Checkpoint #5B**: MCP config valid (step 05)
+- **Final Validation**: All checks pass + cleanup (step 06)
 
 ### Validation Commands
 
@@ -208,10 +213,11 @@ else:
 
 ### Critical Checks Before Release
 
-- [ ] All 6 files exist and chain correctly
-- [ ] Each file ~200-250 lines
+- [ ] All 7 files exist and chain correctly (00-06)
+- [ ] Each file ~200-350 lines
 - [ ] All validation checkpoints work
-- [ ] Temp cleanup happens in step 05
+- [ ] .gitignore configured from standards (step 04)
+- [ ] Temp cleanup happens in step 06
 - [ ] .cursorrules merge is safe
 - [ ] Module name is correct (`"mcp_server"`)
 - [ ] Tested on Linux, macOS, Windows WSL2
@@ -239,7 +245,7 @@ This installation system is **production-ready**.
 
 ```
 For LLMs:
-├── 00-START.md → 01 → 02 → 03 → 04 → 05    (sequential chain)
+├── 00-START.md → 01 → 02 → 03 → 04 → 05 → 06    (sequential chain)
 
 For Reference:
 ├── README.md                                (overview)

@@ -265,6 +265,102 @@ Generate new AI-assisted workflow framework using meta-framework principles.
 
 ---
 
+### `validate_workflow`
+
+Validate workflow structure against construction standards.
+
+**Parameters**:
+- `workflow_path` (string, required): Path to workflow directory (e.g., `"universal/workflows/my_workflow_v1"`)
+
+**Returns**:
+```json
+{
+  "workflow_path": "universal/workflows/my_workflow_v1",
+  "compliant": true,
+  "compliance_score": 0.95,
+  "issues": [],
+  "warnings": [
+    {
+      "type": "file_size",
+      "severity": "minor",
+      "file": "phases/2/task-1-implement.md",
+      "message": "Task file is 185 lines (recommended: 100-170)"
+    }
+  ],
+  "summary": "✅ Workflow compliant with standards"
+}
+```
+
+**Validates**:
+- Standard directory structure (`phases/N/phase.md` + `task-N-name.md`)
+- File naming conventions (`phase.md` not `README.md`)
+- File size guidelines (phase ~80 lines, tasks 100-170 lines)
+- Required `metadata.json` presence and validity
+
+**Example**:
+```python
+# Validate before committing
+result = validate_workflow(
+    workflow_path=".agent-os/workflows/my_custom_workflow_v1"
+)
+
+if result["compliant"]:
+    print("Ready to commit!")
+else:
+    print("Issues found:", result["issues"])
+```
+
+---
+
+### `current_date`
+
+Get current date and time for preventing date errors in AI-generated content.
+
+**Purpose**: AI assistants frequently make date mistakes (using wrong dates, inconsistent formats). This tool provides reliable current date/time for:
+- Creating specifications with correct dates
+- Generating directory names with timestamps
+- Adding date headers to documentation
+- Any content requiring accurate current date
+
+**Parameters**: None
+
+**Returns**:
+```json
+{
+  "iso_date": "2025-10-08",
+  "iso_datetime": "2025-10-08T14:30:00.123456",
+  "day_of_week": "Tuesday",
+  "month": "October",
+  "year": 2025,
+  "unix_timestamp": 1728398400,
+  "formatted": {
+    "spec_directory": "2025-10-08-",
+    "header": "**Date**: 2025-10-08",
+    "full_readable": "Tuesday, October 8, 2025"
+  },
+  "usage_note": "Use 'iso_date' for specs and documentation headers..."
+}
+```
+
+**Example**:
+```python
+# Get current date for spec creation
+date_info = current_date()
+
+# Use in spec directory name
+spec_dir = f".agent-os/specs/{date_info['iso_date']}-my-feature"
+
+# Use in documentation header
+header = f"# Feature Spec\n{date_info['formatted']['header']}\n"
+```
+
+**Why This Tool Exists**: Without it, AI agents often use:
+- Yesterday's date (cached context)
+- Random dates from training data
+- Inconsistent formats (MM-DD-YYYY vs YYYY-MM-DD)
+
+---
+
 ## Browser Tools
 
 ### `aos_browser`

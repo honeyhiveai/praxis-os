@@ -27,7 +27,7 @@ The Cursor agent will:
 
 ```
 your-project/
-├── .cursorrules                  # 27 lines - AI behavioral triggers
+├── .cursorrules                  # 26 lines - AI behavioral triggers
 ├── .agent-os/
 │   ├── standards/
 │   │   ├── universal/            # Copied from repo
@@ -208,19 +208,24 @@ ls -la .agent-os/standards/development/
 
 ## Updating Agent OS
 
-When new versions are released:
+When new versions are released, use the upgrade workflow:
 
 ```bash
 # In Cursor, say:
-"Update Agent OS to latest version"
+"Run the Agent OS upgrade workflow"
 ```
 
-Cursor agent will:
-1. Pull latest from GitHub
-2. Update MCP server code
-3. Update universal standards (if changed)
-4. **Preserve your customizations** in `development/`
-5. Rebuild RAG index
+The `agent_os_upgrade_v1` workflow will:
+1. ✅ Create automatic backup
+2. ✅ Update standards, workflows, and MCP server
+3. ✅ **Preserve your customizations** (specs, development standards)
+4. ✅ Update `.gitignore` from standards
+5. ✅ Validate everything works
+6. ✅ Auto-rollback if anything fails
+
+**Time:** ~3-4 minutes | **Safety:** Automatic backup and rollback
+
+For detailed upgrade documentation, see **[Upgrading Agent OS](./upgrading.md)**
 
 ## Manual Installation (Advanced)
 

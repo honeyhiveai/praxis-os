@@ -7,6 +7,82 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.5.0] - 2025-10-08
+
+### Added
+- **Gitignore Standards**: Canonical source for .gitignore requirements
+  - `universal/standards/installation/gitignore-requirements.md` (151 lines)
+  - Documents all 6 required patterns with rationale and impact
+  - Explains ~2.7GB of ephemeral files prevented from being committed
+  - Provides verification commands and historical context
+  - Single source of truth for installation and upgrade workflows
+
+- **Installation Step 04**: Gitignore configuration
+  - `installation/04-gitignore.md` (322 lines)
+  - Reads patterns dynamically from standards (no hardcoding)
+  - Appends missing entries to target .gitignore
+  - Prevents committing: .cache/ (1.3GB), .backup.* (1.3GB), venv/ (100MB)
+  - Git check-ignore verification
+
+- **Upgrade Workflow Phase 2 Task 3**: Gitignore update
+  - `workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md` (147 lines)
+  - Compares target .gitignore with standards requirements
+  - Appends missing entries automatically during upgrade
+  - Warns if ephemeral files already committed
+
+### Changed
+- **Installation Numbering**: Steps renumbered to accommodate gitignore
+  - `04-venv-mcp.md` → `05-venv-mcp.md`
+  - `05-validate.md` → `06-validate.md`
+  - Total installation steps: 5 → 6
+  - Updated all cross-references in 00-START.md, 03-cursorrules.md, README.md
+
+- **Upgrade Workflow Phase 2**: Task additions and renumbering
+  - Added `task-3-update-gitignore.md` (new)
+  - Renumbered `task-3-verify-checksums` → `task-4-verify-checksums`
+  - Phase timing: 45s → 60s (+15s for gitignore)
+  - Total tasks in Phase 2: 3 → 4
+  - Updated phase.md metadata
+
+- **Repository .gitignore**: Added missing critical patterns
+  - `.agent-os.backup.*` - upgrade backups (1.3GB+)
+  - `.agent-os/.upgrade_lock` - upgrade lock file
+  - Prevents accidentally committing 665 backup files (discovered during testing)
+
+### Fixed
+- **CRITICAL SAFETY**: Removed dangerous `--delete` from user-writable directories
+  - **Location**: `workflows/agent_os_upgrade_v1/phases/2/task-2-actual-upgrade.md`
+  - **Issue**: `rsync --delete` on `.agent-os/usage/` would delete user docs
+  - **Fix**: Changed to `rsync -av` (NO --delete) for usage directory
+  - **Added**: Directory classification documentation (system-managed vs user-writable)
+  - **Impact**: Prevents data loss during upgrades
+
+- **Documentation**: Updated installation/SYSTEM-SUMMARY.md
+  - File structure now shows all 7 steps (00-06)
+  - Sequential chain updated with gitignore step
+  - Checkpoint system renumbered correctly
+  - Issue table updated with new fix locations
+
+### Architecture
+- **Single Source of Truth Pattern**: Implemented for gitignore requirements
+  - Installation reads from: `.agent-os/standards/universal/installation/gitignore-requirements.md`
+  - Upgrade reads from: `.agent-os/standards/universal/installation/gitignore-requirements.md`
+  - Zero hardcoded lists in workflows (DRY principle)
+  - To add new pattern: Edit ONE file, both flows automatically pick it up
+  - Versioned and auditable in git
+
+### Performance
+- **Installation Time**: ~5-10 minutes (unchanged, gitignore step < 2min)
+- **Upgrade Time**: 3min 20s → 3min 35s (+15s for gitignore check)
+
+### Documentation
+- Updated `installation/README.md` with 7-step structure
+- Updated `installation/00-START.md` with step 04 gitignore
+- Updated `installation/SYSTEM-SUMMARY.md` with new architecture
+- Updated `workflows/agent_os_upgrade_v1/README.md` with Phase 2 changes
+
+---
+
 ## [1.4.0] - 2025-10-07
 
 ### Added
