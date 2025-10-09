@@ -186,96 +186,92 @@ function KeyFeatures() {
 }
 
 function TheJourney() {
+  const milestones = [
+    {
+      icon: '🏗️',
+      phase: 'Starting Point',
+      title: 'Refactoring the HoneyHive Python SDK',
+      description: 'Simple goal: AI as code author, not assistant',
+      highlight: null,
+    },
+    {
+      icon: '💡',
+      phase: 'Discovery',
+      title: 'Found BuilderMethods Agent OS',
+      description: '3-layer doc structure (Standards/Product/Specs)',
+      highlight: 'Quality and velocity dramatically improved',
+    },
+    {
+      icon: '📈',
+      phase: 'Scale Challenges',
+      title: 'Side-loaded context hit limits',
+      description: '50KB+ context windows, 4% relevance, no enforcement',
+      highlight: 'Cost explosion + AI confusion',
+    },
+    {
+      icon: '🚀',
+      phase: 'Infrastructure Built',
+      title: 'MCP + RAG + Workflows + State',
+      description: '90% context reduction, phase gating, persistent sessions',
+      highlight: '50KB → 2-5KB per request',
+    },
+    {
+      icon: '📦',
+      phase: 'Production Proven',
+      title: 'Extracted Agent OS Enhanced',
+      description: '2,777 tests, 10.0/10 Pylint, 100% AI-authored',
+      highlight: 'Complete AI development platform',
+    },
+  ];
+
   return (
     <section className={styles.journeySection}>
       <div className="container">
         <div className={styles.sectionHeader}>
           <Heading as="h2">The Journey</Heading>
-          <p>Built on the shoulders of giants</p>
+          <p>From refactor goal to production AI platform</p>
         </div>
-        <div className={styles.journeyContent}>
-          <div className={styles.journeyStory}>
-            <h3>🏗️ The Starting Point: A Refactor Goal</h3>
-            <p>
-              It started with a simple goal: refactor the HoneyHive Python SDK with <strong>AI as the code author</strong>, 
-              not just an assistant. As someone new to the AI development space, I looked for ways to improve the quality 
-              and consistency of AI-generated code.
-            </p>
-
-            <h3>💡 Discovery: BuilderMethods Agent OS</h3>
-            <p>
-              I discovered{' '}
-              <a href="https://buildermethods.com/agent-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
-                BuilderMethods Agent OS
-              </a>
-              —a 3-layer documentation structure (Standards/Product/Specs) that provided a systematic way to organize 
-              development context. Using <code>.cursorrules</code> for side-loaded context and discovery flows via READMEs 
-              in <code>.agent-os/standards</code>, <strong>quality and velocity dramatically improved</strong>. 
-              This enabled the initial workflow/framework methodology to emerge.
-            </p>
-
-            <h3>📈 Success... Then New Problems</h3>
-            <p>
-              The side-loaded context approach worked brilliantly—until it didn't. As we built more sophisticated 
-              workflows and richer standards:
-            </p>
-            <ul className={styles.journeyList}>
-              <li><strong>Diminishing Returns</strong>: More context didn't mean better output</li>
-              <li><strong>Cost Explosion</strong>: Context windows ballooning to 50KB+ per request</li>
-              <li><strong>AI Confusion</strong>: Too much context actually degraded quality (only 4% relevant)</li>
-              <li><strong>No Persistence</strong>: Complex workflows lost when conversations restarted</li>
-              <li><strong>No Enforcement</strong>: AI still skipping steps despite better documentation</li>
-            </ul>
-
-            <h3>🚀 The Infrastructure Evolution</h3>
-            <p>
-              Out of necessity, we built the infrastructure layer:
-            </p>
-            <ul className={styles.journeyList}>
-              <li><strong>MCP + RAG Server</strong>: Semantic search reducing context from 50KB→2-5KB (90% reduction), solving the cost and confusion problems</li>
-              <li><strong>Structured Workflows</strong>: Test generation V3 (65 phase files), production code V2—systematic, repeatable frameworks</li>
-              <li><strong>Persistent State</strong>: Session files surviving restarts and conversation breaks</li>
-              <li><strong>Architectural Gating</strong>: Code-enforced checkpoints preventing AI shortcuts</li>
-              <li><strong>Operating Model</strong>: Formalizing "AI as author" with clear roles (human: direction, AI: 100% implementation)</li>
-              <li><strong>Observability</strong>: HoneyHive tracing dogfooded on itself</li>
-            </ul>
-            <p>
-              Research documented:{' '}
-              <a href="https://honeyhiveai.github.io/python-sdk/development/agent-os-mcp-server.html" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
-                LLM Workflow Engineering Methodology
-              </a>
-            </p>
-
-            <h3>📦 The Extraction: Agent OS Enhanced</h3>
-            <p>
-              After proving these patterns in production SDK development (<strong>2,777 tests, 10.0/10 Pylint, 
-              AI-authored: 2,500+ lines (100%), human-authored: 0 lines (0%)</strong>), we extracted the platform. 
-              Agent OS Enhanced transforms BuilderMethods' conceptual foundation into a complete AI development platform 
-              with enforcement, state management, and the infrastructure needed for production-grade AI authorship.
-            </p>
-
-            <h3>🙏 Standing on Giants</h3>
-            <p>
-              BuilderMethods provided the <strong>3-layer structure</strong> and philosophical foundation that made 
-              the initial breakthrough possible. Everything built on top—MCP+RAG, workflows, state management, enforcement, 
-              the operating model—emerged from solving real problems during production SDK development. 
-              They showed the path; we built the infrastructure to scale it.
-            </p>
-
-            <div className={styles.journeyLinks}>
-              <Link
-                className="button button--secondary button--md"
-                to="https://buildermethods.com/agent-os"
-                target="_blank">
-                Visit Original Agent OS →
-              </Link>
-              <Link
-                className="button button--primary button--md"
-                to="/docs/intro">
-                Explore Enhanced Version →
-              </Link>
+        
+        <div className={styles.journeyTimeline}>
+          {milestones.map((milestone, idx) => (
+            <div key={idx} className={styles.timelineItem}>
+              <div className={styles.timelineIcon}>{milestone.icon}</div>
+              <div className={styles.timelineContent}>
+                <div className={styles.timelinePhase}>{milestone.phase}</div>
+                <h3 className={styles.timelineTitle}>{milestone.title}</h3>
+                <p className={styles.timelineDescription}>{milestone.description}</p>
+                {milestone.highlight && (
+                  <div className={styles.timelineHighlight}>{milestone.highlight}</div>
+                )}
+              </div>
+              {idx < milestones.length - 1 && <div className={styles.timelineConnector}></div>}
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className={styles.journeyCredit}>
+          <p>
+            🙏 <strong>Built on the shoulders of giants:</strong>{' '}
+            <a href="https://buildermethods.com/agent-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
+              BuilderMethods Agent OS
+            </a>
+            {' '}provided the 3-layer structure and philosophical foundation. 
+            We built the infrastructure to scale it.
+          </p>
+        </div>
+
+        <div className={styles.journeyLinks}>
+          <Link
+            className="button button--secondary button--lg"
+            to="https://buildermethods.com/agent-os"
+            target="_blank">
+            Visit Original Agent OS →
+          </Link>
+          <Link
+            className="button button--primary button--lg"
+            to="/docs/intro">
+            Explore Enhanced Version →
+          </Link>
         </div>
       </div>
     </section>
