@@ -1,0 +1,12 @@
+{
+  "session_id": "3402b54b-669a-405e-8f5a-9ed15de6672d",
+  "workflow_type": "spec_execution_v1",
+  "target_file": "test-fix-verification",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-07T08:14:22.930014",
+  "updated_at": "2025-10-07T08:14:22.930143",
+  "metadata": {}
+}

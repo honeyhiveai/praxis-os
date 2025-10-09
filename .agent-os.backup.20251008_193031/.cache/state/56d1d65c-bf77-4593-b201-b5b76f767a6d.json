@@ -1,0 +1,14 @@
+{
+  "session_id": "56d1d65c-bf77-4593-b201-b5b76f767a6d",
+  "workflow_type": "spec_execution_v1",
+  "target_file": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.agent-os/specs/2025-10-07-manifest-based-upgrade-system",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-07T10:43:13.686915",
+  "updated_at": "2025-10-07T10:43:13.686984",
+  "metadata": {
+    "spec_path": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.agent-os/specs/2025-10-07-manifest-based-upgrade-system"
+  }
+}

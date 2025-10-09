@@ -1,0 +1,12 @@
+{
+  "session_id": "c3918cb2-a867-4ee5-ab14-acdc40c9db26",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "test-workflow-registration",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-07T10:32:27.768063",
+  "updated_at": "2025-10-07T10:32:27.768123",
+  "metadata": {}
+}

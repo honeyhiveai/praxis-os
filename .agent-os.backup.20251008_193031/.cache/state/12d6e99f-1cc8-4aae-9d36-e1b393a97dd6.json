@@ -1,0 +1,12 @@
+{
+  "session_id": "12d6e99f-1cc8-4aae-9d36-e1b393a97dd6",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "test-feature",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-07T09:39:27.256579",
+  "updated_at": "2025-10-07T09:39:27.256657",
+  "metadata": {}
+}

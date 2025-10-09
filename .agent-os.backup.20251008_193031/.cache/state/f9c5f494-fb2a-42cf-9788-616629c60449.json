@@ -1,0 +1,12 @@
+{
+  "session_id": "f9c5f494-fb2a-42cf-9788-616629c60449",
+  "workflow_type": "spec_execution_v1",
+  "target_file": ".agent-os/specs/2025-10-07-spec-creation-workflow-v1-test-fix",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-07T08:12:17.471807",
+  "updated_at": "2025-10-07T08:12:17.471912",
+  "metadata": {}
+}

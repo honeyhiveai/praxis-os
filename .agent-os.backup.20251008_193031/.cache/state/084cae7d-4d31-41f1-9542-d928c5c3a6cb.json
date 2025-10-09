@@ -1,0 +1,12 @@
+{
+  "session_id": "084cae7d-4d31-41f1-9542-d928c5c3a6cb",
+  "workflow_type": "spec_creation_v1",
+  "target_file": ".agent-os/specs/2025-10-08-playwright-browser-tools/",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-08T09:36:10.734939",
+  "updated_at": "2025-10-08T09:36:10.735033",
+  "metadata": {}
+}

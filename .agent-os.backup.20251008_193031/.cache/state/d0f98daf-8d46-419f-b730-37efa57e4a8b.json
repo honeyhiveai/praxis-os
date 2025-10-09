@@ -1,0 +1,12 @@
+{
+  "session_id": "d0f98daf-8d46-419f-b730-37efa57e4a8b",
+  "workflow_type": "spec_execution_v1",
+  "target_file": "test-after-cache-clear",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-07T08:17:34.797409",
+  "updated_at": "2025-10-07T08:17:34.797497",
+  "metadata": {}
+}
