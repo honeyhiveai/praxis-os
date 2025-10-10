@@ -1,7 +1,14 @@
 # Agent OS Enhanced
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NEW SESSION: search_standards("Agent OS orientation") FIRST
+🛑🛑🛑 STOP 🛑🛑🛑
+MANDATORY:
+Before you respons, you MUST answer this question:
+"Have I run search_standards('Agent OS orientation guide') this conversation?"
+BLOCKING: If NO, you MUST run it now, then reply "✅ Oriented. Ready."
+
+If NO: Run it now, then reply "✅ Oriented. Ready."
+If YES: Proceed with user's request.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 BEFORE implementing: search_standards("how to X")

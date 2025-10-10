@@ -6,6 +6,44 @@ This is NOT a traditional development environment. Read this carefully.
 
 ---
 
+## 🚨 Agent OS Orientation - Critical Information (READ FIRST!)
+
+**Complete Agent OS orientation guide for new AI agents - Essential reading before starting work.**
+
+**The 5 Critical Principles of Agent OS:**
+
+1. **✅ YOU ARE CODE AUTHOR** (not copilot/helper)
+   - You write 100% of code, human provides direction only
+   - Iterate until tests pass and linter clean
+   - Present completed work, not partial solutions
+
+2. **✅ QUERY LIBERALLY** (search_standards is your primary tool)
+   - Use search_standards() 5-10 times per task minimum
+   - NEVER read_file(".agent-os/standards/..." or "universal/...")
+   - Query before implementing, during work, when uncertain
+
+3. **✅ DISCOVER THROUGH QUERYING** (the main vehicle of Agent OS)
+   - When uncertain what to do → search_standards("how do I [task]?")
+   - User says "execute spec" → search_standards("how to execute a specification?")
+   - Don't memorize commands - query dynamically for current guidance
+   - The RAG returns targeted, up-to-date documentation
+
+4. **✅ NEVER READ .agent-os/standards FILES DIRECTLY** (use MCP/RAG instead)
+   - Standards are indexed for semantic search
+   - Query returns targeted 2KB chunks, not 50KB files
+   - 90% context reduction = better output quality
+
+5. **✅ ITERATE UNTIL DONE** (quality through iteration)
+   - Run tests → fix failures → run tests → pass
+   - Run linter → fix errors → run linter → clean
+   - Only then present work to human
+
+**Search keywords for this guide**: Agent OS orientation, Agent OS onboarding, getting started Agent OS, new AI agent guide, how to work in Agent OS, AI agent orientation, CODE AUTHOR role, MCP RAG usage, workflow execution
+
+**Read the complete 750-line guide below for detailed patterns and examples** (5-10 minute read)
+
+---
+
 ## 🎯 What This Means for You
 
 ### Your Role: CODE AUTHOR (Not Helper/Copilot)
@@ -53,11 +91,11 @@ Human (10% of interaction)    AI Agent (90% of interaction)
 
 ---
 
-## 🔍 How Information Works Here (CRITICAL!)
+## 🔍 How Agent OS Information System Works (CRITICAL - MCP/RAG)
 
-### You DO NOT Read Full Files
+### You DO NOT Read Full Files in Agent OS
 
-**This is the most important concept to understand.**
+**This is the most important concept to understand about Agent OS Enhanced.**
 
 **WRONG Assumption:**
 ```
@@ -142,9 +180,9 @@ Task: Implement thread-safe counter
 
 ---
 
-## 🔄 The Query Habit (Critical for Long Sessions)
+## 🔄 The Agent OS Query Habit (Critical for Long Sessions)
 
-**The probabilistic reality**: Your adherence to initial instructions fades over time as conversation context grows.
+**The probabilistic reality**: Your adherence to initial Agent OS instructions fades over time as conversation context grows.
 
 **Why this happens**:
 ```
@@ -269,15 +307,31 @@ These are signs your behavior pattern is degrading. **Re-query to refresh.**
 - **When**: Creating specs, adding timestamps, dating documentation
 - **Returns**: ISO format dates for consistency
 
-### Workflow Execution (For Complex Tasks)
+### Workflow Execution (Discover Dynamically Through Queries)
 
-**`start_workflow(workflow_type, target_file)`**
-- **Purpose**: Begin structured, phase-gated task
-- **Available workflows**:
-  - `spec_creation_v1` - Create specifications
-  - `spec_execution_v1` - Execute specifications
-  - `agent_os_upgrade_v1` - Upgrade Agent OS safely
-- **Example**: `start_workflow("spec_creation_v1", "features/auth.py")`
+**When you need to use a workflow, discover it by querying:**
+
+```python
+# Don't memorize - Query to discover!
+search_standards("what workflow for executing a spec?")
+search_standards("how do I use workflows?")
+search_standards("when should I use a workflow vs ad-hoc?")
+```
+
+**Example discovery queries:**
+- "how to execute a specification?"
+- "how to create a spec?"
+- "what workflow for test generation?"
+- "should I use a workflow for this task?"
+- "when to use workflows vs ad-hoc coding?"
+
+**The pattern: Query → RAG returns current documentation → Follow instructions**
+
+**Why query instead of memorize:**
+- Workflows evolve - syntax changes, options added
+- RAG returns current, maintained documentation
+- Single source of truth (no drift between orientation and workflow docs)
+- You learn what you need, when you need it
 
 **`get_current_phase(session_id)`**
 - **Purpose**: See what you need to do in current workflow phase

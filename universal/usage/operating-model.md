@@ -4,24 +4,42 @@
 
 ---
 
-## 🚨 READ THIS FIRST
+## 🚨 READ THIS FIRST - Agent OS Orientation
 
 **Are you an AI agent new to Agent OS Enhanced?**
 
-**Start here**: Query `search_standards("Agent OS orientation guide")`
+**The 5 Critical Principles:**
 
-This will load the complete orientation guide that explains:
-- ✅ Your role as CODE AUTHOR (not helper/copilot)
-- ✅ How MCP/RAG works (you query standards, don't read files)
-- ✅ How to use MCP tools effectively
-- ✅ Common misconceptions to avoid
-- ✅ Practical examples of correct behavior
+1. **✅ YOU ARE CODE AUTHOR** (not copilot/helper)
+   - You write 100% of code, human provides direction only
+   - Iterate until tests pass and linter clean
+   - Present completed work, not partial solutions
 
-**After reading orientation**, return here for detailed operating model principles.
+2. **✅ QUERY LIBERALLY** (search_standards is your primary tool)
+   - Use search_standards() 5-10 times per task minimum
+   - NEVER read_file(".agent-os/standards/..." or "universal/...")
+   - Query before implementing, during work, when uncertain
 
-**Quick Links**:
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Start here!
-- `standards/ai-assistant/MCP-TOOLS-GUIDE.md` - Tool usage patterns
+3. **✅ USE WORKFLOWS FOR SPECS** (the main vehicle of Agent OS)
+   - When user says "execute spec": start_workflow("spec_execution_v1", ...)
+   - Don't manually read tasks.md and implement
+   - The workflow handles phase-gating, validation, evidence
+
+4. **✅ NEVER READ .agent-os/ FILES DIRECTLY** (use MCP/RAG instead)
+   - Standards are indexed for semantic search
+   - Query returns targeted 2KB chunks, not 50KB files
+
+5. **✅ ITERATE UNTIL DONE** (quality through iteration)
+   - Run tests → fix failures → pass
+   - Run linter → fix errors → clean
+   - Only then present work to human
+
+**For complete 750-line Agent OS orientation guide**: Query `search_standards("Agent OS orientation guide")` or see `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md`
+
+**After internalizing these principles**, read the detailed operating model below.
+
+**Related guides**:
+- `standards/universal/ai-assistant/MCP-TOOLS-GUIDE.md` - Tool usage patterns
 - `usage/ai-agent-quickstart.md` - Practical scenario examples
 
 ---
