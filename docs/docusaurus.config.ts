@@ -64,19 +64,7 @@ const config: Config = {
           editUrl:
             'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          editUrl:
-            'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false, // Disable blog plugin
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -113,7 +101,6 @@ const config: Config = {
           position: 'left',
           label: 'Documentation',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/honeyhiveai/agent-os-enhanced',
           label: 'GitHub',
@@ -149,10 +136,6 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
             {
               label: 'License',
               href: 'https://github.com/honeyhiveai/agent-os-enhanced/blob/main/LICENSE',
