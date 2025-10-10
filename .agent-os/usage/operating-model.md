@@ -4,6 +4,28 @@
 
 ---
 
+## 🚨 READ THIS FIRST
+
+**Are you an AI agent new to Agent OS Enhanced?**
+
+**Start here**: Query `search_standards("Agent OS orientation guide")`
+
+This will load the complete orientation guide that explains:
+- ✅ Your role as CODE AUTHOR (not helper/copilot)
+- ✅ How MCP/RAG works (you query standards, don't read files)
+- ✅ How to use MCP tools effectively
+- ✅ Common misconceptions to avoid
+- ✅ Practical examples of correct behavior
+
+**After reading orientation**, return here for detailed operating model principles.
+
+**Quick Links**:
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Start here!
+- `standards/ai-assistant/MCP-TOOLS-GUIDE.md` - Tool usage patterns
+- `usage/ai-agent-quickstart.md` - Practical scenario examples
+
+---
+
 ## 🎯 Core Principle
 
 **Agent OS enables rapid design and implementation of high-quality enterprise software through AI-human partnership:**
