@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Agent OS Enhanced',
   tagline: 'Portable Multi-Agent Development Framework',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.svg',
 
   // OpenGraph metadata for social sharing
   headTags: [
