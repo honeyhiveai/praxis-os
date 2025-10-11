@@ -1,16 +1,58 @@
-# Agent OS Update Procedures Standard
+# Agent OS Update Standards (Discovery Guide)
 
-**Standards for updating Agent OS content in consuming projects**
+**Guide for discovering and understanding Agent OS updates**
+
+---
+
+## 🚨 Agent OS Update Quick Reference (TL;DR)
+
+**Keywords for search**: agent os update, upgrade agent os, how to update agent os, agent os installation update, update standards workflows, sync from universal, agent os upgrade workflow, update procedure
+
+**Questions This Answers:**
+- "How do I update Agent OS?"
+- "User wants to upgrade Agent OS"
+- "How do I get the latest standards and workflows?"
+- "How do I safely update without breaking custom content?"
+- "When should I update Agent OS?"
+- "What's the difference between content and server updates?"
+
+**Critical: Use the automated workflow, not manual commands!**
+
+```python
+# ✅ CORRECT: Use the automated workflow
+start_workflow(
+    workflow_type="agent_os_upgrade_v1",
+    target_file="mcp_server",
+    options={
+        "source_path": "/path/to/agent-os-enhanced",
+        "dry_run": false,
+        "auto_restart": true
+    }
+)
+```
+
+**Why use the workflow:**
+- ✅ Automatic validation (pre-flight checks prevent bad upgrades)
+- ✅ Rollback capability (automatic rollback on any failure)
+- ✅ Preserves custom content (never deletes user specs/standards)
+- ✅ Handles server restart (survives MCP server restart)
+- ✅ Complete validation (post-upgrade health checks)
+- ✅ ~3.5 minutes fully guided
+
+**For complete guide, continue reading below.**
 
 ---
 
 ## 🎯 Purpose
 
-This document establishes standards for safely and correctly updating Agent OS in consuming projects. This includes:
-- **Content updates**: Standards, workflows, and documentation
-- **Server updates**: MCP server software and dependencies
+This standard helps AI agents **discover and understand** when and how to update Agent OS installations. It explains:
 
-Following these standards prevents common mistakes that can corrupt local installations.
+- **WHEN** to update (triggers, frequency, urgency)
+- **WHY** the directory structure matters (universal/ namespace, custom protection)
+- **HOW** to execute updates (via `agent_os_upgrade_v1` workflow)
+- **WHAT** to validate (directory structure, file counts, functionality)
+
+**This is a discovery guide, not a command reference.** Use the `agent_os_upgrade_v1` workflow for actual updates.
 
 ---
 
@@ -18,544 +60,451 @@ Following these standards prevents common mistakes that can corrupt local instal
 
 ### Content Updates
 
-Updating standards, workflows, and usage documentation stored in `.agent-os/`:
-- Source: `universal/` directory
-- Destination: `.agent-os/` directory
-- Method: rsync
-- Requires: RAG index rebuild
+Updating standards, workflows, and usage documentation:
+- **Source**: `universal/` directory in agent-os-enhanced repository
+- **Destination**: `.agent-os/` directory in your project
+- **Method**: Via `agent_os_upgrade_v1` workflow
+- **Time**: ~2 minutes
+- **Requires**: File watcher auto-rebuilds RAG index (10-30 seconds)
+- **No server restart needed** for content-only updates
 
 ### Server Updates
 
-Updating the MCP server software itself:
-- Source: `mcp_server/` directory or PyPI package
-- Method: pip install
-- Requires: Server restart
+Updating the MCP server software:
+- **Source**: `mcp_server/` directory or PyPI package
+- **Method**: Via `agent_os_upgrade_v1` workflow (handles pip install)
+- **Time**: ~1.5 minutes
+- **Requires**: MCP server restart (workflow handles this)
 
-**Both types may be needed** when updating to a new version.
+### Combined Updates
+
+The `agent_os_upgrade_v1` workflow handles **both types** in a single execution:
+- Phase 0-2: Validate, backup, update content
+- Phase 3: Update and restart MCP server (workflow survives restart)
+- Phase 4-5: Validate and cleanup
 
 ---
 
-## 📍 Source Standards
+## 📍 Directory Structure Standards
 
-### Content Source Location
+### Understanding the Universal Namespace
 
-**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the agent-os-enhanced repository.
+**STANDARD:** Agent OS content MUST be namespaced under `universal/` to preserve custom content.
 
+**Source Repository Structure:**
 ```
 agent-os-enhanced/
-└── universal/          ← SYNC FROM HERE
+├── universal/                    ← CANONICAL SOURCE
+│   ├── standards/
+│   │   ├── ai-assistant/
+│   │   ├── development/
+│   │   ├── testing/
+│   │   └── workflows/
+│   ├── usage/
+│   └── workflows/
+│       ├── test_generation_v3/
+│       ├── spec_execution_v1/
+│       └── agent_os_upgrade_v1/
+│
+└── .agent-os/                    ← LOCAL BUILD (agent-os-enhanced only)
     ├── standards/
     ├── usage/
-    └── workflows/
+    ├── workflows/
+    ├── rag_index/                ← Generated, never sync
+    └── .mcp_state/               ← Generated, never sync
 ```
 
-### Prohibited Source Locations
-
-**PROHIBITED:** Syncing from the `.agent-os/` directory is FORBIDDEN.
-
+**Installed Project Structure:**
 ```
-agent-os-enhanced/
-└── .agent-os/          ← NEVER SYNC FROM HERE
+your-project/
+└── .agent-os/
     ├── standards/
-    ├── rag_index/
-    └── .mcp_state/
+    │   ├── universal/            ← Agent OS provided (synced with --delete)
+    │   │   ├── ai-assistant/
+    │   │   ├── development/
+    │   │   ├── testing/
+    │   │   └── workflows/
+    │   └── development/          ← Project-specific (NEVER touched by sync)
+    │       └── my-custom-standards.md
+    │
+    ├── usage/                    ← Mixed (Agent OS + custom, NO --delete)
+    │   ├── mcp-usage-guide.md    ← Agent OS provided
+    │   └── project-guide.md      ← Project-specific
+    │
+    ├── workflows/                ← Agent OS managed (synced with --delete)
+    │   └── test_generation_v3/
+    │
+    ├── specs/                    ← Project-only (NEVER touched by sync)
+    │   └── 2025-10-10-feature/
+    │
+    ├── rag_index/                ← Generated by MCP server
+    └── .mcp_state/               ← Generated by MCP server
 ```
 
-**Rationale:**
-- `.agent-os/` is a build artifact directory
-- Contains processed files and local state
-- Not version-controlled source content
-- May include development-only or test data
+**Why This Structure:**
 
-### Server Source Location
+1. **Universal Namespace Isolation**: 
+   - Agent OS content lives in `.agent-os/standards/universal/`
+   - Custom content lives in `.agent-os/standards/development/`
+   - Updates can safely use `--delete` on `universal/` without touching custom content
 
-**STANDARD:** MCP server software MUST be obtained from:
-- **Recommended**: PyPI package (`pip install agent-os-mcp`)
-- **Development**: Source repository (`mcp_server/` directory)
-- **Prohibited**: Copying from another project's installation
+2. **Clear Ownership Boundaries**:
+   - **System-Managed (can use --delete)**: `standards/universal/`, `workflows/`
+   - **User-Writable (never --delete)**: `usage/`, `specs/`, `standards/development/`
 
-```
-agent-os-enhanced/
-├── mcp_server/              ← Server source code
-│   ├── agent_os_rag.py
-│   ├── workflow_engine.py
-│   ├── requirements.txt     ← Server dependencies
-│   └── ...
-└── universal/               ← Content source
-```
+3. **Safe Updates**:
+   - Workflow knows exactly what to sync and what to protect
+   - No need for complex `--exclude` patterns
+   - Impossible to accidentally delete user content
 
 ---
 
-## 🔄 Update Frequency Standard
-
-### Regular Updates
-
-**STANDARD:** Projects SHOULD update Agent OS content:
-- **Minimum**: Once per quarter
-- **Recommended**: Monthly or when new features are needed
-- **Critical**: Immediately for security fixes
+## ⏰ When to Update
 
 ### Update Triggers
 
-Projects MUST update when:
-- Security vulnerabilities are disclosed
-- Breaking changes affect project functionality
-- New workflow features are required
-- Bugs in current version impact operations
+**MUST update immediately when:**
+- 🔴 Security vulnerabilities disclosed
+- 🔴 Breaking changes affect your project functionality
+- 🔴 Bugs in current version block your work
 
----
+**SHOULD update when:**
+- 🟡 New workflow features you need are released
+- 🟡 Significant performance improvements available
+- 🟡 Your standards are >1 month old
 
-## 📋 Update Process Standard
+**MAY update when:**
+- 🟢 Minor documentation improvements
+- 🟢 Monthly maintenance window
+- 🟢 You're starting a new feature and want latest best practices
 
-### Pre-Update Requirements
+### Update Frequency Guidelines
 
-Before updating, projects MUST:
+- **Minimum**: Once per quarter
+- **Recommended**: Monthly
+- **Active Development**: Weekly (if using cutting-edge features)
 
-1. **Verify Source Repository**
-   ```bash
-   cd /path/to/agent-os-enhanced
-   git remote -v
-   # Verify origin points to official repository
-   ```
-
-2. **Pull Latest Changes**
-   ```bash
-   git pull origin main
-   git log -1  # Note commit hash for tracking
-   ```
-
-3. **Create Backup** (Recommended)
-   ```bash
-   cp -r .agent-os/ .agent-os.backup.$(date +%Y%m%d)
-   ```
-
-### Update Execution Standard
-
-**STANDARD:** Updates MUST use rsync with these parameters:
+### How to Check if Update Needed
 
 ```bash
-# Standards (required)
-rsync -av --delete \
-    /path/to/agent-os-enhanced/universal/standards/ \
-    .agent-os/standards/
+# Check your current version
+cat .agent-os/VERSION.txt
 
-# Usage docs (required)
-rsync -av --delete \
-    /path/to/agent-os-enhanced/universal/usage/ \
-    .agent-os/usage/
-
-# Workflows (optional)
-rsync -av --delete \
-    /path/to/agent-os-enhanced/universal/workflows/ \
-    .agent-os/workflows/
+# Check latest version in source repo
+cd /path/to/agent-os-enhanced
+git pull origin main
+git log -1
 ```
 
-**Required Flags:**
-- `-a`: Archive mode (preserves permissions, timestamps)
-- `-v`: Verbose (logs operations)
-- `--delete`: Removes obsolete files
-
-### Post-Update Requirements
-
-After updating content, projects MUST:
-
-1. **Wait for Auto-Index Update**
-   - File watcher detects changes automatically
-   - Index rebuilds incrementally (10-30 seconds)
-   - **No server restart needed** for content updates
-   - Monitor logs: "👀 File change detected, rebuilding RAG index..."
-
-2. **Verify Update**
-   ```bash
-   # Wait for index rebuild to complete, then test
-   # (Usually 10-30 seconds after rsync completes)
-   
-   mcp_agent-os-rag_search_standards(
-       query="testing standards",
-       n_results=3
-   )
-   ```
-
-3. **Update Version Tracking**
-   ```bash
-   echo "Updated: $(date +%Y-%m-%d)" >> .agent-os/VERSION.txt
-   echo "Commit: $(cd /path/to/agent-os-enhanced && git rev-parse --short HEAD)" >> .agent-os/VERSION.txt
-   ```
-
-**Note:** Manual index rebuild only needed if file watcher is disabled or troubleshooting.
-
-### MCP Server Update Requirements
-
-After updating MCP server software, projects MUST:
-
-1. **Restart MCP Server**
-   ```bash
-   # Stop current server
-   pkill -f "mcp.*agent-os-rag"
-   
-   # Restart via Cursor IDE or process manager
-   ```
-
-2. **Verify Server Version**
-   ```bash
-   pip show agent-os-mcp  # Check installed version
-   ```
-
-3. **Test New Features**
-   - Verify new tools appear in Cursor
-   - Test that existing workflows still work
-   - Check for breaking changes
-
-4. **Track Server Version**
-   ```bash
-   cat > .agent-os/SERVER_VERSION.txt << EOF
-   Server Version: $(pip show agent-os-mcp | grep Version | awk '{print $2}')
-   Updated: $(date +"%Y-%m-%d")
-   EOF
-   ```
+If commit hashes differ, an update is available.
 
 ---
 
-## 🚨 Prohibited Actions
+## 🚀 How to Execute Updates
 
-### FORBIDDEN Operations
+### Use the Automated Workflow
 
-The following actions are PROHIBITED:
+**STANDARD:** All updates MUST use the `agent_os_upgrade_v1` workflow.
 
-1. **Syncing from .agent-os directory**
-   ```bash
-   # ❌ FORBIDDEN
-   rsync -av agent-os-enhanced/.agent-os/ .agent-os/
-   ```
+```python
+# Discover the workflow first
+search_standards("agent os upgrade workflow")
 
-2. **Manual file copying without rsync**
-   ```bash
-   # ❌ FORBIDDEN - Doesn't preserve structure
-   cp -r agent-os-enhanced/universal/* .agent-os/
-   ```
+# Start the workflow
+start_workflow(
+    workflow_type="agent_os_upgrade_v1",
+    target_file="mcp_server",
+    options={
+        "source_path": "/path/to/agent-os-enhanced",
+        "dry_run": false,            # Set true to preview changes
+        "auto_restart": true          # Auto-restart MCP server in Phase 3
+    }
+)
 
-3. **Partial updates without tracking**
-   ```bash
-   # ❌ FORBIDDEN - Leads to version conflicts
-   rsync -av agent-os-enhanced/universal/standards/testing/ .agent-os/standards/testing/
-   # (missing other standards)
-   ```
-
-4. **Syncing state directories**
-   ```bash
-   # ❌ FORBIDDEN - Corrupts local state
-   rsync -av agent-os-enhanced/.agent-os/rag_index/ .agent-os/rag_index/
-   rsync -av agent-os-enhanced/.agent-os/.mcp_state/ .agent-os/.mcp_state/
-   ```
-
----
-
-## 🔒 Protection Standards
-
-### Custom Content Protection
-
-**STANDARD:** Projects with custom workflows/standards MUST use exclusions:
-
-```bash
-rsync -av --delete \
-    --exclude="workflows/custom_workflow/" \
-    --exclude="standards/custom_standards/" \
-    /path/to/agent-os-enhanced/universal/ \
-    .agent-os/
+# The workflow will:
+# Phase 0 (30s): Validate source, target, disk space, no concurrent upgrades
+# Phase 1 (20s): Create backup, verify backup, acquire lock
+# Phase 2 (60s): Dry-run, execute upgrade, update gitignore, verify checksums
+# Phase 3 (60s): Copy server, install deps, restart server (workflow survives)
+# Phase 4 (30s): Validate tools, smoke tests, generate report
+# Phase 5 (15s): Release lock, archive backups, generate summary
 ```
 
-### State File Protection
+### After Server Restart (Phase 3)
 
-**STANDARD:** Update scripts MUST always exclude:
-- `rag_index/` - Local vector database
-- `.mcp_state/` - MCP server state
-- `scripts/` - Use from mcp_server instead
-- `*.log` - Local log files
+The workflow automatically resumes after the MCP server restart:
 
-### Rollback Capability
+```python
+# The workflow survives the restart via disk state
+# Continue where you left off:
+get_current_phase(session_id)  # Returns Phase 4 content
 
-**STANDARD:** Production systems MUST maintain rollback capability:
-
-```bash
-# Before update
-BACKUP_DIR=".agent-os.backup.$(date +%Y%m%d_%H%M%S)"
-cp -r .agent-os/ "$BACKUP_DIR"
-
-# Keep last 3 backups
-ls -dt .agent-os.backup.* | tail -n +4 | xargs rm -rf
+# Or check full state:
+get_workflow_state(session_id)
 ```
 
 ---
 
-## 📊 Version Tracking Standard
+## ✅ Post-Update Validation
 
-### Version File Requirement
+### Directory Structure Check
 
-**STANDARD:** Projects MUST maintain `.agent-os/VERSION.txt`:
+Verify the structure matches the standard:
+
+```bash
+# Should exist - Agent OS universal content
+test -d .agent-os/standards/universal/ai-assistant/ && echo "✅ Universal standards present"
+
+# Should exist if you have custom content
+test -d .agent-os/standards/development/ && echo "✅ Custom standards preserved"
+
+# Should exist - user specs
+test -d .agent-os/specs/ && echo "✅ User specs preserved"
+
+# Should NOT exist - old flat structure
+test ! -d .agent-os/standards/ai-assistant/ && echo "✅ No flat structure"
+```
+
+### Functional Validation
+
+```python
+# Test RAG search
+search_standards("testing standards")
+# Should return results
+
+# Test workflow discovery
+search_standards("test generation workflow")
+# Should return test_generation_v3
+
+# Test browser tool (if applicable)
+aos_browser(action="navigate", url="https://example.com", session_id="test-123")
+```
+
+### File Count Validation
+
+```bash
+# Expected counts (approximate)
+echo "Universal standards: $(find .agent-os/standards/universal -type f -name '*.md' | wc -l)"
+# Should be: 50-100 files
+
+echo "Workflows: $(find .agent-os/workflows -maxdepth 1 -type d | wc -l)"
+# Should be: 3-10 workflows
+
+echo "Usage docs: $(find .agent-os/usage -type f -name '*.md' | wc -l)"
+# Should be: 5-15 files
+```
+
+---
+
+## 🚨 What NOT to Do
+
+### ❌ FORBIDDEN: Manual rsync Commands
+
+**DO NOT run manual rsync commands.** Use the workflow instead.
+
+**Why manual commands are dangerous:**
+```bash
+# ❌ This looks safe but will destroy custom content:
+rsync -av --delete /path/to/agent-os-enhanced/universal/standards/ .agent-os/standards/
+
+# What it does:
+# 1. Deletes .agent-os/standards/universal/ (OK)
+# 2. Deletes .agent-os/standards/development/ (YOUR CUSTOM CONTENT GONE!)
+# 3. Copies universal/standards/* to .agent-os/standards/ (wrong structure)
+```
+
+**The workflow handles this correctly:**
+```bash
+# ✅ Workflow does this (simplified):
+rsync -av --delete universal/standards/ .agent-os/standards/universal/
+# Result: Only universal/ updated, custom content preserved
+```
+
+### ❌ FORBIDDEN: Syncing from .agent-os/
+
+```bash
+# ❌ NEVER sync from the .agent-os directory in agent-os-enhanced
+rsync -av /path/to/agent-os-enhanced/.agent-os/ .agent-os/
+```
+
+**Why this is wrong:**
+- `.agent-os/` in agent-os-enhanced is a **build artifact directory**
+- Contains processed files, RAG index, local state
+- Not the canonical source of truth
+- May include development-only or test data
+
+**Always sync from `universal/`** (the workflow does this automatically).
+
+### ❌ FORBIDDEN: Partial Updates
+
+```bash
+# ❌ Don't cherry-pick individual files
+cp agent-os-enhanced/universal/standards/testing/test-pyramid.md .agent-os/standards/universal/testing/
+```
+
+**Why this is wrong:**
+- Creates version conflicts (some files new, some old)
+- Breaks cross-references between standards
+- RAG index may be inconsistent
+- Hard to track what version you're on
+
+**Always update atomically** (the workflow does this).
+
+---
+
+## 🔧 Troubleshooting
+
+### Issue: Flat Structure Detected
+
+**Symptom:**
+```bash
+ls .agent-os/standards/
+# Shows: ai-assistant/ development/ testing/
+# Missing: universal/
+```
+
+**Cause:** Update was done with incorrect rsync command (pre-workflow era)
+
+**Fix:**
+```python
+# Use the workflow with a fresh target
+# The workflow will detect and fix the structure
+start_workflow(
+    workflow_type="agent_os_upgrade_v1",
+    target_file="mcp_server",
+    options={"source_path": "/path/to/agent-os-enhanced"}
+)
+```
+
+### Issue: Duplicate Files in Multiple Locations
+
+**Symptom:**
+```bash
+# Same file exists in both places:
+.agent-os/standards/ai-assistant/rag-content-authoring.md
+.agent-os/standards/universal/ai-assistant/rag-content-authoring.md
+```
+
+**Cause:** Mix of old flat structure and new nested structure
+
+**Fix:**
+```bash
+# 1. Backup your custom content
+cp -r .agent-os/standards/development/ /tmp/my-custom-standards/
+
+# 2. Remove the flat structure
+rm -rf .agent-os/standards/ai-assistant/
+rm -rf .agent-os/standards/testing/
+# Keep: .agent-os/standards/universal/ and .agent-os/standards/development/
+
+# 3. Run the workflow to ensure consistency
+start_workflow(workflow_type="agent_os_upgrade_v1", ...)
+
+# 4. Restore custom content if needed
+cp -r /tmp/my-custom-standards/ .agent-os/standards/development/
+```
+
+### Issue: Custom Content Deleted
+
+**Symptom:** Your custom standards/workflows disappeared after update
+
+**Cause:** Manual rsync with `--delete` on wrong directory
+
+**Recovery:**
+```bash
+# 1. Restore from backup (workflow creates these)
+ls -lt .agent-os.backup.*
+# Find most recent backup
+
+# 2. Restore custom content
+cp -r .agent-os.backup.TIMESTAMP/standards/development/ .agent-os/standards/
+
+# 3. Use workflow for future updates to prevent this
+```
+
+**Prevention:** Always use the `agent_os_upgrade_v1` workflow.
+
+---
+
+## 📊 Version Tracking
+
+### VERSION.txt File
+
+After updates, check `.agent-os/VERSION.txt`:
 
 ```txt
 Agent OS Content Version
 
 Repository: https://github.com/honeyhiveai/agent-os-enhanced
-Last Updated: 2025-10-06 14:30:00
-Source Commit: abc123def456
-Updated By: deployment-script
+Last Updated: 2025-10-10 18:30:00
+Source Commit: abc123def
+Updated By: agent_os_upgrade_v1 workflow
 Previous Version: v1.2.3
 Current Version: v1.3.0
 Notes: Updated for horizontal scaling features
 ```
 
-### Update Log Requirement
+The workflow maintains this automatically.
 
-**STANDARD:** Projects SHOULD maintain `.agent-os/UPDATE_LOG.txt`:
+---
 
-```txt
-2025-10-06 14:30:00 | abc123def | Updated to v1.3.0 (horizontal scaling)
-2025-09-15 10:15:00 | def456abc | Updated to v1.2.2 (config.json paths)
-2025-09-01 16:45:00 | 123abc456 | Updated to v1.2.0 (workflow metadata)
+## 🔍 Discovery Queries
+
+**To find this standard:**
+```python
+search_standards("how to update agent os")
+search_standards("agent os upgrade procedure")
+search_standards("sync from universal directory")
+```
+
+**To find the workflow:**
+```python
+search_standards("agent os upgrade workflow")
+search_standards("automated upgrade with rollback")
+```
+
+**To understand directory structure:**
+```python
+search_standards("agent os directory structure universal namespace")
+search_standards("why nested standards structure")
 ```
 
 ---
 
-## 🔍 Validation Standard
+## 📚 Related Standards
 
-### Pre-Update Validation
+- [Workflow System Overview](../workflows/workflow-system-overview.md) - How workflows work
+- [Workflow Metadata Standards](../workflows/workflow-metadata-standards.md) - Workflow discovery
+- [Dogfooding Model](../development/dogfooding-model.md) - How agent-os-enhanced uses Agent OS
 
-**STANDARD:** Update scripts MUST validate source before syncing:
+**Related Workflows:**
+- `agent_os_upgrade_v1` - Automated upgrade with validation and rollback
+- `spec_execution_v1` - How to execute specifications after update
 
-```bash
-# Validate source exists
-if [ ! -d "$SOURCE/universal/standards" ]; then
-    echo "ERROR: Invalid source directory"
-    exit 1
-fi
+---
 
-# Validate not syncing from .agent-os
-if [[ "$SOURCE" == *".agent-os"* ]]; then
-    echo "ERROR: Cannot sync from .agent-os directory"
-    exit 1
-fi
+## ✅ Success Checklist
 
-# Validate git repository
-if [ ! -d "$SOURCE/.git" ]; then
-    echo "WARNING: Source is not a git repository"
-fi
-```
+After reading this standard, you should understand:
 
-### Post-Update Validation
+- [ ] Why to use `agent_os_upgrade_v1` workflow instead of manual commands
+- [ ] When to trigger an update (security, bugs, features, maintenance)
+- [ ] Why the universal/ namespace exists (custom content protection)
+- [ ] What directory structure looks like after correct update
+- [ ] How to validate the update was successful
+- [ ] What to do if you detect the old flat structure
+- [ ] Why manual rsync commands are dangerous
 
-**STANDARD:** Updates MUST be validated after completion:
-
-```bash
-# Check essential directories exist
-test -d .agent-os/standards/ || { echo "ERROR: standards missing"; exit 1; }
-test -d .agent-os/usage/ || { echo "ERROR: usage missing"; exit 1; }
-
-# Check MCP can query
-mcp_query_result=$(mcp_agent-os-rag_search_standards \
-    --query "testing standards" \
-    --n_results 1)
-
-if [ -z "$mcp_query_result" ]; then
-    echo "ERROR: MCP query failed"
-    exit 1
-fi
-
-echo "✅ Update validated successfully"
+**Next Step:**
+```python
+# Start the upgrade workflow
+start_workflow(
+    workflow_type="agent_os_upgrade_v1",
+    target_file="mcp_server",
+    options={"source_path": "/path/to/agent-os-enhanced"}
+)
 ```
 
 ---
 
-## 🎓 Training Standard
-
-### Required Knowledge
-
-Teams MUST understand:
-1. Difference between `universal/` (source) and `.agent-os/` (build artifact)
-2. Why syncing from `.agent-os/` is forbidden
-3. How to verify source repository authenticity
-4. Rollback procedures for failed updates
-
-### Documentation Requirement
-
-**STANDARD:** Projects MUST document their update process:
-
-```markdown
-# Our Agent OS Update Process
-
-## Schedule
-- Monthly automated updates (1st of month)
-- Emergency updates as needed
-
-## Responsible Team
-- Primary: DevOps team
-- Backup: Platform team
-
-## Process
-1. Run ./scripts/update-agent-os.sh
-2. Verify with test query
-3. Update VERSION.txt
-4. Monitor for 24 hours
-
-## Rollback
-1. Stop MCP server
-2. Restore from .agent-os.backup.*
-3. Restart MCP server
-```
-
----
-
-## 🔧 Automation Standard
-
-### Update Script Requirements
-
-**STANDARD:** Automated update scripts MUST:
-
-1. **Validate source location**
-2. **Create backups**
-3. **Use correct rsync flags**
-4. **Rebuild RAG index**
-5. **Log all operations**
-6. **Validate success**
-7. **Send notifications on failure**
-
-### Example Standard-Compliant Script
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-# Configuration
-AGENT_OS_REPO="${AGENT_OS_REPO:-/opt/agent-os-enhanced}"
-PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-LOG_FILE="$PROJECT_ROOT/.agent-os/UPDATE_LOG.txt"
-
-# Logging
-log() {
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
-}
-
-# Validation
-validate_source() {
-    if [ ! -d "$AGENT_OS_REPO/universal" ]; then
-        log "ERROR: Invalid source - universal/ not found"
-        exit 1
-    fi
-    
-    if [[ "$AGENT_OS_REPO" == *".agent-os"* ]]; then
-        log "ERROR: Source contains .agent-os - forbidden"
-        exit 1
-    fi
-}
-
-# Backup
-create_backup() {
-    local backup_dir=".agent-os.backup.$(date +%Y%m%d_%H%M%S)"
-    log "Creating backup: $backup_dir"
-    cp -r "$PROJECT_ROOT/.agent-os" "$PROJECT_ROOT/$backup_dir"
-}
-
-# Update
-perform_update() {
-    log "Syncing from $AGENT_OS_REPO/universal/"
-    
-    rsync -av --delete \
-        --exclude="rag_index/" \
-        --exclude=".mcp_state/" \
-        "$AGENT_OS_REPO/universal/standards/" "$PROJECT_ROOT/.agent-os/standards/"
-    
-    rsync -av --delete \
-        "$AGENT_OS_REPO/universal/usage/" "$PROJECT_ROOT/.agent-os/usage/"
-    
-    rsync -av --delete \
-        "$AGENT_OS_REPO/universal/workflows/" "$PROJECT_ROOT/.agent-os/workflows/"
-}
-
-# Main
-main() {
-    log "Starting Agent OS update"
-    validate_source
-    create_backup
-    perform_update
-    log "Update complete - commit: $(cd "$AGENT_OS_REPO" && git rev-parse --short HEAD)"
-}
-
-main
-```
-
----
-
-## 📈 Monitoring Standard
-
-### Update Metrics
-
-**STANDARD:** Projects SHOULD track:
-- Update frequency
-- Update duration
-- Failure rate
-- Rollback count
-
-### Alert Conditions
-
-**STANDARD:** Projects MUST alert on:
-- Update failures
-- RAG index rebuild failures
-- Post-update validation failures
-- MCP server restart failures
-
----
-
-## 🆘 Incident Response Standard
-
-### Update Failure Response
-
-When an update fails:
-
-1. **DO NOT proceed with partial update**
-2. **Restore from backup immediately**
-3. **Document failure cause**
-4. **Review validation checks**
-5. **Test fix in non-production first**
-
-### Corruption Recovery
-
-If content is corrupted:
-
-```bash
-# 1. Stop MCP server
-pkill -f "mcp.*agent-os-rag" || true
-
-# 2. Remove corrupted content
-rm -rf .agent-os/
-
-# 3. Clean reinstall from source
-mkdir -p .agent-os/
-rsync -av /path/to/agent-os-enhanced/universal/ .agent-os/
-
-# 4. Rebuild RAG index
-python -m agent_os.scripts.build_rag_index
-
-# 5. Restart MCP server
-# (restart via your process manager)
-```
-
----
-
-## ✅ Compliance Checklist
-
-Before marking an update as complete, verify:
-
-- [ ] Synced from `universal/` directory (not `.agent-os/`)
-- [ ] Used rsync with `-av --delete` flags
-- [ ] Excluded state directories (rag_index, .mcp_state)
-- [ ] Protected custom workflows/standards
-- [ ] Created backup before update
-- [ ] Rebuilt RAG index after update
-- [ ] Validated with test query
-- [ ] Updated VERSION.txt
-- [ ] Logged update in UPDATE_LOG.txt
-- [ ] Tested workflow execution (if applicable)
-
----
-
-**This is a standard document. All consuming projects MUST follow these procedures when updating Agent OS content.**
+**This is a discovery standard, not an execution manual. Use the `agent_os_upgrade_v1` workflow for actual updates.**

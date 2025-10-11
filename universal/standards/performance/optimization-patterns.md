@@ -2,6 +2,77 @@
 
 **Timeless patterns for writing efficient code without premature optimization.**
 
+---
+
+## 🎯 TL;DR - Performance Optimization Quick Reference
+
+**Keywords for search**: performance optimization, optimize code, profiling, bottlenecks, algorithmic complexity, caching, lazy loading, code performance, premature optimization, measure performance
+
+**Core Principle:** "Make it work, make it right, make it fast - in that order."
+
+**The Golden Rule:** Measure before optimizing. Don't guess.
+
+**The Process (MANDATORY):**
+```
+1. Profile the code
+2. Identify the bottleneck (80/20 rule: 80% time in 20% code)
+3. Measure current performance
+4. Set performance target
+5. Optimize the bottleneck
+6. Measure again
+7. Verify improvement
+```
+
+**Universal Optimization Patterns:**
+1. **Reduce Algorithmic Complexity** - Use right algorithm (O(n²) → O(n))
+2. **Cache Expensive Operations** - Store results, avoid recomputation
+3. **Lazy Loading** - Compute only when needed
+4. **Batch Operations** - Group I/O for efficiency
+5. **Use Efficient Data Structures** - Choose right structure for use case
+6. **Minimize Allocations** - Reuse objects in hot paths
+7. **Parallelize Independent Work** - Use concurrency for I/O
+
+**Common Anti-Patterns to Avoid:**
+- ❌ Premature optimization (optimizing before measuring)
+- ❌ Optimizing non-bottlenecks (wasting time)
+- ❌ Sacrificing readability for micro-optimizations
+- ❌ N+1 queries (database inefficiency)
+- ❌ Synchronous I/O in hot paths
+
+**Performance Targets:**
+- **Web APIs:** <100ms response time (p95)
+- **CLI tools:** <1s for common operations
+- **Data processing:** Handle 10x expected load
+- **Memory:** Stay under 80% available memory
+
+**The 3 Laws:**
+1. Don't optimize without profiling
+2. Optimize the bottleneck, not everything
+3. Measure impact after optimization
+
+**When NOT to Optimize:**
+- Function takes <1% of total runtime
+- Code is already fast enough
+- No user-facing performance issue
+- Optimization reduces maintainability significantly
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I optimize code performance?"
+2. "What is the performance optimization process?"
+3. "How to identify bottlenecks?"
+4. "What optimization patterns should I use?"
+5. "How to avoid premature optimization?"
+6. "What are common performance anti-patterns?"
+7. "How to measure code performance?"
+8. "What are good performance targets?"
+9. "When should I optimize code?"
+10. "How to profile code?"
+
+---
+
 ## Core Principle
 
 **"Make it work, make it right, make it fast - in that order."**
@@ -14,7 +85,9 @@
 
 ---
 
-## The Performance Optimization Process
+## What Is the Performance Optimization Process?
+
+Systematic approach to improving code performance through measurement and targeted optimization.
 
 ### Step 1: Measure (MANDATORY)
 
@@ -59,7 +132,9 @@ Don't optimize code that takes <1% of total runtime.
 
 ---
 
-## Universal Optimization Patterns
+## What Universal Optimization Patterns Should I Use?
+
+Seven proven patterns for improving code performance across all languages.
 
 ### Pattern 1: Reduce Algorithmic Complexity
 
@@ -212,7 +287,9 @@ async function process_urls(urls):
 
 ---
 
-## Common Performance Anti-Patterns
+## What Performance Anti-Patterns Should I Avoid?
+
+Common mistakes that waste time or harm code quality.
 
 ### Anti-Pattern 1: Premature Optimization
 
@@ -282,7 +359,9 @@ function process_users():
 
 ---
 
-## Performance Measurement
+## How to Measure Performance?
+
+Tools and techniques for profiling and measuring code performance.
 
 ### Benchmarking Best Practices
 
@@ -319,7 +398,9 @@ function benchmark(operation, iterations=1000):
 
 ---
 
-## Specific Optimization Techniques
+## What Specific Optimization Techniques Should I Use?
+
+Targeted techniques for different performance bottleneck types.
 
 ### Technique 1: Database Query Optimization
 
@@ -402,7 +483,9 @@ for request in requests:
 
 ---
 
-## Performance Targets
+## What Are Good Performance Targets?
+
+Measurable targets to guide optimization efforts.
 
 ### Latency Guidelines (User-Facing)
 
@@ -427,7 +510,9 @@ Batch processing: > 1000 items/second
 
 ---
 
-## Trade-offs
+## What Trade-offs Should I Consider?
+
+Balancing performance with other code quality attributes.
 
 ### Memory vs Speed
 
@@ -473,7 +558,9 @@ result = insertion_sort(items)  // O(n) for nearly sorted
 
 ---
 
-## Testing Performance
+## How to Test Performance?
+
+Testing strategies to validate optimization improvements.
 
 ### Performance Regression Tests
 
@@ -507,7 +594,9 @@ function load_test():
 
 ---
 
-## Best Practices Summary
+## What Are Performance Optimization Best Practices?
+
+Summary of key principles and practices for effective optimization.
 
 ### 1. Always Measure First
 
@@ -559,13 +648,49 @@ function find_duplicates(items):
 
 ---
 
-## Language-Specific Implementation
+## 🔍 When to Query This Standard
 
-**This document covers universal concepts. For language-specific implementations:**
-- See `.agent-os/standards/development/python-performance.md`
-- See `.agent-os/standards/development/go-performance.md`
-- See `.agent-os/standards/development/rust-performance.md`
-- Etc.
+| Situation | Example Query |
+|-----------|---------------|
+| **Slow code** | `search_standards("performance optimization")` |
+| **Profiling** | `search_standards("how to profile code")` |
+| **Bottlenecks** | `search_standards("identify bottlenecks")` |
+| **Caching** | `search_standards("caching patterns")` |
+| **Algorithm choice** | `search_standards("algorithmic complexity")` |
+| **Before optimizing** | `search_standards("premature optimization")` |
+| **Performance targets** | `search_standards("performance targets")` |
+| **Measurement** | `search_standards("how to measure performance")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for performance optimization:**
+
+1. **Start with optimization patterns** → `search_standards("performance optimization")` (this document)
+2. **Learn database optimization** → `search_standards("database patterns")` → `standards/database/database-patterns.md`
+3. **Understand concurrency** → `search_standards("concurrency patterns")` → `standards/concurrency/`
+4. **Learn testing** → `search_standards("performance testing")` → `standards/testing/integration-testing.md`
+
+**By Category:**
+
+**Database:**
+- `standards/database/database-patterns.md` - Database optimization → `search_standards("database patterns")`
+
+**Concurrency:**
+- `standards/concurrency/race-conditions.md` - Concurrent safety → `search_standards("race conditions")`
+- `standards/concurrency/locking-strategies.md` - Locking patterns → `search_standards("locking strategies")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Performance tests → `search_standards("integration testing")`
+- `standards/testing/property-based-testing.md` - Load testing → `search_standards("property based testing")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production requirements → `search_standards("production code checklist")`
+
+**Failure Modes:**
+- `standards/failure-modes/timeout-patterns.md` - Timeout handling → `search_standards("timeout patterns")`
+- `standards/failure-modes/circuit-breakers.md` - Resilience → `search_standards("circuit breakers")`
 
 ---
 

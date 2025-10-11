@@ -2,6 +2,80 @@
 
 **Timeless pattern for breaking complexity into focused modules**
 
+---
+
+## 🎯 TL;DR - Horizontal Decomposition Quick Reference
+
+**Keywords for search**: horizontal decomposition, task decomposition, file size optimization, LLM context management, workflow decomposition, breaking down tasks, modular workflows, AI file size limits
+
+**Core Principle:** Break complex workflows horizontally into small, focused files (≤100 lines) rather than vertically layering abstraction.
+
+**The Problem:** Large monolithic files (2000 lines) → 90%+ context use → <70% attention quality → 60-70% success
+**The Solution:** Horizontal decomposition (30 × 65 lines) → 15-25% context use → 95%+ attention quality → 85-95% success
+
+**Decomposition Strategies:**
+
+1. **By Workflow Phase**
+   - Break workflow into sequential phases
+   - Each phase = one directory with multiple tasks
+   - Example: Setup → Analysis → Generation → Validation
+
+2. **By Single Responsibility**
+   - One clear purpose per file
+   - Task 1: Parse schema (70 lines)
+   - Task 2: Generate tests (85 lines)
+   - Task 3: Validate output (60 lines)
+
+3. **By Data Type**
+   - Decompose by what's being processed
+   - Example: users.md, products.md, orders.md
+
+4. **By Complexity**
+   - Simple tasks stay together (30 lines)
+   - Complex tasks get own file (100 lines)
+
+**Target File Sizes:**
+- **Optimal:** ≤100 lines (95%+ attention quality)
+- **Acceptable:** 100-170 lines (85-95% attention)
+- **Warning:** 170-500 lines (70-85% attention)
+- **Failure:** >500 lines (<70% attention)
+
+**Key Pattern:**
+```
+Large Task (2000 lines)
+  ↓ Break into Phases (8 × 250 lines)
+  ↓ Break into Tasks (30 × 65 lines)
+  ↓ Result: 15-25% context use, 95%+ quality
+```
+
+**Horizontal vs Vertical:**
+- ❌ **Vertical** - Layered abstractions (models → services → controllers)
+- ✅ **Horizontal** - Focused modules by workflow step (task-1 → task-2 → task-3)
+
+**Benefits:**
+- 3-4x improvement in success rate
+- Minimal context use (15-25% vs 90%+)
+- Focused attention per task
+- Easier debugging and maintenance
+- Parallel execution possible
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I break down complex AI workflows?"
+2. "What is horizontal decomposition?"
+3. "Why are my AI tasks failing with large files?"
+4. "What file size is optimal for AI?"
+5. "How do I prevent AI context overflow?"
+6. "What is the difference between horizontal and vertical decomposition?"
+7. "How do I structure workflow tasks?"
+8. "What decomposition strategies exist?"
+9. "How small should task files be?"
+10. "How do I improve AI attention quality?"
+
+---
+
 ## What Is Horizontal Decomposition?
 
 **Breaking complex workflows across focused, single-responsibility modules** rather than vertically layering abstraction.
@@ -10,7 +84,9 @@
 
 ---
 
-## The Monolithic Problem
+## What Is the Monolithic Problem?
+
+Large, complex files cause AI attention degradation and execution failures.
 
 ```
 Large Complex Task (2000 lines)
@@ -28,7 +104,9 @@ Failures, shortcuts, incomplete work
 
 ---
 
-## The Decomposition Solution
+## How Does Decomposition Solve the Problem?
+
+Breaking large tasks into small files optimizes AI attention and dramatically improves success rates.
 
 ```
 Large Task (2000 lines)
@@ -48,7 +126,9 @@ Consistent, complete execution
 
 ---
 
-## Decomposition Strategies
+## What Decomposition Strategies Should I Use?
+
+Choose the strategy that best matches your workflow's natural structure.
 
 ### Strategy 1: By Workflow Phase
 
@@ -87,7 +167,9 @@ Step 4: Refine test (60 lines)
 
 ---
 
-## Target File Sizes
+## What Are the Target File Sizes?
+
+File size directly impacts AI attention quality. Follow these targets for optimal results.
 
 | Tier | Size | Purpose | Count |
 |------|------|---------|-------|
@@ -100,7 +182,9 @@ Step 4: Refine test (60 lines)
 
 ---
 
-## Implementation Pattern
+## How to Implement Horizontal Decomposition?
+
+Follow this systematic pattern to decompose any complex workflow.
 
 ### Pattern 1: Top-Down Breakdown
 
@@ -140,7 +224,9 @@ Step 4: Refine test (60 lines)
 
 ---
 
-## Horizontal vs Vertical
+## What Is Horizontal vs Vertical Decomposition?
+
+Understanding the difference is critical for choosing the right approach for AI workflows.
 
 ### ❌ Vertical Decomposition (Abstraction Layers)
 
@@ -162,7 +248,9 @@ Benefit: AI reads ONE task at a time, focused context
 
 ---
 
-## Benefits
+## What Are the Benefits of Horizontal Decomposition?
+
+Horizontal decomposition delivers measurable improvements across all quality metrics.
 
 ### Context Efficiency
 - **Before**: 75-90% utilization (overflow)
@@ -181,7 +269,9 @@ Benefit: AI reads ONE task at a time, focused context
 
 ---
 
-## Validation
+## How to Validate Decomposition Quality?
+
+Use these metrics to ensure your decomposition meets Agent OS standards.
 
 ```bash
 # Check task file sizes
@@ -199,10 +289,44 @@ find phases/ -name "*.md" -exec sh -c '
 
 ---
 
-## References
+## 🔍 When to Query This Standard
 
-- [Framework Creation Principles](framework-creation-principles.md)
-- [Three-Tier Architecture](three-tier-architecture.md)
+| Situation | Example Query |
+|-----------|---------------|
+| **Large file failures** | `search_standards("AI failing large files")` |
+| **Breaking down workflows** | `search_standards("horizontal decomposition")` |
+| **Optimal file size** | `search_standards("optimal file size AI")` |
+| **Context overflow** | `search_standards("AI context overflow")` |
+| **Task structure** | `search_standards("how to structure tasks")` |
+| **Decomposition strategies** | `search_standards("task decomposition strategies")` |
+| **Workflow organization** | `search_standards("workflow organization")` |
+| **File size limits** | `search_standards("AI file size limits")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete decomposition understanding:**
+
+1. **Start with decomposition** → `search_standards("horizontal decomposition")` (this document)
+2. **Learn framework principles** → `search_standards("framework creation principles")` → `standards/meta-framework/framework-creation-principles.md`
+3. **Understand architecture** → `search_standards("three-tier architecture")` → `standards/meta-framework/three-tier-architecture.md`
+4. **Apply validation** → `search_standards("validation gates")` → `standards/meta-framework/validation-gates.md`
+
+**By Category:**
+
+**Meta-Framework:**
+- `standards/meta-framework/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+- `standards/meta-framework/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
+- `standards/meta-framework/command-language.md` - Binding instructions → `search_standards("command language")`
+- `standards/meta-framework/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+
+**Workflows:**
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+
+**Architecture:**
+- `standards/architecture/solid-principles.md` - Single Responsibility Principle → `search_standards("SOLID principles")`
+- `standards/architecture/separation-of-concerns.md` - Concern separation → `search_standards("separation of concerns")`
 
 ---
 

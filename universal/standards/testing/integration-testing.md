@@ -2,6 +2,53 @@
 
 **Timeless approach to testing component interactions and system behavior.**
 
+---
+
+## 🚨 Integration Testing Quick Reference (TL;DR)
+
+**Keywords for search**: integration testing, component integration, database testing, API testing, integration test patterns, test database strategies, external service testing, integration vs unit tests, test fixtures, test data management
+
+**The 4 types of integration testing:**
+
+| Type | What It Tests | Example |
+|------|---------------|---------|
+| **Component Integration** | Internal modules working together | Service → Repository → Database |
+| **API Integration** | API endpoints with real components | HTTP requests through full stack |
+| **Database Integration** | Actual database operations | Real queries, transactions, migrations |
+| **External Service Integration** | Third-party service calls | Payment gateways, email services, APIs |
+
+**Key principle:** Unit tests verify components in isolation. Integration tests verify they work together.
+
+**Test database strategies:**
+1. **In-memory** - Fast (SQLite :memory:), limited features
+2. **Test instance** - Real database, slower, requires cleanup
+3. **Transactions** - Rollback after each test, fast cleanup
+4. **Docker containers** - Fresh database each run, exact match to production
+
+**When to query this standard:**
+- Planning integration tests → `search_standards("integration testing patterns")`
+- Database testing strategy → `search_standards("test database strategies")`
+- Testing external APIs → `search_standards("external service testing")`
+- Test data management → `search_standards("test fixtures factories")`
+- Slow integration tests → `search_standards("fast integration tests")`
+
+**For complete guide with examples, continue reading below.**
+
+---
+
+## Questions This Answers
+
+- "What is integration testing and when should I use it?"
+- "What's the difference between unit tests and integration tests?"
+- "How do I test database interactions?"
+- "Should I use an in-memory database or real database for tests?"
+- "How do I test external API integrations?"
+- "How do I manage test data for integration tests?"
+- "Why are my integration tests so slow?"
+- "What integration testing patterns should I use?"
+
+---
+
 ## What is Integration Testing?
 
 Integration testing verifies that different components/modules work together correctly when integrated.
@@ -29,9 +76,11 @@ Integration testing verifies that different components/modules work together cor
 
 ---
 
-## Types of Integration Testing
+## What Types of Integration Testing Exist?
 
-### Type 1: Component Integration
+There are 4 main types, each testing different integration boundaries.
+
+### How to Test Component Integration (Type 1)
 
 **What:** Test integration between internal components.
 
@@ -57,7 +106,7 @@ def test_user_service_with_repository():
 
 ---
 
-### Type 2: API Integration
+### How to Test API Integration (Type 2)
 
 **What:** Test API endpoints with real components.
 
@@ -82,7 +131,7 @@ def test_create_user_endpoint():
 
 ---
 
-### Type 3: External Service Integration
+### How to Test External Service Integration (Type 3)
 
 **What:** Test integration with external services.
 
@@ -105,7 +154,7 @@ def test_payment_gateway_integration():
 
 ---
 
-### Type 4: Database Integration
+### How to Test Database Integration (Type 4)
 
 **What:** Test actual database operations.
 
@@ -129,9 +178,11 @@ def test_user_repository_database_integration():
 
 ---
 
-## Integration Test Patterns
+## What Integration Test Patterns Should I Use?
 
-### Pattern 1: Top-Down Integration
+Choose the pattern that matches your testing strategy and system architecture.
+
+### How to Use Top-Down Integration Pattern
 
 **Concept:** Test from high-level modules down to low-level.
 
@@ -159,7 +210,7 @@ def test_full_integration():
 
 ---
 
-### Pattern 2: Bottom-Up Integration
+### How to Use Bottom-Up Integration Pattern
 
 **Concept:** Test from low-level modules up to high-level.
 
@@ -186,7 +237,7 @@ def test_api():
 
 ---
 
-### Pattern 3: Big Bang Integration
+### How to Use Big Bang Integration Pattern
 
 **Concept:** Integrate all components at once and test.
 
@@ -213,7 +264,7 @@ def test_full_system():
 
 ---
 
-### Pattern 4: Sandwich Integration
+### How to Use Sandwich Integration Pattern
 
 **Concept:** Test high and low levels first, then middle layers.
 
@@ -241,9 +292,11 @@ def test_full_integration():
 
 ---
 
-## Test Database Strategies
+## How to Choose a Test Database Strategy?
 
-### Strategy 1: In-Memory Database
+Pick the strategy that balances speed, realism, and isolation for your needs.
+
+### How to Use In-Memory Database for Testing
 
 **Concept:** Use in-memory database for fast tests.
 
@@ -270,7 +323,7 @@ def test_user_repository():
 
 ---
 
-### Strategy 2: Test Database Instance
+### How to Use Test Database Instance
 
 **Concept:** Use real database but separate instance for testing.
 
@@ -299,7 +352,7 @@ def test_user_repository():
 
 ---
 
-### Strategy 3: Database Per Test (Transactions)
+### How to Use Transaction Rollback for Test Isolation
 
 **Concept:** Wrap each test in transaction, rollback after.
 
@@ -328,7 +381,7 @@ def test_user_repository():
 
 ---
 
-### Strategy 4: Docker Containers
+### How to Use Docker Containers for Test Databases
 
 **Concept:** Spin up fresh database container for each test run.
 
@@ -362,9 +415,11 @@ def test_user_repository():
 
 ---
 
-## Testing External Services
+## How to Test External Services?
 
-### Approach 1: Test/Sandbox Environment
+Choose the approach that balances realism with test speed and reliability.
+
+### How to Use Test/Sandbox Environment
 
 **Concept:** Use service provider's test environment.
 
@@ -391,7 +446,7 @@ def test_stripe_payment():
 
 ---
 
-### Approach 2: Mock Server
+### How to Use Mock Servers for External Services
 
 **Concept:** Run mock server that mimics external service.
 
@@ -419,7 +474,7 @@ def test_payment_service():
 
 ---
 
-### Approach 3: Contract Testing
+### How to Use Contract Testing
 
 **Concept:** Test that your client matches service's contract.
 
@@ -442,9 +497,11 @@ def test_payment_client():
 
 ---
 
-## Test Data Management
+## How to Manage Test Data?
 
-### Strategy 1: Fixtures
+Choose the test data strategy that fits your test maintenance and flexibility needs.
+
+### How to Use Fixtures for Test Data
 
 **Concept:** Predefined test data loaded before tests.
 
@@ -474,7 +531,7 @@ def test_get_user():
 
 ---
 
-### Strategy 2: Factories
+### How to Use Factories for Test Data
 
 **Concept:** Generate test data programmatically.
 
@@ -505,7 +562,7 @@ def test_user_creation():
 
 ---
 
-### Strategy 3: Builders
+### How to Use Builders for Test Data
 
 **Concept:** Fluent API for building test objects.
 
@@ -539,9 +596,9 @@ def test_admin_permissions():
 
 ---
 
-## Best Practices
+## What are Integration Testing Best Practices?
 
-### 1. Test One Integration at a Time
+### 1. How to Test One Integration at a Time
 
 ```
 // GOOD: Tests repository → database integration
@@ -560,7 +617,7 @@ def test_entire_system():
     // Too much to debug if this fails!
 ```
 
-### 2. Use Real Dependencies When Practical
+### 2. When to Use Real Dependencies vs Mocks
 
 ```
 // GOOD: Use real database
@@ -575,7 +632,7 @@ def test_user_service():
     service = UserService(repo, email_service)
 ```
 
-### 3. Isolate Tests
+### 3. How to Isolate Tests Properly
 
 ```
 // GOOD: Each test independent
@@ -597,7 +654,7 @@ def test_2_update_user():
     update_user(user_id, ...)  // Depends on test_1!
 ```
 
-### 4. Fast Enough to Run Frequently
+### 4. How Fast Should Integration Tests Be?
 
 ```
 // Target: Integration tests should run in < 5 minutes
@@ -610,9 +667,9 @@ def test_2_update_user():
 
 ---
 
-## Common Pitfalls
+## What Common Pitfalls Should I Avoid?
 
-### Pitfall 1: Testing Too Much
+### Pitfall 1: Testing Too Much (Treat as E2E Test)
 
 ❌ Testing implementation details instead of integration.
 
@@ -625,13 +682,13 @@ def test_user_service_calls_repository():
     assert mock_repo.save.called == True  // Testing implementation!
 ```
 
-### Pitfall 2: Slow Tests
+### Pitfall 2: Tests That Are Too Slow
 
 ❌ Tests take too long, developers stop running them.
 
 **Fix:** Use faster test doubles, in-memory databases, parallel execution.
 
-### Pitfall 3: Flaky Tests
+### Pitfall 3: Flaky Tests (Non-Deterministic Failures)
 
 ❌ Tests pass/fail randomly.
 
@@ -643,14 +700,69 @@ def test_user_service_calls_repository():
 
 ---
 
-## Language-Specific Implementation
+## Cross-References and Related Standards
 
-**This document covers universal concepts. For language-specific implementations:**
-- See `.agent-os/standards/development/python-testing.md` (Python: pytest fixtures, TestClient)
-- See `.agent-os/standards/development/java-testing.md` (Java: @SpringBootTest, TestContainers)
-- See `.agent-os/standards/development/js-testing.md` (JavaScript: supertest, test databases)
-- Etc.
+### Related Testing Standards
+
+Query for comprehensive testing strategy:
+
+```python
+# For test strategy overview
+search_standards("test pyramid unit integration e2e")
+
+# For test doubles and mocking
+search_standards("test doubles mocks stubs spies")
+
+# For database patterns
+search_standards("database patterns repository")
+
+# For API design and testing
+search_standards("API design principles testing")
+```
+
+**Related Standards:**
+- [Test Pyramid](test-pyramid.md) - Overall testing strategy, 70-15-5 rule
+- [Test Doubles](test-doubles.md) - Mocks, stubs, fakes for testing
+- [Production Code Checklist](../ai-safety/production-code-checklist.md) - Testing requirements
+- [Database Patterns](../architecture/database-patterns.md) - Repository pattern, transactions
+
+### When to Query This Standard
+
+```python
+# When planning integration tests
+search_standards("integration testing patterns")
+
+# When tests are too slow
+search_standards("fast integration tests database")
+
+# When managing test data
+search_standards("test fixtures factories builders")
+
+# When testing external services
+search_standards("external service testing mocking")
+```
+
+### Language-Specific Implementation
+
+This document covers universal concepts. For language-specific tools and patterns:
+
+```python
+# Python integration testing
+search_standards("pytest fixtures test client python")
+
+# Java integration testing  
+search_standards("spring boot test testcontainers")
+
+# JavaScript integration testing
+search_standards("supertest jest integration tests")
+```
+
+**Language-Specific Guides:**
+- Python: pytest fixtures, TestClient, pytest-mock, SQLAlchemy test patterns
+- Java: @SpringBootTest, TestContainers, Mockito, JUnit integration
+- JavaScript: supertest, jest, test databases, Prisma test patterns
+- Go: httptest, testify, database/sql testing patterns
 
 ---
 
-**Integration tests verify that components work together correctly. They sit between unit tests (fast, isolated) and E2E tests (slow, full system). Test real integrations when practical, mock only when necessary. Keep tests fast enough to run frequently.**
+**Integration tests verify that components work together correctly. They sit between unit tests (fast, isolated) and E2E tests (slow, full system). Test real integrations when practical, mock only when necessary. Keep tests fast enough to run frequently (<5 minutes).**

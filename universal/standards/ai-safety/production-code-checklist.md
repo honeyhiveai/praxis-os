@@ -9,6 +9,44 @@
 
 ---
 
+## 🚨 The 5-Second Rule - Production Code Quick Reference (TL;DR)
+
+**Keywords for search**: production code checklist, code quality standards, AI code review, before writing code, quality checklist, configuration management, concurrency analysis, failure modes, resource lifecycle, test coverage, code review checklist, production-ready code
+
+**Before writing ANY code, answer these 5 questions:**
+
+1. **Configuration?** → Single source of truth (RAGConfig dataclass with defaults)
+2. **Shared state?** → Concurrency analysis (threading.RLock, never assume thread-safety)
+3. **How does this fail?** → Graceful degradation (try/except with logging + fallback)
+4. **Resources?** → Lifecycle management (context managers, explicit cleanup)
+5. **Tests?** → Unit + integration coverage (happy path + failure modes)
+
+**When to query this standard:**
+- Before starting new feature → `search_standards("production code checklist")`
+- During code review → `search_standards("code quality requirements")`
+- When adding dependencies → `search_standards("dependency version management")`
+- When handling failures → `search_standards("graceful degradation patterns")`
+- When managing state → `search_standards("concurrency thread safety")`
+
+**Remember: We teach quality standards - we must exemplify them.**
+
+**For complete checklist with examples, continue reading below.**
+
+---
+
+## Questions This Answers
+
+- "What should I check before committing code?"
+- "How do I ensure my code is production-ready?"
+- "What are the quality standards for AI-written code?"
+- "How do I handle configuration in Agent OS?"
+- "When do I need concurrency analysis?"
+- "How should I handle failures gracefully?"
+- "What documentation is required for production code?"
+- "What testing is required before committing?"
+
+---
+
 ## 🎯 Core Principle
 
 **"AI has no excuse for shortcuts - especially when building a quality framework."**
@@ -25,7 +63,7 @@ If we ship bugs, we undermine the entire framework. Every line must be productio
 
 ## 📋 Universal Checks (Tier 1 - MANDATORY FOR ALL CODE)
 
-### 1. **Configuration Management** (Framework-Specific)
+### 1. How to Manage Configuration (Framework-Specific)
 
 **Question**: Does this code read or modify configuration?
 
@@ -82,7 +120,7 @@ def _load_config():
 self.path = base / "standards"  # ❌ Not from config
 ```
 
-### 2. **Shared State Analysis**
+### 2. How to Analyze Shared State and Concurrency
 
 **Question**: Does this code access shared state?
 
@@ -126,7 +164,7 @@ class RAGEngine:
                 self._rebuilding.clear()
 ```
 
-### 3. **Dependency Analysis**
+### 3. How to Manage Dependencies and Versions
 
 **Question**: Does this code add/modify dependencies?
 
@@ -149,7 +187,7 @@ lancedb~=0.17.0  # Latest stable with improved concurrency, avoid 0.16.x race co
 watchdog~=6.0.0   # Stable file watching, fixes macOS symlink issues in 5.x
 ```
 
-### 4. **Failure Mode Analysis**
+### 4. How to Analyze and Handle Failure Modes
 
 **Question**: How does this code fail gracefully?
 
@@ -178,7 +216,7 @@ except:  # ❌ Bare except
     pass  # ❌ Silent failure
 ```
 
-### 5. **Resource Lifecycle**
+### 5. How to Manage Resource Lifecycle
 
 **Question**: Does this manage resources?
 
@@ -213,7 +251,7 @@ finally:
         observer.join(timeout=5)
 ```
 
-### 6. **Documentation Standards**
+### 6. How to Document Code Properly
 
 **Question**: Can another developer (or AI) understand this code?
 
@@ -330,7 +368,7 @@ def process_data(x, y):
     return x + y
 ```
 
-### 7. **Test Coverage**
+### 7. How to Ensure Adequate Test Coverage
 
 **Question**: How do I validate this works?
 
@@ -355,9 +393,9 @@ def test_failure_mode():
 
 ## 🏗️ Framework-Specific Checks (Tier 2)
 
-### 7. **Dogfooding Validation**
+### 7. How to Validate Dogfooding (Installation Logic)
 
-**Question**: Does this code installation/file-copying logic?
+**Question**: Does this code handle installation/file-copying logic?
 
 **Agent OS dogfoods itself - validate consumer experience:**
 - [ ] Does this work with real copied files (not symlinks)?
@@ -373,7 +411,7 @@ cp -r universal/standards .agent-os/standards/universal
 # Verify MCP finds new content
 ```
 
-### 8. **MCP Tool Interface**
+### 8. How to Design MCP Tool Interfaces
 
 **Question**: Does this code implement or modify MCP tools?
 
@@ -413,7 +451,7 @@ def my_tool(
         }
 ```
 
-### 9. **RAG Index Consistency**
+### 9. How to Maintain RAG Index Consistency
 
 **Question**: Does this code modify or rebuild the RAG index?
 
@@ -445,7 +483,7 @@ def reload_index(self) -> None:
             self._rebuilding.clear()
 ```
 
-### 10. **Workflow State Management**
+### 10. How to Manage Workflow State
 
 **Question**: Does this code manage workflow state?
 
@@ -518,13 +556,48 @@ except:
 
 ---
 
-## 📚 Related Standards
+## 📚 Cross-References and Related Standards
 
-- `universal/standards/concurrency/` - Concurrency patterns
-- `universal/standards/failure-modes/` - Graceful degradation
-- `universal/usage/operating-model.md` - Human vs AI roles
-- `python-code-quality.md` - Code quality requirements
-- `python-testing-standards.md` - Testing requirements
+### Related Architecture Standards
+
+Query when implementing production code:
+
+```python
+# For concurrency patterns
+search_standards("thread safety concurrency patterns")
+
+# For graceful degradation  
+search_standards("failure modes graceful degradation")
+
+# For system architecture
+search_standards("dependency injection architecture patterns")
+
+# For testing strategy
+search_standards("test pyramid unit integration")
+```
+
+**Related Standards:**
+- [Concurrency Patterns](../concurrency/) - Thread-safety, locking strategies
+- [Failure Modes](../failure-modes/) - Graceful degradation patterns
+- [SOLID Principles](../architecture/solid-principles.md) - Class design for maintainability
+- [Test Pyramid](../testing/test-pyramid.md) - Testing strategy and ratios
+- [Operating Model](../../usage/operating-model.md) - Human vs AI roles
+
+### When to Query This Checklist
+
+```python
+# Before starting implementation
+search_standards("production code checklist")
+
+# During code review
+search_standards("code quality standards AI")
+
+# When debugging quality issues
+search_standards("common code quality mistakes")
+
+# When onboarding to Agent OS
+search_standards("Agent OS code standards")
+```
 
 ---
 

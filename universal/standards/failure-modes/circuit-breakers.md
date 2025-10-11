@@ -2,6 +2,61 @@
 
 **Timeless pattern for preventing cascade failures in distributed systems.**
 
+---
+
+## 🎯 TL;DR - Circuit Breakers Quick Reference
+
+**Keywords for search**: circuit breaker, circuit breaker pattern, fail fast, cascade failure, distributed systems resilience, circuit breaker states, half-open state, fallback strategy, resilience pattern
+
+**Three Circuit States:**
+1. **CLOSED** (Normal) - All requests pass through, monitor failures
+2. **OPEN** (Failing) - Block all requests, fail fast, return fallback
+3. **HALF-OPEN** (Testing) - Allow limited test requests to check recovery
+
+**State Transitions:**
+```
+CLOSED → (failures exceed threshold) → OPEN
+OPEN → (timeout expires) → HALF-OPEN
+HALF-OPEN → (success) → CLOSED
+HALF-OPEN → (failure) → OPEN
+```
+
+**Key Configuration:**
+- **Failure Threshold:** 50% failure rate over 10 requests (typical)
+- **Timeout:** 30-60 seconds before testing recovery
+- **Test Requests:** 1-5 requests in half-open state
+
+**When to Use:**
+- **External API calls** (network unreliability)
+- **Database connections** (prevent connection pool exhaustion)
+- **Microservice calls** (prevent cascade failures)
+- **Any remote dependency** (protect your system from their failures)
+
+**Fallback Strategies:**
+- Return cached data
+- Return default value
+- Degrade to simplified functionality
+- Return informative error
+
+**Key Benefit:** Fail fast instead of wasting resources on doomed operations, allowing system to recover.
+
+---
+
+## ❓ Questions This Answers
+
+1. "What is a circuit breaker?"
+2. "How do circuit breakers prevent cascade failures?"
+3. "When should I use a circuit breaker?"
+4. "What are the three circuit breaker states?"
+5. "What's the difference between open, closed, and half-open states?"
+6. "How do I configure circuit breaker thresholds?"
+7. "What's a fallback strategy?"
+8. "How do circuit breakers work with retry logic?"
+9. "How do I test circuit breaker behavior?"
+10. "What circuit breaker anti-patterns should I avoid?"
+
+---
+
 ## What is a Circuit Breaker?
 
 A circuit breaker is a design pattern that prevents an application from repeatedly attempting operations that are likely to fail, allowing it to "fail fast" and recover gracefully.
@@ -10,7 +65,9 @@ A circuit breaker is a design pattern that prevents an application from repeated
 
 **Key principle:** Don't waste resources on operations that will fail. Fail fast, then periodically retry.
 
-## Three Circuit States
+## What are the Three Circuit Breaker States?
+
+Circuit breakers operate as a state machine with three distinct states. Understanding state transitions is essential for correct implementation.
 
 ```
      CLOSED                    OPEN                   HALF-OPEN
@@ -42,7 +99,9 @@ A circuit breaker is a design pattern that prevents an application from repeated
 
 ---
 
-## Universal Implementation Pattern
+## How to Implement a Circuit Breaker (Universal Pattern)
+
+This universal implementation pattern applies across all languages and frameworks, providing the core logic for circuit breaker behavior.
 
 ```
 class CircuitBreaker:
@@ -100,7 +159,9 @@ class CircuitBreaker:
 
 ---
 
-## When to Use Circuit Breakers
+## When Should I Use Circuit Breakers?
+
+Circuit breakers protect your system from wasting resources on failing dependencies. Use them for any remote or unreliable operation.
 
 ### ✅ Good Use Cases
 
@@ -153,7 +214,9 @@ def create_order(order_data):
 
 ---
 
-## Fallback Strategies
+## What Fallback Strategies Should I Use?
+
+When the circuit breaker is open, your system must provide a fallback response. Choose the strategy that best maintains user experience while protecting system resources.
 
 When circuit is open, provide alternative behavior:
 
@@ -207,7 +270,9 @@ def send_notification(message):
 
 ---
 
-## Configuration Parameters
+## How to Configure Circuit Breaker Parameters
+
+Proper configuration is critical for effective circuit breaker behavior. These parameters control when the breaker opens, how long it stays open, and when it tests recovery.
 
 ### Failure Threshold
 **What:** Number of consecutive failures before opening circuit.
@@ -244,7 +309,9 @@ def send_notification(message):
 
 ---
 
-## Advanced Patterns
+## What Advanced Circuit Breaker Patterns Exist?
+
+These advanced patterns extend basic circuit breaker functionality for complex distributed systems scenarios.
 
 ### Pattern 1: Percentage-Based Threshold
 **Concept:** Open circuit if failure rate exceeds percentage (not absolute count).
@@ -303,7 +370,9 @@ if state == HALF_OPEN:
 
 ---
 
-## Integration with Retry Strategies
+## How Do Circuit Breakers Integrate with Retry Strategies?
+
+Circuit breakers and retry strategies are complementary resilience patterns. Use them together for optimal failure handling.
 
 Circuit breakers complement retry strategies:
 
@@ -334,7 +403,9 @@ for attempt in range(max_retries):
 
 ---
 
-## Observability
+## How to Monitor Circuit Breaker Behavior
+
+Effective observability helps you tune circuit breaker parameters, diagnose issues, and understand system health.
 
 ### Metrics to Track
 ```
@@ -377,7 +448,9 @@ logger.info(
 
 ---
 
-## Anti-Patterns
+## What Circuit Breaker Anti-Patterns Should I Avoid?
+
+These common mistakes undermine circuit breaker effectiveness or create new problems.
 
 ### Anti-Pattern 1: No Fallback
 ❌ Circuit opens, but no alternative behavior.
@@ -401,7 +474,9 @@ logger.info(
 
 ---
 
-## Testing
+## How to Test Circuit Breakers
+
+Circuit breaker testing ensures correct state transitions and fallback behavior under failure conditions.
 
 ### Unit Tests
 ```
@@ -434,6 +509,47 @@ def test_circuit_closes_after_successes():
 - Verify fallback behavior
 - Simulate recovery
 - Verify circuit closes
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **External API integration** | `search_standards("circuit breaker")` |
+| **Cascade failure prevention** | `search_standards("prevent cascade failure")` |
+| **Microservices communication** | `search_standards("circuit breaker pattern")` |
+| **Service degradation** | `search_standards("fallback strategy")` |
+| **Half-open state confusion** | `search_standards("circuit breaker states")` |
+| **Parameter tuning** | `search_standards("circuit breaker configuration")` |
+| **Resilience patterns** | `search_standards("fail fast")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for resilient systems:**
+
+1. **Start with retries** → `search_standards("retry strategies")` → `standards/failure-modes/retry-strategies.md`
+2. **Add circuit breaker** → `search_standards("circuit breaker")` (this document)
+3. **Add graceful degradation** → `search_standards("graceful degradation")` → `standards/failure-modes/graceful-degradation.md`
+4. **Add timeouts** → `search_standards("timeout patterns")` → `standards/failure-modes/timeout-patterns.md`
+
+**By Category:**
+
+**Failure Modes:**
+- `standards/failure-modes/retry-strategies.md` - Retry logic (use inside circuit breaker) → `search_standards("retry strategies")`
+- `standards/failure-modes/graceful-degradation.md` - Degrading functionality → `search_standards("graceful degradation")`
+- `standards/failure-modes/timeout-patterns.md` - Timeout configuration → `search_standards("timeout patterns")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Testing circuit breaker behavior → `search_standards("integration testing")`
+
+**Architecture:**
+- `standards/architecture/dependency-injection.md` - Injecting circuit breakers → `search_standards("dependency injection")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production code checklist (includes failure handling) → `search_standards("production code checklist")`
 
 ---
 

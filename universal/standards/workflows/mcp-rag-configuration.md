@@ -4,17 +4,84 @@
 
 ---
 
+## 🎯 TL;DR - MCP RAG Configuration Quick Reference
+
+**Keywords for search**: MCP RAG configuration, RAG indexing, vector index, workflow metadata indexing, search_standards configuration, embedding configuration, file watcher, RAG performance
+
+**Core Principle:** Configure MCP RAG to index standards, workflows, and usage guides for AI agent discovery via `search_standards()`.
+
+**Three Primary Directories to Index:**
+1. **universal/standards/** - Technical standards (architecture, testing, meta-framework)
+2. **universal/workflows/** - Workflow metadata.json files
+3. **universal/usage/** - Usage guides and quickstarts
+
+**Key Configuration:**
+```python
+builder = IndexBuilder(
+    index_path=Path(".agent-os/.cache/vector_index"),
+    standards_path=Path("universal/standards"),
+    usage_path=Path("universal/usage"),
+    workflows_path=Path("universal/workflows"),  # Required
+    embedding_provider="local",  # or "openai"
+    embedding_model="all-MiniLM-L6-v2"  # Free, offline
+)
+```
+
+**File Watcher (Hot Reload):**
+- Watches universal/ directory for changes
+- Automatically rebuilds index on file modifications
+- Typical rebuild: 2-5 seconds for single file
+- Debounce: 1 second to batch rapid changes
+
+**Indexing Strategy:**
+- **Chunk size:** 500 tokens (overlap: 50 tokens)
+- **Files:** Markdown (.md) and JSON (metadata.json)
+- **Exclusions:** node_modules/, .git/, __pycache__/, build/
+
+**Search Optimization:**
+- Semantic search via vector similarity
+- Returns top 5 results by default
+- Includes file path, section headers, relevance score
+
+**Performance Targets:**
+- **Query time:** <100ms (95th percentile)
+- **Index rebuild:** <10s for full corpus
+- **Memory usage:** <500MB with index loaded
+
+**Common Errors:**
+- ❌ Forgetting workflows_path (workflow metadata not discoverable)
+- ❌ Wrong embedding model (index incompatible with queries)
+- ❌ Not restarting MCP server after config changes
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I configure MCP RAG?"
+2. "What directories should RAG index?"
+3. "How do I enable workflow metadata indexing?"
+4. "What embedding model should I use?"
+5. "How does file watcher work?"
+6. "How fast should RAG queries be?"
+7. "How do I optimize RAG performance?"
+8. "What files does RAG index?"
+9. "How do I test RAG configuration?"
+10. "What are common RAG configuration errors?"
+11. "How do I enable hot reload for RAG?"
+
+---
+
 ## 🎯 Purpose
 
 This document defines standards for configuring the MCP RAG system to properly index and serve workflow metadata, standards, and usage documentation to AI agents.
 
 ---
 
-## 📂 Directory Structure
+## What Directory Structure Should RAG Index?
+
+The MCP RAG system indexes content from three primary directories that contain discoverable content for AI agents.
 
 ### Required Directories
-
-The MCP RAG system indexes content from three primary directories:
 
 ```
 universal/
@@ -39,7 +106,9 @@ universal/
 
 ---
 
-## ⚙️ IndexBuilder Configuration
+## How to Configure IndexBuilder?
+
+IndexBuilder is the core component that creates and maintains the vector index for semantic search.
 
 ### Initialization Parameters
 
@@ -70,7 +139,9 @@ builder = IndexBuilder(
 
 ---
 
-## 🔄 File Watcher Configuration
+## How Does File Watcher Enable Hot Reload?
+
+File Watcher monitors the universal/ directory and automatically rebuilds the index when files change, enabling instant discovery of new content.
 
 ### Required Watchers
 
@@ -118,7 +189,9 @@ Without workflows directory watching:
 
 ---
 
-## 📊 Indexing Strategy
+## What Indexing Strategy Should I Use?
+
+The indexing strategy determines how content is broken into searchable chunks and stored in the vector database.
 
 ### File Types to Index
 
@@ -174,7 +247,9 @@ def chunk_workflow_metadata(metadata_path: Path) -> List[DocumentChunk]:
 
 ---
 
-## 🔍 Search Optimization
+## How to Optimize Search Performance?
+
+Search optimization ensures fast, relevant results for AI agent queries via `search_standards()`.
 
 ### Metadata for Better Search
 
@@ -209,7 +284,9 @@ await search_standards("What are the deliverables of Phase 2?")
 
 ---
 
-## 🚀 Server Configuration
+## How to Configure MCP Server for RAG?
+
+MCP server configuration integrates the RAG engine with the Model Context Protocol for AI agent access.
 
 ### MCP Server Initialization
 
@@ -250,7 +327,9 @@ def create_server(base_path: Optional[Path] = None) -> FastMCP:
 
 ---
 
-## 🧪 Testing Configuration
+## How to Test RAG Configuration?
+
+Testing ensures RAG is properly indexing content and returning relevant results for AI agent queries.
 
 ### Verification Checklist
 
@@ -321,7 +400,9 @@ if __name__ == "__main__":
 
 ---
 
-## ⚠️ Common Configuration Errors
+## What Common Configuration Errors Should I Avoid?
+
+These common mistakes break RAG functionality or prevent content from being discoverable. Recognize and fix them.
 
 ### Error 1: Workflows Not Indexed
 
@@ -382,7 +463,9 @@ if file_path.suffix in [".md", ".json"]:
 
 ---
 
-## 📖 Migration Checklist
+## How to Migrate to Workflow-Enabled RAG?
+
+Follow this checklist to upgrade existing RAG configuration to support workflow metadata indexing.
 
 When upgrading existing repos to support workflow indexing:
 
@@ -399,7 +482,9 @@ When upgrading existing repos to support workflow indexing:
 
 ---
 
-## 🎯 Performance Considerations
+## What Are RAG Performance Considerations?
+
+Performance targets ensure RAG remains responsive and efficient for AI agent usage.
 
 ### Incremental Updates
 
@@ -436,26 +521,43 @@ class WorkflowEngine:
 
 ---
 
-## 📚 Related Standards
+## 🔍 When to Query This Standard
 
-- [Workflow System Overview](workflow-system-overview.md) - Complete workflow system guide
-- [MCP Usage Guide](../../usage/mcp-usage-guide.md) - Using MCP tools
-- [Workflow Metadata Guide](../../../mcp_server/WORKFLOW_METADATA_GUIDE.md) - Creating metadata
+| Situation | Example Query |
+|-----------|---------------|
+| **Configuring RAG** | `search_standards("MCP RAG configuration")` |
+| **Workflow indexing** | `search_standards("workflow metadata indexing")` |
+| **File watcher setup** | `search_standards("file watcher RAG")` |
+| **Vector index** | `search_standards("configure vector index")` |
+| **Embedding models** | `search_standards("embedding configuration")` |
+| **RAG performance** | `search_standards("RAG performance")` |
+| **Testing RAG** | `search_standards("test RAG configuration")` |
+| **Migration** | `search_standards("migrate RAG configuration")` |
 
 ---
 
-## 🔍 Querying This Document
+## 🔗 Related Standards
 
-```python
-# Configuration questions
-await search_standards("How do I configure MCP RAG for workflows?")
+**Query workflow for complete RAG configuration:**
 
-# Troubleshooting
-await search_standards("Why aren't my workflows being indexed?")
+1. **Start with RAG config** → `search_standards("MCP RAG configuration")` (this document)
+2. **Understand workflow system** → `search_standards("workflow system overview")` → `standards/workflows/workflow-system-overview.md`
+3. **Learn workflow metadata** → `search_standards("workflow metadata")` → `standards/workflows/workflow-metadata-standards.md`
+4. **Use MCP tools** → `search_standards("MCP usage guide")` → `usage/mcp-usage-guide.md`
 
-# Setup guidance
-await search_standards("What directories does RAG index?")
-```
+**By Category:**
+
+**Workflows:**
+- `standards/workflows/workflow-system-overview.md` - Complete workflow system → `search_standards("workflow system overview")`
+- `standards/workflows/workflow-metadata-standards.md` - metadata.json structure → `search_standards("workflow metadata")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+
+**Usage:**
+- `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`
+- `usage/operating-model.md` - Agent OS operating model → `search_standards("Agent OS operating model")`
+
+**AI Assistant:**
+- `standards/ai-assistant/rag-content-authoring.md` - Writing discoverable content → `search_standards("RAG content authoring")`
 
 ---
 

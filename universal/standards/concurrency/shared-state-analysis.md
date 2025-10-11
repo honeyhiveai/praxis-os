@@ -2,6 +2,60 @@
 
 **Timeless approach to identifying and managing shared state in concurrent systems.**
 
+**Keywords for search**: shared state, shared mutable state, concurrent access, thread safety, state classification, local state, immutable state, shared state analysis, concurrency bugs, data flow analysis, escape analysis
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Core Principle:** Shared mutable state is the root of most concurrency bugs.
+
+**Three Categories of State:**
+1. **Local State** (Safe) - Owned by single context, never shared
+2. **Shared Immutable State** (Safe) - Shared but read-only
+3. **Shared Mutable State** (DANGER!) - Shared AND can be modified
+
+**Three Key Questions:**
+1. **Is it shared?** Can multiple contexts access it?
+2. **Is it mutable?** Can it be modified after creation?
+3. **Is access synchronized?** Is there proper synchronization?
+
+**Four Refactoring Strategies:**
+1. **Eliminate Sharing** - Make state local
+2. **Make Immutable** - Copy-on-write, frozen data structures
+3. **Add Synchronization** - Locks, atomics, channels
+4. **Use Message Passing** - No shared state, communicate via messages
+
+**Common Patterns:**
+- **Read-Heavy State** → Read-write lock or immutable copy-on-write
+- **Accumulator (Counter)** → Atomic operations or thread-local aggregation
+- **Lazy Initialization** → Double-checked locking or Once/Call-Once
+- **Producer-Consumer** → Thread-safe queue
+
+**Analysis Techniques:**
+- Data flow analysis (where created, modified, accessed)
+- Happens-before analysis (guaranteed ordering)
+- Escape analysis (does local data become shared)
+
+---
+
+## Questions This Answers
+
+- "What is shared state?"
+- "How to identify shared state in my code?"
+- "What's the difference between local, shared immutable, and shared mutable state?"
+- "How to analyze if state is thread-safe?"
+- "What patterns indicate shared mutable state?"
+- "How to refactor to eliminate shared state?"
+- "When to use locks vs immutability vs message passing?"
+- "What is escape analysis?"
+- "How to test for shared state issues?"
+- "What is happens-before analysis?"
+- "How to identify race conditions from shared state?"
+- "What are best practices for managing shared state?"
+
+---
+
 ## What is Shared State?
 
 Shared state is data that can be accessed or modified by multiple execution contexts (threads, processes, goroutines, async tasks) concurrently.
@@ -10,7 +64,7 @@ Shared state is data that can be accessed or modified by multiple execution cont
 
 ---
 
-## The Three Categories of State
+## How to Classify State? (Three Categories)
 
 ```
 State Classification:
@@ -96,7 +150,7 @@ def increment():
 
 ---
 
-## Identifying Shared State
+## How to Identify Shared State?
 
 ### Question 1: Is it Shared?
 
@@ -166,7 +220,7 @@ class SafeCounter:
 
 ---
 
-## Shared State Patterns
+## What Common Shared State Patterns Exist?
 
 ### Pattern 1: Read-Heavy Shared State
 
@@ -344,7 +398,7 @@ def consumer():
 
 ---
 
-## Analysis Techniques
+## What Analysis Techniques Should I Use?
 
 ### Technique 1: Data Flow Analysis
 
@@ -424,7 +478,7 @@ def process(callback):
 
 ---
 
-## Refactoring Strategies
+## How to Refactor Shared State?
 
 ### Strategy 1: Eliminate Sharing
 
@@ -548,7 +602,7 @@ class Counter:
 
 ---
 
-## Testing for Shared State Issues
+## How to Test for Shared State Issues?
 
 ### Test 1: Stress Test
 
@@ -592,7 +646,7 @@ def test_concurrent_increment():
 
 ---
 
-## Best Practices Summary
+## What Are Shared State Best Practices?
 
 ### 1. Minimize Shared State
 - Prefer local variables
@@ -621,7 +675,7 @@ def test_concurrent_increment():
 
 ---
 
-## Checklist for Code Review
+## What Should I Check in Code Review?
 
 When reviewing code for shared state issues:
 
@@ -646,6 +700,72 @@ When reviewing code for shared state issues:
 - See `.agent-os/standards/development/rust-concurrency.md` (Rust: ownership, Send/Sync traits)
 - See `.agent-os/standards/development/java-concurrency.md` (Java: synchronized, volatile, concurrent collections)
 - Etc.
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Starting Concurrent Code Design**
+   - Situation: Planning multi-threaded architecture
+   - Query: `search_standards("how to identify shared state")`
+
+2. **Code Review for Concurrency**
+   - Situation: Reviewing code that uses threads/async
+   - Query: `search_standards("shared state analysis checklist")`
+
+3. **Debugging Concurrency Bugs**
+   - Situation: Intermittent failures, race conditions suspected
+   - Query: `search_standards("shared mutable state patterns")`
+
+4. **Refactoring to Improve Thread Safety**
+   - Situation: Have shared state, want to eliminate or protect it
+   - Query: `search_standards("how to refactor shared state")`
+
+5. **Choosing Synchronization Approach**
+   - Situation: Deciding between locks, immutability, message passing
+   - Query: `search_standards("shared state refactoring strategies")`
+
+6. **Understanding Concurrency Failures**
+   - Situation: "Why is my concurrent code breaking?"
+   - Query: `search_standards("shared mutable state root cause")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Identify shared state | `search_standards("how to identify shared state")` |
+| Classify state safety | `search_standards("local vs shared state")` |
+| Refactor away sharing | `search_standards("eliminate shared state")` |
+| Add synchronization | `search_standards("synchronize shared state")` |
+| Test concurrency | `search_standards("test shared state issues")` |
+| Code review checklist | `search_standards("shared state code review")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Concurrency Standards:**
+- `standards/concurrency/race-conditions.md` - Race conditions from unsynchronized shared state
+  → `search_standards("race condition prevention")`
+- `standards/concurrency/deadlocks.md` - Deadlocks from improper lock ordering
+  → `search_standards("deadlock prevention")`
+- `standards/concurrency/locking-strategies.md` - Choosing locks to protect shared state
+  → `search_standards("locking strategies")`
+
+**Testing Standards:**
+- `standards/testing/integration-testing.md` - Testing concurrent code with shared state
+  → `search_standards("integration testing concurrency")`
+
+**Query workflow for managing shared state:**
+1. **Identify**: `search_standards("how to identify shared state")` → Find all shared data
+2. **Classify**: Determine if local, shared immutable, or shared mutable
+3. **Analyze**: `search_standards("escape analysis")` → Check if local data escapes
+4. **Choose Strategy**: `search_standards("how to refactor shared state")` → Eliminate, immutabilize, or synchronize
+5. **Implement**: Apply chosen strategy (locks, atomics, immutable structures)
+6. **Test**: `search_standards("test shared state issues")` → Stress test with concurrency
+7. **Review**: `search_standards("shared state code review")` → Validate with checklist
 
 ---
 

@@ -37,7 +37,7 @@ import subprocess
 import threading
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 
 import lancedb
 
@@ -90,6 +90,7 @@ class RAGEngine:
         self._rebuilding = threading.Event()  # Signal when rebuild in progress
 
         # Initialize embedding model
+        self.local_model: Any = None
         if self.embedding_provider == "local":
             from sentence_transformers import SentenceTransformer
 
@@ -303,13 +304,14 @@ class RAGEngine:
             if self.local_model is None:
                 raise RuntimeError("Local embedding model not initialized")
             embedding = self.local_model.encode(text, convert_to_numpy=True)
-            return embedding.tolist()
+            return cast(List[float], embedding.tolist())
 
         if self.embedding_provider == "openai":
             import openai
 
             response = openai.embeddings.create(model=self.embedding_model, input=text)
-            return response.data[0].embedding
+            # OpenAI SDK returns embedding as list[float] but type-stubbed as Any
+            return response.data[0].embedding  # type: ignore[no-any-return]
 
         raise ValueError(f"Unknown embedding provider: {self.embedding_provider}")
 
@@ -377,7 +379,10 @@ class RAGEngine:
                 if len(chunks) >= n_results:
                     break
 
-            total_tokens = sum(c["token_count"] for c in chunks)
+            total_tokens = sum(
+                int(c["token_count"]) if isinstance(c["token_count"], (int, str)) else 0
+                for c in chunks
+            )
 
             return SearchResult(
                 chunks=chunks[:n_results],
@@ -431,6 +436,7 @@ class RAGEngine:
         if cache_key not in self._query_cache:
             return None
 
+        result: SearchResult
         result, timestamp = self._query_cache[cache_key]
 
         # Check if expired

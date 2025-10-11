@@ -121,7 +121,12 @@ addopts = [
 markers = [
     "unit: Unit tests (fast, isolated)",
     "integration: Integration tests (slower, real dependencies)",
+    "asyncio: Async tests using pytest-asyncio",
+    "browser: Tests requiring real browser installation (Playwright)",
 ]
+
+[tool.pytest_asyncio]
+asyncio_mode = "auto"
 
 [tool.coverage.run]
 source = ["mcp_server"]

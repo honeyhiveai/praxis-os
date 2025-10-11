@@ -4,6 +4,73 @@
 
 ---
 
+## 🎯 TL;DR - Standards Creation Quick Reference
+
+**Keywords for search**: standards creation, creating standards, standards process, how to write standards, standards structure, standards template, standards quality, maintaining standards
+
+**Core Principle:** Standards define "how to work" guidelines that shape AI agent behavior and code quality. Create them when you need reusable, consistent processes.
+
+**When to Create a Standard:**
+- ✅ Process/methodology needs consistency
+- ✅ Quality criteria needs definition
+- ✅ Best practices need documentation
+- ✅ Constraints/rules need enforcement
+- ❌ NOT for one-time tasks or feature designs (use specs)
+
+**Standard Structure (Required Sections):**
+1. **Purpose** - Why this standard exists (2-3 sentences)
+2. **The Problem** - What happens WITHOUT this standard
+3. **The Standard** - The actual rules/guidelines (specific, actionable)
+4. **Checklist** - Quick validation checklist
+5. **Examples** - Real-world applications
+6. **Anti-Patterns** - Common mistakes to avoid
+
+**Quality Standards:**
+- Specific & actionable (not vague advice)
+- Measurable (can verify compliance)
+- Justified (explains WHY, not just WHAT)
+- Testable (can validate with examples)
+- Discoverable (RAG-optimized with TL;DR, query hooks)
+
+**Creation Workflow:**
+```
+1. Query existing standards → Identify gap
+2. Write Problem → Validate need
+3. Draft Standard → Get feedback
+4. Add examples → Demonstrate application
+5. RAG optimize → Ensure discoverability
+6. Test queries → Validate findability
+```
+
+**Common Mistakes:**
+- ❌ Too vague ("write good code" instead of specific checklist)
+- ❌ No examples (abstract rules without demonstrations)
+- ❌ Not RAG-optimized (hidden, undiscoverable content)
+- ❌ No justification (rules without reasoning)
+
+**Maintenance:**
+- Review quarterly or when issues arise
+- Update based on dogfooding feedback
+- Archive obsolete standards (don't delete)
+- Version changes that impact behavior
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I create a new standard?"
+2. "When should I create a standard?"
+3. "What structure should standards follow?"
+4. "What makes a good standard?"
+5. "How do I maintain standards?"
+6. "What are standards creation anti-patterns?"
+7. "How do I ensure standards are discoverable?"
+8. "What's the difference between standards and specs?"
+9. "How do I validate standard quality?"
+10. "What examples exist of good standards?"
+
+---
+
 ## 🎯 Purpose
 
 Define how to create new standards, when to create them, and how to structure them for maximum effectiveness. Standards are the "how to work" guidelines that shape agent behavior and code quality.
@@ -14,7 +81,9 @@ Define how to create new standards, when to create them, and how to structure th
 
 ---
 
-## 🚨 When to Create a Standard
+## When Should I Create a Standard?
+
+Create a standard when you need reusable, consistent guidelines for recurring processes or behaviors.
 
 Create a standard when you need to define:
 - ✅ **Process/methodology** - How to do something consistently
@@ -37,12 +106,58 @@ Do NOT create a standard for:
 
 ---
 
-## 📋 Standard Structure Template
+## What Structure Should Standards Follow?
+
+All standards must follow this RAG-optimized template structure for consistency and discoverability.
 
 ```markdown
 # [Standard Name]
 
 **[One sentence describing what this standard defines]**
+
+---
+
+## 🎯 TL;DR - [Standard Name] Quick Reference
+
+**Keywords for search**: [primary keyword], [synonym 1], [synonym 2], [natural query phrase 1], [natural query phrase 2], [how to X], [what is X], [when to use X]
+
+**Core Principle:** [The key insight this standard embodies - one clear sentence]
+
+**[The Core Pattern/Process - 3-5 key points]:**
+1. **[First key point]** - [Brief explanation]
+2. **[Second key point]** - [Brief explanation]
+3. **[Third key point]** - [Brief explanation]
+
+**[Main Checklist Name]:**
+- [ ] [Most critical criterion 1]
+- [ ] [Most critical criterion 2]
+- [ ] [Most critical criterion 3]
+- [ ] [Most critical criterion 4]
+
+**Common Anti-Patterns:**
+- ❌ [Anti-pattern 1]
+- ❌ [Anti-pattern 2]
+- ❌ [Anti-pattern 3]
+
+**When to Query This Standard:**
+- [Scenario 1] → `search_standards("[query phrase 1]")`
+- [Scenario 2] → `search_standards("[query phrase 2]")`
+- [Scenario 3] → `search_standards("[query phrase 3]")`
+
+---
+
+## ❓ Questions This Answers
+
+1. "[Question phrased as agent would ask it]"
+2. "[Another natural language question]"
+3. "[How to do X?]"
+4. "[What is Y?]"
+5. "[When should I Z?]"
+6. "[Why does W matter?]"
+7. "[What are X anti-patterns?]"
+8. "[How to validate X?]"
+9. "[What examples exist for X?]"
+10. "[How to avoid common mistakes in X?]"
 
 ---
 
@@ -54,18 +169,23 @@ Do NOT create a standard for:
 
 ---
 
-## 🚨 The Problem
+## Why [Standard Topic] Matters - The Problem
 
 [Describe what happens WITHOUT this standard]
 
 **Example of the problem:**
 [Concrete scenario showing the pain point]
 
+**Impact:**
+- ❌ [Negative outcome 1]
+- ❌ [Negative outcome 2]
+- ❌ [Negative outcome 3]
+
 ---
 
-## ✅ The Standard
+## What Is [The Standard]?
 
-### [Principle/Rule 1]
+### [Principle/Rule 1 - Phrased as Question]
 
 **What to do:**
 [Clear, actionable guidance]
@@ -83,34 +203,35 @@ Do NOT create a standard for:
 [Code/text showing what NOT to do]
 ```
 
-### [Principle/Rule 2]
+### [Principle/Rule 2 - Phrased as Question]
 
 [Repeat structure]
 
 ---
 
-## 📋 Checklist
+## What Is the [Standard Topic] Checklist?
 
 When [doing the thing this standard covers]:
 
 - [ ] [Criterion 1]
 - [ ] [Criterion 2]
 - [ ] [Criterion 3]
+- [ ] [Criterion 4]
 
 ---
 
-## 📚 Examples
+## What Are [Standard Topic] Examples?
 
 ### Example 1: [Scenario]
 
 **Context**: [Situation]
 
-**Bad** (violates standard):
+**❌ Bad** (violates standard):
 ```
 [Example of violation]
 ```
 
-**Good** (follows standard):
+**✅ Good** (follows standard):
 ```
 [Example of compliance]
 ```
@@ -119,7 +240,7 @@ When [doing the thing this standard covers]:
 
 ---
 
-## 🚫 Anti-Patterns
+## What Are [Standard Topic] Anti-Patterns?
 
 ### Anti-Pattern 1: [Common mistake]
 
@@ -133,9 +254,11 @@ When [doing the thing this standard covers]:
 [Correct approach]
 ```
 
+**Why it fails:** [Explanation of the problem]
+
 ---
 
-## 📞 Questions?
+## ❓ Frequently Asked Questions
 
 **[Common question 1]?**
 → [Answer]
@@ -145,7 +268,35 @@ When [doing the thing this standard covers]:
 
 ---
 
-**Related Standards:**
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **[Scenario 1]** | `search_standards("[natural query 1]")` |
+| **[Scenario 2]** | `search_standards("[natural query 2]")` |
+| **[Scenario 3]** | `search_standards("[natural query 3]")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for [topic] mastery:**
+
+1. **Start with [this standard]** → `search_standards("[topic]")` (this document)
+2. **Learn [related topic 1]** → `search_standards("[related topic 1]")` → `standards/[path]/[file].md`
+3. **Understand [related topic 2]** → `search_standards("[related topic 2]")` → `standards/[path]/[file].md`
+
+**By Category:**
+
+**[Category 1]:**
+- `standards/[path]/[file].md` - [Description] → `search_standards("[query]")`
+
+**[Category 2]:**
+- `standards/[path]/[file].md` - [Description] → `search_standards("[query]")`
+
+---
+
+**Related Standards (Legacy format - update to above):**
 - [Related standard 1]
 - [Related standard 2]
 
@@ -161,7 +312,9 @@ search_standards("[natural language query]")
 
 ---
 
-## 🔄 Standards Creation Workflow
+## How to Create a New Standard (Step-by-Step)?
+
+Complete workflow from identifying a gap through validation and publication.
 
 ### Step 1: Identify the Gap
 
@@ -200,17 +353,38 @@ search_standards("[related concept] guidelines")
 - Anti-patterns documented
 - RAG-optimized for discoverability (follow rag-content-authoring.md)
 
-### Step 4: Test Discoverability
+### Step 4: Test Discoverability (Multi-Angle)
+
+**CRITICAL: Test from 5+ different perspectives to ensure comprehensive discoverability**
 
 ```python
-# Test if agents can find your standard
-search_standards("how to [do what standard covers]")
-search_standards("[natural question about topic]")
+# Test multi-angle discovery (thorough, systematic approach)
 
-# Should return your new standard in top 3-5 results
+# Angle 1: Direct "how to" query
+search_standards("how to [do what standard covers]")
+
+# Angle 2: "What is" conceptual query  
+search_standards("what is [main concept]")
+
+# Angle 3: Best practices query
+search_standards("[topic] best practices")
+
+# Angle 4: Problem-solving query
+search_standards("when should I [use this]")
+
+# Angle 5: Anti-pattern query
+search_standards("[topic] anti-patterns")
+
+# Should return your new standard in top 3 results for ALL angles
 ```
 
-If not discoverable, add query hooks and keywords.
+**If not discoverable from ALL angles:**
+- Add more query hooks covering missing angles
+- Increase keyword density for underperforming queries
+- Add explicit "Questions This Answers" entries for missing angles
+- Update headers to include missing query phrasings
+
+**Validation criteria:** Content MUST return in top 3 for minimum 5 different natural query phrasings.
 
 ### Step 5: Place in Correct Directory
 
@@ -258,23 +432,34 @@ search_standards("[your standard topic]")
 
 ---
 
-## ✅ Quality Standards for Standards
+## What Makes a Good Standard?
+
+Quality standards ensure standards are effective, usable, and discoverable.
 
 A good standard must:
 
 - [ ] **Solve a real problem** - Based on actual experience, not theoretical
 - [ ] **Be actionable** - Clear what to do, not vague philosophy
 - [ ] **Include examples** - Show good vs bad concretely
-- [ ] **Be discoverable** - Returns for natural queries (RAG-optimized)
+- [ ] **Be RAG-optimized** - Returns in top 3 for natural queries from 5+ angles:
+  - [ ] Has TL;DR section first with high keyword density
+  - [ ] Has "Questions This Answers" section (10+ questions)
+  - [ ] Uses query-oriented headers ("How to X?" not "Usage")
+  - [ ] Has "When to Query This Standard" table with example queries
+  - [ ] Has "Keywords for search" line with explicit search terms
+  - [ ] Has cross-references with query patterns, not just file links
+  - [ ] Tested and discoverable from minimum 5 different query phrasings
 - [ ] **Have checklist** - Concrete compliance criteria
 - [ ] **Document anti-patterns** - Show common mistakes
-- [ ] **Link to related standards** - Part of coherent system
+- [ ] **Link to related standards** - Part of coherent system with query workflows
 - [ ] **Be maintainable** - Single source of truth, no duplication
 - [ ] **Be testable** - Can verify compliance programmatically
 
 ---
 
-## 🚫 Anti-Patterns in Standards Creation
+## What Standards Creation Anti-Patterns Should I Avoid?
+
+These common mistakes reduce standard effectiveness. Recognize and avoid them.
 
 ### Anti-Pattern 1: Vague Philosophy
 
@@ -326,13 +511,88 @@ search_standards("[topic you're covering]")
 
 **Wrong**: Writing for human readers who will read top-to-bottom
 
-**Right**: Writing for AI agents who will query with natural language
+```markdown
+# My Standard
 
-**Follow**: `standards/documentation/rag-content-authoring.md`
+## Introduction
+[Long introduction...]
+
+## Background
+[Historical context...]
+
+## The Actual Content
+[Useful stuff buried on line 300]
+```
+
+**Why it fails:**
+- AI queries won't return relevant chunks
+- Critical info buried too deep
+- No query hooks for discovery
+- Generic headers don't rank
+- Not testable for discoverability
+
+**Right**: Writing for AI agents with RAG optimization
+
+```markdown
+# My Standard
+
+## 🎯 TL;DR - My Standard Quick Reference
+
+**Keywords for search**: [topic], [how to X], [what is Y]
+
+**Core Principle:** [One sentence]
+
+**[Key Points]:**
+1. Point 1
+2. Point 2
 
 ---
 
-## 📚 Examples of Good Standards
+## ❓ Questions This Answers
+
+1. "How to do X?"
+2. "What is Y?"
+...
+
+---
+
+## 🎯 Purpose
+
+[Content continues with query-oriented headers...]
+
+## What Is [Topic]?
+## How to [Action]?
+## What Are [Topic] Examples?
+```
+
+**Requirements (ALL must be met):**
+- [ ] **TL;DR section first** - High keyword density, front-loaded critical info
+- [ ] **"Questions This Answers" section** - 10+ natural language questions
+- [ ] **Query-oriented headers** - "How to X?" not "Usage", "What is Y?" not "Overview"
+- [ ] **"When to Query This Standard" table** - Scenarios with example queries
+- [ ] **Cross-references with queries** - `search_standards("[topic]")` not just file links
+- [ ] **Keywords for search line** - Explicit list of search terms
+- [ ] **Multi-angle tested** - Verified discoverable from 5+ different query phrasings
+
+**Follow**: `standards/ai-assistant/rag-content-authoring.md`
+
+**Test with:**
+```python
+# Test 5+ different angles
+search_standards("how to [primary approach]")
+search_standards("what is [main concept]")
+search_standards("[action] best practices")
+search_standards("when should I [scenario]")
+search_standards("[topic] anti-patterns")
+```
+
+**If content doesn't return in top 3 for ALL test queries → Not properly optimized**
+
+---
+
+## What Examples of Good Standards Exist?
+
+Learn from these exemplar Agent OS standards that demonstrate best practices.
 
 Study these as templates:
 
@@ -343,7 +603,9 @@ Study these as templates:
 
 ---
 
-## 🔄 Maintaining Standards
+## How to Maintain Standards?
+
+Standards require ongoing maintenance to remain effective and relevant.
 
 ### When to Update Standards
 
@@ -389,7 +651,9 @@ If standard is obsolete:
 
 ---
 
-## 📊 Standards Metrics
+## How to Measure Standard Effectiveness?
+
+Track these metrics to measure standard adoption and effectiveness.
 
 Track effectiveness:
 
@@ -425,17 +689,45 @@ Track effectiveness:
 
 ---
 
-**Related Standards:**
-- `standards/documentation/rag-content-authoring.md` - How to make standards discoverable
-- `standards/meta-framework/command-language.md` - Command language for frameworks
-- `standards/meta-framework/three-tier-architecture.md` - Framework architecture
+## 🔍 When to Query This Standard
 
-**Query anytime:**
-```python
-search_standards("how to create a standard")
-search_standards("standards creation process")
-search_standards("when to write a standard vs spec")
-```
+| Situation | Example Query |
+|-----------|---------------|
+| **Creating standard** | `search_standards("how to create standard")` |
+| **Standard structure** | `search_standards("standard structure template")` |
+| **Quality criteria** | `search_standards("what makes good standard")` |
+| **When to create** | `search_standards("when to write standard")` |
+| **Standards vs specs** | `search_standards("standard vs spec")` |
+| **Maintenance** | `search_standards("maintain standards")` |
+| **Anti-patterns** | `search_standards("standards creation mistakes")` |
+| **Examples** | `search_standards("good standard examples")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for creating standards:**
+
+1. **Start with creation process** → `search_standards("how to create standard")` (this document)
+2. **Learn RAG optimization** → `search_standards("RAG content authoring")` → `standards/documentation/rag-content-authoring.md`
+3. **Understand specs** → `search_standards("creating specs")` → `usage/creating-specs.md`
+4. **Learn command language** → `search_standards("command language")` → `standards/meta-framework/command-language.md`
+
+**By Category:**
+
+**Documentation:**
+- `standards/documentation/rag-content-authoring.md` - RAG optimization → `search_standards("RAG content authoring")`
+- `standards/documentation/readme-templates.md` - README patterns → `search_standards("README templates")`
+- `standards/documentation/code-comments.md` - Comment guidelines → `search_standards("code comments")`
+
+**Meta-Framework:**
+- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-framework/three-tier-architecture.md` - Content organization → `search_standards("three tier architecture")`
+- `standards/meta-framework/validation-gates.md` - Quality gates → `search_standards("validation gates")`
+
+**Usage:**
+- `usage/creating-specs.md` - Spec creation guide → `search_standards("creating specs")`
+- `usage/operating-model.md` - Agent OS principles → `search_standards("operating model")`
 
 ---
 

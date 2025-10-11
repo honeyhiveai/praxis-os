@@ -4,13 +4,78 @@
 
 ---
 
+## 🎯 TL;DR - Workflow Metadata Quick Reference
+
+**Keywords for search**: workflow metadata, metadata.json, workflow discovery, workflow schema, metadata validation, workflow phases, workflow indexing, RAG workflow discovery
+
+**Core Principle:** metadata.json files enable AI agents to discover, plan, and execute workflows via semantic search.
+
+**File Location:**
+```
+universal/workflows/{workflow_name}/metadata.json
+```
+
+**Required Root Fields:**
+- `workflow_type`: Unique identifier (e.g., "test_generation_v3")
+- `version`: Semantic version (e.g., "3.0.0")
+- `description`: Human-readable purpose
+- `total_phases`: Number of phases
+- `estimated_duration`: Expected total time
+- `primary_outputs`: Key deliverables array
+- `phases`: Array of phase objects
+
+**Required Phase Fields:**
+- `phase_number`: 0-based identifier
+- `phase_name`: Human-readable name
+- `purpose`: What phase accomplishes
+- `estimated_effort`: Expected phase duration
+- `key_deliverables`: Phase outputs array
+- `validation_criteria`: Success criteria array
+
+**Quality Standards:**
+- ✅ Searchable descriptions (natural language, keyword-rich)
+- ✅ Specific validation criteria (measurable, actionable)
+- ✅ Realistic effort estimates (based on actual usage)
+- ✅ Clear deliverables (tangible outputs)
+
+**Validation:**
+```bash
+# Validate metadata.json syntax and required fields
+python scripts/validate_workflow_metadata.py universal/workflows/{workflow_name}
+```
+
+**Common Mistakes:**
+- ❌ Vague descriptions ("Process data" instead of "Analyze Python AST for test generation")
+- ❌ Missing validation criteria
+- ❌ Generic phase names ("Step 1" instead of "Code Analysis")
+- ❌ Wrong file location (not in universal/workflows/)
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I create workflow metadata?"
+2. "What fields are required in metadata.json?"
+3. "Where should metadata.json be located?"
+4. "How do I make workflows discoverable?"
+5. "What are workflow metadata quality standards?"
+6. "How do I validate workflow metadata?"
+7. "What are common metadata mistakes?"
+8. "How do I write searchable descriptions?"
+9. "What naming conventions should I use?"
+10. "How do workflows get indexed by RAG?"
+
+---
+
 ## 🎯 Purpose
 
 This document defines standards for workflow metadata files that enable semantic discovery, AI planning, and proper workflow execution.
 
 ---
 
-## 📋 Metadata Schema (Required Fields)
+## What Is the Workflow Metadata Schema?
+
+The metadata schema defines the required structure for metadata.json files that enable workflow discovery and execution.
 
 ### Complete Schema
 
@@ -62,7 +127,9 @@ This document defines standards for workflow metadata files that enable semantic
 
 ---
 
-## 📍 File Location
+## Where Should metadata.json Be Located?
+
+File location is critical for workflow discovery via RAG indexing. metadata.json must be in the correct directory to be indexed.
 
 ### Standard Location
 
@@ -93,7 +160,9 @@ mcp_server/workflows/                   # Not in workflows directory
 
 ---
 
-## ✅ Metadata Quality Standards
+## What Are Metadata Quality Standards?
+
+Quality standards ensure metadata is discoverable, actionable, and accurately represents workflow capabilities.
 
 ### 1. Phase Numbering
 
@@ -199,7 +268,9 @@ mcp_server/workflows/                   # Not in workflows directory
 
 ---
 
-## 🎨 Naming Conventions
+## What Naming Conventions Should I Use?
+
+Naming conventions ensure consistency and discoverability across all workflows.
 
 ### Workflow Type
 
@@ -236,7 +307,9 @@ Examples:
 
 ---
 
-## 🔍 Searchability Standards
+## How Do AI Agents Discover Workflows?
+
+Searchability standards ensure workflows are discoverable via natural language queries through RAG semantic search.
 
 ### Keywords to Include
 
@@ -270,7 +343,9 @@ await search_standards("Automated test generation with validation")
 
 ---
 
-## 📊 Example: Complete Metadata File
+## What Does a Complete Metadata File Look Like?
+
+Real-world example demonstrating all required fields and quality standards.
 
 ```json
 {
@@ -328,7 +403,9 @@ await search_standards("Automated test generation with validation")
 
 ---
 
-## ⚠️ Common Mistakes
+## What Common Metadata Mistakes Should I Avoid?
+
+These common mistakes break workflow discovery or reduce metadata quality. Recognize and fix them.
 
 ### Mistake 1: Incomplete Phase Definitions
 
@@ -385,7 +462,9 @@ await search_standards("Automated test generation with validation")
 
 ---
 
-## 🧪 Validation Checklist
+## How to Validate Workflow Metadata?
+
+Validation ensures metadata meets all quality standards and is properly structured for indexing.
 
 Before committing metadata.json:
 
@@ -442,26 +521,40 @@ def validate_workflow_metadata(metadata_path: Path) -> bool:
 
 ---
 
-## 📚 Related Standards
+## 🔍 When to Query This Standard
 
-- [Workflow System Overview](workflow-system-overview.md) - Complete workflow system
-- [MCP RAG Configuration](mcp-rag-configuration.md) - How metadata is indexed
-- [Workflow Metadata Guide](../../../mcp_server/WORKFLOW_METADATA_GUIDE.md) - Technical implementation
+| Situation | Example Query |
+|-----------|---------------|
+| **Creating workflow** | `search_standards("workflow metadata")` |
+| **Required fields** | `search_standards("workflow metadata schema")` |
+| **File location** | `search_standards("where workflow metadata")` |
+| **Making discoverable** | `search_standards("workflow discovery")` |
+| **Quality standards** | `search_standards("workflow metadata quality")` |
+| **Validation** | `search_standards("validate workflow metadata")` |
+| **Naming conventions** | `search_standards("workflow naming")` |
+| **Searchability** | `search_standards("searchable workflow descriptions")` |
 
 ---
 
-## 🔍 Querying This Document
+## 🔗 Related Standards
 
-```python
-# Metadata creation questions
-await search_standards("How do I create workflow metadata?")
+**Query workflow for creating workflow metadata:**
 
-# Schema questions
-await search_standards("What fields are required in workflow metadata?")
+1. **Start with metadata standards** → `search_standards("workflow metadata")` (this document)
+2. **Understand workflow system** → `search_standards("workflow system overview")` → `standards/workflows/workflow-system-overview.md`
+3. **Learn RAG indexing** → `search_standards("MCP RAG configuration")` → `standards/workflows/mcp-rag-configuration.md`
+4. **Learn construction standards** → `search_standards("workflow construction")` → `standards/workflows/workflow-construction-standards.md`
 
-# Quality standards
-await search_standards("How should I write validation criteria?")
-```
+**By Category:**
+
+**Workflows:**
+- `standards/workflows/workflow-system-overview.md` - Complete workflow system → `search_standards("workflow system overview")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/workflows/mcp-rag-configuration.md` - RAG indexing → `search_standards("MCP RAG configuration")`
+
+**Meta-Framework:**
+- `standards/meta-framework/validation-gates.md` - Checkpoint criteria → `search_standards("validation gates")`
+- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
 
 ---
 

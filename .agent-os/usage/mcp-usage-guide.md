@@ -2,6 +2,44 @@
 
 **Guide for using Model Context Protocol (MCP) tools in Agent OS projects.**
 
+**Keywords for search**: MCP tools, Model Context Protocol, how to use MCP tools, search_standards, start_workflow, workflow tools, MCP usage, semantic search, phase gating, tool discovery
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**What is MCP?** Model Context Protocol - standardized interface for AI assistants to access tools and information.
+
+**8 Core MCP Tools:**
+1. **`search_standards`** - Semantic search over Agent OS docs (use 5-10+ times per task)
+2. **`start_workflow`** - Initialize phase-gated workflows
+3. **`get_current_phase`** - Retrieve current workflow phase
+4. **`get_task`** - Get specific task details (NEW in v1.3.0)
+5. **`complete_phase`** - Submit evidence and advance
+6. **`get_workflow_state`** - Check workflow progress
+7. **`create_workflow`** - Generate new workflow frameworks
+8. **`current_date`** - Get current date/time
+
+**Critical Rules:**
+- ✅ **NEVER bypass MCP** - Always use `search_standards()`, never `read_file()` for standards
+- ✅ **Query liberally** - 5-10+ queries per task, not just once
+- ✅ **Follow phase gating** - Use workflows for structured tasks
+
+---
+
+## Questions This Answers
+
+- "How do I use MCP tools in Agent OS?"
+- "What is the Model Context Protocol?"
+- "How do I search for standards using MCP?"
+- "How do I start a workflow?"
+- "What MCP tools are available?"
+- "Should I use read_file or search_standards?"
+- "How do I get workflow tasks?"
+- "How do I complete a workflow phase?"
+- "What is phase gating?"
+- "How often should I query standards?"
+
 ---
 
 ## 🎯 What Is MCP?
@@ -419,9 +457,71 @@ When in a workflow:
 
 ---
 
-##📞 Questions?
+## When to Query This Guide
 
-- **Tool behavior**: Query MCP: `"mcp tool routing guide"`
+This guide is most valuable when:
+
+1. **Starting to Use MCP Tools**
+   - Situation: First time using Agent OS MCP tools
+   - Query: `search_standards("how to use MCP tools")`
+
+2. **Choosing Between Tools**
+   - Situation: Not sure which MCP tool to use
+   - Query: `search_standards("MCP tools available")`
+
+3. **Workflow Questions**
+   - Situation: Need to understand workflow execution
+   - Query: `search_standards("how to start workflow")`
+
+4. **Search vs Read File**
+   - Situation: Unsure if I should use `search_standards` or `read_file`
+   - Query: `search_standards("search_standards vs read_file")`
+
+5. **Phase Gating Questions**
+   - Situation: Understanding workflow phase progression
+   - Query: `search_standards("workflow phase gating")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| MCP overview | `search_standards("what is MCP")` |
+| Available tools | `search_standards("MCP tools available")` |
+| Search standards | `search_standards("how to use search_standards")` |
+| Start workflow | `search_standards("how to start workflow")` |
+| Complete phase | `search_standards("how to complete workflow phase")` |
+
+---
+
+## Cross-References and Related Guides
+
+**Core Orientation:**
+- `usage/ai-agent-quickstart.md` - Practical examples of using MCP tools
+  → `search_standards("AI agent quickstart")`
+- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - MCP in context of Agent OS principles
+  → `search_standards("Agent OS orientation")`
+
+**Workflows:**
+- `workflows/spec_execution_v1/` - Example of phase-gated workflow
+  → `search_standards("spec execution workflow")`
+- `workflows/test_generation_v3/` - Test generation workflow
+  → `search_standards("test generation workflow")`
+
+**Standards:**
+- `standards/documentation/rag-content-authoring.md` - How content is optimized for search
+  → `search_standards("RAG content authoring")`
+
+**Query workflow:**
+1. **First Use**: `search_standards("how to use MCP tools")` → Learn tool basics
+2. **During Work**: Use `search_standards()` liberally (5-10+ times per task)
+3. **Workflows**: `search_standards("how to start workflow")` → Execute structured tasks
+4. **Troubleshooting**: `search_standards("MCP tool usage")` → Resolve issues
+
+---
+
+## 📞 Questions?
+
+- **Tool behavior**: Query MCP: `search_standards("mcp tool routing guide")`
 - **Standards access**: Use `search_standards` with your question
 - **Workflow help**: Read workflow entry point (via `get_current_phase`)
 

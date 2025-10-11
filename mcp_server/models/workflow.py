@@ -380,7 +380,7 @@ class WorkflowMetadata:
 
     def to_dict(self) -> Dict[str, Any]:
         """Serialize to dictionary."""
-        result = {
+        result: Dict[str, Any] = {
             "workflow_type": self.workflow_type,
             "version": self.version,
             "description": self.description,

@@ -50,8 +50,8 @@ def parse_markdown_headers(content: str) -> List[Dict[str, Any]]:
     Returns:
         List of sections with header level, text, and content
     """
-    sections = []
-    current_section = None
+    sections: List[Dict[str, Any]] = []
+    current_section: Optional[Dict[str, Any]] = None
 
     for line in content.split("\n"):
         # Dynamic header detection: analyze line structure
@@ -297,7 +297,7 @@ class AgentOSChunker:
             elif "code-generation" in part:
                 remaining = path_parts[i + 1 :]
                 if remaining:
-                    return remaining[0]
+                    return str(remaining[0])
 
         return "general"
 

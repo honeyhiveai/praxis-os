@@ -240,7 +240,9 @@ class TestDelegationToSession:
 
         # Verify
         mock_method.assert_called_once()
-        assert result == {"phase": 0, "content": "test"}
+        # Check that core fields are present (may have additional workflow metadata)
+        assert result["phase"] == 0
+        assert result["content"] == "test"
 
     def test_get_task_delegates(self, engine, mock_state_manager, sample_state):
         """Test get_task delegates to session."""
@@ -254,7 +256,8 @@ class TestDelegationToSession:
 
         # Verify
         mock_method.assert_called_once_with(0, 1)
-        assert result == {"task": "test task"}
+        # Check that core field is present (may have additional workflow metadata)
+        assert result["task"] == "test task"
 
     def test_complete_phase_delegates(self, engine, mock_state_manager, sample_state):
         """Test complete_phase delegates to session."""

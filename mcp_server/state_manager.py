@@ -473,7 +473,7 @@ class StateManager:
         all_sessions = self.list_sessions()
         active_sessions = [s for s in all_sessions if not s.is_complete()]
 
-        workflow_counts = {}
+        workflow_counts: Dict[str, int] = {}
         for session in all_sessions:
             workflow_type = session.workflow_type
             workflow_counts[workflow_type] = workflow_counts.get(workflow_type, 0) + 1

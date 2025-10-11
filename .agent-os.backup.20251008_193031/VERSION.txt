@@ -1,9 +1,0 @@
-Agent OS Content Version
-
-Repository: https://github.com/honeyhiveai/agent-os-enhanced
-Last Updated: 2025-10-06 19:12:58
-Source Commit: N/A (pre-git)
-Updated By: AI-authored workflow creation
-Previous Version: N/A
-Current Version: v1.0.0
-Notes: Added spec_execution_v1 workflow with dynamic phase/task generation

@@ -2,6 +2,52 @@
 
 **Timeless patterns for working with databases effectively.**
 
+---
+
+## 🎯 TL;DR - Database Patterns Quick Reference
+
+**Keywords for search**: database patterns, database optimization, N+1 query problem, database indexes, database transactions, query optimization, schema design, database migrations, connection pooling, database testing, database performance
+
+**Critical Database Principles:**
+1. **Avoid N+1 Queries** - Use JOINs or eager loading (1-2 queries instead of 100+)
+2. **Index Strategically** - Index WHERE/JOIN columns, avoid over-indexing
+3. **Handle Transactions** - ACID guarantees for multi-step operations
+4. **Batch Operations** - Process multiple rows in single query
+5. **Connection Pool** - Reuse connections, don't create per-query
+6. **Test with Real DB** - In-memory DBs hide performance issues
+
+**Common Anti-Patterns:**
+- SELECT * (retrieve all columns unnecessarily)
+- Missing indexes on foreign keys
+- Long-running transactions
+- Not handling deadlocks/retries
+- Testing only with mocks (not real database)
+
+**Performance Targets:**
+- Index queries: <10ms for simple lookups
+- Complex queries: <100ms
+- Transactions: <1 second
+- Connection pool: 10-50 connections for most apps
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I avoid N+1 query problems?"
+2. "When should I add database indexes?"
+3. "How do I handle database transactions properly?"
+4. "What's the best way to optimize slow database queries?"
+5. "How do I design database schemas effectively?"
+6. "How do I handle database migrations safely?"
+7. "What's connection pooling and how do I use it?"
+8. "What database anti-patterns should I avoid?"
+9. "How do I test code that uses a database?"
+10. "How do I improve database performance?"
+11. "What's the difference between optimistic and pessimistic locking?"
+12. "How do I batch database operations?"
+
+---
+
 ## Core Principle
 
 **"Database operations are expensive. Minimize them."**
@@ -14,9 +60,9 @@
 
 ---
 
-## The N+1 Query Problem
+## How to Avoid the N+1 Query Problem (Most Critical Pattern)
 
-### Most Common Database Anti-Pattern
+The N+1 query problem is the most common and most expensive database anti-pattern. Understanding and preventing it is essential for performant database code.
 
 **Problem:** Making N additional queries inside a loop.
 
@@ -70,7 +116,9 @@ for user in users:
 
 ---
 
-## Index Patterns
+## How to Use Database Indexes Effectively
+
+Indexes dramatically improve query performance but cost storage and slow down writes. Strategic indexing is a critical skill for database-driven applications.
 
 ### Pattern 1: Index Frequently Queried Columns
 
@@ -134,7 +182,9 @@ CREATE INDEX idx5 ON users(status);
 
 ---
 
-## Transaction Patterns
+## How to Handle Database Transactions Properly
+
+Transactions ensure that multi-step database operations either complete fully or roll back completely, maintaining data consistency and integrity.
 
 ### Pattern 1: Atomic Operations
 
@@ -211,7 +261,9 @@ transaction.commit()
 
 ---
 
-## Query Optimization Patterns
+## How to Optimize Database Queries
+
+Query optimization transforms slow queries into fast ones. Small changes to query structure can produce 10x-100x performance improvements.
 
 ### Pattern 1: SELECT Only Needed Columns
 
@@ -257,7 +309,9 @@ EXPLAIN SELECT * FROM users WHERE email = ?
 
 ---
 
-## Schema Design Patterns
+## How to Design Database Schemas Effectively
+
+Good schema design prevents data anomalies, improves query performance, and makes your database maintainable. These patterns apply across all relational databases.
 
 ### Pattern 1: Normalization
 
@@ -342,7 +396,9 @@ CREATE TABLE users (
 
 ---
 
-## Migration Patterns
+## How to Handle Database Migrations Safely
+
+Database migrations modify schema or data in production. Safe migrations prevent downtime, data loss, and difficult-to-reverse changes.
 
 ### Pattern 1: Reversible Migrations
 
@@ -402,7 +458,9 @@ ALTER TABLE users DROP COLUMN old_field;
 
 ---
 
-## Connection Management
+## How to Manage Database Connections
+
+Database connections are expensive to create. Connection pooling reuses existing connections, dramatically improving performance and resource utilization.
 
 ### Pattern 1: Connection Pooling
 
@@ -451,7 +509,9 @@ function query_with_retry():
 
 ---
 
-## Common Anti-Patterns
+## What Database Anti-Patterns Should I Avoid?
+
+These common mistakes cause severe performance degradation and maintenance issues. Recognizing them early prevents costly refactoring.
 
 ### Anti-Pattern 1: SELECT * with Large BLOB
 
@@ -503,7 +563,9 @@ connection = create_connection(
 
 ---
 
-## Testing Database Code
+## How to Test Database Code
+
+Testing database code requires real database instances. In-memory databases and mocks hide performance issues and subtle bugs that only appear with real database engines.
 
 ### Test 1: Use Test Database
 
@@ -558,6 +620,49 @@ test_unique_constraint():
 - [ ] **Query analysis:** EXPLAIN used to identify slow queries
 - [ ] **Timeouts:** Connection and query timeouts set
 - [ ] **Migrations:** Reversible and tested
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Slow queries** | `search_standards("how to optimize slow database queries")` |
+| **Designing schema** | `search_standards("database schema design patterns")` |
+| **Writing loops** | `search_standards("N+1 query problem")` |
+| **Adding indexes** | `search_standards("when to add database indexes")` |
+| **Multi-step operations** | `search_standards("database transactions")` |
+| **Database tests** | `search_standards("how to test database code")` |
+| **Migrations** | `search_standards("database migrations")` |
+| **Performance issues** | `search_standards("database performance")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for database implementation:**
+
+1. **Start here** → `search_standards("database patterns")`
+2. **Then design** → `search_standards("database schema design")`
+3. **Then test** → `search_standards("integration testing database")` → `standards/testing/integration-testing.md`
+4. **Then optimize** → `search_standards("database performance")` (this document)
+
+**By Category:**
+
+**Testing:**
+- `standards/testing/integration-testing.md` - How to test database integration → `search_standards("integration testing database")`
+- `standards/testing/test-pyramid.md` - Test ratios (integration tests 20-30%) → `search_standards("test pyramid")`
+
+**Architecture:**
+- `standards/architecture/api-design-principles.md` - API design for database-backed services → `search_standards("API design patterns")`
+- `standards/architecture/dependency-injection.md` - Injecting database connections → `search_standards("dependency injection")`
+
+**Failure Modes:**
+- `standards/failure-modes/retry-strategies.md` - Retrying failed database operations → `search_standards("retry strategies")`
+- `standards/failure-modes/timeout-patterns.md` - Database query timeouts → `search_standards("timeout patterns")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production code checklist (includes database validation) → `search_standards("production code checklist")`
 
 ---
 

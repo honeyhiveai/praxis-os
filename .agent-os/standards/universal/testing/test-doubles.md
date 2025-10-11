@@ -2,6 +2,61 @@
 
 **Timeless patterns for isolating code during testing.**
 
+**Keywords for search**: test doubles, mock, stub, spy, fake, dummy, test isolation, mocking, stubbing, test fixtures, dependency injection testing, unit testing isolation
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Definition:** Objects that stand in for real dependencies during testing to isolate code under test.
+
+**Terminology by:** Gerard Meszaros (xUnit Test Patterns, 2007)
+
+**Core Principle:** Test the code you're writing, not its dependencies.
+
+**Five Types of Test Doubles:**
+1. **Dummy** - Passed but never used (satisfies parameter list)
+2. **Stub** - Returns pre-configured responses (controls test input)
+3. **Spy** - Records calls for verification (loose verification)
+4. **Mock** - Pre-programmed with expectations (strict verification)
+5. **Fake** - Working implementation, simplified (e.g., in-memory DB)
+
+**Quick Selection Guide:**
+- Parameter not used? → **Dummy**
+- Need to control what dependency returns? → **Stub**
+- Want to verify dependency was called? → **Spy** (loose) or **Mock** (strict)
+- Need realistic but fast implementation? → **Fake**
+
+**Common Anti-Patterns:**
+- ❌ Testing implementation details (internal calls)
+- ❌ Over-mocking (mocking everything)
+- ❌ Fragile tests (mock every method call)
+
+**Frameworks by Language:**
+- Python: unittest.mock, pytest-mock
+- JavaScript: Jest, Sinon
+- Java: Mockito, EasyMock
+- C#: Moq, NSubstitute
+
+---
+
+## Questions This Answers
+
+- "What are test doubles?"
+- "What's the difference between mock, stub, spy, fake, and dummy?"
+- "When should I use a mock vs a stub?"
+- "How to isolate code during unit testing?"
+- "What is mocking in testing?"
+- "How to test code with dependencies?"
+- "When to use test doubles?"
+- "What are test double anti-patterns?"
+- "How to choose the right test double type?"
+- "What mocking frameworks exist?"
+- "How to verify method calls in tests?"
+- "What is a fake in testing?"
+
+---
+
 ## What are Test Doubles?
 
 Test doubles are objects that stand in for real dependencies during testing, allowing you to test code in isolation.
@@ -12,7 +67,7 @@ Test doubles are objects that stand in for real dependencies during testing, all
 
 ---
 
-## The Five Types of Test Doubles
+## What Are the Five Types of Test Doubles?
 
 ```
 Test Double (Generic Term)
@@ -337,7 +392,9 @@ def test_user_repository():
 
 ---
 
-## Comparison Matrix
+## How Do Test Doubles Compare?
+
+### Comparison Matrix
 
 | Type | Returns Data | Records Calls | Verifies Expectations | Has Logic | Use Case |
 |------|-------------|---------------|----------------------|-----------|----------|
@@ -380,7 +437,7 @@ def test_user_repository():
 
 ---
 
-## Anti-Patterns
+## What Test Double Anti-Patterns Should I Avoid?
 
 ### Anti-Pattern 1: Mocking Everything
 ❌ Mocking every dependency, even simple ones.
@@ -412,7 +469,7 @@ def test_user_repository():
 
 ---
 
-## Test Double Frameworks (Language-Specific)
+## What Test Double Frameworks Are Available?
 
 Most languages have test double frameworks:
 
@@ -427,7 +484,7 @@ Most languages have test double frameworks:
 
 ---
 
-## Best Practices
+## What Are Test Double Best Practices?
 
 ### 1. Prefer Fakes for Complex Dependencies
 If you can build a simple in-memory fake, it's often better than mocks.
@@ -458,6 +515,75 @@ Avoid mocking third-party libraries directly. Create an adapter/wrapper and mock
 - See `.agent-os/standards/development/go-testing.md` (Go: interfaces, table tests)
 - See `.agent-os/standards/development/js-testing.md` (JavaScript: `sinon`, `jest.mock`)
 - Etc.
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Writing Unit Tests**
+   - Situation: Need to isolate code from dependencies
+   - Query: `search_standards("how to use test doubles")`
+
+2. **Choosing Test Double Type**
+   - Situation: Unsure whether to use mock, stub, or spy
+   - Query: `search_standards("mock vs stub vs spy")`
+
+3. **Learning Mocking**
+   - Situation: New to test doubles, want to understand
+   - Query: `search_standards("what are test doubles")`
+
+4. **Code Review for Tests**
+   - Situation: Reviewing test code with mocks
+   - Query: `search_standards("test double anti-patterns")`
+
+5. **Testing Code with Dependencies**
+   - Situation: How to test code that calls databases, APIs
+   - Query: `search_standards("test isolation with doubles")`
+
+6. **Choosing Mocking Framework**
+   - Situation: Want to add mocking to project
+   - Query: `search_standards("test double frameworks")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Learn test doubles | `search_standards("what are test doubles")` |
+| Choose type | `search_standards("mock vs stub vs spy")` |
+| Isolate tests | `search_standards("test isolation doubles")` |
+| Verify calls | `search_standards("spy vs mock verification")` |
+| Avoid anti-patterns | `search_standards("test double anti-patterns")` |
+| Choose framework | `search_standards("mocking frameworks")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Testing Standards:**
+- `standards/testing/test-pyramid.md` - Test doubles primary used in unit tests (bottom layer)
+  → `search_standards("test pyramid structure")`
+- `standards/testing/integration-testing.md` - When to use real dependencies vs test doubles
+  → `search_standards("integration testing patterns")`
+- `standards/testing/property-based-testing.md` - Can combine with test doubles
+  → `search_standards("property-based testing")`
+
+**Architecture Standards:**
+- `standards/architecture/dependency-injection.md` - DI enables easy test double injection
+  → `search_standards("dependency injection pattern")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Test coverage requirements
+  → `search_standards("production code checklist")`
+
+**Query workflow for using test doubles:**
+1. **Learn Types**: `search_standards("five types of test doubles")` → Understand dummy, stub, spy, mock, fake
+2. **Choose Type**: `search_standards("mock vs stub")` → Select appropriate double for your use case
+3. **Learn Framework**: `search_standards("test double frameworks")` → Pick language-specific framework
+4. **Implement**: Write tests with chosen test doubles
+5. **Validate**: `search_standards("test double anti-patterns")` → Check for common mistakes
+6. **Refine**: Ensure tests verify behavior, not implementation details
 
 ---
 

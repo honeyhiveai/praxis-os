@@ -28,7 +28,7 @@ Provides 8 workflow tools:
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 
 logger = logging.getLogger(__name__)
 
@@ -114,7 +114,7 @@ def register_workflow_tools(
 
             logger.info("Workflow started: session_id=%s", result["session_id"])
 
-            return result
+            return cast(Dict[str, Any], result)
 
         except Exception as e:
             logger.error("start_workflow failed: %s", e, exc_info=True)
@@ -160,7 +160,7 @@ def register_workflow_tools(
                 "Returned phase %s content for %s", result["current_phase"], session_id
             )
 
-            return result
+            return cast(Dict[str, Any], result)
 
         except ValueError as e:
             logger.warning("get_current_phase: %s", e)
@@ -224,7 +224,7 @@ def register_workflow_tools(
                 len(result.get("steps", [])),
             )
 
-            return result
+            return cast(Dict[str, Any], result)
 
         except ValueError as e:
             logger.warning("get_task: %s", e)
@@ -293,7 +293,7 @@ def register_workflow_tools(
                     result.get("missing_evidence"),
                 )
 
-            return result
+            return cast(Dict[str, Any], result)
 
         except ValueError as e:
             logger.warning("complete_phase: %s", e)
@@ -343,7 +343,7 @@ def register_workflow_tools(
                 "Returned state for %s: phase %s", session_id, result["current_phase"]
             )
 
-            return result
+            return cast(Dict[str, Any], result)
 
         except ValueError as e:
             logger.warning("get_workflow_state: %s", e)
@@ -521,7 +521,7 @@ def register_workflow_tools(
                 len(result["warnings"]),
             )
 
-            return result
+            return cast(Dict[str, Any], result)
 
         except Exception as e:
             logger.error("validate_workflow failed: %s", e, exc_info=True)

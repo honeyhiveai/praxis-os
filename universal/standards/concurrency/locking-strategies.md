@@ -2,6 +2,60 @@
 
 **Timeless patterns for synchronizing access to shared resources.**
 
+**Keywords for search**: locking strategies, mutex, reentrant lock, read-write lock, rwlock, spinlock, semaphore, lock-free, compare-and-swap, CAS, synchronization, thread safety, concurrent access, lock types
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Core Principle:** Only one execution context should access shared mutable state at a time.
+
+**Six Locking Strategies:**
+1. **Mutex** - Basic mutual exclusion (1 holder at a time)
+2. **Reentrant Lock** - Same context can acquire multiple times
+3. **Read-Write Lock** - Multiple readers OR single writer
+4. **Spinlock** - Busy-wait instead of blocking (kernel/real-time)
+5. **Semaphore** - Counted access (N simultaneous holders)
+6. **Lock-Free (CAS)** - Atomic operations, no locks
+
+**Quick Decision Tree:**
+- Read-heavy (>80% reads)? → **Read-Write Lock**
+- Nested function calls? → **Reentrant Lock**
+- Resource pool limit? → **Semaphore**
+- Very short critical section (<1μs)? → **Spinlock**
+- High contention + simple op? → **Lock-Free**
+- Default → **Mutex**
+
+**Performance (Uncontended):**
+- Mutex: ~20-100ns
+- RWLock (read): ~30-100ns
+- Spinlock: ~10-50ns
+- Lock-Free (CAS): ~10-50ns
+
+**Common Anti-Patterns:**
+- ❌ Holding lock during I/O
+- ❌ Nested locks without order (deadlock risk)
+- ❌ Using mutex for read-heavy workloads
+
+---
+
+## Questions This Answers
+
+- "What locking strategies are available?"
+- "When should I use mutex vs read-write lock?"
+- "What is a reentrant lock and when to use it?"
+- "How does a spinlock work?"
+- "What is a semaphore used for?"
+- "What are lock-free algorithms?"
+- "How to choose the right locking strategy?"
+- "What is compare-and-swap (CAS)?"
+- "When to use read-write lock for performance?"
+- "How to prevent deadlocks with lock ordering?"
+- "What is lock granularity?"
+- "What are common locking anti-patterns?"
+
+---
+
 ## What are Locking Strategies?
 
 Locking strategies are systematic approaches to controlling concurrent access to shared resources, preventing race conditions and ensuring data consistency.
@@ -10,7 +64,9 @@ Locking strategies are systematic approaches to controlling concurrent access to
 
 ---
 
-## Strategy 1: Mutex (Mutual Exclusion Lock)
+## How to Use Each Locking Strategy?
+
+### Strategy 1: How to Use Mutex (Mutual Exclusion Lock)
 
 **Definition:** Basic lock that allows only one execution context to hold it at a time.
 
@@ -65,7 +121,7 @@ class BankAccount:
 
 ---
 
-## Strategy 2: Reentrant Lock (Recursive Lock)
+### Strategy 2: How to Use Reentrant Lock (Recursive Lock)
 
 **Definition:** Lock that can be acquired multiple times by the same execution context.
 
@@ -116,7 +172,7 @@ class ThreadSafeCache:
 
 ---
 
-## Strategy 3: Read-Write Lock (RWLock)
+### Strategy 3: How to Use Read-Write Lock (RWLock)
 
 **Definition:** Lock with two modes - multiple readers OR single writer.
 
@@ -166,7 +222,7 @@ class CachedDatabase:
 
 ---
 
-## Strategy 4: Spinlock
+### Strategy 4: How to Use Spinlock
 
 **Definition:** Lock that busy-waits (spins) instead of blocking.
 
@@ -212,7 +268,7 @@ class HighFrequencyCounter:
 
 ---
 
-## Strategy 5: Semaphore
+### Strategy 5: How to Use Semaphore
 
 **Definition:** Lock with a count, allowing N simultaneous holders.
 
@@ -256,7 +312,7 @@ class ConnectionPool:
 
 ---
 
-## Strategy 6: Lock-Free Algorithms (Compare-and-Swap)
+### Strategy 6: How to Use Lock-Free Algorithms (Compare-and-Swap)
 
 **Definition:** Algorithms that use atomic operations instead of locks.
 
@@ -317,7 +373,9 @@ class LockFreeStack:
 
 ---
 
-## Comparison Matrix
+## How Do Locking Strategies Compare?
+
+### Comparison Matrix
 
 | Strategy | Concurrent Readers | Concurrent Writers | Complexity | Performance | Use Case |
 |----------|-------------------|-------------------|------------|-------------|----------|
@@ -330,7 +388,7 @@ class LockFreeStack:
 
 ---
 
-## Choosing the Right Strategy
+## How to Choose the Right Locking Strategy?
 
 ### Decision Tree
 
@@ -362,7 +420,7 @@ Default → Mutex
 
 ---
 
-## Advanced Patterns
+## What Advanced Locking Patterns Exist?
 
 ### Pattern 1: Lock Ordering (Prevent Deadlocks)
 
@@ -413,7 +471,7 @@ class ShardedCache:
 
 ---
 
-## Anti-Patterns
+## What Locking Anti-Patterns Should I Avoid?
 
 ### Anti-Pattern 1: Holding Lock Too Long
 ❌ Performing I/O or heavy computation while holding lock.
@@ -444,7 +502,7 @@ with lock:
 
 ---
 
-## Performance Guidelines
+## What Are Locking Performance Guidelines?
 
 ### Lock Acquisition Cost
 
@@ -468,6 +526,71 @@ with lock:
 - See `.agent-os/standards/development/rust-concurrency.md` (Rust: `Mutex<T>`, `RwLock<T>`, `Arc<T>`)
 - See `.agent-os/standards/development/java-concurrency.md` (Java: `synchronized`, `ReentrantLock`, `ReadWriteLock`)
 - Etc.
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Choosing Lock Type for New Code**
+   - Situation: Writing concurrent code, unsure which lock to use
+   - Query: `search_standards("how to choose locking strategy")`
+
+2. **Optimizing Read-Heavy Workload**
+   - Situation: Cache or config with 90% reads, mutex too slow
+   - Query: `search_standards("read-write lock performance")`
+
+3. **Implementing Resource Pool**
+   - Situation: Need to limit concurrent access (DB connections, threads)
+   - Query: `search_standards("semaphore resource pool")`
+
+4. **Nested Function Lock Issues**
+   - Situation: Deadlock when function calls itself with same lock
+   - Query: `search_standards("reentrant lock nested calls")`
+
+5. **High-Contention Performance**
+   - Situation: Lock contention causing slowdowns
+   - Query: `search_standards("lock-free algorithms CAS")`
+
+6. **Code Review for Lock Safety**
+   - Situation: Reviewing code with locks
+   - Query: `search_standards("locking anti-patterns")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Choose lock type | `search_standards("mutex vs read-write lock")` |
+| Read-heavy optimization | `search_standards("read-write lock performance")` |
+| Resource pooling | `search_standards("semaphore use case")` |
+| Nested locking | `search_standards("reentrant lock")` |
+| Lock-free | `search_standards("compare-and-swap lock-free")` |
+| Performance | `search_standards("locking performance guidelines")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Concurrency Standards:**
+- `standards/concurrency/race-conditions.md` - Preventing data races with locks
+  → `search_standards("race condition prevention")`
+- `standards/concurrency/deadlocks.md` - Lock ordering to prevent deadlocks
+  → `search_standards("deadlock prevention lock ordering")`
+- `standards/concurrency/shared-state-analysis.md` - Identifying what needs locks
+  → `search_standards("shared state analysis")`
+
+**Testing Standards:**
+- `standards/testing/integration-testing.md` - Stress testing locked code
+  → `search_standards("stress testing concurrency")`
+
+**Query workflow for choosing locking strategy:**
+1. **Identify Need**: `search_standards("shared state analysis")` → Find what needs protection
+2. **Analyze Access**: Determine read/write ratio, contention level
+3. **Choose Strategy**: `search_standards("how to choose locking strategy")` → Use decision tree
+4. **Implement**: Apply chosen lock type with proper error handling
+5. **Validate**: `search_standards("locking anti-patterns")` → Check for common mistakes
+6. **Test**: Stress test with high concurrency
 
 ---
 

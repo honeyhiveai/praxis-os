@@ -2,6 +2,64 @@
 
 **Timeless principle for organizing code into distinct responsibilities.**
 
+**Keywords for search**: separation of concerns, SoC, single responsibility, layered architecture, MVC, repository pattern, service layer, hexagonal architecture, modularity, code organization, maintainability
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Core Principle:** Each module/class/function should address a single concern, and concerns should not overlap.
+
+**Coined by:** Edsger W. Dijkstra (1974)
+
+**Common Concerns:**
+- **Horizontal** (Cross-cutting): Logging, error handling, auth, caching, validation
+- **Vertical** (Feature-specific): User management, order processing, payments
+
+**Four Key Patterns:**
+1. **MVC** (Model-View-Controller) - Separates data, presentation, and control
+2. **Repository Pattern** - Separates business logic from data access
+3. **Service Layer** - Separates workflow orchestration from business rules
+4. **Hexagonal Architecture** - Separates core logic from external dependencies
+
+**Benefits:**
+- ✅ Easy to test (isolated concerns)
+- ✅ Easy to maintain (change one concern, others unaffected)
+- ✅ Easy to reuse (concerns are independent)
+- ✅ Follows Single Responsibility Principle
+
+**Quick Example:**
+```python
+# Without SoC (Bad) - Everything in one function
+def handle_request(data):
+    # Validation + business logic + database + API + response...
+    # 50 lines mixing 5 concerns
+
+# With SoC (Good) - Separate classes
+validator.validate(data)
+user = user_service.create_user(data)
+return presenter.to_json(user)
+```
+
+---
+
+## Questions This Answers
+
+- "What is separation of concerns and why is it important?"
+- "How to organize code into distinct responsibilities?"
+- "What concerns should be separated in my application?"
+- "How to implement MVC pattern?"
+- "What is the repository pattern and when to use it?"
+- "How to separate business logic from data access?"
+- "What is hexagonal architecture (ports and adapters)?"
+- "How to identify violation of separation of concerns?"
+- "What is a God Object and how to fix it?"
+- "How to apply layered architecture?"
+- "How to make code easier to test and maintain?"
+- "What's the difference between horizontal and vertical concerns?"
+
+---
+
 ## What is Separation of Concerns?
 
 Separation of Concerns (SoC) is the design principle of dividing a program into distinct sections, each addressing a separate concern.
@@ -149,9 +207,9 @@ def handle_user_request(request_data):
 
 ---
 
-## Common Concerns in Software
+## What Types of Concerns Exist in Software?
 
-### Horizontal Concerns (Cross-cutting)
+### What Are Horizontal Concerns? (Cross-cutting)
 
 ```
 Application
@@ -169,7 +227,7 @@ Application
 
 ---
 
-### Vertical Concerns (Feature-specific)
+### What Are Vertical Concerns? (Feature-specific)
 
 ```
 User Management Feature
@@ -189,9 +247,9 @@ Order Management Feature
 
 ---
 
-## Layered Architecture
+## How to Apply Layered Architecture?
 
-### Classic N-Tier Separation
+### What is Classic N-Tier Separation?
 
 ```
 ┌─────────────────────────────────┐
@@ -212,9 +270,9 @@ Order Management Feature
 
 ---
 
-## Separation Patterns
+## What Separation Patterns Should I Use?
 
-### Pattern 1: MVC (Model-View-Controller)
+### Pattern 1: How to Use MVC (Model-View-Controller)
 
 **Concerns:**
 - **Model:** Data and business logic
@@ -256,7 +314,7 @@ class UserController:
 
 ---
 
-### Pattern 2: Repository Pattern (Data Access Separation)
+### Pattern 2: How to Use Repository Pattern (Data Access Separation)
 
 **Concern:** Separate business logic from data persistence.
 
@@ -294,7 +352,7 @@ class OrderRepository:
 
 ---
 
-### Pattern 3: Service Layer Pattern
+### Pattern 3: How to Use Service Layer Pattern
 
 **Concern:** Separate workflow orchestration from business logic.
 
@@ -339,7 +397,7 @@ class PurchaseService:
 
 ---
 
-### Pattern 4: Hexagonal Architecture (Ports & Adapters)
+### Pattern 4: How to Use Hexagonal Architecture (Ports & Adapters)
 
 **Concern:** Separate core business logic from external dependencies.
 
@@ -403,9 +461,9 @@ class MongoDBUserRepository implements UserRepository:
 
 ---
 
-## Identifying Violations
+## How to Identify Separation of Concerns Violations?
 
-### Violation 1: God Object
+### Violation 1: God Object (Everything in One Class)
 
 **Problem:** One class that does everything.
 
@@ -435,7 +493,7 @@ class UserManager:
 
 ---
 
-### Violation 2: Feature Envy
+### Violation 2: Feature Envy (Accessing Another Class's Data Excessively)
 
 **Problem:** Class accessing another class's data excessively.
 
@@ -468,7 +526,7 @@ class OrderPrinter:
 
 ---
 
-### Violation 3: Inappropriate Intimacy
+### Violation 3: Inappropriate Intimacy (Classes Too Tightly Coupled)
 
 **Problem:** Two classes too tightly coupled.
 
@@ -501,7 +559,7 @@ class Order:
 
 ---
 
-## Testing with Separation
+## How Does Separation of Concerns Improve Testing?
 
 ### Without Separation (Hard to Test)
 
@@ -566,7 +624,7 @@ def test_payment_success():
 
 ---
 
-## Best Practices
+## What Are Separation of Concerns Best Practices?
 
 ### 1. One Concern Per Module/Class/Function
 
@@ -622,6 +680,74 @@ class OrderService:
 - See `.agent-os/standards/development/java-architecture.md` (Java: packages, access modifiers)
 - See `.agent-os/standards/development/go-architecture.md` (Go: packages, internal visibility)
 - Etc.
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Designing New Features**
+   - Situation: Planning how to organize code for new functionality
+   - Query: `search_standards("how to organize code by concern")`
+
+2. **Refactoring Tangled Code**
+   - Situation: Code has multiple responsibilities mixed together
+   - Query: `search_standards("separation of concerns pattern")`
+
+3. **Choosing Architecture Pattern**
+   - Situation: Deciding on MVC vs Repository vs Service Layer vs Hexagonal
+   - Query: `search_standards("what separation pattern to use")`
+
+4. **Improving Testability**
+   - Situation: Hard to test because concerns are mixed
+   - Query: `search_standards("how to make code testable")`
+
+5. **Code Review Feedback**
+   - Situation: Reviewer says "this violates separation of concerns"
+   - Query: `search_standards("separation of concerns violations")`
+
+6. **Identifying God Objects**
+   - Situation: Class doing too many things
+   - Query: `search_standards("God Object anti-pattern")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Organize code | `search_standards("how to organize code by concern")` |
+| Refactor tangled code | `search_standards("separation of concerns refactoring")` |
+| Choose pattern | `search_standards("MVC vs repository pattern")` |
+| Improve testability | `search_standards("make code testable")` |
+| Fix God Object | `search_standards("God Object anti-pattern")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Architecture Standards:**
+- `standards/architecture/solid-principles.md` - SRP (Single Responsibility) is core to SoC
+  → `search_standards("single responsibility principle")`
+- `standards/architecture/dependency-injection.md` - DI enables separation
+  → `search_standards("dependency injection pattern")`
+
+**Testing Standards:**
+- `standards/testing/test-doubles.md` - Separated concerns are easier to mock
+  → `search_standards("how to use test doubles")`
+- `standards/testing/integration-testing.md` - Testing separated layers
+  → `search_standards("integration testing patterns")`
+
+**Production Code:**
+- `standards/ai-safety/production-code-checklist.md` - Validates separation
+  → `search_standards("production code checklist")`
+
+**Query workflow for applying SoC:**
+1. **Learn Principle**: `search_standards("separation of concerns")` → Read this standard
+2. **Learn SOLID**: `search_standards("single responsibility principle")` → Understand SRP
+3. **Choose Pattern**: `search_standards("MVC vs repository pattern")` → Select approach
+4. **Implement**: Apply chosen pattern to your code
+5. **Test**: `search_standards("how to test with mocks")` → Write tests for each concern
+6. **Review**: `search_standards("separation of concerns violations")` → Validate approach
 
 ---
 

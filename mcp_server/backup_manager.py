@@ -16,7 +16,7 @@ import logging
 import shutil
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -182,7 +182,10 @@ class BackupManager:
         Returns:
             Manifest dictionary with file checksums
         """
-        manifest = {"timestamp": datetime.now().isoformat(), "files": {}}
+        manifest: Dict[str, Any] = {
+            "timestamp": datetime.now().isoformat(),
+            "files": {},
+        }
 
         for file_path in backup_path.rglob("*"):
             if file_path.is_file() and file_path.name != "MANIFEST.json":
@@ -396,7 +399,7 @@ class BackupManager:
                 backups.append(backup_info)
 
         # Sort by timestamp (newest first)
-        backups.sort(key=lambda b: b["timestamp"], reverse=True)
+        backups.sort(key=lambda b: str(b["timestamp"]), reverse=True)
 
         return backups
 

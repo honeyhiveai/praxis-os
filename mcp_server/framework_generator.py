@@ -133,12 +133,12 @@ class FrameworkGenerator:
 
             principles = {}
             for chunk in results.chunks:
-                if "three-tier" in chunk.content.lower():
-                    principles["three_tier"] = chunk.content[:200]
-                if "command" in chunk.content.lower():
-                    principles["command_language"] = chunk.content[:200]
-                if "validation" in chunk.content.lower():
-                    principles["validation_gates"] = chunk.content[:200]
+                if "three-tier" in chunk["content"].lower():
+                    principles["three_tier"] = chunk["content"][:200]
+                if "command" in chunk["content"].lower():
+                    principles["command_language"] = chunk["content"][:200]
+                if "validation" in chunk["content"].lower():
+                    principles["validation_gates"] = chunk["content"][:200]
 
             return principles
         except Exception:
@@ -438,7 +438,7 @@ Validate results:
         :param framework: Framework to validate
         :returns: Compliance report
         """
-        report = {
+        report: Dict[str, Any] = {
             "file_count": len(framework.files),
             "file_sizes": {},
             "tier1_compliance": 0,

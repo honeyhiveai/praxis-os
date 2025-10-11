@@ -2,6 +2,55 @@
 
 **Timeless pattern applicable to all concurrent systems.**
 
+**Keywords for search**: deadlock, deadlocks, circular wait, lock ordering, resource starvation, Coffman conditions, mutual exclusion, hold and wait, no preemption, deadlock prevention, deadlock detection, dining philosophers
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Definition:** Two or more execution contexts permanently blocked, each waiting for the other to release a resource → system hangs indefinitely.
+
+**Four Necessary Conditions (Coffman):**
+Deadlock can ONLY occur if ALL four are present:
+1. **Mutual Exclusion** - Resources can't be shared
+2. **Hold and Wait** - Contexts hold resources while waiting for more
+3. **No Preemption** - Resources can't be forcibly taken
+4. **Circular Wait** - Circular chain of contexts waiting for each other
+
+**Prevention = Break ANY ONE condition**
+
+**Four Prevention Strategies:**
+1. **Lock Ordering** (Break Circular Wait) - Always acquire in same order
+2. **Timeout** (Break Hold and Wait) - Release all on timeout, retry
+3. **Lock-Free** (Break Mutual Exclusion) - Use atomic operations
+4. **All-or-Nothing** (Break Hold and Wait) - Acquire all resources atomically
+
+**Detection & Recovery:**
+- **Resource Allocation Graph** - Detect cycles
+- **Abort and Restart** - Kill one context to break deadlock
+- **Rollback** - Roll back to safe state
+
+**Best Strategy:** Lock ordering (simplest, most effective, no runtime overhead)
+
+---
+
+## Questions This Answers
+
+- "What is a deadlock?"
+- "How to prevent deadlocks?"
+- "What are the Coffman conditions?"
+- "What is lock ordering and why does it work?"
+- "How to detect deadlocks?"
+- "How to recover from a deadlock?"
+- "What is the dining philosophers problem?"
+- "When to use timeout vs lock ordering?"
+- "What tools detect deadlocks?"
+- "How to test for deadlocks?"
+- "What is circular wait?"
+- "How to avoid nested locking deadlocks?"
+
+---
+
 ## What is a Deadlock?
 
 A deadlock occurs when two or more execution contexts are permanently blocked, each waiting for the other to release a resource.
@@ -19,7 +68,7 @@ wait for Resource B     wait for Resource A
 [DEADLOCK - both waiting forever]
 ```
 
-## The Four Necessary Conditions (Coffman Conditions)
+## What Are the Four Necessary Conditions? (Coffman Conditions)
 
 A deadlock can ONLY occur if ALL four conditions are present:
 
@@ -39,9 +88,9 @@ A circular chain of contexts exists where each waits for a resource held by the 
 
 ---
 
-## Prevention Strategies (Universal)
+## How to Prevent Deadlocks? (Universal Strategies)
 
-### Strategy 1: Lock Ordering (Break Circular Wait)
+### Strategy 1: How to Use Lock Ordering (Break Circular Wait)
 **Concept:** Always acquire locks in a consistent global order.
 
 ```
@@ -75,7 +124,7 @@ Context 2:
 
 ---
 
-### Strategy 2: Timeout (Break Hold and Wait)
+### Strategy 2: How to Use Timeout (Break Hold and Wait)
 **Concept:** Limit how long a context waits for a resource.
 
 ```
@@ -110,7 +159,7 @@ except TimeoutError:
 
 ---
 
-### Strategy 3: Lock-Free Data Structures (Break Mutual Exclusion)
+### Strategy 3: How to Use Lock-Free Data Structures (Break Mutual Exclusion)
 **Concept:** Use atomic operations instead of locks.
 
 ```
@@ -134,7 +183,7 @@ if not success:
 
 ---
 
-### Strategy 4: Single-Resource Acquisition (Break Hold and Wait)
+### Strategy 4: How to Use All-or-Nothing Resource Acquisition (Break Hold and Wait)
 **Concept:** Acquire all resources atomically or none at all.
 
 ```
@@ -162,9 +211,9 @@ else:
 
 ---
 
-## Detection Strategies
+## How to Detect Deadlocks?
 
-### Resource Allocation Graph
+### How to Use Resource Allocation Graph
 **Concept:** Model resources and contexts as a graph, detect cycles.
 
 ```
@@ -186,7 +235,7 @@ Cycle detection:
 
 ---
 
-## Recovery Strategies
+## How to Recover from Deadlocks?
 
 ### 1. Abort and Restart
 **Concept:** Kill one or more contexts to break the deadlock.
@@ -218,7 +267,7 @@ if deadlock_detected():
 
 ---
 
-## Real-World Examples
+## What Are Real-World Deadlock Examples?
 
 ### Example 1: Dining Philosophers
 **Problem:** 5 philosophers, 5 forks, each needs 2 forks to eat.
@@ -245,7 +294,7 @@ Philosopher 5: fork_5, fork_1  // Circular dependency!
 
 ---
 
-## Anti-Patterns
+## What Deadlock Anti-Patterns Should I Avoid?
 
 ### Anti-Pattern 1: Ignoring Lock Order
 ❌ Different contexts acquire locks in different orders.
@@ -273,9 +322,9 @@ lock(X)
 
 ---
 
-## Testing for Deadlocks
+## How to Test for Deadlocks?
 
-### Techniques
+### Testing Techniques
 1. **Stress testing:** High load with many concurrent contexts
 2. **Deadlock detectors:** Tools that analyze lock acquisition patterns
 3. **Static analysis:** Detect potential deadlock cycles in code
@@ -304,4 +353,68 @@ Each language guide will provide:
 
 ---
 
-**Deadlocks are a universal problem in concurrent systems. Prevention is better than detection. Lock ordering is the simplest and most effective strategy.**
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **System Hangs Indefinitely**
+   - Situation: Application freezes, no progress
+   - Query: `search_standards("deadlock system hangs")`
+
+2. **Implementing Multi-Lock Code**
+   - Situation: Need to acquire multiple locks
+   - Query: `search_standards("how to prevent deadlocks")`
+
+3. **Code Review for Lock Safety**
+   - Situation: Reviewing code with multiple locks
+   - Query: `search_standards("deadlock prevention lock ordering")`
+
+4. **Choosing Deadlock Prevention Strategy**
+   - Situation: Deciding between lock ordering, timeout, lock-free
+   - Query: `search_standards("deadlock prevention strategies")`
+
+5. **Debugging Concurrent System Freeze**
+   - Situation: Production system hangs under load
+   - Query: `search_standards("how to detect deadlocks")`
+
+6. **Understanding Coffman Conditions**
+   - Situation: Learning deadlock theory
+   - Query: `search_standards("Coffman conditions deadlock")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Prevent deadlocks | `search_standards("deadlock prevention")` |
+| Lock ordering | `search_standards("lock ordering prevent deadlock")` |
+| Detect deadlocks | `search_standards("how to detect deadlocks")` |
+| Timeout strategy | `search_standards("timeout deadlock prevention")` |
+| Dining philosophers | `search_standards("dining philosophers deadlock")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Concurrency Standards:**
+- `standards/concurrency/race-conditions.md` - Preventing data races (complementary to deadlock prevention)
+  → `search_standards("race condition prevention")`
+- `standards/concurrency/locking-strategies.md` - Choosing lock types (reentrant locks help with nested calls)
+  → `search_standards("locking strategies")`
+- `standards/concurrency/shared-state-analysis.md` - Identifying shared resources that need locks
+  → `search_standards("shared state analysis")`
+
+**Testing Standards:**
+- `standards/testing/integration-testing.md` - Stress testing for deadlocks
+  → `search_standards("stress testing concurrency")`
+
+**Query workflow for preventing deadlocks:**
+1. **Learn Theory**: `search_standards("Coffman conditions")` → Understand 4 conditions
+2. **Identify Resources**: `search_standards("shared state analysis")` → Find what needs locking
+3. **Choose Strategy**: `search_standards("deadlock prevention strategies")` → Select lock ordering (best)
+4. **Implement**: Define global lock order, apply consistently
+5. **Test**: `search_standards("how to test for deadlocks")` → Stress test with many threads
+6. **Review**: Check all lock acquisitions follow order
+
+---
+
+**Deadlocks are a universal problem in concurrent systems. Prevention is better than detection. Lock ordering is the simplest and most effective strategy. Break ANY ONE of the four Coffman conditions to prevent deadlocks.**

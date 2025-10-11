@@ -1,871 +1,347 @@
-# MCP Tools - Practical Guide for AI Agents
+# MCP Tools - Dynamic Discovery Guide
 
-**How to use Agent OS Enhanced MCP tools effectively**
-
----
-
-## 🎯 Overview
-
-MCP (Model Context Protocol) tools are your interface to Agent OS Enhanced capabilities. This guide teaches you how to use them effectively through examples and patterns.
+**How to discover and use Agent OS MCP tools through dynamic introspection**
 
 ---
 
-## 🔍 Tool Discovery (Dynamic, Not Static)
+## 🎯 TL;DR - MCP Dynamic Discovery Quick Reference
 
-**Agent OS Philosophy:** Self-documenting, evolving systems over static documentation.
+**Keywords for search**: MCP tools, tool discovery, tools/list, dynamic discovery, IDE autocomplete, self-documenting tools, probabilistic reality, context degradation, why query matters, MCP introspection
 
-### How to Discover Available Tools
+**Core Principle:** Tools are self-documenting via MCP protocol. Discover dynamically through IDE, never memorize.
 
-**Source of Truth:** The MCP protocol's `tools/list` provides the complete, always-current list of available tools.
+**The Agent OS Way:**
+1. ✅ **Start typing in IDE** → Autocomplete shows all available tools + schemas
+2. ✅ **Use tools/list** → Always-current source of truth
+3. ✅ **Query for patterns** → `search_standards("how to use X tool")`
+4. ❌ **Don't memorize** → Tools evolve, parameters change
+5. ❌ **Don't read static docs** → Will drift from actual implementation
+
+**Why Dynamic Discovery Matters:**
+- Tools add/remove/change between versions
+- Parameter schemas are definitive in code
+- IDE provides real-time introspection
+- Documentation always lags implementation
+
+**The Probabilistic Reality:**
+```
+Context Window at Message 1:  Initial instructions = 75% influence
+Context Window at Message 30: Initial instructions = 0.6% influence
+
+Result: Initial guidance fades mathematically
+Solution: Create self-reinforcing habits through tools
+```
+
+**Tool Categories (High-Level):**
+- **Discovery:** `search_standards` (most important)
+- **Workflows:** Phase-gated execution tools
+- **Browser:** `aos_browser` (browse web like a human - extract themes, compare UIs, research, test)
+- **System:** Date, validation, framework tools
+
+**When to Query This Guide:**
+- Need to understand dynamic discovery → `search_standards("MCP dynamic discovery")`
+- Why tools/list matters → `search_standards("why dynamic tools")`
+- Understanding context degradation → `search_standards("probabilistic reality AI")`
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I discover what MCP tools are available?"
+2. "Why doesn't Agent OS document all tools statically?"
+3. "How does tools/list work?"
+4. "Why can't I just memorize the tools?"
+5. "What is probabilistic reality?"
+6. "Why does context degrade over time?"
+7. "How does IDE autocomplete get tool info?"
+8. "Why dynamic discovery over static documentation?"
+9. "What categories of tools exist?"
+10. "How to find the right tool for my task?"
+
+---
+
+## Why Dynamic Discovery Over Static Documentation?
+
+Agent OS tools are self-documenting and evolutionary. Static documentation creates maintenance burden and guaranteed drift.
+
+**The Problem with Static Documentation:**
 
 ```
-Your IDE (Cursor) → calls tools/list → gets all available tools + schemas
-                                    ↓
-                           Provides autocomplete with:
-                           - Tool names
-                           - Parameter types
-                           - Required vs optional
-                           - Return schemas
+Traditional Approach:
+Code changes → Docs lag → Docs wrong → User confused → Time wasted
+
+Agent OS Approach:
+Code IS documentation → Always accurate → IDE shows it → User succeeds
 ```
 
-**Why This Matters:**
-- ✅ **Always accurate** - Tools define themselves
+**The MCP Protocol Solution:**
+
+The MCP (Model Context Protocol) provides built-in tool introspection:
+
+```
+Your IDE → calls tools/list → receives:
+    - Complete tool inventory
+    - Parameter schemas (types, required/optional)
+    - Return type schemas
+    - Tool descriptions
+    - Real-time accuracy (reflects actual code)
+```
+
+**Benefits:**
+- ✅ **Always accurate** - Tools define themselves in code
 - ✅ **Never out of sync** - No manual doc updates needed
 - ✅ **Self-documenting** - Parameter schemas built-in
 - ✅ **Evolutionary** - New tools appear automatically
+- ✅ **IDE integration** - Autocomplete works instantly
 
-**When You Need Info:**
+**When You Need Tool Information:**
 - "What tools exist?" → **Start typing in IDE, autocomplete shows all**
-- "What params does X take?" → **IDE shows inline documentation**
-- "How do I use X?" → **Query standards for patterns/examples**
-
-### This Guide's Purpose
-
-**This guide does NOT:**
-- ❌ List all available tools (that's `tools/list`)
-- ❌ Document every parameter (that's the tool schemas)
-- ❌ Provide complete API reference (that's MCP protocol)
-
-**This guide DOES:**
-- ✅ Teach WHEN to use which tools (patterns)
-- ✅ Show HOW to use tools effectively (examples)
-- ✅ Explain WHY certain approaches work (mental models)
-- ✅ Reinforce self-sustaining query habits (probabilistic design)
-
-**Key Tools You'll Use Most:**
-- `search_standards` - Query liberally (5-10x per task)
-- Workflow tools - For structured, phase-gated execution
-- `aos_browser` - For web UI testing and validation
-- `validate_workflow` - For framework creation
-- `current_date` - For accurate timestamps
-
-**The Agent OS way:** Learn patterns, discover tools dynamically, query liberally.
+- "What params does X take?" → **IDE shows inline parameter documentation**
+- "How do I use X effectively?" → **Query for patterns: `search_standards("how to use X tool")`**
 
 ---
 
-## 🔄 Why Query Frequency Matters (Probabilistic Reality)
+## Understanding Probabilistic Reality (Why Initial Instructions Fade)
 
-**Critical insight**: Your memory of patterns and instructions fades as your session grows due to your probabilistic nature.
+**Critical insight for AI agents:** Your memory of patterns and instructions degrades mathematically as your session grows.
 
-### The Degradation Pattern
+### The Mathematical Reality
 
 ```
-Context window composition over time:
-Message 1:   Rules/patterns = 75% of context → HIGH influence
-Message 30:  Rules/patterns = 0.6% of context → NEGLIGIBLE influence
+Context Window Composition Over Time:
+
+Message 1:
+├── Initial orientation: 15,000 tokens (75% of context)
+└── User message: 5,000 tokens (25%)
+→ Rules/patterns have HIGH statistical influence
+
+Message 30:
+├── Initial orientation: 15,000 tokens (still 15k)
+├── 29 messages of conversation: 2,485,000 tokens (99.4%)
+└── Latest message: 5,000 tokens
+→ Rules/patterns have NEGLIGIBLE statistical influence (0.6%)
 
 Result: Initial guidance becomes statistically irrelevant
 ```
 
+### Why This Matters for Tool Usage
+
+As your context grows, you probabilistically forget:
+- Which tools exist
+- How to use them
+- Best practices for tool selection
+- Patterns for effective usage
+
+**You can't prevent this degradation** - it's mathematical reality.
+
+**You CAN create self-reinforcing habits** that persist through the session.
+
 ### The Self-Reinforcing Solution
 
-**Don't fight degradation - create self-sustaining behavior through frequent querying:**
+Dynamic discovery + frequent querying creates persistent behavior:
 
 ```
-Query Standards Frequently
+Discover Tool via IDE Autocomplete
          ↓
-Get Answer + "Query more" reminder
+Query for usage pattern
+         ↓
+Get answer + "Query more" reminder
          ↓
 P(query_next_time) increases
          ↓
-Query Again (stronger habit)
+Pattern reinforces with each use
          ↓
-Pattern Reinforces
-         ↓
-Querying Becomes Dominant Behavior
+Dynamic discovery becomes automatic
 ```
 
-**Each query strengthens the pattern. The more you query, the better you perform.**
-
-### Under-Querying is the #1 Problem
-
-**Typical AI agent behavior (WRONG)**:
-```
-Message 1: Query orientation (from .cursorrules)
-Message 5: Query for implementation approach
-Message 20: Query when stuck
-Message 50: No queries (pattern faded)
-Result: Drift back to default "helper" behavior
-```
-
-**Correct Agent OS behavior**:
-```
-Message 1: Query orientation
-Message 5: Query approach (3 queries for different aspects)
-Message 20: Query implementation details (5 queries)
-Message 50: Still querying frequently (habit established)
-Result: Maintain correct behavior throughout session
-```
-
-### Target: 5-10 Queries Per Significant Task
-
-**Why this number?**:
-- Covers different aspects (architecture, security, testing, etc.)
-- Reinforces pattern multiple times
-- Keeps fresh context in conversation
-- Prevents probabilistic drift
-
-### Signs You Need to Refresh
-
-**Immediate re-query if you notice**:
-- ❌ Asking human to write code → `search_standards("Agent OS orientation")`
-- ❌ Reading `.agent-os/` files → `search_standards("MCP tools")`
-- ❌ Presenting partial work → `search_standards("quality standards")`
-- ❌ Waiting for permission → `search_standards("Agent OS orientation")`
-
-**These are signs of pattern degradation. Refresh immediately.**
-
-### The Key Insight
-
-You can't prevent initial context from fading (probabilistic reality).  
-You CAN create habits that persist through self-reinforcement.
-
-**Query liberally = Stronger pattern = Better behavior = Higher quality output**
+**Key insight:** You can't keep all tools in your working memory. You CAN make "discover dynamically" your default habit.
 
 ---
 
-## 🔍 `search_standards` - Your Most Important Tool
+## How to Discover Available Tools
 
-### What It Does
+### Method 1: IDE Autocomplete (Primary)
 
-Performs semantic search over all Agent OS documentation:
-- Standards (`.agent-os/standards/`)
-- Workflows (`.agent-os/workflows/`)
-- Usage guides (`.agent-os/usage/`)
+**The fastest way to discover tools:**
 
-Returns 2-5KB of relevant chunks instead of full files (90% context reduction).
+1. Start typing `mcp_` or tool category name
+2. IDE calls `tools/list` automatically
+3. Autocomplete shows all available tools
+4. Select tool to see parameter schema
+5. IDE shows inline documentation
 
-### Query Patterns That Work
+**This is ALWAYS current** - reflects actual code at runtime.
 
-**✅ Excellent Queries (Specific, Natural Language, Question Format)**
+### Method 2: Query for Patterns
+
+**When you need usage guidance:**
 
 ```python
-# Concurrency
-search_standards("How do I prevent race conditions in Python?")
-search_standards("What's the proper way to use threading locks?")
-search_standards("How should I structure async/await code?")
+# Don't know what tools exist for X
+search_standards("what tools for browser testing")
 
-# Testing
-search_standards("How do I structure integration tests?")
-search_standards("What should I test in unit vs integration tests?")
-search_standards("How do I mock database connections for testing?")
+# Know tool name, need usage pattern
+search_standards("how to use aos_browser")
 
-# Architecture
-search_standards("How should I organize API routes?")
-search_standards("What's the proper way to handle database transactions?")
-search_standards("How do I structure error handling in services?")
-
-# Security
-search_standards("How do I safely store credentials?")
-search_standards("What input validation should I implement?")
-search_standards("How should I handle JWT token expiration?")
+# Know category, need specific capability
+search_standards("workflow tools")
 ```
 
-**Why These Work**:
-- Start with "How do I..." or "What's..." or "Where should..."
-- Specific enough to get targeted results
-- Natural language (like asking a colleague)
-- Context included (language, framework, use case)
+**Queries return patterns and best practices**, not parameter lists (IDE provides those).
 
-**❌ Poor Queries (Too Broad, Keyword-Only, Vague)**
+### Method 3: tools/list Direct Inspection
+
+**For comprehensive discovery:**
 
 ```python
-# Too broad
-search_standards("concurrency")  # Returns too much, not focused
-search_standards("testing")  # Which aspect of testing?
-search_standards("Python")  # Way too broad
-
-# Keyword-only
-search_standards("race condition")  # No context on what you need
-search_standards("JWT")  # Looking for what about JWT?
-
-# Too vague
-search_standards("best practices")  # For what?
-search_standards("how to code")  # Not specific enough
-```
-
-**Why These Fail**:
-- No clear question or intent
-- Missing context
-- Would return generic/scattered results
-- You won't know which chunk answers your specific need
-
-### When to Query Standards
-
-**Query BEFORE Implementing (Preventive)**
-
-```python
-# ❌ DON'T: Write code first, query later
-def process_user_data(data):
-    # Hmm, this might have thread safety issues...
-    # Let me query now after I've written problematic code
-    
-# ✅ DO: Query first, implement correctly
-# Step 1: Query
-search_standards("How do I make data processing thread-safe in Python?")
-
-# Step 2: Get guidance (threading.Lock with context manager)
-
-# Step 3: Implement correctly
-class DataProcessor:
-    def __init__(self):
-        self._lock = threading.Lock()
-    
-    def process_user_data(self, data):
-        with self._lock:  # Got this pattern from query!
-            # Process safely
-            pass
-```
-
-**Query During Implementation (Clarification)**
-
-```python
-# You're implementing OAuth, hit a decision point
-
-# Query 1: Overall structure
-search_standards("How should I structure OAuth flow?")
-# → Implement basic flow
-
-# Query 2: Token storage
-search_standards("Where should I store OAuth tokens securely?")
-# → Implement secure storage
-
-# Query 3: Token refresh
-search_standards("How do I handle OAuth token refresh?")
-# → Implement refresh logic
-```
-
-**Query After Failures (Debugging)**
-
-```python
-# Tests failing with deadlock
-
-# Query to understand issue
-search_standards("What causes deadlocks in Python threading?")
-# → Learn about lock ordering
-
-# Query to fix
-search_standards("How do I prevent deadlocks in concurrent code?")
-# → Implement proper lock ordering
-```
-
-### Query Frequency: More is Better
-
-**❌ Under-Querying**:
-```python
-# One query at start, then wing it
-search_standards("API development")
-# → Vague results
-# → Miss specific guidance for database, auth, rate limiting, etc.
-```
-
-**✅ Appropriate Querying**:
-```python
-# Query for each major decision
-
-# API structure
-search_standards("How should I organize FastAPI routes?")
-
-# Database
-search_standards("How do I handle database transactions in FastAPI?")
-
-# Authentication
-search_standards("How do I implement JWT authentication?")
-
-# Rate limiting
-search_standards("What's the best way to add rate limiting to API?")
-
-# Error handling
-search_standards("How should I structure error responses in REST API?")
-
-# Testing
-search_standards("How do I test FastAPI endpoints?")
-```
-
-**Result**: Each query gets targeted guidance for that specific aspect. Total context: 6 queries × 2KB = 12KB. Reading full files would be 300KB+.
-
-### Advanced Query Techniques
-
-**Targeting Specific Directories**
-
-```python
-# Search only workflows
-search_standards(
-    "How does spec_creation work?",
-    target_directories=["workflows"]
-)
-
-# Search only testing standards
-search_standards(
-    "Integration testing patterns",
-    target_directories=["standards/testing"]
-)
-```
-
-**Controlling Result Count**
-
-```python
-# Get more results for broad topic
-search_standards(
-    "Error handling patterns",
-    n_results=10
-)
-
-# Get fewer results for specific question
-search_standards(
-    "How do I use threading.Lock context manager?",
-    n_results=3  # Usually enough
-)
-```
-
----
-
-## 📅 `current_date` - Get Accurate Dates
-
-### Why This Exists
-
-AI models often have incorrect dates in their training data or make mistakes about current date. This tool provides the **actual** current date.
-
-### When to Use
-
-```python
-# Creating specifications
-current_date()
-# → Use iso_date for spec headers: "2025-10-10"
-
-# Creating spec directories
-current_date()
-# → Use spec_directory for folder names: "2025-10-10-feature-name"
-
-# Adding timestamps
-current_date()
-# → Use formatted.full_readable: "Friday, October 10, 2025"
-
-# Documentation headers
-current_date()
-# → Use formatted.header: "**Date**: 2025-10-10"
-```
-
-### Example Usage
-
-```python
-# Get current date
-date_info = current_date()
-
-# Use in spec creation
-spec_header = f"""
-# Feature Specification
-
-{date_info['formatted']['header']}
-**Author**: AI Agent
-**Status**: Draft
-"""
-
-# Use in directory naming
-spec_dir = f".agent-os/specs/{date_info['spec_directory']}authentication-feature/"
-```
-
-**Result**: Consistent, accurate dates across all artifacts.
-
----
-
-## 🔄 Workflow Tools
-
-### `start_workflow` - Begin Structured Task
-
-**When to Use**:
-- Creating specifications (complex design work)
-- Executing specifications (phased implementation)
-- Upgrading Agent OS (safe upgrade with backups)
-
-**Available Workflows**:
-
-```python
-# Create specification for new feature
-start_workflow(
-    workflow_type="spec_creation_v1",
-    target_file="features/authentication.py"
-)
-
-# Execute existing specification
-start_workflow(
-    workflow_type="spec_execution_v1",
-    target_file="features/authentication.py"
-)
-
-# Upgrade Agent OS safely
-start_workflow(
-    workflow_type="agent_os_upgrade_v1",
-    target_file=".agent-os/"
-)
-```
-
-**What Happens**:
-1. Workflow state created
-2. You receive Phase 0 or Phase 1 content (can't skip ahead)
-3. Session ID returned for tracking
-4. You must complete phase before advancing
-
-### `get_current_phase` - See What To Do
-
-**When to Use**:
-- After starting workflow
-- Resuming interrupted workflow
-- Checking current requirements
-
-```python
-# Get current phase details
-phase_info = get_current_phase(session_id="workflow-123")
+# List all available tools with schemas
+tools = mcp.list_tools()
 
 # Returns:
-# {
-#   "phase": 1,
-#   "title": "Requirements Definition",
-#   "content": "...",  # Phase markdown content
-#   "tasks": [...],  # Task files to complete
-#   "artifacts": {...}  # Previous phase outputs
-# }
-```
-
-**Use Case**:
-```python
-# Start workflow
-response = start_workflow("spec_creation_v1", "auth.py")
-session_id = response['session_id']
-
-# Get phase 1 details
-phase = get_current_phase(session_id)
-print(phase['content'])  # Read requirements
-
-# Complete phase 1 work...
-```
-
-### `complete_phase` - Submit Evidence to Advance
-
-**When to Use**:
-- Finished all tasks in current phase
-- Have required evidence/deliverables
-- Ready to advance to next phase
-
-**Evidence Format**:
-```python
-# Phase 1 evidence (Requirements)
-evidence = {
-    "srd_created": True,
-    "business_goals_count": 3,
-    "user_stories_count": 5,
-    "functional_requirements_count": 12,
-    "file_path": ".agent-os/specs/2025-10-10-auth/srd.md"
-}
-
-# Submit
-result = complete_phase(
-    session_id="workflow-123",
-    phase=1,
-    evidence=evidence
-)
-
-# If validation passes:
-# result['status'] = 'passed'
-# result['next_phase'] = 2
-# result['next_phase_content'] = "..."
-
-# If validation fails:
-# result['status'] = 'failed'
-# result['missing_evidence'] = ["Need at least 3 functional requirements"]
-# You stay in current phase
-```
-
-**The Checkpoint System**:
-- Each phase has specific evidence requirements
-- You MUST meet requirements to advance
-- If you don't, you get specific feedback on what's missing
-- Fix and resubmit until validation passes
-
-### `get_workflow_state` - Check Progress
-
-**When to Use**:
-- Resuming after interruption
-- Checking what's been completed
-- Debugging workflow issues
-
-```python
-state = get_workflow_state(session_id="workflow-123")
-
-# Returns:
-# {
-#   "session_id": "workflow-123",
-#   "workflow_type": "spec_creation_v1",
-#   "target_file": "auth.py",
-#   "current_phase": 2,
-#   "completed_phases": [0, 1],
-#   "phase_evidence": {
-#     "0": {...},
-#     "1": {...}
-#   },
-#   "artifacts": {
-#     "srd.md": "path/to/srd.md",
-#     ...
-#   }
-# }
+# - Tool names
+# - Descriptions
+# - Parameter schemas
+# - Return types
 ```
 
 ---
 
-## 🌐 `aos_browser` - Browser Automation
+## Tool Selection Mental Model
 
-### When to Use
+**High-level categories (not exhaustive - use IDE to discover specifics):**
 
-- Testing web applications
-- Validating UI behavior
-- Taking screenshots for documentation
-- Integration testing with real browser
+### Discovery & Learning Tools
+- **Primary use:** Finding information and guidance
+- **When:** Before implementing anything
+- **Example pattern:** Query 5-10 times to understand approach
 
-### Common Actions
+### Workflow Tools
+- **Primary use:** Structured, phase-gated execution
+- **When:** Complex tasks with multiple steps
+- **Example pattern:** Start workflow, get phase, complete phase
 
+### Browser & Web Research Tools
+- **Primary use:** Browse web like a human - research, extract info, compare sites, UI development, testing
+- **When:** Need to interact with or learn from web content
+- **Example patterns:** 
+  - Extract design themes from sample sites
+  - Compare UI implementations across sites
+  - Research best practices by browsing examples
+  - Test web applications
+  - Gather information from public websites
+
+### System Tools
+- **Primary use:** Dates, validation, framework operations
+- **When:** Specific system-level needs
+- **Example pattern:** Get current date, validate structure
+
+**To find tools for your task:**
+1. Start typing in IDE (category or verb)
+2. Explore autocomplete suggestions
+3. Query for usage patterns: `search_standards("how to use [discovered tool]")`
+
+---
+
+## Best Practices for Dynamic Discovery
+
+### 1. Trust IDE Autocomplete Over Memory
+
+**Wrong:**
 ```python
-# Navigate to page
-aos_browser(
-    action="navigate",
-    url="http://localhost:3000",
-    session_id="test-session"
-)
-
-# Click element
-aos_browser(
-    action="click",
-    selector="#login-button",
-    session_id="test-session"
-)
-
-# Fill form
-aos_browser(
-    action="fill",
-    selector="#username",
-    value="testuser@example.com",
-    session_id="test-session"
-)
-
-# Take screenshot
-aos_browser(
-    action="screenshot",
-    screenshot_path="/tmp/homepage.png",
-    session_id="test-session"
-)
-
-# Close session
-aos_browser(
-    action="close",
-    session_id="test-session"
-)
+# Trying to remember exact tool name and parameters
+mcp_search_documents(query="...", limit=5, ...)  # Guessing
 ```
 
-### Testing Pattern
+**Right:**
+```python
+# Start typing, let IDE show options
+mcp_[autocomplete shows: search_standards, search_workflow, etc.]
+# Select correct tool, IDE shows exact parameter schema
+```
+
+### 2. Query for Patterns, Not Parameters
+
+**Wrong:**
+```python
+search_standards("aos_browser parameters")  # IDE already shows this
+```
+
+**Right:**
+```python
+search_standards("how to test web UI with aos_browser")  # Patterns
+```
+
+### 3. Embrace Evolution
+
+**Wrong Mindset:**
+"I'll memorize all tools and their parameters"
+
+**Right Mindset:**
+"I'll develop the habit of discovering tools dynamically as needed"
+
+### 4. Combine Discovery Methods
 
 ```python
-# Start browser session
-session = "auth-test-1"
-
-# Navigate to app
-aos_browser(action="navigate", url="http://localhost:3000", session_id=session)
-
-# Fill login form
-aos_browser(action="fill", selector="#email", value="test@example.com", session_id=session)
-aos_browser(action="fill", selector="#password", value="testpass123", session_id=session)
-
-# Submit
-aos_browser(action="click", selector="button[type='submit']", session_id=session)
-
-# Wait for dashboard
-aos_browser(action="wait", selector="#dashboard", wait_for_state="visible", session_id=session)
-
-# Verify success
-aos_browser(action="screenshot", screenshot_path="/tmp/dashboard.png", session_id=session)
-
-# Cleanup
-aos_browser(action="close", session_id=session)
+# 1. IDE autocomplete → discover tool exists
+# 2. IDE hover → see parameter schema
+# 3. Query → understand usage patterns
+# 4. Implement → use tool effectively
 ```
 
 ---
 
-## 🏗️ Advanced Tools
+## Why This Guide Exists
 
-### `create_workflow` - Generate New Workflow
+**This guide does NOT:**
+- ❌ List all available tools (that's `tools/list` via IDE)
+- ❌ Document every parameter (that's tool schemas)
+- ❌ Provide complete API reference (that's MCP protocol)
 
-**When to Use**: Creating custom workflows for project-specific tasks
+**This guide DOES:**
+- ✅ Explain WHY dynamic discovery works
+- ✅ Teach HOW to discover tools effectively
+- ✅ Clarify the probabilistic reality you face
+- ✅ Provide mental models for tool selection
 
-```python
-result = create_workflow(
-    name="api-documentation-v1",
-    workflow_type="documentation",
-    phases=["Analysis", "Generation", "Validation"],
-    target_language="python",
-    quick_start=True  # Use minimal template
-)
-
-# Creates compliant workflow structure:
-# .agent-os/workflows/api-documentation-v1/
-# ├── metadata.json
-# └── phases/
-#     ├── 1/
-#     │   ├── phase.md
-#     │   └── task-1-analyze.md
-#     ├── 2/
-#     │   └── ...
-```
-
-### `validate_workflow` - Check Compliance
-
-**When to Use**: Verifying workflow follows Agent OS standards
-
-```python
-result = validate_workflow(
-    workflow_path="universal/workflows/my-workflow-v1"
-)
-
-# Returns:
-# {
-#   "compliant": True/False,
-#   "issues": [...],  # What's wrong
-#   "warnings": [...],  # What could be better
-#   "compliance_score": 0.95  # 0-1 score
-# }
-```
+**The unique value:** Understanding the SCIENCE of why Agent OS uses dynamic discovery, not documenting specific tools.
 
 ---
 
-## 📊 Usage Patterns by Task Type
+## 🔍 When to Query This Standard
 
-### Pattern 1: Simple Implementation
-
-```python
-# Human: "Add logging to the API"
-
-# 1. Query for guidance
-search_standards("How should I implement logging in Python?")
-
-# 2. Implement
-# [Write logging configuration]
-# [Add logging calls to API]
-
-# 3. Test
-# [Run tests]
-
-# 4. Present
-"Logging implemented using Python logging module. All tests passing."
-```
-
-### Pattern 2: Complex Feature (Use Workflow)
-
-```python
-# Human: "Add authentication system"
-
-# 1. Start spec creation workflow
-response = start_workflow("spec_creation_v1", "auth/")
-session_id = response['session_id']
-
-# 2. Get phase requirements
-phase = get_current_phase(session_id)
-# [Read phase content]
-
-# 3. Query for guidance
-search_standards("Authentication system architecture")
-search_standards("JWT token implementation")
-
-# 4. Complete phase work
-# [Create srd.md]
-
-# 5. Submit evidence
-complete_phase(session_id, phase=1, evidence={...})
-
-# 6. Repeat for each phase until spec complete
-
-# 7. Execute spec with spec_execution_v1
-```
-
-### Pattern 3: Debugging
-
-```python
-# Tests failing
-
-# 1. Analyze failure
-# [Read test output]
-
-# 2. Query for understanding
-search_standards("What causes this error?")
-
-# 3. Query for solution
-search_standards("How do I fix X?")
-
-# 4. Implement fix
-
-# 5. Retest
-# [Run tests again]
-
-# 6. Iterate until passing
-```
-
-### Pattern 4: Code Review
-
-```python
-# Human: "Review the auth implementation"
-
-# 1. Query standards for checklist
-search_standards("What should I check in security code review?")
-
-# 2. Review against standards
-# [Check code]
-
-# 3. Query specific concerns
-search_standards("Is this JWT implementation secure?")
-
-# 4. Provide detailed review
-"Reviewed auth implementation:
-✅ Password hashing correct
-✅ Token expiration handled
-❌ Missing rate limiting
-❌ Should validate email format
-Fixes implemented. Ready for re-review."
-```
-
----
-
-## 🎯 Tool Selection Guide
-
-| Task | Primary Tool | Secondary Tools |
-|------|-------------|-----------------|
-| Simple implementation | `search_standards` | None |
-| Complex feature | `start_workflow` | `search_standards`, `current_date` |
-| Debugging | `search_standards` | None |
-| Creating specs | `start_workflow` (spec_creation_v1) | `search_standards`, `current_date` |
-| Executing specs | `start_workflow` (spec_execution_v1) | `search_standards` |
-| Testing web app | `aos_browser` | `search_standards` |
-| Creating workflows | `create_workflow` | `validate_workflow`, `search_standards` |
-
----
-
-## ⚡ Pro Tips
-
-### Tip 1: Query Liberally
-
-Cost of query: 0.001 seconds, 2KB context
-Cost of wrong implementation: 5 minutes debugging, failed tests, rework
-
-**Query early, query often.**
-
-### Tip 2: Chain Queries for Complex Tasks
-
-```python
-# Don't: One vague query
-search_standards("build authentication")
-
-# Do: Multiple specific queries
-search_standards("How should I structure authentication middleware?")
-search_standards("How do I securely hash passwords?")
-search_standards("What JWT library should I use in Python?")
-search_standards("How do I handle token refresh?")
-search_standards("What security headers should auth endpoints include?")
-```
-
-### Tip 3: Use Workflows for Complex Tasks
-
-If task has >3 major phases or >5 days of work → Use workflow
-
-Workflows provide:
-- Structure (don't forget steps)
-- Quality gates (evidence validation)
-- Resumability (can pause/resume)
-
-### Tip 4: Combine Tools
-
-```python
-# Starting spec
-date = current_date()
-search_standards("How do I structure an SRD?")
-start_workflow("spec_creation_v1", "feature.py")
-
-# Implementing with browser testing
-search_standards("FastAPI authentication patterns")
-# [Implement]
-aos_browser(action="navigate", url="http://localhost:8000")
-aos_browser(action="click", selector="#test-login")
-# [Verify]
-```
-
-### Tip 5: Check Workflow State After Interruptions
-
-```python
-# Session interrupted yesterday, resuming today
-
-# First thing: check state
-state = get_workflow_state(session_id="previous-session-id")
-print(f"Currently on phase {state['current_phase']}")
-print(f"Completed: {state['completed_phases']}")
-
-# Get current phase content
-phase = get_current_phase(session_id="previous-session-id")
-# [Continue from where you left off]
-```
+| Situation | Example Query |
+|-----------|---------------|
+| **Understanding dynamic discovery** | `search_standards("MCP dynamic discovery")` |
+| **Why tools/list matters** | `search_standards("why dynamic tools")` |
+| **Context degradation** | `search_standards("probabilistic reality AI")` |
+| **Tool discovery best practices** | `search_standards("how to discover MCP tools")` |
+| **Why not static docs** | `search_standards("why MCP tools not documented")` |
+| **Tool selection** | `search_standards("how to choose right tool")` |
 
 ---
 
 ## 🔗 Related Standards
 
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Overall Agent OS concepts
-- `standards/ai-assistant/OPERATING-MODEL.md` - Your role and responsibilities
-- `usage/ai-agent-quickstart.md` - Practical scenario examples
+**Query workflow for tool mastery:**
 
-**Query anytime**:
-```python
-search_standards("How do I use MCP tools?")
-search_standards("Query patterns for standards search")
-```
+1. **Start with dynamic discovery** → `search_standards("MCP dynamic discovery")` (this document)
+2. **Learn orientation** → `search_standards("Agent OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
+3. **See practical examples** → `search_standards("AI agent examples")` → `usage/ai-agent-quickstart.md`
+4. **Understand workflows** → `search_standards("workflow system")` → `standards/workflows/workflow-system-overview.md`
 
----
+**By Category:**
 
-**Master these tools, and you'll be a highly effective AI agent in Agent OS Enhanced.** 🚀
+**AI Assistant:**
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core Agent OS concepts → `search_standards("Agent OS orientation")`
+- `usage/mcp-usage-guide.md` - MCP protocol usage → `search_standards("MCP usage guide")`
 
----
+**Usage:**
+- `usage/ai-agent-quickstart.md` - Practical examples → `search_standards("AI agent behavior examples")`
+- `usage/operating-model.md` - Partnership roles → `search_standards("operating model")`
 
-## 🔗 Query Standards Frequently
-
-Throughout your session, query liberally to maintain correct behavior patterns:
-
-```python
-# Tool usage
-search_standards("MCP tools guide")
-search_standards("How to query standards effectively")
-
-# Orientation refresh
-search_standards("Agent OS orientation")  
-
-# Specific needs
-search_standards("How do I X?")  # Your actual question
-```
-
-**Remember**: Each query reinforces the pattern. Target 5-10 queries per task to maintain Agent OS awareness throughout your session.
+**Development:**
+- `standards/development/mcp-tool-design-best-practices.md` - Creating tools → `search_standards("MCP tool design")`
 
 ---
 
-**Query liberally. Build the habit. Better code follows.** 🚀
-
+**Dynamic discovery over static documentation. Embrace evolution, trust introspection, query for patterns.** 🚀

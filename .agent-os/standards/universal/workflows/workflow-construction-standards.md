@@ -6,6 +6,92 @@
 
 ---
 
+## 🎯 TL;DR - Workflow Construction Quick Reference
+
+**Keywords for search**: workflow construction, building workflows, workflow structure, phase.md, task files, workflow standards, workflow file sizes, workflow engine, creating workflows, workflow templates
+
+**Core Principle:** Workflows follow meta-framework principles with specific file naming and size standards: phase.md (~80 lines), task files (100-170 lines), command language, validation gates.
+
+**Directory Structure:**
+```
+workflows/{workflow_name}/
+├── metadata.json           # Workflow definition (required)
+├── phases/
+│   ├── N/
+│   │   ├── phase.md       # Phase overview (~80 lines)
+│   │   ├── task-1-name.md # Task files (100-170 lines)
+│   │   └── task-2-name.md
+└── core/                   # Optional supporting docs
+```
+
+**Key Rules:**
+1. ✅ **Use `phase.md`** (not README.md)
+2. ✅ **Phase files: ~80 lines** (overview only)
+3. ✅ **Task files: 100-170 lines** (detailed execution)
+4. ✅ **One task = one file** (horizontal decomposition)
+5. ✅ **Command language** (🛑, 🎯, 📊)
+6. ✅ **Validation gates** after every phase
+
+**Phase File Template:**
+```markdown
+# Phase N: [Name]
+🎯 Phase Objective: [Clear goal]
+## Tasks in This Phase
+- task-1-name.md
+- task-2-name.md
+🛑 VALIDATE-GATE: Phase N Checkpoint
+- [ ] Criterion ✅/❌
+```
+
+**Task File Template:**
+```markdown
+# Task N: [Name]
+🎯 Objective: [What this accomplishes]
+## Prerequisites
+🛑 EXECUTE-NOW: [Required actions]
+## Steps
+### Step 1: [Action]
+[Detailed instructions]
+## Completion Criteria
+- [ ] Criterion ✅/❌
+🎯 NEXT-MANDATORY: [Next task]
+```
+
+**File Size Guidelines:**
+- **Phase files:** 60-100 lines (target: 80)
+- **Task files:** 100-170 lines (target: 120)
+- **Supporting docs:** 200-500 lines
+
+**Command Language:**
+- `🛑 EXECUTE-NOW` - Blocking action
+- `🎯 NEXT-MANDATORY` - Explicit routing
+- `📊 COUNT-AND-DOCUMENT` - Evidence gathering
+- `🛑 VALIDATE-GATE` - Quality checkpoint
+
+**Common Mistakes:**
+- Using README.md instead of phase.md
+- Monolithic task files (>200 lines)
+- Missing validation gates
+- Vague completion criteria
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I create a workflow?"
+2. "What is the workflow directory structure?"
+3. "Should I use README.md or phase.md?"
+4. "What size should task files be?"
+5. "How do I structure phase files?"
+6. "How do I structure task files?"
+7. "What command language should I use?"
+8. "How do I add validation gates?"
+9. "What are workflow construction standards?"
+10. "How do workflows relate to meta-framework?"
+11. "What file naming conventions exist?"
+
+---
+
 ## 🎯 Overview
 
 This document defines the **structural standards** for building workflows in the Agent OS workflow engine. It applies meta-framework principles specifically to workflow construction.
@@ -18,9 +104,9 @@ This document defines the **structural standards** for building workflows in the
 
 ---
 
-## 📁 Standard Workflow Structure
+## What Is the Standard Workflow Structure?
 
-Every workflow MUST follow this directory structure:
+Every workflow MUST follow this directory structure to ensure compatibility with the workflow engine:
 
 ```
 workflows/{workflow_name}/
@@ -46,7 +132,9 @@ workflows/{workflow_name}/
 
 ---
 
-## 📄 Phase File Standard
+## How to Structure Phase Files?
+
+Phase files are navigation hubs that provide overview and route to tasks. They must be concise and focused.
 
 **Filename:** `phase.md`  
 **Size:** ~80 lines  
@@ -106,7 +194,9 @@ workflows/{workflow_name}/
 
 ---
 
-## 📄 Task File Standard
+## How to Structure Task Files?
+
+Task files contain detailed execution instructions for a single, focused task. They are the core execution units.
 
 **Filename:** `task-N-descriptive-name.md`  
 **Size:** 100-170 lines  
@@ -169,7 +259,9 @@ workflows/{workflow_name}/
 
 ---
 
-## 📏 File Size Guidelines
+## What Are the File Size Guidelines?
+
+File size directly impacts AI attention quality. Follow these empirically validated targets:
 
 Based on meta-framework horizontal decomposition principles:
 
@@ -192,7 +284,9 @@ Based on meta-framework horizontal decomposition principles:
 
 ---
 
-## 🔧 Command Language
+## What Command Language Should I Use in Workflows?
+
+Command language creates binding instructions that AI agents cannot ignore. Use these standardized symbols:
 
 All workflow files MUST use command language for enforceability:
 
@@ -216,7 +310,9 @@ See: [Command Language Standard](../meta-framework/command-language.md)
 
 ---
 
-## ✅ Validation Checklist
+## How to Validate Workflow Quality?
+
+Use this checklist to ensure your workflow meets Agent OS standards before deployment:
 
 Before considering a workflow complete:
 
@@ -243,7 +339,9 @@ Before considering a workflow complete:
 
 ---
 
-## 📚 Examples
+## What Working Examples Exist?
+
+These production workflows demonstrate the standards in action:
 
 **Compliant Workflows:**
 - `spec_execution_v1` - Hybrid static/dynamic workflow
@@ -255,7 +353,9 @@ Before considering a workflow complete:
 
 ---
 
-## 🚨 Common Mistakes
+## What Common Mistakes Should I Avoid?
+
+These anti-patterns frequently occur in workflow construction. Recognize and eliminate them:
 
 ### Mistake 1: Using README.md Instead of phase.md
 **Problem:** Inconsistent naming, unclear purpose  
@@ -275,7 +375,9 @@ Before considering a workflow complete:
 
 ---
 
-## 🔄 Relationship to Meta-Framework
+## How Do Workflows Relate to Meta-Framework?
+
+Workflow construction standards are the specific application of meta-framework principles:
 
 **Workflow Construction Standards** are a specific application of **Meta-Framework Principles**:
 
@@ -292,7 +394,9 @@ Before considering a workflow complete:
 
 ---
 
-## 📝 Creating a New Workflow
+## How to Create a New Workflow?
+
+Follow this systematic process to create a workflow from scratch or from specification:
 
 **Step-by-step process:**
 
@@ -319,6 +423,50 @@ Before considering a workflow complete:
 4. ✅ **One task = one file** (horizontal decomposition)
 5. ✅ **Command language** enforces compliance
 6. ✅ **Based on actual working workflows** (not theoretical)
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Creating workflow** | `search_standards("workflow construction")` |
+| **Workflow structure** | `search_standards("workflow structure")` |
+| **Phase files** | `search_standards("phase.md")` |
+| **Task files** | `search_standards("task file structure")` |
+| **File sizes** | `search_standards("workflow file sizes")` |
+| **Validation gates** | `search_standards("workflow validation gates")` |
+| **Command language** | `search_standards("workflow commands")` |
+| **Building workflows** | `search_standards("building workflows")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete workflow creation:**
+
+1. **Start with construction** → `search_standards("workflow construction")` (this document)
+2. **Add metadata** → `search_standards("workflow metadata")` → `standards/workflows/workflow-metadata-standards.md`
+3. **Understand system** → `search_standards("workflow system overview")` → `standards/workflows/workflow-system-overview.md`
+4. **Learn principles** → `search_standards("framework creation principles")` → `standards/meta-framework/framework-creation-principles.md`
+5. **Apply architecture** → `search_standards("three-tier architecture")` → `standards/meta-framework/three-tier-architecture.md`
+
+**By Category:**
+
+**Workflows:**
+- `standards/workflows/workflow-metadata-standards.md` - metadata.json structure → `search_standards("workflow metadata")`
+- `standards/workflows/workflow-system-overview.md` - Workflow engine → `search_standards("workflow system overview")`
+- `standards/workflows/mcp-rag-configuration.md` - RAG configuration → `search_standards("MCP RAG configuration")`
+
+**Meta-Framework (Foundation):**
+- `standards/meta-framework/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+- `standards/meta-framework/three-tier-architecture.md` - Content organization → `search_standards("three-tier architecture")`
+- `standards/meta-framework/horizontal-decomposition.md` - File size guidelines → `search_standards("horizontal decomposition")`
+- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-framework/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+
+**Usage:**
+- `usage/creating-specs.md` - Specification structure → `search_standards("how to create specs")`
 
 ---
 

@@ -2,6 +2,42 @@
 
 **How to properly update Agent OS content in consuming projects**
 
+**Keywords for search**: Agent OS update, how to update Agent OS, sync from universal, update procedures, content sync, MCP server upgrade, rsync commands, safe upgrade, Agent OS installation update
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Critical Rules:**
+1. ✅ **ALWAYS sync from** `universal/` directory (source)
+2. ❌ **NEVER sync from** `.agent-os/` directory (build artifact)
+3. ✅ **Use safe-upgrade** script for automated updates
+4. ✅ **Sync to** `.agent-os/` in your consuming project
+5. ✅ **RAG index auto-rebuilds** on file changes (no manual action needed)
+
+**Quick Update Command:**
+```bash
+# Sync from agent-os-enhanced/universal/ to your-project/.agent-os/
+rsync -av --delete /path/to/agent-os-enhanced/universal/ /path/to/your-project/.agent-os/
+```
+
+**Recommended:** Use `agent_os_upgrade_v1` workflow for safe, automated updates with validation and rollback.
+
+---
+
+## Questions This Answers
+
+- "How do I update Agent OS in my project?"
+- "Where do I sync Agent OS content from?"
+- "Should I sync from .agent-os or universal?"
+- "How do I update standards and workflows?"
+- "Does the RAG index rebuild automatically?"
+- "How often should I update Agent OS?"
+- "What's the safe way to update?"
+- "How do I use the safe-upgrade script?"
+- "What gets synced during an update?"
+- "How do I update the MCP server?"
+
 ---
 
 ## 🚨 CRITICAL: Update Source Location
@@ -608,6 +644,64 @@ If you encounter issues:
 3. Verify you're syncing from `universal/` not `.agent-os/`
 4. Check file watchers are running (auto-rebuild)
 5. Try a clean reinstall from `universal/`
+
+---
+
+## When to Query This Guide
+
+This guide is most valuable when:
+
+1. **Updating Agent OS**
+   - Situation: Need to get latest standards and workflows
+   - Query: `search_standards("how to update Agent OS")`
+
+2. **Unsure About Sync Source**
+   - Situation: Don't know if I should sync from `.agent-os` or `universal`
+   - Query: `search_standards("sync from universal or agent-os")`
+
+3. **RAG Index Questions**
+   - Situation: Wondering if I need to rebuild RAG index
+   - Query: `search_standards("RAG index auto rebuild")`
+
+4. **MCP Server Updates**
+   - Situation: Need to update MCP server code
+   - Query: `search_standards("update MCP server")`
+
+5. **Update Frequency**
+   - Situation: How often should I update?
+   - Query: `search_standards("Agent OS update frequency")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Update process | `search_standards("how to update Agent OS")` |
+| Sync source | `search_standards("sync from universal")` |
+| Safe upgrade | `search_standards("safe upgrade Agent OS")` |
+| RAG index | `search_standards("RAG index rebuild")` |
+| MCP server update | `search_standards("update MCP server")` |
+
+---
+
+## Cross-References and Related Guides
+
+**Update Standards:**
+- `standards/installation/update-procedures.md` - Update procedures standard (discovery guide)
+  → `search_standards("Agent OS update standards")`
+
+**Workflows:**
+- `workflows/agent_os_upgrade_v1/` - Automated safe upgrade workflow
+  → `search_standards("agent OS upgrade workflow")`
+
+**Installation:**
+- `usage/installation-guide.md` - Initial installation (if available)
+  → `search_standards("Agent OS installation")`
+
+**Query workflow:**
+1. **Before Update**: `search_standards("how to update Agent OS")` → Learn process
+2. **Execute**: Use `agent_os_upgrade_v1` workflow for safe update
+3. **Verify**: Check RAG index rebuilt automatically
+4. **Troubleshoot**: `search_standards("Agent OS update issues")` if needed
 
 ---
 

@@ -2,11 +2,43 @@
 
 **How to update the Agent OS MCP server software in consuming projects**
 
+**Keywords for search**: MCP server update, update MCP server, upgrade MCP server, server software update, MCP Python code update, server restart, dependency update
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Two types of updates:**
+
+1. **Content Updates** (standards/workflows) → Use `agent_os_upgrade_v1` workflow
+   - No server restart needed
+   - RAG index rebuilds automatically
+
+2. **MCP Server Updates** (Python code) → Covered in this guide
+   - ⚠️ **Requires server restart**
+   - May have breaking changes
+   - Use `agent_os_upgrade_v1` workflow (recommended) or manual method
+
+**Recommended: Use the workflow for both types**
+
+---
+
+## Questions This Answers
+
+- "How do I update the MCP server software?"
+- "Do I need to restart the MCP server?"
+- "What's the difference between content and server updates?"
+- "How do I update MCP server dependencies?"
+- "When should I update the MCP server?"
+- "How do I test MCP server updates?"
+- "What if the server update breaks something?"
+- "How do I roll back an MCP server update?"
+
 ---
 
 ## 📋 Two Types of Updates
 
-### 1. Content Updates (Covered in agent-os-update-guide.md)
+### 1. Content Updates (Covered in standards/installation/update-procedures.md)
 
 Updating standards, workflows, and documentation:
 ```bash
@@ -617,12 +649,63 @@ echo "📋 Check logs: Cursor > Settings > MCP Servers > agent-os-rag > View Log
 
 ---
 
-## 📚 Related Documentation
+## When to Query This Guide
 
-- **Content Updates**: `agent-os-update-guide.md`
-- **Installation**: Agent OS installation guide
-- **MCP Configuration**: Cursor MCP server setup
-- **CHANGELOG**: `mcp_server/CHANGELOG.md`
+This guide is most valuable when:
+
+1. **Updating MCP Server Software**
+   - Situation: Need to update Python server code
+   - Query: `search_standards("how to update MCP server")`
+
+2. **Server Restart Questions**
+   - Situation: Unsure if restart needed after update
+   - Query: `search_standards("MCP server restart required")`
+
+3. **Dependency Updates**
+   - Situation: Need to update server dependencies
+   - Query: `search_standards("update MCP server dependencies")`
+
+4. **Breaking Changes**
+   - Situation: Checking for breaking changes in update
+   - Query: `search_standards("MCP server breaking changes")`
+
+5. **Rollback Scenarios**
+   - Situation: Need to roll back failed server update
+   - Query: `search_standards("rollback MCP server update")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Server update | `search_standards("update MCP server")` |
+| Restart required | `search_standards("MCP server restart")` |
+| Dependencies | `search_standards("MCP server dependencies")` |
+| Testing updates | `search_standards("test MCP server update")` |
+| Rollback | `search_standards("rollback MCP server")` |
+
+---
+
+## Cross-References and Related Guides
+
+**Update Standards:**
+- `standards/installation/update-procedures.md` - Content update procedures
+  → `search_standards("Agent OS update standards")`
+
+**Workflows:**
+- `workflows/agent_os_upgrade_v1/` - Automated upgrade workflow (handles both content and server)
+  → `search_standards("agent OS upgrade workflow")`
+
+**MCP Documentation:**
+- `usage/mcp-usage-guide.md` - How to use MCP tools
+  → `search_standards("MCP tools guide")`
+- `mcp_server/CHANGELOG.md` - Server version history
+
+**Query workflow:**
+1. **Before Update**: `search_standards("how to update MCP server")` → Learn process
+2. **Check Changes**: Read CHANGELOG.md for breaking changes
+3. **Execute**: Use `agent_os_upgrade_v1` workflow (recommended) or manual method
+4. **Validate**: Test MCP tools after restart
+5. **Troubleshoot**: `search_standards("MCP server update issues")` if needed
 
 ---
 

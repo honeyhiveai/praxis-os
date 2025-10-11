@@ -2,6 +2,59 @@
 
 **Timeless patterns for writing secure code.**
 
+---
+
+## 🎯 TL;DR - Security Patterns Quick Reference
+
+**Keywords for search**: security patterns, OWASP Top 10, SQL injection, XSS, CSRF, authentication, authorization, input validation, password hashing, session management, cryptography, security best practices, secure coding
+
+**Core Principle:** "Security is not a feature - it's a requirement." Assume all input is malicious until proven otherwise.
+
+**OWASP Top 10 Quick Reference:**
+1. **Injection** - Use parameterized queries, never concatenate user input
+2. **Broken Authentication** - Hash passwords (bcrypt/Argon2), use MFA
+3. **Sensitive Data Exposure** - Encrypt data at rest and in transit (TLS 1.2+)
+4. **XML External Entities (XXE)** - Disable external entity processing
+5. **Broken Access Control** - Verify authorization on every request
+6. **Security Misconfiguration** - Secure defaults, disable debug in production
+7. **Cross-Site Scripting (XSS)** - Escape all output, use Content Security Policy
+8. **Insecure Deserialization** - Validate before deserializing, use allowlists
+9. **Using Components with Known Vulnerabilities** - Keep dependencies updated
+10. **Insufficient Logging & Monitoring** - Log security events, alert on anomalies
+
+**Critical Security Rules:**
+- **Never trust user input** - Validate, sanitize, escape everything
+- **Use parameterized queries** - No string concatenation for SQL
+- **Hash passwords** - bcrypt, Argon2, scrypt (never plain text, never MD5/SHA1)
+- **Encrypt sensitive data** - AES-256 at rest, TLS 1.2+ in transit
+- **Implement authorization** - Check permissions on every request
+- **Update dependencies** - Patch known vulnerabilities immediately
+
+**Security Testing:**
+- Static analysis (SAST)
+- Dynamic analysis (DAST)
+- Dependency scanning
+- Penetration testing
+
+---
+
+## ❓ Questions This Answers
+
+1. "What are the OWASP Top 10 security threats?"
+2. "How do I prevent SQL injection?"
+3. "How do I prevent XSS attacks?"
+4. "What's the correct way to hash passwords?"
+5. "How do I implement authentication securely?"
+6. "What's the difference between authentication and authorization?"
+7. "How do I validate user input?"
+8. "What encryption should I use?"
+9. "How do I prevent CSRF attacks?"
+10. "What security testing should I do?"
+11. "How do I secure API endpoints?"
+12. "What are common security anti-patterns?"
+
+---
+
 ## Core Principle
 
 **"Security is not a feature - it's a requirement."**
@@ -12,7 +65,9 @@ Security must be built in from the start, not added later.
 
 ---
 
-## The OWASP Top 10 (Universal Threats)
+## What Are the OWASP Top 10 Security Threats?
+
+The OWASP Top 10 represents the most critical web application security risks. Understanding and mitigating these threats is essential for secure software development.
 
 ### 1. Injection
 
@@ -240,7 +295,9 @@ if failed_login_count > 5:
 
 ---
 
-## Input Validation Patterns
+## How to Validate User Input
+
+Input validation is the first line of defense against many security vulnerabilities. All data from users, APIs, and external sources must be validated before use.
 
 ### Pattern 1: Allowlist Validation
 
@@ -294,7 +351,9 @@ function get_user(user_id: Integer):
 
 ---
 
-## Authentication Patterns
+## How to Implement Secure Authentication
+
+Authentication verifies user identity. Poor authentication is one of the most common and dangerous security vulnerabilities.
 
 ### Pattern 1: Secure Password Storage
 
@@ -358,7 +417,9 @@ store_session(
 
 ---
 
-## Authorization Patterns
+## How to Implement Secure Authorization
+
+Authorization controls what authenticated users can access. Every request must verify the user has permission for the requested resource.
 
 ### Pattern 1: Role-Based Access Control (RBAC)
 
@@ -399,7 +460,9 @@ function update_order(order_id, new_status, current_user):
 
 ---
 
-## Cryptography Patterns
+## How to Use Cryptography Correctly
+
+Cryptography protects sensitive data, but incorrect usage can be worse than no encryption. Follow established patterns and use well-tested libraries.
 
 ### Pattern 1: Use Standard Libraries
 
@@ -445,7 +508,9 @@ if not encryption_key:
 
 ---
 
-## Common Security Anti-Patterns
+## What Security Anti-Patterns Should I Avoid?
+
+These common security mistakes create vulnerabilities even in otherwise well-designed systems. Recognize and avoid them.
 
 ### Anti-Pattern 1: Security by Obscurity
 
@@ -501,7 +566,9 @@ session_id = cryptographically_secure_random_bytes(32)
 
 ---
 
-## Security Testing
+## How to Test Security
+
+Security testing must be integrated into the development lifecycle. Different testing approaches catch different vulnerability types.
 
 ### Test 1: Authentication Bypass
 
@@ -539,7 +606,9 @@ test_sql_injection_protection():
 
 ---
 
-## Security Checklist
+## What Is the Security Checklist?
+
+Use this checklist to verify security requirements are met before deploying code to production.
 
 **Before deploying:**
 
@@ -555,6 +624,53 @@ test_sql_injection_protection():
 - [ ] **Logging:** Security events logged
 - [ ] **Rate limiting:** Login, API endpoints
 - [ ] **Error messages:** Generic to users, detailed in logs
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **User input handling** | `search_standards("input validation")` |
+| **SQL queries** | `search_standards("prevent SQL injection")` |
+| **Password storage** | `search_standards("hash passwords")` |
+| **Authentication** | `search_standards("secure authentication")` |
+| **Authorization** | `search_standards("authorization patterns")` |
+| **Sensitive data** | `search_standards("encryption")` |
+| **XSS prevention** | `search_standards("prevent XSS")` |
+| **API security** | `search_standards("secure API")` |
+| **Security vulnerabilities** | `search_standards("OWASP Top 10")` |
+| **Security testing** | `search_standards("security testing")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for secure application development:**
+
+1. **Start here** → `search_standards("security patterns")` (this document)
+2. **Then validate inputs** → `search_standards("input validation")`
+3. **Then test** → `search_standards("security testing")` (this document)
+4. **Then review** → `search_standards("production code checklist")` → `standards/ai-safety/production-code-checklist.md`
+
+**By Category:**
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Testing authentication and authorization → `search_standards("integration testing")`
+- `standards/testing/test-pyramid.md` - Security test coverage ratios → `search_standards("test pyramid")`
+
+**Architecture:**
+- `standards/architecture/api-design-principles.md` - Secure API design → `search_standards("API design")`
+- `standards/architecture/dependency-injection.md` - Injecting security services → `search_standards("dependency injection")`
+
+**Database:**
+- `standards/database/database-patterns.md` - Preventing SQL injection → `search_standards("database patterns")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production security checklist → `search_standards("production code checklist")`
+
+**Documentation:**
+- `standards/documentation/api-documentation.md` - Documenting security requirements → `search_standards("API documentation")`
 
 ---
 

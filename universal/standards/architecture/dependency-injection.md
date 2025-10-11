@@ -2,6 +2,67 @@
 
 **Timeless pattern for decoupling and testable code.**
 
+**Keywords for search**: dependency injection, DI, constructor injection, testable code, mocking dependencies, inversion of control, IoC container, decoupling, SOLID principles, dependency management
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Core Principle:** Don't create what you need. Ask for it.
+
+**Three Types of DI:**
+1. **Constructor Injection** (Recommended, 90% of cases) - Dependencies passed through constructor
+2. **Setter Injection** (Rare) - Dependencies set via methods after construction
+3. **Interface Injection** (Almost never) - Object provides injection method
+
+**Key Benefits:**
+- ✅ Loosely coupled code
+- ✅ Easy to test (inject mocks)
+- ✅ Reusable components
+- ✅ Follows SOLID principles
+
+**Three Implementation Patterns:**
+1. **Manual DI** - Manually wire dependencies (small projects, <20 classes)
+2. **DI Container** - Framework manages dependencies (large projects, >20 classes)
+3. **Factory Pattern** - Factory creates objects with dependencies (medium projects)
+
+**Anti-Patterns to Avoid:**
+- ❌ Service Locator (hidden dependencies)
+- ❌ New keyword in business logic
+- ❌ Overusing DI (injecting constants)
+
+**Quick Start:**
+```python
+# Without DI (Bad)
+class UserService:
+    def __init__(self):
+        self.database = MySQLDatabase()  # Hard-coded!
+
+# With DI (Good)
+class UserService:
+    def __init__(self, database):  # Dependency injected!
+        self.database = database
+```
+
+---
+
+## Questions This Answers
+
+- "What is dependency injection and why use it?"
+- "How to make code testable by injecting dependencies?"
+- "What's the difference between constructor, setter, and interface injection?"
+- "When should I use a DI container vs manual wiring?"
+- "How to avoid hard-coded dependencies in my code?"
+- "How to mock dependencies for unit testing?"
+- "What are dependency injection anti-patterns?"
+- "How to handle circular dependencies?"
+- "When should I use constructor injection vs setter injection?"
+- "How to implement dependency injection in my language?"
+- "What's the difference between dependency injection and service locator?"
+- "How to refactor code to use dependency injection?"
+
+---
+
 ## What is Dependency Injection?
 
 Dependency Injection (DI) is a design pattern where an object receives its dependencies from external sources rather than creating them itself.
@@ -78,9 +139,11 @@ user_service = UserService(mock_db, mock_logger, mock_cache)
 
 ---
 
-## Three Types of Dependency Injection
+## How to Choose the Right Type of Dependency Injection
 
-### Type 1: Constructor Injection (Recommended)
+Understanding the three types helps you select the best approach for your specific use case.
+
+### Type 1: How to Use Constructor Injection (Recommended)
 
 **Concept:** Dependencies passed through constructor.
 
@@ -107,7 +170,7 @@ class OrderService:
 
 ---
 
-### Type 2: Setter Injection
+### Type 2: How to Use Setter Injection
 
 **Concept:** Dependencies set through methods after construction.
 
@@ -149,7 +212,7 @@ report = generator.generate_report()
 
 ---
 
-### Type 3: Interface Injection
+### Type 3: How to Use Interface Injection (Rarely Needed)
 
 **Concept:** Object provides method to inject dependencies (rare).
 
@@ -167,9 +230,11 @@ class UserService implements InjectableService:
 
 ---
 
-## Dependency Injection Patterns
+## How to Implement Dependency Injection (Three Patterns)
 
-### Pattern 1: Manual DI (Simple Projects)
+Choose the pattern that matches your project size and complexity.
+
+### Pattern 1: How to Use Manual DI (Simple Projects)
 
 **Concept:** Manually wire dependencies in main/setup code.
 
@@ -206,7 +271,7 @@ if __name__ == "__main__":
 
 ---
 
-### Pattern 2: DI Container (Large Projects)
+### Pattern 2: How to Use DI Container (Large Projects)
 
 **Concept:** Container manages dependency creation and injection.
 
@@ -256,7 +321,7 @@ class DIContainer:
 
 ---
 
-### Pattern 3: Factory Pattern
+### Pattern 3: How to Use Factory Pattern for DI
 
 **Concept:** Factory creates objects with dependencies.
 
@@ -284,9 +349,9 @@ order_service = factory.create_order_service()
 
 ---
 
-## Handling Complex Dependencies
+## How to Handle Complex Dependency Scenarios
 
-### Problem: Circular Dependencies
+### How to Resolve Circular Dependencies
 
 ```
 // BAD: Circular dependency
@@ -338,7 +403,7 @@ service_a.set_service_b(service_b)
 
 ---
 
-### Problem: Too Many Dependencies
+### How to Handle Too Many Dependencies
 
 ```
 // Code smell: Constructor with 8+ parameters
@@ -381,9 +446,11 @@ class ReportService:
 
 ---
 
-## Testing with Dependency Injection
+## How to Test Code Using Dependency Injection
 
-### Unit Test with Mocks
+DI makes testing significantly easier by allowing mock injection.
+
+### How to Write Unit Tests with Mocked Dependencies
 
 ```
 def test_get_user_caches_result():
@@ -404,7 +471,7 @@ def test_get_user_caches_result():
     assert mock_db.call_count == 1      // DB called once
 ```
 
-### Integration Test with Real Dependencies
+### How to Write Integration Tests with Real Dependencies
 
 ```
 def test_order_flow_integration():
@@ -422,7 +489,7 @@ def test_order_flow_integration():
 
 ---
 
-## DI Containers (Language Examples)
+## What DI Containers Are Available by Language?
 
 ### Python
 - **Manual:** Simple constructor injection
@@ -445,9 +512,9 @@ def test_order_flow_integration():
 
 ---
 
-## Anti-Patterns
+## What Dependency Injection Anti-Patterns Should I Avoid?
 
-### Anti-Pattern 1: Service Locator
+### Anti-Pattern 1: Service Locator (Hidden Dependencies)
 
 ❌ Using global registry to fetch dependencies.
 
@@ -468,7 +535,7 @@ class UserService:
 
 ---
 
-### Anti-Pattern 2: New Keyword in Business Logic
+### Anti-Pattern 2: Creating Dependencies in Business Logic
 
 ❌ Creating dependencies in methods.
 
@@ -484,7 +551,7 @@ class OrderService:
 
 ---
 
-### Anti-Pattern 3: Overusing DI
+### Anti-Pattern 3: Overusing Dependency Injection
 
 ❌ Injecting everything, even simple values.
 
@@ -502,7 +569,7 @@ class TaxCalculator:
 
 ---
 
-## Best Practices
+## What Are Dependency Injection Best Practices?
 
 ### 1. Prefer Constructor Injection
 Makes dependencies explicit and immutable.
@@ -546,6 +613,74 @@ Manual wiring doesn't scale beyond 20-30 classes.
 - See `.agent-os/standards/development/csharp-architecture.md` (C#: built-in DI)
 - See `.agent-os/standards/development/js-architecture.md` (JavaScript: InversifyJS)
 - Etc.
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Designing New Classes**
+   - Situation: Creating classes with external dependencies
+   - Query: `search_standards("how to inject dependencies")`
+
+2. **Making Code Testable**
+   - Situation: Need to mock dependencies for unit tests
+   - Query: `search_standards("how to make code testable")`
+
+3. **Refactoring Hard-Coded Dependencies**
+   - Situation: Code has hard-coded database/API/service instantiation
+   - Query: `search_standards("how to remove hard-coded dependencies")`
+
+4. **Choosing DI Implementation Pattern**
+   - Situation: Deciding between manual DI, container, or factory
+   - Query: `search_standards("when to use DI container")`
+
+5. **Resolving Circular Dependencies**
+   - Situation: Two classes depend on each other
+   - Query: `search_standards("how to resolve circular dependencies")`
+
+6. **Code Review Feedback**
+   - Situation: Reviewer says "this should use dependency injection"
+   - Query: `search_standards("dependency injection pattern")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Make code testable | `search_standards("how to make code testable")` |
+| Remove hard-coding | `search_standards("avoid hard-coded dependencies")` |
+| Choose DI type | `search_standards("constructor vs setter injection")` |
+| Handle circular deps | `search_standards("circular dependencies solution")` |
+| DI container | `search_standards("when to use DI container")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Architecture Standards:**
+- `standards/architecture/solid-principles.md` - SOLID principles (DI supports Dependency Inversion)
+  → `search_standards("how to apply SOLID principles")`
+- `standards/architecture/separation-of-concerns.md` - Separating concerns makes DI easier
+  → `search_standards("separation of concerns")`
+
+**Testing Standards:**
+- `standards/testing/test-doubles.md` - Mocks, stubs, fakes for DI testing
+  → `search_standards("how to use test doubles")`
+- `standards/testing/test-pyramid.md` - Unit tests require DI for mocking
+  → `search_standards("test pyramid structure")`
+
+**Production Code:**
+- `standards/ai-safety/production-code-checklist.md` - Dependency management checklist
+  → `search_standards("production code checklist")`
+
+**Query workflow for implementing DI:**
+1. **Learn Pattern**: `search_standards("dependency injection pattern")` → Read this standard
+2. **Learn Testing**: `search_standards("how to use test doubles")` → Understand mocking
+3. **Choose Type**: `search_standards("constructor vs setter injection")` → Select DI type
+4. **Implement**: Apply constructor injection to your classes
+5. **Test**: `search_standards("how to unit test with mocks")` → Write tests with mocked dependencies
+6. **Review**: `search_standards("dependency injection anti-patterns")` → Validate approach
 
 ---
 

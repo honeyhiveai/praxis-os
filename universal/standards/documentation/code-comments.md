@@ -2,6 +2,80 @@
 
 **Timeless principles for writing helpful code comments.**
 
+---
+
+## 🎯 TL;DR - Code Comments Quick Reference
+
+**Keywords for search**: code comments, comment best practices, when to comment, comment styles, docstrings, JSDoc, Javadoc, TODO comments, FIXME, comment anti-patterns, self-documenting code
+
+**Core Principle:** Comments should explain WHY, not WHAT. Code explains WHAT.
+
+**When to Comment:**
+- ✅ **Complex logic** - Explain the algorithm/approach
+- ✅ **Non-obvious decisions** - Why you chose this solution
+- ✅ **Performance optimizations** - Why this unusual approach
+- ✅ **Business rules** - Domain logic that isn't obvious from code
+- ✅ **Workarounds** - Why you're working around a bug/limitation
+- ✅ **Security concerns** - Why certain checks are necessary
+- ✅ **Public APIs** - Function/class documentation for users
+
+**When NOT to Comment:**
+- ❌ **Obvious code** - `i++  // increment i`
+- ❌ **Bad variable names** - Fix the name instead
+- ❌ **Commented-out code** - Delete it (use version control)
+- ❌ **Outdated comments** - Update or remove them
+
+**Comment Styles:**
+1. **Single-line** - `// Quick explanation`
+2. **Multi-line** - Block comments for longer explanations
+3. **Documentation** - JSDoc, docstrings, Javadoc (public API)
+4. **Special tags** - `TODO`, `FIXME`, `HACK`, `NOTE`
+
+**Documentation Comments (Public APIs):**
+```
+/**
+ * Brief description of function
+ * 
+ * @param {type} name - Parameter description
+ * @returns {type} Return value description
+ * @throws {ErrorType} When this error occurs
+ * @example
+ * functionName(example)
+ */
+```
+
+**Best Practices:**
+- Write comments for your future self (6 months later)
+- Update comments when code changes
+- Explain "why" not "what"
+- Use self-documenting code first, comments second
+- Keep comments near the code they describe
+
+**Anti-Patterns:**
+- Commented-out code
+- Misleading/outdated comments
+- Comments that restate code
+- Wall of comments (refactor instead)
+
+---
+
+## ❓ Questions This Answers
+
+1. "When should I write code comments?"
+2. "What makes a good comment?"
+3. "Should I comment obvious code?"
+4. "What's the difference between TODO and FIXME?"
+5. "How do I write documentation comments?"
+6. "What's JSDoc/docstring/Javadoc?"
+7. "When should I NOT comment?"
+8. "How do I maintain comments?"
+9. "What are comment anti-patterns?"
+10. "Should I keep commented-out code?"
+11. "How do I comment complex algorithms?"
+12. "What comment style should I use?"
+
+---
+
 ## What Are Code Comments?
 
 Code comments are human-readable explanations embedded in source code.
@@ -10,7 +84,9 @@ Code comments are human-readable explanations embedded in source code.
 
 ---
 
-## The Golden Rule
+## What Is the Golden Rule for Comments?
+
+The golden rule separates helpful comments from noise. Understanding this principle improves all your commenting decisions.
 
 ```
 // Good comment: Explains WHY
@@ -29,7 +105,9 @@ index = binary_search(sorted_list, target)
 
 ---
 
-## When to Comment
+## When Should I Write Comments?
+
+Effective commenting requires judging when comments add value versus when they create noise. These guidelines help you decide.
 
 ### ✅ DO Comment
 
@@ -159,7 +237,9 @@ def calculate_total(items):
 
 ---
 
-## Comment Styles
+## What Comment Styles Should I Use?
+
+Different comment styles serve different purposes. Choose the right style for your comment's intent.
 
 ### 1. Function/Method Documentation
 
@@ -282,7 +362,9 @@ import jwt
 
 ---
 
-## Special Comment Tags
+## What Special Comment Tags Exist?
+
+Special tags create searchable markers for specific types of comments. Use them consistently for easier codebase navigation.
 
 ### Standard Tags
 
@@ -306,7 +388,9 @@ import jwt
 
 ---
 
-## Comments for Different Audiences
+## How Do I Write Comments for Different Audiences?
+
+Comments serve different audiences with different needs. Tailor your comments to who will read them.
 
 ### For Future You (6 Months Later)
 
@@ -340,7 +424,9 @@ npv = sum(cf / (1 + rate) ** t for t, cf in enumerate(cash_flows))
 
 ---
 
-## Maintaining Comments
+## How Do I Maintain Comments?
+
+Comments that don't match the code are worse than no comments. Treat comments as code that needs maintenance.
 
 ### Problem: Stale Comments
 
@@ -375,7 +461,9 @@ def test_get_user_info_returns_contact_info():
 
 ---
 
-## Code Examples vs Comments
+## When Should I Use Code Examples vs Comments?
+
+Working code examples often communicate better than prose explanations. Choose the right approach for your situation.
 
 ### Instead of Complex Comments, Write Clear Code
 
@@ -394,7 +482,9 @@ if user.is_active and (user.is_admin or user.has_premium_subscription):
 
 ---
 
-## Language-Specific Comment Styles
+## What Are Language-Specific Comment Styles?
+
+Each language has conventions for documentation comments. Follow your language's standards for tool compatibility.
 
 ### Python
 ```
@@ -452,7 +542,9 @@ func Calculate(arg int) int {
 
 ---
 
-## Anti-Patterns
+## What Comment Anti-Patterns Should I Avoid?
+
+These common commenting mistakes create confusion and maintenance burden. Recognize and eliminate them.
 
 ### Anti-Pattern 1: Commenting Everything
 
@@ -504,7 +596,9 @@ needs_tax = check_tax(price_after_discount)
 
 ---
 
-## Best Practices Summary
+## What Are Comment Best Practices?
+
+Follow these practices to write comments that help rather than hinder code understanding.
 
 ### Do Write Comments For:
 1. **Why**, not **what** (code explains what)
@@ -529,7 +623,9 @@ needs_tax = check_tax(price_after_discount)
 
 ---
 
-## Comment Quality Checklist
+## What Is the Comment Quality Checklist?
+
+Use this checklist to review comments before committing code.
 
 Before committing, ask:
 
@@ -538,6 +634,43 @@ Before committing, ask:
 - [ ] Is the comment accurate and up-to-date?
 - [ ] Could I improve code clarity instead of adding comment?
 - [ ] Does comment add information beyond what code conveys?
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Writing comments** | `search_standards("code comments")` |
+| **Comment best practices** | `search_standards("comment best practices")` |
+| **Deciding to comment** | `search_standards("when to comment")` |
+| **Documentation comments** | `search_standards("docstrings JSDoc")` |
+| **TODO vs FIXME** | `search_standards("TODO FIXME")` |
+| **Commented-out code** | `search_standards("commented out code")` |
+| **Maintaining comments** | `search_standards("maintain comments")` |
+| **Comment anti-patterns** | `search_standards("comment anti-patterns")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete documentation:**
+
+1. **Start with comments** → `search_standards("code comments")` (this document)
+2. **API docs** → `search_standards("API documentation")` → `standards/documentation/api-documentation.md`
+3. **README** → `search_standards("README templates")` → `standards/documentation/readme-templates.md`
+
+**By Category:**
+
+**Documentation:**
+- `standards/documentation/api-documentation.md` - Documenting APIs → `search_standards("API documentation")`
+- `standards/documentation/readme-templates.md` - Project README structure → `search_standards("README templates")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Documentation requirements for production → `search_standards("production code checklist")`
+
+**Architecture:**
+- `standards/architecture/solid-principles.md` - Single Responsibility (helps code clarity) → `search_standards("SOLID principles")`
 
 ---
 

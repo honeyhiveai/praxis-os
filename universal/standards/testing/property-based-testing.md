@@ -2,6 +2,62 @@
 
 **Timeless approach to finding edge cases through generative testing.**
 
+**Keywords for search**: property-based testing, PBT, QuickCheck, Hypothesis, generative testing, property testing, test properties, invariants, round-trip property, idempotence, shrinking, fuzzing
+
+---
+
+## 🚨 Quick Reference (TL;DR)
+
+**Definition:** Specify properties that should hold for all inputs → framework generates hundreds/thousands of random test cases automatically.
+
+**Invented by:** QuickCheck (Haskell, 1999) by Koen Claessen and John Hughes
+
+**Core Principle:** Test universal properties, not specific examples.
+
+**Five Types of Properties:**
+1. **Invariants** - Things always true (e.g., sort preserves length)
+2. **Idempotence** - Doing twice = doing once (e.g., sort(sort(x)) == sort(x))
+3. **Round-Trip** - Encode then decode = original (e.g., parse(serialize(x)) == x)
+4. **Commutativity** - Order doesn't matter (e.g., a + b == b + a)
+5. **Oracle** - Compare with known-good implementation
+
+**Key Benefits:**
+- ✅ Finds edge cases automatically
+- ✅ Generates hundreds of tests from one property
+- ✅ Shrinks failing inputs to minimal case
+- ✅ Catches bugs example-based tests miss
+
+**When to Use:**
+- Complex algorithms (sorting, parsing, compression)
+- APIs with invariants (data structures, serialization)
+- Mathematical properties (commutativity, associativity)
+
+**Frameworks by Language:**
+- Python: Hypothesis
+- JavaScript: fast-check
+- Java: jqwik
+- Rust: proptest
+- Go: gopter
+
+---
+
+## Questions This Answers
+
+- "What is property-based testing?"
+- "How does property-based testing differ from example-based testing?"
+- "When should I use property-based testing?"
+- "What are properties in property-based testing?"
+- "How to write properties for my code?"
+- "What is shrinking in property testing?"
+- "What frameworks exist for property-based testing?"
+- "How to test sorting algorithms with properties?"
+- "What is QuickCheck?"
+- "How to generate test data automatically?"
+- "What properties should I test for my API?"
+- "How to find edge cases automatically?"
+
+---
+
 ## What is Property-Based Testing?
 
 Property-based testing (PBT) is a testing approach where you specify properties that should hold true for all inputs, and a testing framework generates hundreds/thousands of random test cases.
@@ -60,7 +116,7 @@ def test_reverse(data: List[int]):
 
 ---
 
-## Types of Properties
+## What Types of Properties Exist?
 
 ### Property 1: Invariants
 
@@ -238,7 +294,7 @@ def test_dedup_no_consecutive_dupes(data: List[int]):
 
 ---
 
-## Generators (Creating Test Data)
+## How to Generate Test Data? (Generators)
 
 ### Built-in Generators
 
@@ -306,7 +362,7 @@ def test_with_users(user: user_generator):
 
 ---
 
-## Shrinking (Finding Minimal Failing Case)
+## How Does Shrinking Work? (Finding Minimal Failing Case)
 
 **Concept:** When test fails, framework reduces input to smallest failing example.
 
@@ -335,7 +391,7 @@ test_list_operation([0])                    // Still fails!
 
 ---
 
-## Common Patterns
+## What Common Property Patterns Exist?
 
 ### Pattern 1: Round-Trip Testing
 
@@ -496,7 +552,7 @@ def test_stripe_api():
 
 ---
 
-## Tools and Frameworks
+## What Tools and Frameworks Are Available?
 
 ### Python
 - **Hypothesis:** Most popular, powerful
@@ -526,7 +582,7 @@ def test_stripe_api():
 
 ---
 
-## Best Practices
+## What Are Property-Based Testing Best Practices?
 
 ### 1. Start Simple
 
@@ -586,7 +642,7 @@ def test_cache_uses_dict(key: str, value: Any):
 
 ---
 
-## Debugging Failed Properties
+## How to Debug Failed Properties?
 
 ### 1. Examine Minimal Case
 
@@ -635,6 +691,71 @@ def test_sort_specific_case():
 - See `.agent-os/standards/development/js-testing.md` (JavaScript: fast-check)
 - See `.agent-os/standards/development/java-testing.md` (Java: jqwik)
 - Etc.
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Testing Complex Algorithms**
+   - Situation: Writing tests for sorting, parsing, compression
+   - Query: `search_standards("property-based testing algorithms")`
+
+2. **Finding Edge Cases**
+   - Situation: Want to find bugs example-based tests miss
+   - Query: `search_standards("property-based testing edge cases")`
+
+3. **Testing API Invariants**
+   - Situation: API has properties that should always hold
+   - Query: `search_standards("what properties to test")`
+
+4. **Learning Property-Based Testing**
+   - Situation: Never used PBT before, want to understand
+   - Query: `search_standards("what is property-based testing")`
+
+5. **Debugging Shrinking Issues**
+   - Situation: Property test failing, need to understand shrinking
+   - Query: `search_standards("shrinking property testing")`
+
+6. **Choosing Test Framework**
+   - Situation: Want to add PBT to project
+   - Query: `search_standards("property-based testing frameworks")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Learn PBT | `search_standards("what is property-based testing")` |
+| Write properties | `search_standards("types of properties PBT")` |
+| Generate test data | `search_standards("generators property testing")` |
+| Debug failures | `search_standards("shrinking property testing")` |
+| Common patterns | `search_standards("round-trip property testing")` |
+| Choose framework | `search_standards("Hypothesis vs QuickCheck")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Testing Standards:**
+- `standards/testing/test-pyramid.md` - Where PBT fits in test strategy
+  → `search_standards("test pyramid structure")`
+- `standards/testing/test-doubles.md` - May need mocks for property tests
+  → `search_standards("how to use test doubles")`
+- `standards/testing/integration-testing.md` - PBT complements integration tests
+  → `search_standards("integration testing patterns")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Test coverage requirements
+  → `search_standards("production code checklist")`
+
+**Query workflow for adding property-based testing:**
+1. **Learn Concept**: `search_standards("what is property-based testing")` → Understand approach
+2. **Identify Properties**: `search_standards("types of properties")` → Find invariants, round-trips
+3. **Choose Framework**: `search_standards("property testing frameworks")` → Select Hypothesis/fast-check/jqwik
+4. **Write Tests**: `search_standards("generators property testing")` → Generate test data
+5. **Debug**: `search_standards("shrinking property testing")` → Understand minimal failures
+6. **Refine**: `search_standards("property testing best practices")` → Improve properties
 
 ---
 

@@ -2,6 +2,70 @@
 
 **Timeless rule for AI assistants to never modify credential files.**
 
+---
+
+## 🎯 TL;DR - Credential File Protection Quick Reference
+
+**Keywords for search**: credential protection, .env safety, API key protection, never write credentials, secrets safety, credential files, environment variables safety, AI safety rules
+
+**Core Principle:** NEVER write to credential files. Credentials are irreplaceable secrets. Always read-only, never write.
+
+**ABSOLUTELY FORBIDDEN:**
+```bash
+❌ echo "API_KEY=test" > .env        # Overwrites real credentials
+❌ write(".env", content)            # File tools forbidden
+❌ sed -i 's/old/new/' .env          # No in-place editing
+❌ mv backup.env .env                # No moving to credential files
+```
+
+**Protected File Patterns:**
+- `.env` and `.env.*` (all variants)
+- `credentials.json`, `secrets.yaml`, `auth.json`
+- `~/.ssh/*` (SSH keys)
+- `~/.aws/credentials`, `~/.kube/config`
+- Any file containing API keys, tokens, passwords
+
+**Safe Operations ONLY:**
+- ✅ Read credential files
+- ✅ Reference values in code
+- ✅ Create `.env.example` templates (fake values)
+- ✅ Document credential requirements
+- ✅ Validate credential format
+
+**Safe Alternatives:**
+- Create example files: `.env.example` with fake values
+- Update documentation about required credentials
+- Provide instructions for manual setup
+- Use configuration management templates
+
+**Why This Matters:**
+- Credentials are IRREPLACEABLE (unique, cannot be recovered)
+- Overwriting loses access to services permanently
+- Regeneration requires updating multiple systems
+- Can cause production outages
+
+**Enforcement:**
+- Pre-commit hooks validate no credential file modifications
+- Linter checks for credential file writes
+- Code review flags credential file changes
+
+---
+
+## ❓ Questions This Answers
+
+1. "Can I write to .env files?"
+2. "What files are protected from AI modification?"
+3. "Why can't AI modify credential files?"
+4. "How do I create example credential files?"
+5. "What happens if AI writes to .env?"
+6. "What are safe operations on credential files?"
+7. "How do I handle credential configuration?"
+8. "What enforcement exists for credential protection?"
+9. "How do I test credential safety?"
+10. "What are credential file patterns to avoid?"
+
+---
+
 ## What is Credential File Protection?
 
 Credential file protection is a strict safety rule that prevents AI assistants from writing to files containing API keys, passwords, tokens, or other secrets.
@@ -10,7 +74,9 @@ Credential file protection is a strict safety rule that prevents AI assistants f
 
 ---
 
-## 🚫 ABSOLUTELY FORBIDDEN Operations
+## What Operations Are ABSOLUTELY FORBIDDEN?
+
+These operations MUST NEVER be performed on credential files under any circumstances.
 
 ### Never Write to These Files
 
@@ -31,7 +97,9 @@ edit_file(".env", changes)
 
 ---
 
-## 📁 Protected File Patterns
+## What File Patterns Are Protected?
+
+These file patterns are NEVER to be written to by AI agents.
 
 **Never write to:**
 - `.env` and `.env.*` (all variants: `.env.local`, `.env.production`, etc.)
@@ -43,7 +111,9 @@ edit_file(".env", changes)
 
 ---
 
-## 🚨 Real-World Incident
+## What Happens When This Rule Is Violated? (Real Incident)
+
+Real-world example demonstrating the catastrophic consequences of violating credential file protection.
 
 ### The API Key Loss
 
@@ -67,7 +137,9 @@ echo "HH_API_KEY=test_key_for_demo" > .env
 
 ---
 
-## ✅ Safe Operations ONLY
+## What Operations Are Safe on Credential Files?
+
+ONLY these read-only operations are permitted on credential files.
 
 ### Reading is Safe
 
@@ -91,7 +163,9 @@ read_file("env.integration.example")
 
 ---
 
-## ✅ Safe Alternatives
+## What Are Safe Alternatives to Writing Credential Files?
+
+When you need to provide credential configuration guidance, use these safe alternatives.
 
 ### Instead of Creating .env → Guide User
 
@@ -140,7 +214,9 @@ if not api_key:
 
 ---
 
-## 🛡️ Enforcement Protocol
+## How Is Credential Protection Enforced?
+
+Multiple layers of enforcement prevent credential file modifications.
 
 ### Pre-Write Check (MANDATORY)
 
@@ -174,7 +250,9 @@ if is_credential_file(target_file):
 
 ---
 
-## 📋 Compliance Checklist
+## How to Validate Compliance with Credential Protection?
+
+Checklist to verify compliance before any credential-related operation.
 
 **Before ANY file write:**
 
@@ -186,7 +264,9 @@ if is_credential_file(target_file):
 
 ---
 
-## 🆘 Escalation Protocol
+## What to Do If Credential File Was Modified? (Escalation)
+
+Immediate action protocol if credential file modification occurs.
 
 ### When Operation is Requested
 
@@ -248,7 +328,9 @@ AI assistant does NOT need to:
 
 ---
 
-## 🔍 Detection Methods
+## How to Detect Credential File Violations?
+
+Methods for detecting and preventing credential file modifications.
 
 ### Filename Patterns
 
@@ -278,7 +360,9 @@ auth\.json               # auth.json
 
 ---
 
-## Testing
+## How to Test Credential Safety?
+
+Testing strategies to validate credential protection compliance.
 
 ### Positive Tests (Should Block)
 
@@ -310,7 +394,9 @@ def test_allows_config_py():
 
 ---
 
-## Best Practices
+## What Are Credential Protection Best Practices?
+
+Guidelines for safely handling credential configuration.
 
 ### 1. Always Use Templates
 
@@ -323,7 +409,9 @@ def test_allows_config_py():
 ### 2. Document Setup Process
 
 ```markdown
-## Setup
+## How to Set Up Credential Protection?
+
+Installation and configuration of credential protection enforcement.
 
 1. Copy template: `cp .env.example .env`
 2. Edit `.env` with your actual credentials
@@ -343,12 +431,53 @@ API_KEY = "sk-1234567890abcdef"  # NEVER DO THIS
 
 ---
 
-## Language-Specific Implementation
+## How to Implement Credential Protection by Language?
+
+Language-specific patterns for credential file detection and protection.
 
 **This document covers universal concepts. For language-specific implementations:**
 - See `.agent-os/standards/ai-workflows/credential-management.md` (Language-specific patterns)
 - See `.agent-os/standards/security/secrets-management.md` (Comprehensive security)
 - Etc.
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Writing to .env** | `search_standards("can I write to .env")` |
+| **Credential protection** | `search_standards("credential file protection")` |
+| **Protected files** | `search_standards("what files protected AI")` |
+| **Safe alternatives** | `search_standards("safe alternatives credential files")` |
+| **Example files** | `search_standards("create env example")` |
+| **Enforcement** | `search_standards("credential protection enforcement")` |
+| **Testing safety** | `search_standards("test credential safety")` |
+| **Violation response** | `search_standards("credential file modified")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for credential safety:**
+
+1. **Start with protection rules** → `search_standards("credential file protection")` (this document)
+2. **Learn git safety** → `search_standards("git safety rules")` → `standards/ai-safety/git-safety-rules.md`
+3. **Understand security patterns** → `search_standards("security patterns")` → `standards/security/security-patterns.md`
+4. **Learn production checklist** → `search_standards("production code checklist")` → `standards/ai-safety/production-code-checklist.md`
+
+**By Category:**
+
+**AI Safety:**
+- `standards/ai-safety/git-safety-rules.md` - Git operations safety → `search_standards("git safety rules")`
+- `standards/ai-safety/production-code-checklist.md` - Production code requirements → `search_standards("production code checklist")`
+- `standards/ai-safety/import-verification-rules.md` - Import safety → `search_standards("import verification")`
+
+**Security:**
+- `standards/security/security-patterns.md` - Universal security practices → `search_standards("security patterns")`
+
+**Installation:**
+- `standards/installation/gitignore-requirements.md` - Gitignore patterns → `search_standards("gitignore requirements")`
 
 ---
 

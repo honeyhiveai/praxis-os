@@ -100,8 +100,8 @@ class TestWaitForServerReady:
         self, mock_time, mock_sleep, mock_run, server_manager
     ):
         """Test waiting when server never becomes ready."""
-        # Mock time to simulate timeout
-        mock_time.side_effect = [0, 5, 10, 15, 20, 25, 31]  # Simulate time passing
+        # Mock time to simulate timeout (with extra values for logging calls)
+        mock_time.side_effect = [0, 5, 10, 15, 20, 25, 31, 31, 31, 31]
 
         # Mock pgrep always failing
         mock_run.return_value = Mock(returncode=1)

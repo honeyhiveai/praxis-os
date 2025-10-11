@@ -2,6 +2,67 @@
 
 **Timeless principles for documenting APIs effectively.**
 
+---
+
+## 🎯 TL;DR - API Documentation Quick Reference
+
+**Keywords for search**: API documentation, REST API documentation, API reference, getting started guide, API examples, OpenAPI, Swagger, API versioning, authentication documentation, error codes, rate limiting documentation
+
+**Core Principle:** Great documentation answers "How do I...?" before developers ask.
+
+**Three Types of API Documentation:**
+1. **Reference** - Complete specification (every endpoint/function)
+2. **Getting Started** - Quick integration guide (0 to working in 10 minutes)
+3. **Tutorials** - Step-by-step guides for common use cases
+
+**For Every Endpoint/Function:**
+- **Purpose** - What does it do?
+- **Parameters** - What inputs? (type, required/optional, validation rules)
+- **Response** - What outputs? (success cases, error cases with codes)
+- **Example** - Working code snippet (copy-paste ready)
+- **Rate Limits** - How many requests allowed?
+- **Authentication** - What credentials needed?
+
+**Documentation Formats:**
+- **OpenAPI/Swagger** - REST API standard (generates interactive docs)
+- **Markdown** - Simple, version-controllable
+- **Code comments** - JSDoc, docstrings (auto-generate docs)
+- **Interactive** - Try API in browser (Swagger UI, Postman)
+
+**Best Practices:**
+- **Show examples first** - Code before prose
+- **Keep it current** - Update docs with code
+- **Test code samples** - Every example must work
+- **Document errors** - Every error code explained
+- **Version docs** - Match docs to API version
+- **Make it searchable** - Good structure, clear headers
+
+**Anti-Patterns:**
+- No examples
+- Outdated documentation
+- Missing error codes
+- No authentication guide
+- Breaking changes without notice
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I document an API?"
+2. "What should API documentation include?"
+3. "What's the difference between reference docs and tutorials?"
+4. "How do I write a getting started guide?"
+5. "What format should I use for API documentation?"
+6. "How do I document authentication?"
+7. "How do I document error codes?"
+8. "How do I version API documentation?"
+9. "What are API documentation best practices?"
+10. "How do I make documentation interactive?"
+11. "What's OpenAPI/Swagger?"
+12. "How do I test API documentation?"
+
+---
+
 ## What is API Documentation?
 
 API documentation explains how to use an interface (library, REST API, GraphQL, SDK, etc.) so developers can integrate with it successfully.
@@ -10,7 +71,9 @@ API documentation explains how to use an interface (library, REST API, GraphQL, 
 
 ---
 
-## Types of API Documentation
+## What Types of API Documentation Exist?
+
+Different documentation types serve different purposes. Effective API documentation includes all three types.
 
 ### Type 1: Reference Documentation
 
@@ -148,7 +211,9 @@ Tokens expire after 1 hour. Refresh tokens last 30 days.
 
 ---
 
-## What to Document
+## What Should I Document for Every Endpoint?
+
+Complete, accurate documentation for every API endpoint prevents integration issues and support requests.
 
 ### For Every Endpoint/Function
 
@@ -408,7 +473,9 @@ Triggered when a new user is created.
 
 ---
 
-## Documentation Formats
+## What Documentation Formats Should I Use?
+
+Different formats suit different needs. Choose based on your API type and audience.
 
 ### Format 1: OpenAPI/Swagger (REST APIs)
 
@@ -563,7 +630,9 @@ async function getUser(userId, includeOrders = false) {
 
 ---
 
-## Interactive Documentation
+## How to Create Interactive Documentation
+
+Interactive documentation lets developers explore and test your API directly in the browser, dramatically improving the developer experience.
 
 ### 1. Try It Out (API Explorer)
 
@@ -647,7 +716,9 @@ curl https://sandbox.example.com/api/users/123 \
 
 ---
 
-## Documentation Anti-Patterns
+## What API Documentation Anti-Patterns Should I Avoid?
+
+These common documentation mistakes frustrate developers and increase support burden.
 
 ### Anti-Pattern 1: Stale Documentation
 
@@ -720,7 +791,9 @@ the API returns the original response instead of processing twice."
 
 ---
 
-## Best Practices
+## What Are API Documentation Best Practices?
+
+Follow these practices to create documentation developers love and that reduces support requests.
 
 ### 1. Start with Quick Start
 
@@ -822,7 +895,9 @@ Documentation should be searchable:
 
 ---
 
-## Testing Documentation
+## How to Test API Documentation
+
+Testing documentation ensures examples work and information is accurate, preventing developer frustration.
 
 ### 1. Ensure Examples Work
 
@@ -870,7 +945,9 @@ def test_documentation_links():
 
 ---
 
-## Documentation Tools
+## What Documentation Tools Should I Use?
+
+These tools automate documentation generation, validation, and hosting.
 
 ### REST APIs
 - **Swagger/OpenAPI:** Industry standard
@@ -893,6 +970,51 @@ def test_documentation_links():
 - **ReadMe:** Hosted docs with metrics
 - **Redocly:** OpenAPI-first platform
 - **Stripe-like docs:** Reference implementation
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Building an API** | `search_standards("API documentation")` |
+| **Writing API reference** | `search_standards("API reference documentation")` |
+| **Getting started guide** | `search_standards("getting started guide")` |
+| **Documenting authentication** | `search_standards("authentication documentation")` |
+| **Error code documentation** | `search_standards("error codes documentation")` |
+| **API examples** | `search_standards("API examples")` |
+| **Interactive documentation** | `search_standards("interactive API docs")` |
+| **API versioning** | `search_standards("API versioning")` |
+| **OpenAPI/Swagger** | `search_standards("OpenAPI Swagger")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete API documentation:**
+
+1. **Start here** → `search_standards("API documentation")` (this document)
+2. **Code comments** → `search_standards("code comments")` → `standards/documentation/code-comments.md`
+3. **README** → `search_standards("README templates")` → `standards/documentation/readme-templates.md`
+4. **Security** → `search_standards("security patterns")` → `standards/security/security-patterns.md`
+
+**By Category:**
+
+**Documentation:**
+- `standards/documentation/code-comments.md` - Inline code documentation → `search_standards("code comments")`
+- `standards/documentation/readme-templates.md` - Project README structure → `search_standards("README templates")`
+
+**Architecture:**
+- `standards/architecture/api-design-principles.md` - API design best practices → `search_standards("API design")`
+
+**Security:**
+- `standards/security/security-patterns.md` - Securing APIs → `search_standards("security patterns")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Testing API endpoints → `search_standards("integration testing")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Documentation requirements for production → `search_standards("production code checklist")`
 
 ---
 

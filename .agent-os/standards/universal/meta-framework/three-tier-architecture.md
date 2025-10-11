@@ -2,6 +2,85 @@
 
 **Timeless pattern for organizing AI workflow content by consumption model**
 
+---
+
+## 🎯 TL;DR - Three-Tier Architecture Quick Reference
+
+**Keywords for search**: three-tier architecture, workflow structure, README phase task, tier 1 tier 2 tier 3, side-loaded context, active read context, output artifacts, framework organization, AI consumption model
+
+**Core Principle:** Organize framework content by when and how AI consumes it: Tier 1 (side-loaded during execution, ≤100 lines), Tier 2 (on-demand reading, 200-500 lines), Tier 3 (generated outputs, never re-read).
+
+**The Problem:** Everything in one place → Large files → Context overflow → Poor attention → Failures
+**The Solution:** Separate by consumption model → Small execution files → Optimal context → Success
+
+**The Three Tiers:**
+
+1. **Tier 1: Side-Loaded Context** (Execution Files)
+   - **What:** Files AI reads during execution
+   - **Size:** ≤100 lines per file
+   - **Examples:** task-1-setup.md, task-2-validation.md
+   - **Pattern:** Single-responsibility, command language (🛑 🎯)
+   - **Consumption:** Read 1-5 files per task (5-10% context)
+
+2. **Tier 2: Active Read Context** (Methodology/Reference)
+   - **What:** Files AI reads on-demand for guidance
+   - **Size:** 200-500 lines
+   - **Examples:** phase-overview.md, README.md, architecture.md
+   - **Pattern:** Comprehensive methodology, principles
+   - **Consumption:** Read when explicitly needed (15-25% context)
+
+3. **Tier 3: Output Artifacts** (Generated Content)
+   - **What:** AI generates but NEVER re-reads
+   - **Size:** Unlimited
+   - **Examples:** tests/, generated-code/, reports/
+   - **Pattern:** Human/system consumption only
+   - **Critical:** Re-reading Tier 3 causes context pollution
+
+**Directory Structure:**
+```
+framework/
+├── README.md              (Tier 2: Overview)
+├── phases/
+│   ├── 1/
+│   │   ├── phase.md      (Tier 2: Methodology)
+│   │   ├── task-1.md     (Tier 1: Execution, ≤100 lines)
+│   │   ├── task-2.md     (Tier 1: Execution, ≤100 lines)
+│   │   └── task-3.md     (Tier 1: Execution, ≤100 lines)
+│   └── 2/ ...
+└── outputs/               (Tier 3: Generated, never re-read)
+```
+
+**File Size Targets:**
+- **Tier 1 (Execution):** 60-100 lines → 95%+ attention quality
+- **Tier 2 (Methodology):** 200-500 lines → 80-90% attention quality
+- **Tier 3 (Outputs):** Unlimited → Not consumed by AI
+
+**Why This Works:**
+- **Context efficiency:** 15-25% utilization vs 75-90%
+- **Focused attention:** AI reads only what's needed
+- **Scalability:** Add tasks without context bloat
+- **Maintainability:** Small, focused files easy to update
+
+**Common Mistake:** Mixing tiers → context pollution → degraded performance
+
+---
+
+## ❓ Questions This Answers
+
+1. "What is three-tier architecture?"
+2. "How should I organize workflow files?"
+3. "What's the difference between README, phase, and task files?"
+4. "What is side-loaded context?"
+5. "What is active read context?"
+6. "What are output artifacts?"
+7. "Why can't AI re-read generated code?"
+8. "What file sizes should I use?"
+9. "How do I prevent context overflow?"
+10. "How do tiers interact?"
+11. "What's Tier 1 vs Tier 2 vs Tier 3?"
+
+---
+
 ## What Is Three-Tier Architecture?
 
 A systematic organization of framework content into three categories based on **when and how the AI consumes them**:
@@ -329,11 +408,46 @@ def validate_tier_compliance(framework_path):
 
 ---
 
-## References
+## 🔍 When to Query This Standard
 
-- [Framework Creation Principles](framework-creation-principles.md)
-- [Command Language](command-language.md)
-- [Horizontal Decomposition](horizontal-decomposition.md)
+| Situation | Example Query |
+|-----------|---------------|
+| **Organizing workflows** | `search_standards("three-tier architecture")` |
+| **File structure design** | `search_standards("workflow structure")` |
+| **README phase task** | `search_standards("README phase task structure")` |
+| **Context overflow** | `search_standards("prevent context overflow")` |
+| **File size guidance** | `search_standards("workflow file sizes")` |
+| **Tier differences** | `search_standards("tier 1 tier 2 tier 3")` |
+| **Output artifacts** | `search_standards("output artifacts")` |
+| **Framework organization** | `search_standards("framework organization")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete architecture understanding:**
+
+1. **Start with tiers** → `search_standards("three-tier architecture")` (this document)
+2. **Learn decomposition** → `search_standards("horizontal decomposition")` → `standards/meta-framework/horizontal-decomposition.md`
+3. **Add commands** → `search_standards("command language")` → `standards/meta-framework/command-language.md`
+4. **Understand principles** → `search_standards("framework creation principles")` → `standards/meta-framework/framework-creation-principles.md`
+5. **Implement gates** → `search_standards("validation gates")` → `standards/meta-framework/validation-gates.md`
+
+**By Category:**
+
+**Meta-Framework (Complete Set):**
+- `standards/meta-framework/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+- `standards/meta-framework/command-language.md` - Binding instructions → `search_standards("command language")`
+- `standards/meta-framework/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+- `standards/meta-framework/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+
+**Workflows:**
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
+
+**Architecture:**
+- `standards/architecture/solid-principles.md` - Single Responsibility → `search_standards("SOLID principles")`
+- `standards/architecture/separation-of-concerns.md` - Concern separation → `search_standards("separation of concerns")`
 
 ---
 

@@ -4,6 +4,67 @@
 
 ---
 
+## 🚨 RAG Content Authoring Quick Reference
+
+**Keywords for search**: RAG optimization, content authoring, semantic search, discoverability, natural language queries, query hooks, RAG-optimized content, keyword density, chunking, search ranking, documentation discoverability, how to write for RAG, self-reinforcing loop, multi-angle testing, probabilistic reality
+
+**Core Principle:** RAG search is the interface. Content not discoverable through natural queries does not exist to AI agents.
+
+**The Self-Reinforcing Insight:** RAG-optimized content that teaches agents to query creates a self-reinforcing loop - more queries lead to more reinforcement, counteracting context degradation.
+
+**6 RAG Optimization Principles:**
+1. **Write for Natural Queries** - Headers and content match how agents think, not how humans read
+2. **Include Query Hooks** - List natural language questions your content answers
+3. **Optimize Headers for Chunking** - Keyword-rich, specific headers (not "Usage" but "How to Execute Specifications")
+4. **Front-Load Critical Information** - TL;DR section at top with high keyword density
+5. **Link to Source of Truth** - Avoid documentation drift, teach dynamic discovery
+6. **Test with Multi-Angle Queries** - Verify content returns from multiple perspectives (thorough, systematic approach)
+
+**RAG-Optimized Content Checklist:**
+- [ ] Headers contain searchable keywords
+- [ ] "Questions This Answers" section included
+- [ ] TL;DR with high keyword density at top
+- [ ] Query hooks throughout (natural language phrases)
+- [ ] Tested with natural queries (returns in top 3)
+- [ ] Links to source of truth (no duplication)
+- [ ] Chunks are 100-500 tokens each
+- [ ] Each section semantically complete
+
+**Common Anti-Patterns:**
+- ❌ Generic headers ("Usage", "Examples", "Notes")
+- ❌ Keyword stuffing
+- ❌ Burying critical info deep in document
+- ❌ Duplicating content instead of linking
+- ❌ Hardcoding instructions instead of teaching discovery
+
+**Testing:** `search_standards("your expected query")` - Should return your content in top 3 results
+
+**When to Query This Standard:**
+- Writing new standard → `search_standards("how to write RAG-optimized content")`
+- Content not discoverable → `search_standards("RAG optimization techniques")`
+- Improving search ranking → `search_standards("content authoring for semantic search")`
+
+---
+
+## ❓ Questions This Answers
+
+1. "How to write content for RAG search?"
+2. "How to make documentation discoverable?"
+3. "What makes content RAG-optimized?"
+4. "How to structure content for semantic search?"
+5. "Why isn't my content being found by search?"
+6. "What are query hooks?"
+7. "How to optimize headers for chunking?"
+8. "How to test if content is discoverable?"
+9. "What are RAG content anti-patterns?"
+10. "How to avoid documentation drift?"
+11. "What is the self-reinforcing loop in RAG content?"
+12. "Why test from multiple angles instead of single queries?"
+13. "How does RAG content counteract context degradation?"
+14. "What is multi-angle query testing?"
+
+---
+
 ## 🎯 Purpose
 
 This standard defines how to author content (standards, workflows, usage docs) that AI agents can discover through natural language RAG queries. Content must be structured so the chunking algorithm and ranking system return relevant information when agents query naturally.
@@ -12,7 +73,7 @@ This standard defines how to author content (standards, workflows, usage docs) t
 
 ---
 
-## 🚨 The Fundamental Problem
+## Why RAG Optimization Matters - The Fundamental Problem
 
 **What happens when content isn't RAG-optimized:**
 
@@ -34,9 +95,35 @@ Agent behavior: Follows documented patterns
 Result: Agent works correctly, system reinforces itself
 ```
 
+### The Self-Reinforcing Loop
+
+**RAG-optimized content creates a self-reinforcing behavior loop:**
+
+```
+1. Content teaches "query for guidance"
+   ↓
+2. Agent queries and finds helpful content
+   ↓
+3. Content reinforces "query liberally" message
+   ↓
+4. Agent queries more frequently
+   ↓
+5. More queries = more reinforcement = stronger behavior pattern
+
+Result: Querying becomes the default behavior, counteracting probabilistic context degradation
+```
+
+**Why this matters:**
+- Initial instructions fade as context grows (probabilistic reality)
+- Each query retrieves the "query more" message
+- Pattern becomes self-sustaining through repetition
+- Works WITH AI's probabilistic nature, not against it
+
+**Key insight**: Content that teaches agents to discover dynamically creates agents that query thoroughly and systematically - the foundation of quality work.
+
 ---
 
-## 📋 RAG Optimization Principles
+## What Are the RAG Optimization Principles?
 
 ### Principle 1: Write for Natural Queries, Not Readers
 
@@ -226,31 +313,48 @@ The RAG will return current documentation from the workflow itself.
 
 ---
 
-### Principle 6: Test Discoverability with Natural Queries
+### Principle 6: Test Discoverability with Multi-Angle Queries
 
-After writing content, TEST if it's discoverable:
+After writing content, TEST if it's discoverable **from multiple perspectives**:
+
+**The multi-angle testing approach:**
 
 ```python
-# Test if agents can find your content
+# Test from different angles - thorough, systematic approach
+# Don't just test one query - test how agents would think about this from different perspectives
+
+# Angle 1: Direct question
 search_standards("how to execute a specification")
-# Should return your workflow documentation
 
+# Angle 2: User intent phrasing
 search_standards("user wants to implement a spec")
-# Should return same workflow documentation
 
+# Angle 3: Decision-making query
 search_standards("when should I use workflows")
-# Should return workflow decision guidance
+
+# Angle 4: Problem-solving query
+search_standards("what workflow for spec execution")
+
+# Angle 5: Tool discovery query
+search_standards("what tools for implementing specs")
 ```
 
-**If your content doesn't return**: 
+**Why multi-angle testing matters:**
+- One query tests one keyword combination
+- Real agents approach problems from different mental models
+- Comprehensive discoverability = content ranks for multiple natural phrasings
+- **Thorough, systematic testing = accuracy over speed**
+
+**If your content doesn't return in top 3 for ALL angles**: 
 - Add more natural language query hooks
 - Increase keyword density in critical sections
 - Front-load a TL;DR section
 - Simplify headers to include keywords
+- Add "Questions This Answers" section covering all angles
 
 ---
 
-## ✅ RAG-Optimized Content Checklist
+## What Is the RAG-Optimized Content Checklist?
 
 When authoring any standard, workflow, or usage doc:
 
@@ -266,7 +370,7 @@ When authoring any standard, workflow, or usage doc:
 
 ---
 
-## 📚 Examples
+## What Are RAG Optimization Examples?
 
 ### Example 1: Bad vs Good Workflow Documentation
 
@@ -359,7 +463,7 @@ Don't memorize workflow commands. Query dynamically to get current, maintained i
 
 ---
 
-## 🔄 Testing and Iteration
+## How to Test Content Discoverability?
 
 ### Test Suite for Discoverability
 
@@ -397,19 +501,25 @@ def test_spec_execution_discoverable():
 
 ---
 
-## 🚫 Anti-Patterns
+## What Are RAG Content Anti-Patterns?
 
 ### Anti-Pattern 1: Keyword Stuffing
 
 **Wrong:**
 ```markdown
-## Agent OS Orientation Guide Agent OS Orientation Agent OS
+## Testing Guide Testing Guide Test Guide Testing
 
-Agent OS orientation guide for Agent OS agents to learn Agent OS...
+Testing guide for testing tests to test testing framework testing...
 ```
 
 **Right:**
 Use keywords naturally in context, not repetitively.
+
+```markdown
+## Testing Guide - How to Write Tests
+
+Guide for writing effective tests in your testing framework...
+```
 
 ---
 
@@ -417,18 +527,21 @@ Use keywords naturally in context, not repetitively.
 
 **Wrong:**
 ```markdown
-## Orientation
+## Configuration Guide
 
-Query search_standards("Agent OS orientation guide") to load orientation.
+Query search_standards("configuration guide") to load configuration guide.
 ```
 
 **Right:**
 ```markdown
-## Orientation Quick Reference
+## Configuration Quick Reference
 
-[Actual critical information here]
+**Critical settings:**
+- Database: connection_string, pool_size
+- Cache: redis_url, ttl_seconds
+- API: rate_limit, timeout
 
-For complete 750-line guide, continue reading below.
+For complete guide, continue reading below.
 ```
 
 ---
@@ -462,7 +575,7 @@ For complete 750-line guide, continue reading below.
 
 ---
 
-## 📞 Questions?
+## ❓ Frequently Asked Questions
 
 **How do I test if my content is discoverable?**
 → Use search_standards() with natural queries you expect agents to use
@@ -478,19 +591,51 @@ For complete 750-line guide, continue reading below.
 
 ---
 
-**Related Standards:**
-- `standards/meta-framework/standards-creation-process.md` - How to create standards
-- `standards/workflows/workflow-metadata-standards.md` - Workflow-specific metadata
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Teaching agents to query
+## 🔍 When to Query This Standard
 
-**Query anytime:**
+| Situation | Example Query |
+|-----------|---------------|
+| **Writing new standard** | `search_standards("how to write RAG-optimized content")` |
+| **Content not being found** | `search_standards("RAG optimization techniques")` |
+| **Improving discoverability** | `search_standards("content authoring for semantic search")` |
+| **Optimizing headers** | `search_standards("how to write query-oriented headers")` |
+| **Adding query hooks** | `search_standards("what are query hooks")` |
+| **Testing content** | `search_standards("test content discoverability")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for content authoring mastery:**
+
+1. **Start with RAG content authoring** → `search_standards("RAG content authoring")` (this document)
+2. **Learn standards creation** → `search_standards("standards creation process")` → `standards/meta-framework/standards-creation-process.md`
+3. **Understand workflow metadata** → `search_standards("workflow metadata standards")` → `standards/workflows/workflow-metadata-standards.md`
+4. **Master orientation principles** → `search_standards("Agent OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
+
+**By Category:**
+
+**AI Assistant:**
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Teaching agents to query → `search_standards("Agent OS orientation")`
+- `standards/ai-assistant/standards-creation-process.md` - Creating standards → `search_standards("standards creation")`
+- `standards/ai-assistant/MCP-TOOLS-GUIDE.md` - Dynamic discovery → `search_standards("MCP dynamic discovery")`
+
+**Meta-Framework:**
+- `standards/meta-framework/standards-creation-process.md` - How to create standards → `search_standards("meta-framework standards creation")`
+- `standards/meta-framework/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+
+**Workflows:**
+- `standards/workflows/workflow-metadata-standards.md` - Workflow-specific metadata → `search_standards("workflow metadata")`
+- `standards/workflows/mcp-rag-configuration.md` - RAG indexing config → `search_standards("MCP RAG configuration")`
+
+---
+
+**Remember**: If agents can't find it through natural queries, it doesn't exist. Write for discovery, not for reading.
+
+**Query this standard anytime:**
 ```python
 search_standards("how to write content for RAG")
 search_standards("content authoring for semantic search")
 search_standards("making documentation discoverable")
 ```
-
----
-
-**Remember**: If agents can't find it through natural queries, it doesn't exist. Write for discovery, not for reading.
 

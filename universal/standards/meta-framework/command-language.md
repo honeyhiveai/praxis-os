@@ -2,6 +2,64 @@
 
 **Timeless pattern for binding, non-ambiguous AI instructions**
 
+---
+
+## 🎯 TL;DR - Command Language Quick Reference
+
+**Keywords for search**: command language, AI commands, workflow commands, binding instructions, command symbols, workflow execution, natural language vs commands, AI instruction patterns
+
+**Core Principle:** Natural language is ambiguous and non-binding. Command symbols create explicit, binding obligations that AI agents cannot ignore.
+
+**The Problem:** Natural language ("Please validate...") → ~60% AI compliance
+**The Solution:** Command symbols (`🛑 VALIDATE-GATE`) → ~85% AI compliance
+
+**Command Categories:**
+1. **🛑 Blocking Commands** - EXECUTE-NOW, VALIDATE-GATE (cannot proceed)
+2. **🎯 Routing Commands** - NEXT-MANDATORY, BRANCH-IF (control flow)
+3. **📊 Evidence Commands** - COUNT-AND-DOCUMENT, GATHER-EVIDENCE (proof required)
+4. **🔄 Update Commands** - UPDATE-TABLE, SYNC-STATUS (progress tracking)
+5. **⚠️ Reading Commands** - MUST-READ, LOAD-CONTEXT (required input)
+6. **🚨 Detection Commands** - FRAMEWORK-VIOLATION (error detection)
+
+**Command Pattern:**
+```markdown
+🛑 EXECUTE-NOW: [Action verb] [Target] [Success criteria]
+
+Example:
+🛑 VALIDATE-GATE: Run all tests → must pass → document results → update table
+```
+
+**Why This Works:**
+- **Visual** - Symbols stand out in long context
+- **Binding** - Creates strong obligation (not suggestion)
+- **Explicit** - Unambiguous meaning
+- **Consistent** - Same symbol = same meaning
+
+**When to Use Commands:**
+- Critical execution steps that must not be skipped
+- Quality gates and validation checkpoints
+- Progress tracking and evidence gathering
+- Control flow and routing decisions
+- Framework compliance enforcement
+
+---
+
+## ❓ Questions This Answers
+
+1. "Why does AI skip steps in workflows?"
+2. "How do I make AI follow instructions reliably?"
+3. "What are workflow commands?"
+4. "How to create binding AI instructions?"
+5. "What command symbols exist?"
+6. "When should I use command language vs natural language?"
+7. "How do I prevent AI from taking shortcuts?"
+8. "What's the difference between blocking and routing commands?"
+9. "How do I enforce quality gates in workflows?"
+10. "What evidence commands should I use?"
+11. "How to measure command effectiveness?"
+
+---
+
 ## What Is Command Language?
 
 A **standardized set of symbols** that create binding obligations for AI execution, replacing ambiguous natural language with clear, actionable commands.
@@ -435,11 +493,44 @@ When done, move to the next phase.
 
 ---
 
-## References
+## 🔍 When to Query This Standard
 
-- [Framework Creation Principles](framework-creation-principles.md)
-- [Three-Tier Architecture](three-tier-architecture.md)
-- [Validation Gates](validation-gates.md)
+| Situation | Example Query |
+|-----------|---------------|
+| **AI skipping steps** | `search_standards("AI skipping steps")` |
+| **Creating workflows** | `search_standards("workflow commands")` |
+| **Enforcing quality gates** | `search_standards("quality gates")` |
+| **Binding instructions** | `search_standards("binding AI instructions")` |
+| **Command symbols** | `search_standards("command language")` |
+| **AI compliance issues** | `search_standards("AI follow instructions")` |
+| **Workflow execution** | `search_standards("workflow execution patterns")` |
+| **Evidence gathering** | `search_standards("evidence commands")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete meta-framework understanding:**
+
+1. **Start with commands** → `search_standards("command language")` (this document)
+2. **Framework structure** → `search_standards("three-tier architecture")` → `standards/meta-framework/three-tier-architecture.md`
+3. **Quality gates** → `search_standards("validation gates")` → `standards/meta-framework/validation-gates.md`
+4. **Framework creation** → `search_standards("framework creation principles")` → `standards/meta-framework/framework-creation-principles.md`
+
+**By Category:**
+
+**Meta-Framework:**
+- `standards/meta-framework/framework-creation-principles.md` - Creating new frameworks → `search_standards("framework creation principles")`
+- `standards/meta-framework/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
+- `standards/meta-framework/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+- `standards/meta-framework/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+
+**Workflows:**
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
+
+**AI Assistant:**
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core AI behavior → `search_standards("Agent OS orientation")`
 
 ---
 

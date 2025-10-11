@@ -161,7 +161,7 @@ class TestWorkflowEnginePhase0(unittest.TestCase):
 
         # Verify Phase 0 is returned
         self.assertEqual(result["current_phase"], 0)
-        self.assertEqual(result["phase_content"]["phase_number"], 0)
+        # Note: Workflow engine no longer returns phase_content in start_workflow response
 
     def test_start_workflow_returns_phase_1_backwards_compat(self):
         """Test that workflows without Phase 0 still start at Phase 1."""
@@ -188,7 +188,7 @@ class TestWorkflowEnginePhase0(unittest.TestCase):
 
         # Verify Phase 1 is returned
         self.assertEqual(result["current_phase"], 1)
-        self.assertEqual(result["phase_content"]["phase_number"], 1)
+        # Note: Workflow engine no longer returns phase_content in start_workflow response
 
     def test_complete_phase_0_advances_to_phase_1(self):
         """Test that completing Phase 0 advances to Phase 1."""

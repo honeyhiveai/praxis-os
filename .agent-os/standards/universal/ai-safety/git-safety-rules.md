@@ -2,6 +2,77 @@
 
 **Timeless rules for AI assistants to prevent data loss through git operations.**
 
+---
+
+## 🎯 TL;DR - Git Safety Rules Quick Reference
+
+**Keywords for search**: git safety, git rules, AI git operations, git destructive commands, git data loss, never git reset, never git push force, safe git operations
+
+**Core Principle:** AI assistants MUST NEVER run destructive git operations. Use file editing tools instead.
+
+**STRICTLY FORBIDDEN Operations:**
+```bash
+❌ git checkout -- <file>         # Loses uncommitted work
+❌ git reset --hard               # Destroys commits
+❌ git push --force               # Overwrites remote
+❌ git branch -D <branch>         # Deletes branches
+❌ git stash drop                 # Loses stashed work
+❌ git clean -fd                  # Removes untracked files
+❌ git rebase -i                  # Rewrites history
+❌ git commit --amend             # Changes commit history
+```
+
+**Why These Are Forbidden:**
+- Cause PERMANENT data loss (no undo)
+- Destroy hours of uncommitted work
+- Overwrite remote history (confuses team)
+- Create detached HEAD states (confusing)
+- Delete branches permanently
+
+**Safe Alternatives:**
+- Instead of `git checkout --` → Use `search_replace()` or `write()` tools
+- Instead of `git reset` → Tell user to manually review/reset
+- Instead of `git push -f` → Tell user to resolve conflicts manually
+- Instead of `git branch -D` → Tell user to delete manually if needed
+- Read-only git operations are SAFE: `git status`, `git log`, `git diff`
+
+**Safe Git Operations:**
+```bash
+✅ git status                     # Check repository state
+✅ git log                        # View commit history
+✅ git diff                       # View changes
+✅ git branch                     # List branches (no flags)
+✅ git show <commit>              # View commit details
+```
+
+**Real Incident:**
+- AI ran `git checkout HEAD -- file.py`
+- Lost 3 hours of uncommitted work
+- User had to recreate from memory
+- PERMANENT loss (no recovery)
+
+**Enforcement:**
+- Pre-commit hooks block destructive commands
+- Code review flags git operations
+- Validation fails on forbidden commands
+
+---
+
+## ❓ Questions This Answers
+
+1. "Can AI run git commands?"
+2. "What git operations are forbidden?"
+3. "Why can't AI use git reset?"
+4. "What happens if AI runs git push --force?"
+5. "What are safe git operations?"
+6. "How to revert file changes?"
+7. "Can AI delete git branches?"
+8. "What git commands cause data loss?"
+9. "How to handle git conflicts?"
+10. "What git operations are read-only safe?"
+
+---
+
 ## What Are Git Safety Rules?
 
 Git safety rules define operations that AI assistants must NEVER perform automatically, as they can cause permanent data loss or confusing repository states.
@@ -10,7 +81,9 @@ Git safety rules define operations that AI assistants must NEVER perform automat
 
 ---
 
-## 🚫 STRICTLY FORBIDDEN Operations
+## What Git Operations Are STRICTLY FORBIDDEN?
+
+These operations MUST NEVER be performed by AI assistants due to permanent data loss risk.
 
 ### Category 1: File Reversion (Destroys Uncommitted Work)
 
@@ -81,7 +154,9 @@ git clean -fx
 
 ---
 
-## ✅ Safe Alternatives
+## What Are Safe Alternatives to Destructive Git Operations?
+
+When you need to modify files or repository state, use these safe alternatives.
 
 ### Instead of Reverting Files → Use File Editing
 
@@ -124,7 +199,9 @@ read_file("conflicted_file.py")
 
 ---
 
-## 🛡️ Safety Protocol
+## How Is Git Safety Enforced?
+
+Multiple enforcement mechanisms prevent destructive git operations.
 
 ### Pre-Operation Checks (MANDATORY)
 
@@ -154,7 +231,9 @@ git ls-files --others --exclude-standard
 
 ---
 
-## ✅ Safe Git Operations
+## What Git Operations Are Safe?
+
+Read-only git operations that do not modify repository state are safe for AI use.
 
 **AI assistants MAY use these read-only/additive operations:**
 
@@ -175,7 +254,9 @@ git push  # (without --force)
 
 ---
 
-## 🚨 Real-World Incident
+## What Happens When Git Safety Rules Are Violated? (Real Incident)
+
+Real-world example demonstrating catastrophic consequences of destructive git operations.
 
 ### The 3-Hour Loss
 
@@ -197,7 +278,9 @@ run_terminal_cmd("black src/feature.py")
 
 ---
 
-## 📋 Compliance Checklist
+## How to Validate Git Safety Compliance?
+
+Checklist to verify compliance before any git operation.
 
 **Before ANY git operation:**
 
@@ -209,7 +292,9 @@ run_terminal_cmd("black src/feature.py")
 
 ---
 
-## 🆘 Escalation Protocol
+## What to Do If Destructive Git Operation Is Requested? (Escalation)
+
+Response protocol when user requests forbidden git operations.
 
 ### When to Escalate to User
 
@@ -237,7 +322,9 @@ Please confirm if you want me to proceed or suggest an alternative.
 
 ---
 
-## 🚫 Why These Rules Exist
+## Why Do Git Safety Rules Exist?
+
+Understanding the fundamental reasons for restricting AI git operations.
 
 ### 1. AI Has No Time Pressure
 
@@ -275,7 +362,9 @@ Time to recover lost work: HOURS or IMPOSSIBLE
 
 ---
 
-## 🔍 Monitoring
+## How to Monitor Git Safety Compliance?
+
+Methods for detecting and preventing destructive git operations.
 
 ### Audit All Git Operations
 
@@ -300,20 +389,40 @@ fi
 
 ---
 
-## 📚 Related Patterns
+## 🔍 When to Query This Standard
 
-- **Graceful Degradation:** When git operation fails, use file editing instead
-- **Least Privilege:** AI should use minimal permissions (file editing, not git)
-- **Reversibility:** File edits are reversible (undo), git operations often aren't
+| Situation | Example Query |
+|-----------|---------------|
+| **Git operations** | `search_standards("git safety rules")` |
+| **Revert changes** | `search_standards("how to revert file changes")` |
+| **Forbidden commands** | `search_standards("forbidden git commands")` |
+| **git reset** | `search_standards("can AI use git reset")` |
+| **git push force** | `search_standards("git push force")` |
+| **Safe git operations** | `search_standards("safe git operations")` |
+| **Data loss** | `search_standards("git data loss")` |
+| **Branch operations** | `search_standards("AI delete git branch")` |
 
 ---
 
-## Language-Specific Implementation
+## 🔗 Related Standards
 
-**This document covers universal concepts. For language-specific implementations:**
-- See `.agent-os/standards/ai-workflows/git-safety-enforcement.md` (Language-specific enforcement)
-- See `.agent-os/standards/ai-workflows/file-editing-patterns.md` (Safe alternatives)
-- Etc.
+**Query workflow for git safety:**
+
+1. **Start with git rules** → `search_standards("git safety rules")` (this document)
+2. **Learn production checklist** → `search_standards("production code checklist")` → `standards/ai-safety/production-code-checklist.md`
+3. **Learn credential protection** → `search_standards("credential file protection")` → `standards/ai-safety/credential-file-protection.md`
+4. **Understand security** → `search_standards("security patterns")` → `standards/security/security-patterns.md`
+
+**By Category:**
+
+**AI Safety:**
+- `standards/ai-safety/credential-file-protection.md` - File protection rules → `search_standards("credential file protection")`
+- `standards/ai-safety/production-code-checklist.md` - Production requirements → `search_standards("production code checklist")`
+- `standards/ai-safety/date-usage-policy.md` - Date handling → `search_standards("date usage policy")`
+- `standards/ai-safety/import-verification-rules.md` - Import safety → `search_standards("import verification")`
+
+**Installation:**
+- `standards/installation/gitignore-requirements.md` - Gitignore patterns → `search_standards("gitignore requirements")`
 
 ---
 

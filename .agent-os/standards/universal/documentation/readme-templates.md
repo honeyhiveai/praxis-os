@@ -2,6 +2,79 @@
 
 **Timeless patterns for effective project README files.**
 
+---
+
+## 🎯 TL;DR - README Templates Quick Reference
+
+**Keywords for search**: README, README template, project documentation, README structure, README best practices, README examples, quick start guide, project README, documentation templates, README sections
+
+**Core Principle:** A great README gets developers from zero to productive in 5 minutes.
+
+**Universal README Structure:**
+1. **Title & Description** - What is this? (one sentence)
+2. **Badges** - Build status, coverage, version, license
+3. **Quick Start** - Get running in 5 minutes (copy-paste ready)
+4. **Installation** - Detailed setup instructions
+5. **Usage Examples** - Code examples that work
+6. **Features** - What makes this special
+7. **Documentation** - Link to full docs
+8. **Contributing** - How to contribute
+9. **License** - License information
+
+**Quick Start Template:**
+```markdown
+# Project Name
+
+One-sentence description
+
+## Quick Start
+\`\`\`bash
+npm install project-name
+npm start
+# Open http://localhost:3000
+\`\`\`
+```
+
+**README Types:**
+- **Library/SDK** - Focus on installation + usage examples
+- **Web Application** - Include demo + deployment instructions
+- **CLI Tool** - Show command examples + configuration
+- **Data Science** - Results + reproduce steps + visualizations
+
+**Best Practices:**
+- **Start with Quick Start** - Get users running first
+- **Show, don't tell** - Code examples before prose
+- **Keep it current** - Update README with code
+- **Use visuals** - Screenshots, diagrams, GIFs
+- **Test examples** - Every code snippet must work
+- **Link to docs** - Don't duplicate full documentation
+
+**Anti-Patterns:**
+- No Quick Start section
+- Installation instructions don't work
+- Outdated examples
+- Walls of text without code
+- No visuals
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I write a README?"
+2. "What should a README include?"
+3. "What's the best README structure?"
+4. "How do I write a Quick Start guide?"
+5. "What README template should I use?"
+6. "What makes a good README?"
+7. "How long should a README be?"
+8. "Should I include badges in README?"
+9. "What README anti-patterns should I avoid?"
+10. "How do I write installation instructions?"
+11. "What README format for different project types?"
+12. "How do I make README visually appealing?"
+
+---
+
 ## What is a README?
 
 A README is the first document developers see when discovering your project. It answers: "What is this? Should I use it? How do I get started?"
@@ -10,7 +83,9 @@ A README is the first document developers see when discovering your project. It 
 
 ---
 
-## Universal README Structure
+## What Is the Universal README Structure?
+
+Understanding the standard README structure ensures developers can quickly find information they need in familiar locations.
 
 ```markdown
 # Project Name
@@ -46,7 +121,9 @@ License information
 
 ---
 
-## Section 1: Project Title and Description
+## How to Write Project Title and Description (Section 1)
+
+The title and description are your first impression. Make them clear, concise, and compelling.
 
 ### Pattern: Clear, Concise, Compelling
 
@@ -79,7 +156,9 @@ Key features:
 
 ---
 
-## Section 2: Badges
+## How to Use Badges (Section 2)
+
+Badges provide at-a-glance status information. Choose badges that signal project health and quality.
 
 ### Pattern: Status at a Glance
 
@@ -102,7 +181,9 @@ Key features:
 
 ---
 
-## Section 3: Quick Start
+## How to Write Quick Start Guide (Section 3)
+
+The Quick Start section is the most critical. Get developers running your project in 5 minutes or less.
 
 ### Pattern: Working Example in 5 Minutes
 
@@ -157,7 +238,9 @@ Open http://localhost:8000 in your browser.
 
 ---
 
-## Section 4: Installation
+## How to Write Installation Instructions (Section 4)
+
+Detailed installation instructions cover platform-specific requirements and troubleshooting.
 
 ### Pattern: Support All Common Scenarios
 
@@ -201,7 +284,9 @@ pip install package-name[all]
 
 ---
 
-## Section 5: Usage Examples
+## How to Write Usage Examples (Section 5)
+
+Usage examples demonstrate real-world value. Show code that developers can copy and run immediately.
 
 ### Pattern: Simple to Complex
 
@@ -244,7 +329,9 @@ See [examples/](examples/) directory for complete working examples.
 
 ---
 
-## Section 6: Features
+## How to List Features (Section 6)
+
+Features highlight what makes your project special. Focus on benefits, not just capabilities.
 
 ### Pattern: What It Can Do
 
@@ -271,7 +358,9 @@ See [examples/](examples/) directory for complete working examples.
 
 ---
 
-## Section 7: Documentation
+## How to Link to Documentation (Section 7)
+
+The Documentation section provides entry points to comprehensive guides without overwhelming the README.
 
 ### Pattern: Organized by User Journey
 
@@ -302,7 +391,9 @@ See [examples/](examples/) directory for complete working examples.
 
 ---
 
-## Section 8: Contributing
+## How to Write Contributing Guidelines (Section 8)
+
+Contributing guidelines lower the barrier for external contributions. Make the process clear and welcoming.
 
 ### Pattern: Welcome and Guide Contributors
 
@@ -361,7 +452,9 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
 ---
 
-## Section 9: License
+## How to Specify License (Section 9)
+
+License information clarifies usage rights. Place it prominently to avoid legal uncertainty.
 
 ### Pattern: Clear and Visible
 
@@ -378,7 +471,9 @@ This project uses the following open-source packages:
 
 ---
 
-## README Templates by Project Type
+## What README Templates Exist by Project Type?
+
+Different project types have different documentation needs. Choose the template that matches your project's purpose.
 
 ### Template 1: Library/SDK
 
@@ -647,7 +742,9 @@ MIT License (Code) / CC-BY-4.0 (Data)
 
 ---
 
-## Anti-Patterns
+## What README Anti-Patterns Should I Avoid?
+
+These common README mistakes frustrate developers and reduce adoption. Recognize and eliminate them.
 
 ### Anti-Pattern 1: No README
 
@@ -706,7 +803,9 @@ from oldpackage import OldClass  # This class was removed in v2.0!
 
 ---
 
-## Best Practices
+## What Are README Best Practices?
+
+Follow these practices to create READMEs that developers love and maintainers appreciate.
 
 ### 1. Lead with Value
 
@@ -778,7 +877,9 @@ Don't dump everything in README. Link to detailed docs.
 
 ---
 
-## Checklist for Great README
+## What Is the Checklist for a Great README?
+
+Use this checklist to validate your README before publishing or updating your project.
 
 - [ ] Clear project name
 - [ ] One-sentence description
@@ -799,7 +900,9 @@ Don't dump everything in README. Link to detailed docs.
 
 ---
 
-## Tools for README
+## What Tools Exist for README Creation?
+
+Tools and generators that automate README creation and improve documentation quality.
 
 ### Badges
 - [Shields.io](https://shields.io/) - Badge service
@@ -820,13 +923,53 @@ Don't dump everything in README. Link to detailed docs.
 
 ---
 
-## Language-Specific Implementation
+## What Are Language-Specific README Conventions?
+
+Different languages have ecosystem-specific README conventions. Follow your community's standards.
 
 **This document covers universal concepts. For language-specific implementations:**
 - See `.agent-os/standards/development/python-documentation.md` (Python: PyPI requirements)
 - See `.agent-os/standards/development/js-documentation.md` (JavaScript: npm package.json)
 - See `.agent-os/standards/development/rust-documentation.md` (Rust: Cargo.toml)
 - Etc.
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Creating new README** | `search_standards("README template")` |
+| **Improving README** | `search_standards("README best practices")` |
+| **Quick Start section** | `search_standards("Quick Start guide")` |
+| **Project documentation** | `search_standards("project documentation")` |
+| **Installation instructions** | `search_standards("installation instructions")` |
+| **Usage examples** | `search_standards("usage examples README")` |
+| **README structure** | `search_standards("README structure")` |
+| **README by project type** | `search_standards("README template library")` or similar |
+| **README anti-patterns** | `search_standards("README anti-patterns")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete documentation:**
+
+1. **Start with README** → `search_standards("README template")` (this document)
+2. **Code comments** → `search_standards("code comments")` → `standards/documentation/code-comments.md`
+3. **API docs** → `search_standards("API documentation")` → `standards/documentation/api-documentation.md`
+
+**By Category:**
+
+**Documentation:**
+- `standards/documentation/code-comments.md` - Commenting practices → `search_standards("code comments")`
+- `standards/documentation/api-documentation.md` - API documentation → `search_standards("API documentation")`
+
+**Usage Guides:**
+- `usage/creating-specs.md` - Creating specifications → `search_standards("how to create specs")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Documentation requirements → `search_standards("production code checklist")`
 
 ---
 

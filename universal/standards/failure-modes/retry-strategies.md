@@ -2,13 +2,64 @@
 
 **Timeless patterns for handling transient failures.**
 
+---
+
+## 🎯 TL;DR - Retry Strategies Quick Reference
+
+**Keywords for search**: retry strategies, retry patterns, exponential backoff, jitter, transient failures, idempotency, circuit breaker, failure handling, retry logic, backoff algorithm
+
+**Core Retry Strategies:**
+1. **Simple Retry (Fixed Delay)** - Retry N times with fixed delay (use for low-traffic)
+2. **Exponential Backoff** - Double delay each attempt (1s → 2s → 4s)
+3. **Exponential Backoff + Jitter** - Add randomness to prevent thundering herd (**recommended for production**)
+4. **Retry with Timeout** - Give up after max time, not just max attempts
+5. **Adaptive Retry** - Integrate with circuit breaker for system-wide protection
+
+**Key Principles:**
+- **Retry transient failures only** (503, timeout, rate limit)
+- **Don't retry permanent failures** (401, 404, 400)
+- **Make operations idempotent** - Retrying must be safe
+- **Use exponential backoff + jitter** - Prevents thundering herd
+- **Set max retries AND timeout** - Avoid infinite loops
+
+**Quick Decision:**
+- **Network/API calls** → Exponential backoff + jitter
+- **Database operations** → Simple retry (fast recovery)
+- **File operations** → Retry with timeout
+- **High-traffic systems** → Adaptive retry + circuit breaker
+
+**Retry Decision:**
+```
+503/504/429/timeout → RETRY
+401/403/404/400 → FAIL IMMEDIATELY
+```
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I implement retry logic?"
+2. "When should I retry a failed operation?"
+3. "What's exponential backoff?"
+4. "What's jitter and why do I need it?"
+5. "Should I retry a 404 error?"
+6. "How many times should I retry?"
+7. "What's the difference between transient and permanent failures?"
+8. "How do I prevent thundering herd during retries?"
+9. "What does idempotency mean for retries?"
+10. "How do I combine retries with circuit breakers?"
+
+---
+
 ## What are Retry Strategies?
 
 Retry strategies are systematic approaches to re-attempting failed operations when failures are transient (temporary) rather than permanent.
 
 **Key principle:** Not all failures are permanent. Network blips, temporary overload, and brief outages should be retried.
 
-## Transient vs Permanent Failures
+## How to Distinguish Transient vs Permanent Failures
+
+The first step in retry logic is classifying failures. Retrying permanent failures wastes resources and delays error reporting to users.
 
 ### Transient Failures (Retry-able)
 - ✅ Network timeout
@@ -30,7 +81,9 @@ Retry strategies are systematic approaches to re-attempting failed operations wh
 
 ---
 
-## Strategy 1: Simple Retry (Fixed Delay)
+## How to Implement Simple Retry (Fixed Delay) - Strategy 1
+
+Simple retry with fixed delay is the easiest retry strategy to implement. Use it for low-traffic systems or when failures recover quickly.
 
 **Concept:** Retry N times with fixed delay between attempts.
 
@@ -61,7 +114,9 @@ for attempt in range(max_retries):
 
 ---
 
-## Strategy 2: Exponential Backoff
+## How to Implement Exponential Backoff - Strategy 2
+
+Exponential backoff increases delay exponentially with each retry, reducing load on failing services and allowing time for recovery.
 
 **Concept:** Increase delay exponentially after each failure.
 
@@ -94,7 +149,9 @@ for attempt in range(max_retries):
 
 ---
 
-## Strategy 3: Exponential Backoff with Jitter
+## How to Implement Exponential Backoff with Jitter - Strategy 3 (Recommended)
+
+Jitter adds randomness to backoff delays, preventing all clients from retrying simultaneously. This is the recommended production strategy.
 
 **Concept:** Add randomness to exponential backoff to prevent thundering herd.
 
@@ -129,7 +186,9 @@ for attempt in range(max_retries):
 
 ---
 
-## Strategy 4: Retry with Timeout
+## How to Implement Retry with Timeout - Strategy 4
+
+Timeout-based retries set a maximum total time for all retry attempts, preventing operations from hanging indefinitely even with exponential backoff.
 
 **Concept:** Limit total time spent retrying, not just number of attempts.
 
@@ -163,7 +222,9 @@ while current_time() - start_time < max_total_time:
 
 ---
 
-## Strategy 5: Adaptive Retry (Circuit Breaker Integration)
+## How to Implement Adaptive Retry (Circuit Breaker Integration) - Strategy 5
+
+Adaptive retry dynamically adjusts retry behavior based on system health, integrating with circuit breakers for system-wide failure protection.
 
 **Concept:** Adjust retry behavior based on system health.
 
@@ -204,7 +265,9 @@ for attempt in range(max_retries):
 
 ---
 
-## Retry Decision Matrix
+## How to Choose the Right Retry Strategy (Decision Matrix)
+
+Use this matrix to quickly select the appropriate retry strategy based on failure type and context.
 
 | Failure Type | Retry? | Strategy | Max Retries | Max Time |
 |--------------|--------|----------|-------------|----------|
@@ -220,7 +283,9 @@ for attempt in range(max_retries):
 
 ---
 
-## Idempotency Requirements
+## Why Idempotency is Critical for Retries
+
+Retrying non-idempotent operations can cause duplicate side effects (double charges, duplicate records). Operations must be idempotent before implementing retries.
 
 **Critical:** Retries are only safe if operations are idempotent.
 
@@ -273,7 +338,9 @@ def create_payment(amount, idempotency_key):
 
 ---
 
-## Anti-Patterns
+## What Retry Anti-Patterns Should I Avoid?
+
+These common retry mistakes can make outages worse, waste resources, or cause data corruption. Recognize and avoid them.
 
 ### Anti-Pattern 1: Immediate Retry Without Delay
 ❌ Retrying instantly on failure (amplifies load).
@@ -328,7 +395,9 @@ except TransientError:
 
 ---
 
-## Observability
+## How to Monitor and Observe Retry Behavior
+
+Effective retry observability helps diagnose issues, tune retry parameters, and detect when services need attention.
 
 ### What to Log
 ```
@@ -350,6 +419,47 @@ logger.warning(
 - Alert if retry rate exceeds threshold (e.g., >10%)
 - Alert if final failure rate is high (e.g., >1%)
 - Alert if retry delays are consistently long (service degraded)
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Network call failures** | `search_standards("retry strategies")` |
+| **API integration** | `search_standards("exponential backoff")` |
+| **Transient errors** | `search_standards("when to retry failures")` |
+| **Distributed systems** | `search_standards("retry with jitter")` |
+| **Duplicate operations concern** | `search_standards("idempotency retries")` |
+| **Retry tuning** | `search_standards("retry decision matrix")` |
+| **Thundering herd** | `search_standards("jitter retry")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for resilient failure handling:**
+
+1. **Start here** → `search_standards("retry strategies")`
+2. **Then protect** → `search_standards("circuit breaker")` → `standards/failure-modes/circuit-breakers.md`
+3. **Then degrade** → `search_standards("graceful degradation")` → `standards/failure-modes/graceful-degradation.md`
+4. **Then timeout** → `search_standards("timeout patterns")` → `standards/failure-modes/timeout-patterns.md`
+
+**By Category:**
+
+**Failure Modes:**
+- `standards/failure-modes/circuit-breakers.md` - System-wide failure protection → `search_standards("circuit breaker")`
+- `standards/failure-modes/graceful-degradation.md` - Degrade functionality when services fail → `search_standards("graceful degradation")`
+- `standards/failure-modes/timeout-patterns.md` - Timeout configuration → `search_standards("timeout patterns")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Testing retry logic → `search_standards("integration testing")`
+
+**Database:**
+- `standards/database/database-patterns.md` - Database retry strategies → `search_standards("database retry")` 
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production code checklist (includes failure handling) → `search_standards("production code checklist")`
 
 ---
 

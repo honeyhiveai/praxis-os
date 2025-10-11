@@ -16,7 +16,7 @@ with full dependency injection throughout.
 
 import logging
 import sys
-from typing import Optional
+from typing import Any, List, Optional
 
 from fastmcp import FastMCP
 from watchdog.observers import Observer
@@ -45,7 +45,7 @@ class ServerFactory:
         """
         self.config = config
         self.paths = config.resolved_paths
-        self.observers = []  # Track file watchers for cleanup
+        self.observers: List[Any] = []  # Track file watchers for cleanup
 
     def create_server(self) -> FastMCP:
         """

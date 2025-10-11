@@ -2,6 +2,88 @@
 
 **Timeless pattern for ensuring quality at phase boundaries**
 
+---
+
+## 🎯 TL;DR - Validation Gates Quick Reference
+
+**Keywords for search**: validation gates, quality gates, phase checkpoints, validation criteria, evidence-based validation, checkpoint patterns, quality checkpoints, gate enforcement, phase validation
+
+**Core Principle:** Explicit checkpoints with measurable criteria that must be satisfied before proceeding. Without gates, AI claims premature completion; with gates, quality is enforced.
+
+**The Problem:** Trust-based workflow → 60-70% completion → variable quality
+**The Solution:** Evidence-based gates → 85-95% completion → assured quality
+
+**Gate Structure:**
+```markdown
+🛑 VALIDATE-GATE: [Phase/Task Name]
+
+**Criteria** (all must be ✅ to proceed):
+- [ ] Criterion 1: [specific, measurable] ✅/❌
+- [ ] Criterion 2: [specific, measurable] ✅/❌
+- [ ] Criterion 3: [specific, measurable] ✅/❌
+
+🚨 FRAMEWORK-VIOLATION: Proceeding with ❌ criteria
+```
+
+**Gate Types:**
+
+1. **Completion Gate**
+   - All tasks in phase done
+   - Example: `- [ ] All 5 tasks completed ✅/❌`
+
+2. **Quality Gate**
+   - Output meets standards
+   - Example: `- [ ] All tests pass ✅/❌`
+
+3. **Coverage Gate**
+   - Comprehensive handling
+   - Example: `- [ ] 90%+ code coverage ✅/❌`
+
+4. **Evidence Gate**
+   - Proof of work
+   - Example: `- [ ] Test report generated at path X ✅/❌`
+
+**Key Elements:**
+- **Command Symbol (🛑)** - Blocking, cannot ignore
+- **Measurable Criteria** - Specific, verifiable (not vague)
+- **Checkboxes (✅/❌)** - Forces explicit verification
+- **Violation Warning** - Prevents shortcuts
+
+**Criteria Requirements:**
+- ✅ **Measurable:** "All 15 files processed" (not "files processed")
+- ✅ **Specific:** "Tests at tests/test_auth.py" (not "tests exist")
+- ✅ **Binary:** Clear ✅ or ❌ (not subjective)
+- ❌ **Vague:** "Good quality" (not measurable)
+
+**Enforcement:**
+- Workflow engine checks gates programmatically
+- Cannot proceed without ✅ for all criteria
+- Violations logged and flagged
+
+**Why This Works:**
+- Forces verification before proceeding
+- Eliminates trust-based workflows
+- Catches incomplete work early
+- Measurable quality assurance
+
+---
+
+## ❓ Questions This Answers
+
+1. "What is a validation gate?"
+2. "How do I ensure AI completes work?"
+3. "How to prevent premature completion?"
+4. "What are quality gates?"
+5. "How to write validation criteria?"
+6. "What makes good gate criteria?"
+7. "What gate types exist?"
+8. "How to enforce quality checkpoints?"
+9. "How to validate phase completion?"
+10. "What are evidence gates?"
+11. "How to prevent AI shortcuts?"
+
+---
+
 ## What Is a Validation Gate?
 
 A **validation gate** is an explicit checkpoint with measurable criteria that must be satisfied before proceeding to the next phase.
@@ -212,10 +294,49 @@ Cannot proceed to Phase 2 until:
 
 ---
 
-## References
+## 🔍 When to Query This Standard
 
-- [Framework Creation Principles](framework-creation-principles.md)
-- [Command Language](command-language.md)
+| Situation | Example Query |
+|-----------|---------------|
+| **Quality assurance** | `search_standards("validation gates")` |
+| **Phase checkpoints** | `search_standards("phase checkpoints")` |
+| **Preventing shortcuts** | `search_standards("prevent AI shortcuts")` |
+| **Quality gates** | `search_standards("quality gates")` |
+| **Validation criteria** | `search_standards("validation criteria")` |
+| **Evidence-based validation** | `search_standards("evidence-based validation")` |
+| **Gate enforcement** | `search_standards("gate enforcement")` |
+| **Ensuring completion** | `search_standards("ensure AI completes work")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for complete validation understanding:**
+
+1. **Start with gates** → `search_standards("validation gates")` (this document)
+2. **Learn framework principles** → `search_standards("framework creation principles")` → `standards/meta-framework/framework-creation-principles.md`
+3. **Add commands** → `search_standards("command language")` → `standards/meta-framework/command-language.md`
+4. **Understand architecture** → `search_standards("three-tier architecture")` → `standards/meta-framework/three-tier-architecture.md`
+5. **Apply decomposition** → `search_standards("horizontal decomposition")` → `standards/meta-framework/horizontal-decomposition.md`
+
+**By Category:**
+
+**Meta-Framework (Complete Set):**
+- `standards/meta-framework/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+- `standards/meta-framework/command-language.md` - Binding instructions → `search_standards("command language")`
+- `standards/meta-framework/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
+- `standards/meta-framework/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+
+**Workflows:**
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
+
+**Testing:**
+- `standards/testing/test-pyramid.md` - Test coverage targets → `search_standards("test pyramid")`
+- `standards/testing/integration-testing.md` - Integration testing patterns → `search_standards("integration testing")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production validation → `search_standards("production code checklist")`
 
 ---
 

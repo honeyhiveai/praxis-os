@@ -14,7 +14,7 @@ import logging
 import shutil
 import subprocess
 from pathlib import Path
-from typing import Dict
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +65,7 @@ class ValidationModule:
         """
         logger.info("Validating source repository: %s", source_path)
 
-        result = {
+        result: Dict[str, Any] = {
             "valid": False,
             "path_exists": False,
             "is_agent_os_repo": False,
@@ -180,7 +180,7 @@ class ValidationModule:
 
         target = Path(target_path).resolve()
 
-        result = {
+        result: Dict[str, Any] = {
             "valid": False,
             "target_exists": target.exists(),
             "required_dirs": {},
@@ -305,7 +305,7 @@ class ValidationModule:
         source = Path(source_dir)
         target = Path(target_dir)
 
-        result = {
+        result: Dict[str, Any] = {
             "verified": False,
             "files_checked": 0,
             "mismatches": [],
@@ -372,7 +372,7 @@ class ValidationModule:
         """
         logger.info("Checking server health...")
 
-        result = {
+        result: Dict[str, Any] = {
             "healthy": False,
             "responding": False,
             "response_time_ms": None,

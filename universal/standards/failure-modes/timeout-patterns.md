@@ -2,13 +2,74 @@
 
 **Timeless patterns for preventing operations from hanging indefinitely.**
 
+---
+
+## 🎯 TL;DR - Timeout Patterns Quick Reference
+
+**Keywords for search**: timeout patterns, connection timeout, request timeout, idle timeout, timeout configuration, timeout strategies, cascading timeouts, fail fast, timeout hierarchy, timeout best practices
+
+**Core Principle:** Don't wait forever. Fail fast when operations take too long.
+
+**Four Timeout Types:**
+1. **Connection Timeout** - Time to establish connection (typically 2-10 seconds)
+2. **Request/Response Timeout** - Total time for operation (typically 5-30 seconds)
+3. **Idle/Read Timeout** - Time between data packets (typically 30-60 seconds)
+4. **Total Timeout** - Absolute maximum time including retries (typically 60-120 seconds)
+
+**Quick Configuration Guide:**
+```
+Connection timeout: 5 seconds
+Request timeout: 30 seconds
+Idle timeout: 60 seconds
+Total timeout (with retries): 90 seconds
+```
+
+**Timeout Hierarchy:**
+```
+Total Timeout (90s)
+  ├─ Retry 1 (30s request timeout)
+  ├─ Retry 2 (30s request timeout)
+  └─ Retry 3 (30s request timeout)
+```
+
+**Key Rules:**
+- **Set timeouts on ALL remote calls** (network, database, external services)
+- **Child timeout < Parent timeout** (inner operation must timeout before outer)
+- **Timeout + Retry < User patience** (typically 60-90 seconds max)
+- **Different timeouts for different operations** (fast for reads, longer for writes)
+
+**Anti-Patterns to Avoid:**
+- No timeouts (infinite wait)
+- Timeout too long (user frustration)
+- Cascading timeouts (child > parent)
+- Same timeout for all operations
+
+---
+
+## ❓ Questions This Answers
+
+1. "What are timeouts and why do I need them?"
+2. "How long should my timeouts be?"
+3. "What's the difference between connection timeout and request timeout?"
+4. "How do timeouts work with retries?"
+5. "What happens when a timeout occurs?"
+6. "Should I use different timeouts for different operations?"
+7. "How do I prevent cascading timeouts?"
+8. "What's idle timeout vs request timeout?"
+9. "How do I test timeout behavior?"
+10. "What timeout anti-patterns should I avoid?"
+
+---
+
 ## What are Timeouts?
 
 Timeouts are limits on how long an operation can take before being forcibly terminated or considered failed.
 
 **Key principle:** Don't wait forever. Fail fast when operations take too long.
 
-## Why Timeouts Matter
+## Why Do Timeouts Matter?
+
+Understanding the impact of timeouts helps prioritize their implementation. Timeouts prevent resource exhaustion and improve user experience.
 
 ### Without Timeouts
 ```
@@ -40,7 +101,9 @@ User sees profile (slightly stale, but fast)
 
 ---
 
-## Timeout Types
+## What Are the Four Timeout Types?
+
+Different timeout types control different aspects of network communication. Understanding each type is essential for effective timeout configuration.
 
 ### 1. Connection Timeout
 
@@ -153,7 +216,9 @@ pool.return_connection(connection)
 
 ---
 
-## Timeout Strategies
+## What Timeout Strategies Should I Use?
+
+Effective timeout strategies balance responsiveness with reliability, adapting to different operation types and user expectations.
 
 ### Strategy 1: Aggressive Timeouts with Fallback
 
@@ -293,7 +358,9 @@ def call_api():
 
 ---
 
-## Timeout Configuration Matrix
+## How Should I Configure Timeouts for Different Operations?
+
+Use this configuration matrix as a starting point, then tune based on your system's specific requirements and user expectations.
 
 | Operation Type | Connection | Request | Total | Idle |
 |----------------|------------|---------|-------|------|
@@ -308,7 +375,9 @@ def call_api():
 
 ---
 
-## Integration with Retry and Circuit Breaker
+## How Do Timeouts Integrate with Retries and Circuit Breakers?
+
+Timeouts, retries, and circuit breakers are complementary resilience patterns. Proper integration prevents resource exhaustion and provides comprehensive failure handling.
 
 ### Timeout + Retry
 ```
@@ -357,7 +426,9 @@ def fully_resilient_call():
 
 ---
 
-## Anti-Patterns
+## What Timeout Anti-Patterns Should I Avoid?
+
+These common timeout mistakes lead to hanging operations, resource exhaustion, or poor user experience.
 
 ### Anti-Pattern 1: No Timeouts
 ❌ Operations that can hang forever.
@@ -410,7 +481,9 @@ except Timeout:
 
 ---
 
-## Observability
+## How to Monitor Timeout Behavior
+
+Effective timeout observability helps identify slow operations, tune timeout values, and detect system degradation.
 
 ### What to Log
 ```
@@ -443,7 +516,9 @@ metrics = {
 
 ---
 
-## Testing Timeouts
+## How to Test Timeout Behavior
+
+Testing timeouts ensures they trigger correctly and systems handle timeout failures gracefully.
 
 ### Unit Tests
 ```
@@ -473,7 +548,9 @@ def test_cascading_timeouts():
 
 ---
 
-## Best Practices
+## What Are Timeout Best Practices?
+
+Follow these practices to implement effective timeouts that protect your system without degrading user experience.
 
 ### 1. Always Set Timeouts
 Every network operation should have a timeout. No exceptions.
@@ -497,6 +574,47 @@ Don't let user see "Request timeout" error. Show cached/default data.
 
 ### 5. Log and Monitor All Timeouts
 Timeouts are service degradation signals. Track and alert on them.
+
+---
+
+## 🔍 When to Query This Standard
+
+| Situation | Example Query |
+|-----------|---------------|
+| **Network operations** | `search_standards("timeout patterns")` |
+| **API integration** | `search_standards("request timeout")` |
+| **Slow operations** | `search_standards("connection timeout")` |
+| **Timeout configuration** | `search_standards("timeout configuration")` |
+| **Hanging operations** | `search_standards("timeout strategies")` |
+| **Retry timeouts** | `search_standards("timeout with retry")` |
+| **Cascading failures** | `search_standards("cascading timeouts")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for resilient failure handling:**
+
+1. **Set timeouts** → `search_standards("timeout patterns")` (this document)
+2. **Add retries** → `search_standards("retry strategies")` → `standards/failure-modes/retry-strategies.md`
+3. **Add circuit breaker** → `search_standards("circuit breaker")` → `standards/failure-modes/circuit-breakers.md`
+4. **Plan degradation** → `search_standards("graceful degradation")` → `standards/failure-modes/graceful-degradation.md`
+
+**By Category:**
+
+**Failure Modes:**
+- `standards/failure-modes/retry-strategies.md` - Retry logic (total timeout must account for retries) → `search_standards("retry strategies")`
+- `standards/failure-modes/circuit-breakers.md` - Fail fast when dependency is down → `search_standards("circuit breaker")`
+- `standards/failure-modes/graceful-degradation.md` - Fallback strategies for timeouts → `search_standards("graceful degradation")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Testing timeout behavior → `search_standards("integration testing")`
+
+**Database:**
+- `standards/database/database-patterns.md` - Database timeout configuration → `search_standards("database patterns")`
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production code checklist (includes timeout validation) → `search_standards("production code checklist")`
 
 ---
 

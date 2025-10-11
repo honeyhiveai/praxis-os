@@ -2,6 +2,88 @@
 
 **Timeless rule for AI assistants to verify imports before using them.**
 
+---
+
+## 🎯 TL;DR - Import Verification Quick Reference
+
+**Keywords for search**: import verification, verify imports, hallucinated imports, import paths, check imports, AI import errors, module not found, import discovery, package structure
+
+**Core Principle:** NEVER assume import paths. ALWAYS verify against existing codebase first.
+
+**The Problem:**
+- AI hallucinates import paths that "seem reasonable"
+- Causes `ModuleNotFoundError` at runtime
+- Wastes 30+ minutes debugging
+- Creates user frustration
+
+**MANDATORY 3-Step Verification:**
+```bash
+# Step 1: Check package __init__.py
+read_file("src/package/__init__.py")  # See public API
+
+# Step 2: Check example code
+grep -r "from package import" examples/  # See actual usage
+
+# Step 3: Check documentation
+read_file("README.md")  # See documented patterns
+```
+
+**Forbidden Practice:**
+```python
+❌ from package.sdk.tracer import trace  # Assumed, not verified!
+❌ from package.utils.helpers import format_data  # Hallucinated!
+```
+
+**Safe Workflow:**
+```python
+# 1. Verify first
+read_file("src/honeyhive/__init__.py")
+# Found: from honeyhive import trace
+
+# 2. Use verified import
+✅ from honeyhive import trace  # Confirmed exists
+```
+
+**Real Incident:**
+- AI assumed: `from honeyhive.sdk.tracer import trace`
+- Reality: `from honeyhive import trace`
+- Result: 30 minutes debugging
+- Prevention: 2 minutes to verify (15x faster)
+
+**The 2-Minute Rule:**
+- Spend 2 minutes verifying imports
+- Saves 30+ minutes debugging
+- 15x ROI on time investment
+
+**Discovery Methods:**
+1. Check `__init__.py` → Public API
+2. Check examples → Actual usage patterns
+3. Check tests → Real import statements
+4. Check docs → Documented patterns
+5. grep codebase → Find existing imports
+
+**Enforcement:**
+- Pre-commit validation checks all imports
+- Linter flags unverified imports
+- Code review catches assumed imports
+
+---
+
+## ❓ Questions This Answers
+
+1. "How do I verify import paths?"
+2. "What happens if I assume imports?"
+3. "How to find correct import paths?"
+4. "What is import verification?"
+5. "Why do import errors happen?"
+6. "How to prevent ModuleNotFoundError?"
+7. "What are safe import practices?"
+8. "How to discover package structure?"
+9. "What is the 2-minute rule?"
+10. "How to check if import exists?"
+
+---
+
 ## What are Import Verification Rules?
 
 Import verification rules require AI assistants to verify import paths exist in the codebase before using them, preventing hallucinated or assumed imports that cause runtime errors.
@@ -10,7 +92,9 @@ Import verification rules require AI assistants to verify import paths exist in 
 
 ---
 
-## 🚫 Forbidden Practices
+## What Import Practices Are Forbidden?
+
+These practices MUST be avoided to prevent hallucinated imports and runtime errors.
 
 ### Never Assume Imports
 
@@ -25,7 +109,9 @@ from package.utils.helpers import format_data  # Guessed?
 
 ---
 
-## 🚨 Real-World Incident
+## What Happens When Imports Aren't Verified? (Real Incident)
+
+Real-world example demonstrating the cost of assumed imports.
 
 ### The MCP Server Import Error
 
@@ -58,7 +144,9 @@ from honeyhive.models import EventType
 
 ---
 
-## ✅ Required Verification Process
+## How to Verify Imports? (MANDATORY Process)
+
+3-step verification process that MUST be followed before using any imports.
 
 ### MANDATORY: 3-Step Verification
 
@@ -121,7 +209,9 @@ python -c "from package import symbol; print('Success')"
 
 ---
 
-## 📋 Import Verification Checklist
+## What Is the Import Verification Checklist?
+
+Complete checklist to validate imports before use.
 
 **Before writing integration code:**
 
@@ -133,7 +223,9 @@ python -c "from package import symbol; print('Success')"
 
 ---
 
-## 🎯 When to Apply
+## When Should Import Verification Be Applied?
+
+Situations requiring import verification before use.
 
 ### Always Apply For:
 - ✅ Third-party packages (external dependencies)
@@ -148,7 +240,9 @@ python -c "from package import symbol; print('Success')"
 
 ---
 
-## 🔍 Discovery Methods
+## How to Discover Correct Import Paths?
+
+Methods for finding actual import paths in the codebase.
 
 ### Method 1: Package __init__.py (Primary)
 
@@ -195,7 +289,9 @@ read_file("docs/api/quickstart.md")
 
 ---
 
-## ✅ Safe Workflow
+## What Is the Safe Import Workflow?
+
+Complete workflow demonstrating proper import verification and usage.
 
 ### 1. Before Writing Code
 
@@ -227,7 +323,9 @@ from package_x import Foo, Bar
 
 ---
 
-## 🚨 Enforcement Protocol
+## How Is Import Verification Enforced?
+
+Enforcement mechanisms to prevent unverified imports.
 
 ### Pre-Code Generation Gate
 
@@ -263,7 +361,9 @@ Proceeding with verification...
 
 ---
 
-## Common Anti-Patterns
+## What Import Anti-Patterns Should I Avoid?
+
+Common mistakes that lead to import errors.
 
 ### Anti-Pattern 1: "Reasonable" Assumptions
 
@@ -301,7 +401,9 @@ from other_project.api import Client
 
 ---
 
-## Testing
+## How to Test Import Verification?
+
+Testing strategies to validate import correctness.
 
 ### Automated Import Verification
 
@@ -347,7 +449,9 @@ done
 
 ---
 
-## Best Practices
+## What Are Import Verification Best Practices?
+
+Guidelines for reliable import usage.
 
 ### 1. Always Start with __init__.py
 
@@ -395,7 +499,9 @@ from external_package import Client, Config
 
 ---
 
-## The 2-Minute Rule
+## What Is the 2-Minute Rule?
+
+Cost-benefit analysis of import verification.
 
 > **"Spend 2 minutes verifying imports before writing code,**  
 > **or spend 30+ minutes debugging ImportError after."**
@@ -428,13 +534,45 @@ Import verification is not optional. It's a **CRITICAL** safety rule.
 
 ---
 
-## Language-Specific Implementation
+## 🔍 When to Query This Standard
 
-**This document covers universal concepts. For language-specific implementations:**
-- See `.agent-os/standards/development/python-import-verification.md`
-- See `.agent-os/standards/development/javascript-import-verification.md`
-- See `.agent-os/standards/development/go-import-verification.md`
-- Etc.
+| Situation | Example Query |
+|-----------|---------------|
+| **New integration** | `search_standards("import verification")` |
+| **Third-party package** | `search_standards("how to verify imports")` |
+| **Module not found error** | `search_standards("how to find correct import paths")` |
+| **SDK integration** | `search_standards("verify package imports")` |
+| **Import errors** | `search_standards("import errors")` |
+| **Package structure** | `search_standards("discover package structure")` |
+| **Hallucinated imports** | `search_standards("AI import errors")` |
+| **Before coding** | `search_standards("2 minute rule imports")` |
+
+---
+
+## 🔗 Related Standards
+
+**Query workflow for import verification:**
+
+1. **Start with verification** → `search_standards("import verification")` (this document)
+2. **Learn production checklist** → `search_standards("production code checklist")` → `standards/ai-safety/production-code-checklist.md`
+3. **Understand testing** → `search_standards("integration testing")` → `standards/testing/integration-testing.md`
+4. **Learn code documentation** → `search_standards("code comments")` → `standards/documentation/code-comments.md`
+
+**By Category:**
+
+**AI Safety:**
+- `standards/ai-safety/production-code-checklist.md` - Production requirements → `search_standards("production code checklist")`
+- `standards/ai-safety/credential-file-protection.md` - File protection rules → `search_standards("credential file protection")`
+- `standards/ai-safety/date-usage-policy.md` - Date handling → `search_standards("date usage policy")`
+- `standards/ai-safety/git-safety-rules.md` - Git operations → `search_standards("git safety rules")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - Integration test patterns → `search_standards("integration testing")`
+- `standards/testing/test-doubles.md` - Test isolation → `search_standards("test doubles")`
+
+**Documentation:**
+- `standards/documentation/code-comments.md` - Code documentation → `search_standards("code comments")`
+- `standards/documentation/api-documentation.md` - API docs → `search_standards("API documentation")`
 
 ---
 

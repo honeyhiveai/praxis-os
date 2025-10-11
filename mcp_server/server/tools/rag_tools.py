@@ -73,7 +73,7 @@ def register_rag_tools(mcp: Any, rag_engine: Any) -> int:
                 filter_phase,
             )
 
-            filters = {}
+            filters: Dict[str, Any] = {}
             if filter_phase is not None:
                 filters["phase"] = filter_phase
             if filter_tags:
@@ -94,6 +94,19 @@ def register_rag_tools(mcp: Any, rag_engine: Any) -> int:
                 }
                 for chunk, score in zip(result.chunks, result.relevance_scores)
             ]
+
+            # Prepend reminder to FIRST result only, at the very beginning
+            if formatted_results:
+                reminder_text = (
+                    "⚙️ AGENT OS REMINDER: Quality work is ensured, by "
+                    "completing it in a thorough, systematic manner, "
+                    "ensuring accuracy over speed. Doing it right the "
+                    "first time is our goal.\n\n"
+                    "---\n\n"
+                )
+                formatted_results[0]["content"] = (
+                    reminder_text + formatted_results[0]["content"]
+                )
 
             response = {
                 "results": formatted_results,

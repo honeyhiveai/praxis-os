@@ -4,13 +4,81 @@
 
 ---
 
+## 🎯 TL;DR - Workflow System Quick Reference
+
+**Keywords for search**: workflow system, phase gating, workflow execution, workflow discovery, start_workflow, get_task, complete_phase, horizontal scaling, workflow state, validation gates
+
+**Core Principle:** Workflows are structured, phase-gated processes that guide AI agents through complex tasks with quality checkpoints.
+
+**Three Components:**
+1. **Metadata** (metadata.json) - Workflow definition, indexed by RAG
+2. **Engine** (workflow_engine.py) - Enforces gating, validates evidence
+3. **MCP Tools** - AI agent interface (start_workflow, get_task, complete_phase)
+
+**Key MCP Tools:**
+```python
+# Discover and start workflow
+start_workflow(workflow_type="test_generation_v3", target_file="src/utils.py")
+
+# Get current phase overview
+get_current_phase(session_id)
+
+# Get full task content (v1.3.0: horizontal scaling)
+get_task(session_id, phase=1, task_number=2)
+
+# Submit evidence and advance
+complete_phase(session_id, phase=1, evidence={...})
+
+# Check status
+get_workflow_state(session_id)
+```
+
+**Phase Gating:** Sequential execution with validation gates. Cannot skip phases. Must provide evidence of completion.
+
+**Horizontal Scaling (v1.3.0):** Tasks broken into individual files (≤100 lines), loaded on-demand to preserve context.
+
+**Workflow Discovery:** RAG indexes metadata.json → AI queries like "how to generate tests" → Returns relevant workflow overview.
+
+**State Management:** Persistent across sessions, resumable after failures, automatic backups.
+
+**Common Workflows:**
+- `test_generation_v3` - Generate comprehensive test suites
+- `production_code_v2` - Write production-quality code
+- `spec_execution_v1` - Execute design specifications
+
+**Anti-Patterns:**
+- ❌ Skipping phases (gating prevents this)
+- ❌ Manual task management instead of using workflows
+- ❌ Not submitting evidence at checkpoints
+
+---
+
+## ❓ Questions This Answers
+
+1. "What is the Agent OS workflow system?"
+2. "How do workflows work?"
+3. "How do I start a workflow?"
+4. "How do I use workflow MCP tools?"
+5. "What is phase gating?"
+6. "How do I discover workflows?"
+7. "What is horizontal scaling in workflows?"
+8. "How do I complete a phase?"
+9. "How does workflow state management work?"
+10. "How do I create a new workflow?"
+11. "What are standard Agent OS workflows?"
+12. "What are workflow best practices?"
+
+---
+
 ## 🎯 Purpose
 
 The Agent OS workflow system provides structured, phase-gated execution for complex AI-assisted tasks. This document defines standards for understanding, using, and creating workflows.
 
 ---
 
-## 🏗️ Architecture
+## How Is the Workflow System Architected?
+
+The workflow system uses a three-tier architecture separating metadata, execution engine, and AI agent interface.
 
 ### Three-Tier System
 
@@ -33,7 +101,9 @@ The Agent OS workflow system provides structured, phase-gated execution for comp
 
 ---
 
-## 📋 Workflow Metadata Schema
+## What Is the Workflow Metadata Schema?
+
+Metadata defines workflow structure, phases, and deliverables, enabling RAG discovery and AI planning.
 
 ### Structure
 
@@ -71,7 +141,9 @@ Example locations:
 
 ---
 
-## 🚀 Using Workflows
+## How to Use Workflows (Step-by-Step)?
+
+Complete workflow usage from discovery through execution to completion.
 
 ### Starting a Workflow
 
@@ -111,7 +183,9 @@ phases = overview["phases"]  # All phase metadata
 
 ---
 
-## 🔍 Workflow Discovery via RAG
+## How Does Workflow Discovery via RAG Work?
+
+RAG-based workflow discovery enables AI agents to find relevant workflows through natural language queries.
 
 ### How It Works
 
@@ -139,7 +213,9 @@ result = await mcp_agent-os-rag_search_standards(
 
 ---
 
-## 📐 Phase Gating Principles
+## What Is Phase Gating and Why Does It Matter?
+
+Phase gating enforces sequential workflow execution with validation checkpoints, preventing premature advancement and ensuring quality.
 
 ### Sequential Execution
 
@@ -175,7 +251,9 @@ await mcp_agent-os-rag_complete_phase(
 
 ---
 
-## 🎯 Horizontal Scaling (v1.3.0)
+## What Is Horizontal Scaling in Workflows? (v1.3.0)
+
+Horizontal scaling breaks large workflows into focused, on-demand task files to preserve AI context efficiency.
 
 ### Task-Level Execution
 
@@ -252,7 +330,9 @@ await mcp_agent-os-rag_complete_phase(
 
 ---
 
-## 🎨 Creating New Workflows
+## How to Create New Workflows?
+
+Guidelines for designing and implementing new workflows that follow Agent OS standards.
 
 ### Step 1: Define Metadata
 
@@ -310,7 +390,9 @@ result = await mcp_agent-os-rag_search_standards(
 
 ---
 
-## 🔧 Standard Workflows
+## What Standard Workflows Are Available?
+
+Agent OS includes battle-tested workflows for common development tasks.
 
 ### test_generation_v3
 
@@ -344,7 +426,9 @@ result = await mcp_agent-os-rag_search_standards(
 
 ---
 
-## 📊 Workflow State Management
+## How Does Workflow State Management Work?
+
+State management ensures workflows are persistent, resumable, and recoverable across sessions.
 
 ### Session Persistence
 
@@ -374,7 +458,9 @@ result = await mcp_agent-os-rag_start_workflow(
 
 ---
 
-## ⚠️ Common Mistakes
+## What Common Workflow Mistakes Should I Avoid?
+
+These anti-patterns defeat the purpose of workflows. Recognize and avoid them.
 
 ### ❌ DON'T: Skip Phases
 
@@ -414,7 +500,9 @@ metadata = result["workflow_overview"]
 
 ---
 
-## 🎯 Best Practices
+## What Are Workflow System Best Practices?
+
+Proven practices for effective workflow usage and creation.
 
 ### 1. Query Before Starting
 
@@ -472,32 +560,48 @@ if not result["checkpoint_passed"]:
 
 ---
 
-## 📚 Related Standards
+## 🔍 When to Query This Standard
 
-- [MCP Usage Guide](../../usage/mcp-usage-guide.md) - How to use MCP tools
-- [Workflow Metadata Guide](../../../mcp_server/WORKFLOW_METADATA_GUIDE.md) - Creating metadata
-- [Meta-Framework Principles](../meta-framework/framework-creation-principles.md) - Framework design
-- [Validation Gates](../meta-framework/validation-gates.md) - Checkpoint validation
+| Situation | Example Query |
+|-----------|---------------|
+| **Understanding workflows** | `search_standards("workflow system")` |
+| **Starting workflow** | `search_standards("how to start workflow")` |
+| **Phase gating** | `search_standards("phase gating")` |
+| **Horizontal scaling** | `search_standards("workflow horizontal scaling")` |
+| **Workflow discovery** | `search_standards("workflow discovery")` |
+| **Available workflows** | `search_standards("standard workflows")` |
+| **Creating workflow** | `search_standards("create new workflow")` |
+| **State management** | `search_standards("workflow state")` |
+| **MCP tools** | `search_standards("workflow MCP tools")` |
+| **Best practices** | `search_standards("workflow best practices")` |
 
 ---
 
-## 🔍 Querying This Document
+## 🔗 Related Standards
 
-Use semantic search to find workflow information:
+**Query workflow for complete workflow understanding:**
 
-```python
-# General workflow questions
-await search_standards("How does the workflow system work?")
+1. **Start with system overview** → `search_standards("workflow system")` (this document)
+2. **Learn metadata structure** → `search_standards("workflow metadata")` → `standards/workflows/workflow-metadata-standards.md`
+3. **Understand construction** → `search_standards("workflow construction")` → `standards/workflows/workflow-construction-standards.md`
+4. **Learn RAG configuration** → `search_standards("MCP RAG configuration")` → `standards/workflows/mcp-rag-configuration.md`
 
-# Specific workflow discovery
-await search_standards("What workflows are available for testing?")
+**By Category:**
 
-# Phase gating questions
-await search_standards("How do I complete a workflow phase?")
+**Workflows:**
+- `standards/workflows/workflow-metadata-standards.md` - metadata.json structure → `search_standards("workflow metadata")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/workflows/mcp-rag-configuration.md` - RAG indexing → `search_standards("MCP RAG configuration")`
 
-# Metadata schema questions
-await search_standards("What fields are in workflow metadata?")
-```
+**Meta-Framework:**
+- `standards/meta-framework/validation-gates.md` - Checkpoint validation → `search_standards("validation gates")`
+- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-framework/framework-creation-principles.md` - Framework design → `search_standards("framework creation principles")`
+- `standards/meta-framework/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+
+**Usage:**
+- `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`
+- `usage/operating-model.md` - Agent OS principles → `search_standards("Agent OS operating model")`
 
 ---
 

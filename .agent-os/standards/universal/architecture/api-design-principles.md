@@ -2,6 +2,57 @@
 
 **Timeless principles for designing maintainable, usable APIs.**
 
+**Keywords for search**: API design, how to design APIs, API best practices, REST API design, interface design, API principles, API usability, API consistency
+
+---
+
+## 🚨 API Design Quick Reference (TL;DR)
+
+**6 Universal Principles:**
+1. **Consistency** - Similar things work the same way
+2. **Clarity Over Cleverness** - Obvious beats clever
+3. **Fail Fast** - Detect errors early with good messages
+4. **Least Surprise** - Behave as users expect
+5. **Design for Common Case** - Optimize for 80% use case
+6. **Versioning** - Plan for change from the start
+
+**REST API Quick Rules:**
+- **Resource-based URLs:** `/users/123` not `/getUser?id=123`
+- **HTTP methods:** GET (read), POST (create), PUT/PATCH (update), DELETE (delete)
+- **Status codes:** 200 (OK), 201 (Created), 400 (Bad Request), 404 (Not Found), 500 (Server Error)
+- **Pagination:** Always paginate collections
+- **Error format:** Consistent JSON with `error`, `message`, `field` (if validation)
+
+**Library/SDK Quick Rules:**
+- **Fluent interfaces:** Chain methods naturally
+- **Sensible defaults:** Make simple things simple
+- **Context managers:** Use `with` for resources
+- **Type hints:** Always type your interfaces
+
+**Anti-Patterns to Avoid:**
+- ❌ Boolean traps: `send_email(user, True, False, True)` → Use named parameters
+- ❌ Stringly-typed APIs: `api.get("user", "123")` → Use types
+- ❌ Kitchen sink APIs: One function doing 10 things → Split responsibilities
+
+---
+
+## Questions This Answers
+
+- "How do I design a good API?"
+- "What are API design best practices?"
+- "How do I make my API easy to use?"
+- "How should I design REST API endpoints?"
+- "How do I handle API versioning?"
+- "What HTTP status codes should I use?"
+- "How do I make my API consistent?"
+- "What are common API anti-patterns?"
+- "How do I design GraphQL schemas?"
+- "How should I document my API?"
+- "How do I test APIs?"
+- "How do I handle backward compatibility?"
+
+---
+
 ## What is an API?
 
 An API (Application Programming Interface) is a contract between software components. It defines how they communicate.
@@ -16,9 +67,11 @@ An API (Application Programming Interface) is a contract between software compon
 
 ---
 
-## Universal Principles
+## What are Universal API Design Principles?
 
-### Principle 1: Consistency
+These 6 principles apply to all types of APIs (REST, GraphQL, Library, RPC).
+
+### How to Apply Consistency in APIs (Principle 1)
 
 **Concept:** Similar things should work the same way.
 
@@ -52,7 +105,7 @@ api.product_create(product_data)      // Different order!
 
 ---
 
-### Principle 2: Clarity Over Cleverness
+### How to Prioritize Clarity Over Cleverness (Principle 2)
 
 **Concept:** API should be obvious, not clever.
 
@@ -80,7 +133,7 @@ def calc(i, t, d):  // What do these mean?
 
 ---
 
-### Principle 3: Fail Fast with Good Errors
+### How to Fail Fast with Good Error Messages (Principle 3)
 
 **Concept:** Detect errors early and provide actionable messages.
 
@@ -115,7 +168,7 @@ def withdraw(account, amount):
 
 ---
 
-### Principle 4: Principle of Least Surprise
+### How to Apply Principle of Least Surprise (Principle 4)
 
 **Concept:** API should behave as users expect.
 
@@ -145,7 +198,7 @@ api.update_user(user_id, data)  // Creates user if missing!
 
 ---
 
-### Principle 5: Design for the Common Case
+### How to Design for the Common Case (Principle 5)
 
 **Concept:** Make common operations easy, complex ones possible.
 
@@ -183,7 +236,7 @@ user = api.get_user(
 
 ---
 
-### Principle 6: Versioning and Compatibility
+### How to Handle Versioning and Compatibility (Principle 6)
 
 **Concept:** Evolve APIs without breaking existing users.
 
@@ -235,9 +288,9 @@ def get_user_v2(user_id):
 
 ---
 
-## REST API Design
+## How to Design REST APIs?
 
-### Resource-Based URLs
+### How to Design Resource-Based URLs
 
 **Good:**
 ```
@@ -257,7 +310,7 @@ POST   /createUser                  // Verb in URL
 GET    /user?action=delete&id=123   // Action in query
 ```
 
-### HTTP Methods Semantics
+### How to Use HTTP Methods Correctly
 
 | Method | Purpose | Safe? | Idempotent? |
 |--------|---------|-------|-------------|
@@ -270,7 +323,7 @@ GET    /user?action=delete&id=123   // Action in query
 **Safe:** Doesn't modify server state  
 **Idempotent:** Same effect if called multiple times
 
-### HTTP Status Codes
+### How to Choose HTTP Status Codes
 
 ```
 2xx Success:
@@ -292,7 +345,7 @@ GET    /user?action=delete&id=123   // Action in query
     503 Service Unavailable    // Temporary outage
 ```
 
-### Pagination
+### How to Implement Pagination
 
 **Good:**
 ```
@@ -312,7 +365,7 @@ Response:
 }
 ```
 
-### Filtering and Sorting
+### How to Implement Filtering and Sorting
 
 **Good:**
 ```
@@ -329,7 +382,7 @@ Response:
 }
 ```
 
-### Error Response Format
+### How to Format Error Responses
 
 **Good:**
 ```
@@ -350,9 +403,9 @@ Response:
 
 ---
 
-## Library/SDK API Design
+## How to Design Library/SDK APIs?
 
-### Principle: Fluent Interface
+### How to Create Fluent Interfaces
 
 **Good (Fluent):**
 ```
@@ -374,7 +427,7 @@ query.where("status", "=", "active")
 result = query.execute()
 ```
 
-### Principle: Sensible Defaults
+### How to Provide Sensible Defaults
 
 **Good:**
 ```
@@ -390,7 +443,7 @@ client = APIClient(
 )
 ```
 
-### Principle: Context Managers (Resource Management)
+### How to Use Context Managers for Resource Management
 
 **Good:**
 ```
@@ -408,9 +461,9 @@ conn.close()  // Easy to forget!
 
 ---
 
-## GraphQL API Design
+## How to Design GraphQL APIs?
 
-### Schema Design
+### How to Design GraphQL Schemas
 
 **Good:**
 ```
@@ -433,7 +486,7 @@ type Order {
 }
 ```
 
-### Avoid N+1 Queries
+### How to Avoid N+1 Queries in GraphQL
 
 **Bad:**
 ```
@@ -449,9 +502,9 @@ type Order {
 
 ---
 
-## API Documentation
+## How to Document APIs?
 
-### What to Document
+### What to Document in APIs
 
 1. **Purpose:** What does this do?
 2. **Parameters:** What inputs does it accept?
@@ -487,9 +540,9 @@ function transfer(from_account, to_account, amount)
 
 ---
 
-## Testing APIs
+## How to Test APIs?
 
-### Unit Tests (Library API)
+### How to Unit Test Library APIs
 
 ```
 def test_withdraw_insufficient_funds():
@@ -502,7 +555,7 @@ def test_withdraw_insufficient_funds():
     assert "requested=150" in str(error)
 ```
 
-### Integration Tests (REST API)
+### How to Integration Test REST APIs
 
 ```
 def test_create_user_endpoint():
@@ -516,7 +569,7 @@ def test_create_user_endpoint():
     assert response.json["name"] == "Alice"
 ```
 
-### Contract Tests
+### How to Use Contract Tests for APIs
 
 ```
 def test_api_response_schema():
@@ -528,9 +581,9 @@ def test_api_response_schema():
 
 ---
 
-## Anti-Patterns
+## What API Anti-Patterns Should I Avoid?
 
-### Anti-Pattern 1: Boolean Trap
+### Anti-Pattern 1: Boolean Trap (Unclear Parameters)
 
 ❌ Unclear boolean parameters.
 
@@ -551,7 +604,7 @@ user = get_user(
 )
 ```
 
-### Anti-Pattern 2: Stringly-Typed API
+### Anti-Pattern 2: Stringly-Typed API (Everything is a String)
 
 ❌ Using strings where enums/types should be used.
 
@@ -568,7 +621,7 @@ result = api.sort_users(SortField.NAME, SortOrder.ASCENDING)
 result = api.sort_users(SortField.NAEM, ...)  // Compile-time error!
 ```
 
-### Anti-Pattern 3: Kitchen Sink API
+### Anti-Pattern 3: Kitchen Sink API (Doing Too Much)
 
 ❌ One function that does everything.
 
@@ -589,6 +642,79 @@ api.create_user(data)
 api.update_user(user_id, data)
 api.delete_user(user_id)
 ```
+
+---
+
+## When to Query This Standard
+
+This standard is most valuable when:
+
+1. **Starting New API Design**
+   - Situation: Beginning design of REST API, GraphQL API, or library API
+   - Query: `search_standards("how to design APIs")`
+
+2. **During API Review**
+   - Situation: Reviewing proposed API changes
+   - Query: `search_standards("API design best practices")`
+
+3. **Debugging API Usability Issues**
+   - Situation: Users find your API confusing or error-prone
+   - Query: `search_standards("API usability principles")`
+
+4. **Choosing HTTP Status Codes**
+   - Situation: Not sure which HTTP status code to return
+   - Query: `search_standards("HTTP status codes")`
+
+5. **Implementing Versioning**
+   - Situation: Need to evolve API without breaking clients
+   - Query: `search_standards("API versioning compatibility")`
+
+6. **Handling Errors in APIs**
+   - Situation: Designing error response format
+   - Query: `search_standards("API error handling")`
+
+7. **Pagination/Filtering Design**
+   - Situation: Need to implement pagination for collections
+   - Query: `search_standards("REST API pagination")`
+
+### Query by Use Case
+
+| Use Case | Example Query |
+|----------|---------------|
+| Starting API design | `search_standards("how to design APIs")` |
+| REST endpoint design | `search_standards("REST API design")` |
+| HTTP status codes | `search_standards("HTTP status codes")` |
+| API error messages | `search_standards("API error handling")` |
+| API versioning | `search_standards("API versioning compatibility")` |
+| Library API design | `search_standards("library SDK API design")` |
+
+---
+
+## Cross-References and Related Standards
+
+**Architecture & Design:**
+- `standards/architecture/solid-principles.md` - Class design principles for API implementations
+  → `search_standards("how to design maintainable classes")`
+
+**Testing:**
+- `standards/testing/integration-testing.md` - How to test APIs effectively
+  → `search_standards("integration testing")`
+- `standards/testing/test-pyramid.md` - Testing strategy for API layers
+  → `search_standards("test pyramid API testing")`
+
+**Quality:**
+- `standards/ai-safety/production-code-checklist.md` - Production code requirements
+  → `search_standards("production code quality checklist")`
+
+**Documentation:**
+- `standards/documentation/rag-content-authoring.md` - How to document for discoverability
+  → `search_standards("documentation standards")`
+
+**Query workflow:**
+1. **Before**: `search_standards("API design principles")` → Learn universal principles
+2. **During**: `search_standards("REST API design")` → Apply to specific API type
+3. **Testing**: `search_standards("how to test APIs")` → Validate with tests
+4. **After**: `search_standards("production code checklist")` → Final quality check
 
 ---
 

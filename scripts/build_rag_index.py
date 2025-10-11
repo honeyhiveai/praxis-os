@@ -16,7 +16,7 @@ import logging
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, cast
 
 import lancedb
 
@@ -38,8 +38,8 @@ class IndexBuilder:
         self,
         index_path: Path,
         standards_path: Path,
-        usage_path: Path = None,
-        workflows_path: Path = None,
+        usage_path: Optional[Path] = None,
+        workflows_path: Optional[Path] = None,
         embedding_provider: str = "local",
         embedding_model: str = "all-MiniLM-L6-v2",
     ):
@@ -72,6 +72,7 @@ class IndexBuilder:
         self.embedding_model = embedding_model
 
         # Initialize embedding model
+        self.local_model: Any = None
         if self.embedding_provider == "local":
             logger.info(
                 "Using local embeddings (sentence-transformers) - FREE & OFFLINE"
@@ -108,7 +109,7 @@ class IndexBuilder:
                 # Local embeddings using sentence-transformers
                 # Returns 384-dimensional vector
                 embedding = self.local_model.encode(text, convert_to_numpy=True)
-                return embedding.tolist()
+                return cast(List[float], embedding.tolist())
             except Exception as e:
                 logger.error(f"Failed to generate local embedding: {e}")
                 raise
@@ -120,7 +121,8 @@ class IndexBuilder:
                 response = openai.embeddings.create(
                     model=self.embedding_model, input=text
                 )
-                return response.data[0].embedding
+                # OpenAI SDK returns embedding as list[float] but type-stubbed as Any
+                return response.data[0].embedding  # type: ignore[no-any-return]
             except Exception as e:
                 logger.error(f"Failed to generate OpenAI embedding: {e}")
                 raise

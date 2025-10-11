@@ -12,7 +12,7 @@ Manages MCP server restart and health verification.
 import logging
 import subprocess
 import time
-from typing import Dict
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
@@ -58,7 +58,7 @@ class ServerManager:
 
         start_time = time.time()
 
-        result = {
+        result: Dict[str, Any] = {
             "stopped": False,
             "started": False,
             "restart_time_seconds": 0.0,
