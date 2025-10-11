@@ -139,18 +139,43 @@ Create `.cursor/mcp.json`:
 {
   "mcpServers": {
     "agent-os-rag": {
-      "command": "python",
-      "args": ["${workspaceFolder}/.agent-os/mcp_server/__main__.py"],
+      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "args": [
+        "-m",
+        "mcp_server",
+        "--transport",
+        "dual",
+        "--log-level",
+        "INFO"
+      ],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.agent-os"
-      }
+        "PYTHONPATH": "${workspaceFolder}/.agent-os",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "autoApprove": [
+        "search_standards",
+        "get_current_phase",
+        "get_workflow_state",
+        "get_server_info"
+      ]
     }
   }
 }
 ```
 
+**Transport Modes:**
+- `dual`: stdio (IDE) + HTTP (sub-agents) - **Recommended**
+- `stdio`: IDE communication only (traditional mode)
+- `http`: Network communication only (for testing or services)
+
 **Restart Cursor** to activate MCP server.
+
+**Dual-Transport Benefits:**
+- ✅ IDE integration via stdio
+- ✅ Sub-agent access via HTTP (http://127.0.0.1:4242/mcp)
+- ✅ Zero port conflicts (automatic port allocation)
+- ✅ Multi-project support (each project gets its own port)
 
 ### 6. Build RAG Index
 
@@ -185,6 +210,25 @@ Index built in 58s
 ```
 
 Should return relevant chunks from universal/development standards.
+
+### Check Dual-Transport (if using dual mode)
+
+```bash
+# Check state file
+cat .agent-os/.mcp_server_state.json
+
+# Should show:
+# - transport: "dual"
+# - port: 4242 (or another available port)
+# - url: "http://127.0.0.1:4242/mcp"
+# - project info
+
+# Test HTTP endpoint
+# In Cursor, say:
+"Call get_server_info tool"
+
+# Should show server info including transport mode
+```
 
 ### Check Workflows
 

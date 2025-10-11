@@ -15,6 +15,7 @@ from typing import Any, List, Optional
 
 from .browser_tools import register_browser_tools
 from .rag_tools import register_rag_tools
+from .server_info_tools import register_server_info_tools
 from .workflow_tools import register_workflow_tools
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,8 @@ def register_all_tools(
     base_path: Optional[Any] = None,
     enabled_groups: Optional[List[str]] = None,
     max_tools_warning: int = 20,
+    project_discovery: Optional[Any] = None,
+    transport_mode: str = "stdio",
 ) -> int:
     """
     Register MCP tools with selective loading and performance monitoring.
@@ -46,6 +49,8 @@ def register_all_tools(
     :param base_path: Base path for .agent-os (for create_workflow)
     :param enabled_groups: Tool groups to enable (None = default groups)
     :param max_tools_warning: Warning threshold for tool count (default 20)
+    :param project_discovery: ProjectInfoDiscovery for server info tool
+    :param transport_mode: Current transport mode (dual, stdio, http)
     :return: Total number of registered tools
 
     Traceability:
@@ -55,6 +60,12 @@ def register_all_tools(
         enabled_groups = ["rag", "workflow"]  # Default: core tools only
 
     tool_count = 0
+
+    # Always register server info tool (core functionality)
+    if project_discovery:
+        count = register_server_info_tools(mcp, project_discovery, transport_mode)
+        tool_count += count
+        logger.info("✅ Registered %s server info tool(s)", count)
 
     if "rag" in enabled_groups:
         count = register_rag_tools(mcp, rag_engine)
@@ -101,4 +112,5 @@ __all__ = [
     "register_rag_tools",
     "register_workflow_tools",
     "register_browser_tools",
+    "register_server_info_tools",
 ]

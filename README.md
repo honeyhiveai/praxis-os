@@ -215,6 +215,159 @@ Once installed in your project, use MCP tools:
 → Returns detailed task instructions with commands
 ```
 
+## 🌐 Dual-Transport Architecture (New!)
+
+**Multi-Agent Collaboration with Zero Conflicts**
+
+Agent OS now supports **dual-transport mode**, enabling seamless multi-agent workflows:
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│                  Your Project                       │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  Main IDE (Cursor/Windsurf)                        │
+│        │                                            │
+│        │ stdio                                      │
+│        ▼                                            │
+│  ┌──────────────────────┐                          │
+│  │   MCP Server         │                          │
+│  │   (Dual Transport)   │                          │
+│  │                      │                          │
+│  │  stdio ◄──► http     │                          │
+│  └──────────────────────┘                          │
+│        ▲                                            │
+│        │ HTTP                                       │
+│        │                                            │
+│  Sub-Agents (Cline, Aider, Custom Scripts)         │
+│        │                                            │
+│        │ Auto-discovery via                         │
+│        │ .agent-os/.mcp_server_state.json           │
+└─────────────────────────────────────────────────────┘
+```
+
+### Key Features
+
+#### 🔌 Multi-Transport Support
+
+- **Main IDE**: Connects via stdio (standard MCP)
+- **Sub-agents**: Connect via HTTP (auto-discovered)
+- **No configuration needed**: Sub-agents auto-discover the HTTP endpoint
+
+#### 🚀 Zero-Conflict Multi-Project
+
+Run multiple Agent OS projects simultaneously:
+- Each project gets a unique port (auto-allocated from `4242-5242`)
+- No manual port configuration required
+- Works across multiple IDE instances
+
+#### 🔍 Auto-Discovery
+
+Sub-agents discover the MCP server automatically:
+
+```python
+from mcp_server.sub_agents import discover_mcp_server
+
+# Find the server (reads .agent-os/.mcp_server_state.json)
+url = discover_mcp_server()
+if url:
+    # Connect and use tools
+    ...
+```
+
+#### 📊 State File
+
+Server writes connection info to `.agent-os/.mcp_server_state.json`:
+
+```json
+{
+  "transport": "dual",
+  "url": "http://127.0.0.1:4242/mcp",
+  "port": 4242,
+  "pid": 12345,
+  "project": {"name": "my-project"},
+  "started_at": "2025-10-11T14:30:00Z"
+}
+```
+
+### Usage
+
+#### Enable Dual Transport
+
+**File:** `.cursor/mcp.json`
+
+```json
+{
+  "mcpServers": {
+    "agent-os-rag": {
+      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "args": [
+        "-m",
+        "mcp_server",
+        "--transport",
+        "dual"
+      ],
+      "transport": "stdio"
+    }
+  }
+}
+```
+
+#### Sub-Agent Integration
+
+**Example: Cline**  
+Cline auto-discovers the server, no config needed!
+
+**Example: Python SDK**
+
+```python
+from mcp_server.sub_agents import connect_and_use_mcp_server
+import asyncio
+
+result = asyncio.run(connect_and_use_mcp_server())
+print(result)  # {'success': True, 'tools': [...], ...}
+```
+
+**Example: Aider**
+
+```python
+from mcp_server.sub_agents import discover_mcp_server
+
+url = discover_mcp_server()
+# Use url with your HTTP client
+```
+
+### Configuration Examples
+
+See `.agent-os/specs/2025-10-11-mcp-dual-transport/IDE-CONFIGURATION.md` for:
+- Cursor setup
+- Windsurf setup
+- Claude Desktop setup
+- Sub-agent integration examples
+- Troubleshooting guide
+
+### Backwards Compatibility
+
+**No breaking changes!** Existing configs work as-is:
+- Omitting `--transport dual` defaults to stdio-only mode
+- All existing IDE configurations continue to work
+- Upgrade when you need multi-agent support
+
+### Benefits
+
+| Feature | Stdio-Only | **Dual Transport** |
+|---------|-----------|-------------------|
+| IDE connection | ✅ | ✅ |
+| Sub-agent support | ❌ | **✅** |
+| Multi-project | Manual | **✅ Zero-config** |
+| Auto-discovery | N/A | **✅** |
+| Thread-safe | ✅ | **✅** |
+| State monitoring | ❌ | **✅** |
+
+**Recommendation:** Use dual transport for all new projects
+
 ## 📊 Maintenance Model
 
 ### Updating Agent OS in Your Project

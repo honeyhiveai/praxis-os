@@ -134,7 +134,14 @@ mcp_config = {
     "mcpServers": {
         "agent-os-rag": {
             "command": python_cmd,
-            "args": ["-m", "mcp_server"],  # ← CORRECT module name!
+            "args": [
+                "-m",
+                "mcp_server",
+                "--transport",
+                "dual",  # ← Enable dual-transport (stdio + HTTP)
+                "--log-level",
+                "INFO"
+            ],
             "env": {
                 "PROJECT_ROOT": "${workspaceFolder}",
                 "PYTHONPATH": "${workspaceFolder}/.agent-os",
@@ -143,7 +150,8 @@ mcp_config = {
             "autoApprove": [
                 "search_standards",
                 "get_current_phase",
-                "get_workflow_state"
+                "get_workflow_state",
+                "get_server_info"
             ]
         }
     }
@@ -157,7 +165,35 @@ print("✅ .cursor/mcp.json created")
 print(f"   Platform: {'Windows' if os.name == 'nt' else 'Unix-like'}")
 print(f"   Python: {python_cmd}")
 print("   Module: mcp_server")
+print("   Transport: dual (stdio + HTTP)")
+print("   HTTP endpoint: http://127.0.0.1:4242/mcp (auto-allocated port)")
 ```
+
+**About Dual-Transport Mode:**
+
+The `--transport dual` argument enables both:
+- **stdio**: For Cursor IDE communication (traditional MCP)
+- **HTTP**: For sub-agent access via `http://127.0.0.1:4242/mcp`
+
+**Benefits:**
+- ✅ IDE integration works as before
+- ✅ Sub-agents can connect via HTTP
+- ✅ Zero port conflicts (automatic port allocation per project)
+- ✅ Multi-project support (each gets its own port)
+
+**Alternative Modes** (if needed):
+- `stdio`: IDE only (no HTTP) - use if you don't need sub-agents
+- `http`: HTTP only (no stdio) - use for services/testing
+
+**State File:**
+
+With dual-transport, a state file is created at `.agent-os/.mcp_server_state.json` containing:
+- Transport mode
+- Allocated port
+- HTTP URL
+- Project info
+
+This file is automatically managed (created on start, deleted on shutdown) and added to `.gitignore`.
 
 ---
 

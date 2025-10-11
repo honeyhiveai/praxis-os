@@ -47,10 +47,14 @@ class ServerFactory:
         self.paths = config.resolved_paths
         self.observers: List[Any] = []  # Track file watchers for cleanup
 
-    def create_server(self) -> FastMCP:
+    def create_server(
+        self, project_discovery: Optional[Any] = None, transport_mode: str = "stdio"
+    ) -> FastMCP:
         """
         Create fully configured MCP server.
 
+        :param project_discovery: Optional ProjectInfoDiscovery for server info tool
+        :param transport_mode: Transport mode for server info (dual, stdio, http)
         :return: FastMCP server ready to run
         :raises ValueError: If component creation fails
         """
@@ -79,6 +83,8 @@ class ServerFactory:
             framework_generator=framework_generator,
             workflow_validator=WorkflowValidator,
             browser_manager=browser_manager,
+            project_discovery=project_discovery,
+            transport_mode=transport_mode,
         )
 
         logger.info("✅ MCP server created successfully")
@@ -126,7 +132,7 @@ class ServerFactory:
             result = builder.build_index()
 
             if result["status"] == "success":
-                logger.info("✅ RAG index built: %s chunks", result["chunks_indexed"])
+                logger.info("✅ RAG index built: %s chunks", result.get("chunks", 0))
             else:
                 logger.warning("⚠️  Index build incomplete: %s", result.get("message"))
 
@@ -224,6 +230,8 @@ class ServerFactory:
         framework_generator: FrameworkGenerator,
         workflow_validator: type,
         browser_manager: BrowserManager,
+        project_discovery: Optional[Any] = None,
+        transport_mode: str = "stdio",
     ) -> FastMCP:
         """Create and configure FastMCP server."""
         logger.info("Creating FastMCP server...")
@@ -242,6 +250,8 @@ class ServerFactory:
             base_path=self.config.base_path,
             enabled_groups=self.config.mcp.enabled_tool_groups,
             max_tools_warning=self.config.mcp.max_tools_warning,
+            project_discovery=project_discovery,
+            transport_mode=transport_mode,
         )
 
         logger.info("✅ FastMCP server created with %s tools", tool_count)
