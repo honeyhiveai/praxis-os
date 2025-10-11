@@ -1,6 +1,6 @@
-# Step 5: Final Validation and Cleanup
+# Step 6: Final Validation and Cleanup
 
-**Previous**: `04-venv-mcp.md` (created venv and mcp.json)  
+**Previous**: `05-venv-mcp.md` (created venv, mcp.json, and RAG index)  
 **Current**: Final validation and cleanup  
 **Next**: Installation complete!
 
@@ -123,6 +123,24 @@ try:
 except Exception as e:
     print(f"  ❌ Error reading .cursorrules: {e}")
     errors.append(".cursorrules unreadable")
+
+# Check 7: RAG index exists
+print("\n📚 Checking RAG index...")
+rag_checks = {
+    "Index directory": os.path.exists(".agent-os/.cache/vector_index"),
+    "LanceDB data": os.path.exists(".agent-os/.cache/vector_index/agent_os_standards.lance"),
+    "Metadata file": os.path.exists(".agent-os/.cache/vector_index/metadata.json"),
+}
+
+all_rag_passed = all(rag_checks.values())
+if all_rag_passed:
+    print("  ✅ RAG index built")
+else:
+    print("  ❌ RAG index missing or incomplete")
+    for check, passed in rag_checks.items():
+        if not passed:
+            print(f"     Missing: {check}")
+    errors.append("RAG index not built - run: .agent-os/venv/bin/python .agent-os/scripts/build_rag_index.py")
 
 # Summary
 print("\n" + "="*60)
@@ -335,8 +353,9 @@ The installation followed these steps:
 2. ✅ Created all required directories (step 01)
 3. ✅ Copied all content files (step 02)
 4. ✅ Handled .cursorrules safely (step 03)
-5. ✅ Created Python venv and mcp.json (step 04)
-6. ✅ Validated and cleaned up (step 05)
+5. ✅ Configured .gitignore (step 04)
+6. ✅ Created Python venv, mcp.json, and RAG index (step 05)
+7. ✅ Validated and cleaned up (step 06)
 
 **No further steps required.**
 

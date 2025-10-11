@@ -1,8 +1,8 @@
-# Step 4: Python venv and MCP Configuration
+# Step 5: Python venv, MCP Configuration, and RAG Index
 
-**Previous**: `03-cursorrules.md` (handled .cursorrules)  
-**Current**: Creating Python venv and configuring Cursor MCP  
-**Next**: `05-validate.md`
+**Previous**: `04-gitignore.md` (configured .gitignore)  
+**Current**: Creating Python venv, configuring Cursor MCP, and building RAG index  
+**Next**: `06-validate.md`
 
 ---
 
@@ -11,15 +11,16 @@
 1. Create isolated Python virtual environment
 2. Install MCP server dependencies
 3. Create `.cursor/mcp.json` configuration file
-4. Validate Python setup
+4. **Build RAG index** (enables semantic search)
+5. Validate Python setup
 
 **Why isolated venv**: Prevents Agent OS dependencies from conflicting with your project's dependencies.
 
-**Time**: ~2-3 minutes
+**Time**: ~3-5 minutes (includes RAG index build)
 
 ---
 
-## 📦 Step 4.1: Create Python Virtual Environment
+## 📦 Step 5.1: Create Python Virtual Environment
 
 ```python
 import subprocess
@@ -42,7 +43,7 @@ print("✅ Virtual environment created at .agent-os/venv/")
 
 ---
 
-## 📥 Step 4.2: Install MCP Server Dependencies
+## 📥 Step 5.2: Install MCP Server Dependencies
 
 ```python
 import subprocess
@@ -72,7 +73,7 @@ print(result.stdout)
 
 ---
 
-## ✅ Validation Checkpoint #4A
+## ✅ Validation Checkpoint #5A
 
 Verify Python venv is working:
 
@@ -114,7 +115,7 @@ else:
 
 ---
 
-## 🔧 Step 4.3: Create .cursor/mcp.json
+## 🔧 Step 5.3: Create .cursor/mcp.json
 
 ⚠️ **CRITICAL**: Use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`!
 
@@ -263,7 +264,7 @@ cat .cursor/mcp.json
 
 ---
 
-## ✅ Validation Checkpoint #4B
+## ✅ Validation Checkpoint #5B
 
 Test that MCP server can start (don't worry if it complains about missing index, that's normal):
 
@@ -362,6 +363,112 @@ ls -ld .agent-os
 
 ---
 
+## 🔍 Step 5.4: Build RAG Index
+
+⚠️ **CRITICAL STEP**: Without the RAG index, `search_standards` won't work!
+
+The RAG (Retrieval Augmented Generation) index enables semantic search over Agent OS standards.
+
+**Linux/macOS/WSL2:**
+```bash
+.agent-os/venv/bin/python .agent-os/scripts/build_rag_index.py \
+  --index-path .agent-os/.cache/vector_index \
+  --standards-path .agent-os/standards \
+  --usage-path .agent-os/usage \
+  --workflows-path .agent-os/workflows
+```
+
+**Windows:**
+```bash
+.agent-os\venv\Scripts\python.exe .agent-os\scripts\build_rag_index.py --index-path .agent-os\.cache\vector_index --standards-path .agent-os\standards --usage-path .agent-os\usage --workflows-path .agent-os\workflows
+```
+
+**Expected output:**
+```
+INFO - Initializing LanceDB at .agent-os/.cache/vector_index
+INFO - Including usage docs from: .agent-os/usage
+INFO - Including workflow metadata from: .agent-os/workflows
+INFO - Processing 98 markdown files
+INFO - Generated 1247 chunks from 98 files
+INFO - Generating embeddings for all chunks...
+INFO - Creating new table with 1247 records...
+✅ Table created with 1247 records
+✅ Index full build complete in 87.3s
+```
+
+**What this does:**
+- Auto-detects installed location (`.agent-os/`)
+- Scans all markdown files in `standards/`, `usage/`, and `workflows/` directories
+- Chunks content using semantic-aware chunking (preserves section headers and metadata)
+- Generates embeddings using local model (sentence-transformers, FREE & OFFLINE)
+- Stores vectors in LanceDB at `.agent-os/.cache/vector_index/`
+
+**Indexed content:**
+- ✅ Standards (~46 files) - Universal CS fundamentals
+- ✅ Usage docs (~5 files) - How to use Agent OS
+- ✅ Workflows (~47 files) - Phase-gated workflow definitions
+
+**Time**: 1-2 minutes for ~100 files (first run downloads embedding model ~90MB)  
+**Disk**: ~20-50 MB for index
+
+**Note**: The script auto-detects all three directories. The index auto-updates on file changes via file watcher in the MCP server, so you only need to build it once during installation.
+
+---
+
+## ✅ Validation Checkpoint #5C
+
+Verify RAG index was created:
+
+**Linux/macOS/WSL2:**
+```bash
+ls -la .agent-os/.cache/vector_index/
+```
+
+**Windows:**
+```bash
+dir .agent-os\.cache\vector_index\
+```
+
+**You should see:**
+- `agent_os_standards.lance/` - LanceDB table directory
+- `metadata.json` - Build metadata (timestamps, file counts, etc.)
+
+**Quick test:**
+```bash
+# Linux/macOS/WSL2
+test -f .agent-os/.cache/vector_index/metadata.json && echo "✅ RAG index built" || echo "❌ RAG index missing"
+
+# Windows
+if exist .agent-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) else (echo ❌ RAG index missing)
+```
+
+---
+
+## 🚨 Troubleshooting
+
+### Issue: "No module named 'sentence_transformers'"
+
+**Cause**: Dependencies not installed correctly
+
+**Fix**:
+```bash
+.agent-os/venv/bin/pip install -r .agent-os/mcp_server/requirements.txt
+```
+
+### Issue: Build takes too long (>5 minutes)
+
+**Cause**: First-time download of embedding model (~90 MB)
+
+**Expected**: Downloads once, then cached forever. Subsequent builds take ~30 seconds.
+
+### Issue: "Path does not exist: .agent-os/standards"
+
+**Cause**: You skipped step 02 (copying files)
+
+**Fix**: Go back to `02-copy-files.md` and ensure all files were copied.
+
+---
+
 ## 📊 Progress Check
 
 At this point you should have:
@@ -369,6 +476,7 @@ At this point you should have:
 - ✅ MCP server dependencies installed
 - ✅ `.cursor/mcp.json` created with correct config
 - ✅ Module name is `"mcp_server"` (not `"mcp_server.agent_os_rag"`)
+- ✅ **RAG index built at `.agent-os/.cache/vector_index/`** (NEW!)
 - ✅ Config validation passes
 - ✅ All validation checkpoints passed
 
@@ -378,7 +486,7 @@ At this point you should have:
 
 ## 🎯 What's Next
 
-You've set up the Python environment and Cursor configuration. Now for the final step:
+You've set up the Python environment, Cursor configuration, and RAG index. Now for the final step:
 1. Run comprehensive validation
 2. **Clean up temp directory** (critical!)
 3. Inform user of successful installation
@@ -399,8 +507,8 @@ That file will:
 
 ---
 
-**Status**: Step 4 Complete ✅  
-**Created**: Python venv + mcp.json  
-**Next File**: `05-validate.md`  
-**Step**: 5 of 5 (final step!)
+**Status**: Step 5 Complete ✅  
+**Created**: Python venv + mcp.json + RAG index  
+**Next File**: `06-validate.md`  
+**Step**: 6 of 6 (final step!)
 

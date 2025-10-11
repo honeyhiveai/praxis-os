@@ -11,7 +11,7 @@ Install Agent OS Enhanced into the target project. This will:
 2. Copy standards, workflows, and MCP server code
 3. Create Python virtual environment
 4. Configure Cursor to use MCP server
-5. Build RAG index
+5. **Build RAG index** (enables semantic search over standards)
 
 **Total Time**: ~5-10 minutes  
 **Complexity**: Medium (vanilla LLM can follow)
@@ -53,7 +53,7 @@ You'll follow these files in order:
 02-copy-files.md      Copy all content from source repo
 03-cursorrules.md     Handle .cursorrules safely (don't overwrite!)
 04-gitignore.md       Configure .gitignore (prevent committing 2.6GB!)
-05-venv-mcp.md        Create venv and mcp.json
+05-venv-mcp.md        Create venv, mcp.json, and BUILD RAG INDEX
 06-validate.md        Final validation and cleanup temp files
 ```
 
@@ -75,8 +75,9 @@ Each file:
 │   ├── 01-directories.md
 │   ├── 02-copy-files.md
 │   ├── 03-cursorrules.md
-│   ├── 04-venv-mcp.md
-│   └── 05-validate.md
+│   ├── 04-gitignore.md
+│   ├── 05-venv-mcp.md
+│   └── 06-validate.md
 ├── universal/                  ← Content to copy
 │   ├── standards/
 │   ├── usage/
@@ -206,5 +207,5 @@ That file will:
 
 **Status**: Pre-Installation Complete ✅  
 **Next File**: `01-directories.md`  
-**Step**: 1 of 5
+**Step**: 1 of 6
 

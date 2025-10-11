@@ -29,7 +29,7 @@ These files use **horizontal scaling** - each file is ~200-250 lines and chains 
     ↓
 04-gitignore.md       Configure .gitignore (prevent committing 2.6GB!)
     ↓
-05-venv-mcp.md        Create Python venv + mcp.json
+05-venv-mcp.md        Create Python venv + mcp.json + BUILD RAG INDEX
     ↓
 06-validate.md        Validate + CLEANUP temp directory
     ↓
@@ -87,7 +87,7 @@ In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`. The entry poi
 - **02-copy-files.md** → File copying with validation  
 - **03-cursorrules.md** → Safe .cursorrules handling
 - **04-gitignore.md** → Configure .gitignore to prevent commits of ephemeral files
-- **05-venv-mcp.md** → Python venv + mcp.json creation
+- **05-venv-mcp.md** → Python venv + mcp.json creation + **RAG index build**
 - **06-validate.md** → Final validation + cleanup
 
 ### For Deep Dives (if needed)
@@ -153,6 +153,7 @@ After installation, these should all be true:
 checks = {
     ".agent-os/workflows/": exists and has ~47 files,
     ".agent-os/venv/": exists with working Python,
+    ".agent-os/.cache/vector_index/": exists with RAG index,
     ".cursorrules": exists with Agent OS rules,
     ".cursor/mcp.json": exists with "mcp_server" module,
     "Temp directory": deleted (cleaned up),
@@ -177,7 +178,7 @@ checks = {
 
 ### When Updating Installation Process
 
-1. Update the sequential files (00-05)
+1. Update the sequential files (00-06)
 2. Keep each file ~200-250 lines
 3. Maintain chain navigation
 4. Update this README
@@ -199,6 +200,7 @@ Installation is successful when:
 - ✅ ~106 files copied
 - ✅ .cursorrules handled safely
 - ✅ Python venv working
+- ✅ **RAG index built** (enables semantic search)
 - ✅ mcp.json configured correctly
 - ✅ **Temp directory deleted**
 - ✅ MCP server validation passes

@@ -451,6 +451,20 @@ def main():
     )
 
     parser.add_argument(
+        "--usage-path",
+        type=Path,
+        default=None,
+        help="Path to Agent OS usage docs (default: auto-detect from standards-path)",
+    )
+
+    parser.add_argument(
+        "--workflows-path",
+        type=Path,
+        default=None,
+        help="Path to Agent OS workflows (default: auto-detect from standards-path)",
+    )
+
+    parser.add_argument(
         "--verbose",
         "-v",
         action="store_true",
@@ -465,14 +479,28 @@ def main():
 
     # Determine paths
     script_dir = Path(__file__).parent
-    repo_root = script_dir.parent.parent
+    repo_root = script_dir.parent
 
-    index_path = args.index_path or (
-        repo_root / ".agent-os" / ".cache" / "vector_index"
-    )
-    standards_path = args.standards_path or (repo_root / "universal" / "standards")
-    usage_path = repo_root / "universal" / "usage"  # Agent OS usage docs
-    workflows_path = repo_root / "universal" / "workflows"  # NEW: Workflow metadata
+    # Default paths depend on whether we're in source repo or installed location
+    # If script is at .agent-os/scripts/, then repo_root is .agent-os/
+    # If script is at agent-os-enhanced/scripts/, then repo_root is agent-os-enhanced/
+    
+    # Detect if we're in an installed location
+    is_installed = (repo_root / "standards").exists() and not (repo_root / "universal").exists()
+    
+    if is_installed:
+        # Installed in .agent-os/ directory
+        index_path = args.index_path or (repo_root / ".cache" / "vector_index")
+        standards_path = args.standards_path or (repo_root / "standards")
+        usage_path = args.usage_path or (repo_root / "usage")
+        workflows_path = args.workflows_path or (repo_root / "workflows")
+    else:
+        # Running from source repository
+        source_root = repo_root.parent  # go up one more level to project root
+        index_path = args.index_path or (source_root / ".agent-os" / ".cache" / "vector_index")
+        standards_path = args.standards_path or (repo_root / "universal" / "standards")
+        usage_path = args.usage_path or (repo_root / "universal" / "usage")
+        workflows_path = args.workflows_path or (repo_root / "universal" / "workflows")
 
     # Validate standards path exists
     if not standards_path.exists():
