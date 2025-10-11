@@ -17,9 +17,15 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 ## Time Estimates
 
+### Human Implementation (Traditional)
 - **Phase 1:** {hours} ({description})
 - **Phase 2:** {hours} ({description})
 - **Total:** {hours} ({days})
+
+### AI Agent + Human Orchestration (Agent OS Enhanced)
+- **Phase 1:** {AI hours} AI work, {human minutes} human orchestration ({leverage}x)
+- **Phase 2:** {AI hours} AI work, {human minutes} human orchestration ({leverage}x)
+- **Total:** {AI hours} AI work, {human hours} human effort ({leverage}x leverage)
 
 ---
 
@@ -32,6 +38,9 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 ### Phase 1 Tasks
 
 - [ ] **Task 1.1**: {Task name}
+  - **Human Estimate:** {hours} ({S/M/L})
+  - **AI Agent Estimate:** {AI hours} AI work, {human min} orchestration ({leverage}x)
+  
   - {Action item}
   - {Action item}
   - Verify {verification}
@@ -41,6 +50,9 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
   - [ ] {Criterion 2}
 
 - [ ] **Task 1.2**: {Task name}
+  - **Human Estimate:** {hours} ({S/M/L})
+  - **AI Agent Estimate:** {AI hours} AI work, {human min} orchestration ({leverage}x)
+  
   - {Action item}
   
   **Acceptance Criteria:**
@@ -95,6 +107,9 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 ```markdown
 - [ ] **Task 1.1**: Create database schema
+  - **Human Estimate:** 4 hours (M)
+  - **AI Agent Estimate:** 4 hours AI work, 12 min human orchestration (20x leverage)
+  
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
   - Create migration file with up/down migrations
@@ -109,6 +124,8 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 ```
 
 **Why Good:**
+- Dual time estimates (human vs AI agent)
+- Shows leverage multiplier (20x)
 - Specific action items
 - Clear verification step
 - Measurable acceptance criteria
@@ -200,31 +217,114 @@ Phase 1
 
 ## Time Estimation Guidelines
 
-### T-Shirt Sizing
+### Dual Estimation: Human vs AI Agent
+
+Agent OS Enhanced requires **two time estimates** to show the leverage multiplier:
+
+1. **Human Estimate** - Traditional human implementation time
+2. **AI Agent Estimate** - Breakdown of AI execution and human orchestration
+
+**Why both?** To demonstrate the 20-40x velocity multiplier that Agent OS provides.
+
+---
+
+### T-Shirt Sizing (Human Implementation Time)
 
 - **Small (S):** 1-2 hours
 - **Medium (M):** 2-4 hours
 - **Large (L):** 4-8 hours
 - **Extra Large (XL):** 8-16 hours (consider breaking down)
 
-### Estimation Formula
+---
+
+### Human Estimation Formula
 
 ```
-Estimated Time = Base Time + (Complexity Factor × Risk Factor)
+Human Time = Base Time × Complexity Factor × Risk Factor
 
 Base Time: How long if everything goes smoothly
 Complexity: 1.0 (simple) to 2.0 (complex)
 Risk: 1.0 (low) to 1.5 (high uncertainty)
 ```
 
-### Example
-
+**Example:**
 ```
 Base: 2 hours (write code)
 Complexity: 1.5 (moderate complexity)
 Risk: 1.2 (some unknowns)
-Total: 2 × 1.5 × 1.2 = 3.6 hours (round to 4)
+Human Time: 2 × 1.5 × 1.2 = 3.6 hours (round to 4 hours)
 ```
+
+---
+
+### AI Agent Estimation Formula
+
+```
+AI Implementation Time = Human Time × 0.8 to 1.2
+  (AI typically similar speed, sometimes faster for parallel tasks,
+   sometimes slower for complex reasoning/debugging)
+
+Human Orchestration Time = AI Implementation Time × 0.03 to 0.10
+  (Typically 3-10% of AI time for direction and review)
+
+Total Human Effort = Human Orchestration Time
+Leverage Multiplier = Human Time ÷ Human Orchestration Time
+```
+
+**Example:**
+```
+Human Time: 4 hours (from above)
+
+AI Implementation Time: 4 × 1.0 = 4 hours
+  (AI works continuously, no context switching)
+
+Human Orchestration Time: 4 × 0.05 = 0.2 hours (12 minutes)
+  (Initial direction: 5 min, review: 7 min)
+
+Leverage: 4 hours ÷ 0.2 hours = 20x
+  (Human saves 3.8 hours per task)
+```
+
+---
+
+### Task Format with Dual Estimates
+
+```markdown
+- [ ] **Task 1.1**: Create database schema
+  - **Human Estimate:** 4 hours (M)
+  - **AI Agent Estimate:** 4 hours AI work, 12 min human orchestration (20x leverage)
+  
+  - Define tables for users, resources, tags
+  - Add indexes for foreign keys and frequently queried columns
+  - Create migration file with up/down migrations
+  - Verify schema matches data models from specs.md
+  
+  **Acceptance Criteria:**
+  - [ ] All tables created with correct columns and types
+  - [ ] Foreign key constraints defined
+  - [ ] Indexes created for performance
+  - [ ] Migration runs successfully (up and down)
+  - [ ] Schema documentation updated
+```
+
+---
+
+### Estimation Guidelines by Task Type
+
+| Task Type | Human Time | AI Multiplier | Orchestration % | Leverage |
+|-----------|-----------|---------------|-----------------|----------|
+| Boilerplate/Setup | 2-4h | 0.8x (faster) | 3% | 30-40x |
+| Straightforward Logic | 2-6h | 1.0x (same) | 5% | 20x |
+| Complex Algorithm | 4-8h | 1.2x (slower) | 8% | 10-15x |
+| Debugging/Research | 4-12h | 1.5x (slower) | 10% | 7-10x |
+| Documentation | 1-3h | 0.6x (faster) | 3% | 30-50x |
+
+**Notes:**
+- AI is **faster** for repetitive/boilerplate work (0.6-0.8x)
+- AI is **similar speed** for standard implementation (1.0x)
+- AI is **slower** for novel/complex problems requiring deep reasoning (1.2-1.5x)
+- Human orchestration is **always small** (3-10% of AI time)
+- **Leverage remains high** even when AI is slower (7-50x)
 
 ---
 
