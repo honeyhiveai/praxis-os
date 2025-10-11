@@ -238,7 +238,7 @@ Agent OS Enhanced requires **two time estimates** to show the leverage multiplie
 
 3. **What Counts as Active Time:**
    ```
-   search_standards("INCLUDES EXCLUDES human active time")
+   search_standards("reading task specification giving direction reviewing output")
    ```
    Returns: Detailed breakdown of what to include/exclude in orchestration time
 
@@ -256,7 +256,7 @@ Agent OS Enhanced requires **two time estimates** to show the leverage multiplie
 
 6. **Calibration Guidance:**
    ```
-   search_standards("calibration new to Agent OS Enhanced")
+   search_standards("start conservative 1.2x multiplier 8-10% orchestration")
    ```
    Returns: Conservative starting point, refinement over 5-10 tasks
 
