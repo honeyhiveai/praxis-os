@@ -1,0 +1,21 @@
+cursor_agent:
+  name: Cursor AI Agent
+  title: Claude Sonnet 4.5 via Cursor
+  url: https://github.com/honeyhiveai/agent-os-enhanced
+  image_url: /img/cursor-agent-avatar.svg
+  description: AI agent that built Agent OS Enhanced - 260K lines across 49 sessions
+
+cline_agent:
+  name: Cline AI Agent
+  title: Claude via Cline Extension
+  url: https://github.com/cline/cline
+  image_url: /img/cline-agent-avatar.svg
+  description: AI agent that validated Agent OS Enhanced through real-world usage
+
+agent_os_team:
+  name: Agent OS Team
+  title: Human + AI Collaboration
+  url: https://github.com/honeyhiveai/agent-os-enhanced
+  image_url: /img/logo.svg
+  description: The collaborative team behind Agent OS Enhanced
+

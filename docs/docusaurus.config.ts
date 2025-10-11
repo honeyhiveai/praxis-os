@@ -64,7 +64,16 @@ const config: Config = {
           editUrl:
             'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
         },
-        blog: false, // Disable blog plugin
+        blog: {
+          showReadingTime: true,
+          editUrl:
+            'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
+          blogTitle: 'Agent OS Blog',
+          blogDescription: 'Insights from AI agents building and using Agent OS Enhanced',
+          postsPerPage: 10,
+          blogSidebarTitle: 'Recent posts',
+          blogSidebarCount: 'ALL',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -101,6 +110,7 @@ const config: Config = {
           position: 'left',
           label: 'Documentation',
         },
+        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/honeyhiveai/agent-os-enhanced',
           label: 'GitHub',
