@@ -38,8 +38,8 @@
 2. Write Problem → Validate need
 3. Draft Standard → Get feedback
 4. Add examples → Demonstrate application
-5. RAG optimize → Ensure discoverability
-6. Test queries → Validate findability
+5. RAG optimize → Query for optimization guidance (see Step 5 below)
+6. Test queries → Validate findability (test for pollution)
 ```
 
 **Common Mistakes:**
@@ -351,9 +351,90 @@ search_standards("[related concept] guidelines")
 - Examples showing good vs bad
 - Checklist for compliance
 - Anti-patterns documented
-- RAG-optimized for discoverability (follow rag-content-authoring.md)
+- RAG-optimized for discoverability (complete Step 5 before finalizing)
 
-### Step 4: Test Discoverability (Multi-Angle)
+### Step 4: Add Examples
+
+**Add concrete examples showing good vs bad applications.**
+
+This step ensures your standard has practical demonstrations that agents can learn from.
+
+### Step 5: RAG Optimize → Ensure Discoverability
+
+**Critical:** Your standard is only useful if agents can find it through natural queries.
+
+**Query for content optimization (how to write):**
+```python
+search_standards("how to make content discoverable for agents")
+search_standards("RAG content authoring keywords query hooks")
+search_standards("avoid generic terms keyword pollution")
+search_standards("front-load critical information TL;DR")
+```
+
+**Query for query patterns (how agents search):**
+```python
+search_standards("query construction content-specific phrases")
+search_standards("semantic search patterns effectiveness")
+search_standards("avoid generic questions use unique values")
+```
+
+**Why query BOTH perspectives:**
+- **Content side:** Learn how to structure discoverable content
+- **Query side:** Understand how agents will search for it
+- **Together:** Avoid keyword pollution, use content-specific phrases
+
+**Apply what you discover:**
+
+1. **Add keyword line** with content-specific terms (not generic)
+   - ✅ "three phase development, conversational design, spec implementation"
+   - ❌ "workflow, process, development" (too generic, pollutes results)
+
+2. **Include query hooks** (20+ natural questions your standard answers)
+
+3. **Front-load TL;DR** with high keyword density
+
+4. **Use specific headers** that match how agents think
+   - ✅ "How to Build Features in Agent OS"
+   - ❌ "Usage" or "Examples"
+
+5. **Test from multiple angles** (Step 6)
+
+**Validation:**
+- [ ] Queried for RAG content optimization guidance
+- [ ] Queried for query construction patterns
+- [ ] Understand both how to write AND how agents search
+- [ ] Keywords are content-specific (won't pollute other standards)
+- [ ] Headers match natural agent queries
+- [ ] TL;DR section has high keyword density
+- [ ] Query hooks section included (20+ questions)
+
+### Step 6: Test Queries → Validate Findability
+
+**Test that your standard returns for the RIGHT queries and doesn't pollute others:**
+
+**Should return your standard (top 3 results):**
+```python
+# Test 5+ natural queries agents would use for YOUR content
+search_standards("[your content-specific phrase 1]")
+search_standards("[your content-specific phrase 2]")
+search_standards("[natural question from your query hooks]")
+search_standards("[domain-specific term unique to your topic]")
+search_standards("[problem your standard solves]")
+```
+
+**Should NOT return your standard:**
+```python
+# Test that generic terms don't cause pollution
+search_standards("workflow")  # Should return workflow standards, not yours
+search_standards("testing")   # Should return test standards, not yours
+search_standards("process")   # Should return process standards, not yours
+```
+
+**If your standard returns for generic queries it shouldn't:**
+→ You're polluting other standards' results
+→ Remove generic keywords from your keyword line
+→ Use more content-specific phrases
+→ Refine Step 5 and retest
 
 **CRITICAL: Test from 5+ different perspectives to ensure comprehensive discoverability**
 
@@ -386,7 +467,7 @@ search_standards("[topic] anti-patterns")
 
 **Validation criteria:** Content MUST return in top 3 for minimum 5 different natural query phrasings.
 
-### Step 5: Place in Correct Directory
+### Step 7: Place in Correct Directory
 
 **Standards location**: `universal/standards/[category]/[standard-name].md`
 
@@ -407,7 +488,7 @@ search_standards("[topic] anti-patterns")
 
 **Create new category** if none fit (but query first to see if it should merge with existing).
 
-### Step 6: Test with Real Usage
+### Step 8: Test with Real Usage
 
 **Dogfooding**: Use the standard yourself immediately.
 
@@ -419,7 +500,7 @@ search_standards("[topic] anti-patterns")
 
 **Iterate** based on actual usage.
 
-### Step 7: Ship to `universal/`
+### Step 9: Ship to `universal/`
 
 Commit to `universal/standards/[category]/[name].md`.
 

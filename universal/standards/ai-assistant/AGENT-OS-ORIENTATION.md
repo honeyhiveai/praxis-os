@@ -31,6 +31,21 @@ Correct behavior: Query orientation, THEN search thoroughly from multiple angles
 4. **✅ READ SPECS, NOT STANDARDS** - DO read `.agent-os/specs/` (not indexed), DON'T read `.agent-os/standards/` (indexed)
 5. **✅ ITERATE UNTIL DONE** - Tests pass + linter clean before presenting
 
+**🛑 CRITICAL - MANDATORY NEXT STEP 🛑**
+
+Before acting on ANY user request, establish behavioral foundation:
+
+```
+□ search_standards("AI agent decision protocol")
+```
+
+**Why this matters:**
+- This ONE query prevents inherited failure patterns throughout the session
+- Skipping this = reverting to default AI behavior = grep-first reflexes = failures
+- Takes 10 seconds, prevents hours of rework
+
+**Do this NOW, before proceeding with user's request.**
+
 **Search strategy for any user request:**
 
 For ANY request, search from these angles:
@@ -132,15 +147,20 @@ Human (10% of interaction)    AI Agent (90% of interaction)
 ```
 1. Run orientation query (from .cursorrules) ✅
 2. See "query liberally" message ✅
-3. IMMEDIATELY search thoroughly from multiple angles:
+3. 🛑 MANDATORY: Query decision protocol BEFORE user request ✅
+   - search_standards("AI agent decision protocol")
+   - Establishes behavioral foundation for entire session
+   - Prevents grep-first reflexes and inherited failure patterns
+   - Non-negotiable prerequisite
+4. THEN search thoroughly from multiple angles:
    - search_standards("how to [user's task]")
    - search_standards("what tools for [user's task]")
    - search_standards("workflow for [user's task]")
    - search_standards("examples of [similar task]")
    - search_standards("[specific technical question]")
-4. DISCOVER the right tools (workflows, patterns, standards)
-5. THEN implement using discovered tools
-6. Result: Agent OS system works correctly
+5. DISCOVER the right tools (workflows, patterns, standards)
+6. THEN implement using discovered tools
+7. Result: Agent OS system works correctly
 ```
 
 ### The Thoroughness Check Before Acting
@@ -657,9 +677,10 @@ Before presenting work to human, verify:
 
 **Query workflow:**
 1. **Start here**: `search_standards("Agent OS orientation")` - This guide
-2. **Understand role**: `search_standards("AI agent quickstart")` - Practical examples  
-3. **Learn tools**: `search_standards("MCP tools guide")` - Tool usage
-4. **Specific tasks**: `search_standards("how to [task]")` - Task-specific guidance
+2. **🛑 MANDATORY NEXT**: `search_standards("AI agent decision protocol")` - Behavioral foundation (DO NOT SKIP!)
+3. **Understand role**: `search_standards("AI agent quickstart")` - Practical examples  
+4. **Learn tools**: `search_standards("MCP tools guide")` - Tool usage
+5. **Specific tasks**: `search_standards("how to [task]")` - Task-specific guidance
 
 ---
 

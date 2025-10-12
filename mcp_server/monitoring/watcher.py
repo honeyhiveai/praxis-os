@@ -99,6 +99,20 @@ class AgentOSFileWatcher(FileSystemEventHandler):
             logger.info("📝 New Agent OS content: %s", Path(event.src_path).name)
             self._schedule_rebuild()
 
+    def on_deleted(self, event: Any) -> None:
+        """
+        Handle file deletion events.
+
+        :param event: File system event from watchdog
+        """
+        if event.is_directory:
+            return
+
+        # Handle both markdown and JSON files (workflows metadata)
+        if event.src_path.endswith(".md") or event.src_path.endswith(".json"):
+            logger.info("🗑️  Agent OS content deleted: %s", Path(event.src_path).name)
+            self._schedule_rebuild()
+
     def _schedule_rebuild(self) -> None:
         """
         Schedule an index rebuild with debouncing.

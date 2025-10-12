@@ -354,10 +354,26 @@ class IndexBuilder:
                     ):
                         changed_files.append(md_file)
 
-            # Log deleted files (in old metadata but not in current files)
+            # Detect and handle deleted files (in old metadata but not in current files)
             deleted_files = set(file_mtimes.keys()) - current_files
             if deleted_files:
                 logger.info(f"Detected {len(deleted_files)} deleted files")
+                # Delete chunks for deleted files from the index
+                if "agent_os_standards" in self.db.table_names():
+                    try:
+                        table = self.db.open_table("agent_os_standards")
+                        for deleted_path in deleted_files:
+                            try:
+                                table.delete(f"file_path = '{deleted_path}'")
+                                logger.info(
+                                    f"🗑️  Removed chunks for deleted file: {deleted_path}"
+                                )
+                            except Exception as e:
+                                logger.warning(
+                                    f"Failed to delete chunks for {deleted_path}: {e}"
+                                )
+                    except Exception as e:
+                        logger.warning(f"Failed to open table for deletion: {e}")
 
             return changed_files
 
@@ -484,10 +500,12 @@ def main():
     # Default paths depend on whether we're in source repo or installed location
     # If script is at .agent-os/scripts/, then repo_root is .agent-os/
     # If script is at agent-os-enhanced/scripts/, then repo_root is agent-os-enhanced/
-    
+
     # Detect if we're in an installed location
-    is_installed = (repo_root / "standards").exists() and not (repo_root / "universal").exists()
-    
+    is_installed = (repo_root / "standards").exists() and not (
+        repo_root / "universal"
+    ).exists()
+
     if is_installed:
         # Installed in .agent-os/ directory
         index_path = args.index_path or (repo_root / ".cache" / "vector_index")
@@ -497,7 +515,9 @@ def main():
     else:
         # Running from source repository
         source_root = repo_root.parent  # go up one more level to project root
-        index_path = args.index_path or (source_root / ".agent-os" / ".cache" / "vector_index")
+        index_path = args.index_path or (
+            source_root / ".agent-os" / ".cache" / "vector_index"
+        )
         standards_path = args.standards_path or (repo_root / "universal" / "standards")
         usage_path = args.usage_path or (repo_root / "universal" / "usage")
         workflows_path = args.workflows_path or (repo_root / "universal" / "workflows")

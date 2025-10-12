@@ -7,6 +7,9 @@
 .agent-os/.upgrade_lock
 .agent-os/.mcp_server_state.json
 
+# Agent OS - Working documents (analysis, session notes, temporary files)
+working-docs/
+
 # Agent OS - Everything else is TRACKED as reference example for consumers
 # (.agent-os/ serves as dogfooding example of proper installation)
 

@@ -16,7 +16,7 @@ import logging
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, cast
 
 import lancedb
 
@@ -38,8 +38,8 @@ class IndexBuilder:
         self,
         index_path: Path,
         standards_path: Path,
-        usage_path: Path = None,
-        workflows_path: Path = None,
+        usage_path: Optional[Path] = None,
+        workflows_path: Optional[Path] = None,
         embedding_provider: str = "local",
         embedding_model: str = "all-MiniLM-L6-v2",
     ):
@@ -58,7 +58,7 @@ class IndexBuilder:
         self.standards_path = standards_path
         self.usage_path = usage_path
         self.workflows_path = workflows_path
-        
+
         # Build list of source paths to scan
         self.source_paths = [standards_path]
         if usage_path and usage_path.exists():
@@ -67,14 +67,18 @@ class IndexBuilder:
         if workflows_path and workflows_path.exists():
             self.source_paths.append(workflows_path)
             logger.info(f"Including workflow metadata from: {workflows_path}")
-        
+
         self.embedding_provider = embedding_provider
         self.embedding_model = embedding_model
-        
+
         # Initialize embedding model
+        self.local_model: Any = None
         if self.embedding_provider == "local":
-            logger.info("Using local embeddings (sentence-transformers) - FREE & OFFLINE")
+            logger.info(
+                "Using local embeddings (sentence-transformers) - FREE & OFFLINE"
+            )
             from sentence_transformers import SentenceTransformer
+
             self.local_model = SentenceTransformer(embedding_model)
         else:
             self.local_model = None
@@ -105,25 +109,29 @@ class IndexBuilder:
                 # Local embeddings using sentence-transformers
                 # Returns 384-dimensional vector
                 embedding = self.local_model.encode(text, convert_to_numpy=True)
-                return embedding.tolist()
+                return cast(List[float], embedding.tolist())
             except Exception as e:
                 logger.error(f"Failed to generate local embedding: {e}")
                 raise
         elif self.embedding_provider == "openai":
             try:
                 import openai
+
                 # OpenAI embeddings (requires API key, costs money)
                 response = openai.embeddings.create(
                     model=self.embedding_model, input=text
                 )
-                return response.data[0].embedding
+                # OpenAI SDK returns embedding as list[float] but type-stubbed as Any
+                return response.data[0].embedding  # type: ignore[no-any-return]
             except Exception as e:
                 logger.error(f"Failed to generate OpenAI embedding: {e}")
                 raise
         else:
             raise ValueError(f"Unknown embedding provider: {self.embedding_provider}")
 
-    def build_index(self, force: bool = False, incremental: bool = True) -> Dict[str, Any]:
+    def build_index(
+        self, force: bool = False, incremental: bool = True
+    ) -> Dict[str, Any]:
         """
         Build vector index from Agent OS files.
 
@@ -152,25 +160,25 @@ class IndexBuilder:
         if not force and self._is_index_fresh():
             logger.info("Index is fresh, skipping rebuild (use --force to rebuild)")
             return {"status": "skipped", "reason": "index_fresh"}
-        
+
         # Determine build strategy
         table_exists = "agent_os_standards" in self.db.table_names()
         use_incremental = incremental and table_exists and not force
-        
+
         if use_incremental:
             logger.info("📝 Using incremental update (only processing changed files)")
             changed_files = self._get_changed_files()
-            
+
             if not changed_files:
                 logger.info("No files changed, index is up to date")
                 return {"status": "skipped", "reason": "no_changes"}
-            
+
             logger.info(f"Found {len(changed_files)} changed files")
             files_to_process = changed_files
-            
+
             # Open existing table
             table = self.db.open_table("agent_os_standards")
-            
+
             # Delete old chunks for changed files
             logger.info("🗑️  Removing old chunks for changed files...")
             for md_file in changed_files:
@@ -208,7 +216,9 @@ class IndexBuilder:
                 # Continue processing other files
                 continue
 
-        logger.info(f"Generated {len(all_chunks)} chunks from {len(files_to_process)} files")
+        logger.info(
+            f"Generated {len(all_chunks)} chunks from {len(files_to_process)} files"
+        )
 
         # Convert chunks to LanceDB format with embeddings
         logger.info("Generating embeddings for all chunks...")
@@ -216,15 +226,15 @@ class IndexBuilder:
         for idx, chunk in enumerate(all_chunks, 1):
             if idx % 100 == 0:
                 logger.info(f"  Embedding chunk {idx}/{len(all_chunks)}")
-            
+
             try:
                 # Generate embedding
                 embedding = self.generate_embedding(chunk.content)
-                
+
                 # Convert absolute file path to relative path
                 abs_path = Path(chunk.file_path)
                 rel_file_path = str(abs_path.relative_to(self.standards_path.parent))
-                
+
                 # Create record with embedding and metadata
                 record = {
                     "chunk_id": chunk.chunk_id,
@@ -241,7 +251,7 @@ class IndexBuilder:
                     "tags": json.dumps(chunk.metadata.tags),
                 }
                 records.append(record)
-                
+
             except Exception as e:
                 logger.error(f"Failed to embed chunk {idx}: {e}")
                 continue
@@ -251,7 +261,9 @@ class IndexBuilder:
         # Update or create table
         if use_incremental:
             # Add new records to existing table
-            logger.info(f"➕ Adding {len(records)} new/updated records to existing table...")
+            logger.info(
+                f"➕ Adding {len(records)} new/updated records to existing table..."
+            )
             table.add(records)
             total_chunks = table.count_rows()
             logger.info(f"✅ Table updated - now contains {total_chunks} total records")
@@ -263,7 +275,7 @@ class IndexBuilder:
                     self.db.drop_table("agent_os_standards")
             except Exception as e:
                 logger.warning(f"Could not drop existing table: {e}")
-            
+
             logger.info(f"Creating new table with {len(records)} records...")
             table = self.db.create_table("agent_os_standards", records)
             total_chunks = len(records)
@@ -272,14 +284,14 @@ class IndexBuilder:
         # Save metadata with file modification times
         build_time = datetime.now()
         elapsed = (build_time - start_time).total_seconds()
-        
+
         # Collect all file mtimes for change detection
         file_mtimes = {}
         for source_path in self.source_paths:
             for md_file in source_path.rglob("*.md"):
                 rel_path = str(md_file.relative_to(self.standards_path.parent))
                 file_mtimes[rel_path] = md_file.stat().st_mtime
-        
+
         metadata = {
             "build_time": build_time.isoformat(),
             "source_files": len(file_mtimes),
@@ -290,7 +302,7 @@ class IndexBuilder:
             "build_type": "incremental" if use_incremental else "full",
             "files_mtimes": file_mtimes,
         }
-        
+
         metadata_file = self.index_path / "metadata.json"
         metadata_file.write_text(json.dumps(metadata, indent=2))
         logger.info(f"Metadata saved to {metadata_file}")
@@ -314,38 +326,57 @@ class IndexBuilder:
             List of file paths that need reprocessing
         """
         metadata_file = self.index_path / "metadata.json"
-        
+
         # No metadata = all files are "changed"
         if not metadata_file.exists():
             all_files = []
             for source_path in self.source_paths:
                 all_files.extend(list(source_path.rglob("*.md")))
             return all_files
-        
+
         try:
             metadata = json.loads(metadata_file.read_text())
             file_mtimes = metadata.get("files_mtimes", {})
-            
+
             changed_files = []
             current_files = set()
-            
+
             for source_path in self.source_paths:
                 for md_file in source_path.rglob("*.md"):
                     rel_path = str(md_file.relative_to(self.standards_path.parent))
                     current_files.add(rel_path)
                     current_mtime = md_file.stat().st_mtime
-                    
+
                     # File is new or modified
-                    if rel_path not in file_mtimes or file_mtimes[rel_path] != current_mtime:
+                    if (
+                        rel_path not in file_mtimes
+                        or file_mtimes[rel_path] != current_mtime
+                    ):
                         changed_files.append(md_file)
-            
-            # Log deleted files (in old metadata but not in current files)
+
+            # Detect and handle deleted files (in old metadata but not in current files)
             deleted_files = set(file_mtimes.keys()) - current_files
             if deleted_files:
                 logger.info(f"Detected {len(deleted_files)} deleted files")
-            
+                # Delete chunks for deleted files from the index
+                if "agent_os_standards" in self.db.table_names():
+                    try:
+                        table = self.db.open_table("agent_os_standards")
+                        for deleted_path in deleted_files:
+                            try:
+                                table.delete(f"file_path = '{deleted_path}'")
+                                logger.info(
+                                    f"🗑️  Removed chunks for deleted file: {deleted_path}"
+                                )
+                            except Exception as e:
+                                logger.warning(
+                                    f"Failed to delete chunks for {deleted_path}: {e}"
+                                )
+                    except Exception as e:
+                        logger.warning(f"Failed to open table for deletion: {e}")
+
             return changed_files
-            
+
         except Exception as e:
             logger.warning(f"Error detecting changed files: {e}")
             # Fall back to full rebuild
@@ -362,20 +393,20 @@ class IndexBuilder:
             True if index is fresh and doesn't need rebuild
         """
         metadata_file = self.index_path / "metadata.json"
-        
+
         # No metadata = needs build
         if not metadata_file.exists():
             return False
-        
+
         # Check if table exists
         if "agent_os_standards" not in self.db.table_names():
             return False
-        
+
         try:
             # Read metadata
             metadata = json.loads(metadata_file.read_text())
             build_time = datetime.fromisoformat(metadata["build_time"])
-            
+
             # Check if any source files are newer than build
             for source_path in self.source_paths:
                 for md_file in source_path.rglob("*.md"):
@@ -383,9 +414,9 @@ class IndexBuilder:
                     if file_mtime > build_time:
                         logger.debug(f"File {md_file.name} modified after build")
                         return False
-            
+
             return True
-            
+
         except Exception as e:
             logger.warning(f"Could not check index freshness: {e}")
             return False
@@ -436,6 +467,20 @@ def main():
     )
 
     parser.add_argument(
+        "--usage-path",
+        type=Path,
+        default=None,
+        help="Path to Agent OS usage docs (default: auto-detect from standards-path)",
+    )
+
+    parser.add_argument(
+        "--workflows-path",
+        type=Path,
+        default=None,
+        help="Path to Agent OS workflows (default: auto-detect from standards-path)",
+    )
+
+    parser.add_argument(
         "--verbose",
         "-v",
         action="store_true",
@@ -450,12 +495,32 @@ def main():
 
     # Determine paths
     script_dir = Path(__file__).parent
-    repo_root = script_dir.parent.parent
+    repo_root = script_dir.parent
 
-    index_path = args.index_path or (repo_root / ".agent-os" / ".cache" / "vector_index")
-    standards_path = args.standards_path or (repo_root / "universal" / "standards")
-    usage_path = repo_root / "universal" / "usage"  # Agent OS usage docs
-    workflows_path = repo_root / "universal" / "workflows"  # NEW: Workflow metadata
+    # Default paths depend on whether we're in source repo or installed location
+    # If script is at .agent-os/scripts/, then repo_root is .agent-os/
+    # If script is at agent-os-enhanced/scripts/, then repo_root is agent-os-enhanced/
+
+    # Detect if we're in an installed location
+    is_installed = (repo_root / "standards").exists() and not (
+        repo_root / "universal"
+    ).exists()
+
+    if is_installed:
+        # Installed in .agent-os/ directory
+        index_path = args.index_path or (repo_root / ".cache" / "vector_index")
+        standards_path = args.standards_path or (repo_root / "standards")
+        usage_path = args.usage_path or (repo_root / "usage")
+        workflows_path = args.workflows_path or (repo_root / "workflows")
+    else:
+        # Running from source repository
+        source_root = repo_root.parent  # go up one more level to project root
+        index_path = args.index_path or (
+            source_root / ".agent-os" / ".cache" / "vector_index"
+        )
+        standards_path = args.standards_path or (repo_root / "universal" / "standards")
+        usage_path = args.usage_path or (repo_root / "universal" / "usage")
+        workflows_path = args.workflows_path or (repo_root / "universal" / "workflows")
 
     # Validate standards path exists
     if not standards_path.exists():
@@ -479,7 +544,7 @@ def main():
                 args.model = "all-MiniLM-L6-v2"
             else:
                 args.model = "text-embedding-3-small"
-        
+
         # Build index
         builder = IndexBuilder(
             index_path=index_path,
