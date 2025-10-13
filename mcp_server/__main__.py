@@ -12,6 +12,7 @@ Allows execution via:
 
 import argparse
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -29,9 +30,10 @@ def find_agent_os_directory() -> Path:
     Find .agent-os directory in project.
 
     Search order:
-    1. Current directory / .agent-os
-    2. Home directory / .agent-os
-    3. Parent of __file__ / .agent-os
+    1. AGENT_OS_BASE_PATH env var (if set)
+    2. Current directory / .agent-os
+    3. Home directory / .agent-os
+    4. Parent of __file__ / .agent-os
 
     Returns:
         Path to .agent-os directory
@@ -39,6 +41,18 @@ def find_agent_os_directory() -> Path:
     Raises:
         SystemExit: If .agent-os directory not found
     """
+    # Priority 1: Check AGENT_OS_BASE_PATH env var (for IDEs with wrong cwd)
+    if base_env := os.getenv("AGENT_OS_BASE_PATH"):
+        base_path = Path(base_env) / ".agent-os"
+        if base_path.exists():
+            logger.info("Using AGENT_OS_BASE_PATH: %s", base_path)
+            return base_path
+        logger.warning(
+            "AGENT_OS_BASE_PATH is set to %s but .agent-os not found there",
+            base_env,
+        )
+
+    # Priority 2: Current directory (for well-behaved IDEs)
     base_path = Path.cwd() / ".agent-os"
 
     if not base_path.exists():
@@ -55,10 +69,13 @@ def find_agent_os_directory() -> Path:
         else:
             logger.error(
                 "Could not find .agent-os directory. Tried:\n"
+                "  - AGENT_OS_BASE_PATH env var: %s\n"
                 "  - %s\n"
                 "  - %s\n"
                 "  - %s\n"
-                "Please run from project root or ensure .agent-os exists.",
+                "Please run from project root, set AGENT_OS_BASE_PATH, "
+                "or ensure .agent-os exists.",
+                os.getenv("AGENT_OS_BASE_PATH", "not set"),
                 Path.cwd() / ".agent-os",
                 Path.home() / ".agent-os",
                 Path(__file__).parent.parent.parent / ".agent-os",
