@@ -1,4 +1,4 @@
-# Command Language - Universal Meta-Framework Pattern
+# Command Language - Universal Meta-Workflow Pattern
 
 **Timeless pattern for binding, non-ambiguous AI instructions**
 
@@ -19,7 +19,7 @@
 3. **📊 Evidence Commands** - COUNT-AND-DOCUMENT, GATHER-EVIDENCE (proof required)
 4. **🔄 Update Commands** - UPDATE-TABLE, SYNC-STATUS (progress tracking)
 5. **⚠️ Reading Commands** - MUST-READ, LOAD-CONTEXT (required input)
-6. **🚨 Detection Commands** - FRAMEWORK-VIOLATION (error detection)
+6. **🚨 Detection Commands** - WORKFLOW-VIOLATION (error detection)
 
 **Command Pattern:**
 ```markdown
@@ -40,7 +40,7 @@ Example:
 - Quality gates and validation checkpoints
 - Progress tracking and evidence gathering
 - Control flow and routing decisions
-- Framework compliance enforcement
+- Workflow compliance enforcement
 
 ---
 
@@ -101,7 +101,7 @@ A **standardized set of symbols** that create binding obligations for AI executi
 📊 COUNT-AND-DOCUMENT  → Quantified evidence
 🔄 UPDATE-TABLE        → Progress tracking
 🛑 VALIDATE-GATE        → Quality gate
-🚨 FRAMEWORK-VIOLATION → Error detection
+🚨 WORKFLOW-VIOLATION → Error detection
 ```
 
 **Result**: ~85% compliance, rarely ignored
@@ -264,21 +264,21 @@ Update the following table:
 
 **Syntax**:
 ```markdown
-🚨 FRAMEWORK-VIOLATION: [violation description]
+🚨 WORKFLOW-VIOLATION: [violation description]
 ```
 
 **Examples**:
 ```markdown
-🚨 FRAMEWORK-VIOLATION: Skipping validation gate
+🚨 WORKFLOW-VIOLATION: Skipping validation gate
 
 If you proceed without completing all ✅ criteria:
 1. Quality cannot be assured
 2. Downstream issues likely
-3. Framework integrity compromised
+3. Workflow integrity compromised
 
 **STOP and complete all criteria first.**
 
-🚨 FRAMEWORK-VIOLATION: Re-reading generated files
+🚨 WORKFLOW-VIOLATION: Re-reading generated files
 
 Do NOT open schema.json (1247 lines).
 Use summary: "24 endpoints, 18 models, validation passed"
@@ -330,7 +330,7 @@ Use summary: "24 endpoints, 18 models, validation passed"
 - Test count: [number]
 - Coverage: [percentage]%
 
-🚨 FRAMEWORK-VIOLATION: Proceeding with ❌ criteria
+🚨 WORKFLOW-VIOLATION: Proceeding with ❌ criteria
 
 🎯 NEXT-MANDATORY: [only if all ✅]
 ```
@@ -384,14 +384,14 @@ can move on to the next file which is phase-2-analysis.md.
 
 ### Step 1: Create Command Glossary
 
-Every framework needs a command glossary file:
+Every workflow needs a command glossary file:
 
 **File**: `core/command-language-glossary.md`
 
 ```markdown
 # Command Language Glossary
 
-This framework uses standardized command symbols for clarity and compliance.
+This workflow uses standardized command symbols for clarity and compliance.
 
 ## Command Reference
 
@@ -401,7 +401,7 @@ This framework uses standardized command symbols for clarity and compliance.
 📊 **COUNT-AND-DOCUMENT**: Provide quantified evidence
 🔄 **UPDATE-TABLE**: Update progress tracking
 🛑 **VALIDATE-GATE**: Verify criteria before proceeding
-🚨 **FRAMEWORK-VIOLATION**: Detected shortcut/error
+🚨 **WORKFLOW-VIOLATION**: Detected shortcut/error
 
 ## Usage
 
@@ -417,7 +417,7 @@ Always follow commands in order:
 ### Step 2: Reference Glossary in Entry Point
 
 ```markdown
-# Framework Entry Point
+# Workflow Entry Point
 
 ⚠️ MUST-READ: [core/command-language-glossary.md]
 
@@ -513,14 +513,14 @@ When done, move to the next phase.
 **Query workflow for complete meta-workflow understanding:**
 
 1. **Start with commands** → `search_standards("command language")` (this document)
-2. **Framework structure** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
+2. **Workflow structure** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
 3. **Quality gates** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
-4. **Framework creation** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+4. **Workflow creation** → `search_standards("workflow creation principles")` → `standards/meta-workflow/workflow-creation-principles.md`
 
 **By Category:**
 
-**Meta-Framework:**
-- `standards/meta-workflow/framework-creation-principles.md` - Creating new frameworks → `search_standards("framework creation principles")`
+**Meta-Workflow:**
+- `standards/meta-workflow/workflow-creation-principles.md` - Creating new workflows → `search_standards("workflow creation principles")`
 - `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
 - `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
 - `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`

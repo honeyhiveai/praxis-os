@@ -1,4 +1,4 @@
-# Horizontal Decomposition - Universal Meta-Framework Pattern
+# Horizontal Decomposition - Universal Meta-Workflow Pattern
 
 **Timeless pattern for breaking complexity into focused modules**
 
@@ -173,7 +173,7 @@ File size directly impacts AI attention quality. Follow these targets for optima
 
 | Tier | Size | Purpose | Count |
 |------|------|---------|-------|
-| Entry | 100-150 lines | Framework overview | 1 |
+| Entry | 100-150 lines | Workflow overview | 1 |
 | Phase | 200-300 lines | Phase introduction | 5-8 |
 | Task | 60-100 lines | Execution instructions | 20-40 |
 | Step | 30-60 lines | Granular actions | Optional |
@@ -189,7 +189,7 @@ Follow this systematic pattern to decompose any complex workflow.
 ### Pattern 1: Top-Down Breakdown
 
 ```
-1. Define Framework (150 lines)
+1. Define Workflow (150 lines)
    - What problem does this solve?
    - What are the major phases?
 
@@ -309,14 +309,14 @@ find phases/ -name "*.md" -exec sh -c '
 **Query workflow for complete decomposition understanding:**
 
 1. **Start with decomposition** → `search_standards("horizontal decomposition")` (this document)
-2. **Learn framework principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+2. **Learn framework principles** → `search_standards("workflow creation principles")` → `standards/meta-workflow/workflow-creation-principles.md`
 3. **Understand architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
 4. **Apply validation** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
 
 **By Category:**
 
-**Meta-Framework:**
-- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+**Meta-Workflow:**
+- `standards/meta-workflow/workflow-creation-principles.md` - Core principles → `search_standards("workflow creation principles")`
 - `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
 - `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
 - `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`

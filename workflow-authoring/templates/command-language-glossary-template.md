@@ -6,9 +6,9 @@
 
 🚨 **CRITICAL**: This glossary MUST be read before any Agent OS workflow execution  
 🛑 **BINDING**: All commands create non-negotiable obligations  
-⚠️ **MANDATORY**: Reading this glossary is required by all systematic frameworks
+⚠️ **MANDATORY**: Reading this glossary is required by all systematic workflows
 
-**Applicable To**: Provider Schema Extraction Framework, Provider DSL Development Framework, Compiler Development Framework, and all future systematic workflows
+**Applicable To**: Provider Schema Extraction Workflow, Provider DSL Development Workflow, Compiler Development Workflow, and all future systematic workflows
 
 ---
 
@@ -146,12 +146,12 @@
 
 ## 🚨 **VIOLATION DETECTION COMMANDS**
 
-### **🚨 FRAMEWORK-VIOLATION**
+### **🚨 WORKFLOW-VIOLATION**
 ```markdown
-🚨 FRAMEWORK-VIOLATION: [violation type]
+🚨 WORKFLOW-VIOLATION: [violation type]
 ```
-**Binding Requirement**: AI MUST acknowledge violation and return to proper framework execution.  
-**Usage**: Self-correction mechanism for framework deviations.
+**Binding Requirement**: AI MUST acknowledge violation and return to proper workflow execution.  
+**Usage**: Self-correction mechanism for workflow deviations.
 
 ### **🚨 EVIDENCE-GAP**
 ```markdown
@@ -245,14 +245,14 @@ Instead of repeating full instructions:
 # Maintain enforcement across file boundaries:
 🎯 CHECKPOINT-THEN: Next phase
 ⚠️ MUST-COMPLETE: All current phase tasks
-🚨 FRAMEWORK-VIOLATION: If skipping evidence
+🚨 WORKFLOW-VIOLATION: If skipping evidence
 ```
 
 ---
 
 ## 🚨 **CRITICAL SUCCESS FACTORS**
 
-1. **Consistent Usage**: All framework files MUST use this glossary consistently
+1. **Consistent Usage**: All workflow files MUST use this glossary consistently
 2. **Binding Language**: Commands create obligations, not suggestions
 3. **Evidence Focus**: Every command ties to evidence requirements
 4. **Size Efficiency**: Replaces verbose instructions with compact commands
@@ -262,7 +262,7 @@ Instead of repeating full instructions:
 
 ---
 
-**Framework Version**: 1.0 (Adapted for HoneyHive DSL)  
+**Workflow Version**: 1.0 (Adapted for HoneyHive DSL)  
 **Last Updated**: 2025-10-02  
-**Source**: Adapted from python-sdk Agent OS framework
+**Source**: Adapted from python-sdk Agent OS workflow
 

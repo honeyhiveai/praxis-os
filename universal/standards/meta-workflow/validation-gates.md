@@ -1,4 +1,4 @@
-# Validation Gates - Universal Meta-Framework Pattern
+# Validation Gates - Universal Meta-Workflow Pattern
 
 **Timeless pattern for ensuring quality at phase boundaries**
 
@@ -22,7 +22,7 @@
 - [ ] Criterion 2: [specific, measurable] ✅/❌
 - [ ] Criterion 3: [specific, measurable] ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: Proceeding with ❌ criteria
+🚨 WORKFLOW-VIOLATION: Proceeding with ❌ criteria
 ```
 
 **Gate Types:**
@@ -125,7 +125,7 @@ Result: 85-95% actual completion, quality assured
 - [ ] Criterion 2: [specific, measurable] ✅/❌
 - [ ] Criterion 3: [specific, measurable] ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: Proceeding with ❌ criteria
+🚨 WORKFLOW-VIOLATION: Proceeding with ❌ criteria
 ```
 
 ### Key Elements
@@ -234,7 +234,7 @@ Verify readiness to proceed:
 - [ ] Tests coverage ≥80% ✅/❌
 - [ ] Progress table updated ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: Do NOT proceed with ❌
+🚨 WORKFLOW-VIOLATION: Do NOT proceed with ❌
 
 Upon all ✅:
 🎯 NEXT-MANDATORY: [phases/3/entry.md]
@@ -247,7 +247,7 @@ Upon all ✅:
 ### Mechanism 1: Violation Warnings
 
 ```markdown
-🚨 FRAMEWORK-VIOLATION: Skipping Gate
+🚨 WORKFLOW-VIOLATION: Skipping Gate
 
 If you proceed without all ✅:
 1. Quality cannot be verified
@@ -314,15 +314,15 @@ Cannot proceed to Phase 2 until:
 **Query workflow for complete validation understanding:**
 
 1. **Start with gates** → `search_standards("validation gates")` (this document)
-2. **Learn framework principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+2. **Learn framework principles** → `search_standards("workflow creation principles")` → `standards/meta-workflow/workflow-creation-principles.md`
 3. **Add commands** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
 4. **Understand architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
 5. **Apply decomposition** → `search_standards("horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
 
 **By Category:**
 
-**Meta-Framework (Complete Set):**
-- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+**Meta-Workflow (Complete Set):**
+- `standards/meta-workflow/workflow-creation-principles.md` - Core principles → `search_standards("workflow creation principles")`
 - `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
 - `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
 - `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`

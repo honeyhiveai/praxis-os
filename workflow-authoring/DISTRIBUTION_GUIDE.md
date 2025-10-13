@@ -1,6 +1,6 @@
-# Meta-Framework Distribution Guide
+# Meta-Workflow Distribution Guide
 
-**Purpose**: Step-by-step instructions for transferring the Agent OS Meta-Framework to other repositories  
+**Purpose**: Step-by-step instructions for transferring the Agent OS Meta-Workflow to other repositories  
 **Version**: 1.0  
 **Date**: 2025-10-02
 
@@ -52,7 +52,7 @@ cp {source}/meta-workflow/templates/command-language-glossary-template.md \
    {target}/.agent-os/meta-workflow/templates/
 
 # 3. Optional: Copy full guide for reference
-cp {source}/meta-workflow/AGENT_OS_FRAMEWORK_CREATION_GUIDE.md \
+cp {source}/meta-workflow/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
    {target}/.agent-os/meta-workflow/
 ```
 
@@ -93,10 +93,10 @@ ls -la .agent-os/meta-workflow/
 
 # Expected files:
 # - README.md
-# - AGENT_OS_FRAMEWORK_CREATION_GUIDE.md
+# - AGENT_OS_WORKFLOW_CREATION_GUIDE.md
 # - QUICK_START_TEMPLATE.md
-# - META_FRAMEWORK_SUMMARY.md
-# - FRAMEWORK_COMPLIANCE_ANALYSIS.md
+# - META_WORKFLOW_SUMMARY.md
+# - WORKFLOW_COMPLIANCE_ANALYSIS.md
 # - DISTRIBUTION_GUIDE.md
 # - VERSION_HISTORY.md
 # - templates/
@@ -118,11 +118,11 @@ open .agent-os/meta-workflow/README.md
 open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
 ```
 
-### **Step 4: Create First Framework** (1-2 hours)
+### **Step 4: Create First Workflow** (1-2 hours)
 
 ```bash
 # Follow quick start template
-# Create: .agent-os/standards/{your-framework-name}/
+# Create: .agent-os/standards/{your-workflow-name}/
 ```
 
 ---
@@ -134,7 +134,7 @@ open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
 **Goal**: Validate meta-workflow in one repository
 
 1. ✅ Transfer full package to pilot repo
-2. ✅ Create test framework using quick start
+2. ✅ Create test workflow using quick start
 3. ✅ Run 5+ executions, collect metrics
 4. ✅ Document lessons learned
 5. ✅ Refine templates based on findings
@@ -149,11 +149,11 @@ open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
 
 1. ✅ Transfer to 3-5 team repositories
 2. ✅ Train team on meta-workflow (1-hour session)
-3. ✅ Create frameworks for common workflows
+3. ✅ Create workflows for common workflows
 4. ✅ Share learnings across team
 5. ✅ Update templates based on feedback
 
-**Success Criteria**: All team repos have ≥1 framework
+**Success Criteria**: All team repos have ≥1 workflow
 
 ---
 
@@ -178,7 +178,7 @@ open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
 ```yaml
 transfer_success:
   structure_present: true/false
-  frameworks_created: count
+  workflows_created: count
   execution_consistency: percentage
   file_size_compliance: percentage
   team_adoption: percentage
@@ -234,7 +234,7 @@ cp -rn {source}/.agent-os/meta-workflow {target}/.agent-os/
 
 ### **Issue 2: Team Resistance**
 
-**Problem**: Team doesn't adopt new framework patterns  
+**Problem**: Team doesn't adopt new workflow patterns  
 **Solution**:
 - Show metrics (3-4x improvement)
 - Start with pilot/champion
@@ -295,7 +295,7 @@ Total ROI = (Time Saved + Quality Improvement) / Transfer Cost
 ### **Repository Transfer Record**
 
 ```markdown
-# Meta-Framework Transfer Record
+# Meta-Workflow Transfer Record
 
 **Repository**: {repo-name}
 **Date**: {date}
@@ -309,7 +309,7 @@ Total ROI = (Time Saved + Quality Improvement) / Transfer Cost
 - [ ] Team notified ✅/❌
 
 ## Post-Transfer Status
-- Frameworks Created: {count}
+- Workflows Created: {count}
 - Team Adoption: {percentage}
 - Execution Consistency: {percentage}
 - Issues Encountered: {list}
@@ -325,8 +325,8 @@ Total ROI = (Time Saved + Quality Improvement) / Transfer Cost
 Transfer is successful when:
 
 1. ✅ All meta-workflow files present in target repo
-2. ✅ First framework created using quick start (1-2 hours)
-3. ✅ Team trained and using framework (1 week)
+2. ✅ First workflow created using quick start (1-2 hours)
+3. ✅ Team trained and using workflow (1 week)
 4. ✅ Execution consistency ≥85% (2 weeks)
 5. ✅ File size compliance ≥95% (2 weeks)
 
@@ -335,9 +335,9 @@ Transfer is successful when:
 ## 📞 **Support**
 
 ### **Internal Support**
-- Reference: `AGENT_OS_FRAMEWORK_CREATION_GUIDE.md`
+- Reference: `AGENT_OS_WORKFLOW_CREATION_GUIDE.md`
 - Quick Help: `QUICK_START_TEMPLATE.md`
-- Troubleshooting: `FRAMEWORK_COMPLIANCE_ANALYSIS.md`
+- Troubleshooting: `WORKFLOW_COMPLIANCE_ANALYSIS.md`
 
 ### **External Resources**
 - Source repo: {link to honeyhive-dsl}
@@ -352,14 +352,14 @@ Transfer is successful when:
 agent-os-meta-workflow-v1.0/
 ├── README.md                                 # Package overview
 ├── DISTRIBUTION_GUIDE.md                     # This file
-├── AGENT_OS_FRAMEWORK_CREATION_GUIDE.md      # Complete methodology
+├── AGENT_OS_WORKFLOW_CREATION_GUIDE.md      # Complete methodology
 ├── QUICK_START_TEMPLATE.md                   # Rapid setup
-├── META_FRAMEWORK_SUMMARY.md                 # Overview & usage
-├── FRAMEWORK_COMPLIANCE_ANALYSIS.md          # Audit tool
+├── META_WORKFLOW_SUMMARY.md                 # Overview & usage
+├── WORKFLOW_COMPLIANCE_ANALYSIS.md          # Audit tool
 ├── VERSION_HISTORY.md                        # Changelog
 └── templates/
     ├── command-language-glossary-template.md # Copy-ready glossary
-    ├── FRAMEWORK_ENTRY_POINT-template.md     # Entry point template
+    ├── WORKFLOW_ENTRY_POINT-template.md     # Entry point template
     ├── progress-tracking-template.md         # Progress table
     └── task-template.md                      # Phase task file
 

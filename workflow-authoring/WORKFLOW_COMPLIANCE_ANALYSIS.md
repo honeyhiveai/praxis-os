@@ -1,7 +1,7 @@
-# Framework Compliance Analysis - DSL Repository
+# Workflow Compliance Analysis - DSL Repository
 
 **Date**: 2025-10-02  
-**Purpose**: Identify gaps between current DSL framework implementation and established Agent OS best practices  
+**Purpose**: Identify gaps between current DSL workflow implementation and established Agent OS best practices  
 **Reference**: `/python-sdk/.agent-os/standards/ai-assistant/` methodologies
 
 ---
@@ -10,10 +10,10 @@
 
 ### **Issue 1: Missing Command Language Glossary**
 
-**Problem**: Provider schema extraction framework does NOT reference or use command language glossary
+**Problem**: Provider schema extraction workflow does NOT reference or use command language glossary
 
 **Current State**:
-- Framework uses natural language instructions (verbose, ambiguous)
+- Workflow uses natural language instructions (verbose, ambiguous)
 - No binding obligations for AI execution
 - Example: "Please extract the schema" vs `🛑 EXECUTE-NOW: Extract schema`
 
@@ -30,13 +30,13 @@
 - ❌ Ambiguous instructions lead to inconsistent execution
 - ❌ No systematic progress tracking
 
-**Fix Required**: Create command language glossary for DSL repo and integrate into all frameworks
+**Fix Required**: Create command language glossary for DSL repo and integrate into all workflows
 
 ---
 
 ### **Issue 2: File Size Constraint Violations**
 
-**Problem**: Framework files significantly exceed optimal size constraints
+**Problem**: Workflow files significantly exceed optimal size constraints
 
 **Optimal Constraints** (from LLM Workflow Engineering Methodology):
 - **Tier 1** (Execution files): ≤100 lines
@@ -45,8 +45,8 @@
 
 **Current Violations** (Audited 2025-10-02):
 ```
-Main Framework Files:
-FRAMEWORK_ENTRY_POINT.md:  127 lines ❌ (exceeds Tier 1 limit, should be ≤100)
+Main Workflow Files:
+WORKFLOW_ENTRY_POINT.md:  127 lines ❌ (exceeds Tier 1 limit, should be ≤100)
 README.md:                 571 lines ❌ (exceeds Tier 2 limit, should be ≤500)
 COMMON_PITFALLS.md:        409 lines ✅ (compliant for Tier 2)
 progress-tracking.md:       63 lines ✅ (compliant)
@@ -88,12 +88,12 @@ Summary: 14/28 phase files violate Tier 1 constraint (50% non-compliance)
 
 ### **Issue 3: Missing Three-Tier Architecture**
 
-**Problem**: Framework does not clearly separate execution instructions from comprehensive methodology
+**Problem**: Workflow does not clearly separate execution instructions from comprehensive methodology
 
 **Current Structure**:
 ```
 .agent-os/standards/provider-schema-extraction/
-├── FRAMEWORK_ENTRY_POINT.md     # Mixed purpose
+├── WORKFLOW_ENTRY_POINT.md     # Mixed purpose
 ├── README.md                     # Mixed purpose (too large)
 ├── phases/*/                     # Execution files (too large)
 └── No separation of tiers
@@ -104,7 +104,7 @@ Summary: 14/28 phase files violate Tier 1 constraint (50% non-compliance)
 .agent-os/standards/provider-schema-extraction/
 ├── core/
 │   └── command-language-glossary.md      # TIER 1: Must-read
-├── FRAMEWORK_ENTRY_POINT.md              # TIER 1: ≤100 lines, routing
+├── WORKFLOW_ENTRY_POINT.md              # TIER 1: ≤100 lines, routing
 ├── phases/
 │   ├── 0/
 │   │   └── task-*.md                     # TIER 1: ≤100 lines each
@@ -119,13 +119,13 @@ Summary: 14/28 phase files violate Tier 1 constraint (50% non-compliance)
 └── schemas/providers/*/                  # TIER 3: Unlimited output
 ```
 
-**Fix Required**: Restructure framework with explicit tier separation
+**Fix Required**: Restructure workflow with explicit tier separation
 
 ---
 
 ### **Issue 4: No Binding Obligations or Validation Gates**
 
-**Problem**: Framework uses suggestive language instead of binding commands
+**Problem**: Workflow uses suggestive language instead of binding commands
 
 **Current Pattern**:
 ```markdown
@@ -199,11 +199,11 @@ Extract the schema by following these steps:
 
 ### **Issue 6: No Discovery Flow Architecture**
 
-**Problem**: Framework assumes AI starts at entry point without compliance checking
+**Problem**: Workflow assumes AI starts at entry point without compliance checking
 
 **Current Flow**:
 ```
-User asks → Start FRAMEWORK_ENTRY_POINT.md
+User asks → Start WORKFLOW_ENTRY_POINT.md
 # ❌ No compliance gate, no standards check
 ```
 
@@ -214,7 +214,7 @@ User asks
   → compliance-checking.md (standards validation)
   → ai-assistant/README.md (task routing)
   → provider-schema-extraction/README.md (methodology selection)
-  → FRAMEWORK_ENTRY_POINT.md (execution start)
+  → WORKFLOW_ENTRY_POINT.md (execution start)
   
 # ✅ Compliance-first, systematic discovery
 ```
@@ -250,7 +250,7 @@ Complete task B
 - [ ] Task A done ✅/❌
 - [ ] Evidence provided ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: If proceeding without File 1 completion
+🚨 WORKFLOW-VIOLATION: If proceeding without File 1 completion
 
 # ✅ Binding navigation, cannot skip
 ```
@@ -272,7 +272,7 @@ Complete task B
 | **Cross-File Enforcement** | ❌ Weak | ✅ Binding | Weak |
 
 **Overall Compliance**: ~20%  
-**Target**: 95%+ (same as python-sdk frameworks)
+**Target**: 95%+ (same as python-sdk workflows)
 
 ---
 
@@ -280,18 +280,18 @@ Complete task B
 
 ### **Phase 1: Critical Infrastructure (Week 1)**
 - [ ] Create `command-language-glossary.md` for DSL repo
-- [ ] Add glossary reference to FRAMEWORK_ENTRY_POINT.md
+- [ ] Add glossary reference to WORKFLOW_ENTRY_POINT.md
 - [ ] Create progress tracking template
-- [ ] Implement discovery flow (entry → compliance → framework)
+- [ ] Implement discovery flow (entry → compliance → workflow)
 
 ### **Phase 2: File Size Compliance (Week 2)**
-- [ ] Audit all framework files for size
+- [ ] Audit all workflow files for size
 - [ ] Split large files into focused modules
 - [ ] Reorganize into three-tier structure
 - [ ] Validate all Tier 1 files are ≤100 lines
 
 ### **Phase 3: Command Language Integration (Week 3)**
-- [ ] Convert FRAMEWORK_ENTRY_POINT.md to command language
+- [ ] Convert WORKFLOW_ENTRY_POINT.md to command language
 - [ ] Convert all Phase 0 files
 - [ ] Convert all Phase 1 files
 - [ ] Convert all Phase 2 files
@@ -303,7 +303,7 @@ Complete task B
 - [ ] Test cross-file enforcement
 
 ### **Phase 5: Validation & Documentation (Week 5)**
-- [ ] Run framework with AI to test compliance
+- [ ] Run workflow with AI to test compliance
 - [ ] Measure consistency improvement
 - [ ] Document lessons learned
 - [ ] Update COMMON_PITFALLS.md
@@ -312,7 +312,7 @@ Complete task B
 
 ## 📈 **Expected Improvements**
 
-Based on python-sdk V3 framework results:
+Based on python-sdk V3 workflow results:
 
 | Metric | Current (Estimated) | After Compliance | Improvement |
 |--------|-------------------|------------------|-------------|
@@ -331,7 +331,7 @@ cp /python-sdk/.agent-os/standards/ai-assistant/code-generation/tests/v3/core/co
    /honeyhive-dsl/.agent-os/standards/command-language-glossary.md
 ```
 
-### **2. Update FRAMEWORK_ENTRY_POINT.md (HIGH PRIORITY)**
+### **2. Update WORKFLOW_ENTRY_POINT.md (HIGH PRIORITY)**
 Add at top:
 ```markdown
 ⚠️ MUST-READ: [../command-language-glossary.md](../command-language-glossary.md)
@@ -369,7 +369,7 @@ mkdir -p .agent-os/standards/provider-schema-extraction/methodology/
 
 ## 🎯 **Success Criteria**
 
-Framework is compliant when:
+Workflow is compliant when:
 - ✅ All Tier 1 files are ≤100 lines
 - ✅ Command language used in 80%+ of instructions
 - ✅ Validation gates at every phase transition
@@ -381,5 +381,5 @@ Framework is compliant when:
 
 **Status**: Analysis Complete, Remediation Required  
 **Timeline**: 5 weeks for full compliance  
-**Impact**: High - Will significantly improve framework reliability and AI consistency
+**Impact**: High - Will significantly improve workflow reliability and AI consistency
 

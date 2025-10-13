@@ -1,25 +1,25 @@
-# Agent OS Framework Creation Guide
+# Agent OS Workflow Creation Guide
 
 **Version**: 1.0  
 **Purpose**: Portable methodology for creating deterministic, high-quality AI-assisted workflows  
 **Transferability**: Apply to any repository or domain requiring systematic AI execution  
-**Source**: Distilled from python-sdk Agent OS methodologies and V3 framework success patterns
+**Source**: Distilled from python-sdk Agent OS methodologies and V3 workflow success patterns
 
 ---
 
 ## 🎯 **What Is This?**
 
 A **meta-workflow** for creating frameworks - a systematic approach to designing AI-assisted workflows that achieve:
-- **85-95% execution consistency** (vs 60-70% without frameworks)
+- **85-95% execution consistency** (vs 60-70% without workflows)
 - **2-3x better context efficiency** (15-25% vs 50-75% utilization)
 - **Automated quality enforcement** (100% validation coverage)
 - **Scalable complexity management** (linear growth, not exponential)
 
 **Use Cases**:
-- Schema extraction frameworks
+- Schema extraction workflows
 - Code generation workflows
 - Documentation creation systems
-- Testing automation frameworks
+- Testing automation workflows
 - Migration/refactoring processes
 - Research and analysis workflows
 
@@ -52,7 +52,7 @@ A **meta-workflow** for creating frameworks - a systematic approach to designing
 - **Size**: 200-500 lines per file
 - **Purpose**: Comprehensive methodology and architecture
 - **Pattern**: Foundation documents, complete specifications
-- **Examples**: `README.md`, `METHODOLOGY.md`, `framework-core.md`
+- **Examples**: `README.md`, `METHODOLOGY.md`, `workflow-core.md`
 
 **Tier 3: Output Artifacts** (AI generates, never re-consumes)
 - **Size**: Unlimited
@@ -113,12 +113,12 @@ Optimal Context Utilization (15-25%)
 - [ ] Criterion 2 ✅/❌
 - [ ] Criterion 3 ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: If proceeding without ✅ on all criteria
+🚨 WORKFLOW-VIOLATION: If proceeding without ✅ on all criteria
 ```
 
 ---
 
-## 🏗️ **Framework Creation Process**
+## 🏗️ **Workflow Creation Process**
 
 ### **Phase 1: Domain Analysis (Week 1)**
 
@@ -164,10 +164,10 @@ What validation is needed? (Target: Automated gates)
 ```
 .agent-os/
 ├── standards/
-│   └── {framework-name}/
+│   └── {workflow-name}/
 │       ├── core/
 │       │   ├── command-language-glossary.md     # Tier 1 (≤100)
-│       │   └── framework-core.md                # Tier 2 (250-400)
+│       │   └── workflow-core.md                # Tier 2 (250-400)
 │       ├── phases/
 │       │   ├── 0/
 │       │   │   ├── task-1-*.md                  # Tier 1 (≤100)
@@ -180,7 +180,7 @@ What validation is needed? (Target: Automated gates)
 │       ├── methodology/                         # Optional Tier 2
 │       │   ├── architecture.md                  # (200-500)
 │       │   └── patterns.md                      # (200-500)
-│       ├── FRAMEWORK_ENTRY_POINT.md             # Tier 1 (≤100)
+│       ├── WORKFLOW_ENTRY_POINT.md             # Tier 1 (≤100)
 │       ├── README.md                            # Tier 2 (200-500)
 │       ├── progress-tracking.md                 # Tier 1 (≤100)
 │       └── COMMON_PITFALLS.md                   # Tier 2 (200-400)
@@ -197,7 +197,7 @@ cp {source-repo}/.agent-os/standards/ai-assistant/code-generation/tests/v3/core/
 **⚠️ MUST-CUSTOMIZE**:
 - Adapt command categories to domain
 - Add domain-specific violation patterns
-- Define framework-specific evidence types
+- Define workflow-specific evidence types
 
 #### **2.3 Discovery Flow Design**
 
@@ -211,9 +211,9 @@ compliance-checking.md (Standards validation) [Optional]
   ↓
 ai-assistant/README.md (Task routing hub) [Optional]
   ↓
-{framework-name}/README.md (Methodology overview) [Tier 2]
+{workflow-name}/README.md (Methodology overview) [Tier 2]
   ↓
-FRAMEWORK_ENTRY_POINT.md (Execution start) [Tier 1]
+WORKFLOW_ENTRY_POINT.md (Execution start) [Tier 1]
   ↓
 phases/*/task-*.md (Systematic execution) [Tier 1]
 ```
@@ -238,7 +238,7 @@ phases/*/task-*.md (Systematic execution) [Tier 1]
 
 **Example Phase Structures**:
 
-**Analysis-Heavy Framework**:
+**Analysis-Heavy Workflow**:
 ```
 0. Setup & Prerequisites
 1. Source Discovery
@@ -248,7 +248,7 @@ phases/*/task-*.md (Systematic execution) [Tier 1]
 5. Documentation
 ```
 
-**Generation-Heavy Framework**:
+**Generation-Heavy Workflow**:
 ```
 0. Requirements Gathering
 1. Pattern Analysis
@@ -313,7 +313,7 @@ phases/*/task-*.md (Systematic execution) [Tier 1]
 - [ ] Evidence documented ✅/❌
 - [ ] Output validated ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: If proceeding without all ✅
+🚨 WORKFLOW-VIOLATION: If proceeding without all ✅
 
 ---
 
@@ -342,9 +342,9 @@ phases/*/task-*.md (Systematic execution) [Tier 1]
 
 **🎯 CREATE: progress-tracking.md**
 ```markdown
-# {Framework Name} - Progress Tracking
+# {Workflow Name} - Progress Tracking
 
-**Instructions**: Copy this table to chat at framework start
+**Instructions**: Copy this table to chat at workflow start
 
 ---
 
@@ -382,11 +382,11 @@ phases/*/task-*.md (Systematic execution) [Tier 1]
 
 **Example (Go validator)**:
 ```go
-// cmd/validate-{framework}/main.go
+// cmd/validate-{workflow}/main.go
 package main
 
 func main() {
-    result := ValidateFrameworkOutput(args)
+    result := ValidateWorkflowOutput(args)
     if result.HasErrors() {
         fmt.Printf("❌ Validation Failed: %d errors\n", result.ErrorCount)
         os.Exit(1)
@@ -398,7 +398,7 @@ func main() {
 
 **Example (Python validator)**:
 ```python
-# scripts/validate_{framework}.py
+# scripts/validate_{workflow}.py
 def validate():
     errors = []
     # Validation logic
@@ -435,11 +435,11 @@ def validate():
 
 ### **Phase 5: Documentation (Week 3)**
 
-#### **5.1 FRAMEWORK_ENTRY_POINT.md**
+#### **5.1 WORKFLOW_ENTRY_POINT.md**
 
 **Template** (≤100 lines):
 ```markdown
-# {Framework Name} - Entry Point
+# {Workflow Name} - Entry Point
 
 ⚠️ MUST-READ: [core/command-language-glossary.md](core/command-language-glossary.md)
 
@@ -461,14 +461,14 @@ def validate():
 
 ## 🛑 **Prerequisites**
 
-🛑 VALIDATE-GATE: Framework readiness
+🛑 VALIDATE-GATE: Workflow readiness
 - [ ] Read command glossary ✅/❌
 - [ ] {Domain-specific prerequisite} ✅/❌
 - [ ] {Tool/environment setup} ✅/❌
 
 ---
 
-## 📊 **Framework Overview**
+## 📊 **Workflow Overview**
 
 | Phase | Purpose | Duration |
 |-------|---------|----------|
@@ -478,7 +478,7 @@ def validate():
 
 ---
 
-## 🎯 **Begin Framework**
+## 🎯 **Begin Workflow**
 
 🛑 EXECUTE-NOW: Copy progress table to chat
 ⚠️ MUST-READ: [progress-tracking.md](progress-tracking.md)
@@ -487,7 +487,7 @@ def validate():
 
 ---
 
-**Framework Version**: 1.0
+**Workflow Version**: 1.0
 **Last Updated**: {Date}
 ```
 
@@ -495,7 +495,7 @@ def validate():
 
 **Template** (200-500 lines):
 ```markdown
-# {Framework Name}
+# {Workflow Name}
 
 **Purpose**: {1-2 sentence description}
 
@@ -503,17 +503,17 @@ def validate():
 
 ## 📋 **Overview**
 
-{Comprehensive framework description}
+{Comprehensive workflow description}
 
 ---
 
 ## 🎯 **Purpose**
 
-{Why this framework exists, what problems it solves}
+{Why this workflow exists, what problems it solves}
 
 ---
 
-## 📊 **Framework Structure**
+## 📊 **Workflow Structure**
 
 {Directory tree, file organization}
 
@@ -555,7 +555,7 @@ def validate():
 
 **Template** (200-400 lines):
 ```markdown
-# {Framework Name} - Common Pitfalls
+# {Workflow Name} - Common Pitfalls
 
 ---
 
@@ -597,10 +597,10 @@ def validate():
 
 #### **6.1 Pilot Execution**
 
-**🛑 EXECUTE-NOW: Test framework with AI**
+**🛑 EXECUTE-NOW: Test workflow with AI**
 ```markdown
 1. Start fresh chat session
-2. Execute framework from entry point
+2. Execute workflow from entry point
 3. Document ALL deviations, confusions, shortcuts
 4. Record time per phase
 5. Measure quality gate pass/fail rates
@@ -642,37 +642,37 @@ quality_enforcement:
 
 ---
 
-## 📦 **Portable Framework Package**
+## 📦 **Portable Workflow Package**
 
-### **Minimal Viable Framework**
+### **Minimal Viable Workflow**
 
 **Files Required** (Can start here):
 ```
-{framework-name}/
+{workflow-name}/
 ├── core/
 │   └── command-language-glossary.md     # Copy from template
 ├── phases/
 │   └── 0/
 │       └── task-1-start.md              # First execution file
-├── FRAMEWORK_ENTRY_POINT.md             # Routing
+├── WORKFLOW_ENTRY_POINT.md             # Routing
 ├── README.md                            # Overview
 └── progress-tracking.md                 # Status table
 ```
 
-### **Full Framework Package**
+### **Full Workflow Package**
 
 **Complete Structure**:
 ```
-{framework-name}/
+{workflow-name}/
 ├── core/
 │   ├── command-language-glossary.md
-│   └── framework-core.md                # Optional deep dive
+│   └── workflow-core.md                # Optional deep dive
 ├── phases/
 │   ├── 0/ ... N/                        # All execution phases
 ├── methodology/                         # Optional Tier 2 context
 │   ├── architecture.md
 │   └── patterns.md
-├── FRAMEWORK_ENTRY_POINT.md
+├── WORKFLOW_ENTRY_POINT.md
 ├── README.md
 ├── progress-tracking.md
 ├── COMMON_PITFALLS.md
@@ -681,7 +681,7 @@ quality_enforcement:
 
 ---
 
-## 🚀 **Quick Start: New Framework**
+## 🚀 **Quick Start: New Workflow**
 
 ### **Week 1 Checklist**
 ```markdown
@@ -717,7 +717,7 @@ quality_enforcement:
 ### **Week 3 Checklist**
 ```markdown
 🛑 Day 1-2: Documentation
-- [ ] Write FRAMEWORK_ENTRY_POINT.md
+- [ ] Write WORKFLOW_ENTRY_POINT.md
 - [ ] Write comprehensive README.md
 - [ ] Start COMMON_PITFALLS.md
 
@@ -787,20 +787,20 @@ quality_enforcement:
 - **Source Methodologies**: `/python-sdk/.agent-os/standards/ai-assistant/`
   - `LLM-WORKFLOW-ENGINEERING-METHODOLOGY.md`
   - `DETERMINISTIC-LLM-OUTPUT-METHODOLOGY.md`
-  - `code-generation/tests/v3/` (V3 framework implementation)
+  - `code-generation/tests/v3/` (V3 workflow implementation)
 
 - **Case Studies**:
-  - Python SDK V3 Test Generation Framework (80%+ success rate)
-  - Provider Schema Extraction Framework (systematic schema extraction)
+  - Python SDK V3 Test Generation Workflow (80%+ success rate)
+  - Provider Schema Extraction Workflow (systematic schema extraction)
 
 ---
 
-## 📝 **Framework Maintenance**
+## 📝 **Workflow Maintenance**
 
 ### **Versioning**
 - Increment version on breaking changes
 - Document all updates in CHANGELOG.md
-- Track framework-level improvements
+- Track workflow-level improvements
 
 ### **Continuous Improvement**
 - Collect metrics from every execution

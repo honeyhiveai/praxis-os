@@ -1,14 +1,14 @@
-# Agent OS Meta-Framework - Version History
+# Agent OS Meta-Workflow - Version History
 
 ---
 
 ## v1.0 - Initial Release (2025-10-02)
 
 ### **Overview**
-First production-ready release of the Agent OS Meta-Framework - a portable "framework for creating frameworks" methodology.
+First production-ready release of the Agent OS Meta-Workflow - a portable "workflow for creating workflows" methodology.
 
 ### **Components Added**
-- ✅ Complete framework creation methodology
+- ✅ Complete workflow creation methodology
 - ✅ Quick start template for rapid setup
 - ✅ Compliance analysis tool
 - ✅ Distribution guide
@@ -21,7 +21,7 @@ First production-ready release of the Agent OS Meta-Framework - a portable "fram
 4. Evidence-Based Progress (Quantified metrics, not vague claims)
 5. Horizontal Decomposition (Break complexity into modules)
 
-### **Proven Results** (From python-sdk V3 framework)
+### **Proven Results** (From python-sdk V3 workflow)
 - Execution consistency: 22% → 80%+ (3.6x improvement)
 - Context efficiency: 75-90% → 15-25% (3-4x improvement)
 - Quality enforcement: Manual → 100% automated
@@ -32,10 +32,10 @@ meta-workflow/
 ├── README.md (Package overview)
 ├── DISTRIBUTION_GUIDE.md (Transfer instructions)
 ├── VERSION_HISTORY.md (This file)
-├── AGENT_OS_FRAMEWORK_CREATION_GUIDE.md (824 lines - Complete methodology)
+├── AGENT_OS_WORKFLOW_CREATION_GUIDE.md (824 lines - Complete methodology)
 ├── QUICK_START_TEMPLATE.md (414 lines - Rapid setup)
-├── META_FRAMEWORK_SUMMARY.md (550 lines - Overview & usage)
-├── FRAMEWORK_COMPLIANCE_ANALYSIS.md (386 lines - Audit tool)
+├── META_WORKFLOW_SUMMARY.md (550 lines - Overview & usage)
+├── WORKFLOW_COMPLIANCE_ANALYSIS.md (386 lines - Audit tool)
 └── templates/
     └── command-language-glossary-template.md (260 lines - Command reference)
 ```
@@ -54,7 +54,7 @@ meta-workflow/
 
 ### **Known Limitations**
 - No automated setup scripts (manual setup required)
-- No language-specific validators (create per-framework)
+- No language-specific validators (create per-workflow)
 - No IDE integration (future enhancement)
 
 ### **Deployment Status**
@@ -68,20 +68,20 @@ meta-workflow/
 ## Future Roadmap
 
 ### **v1.1 - Template Expansion** (Planned: Q4 2025)
-- [ ] Add FRAMEWORK_ENTRY_POINT-template.md
+- [ ] Add WORKFLOW_ENTRY_POINT-template.md
 - [ ] Add progress-tracking-template.md
 - [ ] Add task-template.md
 - [ ] Add README-template.md
 - [ ] Add COMMON_PITFALLS-template.md
 
 ### **v1.2 - Automation Tools** (Planned: Q1 2026)
-- [ ] Automated setup script (generates framework structure)
+- [ ] Automated setup script (generates workflow structure)
 - [ ] File size compliance checker (CI/CD integration)
 - [ ] Command language validator (lint rules)
 - [ ] Progress tracking automation (JSON output)
 
 ### **v2.0 - IDE Integration** (Planned: Q2 2026)
-- [ ] VSCode extension for framework navigation
+- [ ] VSCode extension for workflow navigation
 - [ ] Real-time file size validation
 - [ ] Command language autocomplete
 - [ ] Progress tracking dashboard
@@ -99,12 +99,12 @@ meta-workflow/
 - Compliance analysis tool
 
 **Validated With**:
-- python-sdk V3 test generation framework (80%+ success rate)
-- DSL provider-schema-extraction framework (audit performed)
+- python-sdk V3 test generation workflow (80%+ success rate)
+- DSL provider-schema-extraction workflow (audit performed)
 
 **Metrics**:
-- Setup Time: 1-2 hours for MVP framework
-- Full Framework: 2-4 weeks
+- Setup Time: 1-2 hours for MVP workflow
+- Full Workflow: 2-4 weeks
 - Transfer Time: 1-2 days to new repository
 - Expected ROI: 3-5x within 3 months
 
@@ -134,7 +134,7 @@ meta-workflow/
 
 - Initial extraction and documentation: 2025-10-02
 - Source methodologies: python-sdk Agent OS team
-- Validation: DSL repository framework audit
+- Validation: DSL repository workflow audit
 
 ---
 
@@ -164,7 +164,7 @@ meta-workflow/
 **Internal**: 
 - Issues: Document in repository-specific COMMON_PITFALLS.md
 - Improvements: Update templates and submit PR
-- Questions: Reference AGENT_OS_FRAMEWORK_CREATION_GUIDE.md
+- Questions: Reference AGENT_OS_WORKFLOW_CREATION_GUIDE.md
 
 **External** (when open sourced):
 - GitHub Issues: [TBD]

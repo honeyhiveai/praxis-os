@@ -1,8 +1,8 @@
-# Framework Quick Start Template
+# Workflow Quick Start Template
 
-**Purpose**: Minimal starting point for new AI-assisted workflow frameworks  
-**Time to Setup**: 1-2 hours for basic framework  
-**Based On**: Agent OS Framework Creation Guide v1.0
+**Purpose**: Minimal starting point for new AI-assisted workflows  
+**Time to Setup**: 1-2 hours for basic workflow  
+**Based On**: Agent OS Workflow Creation Guide v1.0
 
 ---
 
@@ -10,10 +10,10 @@
 
 ```bash
 # In your target repository
-mkdir -p .agent-os/standards/{your-framework-name}/core
-mkdir -p .agent-os/standards/{your-framework-name}/phases/0
-mkdir -p .agent-os/standards/{your-framework-name}/phases/1
-mkdir -p .agent-os/standards/{your-framework-name}/phases/2
+mkdir -p .agent-os/standards/{your-workflow-name}/core
+mkdir -p .agent-os/standards/{your-workflow-name}/phases/0
+mkdir -p .agent-os/standards/{your-workflow-name}/phases/1
+mkdir -p .agent-os/standards/{your-workflow-name}/phases/2
 ```
 
 ---
@@ -23,7 +23,7 @@ mkdir -p .agent-os/standards/{your-framework-name}/phases/2
 ```bash
 # Copy from reference implementation
 cp {source-repo}/.agent-os/standards/command-language-glossary.md \
-   .agent-os/standards/{your-framework-name}/core/command-language-glossary.md
+   .agent-os/standards/{your-workflow-name}/core/command-language-glossary.md
 ```
 
 **Or create minimal version**:
@@ -37,17 +37,17 @@ cp {source-repo}/.agent-os/standards/command-language-glossary.md \
 📊 COUNT-AND-DOCUMENT: [metric] - Provide quantified evidence
 🛑 VALIDATE-GATE: [criteria] - Verify completion before proceeding
 🔄 UPDATE-TABLE: Progress table update required
-🚨 FRAMEWORK-VIOLATION: Detected shortcut or skip
+🚨 WORKFLOW-VIOLATION: Detected shortcut or skip
 ```
 
 ---
 
 ## 📝 **Step 3: Create Entry Point** (15 minutes)
 
-**File**: `.agent-os/standards/{your-framework-name}/FRAMEWORK_ENTRY_POINT.md`
+**File**: `.agent-os/standards/{your-workflow-name}/WORKFLOW_ENTRY_POINT.md`
 
 ```markdown
-# {Framework Name} - Entry Point
+# {Workflow Name} - Entry Point
 
 ⚠️ MUST-READ: [core/command-language-glossary.md](core/command-language-glossary.md)
 
@@ -77,7 +77,7 @@ Updating existing {thing}.
 
 ---
 
-## 📊 **Framework Phases**
+## 📊 **Workflow Phases**
 
 | Phase | Purpose | Duration |
 |-------|---------|----------|
@@ -103,12 +103,12 @@ Updating existing {thing}.
 
 ## 📊 **Step 4: Create Progress Tracker** (10 minutes)
 
-**File**: `.agent-os/standards/{your-framework-name}/progress-tracking.md`
+**File**: `.agent-os/standards/{your-workflow-name}/progress-tracking.md`
 
 ```markdown
-# {Framework Name} - Progress Tracking
+# {Workflow Name} - Progress Tracking
 
-**Instructions**: Copy this table to chat at framework start
+**Instructions**: Copy this table to chat at workflow start
 
 ---
 
@@ -137,7 +137,7 @@ Updating existing {thing}.
 
 ### **Task 1: Setup** (≤100 lines)
 
-**File**: `.agent-os/standards/{your-framework-name}/phases/0/task-1-setup.md`
+**File**: `.agent-os/standards/{your-workflow-name}/phases/0/task-1-setup.md`
 
 ```markdown
 # Phase 0: Setup - Task 1: Initialize
@@ -148,7 +148,7 @@ Updating existing {thing}.
 
 ## 🎯 **Objective**
 
-Initialize {framework} workspace and verify prerequisites.
+Initialize {workflow} workspace and verify prerequisites.
 
 ---
 
@@ -200,7 +200,7 @@ mkdir -p {required-directories}
 - [ ] Tools verified ✅/❌
 - [ ] Table updated ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: If proceeding without all ✅
+🚨 WORKFLOW-VIOLATION: If proceeding without all ✅
 
 ---
 
@@ -230,10 +230,10 @@ mkdir -p {required-directories}
 
 ## 📝 **Step 7: Create README** (20 minutes)
 
-**File**: `.agent-os/standards/{your-framework-name}/README.md`
+**File**: `.agent-os/standards/{your-workflow-name}/README.md`
 
 ```markdown
-# {Framework Name}
+# {Workflow Name}
 
 **Purpose**: {1-2 sentence description}  
 **Status**: Active  
@@ -243,30 +243,30 @@ mkdir -p {required-directories}
 
 ## 🎯 **Overview**
 
-{Comprehensive description of what this framework does, why it exists, and what problems it solves.}
+{Comprehensive description of what this workflow does, why it exists, and what problems it solves.}
 
 ---
 
 ## 🚀 **Quick Start**
 
 1. Read [core/command-language-glossary.md](core/command-language-glossary.md)
-2. Execute [FRAMEWORK_ENTRY_POINT.md](FRAMEWORK_ENTRY_POINT.md)
+2. Execute [WORKFLOW_ENTRY_POINT.md](WORKFLOW_ENTRY_POINT.md)
 3. Follow systematic phase-by-phase execution
 4. Complete all quality gates
 
 ---
 
-## 📊 **Framework Structure**
+## 📊 **Workflow Structure**
 
 \`\`\`
-{framework-name}/
+{workflow-name}/
 ├── core/
 │   └── command-language-glossary.md
 ├── phases/
 │   ├── 0/ (Setup)
 │   ├── 1/ (Main work)
 │   └── 2/ (Validation)
-├── FRAMEWORK_ENTRY_POINT.md
+├── WORKFLOW_ENTRY_POINT.md
 ├── progress-tracking.md
 └── README.md
 \`\`\`
@@ -305,7 +305,7 @@ Expected improvements vs ad-hoc approaches:
 
 ## 📞 **Support**
 
-- **Documentation**: Start with FRAMEWORK_ENTRY_POINT.md
+- **Documentation**: Start with WORKFLOW_ENTRY_POINT.md
 - **Issues**: Document in COMMON_PITFALLS.md as discovered
 - **Updates**: Track in CHANGELOG.md
 
@@ -319,12 +319,12 @@ Expected improvements vs ad-hoc approaches:
 
 ## ✅ **Validation Checklist**
 
-After creating your framework, validate:
+After creating your workflow, validate:
 
 ### **File Size Compliance**
 ```bash
 # Check all phase files are ≤100 lines
-find .agent-os/standards/{framework}/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 100 ]; then echo "❌ $1: $lines lines"; else echo "✅ $1: $lines lines"; fi' _ {} \;
+find .agent-os/standards/{workflow}/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 100 ]; then echo "❌ $1: $lines lines"; else echo "✅ $1: $lines lines"; fi' _ {} \;
 ```
 
 ### **Command Language Integration**
@@ -346,17 +346,17 @@ find .agent-os/standards/{framework}/phases -name "*.md" -exec sh -c 'lines=$(wc
 
 ---
 
-## 🎯 **Minimal Viable Framework** (1 hour)
+## 🎯 **Minimal Viable Workflow** (1 hour)
 
 **Absolute minimum to start**:
 ```
-{framework-name}/
+{workflow-name}/
 ├── core/
 │   └── command-language-glossary.md  # Copy from template
 ├── phases/
 │   └── 0/
 │       └── task-1-start.md           # First execution file
-├── FRAMEWORK_ENTRY_POINT.md          # Routing only
+├── WORKFLOW_ENTRY_POINT.md          # Routing only
 └── progress-tracking.md              # Status table
 ```
 
@@ -380,16 +380,16 @@ find .agent-os/standards/{framework}/phases -name "*.md" -exec sh -c 'lines=$(wc
 
 ## 📦 **Package for Distribution**
 
-**To share framework across repositories**:
+**To share workflow across repositories**:
 
 ```bash
 # Create portable package
-tar -czf {framework-name}-v1.0.tar.gz \
-  .agent-os/standards/{framework-name}/
+tar -czf {workflow-name}-v1.0.tar.gz \
+  .agent-os/standards/{workflow-name}/
 
 # Transfer to new repo
 cd {new-repo}
-tar -xzf {framework-name}-v1.0.tar.gz
+tar -xzf {workflow-name}-v1.0.tar.gz
 
 # Customize for new repo
 # (Adapt entry point, phase tasks to new domain)
@@ -399,15 +399,15 @@ tar -xzf {framework-name}-v1.0.tar.gz
 
 ## 🔗 **References**
 
-- **Full Guide**: [AGENT_OS_FRAMEWORK_CREATION_GUIDE.md](AGENT_OS_FRAMEWORK_CREATION_GUIDE.md)
+- **Full Guide**: [AGENT_OS_WORKFLOW_CREATION_GUIDE.md](AGENT_OS_WORKFLOW_CREATION_GUIDE.md)
 - **Source Methodologies**: `/python-sdk/.agent-os/standards/ai-assistant/`
-- **Example Frameworks**: 
+- **Example Workflows**: 
   - `provider-schema-extraction/` (This repo)
   - `code-generation/tests/v3/` (python-sdk repo)
 
 ---
 
 **Template Version**: 1.0  
-**Time to Setup**: 1-2 hours for basic framework  
+**Time to Setup**: 1-2 hours for basic workflow  
 **Customization Time**: Additional 1-2 hours for domain-specific content
 

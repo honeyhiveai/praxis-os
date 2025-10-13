@@ -1,227 +1,437 @@
 {
-  "version": "1.3.0",
-  "generated": "2025-10-07T18:15:09.603728+00:00",
+  "version": "1.4.0-dev",
+  "generated": "2025-10-13T07:03:25.036290+00:00",
   "generator_version": "1.0.0",
   "files": {
+    "standards/ai-assistant/AGENT-OS-ORIENTATION.md": {
+      "checksum": "sha256:f438d21220b7e424b3247618f4ae3b5ac2c4c05474e3cc6e8df2b63d0b7772a3",
+      "size": 13771,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/MCP-TOOLS-GUIDE.md": {
+      "checksum": "sha256:9737dd10581f9a53de090a5786ac470a104b229e336cb8076cac5ede6e8aee9e",
+      "size": 11097,
+      "last_updated": "2025-10-10"
+    },
+    "standards/ai-assistant/agent-decision-protocol.md": {
+      "checksum": "sha256:eb8be066af1d95d1399c050fdd97a094f12f37007915b0be7a6509c8e7b09046",
+      "size": 20321,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/agent-os-development-process.md": {
+      "checksum": "sha256:4474044bbcef6d78756245e640e54dbcec1791700b47665f0a5483ab9a86a41a",
+      "size": 18957,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/analysis-methodology.md": {
+      "checksum": "sha256:ced3df2319ba06b688c9acf35d1af766ebde4fc0dcce0c9d97af79f3a8af8576",
+      "size": 17221,
+      "last_updated": "2025-10-10"
+    },
+    "standards/ai-assistant/commit-protocol.md": {
+      "checksum": "sha256:f974efc250abb6ddda5d29cf235a01a2c627b1f97584fb5414ac814073f01196",
+      "size": 22240,
+      "last_updated": "2025-10-10"
+    },
+    "standards/ai-assistant/compliance-protocol.md": {
+      "checksum": "sha256:cab482f4eb8012eae195840d32f325735a12f7bdc45cd2450389a960dbd47da2",
+      "size": 21354,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/knowledge-compounding-guide.md": {
+      "checksum": "sha256:7ca2141b35ac05e7c237a60dbc2cdb21966ab86bec17fca6fa6e6f1c63cdd6b5",
+      "size": 15099,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/mcp-tool-discovery.md": {
+      "checksum": "sha256:97ea9d6829dad181248856998ef962527a1185df9e4c8c5431ad16ab3b218bee",
+      "size": 10581,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/pre-generation-validation.md": {
+      "checksum": "sha256:750320b4509bd165f9c00211dbfc5283c9cb4facb79c13eaacc2e1f115dc14be",
+      "size": 23824,
+      "last_updated": "2025-10-10"
+    },
+    "standards/ai-assistant/query-construction-patterns.md": {
+      "checksum": "sha256:5a422c7d48cce4f3d62e852813dcce88389a7619cd3fafbfe0ca2d2413ad2ae9",
+      "size": 17249,
+      "last_updated": "2025-10-11"
+    },
+    "standards/ai-assistant/rag-content-authoring.md": {
+      "checksum": "sha256:28751a202be30dc1fbdb9ae6ced44af46b5e83a6aa624679ee68df7532f05f64",
+      "size": 19412,
+      "last_updated": "2025-10-12"
+    },
+    "standards/ai-assistant/standards-creation-process.md": {
+      "checksum": "sha256:ffbcab8eed3f6073e29615b8c361857b4434288adc6e3cf428402fa0d6fca09b",
+      "size": 24261,
+      "last_updated": "2025-10-12"
+    },
     "standards/ai-safety/credential-file-protection.md": {
-      "checksum": "sha256:15954141f1aa847354a4eaf68013fef9818fe4aa58ffe445044b98c7433ab209",
-      "size": 7644,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:33cebd25af175dca8ec0a5c9825efcf601115b8b589a924fdfbc9959c8618856",
+      "size": 13034,
+      "last_updated": "2025-10-10"
     },
     "standards/ai-safety/date-usage-policy.md": {
-      "checksum": "sha256:ed9e0a4a4659d541fb73e3bdc47ed1faf7f305240117b29de730546dfd194024",
-      "size": 5438,
-      "last_updated": "2025-10-05"
+      "checksum": "sha256:f7a150a663e7ab5feabbb9fd2a1734477526b1c1e8526245216acca9d4c240a2",
+      "size": 9623,
+      "last_updated": "2025-10-10"
     },
     "standards/ai-safety/git-safety-rules.md": {
-      "checksum": "sha256:1addae7ad45f39a45975f3e49344157e8ac6af6721a4b6cdf360d1c8bd155f93",
-      "size": 6890,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:ecd71450a7ccfcec220f2800dc573826164702b4cd4e9734021c4e25785faba7",
+      "size": 11478,
+      "last_updated": "2025-10-10"
     },
     "standards/ai-safety/import-verification-rules.md": {
-      "checksum": "sha256:a241a96e47a0042312cd4c4cac8fb822c0cbc09a26431b195279f60f04f15015",
-      "size": 9577,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:51132aeaa5051aa87daa7c08c79d24a08aa0ab2da7c1215459aec741d3b2f1f2",
+      "size": 14622,
+      "last_updated": "2025-10-10"
     },
     "standards/ai-safety/production-code-checklist.md": {
-      "checksum": "sha256:dc46fafbe7fc7074fb90504f54b4eafd37c0e652fa4882b2340d717a54809653",
-      "size": 15865,
-      "last_updated": "2025-10-06"
+      "checksum": "sha256:dd16bde12704054ffc07e3b2c3b0916c7d457cfe418b51d3ae6b433edbfab5c5",
+      "size": 18723,
+      "last_updated": "2025-10-12"
     },
     "standards/architecture/api-design-principles.md": {
-      "checksum": "sha256:f18aec51053dc9291033ceb640e62140d63eb9f1e8a720ce0404badda4c0c832",
-      "size": 14019,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:9c3ae57ceec5792d367d48361f358fb2613ea592c8486166ec7c63080dc39e30",
+      "size": 19209,
+      "last_updated": "2025-10-10"
     },
     "standards/architecture/dependency-injection.md": {
-      "checksum": "sha256:44ecff212cef5c5711835dfc4fc0ae375b103eb6f9a9a11a05a5dde12dff1f31",
-      "size": 13444,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:72f214b0b1c81f3443407996ff062e5b1edad66403f84c93c94be4a16889aa19",
+      "size": 19060,
+      "last_updated": "2025-10-10"
     },
     "standards/architecture/separation-of-concerns.md": {
-      "checksum": "sha256:2edef33d2836a01777a434a6b8b17e78a246974fa171eef53bf43c18737c3b5c",
-      "size": 17044,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:8f41c7aed7a9b0f95538f67b90fdea9af3254acb33eafba3e5e8eef0df9c0289",
+      "size": 22308,
+      "last_updated": "2025-10-10"
     },
     "standards/architecture/solid-principles.md": {
-      "checksum": "sha256:c57bc21f679f6964fc62fd51e25467340f88e4589a9310ca06a5c09099c04c1a",
-      "size": 12537,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:bd7be73f25f8a6f4964e9f0053a16e16ff90b715a9d0e2c38f40ccbc88dc6aed",
+      "size": 25087,
+      "last_updated": "2025-10-10"
     },
     "standards/concurrency/deadlocks.md": {
-      "checksum": "sha256:d2eb38e83f41bff051a356f3b1298f6ac1b5184bcadf091061374a8d20539d8d",
-      "size": 7551,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:f6ffcf3ab21f639cb3f2d7efe8bf6ff10b41222baed9689b85e3fdcdba6443a2",
+      "size": 12308,
+      "last_updated": "2025-10-10"
     },
     "standards/concurrency/locking-strategies.md": {
-      "checksum": "sha256:5948a1c0b6f0a45215e4468a9ede3e26155d74a1ac20c937f93a9ae9e9aae90b",
-      "size": 12900,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:266b72dd547b81755b8d13303fa7ef3deaf0c0046c5a45133b8b5c767f41c675",
+      "size": 17630,
+      "last_updated": "2025-10-10"
     },
     "standards/concurrency/race-conditions.md": {
-      "checksum": "sha256:a983f6c96d9fdc9924df190d58ce09ffbc0e1b1e2876912881334faeaad5fd71",
-      "size": 4722,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:d518a7aee21e020b00d7b19b76fb6a2b16ea7720677b5b08e0ab354e42454094",
+      "size": 9152,
+      "last_updated": "2025-10-10"
     },
     "standards/concurrency/shared-state-analysis.md": {
-      "checksum": "sha256:311cdf1fcf2e72f091c2be04dfa6940673d522593967889e0bf74eef6d605227",
-      "size": 14321,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:2ab76672e6e01bfbd93dae311ed53bc241bac065186717f81361618662149fe0",
+      "size": 19462,
+      "last_updated": "2025-10-10"
     },
     "standards/database/database-patterns.md": {
-      "checksum": "sha256:9049454bf1564fc039a38d6e7fad9834741e160423a2a2547ea784352edd24cc",
-      "size": 12604,
-      "last_updated": "2025-10-04"
-    },
-    "standards/development/mcp-tool-design-best-practices.md": {
-      "checksum": "sha256:cbc8f29af7667c1850db6d4dda176e383a924698004db1b7543065d3cbe1d6d9",
-      "size": 4672,
-      "last_updated": "2025-10-06"
+      "checksum": "sha256:ef9f2707f0af5e648deeef19e6b08134d2344cdad81578fc33bf2ec5c322bed4",
+      "size": 18027,
+      "last_updated": "2025-10-10"
     },
     "standards/documentation/api-documentation.md": {
-      "checksum": "sha256:b2d7cbb6de035dc999dc483959ec392601f88bd7e8276feaefd7f3d4fdb76091",
-      "size": 16849,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:61cb6834ad10477815061d8d496b7afd11ce36cdb1acbc70c55ccba1932bb00b",
+      "size": 22141,
+      "last_updated": "2025-10-10"
     },
     "standards/documentation/code-comments.md": {
-      "checksum": "sha256:1a0b19550d4f3b5c081ff427ce169366031b439d33754cfb7df4c54851aa46ec",
-      "size": 11948,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:ac40bcd756714f45760822411d1773aea00fe95bc18fcb72017c6b4418f493b3",
+      "size": 17355,
+      "last_updated": "2025-10-10"
     },
     "standards/documentation/readme-templates.md": {
-      "checksum": "sha256:8e5c99b9e91e7cf270eaef8483469743fc69e06a61d6fe126a348c9d0659cd1e",
-      "size": 15462,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:fec11bbfd2a28c9e6287385a25bf61c7a7c99c653f1d1fa412e29d1d6be39978",
+      "size": 21307,
+      "last_updated": "2025-10-10"
     },
     "standards/failure-modes/circuit-breakers.md": {
-      "checksum": "sha256:80cd062bc97ddb8250b8754e4098813e1acaf30a2be338852efb2d6ee145b375",
-      "size": 11684,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:9efdf8eff60d94f1d511c3ecda14106d8446eb7182f2aed7e655a64260bc3f7e",
+      "size": 17173,
+      "last_updated": "2025-10-10"
     },
     "standards/failure-modes/graceful-degradation.md": {
-      "checksum": "sha256:9f6e1dc2e68fea50f2f3ffd66ff65f49f435bf28fb0be2c8d2e7d6d416453546",
-      "size": 7163,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:adfaa0c179dec5f4a46c9e82665890cd5926c3ca107daea3616a3151b95a65fb",
+      "size": 12142,
+      "last_updated": "2025-10-10"
     },
     "standards/failure-modes/retry-strategies.md": {
-      "checksum": "sha256:2373e3643072f84e49cf463d224fb4883fb02f83348808d038c9d65de6c8e97a",
-      "size": 9421,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:b40b1632874b95be24f14ed93ab09754b5f39c0fd3489d1ca897682bc056161c",
+      "size": 14791,
+      "last_updated": "2025-10-10"
     },
     "standards/failure-modes/timeout-patterns.md": {
-      "checksum": "sha256:663d92c00336614b7d2096201246ed9558616f186dff3d158b2e20b275ef5c1f",
-      "size": 12066,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:72a39765c36bb1435be35a204d0f04aad1a3e7b7dca1a28c51877fc9500a9cc3",
+      "size": 17448,
+      "last_updated": "2025-10-10"
+    },
+    "standards/installation/gitignore-requirements.md": {
+      "checksum": "sha256:6fab8bd287e1b08852c2ff2c9d826ed47a4e50890c3a21feb1af5a0a468b9a80",
+      "size": 9152,
+      "last_updated": "2025-10-10"
     },
     "standards/installation/update-procedures.md": {
-      "checksum": "sha256:c0f9defd659c310c22a891dceaaf459d641ec6165f8e191ce6eb47312f8d58fd",
-      "size": 13193,
-      "last_updated": "2025-10-06"
+      "checksum": "sha256:fa3f6c391bb96308cdc2e5182b45c6025117b4c3dc42b86173022f7ce65caffe",
+      "size": 15057,
+      "last_updated": "2025-10-10"
     },
-    "standards/meta-framework/command-language.md": {
-      "checksum": "sha256:d8f0214c323c087df37304a852a219e74cfea748462802bbaff85cb1a6855e6c",
-      "size": 9693,
-      "last_updated": "2025-10-05"
+    "standards/meta-workflow/command-language.md": {
+      "checksum": "sha256:7083832a1c37a04c98e5d28a75a439cd5e72cb0142565f04c7e0b201f80abd3a",
+      "size": 13926,
+      "last_updated": "2025-10-12"
     },
-    "standards/meta-framework/framework-creation-principles.md": {
-      "checksum": "sha256:1adac66d9ff7128555e4bfdc878557b4fc8e516352abc6e27fa34ff92eabdb70",
-      "size": 8608,
-      "last_updated": "2025-10-05"
+    "standards/meta-workflow/horizontal-decomposition.md": {
+      "checksum": "sha256:2594e9eb62ee2dd89f729e067582a0f54ffd4ce4b887c07dd0119bbc692fe9d8",
+      "size": 9729,
+      "last_updated": "2025-10-12"
     },
-    "standards/meta-framework/horizontal-decomposition.md": {
-      "checksum": "sha256:33255c6491e71d0b9969668df7f33a87f9cfea77e7d44339508820d796b1a38e",
-      "size": 4246,
-      "last_updated": "2025-10-05"
+    "standards/meta-workflow/three-tier-architecture.md": {
+      "checksum": "sha256:2ab025fbe63c66fde6b776167da478ee520985421fecbea18b80f2c82d03f4c4",
+      "size": 14000,
+      "last_updated": "2025-10-12"
     },
-    "standards/meta-framework/three-tier-architecture.md": {
-      "checksum": "sha256:d4a399f26b5f14f2e5989cf3b94e61b9a3682661c4f6d8f9dc474763e9862584",
-      "size": 8570,
-      "last_updated": "2025-10-05"
+    "standards/meta-workflow/validation-gates.md": {
+      "checksum": "sha256:2dda11318432c72fead1cf532a5337f4d5f25e54ad1ce5f4f0c97ee1f5721592",
+      "size": 9810,
+      "last_updated": "2025-10-12"
     },
-    "standards/meta-framework/validation-gates.md": {
-      "checksum": "sha256:97d43d861dea8b00cf20d676f8b105dd8fecf7b9a2f86cade66a5cf41132a3b5",
-      "size": 4759,
-      "last_updated": "2025-10-05"
+    "standards/meta-workflow/workflow-creation-principles.md": {
+      "checksum": "sha256:f4a02f70ced589896d7cf2ad70dc3853c540a364314b81a5bc07f4bce8e55497",
+      "size": 13838,
+      "last_updated": "2025-10-12"
     },
     "standards/performance/optimization-patterns.md": {
-      "checksum": "sha256:a5b59422a7cec297986ba7d8b3327651035663211e842924420f8ac26bacf983",
-      "size": 12446,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:06f21cfd99f813210dbfb9408cf12647056b4b98e4b1086b9b008b968ac0c2c4",
+      "size": 17412,
+      "last_updated": "2025-10-10"
     },
     "standards/security/security-patterns.md": {
-      "checksum": "sha256:b8fe42a16181e43f3684ba398b7299f6b0fc8c1fdbd1392eae334ae02c4b73a9",
-      "size": 13504,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:1605ecedf40f6add643977c28547f39dfde07926437d5fe41279b8517e8548d9",
+      "size": 19178,
+      "last_updated": "2025-10-10"
     },
     "standards/testing/integration-testing.md": {
-      "checksum": "sha256:60f7ba0cd7fc13a452743012d4ef71fa40f4c855d9b5c97976df69d2c6f6e14e",
-      "size": 15010,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:d156cce5ab4bcd2ea567c1ce6a2c74bb981706e5550e59ef435723ea714475f6",
+      "size": 19420,
+      "last_updated": "2025-10-10"
     },
     "standards/testing/property-based-testing.md": {
-      "checksum": "sha256:35f0da55bf5911d766b138a595143c9d8851e560df3cb536a364c013e1cface5",
-      "size": 15170,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:64e490a720b0c55212a658b7449e3bfdc4331e702fe34c877d28e244c7e6be99",
+      "size": 20072,
+      "last_updated": "2025-10-10"
     },
     "standards/testing/test-doubles.md": {
-      "checksum": "sha256:73688ee6efba552560bbc67cc380dc6a7874a5410dd6dfaea597e3a2a2103c15",
-      "size": 12979,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:a3fdffa42c738c69161dc31674af880b38fcf2640a310aab28ae88ad71b7290a",
+      "size": 17807,
+      "last_updated": "2025-10-10"
     },
     "standards/testing/test-pyramid.md": {
-      "checksum": "sha256:12ad8b57fe45fbe785128dbd6fbc0f34467ecdd65b037a7054ee32af50ecd2f5",
-      "size": 5003,
-      "last_updated": "2025-10-04"
+      "checksum": "sha256:eee84532055742bb42429e7c8178458ed161b9c382815ac70e4a2c8af0ef3f3d",
+      "size": 17461,
+      "last_updated": "2025-10-10"
     },
     "standards/workflows/mcp-rag-configuration.md": {
-      "checksum": "sha256:4aa9dd6ca53d6399f3b7ab13cefccb5c3e3aaad3369bbedc89553115f85dc70d",
-      "size": 12146,
-      "last_updated": "2025-10-06"
+      "checksum": "sha256:1814833aac83e4b6348238b26f91ee1826d8eee0fefaf092601c1a3077a81a90",
+      "size": 17037,
+      "last_updated": "2025-10-12"
+    },
+    "standards/workflows/time-estimation-standards.md": {
+      "checksum": "sha256:b3e71a726e521e31705875df908ccaa4d9c6c41f818b643d02dd4b3e5af47753",
+      "size": 17965,
+      "last_updated": "2025-10-12"
     },
     "standards/workflows/workflow-construction-standards.md": {
-      "checksum": "sha256:d3d400ce6308d7cae2aad0ee08e90eac5ab73034b1244406652040eb137a5ee3",
-      "size": 8773,
-      "last_updated": "2025-10-07"
+      "checksum": "sha256:53ffba7a53a84d42894670639add3cecf0c26ce7fad39f1485d4c94a6145771e",
+      "size": 14936,
+      "last_updated": "2025-10-12"
     },
     "standards/workflows/workflow-metadata-standards.md": {
-      "checksum": "sha256:7e8b052514cf6e1cc8c8641c86d95c899c50d60147e7faa83cbc8147fbe2d703",
-      "size": 11688,
-      "last_updated": "2025-10-06"
+      "checksum": "sha256:e6b9bd203406c3291cd17599d3038cead4d9c79924c845b25ff42779d8f4b31c",
+      "size": 16105,
+      "last_updated": "2025-10-12"
     },
     "standards/workflows/workflow-system-overview.md": {
-      "checksum": "sha256:316cb187152fbdd0ef7dfe33bf2074aba43500d5dba324acd3d88544518fbb36",
-      "size": 13385,
-      "last_updated": "2025-10-07"
+      "checksum": "sha256:597fb8aef3577eae3021ddfe36d0a53c08a98579e91397b6fc9571afc49962f7",
+      "size": 18591,
+      "last_updated": "2025-10-12"
     },
-    "usage/agent-os-update-guide.md": {
-      "checksum": "sha256:79e9ac5f91c20dbbdb390ef12ac69c1dfc39721671c02b5c830ff5b1061478b1",
-      "size": 12446,
-      "last_updated": "2025-10-06"
+    "usage/ai-agent-quickstart.md": {
+      "checksum": "sha256:ccc1dc0d74dea01372a6756e18a774abe84c0904d219d257d2b7186a0c922cf5",
+      "size": 25510,
+      "last_updated": "2025-10-10"
     },
     "usage/creating-specs.md": {
-      "checksum": "sha256:2e55b8fdd829b4b2775a253b5abb8d5d96f6cb41ac36b8d30b2a782e989ebae6",
-      "size": 13508,
-      "last_updated": "2025-10-05"
+      "checksum": "sha256:697f29fbe69ed99bf79cc719373c2550bc4ac77d20c58767f96112608183387b",
+      "size": 18294,
+      "last_updated": "2025-10-10"
     },
     "usage/mcp-server-update-guide.md": {
-      "checksum": "sha256:3a5a7c6111aeb5db6fef28fc3314258d63ef1904ff2705223eadfc934399c564",
-      "size": 12627,
-      "last_updated": "2025-10-06"
+      "checksum": "sha256:4540b1dc3d7821120cd06b872f083ccb1f2e1305983b35f14ea2a3a5344b42f2",
+      "size": 18678,
+      "last_updated": "2025-10-10"
     },
     "usage/mcp-usage-guide.md": {
-      "checksum": "sha256:24eee64efc0282a8891c125ac79e4e1c54c0a65837e5f060b526da3dfcba7a08",
-      "size": 11849,
-      "last_updated": "2025-10-07"
+      "checksum": "sha256:b4443891390ea3eacbecc031b7d9c5502a06ade1e4478abd9656d69f3a09c440",
+      "size": 15677,
+      "last_updated": "2025-10-12"
     },
     "usage/operating-model.md": {
-      "checksum": "sha256:53e77c2acdfb6c45dcd2c7355bb4d31e25c4e6822ffe5adbdc881e1880eed1cf",
-      "size": 4198,
-      "last_updated": "2025-10-05"
+      "checksum": "sha256:83ade5366d0d4644620e0554f054339595dd7466172779df7810881a901e5737",
+      "size": 9822,
+      "last_updated": "2025-10-10"
     },
-    "workflows/production_code_v2/metadata.json": {
-      "checksum": "sha256:090f3c1485c28cd2c7f929207f38cea299671a367f9ab6c48e6e873f03cb36a9",
-      "size": 3100,
-      "last_updated": "2025-10-06"
+    "workflows/agent_os_upgrade_v1/README.md": {
+      "checksum": "sha256:f33e4e2dd7a50f7b9a735cdfd30010071f828d318ffd4d531ae0258bc34c4602",
+      "size": 6734,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/metadata.json": {
+      "checksum": "sha256:eb8144ad4a5a3b7bc29e1502378920a10ac7d037c18956fbae2bc57137b1da2a",
+      "size": 7581,
+      "last_updated": "2025-10-10"
+    },
+    "workflows/agent_os_upgrade_v1/phases/0/phase.md": {
+      "checksum": "sha256:b87b2fca9cd795c5cd0edbd307079c010865fd2be802a98cebbbb882caf73231",
+      "size": 1995,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/0/task-1-validate-source.md": {
+      "checksum": "sha256:1e191ba020f417dd86881157d4b96715ea53b2bffc559ce60973e3432af3effc",
+      "size": 1414,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/0/task-2-validate-target.md": {
+      "checksum": "sha256:810374077aa602578fa107563b9da833de30b72d7b251fc7eb68dcf6b2f53133",
+      "size": 526,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/0/task-3-check-disk-space.md": {
+      "checksum": "sha256:c5b1177d418bbcf471eee9ca2bcbabe359cff8ccfe7b095e5a7d38e7cd8c86bb",
+      "size": 490,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/0/task-4-check-concurrent.md": {
+      "checksum": "sha256:8975a4cef4b31163117bb078e7596e9d9683209f44cdfb04f1a5d00d61169625",
+      "size": 518,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/1/phase.md": {
+      "checksum": "sha256:9393d5f1ffd7ed68cb06c81679f143bc76fd4a5e45a7d1aaa92acd0cfc79d269",
+      "size": 641,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/1/task-1-create-backup.md": {
+      "checksum": "sha256:fd2dfccafba8b41e9dd6f62cfbf3fd0c217a90448189d8eee2cd047ddc6bf7de",
+      "size": 488,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/1/task-2-verify-backup.md": {
+      "checksum": "sha256:2e941deee9f6a3c56f245589370118872343f803b70153b704f5aff5f4bfefda",
+      "size": 508,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/1/task-3-acquire-lock.md": {
+      "checksum": "sha256:d7015251d202abb604382695f056c81ee3760d7e6e48e1eeb84c03e90345bd83",
+      "size": 506,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/2/phase.md": {
+      "checksum": "sha256:acdc6a3a1e4b91d43d36a3b9429f69712cb73bd3c3985c39788bea1c0a0892e3",
+      "size": 692,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/2/task-1-dry-run.md": {
+      "checksum": "sha256:aa06c687bf21f6656919bd7e031c5b96005299e299b3618275c1ad772946425b",
+      "size": 472,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/2/task-2-actual-upgrade.md": {
+      "checksum": "sha256:ce6cd12332a0bd6a6e209f945ae3bfd1c93d82a916150909e579f4839605190b",
+      "size": 2639,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md": {
+      "checksum": "sha256:bf8f43d1410a654f9b0b28e6d921cf0b2d0f1af27476ae2ac46a9c8af3ef9d1b",
+      "size": 3383,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/2/task-4-verify-checksums.md": {
+      "checksum": "sha256:81049437029e6bd3240e8fa35b646b109ec037b20208d249aabc167b83c619a5",
+      "size": 486,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/3/phase.md": {
+      "checksum": "sha256:64838cb1300b1295728c12ef8eccba05e5c21dae0d3a8b02bf22426fc6c5e252",
+      "size": 635,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/3/task-1-copy-server.md": {
+      "checksum": "sha256:34b306fc2520abea1218fa47926439d5fae500f89c41d6a7254386a9f6dd848b",
+      "size": 482,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/3/task-2-install-deps.md": {
+      "checksum": "sha256:5b6cbeee105741a8cbf6e3326cb29c8cd1a0bd3d2a24c318bf97ecb84c9d0503",
+      "size": 482,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/3/task-3-restart-server.md": {
+      "checksum": "sha256:2ddbd0371440d351188293241ebae03fa92d4a18f15a9d3825c686a49ff45edb",
+      "size": 488,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/4/phase.md": {
+      "checksum": "sha256:558148ec5141d6097fe1cb7bae16113a8fe7a3f405d98c691f9225c73fd3e954",
+      "size": 650,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/4/task-1-validate-tools.md": {
+      "checksum": "sha256:df6ce7aae51ea6d43c238b93f9e232b71366824c2aaac6422fe4c0689b66554b",
+      "size": 492,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/4/task-2-smoke-tests.md": {
+      "checksum": "sha256:0921d5c2e65ddb289fe1489e9c66db77717fea89625d6c704b93eb5b77ff73d8",
+      "size": 488,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/4/task-3-generate-report.md": {
+      "checksum": "sha256:23a442f0048f4ef26cadfee5868bd906160d5c9033c8f23383c587295664831f",
+      "size": 490,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/5/phase.md": {
+      "checksum": "sha256:70a3ff8ce2c2108e6ec4937ba68e810c01fee9364baec18a3bbdfdb463e7147d",
+      "size": 650,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/5/task-1-release-lock.md": {
+      "checksum": "sha256:ed59b09ab6553cf20fcf3aa8bb6b0d006fe2e2c46ef1240219482c3f8d197e78",
+      "size": 474,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/5/task-2-archive-backups.md": {
+      "checksum": "sha256:88824c2de2f0c127e339ee747149a0c2691db646383f84d573bc9ac9f356233a",
+      "size": 472,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/phases/5/task-3-generate-summary.md": {
+      "checksum": "sha256:e48ef0db807a9db6bf81fae285706b251e76b6a0a84c6d80f63fc34b6af5c19e",
+      "size": 486,
+      "last_updated": "2025-10-08"
+    },
+    "workflows/agent_os_upgrade_v1/supporting-docs/rollback-procedure.md": {
+      "checksum": "sha256:3d750cfebbba5c178354397c349149ed88dff6fc2fe57c113333e3caf17835a1",
+      "size": 6661,
+      "last_updated": "2025-10-08"
     },
     "workflows/spec_creation_v1/core/architecture-diagrams.md": {
       "checksum": "sha256:46ddcf720c8e66047d13cb856d96f809fb15cebe8606e3c4164accb8d3326188",
@@ -249,9 +459,9 @@
       "last_updated": "2025-10-07"
     },
     "workflows/spec_creation_v1/core/tasks-template.md": {
-      "checksum": "sha256:98e91e60b50b70c320778dd4c85abd8b5df4ec03ceb1e63034cf08eca0a5915d",
-      "size": 4911,
-      "last_updated": "2025-10-07"
+      "checksum": "sha256:7de55e981b58ca2386ea83804e4d84f071b33135ff4daa7a3747846b71020eb4",
+      "size": 7441,
+      "last_updated": "2025-10-11"
     },
     "workflows/spec_creation_v1/metadata.json": {
       "checksum": "sha256:485a2bcb9f08f62de35411b1438c6d414f22cfe821f7130a28dca28b161e4c3d",
@@ -421,42 +631,42 @@
     "workflows/spec_execution_v1/core/dependency-resolver.md": {
       "checksum": "sha256:d398f7137eeba3278de01248ed03d7d8cbd9fca9750c766e01bd715c8787941a",
       "size": 5383,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/core/task-parser.md": {
       "checksum": "sha256:37eaf84479845b85eaf2452e79bf124a5bfde32b799e3e3ca1996f8a20c4608c",
       "size": 7452,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/core/validation-gates.md": {
       "checksum": "sha256:ed12d4ab4225f0c2871609cf601f8b424d56d059e66a4cfd6ca61df43a8392a3",
       "size": 7260,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/metadata.json": {
       "checksum": "sha256:704b0556c79430a55685b1e82bd33630e3b9dad7737230bebf6bbe3490f74e1a",
       "size": 6835,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/phases/0/phase.md": {
       "checksum": "sha256:ab255ddc1add02611aaccb140dce0a11aa7c92496b52bc9cf1c1b5ef8cfe7fa7",
       "size": 1971,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/phases/0/task-1-locate-spec.md": {
       "checksum": "sha256:6b66e31a218cb110e1619b5f7c06712662c64071e49bc9dfbca5d22d3f73c026",
       "size": 2831,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/phases/0/task-2-parse-tasks.md": {
       "checksum": "sha256:770c99621825a18f0349836cda86088f045ade8360bddde281c77ecb32365e81",
       "size": 3123,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/phases/0/task-3-build-plan.md": {
       "checksum": "sha256:c12ffd34c97024c550dadf694727332db769aa6ee67788bfbe9023d97f06f56a",
       "size": 4004,
-      "last_updated": "2025-10-06"
+      "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/phases/dynamic/phase-template.md": {
       "checksum": "sha256:eb389ef2d3d641f49afa20ac5b11f618ad1fa1fb8992e16c8f6e235495d1d3f0",
@@ -464,14 +674,259 @@
       "last_updated": "2025-10-07"
     },
     "workflows/spec_execution_v1/phases/dynamic/task-template.md": {
-      "checksum": "sha256:f93098ce55fddd5e226042a9b8748b38e9f52f40543d2d16f29040e3e44952b8",
-      "size": 3154,
-      "last_updated": "2025-10-07"
+      "checksum": "sha256:1f0d85871c09a294796817e415f8947c66387267abc7e520b1e90ed9e0752593",
+      "size": 4101,
+      "last_updated": "2025-10-10"
     },
-    "workflows/test_generation_v3/metadata.json": {
-      "checksum": "sha256:5d157c0531ce5a4ee56837467d0dcb84dd71eba3f4eb81d4821955a414dcb6ea",
-      "size": 4051,
-      "last_updated": "2025-10-06"
+    "workflows/workflow_creation_v1/core/command-language-glossary.md": {
+      "checksum": "sha256:b23bb24eabb5e3690c6edd8b21757bb8cd4d45bc1d5cee9f6e9ddcf4aeea6f56",
+      "size": 2811,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/core/compliance-audit-methodology.md": {
+      "checksum": "sha256:a2fea65b4058a943b2ee6daa661c58ba301c5dfe5f2d64f3f976286e1d0e4a4a",
+      "size": 9700,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/core/file-splitting-strategies.md": {
+      "checksum": "sha256:a5769540bc12b6b96d6d5da8450b100ebd0050ea5fa516af2c60cbb963b67461",
+      "size": 9803,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/core/human-review-templates.md": {
+      "checksum": "sha256:e4c75d19d6042af1839c526a962fb18e18672401a16e88cdbffe31d47fa4fe50",
+      "size": 7520,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/core/progress-tracking.md": {
+      "checksum": "sha256:49823470beaf3649e51c3ad280a5d0dfba9e88c79dd4d4a6e4746e023b33b09c",
+      "size": 2043,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/core/usability-review-patterns.md": {
+      "checksum": "sha256:2f35970ce71a0f2642c799c04061662f057f641de7c38ed22838835600035607",
+      "size": 7784,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/core/usage-guide-structure.md": {
+      "checksum": "sha256:9ef16694b2faca15b3d22adaaec895aacdf9975c2bf9b6b9d40a1b908e220b28",
+      "size": 11838,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/metadata.json": {
+      "checksum": "sha256:16d52dc31d1e6943892b737614fc127b656e65183637e658c407fa614ebe4513",
+      "size": 5170,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/0/phase.md": {
+      "checksum": "sha256:35bb5eebe46612da189cfc6e8497361fb54a5245acb5f977dbfb9a363fe2e0f8",
+      "size": 1766,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/0/task-1-locate-definition.md": {
+      "checksum": "sha256:61ecca85d5a5df1e91662299d46e6bc5350ba424c1ea6491ccefb72e191552ec",
+      "size": 1916,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/0/task-2-parse-definition.md": {
+      "checksum": "sha256:5aba8e0401dd7e5841da97e505b84d5f8d41f787db997186bf7bd159e668f08d",
+      "size": 1984,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/0/task-3-validate-structure.md": {
+      "checksum": "sha256:a3a1c72122f14c063d84900118f7529c60f15d6133bba3ce8ff6a11eeb8140d9",
+      "size": 2210,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/0/task-4-validate-completeness.md": {
+      "checksum": "sha256:8b08f29ace3f42d86701511256667f8ed14a3e9974b1f305cd87021f4b39bb07",
+      "size": 2609,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/0/task-5-prepare-workspace.md": {
+      "checksum": "sha256:8ec3d21f46b16e877537e6872bdb1bed3b71ec990c9771bfaf69f6d8256a00ce",
+      "size": 3113,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/phase.md": {
+      "checksum": "sha256:5fdaa1bf1ce72aea7619d781a5df0ea1327aff284ed4bb489cadb5df95fb3403",
+      "size": 2041,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-1-create-workflow-directory.md": {
+      "checksum": "sha256:788012ef8d09ad79047c29304145ab64bdba1a34f2e49332fc21cd753d98a491",
+      "size": 2401,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-2-create-phase-directories.md": {
+      "checksum": "sha256:aa250f7e9d2a0603f6323f491cd17756122242c1d9e0b957af73e4ccf8dba330",
+      "size": 2627,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-3-create-core-directory.md": {
+      "checksum": "sha256:0805fc503033f71a63bda3234095aa2b5a59255f0e6b59fef86624586d0592a9",
+      "size": 1472,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-4-create-supporting-docs.md": {
+      "checksum": "sha256:58ccb4e8f2963d27a49b6c266b5256e948ee9e7e2af0d724a30271abab096da0",
+      "size": 1618,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-5-create-dynamic-directories.md": {
+      "checksum": "sha256:151885997930ea83e4bd62d9b1d0e3aa345e8696c6a8cfe936c275cedf98291d",
+      "size": 2386,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-6-generate-metadata-json.md": {
+      "checksum": "sha256:4117d12c43d0da83f4db74ce90d509ea9df47b38dea97f455c484dd6b70f56cb",
+      "size": 3715,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/1/task-7-verify-scaffolding.md": {
+      "checksum": "sha256:cb3a5a442c74681323692bbddea27804ca2eacd5d3741062b6455a6e084acce9",
+      "size": 3420,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/2/phase.md": {
+      "checksum": "sha256:6ca0c7effeffcb27ae5021776518065a10efea595732ba06c2e28e519ecf56d0",
+      "size": 1759,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/2/task-1-create-command-glossary.md": {
+      "checksum": "sha256:17ba8bfd7e165045dadf1821e0673e677b20ddbe367c9650ff3f406222c4c4a6",
+      "size": 3505,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/2/task-2-create-progress-tracking.md": {
+      "checksum": "sha256:cf7803fb84ec0b927fd1c5ce3f4d3ed157c18c8f64cc0d05e0ac66600af9ca30",
+      "size": 3775,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/2/task-3-archive-definition.md": {
+      "checksum": "sha256:96a3991014f8e664835cc7384d13daa9ad9fb746c0fb38c2f6d1e70e6cd54617",
+      "size": 2432,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/2/task-4-generate-design-summary.md": {
+      "checksum": "sha256:1bf8808c1f77833dff7e236c02fc71d9afba22274aa8a51b9c00ddced7fb9301",
+      "size": 3858,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/phase.md": {
+      "checksum": "sha256:50d648166be9e3791d52161995c1532b0445c653dae46b75b119b49d45b10c8a",
+      "size": 2633,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-1-audit-file-sizes.md": {
+      "checksum": "sha256:1d1094be96508bc6a91b09ac87cce73c1dda2bfcf2c335e5ad40d0904b927016",
+      "size": 2896,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-10-final-compliance-check.md": {
+      "checksum": "sha256:2580e1c66cfba261ada525c28e32809a281c1b43f0479d66ac94e805e17c4aa5",
+      "size": 3332,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-2-audit-command-coverage.md": {
+      "checksum": "sha256:0be4406e096b0113e126ec54095dc4ce42f859160aae1308e28336c9a8bd3ee4",
+      "size": 3544,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-3-verify-three-tier.md": {
+      "checksum": "sha256:1cc2db7b5f70e7f40afffbe3450ca19692ecf7900496ad7ff41acb08b784202a",
+      "size": 3909,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-4-verify-validation-gates.md": {
+      "checksum": "sha256:6ab5c6b5a9a933059405119b8a66fe286825201f39cf5a973a4059b076b3574c",
+      "size": 4033,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-5-verify-binding-contract.md": {
+      "checksum": "sha256:49c89c4a09852b5fc38734b6e56f80a8a0ca0c99dfdc87d64904fba317198c88",
+      "size": 4213,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-6-verify-horizontal-decomposition.md": {
+      "checksum": "sha256:c175054b071717f7b5f00a648ebabf8492a96337a777367272d6edc64ab0ba90",
+      "size": 4110,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-7-generate-compliance-report.md": {
+      "checksum": "sha256:ad8d52e83c9439061a35c5ca30a4ebd82c82947e84fc7f97cc03e6487cd319e2",
+      "size": 3340,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-8-fix-violations.md": {
+      "checksum": "sha256:017be3157480099fa1b15255721bc1fc3d2b51fdac482df6492f2258d9ae25b1",
+      "size": 4099,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/3/task-9-re-validate.md": {
+      "checksum": "sha256:28070e66f1b1bb7becf2aa95ea91884d274cdd546d1a3552a726ec62f99d529d",
+      "size": 3153,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/phase.md": {
+      "checksum": "sha256:4babdeec115d17fb54d0c5fb7bdc723c193b0d4de53a5cf6afc5cc4a88cb5564",
+      "size": 2346,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-1-dry-run-navigation.md": {
+      "checksum": "sha256:351ac52414f2565def44fdf513ec78a18b1fc93a95e5f4dad20eb2490cca919d",
+      "size": 3876,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-2-validate-commands.md": {
+      "checksum": "sha256:392a580734fac2c66554bd6c284cdd4155df401865d248ed5c7e1dc174072272",
+      "size": 4006,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-3-validate-gates-parseable.md": {
+      "checksum": "sha256:711a591e88419882bfeaa56b6cec6ba9b9f1e2f559b0c5d503a92d5b29e07a77",
+      "size": 3386,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-4-identify-usability-issues.md": {
+      "checksum": "sha256:bddb207c58f25905aec1ef1ec2747caacdd7cdf2d240f30e1e237b144f80a29d",
+      "size": 3546,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-5-implement-refinements.md": {
+      "checksum": "sha256:b8dbb699b9615d27e350b027cf5595173ca2407709ef7a88a8407af8cc5ccbee",
+      "size": 3752,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-6-create-usage-guide.md": {
+      "checksum": "sha256:a94db8e2a44378fa53338e1ddd5cbd2ba1ba6e7e2437630574a315bf5721965b",
+      "size": 4016,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-7-final-validation.md": {
+      "checksum": "sha256:c5337c2269b34a0821dfb1a3c8cbb881ad339719bd922d0bb18365514aa9c399",
+      "size": 3343,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/4/task-8-human-review.md": {
+      "checksum": "sha256:4fc489a3f8f3d058b0ca6b7926fc6d4a196c5792096d5564645de497a03e1265",
+      "size": 4490,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/dynamic/phase-template.md": {
+      "checksum": "sha256:e9baa356f864aaacb56eac455d992f490f8d079f7171a83fb96cc383311386f6",
+      "size": 6714,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/phases/dynamic/task-template.md": {
+      "checksum": "sha256:60139e8ea98a2146817c3aa996b24bf46a796b85a6e91ac7402445ee43b2449e",
+      "size": 1461,
+      "last_updated": "2025-10-12"
+    },
+    "workflows/workflow_creation_v1/supporting-docs/design-summary.md": {
+      "checksum": "sha256:9516f52f777e827dd4e3ebdb7a4e183fcb95935be6c414fffbd146555f524933",
+      "size": 6908,
+      "last_updated": "2025-10-12"
     }
   }
 }

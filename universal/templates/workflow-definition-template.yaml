@@ -1,0 +1,530 @@
+---
+# ============================================================================
+# Workflow Definition Template v1.0
+# ============================================================================
+#
+# PURPOSE:
+# This template defines the structure for creating workflow specifications.
+# After a design conversation, fill this template to create a complete
+# workflow definition that workflow_creation_v1 can consume.
+#
+# USAGE:
+# 1. Search standards for "workflow definition format" to learn the structure
+# 2. List universal/templates/ directory to find this template
+# 3. Read this complete file
+# 4. Fill all REQUIRED sections based on design conversation
+# 5. Add OPTIONAL sections as needed
+# 6. Validate completeness
+# 7. Save as {workflow-name}-definition.yaml
+#
+# ============================================================================
+
+# ============================================================================
+# REQUIRED: Basic Identification
+# ============================================================================
+
+name: "your-workflow-name-v1"
+# REQUIRED: Workflow identifier in snake_case-v1 format
+# Examples: "payment-processing-v1", "test-generation-js-v2", "api-docs-v1"
+# Convention: descriptive-name-v{version}
+
+version: "1.0.0"
+# REQUIRED: Semantic versioning (major.minor.patch)
+# Increment major for breaking changes, minor for features, patch for fixes
+
+workflow_type: "implementation"
+# REQUIRED: Category of workflow
+# Common types: implementation | testing | documentation | refactoring |
+#               analysis | deployment | optimization | debugging
+
+# ============================================================================
+# REQUIRED: Problem Definition
+# ============================================================================
+
+problem:
+  statement: |
+    [Multi-paragraph description of the problem this workflow solves.
+
+    Include:
+    - What problem exists that requires systematic approach
+    - What constraints or requirements must be met
+    - What complexity justifies a structured workflow
+    - What domain expertise is needed
+
+    Be specific about the context and scope. This should clearly explain
+    WHY this workflow exists and WHAT it accomplishes.]
+
+  why_workflow: "[Explain why this needs to be a workflow rather than a tool or standard. Consider: Does it require multiple phases? Does it need validation gates? Does it require systematic execution with quality checkpoints?]"
+
+  success_criteria:
+    # REQUIRED: List of measurable outcomes that define success
+    # Each criterion should be specific and verifiable
+    - "[Measurable criterion 1 - e.g., 'All modules have 95%+ test coverage']"
+    - "[Measurable criterion 2 - e.g., 'Zero critical security vulnerabilities']"
+    - "[Measurable criterion 3 - e.g., 'Documentation complete for all APIs']"
+    # Add as many as needed - typically 3-7 criteria
+
+# ============================================================================
+# REQUIRED: Phase Definitions
+# ============================================================================
+
+phases:
+  # Each workflow must have at least one phase
+  # Phases should represent natural boundaries/milestones in the process
+  # Each phase produces a concrete deliverable
+
+  - number: 0
+    # REQUIRED: Phase number (0-indexed)
+    # Convention: Start at 0, increment sequentially
+
+    name: "[Phase Name]"
+    # REQUIRED: Human-readable phase name
+    # Examples: "Requirements Analysis", "Implementation", "Testing"
+
+    purpose: "[What this phase accomplishes - one clear sentence]"
+    # REQUIRED: Clear statement of phase objective
+
+    deliverable: "[Concrete output produced by this phase]"
+    # REQUIRED: Tangible result (document, code, tests, etc.)
+    # Examples: "Architecture document with diagrams", "Working implementation",
+    #           "Complete test suite with 95%+ coverage"
+
+    # REQUIRED: Task definitions
+    tasks:
+      - number: 1
+        # REQUIRED: Task number within phase (1-indexed)
+
+        name: "[kebab-case-task-name]"
+        # REQUIRED: Task identifier used for filename: task-{number}-{name}.md
+        # Examples: "gather-requirements", "implement-core", "write-tests"
+        # Convention: lowercase, hyphen-separated, descriptive
+
+        purpose: "[One-line description of what this task does]"
+        # REQUIRED: Clear, concise task objective
+
+        # OPTIONAL: Additional task metadata
+        domain_focus: "[Domain expertise area]"
+        # Optional: Specify domain knowledge needed
+        # Used by workflow_creation_v1 to search for relevant expertise
+        # Examples: "Payment Processing", "AST Analysis", "Security"
+
+        estimated_lines: 100
+        # Optional: Target line count for task file (default: 100)
+
+        commands_needed:
+          # Optional: List of tools/commands this task will use
+          # Helps workflow_creation_v1 add appropriate examples
+          - "write"
+          - "read_file"
+          - "grep"
+          # Common: write, read_file, grep, run_terminal_cmd, search_standards,
+          #         codebase_search, list_dir, glob_file_search
+
+        steps_outline:
+          # Optional: High-level steps for this task
+          # Helps workflow_creation_v1 generate detailed task content
+          - "[Step 1 overview]"
+          - "[Step 2 overview]"
+          - "[Step 3 overview]"
+
+        examples_needed:
+          # Optional: Types of examples to include in task file
+          - "[Example type 1 - e.g., 'Command usage example']"
+          - "[Example type 2 - e.g., 'Expected output example']"
+
+        validation_criteria:
+          # Optional: Success criteria specific to this task
+          # Different from phase validation gate (less formal)
+          - "[Criterion 1 - used for task completion checklist]"
+          - "[Criterion 2]"
+
+        # OPTIONAL: Child workflow invocation
+        invokes_workflow: null
+        # If this task requires starting another workflow, specify the workflow type
+        # Examples: "standards_creation_v1", "spec_creation_v1", "workflow_creation_v1"
+        # The generated task will include instructions to start_workflow() and wait
+        # for completion before proceeding
+
+        invokes_workflow_options: {}
+        # Options to pass to the child workflow via start_workflow()
+        # Example:
+        #   target_file: "{{domain}}-patterns.md"
+        #   custom_option: "value"
+        # Variables in {{brackets}} will be resolved during workflow creation
+
+        invokes_workflow_required_evidence:
+          # List of evidence fields required from child workflow completion
+          # These become evidence requirements for THIS task's validation
+          # Example:
+          # - "session_id"
+          # - "completed"
+          # - "output_path"
+
+      - number: 2
+        name: "[second-task-name]"
+        purpose: "[Second task purpose]"
+        # Add more tasks as needed...
+
+    # REQUIRED: Validation gate
+    validation_gate:
+      # Every phase MUST have a validation gate
+      # Gates enforce quality and prevent premature phase completion
+
+      evidence_required:
+        # REQUIRED: Dictionary of evidence fields needed to pass gate
+        # Each field will be checked by CheckpointLoader
+
+        example_field_name:
+          # Field name should be snake_case
+          # This becomes the key in the evidence dictionary
+
+          type: "string"
+          # REQUIRED: Data type
+          # Options: string | integer | boolean | list | dict
+          # Must match exactly (used for type checking)
+
+          description: "[Clear description of what this evidence proves or provides]"
+          # REQUIRED: Explains what this field represents
+          # Used in validation error messages
+          # Should be specific and measurable
+
+          validator: "non_empty"
+          # REQUIRED: Validation rule to apply
+          # See VALIDATOR REFERENCE at bottom of template
+          # Common: non_empty, file_exists, greater_than_0, is_true, percent_gte_80
+
+        another_field:
+          type: "integer"
+          description: "[Description for integer field]"
+          validator: "greater_than_0"
+
+        # Add as many evidence fields as needed
+        # Typical: 3-8 fields per phase
+        # Keep evidence focused and measurable
+
+      human_approval_required: false
+      # REQUIRED: Boolean flag for human review
+      # Set to true for critical decision points:
+      # - Architecture review
+      # - Content approval before testing
+      # - Final deliverable acceptance
+      # Default: false
+
+    # OPTIONAL: Phase dependencies
+    depends_on: []
+    # Optional: List of phase numbers this phase depends on
+    # Examples: [0, 1] means this phase requires phases 0 and 1 complete
+    # Usually omitted (sequential execution assumed)
+
+    estimated_duration: "30-60 minutes"
+    # Optional: Human-readable time estimate
+    # Helps users plan and understand scope
+
+  # -------------------------------------------------------------------------
+  # Add more phases as needed
+  # Copy the phase structure above for each additional phase
+  # Remember to increment phase numbers sequentially
+  # -------------------------------------------------------------------------
+
+  - number: 1
+    name: "[Phase 1 Name]"
+    purpose: "[Phase 1 purpose]"
+    deliverable: "[Phase 1 deliverable]"
+    tasks:
+      - number: 1
+        name: "[task-name]"
+        purpose: "[Task purpose]"
+    validation_gate:
+      evidence_required:
+        field_name:
+          type: "string"
+          description: "[Description]"
+          validator: "non_empty"
+      human_approval_required: false
+
+# ============================================================================
+# OPTIONAL: Dynamic Workflow Configuration
+# ============================================================================
+
+dynamic: false
+# REQUIRED: Boolean flag indicating if workflow has dynamic phases
+# Default: false (static workflow with predefined phases)
+# Set to true if workflow generates phases based on input
+
+# Only include dynamic_config if dynamic: true
+# dynamic_config:
+#   source_type: "workflow_definition"
+#   # Type of source document to parse
+#   # Common: workflow_definition | spec | architecture | requirements | custom
+#
+#   source_path_key: "definition_path"
+#   # Parameter name in workflow options for source file path
+#   # Example: start_workflow(..., options={"definition_path": "spec.md"})
+#
+#   iteration_logic: "per_target_phase"
+#   # How to iterate through dynamic content
+#   # Common: per_target_phase | per_item | per_section | custom
+#
+#   templates:
+#     phase: "phases/dynamic/phase-template.md"
+#     task: "phases/dynamic/task-template.md"
+#   # Paths to template files (relative to workflow directory)
+#   # Templates use variables to generate content
+#
+#   variables:
+#     # Define variables that templates can access during rendering
+#     # Format: variable_name: "source description"
+#     target_phase_number: "from definition.phases[i].number"
+#     target_phase_name: "from definition.phases[i].name"
+#     target_phase_purpose: "from definition.phases[i].purpose"
+#     target_phase_tasks: "from definition.phases[i].tasks (array)"
+#     iteration_number: "1 to N (current iteration)"
+#     total_iterations: "N (total number of iterations)"
+#
+#   # Special phase numbering for post-dynamic phases:
+#   # Use "N+1", "N+2" notation in phase.number field
+#   # Example: If 5 dynamic phases, "N+1" becomes phase 5+1=6
+
+# ============================================================================
+# OPTIONAL: Additional Metadata
+# ============================================================================
+
+target_language: "python"
+# Optional: Programming language if language-specific
+# Examples: python | javascript | typescript | go | rust | java | csharp
+# Omit for language-agnostic workflows
+
+created: "2025-10-13"
+# Optional: Creation date in YYYY-MM-DD format
+# Use current date when creating definition
+
+tags:
+  # Optional: Tags for categorization and discovery
+  - "backend"
+  - "api"
+  - "testing"
+# Common tags: frontend, backend, api, testing, documentation, deployment,
+#              security, performance, refactoring, analysis
+
+# ============================================================================
+# OPTIONAL: Quality Standards
+# ============================================================================
+
+quality_standards:
+  # Optional: Override default quality standards
+  # If omitted, workflow_creation_v1 uses these defaults:
+
+  task_file_max_lines: 100
+  # Maximum lines for task files (hard limit: 170)
+  # Default: 100
+
+  task_file_target_lines: 100
+  # Target lines for task files (aim for this)
+  # Default: 100
+
+  command_coverage_min: 80
+  # Minimum percentage of instructions using command language
+  # Default: 80 (means 80%+ instructions should use 🛑, 🔍, etc.)
+
+  validation_gate_required: true
+  # Whether every phase must have validation gate
+  # Default: true (highly recommended)
+
+  examples_per_task_min: 2
+  # Minimum number of examples per task file
+  # Default: 2
+
+# ============================================================================
+# VALIDATOR REFERENCE
+# ============================================================================
+#
+# Use these validators in validation_gate.evidence_required.{field}.validator
+#
+# STRING VALIDATORS:
+#   "non_empty"           - String must not be empty
+#   "file_exists"         - String is path to existing file
+#   "directory_exists"    - String is path to existing directory
+#
+# BOOLEAN VALIDATORS:
+#   "is_true"             - Must be true
+#   "is_false"            - Must be false
+#
+# INTEGER VALIDATORS:
+#   "greater_than_0"      - Number must be > 0
+#   "greater_than_N"      - Number must be > N (replace N with number)
+#                          Examples: "greater_than_5", "greater_than_100"
+#   "between_N_M"         - Number must be between N and M inclusive
+#                          Examples: "between_1_10", "between_50_100"
+#
+# LIST VALIDATORS:
+#   "non_empty_list"      - List must have at least 1 item
+#   "min_length_N"        - List must have at least N items
+#                          Examples: "min_length_3", "min_length_10"
+#
+# PERCENTAGE VALIDATORS:
+#   "percent_gte_N"       - Percentage must be >= N
+#                          Examples: "percent_gte_80", "percent_gte_95"
+#
+# CUSTOM VALIDATORS (advanced):
+#   "custom:regex:pattern" - Match regex pattern
+#                           Example: "custom:regex:^v\d+\.\d+\.\d+$"
+#
+# ============================================================================
+
+# ============================================================================
+# COMPLETE EXAMPLE (Simple Static Workflow)
+# ============================================================================
+#
+# name: "api-documentation-v1"
+# version: "1.0.0"
+# workflow_type: "documentation"
+#
+# problem:
+#   statement: |
+#     API documentation is often incomplete, out of date, or inconsistent.
+#     Manual documentation is error-prone and time-consuming. This workflow
+#     systematically generates complete API documentation from code analysis.
+#
+#   why_workflow: "Multi-step process requiring code analysis, content generation, validation, and human review"
+#
+#   success_criteria:
+#     - "100% of API endpoints documented"
+#     - "All examples tested and working"
+#     - "Documentation passes readability review"
+#
+# phases:
+#   - number: 0
+#     name: "API Analysis"
+#     purpose: "Discover and catalog all API endpoints"
+#     deliverable: "Complete API inventory with routes, methods, parameters"
+#     tasks:
+#       - number: 1
+#         name: "scan-api-routes"
+#         purpose: "Find all API route definitions"
+#         commands_needed: ["grep", "codebase_search"]
+#       - number: 2
+#         name: "extract-schemas"
+#         purpose: "Extract request/response schemas"
+#         commands_needed: ["read_file", "grep"]
+#     validation_gate:
+#       evidence_required:
+#         endpoint_count:
+#           type: "integer"
+#           description: "Total number of endpoints found"
+#           validator: "greater_than_0"
+#         inventory_path:
+#           type: "string"
+#           description: "Path to API inventory document"
+#           validator: "file_exists"
+#       human_approval_required: false
+#
+#   - number: 1
+#     name: "Documentation Generation"
+#     purpose: "Generate markdown documentation for all endpoints"
+#     deliverable: "Complete API reference documentation"
+#     tasks:
+#       - number: 1
+#         name: "write-endpoint-docs"
+#         purpose: "Create documentation for each endpoint"
+#       - number: 2
+#         name: "add-examples"
+#         purpose: "Add request/response examples"
+#     validation_gate:
+#       evidence_required:
+#         docs_generated:
+#           type: "boolean"
+#           description: "All endpoint docs created"
+#           validator: "is_true"
+#         example_count:
+#           type: "integer"
+#           description: "Number of examples added"
+#           validator: "greater_than_0"
+#       human_approval_required: true
+#
+# dynamic: false
+# target_language: "python"
+# created: "2025-10-13"
+# tags: ["documentation", "api", "backend"]
+#
+# ============================================================================
+# COMPLETE EXAMPLE (Task with Child Workflow)
+# ============================================================================
+#
+# name: "custom-workflow-v1"
+# version: "1.0.0"
+# workflow_type: "implementation"
+#
+# problem:
+#   statement: |
+#     Implement a custom domain-specific system with comprehensive documentation.
+#   why_workflow: "Multi-phase process with nested workflow for standards creation"
+#   success_criteria:
+#     - "System fully implemented"
+#     - "Domain patterns documented as standards"
+#
+# phases:
+#   - number: 0
+#     name: "Implementation"
+#     purpose: "Build core system"
+#     deliverable: "Working system implementation"
+#     tasks:
+#       - number: 1
+#         name: "implement-core"
+#         purpose: "Core system logic"
+#       - number: 2
+#         name: "write-tests"
+#         purpose: "Test coverage"
+#     validation_gate:
+#       evidence_required:
+#         implementation_complete:
+#           type: "boolean"
+#           description: "Implementation finished"
+#           validator: "is_true"
+#       human_approval_required: false
+#
+#   - number: 1
+#     name: "Documentation"
+#     purpose: "Document patterns as standards"
+#     deliverable: "Standards document with domain patterns"
+#     tasks:
+#       - number: 1
+#         name: "create-standards-doc"
+#         purpose: "Document domain patterns as standard"
+#         domain_focus: "Standards Creation"
+#
+#         # This task will invoke standards_creation_v1 workflow
+#         invokes_workflow: "standards_creation_v1"
+#         invokes_workflow_options:
+#           target_file: "custom-domain-patterns.md"
+#           template: "domain-patterns"
+#         invokes_workflow_required_evidence:
+#           - "standards_session_id"
+#           - "standards_completed"
+#           - "standards_doc_path"
+#
+#       - number: 2
+#         name: "review-standards"
+#         purpose: "Validate standards quality"
+#
+#     validation_gate:
+#       evidence_required:
+#         standards_session_id:
+#           type: "string"
+#           description: "Session ID of standards workflow"
+#           validator: "non_empty"
+#         standards_completed:
+#           type: "boolean"
+#           description: "Standards creation completed"
+#           validator: "is_true"
+#         standards_doc_path:
+#           type: "string"
+#           description: "Path to created standards document"
+#           validator: "file_exists"
+#       human_approval_required: true
+#
+# dynamic: false
+# target_language: "python"
+# created: "2025-10-13"
+# tags: ["implementation", "documentation"]
+#
+# ============================================================================

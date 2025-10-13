@@ -1,7 +1,7 @@
-# Meta-Framework: Agent OS Portable Pattern
+# Meta-Workflow: Agent OS Portable Pattern
 
 **Created**: 2025-10-02  
-**Purpose**: Reusable framework creation methodology for any repository  
+**Purpose**: Reusable workflow creation methodology for any repository  
 **Status**: Production-Ready  
 **Transferability**: Universal
 
@@ -9,58 +9,58 @@
 
 ## 🎯 **What We've Created**
 
-A **"framework for creating frameworks"** - a complete, portable methodology for building deterministic AI-assisted workflows that can be applied to ANY repository or domain.
+A **"workflow for creating workflows"** - a complete, portable methodology for building deterministic AI-assisted workflows that can be applied to ANY repository or domain.
 
 ---
 
 ## 📦 **Deliverables**
 
-### **1. AGENT_OS_FRAMEWORK_CREATION_GUIDE.md** ⭐ PRIMARY
+### **1. AGENT_OS_WORKFLOW_CREATION_GUIDE.md** ⭐ PRIMARY
 
-**What**: Complete methodology for creating AI-assisted workflow frameworks  
+**What**: Complete methodology for creating AI-assisted workflows  
 **Size**: ~600 lines (Tier 2: comprehensive reference)  
 **Use Case**: Read once to understand principles, reference during creation
 
 **Contents**:
 - ✅ Core engineering principles (3-tier architecture, command language, etc.)
 - ✅ 6-phase creation process with week-by-week breakdown
-- ✅ Templates for all framework components
+- ✅ Templates for all workflow components
 - ✅ Quality assurance checklist
 - ✅ Success metrics and validation criteria
 - ✅ Portable patterns and reusable components
 
 **When to Use**: 
-- Creating a new framework from scratch
-- Understanding the "why" behind framework design
-- Training team members on framework principles
+- Creating a new workflow from scratch
+- Understanding the "why" behind workflow design
+- Training team members on workflow principles
 
 ---
 
 ### **2. QUICK_START_TEMPLATE.md** ⚡ QUICKSTART
 
-**What**: Step-by-step template for rapid framework setup  
+**What**: Step-by-step template for rapid workflow setup  
 **Size**: ~400 lines (Tier 2: practical guide)  
-**Use Case**: Copy-paste to bootstrap new frameworks in 1-2 hours
+**Use Case**: Copy-paste to bootstrap new workflows in 1-2 hours
 
 **Contents**:
 - ✅ 7-step setup process
 - ✅ Actual file templates (copy-ready)
 - ✅ Directory structure commands
 - ✅ Validation checklist
-- ✅ Minimal viable framework option (1 hour setup)
+- ✅ Minimal viable workflow option (1 hour setup)
 
 **When to Use**:
-- Starting a new framework TODAY
-- Need working framework quickly
+- Starting a new workflow TODAY
+- Need workflow quickly
 - Want to iterate and expand later
 
 ---
 
-### **3. FRAMEWORK_COMPLIANCE_ANALYSIS.md** 🔍 AUDIT
+### **3. WORKFLOW_COMPLIANCE_ANALYSIS.md** 🔍 AUDIT
 
-**What**: Gap analysis for existing frameworks  
+**What**: Gap analysis for existing workflows  
 **Size**: ~450 lines (Tier 2: analysis report)  
-**Use Case**: Audit existing frameworks against best practices
+**Use Case**: Audit existing workflows against best practices
 
 **Contents**:
 - ✅ 7 critical compliance issues identified
@@ -70,13 +70,13 @@ A **"framework for creating frameworks"** - a complete, portable methodology for
 - ✅ Specific file-by-file audit results
 
 **When to Use**:
-- Auditing existing frameworks
+- Auditing existing workflows
 - Identifying improvement opportunities
-- Planning framework refactoring
+- Planning workflow refactoring
 
 ---
 
-## 🎯 **Core Principles** (The "DNA" of Agent OS Frameworks)
+## 🎯 **Core Principles** (The "DNA" of Agent OS Workflows)
 
 ### **1. Three-Tier Architecture**
 
@@ -124,7 +124,7 @@ Tier 3: Output Artifacts (AI generates, never re-reads)
 - [ ] Criterion 2 ✅/❌
 - [ ] Criterion 3 ✅/❌
 
-🚨 FRAMEWORK-VIOLATION: If proceeding without all ✅
+🚨 WORKFLOW-VIOLATION: If proceeding without all ✅
 ```
 
 **Why**: Prevents AI shortcuts, ensures systematic execution
@@ -160,22 +160,22 @@ Optimal Context (15-25% utilization)
 
 ---
 
-## 🚀 **How to Use This Meta-Framework**
+## 🚀 **How to Use This Meta-Workflow**
 
-### **Scenario 1: Starting Completely New Framework**
+### **Scenario 1: Starting Completely New Workflow**
 
-1. **Read**: `AGENT_OS_FRAMEWORK_CREATION_GUIDE.md` (understand principles)
+1. **Read**: `AGENT_OS_WORKFLOW_CREATION_GUIDE.md` (understand principles)
 2. **Execute**: `QUICK_START_TEMPLATE.md` (setup in 1-2 hours)
 3. **Iterate**: Test with AI, collect metrics, refine
 4. **Validate**: Achieve 85%+ consistency, 95%+ file size compliance
 
-**Timeline**: Week 1 for MVP, Weeks 2-4 for full framework
+**Timeline**: Week 1 for MVP, Weeks 2-4 for full workflow
 
 ---
 
-### **Scenario 2: Improving Existing Framework**
+### **Scenario 2: Improving Existing Workflow**
 
-1. **Audit**: `FRAMEWORK_COMPLIANCE_ANALYSIS.md` (identify gaps)
+1. **Audit**: `WORKFLOW_COMPLIANCE_ANALYSIS.md` (identify gaps)
 2. **Plan**: Prioritize issues (critical → high → medium)
 3. **Refactor**: Apply patterns from creation guide
 4. **Validate**: Re-audit, measure improvement
@@ -191,9 +191,9 @@ Optimal Context (15-25% utilization)
    cp -r {source}/.agent-os/standards/command-language-glossary.md {target}/.agent-os/standards/
    ```
 
-2. **Copy Framework Structure**:
+2. **Copy Workflow Structure**:
    ```bash
-   cp -r {source}/.agent-os/standards/{framework}/ {target}/.agent-os/standards/{new-framework}/
+   cp -r {source}/.agent-os/standards/{workflow}/ {target}/.agent-os/standards/{new-workflow}/
    ```
 
 3. **Customize**:
@@ -212,9 +212,9 @@ Optimal Context (15-25% utilization)
 
 ## 📊 **Expected Results**
 
-Based on python-sdk V3 framework (proven results):
+Based on python-sdk V3 workflow (proven results):
 
-| Metric | Before Framework | After Framework | Improvement |
+| Metric | Before Workflow | After Workflow | Improvement |
 |--------|-----------------|-----------------|-------------|
 | **Execution Consistency** | 22% success | 80%+ success | **3.6x better** |
 | **Context Efficiency** | 75-90% utilization | 15-25% utilization | **3-4x better** |
@@ -228,20 +228,20 @@ Based on python-sdk V3 framework (proven results):
 ### **Current DSL Repository**
 
 **Apply To**:
-- `provider-schema-extraction/` framework (needs remediation)
-- `provider-dsl-development/` framework (check compliance)
-- Future frameworks (use creation guide)
+- `provider-schema-extraction/` workflow (needs remediation)
+- `provider-dsl-development/` workflow (check compliance)
+- Future workflows (use creation guide)
 
 ---
 
 ### **Other HoneyHive Repositories**
 
 **Can Apply To**:
-- **python-sdk**: Additional frameworks for new features
-- **typescript-sdk**: Port frameworks to TypeScript ecosystem
-- **backend services**: Systematic migration frameworks
-- **documentation**: Automated doc generation frameworks
-- **testing**: Test generation frameworks for other languages
+- **python-sdk**: Additional workflows for new features
+- **typescript-sdk**: Port workflows to TypeScript ecosystem
+- **backend services**: Systematic migration workflows
+- **documentation**: Automated doc generation workflows
+- **testing**: Test generation workflows for other languages
 
 ---
 
@@ -261,7 +261,7 @@ Based on python-sdk V3 framework (proven results):
 
 ```
 meta-workflow-v1.0/
-├── AGENT_OS_FRAMEWORK_CREATION_GUIDE.md    # Complete methodology
+├── AGENT_OS_WORKFLOW_CREATION_GUIDE.md    # Complete methodology
 ├── QUICK_START_TEMPLATE.md                 # Rapid setup guide
 ├── command-language-glossary-template.md   # Copy-ready glossary
 └── README.md                                # Package overview
@@ -275,7 +275,7 @@ meta-workflow-v1.0/
 
 ```bash
 # 1. Copy meta-workflow to new repo
-cp -r honeyhive-dsl/.agent-os/AGENT_OS_FRAMEWORK_CREATION_GUIDE.md \
+cp -r honeyhive-dsl/.agent-os/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
       honeyhive-dsl/.agent-os/QUICK_START_TEMPLATE.md \
       {new-repo}/.agent-os/
 
@@ -283,7 +283,7 @@ cp -r honeyhive-dsl/.agent-os/AGENT_OS_FRAMEWORK_CREATION_GUIDE.md \
 cp honeyhive-dsl/.agent-os/standards/command-language-glossary.md \
    {new-repo}/.agent-os/standards/
 
-# 3. Create new framework using quick start
+# 3. Create new workflow using quick start
 cd {new-repo}
 # Follow QUICK_START_TEMPLATE.md steps
 
@@ -293,22 +293,22 @@ cd {new-repo}
 
 ---
 
-## 🎯 **Success Criteria for Meta-Framework**
+## 🎯 **Success Criteria for Meta-Workflow**
 
 The meta-workflow is successful if:
 
 ### **Creation Speed**
-- ✅ New framework MVP in 1-2 hours
-- ✅ Full framework in 1-2 weeks
+- ✅ New workflow MVP in 1-2 hours
+- ✅ Full workflow in 1-2 weeks
 - ✅ Transfer to new repo in 1-2 days
 
 ### **Consistency**
-- ✅ All frameworks follow same architecture
-- ✅ All frameworks use command language
-- ✅ All frameworks have validation gates
+- ✅ All workflows follow same architecture
+- ✅ All workflows use command language
+- ✅ All workflows have validation gates
 
 ### **Quality**
-- ✅ Frameworks achieve 85%+ consistency
+- ✅ Workflows achieve 85%+ consistency
 - ✅ File size compliance 95%+
 - ✅ Automated validation 100%
 
@@ -321,10 +321,10 @@ The meta-workflow is successful if:
 
 ## 📈 **Validation Metrics**
 
-Track these across all frameworks:
+Track these across all workflows:
 
 ```yaml
-framework_health:
+workflow_health:
   file_size_compliance:
     tier_1: "95%+ files ≤100 lines"
     tier_2: "100% files ≤500 lines"
@@ -377,8 +377,8 @@ framework_health:
 ## 🔗 **Reference Implementations**
 
 ### **This Repository (DSL)**
-- `provider-schema-extraction/` - Schema extraction framework (needs update)
-- `provider-dsl-development/` - DSL development framework
+- `provider-schema-extraction/` - Schema extraction workflow (needs update)
+- `provider-dsl-development/` - DSL development workflow
 
 ### **Python SDK**
 - `code-generation/tests/v3/` - V3 test generation (80%+ success)
@@ -418,7 +418,7 @@ version_history:
 3. Document lessons learned (update COMMON_PITFALLS)
 
 ### **Short-Term (Other Repos)**
-1. Transfer to python-sdk (create new frameworks)
+1. Transfer to python-sdk (create new workflows)
 2. Transfer to typescript-sdk (port patterns)
 3. Share with team (train on methodology)
 
@@ -432,14 +432,14 @@ version_history:
 
 ## 🏆 **Value Proposition**
 
-**Before Meta-Framework**:
+**Before Meta-Workflow**:
 - Ad-hoc AI assistance (60-70% consistency)
 - Monolithic instructions (context overflow)
 - Manual validation (inconsistent quality)
 - Slow iteration (hard to improve)
 - Non-transferable (repo-specific)
 
-**After Meta-Framework**:
+**After Meta-Workflow**:
 - Systematic AI workflows (85-95% consistency)
 - Optimized file sizes (15-25% context use)
 - Automated validation (deterministic quality)
@@ -450,8 +450,8 @@ version_history:
 
 ---
 
-**Meta-Framework Status**: ✅ Production-Ready  
+**Meta-Workflow Status**: ✅ Production-Ready  
 **Transferability**: ✅ Universal  
-**Validation**: ✅ Proven in python-sdk V3 framework  
+**Validation**: ✅ Proven in python-sdk V3 workflow  
 **Next**: Apply to DSL repo, then transfer to other repos
 

@@ -1,17 +1,17 @@
-# Framework Creation Principles - Universal Meta-Framework
+# Workflow Creation Principles - Universal Meta-Workflow
 
 **Timeless patterns for building deterministic AI-assisted workflows**
 
 ---
 
-## 🎯 TL;DR - Framework Creation Quick Reference
+## 🎯 TL;DR - Workflow Creation Quick Reference
 
-**Keywords for search**: meta-workflow, framework creation, AI workflows, workflow design, LLM constraints, horizontal decomposition, validation gates, framework principles, AI-assisted workflows, deterministic AI
+**Keywords for search**: meta-workflow, workflow creation, AI workflows, workflow design, LLM constraints, horizontal decomposition, validation gates, workflow principles, AI-assisted workflows, deterministic AI
 
-**Core Principle:** Frameworks compensate for LLM limitations through horizontal decomposition, validation gates, and ≤100 line files.
+**Core Principle:** Workflows compensate for LLM limitations through horizontal decomposition, validation gates, and ≤100 line files.
 
-**The Problem:** Without frameworks → 60-70% execution consistency, context overflow, non-deterministic quality
-**The Solution:** With frameworks → 85-95% consistency, optimal context use, deterministic quality
+**The Problem:** Without workflows → 60-70% execution consistency, context overflow, non-deterministic quality
+**The Solution:** With workflows → 85-95% consistency, optimal context use, deterministic quality
 
 **5 Core Principles:**
 
@@ -40,14 +40,14 @@
    - Binding symbols (🛑, 🎯, 📊)
    - 3-4x improvement in compliance
 
-**Framework Outcomes:**
+**Workflow Outcomes:**
 - 3.6x improvement (22% → 80%+ success rate)
 - 15-25% context utilization (vs 75-90% without)
 - 100% automated validation
 - Deterministic, measurable quality
 
-**When to Create Frameworks:**
-- Complex, multi-step workflows
+**When to Create Workflows:**
+- Complex, multi-step processes
 - Quality-critical processes (testing, deployment)
 - Repeatable processes needing consistency
 - Tasks requiring validation/evidence
@@ -57,7 +57,7 @@
 ## ❓ Questions This Answers
 
 1. "What is a meta-workflow?"
-2. "Why do I need frameworks for AI?"
+2. "Why do I need workflows for AI?"
 3. "What are LLM constraints?"
 4. "How do I design AI workflows?"
 5. "What is horizontal decomposition?"
@@ -66,31 +66,31 @@
 8. "How do I improve AI execution consistency?"
 9. "What file size is optimal for AI?"
 10. "What is three-tier architecture?"
-11. "When should I create a framework?"
-12. "What makes a good AI framework?"
+11. "When should I create a workflow?"
+12. "What makes a good AI workflow?"
 
 ---
 
-## What Is a Meta-Framework?
+## What Is a Meta-Workflow?
 
 A **meta-workflow** is a "framework for creating frameworks" - a systematic methodology for designing AI-assisted workflows that compensate for LLM limitations and achieve consistent, high-quality results.
 
-**Proven Results**: 3.6x improvement (22% → 80%+ success rate) in production frameworks
+**Proven Results**: 3.6x improvement (22% → 80%+ success rate) in production workflows
 
 ---
 
-## Why Do Frameworks Matter for AI?
+## Why Do Workflows Matter for AI?
 
-Frameworks transform AI execution from inconsistent to deterministic. Understanding the difference is critical for production use.
+Workflows transform AI execution from inconsistent to deterministic. Understanding the difference is critical for production use.
 
-### Without Framework
+### Without Workflow
 - ❌ 60-70% execution consistency
 - ❌ 75-90% context utilization (overflow)
 - ❌ Manual validation (inconsistent)
 - ❌ Non-deterministic quality
 - ❌ Difficult to improve
 
-### With Framework
+### With Workflow
 - ✅ 85-95% execution consistency
 - ✅ 15-25% context utilization (optimal)
 - ✅ 100% automated validation
@@ -101,7 +101,7 @@ Frameworks transform AI execution from inconsistent to deterministic. Understand
 
 ## What Are the Core Engineering Principles?
 
-These five principles form the foundation of all successful AI-assisted frameworks.
+These five principles form the foundation of all successful AI-assisted workflows.
 
 ### Principle 1: LLM Constraint Awareness
 
@@ -177,28 +177,28 @@ Result: Binding, rarely ignored, ~85% compliance
 
 **🚨 CRITICAL: The Binding Contract Pattern**
 
-**Command language alone is not enough**. Maximum compliance requires an **explicit binding contract** at framework entry point.
+**Command language alone is not enough**. Maximum compliance requires an **explicit binding contract** at workflow entry point.
 
 **Binding Contract Template**:
 ```markdown
-## What Is the Binding Framework Contract?
+## What Is the Binding Workflow Contract?
 
-The contract is a formal commitment that distinguishes Agent OS frameworks from simple guidelines. Frameworks that adopt this contract achieve 95%+ success rates.
+The contract is a formal commitment that distinguishes Agent OS workflows from simple guidelines. Workflows that adopt this contract achieve 95%+ success rates.
 
 **MANDATORY ACKNOWLEDGMENT BEFORE PROCEEDING**
 
 🛑 EXECUTE-NOW: State this exact acknowledgment:
 
-✅ I acknowledge the [Framework Name] binding contract:
+✅ I acknowledge the [Workflow Name] binding contract:
 - I will follow ALL N phases systematically (0-N in order)
 - I will NOT skip steps or claim premature completion
 - I will execute ALL 🛑 commands before proceeding
 - I will read ALL ⚠️ required files
 - I will provide quantified 📊 evidence for each phase
 - I will update 🔄 progress table after each phase
-- I understand that skipping any step = framework violation
+- I understand that skipping any step = workflow violation
 
-🚨 FRAMEWORK-VIOLATION: If proceeding without exact acknowledgment above
+🚨 WORKFLOW-VIOLATION: If proceeding without exact acknowledgment above
 ```
 
 **Compliance Impact**:
@@ -293,9 +293,9 @@ Result: Measurable, verifiable, accountable
 
 ## What Results Should I Expect?
 
-Frameworks deliver measurable, reproducible improvements across all quality metrics.
+Workflows deliver measurable, reproducible improvements across all quality metrics.
 
-Frameworks following these principles achieve:
+Workflows following these principles achieve:
 
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
@@ -308,10 +308,10 @@ Frameworks following these principles achieve:
 
 ## Where Can I Apply These Principles?
 
-Framework principles are universal and applicable across all domains requiring systematic AI assistance.
+Workflow principles are universal and applicable across all domains requiring systematic AI assistance.
 
 ### Within Same Domain
-- Test generation frameworks
+- Test generation workflows
 - Code generation workflows  
 - Documentation creation
 - Schema extraction
@@ -325,9 +325,9 @@ Framework principles are universal and applicable across all domains requiring s
 
 ---
 
-## What Framework Anti-Patterns Should I Avoid?
+## What Workflow Anti-Patterns Should I Avoid?
 
-These common mistakes undermine framework effectiveness. Recognize and eliminate them.
+These common mistakes undermine workflow effectiveness. Recognize and eliminate them.
 
 ### ❌ Anti-Pattern 1: Monolithic Files
 **Problem**: 500+ line execution files  
@@ -361,13 +361,13 @@ These common mistakes undermine framework effectiveness. Recognize and eliminate
 
 ---
 
-## What Are Framework Success Criteria?
+## What Are Workflow Success Criteria?
 
-Use these criteria to validate that your framework meets Agent OS standards.
+Use these criteria to validate that your workflow meets Agent OS standards.
 
-A framework is successful when:
+A workflow is successful when:
 
-1. ✅ **Binding Contract**: Framework entry point requires explicit acknowledgment
+1. ✅ **Binding Contract**: Workflow entry point requires explicit acknowledgment
 2. ✅ **File Size**: 95%+ Tier 1 files ≤100 lines
 3. ✅ **Command Usage**: 80%+ instructions use commands
 4. ✅ **Validation Gates**: 100% phases have gates
@@ -381,7 +381,7 @@ A framework is successful when:
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Creating new framework** | `search_standards("framework creation principles")` |
+| **Creating new workflow** | `search_standards("workflow creation principles")` |
 | **AI inconsistent execution** | `search_standards("AI execution consistency")` |
 | **Context overflow issues** | `search_standards("LLM constraints")` |
 | **Workflow design** | `search_standards("AI workflow design")` |
@@ -394,9 +394,9 @@ A framework is successful when:
 
 ## 🔗 Related Standards
 
-**Query workflow for complete framework creation:**
+**Query workflow for complete workflow creation:**
 
-1. **Start with principles** → `search_standards("framework creation principles")` (this document)
+1. **Start with principles** → `search_standards("workflow creation principles")` (this document)
 2. **Learn architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
 3. **Add commands** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
 4. **Implement gates** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
@@ -404,7 +404,7 @@ A framework is successful when:
 
 **By Category:**
 
-**Meta-Framework (Complete Set):**
+**Meta-Workflow (Complete Set):**
 - `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
 - `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
 - `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`

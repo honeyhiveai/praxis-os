@@ -1,4 +1,4 @@
-# Three-Tier Architecture - Universal Meta-Framework Pattern
+# Three-Tier Architecture - Universal Meta-Workflow Pattern
 
 **Timeless pattern for organizing AI workflow content by consumption model**
 
@@ -6,9 +6,9 @@
 
 ## 🎯 TL;DR - Three-Tier Architecture Quick Reference
 
-**Keywords for search**: three-tier architecture, workflow structure, README phase task, tier 1 tier 2 tier 3, side-loaded context, active read context, output artifacts, framework organization, AI consumption model
+**Keywords for search**: three-tier architecture, workflow structure, README phase task, tier 1 tier 2 tier 3, side-loaded context, active read context, output artifacts, workflow organization, AI consumption model
 
-**Core Principle:** Organize framework content by when and how AI consumes it: Tier 1 (side-loaded during execution, ≤100 lines), Tier 2 (on-demand reading, 200-500 lines), Tier 3 (generated outputs, never re-read).
+**Core Principle:** Organize workflow content by when and how AI consumes it: Tier 1 (side-loaded during execution, ≤100 lines), Tier 2 (on-demand reading, 200-500 lines), Tier 3 (generated outputs, never re-read).
 
 **The Problem:** Everything in one place → Large files → Context overflow → Poor attention → Failures
 **The Solution:** Separate by consumption model → Small execution files → Optimal context → Success
@@ -38,7 +38,7 @@
 
 **Directory Structure:**
 ```
-framework/
+workflow/
 ├── README.md              (Tier 2: Overview)
 ├── phases/
 │   ├── 1/
@@ -83,7 +83,7 @@ framework/
 
 ## What Is Three-Tier Architecture?
 
-A systematic organization of framework content into three categories based on **when and how the AI consumes them**:
+A systematic organization of workflow content into three categories based on **when and how the AI consumes them**:
 
 1. **Tier 1**: AI reads **during execution** (side-loaded context)
 2. **Tier 2**: AI reads **on-demand** (active read context)
@@ -171,13 +171,13 @@ Files the AI reads **on-demand** for comprehensive understanding.
 - **Frequency**: 1-3 times per workflow
 
 ### Examples
-- `README.md` (350 lines) - Framework overview
+- `README.md` (350 lines) - Workflow overview
 - `METHODOLOGY.md` (450 lines) - Complete methodology
 - `ARCHITECTURE.md` (280 lines) - System design
 
 ### File Structure Template
 ```markdown
-# [Framework Name] - Methodology
+# [Workflow Name] - Methodology
 
 ## Overview
 Comprehensive introduction
@@ -322,7 +322,7 @@ find core/ -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 500 
 
 **Add warnings in Tier 1**:
 ```markdown
-🚨 FRAMEWORK-VIOLATION: Do not re-read generated files
+🚨 WORKFLOW-VIOLATION: Do not re-read generated files
 
 Use summaries only:
 - schema.json: 24 endpoints, 18 models
@@ -334,10 +334,10 @@ Do NOT open these files for details.
 ### Step 4: Validate Compliance
 
 ```python
-def validate_tier_compliance(framework_path):
+def validate_tier_compliance(workflow_path):
     """Validate three-tier architecture compliance."""
-    tier1_files = find_files(framework_path / "phases")
-    tier2_files = find_files(framework_path / "core")
+    tier1_files = find_files(workflow_path / "phases")
+    tier2_files = find_files(workflow_path / "core")
     
     # Check Tier 1: ≤100 lines
     for file in tier1_files:
@@ -419,7 +419,7 @@ def validate_tier_compliance(framework_path):
 | **File size guidance** | `search_standards("workflow file sizes")` |
 | **Tier differences** | `search_standards("tier 1 tier 2 tier 3")` |
 | **Output artifacts** | `search_standards("output artifacts")` |
-| **Framework organization** | `search_standards("framework organization")` |
+| **Workflow organization** | `search_standards("workflow organization")` |
 
 ---
 
@@ -430,13 +430,13 @@ def validate_tier_compliance(framework_path):
 1. **Start with tiers** → `search_standards("three-tier architecture")` (this document)
 2. **Learn decomposition** → `search_standards("horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
 3. **Add commands** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
-4. **Understand principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+4. **Understand principles** → `search_standards("workflow creation principles")` → `standards/meta-workflow/workflow-creation-principles.md`
 5. **Implement gates** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
 
 **By Category:**
 
-**Meta-Framework (Complete Set):**
-- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+**Meta-Workflow (Complete Set):**
+- `standards/meta-workflow/workflow-creation-principles.md` - Core principles → `search_standards("workflow creation principles")`
 - `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
 - `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
 - `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
