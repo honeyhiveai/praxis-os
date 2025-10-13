@@ -26,7 +26,7 @@ This is a **content optimization framework**, not a traditional software system.
 │         ↓                  ↓                  ↓            │
 │  ┌──────────────────────────────────────────────────┐     │
 │  │         Knowledge Document Corpus                 │     │
-│  │  (48 files: standards, usage, meta-framework)     │     │
+│  │  (48 files: standards, usage, meta-workflow)     │     │
 │  └──────────────────────────────────────────────────┘     │
 │                          ↓                                  │
 │  ┌──────────────────────────────────────────────────┐     │

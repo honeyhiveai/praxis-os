@@ -291,7 +291,7 @@ The following template was consistently applied across all 33 files:
 1. **`search_standards()` Reminder:** Embedding quality reminder in tool output reinforces thoroughness
 2. **Step-Level Validation:** Workflow templates need validation gates at each step, not just at end
 3. **Orientation Optimization:** Even the AI's own orientation guide needed RAG optimization for effectiveness
-4. **Execution Discipline:** Without explicit checkpoints, AI will take shortcuts - meta-framework insight
+4. **Execution Discipline:** Without explicit checkpoints, AI will take shortcuts - meta-workflow insight
 
 ---
 

@@ -580,7 +580,7 @@ Can orchestrate: 20 similar tasks in parallel
 - `workflow-construction-standards.md` - Workflow structure and file size
 - `workflow-metadata-standards.md` - Metadata and discoverability
 - `../ai-assistant/AGENT-OS-ORIENTATION.md` - AI agent behavior and leverage
-- `../meta-framework/horizontal-decomposition.md` - File size constraints
+- `../meta-workflow/horizontal-decomposition.md` - File size constraints
 
 ---
 

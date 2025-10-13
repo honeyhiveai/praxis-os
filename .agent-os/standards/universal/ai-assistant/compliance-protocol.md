@@ -667,7 +667,7 @@ Result: Fix consistent with existing concurrency approach, follows project patte
 - `standards/ai-safety/import-verification-rules.md` - Import verification → `search_standards("import verification")`
 
 **Meta-Framework:**
-- `standards/meta-framework/standards-creation-process.md` - Creating standards → `search_standards("standards creation")`
+- `standards/meta-workflow/standards-creation-process.md` - Creating standards → `search_standards("standards creation")`
 
 ---
 

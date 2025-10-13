@@ -176,7 +176,7 @@ def register_workflow_tools(
         Get full content for a specific task (horizontal scaling).
 
         Retrieves complete task content including execution steps and commands.
-        Follows meta-framework principle: work on one task at a time.
+        Follows meta-workflow principle: work on one task at a time.
 
         Args:
             session_id: Workflow session identifier
@@ -363,7 +363,7 @@ def register_workflow_tools(
         output_path: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
-        Generate new AI-assisted workflow framework using meta-framework principles.
+        Generate new AI-assisted workflow framework using meta-workflow principles.
 
         Creates a compliant framework structure with three-tier architecture,
         command language, validation gates, and ≤100 line task files.

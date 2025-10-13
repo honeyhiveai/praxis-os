@@ -22,7 +22,7 @@ The original spec described a workflow structure that **violated workflow constr
 ### Problem 2: Inline Tasks Pattern
 - **Specified:** Tasks embedded inline within phase.md files
 - **Reality:** Each task must be a separate file
-- **Impact:** Would create 500+ line phase files (meta-framework violation)
+- **Impact:** Would create 500+ line phase files (meta-workflow violation)
 
 ### Problem 3: No Concrete Structure
 - **Specified:** Abstract descriptions of content

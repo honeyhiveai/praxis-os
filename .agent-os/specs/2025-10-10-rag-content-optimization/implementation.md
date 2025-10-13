@@ -997,7 +997,7 @@ search_standards("your test query")
 # Verify file is in indexed directories:
 # - universal/standards/
 # - universal/usage/
-# - universal/meta-framework/ (if meta-framework content indexed)
+# - universal/meta-workflow/ (if meta-workflow content indexed)
 ```
 
 ---

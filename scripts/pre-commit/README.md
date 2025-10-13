@@ -45,6 +45,39 @@ git commit -m "update installation docs"
 - `0`: All files present
 - `1`: One or more files missing
 
+### validate-docs.sh
+
+**Purpose**: Validates documentation quality for Divio compliance and broken links
+
+**Checks**:
+1. **Divio Compliance** - Ensures `doc_type` frontmatter and content matches declared type
+2. **Internal Links** - Validates all internal markdown links are not broken
+3. **Full Build** (optional) - Runs Docusaurus build if `DOCS_FULL_BUILD=1`
+
+**Usage**:
+```bash
+# Run manually (quick)
+./scripts/pre-commit/validate-docs.sh
+
+# Run with full build
+DOCS_FULL_BUILD=1 ./scripts/pre-commit/validate-docs.sh
+
+# Called by pre-commit automatically on docs/*.md changes
+git commit -m "update documentation"
+```
+
+**Exit Codes**:
+- `0`: All validation passed
+- `1`: Validation failed (compliance under 80% or broken links)
+
+**Environment Variables**:
+- `DOCS_FULL_BUILD`: Set to `1` to enable full Docusaurus build check (slower)
+
+**Bypass** (not recommended):
+```bash
+git commit --no-verify  # Skips all pre-commit hooks
+```
+
 ## 🔧 Creating New Validation Scripts
 
 ### Guidelines

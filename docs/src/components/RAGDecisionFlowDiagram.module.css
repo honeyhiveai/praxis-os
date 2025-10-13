@@ -1,0 +1,223 @@
+/* RAG Decision Flow - Side-by-side comparison */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 900px; /* Wider for side-by-side, but still laptop-friendly */
+}
+
+.comparisonRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Scenario Box */
+.scenarioBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1rem;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+}
+
+.scenarioHeader {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-heading-color);
+}
+
+.scenarioHeaderGood {
+  background: var(--ifm-color-success-lightest);
+  color: var(--ifm-color-success-darkest);
+  border: 1px solid var(--ifm-color-success);
+}
+
+/* Decision Box */
+.decisionBox {
+  padding: 0.75rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 6px;
+}
+
+.decisionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.35rem;
+}
+
+.decisionText {
+  font-size: 0.85rem;
+  color: var(--ifm-heading-color);
+  font-style: italic;
+}
+
+/* Context Box */
+.contextBox {
+  padding: 0.75rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+}
+
+.contextLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.35rem;
+}
+
+.contextText {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-800);
+  margin-bottom: 0.25rem;
+}
+
+.contextText:last-child {
+  margin-bottom: 0;
+}
+
+/* Probabilities Box */
+.probabilitiesBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+}
+
+.probability {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.probLabel {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  flex: 1;
+}
+
+.probValue {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.probValueGood {
+  color: var(--ifm-color-success-dark);
+}
+
+/* Result Box */
+.resultBox {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 2px solid;
+}
+
+.resultBad {
+  background: rgba(var(--ifm-color-danger-rgb), 0.05);
+  border-color: var(--ifm-color-danger-light);
+}
+
+.resultGood {
+  background: rgba(var(--ifm-color-success-rgb), 0.05);
+  border-color: var(--ifm-color-success);
+}
+
+.resultLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.35rem;
+}
+
+.resultText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+}
+
+/* Insight Box */
+.insight {
+  padding: 1rem 1.25rem;
+  background: var(--ifm-color-primary-lightest);
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-900);
+}
+
+.insight strong {
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .scenarioBox {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .scenarioHeader {
+  background: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .scenarioHeaderGood {
+  background: rgba(var(--ifm-color-success-rgb), 0.15);
+  color: var(--ifm-color-success-lightest);
+}
+
+[data-theme='dark'] .decisionBox {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .resultBad {
+  background: rgba(var(--ifm-color-danger-rgb), 0.1);
+  border-color: var(--ifm-color-danger);
+}
+
+[data-theme='dark'] .resultGood {
+  background: rgba(var(--ifm-color-success-rgb), 0.1);
+  border-color: var(--ifm-color-success);
+}
+
+[data-theme='dark'] .insight {
+  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+  border-left-color: var(--ifm-color-primary-light);
+}
+
+/* Mobile: Stack vertically */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .comparisonRow {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .scenarioBox {
+    padding: 0.875rem;
+  }
+
+  .insight {
+    padding: 0.875rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+

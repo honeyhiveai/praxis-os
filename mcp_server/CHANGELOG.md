@@ -275,7 +275,7 @@ start_workflow("test-generation-js-ts", "file.ts")
 - **`get_task` MCP Tool (Horizontal Scaling)**: New tool for retrieving individual tasks
   - Signature: `get_task(session_id, phase, task_number)`
   - Returns complete task content with execution steps
-  - Follows meta-framework principle: one task at a time
+  - Follows meta-workflow principle: one task at a time
   - Ensures complete content via 50-chunk RAG retrieval
   - Sorted chunks maintain proper content order
 

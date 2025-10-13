@@ -39,7 +39,7 @@ This specification package contains complete documentation for optimizing Agent 
 
 ### Problem Statement
 
-Agent OS ships 48 knowledge documents (standards, usage guides, meta-framework docs) that are indexed by a RAG system for AI agent discovery. Current discoverability is suboptimal:
+Agent OS ships 48 knowledge documents (standards, usage guides, meta-workflow docs) that are indexed by a RAG system for AI agent discovery. Current discoverability is suboptimal:
 - AI agents require 3-4 queries to find relevant information
 - Query success rate <50% (relevant content not in top 3 results)
 - Content structured for human reading, not semantic search
@@ -68,7 +68,7 @@ Systematically optimize all 48 knowledge documents using 5 critical optimization
 - **48 knowledge documents** across 3 categories:
   - 37 standards (architecture, testing, security, AI safety, etc.)
   - 6 usage guides (quickstart, specs, MCP, updates, etc.)
-  - 5 meta-framework documents (command language, workflow construction, etc.)
+  - 5 meta-workflow documents (command language, workflow construction, etc.)
 - **5 critical optimizations** applied systematically
 - **Comprehensive evaluation** with 0-10 scoring rubric
 - **Test query validation** (50 queries baseline and post-optimization)

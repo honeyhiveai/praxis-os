@@ -1,7 +1,7 @@
 """
 Framework Generator - Create AI-assisted workflow frameworks.
 
-Uses meta-framework principles to generate compliant framework structures:
+Uses meta-workflow principles to generate compliant framework structures:
 - Three-tier architecture
 - Command language
 - Validation gates
@@ -37,13 +37,13 @@ class FrameworkDefinition:
 
 
 class FrameworkGenerator:
-    """Generates AI-assisted workflow frameworks using meta-framework principles."""
+    """Generates AI-assisted workflow frameworks using meta-workflow principles."""
     
     def __init__(self, rag_engine: RAGEngine):
         """
         Initialize framework generator.
         
-        :param rag_engine: RAG engine for querying meta-framework standards
+        :param rag_engine: RAG engine for querying meta-workflow standards
         """
         self.rag_engine = rag_engine
     
@@ -56,7 +56,7 @@ class FrameworkGenerator:
         quick_start: bool = True
     ) -> FrameworkDefinition:
         """
-        Generate new framework using meta-framework principles.
+        Generate new framework using meta-workflow principles.
         
         :param name: Framework name (e.g., "api-documentation")
         :param workflow_type: Type of workflow (e.g., "documentation", "testing")
@@ -65,7 +65,7 @@ class FrameworkGenerator:
         :param quick_start: Use quick start template (minimal)
         :returns: Generated framework definition
         """
-        # Query meta-framework principles from RAG
+        # Query meta-workflow principles from RAG
         principles = self._query_principles()
         
         # Generate framework structure
@@ -117,11 +117,11 @@ class FrameworkGenerator:
         return framework
     
     def _query_principles(self) -> Dict[str, str]:
-        """Query meta-framework principles from RAG."""
+        """Query meta-workflow principles from RAG."""
         try:
             # Query key principles
             results = self.rag_engine.search(
-                query="meta-framework principles three-tier command language validation",
+                query="meta-workflow principles three-tier command language validation",
                 n_results=3
             )
             
@@ -270,7 +270,7 @@ Commands create explicit, non-negotiable obligations:
 ---
 
 **Version**: 1.0  
-**Generated**: Auto-generated using meta-framework
+**Generated**: Auto-generated using meta-workflow
 """
     
     def _generate_progress_tracking(self, phases: List[str]) -> str:
@@ -431,7 +431,7 @@ Validate results:
     
     def validate_compliance(self, framework: FrameworkDefinition) -> Dict[str, Any]:
         """
-        Validate framework compliance with meta-framework principles.
+        Validate framework compliance with meta-workflow principles.
         
         :param framework: Framework to validate
         :returns: Compliance report

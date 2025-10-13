@@ -3,17 +3,64 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 /**
  * Agent OS Enhanced Documentation Sidebar
  * 
- * Organized for quick navigation to core concepts, installation, and workflows.
+ * Organized by Divio Documentation Framework quadrants.
  */
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
-    'intro',
-    'how-it-works',
-    'installation',
-    'architecture',
-    'standards',
-    'workflows',
-    'mcp-tools',
+    // Tutorials - Learning-oriented
+    {
+      type: 'category',
+      label: '🎓 Tutorials',
+      collapsible: true,
+      collapsed: false,
+      items: [
+        'tutorials/intro',
+        'tutorials/installation',
+        'tutorials/your-first-agent-os-project',
+        'tutorials/understanding-agent-os-workflows',
+        'tutorials/your-first-project-standard',
+      ],
+    },
+
+    // How-To Guides - Task-oriented
+    {
+      type: 'category',
+      label: '📋 How-To Guides',
+      collapsible: true,
+      items: [
+        'how-to-guides/creating-project-standards',
+        'how-to-guides/create-custom-workflows',
+        'how-to-guides/debug-workflow-failures',
+        'how-to-guides/upgrading',
+      ],
+    },
+
+    // Explanation - Understanding-oriented
+    {
+      type: 'category',
+      label: '💡 Explanation',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'explanation/how-it-works',
+        'explanation/architecture',
+        'explanation/knowledge-compounding',
+        'explanation/standards-knowledge-compounding',
+        'explanation/specs-knowledge-compounding',
+      ],
+    },
+    
+    // Reference - Information-oriented
+    {
+      type: 'category',
+      label: '📚 Reference',
+      collapsible: true,
+      items: [
+        'reference/mcp-tools',
+        'reference/standards',
+        'reference/workflows',
+      ],
+    },
   ],
 };
 

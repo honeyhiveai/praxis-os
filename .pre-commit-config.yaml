@@ -150,6 +150,15 @@ repos:
         stages: [pre-commit]
         verbose: true
 
+      - id: docs-quality-validation
+        name: "Documentation Quality (Divio + Links)"
+        entry: scripts/pre-commit/validate-docs.sh
+        language: system
+        pass_filenames: false
+        files: '^docs/.*\.md$'
+        stages: [pre-commit]
+        verbose: true
+
 # ============================================================
 # CONFIGURATION NOTES
 # ============================================================

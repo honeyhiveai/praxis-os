@@ -303,13 +303,13 @@ NEXT-MANDATORY: Use workflow engine for all {M} tasks
 
 ## 📚 Related Standards
 
-From `standards/meta-framework/framework-creation-principles.md`:
+From `standards/meta-workflow/framework-creation-principles.md`:
 
 > **🚨 CRITICAL: The Binding Contract Pattern**
 > 
 > Command language alone is not enough. Maximum compliance requires an explicit binding contract at framework entry point.
 
-From `standards/meta-framework/command-language.md`:
+From `standards/meta-workflow/command-language.md`:
 
 > **🛑 EXECUTE-NOW**: Cannot proceed until executed
 > **🎯 NEXT-MANDATORY**: Explicit next step routing

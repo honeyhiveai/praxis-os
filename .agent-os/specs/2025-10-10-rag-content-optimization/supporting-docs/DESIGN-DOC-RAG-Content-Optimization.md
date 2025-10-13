@@ -2,7 +2,7 @@
 
 **Date**: 2025-10-10  
 **Status**: In Progress - Analysis Phase  
-**Purpose**: Optimize Agent OS standards, usage, and meta-framework content for AI agent discoverability via semantic search
+**Purpose**: Optimize Agent OS standards, usage, and meta-workflow content for AI agent discoverability via semantic search
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Problem Statement
 
-Agent OS Enhanced content (standards, usage guides, meta-framework documentation) is indexed in a RAG system and consumed by AI agents via `search_standards()` natural language queries. Current content has inconsistent optimization for semantic search discoverability, resulting in:
+Agent OS Enhanced content (standards, usage guides, meta-workflow documentation) is indexed in a RAG system and consumed by AI agents via `search_standards()` natural language queries. Current content has inconsistent optimization for semantic search discoverability, resulting in:
 
 - **Query failures**: Natural language queries don't surface relevant content
 - **Low ranking**: Relevant content exists but ranks below top 3 results
@@ -1754,8 +1754,8 @@ This standard has been superseded by `[new-standard.md]`.
 
 ---
 
-#### 15. `standards/meta-framework/command-language.md`
-**Category**: meta-framework
+#### 15. `standards/meta-workflow/command-language.md`
+**Category**: meta-workflow
 **Length**: 447 lines
 **Score**: 9/10
 **Status**: ✅ Exemplary
@@ -2033,7 +2033,7 @@ This standard has been superseded by `[new-standard.md]`.
 - `standards/documentation/` - 3 files
 - `standards/failure-modes/` - 3 more files
 - `standards/installation/` - 2 files
-- `standards/meta-framework/` - 4 more files
+- `standards/meta-workflow/` - 4 more files
 - `standards/performance/` - 1 file
 - `standards/testing/` - 2 more files
 - `standards/workflows/` - 3 more files

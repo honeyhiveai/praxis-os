@@ -62,7 +62,7 @@ Comprehensive design document for an AI-guided workflow to safely upgrade Agent 
 ## Cross-References
 
 ### Internal References
-- References existing meta-framework standards
+- References existing meta-workflow standards
 - References safe-upgrade.py implementation
 - References workflow engine and state manager
 
@@ -71,7 +71,7 @@ Comprehensive design document for an AI-guided workflow to safely upgrade Agent 
 - `mcp_server/workflow_engine.py` (Workflow Engine)
 - `mcp_server/state_manager.py` (State Manager)
 - `universal/usage/mcp-server-update-guide.md` (Update Guide)
-- `meta-framework/META_FRAMEWORK_SUMMARY.md` (Meta-Framework Guide)
+- `meta-workflow/META_FRAMEWORK_SUMMARY.md` (Meta-Framework Guide)
 
 ---
 

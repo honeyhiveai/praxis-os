@@ -230,7 +230,7 @@ for task in phase_data["tasks"]:
     # Work on this task
     # Request next task when ready
 
-# This is the meta-framework horizontal scaling principle
+# This is the meta-workflow horizontal scaling principle
 ```
 
 ---

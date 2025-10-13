@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for optimizing Agent OS Enhanced content (standards, usage guides, meta-framework documentation) for AI agent discoverability via semantic search (RAG system).
+This document defines the requirements for optimizing Agent OS Enhanced content (standards, usage guides, meta-workflow documentation) for AI agent discoverability via semantic search (RAG system).
 
 ### 1.2 Scope
 This feature will systematically apply RAG optimization principles to ~48 knowledge documents to improve semantic search discoverability, reduce query inefficiency, and enable self-reinforcing agent behavior through explicit query pattern teaching.
@@ -432,7 +432,7 @@ User stories describe the feature from the user's perspective.
 This section explicitly states what will NOT be included in this feature to prevent scope creep.
 
 ### NOT INCLUDED: Workflow Execution Files
-**Rationale:** Workflow `phase.md` and `task-*.md` files are optimized for linear reading and execution, not RAG queries. These files are only indexed for workflow existence awareness. Only knowledge documents (standards, usage, meta-framework) are RAG-optimized.
+**Rationale:** Workflow `phase.md` and `task-*.md` files are optimized for linear reading and execution, not RAG queries. These files are only indexed for workflow existence awareness. Only knowledge documents (standards, usage, meta-workflow) are RAG-optimized.
 
 ---
 

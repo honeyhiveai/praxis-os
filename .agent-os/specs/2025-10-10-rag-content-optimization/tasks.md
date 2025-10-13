@@ -477,7 +477,7 @@ Evaluate and optimize documentation standards:
 **Priority:** Medium
 
 **Description:**
-Evaluate and optimize meta-framework standards:
+Evaluate and optimize meta-workflow standards:
 - command-language.md (baseline: 9/10 - minor polish only)
 - framework-creation-principles.md
 - horizontal-decomposition.md

@@ -336,3 +336,60 @@ h1 {
 [data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
   background: #3f4450;
 }
+
+/* ========================================
+ * Search Plugin CSS Override Fix
+ * ======================================== 
+ * The local search plugin overrides some theme styles.
+ * These rules ensure our custom HoneyHive theme takes precedence.
+ */
+
+/* Force card backgrounds and borders to maintain theme consistency */
+[data-theme='dark'] .timelineContent,
+[data-theme='dark'] .quickStartCard,
+[data-theme='dark'] .featureCard,
+[data-theme='dark'] .journeyCredit {
+  background: #1a1d24 !important;
+  border-color: #2d3139 !important;
+}
+
+/* Force timeline icon styling */
+[data-theme='dark'] .timelineIcon {
+  background: #1a1d24 !important;
+  border-color: var(--ifm-color-primary) !important;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.25) !important;
+}
+
+/* Ensure hover states maintain vibrant shadows */
+[data-theme='dark'] .quickStartLink:hover .quickStartCard {
+  border-color: var(--ifm-color-primary) !important;
+  box-shadow: 0 16px 40px rgba(255, 140, 93, 0.3) !important;
+}
+
+[data-theme='dark'] .featureCardLink:hover .featureCard {
+  border-color: var(--ifm-color-primary) !important;
+  box-shadow: 0 12px 28px rgba(255, 140, 93, 0.25) !important;
+}
+
+[data-theme='dark'] .timelineItem:hover .timelineContent {
+  border-color: var(--ifm-color-primary) !important;
+  box-shadow: 0 12px 28px rgba(255, 107, 53, 0.2) !important;
+}
+
+/* Force code example styling */
+[data-theme='dark'] .codeExample {
+  background: #1a1d24 !important;
+  border-color: #2d3139 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme='dark'] .codeHeader {
+  background: #13151a !important;
+  border-bottom-color: #2d3139 !important;
+}
+
+/* Maintain primary color vibrancy */
+[data-theme='dark'] .timelinePhase,
+[data-theme='dark'] .timelineHighlight {
+  color: var(--ifm-color-primary) !important;
+}

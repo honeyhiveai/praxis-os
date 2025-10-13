@@ -46,7 +46,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 - [ ] `metadata.json` created with all phase definitions
 - [ ] `phases/` directory created
 - [ ] `supporting-docs/` directory created with docs from spec
-- [ ] Structure validated against meta-framework standards
+- [ ] Structure validated against meta-workflow standards
 
 **Dependencies:** None
 
@@ -235,7 +235,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 - [ ] Checkpoint evidence schema defined
 - [ ] Exit criteria clearly stated
 - [ ] File length: 80-120 lines
-- [ ] Follows meta-framework three-tier architecture
+- [ ] Follows meta-workflow three-tier architecture
 
 **Dependencies:** Task 1.1
 

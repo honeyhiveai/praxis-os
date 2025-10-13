@@ -174,7 +174,7 @@ for task_meta in phase['phase_content']['tasks']:
 - After seeing task list from `get_current_phase`
 - Ready to work on a specific task
 - Need task execution steps and commands
-- Following meta-framework's "one task at a time" principle
+- Following meta-workflow's "one task at a time" principle
 
 **Why this tool?**
 - ✅ Focused attention (one task in context at a time)
@@ -291,7 +291,7 @@ mcp_agent-os-rag_get_workflow_state(
 
 ### 7. `create_workflow`
 
-**Purpose:** Generate new workflow framework using meta-framework principles
+**Purpose:** Generate new workflow framework using meta-workflow principles
 
 **When to use:**
 - Creating a new structured process

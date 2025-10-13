@@ -1839,7 +1839,7 @@ LanceDB (Vector Store)
 
 **Purpose**: Ensures new workflows follow Agent OS principles and maintain consistency.
 
-**Key Principles** (from `meta-framework/`):
+**Key Principles** (from `meta-workflow/`):
 1. **Compliance Gates**: New workflows must enforce standards checking
 2. **Phase Structure**: Must use sequential phase progression
 3. **Evidence Requirements**: Must validate outputs at checkpoints
@@ -1919,7 +1919,7 @@ mcp_agent-os-rag_create_workflow(
 - `workflows.md` - Phase-gated workflow explanation
 - `upgrading.md` - Safe upgrade process
 
-**Meta-Framework** (in `meta-framework/`):
+**Meta-Framework** (in `meta-workflow/`):
 - `AGENT_OS_FRAMEWORK_CREATION_GUIDE.md` - How to create workflows
 - `META_FRAMEWORK_SUMMARY.md` - Framework principles
 - `QUICK_START_TEMPLATE.md` - Template for new workflows

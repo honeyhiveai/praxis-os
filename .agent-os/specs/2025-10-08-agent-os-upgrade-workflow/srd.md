@@ -49,7 +49,7 @@
 
 ### BG-3: Demonstrate Meta-Framework for Operational Tasks
 
-**Objective:** Showcase Agent OS meta-framework handling complex operational workflows with state persistence across server restarts.
+**Objective:** Showcase Agent OS meta-workflow handling complex operational workflows with state persistence across server restarts.
 
 **Success Metrics:**
 - **Resumability:** 100% success rate resuming after server restart
@@ -247,7 +247,7 @@
 | NFR-M2 | Phase files < 200 lines | Yes | Line count |
 | NFR-M3 | Task files 100-170 lines | Yes | Line count |
 | NFR-M4 | Reusable rollback procedure | Yes | Code review |
-| NFR-M5 | Follows meta-framework standards | 100% | Compliance check |
+| NFR-M5 | Follows meta-workflow standards | 100% | Compliance check |
 
 ---
 
@@ -423,7 +423,7 @@ A rollback is considered successful if:
 ### Constraints
 
 1. Must use existing `safe-upgrade.py` (no re-implementation)
-2. Must follow meta-framework three-tier architecture
+2. Must follow meta-workflow three-tier architecture
 3. Must persist state to disk (no database dependency)
 4. Phase files must be ≤ 200 lines
 5. Task files must be 100-170 lines

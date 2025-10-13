@@ -10,7 +10,7 @@
 
 **Keywords for search**: workflow construction, building workflows, workflow structure, phase.md, task files, workflow standards, workflow file sizes, workflow engine, creating workflows, workflow templates
 
-**Core Principle:** Workflows follow meta-framework principles with specific file naming and size standards: phase.md (~80 lines), task files (100-170 lines), command language, validation gates.
+**Core Principle:** Workflows follow meta-workflow principles with specific file naming and size standards: phase.md (~80 lines), task files (100-170 lines), command language, validation gates.
 
 **Directory Structure:**
 ```
@@ -87,19 +87,19 @@ workflows/{workflow_name}/
 7. "What command language should I use?"
 8. "How do I add validation gates?"
 9. "What are workflow construction standards?"
-10. "How do workflows relate to meta-framework?"
+10. "How do workflows relate to meta-workflow?"
 11. "What file naming conventions exist?"
 
 ---
 
 ## 🎯 Overview
 
-This document defines the **structural standards** for building workflows in the Agent OS workflow engine. It applies meta-framework principles specifically to workflow construction.
+This document defines the **structural standards** for building workflows in the Agent OS workflow engine. It applies meta-workflow principles specifically to workflow construction.
 
 **Related Standards:**
-- [Meta-Framework Principles](../meta-framework/framework-creation-principles.md) - Foundation principles
-- [Three-Tier Architecture](../meta-framework/three-tier-architecture.md) - Content organization
-- [Horizontal Decomposition](../meta-framework/horizontal-decomposition.md) - File size guidelines
+- [Meta-Framework Principles](../meta-workflow/framework-creation-principles.md) - Foundation principles
+- [Three-Tier Architecture](../meta-workflow/three-tier-architecture.md) - Content organization
+- [Horizontal Decomposition](../meta-workflow/horizontal-decomposition.md) - File size guidelines
 - [Workflow Metadata Standards](workflow-metadata-standards.md) - metadata.json structure
 
 ---
@@ -128,7 +128,7 @@ workflows/{workflow_name}/
 **Key Rules:**
 1. ✅ Phase overview files MUST be named `phase.md` (not README.md)
 2. ✅ Task files MUST be named `task-N-descriptive-name.md`
-3. ✅ File sizes MUST follow meta-framework guidelines (see below)
+3. ✅ File sizes MUST follow meta-workflow guidelines (see below)
 
 ---
 
@@ -263,7 +263,7 @@ Task files contain detailed execution instructions for a single, focused task. T
 
 File size directly impacts AI attention quality. Follow these empirically validated targets:
 
-Based on meta-framework horizontal decomposition principles:
+Based on meta-workflow horizontal decomposition principles:
 
 | File Type | Size | Purpose |
 |-----------|------|---------|
@@ -306,7 +306,7 @@ All workflow files MUST use command language for enforceability:
 **Violations:**
 - `🚨 FRAMEWORK-VIOLATION:` - What NOT to do
 
-See: [Command Language Standard](../meta-framework/command-language.md)
+See: [Command Language Standard](../meta-workflow/command-language.md)
 
 ---
 
@@ -377,7 +377,7 @@ These anti-patterns frequently occur in workflow construction. Recognize and eli
 
 ## How Do Workflows Relate to Meta-Framework?
 
-Workflow construction standards are the specific application of meta-framework principles:
+Workflow construction standards are the specific application of meta-workflow principles:
 
 **Workflow Construction Standards** are a specific application of **Meta-Framework Principles**:
 
@@ -448,8 +448,8 @@ Follow this systematic process to create a workflow from scratch or from specifi
 1. **Start with construction** → `search_standards("workflow construction")` (this document)
 2. **Add metadata** → `search_standards("workflow metadata")` → `standards/workflows/workflow-metadata-standards.md`
 3. **Understand system** → `search_standards("workflow system overview")` → `standards/workflows/workflow-system-overview.md`
-4. **Learn principles** → `search_standards("framework creation principles")` → `standards/meta-framework/framework-creation-principles.md`
-5. **Apply architecture** → `search_standards("three-tier architecture")` → `standards/meta-framework/three-tier-architecture.md`
+4. **Learn principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+5. **Apply architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
 
 **By Category:**
 
@@ -459,11 +459,11 @@ Follow this systematic process to create a workflow from scratch or from specifi
 - `standards/workflows/mcp-rag-configuration.md` - RAG configuration → `search_standards("MCP RAG configuration")`
 
 **Meta-Framework (Foundation):**
-- `standards/meta-framework/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
-- `standards/meta-framework/three-tier-architecture.md` - Content organization → `search_standards("three-tier architecture")`
-- `standards/meta-framework/horizontal-decomposition.md` - File size guidelines → `search_standards("horizontal decomposition")`
-- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
-- `standards/meta-framework/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
+- `standards/meta-workflow/three-tier-architecture.md` - Content organization → `search_standards("three-tier architecture")`
+- `standards/meta-workflow/horizontal-decomposition.md` - File size guidelines → `search_standards("horizontal decomposition")`
+- `standards/meta-workflow/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
 
 **Usage:**
 - `usage/creating-specs.md` - Specification structure → `search_standards("how to create specs")`

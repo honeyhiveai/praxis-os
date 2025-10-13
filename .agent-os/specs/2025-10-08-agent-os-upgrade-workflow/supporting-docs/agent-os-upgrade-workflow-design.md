@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-An AI-guided workflow for safely upgrading Agent OS installations (content + MCP server) with automatic validation, rollback capability, and persistence across server restarts. Demonstrates meta-framework principles for complex operational tasks.
+An AI-guided workflow for safely upgrading Agent OS installations (content + MCP server) with automatic validation, rollback capability, and persistence across server restarts. Demonstrates meta-workflow principles for complex operational tasks.
 
 **Key Innovation:** Workflow state persists to disk (`.agent-os/.cache/state/`), enabling the workflow to survive MCP server restarts during the upgrade process.
 
@@ -694,7 +694,7 @@ workflow.update_state(status="rolled_back", reason="...")
 
 ## 13. References
 
-- **Meta-Framework Guide:** `meta-framework/META_FRAMEWORK_SUMMARY.md`
+- **Meta-Framework Guide:** `meta-workflow/META_FRAMEWORK_SUMMARY.md`
 - **Safe Upgrade Implementation:** `.agent-os/specs/2025-10-07-manifest-based-upgrade-system/`
 - **Workflow Engine:** `mcp_server/workflow_engine.py`
 - **State Manager:** `mcp_server/state_manager.py`

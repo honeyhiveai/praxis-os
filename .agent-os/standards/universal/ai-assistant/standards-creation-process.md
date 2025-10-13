@@ -480,7 +480,7 @@ search_standards("[topic] anti-patterns")
 - `documentation/` - Documentation standards
 - `failure-modes/` - Error handling patterns
 - `installation/` - Installation/upgrade procedures
-- `meta-framework/` - Framework creation/maintenance
+- `meta-workflow/` - Framework creation/maintenance
 - `performance/` - Performance optimization
 - `security/` - Security patterns
 - `testing/` - Testing standards
@@ -792,7 +792,7 @@ Track effectiveness:
 1. **Start with creation process** → `search_standards("how to create standard")` (this document)
 2. **Learn RAG optimization** → `search_standards("RAG content authoring")` → `standards/documentation/rag-content-authoring.md`
 3. **Understand specs** → `search_standards("creating specs")` → `usage/creating-specs.md`
-4. **Learn command language** → `search_standards("command language")` → `standards/meta-framework/command-language.md`
+4. **Learn command language** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
 
 **By Category:**
 
@@ -802,9 +802,9 @@ Track effectiveness:
 - `standards/documentation/code-comments.md` - Comment guidelines → `search_standards("code comments")`
 
 **Meta-Framework:**
-- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
-- `standards/meta-framework/three-tier-architecture.md` - Content organization → `search_standards("three tier architecture")`
-- `standards/meta-framework/validation-gates.md` - Quality gates → `search_standards("validation gates")`
+- `standards/meta-workflow/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-workflow/three-tier-architecture.md` - Content organization → `search_standards("three tier architecture")`
+- `standards/meta-workflow/validation-gates.md` - Quality gates → `search_standards("validation gates")`
 
 **Usage:**
 - `usage/creating-specs.md` - Spec creation guide → `search_standards("creating specs")`

@@ -26,12 +26,12 @@ function HomepageHeader() {
             <div className={styles.heroButtons}>
               <Link
                 className="button button--primary button--lg"
-                to="/docs/intro">
+                to="/docs/tutorials/intro">
                 Get Started →
               </Link>
               <Link
                 className="button button--secondary button--lg"
-                to="/docs/installation">
+                to="/docs/tutorials/installation">
                 View Installation
               </Link>
             </div>
@@ -72,25 +72,25 @@ function QuickStart() {
       icon: '🚀',
       title: 'Quick Start',
       description: 'Install in your project with one command',
-      link: '/docs/intro',
+      link: '/docs/tutorials/intro',
     },
     {
       icon: '📚',
       title: 'Core Concepts',
       description: 'Understand MCP, RAG, and phase gating',
-      link: '/docs/how-it-works',
+      link: '/docs/explanation/how-it-works',
     },
     {
       icon: '⚙️',
       title: 'Installation',
       description: 'Detailed setup and configuration guide',
-      link: '/docs/installation',
+      link: '/docs/tutorials/installation',
     },
     {
       icon: '🔧',
       title: 'Workflows',
       description: 'Learn about spec creation and execution',
-      link: '/docs/workflows',
+      link: '/docs/reference/workflows',
     },
   ];
 
@@ -126,37 +126,37 @@ function KeyFeatures() {
       icon: '🎯',
       title: 'MCP/RAG Architecture',
       description: '90% context reduction. Semantic search delivers exactly what AI needs, nothing more.',
-      link: '/docs/architecture',
+      link: '/docs/explanation/architecture',
     },
     {
       icon: '📖',
       title: 'Universal Standards',
       description: 'Timeless CS fundamentals that work across any language with smart generation.',
-      link: '/docs/standards',
+      link: '/docs/reference/standards',
     },
     {
       icon: '🔒',
       title: 'Architectural Phase Gating',
       description: 'Workflows enforced in code. AI cannot skip phases or bypass quality gates.',
-      link: '/docs/workflows',
+      link: '/docs/reference/workflows',
     },
     {
       icon: '🤖',
       title: 'Specialized Sub-Agents',
       description: 'Design validation, concurrency analysis, test generation - focused tools.',
-      link: '/docs/architecture',
+      link: '/docs/explanation/architecture',
     },
     {
       icon: '📦',
       title: 'Portable & Isolated',
       description: 'Each project owns its Agent OS installation, standards, and version.',
-      link: '/docs/installation',
+      link: '/docs/tutorials/installation',
     },
     {
       icon: '🛠️',
       title: 'Meta-Framework System',
       description: 'Build your own AI-assisted workflows with proven patterns.',
-      link: '/docs/workflows',
+      link: '/docs/reference/workflows',
     },
   ];
 
@@ -269,7 +269,7 @@ function TheJourney() {
           </Link>
           <Link
             className="button button--primary button--lg"
-            to="/docs/intro">
+            to="/docs/tutorials/intro">
             Explore Enhanced Version →
           </Link>
         </div>
@@ -318,7 +318,7 @@ function WhyAgentOS() {
         <div className="text--center margin-top--xl">
           <Link
             className="button button--primary button--lg"
-            to="/docs/how-it-works">
+            to="/docs/explanation/how-it-works">
             Learn How It Works →
           </Link>
         </div>

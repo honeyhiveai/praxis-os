@@ -273,7 +273,7 @@ def get_task(session_id: str, phase: int, task_number: int) -> Dict[str, Any]:
     Get full content for a specific task (horizontal scaling).
     
     Retrieves complete task content including execution steps and commands.
-    Follows meta-framework principle: work on one task at a time.
+    Follows meta-workflow principle: work on one task at a time.
     
     :param session_id: Workflow session identifier (from start_workflow)
     :param phase: Phase number (0-8)

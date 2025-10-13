@@ -11,7 +11,7 @@
 **Core Principle:** Configure MCP RAG to index standards, workflows, and usage guides for AI agent discovery via `search_standards()`.
 
 **Three Primary Directories to Index:**
-1. **universal/standards/** - Technical standards (architecture, testing, meta-framework)
+1. **universal/standards/** - Technical standards (architecture, testing, meta-workflow)
 2. **universal/workflows/** - Workflow metadata.json files
 3. **universal/usage/** - Usage guides and quickstarts
 

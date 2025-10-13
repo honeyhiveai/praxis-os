@@ -318,7 +318,7 @@ await mcp_agent-os-rag_complete_phase(
 - ✅ ~200 bytes for task list
 - ✅ ~1-2KB per task (focused attention)
 - ✅ Load only what's needed now
-- ✅ Honors meta-framework architecture
+- ✅ Honors meta-workflow architecture
 
 ### Benefits
 
@@ -594,10 +594,10 @@ if not result["checkpoint_passed"]:
 - `standards/workflows/mcp-rag-configuration.md` - RAG indexing → `search_standards("MCP RAG configuration")`
 
 **Meta-Framework:**
-- `standards/meta-framework/validation-gates.md` - Checkpoint validation → `search_standards("validation gates")`
-- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
-- `standards/meta-framework/framework-creation-principles.md` - Framework design → `search_standards("framework creation principles")`
-- `standards/meta-framework/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+- `standards/meta-workflow/validation-gates.md` - Checkpoint validation → `search_standards("validation gates")`
+- `standards/meta-workflow/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-workflow/framework-creation-principles.md` - Framework design → `search_standards("framework creation principles")`
+- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
 
 **Usage:**
 - `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`

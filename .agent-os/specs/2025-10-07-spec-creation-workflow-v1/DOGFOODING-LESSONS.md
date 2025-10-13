@@ -104,7 +104,7 @@ Need exact templates showing section order, headers, sizes
 - ✅ Command language requirements
 - ✅ Validation checklist
 - ✅ Common mistakes to avoid
-- ✅ Relationship to meta-framework
+- ✅ Relationship to meta-workflow
 
 **Purpose:** Provides definitive reference for workflow construction
 
@@ -144,7 +144,7 @@ Include complete file templates with exact section order
 Meta-framework principles exist but weren't applied consistently
 
 **Lesson:**  
-Need domain-specific standards (e.g., "Workflow Construction Standards") that show concrete application of meta-framework
+Need domain-specific standards (e.g., "Workflow Construction Standards") that show concrete application of meta-workflow
 
 **Action:**  
 Created workflow-specific standards document with examples

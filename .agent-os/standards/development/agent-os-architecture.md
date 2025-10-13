@@ -26,7 +26,7 @@ agent-os-enhanced/
 │   │   ├── database/
 │   │   ├── documentation/
 │   │   ├── failure-modes/
-│   │   ├── meta-framework/
+│   │   ├── meta-workflow/
 │   │   ├── performance/
 │   │   ├── security/
 │   │   └── testing/

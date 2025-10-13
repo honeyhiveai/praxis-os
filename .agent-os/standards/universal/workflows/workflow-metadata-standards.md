@@ -553,8 +553,8 @@ def validate_workflow_metadata(metadata_path: Path) -> bool:
 - `standards/workflows/mcp-rag-configuration.md` - RAG indexing → `search_standards("MCP RAG configuration")`
 
 **Meta-Framework:**
-- `standards/meta-framework/validation-gates.md` - Checkpoint criteria → `search_standards("validation gates")`
-- `standards/meta-framework/command-language.md` - Command symbols → `search_standards("command language")`
+- `standards/meta-workflow/validation-gates.md` - Checkpoint criteria → `search_standards("validation gates")`
+- `standards/meta-workflow/command-language.md` - Command symbols → `search_standards("command language")`
 
 ---
 

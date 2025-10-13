@@ -609,7 +609,7 @@ For complete guide, continue reading below.
 **Query workflow for content authoring mastery:**
 
 1. **Start with RAG content authoring** → `search_standards("RAG content authoring")` (this document)
-2. **Learn standards creation** → `search_standards("standards creation process")` → `standards/meta-framework/standards-creation-process.md`
+2. **Learn standards creation** → `search_standards("standards creation process")` → `standards/meta-workflow/standards-creation-process.md`
 3. **Understand workflow metadata** → `search_standards("workflow metadata standards")` → `standards/workflows/workflow-metadata-standards.md`
 4. **Master orientation principles** → `search_standards("Agent OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
 
@@ -621,8 +621,8 @@ For complete guide, continue reading below.
 - `standards/ai-assistant/MCP-TOOLS-GUIDE.md` - Dynamic discovery → `search_standards("MCP dynamic discovery")`
 
 **Meta-Framework:**
-- `standards/meta-framework/standards-creation-process.md` - How to create standards → `search_standards("meta-framework standards creation")`
-- `standards/meta-framework/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/meta-workflow/standards-creation-process.md` - How to create standards → `search_standards("meta-workflow standards creation")`
+- `standards/meta-workflow/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
 
 **Workflows:**
 - `standards/workflows/workflow-metadata-standards.md` - Workflow-specific metadata → `search_standards("workflow metadata")`
