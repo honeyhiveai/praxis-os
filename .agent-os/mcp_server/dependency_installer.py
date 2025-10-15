@@ -4,8 +4,12 @@ Dependency Installer for Agent OS Upgrade Workflow.
 Manages Python dependency installation and post-install steps.
 """
 
-import subprocess
+# pylint: disable=broad-exception-caught,missing-raises-doc
+# Justification: Installer uses broad exceptions for robustness,
+# standard exception documentation in docstrings
+
 import logging
+import subprocess
 from pathlib import Path
 from typing import Dict, List
 
@@ -47,7 +51,7 @@ class DependencyInstaller:
                 "errors": List[str]
             }
         """
-        logger.info(f"Installing dependencies from: {requirements_file}")
+        logger.info("Installing dependencies from: %s", requirements_file)
 
         req_path = Path(requirements_file)
 
@@ -65,6 +69,7 @@ class DependencyInstaller:
                 capture_output=True,
                 text=True,
                 timeout=300,  # 5 minutes timeout
+                check=False,
             )
 
             # Count installed packages from output
@@ -73,9 +78,12 @@ class DependencyInstaller:
             success = result.returncode == 0
 
             if success:
-                logger.info(f"Dependencies installed successfully: {packages_installed} packages")
+                logger.info(
+                    "Dependencies installed successfully: %s packages",
+                    packages_installed,
+                )
             else:
-                logger.error(f"Dependency installation failed: {result.stderr}")
+                logger.error("Dependency installation failed: %s", result.stderr)
 
             return {
                 "success": success,
@@ -94,7 +102,7 @@ class DependencyInstaller:
                 "errors": [error],
             }
         except Exception as e:
-            logger.error(f"Failed to install dependencies: {e}")
+            logger.error("Failed to install dependencies: %s", e)
             return {
                 "success": False,
                 "packages_installed": 0,
@@ -121,7 +129,7 @@ class DependencyInstaller:
                 "description": str
             }]
         """
-        logger.info(f"Detecting post-install steps from: {requirements_file}")
+        logger.info("Detecting post-install steps from: %s", requirements_file)
 
         req_path = Path(requirements_file)
 
@@ -131,21 +139,23 @@ class DependencyInstaller:
         steps = []
 
         try:
-            content = req_path.read_text()
+            content = req_path.read_text(encoding="utf-8")
 
             # Check for playwright
             if "playwright" in content.lower():
-                steps.append({
-                    "package": "playwright",
-                    "command": "playwright install chromium",
-                    "description": "Install Chromium browser for Playwright",
-                })
+                steps.append(
+                    {
+                        "package": "playwright",
+                        "command": "playwright install chromium",
+                        "description": "Install Chromium browser for Playwright",
+                    }
+                )
                 logger.info("Detected post-install step: playwright install chromium")
 
             # Add more patterns as needed
 
         except Exception as e:
-            logger.warning(f"Failed to detect post-install steps: {e}")
+            logger.warning("Failed to detect post-install steps: %s", e)
 
         return steps
 
@@ -170,7 +180,7 @@ class DependencyInstaller:
 
         for step in steps:
             command = step["command"]
-            logger.info(f"Running post-install step: {command}")
+            logger.info("Running post-install step: %s", command)
 
             try:
                 result = subprocess.run(
@@ -178,6 +188,7 @@ class DependencyInstaller:
                     capture_output=True,
                     text=True,
                     timeout=300,  # 5 minutes timeout
+                    check=False,
                 )
 
                 # Extract size information if available
@@ -191,34 +202,41 @@ class DependencyInstaller:
 
                 status = "success" if result.returncode == 0 else "failed"
 
-                results.append({
-                    "command": command,
-                    "status": status,
-                    "output": result.stdout,
-                    "size_downloaded": size_downloaded,
-                })
+                results.append(
+                    {
+                        "command": command,
+                        "status": status,
+                        "output": result.stdout,
+                        "size_downloaded": size_downloaded,
+                    }
+                )
 
                 if status == "success":
-                    logger.info(f"Post-install step completed: {command}")
+                    logger.info("Post-install step completed: %s", command)
                 else:
-                    logger.error(f"Post-install step failed: {command}\n{result.stderr}")
+                    logger.error(
+                        "Post-install step failed: %s\n%s", command, result.stderr
+                    )
 
             except subprocess.TimeoutExpired:
-                logger.error(f"Post-install step timed out: {command}")
-                results.append({
-                    "command": command,
-                    "status": "failed",
-                    "output": "Timed out after 5 minutes",
-                    "size_downloaded": None,
-                })
+                logger.error("Post-install step timed out: %s", command)
+                results.append(
+                    {
+                        "command": command,
+                        "status": "failed",
+                        "output": "Timed out after 5 minutes",
+                        "size_downloaded": None,
+                    }
+                )
             except Exception as e:
-                logger.error(f"Failed to run post-install step {command}: {e}")
-                results.append({
-                    "command": command,
-                    "status": "failed",
-                    "output": str(e),
-                    "size_downloaded": None,
-                })
+                logger.error("Failed to run post-install step %s: %s", command, e)
+                results.append(
+                    {
+                        "command": command,
+                        "status": "failed",
+                        "output": str(e),
+                        "size_downloaded": None,
+                    }
+                )
 
         return results
-

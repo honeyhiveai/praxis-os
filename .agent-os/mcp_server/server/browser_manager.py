@@ -28,12 +28,20 @@ Traceability:
     FR-1, FR-2, NFR-1, NFR-4, NFR-5 (per-session isolation)
 """
 
+# pylint: disable=too-many-instance-attributes
+# Justification: BrowserSession dataclass needs 8 attributes for complete session
+# state (playwright instance, browser, page, tabs, metadata, timestamps)
+
+# pylint: disable=broad-exception-caught
+# Justification: Browser automation must be robust - catches broad exceptions
+# during Playwright operations to provide graceful error handling and cleanup
+
 import asyncio
 import logging
 import time
 import uuid
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional, Literal
+from typing import Any, Dict, Literal
 
 from playwright.async_api import Browser, Page, async_playwright
 
@@ -119,9 +127,9 @@ class BrowserSession:
         for tab_id, tab_page in list(self.tabs.items()):
             try:
                 await tab_page.close()
-                logger.debug(f"Tab {tab_id} closed successfully")
+                logger.debug("Tab %s closed successfully", tab_id)
             except Exception as e:
-                logger.warning(f"Tab {tab_id} close error: {e}")
+                logger.warning("Tab %s close error: %s", tab_id, e)
         self.tabs.clear()
 
         # Close primary page
@@ -129,21 +137,21 @@ class BrowserSession:
             await self.page.close()
             logger.debug("Primary page closed successfully")
         except Exception as e:
-            logger.warning(f"Primary page close error: {e}")
+            logger.warning("Primary page close error: %s", e)
 
         # Close browser process
         try:
             await self.browser.close()
             logger.debug("Browser process terminated")
         except Exception as e:
-            logger.warning(f"Browser close error: {e}")
+            logger.warning("Browser close error: %s", e)
 
         # Stop Playwright instance
         try:
             await self.playwright.stop()
             logger.debug("Playwright instance stopped")
         except Exception as e:
-            logger.warning(f"Playwright stop error: {e}")
+            logger.warning("Playwright stop error: %s", e)
 
 
 class BrowserManager:
@@ -212,8 +220,8 @@ class BrowserManager:
         self._lock = asyncio.Lock()
         self._session_timeout = session_timeout
         logger.info(
-            f"BrowserManager initialized (per-session architecture, "
-            f"timeout: {session_timeout}s)"
+            "BrowserManager initialized (per-session architecture, timeout: %ss)",
+            session_timeout,
         )
 
     async def get_session(
@@ -237,7 +245,8 @@ class BrowserManager:
 
         Args:
             session_id (str): Unique session identifier. Default: "default".
-            browser_type (str): Browser type (chromium/firefox/webkit). Default: "chromium".
+            browser_type (str): Browser type (chromium/firefox/webkit).
+                Default: "chromium".
             headless (bool): Run browser in headless mode. Default: True.
 
         Returns:
@@ -245,6 +254,7 @@ class BrowserManager:
 
         Raises:
             RuntimeError: If browser launch fails. Includes remediation message.
+            ValueError: If invalid browser_type specified (not chromium/firefox/webkit).
 
         Example:
             >>> session = await manager.get_session("chat-123")
@@ -254,7 +264,9 @@ class BrowserManager:
             >>> assert session.page is session2.page  # Same page
             >>>
             >>> # Cross-browser testing
-            >>> firefox_session = await manager.get_session("test-ff", browser_type="firefox")
+            >>> firefox_session = await manager.get_session(
+            ...     "test-ff", browser_type="firefox"
+            ... )
 
         Concurrency:
             Thread-safe via asyncio.Lock. Multiple calls can run concurrently,
@@ -278,22 +290,27 @@ class BrowserManager:
                 session = self._sessions[session_id]
                 session.last_access = time.time()
                 logger.debug(
-                    f"Reusing existing session: {session_id} "
-                    f"({session.browser_type}, headless={session.headless}, "
-                    f"total sessions: {len(self._sessions)})"
+                    "Reusing existing session: %s (%s, headless=%s, "
+                    "total sessions: %s)",
+                    session_id,
+                    session.browser_type,
+                    session.headless,
+                    len(self._sessions),
                 )
                 return session
 
             # Create new session with own browser process
             try:
                 logger.info(
-                    f"Creating new session: {session_id} "
-                    f"(browser={browser_type}, headless={headless})..."
+                    "Creating new session: %s (browser=%s, headless=%s)...",
+                    session_id,
+                    browser_type,
+                    headless,
                 )
 
                 # Launch Playwright (per session)
                 playwright = await async_playwright().start()
-                logger.debug(f"Playwright instance started for {session_id}")
+                logger.debug("Playwright instance started for %s", session_id)
 
                 # Get browser launcher based on type
                 if browser_type == "chromium":
@@ -311,20 +328,23 @@ class BrowserManager:
                 # Launch browser (per session)
                 browser = await launcher.launch(headless=headless)
                 logger.debug(
-                    f"{browser_type.capitalize()} browser launched for {session_id} "
-                    f"(pid: {browser.process.pid if hasattr(browser, 'process') else 'unknown'}, "
-                    f"headless={headless})"
+                    "%s browser launched for %s (pid: %s, headless=%s)",
+                    browser_type.capitalize(),
+                    session_id,
+                    browser.process.pid if hasattr(browser, "process") else "unknown",
+                    headless,
                 )
 
                 if not headless:
                     logger.warning(
-                        f"⚠️  Session {session_id} running in headful mode. "
-                        f"Performance may be impacted. Use for debugging only."
+                        "⚠️  Session %s running in headful mode. "
+                        "Performance may be impacted. Use for debugging only.",
+                        session_id,
                     )
 
                 # Create new page
                 page = await browser.new_page()
-                logger.debug(f"New page created for {session_id}")
+                logger.debug("New page created for %s", session_id)
 
                 # Create session object
                 # Note: First tab gets stable UUID like all other tabs
@@ -342,8 +362,10 @@ class BrowserManager:
                 # Store session
                 self._sessions[session_id] = session
                 logger.info(
-                    f"✅ Session created: {session_id} with new {browser_type} process "
-                    f"(total sessions: {len(self._sessions)})"
+                    "✅ Session created: %s with new %s process (total sessions: %s)",
+                    session_id,
+                    browser_type,
+                    len(self._sessions),
                 )
 
                 return session
@@ -393,12 +415,15 @@ class BrowserManager:
                 await session.cleanup()
                 del self._sessions[session_id]
                 logger.info(
-                    f"Cleaned up stale session: {session_id} "
-                    f"(idle for {idle_time:.1f}s)"
+                    "Cleaned up stale session: %s (idle for %.1fs)",
+                    session_id,
+                    idle_time,
                 )
             except Exception as e:
                 logger.error(
-                    f"Error cleaning up stale session {session_id}: {e}",
+                    "Error cleaning up stale session %s: %s",
+                    session_id,
+                    e,
                     exc_info=True,
                 )
                 # Continue cleanup even if one fails
@@ -428,7 +453,7 @@ class BrowserManager:
         async with self._lock:
             if session_id not in self._sessions:
                 logger.warning(
-                    f"close_session called on non-existent session: {session_id}"
+                    "close_session called on non-existent session: %s", session_id
                 )
                 return
 
@@ -437,12 +462,13 @@ class BrowserManager:
                 await session.cleanup()
                 del self._sessions[session_id]
                 logger.info(
-                    f"Session closed: {session_id} "
-                    f"(remaining sessions: {len(self._sessions)})"
+                    "Session closed: %s (remaining sessions: %s)",
+                    session_id,
+                    len(self._sessions),
                 )
             except Exception as e:
                 logger.error(
-                    f"Error closing session {session_id}: {e}", exc_info=True
+                    "Error closing session %s: %s", session_id, e, exc_info=True
                 )
                 # Still remove from dict even if cleanup failed
                 if session_id in self._sessions:
@@ -469,22 +495,26 @@ class BrowserManager:
         """
         async with self._lock:
             session_count = len(self._sessions)
-            logger.info(f"Shutting down BrowserManager ({session_count} sessions)...")
+            logger.info("Shutting down BrowserManager (%s sessions)...", session_count)
 
             # Close all sessions
             for session_id in list(self._sessions.keys()):
                 try:
                     session = self._sessions[session_id]
                     await session.cleanup()
-                    logger.debug(f"Session shut down: {session_id}")
+                    logger.debug("Session shut down: %s", session_id)
                 except Exception as e:
                     logger.error(
-                        f"Error shutting down session {session_id}: {e}",
+                        "Error shutting down session %s: %s",
+                        session_id,
+                        e,
                         exc_info=True,
                     )
                     # Continue shutdown even if one fails
 
             # Clear session dict
             self._sessions.clear()
-            logger.info(f"✅ BrowserManager shutdown complete ({session_count} sessions closed)")
-
+            logger.info(
+                "✅ BrowserManager shutdown complete (%s sessions closed)",
+                session_count,
+            )

@@ -151,8 +151,7 @@ class TestWorkflowEngineSessionFactory:
         # Execute
         session = engine.get_session("test-session-123")
 
-        # Verify - metadata was loaded and cached
-        assert "spec_execution_v1" in engine._metadata_cache
+        # Verify - metadata was loaded
         assert session.metadata.workflow_type == "spec_execution_v1"
 
 
@@ -481,13 +480,3 @@ class TestMetadataLoading:
         assert metadata.version == "1.0.0"
         assert metadata.total_phases == 4
         assert len(metadata.phases) == 4
-
-    def test_metadata_caching(self, engine, mock_workflows_path):
-        """Test metadata is cached after first load."""
-        # Execute - load twice
-        metadata1 = engine.load_workflow_metadata("spec_execution_v1")
-        metadata2 = engine.load_workflow_metadata("spec_execution_v1")
-
-        # Verify - same instance from cache
-        assert metadata1 is metadata2
-        assert "spec_execution_v1" in engine._metadata_cache

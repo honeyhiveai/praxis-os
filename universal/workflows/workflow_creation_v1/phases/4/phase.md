@@ -1,7 +1,7 @@
-# Phase 4: Testing & Delivery
+# Phase 4: Meta-Workflow Compliance
 
-**Purpose**: Test workflow end-to-end, refine, obtain human approval  
-**Deliverable**: Tested, refined, production-ready workflow
+**Purpose**: Validate entire workflow against all 5 meta-workflow principles  
+**Deliverable**: Compliance report, all violations fixed
 
 **Note**: This is Phase "N+4" in the workflow definition, where N = number of target workflow phases.
 
@@ -9,16 +9,18 @@
 
 ## Overview
 
-This final phase ensures the workflow is ready for production use. We systematically:
+This critical phase audits the created workflow for compliance with all meta-workflow principles. We systematically:
 
-1. **Test** workflow navigation works correctly
-2. **Validate** all commands are clear and properly formatted
-3. **Validate** gates are parseable by CheckpointLoader
-4. **Identify** usability issues through review
-5. **Implement** refinements based on findings
-6. **Create** usage guide for workflow consumers
-7. **Re-validate** compliance after refinements
-8. **Obtain** human approval for production release
+1. **Audit** file sizes across all tasks
+2. **Audit** command coverage percentages
+3. **Verify** three-tier architecture adherence
+4. **Verify** validation gates are complete and parseable
+5. **Verify** binding contract exists
+6. **Verify** horizontal decomposition applied
+7. **Generate** comprehensive compliance report
+8. **Fix** any violations discovered
+9. **Re-validate** after fixes
+10. **Confirm** 100% compliance achieved
 
 **Status**: ⬜ Not Started | 🟡 In Progress | ✅ Complete
 
@@ -28,39 +30,41 @@ This final phase ensures the workflow is ready for production use. We systematic
 
 | # | Task | File | Status |
 |---|------|------|--------|
-| 1 | Dry-Run Navigation | task-1-dry-run-navigation.md | ⬜ |
-| 2 | Validate Commands | task-2-validate-commands.md | ⬜ |
-| 3 | Validate Gates Parseable | task-3-validate-gates-parseable.md | ⬜ |
-| 4 | Identify Usability Issues | task-4-identify-usability-issues.md | ⬜ |
-| 5 | Implement Refinements | task-5-implement-refinements.md | ⬜ |
-| 6 | Create Usage Guide | task-6-create-usage-guide.md | ⬜ |
-| 7 | Final Validation | task-7-final-validation.md | ⬜ |
-| 8 | Human Review | task-8-human-review.md | ⬜ |
+| 1 | Audit File Sizes | task-1-audit-file-sizes.md | ⬜ |
+| 2 | Audit Command Coverage | task-2-audit-command-coverage.md | ⬜ |
+| 3 | Verify Three-Tier | task-3-verify-three-tier.md | ⬜ |
+| 4 | Verify Validation Gates | task-4-verify-validation-gates.md | ⬜ |
+| 5 | Verify Binding Contract | task-5-verify-binding-contract.md | ⬜ |
+| 6 | Verify Horizontal Decomposition | task-6-verify-horizontal-decomposition.md | ⬜ |
+| 7 | Generate Compliance Report | task-7-generate-compliance-report.md | ⬜ |
+| 8 | Fix Violations | task-8-fix-violations.md | ⬜ |
+| 9 | Re-validate | task-9-re-validate.md | ⬜ |
+| 10 | Final Compliance Check | task-10-final-compliance-check.md | ⬜ |
 
 ---
 
 ## Validation Gate
 
-🚨 **CRITICAL**: Phase 4 MUST complete successfully before workflow is released.
+🚨 **CRITICAL**: Phase 3 MUST complete successfully before proceeding to Phase 4.
 
 **Evidence Required**:
 
 | Evidence | Type | Validator | Description |
 |----------|------|-----------|-------------|
-| `dry_run_successful` | boolean | is_true | Dry run completed without errors |
-| `usability_issues_count` | integer | greater_than_0 | Number of usability issues found |
-| `refinements_applied` | boolean | is_true | All identified issues addressed |
-| `usage_guide_created` | boolean | is_true | Usage guide written |
-| `final_compliance_passed` | boolean | is_true | Final compliance check passed |
-| `human_approved` | boolean | is_true | Human reviewed and approved for production |
+| `file_size_compliance_percent` | integer | percent_gte_95 | Percentage of task files ≤100 lines |
+| `command_coverage_percent` | integer | percent_gte_80 | Average command coverage across workflow |
+| `three_tier_validated` | boolean | is_true | Three-tier architecture verified |
+| `gate_coverage_percent` | integer | percent_gte_100 | Percentage of phases with validation gates |
+| `binding_contract_present` | boolean | is_true | Binding contract verified in entry point |
+| `violations_fixed` | boolean | is_true | All violations resolved |
 
-**Human Approval**: **REQUIRED**
+**Human Approval**: Not required
 
 ---
 
 ## Navigation
 
-**Start Here**: 🎯 NEXT-MANDATORY: task-1-dry-run-navigation.md
+**Start Here**: 🎯 NEXT-MANDATORY: task-1-audit-file-sizes.md
 
-**After Phase 4 Complete**: Workflow is ready for production use!
+**After Phase 4 Complete**: 🎯 NEXT-MANDATORY: ../5/phase.md
 

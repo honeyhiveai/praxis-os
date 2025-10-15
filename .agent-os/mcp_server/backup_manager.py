@@ -5,20 +5,24 @@ Manages backup creation, verification, restoration, and archival operations.
 Ensures safe rollback capability for upgrade workflows.
 """
 
-import shutil
+# pylint: disable=broad-exception-caught,import-outside-toplevel,missing-raises-doc,too-many-locals
+# Justification: Backup manager uses broad exceptions for robustness,
+# lazy imports for optional dependencies, and verification logic requires many local
+# variables for comprehensive validation (19 locals for metadata, hashes, files)
+
 import hashlib
 import json
 import logging
-from pathlib import Path
+import shutil
 from datetime import datetime
-from typing import Dict, List, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
 
 class BackupIntegrityError(Exception):
     """Raised when backup integrity verification fails."""
-    pass
 
 
 class BackupManager:
@@ -57,7 +61,7 @@ class BackupManager:
         # Ensure backup directory exists
         self.backup_dir.mkdir(parents=True, exist_ok=True)
 
-        logger.info(f"BackupManager initialized: {self.backup_dir}")
+        logger.info("BackupManager initialized: %s", self.backup_dir)
 
     def create_backup(self) -> Dict:
         """
@@ -104,7 +108,7 @@ class BackupManager:
             source = self.agent_os_dir / dir_name
             if source.exists():
                 dest = backup_path / dir_name
-                logger.debug(f"Backing up directory: {source} -> {dest}")
+                logger.debug("Backing up directory: %s -> %s", source, dest)
                 shutil.copytree(source, dest)
                 file_count += sum(1 for _ in dest.rglob("*") if _.is_file())
                 total_size += sum(
@@ -116,7 +120,7 @@ class BackupManager:
             source = self.agent_os_dir / file_name
             if source.exists():
                 dest = backup_path / file_name
-                logger.debug(f"Backing up file: {source} -> {dest}")
+                logger.debug("Backing up file: %s -> %s", source, dest)
                 shutil.copy2(source, dest)
                 file_count += 1
                 total_size += dest.stat().st_size
@@ -130,29 +134,32 @@ class BackupManager:
                 capture_output=True,
                 text=True,
                 timeout=30,
+                check=False,
             )
             if result.returncode == 0:
                 req_snapshot = backup_path / "requirements-snapshot.txt"
                 req_snapshot.write_text(result.stdout)
                 file_count += 1
                 total_size += req_snapshot.stat().st_size
-                logger.debug(f"Created requirements snapshot: {req_snapshot}")
+                logger.debug("Created requirements snapshot: %s", req_snapshot)
         except Exception as e:
-            logger.warning(f"Failed to create requirements snapshot: {e}")
+            logger.warning("Failed to create requirements snapshot: %s", e)
 
         # Generate checksum manifest
         manifest = self._generate_manifest(backup_path)
         manifest_path = backup_path / "MANIFEST.json"
 
-        with open(manifest_path, "w") as f:
+        with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2)
 
         # Verify backup integrity immediately
         integrity_verified = self.verify_backup_integrity(backup_path)
 
         logger.info(
-            f"Backup created: {backup_path} ({file_count} files, "
-            f"{total_size / 1024 / 1024:.2f} MB)"
+            "Backup created: %s (%s files, %.2f MB)",
+            backup_path,
+            file_count,
+            total_size / 1024 / 1024,
         )
 
         return {
@@ -175,7 +182,10 @@ class BackupManager:
         Returns:
             Manifest dictionary with file checksums
         """
-        manifest = {"timestamp": datetime.now().isoformat(), "files": {}}
+        manifest: Dict[str, Any] = {
+            "timestamp": datetime.now().isoformat(),
+            "files": {},
+        }
 
         for file_path in backup_path.rglob("*"):
             if file_path.is_file() and file_path.name != "MANIFEST.json":
@@ -217,33 +227,35 @@ class BackupManager:
         manifest_path = backup_path / "MANIFEST.json"
 
         if not manifest_path.exists():
-            logger.error(f"Manifest not found: {manifest_path}")
+            logger.error("Manifest not found: %s", manifest_path)
             return False
 
         try:
-            with open(manifest_path, "r") as f:
+            with open(manifest_path, "r", encoding="utf-8") as f:
                 manifest = json.load(f)
 
             for relative_path, expected_checksum in manifest["files"].items():
                 file_path = backup_path / relative_path
 
                 if not file_path.exists():
-                    logger.error(f"File missing from backup: {relative_path}")
+                    logger.error("File missing from backup: %s", relative_path)
                     return False
 
                 actual_checksum = self._sha256_file(file_path)
                 if actual_checksum != expected_checksum:
                     logger.error(
-                        f"Checksum mismatch for {relative_path}: "
-                        f"expected {expected_checksum}, got {actual_checksum}"
+                        "Checksum mismatch for %s: expected %s, got %s",
+                        relative_path,
+                        expected_checksum,
+                        actual_checksum,
                     )
                     return False
 
-            logger.info(f"Backup integrity verified: {backup_path}")
+            logger.info("Backup integrity verified: %s", backup_path)
             return True
 
         except Exception as e:
-            logger.error(f"Failed to verify backup integrity: {e}")
+            logger.error("Failed to verify backup integrity: %s", e)
             return False
 
     def restore_from_backup(self, backup_path: Path) -> None:
@@ -259,7 +271,7 @@ class BackupManager:
             BackupIntegrityError: If backup integrity check fails
             IOError: If restoration fails
         """
-        logger.info(f"Restoring from backup: {backup_path}")
+        logger.info("Restoring from backup: %s", backup_path)
 
         # Verify integrity first
         if not self.verify_backup_integrity(backup_path):
@@ -277,11 +289,11 @@ class BackupManager:
             if source.exists():
                 # Remove existing directory if present
                 if dest.exists():
-                    logger.debug(f"Removing existing directory: {dest}")
+                    logger.debug("Removing existing directory: %s", dest)
                     shutil.rmtree(dest)
 
                 # Restore from backup
-                logger.debug(f"Restoring directory: {source} -> {dest}")
+                logger.debug("Restoring directory: %s -> %s", source, dest)
                 shutil.copytree(source, dest)
 
         # Restore individual files
@@ -292,7 +304,7 @@ class BackupManager:
             dest = self.agent_os_dir / file_name
 
             if source.exists():
-                logger.debug(f"Restoring file: {source} -> {dest}")
+                logger.debug("Restoring file: %s -> %s", source, dest)
                 shutil.copy2(source, dest)
 
         logger.info("Restore from backup completed successfully")
@@ -310,7 +322,7 @@ class BackupManager:
                 "kept_backups": List[str]
             }
         """
-        logger.info(f"Archiving old backups (keeping last {keep})")
+        logger.info("Archiving old backups (keeping last %s)", keep)
 
         # Find all backup directories
         backups = []
@@ -328,15 +340,16 @@ class BackupManager:
         archived_count = 0
         for backup_dir in archived_backups:
             try:
-                logger.debug(f"Removing old backup: {backup_dir}")
+                logger.debug("Removing old backup: %s", backup_dir)
                 shutil.rmtree(backup_dir)
                 archived_count += 1
             except Exception as e:
-                logger.warning(f"Failed to remove backup {backup_dir}: {e}")
+                logger.warning("Failed to remove backup %s: %s", backup_dir, e)
 
         logger.info(
-            f"Archived {archived_count} old backups, "
-            f"kept {len(kept_backups)} recent backups"
+            "Archived %s old backups, kept %s recent backups",
+            archived_count,
+            len(kept_backups),
         )
 
         return {
@@ -365,30 +378,28 @@ class BackupManager:
 
                 if manifest_path.exists():
                     try:
-                        with open(manifest_path, "r") as f:
+                        with open(manifest_path, "r", encoding="utf-8") as f:
                             manifest = json.load(f)
                         backup_info["file_count"] = len(manifest.get("files", {}))
                         backup_info["created_at"] = manifest.get("timestamp")
                     except Exception as e:
                         logger.warning(
-                            f"Failed to read manifest for {backup_dir}: {e}"
+                            "Failed to read manifest for %s: %s", backup_dir, e
                         )
 
                 # Calculate total size
                 try:
                     total_size = sum(
-                        f.stat().st_size
-                        for f in backup_dir.rglob("*")
-                        if f.is_file()
+                        f.stat().st_size for f in backup_dir.rglob("*") if f.is_file()
                     )
                     backup_info["size_bytes"] = total_size
                 except Exception as e:
-                    logger.warning(f"Failed to calculate size for {backup_dir}: {e}")
+                    logger.warning("Failed to calculate size for %s: %s", backup_dir, e)
 
                 backups.append(backup_info)
 
         # Sort by timestamp (newest first)
-        backups.sort(key=lambda b: b["timestamp"], reverse=True)
+        backups.sort(key=lambda b: str(b["timestamp"]), reverse=True)
 
         return backups
 
@@ -405,4 +416,3 @@ class BackupManager:
             return None
 
         return Path(backups[0]["path"])
-

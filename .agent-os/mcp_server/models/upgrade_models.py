@@ -4,18 +4,24 @@ Data Models for Agent OS Upgrade Workflow.
 Provides type-safe data structures for workflow evidence and state.
 """
 
-from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Optional
+# pylint: disable=too-many-instance-attributes
+# Justification: Evidence dataclasses require many attributes to capture comprehensive
+# upgrade workflow evidence for each phase (9-14 attributes per phase). This ensures
+# complete checkpoint validation and audit trails.
+
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
+from typing import Dict, List, Optional
 
 
 @dataclass
 class Phase0Evidence:
     """
     Evidence required to pass Phase 0 checkpoint.
-    
+
     Phase 0: Pre-Flight Checks
     """
+
     source_path: str
     source_version: str
     source_commit: str
@@ -31,7 +37,7 @@ class Phase0Evidence:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'Phase0Evidence':
+    def from_dict(cls, data: Dict) -> "Phase0Evidence":
         """Create from dictionary."""
         return cls(**data)
 
@@ -40,9 +46,10 @@ class Phase0Evidence:
 class Phase1Evidence:
     """
     Evidence required to pass Phase 1 checkpoint.
-    
+
     Phase 1: Backup & Preparation
     """
+
     backup_path: str
     backup_timestamp: str
     files_backed_up: int
@@ -56,7 +63,7 @@ class Phase1Evidence:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'Phase1Evidence':
+    def from_dict(cls, data: Dict) -> "Phase1Evidence":
         """Create from dictionary."""
         return cls(**data)
 
@@ -65,9 +72,10 @@ class Phase1Evidence:
 class Phase2Evidence:
     """
     Evidence required to pass Phase 2 checkpoint.
-    
+
     Phase 2: Content Upgrade
     """
+
     safe_upgrade_executed: bool
     dry_run_preview: Dict
     actual_upgrade: Dict
@@ -79,7 +87,7 @@ class Phase2Evidence:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'Phase2Evidence':
+    def from_dict(cls, data: Dict) -> "Phase2Evidence":
         """Create from dictionary."""
         return cls(**data)
 
@@ -88,9 +96,10 @@ class Phase2Evidence:
 class Phase3Evidence:
     """
     Evidence required to pass Phase 3 checkpoint.
-    
+
     Phase 3: MCP Server Upgrade (Critical - server restart)
     """
+
     mcp_server_copied: bool
     files_copied: int
     checksums_verified: bool
@@ -105,7 +114,7 @@ class Phase3Evidence:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'Phase3Evidence':
+    def from_dict(cls, data: Dict) -> "Phase3Evidence":
         """Create from dictionary."""
         return cls(**data)
 
@@ -114,9 +123,10 @@ class Phase3Evidence:
 class Phase4Evidence:
     """
     Evidence required to pass Phase 4 checkpoint.
-    
+
     Phase 4: Post-Upgrade Validation
     """
+
     server_version: str
     tools_registered: int
     expected_tools: int
@@ -134,7 +144,7 @@ class Phase4Evidence:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'Phase4Evidence':
+    def from_dict(cls, data: Dict) -> "Phase4Evidence":
         """Create from dictionary."""
         return cls(**data)
 
@@ -143,9 +153,10 @@ class Phase4Evidence:
 class Phase5Evidence:
     """
     Evidence required to pass Phase 5 checkpoint.
-    
+
     Phase 5: Cleanup & Documentation
     """
+
     lock_released: bool
     old_backups_archived: int
     upgrade_summary: str
@@ -158,7 +169,7 @@ class Phase5Evidence:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'Phase5Evidence':
+    def from_dict(cls, data: Dict) -> "Phase5Evidence":
         """Create from dictionary."""
         return cls(**data)
 
@@ -167,9 +178,10 @@ class Phase5Evidence:
 class BackupManifest:
     """
     Manifest of backed-up files with checksums.
-    
+
     Used by BackupManager to verify backup integrity.
     """
+
     backup_path: str
     timestamp: str
     files: Dict[str, str]  # path -> SHA256 hash
@@ -181,17 +193,17 @@ class BackupManifest:
             "backup_path": self.backup_path,
             "timestamp": self.timestamp,
             "files": self.files,
-            "total_size_bytes": self.total_size_bytes
+            "total_size_bytes": self.total_size_bytes,
         }
 
     @classmethod
-    def from_json(cls, data: Dict) -> 'BackupManifest':
+    def from_json(cls, data: Dict) -> "BackupManifest":
         """Deserialize from JSON file."""
         return cls(
             backup_path=data["backup_path"],
             timestamp=data["timestamp"],
             files=data["files"],
-            total_size_bytes=data["total_size_bytes"]
+            total_size_bytes=data["total_size_bytes"],
         )
 
 
@@ -199,9 +211,10 @@ class BackupManifest:
 class UpgradeReport:
     """
     Summary of upgrade operation.
-    
+
     Used by ReportGenerator to create human-readable reports.
     """
+
     session_id: str
     workflow_type: str
     started_at: str
@@ -218,7 +231,7 @@ class UpgradeReport:
     def to_markdown(self) -> str:
         """
         Generate human-readable markdown report.
-        
+
         Returns:
             Formatted markdown string
         """
@@ -247,20 +260,24 @@ class UpgradeReport:
             lines.append(f"- **Phase {phase_num}:** {summary}")
 
         if self.issues_encountered:
-            lines.extend([
-                "",
-                "## Issues Encountered",
-                "",
-            ])
+            lines.extend(
+                [
+                    "",
+                    "## Issues Encountered",
+                    "",
+                ]
+            )
             for issue in self.issues_encountered:
                 lines.append(f"- {issue}")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            f"_Report generated: {datetime.now().isoformat()}_",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                f"_Report generated: {datetime.now().isoformat()}_",
+            ]
+        )
 
         return "\n".join(lines)
 
@@ -269,7 +286,7 @@ class UpgradeReport:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'UpgradeReport':
+    def from_dict(cls, data: Dict) -> "UpgradeReport":
         """Create from dictionary."""
         return cls(**data)
 
@@ -278,26 +295,27 @@ class UpgradeReport:
 class UpgradeWorkflowSession:
     """
     Complete workflow session state for agent_os_upgrade_v1.
-    
+
     Extends base WorkflowState with upgrade-specific fields.
     """
+
     session_id: str
     workflow_type: str
     target_file: str
     current_phase: int
     completed_phases: List[int]
     phase_artifacts: Dict[int, Dict]
-    
+
     # Upgrade-specific fields
     source_path: str
     dry_run: bool = False
     auto_restart: bool = True
-    
+
     # Timestamps
     started_at: Optional[str] = None
     updated_at: Optional[str] = None
     completed_at: Optional[str] = None
-    
+
     # Status
     status: str = "in_progress"  # in_progress | completed | failed | rolled_back
     rollback_reason: Optional[str] = None
@@ -307,14 +325,14 @@ class UpgradeWorkflowSession:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> 'UpgradeWorkflowSession':
+    def from_dict(cls, data: Dict) -> "UpgradeWorkflowSession":
         """Create from dictionary."""
         return cls(**data)
 
     def get_backup_path(self) -> Optional[str]:
         """
         Get backup path from Phase 1 artifacts.
-        
+
         Returns:
             Backup path if Phase 1 completed, None otherwise
         """
@@ -326,7 +344,7 @@ class UpgradeWorkflowSession:
     def get_source_version(self) -> Optional[str]:
         """
         Get source version from Phase 0 artifacts.
-        
+
         Returns:
             Source version if Phase 0 completed, None otherwise
         """
@@ -342,4 +360,3 @@ class UpgradeWorkflowSession:
     def needs_rollback(self) -> bool:
         """Check if workflow needs rollback."""
         return self.status == "failed" and self.current_phase >= 2
-

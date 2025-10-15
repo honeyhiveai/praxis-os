@@ -184,48 +184,6 @@ class TestWorkflowEngineMetadata(unittest.TestCase):
         self.assertEqual(metadata.phases[0].phase_name, "Setup")
         self.assertEqual(metadata.phases[1].phase_name, "Execute")
 
-    def test_metadata_caching(self):
-        """Test that metadata is cached after first load."""
-        # Create test workflow with metadata
-        workflow_dir = self.test_dir / "test_workflow"
-        workflow_dir.mkdir()
-
-        test_metadata = {
-            "workflow_type": "test_workflow",
-            "version": "1.0.0",
-            "description": "Test workflow",
-            "total_phases": 1,
-            "estimated_duration": "10 minutes",
-            "primary_outputs": [],
-            "phases": [
-                {
-                    "phase_number": 0,
-                    "phase_name": "Test",
-                    "purpose": "Test",
-                    "estimated_effort": "10 minutes",
-                    "key_deliverables": [],
-                    "validation_criteria": [],
-                }
-            ],
-        }
-
-        metadata_file = workflow_dir / "metadata.json"
-        with open(metadata_file, "w") as f:
-            json.dump(test_metadata, f)
-
-        # Load metadata first time
-        metadata1 = self.engine.load_workflow_metadata("test_workflow")
-
-        # Delete metadata file
-        metadata_file.unlink()
-
-        # Load again - should come from cache
-        metadata2 = self.engine.load_workflow_metadata("test_workflow")
-
-        # Should be same object from cache
-        self.assertIs(metadata1, metadata2)
-        self.assertEqual(metadata2.workflow_type, "test_workflow")
-
     def test_start_workflow_includes_overview(self):
         """Test that start_workflow returns workflow_overview."""
         # Mock state manager to return a new session

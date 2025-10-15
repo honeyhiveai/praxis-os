@@ -5,12 +5,16 @@ Provides comprehensive validation functions for pre-flight checks,
 post-upgrade validation, and system state verification.
 """
 
-import subprocess
-import shutil
+# pylint: disable=broad-exception-caught,import-outside-toplevel,missing-raises-doc,unused-argument
+# Justification: Validation module uses broad exceptions for robustness,
+# lazy imports for optional dependencies, standard exception documentation,
+# and check_server_health has timeout parameter reserved for future implementation
+
 import logging
-import time
+import shutil
+import subprocess
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
@@ -59,9 +63,9 @@ class ValidationModule:
                 "errors": List[str]
             }
         """
-        logger.info(f"Validating source repository: {source_path}")
+        logger.info("Validating source repository: %s", source_path)
 
-        result = {
+        result: Dict[str, Any] = {
             "valid": False,
             "path_exists": False,
             "is_agent_os_repo": False,
@@ -139,10 +143,12 @@ class ValidationModule:
 
         if result["valid"]:
             logger.info(
-                f"Source repository validated: {result['version']} @ {result['commit']}"
+                "Source repository validated: %s @ %s",
+                result["version"],
+                result["commit"],
             )
         else:
-            logger.warning(f"Source validation failed: {result['errors']}")
+            logger.warning("Source validation failed: %s", result["errors"])
 
         return result
 
@@ -170,11 +176,11 @@ class ValidationModule:
                 "errors": List[str]
             }
         """
-        logger.info(f"Validating target structure: {target_path}")
+        logger.info("Validating target structure: %s", target_path)
 
         target = Path(target_path).resolve()
 
-        result = {
+        result: Dict[str, Any] = {
             "valid": False,
             "target_exists": target.exists(),
             "required_dirs": {},
@@ -208,7 +214,7 @@ class ValidationModule:
         if result["valid"]:
             logger.info("Target structure validated")
         else:
-            logger.warning(f"Target validation failed: {result['errors']}")
+            logger.warning("Target validation failed: %s", result["errors"])
 
         return result
 
@@ -235,7 +241,7 @@ class ValidationModule:
                 "required_gb": str
             }
         """
-        logger.info(f"Checking disk space for: {path}")
+        logger.info("Checking disk space for: %s", path)
 
         disk = shutil.disk_usage(path)
 
@@ -245,7 +251,7 @@ class ValidationModule:
                 f.stat().st_size for f in Path(path).rglob("*") if f.is_file()
             )
         except Exception as e:
-            logger.warning(f"Failed to calculate current size: {e}")
+            logger.warning("Failed to calculate current size: %s", e)
             current_size = 100 * 1024 * 1024  # Default 100 MB
 
         required = int(current_size * required_multiplier)
@@ -260,13 +266,15 @@ class ValidationModule:
 
         if result["sufficient"]:
             logger.info(
-                f"Disk space sufficient: {result['available_gb']} GB available, "
-                f"{result['required_gb']} GB required"
+                "Disk space sufficient: %s GB available, %s GB required",
+                result["available_gb"],
+                result["required_gb"],
             )
         else:
             logger.warning(
-                f"Insufficient disk space: {result['available_gb']} GB available, "
-                f"{result['required_gb']} GB required"
+                "Insufficient disk space: %s GB available, %s GB required",
+                result["available_gb"],
+                result["required_gb"],
             )
 
         return result
@@ -292,12 +300,12 @@ class ValidationModule:
         """
         import hashlib
 
-        logger.info(f"Verifying checksums: {source_dir} -> {target_dir}")
+        logger.info("Verifying checksums: %s -> %s", source_dir, target_dir)
 
         source = Path(source_dir)
         target = Path(target_dir)
 
-        result = {
+        result: Dict[str, Any] = {
             "verified": False,
             "files_checked": 0,
             "mismatches": [],
@@ -309,9 +317,7 @@ class ValidationModule:
             return result
 
         # Get all files in source
-        source_files = [
-            f.relative_to(source) for f in source.rglob("*") if f.is_file()
-        ]
+        source_files = [f.relative_to(source) for f in source.rglob("*") if f.is_file()]
 
         for relative_path in source_files:
             source_file = source / relative_path
@@ -322,12 +328,8 @@ class ValidationModule:
                 continue
 
             # Calculate checksums
-            source_checksum = hashlib.sha256(
-                source_file.read_bytes()
-            ).hexdigest()
-            target_checksum = hashlib.sha256(
-                target_file.read_bytes()
-            ).hexdigest()
+            source_checksum = hashlib.sha256(source_file.read_bytes()).hexdigest()
+            target_checksum = hashlib.sha256(target_file.read_bytes()).hexdigest()
 
             result["files_checked"] += 1
 
@@ -340,12 +342,12 @@ class ValidationModule:
         )
 
         if result["verified"]:
-            logger.info(f"Checksums verified for {result['files_checked']} files")
+            logger.info("Checksums verified for %s files", result["files_checked"])
         else:
             logger.warning(
-                f"Checksum verification failed: "
-                f"{len(result['mismatches'])} mismatches, "
-                f"{len(result['missing'])} missing files"
+                "Checksum verification failed: %s mismatches, %s missing files",
+                len(result["mismatches"]),
+                len(result["missing"]),
             )
 
         return result
@@ -370,7 +372,7 @@ class ValidationModule:
         """
         logger.info("Checking server health...")
 
-        result = {
+        result: Dict[str, Any] = {
             "healthy": False,
             "responding": False,
             "response_time_ms": None,
@@ -384,6 +386,7 @@ class ValidationModule:
                 capture_output=True,
                 text=True,
                 timeout=5,
+                check=False,
             )
 
             if ps_result.returncode == 0:
@@ -401,7 +404,9 @@ class ValidationModule:
         return result
 
     @staticmethod
-    def check_for_concurrent_upgrades(lock_file: str = ".agent-os/.upgrade-lock") -> Dict:
+    def check_for_concurrent_upgrades(
+        lock_file: str = ".agent-os/.upgrade-lock",
+    ) -> Dict:
         """
         Check for concurrent upgrade workflows.
 
@@ -429,15 +434,17 @@ class ValidationModule:
             try:
                 import json
 
-                result["lock_info"] = json.loads(lock_path.read_text())
-                logger.warning(f"Upgrade lock exists: {result['lock_info']}")
+                result["lock_info"] = json.loads(lock_path.read_text(encoding="utf-8"))
+                logger.warning("Upgrade lock exists: %s", result["lock_info"])
             except Exception as e:
-                logger.warning(f"Failed to read lock file: {e}")
+                logger.warning("Failed to read lock file: %s", e)
 
         return result
 
     @staticmethod
-    def validate_workflow_not_in_progress(state_dir: str = ".agent-os/.cache/state/") -> bool:
+    def validate_workflow_not_in_progress(
+        state_dir: str = ".agent-os/.cache/state/",
+    ) -> bool:
         """
         Check if any upgrade workflow is currently in progress.
 
@@ -463,11 +470,10 @@ class ValidationModule:
                     and state.get("current_phase", 0) < 5
                 ):
                     logger.warning(
-                        f"Active upgrade workflow found: {state.get('session_id')}"
+                        "Active upgrade workflow found: %s", state.get("session_id")
                     )
                     return False
             except Exception:
                 continue
 
         return True
-

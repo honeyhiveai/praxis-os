@@ -18,43 +18,41 @@ _SERVER_START_DATETIME = datetime.now(timezone.utc).isoformat()
 
 
 def register_server_info_tools(
-    mcp: Any,
-    project_discovery: Any,
-    transport_mode: str = "stdio"
+    mcp: Any, project_discovery: Any, transport_mode: str = "stdio"
 ) -> int:
     """
     Register server info tools with MCP server.
-    
+
     Args:
         mcp: FastMCP server instance
         project_discovery: ProjectInfoDiscovery instance
         transport_mode: Current transport mode (dual, stdio, http)
-        
+
     Returns:
         Number of tools registered
     """
-    
+
     @mcp.tool()
     async def get_server_info() -> Dict[str, Any]:
         """
         Get comprehensive server and project information.
-        
+
         Returns runtime metadata about the MCP server, the current project,
         and available capabilities. All information is discovered dynamically
         at runtime - no hardcoded values.
-        
+
         Useful for:
         - Debugging server configuration
         - Verifying project detection
         - Checking available tools and capabilities
         - Monitoring server uptime
-        
+
         Returns:
             Dictionary with three main sections:
             - server: Server runtime metadata
             - project: Project information
             - capabilities: Available features and tools
-            
+
         Example:
             >>> info = await get_server_info()
             >>> print(f"Server uptime: {info['server']['uptime_seconds']}s")
@@ -64,18 +62,18 @@ def register_server_info_tools(
         try:
             # Discover project info dynamically
             project_info = project_discovery.get_project_info()
-            
+
             # Calculate uptime
             uptime_seconds = int(time.time() - _SERVER_START_TIME)
-            
+
             # Get tool count from MCP server
             try:
                 # FastMCP stores tools in a dict
                 tools_count = len(mcp.list_tools())
-            except Exception as e:
-                logger.warning(f"Could not get tool count: {e}")
+            except Exception as e:  # pylint: disable=broad-exception-caught
+                logger.warning("Could not get tool count: %s", e)
                 tools_count = 0
-            
+
             return {
                 "server": {
                     "version": "1.0.0",
@@ -99,9 +97,9 @@ def register_server_info_tools(
                     "http_transport": transport_mode in ["dual", "http"],
                 },
             }
-        
-        except Exception as e:
-            logger.error(f"Error getting server info: {e}", exc_info=True)
+
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logger.error("Error getting server info: %s", e, exc_info=True)
             # Return minimal info even on error
             return {
                 "server": {
@@ -115,9 +113,8 @@ def register_server_info_tools(
                 "project": {"error": "Could not retrieve project info"},
                 "capabilities": {"error": "Could not retrieve capabilities"},
             }
-    
+
     return 1  # Number of tools registered
 
 
 __all__ = ["register_server_info_tools"]
-

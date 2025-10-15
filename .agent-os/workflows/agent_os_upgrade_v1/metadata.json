@@ -18,7 +18,7 @@
     {
       "phase_number": 0,
       "phase_name": "Pre-Flight Checks",
-      "file": "phases/0-pre-flight-checks.md",
+      "file": "phases/0/phase.md",
       "purpose": "Validate source repository, target structure, disk space, and prevent concurrent upgrades",
       "estimated_effort": "30 seconds",
       "key_deliverables": [
@@ -33,12 +33,18 @@
         "Target has valid structure",
         "Sufficient disk space (2x current size)",
         "No other upgrade workflows in progress"
+      ],
+      "tasks": [
+        {"task_number": 1, "name": "validate-source", "file": "task-1-validate-source.md"},
+        {"task_number": 2, "name": "validate-target", "file": "task-2-validate-target.md"},
+        {"task_number": 3, "name": "check-disk-space", "file": "task-3-check-disk-space.md"},
+        {"task_number": 4, "name": "check-concurrent", "file": "task-4-check-concurrent.md"}
       ]
     },
     {
       "phase_number": 1,
       "phase_name": "Backup & Preparation",
-      "file": "phases/1-backup-preparation.md",
+      "file": "phases/1/phase.md",
       "purpose": "Create timestamped backup of current installation and acquire upgrade lock",
       "estimated_effort": "20 seconds",
       "key_deliverables": [
@@ -52,12 +58,17 @@
         "Checksum manifest generated",
         "Backup integrity verified",
         "Lock file created"
+      ],
+      "tasks": [
+        {"task_number": 1, "name": "create-backup", "file": "task-1-create-backup.md"},
+        {"task_number": 2, "name": "verify-backup", "file": "task-2-verify-backup.md"},
+        {"task_number": 3, "name": "acquire-lock", "file": "task-3-acquire-lock.md"}
       ]
     },
     {
       "phase_number": 2,
       "phase_name": "Content Upgrade",
-      "file": "phases/2-content-upgrade.md",
+      "file": "phases/2/phase.md",
       "purpose": "Upgrade .agent-os content (standards, usage, workflows) using safe-upgrade script",
       "estimated_effort": "45 seconds",
       "key_deliverables": [
@@ -72,12 +83,18 @@
         "Checksums verified for copied files",
         "Version updated in config or VERSION file",
         "Update log appended"
+      ],
+      "tasks": [
+        {"task_number": 1, "name": "dry-run", "file": "task-1-dry-run.md"},
+        {"task_number": 2, "name": "actual-upgrade", "file": "task-2-actual-upgrade.md"},
+        {"task_number": 3, "name": "update-gitignore", "file": "task-3-update-gitignore.md"},
+        {"task_number": 4, "name": "verify-checksums", "file": "task-4-verify-checksums.md"}
       ]
     },
     {
       "phase_number": 3,
       "phase_name": "MCP Server Upgrade",
-      "file": "phases/3-mcp-server-upgrade.md",
+      "file": "phases/3/phase.md",
       "purpose": "Upgrade MCP server, install dependencies, restart server, and validate health",
       "estimated_effort": "60 seconds",
       "key_deliverables": [
@@ -94,12 +111,17 @@
         "Server health check returns 200 OK",
         "All expected tools registered"
       ],
-      "requires_restart": true
+      "requires_restart": true,
+      "tasks": [
+        {"task_number": 1, "name": "copy-server", "file": "task-1-copy-server.md"},
+        {"task_number": 2, "name": "install-deps", "file": "task-2-install-deps.md"},
+        {"task_number": 3, "name": "restart-server", "file": "task-3-restart-server.md"}
+      ]
     },
     {
       "phase_number": 4,
       "phase_name": "Post-Upgrade Validation",
-      "file": "phases/4-post-upgrade-validation.md",
+      "file": "phases/4/phase.md",
       "purpose": "Validate upgraded installation with smoke tests and comprehensive checks",
       "estimated_effort": "30 seconds",
       "key_deliverables": [
@@ -117,12 +139,17 @@
         "RAG index is current",
         "Unit tests pass (pytest)",
         "Validation report generated"
+      ],
+      "tasks": [
+        {"task_number": 1, "name": "validate-tools", "file": "task-1-validate-tools.md"},
+        {"task_number": 2, "name": "smoke-tests", "file": "task-2-smoke-tests.md"},
+        {"task_number": 3, "name": "generate-report", "file": "task-3-generate-report.md"}
       ]
     },
     {
       "phase_number": 5,
       "phase_name": "Cleanup & Documentation",
-      "file": "phases/5-cleanup-documentation.md",
+      "file": "phases/5/phase.md",
       "purpose": "Release lock, archive old backups, generate reports, and update documentation",
       "estimated_effort": "15 seconds",
       "key_deliverables": [
@@ -139,6 +166,11 @@
         "INSTALLATION_SUMMARY.md updated",
         "UPDATE_LOG.txt appended",
         "Git changes committed (if applicable)"
+      ],
+      "tasks": [
+        {"task_number": 1, "name": "release-lock", "file": "task-1-release-lock.md"},
+        {"task_number": 2, "name": "archive-backups", "file": "task-2-archive-backups.md"},
+        {"task_number": 3, "name": "generate-summary", "file": "task-3-generate-summary.md"}
       ]
     }
   ],

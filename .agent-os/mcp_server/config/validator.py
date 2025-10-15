@@ -55,22 +55,20 @@ class ConfigValidator:
 
         if not config.mcp.enabled_tool_groups:
             errors.append("❌ At least one tool group must be enabled")
-        
+
         # Validate HTTP transport configuration
-        if not (1024 <= config.mcp.http_port <= 65535):
+        if not 1024 <= config.mcp.http_port <= 65535:
             errors.append(
                 f"❌ http_port must be between 1024-65535: {config.mcp.http_port}"
             )
-        
+
         if config.mcp.http_host != "127.0.0.1":
             errors.append(
                 f"❌ http_host must be '127.0.0.1' for security: {config.mcp.http_host}"
             )
-        
+
         if not config.mcp.http_path.startswith("/"):
-            errors.append(
-                f"❌ http_path must start with '/': {config.mcp.http_path}"
-            )
+            errors.append(f"❌ http_path must start with '/': {config.mcp.http_path}")
 
         return errors
 

@@ -20,13 +20,13 @@ logger = logging.getLogger(__name__)
 class PortManager:
     """
     Manages dynamic port allocation and server state persistence.
-    
+
     Responsibilities:
     - Allocate available ports from range 4242-5242
     - Write atomic state files for sub-agent discovery
     - Provide state file cleanup on shutdown
     - Validate port availability via socket binding
-    
+
     State file format (.agent-os/.mcp_server_state.json):
     {
       "version": "1.0.0",
@@ -39,7 +39,7 @@ class PortManager:
       "started_at": "2025-10-11T10:30:00Z",
       "project": {"name": "...", "root": "..."}
     }
-    
+
     Example:
         >>> from pathlib import Path
         >>> manager = PortManager(Path(".agent-os"), project_discovery)
@@ -48,15 +48,15 @@ class PortManager:
         >>> # ... server runs ...
         >>> manager.cleanup_state()
     """
-    
+
     STATE_FILE_NAME = ".mcp_server_state.json"
     DEFAULT_PORT_START = 4242
     DEFAULT_PORT_END = 5242
-    
+
     def __init__(self, base_path: Path, project_discovery):
         """
         Initialize port manager.
-        
+
         Args:
             base_path: Path to .agent-os directory
             project_discovery: ProjectInfoDiscovery instance for metadata
@@ -64,26 +64,23 @@ class PortManager:
         self.base_path = base_path
         self.state_file = base_path / self.STATE_FILE_NAME
         self.project_discovery = project_discovery
-    
-    def find_available_port(
-        self,
-        preferred_port: int = DEFAULT_PORT_START
-    ) -> int:
+
+    def find_available_port(self, preferred_port: int = DEFAULT_PORT_START) -> int:
         """
         Find first available port in range.
-        
+
         Tries preferred port first (typically 4242), then increments
         through range until available port found or range exhausted.
-        
+
         Args:
             preferred_port: First port to try (default: 4242)
-            
+
         Returns:
             Available port number
-            
+
         Raises:
             RuntimeError: If no ports available in range with actionable message
-            
+
         Example:
             >>> port = manager.find_available_port()
             >>> print(f"Allocated port: {port}")
@@ -91,39 +88,39 @@ class PortManager:
         """
         for port in range(preferred_port, self.DEFAULT_PORT_END + 1):
             if self._is_port_available(port):
-                logger.info(f"Allocated port {port}")
+                logger.info("Allocated port %d", port)
                 return port
-        
+
         # No ports available - provide actionable error
         raise RuntimeError(
             f"No available ports in range {preferred_port}-{self.DEFAULT_PORT_END}. "
             f"Close some MCP server instances (e.g., other Cursor windows) and retry. "
             f"To see active servers: ps aux | grep mcp_server"
         )
-    
+
     def write_state(
         self,
         transport: str,
         port: Optional[int],
         host: str = "127.0.0.1",
-        path: str = "/mcp"
+        path: str = "/mcp",
     ) -> None:
         """
         Write server state to file for sub-agent discovery.
-        
+
         Uses atomic write (temp file + rename) to prevent corruption
         if process crashes during write. Sets restrictive permissions
         (0o600) for security.
-        
+
         Args:
             transport: Transport mode ("dual", "stdio", "http")
             port: HTTP port (None for stdio-only)
             host: HTTP host (default: "127.0.0.1")
             path: HTTP path (default: "/mcp")
-            
+
         Raises:
             OSError: If file write fails (propagated, fatal error)
-            
+
         Example:
             >>> manager.write_state(
             ...     transport="dual",
@@ -134,7 +131,7 @@ class PortManager:
         """
         # Discover project info dynamically
         project_info = self.project_discovery.get_project_info()
-        
+
         # Build complete state document
         state = {
             "version": "1.0.0",
@@ -145,36 +142,33 @@ class PortManager:
             "url": f"http://{host}:{port}{path}" if port else None,
             "pid": os.getpid(),
             "started_at": datetime.now(timezone.utc).isoformat(),
-            "project": {
-                "name": project_info["name"],
-                "root": project_info["root"]
-            }
+            "project": {"name": project_info["name"], "root": project_info["root"]},
         }
-        
+
         # Atomic write: temp file + rename (POSIX atomic operation)
         temp_file = self.state_file.with_suffix(".tmp")
         temp_file.write_text(json.dumps(state, indent=2), encoding="utf-8")
         temp_file.rename(self.state_file)
-        
+
         # Set restrictive permissions (owner read/write only)
         self.state_file.chmod(0o600)
-        
-        logger.info(f"State file written: {self.state_file}")
-    
+
+        logger.info("State file written: %s", self.state_file)
+
     @classmethod
     def read_state(cls, base_path: Path) -> Optional[Dict]:
         """
         Read server state from file (for sub-agents).
-        
+
         Returns None gracefully for missing or corrupted files
         to enable sub-agents to detect server unavailability.
-        
+
         Args:
             base_path: Path to .agent-os directory
-            
+
         Returns:
             State dictionary if valid, None otherwise
-            
+
         Example:
             >>> from pathlib import Path
             >>> state = PortManager.read_state(Path(".agent-os"))
@@ -185,24 +179,25 @@ class PortManager:
             ...     print("Server not running")
         """
         state_file = base_path / cls.STATE_FILE_NAME
-        
+
         if not state_file.exists():
             return None
-        
+
         try:
-            return json.loads(state_file.read_text(encoding="utf-8"))
+            result: Dict = json.loads(state_file.read_text(encoding="utf-8"))
+            return result
         except (json.JSONDecodeError, OSError) as e:
             # Corrupted or unreadable - return None for graceful degradation
-            logger.warning(f"Failed to read state file: {e}")
+            logger.warning("Failed to read state file: %s", e)
             return None
-    
+
     def cleanup_state(self) -> None:
         """
         Remove state file on shutdown.
-        
+
         Called in finally block to ensure cleanup even on errors.
         Safe to call multiple times or if file doesn't exist.
-        
+
         Example:
             >>> try:
             ...     # ... run server ...
@@ -212,18 +207,18 @@ class PortManager:
         """
         if self.state_file.exists():
             self.state_file.unlink()
-            logger.info(f"State file removed: {self.state_file}")
-    
+            logger.info("State file removed: %s", self.state_file)
+
     def _is_port_available(self, port: int) -> bool:
         """
         Check if port is available by attempting socket bind.
-        
+
         Args:
             port: Port number to check
-            
+
         Returns:
             True if port is available, False otherwise
-            
+
         Note:
             Uses SO_REUSEADDR to handle TIME_WAIT state properly.
         """
@@ -235,4 +230,3 @@ class PortManager:
         except OSError:
             # Port in use or permission denied
             return False
-

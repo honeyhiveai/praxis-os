@@ -1,26 +1,18 @@
-# Phase 3: Meta-Workflow Compliance
+# Phase 3: Core Files & Documentation
 
-**Purpose**: Validate entire workflow against all 5 meta-workflow principles  
-**Deliverable**: Compliance report, all violations fixed
-
-**Note**: This is Phase "N+3" in the workflow definition, where N = number of target workflow phases.
+**Purpose**: Create core supporting files, documentation, and archive definition  
+**Deliverable**: Core files, supporting docs, and workflow documentation
 
 ---
 
 ## Overview
 
-This critical phase audits the created workflow for compliance with all meta-workflow principles. We systematically:
+This phase populates the core/ and supporting-docs/ directories with essential files. We systematically:
 
-1. **Audit** file sizes across all tasks
-2. **Audit** command coverage percentages
-3. **Verify** three-tier architecture adherence
-4. **Verify** validation gates are complete and parseable
-5. **Verify** binding contract exists
-6. **Verify** horizontal decomposition applied
-7. **Generate** comprehensive compliance report
-8. **Fix** any violations discovered
-9. **Re-validate** after fixes
-10. **Confirm** 100% compliance achieved
+1. **Create** command language glossary
+2. **Create** progress tracking template
+3. **Archive** the original workflow definition
+4. **Generate** human-readable design summary
 
 **Status**: ⬜ Not Started | 🟡 In Progress | ✅ Complete
 
@@ -30,33 +22,25 @@ This critical phase audits the created workflow for compliance with all meta-wor
 
 | # | Task | File | Status |
 |---|------|------|--------|
-| 1 | Audit File Sizes | task-1-audit-file-sizes.md | ⬜ |
-| 2 | Audit Command Coverage | task-2-audit-command-coverage.md | ⬜ |
-| 3 | Verify Three-Tier | task-3-verify-three-tier.md | ⬜ |
-| 4 | Verify Validation Gates | task-4-verify-validation-gates.md | ⬜ |
-| 5 | Verify Binding Contract | task-5-verify-binding-contract.md | ⬜ |
-| 6 | Verify Horizontal Decomposition | task-6-verify-horizontal-decomposition.md | ⬜ |
-| 7 | Generate Compliance Report | task-7-generate-compliance-report.md | ⬜ |
-| 8 | Fix Violations | task-8-fix-violations.md | ⬜ |
-| 9 | Re-validate | task-9-re-validate.md | ⬜ |
-| 10 | Final Compliance Check | task-10-final-compliance-check.md | ⬜ |
+| 1 | Create Command Glossary | task-1-create-command-glossary.md | ⬜ |
+| 2 | Create Progress Tracking | task-2-create-progress-tracking.md | ⬜ |
+| 3 | Archive Definition | task-3-archive-definition.md | ⬜ |
+| 4 | Generate Design Summary | task-4-generate-design-summary.md | ⬜ |
 
 ---
 
 ## Validation Gate
 
-🚨 **CRITICAL**: Phase 3 MUST complete successfully before proceeding to Phase 4.
+🚨 **CRITICAL**: Phase 2 MUST complete successfully before proceeding to Phase 3.
 
 **Evidence Required**:
 
 | Evidence | Type | Validator | Description |
 |----------|------|-----------|-------------|
-| `file_size_compliance_percent` | integer | percent_gte_95 | Percentage of task files ≤100 lines |
-| `command_coverage_percent` | integer | percent_gte_80 | Average command coverage across workflow |
-| `three_tier_validated` | boolean | is_true | Three-tier architecture verified |
-| `gate_coverage_percent` | integer | percent_gte_100 | Percentage of phases with validation gates |
-| `binding_contract_present` | boolean | is_true | Binding contract verified in entry point |
-| `violations_fixed` | boolean | is_true | All violations resolved |
+| `command_glossary_created` | boolean | is_true | Command glossary file created in core/ |
+| `progress_tracking_created` | boolean | is_true | Progress tracking file created in core/ |
+| `definition_archived` | boolean | is_true | Definition YAML archived in supporting-docs/ |
+| `design_summary_created` | boolean | is_true | Design summary markdown generated |
 
 **Human Approval**: Not required
 
@@ -64,7 +48,7 @@ This critical phase audits the created workflow for compliance with all meta-wor
 
 ## Navigation
 
-**Start Here**: 🎯 NEXT-MANDATORY: task-1-audit-file-sizes.md
+**Start Here**: 🎯 NEXT-MANDATORY: task-1-create-command-glossary.md
 
-**After Phase 3 Complete**: 🎯 NEXT-MANDATORY: ../4/phase.md
+**After Phase 3 Complete**: 🎯 NEXT-MANDATORY: ../dynamic/phase-template.md (if dynamic) or ../4/phase.md (if static)
 

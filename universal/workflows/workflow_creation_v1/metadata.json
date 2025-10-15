@@ -4,21 +4,22 @@
   "description": "Systematic workflow creation using meta-workflow principles",
   "workflow_type": "workflow_creation",
   "target_language": ["any"],
-  "total_phases": 5,
-  "dynamic_phases": true,
-  "dynamic_config": {
-    "source_path_key": "definition_path",
-    "source_type": "workflow_definition",
-    "templates": {
-      "phase": "phases/dynamic/phase-template.md",
-      "task": "phases/dynamic/task-template.md"
-    },
-    "parser": "workflow_definition_parser",
-    "iteration_variable": "target_phase"
-  },
+  "total_phases": 7,
+  "dynamic_phases": false,
   "phases": [
     {
       "phase_number": 0,
+      "phase_name": "Input Conversion & Preprocessing",
+      "tasks": [
+        {"task_number": 1, "name": "determine-input-type", "file": "task-1-determine-input-type.md"},
+        {"task_number": 2, "name": "read-input-document", "file": "task-2-read-input-document.md"},
+        {"task_number": 3, "name": "extract-from-design", "file": "task-3-extract-from-design.md"},
+        {"task_number": 4, "name": "generate-yaml-definition", "file": "task-4-generate-yaml-definition.md"},
+        {"task_number": 5, "name": "validate-generated-definition", "file": "task-5-validate-generated-definition.md"}
+      ]
+    },
+    {
+      "phase_number": 1,
       "phase_name": "Definition Import & Validation",
       "tasks": [
         {"task_number": 1, "name": "locate-definition", "file": "task-1-locate-definition.md"},
@@ -29,7 +30,7 @@
       ]
     },
     {
-      "phase_number": 1,
+      "phase_number": 2,
       "phase_name": "Workflow Scaffolding",
       "tasks": [
         {"task_number": 1, "name": "create-workflow-directory", "file": "task-1-create-workflow-directory.md"},
@@ -38,11 +39,12 @@
         {"task_number": 4, "name": "create-supporting-docs", "file": "task-4-create-supporting-docs.md"},
         {"task_number": 5, "name": "create-dynamic-directories", "file": "task-5-create-dynamic-directories.md"},
         {"task_number": 6, "name": "generate-metadata-json", "file": "task-6-generate-metadata-json.md"},
-        {"task_number": 7, "name": "verify-scaffolding", "file": "task-7-verify-scaffolding.md"}
+        {"task_number": 7, "name": "validate-metadata", "file": "task-7-validate-metadata.md"},
+        {"task_number": 8, "name": "verify-scaffolding", "file": "task-8-verify-scaffolding.md"}
       ]
     },
     {
-      "phase_number": 2,
+      "phase_number": 3,
       "phase_name": "Core Files & Documentation",
       "tasks": [
         {"task_number": 1, "name": "create-command-glossary", "file": "task-1-create-command-glossary.md"},
@@ -52,7 +54,17 @@
       ]
     },
     {
-      "phase_number": 3,
+      "phase_number": 4,
+      "phase_name": "Phase Content Generation",
+      "tasks": [
+        {"task_number": 1, "name": "load-target-definition", "file": "task-1-load-target-definition.md"},
+        {"task_number": 2, "name": "generate-phase-files", "file": "task-2-generate-phase-files.md"},
+        {"task_number": 3, "name": "generate-task-files", "file": "task-3-generate-task-files.md"},
+        {"task_number": 4, "name": "verify-generation", "file": "task-4-verify-generation.md"}
+      ]
+    },
+    {
+      "phase_number": 5,
       "phase_name": "Meta-Workflow Compliance",
       "tasks": [
         {"task_number": 1, "name": "audit-file-sizes", "file": "task-1-audit-file-sizes.md"},
@@ -68,7 +80,7 @@
       ]
     },
     {
-      "phase_number": 4,
+      "phase_number": 6,
       "phase_name": "Testing & Delivery",
       "tasks": [
         {"task_number": 1, "name": "dry-run-navigation", "file": "task-1-dry-run-navigation.md"},

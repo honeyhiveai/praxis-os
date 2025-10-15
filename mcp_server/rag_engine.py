@@ -424,29 +424,39 @@ class RAGEngine:
         return hashlib.md5(key_data.encode()).hexdigest()
 
     def _check_cache(self, cache_key: str) -> Optional[SearchResult]:
-        """Check if cached result exists and is fresh.
+        """Check if cached result exists and is fresh (thread-safe).
+
+        Lock must be held for all cache operations to prevent race conditions
+        where multiple threads check/modify cache simultaneously.
 
         Returns cached result if found and not expired, otherwise None.
+
+        Thread Safety:
+        - Acquires lock before checking cache
+        - Prevents concurrent modification during read/delete
+        - Safe for concurrent search operations
 
         :param cache_key: Cache key to look up
         :type cache_key: str
         :return: Cached search result if fresh, None otherwise
         :rtype: Optional[SearchResult]
         """
-        if cache_key not in self._query_cache:
-            return None
+        # Lock must be held for all cache operations
+        with self._lock:
+            if cache_key not in self._query_cache:
+                return None
 
-        result: SearchResult
-        result, timestamp = self._query_cache[cache_key]
+            result: SearchResult
+            result, timestamp = self._query_cache[cache_key]
 
-        # Check if expired
-        if time.time() - timestamp > self.cache_ttl_seconds:
-            del self._query_cache[cache_key]
-            return None
+            # Check if expired
+            if time.time() - timestamp > self.cache_ttl_seconds:
+                del self._query_cache[cache_key]
+                return None
 
-        # Return cached result with cache_hit flag
-        result.cache_hit = True
-        return result
+            # Return cached result with cache_hit flag
+            result.cache_hit = True
+            return result
 
     def _cache_result(self, cache_key: str, result: SearchResult) -> None:
         """Cache search result with timestamp.
@@ -465,19 +475,31 @@ class RAGEngine:
             self._clean_cache()
 
     def _clean_cache(self) -> None:
-        """Remove expired cache entries.
+        """Remove expired cache entries (thread-safe).
 
         Iterates through cache and deletes entries that have exceeded
         the TTL threshold.
+
+        Thread Safety:
+        - Uses list() copy to prevent RuntimeError during iteration
+        - Safe to call concurrently with cache reads/writes
+        - Lock held during entire operation
+
+        Note:
+            Must be called while holding self._lock (if called externally)
+            or will acquire lock if called directly.
         """
-        current_time = time.time()
-        expired_keys = [
-            key
-            for key, (_, timestamp) in self._query_cache.items()
-            if current_time - timestamp > self.cache_ttl_seconds
-        ]
-        for key in expired_keys:
-            del self._query_cache[key]
+        # Lock must be held for all cache operations
+        with self._lock:
+            current_time = time.time()
+            # Use list() to create snapshot - prevents RuntimeError if cache modified
+            expired_keys = [
+                key
+                for key, (_, timestamp) in list(self._query_cache.items())
+                if current_time - timestamp > self.cache_ttl_seconds
+            ]
+            for key in expired_keys:
+                del self._query_cache[key]
 
     def health_check(self) -> Dict[str, Any]:
         """

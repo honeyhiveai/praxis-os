@@ -121,22 +121,64 @@ phases:
           #         codebase_search, list_dir, glob_file_search
 
         steps_outline:
-          # Optional: High-level steps for this task
-          # Helps workflow_creation_v1 generate detailed task content
-          - "[Step 1 overview]"
-          - "[Step 2 overview]"
-          - "[Step 3 overview]"
+          # 🔥 STRONGLY RECOMMENDED: High-level steps for this task
+          # WITHOUT THIS: Phase 4 generation will use weak fallback logic
+          # WITH THIS: Task files will have rich, actionable 100-170 line instructions
+          #
+          # Providing detailed steps results in AI-executable task files.
+          # Without steps, generated tasks will be generic stubs that agents cannot execute.
+          #
+          # ✅ GOOD PRACTICE: Break down task into 3-8 logical steps
+          # Example: For "validate-structure" task:
+          # - "Load YAML definition file"
+          # - "Load template schema"
+          # - "Validate required fields present"
+          # - "Validate data types correct"
+          # - "Document validation results"
+          #
+          # ❌ BAD PRACTICE: Leaving this empty or using single vague step
+          - "[Step 1 overview - be specific about action to take]"
+          - "[Step 2 overview - include any tool/command needed]"
+          - "[Step 3 overview - mention validation/verification]"
+          - "[Step 4 overview - document output/result]"
 
         examples_needed:
-          # Optional: Types of examples to include in task file
-          - "[Example type 1 - e.g., 'Command usage example']"
-          - "[Example type 2 - e.g., 'Expected output example']"
+          # 🔥 STRONGLY RECOMMENDED: Types of examples to include
+          # WITHOUT THIS: Phase 4 may skip examples or use generic placeholders
+          # WITH THIS: Task files will include concrete, instructive examples
+          #
+          # Be specific about example types (success case, failure case, etc.)
+          # Examples make task files significantly more useful for AI agents.
+          #
+          # ✅ GOOD PRACTICE: Specify 2-3 example types per task
+          # Example: For "implement-api" task:
+          # - "Success case: Valid request returns 200"
+          # - "Failure case: Invalid auth returns 401"
+          # - "Edge case: Malformed request returns 400"
+          #
+          # ❌ BAD PRACTICE: Generic "add example here" or leaving empty
+          - "[Example type 1 - e.g., 'Success case example with working code']"
+          - "[Example type 2 - e.g., 'Failure/edge case example with error handling']"
 
         validation_criteria:
-          # Optional: Success criteria specific to this task
-          # Different from phase validation gate (less formal)
-          - "[Criterion 1 - used for task completion checklist]"
-          - "[Criterion 2]"
+          # 🔥 STRONGLY RECOMMENDED: Task-specific success criteria
+          # WITHOUT THIS: Generic "Task completed successfully" will be used
+          # WITH THIS: Task files will have specific, measurable quality checks
+          #
+          # Make criteria specific and measurable (not vague).
+          # These become the Quality Checks section in generated task files.
+          #
+          # ✅ GOOD PRACTICE: 3-5 specific, measurable criteria per task
+          # Example: For "write-tests" task:
+          # - "Test coverage >= 95%"
+          # - "All edge cases covered"
+          # - "Tests pass in CI"
+          # - "No skipped tests"
+          #
+          # ❌ BAD PRACTICE: "Task complete", "Looks good", "Finished"
+          - "[Criterion 1 - must be measurable, e.g., 'File size under 170 lines']"
+          - "[Criterion 2 - must be specific, e.g., 'All required sections present']"
+          - "[Criterion 3 - must be verifiable, e.g., 'No linter errors']"
 
         # OPTIONAL: Child workflow invocation
         invokes_workflow: null

@@ -48,9 +48,7 @@ class ServerFactory:
         self.observers: List[Any] = []  # Track file watchers for cleanup
 
     def create_server(
-        self,
-        project_discovery: Optional[Any] = None,
-        transport_mode: str = "stdio"
+        self, project_discovery: Optional[Any] = None, transport_mode: str = "stdio"
     ) -> FastMCP:
         """
         Create fully configured MCP server.

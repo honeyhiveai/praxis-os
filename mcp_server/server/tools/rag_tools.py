@@ -98,10 +98,7 @@ def register_rag_tools(mcp: Any, rag_engine: Any) -> int:
             # Prepend reminder to FIRST result only, at the very beginning
             if formatted_results:
                 reminder_text = (
-                    "⚙️ AGENT OS REMINDER: Quality work is ensured, by "
-                    "completing it in a thorough, systematic manner, "
-                    "ensuring accuracy over speed. Doing it right the "
-                    "first time is our goal.\n\n"
+                    "🔍🔍🔍🔍🔍 QUERIES = KNOWLEDGE = ACCURACY = QUALITY ⭐⭐⭐⭐⭐\n\n"
                     "---\n\n"
                 )
                 formatted_results[0]["content"] = (

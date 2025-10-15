@@ -43,7 +43,7 @@ class RAGConfig:
 class MCPConfig:
     """
     MCP server-specific configuration.
-    
+
     Includes transport configuration for dual-transport mode support.
     """
 
@@ -51,7 +51,7 @@ class MCPConfig:
         default_factory=lambda: ["rag", "workflow", "browser"]
     )
     max_tools_warning: int = 20
-    
+
     # HTTP transport configuration (for dual and HTTP modes)
     http_port: int = 4242
     http_host: str = "127.0.0.1"

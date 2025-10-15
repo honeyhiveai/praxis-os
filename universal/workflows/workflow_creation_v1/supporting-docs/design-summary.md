@@ -36,25 +36,32 @@ This is a workflow (not a tool or standard) because:
 
 ## Architecture
 
-### Static Phases (5 Total)
+### Static Phases (6 Total)
 
-**Phase 0: Definition Import & Validation** (5 tasks)
+**Phase 0: Input Conversion & Preprocessing** (5 tasks)
+- Determine input type (design document or YAML)
+- Read input document
+- Extract from design document (if applicable)
+- Generate YAML definition (if applicable)
+- Validate generated definition
+
+**Phase 1: Definition Import & Validation** (5 tasks)
 - Load workflow definition YAML
 - Validate structure and completeness
 - Prepare for creation
 
-**Phase 1: Workflow Scaffolding** (7 tasks)
+**Phase 2: Workflow Scaffolding** (8 tasks)
 - Create directory structure
 - Generate metadata.json
 - Set up core and supporting-docs
 
-**Phase 2: Core Files & Documentation** (4 tasks)
+**Phase 3: Core Files & Documentation** (4 tasks)
 - Create command glossary
 - Create progress tracking
 - Archive definition
 - Generate design summary
 
-**Phase N+3: Meta-Workflow Compliance** (10 tasks)
+**Phase N+4: Meta-Workflow Compliance** (10 tasks)
 - Audit file sizes
 - Audit command coverage
 - Verify three-tier architecture
@@ -66,7 +73,7 @@ This is a workflow (not a tool or standard) because:
 - Re-validate
 - Final compliance check
 
-**Phase N+4: Testing & Delivery** (8 tasks)
+**Phase N+5: Testing & Delivery** (8 tasks)
 - Dry-run navigation
 - Validate commands
 - Validate gates are parseable
@@ -76,7 +83,7 @@ This is a workflow (not a tool or standard) because:
 - Final validation
 - Human review (APPROVAL REQUIRED)
 
-### Dynamic Phases (3 to N+2)
+### Dynamic Phases (4 to N+3)
 
 The workflow dynamically creates phases for each target workflow phase:
 - Iterates N times (once per target phase)
@@ -128,12 +135,13 @@ The workflow produces:
 - No duplication of standards content
 
 ### 4. Validation Gates at Every Boundary
-- Phase 0: Definition validated
-- Phase 1: Scaffolding verified
-- Phase 2: Core files created
+- Phase 0: Input converted
+- Phase 1: Definition validated
+- Phase 2: Scaffolding verified
+- Phase 3: Core files created
 - Each dynamic iteration: Target phase complete
-- Phase N+3: Compliance confirmed
-- Phase N+4: Human approval obtained
+- Phase N+4: Compliance confirmed
+- Phase N+5: Human approval obtained
 
 ### 5. Embedded Compliance Auditing
 - Self-validates against meta-workflow principles
@@ -145,12 +153,12 @@ The workflow produces:
 
 | Metric | Target | Enforced |
 |--------|--------|----------|
-| Task file size | ≤100 lines | Phase N+3, Task 1 |
-| Command coverage | ≥80% | Phase N+3, Task 2 |
-| Validation gates | 100% | Phase N+3, Task 4 |
-| Three-tier architecture | 100% | Phase N+3, Task 3 |
-| Horizontal decomposition | 100% | Phase N+3, Task 6 |
-| Meta-workflow compliance | 100% | Phase N+3, Task 10 |
+| Task file size | ≤100 lines | Phase N+4, Task 1 |
+| Command coverage | ≥80% | Phase N+4, Task 2 |
+| Validation gates | 100% | Phase N+4, Task 4 |
+| Three-tier architecture | 100% | Phase N+4, Task 3 |
+| Horizontal decomposition | 100% | Phase N+4, Task 6 |
+| Meta-workflow compliance | 100% | Phase N+4, Task 10 |
 
 ## Usage Pattern
 
@@ -163,12 +171,13 @@ The workflow produces:
                        {definition_path: "path/to/definition.yaml"})
 
 3. Execute Phases
-   ├─> Phase 0: Import & validate definition
-   ├─> Phase 1: Create scaffolding
-   ├─> Phase 2: Create core files
-   ├─> Phases 3-N+2: Create each target phase (dynamic)
-   ├─> Phase N+3: Validate compliance
-   └─> Phase N+4: Test & deliver (human approval)
+   ├─> Phase 0: Convert input (design doc → YAML)
+   ├─> Phase 1: Import & validate definition
+   ├─> Phase 2: Create scaffolding
+   ├─> Phase 3: Create core files
+   ├─> Phases 4-N+3: Create each target phase (dynamic)
+   ├─> Phase N+4: Validate compliance
+   └─> Phase N+5: Test & deliver (human approval)
 
 4. Output
    └─> universal/workflows/workflow-name-v1/ (complete workflow)

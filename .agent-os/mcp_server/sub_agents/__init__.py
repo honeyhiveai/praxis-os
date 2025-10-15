@@ -3,4 +3,3 @@
 from .discovery import discover_mcp_server
 
 __all__ = ["discover_mcp_server"]
-

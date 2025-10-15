@@ -213,10 +213,10 @@ phases:
   # After dynamic phases complete, workflow continues with static phases:
 
   # --------------------------------------------------------------------------
-  # Phase N+3: Meta-Workflow Compliance (STATIC)
+  # Phase N+4: Meta-Workflow Compliance (STATIC)
   # --------------------------------------------------------------------------
-  # Note: Actual phase number will be 3 + N where N = total_target_phases
-  - number: "N+3"
+  # Note: Actual phase number will be 4 + N where N = total_target_phases
+  - number: "N+4"
     name: "Meta-Workflow Compliance"
     purpose: "Validate entire workflow against all 5 meta-workflow principles"
     deliverable: "Compliance report, all violations fixed"
@@ -303,9 +303,9 @@ phases:
       human_approval_required: false
 
   # --------------------------------------------------------------------------
-  # Phase N+4: Testing & Delivery (STATIC - HUMAN APPROVAL)
+  # Phase N+5: Testing & Delivery (STATIC - HUMAN APPROVAL)
   # --------------------------------------------------------------------------
-  - number: "N+4"
+  - number: "N+5"
     name: "Testing & Delivery"
     purpose: "Test workflow end-to-end, refine, obtain human approval"
     deliverable: "Tested, refined, production-ready workflow"
@@ -344,7 +344,7 @@ phases:
 
       - number: 7
         name: "final-validation"
-        purpose: "Re-run Phase N+3 compliance checks"
+        purpose: "Re-run Phase N+4 compliance checks"
         commands_needed: ["run_terminal_cmd"]
 
       - number: 8

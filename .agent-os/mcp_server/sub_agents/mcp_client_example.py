@@ -13,7 +13,6 @@ into other sub-agent workflows.
 """
 
 import asyncio
-import json
 import logging
 import sys
 from pathlib import Path
@@ -65,7 +64,8 @@ async def connect_and_use_mcp_server(
         if url is None:
             error_msg = (
                 "❌ MCP server not found. Possible reasons:\n"
-                "  1. Server not started (run 'python -m mcp_server --transport dual')\n"
+                "  1. Server not started (run 'python -m mcp_server "
+                "--transport dual')\n"
                 "  2. State file missing (.agent-os/.mcp_server_state.json)\n"
                 "  3. Server crashed (stale PID in state file)\n"
                 "  4. Running in stdio-only mode (need 'dual' or 'http' mode)"
@@ -76,13 +76,10 @@ async def connect_and_use_mcp_server(
         logger.info("✅ Discovered MCP server at: %s", url)
 
         # Step 2: Import MCP client dependencies
-        # These are only imported if needed, to avoid import errors
-        # if the mcp package is not installed
+        # Note: Cline expects stdio transport, not HTTP
+        # These imports are included for reference but not used in this example
         try:
-            from mcp import ClientSession, StdioServerParameters
-            from mcp.client.stdio import stdio_client
-            # Use stdio_client as a fallback if streamable_http not available
-            # In production, you'd use streamable_http_client for HTTP
+            pass  # Reserved for potential stdio fallback
         except ImportError as e:
             error_msg = (
                 f"❌ MCP client libraries not installed: {e}\n"
@@ -119,13 +116,13 @@ async def connect_and_use_mcp_server(
         logger.error(error_msg)
         return {"success": False, "error": error_msg}
 
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         error_msg = f"❌ Unexpected error: {e}"
         logger.exception(error_msg)
         return {"success": False, "error": error_msg}
 
 
-async def _mock_list_tools(url: str) -> List[str]:
+async def _mock_list_tools(_url: str) -> List[str]:
     """
     Mock implementation of listing tools.
 
@@ -159,7 +156,7 @@ async def _mock_list_tools(url: str) -> List[str]:
     ]
 
 
-async def _mock_search_standards(url: str) -> Dict[str, Any]:
+async def _mock_search_standards(_url: str, _query: str = "") -> Dict[str, Any]:
     """
     Mock implementation of calling search_standards tool.
 
@@ -186,7 +183,10 @@ async def _mock_search_standards(url: str) -> Dict[str, Any]:
         "results": [
             {
                 "title": "Production Code Checklist",
-                "content": "All production code must include: docstrings, type hints, error handling...",
+                "content": (
+                    "All production code must include: docstrings, type hints, "
+                    "error handling..."
+                ),
                 "score": 0.95,
             }
         ],
@@ -351,11 +351,12 @@ async def async_main() -> int:
         logger.info("   %s", result["search_result"]["results"][0]["title"])
         logger.info("")
         return 0
-    else:
-        logger.error("")
-        logger.error(result["error"])
-        logger.error("")
-        return 1
+
+    # Error case
+    logger.error("")
+    logger.error(result["error"])
+    logger.error("")
+    return 1
 
 
 def main() -> int:
@@ -373,4 +374,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

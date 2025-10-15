@@ -15,7 +15,10 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 
-def discover_mcp_server(agent_os_path: Optional[Path] = None) -> Optional[str]:
+# pylint: disable=too-many-return-statements
+def discover_mcp_server(
+    agent_os_path: Optional[Path] = None,
+) -> Optional[str]:
     """
     Discover a running MCP server's HTTP endpoint by reading its state file.
 
@@ -96,7 +99,7 @@ def discover_mcp_server(agent_os_path: Optional[Path] = None) -> Optional[str]:
         return None
 
     try:
-        with open(state_file) as f:
+        with open(state_file, encoding="utf-8") as f:
             state = json.load(f)
     except (OSError, json.JSONDecodeError) as e:
         logger.warning("Failed to read state file %s: %s", state_file, e)
@@ -127,7 +130,8 @@ def discover_mcp_server(agent_os_path: Optional[Path] = None) -> Optional[str]:
         return None
 
     # Validate PID (check if process is still running)
-    if not _is_process_alive(pid):
+    pid_int = int(pid) if pid is not None else 0
+    if not _is_process_alive(pid_int):
         logger.warning("Server PID %s is not running (stale state file)", pid)
         return None
 
@@ -167,7 +171,7 @@ def _find_agent_os_directory() -> Optional[Path]:
     return None
 
 
-def _is_process_alive(pid: int) -> bool:
+def _is_process_alive(pid: int) -> bool:  # pylint: disable=too-many-return-statements
     """
     Check if a process with the given PID is currently running.
 
@@ -203,21 +207,21 @@ def _is_process_alive(pid: int) -> bool:
         return True
     except OSError:
         return False
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         # On Windows, os.kill may not work as expected
         logger.debug("Could not check PID %s via signal: %s", pid, e)
 
     # Try psutil as fallback (cross-platform)
     try:
-        import psutil
+        import psutil  # pylint: disable=import-outside-toplevel
 
-        return psutil.pid_exists(pid)
+        result: bool = psutil.pid_exists(pid)
+        return result
     except ImportError:
         logger.debug("psutil not available, assuming PID %s is alive", pid)
         # Conservative: assume process is alive if we can't verify
         # Better to attempt connection and fail than miss a valid server
         return True
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         logger.debug("psutil check failed for PID %s: %s", pid, e)
         return True  # Conservative assumption
-

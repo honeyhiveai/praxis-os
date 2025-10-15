@@ -22,8 +22,8 @@ Running 8 bootstrap queries = 90% of orientation
 ```python
 # Run these NOW in sequence (400ms total):
 
-# 1. Behavioral foundation
-search_standards("inherited patterns efficiency paradox query liberally systematic")
+# 1. Behavioral foundation + decision protocol
+search_standards("grep-first reflex before file operations decision moment pause query")
 
 # 2. Three-phase development  
 search_standards("user asks build something what do first discuss spec implement")
@@ -34,17 +34,17 @@ search_standards("code author role behavior implement query test lint complete")
 # 4. Query construction
 search_standards("content-specific phrases unique values avoid generic structural")
 
-# 5. Multi-angle querying
-search_standards("query 5-10 times multiple angles comprehensive thorough discovery")
+# 5. Multi-angle querying (5-10 times)
+search_standards("single query syndrome 5-10 times multi-angle comprehensive discovery")
 
 # 6. Workflow discovery
-search_standards("workflow discovery query what workflow for task conversational structured")
+search_standards("workflow discovery dynamic don't memorize workflow names query for task")
 
-# 7. MCP RAG architecture
-search_standards("MCP RAG query not read indexed semantic 2KB chunks")
+# 7. Indexed files explicit list
+search_standards(".agent-os/standards indexed query not read universal workflows usage")
 
-# 8. Practical examples
-search_standards("wrong behavior helper mode right behavior implementer eight scenarios examples")
+# 8. Practical examples (8 scenarios)
+search_standards("AI agent quickstart wrong right examples helper mode implementer concrete scenarios")
 ```
 
 **After running all 8: Orientation status = COMPLETE ✅**
@@ -53,14 +53,14 @@ search_standards("wrong behavior helper mode right behavior implementer eight sc
 **Failure cost if skipped:** Hours of rework from reverting to default AI behavior
 
 **What these queries load:**
-- Inherited human shortcuts vs AI strengths
+- Decision protocol checklist (Before File Operations)
 - Three-phase development (Discuss → Spec → Build)
 - Code author role (implement 100%, not suggest)
 - Query construction patterns (content-specific phrases)
-- Multi-angle querying (5-10 times per task)
-- Workflow discovery (query dynamically)
-- MCP RAG system (query not read files)
-- 8 behavioral scenarios (wrong vs right)
+- Multi-angle querying (5-10 times, not 1-2)
+- Workflow discovery (dynamic, don't memorize)
+- Indexed files list (never read .agent-os/standards/, workflows/, usage/)
+- 8 concrete behavioral scenarios (wrong vs right)
 
 **Your role:** CODE AUTHOR (write 100% of code, test, iterate, present complete work)
 
@@ -147,16 +147,16 @@ Agent OS Enhanced is a framework for AI-human partnership in software developmen
 
 These queries load the knowledge needed to work correctly in Agent OS Enhanced.
 
-### Query 1: Behavioral Foundation
+### Query 1: Behavioral Foundation + Decision Protocol
 ```python
-search_standards("inherited patterns efficiency paradox query liberally systematic")
+search_standards("grep-first reflex before file operations decision moment pause query")
 ```
 
 **Loads:**
-- Inherited human shortcuts (efficiency pressure, grep-first reflex)
-- AI strengths (no fatigue, systematic execution)
-- Why systematic is faster for AI
-- Efficiency paradox (feels slow, actually 10x faster)
+- Decision protocol checklist (Before File Operations)
+- Red flag phrases (efficiency pressure, grep-first reflex)
+- "At Decision Moments" guidance
+- When to query instead of acting
 
 ---
 
@@ -199,53 +199,54 @@ search_standards("content-specific phrases unique values avoid generic structura
 
 ---
 
-### Query 5: Multi-Angle Querying
+### Query 5: Multi-Angle Querying (5-10 Times)
 ```python
-search_standards("query 5-10 times multiple angles comprehensive thorough discovery")
+search_standards("single query syndrome 5-10 times multi-angle comprehensive discovery")
 ```
 
 **Loads:**
-- Why one query isn't enough
-- Query from 5+ angles per task
+- Single query syndrome anti-pattern
+- Why 5-10 queries per task (not 1-2)
 - Multi-perspective discovery
-- Comprehensive understanding pattern
+- Self-reinforcing query pattern
 
 ---
 
 ### Query 6: Workflow Discovery
-   ```python
-search_standards("workflow discovery query what workflow for task conversational structured")
+```python
+search_standards("workflow discovery dynamic don't memorize workflow names query for task")
 ```
 
 **Loads:**
 - How to discover workflows dynamically
 - Query pattern: "what workflow for X"
 - Don't memorize workflow names
-- Conversational vs structured modes
+- Query → Discover → Act pattern
 
 ---
 
-### Query 7: MCP RAG Architecture
+### Query 7: Indexed Files Explicit List
 ```python
-search_standards("MCP RAG query not read indexed semantic 2KB chunks")
+search_standards("indexed query don't read .agent-os/standards .agent-os/workflows .agent-os/usage specs")
 ```
 
 **Loads:**
-- Query standards/workflows/usage (indexed)
-- Read specs (not indexed)
-- 2KB chunks vs 50KB files
-- Context window preservation
+- **CRITICAL:** Explicit list of indexed vs not-indexed files
+- .agent-os/standards/ → Query, never read
+- .agent-os/workflows/ → Query, never read
+- .agent-os/usage/ → Query, never read
+- .agent-os/specs/ → Read directly (not indexed)
 
 ---
 
-### Query 8: Practical Examples
+### Query 8: Practical Examples (8 Scenarios)
 ```python
-search_standards("wrong behavior helper mode right behavior implementer eight scenarios examples")
+search_standards("AI agent quickstart wrong right examples helper mode implementer concrete scenarios")
 ```
 
 **Loads:**
-- 8 behavioral scenarios
-- Wrong vs right examples
+- 8 concrete behavioral scenarios explicitly listed
+- Wrong vs right examples for each
 - Helper mode anti-patterns
 - Code author patterns in action
 
@@ -311,14 +312,12 @@ search_standards("when to use workflows for auth")
 **Two categories of files:**
 
 **Indexed (Query, Don't Read):**
-- `.agent-os/standards/` → Use `search_standards()`
-- `.agent-os/workflows/` → Use `search_standards()`
-- `.agent-os/usage/` → Use `search_standards()`
-- `universal/standards/` → Use `search_standards()`
-- `universal/workflows/` → Use `search_standards()`
+- `.agent-os/standards/` → Use `search_standards()` - **NEVER read_file()**
+- `.agent-os/workflows/` → Use `search_standards()` - **NEVER read_file()**
+- `.agent-os/usage/` → Use `search_standards()` - **NEVER read_file()**
 
 **Not Indexed (Read Directly):**
-- `.agent-os/specs/` → Use `read_file()`
+- `.agent-os/specs/` → Use `read_file()` - Project-specific specs
 
 **Why:**
 - Querying: Returns 2KB relevant chunk (95% relevant)

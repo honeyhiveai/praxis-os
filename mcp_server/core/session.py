@@ -26,7 +26,11 @@ from mcp_server.core.dynamic_registry import (
     DynamicContentRegistry,
     DynamicRegistryError,
 )
-from mcp_server.core.parsers import SpecTasksParser
+from mcp_server.core.parsers import (
+    SourceParser,
+    SpecTasksParser,
+    WorkflowDefinitionParser,
+)
 from mcp_server.models.workflow import (
     PhaseArtifact,
     WorkflowMetadata,
@@ -175,10 +179,13 @@ class WorkflowSession:
             "task", "phases/dynamic/task-template.md"
         )
 
-        # Get parser (currently only SpecTasksParser supported)
+        # Get parser (defaults to spec_tasks_parser for backward compatibility)
         parser_name = dynamic_config.get("parser", "spec_tasks_parser")
+        parser: SourceParser
         if parser_name == "spec_tasks_parser":
             parser = SpecTasksParser()
+        elif parser_name == "workflow_definition_parser":
+            parser = WorkflowDefinitionParser()
         else:
             raise DynamicRegistryError(f"Unsupported parser: {parser_name}")
 
