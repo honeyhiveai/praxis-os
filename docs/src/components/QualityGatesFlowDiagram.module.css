@@ -1,0 +1,115 @@
+.container {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+}
+
+.flowBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stepLabel {
+  padding: 0.75rem 1.5rem;
+  background: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary-contrast-background);
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 200px;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0.25rem 0;
+}
+
+.decisionBox {
+  padding: 0.75rem 2rem;
+  background: var(--ifm-color-warning-contrast-background);
+  border: 2px solid var(--ifm-color-warning);
+  border-radius: 8px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.decisionLabel {
+  font-size: 1.1rem;
+  color: var(--ifm-color-warning-dark);
+}
+
+.branchContainer {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.branchLeft,
+.branchRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 250px;
+}
+
+.branchLabel {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.resultBox {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.resultSuccess {
+  background: var(--ifm-color-success-contrast-background);
+  border: 2px solid var(--ifm-color-success);
+  color: var(--ifm-color-success-dark);
+}
+
+.resultBlocked {
+  background: var(--ifm-color-danger-contrast-background);
+  border: 2px solid var(--ifm-color-danger);
+  color: var(--ifm-color-danger-dark);
+}
+
+.resultDetails {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .branchContainer {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .branchLeft,
+  .branchRight {
+    max-width: 100%;
+  }
+}
+

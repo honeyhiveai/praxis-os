@@ -30,6 +30,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'how-to-guides/creating-project-standards',
         'how-to-guides/create-custom-workflows',
+        'how-to-guides/setup-quality-gates',
         'how-to-guides/debug-workflow-failures',
         'how-to-guides/upgrading',
       ],
@@ -44,6 +45,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'explanation/how-it-works',
         'explanation/architecture',
+        'explanation/adversarial-design',
         'explanation/knowledge-compounding',
         'explanation/standards-knowledge-compounding',
         'explanation/specs-knowledge-compounding',
