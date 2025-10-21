@@ -19,6 +19,7 @@
 .agent-os/scripts/__pycache__/     # ~1MB - Python bytecode
 .agent-os.backup.*         # ~1.3GB - Upgrade backups
 .agent-os/.upgrade_lock    # <1KB - Upgrade lock file
+.agent-os/workspace/       # Temporary design docs, analysis, experiments
 ```
 
 **Why These Are Required:**
@@ -100,6 +101,7 @@ Understanding the purpose and impact of each pattern.
 | `.agent-os/scripts/__pycache__/` | ~1MB | Python bytecode | Platform/Python version specific |
 | `.agent-os.backup.*` | ~1.3GB | Upgrade backups (temporary) | Massive repo bloat, only needed locally for rollback |
 | `.agent-os/.upgrade_lock` | <1KB | Upgrade lock file (temporary) | Meaningless outside upgrade process |
+| `.agent-os/workspace/` | Varies | Temporary design docs, analysis, experiments (Phase 1 artifacts) | Mixes ephemeral with permanent content, confuses specs with drafts |
 
 **Total potential bloat**: ~2.7GB of ephemeral files
 
@@ -266,4 +268,3 @@ To add a new required entry:
 
 **Last Updated**: October 8, 2025  
 **Canonical Source**: `universal/standards/installation/gitignore-requirements.md`
-

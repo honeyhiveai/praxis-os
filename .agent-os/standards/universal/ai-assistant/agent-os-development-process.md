@@ -136,7 +136,7 @@ You: [Create spec, get approval, then build it right the first time]
    - "What's your preference?"
 
 4. **Document the design discussion:**
-   - Create `design-doc.md` capturing the conversational exploration
+   - Create `.agent-os/workspace/design/YYYY-MM-DD-feature-name.md` capturing the conversational exploration
    - Capture architecture decisions from discussion
    - Note trade-offs discussed
    - Include diagrams/examples
@@ -577,4 +577,3 @@ Agent: [Pure conversation with queries for patterns]
 ---
 
 **Remember**: Three distinct phases with explicit transitions. Query to discover workflows, don't hardcode. Human approval required between phases. This process ensures quality through systematic execution while maintaining conversational flexibility where needed.
-

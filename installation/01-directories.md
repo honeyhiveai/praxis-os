@@ -29,6 +29,9 @@ The MCP server requires exactly these directories:
 ├── mcp_server/              # MCP server code
 ├── .cache/                  # Vector index and state files
 └── specs/                   # User-created specs
+    ├── review/              # Specs awaiting approval
+    ├── approved/            # Specs ready to implement
+    └── completed/           # Finished implementations
 
 .cursor/                     # Cursor configuration
 ```
@@ -67,7 +70,9 @@ directories = [
     ".agent-os/standards/universal",
     ".agent-os/usage",
     ".agent-os/workflows",          # ← Don't forget this!
-    ".agent-os/specs",
+    ".agent-os/specs/review",       # Specs awaiting approval
+    ".agent-os/specs/approved",     # Specs ready to implement
+    ".agent-os/specs/completed",    # Finished implementations
     ".agent-os/mcp_server",
     ".agent-os/.cache",
     ".cursor",
@@ -87,7 +92,9 @@ print("\n✅ All directories created")
 mkdir -p .agent-os/standards/universal
 mkdir -p .agent-os/usage
 mkdir -p .agent-os/workflows
-mkdir -p .agent-os/specs
+mkdir -p .agent-os/specs/review
+mkdir -p .agent-os/specs/approved
+mkdir -p .agent-os/specs/completed
 mkdir -p .agent-os/mcp_server
 mkdir -p .agent-os/.cache
 mkdir -p .cursor
@@ -98,7 +105,9 @@ mkdir -p .cursor
 New-Item -ItemType Directory -Force -Path ".agent-os\standards\universal"
 New-Item -ItemType Directory -Force -Path ".agent-os\usage"
 New-Item -ItemType Directory -Force -Path ".agent-os\workflows"
-New-Item -ItemType Directory -Force -Path ".agent-os\specs"
+New-Item -ItemType Directory -Force -Path ".agent-os\specs\review"
+New-Item -ItemType Directory -Force -Path ".agent-os\specs\approved"
+New-Item -ItemType Directory -Force -Path ".agent-os\specs\completed"
 New-Item -ItemType Directory -Force -Path ".agent-os\mcp_server"
 New-Item -ItemType Directory -Force -Path ".agent-os\.cache"
 New-Item -ItemType Directory -Force -Path ".cursor"
@@ -117,7 +126,9 @@ required_dirs = [
     ".agent-os/standards/universal",
     ".agent-os/usage",
     ".agent-os/workflows",       # ← Most important!
-    ".agent-os/specs",
+    ".agent-os/specs/review",
+    ".agent-os/specs/approved",
+    ".agent-os/specs/completed",
     ".agent-os/mcp_server",
     ".agent-os/.cache",
     ".cursor",
@@ -157,6 +168,17 @@ drwxr-xr-x  specs/
 drwxr-xr-x  standards/
 drwxr-xr-x  usage/
 drwxr-xr-x  workflows/      ← Must be present!
+```
+
+```bash
+ls -la .agent-os/specs/
+```
+
+**Expected output**:
+```
+drwxr-xr-x  review/         ← Specs awaiting approval
+drwxr-xr-x  approved/       ← Specs ready to implement
+drwxr-xr-x  completed/      ← Finished implementations
 ```
 
 ```bash
