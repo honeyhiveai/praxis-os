@@ -198,6 +198,80 @@ else:
     missing = result.missing_evidence  # Stay on Phase 1
 ```
 
+### Evidence Validation System
+
+Each phase has a `gate-definition.yaml` file that defines validation requirements.
+
+**Gate Definition Structure:**
+```yaml
+# Gate Definition - Phase 1: Requirements Gathering
+checkpoint:
+  strict: false          # Allow override if needed
+  allow_override: true   # Permit manual advancement
+
+evidence_schema:
+  srd_created:
+    type: boolean
+    required: true
+    description: "Software Requirements Document created"
+  
+  business_goals_defined:
+    type: boolean
+    required: true
+    description: "Business goals documented in srd.md"
+
+validators: {}  # Optional custom validators
+```
+
+**Validation Behavior:**
+
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| **YAML Validation** | Strict validation against gate-definition.yaml | Workflows with gates (spec_creation_v1, etc.) |
+| **RAG Fallback** | Query standards for validation rules | Legacy workflows being migrated |
+| **Permissive Mode** | Allow progression with warning | Development/prototyping |
+
+**Field Types:**
+- `boolean` - True/False values
+- `integer` - Numeric values (e.g., test count)
+- `string` - Text values (e.g., file paths)
+- `object` - Complex nested structures
+- `array` - Lists of values
+
+**Example Validation:**
+```python
+# Valid evidence
+evidence = {
+    "srd_created": True,
+    "business_goals_defined": True,
+    "user_stories_documented": True
+}
+
+result = complete_phase(session_id="abc", phase=1, evidence=evidence)
+# Returns: {"checkpoint_passed": True, "next_phase": 2}
+
+# Invalid evidence (missing field)
+evidence = {
+    "srd_created": True
+    # Missing required fields!
+}
+
+result = complete_phase(session_id="abc", phase=1, evidence=evidence)
+# Returns: {
+#   "checkpoint_passed": False, 
+#   "errors": ["Missing required field: business_goals_defined"],
+#   "remediation": "Ensure all required evidence is provided"
+# }
+```
+
+**Gate Coverage:**
+
+All production workflows have complete gate coverage:
+- spec_creation_v1: 6/6 phases
+- spec_execution_v1: 1/1 phase
+- agent_os_upgrade_v1: 6/6 phases
+- workflow_creation_v1: 6/6 phases
+
 ### File Size Standards
 
 Based on LLM attention quality research:

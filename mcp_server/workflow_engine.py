@@ -26,9 +26,11 @@ import json
 import logging
 import re
 import threading
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
+from .config.checkpoint_loader import CheckpointLoader as NewCheckpointLoader
 from .core.metrics import CacheMetrics
 from .core.session import WorkflowSession
 from .models import (
@@ -39,6 +41,7 @@ from .models import (
 )
 from .rag_engine import RAGEngine
 from .state_manager import StateManager
+from .validation import ValidatorExecutor
 
 logger = logging.getLogger(__name__)
 
@@ -900,11 +903,127 @@ class WorkflowEngine:
         # Delegate to session (handles dynamic registry if applicable)
         return add_workflow_guidance(session.get_task(phase, task_number))
 
-    def _validate_checkpoint(
-        self, workflow_type: str, phase: int, evidence: Dict[str, Any]
-    ) -> Tuple[bool, List[str]]:
+    def _validate_required_fields(
+        self, requirements, evidence: Dict[str, Any]
+    ) -> Tuple[List[str], List[str]]:
+        """Validate required fields are present (Layer 1)."""
+        errors = []
+        fields_missing = []
+        fields_required = requirements.get_required_fields()
+
+        for field_name in fields_required:
+            if field_name not in evidence:
+                fields_missing.append(field_name)
+                errors.append(f"Field '{field_name}' is required but missing")
+
+        return (errors, fields_missing)
+
+    def _validate_field_types_and_validators(
+        self, requirements, evidence: Dict[str, Any], executor
+    ) -> Tuple[List[str], List[str], List[str]]:
+        """Validate field types and custom validators (Layer 2 & 3)."""
+        errors = []
+        warnings = []
+        fields_failed = []
+
+        for field_name, field_value in evidence.items():
+            if field_name not in requirements.evidence_schema:
+                warnings.append(f"Field '{field_name}' not in schema (ignoring)")
+                continue
+
+            schema = requirements.evidence_schema[field_name]
+
+            # Layer 2: Type validation
+            if not schema.validate_type(field_value):
+                error_msg = (
+                    f"Field '{field_name}' must be {schema.type}, "
+                    f"got: {type(field_value).__name__}"
+                )
+                errors.append(error_msg)
+                fields_failed.append(field_name)
+                continue
+
+            # Layer 3: Custom validator
+            if schema.validator:
+                validator_expr = requirements.validators.get(schema.validator)
+                if not validator_expr:
+                    msg = (
+                        f"Validator '{schema.validator}' "
+                        f"not found for '{field_name}'"
+                    )
+                    warnings.append(msg)
+                    continue
+
+                passed, error = executor.execute_validator(
+                    validator_expr, field_value, schema.validator_params or {}
+                )
+
+                if not passed:
+                    error_msg = (
+                        f"Validator '{schema.validator}' failed for "
+                        f"field '{field_name}': {error or 'validation failed'}"
+                    )
+                    errors.append(error_msg)
+                    fields_failed.append(field_name)
+
+        return (errors, warnings, fields_failed)
+
+    def _validate_cross_field_rules(
+        self, requirements, evidence: Dict[str, Any]
+    ) -> List[str]:
+        """Validate cross-field rules (Layer 4)."""
+        errors = []
+
+        for rule in requirements.cross_field_rules:
+            try:
+                if not rule.evaluate(evidence):
+                    errors.append(
+                        f"Cross-field validation failed: {rule.error_message}"
+                    )
+            except Exception as e:
+                errors.append(f"Cross-field rule error: {e}")
+
+        return errors
+
+    def _build_validation_result(
+        self, passed: bool, errors: List[str], warnings: List[str], context: Dict
+    ) -> Dict[str, Any]:
+        """Build the validation result dictionary."""
+        return {
+            "checkpoint_passed": passed,
+            "errors": errors,
+            "warnings": warnings,
+            "diagnostics": {
+                "fields_submitted": context["fields_submitted"],
+                "fields_required": context["fields_required"],
+                "fields_missing": context["fields_missing"],
+                "fields_failed": context["fields_failed"],
+                "strict_mode": context["strict_mode"],
+                "gate_source": context["gate_source"],
+                "validation_timestamp": datetime.now().isoformat(),
+            },
+            "remediation": self._build_remediation(errors),
+            "next_steps": self._build_next_steps(errors),
+        }
+
+    def _validate_checkpoint(  # pylint: disable=too-many-locals
+        # Justification: Core validation orchestrator needs tracking variables
+        # for each layer (errors, warnings, fields_missing, fields_failed) plus
+        # requirements and evidence. Already factored into 4 helper methods.
+        self,
+        workflow_type: str,
+        phase: int,
+        evidence: Dict[str, Any],
+    ) -> Tuple[bool, Dict[str, Any]]:
         """
-        Validate evidence against dynamically loaded checkpoint requirements.
+        Validate evidence against checkpoint requirements with multi-layer validation.
+
+        Multi-layer validation:
+        1. Load gate definition (YAML → RAG → permissive)
+        2. Check required fields present
+        3. Validate field types
+        4. Run custom validators
+        5. Check cross-field rules
 
         Args:
             workflow_type: Workflow type
@@ -912,57 +1031,138 @@ class WorkflowEngine:
             evidence: Evidence dictionary
 
         Returns:
-            Tuple of (passed: bool, missing_fields: List[str])
+            Tuple of (passed: bool, result: Dict) where result contains:
+            - checkpoint_passed: bool
+            - errors: List[str] (specific error messages)
+            - warnings: List[str] (non-critical issues)
+            - diagnostics: Dict (metadata about validation)
+            - remediation: str (how to fix errors)
+            - next_steps: List[str] (actions to take)
+
+        Example:
+            >>> passed, result = engine._validate_checkpoint(
+            ...     "spec_creation_v1", 1, {"business_goals": 4}
+            ... )
+            >>> assert passed == True
+            >>> assert result["checkpoint_passed"] == True
         """
-        # Load requirements dynamically from Agent OS documents
-        checkpoint_def = self.checkpoint_loader.load_checkpoint_requirements(
-            workflow_type, phase
+        # Use new CheckpointLoader if available, fallback to old one
+        try:
+            requirements = NewCheckpointLoader(
+                self.workflows_base_path
+            ).load_checkpoint_requirements(workflow_type, phase)
+
+            # Layer 1: Check required fields
+            errors, fields_missing = self._validate_required_fields(
+                requirements, evidence
+            )
+
+            # Layer 2 & 3: Validate types and custom validators
+            type_errors, warnings, fields_failed = (
+                self._validate_field_types_and_validators(
+                    requirements, evidence, ValidatorExecutor()
+                )
+            )
+            errors.extend(type_errors)
+
+            # Layer 4: Cross-field validation
+            errors.extend(self._validate_cross_field_rules(requirements, evidence))
+
+            # Determine if passed (strict mode vs lenient)
+            passed = len(errors) == 0 if requirements.strict else True
+            if not requirements.strict and errors:
+                warnings.extend(errors)
+                errors = []
+
+            # Build and return result
+            return (
+                passed,
+                self._build_validation_result(
+                    passed,
+                    errors,
+                    warnings,
+                    {
+                        "fields_submitted": list(evidence.keys()),
+                        "fields_required": requirements.get_required_fields(),
+                        "fields_missing": fields_missing,
+                        "fields_failed": fields_failed,
+                        "strict_mode": requirements.strict,
+                        "gate_source": requirements.source,
+                    },
+                ),
+            )
+
+        except Exception as e:
+            # Fallback to old checkpoint loader for backwards compatibility
+            logger.warning("New validation failed, falling back to old loader: %s", e)
+            checkpoint_def = self.checkpoint_loader.load_checkpoint_requirements(
+                workflow_type, phase
+            )
+            requirements = checkpoint_def.get("required_evidence", {})
+
+            if not requirements:
+                return (True, {"checkpoint_passed": True, "errors": [], "warnings": []})
+
+            missing = []
+            for field, spec in requirements.items():
+                if field not in evidence:
+                    missing.append(f"{field} (required: {spec.get('description', '')})")
+
+            passed = len(missing) == 0
+            return (
+                passed,
+                {"checkpoint_passed": passed, "errors": missing, "warnings": []},
+            )
+
+    def _build_remediation(self, errors: List[str]) -> str:
+        """
+        Build remediation guidance from errors.
+
+        Args:
+            errors: List of error messages
+
+        Returns:
+            Remediation guidance string
+        """
+        if not errors:
+            return ""
+
+        return (
+            "Please address the following validation errors: "
+            + "; ".join(errors[:3])  # Show first 3 errors
+            + (f" (and {len(errors) - 3} more)" if len(errors) > 3 else "")
         )
 
-        requirements = checkpoint_def.get("required_evidence", {})
+    def _build_next_steps(self, errors: List[str]) -> List[str]:
+        """
+        Build next steps from errors.
 
-        # If no requirements found, pass (permissive fallback)
-        if not requirements:
-            logger.warning(
-                "No checkpoint requirements found for %s phase %s, passing by default",
-                workflow_type,
-                phase,
-            )
-            return (True, [])
+        Args:
+            errors: List of error messages
 
-        missing = []
+        Returns:
+            List of actionable next steps
+        """
+        if not errors:
+            return []
 
-        for field, spec in requirements.items():
-            # Check field exists
-            if field not in evidence:
-                missing.append(
-                    f"{field} (required: {spec.get('description', 'no description')})"
-                )
-                continue
+        steps = ["Review checkpoint requirements in task file"]
 
-            # Check type
-            expected_type = spec.get("type", str)
-            if not isinstance(evidence[field], expected_type):
-                missing.append(
-                    f"{field} (wrong type: expected {expected_type.__name__}, "
-                    f"got {type(evidence[field]).__name__})"
-                )
-                continue
+        # Add specific steps based on error types
+        for error in errors[:5]:  # First 5 errors
+            if "missing" in error.lower():
+                field = error.split("'")[1] if "'" in error else "required field"
+                steps.append(f"Gather evidence for '{field}'")
+            elif "type" in error.lower():
+                field = error.split("'")[1] if "'" in error else "field"
+                steps.append(f"Correct type for '{field}'")
+            elif "validator" in error.lower():
+                field = error.split("'")[1] if "'" in error else "field"
+                steps.append(f"Fix validation for '{field}'")
 
-            # Check validator
-            try:
-                validator = spec.get("validator", lambda x: x is not None)
-                if not validator(evidence[field]):
-                    missing.append(
-                        f"{field} (validation failed: {spec.get('description', '')})"
-                    )
-                    continue
-            except Exception as e:
-                missing.append(f"{field} (validation error: {str(e)})")
-                continue
+        steps.append("Resubmit evidence with complete_phase()")
 
-        passed = len(missing) == 0
-        return (passed, missing)
+        return steps
 
     def _get_phase_content_from_rag(
         self, workflow_type: str, phase: int

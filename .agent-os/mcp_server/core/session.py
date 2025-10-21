@@ -26,7 +26,11 @@ from mcp_server.core.dynamic_registry import (
     DynamicContentRegistry,
     DynamicRegistryError,
 )
-from mcp_server.core.parsers import SpecTasksParser
+from mcp_server.core.parsers import (
+    SourceParser,
+    SpecTasksParser,
+    WorkflowDefinitionParser,
+)
 from mcp_server.models.workflow import (
     PhaseArtifact,
     WorkflowMetadata,
@@ -177,10 +181,10 @@ class WorkflowSession:
 
         # Get parser (defaults to spec_tasks_parser for backward compatibility)
         parser_name = dynamic_config.get("parser", "spec_tasks_parser")
+        parser: SourceParser
         if parser_name == "spec_tasks_parser":
             parser = SpecTasksParser()
         elif parser_name == "workflow_definition_parser":
-            from mcp_server.core.parsers import WorkflowDefinitionParser
             parser = WorkflowDefinitionParser()
         else:
             raise DynamicRegistryError(f"Unsupported parser: {parser_name}")
@@ -492,11 +496,18 @@ class WorkflowSession:
             timestamp=datetime.now(),
         )
 
+        # Validate checkpoint with evidence
+        # TODO: Implement _validate_checkpoint in workflow_engine (Tasks 1.2-1.7)
+        # For now, returning True to maintain backwards compatibility
+        # Once validation is implemented, this will call:
+        # passed, result = self.engine._validate_checkpoint(workflow_type, phase, evidence)
+        checkpoint_passed = True  # Will be replaced with actual validation
+        
         # Complete phase (this advances state)
         self.state.complete_phase(
             phase=phase,
             artifact=artifact,
-            checkpoint_passed=True,  # Simple validation for now
+            checkpoint_passed=checkpoint_passed,
         )
 
         # Persist updated state

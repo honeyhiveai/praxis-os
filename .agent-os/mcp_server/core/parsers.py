@@ -14,6 +14,8 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import yaml
+
 # Mistletoe imports for AST-based parsing
 from mistletoe import Document
 from mistletoe.block_token import Heading
@@ -117,6 +119,11 @@ class SpecTasksParser(SourceParser):
         """
         Extract phases by traversing the markdown AST.
 
+        Uses flexible pattern matching to handle AI format variations:
+        - ## or ### headers
+        - "Phase N:" or "Phase N -" or "N." or "N:"
+        - Phase number before or after name
+
         Args:
             doc: Mistletoe Document object
 
@@ -127,12 +134,14 @@ class SpecTasksParser(SourceParser):
         current_phase_data = None
 
         for node in doc.children:
-            # Check for phase headers (## Phase N: Name or ### Phase N: Name)
-            if isinstance(node, Heading) and node.level in [2, 3]:
+            # Semantic check: match content pattern on ANY heading level
+            if isinstance(node, Heading):
                 header_text = self._get_text_content(node)
-                phase_match = re.match(r"Phase (\d+):\s*(.+)", header_text)
 
-                if phase_match:
+                # Try to extract phase info (semantic pattern match)
+                phase_info = self._extract_phase_info(header_text)
+
+                if phase_info:
                     # Save previous phase if exists
                     if current_phase_data:
                         phase = self._build_phase(current_phase_data)
@@ -140,11 +149,9 @@ class SpecTasksParser(SourceParser):
                             phases.append(phase)
 
                     # Start new phase
-                    phase_number = int(phase_match.group(1))
-                    phase_name = phase_match.group(2).strip()
                     current_phase_data = {
-                        "phase_number": phase_number,
-                        "phase_name": phase_name,
+                        "phase_number": phase_info["number"],
+                        "phase_name": phase_info["name"],
                         "description": "",
                         "estimated_duration": "Variable",
                         "task_lines": [],
@@ -165,6 +172,115 @@ class SpecTasksParser(SourceParser):
 
         return phases
 
+    def _extract_phase_info(self, header_text: str) -> Optional[Dict[str, Any]]:
+        """
+        Extract phase number and name using semantic analysis (no regex).
+
+        Semantic approach: Look for "phase" keyword + number, then extract name.
+        Works for any format variation.
+
+        Args:
+            header_text: Header text to parse
+
+        Returns:
+            Dict with 'number' and 'name' or None if not a phase header
+        """
+        text_lower = header_text.lower()
+
+        # CRITICAL: Reject if this looks like a task
+        # Tasks have "task" keyword or "N.M" pattern (two numbers with dot)
+        if "task" in text_lower:
+            return None
+
+        # Semantic check: Must have "phase" keyword
+        if "phase" not in text_lower:
+            # Maybe it's just "N. Name" or "N: Name" format
+            # But NOT if it has task pattern (N.M)
+            
+            # Check for task pattern (e.g., "1.1")
+            first_num = self._extract_first_number(header_text)
+            if first_num:
+                # After first number, if we see dot/dash followed by another digit,
+                # this is a task pattern, not a phase
+                i = 0
+                while i < len(header_text) and not header_text[i].isdigit():
+                    i += 1
+                while i < len(header_text) and header_text[i].isdigit():
+                    i += 1
+                # Check what comes after first number
+                if i < len(header_text) and header_text[i] in ".-":
+                    next_i = i + 1
+                    if next_i < len(header_text) and header_text[next_i].isdigit():
+                        # This is a task pattern (N.M), not a phase
+                        return None
+                
+                # No task pattern, treat as phase
+                # Find where name starts after the number
+                i = 0
+                # Skip to number
+                while i < len(header_text) and not header_text[i].isdigit():
+                    i += 1
+                # Skip number digits
+                while i < len(header_text) and header_text[i].isdigit():
+                    i += 1
+                # Skip separator and whitespace
+                while i < len(header_text) and header_text[i] in ".:-— \t":
+                    i += 1
+                # Rest is name
+                name = header_text[i:].strip()
+                if name:
+                    return {"number": first_num, "name": name}
+            return None
+
+        # Extract number (any digits found after "phase")
+        number = self._extract_first_number(header_text)
+        if not number:
+            return None
+
+        # SEMANTIC REQUIREMENT: Must have separator after number
+        # Find position after number, check for separator
+        # This prevents "Phase 1 Tasks" from matching (no separator)
+        i = 0
+        while i < len(header_text) and not header_text[i].isdigit():
+            i += 1
+        # Skip number digits
+        while i < len(header_text) and header_text[i].isdigit():
+            i += 1
+        # Check for separator
+        if i >= len(header_text):
+            return None
+        # Skip whitespace
+        while i < len(header_text) and header_text[i] in " \t":
+            i += 1
+        if i >= len(header_text):
+            return None
+        # Must have separator (: or -)
+        if header_text[i] not in ":.-—−":
+            return None
+
+        # Extract name: Everything after separator
+        i += 1  # Skip separator
+        # Skip whitespace after separator
+        while i < len(header_text) and header_text[i] in " \t":
+            i += 1
+
+        name = header_text[i:].strip()
+
+        return {"number": number, "name": name} if name else None
+
+    def _extract_first_number(self, text: str) -> Optional[int]:
+        """Extract first number found in text (native Python, no regex)."""
+        digits = []
+        for char in text:
+            if char.isdigit():
+                digits.append(char)
+            elif digits:  # Found digits, then non-digit
+                break
+
+        if digits:
+            return int("".join(digits))
+        return None
+
     def _build_phase(self, phase_data: Dict[str, Any]) -> Optional[DynamicPhase]:
         """
         Build a DynamicPhase from collected phase data.
@@ -177,41 +293,89 @@ class SpecTasksParser(SourceParser):
         """
         # Extract metadata from nodes
         seen_validation_gate_header = False
-        for node in phase_data["nodes"]:
+        current_task_content = []  # Collect content for current task heading
+        current_task_heading = None
+
+        for i, node in enumerate(phase_data["nodes"]):
             if isinstance(node, Paragraph):
                 text = self._get_text_content(node)
 
-                # Look for metadata patterns (plain text or markdown)
-                if "Objective:" in text or "Goal:" in text:
-                    desc_match = re.search(
-                        r"(?:Objective|Goal):\s*(.+?)(?:\n|$)", text, re.IGNORECASE
-                    )
-                    if desc_match:
-                        # Clean up any remaining non-text tokens
-                        desc = desc_match.group(1).strip()
-                        # Remove any remaining object representations
-                        desc = re.sub(r"<.*?>", "", desc)
+                # Check if this paragraph starts with a task (e.g., "Task 1.1:")
+                task_info = self._extract_task_info(text)
+                if task_info and not current_task_heading:
+                    # This paragraph IS a task heading (without markdown heading marker)
+                    # Start collecting content for this task
+                    current_task_heading = text
+                    current_task_content = []
+                    continue
+
+                # If we're collecting task content, add this paragraph
+                if current_task_heading:
+                    current_task_content.append(text)
+                else:
+                    # Look for metadata patterns using flexible matching
+                    desc = self._extract_metadata(text, ["objective", "goal", "purpose"])
+                    if desc:
                         phase_data["description"] = desc
 
-                if "Estimated Duration:" in text or "Estimated Effort:" in text:
-                    dur_match = re.search(
-                        r"Estimated (?:Duration|Effort):\s*(.+)", text, re.IGNORECASE
+                    duration = self._extract_metadata(
+                        text,
+                        [
+                            "estimated duration",
+                            "estimated effort",
+                            "timeframe",
+                            "estimated time",
+                        ],
                     )
-                    if dur_match:
-                        phase_data["estimated_duration"] = dur_match.group(1).strip()
+                    if duration:
+                        phase_data["estimated_duration"] = duration
 
-                # Check if this paragraph is the validation gate header
-                if "Validation Gate:" in text:
-                    seen_validation_gate_header = True
+                    # Check if this paragraph is the validation gate header
+                    if "Validation Gate:" in text:
+                        seen_validation_gate_header = True
 
             # Extract tasks from markdown lists
             elif isinstance(node, MarkdownList):
+                # Flush any pending task content first
+                if current_task_heading:
+                    full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
+                    phase_data["task_lines"].append({"text": full_task_text, "node": node})
+                    current_task_heading = None
+                    current_task_content = []
+
                 self._extract_tasks_from_list(
                     node, phase_data, seen_validation_gate_header
                 )
                 # Reset the flag after processing the list
                 if seen_validation_gate_header:
                     seen_validation_gate_header = False
+
+            # Extract tasks from headings (ANY level - semantic pattern match)
+            elif isinstance(node, Heading):
+                header_text = self._get_text_content(node)
+                task_info = self._extract_task_info(header_text)
+                
+                if task_info:
+                    # Flush previous task if exists
+                    if current_task_heading:
+                        full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
+                        phase_data["task_lines"].append({"text": full_task_text, "node": node})
+                    
+                    # Start collecting content for this new task
+                    current_task_heading = header_text
+                    current_task_content = []
+                else:
+                    # Not a task heading, if we're collecting task content, this ends it
+                    if current_task_heading:
+                        full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
+                        phase_data["task_lines"].append({"text": full_task_text, "node": node})
+                        current_task_heading = None
+                        current_task_content = []
+
+        # Flush any remaining task content
+        if current_task_heading:
+            full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
+            phase_data["task_lines"].append({"text": full_task_text, "node": None})
 
         # Build tasks
         tasks = self._parse_collected_tasks(
@@ -279,43 +443,196 @@ class SpecTasksParser(SourceParser):
                 gate_items = self._extract_checklist_items(item)
                 phase_data["validation_gate"].extend(gate_items)
 
+    def _extract_metadata(self, text: str, labels: List[str]) -> Optional[str]:
+        """
+        Extract metadata value using semantic search (native Python, no regex).
+
+        Args:
+            text: Text to search
+            labels: List of possible label variations (lowercase)
+
+        Returns:
+            Extracted value or None
+        """
+        text_lower = text.lower()
+
+        for label in labels:
+            # Find label in text
+            label_pos = text_lower.find(label)
+            if label_pos == -1:
+                continue
+
+            # Found the label, now find the separator and value
+            after_label = text[label_pos + len(label) :]
+            after_label_stripped = after_label.lstrip()
+
+            # Check for common separators
+            if not after_label_stripped:
+                continue
+
+            first_char = after_label_stripped[0]
+            if first_char in ":−-—":
+                # Skip separator and whitespace
+                value_start = after_label_stripped[1:].lstrip()
+                # Extract until newline or end
+                value_end = value_start.find("\n")
+                if value_end != -1:
+                    value = value_start[:value_end].strip()
+                else:
+                    value = value_start.strip()
+
+                # Clean up any HTML-like tags
+                if "<" in value and ">" in value:
+                    clean_parts = []
+                    in_tag = False
+                    for char in value:
+                        if char == "<":
+                            in_tag = True
+                        elif char == ">":
+                            in_tag = False
+                        elif not in_tag:
+                            clean_parts.append(char)
+                    value = "".join(clean_parts).strip()
+
+                if value:
+                    return value
+
+        return None
+
     def _extract_task_dependencies(self, text: str) -> List[str]:
-        """Extract dependencies from task text."""
-        deps_match = re.search(r"Dependencies:\s*(.+?)(?:\n|$)", text, re.IGNORECASE)
-        if not deps_match:
+        """Extract dependencies using semantic search (native Python)."""
+        # Try multiple dependency labels
+        dep_text = self._extract_metadata(
+            text, ["dependencies", "depends on", "requires", "after"]
+        )
+        if not dep_text:
             return []
 
-        deps_text = deps_match.group(1).strip()
-        if deps_text.lower() == "none":
+        if dep_text.lower() == "none":
             return []
 
-        # Extract task IDs like "1.1" from dep text
-        task_ids = re.findall(r"\b(\d+\.\d+)\b", deps_text)
-        return task_ids if task_ids else [d.strip() for d in deps_text.split(",")]
+        # Extract task IDs like "1.1" from dep text (native Python)
+        task_ids = []
+        i = 0
+        while i < len(dep_text):
+            if dep_text[i].isdigit():
+                # Found a digit, collect the number
+                num1_digits = []
+                while i < len(dep_text) and dep_text[i].isdigit():
+                    num1_digits.append(dep_text[i])
+                    i += 1
+
+                # Check for dot or dash separator
+                if i < len(dep_text) and dep_text[i] in ".-":
+                    i += 1
+                    # Collect second number
+                    num2_digits = []
+                    while i < len(dep_text) and dep_text[i].isdigit():
+                        num2_digits.append(dep_text[i])
+                        i += 1
+
+                    if num1_digits and num2_digits:
+                        task_id = "".join(num1_digits) + "." + "".join(num2_digits)
+                        task_ids.append(task_id)
+            else:
+                i += 1
+
+        return task_ids if task_ids else [d.strip() for d in dep_text.split(",")]
 
     def _parse_single_task(self, task_text: str) -> Optional[DynamicTask]:
-        """Parse a single task from text."""
-        task_match = re.search(r"Task (\d+)\.(\d+):\s*(.+?)(?:\n|$)", task_text)
-        if not task_match:
+        """Parse a single task using flexible patterns."""
+        # Try multiple task ID patterns
+        task_info = self._extract_task_info(task_text)
+        if not task_info:
             return None
 
-        task_id = f"{task_match.group(1)}.{task_match.group(2)}"
-        task_name = task_match.group(3).strip()
-
-        # Extract estimated time
-        time_match = re.search(
-            r"Estimated (?:Time|Duration):\s*(.+?)(?:\n|$)", task_text, re.IGNORECASE
+        # Extract estimated time using flexible matching
+        estimated_time = (
+            self._extract_metadata(
+                task_text, ["estimated time", "estimated duration", "time", "duration"]
+            )
+            or "Variable"
         )
-        estimated_time = time_match.group(1).strip() if time_match else "Variable"
 
         return DynamicTask(
-            task_id=task_id,
-            task_name=task_name,
-            description=task_name,
+            task_id=task_info["id"],
+            task_name=task_info["name"],
+            description=task_info["name"],
             estimated_time=estimated_time,
             dependencies=self._extract_task_dependencies(task_text),
             acceptance_criteria=self._extract_acceptance_criteria(task_text),
         )
+
+    def _extract_task_info(self, text: str) -> Optional[Dict[str, str]]:
+        """
+        Extract task ID and name using semantic search (native Python, no regex).
+
+        Looks for "task" keyword + two numbers separated by dot/dash,
+        then extracts the name after separator.
+
+        Args:
+            text: Text containing task
+
+        Returns:
+            Dict with 'id' and 'name' or None
+        """
+        text_lower = text.lower()
+
+        # Look for "task" keyword
+        task_pos = text_lower.find("task")
+        if task_pos == -1:
+            # Try without "task" keyword - just look for N.M pattern at start
+            task_pos = 0
+        else:
+            task_pos += 4  # Skip "task" word
+
+        # Skip whitespace and formatting (* -)
+        i = task_pos
+        while i < len(text) and text[i] in " \t\n*-":
+            i += 1
+
+        # Extract first number
+        num1_digits = []
+        while i < len(text) and text[i].isdigit():
+            num1_digits.append(text[i])
+            i += 1
+
+        if not num1_digits:
+            return None
+
+        # Check for separator (. or -)
+        if i >= len(text) or text[i] not in ".-−":
+            return None
+        i += 1  # Skip separator
+
+        # Extract second number
+        num2_digits = []
+        while i < len(text) and text[i].isdigit():
+            num2_digits.append(text[i])
+            i += 1
+
+        if not num2_digits:
+            return None
+
+        # Found task ID!
+        task_id = "".join(num1_digits) + "." + "".join(num2_digits)
+
+        # Now extract the name - skip colon/dash and whitespace
+        while i < len(text) and text[i] in " \t:*-−":
+            i += 1
+
+        # Collect rest of line as name
+        name_chars = []
+        while i < len(text) and text[i] != "\n":
+            name_chars.append(text[i])
+            i += 1
+
+        task_name = "".join(name_chars).strip()
+
+        if not task_name:
+            return None
+
+        return {"id": task_id, "name": task_name}
 
     def _parse_collected_tasks(
         self, task_data_list: List[Dict[str, Any]], phase_number: int
@@ -485,7 +802,10 @@ class SpecTasksParser(SourceParser):
         if hasattr(node, "children") and node.children is not None:
             # Strong nodes: just return first child's content
             if isinstance(node, Strong) and node.children:
-                return self._get_text_content(node.children[0])
+                # Convert to list if needed to access first element
+                children_list = list(node.children)
+                if children_list:
+                    return self._get_text_content(children_list[0])
 
             parts = []
             for child in node.children:
@@ -504,7 +824,7 @@ class WorkflowDefinitionParser(SourceParser):
 
     Parses workflow definition YAML and extracts phase/task structure
     for iterative workflow generation in workflow_creation_v1.
-    
+
     Unlike SpecTasksParser (which parses markdown for display),
     this parser extracts structured data for file generation.
     """
@@ -526,7 +846,6 @@ class WorkflowDefinitionParser(SourceParser):
             raise ParseError(f"Definition file not found: {source_path}")
 
         try:
-            import yaml
             with open(source_path, "r", encoding="utf-8") as f:
                 definition = yaml.safe_load(f)
         except Exception as e:
@@ -563,7 +882,7 @@ class WorkflowDefinitionParser(SourceParser):
         phase_name = phase_data.get("name", f"Phase {phase_number}")
         description = phase_data.get("purpose", "")
         estimated_duration = phase_data.get("estimated_duration", "Variable")
-        
+
         # Extract tasks
         tasks_data = phase_data.get("tasks", [])
         tasks = []
@@ -630,7 +949,7 @@ class WorkflowDefinitionParser(SourceParser):
             List of validation criteria strings
         """
         criteria = []
-        
+
         # Extract evidence_required fields
         evidence_required = validation_gate_data.get("evidence_required", {})
         for field_name, field_data in evidence_required.items():

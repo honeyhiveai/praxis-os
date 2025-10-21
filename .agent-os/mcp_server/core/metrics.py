@@ -7,7 +7,7 @@ performance bottlenecks.
 """
 
 import threading
-from typing import Dict, Any
+from typing import Any, Dict
 
 
 class CacheMetrics:
@@ -171,4 +171,3 @@ class CacheMetrics:
             self._misses = 0
             self._double_loads = 0
             self._lock_waits = 0
-
