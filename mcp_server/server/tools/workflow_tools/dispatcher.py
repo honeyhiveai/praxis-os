@@ -199,7 +199,7 @@ def register_workflow_tools(
             if "action" not in result:
                 result["action"] = action
 
-            return result  # type: ignore[return-value]
+            return result  # type: ignore[no-any-return]
 
         except ValueError as e:
             logger.warning("ValueError in aos_workflow: %s", e)

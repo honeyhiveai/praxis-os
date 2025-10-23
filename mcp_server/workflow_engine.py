@@ -144,8 +144,8 @@ class WorkflowEngine:
         self.state_manager = state_manager
         self.rag_engine = rag_engine
         self.checkpoint_loader = checkpoint_loader or CheckpointLoader(
-            workflows_base_path
-        )  # type: ignore[arg-type]
+            workflows_base_path  # type: ignore[arg-type]
+        )
 
         # Determine workflows base path (default to universal/workflows)
         if workflows_base_path is None:
@@ -794,8 +794,9 @@ class WorkflowEngine:
                 # New format: already handled above
                 return (True, {"checkpoint_passed": True, "errors": [], "warnings": []})
 
-            # type: ignore[union-attr]
-            requirements = checkpoint_def.get("required_evidence", {})
+            requirements = checkpoint_def.get(  # type: ignore[attr-defined]
+                "required_evidence", {}
+            )
 
             if not requirements:
                 return (True, {"checkpoint_passed": True, "errors": [], "warnings": []})

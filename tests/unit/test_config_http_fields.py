@@ -33,7 +33,6 @@ def base_config(temp_config_paths):
     """Create valid base ServerConfig."""
     rag = RAGConfig(
         standards_path="standards",
-        usage_path="usage",
         workflows_path="workflows",
         index_path=".cache/vector_index",
     )
@@ -147,7 +146,6 @@ class TestBackwardCompatibility:
         # Create config without specifying HTTP fields
         rag = RAGConfig(
             standards_path="standards",
-            usage_path="usage",
             workflows_path="workflows",
             index_path=".cache/vector_index",
         )

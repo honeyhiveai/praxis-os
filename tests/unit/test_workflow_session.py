@@ -106,6 +106,9 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test creating static workflow session."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -115,6 +118,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         assert session.session_id == "test-123"
@@ -132,6 +136,9 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test _is_dynamic() returns False for static workflow."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -141,6 +148,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         assert session._is_dynamic() is False
@@ -159,6 +167,9 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test getting current phase for static workflow."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -168,6 +179,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         result = session.get_current_phase()
@@ -194,6 +206,9 @@ class TestWorkflowSession:
             updated_at=datetime.now(),
         )
 
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -203,6 +218,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         result = session.get_current_phase()
@@ -219,6 +235,9 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test getting task for static workflow."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -228,6 +247,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         result = session.get_task(0, 1)
@@ -254,6 +274,9 @@ class TestWorkflowSession:
             updated_at=datetime.now(),
         )
 
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -263,6 +286,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         with pytest.raises(WorkflowSessionError, match="Cannot access phase 5"):
@@ -277,6 +301,13 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test completing a phase."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
+        mock_engine.validate_checkpoint.return_value = (
+            True,
+            {"checkpoint_passed": True},
+        )
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -286,6 +317,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         evidence = {"test_passed": True, "coverage": 90}
@@ -315,6 +347,9 @@ class TestWorkflowSession:
             updated_at=datetime.now(),
         )
 
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -324,6 +359,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         with pytest.raises(WorkflowSessionError, match="Cannot complete phase 0"):
@@ -338,6 +374,9 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test cleanup method."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -347,6 +386,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         # Should not raise
@@ -361,6 +401,9 @@ class TestWorkflowSession:
         workflows_base_path,
     ):
         """Test getting workflow state."""
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -370,6 +413,7 @@ class TestWorkflowSession:
             state_manager=mock_state_manager,
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
+            engine=mock_engine,
         )
 
         state = session.get_state()
@@ -388,6 +432,9 @@ class TestWorkflowSession:
         """Test session with custom options."""
         options = {"custom_option": "value", "debug": True}
 
+        from unittest.mock import Mock
+
+        mock_engine = Mock()
         session = WorkflowSession(
             session_id="test-123",
             workflow_type="test_workflow",
@@ -398,6 +445,7 @@ class TestWorkflowSession:
             workflows_base_path=workflows_base_path,
             metadata=static_metadata,
             options=options,
+            engine=mock_engine,
         )
 
         assert session.options == options

@@ -74,7 +74,7 @@ class TestCompletePhaseValidationFlow:
             return_value=requirements,
         ):
             # Test with valid evidence
-            passed, result = workflow_engine._validate_checkpoint(
+            passed, result = workflow_engine.validate_checkpoint(
                 "test_workflow", 1, {"test_field": True}
             )
 
@@ -108,7 +108,7 @@ class TestCompletePhaseValidationFlow:
             return_value=requirements,
         ):
             # Test with missing field
-            passed, result = workflow_engine._validate_checkpoint(
+            passed, result = workflow_engine.validate_checkpoint(
                 "test_workflow", 1, {}  # Empty evidence
             )
 
@@ -143,7 +143,7 @@ class TestCompletePhaseValidationFlow:
             return_value=requirements,
         ):
             # Test with wrong type (string instead of int)
-            passed, result = workflow_engine._validate_checkpoint(
+            passed, result = workflow_engine.validate_checkpoint(
                 "test_workflow", 1, {"count_field": "not_an_integer"}
             )
 
@@ -168,7 +168,7 @@ class TestCompletePhaseValidationFlow:
             return_value=requirements,
         ):
             # Should pass with permissive gate
-            passed, result = workflow_engine._validate_checkpoint(
+            passed, result = workflow_engine.validate_checkpoint(
                 "test_workflow",
                 1,
                 {},  # Empty evidence should still pass with permissive gate
@@ -204,11 +204,11 @@ class TestCompletePhaseValidationFlow:
             return_value=requirements,
         ) as mock_load:
             # First call
-            workflow_engine._validate_checkpoint("test_workflow", 1, {"field": "value"})
+            workflow_engine.validate_checkpoint("test_workflow", 1, {"field": "value"})
             first_call_count = mock_load.call_count
 
             # Second call should use cache
-            workflow_engine._validate_checkpoint("test_workflow", 1, {"field": "value"})
+            workflow_engine.validate_checkpoint("test_workflow", 1, {"field": "value"})
             # Cache is in CheckpointLoader, so we're testing that validation works
             assert first_call_count > 0
 
@@ -268,7 +268,7 @@ class TestSessionIntegration:
 
         # Create mock engine
         mock_engine = Mock(spec=WorkflowEngine)
-        mock_engine._validate_checkpoint.return_value = (
+        mock_engine.validate_checkpoint.return_value = (
             True,
             {
                 "checkpoint_passed": True,
@@ -280,7 +280,7 @@ class TestSessionIntegration:
             },
         )
 
-        # Create session without engine parameter (it accesses it from parent)
+        # Create session with engine parameter
         session = WorkflowSession(
             session_id="test-session",
             workflow_type="test_workflow",
@@ -291,10 +291,8 @@ class TestSessionIntegration:
             workflows_base_path=Path("."),
             metadata=metadata,
             options={},
+            engine=mock_engine,
         )
-
-        # Inject engine for testing
-        session.engine = mock_engine
 
         # Complete phase with evidence
         result = session.complete_phase(1, {"test_field": True})
@@ -340,7 +338,7 @@ class TestStructuredErrorResponse:
             return_value=requirements,
         ):
             # Call validation with missing field
-            passed, result = engine._validate_checkpoint(
+            passed, result = engine.validate_checkpoint(
                 "test_workflow", 1, {}  # Missing required field
             )
 
@@ -392,7 +390,7 @@ class TestBackwardsCompatibility:
             return_value=requirements,
         ):
             # Any evidence should pass with permissive gate
-            passed, result = engine._validate_checkpoint(
+            passed, result = engine.validate_checkpoint(
                 "unknown_workflow", 99, {"anything": "goes"}
             )
 
