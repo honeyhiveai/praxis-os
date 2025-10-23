@@ -114,7 +114,47 @@ def register_server_info_tools(
                 "capabilities": {"error": "Could not retrieve capabilities"},
             }
 
-    return 1  # Number of tools registered
+    @mcp.tool()
+    async def current_date() -> Dict[str, Any]:
+        """
+        Get current date and time for preventing date errors in AI content.
+
+        AI assistants frequently make date mistakes (using wrong dates,
+        inconsistent formats). This tool provides the reliable current
+        date/time that should be used for:
+        - Creating specifications with correct dates
+        - Generating directory names with timestamps
+        - Adding date headers to documentation
+        - Any content requiring accurate current date
+
+        Returns ISO 8601 formatted date/time information to ensure consistency.
+
+        Returns:
+            Dictionary with current date/time in multiple useful formats
+        """
+        now = datetime.now()
+
+        return {
+            "iso_date": now.strftime("%Y-%m-%d"),  # Primary format: 2025-10-23
+            "iso_datetime": now.isoformat(),  # Full ISO: 2025-10-23T14:30:00.123456
+            "day_of_week": now.strftime("%A"),  # Wednesday
+            "month": now.strftime("%B"),  # October
+            "year": now.year,
+            "unix_timestamp": int(now.timestamp()),
+            "formatted": {
+                # For .agent-os/specs/YYYY-MM-DD-name/
+                "spec_directory": f"{now.strftime('%Y-%m-%d')}-",
+                # For markdown headers
+                "header": f"**Date**: {now.strftime('%Y-%m-%d')}",
+                "readable": now.strftime("%B %d, %Y"),  # October 23, 2025
+            },
+            "usage_note": (
+                "Use 'iso_date' (YYYY-MM-DD) for all specifications, "
+                "directories, and headers per Agent OS date policy"
+            ),
+        }
+
+    return 2  # Two tools registered
 
 
 __all__ = ["register_server_info_tools"]
