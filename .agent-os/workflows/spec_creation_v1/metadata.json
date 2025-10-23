@@ -25,6 +25,7 @@
       "checkpoint": {
         "required_evidence": [
           "spec_directory_created",
+          "spec_dir",
           "supporting_docs_accessible",
           "document_index_created",
           "insights_extracted"

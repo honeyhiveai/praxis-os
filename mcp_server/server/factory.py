@@ -116,16 +116,6 @@ class ServerFactory:
             builder = IndexBuilder(
                 index_path=index_path,
                 standards_path=self.paths["standards_path"],
-                usage_path=(
-                    self.paths["usage_path"]
-                    if self.paths["usage_path"].exists()
-                    else None
-                ),
-                workflows_path=(
-                    self.paths["workflows_path"]
-                    if self.paths["workflows_path"].exists()
-                    else None
-                ),
                 embedding_provider=self.config.rag.embedding_provider,
             )
 
@@ -191,32 +181,16 @@ class ServerFactory:
         watcher = AgentOSFileWatcher(
             index_path=self.paths["index_path"],
             standards_path=self.paths["standards_path"],
-            usage_path=(
-                self.paths["usage_path"] if self.paths["usage_path"].exists() else None
-            ),
-            workflows_path=(
-                self.paths["workflows_path"]
-                if self.paths["workflows_path"].exists()
-                else None
-            ),
+            usage_path=None,  # No longer used (content moved to standards/)
+            workflows_path=None,  # Not indexed (aos_workflow tool provides discovery)
             embedding_provider=self.config.rag.embedding_provider,
             rag_engine=rag_engine,
             debounce_seconds=5,
         )
 
-        # Watch standards directory
+        # Watch standards directory (contains all indexed content)
         observer = Observer()
         observer.schedule(watcher, str(self.paths["standards_path"]), recursive=True)
-
-        # Watch usage directory if exists
-        if self.paths["usage_path"].exists():
-            observer.schedule(watcher, str(self.paths["usage_path"]), recursive=True)
-
-        # Watch workflows directory if exists
-        if self.paths["workflows_path"].exists():
-            observer.schedule(
-                watcher, str(self.paths["workflows_path"]), recursive=True
-            )
 
         observer.start()
         self.observers.append(observer)
@@ -247,7 +221,6 @@ class ServerFactory:
             framework_generator=framework_generator,
             workflow_validator=workflow_validator,
             browser_manager=browser_manager,
-            base_path=self.config.base_path,
             enabled_groups=self.config.mcp.enabled_tool_groups,
             max_tools_warning=self.config.mcp.max_tools_warning,
             project_discovery=project_discovery,

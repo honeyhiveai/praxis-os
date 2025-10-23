@@ -10,8 +10,8 @@ Replaces stateless service pattern with clean object-oriented design.
 # registry, RAG engine, parsers, and metadata - all essential for session
 
 # pylint: disable=too-many-arguments,too-many-positional-arguments
-# Justification: __init__ needs 10 parameters to configure session with
-# all required dependencies and state management
+# Justification: __init__ needs 11 parameters to configure session with
+# all required dependencies and state management (includes engine for validation)
 
 # pylint: disable=too-many-nested-blocks
 # Justification: Complex validation logic with multiple conditional paths
@@ -79,6 +79,7 @@ class WorkflowSession:
         state_manager: StateManager,
         workflows_base_path: Path,
         metadata: WorkflowMetadata,
+        engine: Any,  # WorkflowEngine instance for validation
         options: Optional[Dict[str, Any]] = None,
     ):
         """
@@ -95,6 +96,7 @@ class WorkflowSession:
             state_manager: State manager for persistence
             workflows_base_path: Base path for workflow definitions
             metadata: Workflow metadata
+            engine: WorkflowEngine instance for checkpoint validation
             options: Optional workflow options (e.g., spec_path for dynamic workflows)
 
         Raises:
@@ -108,6 +110,7 @@ class WorkflowSession:
         self.state_manager = state_manager
         self.workflows_base_path = workflows_base_path
         self.metadata = metadata
+        self.engine = engine
         self.options = options or {}
 
         # Initialize dynamic content registry if this is a dynamic workflow
@@ -496,15 +499,10 @@ class WorkflowSession:
             timestamp=datetime.now(),
         )
 
-        # Validate checkpoint with evidence
-        # TODO: Implement _validate_checkpoint in workflow_engine
-        # (Tasks 1.2-1.7)
-        # For now, returning True to maintain backwards compatibility
-        # Once validation is implemented, this will call:
-        # passed, result = self.engine._validate_checkpoint(
-        #     workflow_type, phase, evidence
-        # )
-        checkpoint_passed = True  # Will be replaced with actual validation
+        # Validate checkpoint with evidence (multi-layer validation)
+        checkpoint_passed, validation_result = self.engine.validate_checkpoint(
+            self.state.workflow_type, phase, evidence, session_id=self.session_id
+        )
 
         # Complete phase (this advances state)
         self.state.complete_phase(
@@ -528,7 +526,8 @@ class WorkflowSession:
             next_phase_content = self.get_current_phase()
 
             return {
-                "checkpoint_passed": True,
+                "checkpoint_passed": checkpoint_passed,
+                "validation_result": validation_result,
                 "phase_completed": phase,
                 "next_phase": self.state.current_phase,
                 "next_phase_content": next_phase_content,
@@ -536,7 +535,8 @@ class WorkflowSession:
             }
 
         return {
-            "checkpoint_passed": True,
+            "checkpoint_passed": checkpoint_passed,
+            "validation_result": validation_result,
             "phase_completed": phase,
             "workflow_complete": True,
             "message": "Workflow complete! All phases finished.",

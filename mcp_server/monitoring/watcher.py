@@ -1,8 +1,8 @@
 """
 File system monitoring for Agent OS content changes.
 
-Watches standards, usage, and workflows directories for changes and triggers
-incremental index rebuilds with debouncing.
+Watches standards directory for changes and triggers incremental index rebuilds
+with debouncing.
 """
 
 # pylint: disable=too-many-instance-attributes
@@ -40,8 +40,8 @@ class AgentOSFileWatcher(FileSystemEventHandler):
         self,
         index_path: Path,
         standards_path: Path,
-        usage_path: Optional[Path],
-        workflows_path: Optional[Path],
+        usage_path: Optional[Path] = None,  # Deprecated, kept for compatibility
+        workflows_path: Optional[Path] = None,  # Deprecated, kept for compatibility
         embedding_provider: str = "local",
         rag_engine: Optional[Any] = None,
         debounce_seconds: int = 5,
@@ -52,17 +52,18 @@ class AgentOSFileWatcher(FileSystemEventHandler):
         Uses dependency injection - all paths provided by configuration.
 
         :param index_path: Path to vector index directory
-        :param standards_path: Path to standards directory
-        :param usage_path: Path to usage directory (optional)
-        :param workflows_path: Path to workflows directory (optional)
+        :param standards_path: Path to standards directory (all AI-facing content)
+        :param usage_path: Deprecated, no longer used (kept for compatibility)
+        :param workflows_path: Deprecated, no longer used (kept for compatibility)
         :param embedding_provider: Embedding provider ("local" or "openai")
         :param rag_engine: Optional RAG engine instance for hot reload
         :param debounce_seconds: Seconds to wait after last change before rebuilding
         """
         self.index_path = index_path
         self.standards_path = standards_path
-        self.usage_path = usage_path
-        self.workflows_path = workflows_path
+        # Note: usage_path and workflows_path are deprecated but kept for compatibility
+        self.usage_path = usage_path  # No longer used
+        self.workflows_path = workflows_path  # No longer used
         self.embedding_provider = embedding_provider
         self.rag_engine = rag_engine
         self.rebuild_pending = False
@@ -142,16 +143,6 @@ class AgentOSFileWatcher(FileSystemEventHandler):
                 builder = IndexBuilder(
                     index_path=self.index_path,
                     standards_path=self.standards_path,
-                    usage_path=(
-                        self.usage_path
-                        if self.usage_path and self.usage_path.exists()
-                        else None
-                    ),
-                    workflows_path=(
-                        self.workflows_path
-                        if self.workflows_path and self.workflows_path.exists()
-                        else None
-                    ),
                     embedding_provider=self.embedding_provider,
                 )
 

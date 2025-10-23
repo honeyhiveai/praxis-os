@@ -15,8 +15,10 @@ class RAGConfig:
     """RAG system configuration with validated defaults."""
 
     # Paths (relative to project root)
-    standards_path: str = ".agent-os/standards"
-    usage_path: str = ".agent-os/usage"
+    standards_path: str = (
+        ".agent-os/standards"  # All AI-facing content (indexed in RAG)
+    )
+    # NOT indexed (passed to WorkflowEngine for structured access)
     workflows_path: str = ".agent-os/workflows"
     index_path: str = ".agent-os/.cache/vector_index"
 
@@ -33,7 +35,6 @@ class RAGConfig:
         """
         return {
             "standards_path": project_root / self.standards_path,
-            "usage_path": project_root / self.usage_path,
             "workflows_path": project_root / self.workflows_path,
             "index_path": project_root / self.index_path,
         }

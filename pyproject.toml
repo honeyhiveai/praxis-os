@@ -67,7 +67,6 @@ ignore-paths = [
 disable = [
     "too-few-public-methods",  # Many dataclasses and simple classes
     "import-error",            # Handled by mypy and testing
-    "fixme",                   # Allow TODO/FIXME comments for tracking
 ]
 
 # Goal: Achieve ≥10.0/10.0 pylint score

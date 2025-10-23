@@ -243,13 +243,44 @@ class WorkflowState:
     def is_complete(self) -> bool:
         """
         Check if workflow is complete.
+        
+        Detects whether phases are 0-indexed or 1-indexed and handles accordingly.
 
         Returns:
             True if all phases completed
         """
-        # Assuming 8 phases for test generation
-        max_phases = 8 if "test" in self.workflow_type else 6
-        return self.current_phase > max_phases
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
+        # Get total phases from metadata (populated at session creation)
+        total_phases = self.metadata.get("total_phases")
+        
+        if total_phases is None:
+            # Fall back to old logic for legacy sessions (pre-fix)
+            logger.warning(
+                "WorkflowState missing 'total_phases' in metadata "
+                "(legacy session, using fallback logic). "
+                "Session: %s, Workflow: %s",
+                self.session_id,
+                self.workflow_type,
+            )
+            total_phases = 8 if "test" in self.workflow_type else 6
+        
+        # Detect indexing scheme from completed phases
+        if len(self.completed_phases) > 0:
+            min_phase = min(self.completed_phases)
+            zero_indexed = (min_phase == 0)
+        else:
+            # No completed phases yet - check current_phase
+            zero_indexed = (self.current_phase == 0)
+        
+        if zero_indexed:
+            # Phases 0..N-1, complete when current_phase >= total_phases
+            return self.current_phase >= total_phases
+        else:
+            # Phases 1..N, complete when current_phase > total_phases
+            return self.current_phase > total_phases
 
 
 @dataclass

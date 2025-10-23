@@ -75,7 +75,6 @@ class ConfigLoader:
                 standards_path=rag_section.get(
                     "standards_path", RAGConfig.standards_path
                 ),
-                usage_path=rag_section.get("usage_path", RAGConfig.usage_path),
                 workflows_path=rag_section.get(
                     "workflows_path", RAGConfig.workflows_path
                 ),

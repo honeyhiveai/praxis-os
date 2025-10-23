@@ -1,8 +1,8 @@
 """
-Checkpoint requirement loading with three-tier fallback strategy.
+Checkpoint requirement loading with two-tier fallback strategy.
 
 Loads validation requirements from gate-definition.yaml files with automatic
-fallback to RAG parsing or permissive gates for backwards compatibility.
+fallback to permissive gates for backwards compatibility.
 """
 
 import logging
@@ -222,12 +222,11 @@ class CheckpointLoaderError(Exception):
 
 class CheckpointLoader:
     """
-    Loads checkpoint requirements with three-tier fallback strategy.
+    Loads checkpoint requirements with two-tier fallback strategy.
 
     Loading strategy (in order):
-    1. gate-definition.yaml (if exists) - cached for performance
-    2. RAG parsing of phase.md (if YAML missing)
-    3. Permissive gate (if RAG fails) - accepts any evidence
+    1. gate-definition.yaml (if exists) - strict validation, cached for performance
+    2. Permissive gate (if YAML missing) - accepts any evidence
 
     Thread-safe caching using double-checked locking pattern ensures:
     - High cache hit rate (> 95%)
@@ -243,7 +242,7 @@ class CheckpointLoader:
     Example:
         >>> loader = CheckpointLoader(Path(".agent-os/workflows"))
         >>> requirements = loader.load_checkpoint_requirements("spec_creation_v1", 1)
-        >>> assert requirements.source in ["yaml", "rag", "permissive"]
+        >>> assert requirements.source in ["yaml", "permissive"]
     """
 
     def __init__(self, workflows_base_path: Path):
@@ -262,12 +261,11 @@ class CheckpointLoader:
         self, workflow_type: str, phase: int
     ) -> CheckpointRequirements:
         """
-        Load checkpoint requirements using three-tier strategy.
+        Load checkpoint requirements using two-tier strategy.
 
         Strategy:
-        1. Try gate-definition.yaml (if exists) - cached
-        2. Try RAG parsing of phase.md (if YAML missing)
-        3. Return permissive gate (if RAG fails)
+        1. Try gate-definition.yaml (if exists) - strict validation, cached
+        2. Return permissive gate (if YAML missing) - accepts any evidence
 
         Uses double-checked locking for thread-safe caching:
         - Fast path: Check cache without lock (95%+ hit rate, < 10ms)
@@ -286,7 +284,7 @@ class CheckpointLoader:
             ...     "spec_creation_v1", 1
             ... )
             >>> assert "business_goals" in requirements.evidence_schema
-            >>> assert requirements.source == "yaml"  # or "rag" or "permissive"
+            >>> assert requirements.source == "yaml"  # or "permissive"
         """
         cache_key = f"{workflow_type}:{phase}"
 
@@ -311,9 +309,9 @@ class CheckpointLoader:
         self, workflow_type: str, phase: int
     ) -> CheckpointRequirements:
         """
-        Execute three-tier fallback strategy.
+        Execute two-tier fallback strategy.
 
-        Tries each source in order until one succeeds.
+        Tries YAML first, falls back to permissive gate if missing.
 
         Args:
             workflow_type: Workflow identifier
@@ -328,16 +326,11 @@ class CheckpointLoader:
             logger.info("Loaded gate from YAML: %s:%s", workflow_type, phase)
             return requirements
 
-        # Tier 2: RAG (not implemented in this task - returns None)
-        # pylint: disable=assignment-from-none
-        requirements = self._load_from_rag(workflow_type, phase)
-        if requirements:
-            logger.info("Loaded gate from RAG: %s:%s", workflow_type, phase)
-            return requirements
-
-        # Tier 3: Permissive
-        logger.warning(
-            "Using permissive gate (no YAML or RAG): %s:%s", workflow_type, phase
+        # Tier 2: Permissive (backwards compatibility)
+        logger.info(
+            "Using permissive gate (no gate-definition.yaml): %s:%s",
+            workflow_type,
+            phase,
         )
         return self._get_permissive_gate()
 
@@ -442,36 +435,15 @@ class CheckpointLoader:
             source=source,
         )
 
-    def _load_from_rag(
-        self,
-        workflow_type: str,  # pylint: disable=unused-argument
-        phase: int,  # pylint: disable=unused-argument
-    ) -> Optional[CheckpointRequirements]:
-        """
-        Parse checkpoint from phase.md using RAG engine.
-
-        Falls back to existing RAG-based checkpoint parsing.
-
-        Args:
-            workflow_type: Workflow identifier (unused in stub)
-            phase: Phase number (unused in stub)
-
-        Returns:
-            CheckpointRequirements if parsing succeeds, None otherwise
-
-        Note:
-            This is a stub for Task 1.4 (Implement RAG Fallback).
-            Currently returns None to trigger permissive gate fallback.
-        """
-        # TODO: Implement in Task 1.4
-        return None
-
     def _get_permissive_gate(self) -> CheckpointRequirements:
         """
         Return permissive gate for backwards compatibility.
 
-        Accepts any evidence with basic type checking only.
-        Sets strict=False so all errors become warnings.
+        Used when gate-definition.yaml is missing. Accepts any evidence without
+        validation. This ensures workflows without explicit gates still work.
+
+        Design note: RAG fallback was considered but removed because workflows
+        are not indexed in the RAG system (only standards are indexed).
 
         Returns:
             CheckpointRequirements in permissive mode

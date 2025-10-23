@@ -8,30 +8,35 @@
 
 **Keywords for search**: MCP RAG configuration, RAG indexing, vector index, workflow metadata indexing, search_standards configuration, embedding configuration, file watcher, RAG performance
 
-**Core Principle:** Configure MCP RAG to index standards, workflows, and usage guides for AI agent discovery via `search_standards()`.
+**Core Principle:** Configure MCP RAG to index standards (all AI-facing content) for AI agent discovery via `search_standards()`.
 
-**Three Primary Directories to Index:**
-1. **universal/standards/** - Technical standards (architecture, testing, meta-workflow)
-2. **universal/workflows/** - Workflow metadata.json files
-3. **universal/usage/** - Usage guides and quickstarts
+**One Directory Indexed:**
+- **.agent-os/standards/** - All AI-facing content (behavioral guidance, processes, examples)
+  - `universal/ai-assistant/` - AI behavioral patterns and guides
+  - `universal/workflows/` - Workflow standards and creation guides
+  - `universal/operations/` - System operations and update guides
+  - `project/` - Project-specific standards
+
+**NOT Indexed:**
+- **.agent-os/workflows/** - Use `aos_workflow` tool for workflow discovery
+  - Structured queries provide complete metadata
+  - RAG search not appropriate for structured workflow data
 
 **Key Configuration:**
 ```python
 builder = IndexBuilder(
     index_path=Path(".agent-os/.cache/vector_index"),
-    standards_path=Path("universal/standards"),
-    usage_path=Path("universal/usage"),
-    workflows_path=Path("universal/workflows"),  # Required
+    standards_path=Path(".agent-os/standards"),  # All AI-facing content
     embedding_provider="local",  # or "openai"
     embedding_model="all-MiniLM-L6-v2"  # Free, offline
 )
 ```
 
 **File Watcher (Hot Reload):**
-- Watches universal/ directory for changes
+- Watches .agent-os/standards/ directory for changes
 - Automatically rebuilds index on file modifications
 - Typical rebuild: 2-5 seconds for single file
-- Debounce: 1 second to batch rapid changes
+- Debounce: 5 seconds to batch rapid changes
 
 **Indexing Strategy:**
 - **Chunk size:** 500 tokens (overlap: 50 tokens)
@@ -49,7 +54,7 @@ builder = IndexBuilder(
 - **Memory usage:** <500MB with index loaded
 
 **Common Errors:**
-- ❌ Forgetting workflows_path (workflow metadata not discoverable)
+- ❌ Querying for workflow metadata via `search_standards()` (use `aos_workflow` tool instead)
 - ❌ Wrong embedding model (index incompatible with queries)
 - ❌ Not restarting MCP server after config changes
 

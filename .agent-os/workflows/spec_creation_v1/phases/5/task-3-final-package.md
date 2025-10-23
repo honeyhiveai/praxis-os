@@ -36,12 +36,18 @@ cat core/readme-template.md > .agent-os/specs/{SPEC_DIR}/README.md
 
 ### Step 2: Validate Package Completeness
 
+🛑 CRITICAL: All 5 required spec files MUST be present
+
 Check all documents present:
-- [ ] srd.md (requirements)
-- [ ] specs.md (technical design)
-- [ ] tasks.md (implementation plan)
-- [ ] implementation.md (code guidance)
-- [ ] README.md (package overview)
+- [ ] srd.md (requirements) ✅/❌
+- [ ] specs.md (technical design) ✅/❌
+- [ ] tasks.md (implementation plan) ✅/❌
+- [ ] implementation.md (code guidance) ✅/❌
+- [ ] README.md (package overview - JUST CREATED) ✅/❌
+
+🚨 FRAMEWORK-VIOLATION: Missing README.md
+
+README.md is one of the 5 REQUIRED spec files. It must be created in this task before the spec package is considered complete. See `core/readme-template.md` for structure.
 
 📊 COUNT-AND-DOCUMENT: Package metrics from each document
 
@@ -52,11 +58,14 @@ Check all documents present:
 🛑 VALIDATE-GATE: Task Completion
 
 Before proceeding:
-- [ ] README.md created ✅/❌
-- [ ] Document index complete ✅/❌
+- [ ] README.md created and exists in spec directory ✅/❌
+- [ ] README.md has all required sections from template ✅/❌
+- [ ] Document index complete (links to all 4 other docs) ✅/❌
 - [ ] Quick start guide included ✅/❌
 - [ ] Key metrics documented ✅/❌
 - [ ] Next steps clear ✅/❌
+
+🚨 CRITICAL: README.md is MANDATORY - cannot complete Phase 5 without it
 
 ---
 

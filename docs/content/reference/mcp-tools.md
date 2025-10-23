@@ -140,126 +140,114 @@ header = f"# Feature Spec\n{date_info['formatted']['header']}\n"
 
 ## Workflow Tools
 
-### `start_workflow`
+### `aos_workflow`
 
-Initialize new workflow session with phase-gated execution.
+Consolidated workflow management tool following action-based dispatch pattern.
 
-**Purpose:** Begin structured, phase-by-phase execution of complex tasks with architectural gating.
+**Purpose:** Single unified interface for all workflow operations - discovery, execution, management, and recovery.
 
-**Parameters:**
+#### Common Parameters
+
+All actions accept these parameters:
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `workflow_type` | string | Yes | Workflow identifier (`spec_creation_v1`, `spec_execution_v1`, etc.) |
-| `target_file` | string | Yes | File or feature being worked on |
-| `options` | object | No | Workflow-specific configuration |
+| `action` | string | Yes | Operation to perform (see actions below) |
+| `session_id` | string | Conditional | Session identifier (required for most operations) |
 
-**Returns:** `Dict[str, Any]` - Session info with session ID and Phase 0/1 content.
+#### Discovery Actions
+
+**`list_workflows`** - List available workflows
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `category` | string | No | Filter by category (`"testing"`, `"documentation"`, etc.) |
 
 ```python
+# List all workflows
+aos_workflow(action="list_workflows")
+
+# Filter by category
+aos_workflow(action="list_workflows", category="testing")
+```
+
+**Returns:**
+```python
 {
-  "session_id": "ed5481fe-7334-427c-bea4-c8e6103a592b",
-  "workflow_type": "spec_creation_v1",
-  "current_phase": 0,
-  "phase_content": {
-    "title": "Phase 0: Supporting Documents Integration",
-    "objectives": [...],
-    "commands": [...],
-    "deliverables": [...]
-  },
-  "acknowledgment_required": true
+  "status": "success",
+  "action": "list_workflows",
+  "workflows": [
+    {
+      "workflow_type": "spec_creation_v1",
+      "name": "Spec Creation",
+      "category": "documentation",
+      "version": "1.0.0"
+    }
+  ],
+  "count": 5
 }
 ```
 
-**Examples:**
+#### Execution Actions
+
+**`start`** - Start new workflow session
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `workflow_type` | string | Yes | Workflow identifier (`spec_creation_v1`, etc.) |
+| `target_file` | string | Yes | File or feature being worked on |
 
 ```python
-# Start spec creation workflow
-start_workflow(
+aos_workflow(
+    action="start",
     workflow_type="spec_creation_v1",
     target_file="user_authentication"
 )
-
-# Start spec execution with options
-start_workflow(
-    workflow_type="spec_execution_v1",
-    target_file="2025-10-12-user-auth",
-    options={"strict_mode": true}
-)
 ```
 
-**Errors:**
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `WorkflowNotFound` | Invalid `workflow_type` | Use valid workflow: `spec_creation_v1`, `spec_execution_v1` |
-| `StateConflict` | Active workflow already exists | Complete or abandon existing workflow first |
-| `InvalidTarget` | `target_file` missing or invalid | Provide valid file/feature name |
-
-**Related:** [get_current_phase](#get_current_phase), [complete_phase](#complete_phase), [get_workflow_state](#get_workflow_state)
+**Returns:**
+```python
+{
+  "status": "success",
+  "action": "start",
+  "session_id": "ed5481fe-7334-427c-bea4-c8e6103a592b",
+  "workflow_type": "spec_creation_v1",
+  "current_phase": 0
+}
+```
 
 ---
 
-### `get_current_phase`
-
-Retrieve content and requirements for current workflow phase.
-
-**Purpose:** Get phase objectives, commands, deliverables, and artifacts from previous phases.
-
-**Parameters:**
+**`get_phase`** - Get current phase content
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `session_id` | string | Yes | Workflow session identifier |
 
-**Returns:** `Dict[str, Any]` - Current phase content and accumulated artifacts.
+```python
+aos_workflow(
+    action="get_phase",
+    session_id="ed5481fe..."
+)
+```
 
+**Returns:**
 ```python
 {
-  "session_id": "ed5481fe...",
+  "status": "success",
+  "action": "get_phase",
   "current_phase": 2,
   "phase_content": {
     "title": "Phase 2: Technical Design",
     "objectives": [...],
-    "commands": [...],
-    "deliverables": [...]
-  },
-  "artifacts": {
-    "phase_0": {...},
-    "phase_1": {...}
+    ...
   }
 }
 ```
 
-**Examples:**
-
-```python
-# Get current phase after starting workflow
-session = start_workflow(
-    workflow_type="spec_creation_v1",
-    target_file="feature"
-)
-phase = get_current_phase(session_id=session["session_id"])
-```
-
-**Errors:**
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `SessionNotFound` | Invalid or expired `session_id` | Start new workflow or check session ID |
-| `StateCorrupted` | Workflow state file corrupted | Restart workflow (state unrecoverable) |
-
-**Related:** [start_workflow](#start_workflow), [get_task](#get_task), [complete_phase](#complete_phase)
-
 ---
 
-### `get_task`
-
-Get complete content for specific task within a phase.
-
-**Purpose:** Horizontal scaling - work on one task at a time with focused instructions.
-
-**Parameters:**
+**`get_task`** - Get specific task details
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -267,176 +255,255 @@ Get complete content for specific task within a phase.
 | `phase` | integer | Yes | Phase number |
 | `task_number` | integer | Yes | Task number within phase |
 
-**Returns:** `Dict[str, Any]` - Complete task content with steps and validation criteria.
-
 ```python
-{
-  "session_id": "ed5481fe...",
-  "phase": 2,
-  "task_number": 1,
-  "task_content": {
-    "title": "Design Data Model",
-    "description": "...",
-    "steps": [...],
-    "commands": [...],
-    "acceptance_criteria": [...],
-    "estimated_time": "30 minutes"
-  }
-}
-```
-
-**Examples:**
-
-```python
-# Get specific task
-task = get_task(
+aos_workflow(
+    action="get_task",
     session_id="ed5481fe...",
     phase=2,
     task_number=1
 )
-
-# Work on task, then get next
-task2 = get_task(
-    session_id="ed5481fe...",
-    phase=2,
-    task_number=2
-)
 ```
 
-**Errors:**
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `SessionNotFound` | Invalid `session_id` | Check session ID or start new workflow |
-| `PhaseNotAccessible` | Requested phase not yet unlocked | Complete previous phases first |
-| `TaskNotFound` | Invalid `task_number` for phase | Check valid task numbers for phase |
-
-**Related:** [get_current_phase](#get_current_phase), [complete_phase](#complete_phase)
-
----
-
-### `complete_phase`
-
-Submit evidence and attempt phase completion with checkpoint validation.
-
-**Purpose:** Advance to next phase only if all quality criteria met (architectural gating).
-
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-| `phase` | integer | Yes | Phase number being completed |
-| `evidence` | object | Yes | Evidence matching checkpoint criteria |
-
-**Returns (Success):** `Dict[str, Any]` - Confirmation with next phase content.
-
+**Returns:**
 ```python
 {
-  "status": "passed",
-  "phase_completed": 2,
-  "next_phase": 3,
-  "next_phase_content": {
-    "title": "Phase 3: Implementation",
-    "objectives": [...],
+  "status": "success",
+  "action": "get_task",
+  "task_content": {
+    "title": "Design Data Model",
+    "steps": [...],
     ...
   }
 }
 ```
 
-**Returns (Failure):** `Dict[str, Any]` - Missing evidence with current phase content.
+---
+
+**`complete_phase`** - Submit evidence and complete phase
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `session_id` | string | Yes | Workflow session identifier |
+| `phase` | integer | Yes | Phase number being completed |
+| `evidence` | object | Yes | Evidence matching checkpoint criteria (max 10MB) |
 
 ```python
-{
-  "status": "failed",
-  "missing_evidence": ["srd_created", "requirements_documented"],
-  "current_phase_content": {...}
-}
-```
-
-**Examples:**
-
-```python
-# Submit evidence for phase completion
-complete_phase(
+aos_workflow(
+    action="complete_phase",
     session_id="ed5481fe...",
     phase=1,
     evidence={
         "srd_created": true,
-        "requirements_documented": true,
-        "business_goals_defined": true
+        "requirements_documented": true
     }
 )
-
-# Handle failure
-result = complete_phase(session_id="...", phase=2, evidence={...})
-if result["status"] == "failed":
-    print(f"Missing: {result['missing_evidence']}")
 ```
 
-**Errors:**
+**Returns (Success):**
+```python
+{
+  "status": "success",
+  "action": "complete_phase",
+  "checkpoint_passed": true,
+  "next_phase": 2
+}
+```
 
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `SessionNotFound` | Invalid `session_id` | Check session ID |
-| `PhaseNotCurrent` | Trying to complete non-current phase | Complete phases sequentially |
-| `InvalidEvidence` | Evidence structure incorrect | Match evidence keys to checkpoint criteria |
-
-**Related:** [start_workflow](#start_workflow), [get_current_phase](#get_current_phase), [get_workflow_state](#get_workflow_state)
+**Returns (Failure):**
+```python
+{
+  "status": "error",
+  "action": "complete_phase",
+  "checkpoint_passed": false,
+  "missing_evidence": ["srd_created"]
+}
+```
 
 ---
 
-### `get_workflow_state`
-
-Get complete workflow state for debugging or resumption.
-
-**Purpose:** Check progress, debug issues, or resume interrupted workflows.
-
-**Parameters:**
+**`get_state`** - Get complete workflow state
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `session_id` | string | Yes | Workflow session identifier |
 
-**Returns:** `Dict[str, Any]` - Full workflow state including progress and artifacts.
+```python
+aos_workflow(
+    action="get_state",
+    session_id="ed5481fe..."
+)
+```
 
+**Returns:**
 ```python
 {
-  "session_id": "ed5481fe...",
-  "workflow_type": "spec_creation_v1",
-  "current_phase": 3,
-  "completed_phases": [0, 1, 2],
-  "artifacts": {
-    "phase_0": {...},
-    "phase_1": {...},
-    "phase_2": {...}
-  },
-  "can_resume": true,
-  "state_file": ".agent-os/state/workflow_ed5481fe.json"
+  "status": "success",
+  "action": "get_state",
+  "workflow_state": {
+    "workflow_type": "spec_creation_v1",
+    "current_phase": 3,
+    "completed_phases": [0, 1, 2],
+    ...
+  }
 }
 ```
 
-**Examples:**
+#### Management Actions
+
+**`list_sessions`** - List all workflow sessions
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `status` | string | No | Filter by status (`"active"`, `"paused"`, `"completed"`, `"error"`) |
 
 ```python
-# Check workflow progress
-state = get_workflow_state(session_id="ed5481fe...")
-print(f"Phase {state['current_phase']} of {state['total_phases']}")
+# List all sessions
+aos_workflow(action="list_sessions")
 
-# Resume after interruption
-state = get_workflow_state(session_id="ed5481fe...")
-if state["can_resume"]:
-    phase = get_current_phase(session_id=state["session_id"])
+# Filter by status
+aos_workflow(action="list_sessions", status="active")
 ```
 
-**Errors:**
+**Returns:**
+```python
+{
+  "status": "success",
+  "action": "list_sessions",
+  "sessions": [
+    {
+      "session_id": "ed5481fe...",
+      "workflow_type": "spec_creation_v1",
+      "status": "active",
+      "current_phase": 2
+    }
+  ],
+  "count": 3
+}
+```
+
+---
+
+**`get_session`** - Get session details
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `session_id` | string | Yes | Workflow session identifier |
+
+```python
+aos_workflow(
+    action="get_session",
+    session_id="ed5481fe..."
+)
+```
+
+**Returns:**
+```python
+{
+  "status": "success",
+  "action": "get_session",
+  "session_id": "ed5481fe...",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "user_auth",
+  "current_phase": 2
+}
+```
+
+---
+
+**`delete_session`** - Delete workflow session
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `session_id` | string | Yes | Workflow session identifier |
+
+```python
+aos_workflow(
+    action="delete_session",
+    session_id="ed5481fe..."
+)
+```
+
+**Returns:**
+```python
+{
+  "status": "success",
+  "action": "delete_session",
+  "session_id": "ed5481fe...",
+  "deleted": true
+}
+```
+
+#### Complete Example
+
+```python
+# Workflow execution lifecycle
+result = aos_workflow(
+    action="start",
+    workflow_type="spec_creation_v1",
+    target_file="auth_system"
+)
+session_id = result["session_id"]
+
+# Get current phase
+phase = aos_workflow(
+    action="get_phase",
+    session_id=session_id
+)
+
+# Get specific task
+task = aos_workflow(
+    action="get_task",
+    session_id=session_id,
+    phase=1,
+    task_number=1
+)
+
+# Complete phase
+aos_workflow(
+    action="complete_phase",
+    session_id=session_id,
+    phase=1,
+    evidence={"requirements_complete": true}
+)
+
+# Check state
+state = aos_workflow(
+    action="get_state",
+    session_id=session_id
+)
+
+# Cleanup
+aos_workflow(
+    action="delete_session",
+    session_id=session_id
+)
+```
+
+#### Error Responses
+
+All actions return structured error responses:
+
+```python
+{
+  "status": "error",
+  "action": "start",
+  "error": "Invalid target_file: directory traversal detected",
+  "error_type": "ValueError",
+  "remediation": "Provide relative path within workspace"
+}
+```
+
+**Common Errors:**
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `SessionNotFound` | Invalid or expired `session_id` | Start new workflow |
-| `StateFileCorrupted` | State file unreadable | Cannot resume - start new workflow |
+| `Unknown action` | Invalid `action` parameter | Use valid action (see `valid_actions` in error) |
+| `SessionNotFound` | Invalid `session_id` | Check session ID or start new workflow |
+| `Invalid session_id format` | Malformed UUID | Provide valid UUID format |
+| `directory traversal detected` | Security violation in `target_file` | Use relative paths only |
+| `Evidence too large` | Evidence exceeds 10MB limit | Reduce evidence payload size |
 
-**Related:** [start_workflow](#start_workflow), [get_current_phase](#get_current_phase)
+**Related:** [create_workflow](#create_workflow), [validate_workflow](#validate_workflow)
 
 ---
 

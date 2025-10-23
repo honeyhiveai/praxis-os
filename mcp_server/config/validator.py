@@ -27,7 +27,7 @@ class ConfigValidator:
         paths = config.resolved_paths
 
         # Validate source paths exist
-        for name in ["standards_path", "usage_path", "workflows_path"]:
+        for name in ["standards_path", "workflows_path"]:
             path = paths[name]
             if not path.exists():
                 errors.append(f"❌ {name} does not exist: {path}")

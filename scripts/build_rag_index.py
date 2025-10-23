@@ -38,8 +38,6 @@ class IndexBuilder:
         self,
         index_path: Path,
         standards_path: Path,
-        usage_path: Optional[Path] = None,
-        workflows_path: Optional[Path] = None,
         embedding_provider: str = "local",
         embedding_model: str = "all-MiniLM-L6-v2",
     ):
@@ -48,25 +46,16 @@ class IndexBuilder:
 
         Args:
             index_path: Path to store vector index (LanceDB directory)
-            standards_path: Path to Agent OS standards directory
-            usage_path: Path to Agent OS usage documentation directory (optional)
-            workflows_path: Path to workflows directory with metadata.json files (optional but recommended)
+            standards_path: Path to Agent OS standards directory (all AI-facing content)
             embedding_provider: Provider for embeddings ("local" default/free or "openai" costs money)
             embedding_model: Model to use (all-MiniLM-L6-v2 for local, text-embedding-3-small for openai)
         """
         self.index_path = index_path
         self.standards_path = standards_path
-        self.usage_path = usage_path
-        self.workflows_path = workflows_path
 
-        # Build list of source paths to scan
+        # Single source path for all indexed content
         self.source_paths = [standards_path]
-        if usage_path and usage_path.exists():
-            self.source_paths.append(usage_path)
-            logger.info(f"Including usage docs from: {usage_path}")
-        if workflows_path and workflows_path.exists():
-            self.source_paths.append(workflows_path)
-            logger.info(f"Including workflow metadata from: {workflows_path}")
+        logger.info(f"Indexing standards from: {standards_path}")
 
         self.embedding_provider = embedding_provider
         self.embedding_model = embedding_model
@@ -467,20 +456,6 @@ def main():
     )
 
     parser.add_argument(
-        "--usage-path",
-        type=Path,
-        default=None,
-        help="Path to Agent OS usage docs (default: auto-detect from standards-path)",
-    )
-
-    parser.add_argument(
-        "--workflows-path",
-        type=Path,
-        default=None,
-        help="Path to Agent OS workflows (default: auto-detect from standards-path)",
-    )
-
-    parser.add_argument(
         "--verbose",
         "-v",
         action="store_true",
@@ -510,8 +485,6 @@ def main():
         # Installed in .agent-os/ directory
         index_path = args.index_path or (repo_root / ".cache" / "vector_index")
         standards_path = args.standards_path or (repo_root / "standards")
-        usage_path = args.usage_path or (repo_root / "usage")
-        workflows_path = args.workflows_path or (repo_root / "workflows")
     else:
         # Running from source repository
         source_root = repo_root.parent  # go up one more level to project root
@@ -519,8 +492,6 @@ def main():
             source_root / ".agent-os" / ".cache" / "vector_index"
         )
         standards_path = args.standards_path or (repo_root / "universal" / "standards")
-        usage_path = args.usage_path or (repo_root / "universal" / "usage")
-        workflows_path = args.workflows_path or (repo_root / "universal" / "workflows")
 
     # Validate standards path exists
     if not standards_path.exists():
@@ -549,8 +520,6 @@ def main():
         builder = IndexBuilder(
             index_path=index_path,
             standards_path=standards_path,
-            usage_path=usage_path,
-            workflows_path=workflows_path,  # NEW: Include workflows
             embedding_provider=args.provider,
             embedding_model=args.model,
         )
