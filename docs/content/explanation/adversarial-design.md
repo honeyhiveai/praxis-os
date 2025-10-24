@@ -341,7 +341,7 @@ AI agents want to:
 - [Set Up Quality Gates](../how-to-guides/setup-quality-gates.md) - Implement pre-commit hooks
 - [How It Works](./how-it-works.md) - RAG-driven behavioral reinforcement
 - [Workflow Reference](../reference/workflows.md) - Phase-gated workflow architecture
-- [CONTRIBUTING.md](../../../CONTRIBUTING.md#quality-enforcement-system) - Development quality standards
+- [CONTRIBUTING.md](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/CONTRIBUTING.md#quality-enforcement-system) - Development quality standards
 
 ---
 

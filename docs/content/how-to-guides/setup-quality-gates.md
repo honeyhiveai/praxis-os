@@ -699,7 +699,7 @@ Read: [Adversarial Design Philosophy](../explanation/adversarial-design.md)
 
 - [Adversarial Design](../explanation/adversarial-design.md) - Universal philosophy
 - [Evidence Validation](../reference/workflows.md#evidence-validation-system) - Workflow-level gates
-- [CONTRIBUTING.md](../../../CONTRIBUTING.md#quality-enforcement-system) - Agent OS Enhanced's Python example
+- [CONTRIBUTING.md](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/CONTRIBUTING.md#quality-enforcement-system) - Agent OS Enhanced's Python example
 
 ---
 
