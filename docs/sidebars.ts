@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
         'explanation/how-it-works',
         'explanation/architecture',
         'explanation/adversarial-design',
+        'explanation/measuring-outcomes-not-prompts',
         'explanation/knowledge-compounding',
         'explanation/standards-knowledge-compounding',
         'explanation/specs-knowledge-compounding',
