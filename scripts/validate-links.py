@@ -186,6 +186,22 @@ class LinkValidator:
         source_dir = source_file.parent
         target_file = (source_dir / target_path).resolve()
         
+        # Check if link escapes docs/ directory (Docusaurus scope check)
+        docs_root = (self.content_dir.parent).resolve()  # docs/ directory
+        try:
+            target_file.relative_to(docs_root)
+        except ValueError:
+            # Link escapes docs/ directory - will work locally but fail in Docusaurus build
+            self.result.broken_links.append(BrokenLink(
+                source_file=str(source_file.relative_to(self.content_dir.parent)),
+                line_number=line_num,
+                link_text=link_text,
+                link_target=link_target,
+                issue=f"Link escapes docs/ directory (Docusaurus will fail to build). Use GitHub URL instead: https://github.com/honeyhiveai/agent-os-enhanced/blob/main/{target_file.relative_to(docs_root.parent)}",
+                link_type='escape'
+            ))
+            return
+        
         # Add .md extension if missing and it's not a directory
         if not target_file.suffix:
             # Could be Docusaurus route, check both .md and directory
