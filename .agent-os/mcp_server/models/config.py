@@ -15,8 +15,11 @@ class RAGConfig:
     """RAG system configuration with validated defaults."""
 
     # Paths (relative to project root)
-    standards_path: str = ".agent-os/standards"  # All AI-facing content (indexed in RAG)
-    workflows_path: str = ".agent-os/workflows"  # NOT indexed (passed to WorkflowEngine for structured access)
+    standards_path: str = (
+        ".agent-os/standards"  # All AI-facing content (indexed in RAG)
+    )
+    # NOT indexed (passed to WorkflowEngine for structured access)
+    workflows_path: str = ".agent-os/workflows"
     index_path: str = ".agent-os/.cache/vector_index"
 
     # Settings

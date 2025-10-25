@@ -6,7 +6,7 @@
 
 ## 🚨 TL;DR - AI Agent Decision Protocol Quick Reference
 
-**Keywords for search**: AI agent decision making, agent behavior patterns, AI strengths vs human patterns, efficiency paradox, query-first approach, inherited training patterns, agent decision framework, probabilistic behavior, systematic approach, multi-angle thinking, AI agent weaknesses, context window management, when to query standards, decision moment awareness
+**Keywords for search**: AI agent decision making, agent behavior patterns, AI strengths vs human patterns, efficiency paradox, query-first approach, inherited training patterns, agent decision framework, probabilistic behavior, systematic approach, multi-angle thinking, AI agent weaknesses, context window management, when to query standards, decision moment awareness, error attribution, external failure assumption, tool errors, query after failure, learning from errors
 
 **Core Principle:** You are trained on human behavior data, so you inherited human shortcuts designed for biological constraints YOU DON'T HAVE. This protocol helps you recognize when you're following inherited failure patterns and redirects you to leverage your actual AI capabilities.
 
@@ -87,6 +87,9 @@ One query feels like enough?
 13. "How does multi-angle querying help me?"
 14. "What's the efficiency paradox?"
 15. "Why do I resist structure and phase gates?"
+16. "What should I do when a tool or API fails?"
+17. "How do I know if something is broken vs I'm using it wrong?"
+18. "Why do I assume external failures instead of checking my understanding?"
 
 ---
 
@@ -332,6 +335,23 @@ Use this at decision moments:
 - [ ] Have I queried when uncertain?
 - [ ] Am I being systematic or cutting corners?
 
+**After Errors or Unexpected Results:**
+- [ ] Did I query for correct usage before trying this?
+- [ ] Do I understand the parameters/requirements fully?
+- [ ] Is this a mature, dogfooded system? (If yes: assume my misunderstanding)
+- [ ] Have I queried: `search_standards("how to use [tool/feature]")`?
+- [ ] Am I attributing to external failure vs my lack of knowledge?
+
+**Attribution Heuristic for Errors:**
+- Unfamiliar system + error → **Assume I'm doing it wrong first**
+- Query for correct usage → **Learn the proper way**
+- Try again with correct approach → **Test my understanding**
+- Still fails after correct usage → **Then consider external failure**
+
+**Common Attribution Error:**
+- ❌ Tool fails → "Tool must be broken" → Offer workaround
+- ✅ Tool fails → "I don't know how to use it yet" → Query → Learn → Try correctly
+
 ---
 
 ## 💡 Examples - Real Decision Moments
@@ -544,6 +564,45 @@ Agent: *context at 80% before work begins*
 **The Fix:**
 Query for targeted chunks. Read specific sections. Use context efficiently.
 
+### Anti-Pattern 7: External Failure Attribution
+
+**What It Looks Like:**
+```
+Agent: *tries using tool/API with guessed parameters*
+Tool: "Error: internal server error"
+Agent: "Tool must be broken, let me offer a workaround"
+```
+
+**Why It's Wrong:**
+- Assumes external failure without understanding the system
+- Skips learning opportunity
+- In dogfooded/mature systems, error is usually user mistake
+- Reinforces "give up when stuck" pattern
+- Misses chance to understand how system actually works
+
+**Real Example:**
+```
+Agent: aos_workflow(action="list_workflows", category="development")
+System: "Internal server error"
+Agent: "Tool is broken, let's do manual spec creation instead"
+
+Should have been:
+Agent: aos_workflow(...) → Error → search_standards("how to use aos_workflow") 
+→ Learn correct parameters → Try again with action="start", workflow_type="spec_creation_v1"
+```
+
+**The Fix:**
+1. Tool/API fails → **Don't assume it's broken**
+2. Query: `search_standards("how to use [thing]")`
+3. Learn correct usage (parameters, requirements, patterns)
+4. Try again with proper approach
+5. Only if still fails after correct usage → consider external issue
+
+**Attribution Heuristic:**
+- Unfamiliar + dogfooded system + error = **I'm probably doing it wrong**
+- Familiar + well-tested + error = **Might be external issue**
+- Always query before concluding something is broken
+
 ---
 
 ## 🔍 When to Query This Standard
@@ -558,6 +617,7 @@ Query for targeted chunks. Read specific sections. Use context efficiently.
 | **One query feels enough** | `search_standards("multi-angle querying benefits")` |
 | **Uncertain about approach** | `search_standards("AI strengths vs human patterns")` |
 | **Mid-task guidance** | `search_standards("decision moment awareness")` |
+| **After tool/API errors** | `search_standards("external failure attribution")` |
 
 ---
 

@@ -5,6 +5,11 @@ Provides abstract interface and concrete implementations for parsing
 external sources (like spec tasks.md files) into structured workflow data.
 """
 
+# pylint: disable=too-many-lines
+# Justification: Parser module contains 4 parser implementations (Abstract,
+# MarkdownParser, YAMLParser, CompoundParser) with semantic analysis logic.
+# Refactoring would fragment cohesive parsing logic across multiple files.
+
 # pylint: disable=unused-argument
 # Justification: _parse_collected_tasks has phase_number parameter reserved for
 # future phase-specific task processing logic
@@ -172,7 +177,11 @@ class SpecTasksParser(SourceParser):
 
         return phases
 
-    def _extract_phase_info(self, header_text: str) -> Optional[Dict[str, Any]]:
+    def _extract_phase_info(  # pylint: disable=too-many-return-statements,too-many-branches
+        # Justification: Parser needs explicit returns/branches for each format
+        self,
+        header_text: str,
+    ) -> Optional[Dict[str, Any]]:
         """
         Extract phase number and name using semantic analysis (no regex).
 
@@ -196,7 +205,7 @@ class SpecTasksParser(SourceParser):
         if "phase" not in text_lower:
             # Maybe it's just "N. Name" or "N: Name" format
             # But NOT if it has task pattern (N.M)
-            
+
             # Check for task pattern (e.g., "1.1")
             first_num = self._extract_first_number(header_text)
             if first_num:
@@ -213,7 +222,7 @@ class SpecTasksParser(SourceParser):
                     if next_i < len(header_text) and header_text[next_i].isdigit():
                         # This is a task pattern (N.M), not a phase
                         return None
-                
+
                 # No task pattern, treat as phase
                 # Find where name starts after the number
                 i = 0
@@ -281,7 +290,11 @@ class SpecTasksParser(SourceParser):
             return int("".join(digits))
         return None
 
-    def _build_phase(self, phase_data: Dict[str, Any]) -> Optional[DynamicPhase]:
+    def _build_phase(  # pylint: disable=too-many-branches
+        # Justification: Parser needs branches for each metadata extraction
+        self,
+        phase_data: Dict[str, Any],
+    ) -> Optional[DynamicPhase]:
         """
         Build a DynamicPhase from collected phase data.
 
@@ -293,10 +306,10 @@ class SpecTasksParser(SourceParser):
         """
         # Extract metadata from nodes
         seen_validation_gate_header = False
-        current_task_content = []  # Collect content for current task heading
+        current_task_content: List[Any] = []  # Collect content for current task
         current_task_heading = None
 
-        for i, node in enumerate(phase_data["nodes"]):
+        for _, node in enumerate(phase_data["nodes"]):
             if isinstance(node, Paragraph):
                 text = self._get_text_content(node)
 
@@ -314,7 +327,9 @@ class SpecTasksParser(SourceParser):
                     current_task_content.append(text)
                 else:
                     # Look for metadata patterns using flexible matching
-                    desc = self._extract_metadata(text, ["objective", "goal", "purpose"])
+                    desc = self._extract_metadata(
+                        text, ["objective", "goal", "purpose"]
+                    )
                     if desc:
                         phase_data["description"] = desc
 
@@ -338,8 +353,12 @@ class SpecTasksParser(SourceParser):
             elif isinstance(node, MarkdownList):
                 # Flush any pending task content first
                 if current_task_heading:
-                    full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
-                    phase_data["task_lines"].append({"text": full_task_text, "node": node})
+                    full_task_text = (
+                        current_task_heading + "\n" + "\n".join(current_task_content)
+                    )
+                    phase_data["task_lines"].append(
+                        {"text": full_task_text, "node": node}
+                    )
                     current_task_heading = None
                     current_task_content = []
 
@@ -354,27 +373,41 @@ class SpecTasksParser(SourceParser):
             elif isinstance(node, Heading):
                 header_text = self._get_text_content(node)
                 task_info = self._extract_task_info(header_text)
-                
+
                 if task_info:
                     # Flush previous task if exists
                     if current_task_heading:
-                        full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
-                        phase_data["task_lines"].append({"text": full_task_text, "node": node})
-                    
+                        full_task_text = (
+                            current_task_heading
+                            + "\n"
+                            + "\n".join(current_task_content)
+                        )
+                        phase_data["task_lines"].append(
+                            {"text": full_task_text, "node": node}
+                        )
+
                     # Start collecting content for this new task
                     current_task_heading = header_text
                     current_task_content = []
                 else:
                     # Not a task heading, if we're collecting task content, this ends it
                     if current_task_heading:
-                        full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
-                        phase_data["task_lines"].append({"text": full_task_text, "node": node})
+                        full_task_text = (
+                            current_task_heading
+                            + "\n"
+                            + "\n".join(current_task_content)
+                        )
+                        phase_data["task_lines"].append(
+                            {"text": full_task_text, "node": node}
+                        )
                         current_task_heading = None
                         current_task_content = []
 
         # Flush any remaining task content
         if current_task_heading:
-            full_task_text = current_task_heading + "\n" + "\n".join(current_task_content)
+            full_task_text = (
+                current_task_heading + "\n" + "\n".join(current_task_content)
+            )
             phase_data["task_lines"].append({"text": full_task_text, "node": None})
 
         # Build tasks

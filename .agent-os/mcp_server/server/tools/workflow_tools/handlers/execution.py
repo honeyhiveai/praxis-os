@@ -12,7 +12,11 @@ Handles workflow execution operations:
 import logging
 from typing import Any, Dict, Optional
 
-from ..validators import validate_evidence_size, validate_session_id, validate_target_file
+from ..validators import (
+    validate_evidence_size,
+    validate_session_id,
+    validate_target_file,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +26,7 @@ async def handle_start(
     target_file: Optional[str] = None,
     options: Optional[Dict[str, Any]] = None,
     workflow_engine: Optional[Any] = None,
-    **kwargs
+    **kwargs: Any,  # Accept unused parameters from dispatcher
 ) -> Dict[str, Any]:
     """
     Handle start action.
@@ -31,11 +35,10 @@ async def handle_start(
     Validates inputs and delegates to WorkflowEngine.
 
     Args:
-        workflow_type: Workflow identifier (e.g., "test_generation_v3")
+        workflow_type: Workflow identifier (e.g., "test_generation_v3", "spec_execution_v1")
         target_file: Target file path (validated for security)
-        options: Optional workflow configuration
+        options: Optional workflow options (e.g., spec_path for dynamic workflows)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with session info and Phase 1 content
@@ -67,10 +70,8 @@ async def handle_start(
 
     # 3. Call WorkflowEngine to start session
     result = workflow_engine.start_workflow(
-        workflow_type=workflow_type,
-        target_file=target_file
+        workflow_type=workflow_type, target_file=target_file, metadata=options
     )
-    # Note: options parameter not currently supported by WorkflowEngine
 
     # 4. Return formatted response (ensure target_file is included)
     return {
@@ -82,9 +83,7 @@ async def handle_start(
 
 
 async def handle_get_phase(
-    session_id: Optional[str] = None,
-    workflow_engine: Optional[Any] = None,
-    **kwargs
+    session_id: Optional[str] = None, workflow_engine: Optional[Any] = None
 ) -> Dict[str, Any]:
     """
     Handle get_phase action.
@@ -95,7 +94,6 @@ async def handle_get_phase(
     Args:
         session_id: Session identifier (required, validated)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with current phase content, tasks, and checkpoint
@@ -138,7 +136,6 @@ async def handle_get_task(
     phase: Optional[int] = None,
     task_number: Optional[int] = None,
     workflow_engine: Optional[Any] = None,
-    **kwargs
 ) -> Dict[str, Any]:
     """
     Handle get_task action.
@@ -151,7 +148,6 @@ async def handle_get_task(
         phase: Phase number (required, must be positive integer)
         task_number: Task number within phase (required, must be positive integer)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with complete task content and execution steps
@@ -208,7 +204,6 @@ async def handle_complete_phase(
     phase: Optional[int] = None,
     evidence: Optional[Dict[str, Any]] = None,
     workflow_engine: Optional[Any] = None,
-    **kwargs
 ) -> Dict[str, Any]:
     """
     Handle complete_phase action.
@@ -222,7 +217,6 @@ async def handle_complete_phase(
         phase: Phase number being completed (required, must be non-negative)
         evidence: Evidence dictionary with checkpoint criteria (required, size-limited)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with checkpoint result and next phase content if passed
@@ -278,9 +272,7 @@ async def handle_complete_phase(
 
 
 async def handle_get_state(
-    session_id: Optional[str] = None,
-    workflow_engine: Optional[Any] = None,
-    **kwargs
+    session_id: Optional[str] = None, workflow_engine: Optional[Any] = None
 ) -> Dict[str, Any]:
     """
     Handle get_state action.
@@ -291,7 +283,6 @@ async def handle_get_state(
     Args:
         session_id: Session identifier (required, validated)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with complete workflow state
@@ -321,10 +312,10 @@ async def handle_get_state(
     # 3. Call WorkflowEngine to get workflow state
     state_data = workflow_engine.get_workflow_state(session_id=session_id)
 
-    # 4. Return formatted response (wrap state_data under workflow_state key for consistency)
+    # 4. Return formatted response
+    # (wrap state_data under workflow_state key for consistency)
     return {
         "status": "success",
         "action": "get_state",
         "workflow_state": state_data,
     }
-

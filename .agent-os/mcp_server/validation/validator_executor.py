@@ -13,43 +13,43 @@ import yaml
 # Safe builtins allowed in validator execution context
 # NO os, sys, subprocess, __import__, eval, exec, open, etc.
 SAFE_GLOBALS = {
-    'len': len,
-    'str': str,
-    'int': int,
-    'bool': bool,
-    'float': float,
-    're': re,
-    'yaml': yaml,
-    'any': any,
-    'all': all,
-    'set': set,
-    'list': list,
-    'dict': dict,
-    'abs': abs,
-    'min': min,
-    'max': max,
-    'sum': sum,
-    'round': round,
-    'sorted': sorted,
-    'enumerate': enumerate,
-    'zip': zip,
+    "len": len,
+    "str": str,
+    "int": int,
+    "bool": bool,
+    "float": float,
+    "re": re,
+    "yaml": yaml,
+    "any": any,
+    "all": all,
+    "set": set,
+    "list": list,
+    "dict": dict,
+    "abs": abs,
+    "min": min,
+    "max": max,
+    "sum": sum,
+    "round": round,
+    "sorted": sorted,
+    "enumerate": enumerate,
+    "zip": zip,
 }
 
 # Forbidden patterns in validator expressions (security)
 FORBIDDEN_PATTERNS = [
-    r'__import__',
-    r'exec\s*\(',
-    r'eval\s*\(',
-    r'compile\s*\(',
-    r'open\s*\(',
-    r'file\s*\(',
-    r'input\s*\(',
-    r'os\.',
-    r'sys\.',
-    r'subprocess\.',
-    r'__builtins__',
-    r'globals\s*\(',
-    r'locals\s*\(',
+    r"__import__",
+    r"exec\s*\(",
+    r"eval\s*\(",
+    r"compile\s*\(",
+    r"open\s*\(",
+    r"file\s*\(",
+    r"input\s*\(",
+    r"os\.",
+    r"sys\.",
+    r"subprocess\.",
+    r"__builtins__",
+    r"globals\s*\(",
+    r"locals\s*\(",
 ]
 
 
@@ -79,10 +79,7 @@ class ValidatorExecutor:
         self.safe_globals = SAFE_GLOBALS.copy()
 
     def execute_validator(
-        self,
-        validator_expr: str,
-        value: Any,
-        params: Optional[Dict[str, Any]] = None
+        self, validator_expr: str, value: Any, params: Optional[Dict[str, Any]] = None
     ) -> Tuple[bool, Optional[str]]:
         """
         Execute validator lambda in safe context.
@@ -126,11 +123,12 @@ class ValidatorExecutor:
 
         try:
             # pylint: disable=eval-used
-            # Justification: Controlled eval with restricted globals for validation lambdas
+            # Justification: Controlled eval with restricted globals
+            #                for validation lambdas
             validator_func = eval(
                 validator_expr,
                 self.safe_globals,
-                {}  # Empty locals (no access to surrounding scope)
+                {},  # Empty locals (no access to surrounding scope)
             )
 
             # Execute validator
@@ -139,7 +137,8 @@ class ValidatorExecutor:
 
             return (passed, None)
 
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            # Justification: Catch all exceptions from user validators
             # Validator exception = validation failure with error message
             return (False, f"Validator failed: {str(e)}")
 
@@ -163,7 +162,7 @@ class ValidatorExecutor:
             False
         """
         try:
-            compile(validator_expr, '<string>', 'eval')
+            compile(validator_expr, "<string>", "eval")
             return True
         except SyntaxError:
             return False
@@ -204,7 +203,6 @@ COMMON_VALIDATORS = {
     "matches_pattern": "lambda x, pattern: re.match(pattern, x) is not None",
     "min_length": "lambda x, min_len: len(x) >= min_len",
     "max_length": "lambda x, max_len: len(x) <= max_len",
-
     # Integer validators
     "positive": "lambda x: x > 0",
     "non_negative": "lambda x: x >= 0",
@@ -212,23 +210,21 @@ COMMON_VALIDATORS = {
     "in_range": "lambda x, min_val, max_val: min_val <= x <= max_val",
     "equals": "lambda x, expected: x == expected",
     "not_equals": "lambda x, forbidden: x != forbidden",
-
     # Object validators
     "has_fields": "lambda x, fields: all(f in x for f in fields)",
-    "valid_structure": "lambda x, required_keys: set(required_keys).issubset(set(x.keys()))",
-
+    "valid_structure": (
+        "lambda x, required_keys: set(required_keys).issubset(set(x.keys()))"
+    ),
     # Proof validators (check content, not just boolean claims)
     "yaml_parseable": "lambda x: yaml.safe_load(x) is not None",
     "contains_success": "lambda x: 'success' in x.lower() or '✅' in x",
     "no_errors": "lambda x: 'error' not in x.lower() and '❌' not in x",
     "contains_text": "lambda x, text: text in x",
     "not_contains_text": "lambda x, text: text not in x",
-
     # List validators
     "list_not_empty": "lambda x: isinstance(x, list) and len(x) > 0",
     "list_min_length": "lambda x, min_len: isinstance(x, list) and len(x) >= min_len",
     "all_items_type": "lambda x, item_type: all(isinstance(i, item_type) for i in x)",
-
     # Numeric validators
     "greater_than": "lambda x, threshold: x > threshold",
     "less_than": "lambda x, threshold: x < threshold",
@@ -237,8 +233,8 @@ COMMON_VALIDATORS = {
 
 
 __all__ = [
-    'ValidatorExecutor',
-    'COMMON_VALIDATORS',
-    'SAFE_GLOBALS',
-    'FORBIDDEN_PATTERNS',
+    "ValidatorExecutor",
+    "COMMON_VALIDATORS",
+    "SAFE_GLOBALS",
+    "FORBIDDEN_PATTERNS",
 ]

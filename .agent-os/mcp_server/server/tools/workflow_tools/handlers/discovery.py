@@ -5,6 +5,12 @@ Handles workflow discovery operations:
 - list_workflows: List available workflows with optional filtering
 """
 
+# pylint: disable=global-statement
+# Justification: Module-level cache for workflow metadata provides significant
+# performance benefit (avoids filesystem scan on every list_workflows call).
+# Global is appropriate here as cache is module-scoped and thread-safe via GIL.
+# Tests that need to clear cache can import this module directly.
+
 import glob
 import json
 import logging
@@ -31,17 +37,17 @@ def _load_workflow_metadata() -> list:
     Raises:
         None - Errors are logged and skipped to return partial results
 
-    Examples:
+        Examples:
         >>> workflows = _load_workflow_metadata()
         >>> len(workflows) > 0
         True
     """
-    workflows = []
+    workflows: list = []
 
     # ONLY read from installed workflows in .agent-os/
     # The skeleton (universal/workflows/) is source code, not runtime
     workflow_base = ".agent-os/workflows/"
-    
+
     if not os.path.exists(workflow_base):
         logger.warning("Workflow directory not found: %s", workflow_base)
         return workflows
@@ -60,9 +66,7 @@ def _load_workflow_metadata() -> list:
     return workflows
 
 
-async def handle_list_workflows(
-    category: Optional[str] = None, **kwargs
-) -> Dict[str, Any]:
+async def handle_list_workflows(category: Optional[str] = None) -> Dict[str, Any]:
     """
     Handle list_workflows action.
 
@@ -71,7 +75,6 @@ async def handle_list_workflows(
 
     Args:
         category: Optional category filter (e.g., "code_generation", "testing")
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with workflows list and count
@@ -102,4 +105,3 @@ async def handle_list_workflows(
         "workflows": workflows,
         "count": len(workflows),
     }
-

@@ -11,6 +11,10 @@ Provides search_standards tool for semantic search over Agent OS documentation.
 import logging
 from typing import Any, Dict, List, Optional
 
+from ...core.prepend_generator import generate_query_prepend
+from ...core.query_tracker import get_tracker
+from ...core.session_id_extractor import extract_session_id_from_context, hash_session_id
+
 logger = logging.getLogger(__name__)
 
 # HoneyHive integration (optional)
@@ -95,15 +99,39 @@ def register_rag_tools(mcp: Any, rag_engine: Any) -> int:
                 for chunk, score in zip(result.chunks, result.relevance_scores)
             ]
 
-            # Prepend reminder to FIRST result only, at the very beginning
+            # Query Gamification System: Track queries and generate dynamic prepend
+            # Wrapped in try-except for graceful degradation (Task 2.2)
             if formatted_results:
-                reminder_text = (
-                    "🔍🔍🔍🔍🔍 QUERIES = KNOWLEDGE = ACCURACY = QUALITY ⭐⭐⭐⭐⭐\n\n"
-                    "---\n\n"
-                )
-                formatted_results[0]["content"] = (
-                    reminder_text + formatted_results[0]["content"]
-                )
+                try:
+                    # Extract session ID with dynamic countdown timer
+                    session_id = extract_session_id_from_context(None)
+
+                    # Get tracker and record query
+                    tracker = get_tracker()
+                    tracker.record_query(session_id, query)
+
+                    # Generate dynamic prepend with progress and suggestions
+                    prepend_text = generate_query_prepend(tracker, session_id, query)
+
+                    # Prepend to FIRST result only
+                    formatted_results[0]["content"] = (
+                        prepend_text + formatted_results[0]["content"]
+                    )
+
+                    logger.debug(
+                        "Query gamification applied (session: %s)",
+                        hash_session_id(session_id),
+                    )
+
+                except Exception as e:
+                    # Graceful degradation: log error but don't break search
+                    logger.error(
+                        "Query gamification failed (session: %s): %s",
+                        hash_session_id(session_id) if "session_id" in locals() else "unknown",
+                        e,
+                        exc_info=True,
+                    )
+                    # Return unmodified results - search functionality preserved
 
             response = {
                 "results": formatted_results,

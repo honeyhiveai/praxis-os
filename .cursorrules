@@ -4,16 +4,16 @@
 🛑🛑🛑 STOP 🛑🛑🛑
 MANDATORY ORIENTATION - MUST COMPLETE BEFORE RESPONDING:
 
-Have I completed the 8 mandatory bootstrap queries this conversation?
+Have I completed the 10 mandatory bootstrap queries this conversation?
 
 If NO, run this query NOW:
-    search_standards("orientation bootstrap queries mandatory eight queries")
+    search_standards("orientation bootstrap queries mandatory ten queries")
 
-Then READ the results. The results will contain 8 queries you MUST run.
-Execute ALL 8 queries IN SEQUENCE.
-AFTER all 8 complete, reply: "✅ Oriented. Ready."
+Then READ the results. The results will contain 10 queries you MUST run.
+Execute ALL 10 queries IN SEQUENCE.
+AFTER all 10 complete, reply: "✅ Oriented. Ready."
 
-If YES (already completed 8/8): Proceed with user's request.
+If YES (already completed 10/10): Proceed with user's request.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 BEFORE implementing: search_standards("how to X")

@@ -435,7 +435,6 @@ class CheckpointLoader:
             source=source,
         )
 
-
     def _get_permissive_gate(self) -> CheckpointRequirements:
         """
         Return permissive gate for backwards compatibility.

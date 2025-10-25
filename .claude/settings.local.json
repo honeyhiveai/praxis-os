@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(~/.local/bin/claude mcp:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(printf:*)",
+      "mcp__agent-os-rag__search_standards",
+      "Bash(~/.local/bin/claude:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true
+}

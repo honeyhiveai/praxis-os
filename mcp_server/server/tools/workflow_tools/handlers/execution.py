@@ -24,7 +24,9 @@ logger = logging.getLogger(__name__)
 async def handle_start(
     workflow_type: Optional[str] = None,
     target_file: Optional[str] = None,
+    options: Optional[Dict[str, Any]] = None,
     workflow_engine: Optional[Any] = None,
+    **kwargs: Any,  # Accept unused parameters from dispatcher
 ) -> Dict[str, Any]:
     """
     Handle start action.
@@ -33,8 +35,9 @@ async def handle_start(
     Validates inputs and delegates to WorkflowEngine.
 
     Args:
-        workflow_type: Workflow identifier (e.g., "test_generation_v3")
+        workflow_type: Workflow identifier (e.g., "test_generation_v3", "spec_execution_v1")
         target_file: Target file path (validated for security)
+        options: Optional workflow options (e.g., spec_path for dynamic workflows)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
 
     Returns:
@@ -67,9 +70,8 @@ async def handle_start(
 
     # 3. Call WorkflowEngine to start session
     result = workflow_engine.start_workflow(
-        workflow_type=workflow_type, target_file=target_file
+        workflow_type=workflow_type, target_file=target_file, metadata=options
     )
-    # Note: options parameter not currently supported by WorkflowEngine
 
     # 4. Return formatted response (ensure target_file is included)
     return {

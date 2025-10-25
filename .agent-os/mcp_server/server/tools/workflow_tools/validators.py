@@ -7,6 +7,7 @@ Provides security and data integrity validation for workflow operations.
 import json
 import os
 import re
+import urllib.parse
 from typing import Any, Dict
 
 from .constants import MAX_EVIDENCE_SIZE, SESSION_ID_PATTERN
@@ -42,8 +43,8 @@ def validate_session_id(session_id: str) -> bool:
 
     if not re.match(SESSION_ID_PATTERN, session_id):
         raise ValueError(
-            f"Invalid session_id format: must be UUID format (36 chars, "
-            f"lowercase hex with hyphens)"
+            "Invalid session_id format: must be UUID format "
+            "(36 chars, lowercase hex with hyphens)"
         )
 
     return True
@@ -84,11 +85,12 @@ def validate_target_file(target_file: str) -> bool:
     # Check for command injection attempts (semicolon, pipe, backtick)
     dangerous_chars = [";", "|", "`", "$", "&", ">", "<"]
     if any(char in target_file for char in dangerous_chars):
-        raise ValueError("Invalid target_file: potentially dangerous characters detected")
+        raise ValueError(
+            "Invalid target_file: potentially dangerous characters detected"
+        )
 
     # Check for URL encoding attacks
     if "%" in target_file:
-        import urllib.parse
         decoded = urllib.parse.unquote(target_file)
         # If decoded version has dangerous patterns, reject
         if ".." in decoded or any(char in decoded for char in ["/", "\\"]):
@@ -131,6 +133,7 @@ def validate_evidence_size(evidence: Dict[str, Any]) -> bool:
         True if valid
 
     Raises:
+        TypeError: If evidence is not a dictionary
         ValueError: If evidence exceeds size limit
 
     Examples:
@@ -163,4 +166,3 @@ def validate_evidence_size(evidence: Dict[str, Any]) -> bool:
         if "too large" in str(e).lower():
             raise
         raise ValueError(f"Evidence is not JSON-serializable: {e}") from e
-

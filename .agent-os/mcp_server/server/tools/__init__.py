@@ -1,54 +1,20 @@
 """
-Consolidated workflow management tools.
+MCP tools module with selective loading and performance monitoring.
 
-Single unified interface for all workflow operations following aos_browser pattern.
-Organized into submodules for maintainability:
-- constants: Action names and validation constants
-- validators: Input validation functions
-- handlers/: Action handlers grouped by category
-  (discovery, execution, management, recovery)
-- dispatcher: Main aos_workflow tool with action routing
+Provides tool registration with group-based selective loading to avoid
+performance degradation (research shows 85% drop with >20 tools).
 """
 
-from .constants import MAX_EVIDENCE_SIZE, SESSION_ID_PATTERN, VALID_ACTIONS
-from .dispatcher import ACTION_HANDLERS, register_workflow_tools
-from .handlers import (
-    handle_complete_phase,
-    handle_delete_session,
-    handle_get_phase,
-    handle_get_session,
-    handle_get_state,
-    handle_get_task,
-    handle_list_sessions,
-    handle_list_workflows,
-    handle_start,
-)
-from .validators import (
-    validate_evidence_size,
-    validate_session_id,
-    validate_target_file,
-)
+from .browser_tools import register_browser_tools
+from .rag_tools import register_rag_tools
+from .registry import register_all_tools
+from .server_info_tools import register_server_info_tools
+from .workflow_tools import register_workflow_tools
 
 __all__ = [
-    # Main registration
+    "register_all_tools",
+    "register_rag_tools",
     "register_workflow_tools",
-    # Constants
-    "VALID_ACTIONS",
-    "MAX_EVIDENCE_SIZE",
-    "SESSION_ID_PATTERN",
-    # Validators
-    "validate_session_id",
-    "validate_target_file",
-    "validate_evidence_size",
-    # Action handlers
-    "ACTION_HANDLERS",
-    "handle_list_workflows",
-    "handle_start",
-    "handle_get_phase",
-    "handle_get_task",
-    "handle_complete_phase",
-    "handle_get_state",
-    "handle_list_sessions",
-    "handle_get_session",
-    "handle_delete_session",
+    "register_browser_tools",
+    "register_server_info_tools",
 ]

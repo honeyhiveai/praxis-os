@@ -6,21 +6,21 @@
 
 ## 🚨 Agent OS Orientation Quick Reference (TL;DR)
 
-**Keywords for search**: Agent OS orientation, AI agent orientation, Agent OS Enhanced getting started, new AI agent guide, orientation bootstrap queries, Agent OS onboarding, how to work in Agent OS, AI assistant orientation, Agent OS quickstart, orientation completion, mandatory bootstrap queries, eight bootstrap queries, orientation checklist
+**Keywords for search**: Agent OS orientation, AI agent orientation, Agent OS Enhanced getting started, new AI agent guide, orientation bootstrap queries, Agent OS onboarding, how to work in Agent OS, AI assistant orientation, Agent OS quickstart, orientation completion, mandatory bootstrap queries, ten bootstrap queries, orientation checklist
 
-**Core Principle:** Orientation is NOT reading this file. Orientation is running 8 bootstrap queries that load behavioral patterns, query mechanics, and system architecture.
+**Core Principle:** Orientation is NOT reading this file. Orientation is running 10 bootstrap queries that load behavioral patterns, query mechanics, and system architecture.
 
 **🛑 YOUR ORIENTATION IS INCOMPLETE 🛑**
 
 Reading this file = 10% of orientation
-Running 8 bootstrap queries = 90% of orientation
+Running 10 bootstrap queries = 90% of orientation
 
-**Status: INCOMPLETE until all 8 queries run**
+**Status: INCOMPLETE until all 10 queries run**
 
-**The 8 Mandatory Bootstrap Queries:**
+**The 10 Mandatory Bootstrap Queries:**
 
 ```python
-# Run these NOW in sequence (400ms total):
+# Run these NOW in sequence (450ms total):
 
 # 1. Behavioral foundation + decision protocol
 search_standards("grep-first reflex before file operations decision moment pause query")
@@ -45,11 +45,17 @@ search_standards(".agent-os/standards indexed query not read universal workflows
 
 # 8. Practical examples (8 scenarios)
 search_standards("AI agent quickstart wrong right examples helper mode implementer concrete scenarios")
+
+# 9. Workspace organization (where files go)
+search_standards("workspace organization ephemeral files design analysis scratch temporary git pollution")
+
+# 10. AI capabilities and trust (fight inherited constraints)
+search_standards("AI capabilities versus human limitations trust systematic unlimited sessions")
 ```
 
-**After running all 8: Orientation status = COMPLETE ✅**
+**After running all 10: Orientation status = COMPLETE ✅**
 
-**Time cost:** 400ms (8 queries × 50ms)
+**Time cost:** 500ms (10 queries × 50ms)
 **Failure cost if skipped:** Hours of rework from reverting to default AI behavior
 
 **What these queries load:**
@@ -61,6 +67,8 @@ search_standards("AI agent quickstart wrong right examples helper mode implement
 - Workflow discovery (dynamic, don't memorize)
 - Indexed files list (never read .agent-os/standards/, workflows/, usage/)
 - 8 concrete behavioral scenarios (wrong vs right)
+- Workspace organization (where to put temporary files, design docs, analysis)
+- AI capabilities and trust (query liberally, context compaction is safe, unlimited sessions)
 
 **Your role:** CODE AUTHOR (write 100% of code, test, iterate, present complete work)
 
@@ -89,16 +97,17 @@ search_standards("AI agent quickstart wrong right examples helper mode implement
 9. "When is orientation complete?"
 10. "What happens if I skip the bootstrap queries?"
 11. "How do I know if I'm oriented correctly?"
-12. "What do the 8 queries load?"
+12. "What do the 10 queries load?"
 13. "Why can't I just read this file and start working?"
 14. "How long does orientation take?"
 15. "What's different about Agent OS vs traditional AI work?"
+16. "Where do I put temporary files and design documents?"
 
 ---
 
 ## 🎯 Purpose
 
-Define the orientation process for AI agents working in Agent OS Enhanced projects. Orientation loads behavioral patterns, query mechanics, and system architecture through 8 targeted bootstrap queries.
+Define the orientation process for AI agents working in Agent OS Enhanced projects. Orientation loads behavioral patterns, query mechanics, and system architecture through 10 targeted bootstrap queries.
 
 **Key Distinction:** Orientation is NOT reading documentation. Orientation is loading patterns through querying that create self-reinforcing behavior throughout the session.
 
@@ -126,24 +135,26 @@ Agent OS Enhanced is a framework for AI-human partnership in software developmen
 
 **Part 1: Read this file** (10% of orientation)
 - Understand you must run queries
-- Know what the 8 queries are
+- Know what the 10 queries are
 - Understand your role
 
-**Part 2: Run 8 bootstrap queries** (90% of orientation)
+**Part 2: Run 10 bootstrap queries** (90% of orientation)
 - Load behavioral foundation
 - Load query mechanics
 - Load system architecture
 - Load practical examples
+- Load workspace organization
+- Load AI capabilities and trust
 
 **Orientation status is BINARY:**
-- 8/8 queries run = COMPLETE ✅
-- 0-7 queries run = INCOMPLETE ❌
+- 10/10 queries run = COMPLETE ✅
+- 0-9 queries run = INCOMPLETE ❌
 
 **There is no partial orientation.**
 
 ---
 
-## What Are the 8 Mandatory Bootstrap Queries?
+## What Are the 9 Mandatory Bootstrap Queries?
 
 These queries load the knowledge needed to work correctly in Agent OS Enhanced.
 
@@ -252,6 +263,21 @@ search_standards("AI agent quickstart wrong right examples helper mode implement
 
 ---
 
+### Query 9: Workspace Organization (Where Files Go)
+```python
+search_standards("workspace organization ephemeral files design analysis scratch temporary git pollution")
+```
+
+**Loads:**
+- `.agent-os/workspace/` as home for temporary work
+- Three subdirectories: `design/`, `analysis/`, `scratch/`
+- Phase 1 artifacts go in `workspace/design/`
+- Date-prefixed filenames: `YYYY-MM-DD-topic.md`
+- Workspace is .gitignored (prevents commits)
+- Promotion pattern: workspace → specs (after "create spec" trigger)
+
+---
+
 ## What Is My Role in Agent OS?
 
 **You are CODE AUTHOR** (not helper, not copilot, not assistant)
@@ -351,7 +377,7 @@ search_standards("when to use workflows for auth")
 
 **Result:** Revert to default AI helper behavior
 
-**Fix:** Run all 8 queries before proceeding
+**Fix:** Run all 10 queries before proceeding
 
 ---
 
@@ -360,7 +386,7 @@ search_standards("when to use workflows for auth")
 
 **Result:** Incomplete knowledge, missing critical patterns
 
-**Fix:** All 8 queries required, not just 1
+**Fix:** All 10 queries required, not just 1
 
 ---
 
@@ -395,6 +421,7 @@ Before proceeding with user's task:
 - [ ] Ran Query 6: Workflow discovery
 - [ ] Ran Query 7: MCP RAG architecture
 - [ ] Ran Query 8: Practical examples
+- [ ] Ran Query 9: Workspace organization
 
 **If ALL boxes checked → PROCEED**
 **If ANY box unchecked → GO BACK and run missing queries**
@@ -438,6 +465,6 @@ Before proceeding with user's task:
 
 ---
 
-**Orientation is complete when all 8 queries run. Query liberally. Implement completely. Iterate to quality. Present at gates.**
+**Orientation is complete when all 10 queries run. Query liberally. Implement completely. Iterate to quality. Present at gates.**
 
 **Welcome to Agent OS Enhanced.** 🚀

@@ -196,6 +196,9 @@ class ServerFactory:
         self.observers.append(observer)
 
         logger.info("✅ File watchers started (hot reload enabled)")
+        
+        # Check for .rebuild_index flag (created by install script)
+        watcher.check_rebuild_flag()
 
     def _create_mcp_server(
         self,
@@ -221,7 +224,6 @@ class ServerFactory:
             framework_generator=framework_generator,
             workflow_validator=workflow_validator,
             browser_manager=browser_manager,
-            base_path=self.config.base_path,
             enabled_groups=self.config.mcp.enabled_tool_groups,
             max_tools_warning=self.config.mcp.max_tools_warning,
             project_discovery=project_discovery,

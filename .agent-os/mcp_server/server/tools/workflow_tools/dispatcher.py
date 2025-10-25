@@ -17,6 +17,7 @@ Provides the main aos_workflow tool that routes actions to specific handlers.
 # structured error responses to LLM. Specific exceptions re-raised after logging.
 # Alternative (narrow catching) would crash tool and break AI workflows.
 
+import inspect
 import logging
 from typing import Any, Dict, Optional, Union
 
@@ -174,26 +175,37 @@ def register_workflow_tools(
             if to_phase is not None:
                 to_phase = int(to_phase)
 
-            # Call handler with all parameters + injected dependencies
-            result = await handler(
-                session_id=session_id,
-                workflow_type=workflow_type,
-                target_file=target_file,
-                options=options,
-                phase=phase,
-                task_number=task_number,
-                evidence=evidence,
-                category=category,
-                status=status,
-                reason=reason,
-                checkpoint_note=checkpoint_note,
-                reset_evidence=reset_evidence,
-                to_phase=to_phase,
+            # Build parameter dict with all possible parameters
+            all_params = {
+                "session_id": session_id,
+                "workflow_type": workflow_type,
+                "target_file": target_file,
+                "options": options,
+                "phase": phase,
+                "task_number": task_number,
+                "evidence": evidence,
+                "category": category,
+                "status": status,
+                "reason": reason,
+                "checkpoint_note": checkpoint_note,
+                "reset_evidence": reset_evidence,
+                "to_phase": to_phase,
                 # Injected dependencies from outer scope
-                workflow_engine=workflow_engine,
-                framework_generator=framework_generator,
-                workflow_validator=workflow_validator,
-            )
+                "workflow_engine": workflow_engine,
+                "framework_generator": framework_generator,
+                "workflow_validator": workflow_validator,
+            }
+
+            # Introspect handler signature and only pass parameters it accepts
+            sig = inspect.signature(handler)
+            handler_params = {
+                name: all_params[name]
+                for name in sig.parameters.keys()
+                if name in all_params
+            }
+
+            # Call handler with only the parameters it accepts
+            result = await handler(**handler_params)
 
             # Ensure action is echoed in result
             if "action" not in result:

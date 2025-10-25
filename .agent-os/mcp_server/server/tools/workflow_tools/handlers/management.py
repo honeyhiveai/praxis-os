@@ -7,6 +7,12 @@ Handles session management operations:
 - delete_session: Delete a session and cleanup state
 """
 
+# pylint: disable=too-many-branches
+# Justification: handle_list_sessions has 13 branches (1 over limit) for status
+# validation, WorkflowState vs dict handling (test compatibility), status computation
+# (complete/paused/active/error), and status filtering. Refactoring would fragment
+# cohesive session listing logic across multiple functions for minimal gain.
+
 import logging
 from typing import Any, Dict, Optional
 
@@ -16,9 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 async def handle_list_sessions(
-    status: Optional[str] = None,
-    workflow_engine: Optional[Any] = None,
-    **kwargs
+    status: Optional[str] = None, workflow_engine: Optional[Any] = None
 ) -> Dict[str, Any]:
     """
     Handle list_sessions action.
@@ -29,7 +33,6 @@ async def handle_list_sessions(
     Args:
         status: Optional status filter ("active", "paused", "completed", "error")
         workflow_engine: WorkflowEngine instance (injected, has state_manager)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with sessions list and count
@@ -61,13 +64,13 @@ async def handle_list_sessions(
 
     # 3. Get StateManager from WorkflowEngine and list sessions
     state_manager = workflow_engine.state_manager
-    
+
     # Map status filter to StateManager parameters
     active_only = (status == "active") if status else False
-    
+
     # Get all sessions (StateManager returns List[WorkflowState] objects)
     session_objects = state_manager.list_sessions(active_only=active_only)
-    
+
     # Convert WorkflowState objects (or dicts from tests) to dictionaries
     sessions = []
     for session_obj in session_objects:
@@ -91,16 +94,24 @@ async def handle_list_sessions(
                 computed_status = "error"
             else:
                 computed_status = "active"
-            
+
             session_dict = {
                 "session_id": session_obj.session_id,
                 "workflow_type": session_obj.workflow_type,
                 "session_status": computed_status,
                 "current_phase": session_obj.current_phase,
-                "created_at": session_obj.created_at.isoformat() if hasattr(session_obj.created_at, 'isoformat') else str(session_obj.created_at),
-                "updated_at": session_obj.updated_at.isoformat() if hasattr(session_obj.updated_at, 'isoformat') else str(session_obj.updated_at),
+                "created_at": (
+                    session_obj.created_at.isoformat()
+                    if hasattr(session_obj.created_at, "isoformat")
+                    else str(session_obj.created_at)
+                ),
+                "updated_at": (
+                    session_obj.updated_at.isoformat()
+                    if hasattr(session_obj.updated_at, "isoformat")
+                    else str(session_obj.updated_at)
+                ),
             }
-        
+
         # Apply status filter if provided
         if status:
             if session_dict.get("session_status") == status:
@@ -118,9 +129,7 @@ async def handle_list_sessions(
 
 
 async def handle_get_session(
-    session_id: Optional[str] = None,
-    workflow_engine: Optional[Any] = None,
-    **kwargs
+    session_id: Optional[str] = None, workflow_engine: Optional[Any] = None
 ) -> Dict[str, Any]:
     """
     Handle get_session action.
@@ -131,7 +140,6 @@ async def handle_get_session(
     Args:
         session_id: Session identifier (required, validated)
         workflow_engine: WorkflowEngine instance (injected, has state_manager)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary with session details
@@ -161,7 +169,7 @@ async def handle_get_session(
     # 3. Get StateManager from WorkflowEngine and load session state
     state_manager = workflow_engine.state_manager
     workflow_state = state_manager.load_state(session_id=session_id)
-    
+
     if not workflow_state:
         raise ValueError(f"Session not found: {session_id}")
 
@@ -185,15 +193,23 @@ async def handle_get_session(
             computed_status = "error"
         else:
             computed_status = "active"
-        
+
         session_info = {
             "session_id": workflow_state.session_id,
             "workflow_type": workflow_state.workflow_type,
             "session_status": computed_status,
             "current_phase": workflow_state.current_phase,
             "target_file": workflow_state.target_file,
-            "created_at": workflow_state.created_at.isoformat() if hasattr(workflow_state.created_at, 'isoformat') else str(workflow_state.created_at),
-            "updated_at": workflow_state.updated_at.isoformat() if hasattr(workflow_state.updated_at, 'isoformat') else str(workflow_state.updated_at),
+            "created_at": (
+                workflow_state.created_at.isoformat()
+                if hasattr(workflow_state.created_at, "isoformat")
+                else str(workflow_state.created_at)
+            ),
+            "updated_at": (
+                workflow_state.updated_at.isoformat()
+                if hasattr(workflow_state.updated_at, "isoformat")
+                else str(workflow_state.updated_at)
+            ),
             "checkpoints": {
                 phase: checkpoint_status.value
                 for phase, checkpoint_status in workflow_state.checkpoints.items()
@@ -213,9 +229,7 @@ async def handle_get_session(
 
 
 async def handle_delete_session(
-    session_id: Optional[str] = None,
-    workflow_engine: Optional[Any] = None,
-    **kwargs
+    session_id: Optional[str] = None, workflow_engine: Optional[Any] = None
 ) -> Dict[str, Any]:
     """
     Handle delete_session action.
@@ -226,7 +240,6 @@ async def handle_delete_session(
     Args:
         session_id: Session identifier (required, validated)
         workflow_engine: WorkflowEngine instance (injected, has state_manager)
-        **kwargs: Additional parameters (ignored)
 
     Returns:
         Dictionary confirming deletion
@@ -264,4 +277,3 @@ async def handle_delete_session(
         "session_id": session_id,
         "deleted": True,
     }
-
