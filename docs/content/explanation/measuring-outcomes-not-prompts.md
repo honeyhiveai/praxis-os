@@ -5,7 +5,7 @@ doc_type: explanation
 
 # Measuring Outcomes, Not Prompts
 
-Agent OS Enhanced doesn't measure prompt quality. It measures product quality achieved through a three-layer system that shapes AI behavior from response generation through final delivery.
+prAxIs OS doesn't measure prompt quality. It measures product quality achieved through a three-layer system that shapes AI behavior from response generation through final delivery.
 
 ## TL;DR
 
@@ -212,7 +212,7 @@ git log --all-match --grep="no-verify" --since="30 days" | wc -l  # Target: 0
 
 **Problem:** Doesn't scale to complex workflows, breaks with model updates
 
-### Agent OS Enhanced Focus
+### prAxIs OS Focus
 
 **What we measure:**
 - Product quality (Pylint, MyPy, tests, coverage)

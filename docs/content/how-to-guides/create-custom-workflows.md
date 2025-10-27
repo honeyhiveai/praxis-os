@@ -5,7 +5,7 @@ doc_type: how-to
 
 # Create Custom Workflows
 
-This guide covers the AI-human collaborative process for creating custom Agent OS Enhanced workflows that follow meta-framework principles and construction standards.
+This guide covers the AI-human collaborative process for creating custom prAxIs OS workflows that follow meta-framework principles and construction standards.
 
 ## Goal
 
@@ -18,8 +18,8 @@ By following this guide, AI agents will create workflows with:
 
 ## Prerequisites
 
-- Understanding of Agent OS Enhanced workflows ([Understanding Agent OS Enhanced Workflows](../tutorials/understanding-agent-os-workflows))
-- Agent OS Enhanced installed in your project
+- Understanding of prAxIs OS workflows ([Understanding prAxIs OS Workflows](../tutorials/understanding-agent-os-workflows))
+- prAxIs OS installed in your project
 - **AI agents**: Heavy querying of standards throughout creation
 
 ## Critical: AI-Human Partnership Model
@@ -815,7 +815,7 @@ Phase files should be overview only (~80 lines). Move detailed content to task f
 
 ## Related Documentation
 
-- **[Understanding Agent OS Enhanced Workflows](../tutorials/understanding-agent-os-workflows)** - Learn workflow concepts
+- **[Understanding prAxIs OS Workflows](../tutorials/understanding-agent-os-workflows)** - Learn workflow concepts
 - **[Reference: Workflows](../reference/workflows)** - Complete workflow system reference
 - **Standards: workflow-construction-standards.md** - Detailed construction rules
 - **Standards: workflow-metadata-standards.md** - Metadata.json specification

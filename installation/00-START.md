@@ -6,7 +6,7 @@
 
 ## 🎯 What You're About To Do
 
-Install Agent OS Enhanced into the target project. This will:
+Install prAxIs OS into the target project. This will:
 1. Create `.agent-os/` directory structure
 2. Copy standards, workflows, and MCP server code
 3. Create Python virtual environment

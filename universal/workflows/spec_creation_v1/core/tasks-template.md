@@ -22,7 +22,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 - **Phase 2:** {hours} ({description})
 - **Total:** {hours} ({days})
 
-### AI Agent + Human Orchestration (Agent OS Enhanced)
+### AI Agent + Human Orchestration (prAxIs OS)
 - **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)
 - **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)
 - **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)
@@ -220,7 +220,7 @@ Phase 1
 
 ### Dual Estimation: Human vs AI Agent
 
-Agent OS Enhanced requires **two time estimates** to show the leverage multiplier (20-40x typical).
+prAxIs OS requires **two time estimates** to show the leverage multiplier (20-40x typical).
 
 **For complete dual estimation guidance, query these standards:**
 

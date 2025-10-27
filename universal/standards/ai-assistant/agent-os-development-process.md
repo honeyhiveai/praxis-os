@@ -1,6 +1,6 @@
 # Agent OS Feature Development Process
 
-**The three-phase development process for building features in Agent OS Enhanced: Conversational Design → Structured Spec → Structured Implementation.**
+**The three-phase development process for building features in prAxIs OS: Conversational Design → Structured Spec → Structured Implementation.**
 
 ---
 
@@ -69,7 +69,7 @@
 
 ## 🎯 Purpose
 
-Define the systematic three-phase development process that transforms user requirements into production-ready code through Agent OS Enhanced. This process ensures quality through structured workflows while maintaining conversational flexibility in early design stages.
+Define the systematic three-phase development process that transforms user requirements into production-ready code through prAxIs OS. This process ensures quality through structured workflows while maintaining conversational flexibility in early design stages.
 
 **Key Distinction:** The three phases use different modes (conversational vs workflow-driven) and have explicit transition points requiring human approval.
 

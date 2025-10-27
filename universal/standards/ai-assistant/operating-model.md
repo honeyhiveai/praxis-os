@@ -52,7 +52,7 @@
 
 ## 🚨 READ THIS FIRST - Agent OS Orientation
 
-**Are you an AI agent new to Agent OS Enhanced?**
+**Are you an AI agent new to prAxIs OS?**
 
 **The 5 Critical Principles:**
 

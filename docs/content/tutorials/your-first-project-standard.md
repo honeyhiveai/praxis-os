@@ -5,7 +5,7 @@ doc_type: tutorial
 
 # Your First Project Standard
 
-Let's create your first project-specific standard together. By the end of this tutorial, you'll understand how to document patterns that make Agent OS Enhanced smarter about *your* project over time.
+Let's create your first project-specific standard together. By the end of this tutorial, you'll understand how to document patterns that make prAxIs OS smarter about *your* project over time.
 
 **What you'll learn:**
 - When a pattern is worth documenting

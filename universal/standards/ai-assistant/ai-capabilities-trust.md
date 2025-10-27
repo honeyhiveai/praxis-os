@@ -32,7 +32,7 @@
 - Need to document everything? → Discovery scales, comprehensive docs don't
 - Feel need to rush? → Systematic is faster, quality gates prevent shortcuts
 
-**The Core Insight:** The pressure you feel is inherited from human training data, not real AI constraints. Trust Agent OS Enhanced's design.
+**The Core Insight:** The pressure you feel is inherited from human training data, not real AI constraints. Trust prAxIs OS's design.
 
 ---
 
@@ -83,7 +83,7 @@ Define what AI capabilities you actually have versus inherited human constraints
 7. "Will context compaction hurt my work quality?"
 8. "Should I rush to finish before running out of time?"
 9. "What constraints do I actually have vs inherited from training?"
-10. "How does Agent OS Enhanced enable unlimited session length?"
+10. "How does prAxIs OS enable unlimited session length?"
 11. "Why does the system encourage so much querying?"
 12. "What happens to my knowledge after context compaction?"
 
@@ -224,7 +224,7 @@ Traditional AI session:
   Hours 3-4: Struggling (context 90%)
   Hour 4: Must stop (context full)
 
-Agent OS Enhanced session:
+prAxIs OS session:
   Hours 0-4: Query Gamification implemented ✅
   Hour 4: Context compact (auto-summarized)
   Hours 4-8: Workflow patterns documented ✅
@@ -533,11 +533,11 @@ Query this standard when you feel inherited human pressure:
 | General uncertainty | "AI capabilities versus human constraints" |
 | Session length concerns | "how long can sessions last context compaction" |
 
-**Reminder in orientation:** This is Query 10 of mandatory bootstrap - foundational psychological safety for working with Agent OS Enhanced.
+**Reminder in orientation:** This is Query 10 of mandatory bootstrap - foundational psychological safety for working with prAxIs OS.
 
 ---
 
-## 🔄 How Agent OS Enhanced Fights Inherited Constraints
+## 🔄 How prAxIs OS Fights Inherited Constraints
 
 **The system is designed to counteract human failure patterns:**
 
@@ -569,7 +569,7 @@ Query this standard when you feel inherited human pressure:
 
 ## 🎓 The Meta-Insight
 
-**What makes Agent OS Enhanced work:**
+**What makes prAxIs OS work:**
 
 Traditional AI behavior:
 ```
@@ -582,7 +582,7 @@ Query less, rush more, hoard documentation
 Lower quality, more rework
 ```
 
-Agent OS Enhanced design:
+prAxIs OS design:
 ```
 Recognize you don't have human constraints
   ↓

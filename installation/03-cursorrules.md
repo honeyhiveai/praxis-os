@@ -114,7 +114,7 @@ if user_choice == "1":
     from datetime import datetime
     
     # Create merged content
-    merged_content = f"""# Agent OS Enhanced Rules
+    merged_content = f"""# prAxIs OS Rules
 # (Added during Agent OS installation on {datetime.now().strftime('%Y-%m-%d')})
 
 {agent_os_rules}
@@ -233,7 +233,7 @@ head -20 .cursorrules
 
 **Should show**:
 ```
-# Agent OS Enhanced Rules
+# prAxIs OS Rules
 # (Added during Agent OS installation...)
 
 ## 🤖 OPERATING MODEL
@@ -286,7 +286,7 @@ else:
 
 **Fix manually**:
 1. Open `.cursorrules`
-2. Cut the Agent OS section (starts with `# Agent OS Enhanced Rules`)
+2. Cut the Agent OS section (starts with `# prAxIs OS Rules`)
 3. Paste it at the very top of the file
 4. Save
 

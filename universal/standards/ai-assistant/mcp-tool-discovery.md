@@ -31,7 +31,7 @@
 This standard defines how to discover available MCP tools dynamically using the MCP protocol, avoiding static documentation that drifts from reality.
 
 **Questions This Answers:**
-- What MCP tools are available in Agent OS Enhanced?
+- What MCP tools are available in prAxIs OS?
 - How do I find out what parameters a tool takes?
 - What's the difference between tools/list and search_standards?
 - Why shouldn't I create a static tool catalog?

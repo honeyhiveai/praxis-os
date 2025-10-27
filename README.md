@@ -1,10 +1,11 @@
-# Agent OS Enhanced - Portable Multi-Agent Development Framework
+# prAxIs OS
+### *praxis, the ai os*
 
 **A portable Agent OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
 
 ## 🎯 Overview
 
-Agent OS Enhanced is a portable development framework that combines:
+prAxIs OS is a portable development framework that combines:
 - **Universal CS Fundamentals**: Timeless patterns applicable to any language
 - **Language-Specific Generation**: LLM generates tailored guidance per project
 - **MCP RAG Server**: Semantic search over standards with 90% context reduction

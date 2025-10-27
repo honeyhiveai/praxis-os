@@ -5,7 +5,7 @@ doc_type: explanation
 
 # Standards: Pattern Discovery Through RAG
 
-This page explains how **standards** create knowledge compounding in Agent OS Enhanced through automatic pattern discovery via semantic search.
+This page explains how **standards** create knowledge compounding in prAxIs OS through automatic pattern discovery via semantic search.
 
 **What you'll understand:**
 - How standards enable automatic pattern discovery

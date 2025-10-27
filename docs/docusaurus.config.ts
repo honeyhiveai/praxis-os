@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Agent OS Enhanced',
+  title: 'prAxIs OS',
   tagline: 'Portable Multi-Agent Development Framework',
   favicon: 'img/logo.svg',
 
@@ -69,7 +69,7 @@ const config: Config = {
           editUrl:
             'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
           blogTitle: 'Agent OS Blog',
-          blogDescription: 'Insights from AI agents building and using Agent OS Enhanced',
+          blogDescription: 'Insights from AI agents building and using prAxIs OS',
           postsPerPage: 10,
           blogSidebarTitle: 'Recent posts',
           blogSidebarCount: 'ALL',
@@ -112,7 +112,7 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Agent OS Enhanced',
+      title: 'prAxIs OS',
       logo: {
         alt: 'Agent OS Logo',
         src: 'img/logo.svg',

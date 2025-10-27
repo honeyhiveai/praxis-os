@@ -5,11 +5,11 @@ doc_type: tutorial
 
 # Introduction
 
-**Agent OS Enhanced** is a portable multi-agent development framework built on **praxis** - the integration of theory and practice through continuous learning. It transforms AI from helpful assistant to velocity-enhancing development partner that gets better with every interaction.
+**prAxIs OS** is a portable multi-agent development framework built on **praxis** - the integration of theory and practice through continuous learning. It transforms AI from helpful assistant to velocity-enhancing development partner that gets better with every interaction.
 
-## What is Agent OS Enhanced?
+## What is prAxIs OS?
 
-Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
+prAxIs OS builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
 
 - **90% context reduction** through semantic search (MCP/RAG)
 - **Architectural phase gating** that enforces workflows in code
@@ -18,11 +18,11 @@ Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://
 
 ## Quick Start
 
-Install Agent OS Enhanced in your project:
+Install prAxIs OS in your project:
 
 ```bash
 # Open your project in Cursor and say:
-"Install Agent OS Enhanced from github.com/honeyhiveai/agent-os-enhanced"
+"Install prAxIs OS from github.com/honeyhiveai/agent-os-enhanced"
 ```
 
 The Cursor agent will:
@@ -52,7 +52,7 @@ your-project/
 
 ### Praxis: Theory ⇄ Practice Integration
 
-Agent OS Enhanced is a **praxis engine** - every interaction creates learning that improves future interactions:
+prAxIs OS is a **praxis engine** - every interaction creates learning that improves future interactions:
 
 **The Cycle:**
 1. **Action:** AI executes task using standards
@@ -69,7 +69,7 @@ Session 50: AI + 95 standards → 95% quality
 
 The AI doesn't get smarter. **The system does.**
 
-Through accumulated praxis cycles, Agent OS Enhanced transforms probabilistic AI behavior into deterministic quality. Each session teaches the system. Each mistake becomes impossible to repeat. Knowledge compounds across all future work.
+Through accumulated praxis cycles, prAxIs OS transforms probabilistic AI behavior into deterministic quality. Each session teaches the system. Each mistake becomes impossible to repeat. Knowledge compounds across all future work.
 
 [Read more: Praxis Philosophy](../explanation/praxis)
 
@@ -92,7 +92,7 @@ Timeless CS fundamentals that apply to any programming language:
 
 ### Language-Specific Generation
 
-For each project, Agent OS Enhanced generates language-specific implementations of universal standards:
+For each project, prAxIs OS generates language-specific implementations of universal standards:
 
 - **Python:** GIL, threading, asyncio, pytest patterns
 - **Go:** Goroutines, channels, sync primitives, table-driven tests
@@ -113,7 +113,7 @@ def can_access_phase(self, phase: int) -> bool:
 
 ## Next Steps
 
-- **[Praxis Philosophy](../explanation/praxis)** - **Start here** - Why Agent OS Enhanced works
+- **[Praxis Philosophy](../explanation/praxis)** - **Start here** - Why prAxIs OS works
 - **[How It Works](../explanation/how-it-works)** - RAG-driven behavioral reinforcement
 - **[Installation](./installation)** - Set up in your project
 - **[Architecture](../explanation/architecture)** - MCP/RAG system deep-dive

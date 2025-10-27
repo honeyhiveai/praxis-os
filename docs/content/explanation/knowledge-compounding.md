@@ -3,13 +3,13 @@ sidebar_position: 3
 doc_type: explanation
 ---
 
-# Knowledge Compounding: How Agent OS Enhanced Gets Smarter Over Time
+# Knowledge Compounding: How prAxIs OS Gets Smarter Over Time
 
-One of the most powerful aspects of Agent OS Enhanced is its ability to get smarter about *your* project over time through **knowledge compounding**. Unlike traditional development tools, Agent OS Enhanced accumulates project-specific knowledge that makes every future task faster, more consistent, and higher quality.
+One of the most powerful aspects of prAxIs OS is its ability to get smarter about *your* project over time through **knowledge compounding**. Unlike traditional development tools, prAxIs OS accumulates project-specific knowledge that makes every future task faster, more consistent, and higher quality.
 
 ## What is Knowledge Compounding?
 
-**Knowledge compounding** is the practice of systematically capturing learnings so they benefit all future work. In Agent OS Enhanced, this happens through two complementary mechanisms:
+**Knowledge compounding** is the practice of systematically capturing learnings so they benefit all future work. In prAxIs OS, this happens through two complementary mechanisms:
 
 ### 1. Standards: Discoverable Patterns
 

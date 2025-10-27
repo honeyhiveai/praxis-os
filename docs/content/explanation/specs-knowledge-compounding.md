@@ -5,7 +5,7 @@ doc_type: explanation
 
 # Specs: Historical Context Through Git
 
-This page explains how **specs** create knowledge compounding in Agent OS Enhanced through git-preserved design documentation that captures the "why" behind your project's evolution.
+This page explains how **specs** create knowledge compounding in prAxIs OS through git-preserved design documentation that captures the "why" behind your project's evolution.
 
 **What you'll understand:**
 - How specs preserve decision history

@@ -299,7 +299,7 @@ This workflow follows [Semantic Versioning](https://semver.org/):
 
 ## Distribution Preparation
 
-### For Core Workflows (Agent OS Enhanced)
+### For Core Workflows (prAxIs OS)
 
 1. **Notify Maintainers**
    - Create announcement

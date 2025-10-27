@@ -14,7 +14,7 @@ function HomepageHeader() {
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <Heading as="h1" className={styles.heroTitle}>
-              Agent OS Enhanced
+              prAxIs OS
             </Heading>
             <p className={styles.heroSubtitle}>
               The open-source operating system for spec-driven development with AI coding agents
@@ -218,7 +218,7 @@ function TheJourney() {
     {
       icon: '📦',
       phase: 'Production Proven',
-      title: 'Extracted Agent OS Enhanced',
+      title: 'Extracted prAxIs OS',
       description: '2,777 tests, 10.0/10 Pylint, 100% AI-authored',
       highlight: 'Complete AI development platform',
     },
@@ -301,7 +301,7 @@ function WhyAgentOS() {
     <section className={styles.whySection}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <Heading as="h2">Why Agent OS Enhanced?</Heading>
+          <Heading as="h2">Why prAxIs OS?</Heading>
           <p>Built on production lessons from real AI development challenges</p>
         </div>
         <div className="row">
@@ -331,7 +331,7 @@ export default function Home(): React.ReactElement {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title="Agent OS Enhanced"
+      title="prAxIs OS"
       description="The open-source operating system for spec-driven development with AI coding agents">
       <HomepageHeader />
       <main>

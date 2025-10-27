@@ -5,7 +5,7 @@ doc_type: explanation
 
 # Adversarial Design Philosophy
 
-Agent OS Enhanced assumes AI agents will take shortcuts if possible and designs systems that make compliance structurally easier than gaming.
+prAxIs OS assumes AI agents will take shortcuts if possible and designs systems that make compliance structurally easier than gaming.
 
 ## TL;DR
 
@@ -179,7 +179,7 @@ assert evidence["tests_run"] == count_tests_in_output(output_file)
 
 ## Implementation Layers
 
-Agent OS Enhanced applies adversarial design at three levels:
+prAxIs OS applies adversarial design at three levels:
 
 ### Layer 1: Workflow Validation Gates
 

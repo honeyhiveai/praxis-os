@@ -5,7 +5,7 @@ doc_type: reference
 
 # Workflows Reference
 
-Complete reference for Agent OS Enhanced phase-gated workflows.
+Complete reference for prAxIs OS phase-gated workflows.
 
 ## Overview
 
@@ -27,7 +27,7 @@ Workflows are structured, multi-phase processes with architectural enforcement o
 |----------|---------|--------|----------|--------|
 | [spec_creation_v1](#spec_creation_v1) | Create comprehensive design specifications | 6 phases | 2-4 hours | Production |
 | [spec_execution_v1](#spec_execution_v1) | Implement specifications systematically | Dynamic (spec-driven) | Varies by spec | Production |
-| [agent_os_upgrade_v1](#agent_os_upgrade_v1) | Upgrade Agent OS Enhanced safely with rollback | 6 phases | 15-30 min | Production |
+| [agent_os_upgrade_v1](#agent_os_upgrade_v1) | Upgrade prAxIs OS safely with rollback | 6 phases | 15-30 min | Production |
 
 ---
 
@@ -130,11 +130,11 @@ start_workflow(
 
 ### agent_os_upgrade_v1
 
-Upgrade Agent OS Enhanced safely with automatic rollback on failure.
+Upgrade prAxIs OS safely with automatic rollback on failure.
 
-**Purpose:** Update Agent OS Enhanced standards, workflows, and MCP server with minimal risk.
+**Purpose:** Update prAxIs OS standards, workflows, and MCP server with minimal risk.
 
-**When to Use:** Upgrading to new Agent OS Enhanced version.
+**When to Use:** Upgrading to new prAxIs OS version.
 
 **Phases:**
 
@@ -466,7 +466,7 @@ validate_workflow(
 | New feature or major change | `spec_creation_v1` → `spec_execution_v1` |
 | Bug fix (non-trivial) | `spec_creation_v1` → `spec_execution_v1` |
 | Simple bug fix | Ad-hoc (no workflow needed) |
-| Upgrade Agent OS Enhanced | `agent_os_upgrade_v1` |
+| Upgrade prAxIs OS | `agent_os_upgrade_v1` |
 | Custom process | Create custom workflow |
 
 ---

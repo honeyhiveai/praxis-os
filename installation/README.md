@@ -1,6 +1,6 @@
 # Agent OS Installation Guide
 
-**How to install Agent OS Enhanced into a target project**
+**How to install prAxIs OS into a target project**
 
 ---
 

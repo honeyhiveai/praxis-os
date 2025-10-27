@@ -3,9 +3,9 @@ sidebar_position: 6
 doc_type: how-to
 ---
 
-# Upgrading Agent OS Enhanced
+# Upgrading prAxIs OS
 
-Keep your Agent OS Enhanced installation up-to-date with new features, standards, and improvements.
+Keep your prAxIs OS installation up-to-date with new features, standards, and improvements.
 
 ## Quick Upgrade
 
@@ -13,7 +13,7 @@ The simplest way to upgrade:
 
 ```bash
 # In Cursor, say:
-"Run the Agent OS Enhanced upgrade workflow"
+"Run the prAxIs OS upgrade workflow"
 ```
 
 The AI will use the `agent_os_upgrade_v1` workflow to safely upgrade your installation with automatic backup and validation.
@@ -181,7 +181,7 @@ mv .agent-os.backup.YYYYMMDD_HHMMSS .agent-os
 
 ## Version Tracking
 
-Agent OS Enhanced tracks what's installed:
+prAxIs OS tracks what's installed:
 
 ```bash
 # Check current version
@@ -241,7 +241,7 @@ git clone https://github.com/honeyhiveai/agent-os-enhanced.git /tmp/agent-os-lat
 ### 3. Update Content
 
 ```bash
-# Update standards (Agent OS Enhanced owned)
+# Update standards (prAxIs OS owned)
 rsync -av --delete agent-os-enhanced/universal/standards/ .agent-os/standards/universal/
 
 # Update usage (preserve user docs)

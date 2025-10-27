@@ -1,7 +1,7 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 /**
- * Agent OS Enhanced Documentation Sidebar
+ * prAxIs OS Documentation Sidebar
  * 
  * Organized by Divio Documentation Framework quadrants.
  */

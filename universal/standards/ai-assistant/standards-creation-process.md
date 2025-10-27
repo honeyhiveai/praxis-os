@@ -1,6 +1,6 @@
 # Standards Creation Process
 
-**Standard for creating, structuring, and maintaining standards in Agent OS Enhanced.**
+**Standard for creating, structuring, and maintaining standards in prAxIs OS.**
 
 ---
 

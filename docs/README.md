@@ -1,6 +1,6 @@
-# Agent OS Enhanced Documentation
+# prAxIs OS Documentation
 
-This directory contains the Docusaurus-based documentation site for Agent OS Enhanced.
+This directory contains the Docusaurus-based documentation site for prAxIs OS.
 
 ## 🚀 Local Development
 

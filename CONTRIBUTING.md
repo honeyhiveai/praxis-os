@@ -1,4 +1,4 @@
-# Contributing to Agent OS Enhanced
+# Contributing to prAxIs OS
 
 Thank you for your interest in contributing! This guide will help you add universal standards, language instructions, or MCP server features.
 
@@ -426,6 +426,6 @@ Explain:
 
 ---
 
-**Thank you for contributing to Agent OS Enhanced!**
+**Thank you for contributing to prAxIs OS!**
 
 Your contributions help developers worldwide build better software with AI assistance.

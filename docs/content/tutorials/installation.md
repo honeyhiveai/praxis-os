@@ -5,13 +5,13 @@ doc_type: tutorial
 
 # Installation
 
-Install Agent OS Enhanced in any project with a simple conversation. The Cursor agent handles everything automatically.
+Install prAxIs OS in any project with a simple conversation. The Cursor agent handles everything automatically.
 
 ## Quick Start
 
 ```bash
 # Open your project in Cursor and say:
-"Install Agent OS Enhanced from github.com/honeyhiveai/agent-os-enhanced"
+"Install prAxIs OS from github.com/honeyhiveai/agent-os-enhanced"
 ```
 
 The Cursor agent will:
@@ -41,7 +41,7 @@ your-project/
 │   │       ├── python-concurrency.md  # (if Python project)
 │   │       ├── python-testing.md
 │   │       └── python-architecture.md
-│   ├── usage/                    # How to use Agent OS Enhanced
+│   ├── usage/                    # How to use prAxIs OS
 │   ├── workflows/                # Phase-gated workflows
 │   │   ├── spec_creation_v1/
 │   │   └── spec_execution_v1/
@@ -251,13 +251,13 @@ ls -la .agent-os/standards/development/
 # Should see language-specific files
 ```
 
-## Updating Agent OS Enhanced
+## Updating prAxIs OS
 
 When new versions are released, use the upgrade workflow:
 
 ```bash
 # In Cursor, say:
-"Run the Agent OS Enhanced upgrade workflow"
+"Run the prAxIs OS upgrade workflow"
 ```
 
 The `agent_os_upgrade_v1` workflow will:
@@ -270,7 +270,7 @@ The `agent_os_upgrade_v1` workflow will:
 
 **Time:** ~3-4 minutes | **Safety:** Automatic backup and rollback
 
-For detailed upgrade documentation, see **[Upgrading Agent OS Enhanced](../how-to-guides/upgrading.md)**
+For detailed upgrade documentation, see **[Upgrading prAxIs OS](../how-to-guides/upgrading.md)**
 
 ## Manual Installation (Advanced)
 

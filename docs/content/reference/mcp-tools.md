@@ -5,11 +5,11 @@ doc_type: reference
 
 # MCP Tools Reference
 
-Comprehensive API reference for Agent OS Enhanced MCP (Model Context Protocol) tools.
+Comprehensive API reference for prAxIs OS MCP (Model Context Protocol) tools.
 
 ## Overview
 
-Agent OS Enhanced provides tools for semantic search, workflow execution, and browser automation. Tools are organized into groups for selective loading to maintain optimal LLM performance (under 20 tools).
+prAxIs OS provides tools for semantic search, workflow execution, and browser automation. Tools are organized into groups for selective loading to maintain optimal LLM performance (under 20 tools).
 
 **Tool Groups:**
 - `rag` - Semantic search over standards and documentation

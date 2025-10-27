@@ -9,7 +9,7 @@ import SessionEvolution from '@site/src/components/SessionEvolution';
 import KnowledgeCompounding from '@site/src/components/KnowledgeCompounding';
 import QualityProgression from '@site/src/components/QualityProgression';
 
-# Praxis: The Philosophy Behind Agent OS Enhanced
+# Praxis: The Philosophy Behind prAxIs OS
 
 ## What is Praxis?
 
@@ -46,7 +46,7 @@ Human: "Use workspace/design/ - I've told you this 49 times!"
 
 ### The Solution: Structured Praxis Cycles
 
-Agent OS Enhanced provides the missing piece: **a framework for AI to learn from experience and systematically improve.**
+prAxIs OS provides the missing piece: **a framework for AI to learn from experience and systematically improve.**
 
 Not through better prompts. Not through fine-tuning. Through **structured praxis cycles** that:
 1. Capture learning in queryable standards
@@ -56,7 +56,7 @@ Not through better prompts. Not through fine-tuning. Through **structured praxis
 
 ---
 
-## Agent OS Enhanced as a Praxis Engine
+## prAxIs OS as a Praxis Engine
 
 ### How a Feature Actually Gets Built
 
@@ -264,7 +264,7 @@ Praxis is:
 
 **Praxis is not a feature. It's the foundation.**
 
-Agent OS Enhanced creates a system where:
+prAxIs OS creates a system where:
 - **Every conversation** refines understanding
 - **Every feature** teaches the system
 - **Every mistake** becomes impossible to repeat

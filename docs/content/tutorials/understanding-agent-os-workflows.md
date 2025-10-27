@@ -3,9 +3,9 @@ sidebar_position: 4
 doc_type: tutorial
 ---
 
-# Understanding Agent OS Enhanced Workflows
+# Understanding prAxIs OS Workflows
 
-In [Tutorial 1](./your-first-agent-os-project), you experienced spec-driven development hands-on. Now you'll learn **what workflows actually are** and why they're critical to Agent OS Enhanced's approach.
+In [Tutorial 1](./your-first-agent-os-project), you experienced spec-driven development hands-on. Now you'll learn **what workflows actually are** and why they're critical to prAxIs OS's approach.
 
 ## Learning Goals
 
@@ -23,7 +23,7 @@ By completing this tutorial, you will learn to:
 
 ## Prerequisites
 
-- [Tutorial 1: Your First Agent OS Enhanced Project](./your-first-agent-os-project) completed
+- [Tutorial 1: Your First prAxIs OS Project](./your-first-agent-os-project) completed
 - Basic understanding of spec-driven development
 
 ## What You'll Learn
@@ -49,11 +49,11 @@ When most people hear "workflow," they think:
 - ❌ A process documented in a diagram
 - ❌ Something you can skip if you know what you're doing
 
-**Agent OS Enhanced workflows are different.**
+**prAxIs OS workflows are different.**
 
 ### Workflows Are Phase-Gated Tools
 
-Agent OS Enhanced workflows are:
+prAxIs OS workflows are:
 - ✅ **Executable code** that enforces progression
 - ✅ **Hard gates** that AI cannot bypass
 - ✅ **Validation engines** that check evidence
@@ -330,9 +330,9 @@ Create a custom workflow when you have:
 
 ### Examples of Custom Workflows
 
-Real workflows in Agent OS Enhanced:
+Real workflows in prAxIs OS:
 - `test_generation_v3` - Generate comprehensive test suites
-- `agent_os_upgrade_v1` - Upgrade Agent OS Enhanced installations
+- `agent_os_upgrade_v1` - Upgrade prAxIs OS installations
 
 You could create workflows for:
 - Database migrations with validation
@@ -356,7 +356,7 @@ This is beyond the scope of this tutorial, but the process involves:
 
 ## What You Learned
 
-Congratulations! You now understand the Agent OS Enhanced workflow system. Here are the key takeaways:
+Congratulations! You now understand the prAxIs OS workflow system. Here are the key takeaways:
 
 ### 1. **Workflows Are Enforcement Tools**
 
@@ -461,7 +461,7 @@ In this tutorial, you:
 
 **Key Insight:** Workflows enforce quality through **code**, not through hoping AI "remembers" best practices. Phase gates are real barriers that require evidence to pass.
 
-You now understand why Agent OS Enhanced workflows are essential for production-quality AI-assisted development! 🎉
+You now understand why prAxIs OS workflows are essential for production-quality AI-assisted development! 🎉
 
 ---
 

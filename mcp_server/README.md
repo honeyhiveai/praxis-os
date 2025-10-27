@@ -1,6 +1,6 @@
 # Agent OS MCP Server
 
-**Model Context Protocol server for Agent OS Enhanced with RAG, sub-agents, and workflow engine.**
+**Model Context Protocol server for prAxIs OS with RAG, sub-agents, and workflow engine.**
 
 ## Components
 

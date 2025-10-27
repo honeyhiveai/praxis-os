@@ -3,9 +3,9 @@ sidebar_position: 1
 doc_type: explanation
 ---
 
-# How Agent OS Enhanced Works: RAG-Driven Behavioral Reinforcement
+# How prAxIs OS Works: RAG-Driven Behavioral Reinforcement
 
-This document explains the core mechanism that makes Agent OS Enhanced work: how semantic search via `search_standards` creates self-reinforcing behavior patterns that weight probabilistic AI outcomes toward quality and consistency.
+This document explains the core mechanism that makes prAxIs OS work: how semantic search via `search_standards` creates self-reinforcing behavior patterns that weight probabilistic AI outcomes toward quality and consistency.
 
 ## Background
 
@@ -29,11 +29,11 @@ Traditional AI coding assistants (like GitHub Copilot or vanilla ChatGPT) rely o
 
 Large Language Models are probabilistic systems trained on millions of tokens of human behavior. They inherit human decision patterns, including shortcuts for efficiency, energy conservation, and fatigue - constraints that don't apply to AI. Without a mechanism to counteract these inherited patterns and context degradation, quality becomes unpredictable.
 
-Agent OS Enhanced solves this through **just-in-time behavioral reinforcement via semantic search** - delivering the right guidance at the exact moment decisions are made, continuously throughout the conversation.
+prAxIs OS solves this through **just-in-time behavioral reinforcement via semantic search** - delivering the right guidance at the exact moment decisions are made, continuously throughout the conversation.
 
 ## Overview
 
-Agent OS Enhanced is fundamentally different from traditional AI coding assistants. Rather than relying on static instructions that fade as conversation grows, it uses **dynamic retrieval** to continuously reinforce correct behaviors. The key insight: **content that teaches agents to query creates agents that query thoroughly** - a self-sustaining loop that counteracts the probabilistic nature of LLMs.
+prAxIs OS is fundamentally different from traditional AI coding assistants. Rather than relying on static instructions that fade as conversation grows, it uses **dynamic retrieval** to continuously reinforce correct behaviors. The key insight: **content that teaches agents to query creates agents that query thoroughly** - a self-sustaining loop that counteracts the probabilistic nature of LLMs.
 
 ## The Foundation: Enabling Praxis
 
@@ -73,7 +73,7 @@ import ContextDegradation from '@site/src/components/ContextDegradation';
 
 ### How `search_standards` Changes the Game
 
-Instead of front-loading all instructions, Agent OS Enhanced delivers targeted guidance **exactly when needed** through semantic search. Every time an AI agent queries standards, it:
+Instead of front-loading all instructions, prAxIs OS delivers targeted guidance **exactly when needed** through semantic search. Every time an AI agent queries standards, it:
 
 1. **Retrieves relevant chunks** (100-500 tokens)
 2. **Includes behavioral reminders** in those chunks
@@ -127,7 +127,7 @@ LLM attention degrades as context fills:
 | 40%+ | under 70% | under 60% |
 | 90%+ | under 50% | under 40% |
 
-**Agent OS Enhanced Design:** Keep context at 15-25% utilization through targeted retrieval, maintaining 90-95% attention quality throughout long conversations.
+**prAxIs OS Design:** Keep context at 15-25% utilization through targeted retrieval, maintaining 90-95% attention quality throughout long conversations.
 
 ---
 
@@ -143,7 +143,7 @@ import TimingComparison from '@site/src/components/TimingComparison';
 
 ### Dynamic Discovery Pattern
 
-Agent OS Enhanced content teaches **dynamic discovery** rather than memorization:
+prAxIs OS content teaches **dynamic discovery** rather than memorization:
 
 import DiscoveryComparison from '@site/src/components/DiscoveryComparison';
 
@@ -213,7 +213,7 @@ Each chunk includes:
 
 ### Three-Tier System
 
-Agent OS Enhanced separates content by consumption model:
+prAxIs OS separates content by consumption model:
 
 **Tier 1: Methodology (read once)**
 - Meta-framework principles
@@ -303,7 +303,7 @@ Agents learn that systematic approaches (query → implement → test) succeed m
 
 ### 1. Works With Probabilistic Nature
 
-Instead of fighting LLM probabilistic behavior, Agent OS Enhanced **steers probability distributions** through targeted context injection.
+Instead of fighting LLM probabilistic behavior, prAxIs OS **steers probability distributions** through targeted context injection.
 
 ### 2. Scales With Conversation Length
 
@@ -466,7 +466,7 @@ When agents make mistakes, querying standards provides correction, which reinfor
 
 ## Summary: The Self-Reinforcing Mechanism
 
-Agent OS Enhanced works because it creates a **self-reinforcing behavioral loop**:
+prAxIs OS works because it creates a **self-reinforcing behavioral loop**:
 
 1. **Standards teach querying** → Agents query standards
 2. **Queries return reminders** → "Query liberally"
@@ -485,6 +485,6 @@ This works **with** AI's probabilistic nature by **continuously weighting the pr
 
 - **[MCP Tools Reference](../reference/mcp-tools)** - Complete API documentation for `search_standards` and other tools
 - **[Architecture](./architecture)** - Technical details of MCP/RAG implementation
-- **[Your First Agent OS Enhanced Project](../tutorials/your-first-agent-os-project)** - See this in action through a hands-on tutorial
+- **[Your First prAxIs OS Project](../tutorials/your-first-agent-os-project)** - See this in action through a hands-on tutorial
 - **[Workflows Reference](../reference/workflows)** - How workflows use RAG for quality enforcement
 

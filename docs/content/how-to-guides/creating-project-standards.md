@@ -5,7 +5,7 @@ doc_type: how-to
 
 # Creating Project Standards
 
-This guide covers everything you need to know about creating project-specific standards that make Agent OS Enhanced smarter about your codebase over time.
+This guide covers everything you need to know about creating project-specific standards that make prAxIs OS smarter about your codebase over time.
 
 **You'll learn:**
 - When to create a standard vs when not to

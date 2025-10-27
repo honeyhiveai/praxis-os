@@ -3,9 +3,9 @@ sidebar_position: 3
 doc_type: tutorial
 ---
 
-# Your First Agent OS Enhanced Project
+# Your First prAxIs OS Project
 
-Welcome! This tutorial will guide you through your first spec-driven development cycle with Agent OS Enhanced. By the end, you'll understand why **specification-driven development is THE main vehicle** for AI-assisted software development.
+Welcome! This tutorial will guide you through your first spec-driven development cycle with prAxIs OS. By the end, you'll understand why **specification-driven development is THE main vehicle** for AI-assisted software development.
 
 ## Learning Goals
 
@@ -24,7 +24,7 @@ By completing this tutorial, you will learn to:
 
 ## Prerequisites
 
-- Agent OS Enhanced installed in your project ([Installation Guide](./installation))
+- prAxIs OS installed in your project ([Installation Guide](./installation))
 - A Cursor AI session open in your project
 
 ## What You'll Build
@@ -366,7 +366,7 @@ Congratulations! You just completed your first spec-driven development cycle. He
 
 ### 1. **Specification-Driven Development is THE Main Vehicle**
 
-You learned that Agent OS Enhanced is built around a core principle:
+You learned that prAxIs OS is built around a core principle:
 
 > **Design → Specify → Implement**
 
@@ -407,7 +407,7 @@ This is not prototype code - it's ready for production.
 
 Now that you understand the basic workflow, continue learning:
 
-- **Tutorial 2: Understanding Agent OS Enhanced Workflows** (Coming in Phase 2) - Deep dive into workflow mechanics, phases, and gates
+- **Tutorial 2: Understanding prAxIs OS Workflows** (Coming in Phase 2) - Deep dive into workflow mechanics, phases, and gates
 - **How-To: Create Custom Specifications** (Coming in Phase 3) - Learn to customize spec templates
 - **How-To: Debug Workflow Execution** (Coming in Phase 3) - Troubleshooting workflow issues
 - **[Reference: Workflows](../reference/workflows)** - Complete workflow reference
@@ -462,7 +462,7 @@ In this tutorial, you:
 
 **Result:** Production-ready user profile API endpoint with tests and >90% coverage
 
-You now understand why **specification-driven development is the main vehicle** in Agent OS Enhanced. The spec is not "extra documentation" - it's the **contract** that ensures AI-generated code meets your requirements.
+You now understand why **specification-driven development is the main vehicle** in prAxIs OS. The spec is not "extra documentation" - it's the **contract** that ensures AI-generated code meets your requirements.
 
 Welcome to specification-driven development! 🎉
 

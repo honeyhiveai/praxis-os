@@ -9,7 +9,7 @@ Comprehensive index of universal standards accessible via `search_standards`.
 
 ## Overview
 
-Agent OS Enhanced ships two types of standards. The first are timeless CS fundamentals that apply across programming languages. The second are the standards that form the basis for Agent OS Enhanced itself. These help aid the agents in making better decisions and adhering to standards served via the MCP search_standards tool. Standards are retrieved via semantic search (`search_standards`) rather than direct file reading.
+prAxIs OS ships two types of standards. The first are timeless CS fundamentals that apply across programming languages. The second are the standards that form the basis for prAxIs OS itself. These help aid the agents in making better decisions and adhering to standards served via the MCP search_standards tool. Standards are retrieved via semantic search (`search_standards`) rather than direct file reading.
 
 **Access Pattern:**
 ```python
@@ -110,8 +110,8 @@ Installation and update procedures.
 
 | Standard | Purpose |
 |----------|---------|
-| [Gitignore Requirements](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/universal/standards/installation/gitignore-requirements.md) | Required .gitignore entries for Agent OS Enhanced |
-| [Update Procedures](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/universal/standards/installation/update-procedures.md) | Upgrading Agent OS Enhanced safely |
+| [Gitignore Requirements](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/universal/standards/installation/gitignore-requirements.md) | Required .gitignore entries for prAxIs OS |
+| [Update Procedures](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/universal/standards/installation/update-procedures.md) | Upgrading prAxIs OS safely |
 
 ### Meta-Framework
 

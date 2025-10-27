@@ -671,7 +671,7 @@ Result: Fix consistent with existing concurrency approach, follows project patte
 
 ---
 
-**This is a universal standard. It applies to all projects using Agent OS Enhanced, regardless of programming language or technology stack.**
+**This is a universal standard. It applies to all projects using prAxIs OS, regardless of programming language or technology stack.**
 
 **For project-specific compliance rules, see `.agent-os/standards/development/compliance-addendum.md` in your project.**
 

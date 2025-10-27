@@ -212,7 +212,7 @@ The installation is complete, but the MCP server won't start until Cursor is res
 **Inform the user:**
 
 ```
-✅ Agent OS Enhanced installed successfully!
+✅ prAxIs OS installed successfully!
 
 Installation Summary:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -346,7 +346,7 @@ else:
 
 ## 🎯 Installation Complete!
 
-**You have successfully installed Agent OS Enhanced!**
+**You have successfully installed prAxIs OS!**
 
 The installation followed these steps:
 1. ✅ Cloned source to temp directory (step 00)

@@ -621,7 +621,7 @@ Agent: aos_workflow(...) → Error → search_standards("how to use aos_workflow
 
 ---
 
-## 🔄 Integration with Agent OS Enhanced
+## 🔄 Integration with prAxIs OS
 
 **This Protocol Works With:**
 

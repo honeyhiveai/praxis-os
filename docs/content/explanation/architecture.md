@@ -5,13 +5,13 @@ doc_type: explanation
 
 # Architecture
 
-Agent OS Enhanced's architecture addresses three fundamental challenges in AI-assisted development: context overflow, phase skipping, and language-specific brittleness. This document explains the system's design, the reasoning behind key decisions, and the trade-offs involved.
+prAxIs OS's architecture addresses three fundamental challenges in AI-assisted development: context overflow, phase skipping, and language-specific brittleness. This document explains the system's design, the reasoning behind key decisions, and the trade-offs involved.
 
 ---
 
 ## Overview
 
-Agent OS Enhanced consists of four integrated systems:
+prAxIs OS consists of four integrated systems:
 
 1. **MCP Server** - Model Context Protocol server providing tool discovery and execution
 2. **RAG Engine** - Semantic search over standards with 90% context reduction
@@ -524,7 +524,7 @@ import ThreeTierArchitecture from '@site/src/components/ThreeTierArchitecture';
 
 ### Per-Project Installation
 
-**Decision:** Each project gets its own Agent OS Enhanced copy.
+**Decision:** Each project gets its own prAxIs OS copy.
 
 **Structure:**
 
@@ -534,10 +534,10 @@ import DeploymentStructure from '@site/src/components/DeploymentStructure';
 
 **Why per-project, not global:**
 
-1. **Version control**: Different projects can use different Agent OS Enhanced versions
+1. **Version control**: Different projects can use different prAxIs OS versions
 2. **Customization**: Tailor standards and workflows per project
 3. **Isolation**: No cross-contamination between projects
-4. **Portability**: Git clone includes Agent OS Enhanced setup
+4. **Portability**: Git clone includes prAxIs OS setup
 5. **Team consistency**: Everyone uses same version
 
 **Trade-offs:**
@@ -557,4 +557,4 @@ import DeploymentStructure from '@site/src/components/DeploymentStructure';
 - [Reference: MCP Tools](../reference/mcp-tools) - Complete tool API
 - [Reference: Standards](../reference/standards) - Universal standards index
 - [Reference: Workflows](../reference/workflows) - Available workflows
-- [Tutorial: Installation](../tutorials/installation) - Set up Agent OS Enhanced
+- [Tutorial: Installation](../tutorials/installation) - Set up prAxIs OS

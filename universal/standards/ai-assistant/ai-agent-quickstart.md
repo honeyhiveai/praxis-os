@@ -1,6 +1,6 @@
 # AI Agent Quickstart - See It In Action
 
-**Practical examples of correct Agent OS Enhanced behavior**
+**Practical examples of correct prAxIs OS behavior**
 
 **Keywords for search**: AI agent quickstart, how to behave as AI agent in Agent OS, correct AI agent behavior, how AI should behave, AI behavior patterns, Agent OS examples, AI autonomy, query then implement, test and lint, agent patterns, wrong vs right AI behavior, AI behavioral guide
 
@@ -59,7 +59,7 @@ This guide shows **exactly how AI agents should behave** in Agent OS through 8 p
 
 ## 🎯 Purpose
 
-This guide shows you **exactly** how to behave in common scenarios. Each example contrasts WRONG (traditional AI assistant) with RIGHT (Agent OS Enhanced) approaches.
+This guide shows you **exactly** how to behave in common scenarios. Each example contrasts WRONG (traditional AI assistant) with RIGHT (prAxIs OS) approaches.
 
 ---
 
@@ -83,7 +83,7 @@ This guide shows you **exactly** how to behave in common scenarios. Each example
 - ❌ Step-by-step hand-holding
 - ❌ "Help" language implies human codes
 
-### 🟢 RIGHT Response (Agent OS Enhanced)
+### 🟢 RIGHT Response (prAxIs OS)
 
 **Human says**: "Add user authentication to the API"
 

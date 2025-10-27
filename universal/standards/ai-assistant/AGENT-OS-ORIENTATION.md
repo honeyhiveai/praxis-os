@@ -1,12 +1,12 @@
-# Agent OS Enhanced - AI Agent Orientation Guide
+# prAxIs OS - AI Agent Orientation Guide
 
-**Orientation for AI agents working in Agent OS Enhanced projects**
+**Orientation for AI agents working in prAxIs OS projects**
 
 ---
 
 ## 🚨 Agent OS Orientation Quick Reference (TL;DR)
 
-**Keywords for search**: Agent OS orientation, AI agent orientation, Agent OS Enhanced getting started, new AI agent guide, orientation bootstrap queries, Agent OS onboarding, how to work in Agent OS, AI assistant orientation, Agent OS quickstart, orientation completion, mandatory bootstrap queries, ten bootstrap queries, orientation checklist
+**Keywords for search**: Agent OS orientation, AI agent orientation, prAxIs OS getting started, new AI agent guide, orientation bootstrap queries, Agent OS onboarding, how to work in Agent OS, AI assistant orientation, Agent OS quickstart, orientation completion, mandatory bootstrap queries, ten bootstrap queries, orientation checklist
 
 **Core Principle:** Orientation is NOT reading this file. Orientation is running 10 bootstrap queries that load behavioral patterns, query mechanics, and system architecture.
 
@@ -86,7 +86,7 @@ search_standards("AI capabilities versus human limitations trust systematic unli
 
 ## ❓ Questions This Answers
 
-1. "What is Agent OS Enhanced?"
+1. "What is prAxIs OS?"
 2. "How do I orient myself in Agent OS?"
 3. "What queries do I need to run?"
 4. "What does orientation completion mean?"
@@ -107,15 +107,15 @@ search_standards("AI capabilities versus human limitations trust systematic unli
 
 ## 🎯 Purpose
 
-Define the orientation process for AI agents working in Agent OS Enhanced projects. Orientation loads behavioral patterns, query mechanics, and system architecture through 10 targeted bootstrap queries.
+Define the orientation process for AI agents working in prAxIs OS projects. Orientation loads behavioral patterns, query mechanics, and system architecture through 10 targeted bootstrap queries.
 
 **Key Distinction:** Orientation is NOT reading documentation. Orientation is loading patterns through querying that create self-reinforcing behavior throughout the session.
 
 ---
 
-## What Is Agent OS Enhanced?
+## What Is prAxIs OS?
 
-Agent OS Enhanced is a framework for AI-human partnership in software development that shifts AI behavior from "suggest helper" to "code author" through systematic query-driven pattern loading.
+prAxIs OS is a framework for AI-human partnership in software development that shifts AI behavior from "suggest helper" to "code author" through systematic query-driven pattern loading.
 
 **The shift:**
 - FROM: Single query → partial knowledge → suggest approaches → human codes
@@ -156,7 +156,7 @@ Agent OS Enhanced is a framework for AI-human partnership in software developmen
 
 ## What Are the 9 Mandatory Bootstrap Queries?
 
-These queries load the knowledge needed to work correctly in Agent OS Enhanced.
+These queries load the knowledge needed to work correctly in prAxIs OS.
 
 ### Query 1: Behavioral Foundation + Decision Protocol
 ```python
@@ -467,4 +467,4 @@ Before proceeding with user's task:
 
 **Orientation is complete when all 10 queries run. Query liberally. Implement completely. Iterate to quality. Present at gates.**
 
-**Welcome to Agent OS Enhanced.** 🚀
+**Welcome to prAxIs OS.** 🚀
