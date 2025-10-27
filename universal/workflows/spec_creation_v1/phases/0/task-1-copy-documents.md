@@ -33,22 +33,22 @@ The spec directory was created in Task 0. Verify it exists:
 
 ```bash
 # Load SPEC_DIR from Task 0
-source .agent-os/specs/.current-spec
-ls -ld .agent-os/specs/${SPEC_DIR}
+source .praxis-os/specs/.current-spec
+ls -ld .praxis-os/specs/${SPEC_DIR}
 ```
 
 📊 COUNT-AND-DOCUMENT: Directory verified
-- Path: `.agent-os/specs/${SPEC_DIR}`
+- Path: `.praxis-os/specs/${SPEC_DIR}`
 - Status: ✅ exists (created in Task 0)
 
 ### Step 2: Create Supporting Docs Subdirectory
 
 ```bash
-mkdir -p .agent-os/specs/${SPEC_DIR}/supporting-docs/
+mkdir -p .praxis-os/specs/${SPEC_DIR}/supporting-docs/
 ```
 
 📊 COUNT-AND-DOCUMENT: Subdirectory created
-- Path: `.agent-os/specs/${SPEC_DIR}/supporting-docs/`
+- Path: `.praxis-os/specs/${SPEC_DIR}/supporting-docs/`
 - Status: [created/already exists]
 
 ### Step 3: Process Documents Based on Mode
@@ -59,11 +59,11 @@ Copy documents to supporting-docs:
 
 ```bash
 # Use SPEC_DIR from Task 0
-source .agent-os/specs/.current-spec
+source .praxis-os/specs/.current-spec
 
 # For each document
-cp {doc_path_1} .agent-os/specs/${SPEC_DIR}/supporting-docs/
-cp {doc_path_2} .agent-os/specs/${SPEC_DIR}/supporting-docs/
+cp {doc_path_1} .praxis-os/specs/${SPEC_DIR}/supporting-docs/
+cp {doc_path_2} .praxis-os/specs/${SPEC_DIR}/supporting-docs/
 ```
 
 #### If `embed_supporting_docs` is FALSE:
@@ -71,8 +71,8 @@ cp {doc_path_2} .agent-os/specs/${SPEC_DIR}/supporting-docs/
 Create REFERENCES.md with links:
 
 ```bash
-source .agent-os/specs/.current-spec
-cat > .agent-os/specs/${SPEC_DIR}/supporting-docs/REFERENCES.md << 'EOF'
+source .praxis-os/specs/.current-spec
+cat > .praxis-os/specs/${SPEC_DIR}/supporting-docs/REFERENCES.md << 'EOF'
 # Document References
 
 ## Referenced Documents
@@ -96,10 +96,10 @@ EOF
 Verify all documents are accessible:
 
 ```bash
-source .agent-os/specs/.current-spec
+source .praxis-os/specs/.current-spec
 
 # If embedded
-ls -lh .agent-os/specs/${SPEC_DIR}/supporting-docs/
+ls -lh .praxis-os/specs/${SPEC_DIR}/supporting-docs/
 
 # If referenced
 # Check each reference path exists
@@ -117,8 +117,8 @@ test -f {doc_path_2} && echo "✅ {doc_2_name}" || echo "❌ {doc_2_name} NOT FO
 Add a note to track which method was used:
 
 ```bash
-source .agent-os/specs/.current-spec
-cat > .agent-os/specs/${SPEC_DIR}/supporting-docs/.processing-mode << 'EOF'
+source .praxis-os/specs/.current-spec
+cat > .praxis-os/specs/${SPEC_DIR}/supporting-docs/.processing-mode << 'EOF'
 PROCESSING_MODE={embedded/referenced}
 PROCESSED_DATE={current_date}
 DOCUMENT_COUNT={number}

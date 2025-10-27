@@ -25,7 +25,7 @@ Copy all required content from the source repository (`agent-os-enhanced/`) to y
 ### Copy #1: Universal Standards
 
 **Source**: `{AGENT_OS_SOURCE}/universal/standards/`  
-**Destination**: `.agent-os/standards/universal/`  
+**Destination**: `.praxis-os/standards/universal/`  
 **Contents**: ~30 markdown files with CS fundamentals
 
 ```python
@@ -34,7 +34,7 @@ import shutil
 # Use AGENT_OS_SOURCE from step 00
 shutil.copytree(
     f"{AGENT_OS_SOURCE}/universal/standards",
-    ".agent-os/standards/universal",
+    ".praxis-os/standards/universal",
     dirs_exist_ok=True
 )
 print("✅ Copied universal standards")
@@ -49,13 +49,13 @@ print("✅ Copied universal standards")
 ### Copy #2: Usage Documentation
 
 **Source**: `agent-os-enhanced/universal/usage/`  
-**Destination**: `.agent-os/usage/`  
+**Destination**: `.praxis-os/usage/`  
 **Contents**: ~5 markdown files explaining how to use Agent OS
 
 ```python
 shutil.copytree(
     "agent-os-enhanced/universal/usage",
-    ".agent-os/usage",
+    ".praxis-os/usage",
     dirs_exist_ok=True
 )
 print("✅ Copied usage documentation")
@@ -68,7 +68,7 @@ print("✅ Copied usage documentation")
 ### Copy #3: Workflows (CRITICAL!)
 
 **Source**: `agent-os-enhanced/universal/workflows/`  
-**Destination**: `.agent-os/workflows/`  
+**Destination**: `.praxis-os/workflows/`  
 **Contents**: ~50 files (spec_creation_v1 + spec_execution_v1)
 
 ⚠️ **This is the one people forget!**
@@ -76,7 +76,7 @@ print("✅ Copied usage documentation")
 ```python
 shutil.copytree(
     "agent-os-enhanced/universal/workflows",
-    ".agent-os/workflows",
+    ".praxis-os/workflows",
     dirs_exist_ok=True
 )
 print("✅ Copied workflows")
@@ -93,13 +93,13 @@ print("✅ Copied workflows")
 ### Copy #4: MCP Server Code
 
 **Source**: `agent-os-enhanced/mcp_server/`  
-**Destination**: `.agent-os/mcp_server/`  
+**Destination**: `.praxis-os/mcp_server/`  
 **Contents**: ~20 Python files + requirements.txt
 
 ```python
 shutil.copytree(
     "agent-os-enhanced/mcp_server",
-    ".agent-os/mcp_server",
+    ".praxis-os/mcp_server",
     dirs_exist_ok=True
 )
 print("✅ Copied MCP server")
@@ -112,7 +112,7 @@ print("✅ Copied MCP server")
 ### Copy #5: Scripts (CRITICAL - RAG Index Builder!)
 
 **Source**: `agent-os-enhanced/scripts/`  
-**Destination**: `.agent-os/scripts/`  
+**Destination**: `.praxis-os/scripts/`  
 **Contents**: ~3 Python files including `build_rag_index.py`
 
 ⚠️ **DO NOT SKIP THIS!** Without `build_rag_index.py`, the MCP server cannot build the RAG index on first startup. AIs will try to create their own version, causing inconsistent implementations.
@@ -120,7 +120,7 @@ print("✅ Copied MCP server")
 ```python
 shutil.copytree(
     "agent-os-enhanced/scripts",
-    ".agent-os/scripts",
+    ".praxis-os/scripts",
     dirs_exist_ok=True
 )
 print("✅ Copied scripts")
@@ -131,7 +131,7 @@ print("✅ Copied scripts")
 - `generate-manifest.py` - Workflow manifest generator
 - `safe-upgrade.py` - Safe upgrade utilities
 
-**Why it's critical**: The MCP server's `factory.py` imports `IndexBuilder` from this script to build the RAG index when `.agent-os/.cache/vector_index/` doesn't exist. Without it, installation fails.
+**Why it's critical**: The MCP server's `factory.py` imports `IndexBuilder` from this script to build the RAG index when `.praxis-os/.cache/vector_index/` doesn't exist. Without it, installation fails.
 
 ---
 
@@ -164,35 +164,35 @@ print(f"Source: {AGENT_OS_SOURCE}\n")
 # Copy #1: Universal standards
 success1 = copy_with_status(
     f"{AGENT_OS_SOURCE}/universal/standards",
-    ".agent-os/standards/universal",
+    ".praxis-os/standards/universal",
     "Universal standards"
 )
 
 # Copy #2: Usage docs
 success2 = copy_with_status(
     f"{AGENT_OS_SOURCE}/universal/usage",
-    ".agent-os/usage",
+    ".praxis-os/usage",
     "Usage documentation"
 )
 
 # Copy #3: Workflows (CRITICAL!)
 success3 = copy_with_status(
     f"{AGENT_OS_SOURCE}/universal/workflows",
-    ".agent-os/workflows",
+    ".praxis-os/workflows",
     "Workflows"
 )
 
 # Copy #4: MCP server
 success4 = copy_with_status(
     f"{AGENT_OS_SOURCE}/mcp_server",
-    ".agent-os/mcp_server",
+    ".praxis-os/mcp_server",
     "MCP server"
 )
 
 # Copy #5: Scripts (CRITICAL!)
 success5 = copy_with_status(
     f"{AGENT_OS_SOURCE}/scripts",
-    ".agent-os/scripts",
+    ".praxis-os/scripts",
     "Scripts"
 )
 
@@ -235,24 +235,24 @@ import os
 
 critical_files = [
     # Standards
-    ".agent-os/standards/universal/architecture/solid-principles.md",
-    ".agent-os/standards/universal/testing/test-pyramid.md",
+    ".praxis-os/standards/universal/architecture/solid-principles.md",
+    ".praxis-os/standards/universal/testing/test-pyramid.md",
     
     # Usage
-    ".agent-os/usage/creating-specs.md",
-    ".agent-os/usage/mcp-usage-guide.md",
+    ".praxis-os/usage/creating-specs.md",
+    ".praxis-os/usage/mcp-usage-guide.md",
     
     # Workflows (MOST IMPORTANT!)
-    ".agent-os/workflows/spec_creation_v1/metadata.json",
-    ".agent-os/workflows/spec_execution_v1/metadata.json",
+    ".praxis-os/workflows/spec_creation_v1/metadata.json",
+    ".praxis-os/workflows/spec_execution_v1/metadata.json",
     
     # MCP Server
-    ".agent-os/mcp_server/__main__.py",
-    ".agent-os/mcp_server/requirements.txt",
+    ".praxis-os/mcp_server/__main__.py",
+    ".praxis-os/mcp_server/requirements.txt",
     
     # Scripts (CRITICAL!)
-    ".agent-os/scripts/build_rag_index.py",  # Required for RAG index building!
-    ".agent-os/scripts/generate-manifest.py",
+    ".praxis-os/scripts/build_rag_index.py",  # Required for RAG index building!
+    ".praxis-os/scripts/generate-manifest.py",
 ]
 
 missing = [f for f in critical_files if not os.path.exists(f)]
@@ -277,8 +277,8 @@ Check that workflows directory is populated:
 import os
 
 workflow_dirs = [
-    ".agent-os/workflows/spec_creation_v1",
-    ".agent-os/workflows/spec_execution_v1",
+    ".praxis-os/workflows/spec_creation_v1",
+    ".praxis-os/workflows/spec_execution_v1",
 ]
 
 for workflow_dir in workflow_dirs:
@@ -301,10 +301,10 @@ for workflow_dir in workflow_dirs:
 
 **Expected output**:
 ```
-✅ .agent-os/workflows/spec_creation_v1: 38 files
-✅ .agent-os/workflows/spec_execution_v1: 9 files
-✅ Found: .agent-os/workflows/spec_creation_v1/metadata.json
-✅ Found: .agent-os/workflows/spec_execution_v1/metadata.json
+✅ .praxis-os/workflows/spec_creation_v1: 38 files
+✅ .praxis-os/workflows/spec_execution_v1: 9 files
+✅ Found: .praxis-os/workflows/spec_creation_v1/metadata.json
+✅ Found: .praxis-os/workflows/spec_execution_v1/metadata.json
 ```
 
 ---
@@ -334,7 +334,7 @@ if not os.path.exists("agent-os-enhanced/universal"):
 **Fix**:
 ```bash
 # Check target directory permissions
-ls -ld .agent-os
+ls -ld .praxis-os
 
 # Should see something like: drwxr-xr-x
 # The 'w' means writable
@@ -349,13 +349,13 @@ import shutil
 
 shutil.copytree(
     "agent-os-enhanced/universal/workflows",
-    ".agent-os/workflows",
+    ".praxis-os/workflows",
     dirs_exist_ok=True
 )
 
 # Verify
 import os
-count = sum(len(files) for _, _, files in os.walk(".agent-os/workflows"))
+count = sum(len(files) for _, _, files in os.walk(".praxis-os/workflows"))
 print(f"Workflow files: {count}")  # Should be ~47
 ```
 
@@ -365,10 +365,10 @@ print(f"Workflow files: {count}")  # Should be ~47
 
 ```python
 # Identify what's missing, then copy just that
-if not os.path.exists(".agent-os/workflows/spec_creation_v1"):
+if not os.path.exists(".praxis-os/workflows/spec_creation_v1"):
     shutil.copytree(
         "agent-os-enhanced/universal/workflows/spec_creation_v1",
-        ".agent-os/workflows/spec_creation_v1"
+        ".praxis-os/workflows/spec_creation_v1"
     )
 ```
 
@@ -377,11 +377,11 @@ if not os.path.exists(".agent-os/workflows/spec_creation_v1"):
 ## 📊 Progress Check
 
 At this point you should have:
-- ✅ ~31 files in `.agent-os/standards/universal/`
-- ✅ ~5 files in `.agent-os/usage/`
-- ✅ ~47 files in `.agent-os/workflows/` (across 2 workflows)
-- ✅ ~23 files in `.agent-os/mcp_server/`
-- ✅ ~3 files in `.agent-os/scripts/` (including `build_rag_index.py`!)
+- ✅ ~31 files in `.praxis-os/standards/universal/`
+- ✅ ~5 files in `.praxis-os/usage/`
+- ✅ ~47 files in `.praxis-os/workflows/` (across 2 workflows)
+- ✅ ~23 files in `.praxis-os/mcp_server/`
+- ✅ ~3 files in `.praxis-os/scripts/` (including `build_rag_index.py`!)
 - ✅ All validation checkpoints passed
 
 **Total**: ~109 files copied

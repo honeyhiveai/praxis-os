@@ -219,13 +219,13 @@ search_standards("workflow directory structure phase.md task files")
 Create the standard workflow directory structure:
 
 ```bash
-mkdir -p .agent-os/workflows/api_validation_v1/phases/{0,1,2,3}
-mkdir -p .agent-os/workflows/api_validation_v1/core
+mkdir -p .praxis-os/workflows/api_validation_v1/phases/{0,1,2,3}
+mkdir -p .praxis-os/workflows/api_validation_v1/core
 ```
 
 **Result:**
 ```
-.agent-os/workflows/api_validation_v1/
+.praxis-os/workflows/api_validation_v1/
 ├── metadata.json           # Workflow definition (required)
 ├── phases/
 │   ├── 0/
@@ -261,7 +261,7 @@ search_standards("workflow naming conventions versioning")
 
 **Critical:** Metadata must be **RAG-optimized** for discoverability. Use natural language descriptions that match how AI agents will query.
 
-Create `.agent-os/workflows/api_validation_v1/metadata.json`:
+Create `.praxis-os/workflows/api_validation_v1/metadata.json`:
 
 ```json
 {
@@ -365,7 +365,7 @@ Create a `phase.md` file for each phase. These should be **~80 lines** and provi
 
 ### 5.1 Phase File Template
 
-Create `.agent-os/workflows/api_validation_v1/phases/0/phase.md`:
+Create `.praxis-os/workflows/api_validation_v1/phases/0/phase.md`:
 
 ```markdown
 # Phase 0: API Discovery
@@ -474,7 +474,7 @@ Create detailed task files (**100-170 lines**) for each task in each phase.
 
 ### 6.1 Task File Template
 
-Create `.agent-os/workflows/api_validation_v1/phases/0/task-1-scan-routes.md`:
+Create `.praxis-os/workflows/api_validation_v1/phases/0/task-1-scan-routes.md`:
 
 ```markdown
 # Task 1: Scan Routes
@@ -643,11 +643,11 @@ Use the workflow construction checklist:
 
 ```bash
 # Check directory structure
-ls .agent-os/workflows/api_validation_v1/
+ls .praxis-os/workflows/api_validation_v1/
 # Should see: metadata.json, phases/, core/
 
 # Check phase files exist (and named correctly - phase.md not README.md)
-ls .agent-os/workflows/api_validation_v1/phases/*/phase.md
+ls .praxis-os/workflows/api_validation_v1/phases/*/phase.md
 ```
 
 **AI verifies:**
@@ -659,10 +659,10 @@ ls .agent-os/workflows/api_validation_v1/phases/*/phase.md
 
 ```bash
 # Check phase.md files (~80 lines) - optimal attention quality
-wc -l .agent-os/workflows/api_validation_v1/phases/*/phase.md
+wc -l .praxis-os/workflows/api_validation_v1/phases/*/phase.md
 
 # Check task files (100-170 lines) - acceptable attention quality
-wc -l .agent-os/workflows/api_validation_v1/phases/*/*task*.md
+wc -l .praxis-os/workflows/api_validation_v1/phases/*/*task*.md
 ```
 
 **AI verifies:**
@@ -783,9 +783,9 @@ Before considering the workflow complete, AI verifies:
 
 1. Check file location:
    ```bash
-   ls .agent-os/workflows/your_workflow_v1/metadata.json
+   ls .praxis-os/workflows/your_workflow_v1/metadata.json
    ```
-   Must be in `.agent-os/workflows/` or configured in `.agent-os/config.json`
+   Must be in `.praxis-os/workflows/` or configured in `.praxis-os/config.json`
 
 2. Restart MCP server (restart Cursor or kill process)
 

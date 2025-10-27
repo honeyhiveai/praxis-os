@@ -18,7 +18,7 @@
 
 ## Installation
 
-This MCP server is copied to `.agent-os/mcp_server/` in target projects during Agent OS installation.
+This MCP server is copied to `.praxis-os/mcp_server/` in target projects during Agent OS installation.
 
 ## Dependencies
 
@@ -39,10 +39,10 @@ Configured in target project's `.cursor/mcp.json`:
   "mcpServers": {
     "agent-os-rag": {
       "command": "python",
-      "args": ["${workspaceFolder}/.agent-os/mcp_server/agent_os_rag.py"],
+      "args": ["${workspaceFolder}/.praxis-os/mcp_server/agent_os_rag.py"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.agent-os"
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os"
       }
     }
   }
@@ -95,4 +95,4 @@ To modify the MCP server:
 
 ---
 
-**Note:** The actual MCP server implementation files should be copied from the HoneyHive Python SDK's `.agent-os/mcp_server/` directory. This README serves as documentation for the structure.
+**Note:** The actual MCP server implementation files should be copied from the HoneyHive Python SDK's `.praxis-os/mcp_server/` directory. This README serves as documentation for the structure.

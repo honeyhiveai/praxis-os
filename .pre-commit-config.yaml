@@ -206,5 +206,5 @@ repos:
 #   pre-commit run tox-type --all-files
 #
 # Standards Documentation:
-# - .agent-os/standards/development/code-quality.md
-# - .agent-os/standards/ai-assistant/code-generation/linters/README.md
+# - .praxis-os/standards/development/code-quality.md
+# - .praxis-os/standards/ai-assistant/code-generation/linters/README.md

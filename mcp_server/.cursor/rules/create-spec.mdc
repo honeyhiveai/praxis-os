@@ -26,7 +26,7 @@ Ask the user:
 
 ### 3. Create Spec Directory
 ```
-.agent-os/specs/YYYY-MM-DD-feature-name/
+.praxis-os/specs/YYYY-MM-DD-feature-name/
 ├── README.md         # Executive summary
 ├── srd.md           # Requirements (goals, users, criteria)
 ├── specs.md         # Technical design
@@ -78,7 +78,7 @@ Ask the user:
 
 ## Output
 
-A complete specification in `.agent-os/specs/YYYY-MM-DD-feature-name/` ready for implementation.
+A complete specification in `.praxis-os/specs/YYYY-MM-DD-feature-name/` ready for implementation.
 
 ## Next Step
 
@@ -86,7 +86,7 @@ Tell user: "Spec created! Use `execute-tasks` to implement, or review tasks.md a
 
 ## Standards Applied
 
-- Follows `.agent-os/usage/creating-specs.md`
+- Follows `.praxis-os/usage/creating-specs.md`
 - Uses Sphinx-style docstrings
 - Includes production code checklist references
 - Phase-gated with validation criteria

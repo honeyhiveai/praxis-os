@@ -94,7 +94,7 @@ The agent will:
 2. Start the `spec_creation_v1` workflow
 3. Begin creating specification documents
 
-**Success Indicator:** ✅ You see the agent mention "spec_creation_v1" and start creating files in `.agent-os/specs/`
+**Success Indicator:** ✅ You see the agent mention "spec_creation_v1" and start creating files in `.praxis-os/specs/`
 
 **Why This Matters:**
 
@@ -119,7 +119,7 @@ The agent will progress through these phases:
 
 The agent will:
 - Ask follow-up questions if anything is unclear
-- Create files in `.agent-os/specs/YYYY-MM-DD-feature-name/`
+- Create files in `.praxis-os/specs/YYYY-MM-DD-feature-name/`
 - Show you the progress through phases
 - Request your approval before finalizing
 
@@ -138,7 +138,7 @@ Answer based on the feature requirements. For this tutorial:
 
 You'll see files being created:
 ```
-.agent-os/specs/2025-10-12-user-profile-endpoint/
+.praxis-os/specs/2025-10-12-user-profile-endpoint/
   ├── README.md           # Specification overview
   ├── srd.md             # Software Requirements Document
   ├── specs.md           # Technical specification
@@ -146,7 +146,7 @@ You'll see files being created:
   └── implementation.md  # Implementation guidance
 ```
 
-**Success Indicator:** ✅ All 5 specification files created in `.agent-os/specs/`
+**Success Indicator:** ✅ All 5 specification files created in `.praxis-os/specs/`
 
 **Why This Matters:**
 
@@ -160,7 +160,7 @@ Now that the spec is created, take a moment to review it. This step is **critica
 
 ### Step 5: Open and Review `README.md`
 
-Open `.agent-os/specs/[date]-user-profile-endpoint/README.md`
+Open `.praxis-os/specs/[date]-user-profile-endpoint/README.md`
 
 **What to Look For:**
 
@@ -236,7 +236,7 @@ Perfect! Let's implement this spec using spec_execution_v1 workflow.
 **Expected Response:**
 
 The agent will:
-1. Load the specification from `.agent-os/specs/`
+1. Load the specification from `.praxis-os/specs/`
 2. Start the `spec_execution_v1` workflow
 3. Begin executing tasks from `tasks.md`
 

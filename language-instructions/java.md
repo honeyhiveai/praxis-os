@@ -729,11 +729,11 @@ package com.example.myapp.domain.user;
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/java-concurrency.md`
-   - `.agent-os/standards/development/java-testing.md`
-   - `.agent-os/standards/development/java-dependencies.md`
-   - `.agent-os/standards/development/java-code-quality.md`
-   - `.agent-os/standards/development/java-documentation.md`
+   - `.praxis-os/standards/development/java-concurrency.md`
+   - `.praxis-os/standards/development/java-testing.md`
+   - `.praxis-os/standards/development/java-dependencies.md`
+   - `.praxis-os/standards/development/java-code-quality.md`
+   - `.praxis-os/standards/development/java-documentation.md`
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

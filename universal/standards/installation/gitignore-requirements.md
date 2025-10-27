@@ -6,19 +6,19 @@
 
 ## 🎯 TL;DR - .gitignore Requirements Quick Reference
 
-**Keywords for search**: gitignore requirements, Agent OS gitignore, what to ignore, .gitignore patterns, ephemeral content, do not commit, version control, .agent-os cache, vector index
+**Keywords for search**: gitignore requirements, Agent OS gitignore, what to ignore, .gitignore patterns, ephemeral content, do not commit, version control, .praxis-os cache, vector index
 
 **Core Principle:** Ignore ephemeral, machine-specific content. Commit everything else.
 
 **MANDATORY .gitignore Entries:**
 ```gitignore
 # Agent OS - Ephemeral content (do not commit)
-.agent-os/.cache/          # ~1.3GB - Vector index
-.agent-os/venv/            # ~100MB - Python virtual environment
-.agent-os/mcp_server/__pycache__/  # ~5MB - Python bytecode
-.agent-os/scripts/__pycache__/     # ~1MB - Python bytecode
-.agent-os.backup.*         # ~1.3GB - Upgrade backups
-.agent-os/.upgrade_lock    # <1KB - Upgrade lock file
+.praxis-os/.cache/          # ~1.3GB - Vector index
+.praxis-os/venv/            # ~100MB - Python virtual environment
+.praxis-os/mcp_server/__pycache__/  # ~5MB - Python bytecode
+.praxis-os/scripts/__pycache__/     # ~1MB - Python bytecode
+.praxis-os.backup.*         # ~1.3GB - Upgrade backups
+.praxis-os/.upgrade_lock    # <1KB - Upgrade lock file
 ```
 
 **Why These Are Required:**
@@ -31,11 +31,11 @@
 
 **What TO Commit:**
 ```
-✅ .agent-os/standards/    - Standards and fundamentals
-✅ .agent-os/usage/        - Documentation
-✅ .agent-os/workflows/    - Workflow definitions
-✅ .agent-os/specs/        - Project specifications (CRITICAL!)
-✅ .agent-os/mcp_server/   - MCP server code (if customized)
+✅ .praxis-os/standards/    - Standards and fundamentals
+✅ .praxis-os/usage/        - Documentation
+✅ .praxis-os/workflows/    - Workflow definitions
+✅ .praxis-os/specs/        - Project specifications (CRITICAL!)
+✅ .praxis-os/mcp_server/   - MCP server code (if customized)
 ✅ .cursor/mcp.json        - Cursor MCP config
 ✅ .cursorrules            - AI behavioral triggers
 ```
@@ -43,16 +43,16 @@
 **Verification:**
 ```bash
 # Check what would be committed
-git status --porcelain | grep ".agent-os/.cache"  # Should be empty
-git status --porcelain | grep ".agent-os/venv"    # Should be empty
+git status --porcelain | grep ".praxis-os/.cache"  # Should be empty
+git status --porcelain | grep ".praxis-os/venv"    # Should be empty
 
 # If files appear, add to .gitignore and untrack
-git rm --cached -r .agent-os/.cache/
+git rm --cached -r .praxis-os/.cache/
 ```
 
 **Installation Validation:**
 - Run `git status` after Agent OS install
-- Should NOT see `.agent-os/.cache/` or `.agent-os/venv/`
+- Should NOT see `.praxis-os/.cache/` or `.praxis-os/venv/`
 - If you do → .gitignore entries missing or incorrect
 
 ---
@@ -62,12 +62,12 @@ git rm --cached -r .agent-os/.cache/
 1. "What should I add to .gitignore for Agent OS?"
 2. "Why is my repo so large after Agent OS install?"
 3. "What Agent OS files should be committed?"
-4. "How to ignore .agent-os cache?"
+4. "How to ignore .praxis-os cache?"
 5. "What are required gitignore entries?"
-6. "Why ignore .agent-os/venv/?"
-7. "Should I commit .agent-os/specs/?"
+6. "Why ignore .praxis-os/venv/?"
+7. "Should I commit .praxis-os/specs/?"
 8. "How to verify gitignore is working?"
-9. "What is the .agent-os/.cache/ directory?"
+9. "What is the .praxis-os/.cache/ directory?"
 10. "How to fix accidentally committed cache?"
 
 ---
@@ -78,12 +78,12 @@ All Agent OS installations MUST include these entries in the project's `.gitigno
 
 ```gitignore
 # Agent OS - Ephemeral content (do not commit)
-.agent-os/.cache/
-.agent-os/venv/
-.agent-os/mcp_server/__pycache__/
-.agent-os/scripts/__pycache__/
-.agent-os.backup.*
-.agent-os/.upgrade_lock
+.praxis-os/.cache/
+.praxis-os/venv/
+.praxis-os/mcp_server/__pycache__/
+.praxis-os/scripts/__pycache__/
+.praxis-os.backup.*
+.praxis-os/.upgrade_lock
 ```
 
 ---
@@ -94,12 +94,12 @@ Understanding the purpose and impact of each pattern.
 
 | Pattern | Size | Reason | Impact if Committed |
 |---------|------|--------|---------------------|
-| `.agent-os/.cache/` | ~1.3GB | Vector index, regenerated on each machine | Massive repo bloat, conflicts across machines |
-| `.agent-os/venv/` | ~100MB | Python virtual environment | Platform-specific, breaks across OS/Python versions |
-| `.agent-os/mcp_server/__pycache__/` | ~5MB | Python bytecode | Platform/Python version specific |
-| `.agent-os/scripts/__pycache__/` | ~1MB | Python bytecode | Platform/Python version specific |
-| `.agent-os.backup.*` | ~1.3GB | Upgrade backups (temporary) | Massive repo bloat, only needed locally for rollback |
-| `.agent-os/.upgrade_lock` | <1KB | Upgrade lock file (temporary) | Meaningless outside upgrade process |
+| `.praxis-os/.cache/` | ~1.3GB | Vector index, regenerated on each machine | Massive repo bloat, conflicts across machines |
+| `.praxis-os/venv/` | ~100MB | Python virtual environment | Platform-specific, breaks across OS/Python versions |
+| `.praxis-os/mcp_server/__pycache__/` | ~5MB | Python bytecode | Platform/Python version specific |
+| `.praxis-os/scripts/__pycache__/` | ~1MB | Python bytecode | Platform/Python version specific |
+| `.praxis-os.backup.*` | ~1.3GB | Upgrade backups (temporary) | Massive repo bloat, only needed locally for rollback |
+| `.praxis-os/.upgrade_lock` | <1KB | Upgrade lock file (temporary) | Meaningless outside upgrade process |
 
 **Total potential bloat**: ~2.7GB of ephemeral files
 
@@ -113,11 +113,11 @@ Agent OS content that should be tracked in version control:
 
 | Directory | Purpose | Commit? |
 |-----------|---------|---------|
-| `.agent-os/standards/` | Universal CS fundamentals + project standards | ✅ YES |
-| `.agent-os/usage/` | Documentation + custom docs | ✅ YES |
-| `.agent-os/workflows/` | Workflow definitions | ✅ YES |
-| `.agent-os/specs/` | Project specifications | ✅ YES (critical!) |
-| `.agent-os/mcp_server/` | MCP server code | ✅ YES (if customized) |
+| `.praxis-os/standards/` | Universal CS fundamentals + project standards | ✅ YES |
+| `.praxis-os/usage/` | Documentation + custom docs | ✅ YES |
+| `.praxis-os/workflows/` | Workflow definitions | ✅ YES |
+| `.praxis-os/specs/` | Project specifications | ✅ YES (critical!) |
+| `.praxis-os/mcp_server/` | MCP server code | ✅ YES (if customized) |
 | `.cursor/mcp.json` | Cursor MCP configuration | ✅ YES |
 | `.cursorrules` | AI assistant behavioral triggers | ✅ YES |
 
@@ -131,12 +131,12 @@ The entries should be added as a single section:
 
 ```gitignore
 # Agent OS - Ephemeral content (do not commit)
-.agent-os/.cache/
-.agent-os/venv/
-.agent-os/mcp_server/__pycache__/
-.agent-os/scripts/__pycache__/
-.agent-os.backup.*
-.agent-os/.upgrade_lock
+.praxis-os/.cache/
+.praxis-os/venv/
+.praxis-os/mcp_server/__pycache__/
+.praxis-os/scripts/__pycache__/
+.praxis-os.backup.*
+.praxis-os/.upgrade_lock
 ```
 
 **Rules**:
@@ -156,12 +156,12 @@ To verify entries are working:
 
 ```bash
 # Check if patterns are ignored
-git check-ignore .agent-os/.cache/test         # Should exit 0
-git check-ignore .agent-os.backup.20251008     # Should exit 0
-git check-ignore .agent-os/.upgrade_lock       # Should exit 0
+git check-ignore .praxis-os/.cache/test         # Should exit 0
+git check-ignore .praxis-os.backup.20251008     # Should exit 0
+git check-ignore .praxis-os/.upgrade_lock       # Should exit 0
 
 # Check if any ephemeral files are already committed
-git ls-files .agent-os/.cache/ .agent-os/venv/ .agent-os.backup.*
+git ls-files .praxis-os/.cache/ .praxis-os/venv/ .praxis-os.backup.*
 # Should return nothing
 ```
 
@@ -178,7 +178,7 @@ Understanding the reasoning behind .gitignore requirements.
 - Merge conflicts on binary cache files
 - Wasted CI/CD bandwidth
 
-**Previous Issue**: `.agent-os.backup.*` was not in original .gitignore, discovered during upgrade workflow testing when 665 backup files (117K insertions) were staged for commit.
+**Previous Issue**: `.praxis-os.backup.*` was not in original .gitignore, discovered during upgrade workflow testing when 665 backup files (117K insertions) were staged for commit.
 
 ---
 
@@ -203,7 +203,7 @@ When updating existing installations:
 
 ```python
 # Read from standards, not hardcoded list
-standards_path = ".agent-os/standards/universal/installation/gitignore-requirements.md"
+standards_path = ".praxis-os/standards/universal/installation/gitignore-requirements.md"
 with open(standards_path) as f:
     content = f.read()
     # Extract and compare with target .gitignore

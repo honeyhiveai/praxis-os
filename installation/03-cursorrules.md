@@ -143,22 +143,22 @@ if user_choice == "1":
 ```python
 elif user_choice == "2":
     # Save Agent OS rules to temp file for user reference
-    with open(".cursorrules.agent-os", "w") as f:
+    with open(".cursorrules.praxis-os", "w") as f:
         f.write(agent_os_rules)
     
     print("""
 📄 Files for manual merge:
 
 Your existing rules:  .cursorrules
-Agent OS rules:       .cursorrules.agent-os
+Agent OS rules:       .cursorrules.praxis-os
 
 Instructions:
 1. Open both files
-2. Copy Agent OS rules from .cursorrules.agent-os
+2. Copy Agent OS rules from .cursorrules.praxis-os
 3. Paste at the TOP of .cursorrules
 4. Ensure your existing rules remain below
 5. Save .cursorrules
-6. Delete .cursorrules.agent-os when done
+6. Delete .cursorrules.praxis-os when done
 
 Press Enter when you've completed the manual merge...
     """)

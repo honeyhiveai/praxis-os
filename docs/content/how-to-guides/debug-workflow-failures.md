@@ -172,7 +172,7 @@ Missing evidence: specs_created
 
 2. Verify the file exists:
    ```bash
-   ls .agent-os/specs/[date]-[name]/specs.md
+   ls .praxis-os/specs/[date]-[name]/specs.md
    ```
 
 3. Retry checkpoint validation:
@@ -263,7 +263,7 @@ Error: JSON parse error in state file
 
    **Important:** Save any completed artifacts before restarting:
    ```bash
-   cp -r .agent-os/specs/[date]-[name] .agent-os/specs/[date]-[name]-backup
+   cp -r .praxis-os/specs/[date]-[name] .praxis-os/specs/[date]-[name]-backup
    ```
 
 ### Pattern 5: Phase Skipping Blocked

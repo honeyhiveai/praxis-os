@@ -20,7 +20,7 @@ Read these universal standards:
 - `universal/standards/concurrency/race-conditions.md`
 - `universal/standards/concurrency/deadlocks.md`
 - `universal/standards/concurrency/locking-strategies.md`
-- `.agent-os/standards/development/javascript-concurrency.md` (if exists)
+- `.praxis-os/standards/development/javascript-concurrency.md` (if exists)
 
 ### TypeScript-Specific Context to Add
 
@@ -96,7 +96,7 @@ class UserService extends TypedEventEmitter<UserEvents> {
 Read:
 - `universal/standards/testing/test-pyramid.md`
 - `universal/standards/testing/test-doubles.md`
-- `.agent-os/standards/development/javascript-testing.md` (if exists)
+- `.praxis-os/standards/development/javascript-testing.md` (if exists)
 
 ### TypeScript-Specific Context to Add
 
@@ -187,7 +187,7 @@ test('fetches user data', () => {
 ### Source Materials
 Read:
 - `universal/standards/architecture/dependency-injection.md`
-- `.agent-os/standards/development/javascript-dependencies.md` (if exists)
+- `.praxis-os/standards/development/javascript-dependencies.md` (if exists)
 
 ### TypeScript-Specific Context
 
@@ -545,11 +545,11 @@ npx typedoc --out docs src/index.ts
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/typescript-concurrency.md`
-   - `.agent-os/standards/development/typescript-testing.md`
-   - `.agent-os/standards/development/typescript-dependencies.md`
-   - `.agent-os/standards/development/typescript-code-quality.md`
-   - `.agent-os/standards/development/typescript-documentation.md`
+   - `.praxis-os/standards/development/typescript-concurrency.md`
+   - `.praxis-os/standards/development/typescript-testing.md`
+   - `.praxis-os/standards/development/typescript-dependencies.md`
+   - `.praxis-os/standards/development/typescript-code-quality.md`
+   - `.praxis-os/standards/development/typescript-documentation.md`
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

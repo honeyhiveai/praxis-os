@@ -713,7 +713,7 @@ CURRENT_DATE=$(date +"%Y-%m-%d")
 
 ## How to Define Project-Specific Validation?
 
-**Projects should define validation commands in `.agent-os/standards/development/validation-commands.md`.**
+**Projects should define validation commands in `.praxis-os/standards/development/validation-commands.md`.**
 
 ### Example Validation Commands File
 
@@ -836,5 +836,5 @@ tox -e unit
 
 **This is a universal standard. It applies to all projects using prAxIs OS, regardless of programming language or technology stack.**
 
-**For project-specific validation commands, see `.agent-os/standards/development/validation-commands.md` in your project.**
+**For project-specific validation commands, see `.praxis-os/standards/development/validation-commands.md` in your project.**
 

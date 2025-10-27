@@ -371,7 +371,7 @@ User: "Find the persona spec from October 6th"
 Agent: *pauses, recognizes this is a search task*
 Agent: search_standards("what are persona specs in this project")
 Agent: search_standards("where are specs located in project structure")
-Agent: *now knows: specs in .agent-os/specs/, dated folders*
+Agent: *now knows: specs in .praxis-os/specs/, dated folders*
 Agent: *uses informed search, finds quickly*
 Result: Fast, correct, learned project structure
 ```

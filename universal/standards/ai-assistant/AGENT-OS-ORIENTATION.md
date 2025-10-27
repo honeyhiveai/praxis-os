@@ -41,7 +41,7 @@ search_standards("single query syndrome 5-10 times multi-angle comprehensive dis
 search_standards("workflow discovery dynamic don't memorize workflow names query for task")
 
 # 7. Indexed files explicit list
-search_standards(".agent-os/standards indexed query not read universal workflows usage")
+search_standards(".praxis-os/standards indexed query not read universal workflows usage")
 
 # 8. Practical examples (8 scenarios)
 search_standards("AI agent quickstart wrong right examples helper mode implementer concrete scenarios")
@@ -65,7 +65,7 @@ search_standards("AI capabilities versus human limitations trust systematic unli
 - Query construction patterns (content-specific phrases)
 - Multi-angle querying (5-10 times, not 1-2)
 - Workflow discovery (dynamic, don't memorize)
-- Indexed files list (never read .agent-os/standards/, workflows/, usage/)
+- Indexed files list (never read .praxis-os/standards/, workflows/, usage/)
 - 8 concrete behavioral scenarios (wrong vs right)
 - Workspace organization (where to put temporary files, design docs, analysis)
 - AI capabilities and trust (query liberally, context compaction is safe, unlimited sessions)
@@ -238,15 +238,15 @@ search_standards("workflow discovery dynamic don't memorize workflow names query
 
 ### Query 7: Indexed Files Explicit List
 ```python
-search_standards("indexed query don't read .agent-os/standards .agent-os/workflows .agent-os/usage specs")
+search_standards("indexed query don't read .praxis-os/standards .praxis-os/workflows .praxis-os/usage specs")
 ```
 
 **Loads:**
 - **CRITICAL:** Explicit list of indexed vs not-indexed files
-- .agent-os/standards/ → Query, never read
-- .agent-os/workflows/ → Query, never read
-- .agent-os/usage/ → Query, never read
-- .agent-os/specs/ → Read directly (not indexed)
+- .praxis-os/standards/ → Query, never read
+- .praxis-os/workflows/ → Query, never read
+- .praxis-os/usage/ → Query, never read
+- .praxis-os/specs/ → Read directly (not indexed)
 
 ---
 
@@ -269,7 +269,7 @@ search_standards("workspace organization ephemeral files design analysis scratch
 ```
 
 **Loads:**
-- `.agent-os/workspace/` as home for temporary work
+- `.praxis-os/workspace/` as home for temporary work
 - Three subdirectories: `design/`, `analysis/`, `scratch/`
 - Phase 1 artifacts go in `workspace/design/`
 - Date-prefixed filenames: `YYYY-MM-DD-topic.md`
@@ -338,12 +338,12 @@ search_standards("when to use workflows for auth")
 **Two categories of files:**
 
 **Indexed (Query, Don't Read):**
-- `.agent-os/standards/` → Use `search_standards()` - **NEVER read_file()**
-- `.agent-os/workflows/` → Use `search_standards()` - **NEVER read_file()**
-- `.agent-os/usage/` → Use `search_standards()` - **NEVER read_file()**
+- `.praxis-os/standards/` → Use `search_standards()` - **NEVER read_file()**
+- `.praxis-os/workflows/` → Use `search_standards()` - **NEVER read_file()**
+- `.praxis-os/usage/` → Use `search_standards()` - **NEVER read_file()**
 
 **Not Indexed (Read Directly):**
-- `.agent-os/specs/` → Use `read_file()` - Project-specific specs
+- `.praxis-os/specs/` → Use `read_file()` - Project-specific specs
 
 **Why:**
 - Querying: Returns 2KB relevant chunk (95% relevant)
@@ -391,7 +391,7 @@ search_standards("when to use workflows for auth")
 ---
 
 ### ❌ Failure 3: Reading Standards Files
-**Symptom:** Using `read_file('.agent-os/standards/...')`
+**Symptom:** Using `read_file('.praxis-os/standards/...')`
 
 **Result:** Context overload, missed relevant content
 

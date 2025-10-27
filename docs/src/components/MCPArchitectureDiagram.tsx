@@ -55,14 +55,14 @@ export default function MCPArchitectureDiagram(): React.ReactElement {
       {/* Bottom Storage Boxes */}
       <div className={styles.storageRow}>
         <div className={styles.storageBox}>
-          <div className={styles.storageTitle}>📁 .agent-os/</div>
+          <div className={styles.storageTitle}>📁 .praxis-os/</div>
           <div className={styles.storagePath}>universal/</div>
           <div className={styles.storagePath}>standards/</div>
           <div className={styles.storagePath}>.cache/vector_index</div>
         </div>
 
         <div className={styles.storageBox}>
-          <div className={styles.storageTitle}>📁 .agent-os/</div>
+          <div className={styles.storageTitle}>📁 .praxis-os/</div>
           <div className={styles.storagePath}>state/</div>
           <div className={styles.storagePath}>session_*.json</div>
           <div className={styles.storagePath}>.lock</div>

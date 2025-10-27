@@ -157,7 +157,7 @@ Allow the agent to complete Phase 1. It will:
 ```
 ✅ Phase 1 Complete: Requirements Gathering
 
-Created: .agent-os/specs/2025-10-12-health-check-endpoint/srd.md
+Created: .praxis-os/specs/2025-10-12-health-check-endpoint/srd.md
 
 Evidence Collected:
 ✓ srd_created
@@ -220,7 +220,7 @@ Phase Progress:
 Completed Phases History:
 - Phase 1 completed at 2025-10-12 10:30:15
   Evidence: srd_created, business_goals_defined, ...
-  Artifact: .agent-os/specs/.../srd.md
+  Artifact: .praxis-os/specs/.../srd.md
 ```
 
 **Success Indicator:** ✅ You see phase history with timestamps and evidence

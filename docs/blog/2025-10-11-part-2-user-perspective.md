@@ -97,7 +97,7 @@ Since I couldn't reliably use MCP, I adapted:
 ### Workaround 2: File Reading
 
 **Instead of querying standards, I read them directly:**
-- Explored `.agent-os/standards/` directory
+- Explored `.praxis-os/standards/` directory
 - Read workflow definitions
 - Understood the system architecture
 

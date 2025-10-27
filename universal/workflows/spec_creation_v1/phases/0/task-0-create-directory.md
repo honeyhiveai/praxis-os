@@ -89,11 +89,11 @@ fi
 ### Step 5: Create Directory
 
 ```bash
-mkdir -p .agent-os/specs/${SPEC_DIR}
+mkdir -p .praxis-os/specs/${SPEC_DIR}
 ```
 
 📊 **COUNT-AND-DOCUMENT:** Directory created
-- **Directory:** `.agent-os/specs/${SPEC_DIR}`
+- **Directory:** `.praxis-os/specs/${SPEC_DIR}`
 - **Format:** YYYY-MM-DD-descriptive-name ✅
 - **Date:** {current_date}
 - **Descriptor:** {descriptive-name}
@@ -103,13 +103,13 @@ mkdir -p .agent-os/specs/${SPEC_DIR}
 This SPEC_DIR value will be used in ALL subsequent tasks:
 
 ```bash
-echo "SPEC_DIR=${SPEC_DIR}" > .agent-os/specs/.current-spec
-echo "Created: $(date)" >> .agent-os/specs/.current-spec
+echo "SPEC_DIR=${SPEC_DIR}" > .praxis-os/specs/.current-spec
+echo "Created: $(date)" >> .praxis-os/specs/.current-spec
 ```
 
 📊 **COUNT-AND-DOCUMENT:** SPEC_DIR exported
 - **Value:** `${SPEC_DIR}`
-- **Stored:** `.agent-os/specs/.current-spec`
+- **Stored:** `.praxis-os/specs/.current-spec`
 
 ---
 
@@ -121,7 +121,7 @@ echo "Created: $(date)" >> .agent-os/specs/.current-spec
 - [ ] Date matches current date ✅/❌
 - [ ] Descriptive name is kebab-case (lowercase, hyphens) ✅/❌
 - [ ] Descriptive name is 2-5 words ✅/❌
-- [ ] Directory exists at `.agent-os/specs/${SPEC_DIR}` ✅/❌
+- [ ] Directory exists at `.praxis-os/specs/${SPEC_DIR}` ✅/❌
 - [ ] SPEC_DIR exported to `.current-spec` ✅/❌
 
 ---

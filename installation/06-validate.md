@@ -36,12 +36,12 @@ warnings = []
 # Check 1: All directories exist
 print("\n📁 Checking directories...")
 required_dirs = [
-    ".agent-os/standards/universal",
-    ".agent-os/usage",
-    ".agent-os/workflows",
-    ".agent-os/mcp_server",
-    ".agent-os/.cache",
-    ".agent-os/venv",
+    ".praxis-os/standards/universal",
+    ".praxis-os/usage",
+    ".praxis-os/workflows",
+    ".praxis-os/mcp_server",
+    ".praxis-os/.cache",
+    ".praxis-os/venv",
     ".cursor",
 ]
 
@@ -55,10 +55,10 @@ for d in required_dirs:
 # Check 2: Critical files exist
 print("\n📄 Checking critical files...")
 critical_files = [
-    ".agent-os/workflows/spec_creation_v1/metadata.json",
-    ".agent-os/workflows/spec_execution_v1/metadata.json",
-    ".agent-os/mcp_server/__main__.py",
-    ".agent-os/mcp_server/requirements.txt",
+    ".praxis-os/workflows/spec_creation_v1/metadata.json",
+    ".praxis-os/workflows/spec_execution_v1/metadata.json",
+    ".praxis-os/mcp_server/__main__.py",
+    ".praxis-os/mcp_server/requirements.txt",
     ".cursorrules",
     ".cursor/mcp.json",
 ]
@@ -72,7 +72,7 @@ for f in critical_files:
 
 # Check 3: Workflows directory populated
 print("\n🔄 Checking workflows...")
-workflow_count = sum(len(files) for _, _, files in os.walk(".agent-os/workflows"))
+workflow_count = sum(len(files) for _, _, files in os.walk(".praxis-os/workflows"))
 if workflow_count >= 40:  # Should have ~47 files
     print(f"  ✅ Workflows populated ({workflow_count} files)")
 else:
@@ -82,9 +82,9 @@ else:
 # Check 4: Python venv working
 print("\n🐍 Checking Python venv...")
 if os.name == "nt":
-    python_path = ".agent-os/venv/Scripts/python.exe"
+    python_path = ".praxis-os/venv/Scripts/python.exe"
 else:
-    python_path = ".agent-os/venv/bin/python"
+    python_path = ".praxis-os/venv/bin/python"
 
 if os.path.exists(python_path):
     print(f"  ✅ Python venv exists")
@@ -127,9 +127,9 @@ except Exception as e:
 # Check 7: RAG index exists
 print("\n📚 Checking RAG index...")
 rag_checks = {
-    "Index directory": os.path.exists(".agent-os/.cache/vector_index"),
-    "LanceDB data": os.path.exists(".agent-os/.cache/vector_index/agent_os_standards.lance"),
-    "Metadata file": os.path.exists(".agent-os/.cache/vector_index/metadata.json"),
+    "Index directory": os.path.exists(".praxis-os/.cache/vector_index"),
+    "LanceDB data": os.path.exists(".praxis-os/.cache/vector_index/agent_os_standards.lance"),
+    "Metadata file": os.path.exists(".praxis-os/.cache/vector_index/metadata.json"),
 }
 
 all_rag_passed = all(rag_checks.values())
@@ -140,7 +140,7 @@ else:
     for check, passed in rag_checks.items():
         if not passed:
             print(f"     Missing: {check}")
-    errors.append("RAG index not built - run: .agent-os/venv/bin/python .agent-os/scripts/build_rag_index.py")
+    errors.append("RAG index not built - run: .praxis-os/venv/bin/python .praxis-os/scripts/build_rag_index.py")
 
 # Summary
 print("\n" + "="*60)
@@ -216,7 +216,7 @@ The installation is complete, but the MCP server won't start until Cursor is res
 
 Installation Summary:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ .agent-os/ directory structure created
+✅ .praxis-os/ directory structure created
 ✅ ~106 files copied from source repository
 ✅ .cursorrules configured (or merged with existing)
 ✅ Python virtual environment created
@@ -276,9 +276,9 @@ What's Installed:
    - Sub-agents (design validator, concurrency analyzer, etc.)
 
 📝 Documentation:
-   - .agent-os/usage/creating-specs.md
-   - .agent-os/usage/operating-model.md
-   - .agent-os/usage/mcp-usage-guide.md
+   - .praxis-os/usage/creating-specs.md
+   - .praxis-os/usage/operating-model.md
+   - .praxis-os/usage/mcp-usage-guide.md
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -288,10 +288,10 @@ Troubleshooting:
 If MCP server doesn't start:
 1. Check Cursor's MCP logs
 2. Verify .cursor/mcp.json exists and is valid
-3. Run validation: .agent-os/venv/bin/python -c "
+3. Run validation: .praxis-os/venv/bin/python -c "
    from pathlib import Path
    from mcp_server.config import ConfigLoader, ConfigValidator
-   config = ConfigLoader.load(Path('.agent-os'))
+   config = ConfigLoader.load(Path('.praxis-os'))
    errors = ConfigValidator.validate(config)
    print('✅ Valid' if not errors else f'❌ {errors}')
    "
@@ -322,10 +322,10 @@ Before you finish, double-check:
 
 ```python
 final_checks = {
-    "Directories created": os.path.exists(".agent-os/workflows"),
-    "Files copied": os.path.exists(".agent-os/workflows/spec_creation_v1/metadata.json"),
+    "Directories created": os.path.exists(".praxis-os/workflows"),
+    "Files copied": os.path.exists(".praxis-os/workflows/spec_creation_v1/metadata.json"),
     ".cursorrules handled": os.path.exists(".cursorrules"),
-    "Python venv created": os.path.exists(".agent-os/venv"),
+    "Python venv created": os.path.exists(".praxis-os/venv"),
     "mcp.json created": os.path.exists(".cursor/mcp.json"),
     "Temp directory deleted": not os.path.exists(AGENT_OS_SOURCE) if 'AGENT_OS_SOURCE' in globals() else True,
 }

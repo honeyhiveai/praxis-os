@@ -24,7 +24,7 @@ export default function StandardsGenerationFlow(): React.ReactElement {
         <div className={`${styles.file} ${styles.fileGenerated}`}>
           <div className={styles.fileHeader}>
             <span className={styles.fileIcon}>✨</span>
-            <span className={styles.fileName}>.agent-os/standards/development/python-concurrency.md</span>
+            <span className={styles.fileName}>.praxis-os/standards/development/python-concurrency.md</span>
           </div>
           <div className={styles.fileDescription}>
             (Python-specific: threading, asyncio, GIL, pytest)

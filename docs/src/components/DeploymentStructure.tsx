@@ -11,10 +11,10 @@ export default function DeploymentStructure(): React.ReactElement {
         </div>
         
         <div className={styles.children}>
-          {/* .agent-os directory */}
+          {/* .praxis-os directory */}
           <div className={styles.mainDir}>
             <span className={styles.dirIcon}>📂</span>
-            <span className={styles.dirName}>.agent-os/</span>
+            <span className={styles.dirName}>.praxis-os/</span>
           </div>
           <div className={styles.subChildren}>
             <div className={styles.item}>

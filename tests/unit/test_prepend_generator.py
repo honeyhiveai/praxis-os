@@ -159,12 +159,16 @@ class TestGenerateQueryPrepend:
             for j in range(num_queries):
                 tracker.record_query(session_id, queries[j])
 
-            prepend = generate_query_prepend(tracker, session_id, queries[num_queries - 1])
+            prepend = generate_query_prepend(
+                tracker, session_id, queries[num_queries - 1]
+            )
             token_count = len(enc.encode(prepend))
             token_counts.append(token_count)
 
         avg_tokens = sum(token_counts) / len(token_counts)
-        assert 75 <= avg_tokens <= 95, f"Average token count {avg_tokens:.1f} not within 75-95 range"
+        assert (
+            75 <= avg_tokens <= 95
+        ), f"Average token count {avg_tokens:.1f} not within 75-95 range"
 
     def test_prepend_performance(self) -> None:
         """Test generate_query_prepend meets ≤10ms performance target."""
@@ -187,7 +191,9 @@ class TestGenerateQueryPrepend:
             timings.append((end - start) * 1000)  # Convert to ms
 
         avg_time_ms = sum(timings) / len(timings)
-        assert avg_time_ms <= 10.0, f"Average prepend generation time {avg_time_ms:.2f}ms exceeds 10ms target"
+        assert (
+            avg_time_ms <= 10.0
+        ), f"Average prepend generation time {avg_time_ms:.2f}ms exceeds 10ms target"
 
 
 class TestGenerateAngleIndicators:
@@ -343,4 +349,3 @@ def test_module_exports() -> None:
     from mcp_server.core import prepend_generator
 
     assert hasattr(prepend_generator, "generate_query_prepend")
-

@@ -307,4 +307,3 @@ __all__ = [
     "QueryTracker",
     "get_tracker",
 ]
-

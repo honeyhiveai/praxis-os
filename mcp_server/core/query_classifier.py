@@ -185,7 +185,9 @@ def get_angle_emoji(angle: QueryAngle) -> str:
         - FR-005: Angle emoji representations
     """
     if angle not in _ANGLE_EMOJIS:
-        raise KeyError(f"Invalid angle: {angle}. Must be one of {list(_ANGLE_EMOJIS.keys())}")
+        raise KeyError(
+            f"Invalid angle: {angle}. Must be one of {list(_ANGLE_EMOJIS.keys())}"
+        )
 
     return _ANGLE_EMOJIS[angle]
 
@@ -219,7 +221,9 @@ def get_angle_suggestion(angle: QueryAngle, topic: str = "[concept]") -> str:
         - FR-008: Angle-specific suggestion generation
     """
     if angle not in _ANGLE_SUGGESTIONS:
-        raise KeyError(f"Invalid angle: {angle}. Must be one of {list(_ANGLE_SUGGESTIONS.keys())}")
+        raise KeyError(
+            f"Invalid angle: {angle}. Must be one of {list(_ANGLE_SUGGESTIONS.keys())}"
+        )
 
     template = _ANGLE_SUGGESTIONS[angle]
     return template.format(topic=topic)
@@ -231,4 +235,3 @@ __all__ = [
     "get_angle_emoji",
     "get_angle_suggestion",
 ]
-

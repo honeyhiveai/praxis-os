@@ -70,7 +70,7 @@ Many projects have existing `.cursorrules` files. Step 03 checks for this and of
 
 ### 3. Create ALL Directories
 
-The most common mistake: forgetting `.agent-os/workflows/` directory. The MCP server's `ConfigValidator` requires it.
+The most common mistake: forgetting `.praxis-os/workflows/` directory. The MCP server's `ConfigValidator` requires it.
 
 ### 4. Use Correct Module Name
 
@@ -131,7 +131,7 @@ agent-os-enhanced/
 **Target Project** (consumer):
 ```
 target-project/
-├── .agent-os/             ← Created during installation
+├── .praxis-os/             ← Created during installation
 │   ├── standards/
 │   ├── usage/
 │   ├── workflows/
@@ -151,9 +151,9 @@ After installation, these should all be true:
 
 ```python
 checks = {
-    ".agent-os/workflows/": exists and has ~47 files,
-    ".agent-os/venv/": exists with working Python,
-    ".agent-os/.cache/vector_index/": exists with RAG index,
+    ".praxis-os/workflows/": exists and has ~47 files,
+    ".praxis-os/venv/": exists with working Python,
+    ".praxis-os/.cache/vector_index/": exists with RAG index,
     ".cursorrules": exists with Agent OS rules,
     ".cursor/mcp.json": exists with "mcp_server" module,
     "Temp directory": deleted (cleaned up),
@@ -166,7 +166,7 @@ checks = {
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
-| Missing workflows/ | Forgot step 01 | Create `.agent-os/workflows/` |
+| Missing workflows/ | Forgot step 01 | Create `.praxis-os/workflows/` |
 | Wrong module name | Used `mcp_server.agent_os_rag` | Change to `mcp_server` in mcp.json |
 | Empty workflows/ | Forgot step 02 | Copy files from `universal/workflows/` |
 | Git repo left behind | Forgot step 05 | Delete temp directory manually |

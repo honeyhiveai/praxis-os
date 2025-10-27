@@ -143,7 +143,9 @@ class TestClassifyQueryAngle:
             timings.append((end - start) * 1000)  # Convert to ms
 
         avg_time_ms = sum(timings) / len(timings)
-        assert avg_time_ms <= 5.0, f"Average classification time {avg_time_ms:.2f}ms exceeds 5ms target"
+        assert (
+            avg_time_ms <= 5.0
+        ), f"Average classification time {avg_time_ms:.2f}ms exceeds 5ms target"
 
 
 class TestGetAngleEmoji:
@@ -273,7 +275,9 @@ class TestAccuracyRequirement:
                 correct += 1
 
         accuracy = (correct / total) * 100
-        assert accuracy >= 90.0, f"Accuracy {accuracy:.1f}% below 90% target (correct: {correct}/{total})"
+        assert (
+            accuracy >= 90.0
+        ), f"Accuracy {accuracy:.1f}% below 90% target (correct: {correct}/{total})"
 
 
 # Integration test placeholder
@@ -285,4 +289,3 @@ def test_module_exports() -> None:
     assert hasattr(query_classifier, "classify_query_angle")
     assert hasattr(query_classifier, "get_angle_emoji")
     assert hasattr(query_classifier, "get_angle_suggestion")
-

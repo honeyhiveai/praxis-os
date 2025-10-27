@@ -26,11 +26,11 @@
 import subprocess
 import sys
 
-# Create venv in .agent-os/venv
+# Create venv in .praxis-os/venv
 print("📦 Creating Python virtual environment...")
 
 result = subprocess.run([
-    sys.executable, "-m", "venv", ".agent-os/venv"
+    sys.executable, "-m", "venv", ".praxis-os/venv"
 ], capture_output=True, text=True)
 
 if result.returncode != 0:
@@ -38,7 +38,7 @@ if result.returncode != 0:
     print(result.stderr)
     exit(1)
 
-print("✅ Virtual environment created at .agent-os/venv/")
+print("✅ Virtual environment created at .praxis-os/venv/")
 ```
 
 ---
@@ -51,15 +51,15 @@ import os
 
 # Determine pip path based on platform
 if os.name == "nt":  # Windows
-    pip_path = ".agent-os/venv/Scripts/pip"
+    pip_path = ".praxis-os/venv/Scripts/pip"
 else:  # Unix-like (Linux, macOS, WSL2)
-    pip_path = ".agent-os/venv/bin/pip"
+    pip_path = ".praxis-os/venv/bin/pip"
 
 print(f"📥 Installing MCP server dependencies...")
 
 result = subprocess.run([
     pip_path, "install", 
-    "-r", ".agent-os/mcp_server/requirements.txt"
+    "-r", ".praxis-os/mcp_server/requirements.txt"
 ], capture_output=True, text=True)
 
 if result.returncode != 0:
@@ -83,9 +83,9 @@ import os
 
 # Determine python path
 if os.name == "nt":
-    python_path = ".agent-os/venv/Scripts/python.exe"
+    python_path = ".praxis-os/venv/Scripts/python.exe"
 else:
-    python_path = ".agent-os/venv/bin/python"
+    python_path = ".praxis-os/venv/bin/python"
 
 # Test Python
 result = subprocess.run([
@@ -102,7 +102,7 @@ else:
 result = subprocess.run([
     python_path, "-c", "import mcp_server"
 ], capture_output=True, text=True, 
-   env={**os.environ, "PYTHONPATH": ".agent-os"}
+   env={**os.environ, "PYTHONPATH": ".praxis-os"}
 )
 
 if result.returncode == 0:
@@ -126,10 +126,10 @@ import os
 # Determine correct Python path for mcp.json
 if os.name == "nt":
     # Windows native
-    python_cmd = "${workspaceFolder}/.agent-os/venv/Scripts/python.exe"
+    python_cmd = "${workspaceFolder}/.praxis-os/venv/Scripts/python.exe"
 else:
     # Linux, macOS, WSL2
-    python_cmd = "${workspaceFolder}/.agent-os/venv/bin/python"
+    python_cmd = "${workspaceFolder}/.praxis-os/venv/bin/python"
 
 mcp_config = {
     "mcpServers": {
@@ -145,7 +145,7 @@ mcp_config = {
             ],
             "env": {
                 "PROJECT_ROOT": "${workspaceFolder}",
-                "PYTHONPATH": "${workspaceFolder}/.agent-os",
+                "PYTHONPATH": "${workspaceFolder}/.praxis-os",
                 "PYTHONUNBUFFERED": "1"
             },
             "autoApprove": [
@@ -188,7 +188,7 @@ The `--transport dual` argument enables both:
 
 **State File:**
 
-With dual-transport, a state file is created at `.agent-os/.mcp_server_state.json` containing:
+With dual-transport, a state file is created at `.praxis-os/.mcp_server_state.json` containing:
 - Transport mode
 - Allocated port
 - HTTP URL
@@ -243,11 +243,11 @@ cat .cursor/mcp.json
 {
   "mcpServers": {
     "agent-os-rag": {
-      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.agent-os",
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [
@@ -275,9 +275,9 @@ import time
 
 # Determine python path
 if os.name == "nt":
-    python_path = ".agent-os/venv/Scripts/python.exe"
+    python_path = ".praxis-os/venv/Scripts/python.exe"
 else:
-    python_path = ".agent-os/venv/bin/python"
+    python_path = ".praxis-os/venv/bin/python"
 
 print("🧪 Testing MCP server startup...")
 
@@ -285,11 +285,11 @@ print("🧪 Testing MCP server startup...")
 test_script = """
 import sys
 from pathlib import Path
-sys.path.insert(0, '.agent-os')
+sys.path.insert(0, '.praxis-os')
 
 from mcp_server.config import ConfigLoader, ConfigValidator
 
-config = ConfigLoader.load(Path('.agent-os'))
+config = ConfigLoader.load(Path('.praxis-os'))
 errors = ConfigValidator.validate(config)
 
 if errors:
@@ -339,7 +339,7 @@ sudo apt-get install python3-venv
 **Fix**:
 ```bash
 # Check permissions
-ls -ld .agent-os
+ls -ld .praxis-os
 # Should show write permission (w)
 ```
 
@@ -350,7 +350,7 @@ ls -ld .agent-os
 **Fix**:
 ```bash
 # Retry with verbose output
-.agent-os/venv/bin/pip install -r .agent-os/mcp_server/requirements.txt -v
+.praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt -v
 ```
 
 ### Issue: Config validation fails with "workflows_path does not exist"
@@ -358,7 +358,7 @@ ls -ld .agent-os
 **Cause**: You skipped step 01 or 02
 
 **Fix**: Go back and ensure:
-1. `.agent-os/workflows/` directory exists (step 01)
+1. `.praxis-os/workflows/` directory exists (step 01)
 2. Workflow files were copied (step 02)
 
 ---
@@ -371,23 +371,23 @@ The RAG (Retrieval Augmented Generation) index enables semantic search over Agen
 
 **Linux/macOS/WSL2:**
 ```bash
-.agent-os/venv/bin/python .agent-os/scripts/build_rag_index.py \
-  --index-path .agent-os/.cache/vector_index \
-  --standards-path .agent-os/standards \
-  --usage-path .agent-os/usage \
-  --workflows-path .agent-os/workflows
+.praxis-os/venv/bin/python .praxis-os/scripts/build_rag_index.py \
+  --index-path .praxis-os/.cache/vector_index \
+  --standards-path .praxis-os/standards \
+  --usage-path .praxis-os/usage \
+  --workflows-path .praxis-os/workflows
 ```
 
 **Windows:**
 ```bash
-.agent-os\venv\Scripts\python.exe .agent-os\scripts\build_rag_index.py --index-path .agent-os\.cache\vector_index --standards-path .agent-os\standards --usage-path .agent-os\usage --workflows-path .agent-os\workflows
+.praxis-os\venv\Scripts\python.exe .praxis-os\scripts\build_rag_index.py --index-path .praxis-os\.cache\vector_index --standards-path .praxis-os\standards --usage-path .praxis-os\usage --workflows-path .praxis-os\workflows
 ```
 
 **Expected output:**
 ```
-INFO - Initializing LanceDB at .agent-os/.cache/vector_index
-INFO - Including usage docs from: .agent-os/usage
-INFO - Including workflow metadata from: .agent-os/workflows
+INFO - Initializing LanceDB at .praxis-os/.cache/vector_index
+INFO - Including usage docs from: .praxis-os/usage
+INFO - Including workflow metadata from: .praxis-os/workflows
 INFO - Processing 98 markdown files
 INFO - Generated 1247 chunks from 98 files
 INFO - Generating embeddings for all chunks...
@@ -397,11 +397,11 @@ INFO - Creating new table with 1247 records...
 ```
 
 **What this does:**
-- Auto-detects installed location (`.agent-os/`)
+- Auto-detects installed location (`.praxis-os/`)
 - Scans all markdown files in `standards/`, `usage/`, and `workflows/` directories
 - Chunks content using semantic-aware chunking (preserves section headers and metadata)
 - Generates embeddings using local model (sentence-transformers, FREE & OFFLINE)
-- Stores vectors in LanceDB at `.agent-os/.cache/vector_index/`
+- Stores vectors in LanceDB at `.praxis-os/.cache/vector_index/`
 
 **Indexed content:**
 - ✅ Standards (~46 files) - Universal CS fundamentals
@@ -421,12 +421,12 @@ Verify RAG index was created:
 
 **Linux/macOS/WSL2:**
 ```bash
-ls -la .agent-os/.cache/vector_index/
+ls -la .praxis-os/.cache/vector_index/
 ```
 
 **Windows:**
 ```bash
-dir .agent-os\.cache\vector_index\
+dir .praxis-os\.cache\vector_index\
 ```
 
 **You should see:**
@@ -436,10 +436,10 @@ dir .agent-os\.cache\vector_index\
 **Quick test:**
 ```bash
 # Linux/macOS/WSL2
-test -f .agent-os/.cache/vector_index/metadata.json && echo "✅ RAG index built" || echo "❌ RAG index missing"
+test -f .praxis-os/.cache/vector_index/metadata.json && echo "✅ RAG index built" || echo "❌ RAG index missing"
 
 # Windows
-if exist .agent-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) else (echo ❌ RAG index missing)
+if exist .praxis-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) else (echo ❌ RAG index missing)
 ```
 
 ---
@@ -452,7 +452,7 @@ if exist .agent-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) 
 
 **Fix**:
 ```bash
-.agent-os/venv/bin/pip install -r .agent-os/mcp_server/requirements.txt
+.praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt
 ```
 
 ### Issue: Build takes too long (>5 minutes)
@@ -461,7 +461,7 @@ if exist .agent-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) 
 
 **Expected**: Downloads once, then cached forever. Subsequent builds take ~30 seconds.
 
-### Issue: "Path does not exist: .agent-os/standards"
+### Issue: "Path does not exist: .praxis-os/standards"
 
 **Cause**: You skipped step 02 (copying files)
 
@@ -472,11 +472,11 @@ if exist .agent-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) 
 ## 📊 Progress Check
 
 At this point you should have:
-- ✅ Python venv at `.agent-os/venv/`
+- ✅ Python venv at `.praxis-os/venv/`
 - ✅ MCP server dependencies installed
 - ✅ `.cursor/mcp.json` created with correct config
 - ✅ Module name is `"mcp_server"` (not `"mcp_server.agent_os_rag"`)
-- ✅ **RAG index built at `.agent-os/.cache/vector_index/`** (NEW!)
+- ✅ **RAG index built at `.praxis-os/.cache/vector_index/`** (NEW!)
 - ✅ Config validation passes
 - ✅ All validation checkpoints passed
 

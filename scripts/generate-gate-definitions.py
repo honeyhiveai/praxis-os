@@ -244,7 +244,7 @@ class MigrationRunner:
     
     def __init__(
         self,
-        workflows_dir: str = ".agent-os/workflows",
+        workflows_dir: str = ".praxis-os/workflows",
         dry_run: bool = False,
         strict: bool = False
     ):
@@ -499,8 +499,8 @@ def main():
     parser.add_argument(
         "--workflows-dir",
         type=str,
-        default=".agent-os/workflows",
-        help="Path to workflows directory (default: .agent-os/workflows)"
+        default=".praxis-os/workflows",
+        help="Path to workflows directory (default: .praxis-os/workflows)"
     )
     
     parser.add_argument(

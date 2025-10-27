@@ -18,10 +18,10 @@ export default function InstallationStructure(): React.ReactElement {
             <span className={styles.itemDesc}># AI behavioral triggers (27 lines)</span>
           </div>
 
-          {/* .agent-os directory */}
+          {/* .praxis-os directory */}
           <div className={styles.mainDir}>
             <span className={styles.dirIcon}>📂</span>
-            <span className={styles.dirName}>.agent-os/</span>
+            <span className={styles.dirName}>.praxis-os/</span>
           </div>
           <div className={styles.subChildren}>
             <div className={styles.subDir}>

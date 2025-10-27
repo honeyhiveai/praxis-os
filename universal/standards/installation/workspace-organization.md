@@ -2,9 +2,9 @@
 
 ## 🚨 TL;DR - Workspace Organization Quick Reference
 
-**Keywords for search**: workspace directory, temporary files, ephemeral content, where to put design docs, Phase 1 artifacts, uncommitted work, working documents, design-doc.md, draft documents, WIP files, temporary analysis, scratch notes, workspace/, .agent-os/workspace, where do temporary files go, ephemeral file organization, git pollution prevention
+**Keywords for search**: workspace directory, temporary files, ephemeral content, where to put design docs, Phase 1 artifacts, uncommitted work, working documents, design-doc.md, draft documents, WIP files, temporary analysis, scratch notes, workspace/, .praxis-os/workspace, where do temporary files go, ephemeral file organization, git pollution prevention
 
-**Core Principle:** If a document is not ready to commit, it belongs in `.agent-os/workspace/`. Workspace provides a designated location for all temporary development artifacts, preventing git pollution and maintaining clear separation between ephemeral and permanent content.
+**Core Principle:** If a document is not ready to commit, it belongs in `.praxis-os/workspace/`. Workspace provides a designated location for all temporary development artifacts, preventing git pollution and maintaining clear separation between ephemeral and permanent content.
 
 **The Workspace Pattern (3 Subdirectories):**
 1. **design/** - Phase 1 conversational design explorations (before formal spec)
@@ -20,7 +20,7 @@
 - [ ] Workspace/ is .gitignored (never committed)
 
 **Common Anti-Patterns:**
-- ❌ Creating design docs in `.agent-os/specs/` root
+- ❌ Creating design docs in `.praxis-os/specs/` root
 - ❌ Committing workspace content to git
 - ❌ Skipping Phase 1 workspace and going directly to formal spec
 - ❌ Leaving workspace files after formal spec created
@@ -35,7 +35,7 @@
 
 ## 🎯 Purpose
 
-Define rules for managing temporary development artifacts in `.agent-os/workspace/` to prevent git pollution and maintain clean separation between ephemeral and permanent content. This standard ensures AI agents and developers have a clear, consistent location for work-in-progress documents that are not yet ready to commit.
+Define rules for managing temporary development artifacts in `.praxis-os/workspace/` to prevent git pollution and maintain clean separation between ephemeral and permanent content. This standard ensures AI agents and developers have a clear, consistent location for work-in-progress documents that are not yet ready to commit.
 
 ---
 
@@ -43,14 +43,14 @@ Define rules for managing temporary development artifacts in `.agent-os/workspac
 
 **Without workspace organization:**
 
-1. **Git pollution** - Temporary files scattered throughout `.agent-os/specs/`, creating confusion about what is permanent vs ephemeral
+1. **Git pollution** - Temporary files scattered throughout `.praxis-os/specs/`, creating confusion about what is permanent vs ephemeral
 2. **Accidental commits** - Committing 35+ design docs that should have been temporary (actual problem that motivated this standard)
 3. **No clear lifecycle** - Uncertainty about when/where to create temporary documents
 4. **Mixed artifacts** - Formal specifications mixed with draft explorations
 5. **Poor discoverability** - AI agents don't know where to put temporary work
 6. **Cleanup confusion** - Unclear what can be deleted vs what must be kept
 
-**Real example:** `.agent-os/specs/` accumulated 35+ temporary analysis files like `amplifier-agents-detailed-2025-10-20.md`, `cache-analysis-2025-10-13.md` at root level, mixing with formal spec directories.
+**Real example:** `.praxis-os/specs/` accumulated 35+ temporary analysis files like `amplifier-agents-detailed-2025-10-20.md`, `cache-analysis-2025-10-13.md` at root level, mixing with formal spec directories.
 
 ---
 
@@ -62,28 +62,28 @@ Define rules for managing temporary development artifacts in `.agent-os/workspac
 
 ```
 ┌─ Is this a formal specification with structured directory?
-│  └─ YES → .agent-os/specs/YYYY-MM-DD-name/
+│  └─ YES → .praxis-os/specs/YYYY-MM-DD-name/
 │  
 ├─ Is this a standards document for RAG indexing?
-│  └─ YES → .agent-os/standards/
+│  └─ YES → .praxis-os/standards/
 │
 ├─ Is this a completed workflow definition?
-│  └─ YES → .agent-os/workflows/
+│  └─ YES → .praxis-os/workflows/
 │
 ├─ Is this Phase 1 conversational design exploration?
-│  └─ YES → .agent-os/workspace/design/
+│  └─ YES → .praxis-os/workspace/design/
 │
 ├─ Is this temporary analysis, research, or investigation?
-│  └─ YES → .agent-os/workspace/analysis/
+│  └─ YES → .praxis-os/workspace/analysis/
 │
 └─ Is this scratch notes, experiments, or WIP?
-   └─ YES → .agent-os/workspace/scratch/
+   └─ YES → .praxis-os/workspace/scratch/
 ```
 
 ### Workspace Directory Structure
 
 ```
-.agent-os/workspace/
+.praxis-os/workspace/
 ├── README.md              # User-friendly lifecycle guide
 ├── design/                # Phase 1 conversational design
 │   └── YYYY-MM-DD-*.md   # Design explorations
@@ -116,18 +116,18 @@ Define rules for managing temporary development artifacts in `.agent-os/workspac
 
 🚫 **FRAMEWORK-VIOLATION: Creating ephemeral files outside workspace/**
 
-Creating temporary design docs, analysis, or WIP files anywhere except `.agent-os/workspace/` defeats the purpose of separation and risks git pollution.
+Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-os/workspace/` defeats the purpose of separation and risks git pollution.
 
 **Correct:**
 ```bash
-.agent-os/workspace/design/2025-10-21-auth-system.md
-.agent-os/workspace/analysis/2025-10-21-cache-comparison.md
+.praxis-os/workspace/design/2025-10-21-auth-system.md
+.praxis-os/workspace/analysis/2025-10-21-cache-comparison.md
 ```
 
 **Wrong:**
 ```bash
-.agent-os/specs/auth-system-draft.md  # ❌ Not in workspace
-.agent-os/design-notes.md             # ❌ Wrong location
+.praxis-os/specs/auth-system-draft.md  # ❌ Not in workspace
+.praxis-os/design-notes.md             # ❌ Wrong location
 ./working-doc.md                      # ❌ Root pollution
 ```
 
@@ -146,7 +146,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.agent-o
    └─ Phase 1 complete
 
 3. FORMALIZATION (Phase 2)
-   └─ Create: .agent-os/specs/2025-10-21-feature/
+   └─ Create: .praxis-os/specs/2025-10-21-feature/
    └─ Extract insights from workspace doc
    └─ Create structured spec files (srd.md, specs.md, etc.)
 
@@ -228,16 +228,16 @@ search_standards("where to put design documents")
 search_standards("Phase 1 conversational design")
 
 # Step 2: Create workspace design doc
-.agent-os/workspace/design/2025-10-21-authentication-system.md
+.praxis-os/workspace/design/2025-10-21-authentication-system.md
 
 # Step 3: Iterate with user in Phase 1
 # Document evolves through conversation
 
 # Step 4: User says "create the spec"
-# Now formalize into .agent-os/specs/2025-10-21-authentication-system/
+# Now formalize into .praxis-os/specs/2025-10-21-authentication-system/
 
 # Step 5: Delete workspace doc
-rm .agent-os/workspace/design/2025-10-21-authentication-system.md
+rm .praxis-os/workspace/design/2025-10-21-authentication-system.md
 ```
 
 ### Example 2: Research Analysis
@@ -247,7 +247,7 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 **Correct Approach:**
 ```bash
 # Create analysis document
-.agent-os/workspace/analysis/2025-10-21-cache-strategy-comparison.md
+.praxis-os/workspace/analysis/2025-10-21-cache-strategy-comparison.md
 
 # Content:
 ## Redis vs In-Memory Caching
@@ -272,7 +272,7 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 **Correct Approach:**
 ```bash
 # Create scratch document
-.agent-os/workspace/scratch/2025-10-21-api-rate-limit-test.md
+.praxis-os/workspace/scratch/2025-10-21-api-rate-limit-test.md
 
 # After experiment complete and findings documented elsewhere:
 # Delete scratch file
@@ -282,16 +282,16 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 
 **Correct:**
 ```bash
-.agent-os/workspace/design/2025-10-21-oauth-integration.md
-.agent-os/workspace/analysis/2025-10-21-database-performance.md
-.agent-os/workspace/scratch/2025-10-21-quick-test.md
+.praxis-os/workspace/design/2025-10-21-oauth-integration.md
+.praxis-os/workspace/analysis/2025-10-21-database-performance.md
+.praxis-os/workspace/scratch/2025-10-21-quick-test.md
 ```
 
 **Wrong:**
 ```bash
-.agent-os/workspace/design/oauth.md              # ❌ No date
-.agent-os/workspace/oauth-design.md             # ❌ Wrong subdirectory
-.agent-os/workspace/design/DRAFT-oauth.md       # ❌ Date should be prefix
+.praxis-os/workspace/design/oauth.md              # ❌ No date
+.praxis-os/workspace/oauth-design.md             # ❌ Wrong subdirectory
+.praxis-os/workspace/design/DRAFT-oauth.md       # ❌ Date should be prefix
 ```
 
 ---
@@ -300,7 +300,7 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 
 ### Anti-Pattern 1: Creating Design Docs in specs/ Root
 
-**Symptom:** Creating temporary documents directly in `.agent-os/specs/`
+**Symptom:** Creating temporary documents directly in `.praxis-os/specs/`
 
 **Problem:**
 - Mixes ephemeral with permanent content
@@ -309,22 +309,22 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 
 **Example of Wrong Approach:**
 ```bash
-❌ .agent-os/specs/feature-draft.md
-❌ .agent-os/specs/2025-10-21-feature-design.md
-❌ .agent-os/specs/auth-exploration.md
+❌ .praxis-os/specs/feature-draft.md
+❌ .praxis-os/specs/2025-10-21-feature-design.md
+❌ .praxis-os/specs/auth-exploration.md
 ```
 
 **Correct Approach:**
 ```bash
-✅ .agent-os/workspace/design/2025-10-21-feature.md
-✅ (after "create spec") .agent-os/specs/2025-10-21-feature/
+✅ .praxis-os/workspace/design/2025-10-21-feature.md
+✅ (after "create spec") .praxis-os/specs/2025-10-21-feature/
 ```
 
 ---
 
 ### Anti-Pattern 2: Committing Workspace Content
 
-**Symptom:** Attempting to `git add .agent-os/workspace/`
+**Symptom:** Attempting to `git add .praxis-os/workspace/`
 
 **Problem:**
 - Defeats purpose of ephemeral workspace
@@ -333,7 +333,7 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 
 **Example of Wrong Approach:**
 ```bash
-❌ git add .agent-os/workspace/
+❌ git add .praxis-os/workspace/
 ❌ git commit -m "Added design docs"
 # This should fail due to .gitignore
 ```
@@ -341,8 +341,8 @@ rm .agent-os/workspace/design/2025-10-21-authentication-system.md
 **Correct Approach:**
 ```bash
 ✅ # Workspace is .gitignored automatically
-✅ # Only commit formal specs in .agent-os/specs/
-git add .agent-os/specs/2025-10-21-feature/
+✅ # Only commit formal specs in .praxis-os/specs/
+git add .praxis-os/specs/2025-10-21-feature/
 git commit -m "Add authentication system spec"
 ```
 
@@ -360,7 +360,7 @@ git commit -m "Add authentication system spec"
 **Example of Wrong Approach:**
 ```bash
 ❌ User: "Build feature X"
-❌ Agent: *immediately creates .agent-os/specs/2025-10-21-X/*
+❌ Agent: *immediately creates .praxis-os/specs/2025-10-21-X/*
 ```
 
 **Correct Approach:**
@@ -386,14 +386,14 @@ git commit -m "Add authentication system spec"
 **Example of Wrong Approach:**
 ```bash
 ❌ # Both exist simultaneously:
-.agent-os/workspace/design/2025-10-21-feature.md
-.agent-os/specs/2025-10-21-feature/
+.praxis-os/workspace/design/2025-10-21-feature.md
+.praxis-os/specs/2025-10-21-feature/
 ```
 
 **Correct Approach:**
 ```bash
 ✅ # Only formal spec exists after formalization:
-.agent-os/specs/2025-10-21-feature/
+.praxis-os/specs/2025-10-21-feature/
 # Workspace file deleted or archived in supporting-docs/
 ```
 
@@ -410,16 +410,16 @@ git commit -m "Add authentication system spec"
 
 **Example of Wrong Approach:**
 ```bash
-❌ .agent-os/workspace/scratch/2025-10-21-auth-design.md  # Should be design/
-❌ .agent-os/workspace/design/quick-experiment.md        # Should be scratch/
-❌ .agent-os/workspace/analysis/session-notes.md         # Should be scratch/
+❌ .praxis-os/workspace/scratch/2025-10-21-auth-design.md  # Should be design/
+❌ .praxis-os/workspace/design/quick-experiment.md        # Should be scratch/
+❌ .praxis-os/workspace/analysis/session-notes.md         # Should be scratch/
 ```
 
 **Correct Approach:**
 ```bash
-✅ .agent-os/workspace/design/2025-10-21-auth-design.md   # Phase 1 design
-✅ .agent-os/workspace/scratch/quick-experiment.md        # Temporary test
-✅ .agent-os/workspace/analysis/2025-10-21-perf-study.md  # Research doc
+✅ .praxis-os/workspace/design/2025-10-21-auth-design.md   # Phase 1 design
+✅ .praxis-os/workspace/scratch/quick-experiment.md        # Temporary test
+✅ .praxis-os/workspace/analysis/2025-10-21-perf-study.md  # Research doc
 ```
 
 ---
@@ -447,7 +447,7 @@ git commit -m "Add authentication system spec"
 - ✅ Wait for "create spec" trigger (NOT auto-advancing)
 
 **Phase 2: Structured Spec**
-- ✅ Create `.agent-os/specs/YYYY-MM-DD-feature/`
+- ✅ Create `.praxis-os/specs/YYYY-MM-DD-feature/`
 - ✅ Extract insights from `workspace/design/` file
 - ✅ Delete `workspace/design/` file (or archive in supporting-docs/)
 
@@ -474,12 +474,12 @@ search_standards("workspace organization")
 
 2. **Check if formal spec exists:**
 ```bash
-ls .agent-os/specs/ | grep feature-name
+ls .praxis-os/specs/ | grep feature-name
 ```
 
 3. **Create Phase 1 design doc:**
 ```bash
-.agent-os/workspace/design/YYYY-MM-DD-feature-name.md
+.praxis-os/workspace/design/YYYY-MM-DD-feature-name.md
 ```
 
 ### During Conversational Design (Phase 1)
@@ -514,15 +514,15 @@ ls .agent-os/specs/ | grep feature-name
 
 **Pre-commit Check:**
 ```bash
-git status --porcelain | grep ".agent-os/workspace/"
+git status --porcelain | grep ".praxis-os/workspace/"
 # Should return nothing (workspace is .gitignored)
 ```
 
 **Audit Command:**
 ```bash
 # Check for orphaned workspace files
-ls .agent-os/workspace/design/
-ls .agent-os/specs/
+ls .praxis-os/workspace/design/
+ls .praxis-os/specs/
 
 # If design file date matches spec dir date → delete design file
 ```
@@ -530,11 +530,11 @@ ls .agent-os/specs/
 **Workspace Health Check:**
 ```bash
 # Should have clear subdirectories
-ls .agent-os/workspace/
+ls .praxis-os/workspace/
 # Expected: README.md design/ analysis/ scratch/
 
 # Should NOT be in git
-git ls-files .agent-os/workspace/
+git ls-files .praxis-os/workspace/
 # Expected: empty (nothing tracked)
 ```
 

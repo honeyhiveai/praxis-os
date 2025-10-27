@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "agent-os-enhanced": {
-      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "mcp_server",
@@ -12,7 +12,7 @@
       ],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.agent-os",
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [

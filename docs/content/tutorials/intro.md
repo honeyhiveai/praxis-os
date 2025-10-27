@@ -38,7 +38,7 @@ The Cursor agent will:
 ```
 your-project/
 ├── .cursorrules              # AI behavioral triggers (27 lines)
-├── .agent-os/
+├── .praxis-os/
 │   ├── standards/
 │   │   ├── universal/        # Timeless CS fundamentals
 │   │   └── development/      # Language-specific guidance

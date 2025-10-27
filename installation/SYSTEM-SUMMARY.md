@@ -113,12 +113,12 @@ Installation is successful when:
 ```python
 checks = {
     # Directories
-    ".agent-os/standards/universal/": exists,
-    ".agent-os/usage/": exists,
-    ".agent-os/workflows/": exists and has ~47 files,
-    ".agent-os/mcp_server/": exists and has ~23 files,
-    ".agent-os/venv/": exists with working Python,
-    ".agent-os/.cache/": exists,
+    ".praxis-os/standards/universal/": exists,
+    ".praxis-os/usage/": exists,
+    ".praxis-os/workflows/": exists and has ~47 files,
+    ".praxis-os/mcp_server/": exists and has ~23 files,
+    ".praxis-os/venv/": exists with working Python,
+    ".praxis-os/.cache/": exists,
     ".cursor/": exists,
     
     # Files

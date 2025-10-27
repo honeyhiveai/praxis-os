@@ -20,9 +20,9 @@ This page explains how **specs** create knowledge compounding in prAxIs OS throu
 
 **Specs** (specifications) are comprehensive design documents that capture requirements, architecture decisions, trade-offs, and implementation plans for features.
 
-**Location:** `.agent-os/specs/YYYY-MM-DD-feature-name/`
+**Location:** `.praxis-os/specs/YYYY-MM-DD-feature-name/`
 
-**Access:** `read_file(".agent-os/specs/...")` when needed
+**Access:** `read_file(".praxis-os/specs/...")` when needed
 
 **Purpose:** Preserve the "why" and "how" of decision-making for future reference
 
@@ -33,7 +33,7 @@ This page explains how **specs** create knowledge compounding in prAxIs OS throu
 Each spec directory contains:
 
 ```
-.agent-os/specs/2025-10-15-authentication-system/
+.praxis-os/specs/2025-10-15-authentication-system/
 ├── README.md           # Executive summary
 ├── srd.md             # System Requirements Document
 ├── specs.md           # Technical specifications
@@ -81,13 +81,13 @@ search_standards("authentication")
 
 ```python
 # You know what you're looking for:
-read_file(".agent-os/specs/2025-01-15-authentication-system/specs.md")
+read_file(".praxis-os/specs/2025-01-15-authentication-system/specs.md")
 
 # OR browse directory:
-list_dir(".agent-os/specs/")
+list_dir(".praxis-os/specs/")
 
 # OR search with git:
-git grep "authentication" .agent-os/specs/
+git grep "authentication" .praxis-os/specs/
 ```
 
 **This is intentional**—you access specs deliberately, not through discovery.
@@ -126,7 +126,7 @@ git grep "authentication" .agent-os/specs/
 **With specs:**
 ```bash
 # Read the spec
-read_file(".agent-os/specs/2025-01-15-authentication-system/specs.md")
+read_file(".praxis-os/specs/2025-01-15-authentication-system/specs.md")
 ```
 
 **Finds in spec:**
@@ -252,7 +252,7 @@ Result: Consistent with existing architecture
 
 ### Example: Authentication
 
-**Spec** (`.agent-os/specs/2025-01-15-authentication-system/`):
+**Spec** (`.praxis-os/specs/2025-01-15-authentication-system/`):
 ```markdown
 # Authentication System Spec
 
@@ -272,7 +272,7 @@ JWT with refresh token flow because:
 [Detailed design of the specific system]
 ```
 
-**Standard** (`.agent-os/standards/development/jwt-authentication.md`):
+**Standard** (`.praxis-os/standards/development/jwt-authentication.md`):
 ```markdown
 # JWT Authentication Standard
 
@@ -319,13 +319,13 @@ def create_access_token(user_id):
 **Example workflow:**
 ```bash
 # See when authentication was added
-git log --all --oneline -- ".agent-os/specs/*authentication*"
+git log --all --oneline -- ".praxis-os/specs/*authentication*"
 
 # See what changed in auth spec
-git log -p .agent-os/specs/2025-01-15-authentication-system/specs.md
+git log -p .praxis-os/specs/2025-01-15-authentication-system/specs.md
 
 # See why OAuth was added later
-git show abc123:.agent-os/specs/2025-03-20-oauth-integration/
+git show abc123:.praxis-os/specs/2025-03-20-oauth-integration/
 ```
 
 **Value:**

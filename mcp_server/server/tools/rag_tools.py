@@ -13,7 +13,10 @@ from typing import Any, Dict, List, Optional
 
 from ...core.prepend_generator import generate_query_prepend
 from ...core.query_tracker import get_tracker
-from ...core.session_id_extractor import extract_session_id_from_context, hash_session_id
+from ...core.session_id_extractor import (
+    extract_session_id_from_context,
+    hash_session_id,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -127,7 +130,11 @@ def register_rag_tools(mcp: Any, rag_engine: Any) -> int:
                     # Graceful degradation: log error but don't break search
                     logger.error(
                         "Query gamification failed (session: %s): %s",
-                        hash_session_id(session_id) if "session_id" in locals() else "unknown",
+                        (
+                            hash_session_id(session_id)
+                            if "session_id" in locals()
+                            else "unknown"
+                        ),
                         e,
                         exc_info=True,
                     )

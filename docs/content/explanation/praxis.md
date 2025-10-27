@@ -222,7 +222,7 @@ Historical context and decision rationale:
 - What was tried and didn't work
 - What patterns emerged
 
-**Preserved in:** `.agent-os/specs/` (direct file access, not RAG indexed)
+**Preserved in:** `.praxis-os/specs/` (direct file access, not RAG indexed)
 
 **Purpose:** Capture "why" for future reference, inform future decisions
 

@@ -471,11 +471,11 @@ package myproject
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/go-concurrency.md`
-   - `.agent-os/standards/development/go-testing.md`
-   - `.agent-os/standards/development/go-dependencies.md`
-   - `.agent-os/standards/development/go-code-quality.md`
-   - `.agent-os/standards/development/go-documentation.md`
+   - `.praxis-os/standards/development/go-concurrency.md`
+   - `.praxis-os/standards/development/go-testing.md`
+   - `.praxis-os/standards/development/go-dependencies.md`
+   - `.praxis-os/standards/development/go-code-quality.md`
+   - `.praxis-os/standards/development/go-documentation.md`
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

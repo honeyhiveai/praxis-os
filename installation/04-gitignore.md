@@ -9,7 +9,7 @@
 
 Add Agent OS entries to your project's `.gitignore` to prevent committing ~2.7GB of ephemeral files.
 
-**📖 Canonical Source**: `.agent-os/standards/universal/installation/gitignore-requirements.md`
+**📖 Canonical Source**: `.praxis-os/standards/universal/installation/gitignore-requirements.md`
 
 ---
 
@@ -36,7 +36,7 @@ The required .gitignore entries are defined in the standards you just copied:
 import re
 
 # Read canonical requirements from standards
-standards_file = ".agent-os/standards/universal/installation/gitignore-requirements.md"
+standards_file = ".praxis-os/standards/universal/installation/gitignore-requirements.md"
 
 with open(standards_file, "r") as f:
     content = f.read()
@@ -187,31 +187,31 @@ def verify_gitignore():
         print("ℹ️  Not a git repository, skipping verification")
         return True
     
-    # Check if .agent-os/.cache/ would be ignored
+    # Check if .praxis-os/.cache/ would be ignored
     result = subprocess.run(
-        ["git", "check-ignore", ".agent-os/.cache/test"],
+        ["git", "check-ignore", ".praxis-os/.cache/test"],
         capture_output=True,
         text=True
     )
     
     if result.returncode == 0:
-        print("✅ .gitignore verification: .agent-os/.cache/ is ignored")
+        print("✅ .gitignore verification: .praxis-os/.cache/ is ignored")
     else:
-        print("❌ WARNING: .agent-os/.cache/ is NOT being ignored!")
+        print("❌ WARNING: .praxis-os/.cache/ is NOT being ignored!")
         print("   Check your .gitignore file")
         return False
     
     # Check if backup directory would be ignored
     result = subprocess.run(
-        ["git", "check-ignore", ".agent-os.backup.test"],
+        ["git", "check-ignore", ".praxis-os.backup.test"],
         capture_output=True,
         text=True
     )
     
     if result.returncode == 0:
-        print("✅ .gitignore verification: .agent-os.backup.* is ignored")
+        print("✅ .gitignore verification: .praxis-os.backup.* is ignored")
     else:
-        print("❌ WARNING: .agent-os.backup.* is NOT being ignored!")
+        print("❌ WARNING: .praxis-os.backup.* is NOT being ignored!")
         print("   Check your .gitignore file")
         return False
     
@@ -230,21 +230,21 @@ if not verify_gitignore():
 
 ### ✅ TRACKED (Committed to Git)
 ```
-.agent-os/standards/        # Universal CS fundamentals + your standards
-.agent-os/usage/            # Documentation + your custom docs
-.agent-os/workflows/        # Workflow definitions
-.agent-os/specs/            # YOUR project specifications (important!)
-.agent-os/mcp_server/       # MCP server code (if customized)
+.praxis-os/standards/        # Universal CS fundamentals + your standards
+.praxis-os/usage/            # Documentation + your custom docs
+.praxis-os/workflows/        # Workflow definitions
+.praxis-os/specs/            # YOUR project specifications (important!)
+.praxis-os/mcp_server/       # MCP server code (if customized)
 .cursor/mcp.json            # Cursor MCP configuration
 .cursorrules                # AI assistant behavioral triggers
 ```
 
 ### ❌ IGNORED (Not Committed)
 ```
-.agent-os/.cache/           # 1.3GB vector index (regenerated)
-.agent-os/venv/             # Python packages (reinstalled)
-.agent-os.backup.*          # 1.3GB upgrade backups (temporary)
-.agent-os/.upgrade_lock     # Upgrade lock file
+.praxis-os/.cache/           # 1.3GB vector index (regenerated)
+.praxis-os/venv/             # Python packages (reinstalled)
+.praxis-os.backup.*          # 1.3GB upgrade backups (temporary)
+.praxis-os/.upgrade_lock     # Upgrade lock file
 __pycache__/                # Python bytecode
 ```
 
@@ -256,8 +256,8 @@ Before proceeding to step 05:
 
 - [ ] `.gitignore` file exists ✅/❌
 - [ ] Agent OS entries added ✅/❌
-- [ ] `.agent-os/.cache/` is ignored (verified) ✅/❌
-- [ ] `.agent-os.backup.*` is ignored (verified) ✅/❌
+- [ ] `.praxis-os/.cache/` is ignored (verified) ✅/❌
+- [ ] `.praxis-os.backup.*` is ignored (verified) ✅/❌
 - [ ] No warnings from verification ✅/❌
 
 ---
@@ -271,10 +271,10 @@ Before proceeding to step 05:
 **Fix:**
 ```bash
 # Test if pattern works
-git check-ignore -v .agent-os/.cache/test
+git check-ignore -v .praxis-os/.cache/test
 
 # Should output:
-# .gitignore:2:.agent-os/.cache/  .agent-os/.cache/test
+# .gitignore:2:.praxis-os/.cache/  .praxis-os/.cache/test
 ```
 
 ---
@@ -286,9 +286,9 @@ git check-ignore -v .agent-os/.cache/test
 **Fix:**
 ```bash
 # Remove from git but keep locally
-git rm -r --cached .agent-os/.cache/
-git rm -r --cached .agent-os/venv/
-git rm --cached .agent-os.backup.*
+git rm -r --cached .praxis-os/.cache/
+git rm -r --cached .praxis-os/venv/
+git rm --cached .praxis-os.backup.*
 
 # Commit the removal
 git commit -m "chore: remove ephemeral Agent OS files from git"
@@ -298,17 +298,17 @@ git commit -m "chore: remove ephemeral Agent OS files from git"
 
 ### Problem: "Backup directories keep appearing in git status"
 
-**Cause:** Pattern `.agent-os.backup.*` might not match correctly
+**Cause:** Pattern `.praxis-os.backup.*` might not match correctly
 
 **Fix:**
 ```bash
 # Test the pattern
-ls -d .agent-os.backup.* 2>/dev/null
-git check-ignore .agent-os.backup.20251008_193031
+ls -d .praxis-os.backup.* 2>/dev/null
+git check-ignore .praxis-os.backup.20251008_193031
 
 # If not ignored, check .gitignore has:
-.agent-os.backup.*
-# NOT: .agent-os.backup*/ (wrong!)
+.praxis-os.backup.*
+# NOT: .praxis-os.backup*/ (wrong!)
 ```
 
 ---

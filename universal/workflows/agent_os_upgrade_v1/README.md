@@ -119,7 +119,7 @@ Workflow state is saved to disk after each phase, enabling the workflow to survi
 - Must have VERSION.txt file
 
 ### Target Installation
-- Valid `.agent-os/` directory structure
+- Valid `.praxis-os/` directory structure
 - Sufficient disk space (2x current size)
 - No other upgrade workflows in progress
 
@@ -169,7 +169,7 @@ from mcp_server.backup_manager import BackupManager
 from pathlib import Path
 
 backup_mgr = BackupManager()
-backup_path = Path(".agent-os/.backups/2025-10-08-103045/")
+backup_path = Path(".praxis-os/.backups/2025-10-08-103045/")
 backup_mgr.restore_from_backup(backup_path)
 ```
 
@@ -264,8 +264,8 @@ The workflow will detect conflicts and prompt for resolution. Options:
 For issues or questions:
 
 1. Check [troubleshooting.md](supporting-docs/troubleshooting.md)
-2. Review upgrade logs in `.agent-os/.cache/`
-3. Check backup availability in `.agent-os/.backups/`
+2. Review upgrade logs in `.praxis-os/.cache/`
+3. Check backup availability in `.praxis-os/.backups/`
 4. Report issues with session ID and phase number
 
 ---

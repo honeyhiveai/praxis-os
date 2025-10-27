@@ -419,7 +419,7 @@ create_workflow(
 
 **Generated Structure:**
 ```
-.agent-os/workflows/api_documentation_v1/
+.praxis-os/workflows/api_documentation_v1/
 ├── metadata.json
 ├── phases/
 │   ├── 0/
@@ -437,7 +437,7 @@ create_workflow(
 **Validation:**
 ```python
 validate_workflow(
-    workflow_path=".agent-os/workflows/api_documentation_v1"
+    workflow_path=".praxis-os/workflows/api_documentation_v1"
 )
 ```
 

@@ -147,7 +147,7 @@ def _extract_topic(query: str) -> str:
 
     Strips common query words (what, how, where, is, are, the, a, an)
     to extract the core topic for suggestion generation.
-    
+
     **Security**: Sanitizes HTML tags to prevent XSS injection in suggestions.
 
     Args:
@@ -174,7 +174,8 @@ def _extract_topic(query: str) -> str:
     # SECURITY: Remove HTML tags to prevent XSS (NFR-S1)
     # Simple regex to strip all <tag> and </tag> patterns
     import re
-    sanitized_query = re.sub(r'<[^>]+>', '', query)
+
+    sanitized_query = re.sub(r"<[^>]+>", "", query)
 
     # Common words to remove
     common_words = {
@@ -259,4 +260,3 @@ def _generate_suggestion(uncovered_angles: Set[QueryAngle], topic: str) -> str:
 __all__ = [
     "generate_query_prepend",
 ]
-

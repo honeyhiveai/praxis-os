@@ -16,7 +16,7 @@ prAxIs OS provides tools for semantic search, workflow execution, and browser au
 - `workflow` - Phase-gated workflow execution and creation
 - `browser` - Browser automation with Playwright
 
-**Configuration:** Enable/disable groups in `.agent-os/config.json`:
+**Configuration:** Enable/disable groups in `.praxis-os/config.json`:
 ```json
 {
   "enabled_tool_groups": ["rag", "workflow", "browser"]
@@ -88,7 +88,7 @@ search_standards(
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `No results found` | Query too specific or no indexed content | Broaden query terms, check `.agent-os/.cache/vector_index/` exists |
+| `No results found` | Query too specific or no indexed content | Broaden query terms, check `.praxis-os/.cache/vector_index/` exists |
 | `Index not found` | RAG not initialized | Wait 10-30s for file watcher to build index |
 
 **Related:** [current_date](#current_date)
@@ -126,7 +126,7 @@ Get current date/time for preventing date errors in AI-generated content.
 ```python
 # Get current date for spec directory
 date_info = current_date()
-spec_dir = f".agent-os/specs/{date_info['iso_date']}-my-feature"
+spec_dir = f".praxis-os/specs/{date_info['iso_date']}-my-feature"
 
 # Use in documentation header
 header = f"# Feature Spec\n{date_info['formatted']['header']}\n"
@@ -533,8 +533,8 @@ Generate new workflow framework using meta-workflow principles.
   "workflow_name": "api-documentation",
   "phases": 3,
   "files_created": [
-    ".agent-os/workflows/api-documentation/metadata.json",
-    ".agent-os/workflows/api-documentation/phases/0/phase.md",
+    ".praxis-os/workflows/api-documentation/metadata.json",
+    ".praxis-os/workflows/api-documentation/phases/0/phase.md",
     ...
   ],
   "compliance": {
@@ -563,7 +563,7 @@ create_workflow(
     phases=["Setup", "Execution", "Reporting"],
     target_language="typescript",
     quick_start=false,
-    output_path=".agent-os/workflows/custom/"
+    output_path=".praxis-os/workflows/custom/"
 )
 ```
 
@@ -616,7 +616,7 @@ Validate workflow structure against construction standards.
 ```python
 # Validate before committing
 result = validate_workflow(
-    workflow_path=".agent-os/workflows/my_custom_workflow_v1"
+    workflow_path=".praxis-os/workflows/my_custom_workflow_v1"
 )
 
 if result["compliant"]:
@@ -1027,7 +1027,7 @@ aos_browser(action="close", session_id=session_id)
 
 ### Tool not found
 
-Check enabled tool groups in `.agent-os/config.json`:
+Check enabled tool groups in `.praxis-os/config.json`:
 ```json
 {
   "enabled_tool_groups": ["rag", "workflow", "browser"]
@@ -1036,7 +1036,7 @@ Check enabled tool groups in `.agent-os/config.json`:
 
 ### No results from search_standards
 
-1. Check vector index exists: `.agent-os/.cache/vector_index/`
+1. Check vector index exists: `.praxis-os/.cache/vector_index/`
 2. Wait 10-30s for file watcher rebuild
 3. Use broader query terms
 

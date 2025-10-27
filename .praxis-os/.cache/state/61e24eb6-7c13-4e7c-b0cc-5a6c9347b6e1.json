@@ -1,0 +1,14 @@
+{
+  "session_id": "61e24eb6-7c13-4e7c-b0cc-5a6c9347b6e1",
+  "workflow_type": "spec_execution_v1",
+  "target_file": ".praxis-os/specs/test/validation-test",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "created_at": "2025-10-23T11:27:20.462083",
+  "updated_at": "2025-10-23T11:27:20.462149",
+  "metadata": {
+    "total_phases": 2
+  }
+}

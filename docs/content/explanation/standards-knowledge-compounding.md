@@ -20,7 +20,7 @@ This page explains how **standards** create knowledge compounding in prAxIs OS t
 
 **Standards** are reusable patterns documented in markdown files that AI agents discover automatically through semantic search.
 
-**Location:** `.agent-os/standards/development/[topic].md`
+**Location:** `.praxis-os/standards/development/[topic].md`
 
 **Access:** `search_standards("pattern")`
 
@@ -64,7 +64,7 @@ This page explains how **standards** create knowledge compounding in prAxIs OS t
 - Implements authentication with custom JWT refresh pattern
 - Human: "We should document this as a standard"
 - Agent queries: `search_standards("how to create standards")`
-- Creates: `.agent-os/standards/development/authentication.md`
+- Creates: `.praxis-os/standards/development/authentication.md`
 - **Learning is captured** ✅
 
 **Agent 2 (Week 3):**
@@ -357,7 +357,7 @@ except APIError as e:
 
 **AI Creates Standard:**
 1. Queries: `search_standards("how to create standards")`
-2. Creates: `.agent-os/standards/development/api-error-handling.md`
+2. Creates: `.praxis-os/standards/development/api-error-handling.md`
 
 ```markdown
 # API Error Handling Standard

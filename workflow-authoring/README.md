@@ -51,13 +51,13 @@ A complete, transferable methodology for building AI-assisted workflows that ach
 
 ```bash
 # 1. Copy this meta-workflow to your repo
-cp -r {source}/.agent-os/meta-workflow {target-repo}/.agent-os/
+cp -r {source}/.praxis-os/meta-workflow {target-repo}/.praxis-os/
 
 # 2. Read the creation guide
-open .agent-os/meta-workflow/AGENT_OS_WORKFLOW_CREATION_GUIDE.md
+open .praxis-os/meta-workflow/AGENT_OS_WORKFLOW_CREATION_GUIDE.md
 
 # 3. Follow quick start template
-open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
+open .praxis-os/meta-workflow/QUICK_START_TEMPLATE.md
 
 # 4. Setup takes 1-2 hours for MVP
 ```
@@ -66,10 +66,10 @@ open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
 
 ```bash
 # 1. Read compliance analysis
-open .agent-os/meta-workflow/WORKFLOW_COMPLIANCE_ANALYSIS.md
+open .praxis-os/meta-workflow/WORKFLOW_COMPLIANCE_ANALYSIS.md
 
 # 2. Run file size audit
-find .agent-os/standards/{workflow}/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); printf "%4d lines: %s\n" "$lines" "$1"' _ {} \; | sort -rn
+find .praxis-os/standards/{workflow}/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); printf "%4d lines: %s\n" "$lines" "$1"' _ {} \; | sort -rn
 
 # 3. Follow remediation plan
 ```
@@ -200,7 +200,7 @@ Based on proven implementation in python-sdk:
 ```bash
 # Create tarball
 tar -czf agent-os-meta-workflow-v1.0.tar.gz \
-  .agent-os/meta-workflow/
+  .praxis-os/meta-workflow/
 
 # Transfer to new repo
 cd {new-repo}
@@ -210,8 +210,8 @@ tar -xzf agent-os-meta-workflow-v1.0.tar.gz
 ### **Selective Transfer**
 ```bash
 # Copy only essentials (quick start)
-cp meta-workflow/QUICK_START_TEMPLATE.md {new-repo}/.agent-os/
-cp meta-workflow/templates/* {new-repo}/.agent-os/templates/
+cp meta-workflow/QUICK_START_TEMPLATE.md {new-repo}/.praxis-os/
+cp meta-workflow/templates/* {new-repo}/.praxis-os/templates/
 ```
 
 ---

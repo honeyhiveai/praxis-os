@@ -188,12 +188,12 @@ Optimal Context (15-25% utilization)
 
 1. **Copy Base Files**:
    ```bash
-   cp -r {source}/.agent-os/standards/command-language-glossary.md {target}/.agent-os/standards/
+   cp -r {source}/.praxis-os/standards/command-language-glossary.md {target}/.praxis-os/standards/
    ```
 
 2. **Copy Workflow Structure**:
    ```bash
-   cp -r {source}/.agent-os/standards/{workflow}/ {target}/.agent-os/standards/{new-workflow}/
+   cp -r {source}/.praxis-os/standards/{workflow}/ {target}/.praxis-os/standards/{new-workflow}/
    ```
 
 3. **Customize**:
@@ -275,13 +275,13 @@ meta-workflow-v1.0/
 
 ```bash
 # 1. Copy meta-workflow to new repo
-cp -r honeyhive-dsl/.agent-os/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
-      honeyhive-dsl/.agent-os/QUICK_START_TEMPLATE.md \
-      {new-repo}/.agent-os/
+cp -r honeyhive-dsl/.praxis-os/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
+      honeyhive-dsl/.praxis-os/QUICK_START_TEMPLATE.md \
+      {new-repo}/.praxis-os/
 
 # 2. Copy command glossary template
-cp honeyhive-dsl/.agent-os/standards/command-language-glossary.md \
-   {new-repo}/.agent-os/standards/
+cp honeyhive-dsl/.praxis-os/standards/command-language-glossary.md \
+   {new-repo}/.praxis-os/standards/
 
 # 3. Create new workflow using quick start
 cd {new-repo}

@@ -10,10 +10,10 @@
 
 ```bash
 # In your target repository
-mkdir -p .agent-os/standards/{your-workflow-name}/core
-mkdir -p .agent-os/standards/{your-workflow-name}/phases/0
-mkdir -p .agent-os/standards/{your-workflow-name}/phases/1
-mkdir -p .agent-os/standards/{your-workflow-name}/phases/2
+mkdir -p .praxis-os/standards/{your-workflow-name}/core
+mkdir -p .praxis-os/standards/{your-workflow-name}/phases/0
+mkdir -p .praxis-os/standards/{your-workflow-name}/phases/1
+mkdir -p .praxis-os/standards/{your-workflow-name}/phases/2
 ```
 
 ---
@@ -22,8 +22,8 @@ mkdir -p .agent-os/standards/{your-workflow-name}/phases/2
 
 ```bash
 # Copy from reference implementation
-cp {source-repo}/.agent-os/standards/command-language-glossary.md \
-   .agent-os/standards/{your-workflow-name}/core/command-language-glossary.md
+cp {source-repo}/.praxis-os/standards/command-language-glossary.md \
+   .praxis-os/standards/{your-workflow-name}/core/command-language-glossary.md
 ```
 
 **Or create minimal version**:
@@ -44,7 +44,7 @@ cp {source-repo}/.agent-os/standards/command-language-glossary.md \
 
 ## 📝 **Step 3: Create Entry Point** (15 minutes)
 
-**File**: `.agent-os/standards/{your-workflow-name}/WORKFLOW_ENTRY_POINT.md`
+**File**: `.praxis-os/standards/{your-workflow-name}/WORKFLOW_ENTRY_POINT.md`
 
 ```markdown
 # {Workflow Name} - Entry Point
@@ -103,7 +103,7 @@ Updating existing {thing}.
 
 ## 📊 **Step 4: Create Progress Tracker** (10 minutes)
 
-**File**: `.agent-os/standards/{your-workflow-name}/progress-tracking.md`
+**File**: `.praxis-os/standards/{your-workflow-name}/progress-tracking.md`
 
 ```markdown
 # {Workflow Name} - Progress Tracking
@@ -137,7 +137,7 @@ Updating existing {thing}.
 
 ### **Task 1: Setup** (≤100 lines)
 
-**File**: `.agent-os/standards/{your-workflow-name}/phases/0/task-1-setup.md`
+**File**: `.praxis-os/standards/{your-workflow-name}/phases/0/task-1-setup.md`
 
 ```markdown
 # Phase 0: Setup - Task 1: Initialize
@@ -230,7 +230,7 @@ mkdir -p {required-directories}
 
 ## 📝 **Step 7: Create README** (20 minutes)
 
-**File**: `.agent-os/standards/{your-workflow-name}/README.md`
+**File**: `.praxis-os/standards/{your-workflow-name}/README.md`
 
 ```markdown
 # {Workflow Name}
@@ -324,7 +324,7 @@ After creating your workflow, validate:
 ### **File Size Compliance**
 ```bash
 # Check all phase files are ≤100 lines
-find .agent-os/standards/{workflow}/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 100 ]; then echo "❌ $1: $lines lines"; else echo "✅ $1: $lines lines"; fi' _ {} \;
+find .praxis-os/standards/{workflow}/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 100 ]; then echo "❌ $1: $lines lines"; else echo "✅ $1: $lines lines"; fi' _ {} \;
 ```
 
 ### **Command Language Integration**
@@ -385,7 +385,7 @@ find .agent-os/standards/{workflow}/phases -name "*.md" -exec sh -c 'lines=$(wc 
 ```bash
 # Create portable package
 tar -czf {workflow-name}-v1.0.tar.gz \
-  .agent-os/standards/{workflow-name}/
+  .praxis-os/standards/{workflow-name}/
 
 # Transfer to new repo
 cd {new-repo}
@@ -400,7 +400,7 @@ tar -xzf {workflow-name}-v1.0.tar.gz
 ## 🔗 **References**
 
 - **Full Guide**: [AGENT_OS_WORKFLOW_CREATION_GUIDE.md](AGENT_OS_WORKFLOW_CREATION_GUIDE.md)
-- **Source Methodologies**: `/python-sdk/.agent-os/standards/ai-assistant/`
+- **Source Methodologies**: `/python-sdk/.praxis-os/standards/ai-assistant/`
 - **Example Workflows**: 
   - `provider-schema-extraction/` (This repo)
   - `code-generation/tests/v3/` (python-sdk repo)

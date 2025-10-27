@@ -750,11 +750,11 @@ See [Documentation Site](https://docs.example.com)
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/csharp-concurrency.md`
-   - `.agent-os/standards/development/csharp-testing.md`
-   - `.agent-os/standards/development/csharp-dependencies.md`
-   - `.agent-os/standards/development/csharp-code-quality.md`
-   - `.agent-os/standards/development/csharp-documentation.md`
+   - `.praxis-os/standards/development/csharp-concurrency.md`
+   - `.praxis-os/standards/development/csharp-testing.md`
+   - `.praxis-os/standards/development/csharp-dependencies.md`
+   - `.praxis-os/standards/development/csharp-code-quality.md`
+   - `.praxis-os/standards/development/csharp-documentation.md`
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

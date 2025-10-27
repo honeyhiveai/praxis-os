@@ -44,7 +44,7 @@ class MigrationScript:
         force: Whether to overwrite existing gates
     
     Example:
-        >>> script = MigrationScript(Path(".agent-os/workflows"))
+        >>> script = MigrationScript(Path(".praxis-os/workflows"))
         >>> results = script.run()
         >>> print(f"Generated {results['gates_created']} gates")
     """
@@ -84,7 +84,7 @@ class MigrationScript:
             Dictionary with migration statistics
             
         Example:
-            >>> script = MigrationScript(Path(".agent-os/workflows"))
+            >>> script = MigrationScript(Path(".praxis-os/workflows"))
             >>> results = script.run()
             >>> assert results['gates_created'] >= 0
         """
@@ -123,7 +123,7 @@ class MigrationScript:
             List of workflow directory names
             
         Example:
-            >>> script = MigrationScript(Path(".agent-os/workflows"))
+            >>> script = MigrationScript(Path(".praxis-os/workflows"))
             >>> workflows = script.scan_workflows()
             >>> assert "test_generation_v3" in workflows
         """
@@ -146,7 +146,7 @@ class MigrationScript:
             workflow_name: Name of workflow directory
             
         Example:
-            >>> script = MigrationScript(Path(".agent-os/workflows"))
+            >>> script = MigrationScript(Path(".praxis-os/workflows"))
             >>> script.process_workflow("test_generation_v3")
         """
         logger.info("Processing workflow: %s", workflow_name)
@@ -180,8 +180,8 @@ class MigrationScript:
             phase_path: Path to phase directory
             
         Example:
-            >>> script = MigrationScript(Path(".agent-os/workflows"))
-            >>> phase_path = Path(".agent-os/workflows/test_generation_v3/phases/1")
+            >>> script = MigrationScript(Path(".praxis-os/workflows"))
+            >>> phase_path = Path(".praxis-os/workflows/test_generation_v3/phases/1")
             >>> script.process_phase("test_generation_v3", 1, phase_path)
         """
         logger.info("Processing phase: %s phase %d", workflow_name, phase_num)
@@ -230,8 +230,8 @@ class MigrationScript:
             CheckpointRequirements if found, None otherwise
             
         Example:
-            >>> script = MigrationScript(Path(".agent-os/workflows"))
-            >>> phase_path = Path(".agent-os/workflows/test/phases/1")
+            >>> script = MigrationScript(Path(".praxis-os/workflows"))
+            >>> phase_path = Path(".praxis-os/workflows/test/phases/1")
             >>> requirements = script.parse_checkpoint(phase_path)
             >>> assert requirements is not None
         """
@@ -587,8 +587,8 @@ def main() -> int:
     parser.add_argument(
         '--workflows-path',
         type=Path,
-        default=Path('.agent-os/workflows'),
-        help='Path to workflows directory (default: .agent-os/workflows)'
+        default=Path('.praxis-os/workflows'),
+        help='Path to workflows directory (default: .praxis-os/workflows)'
     )
     parser.add_argument(
         '--dry-run',

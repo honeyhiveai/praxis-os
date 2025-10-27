@@ -40,7 +40,7 @@ For each document in INDEX.md, extract:
 Add insights section to INDEX.md:
 
 ```bash
-cat >> .agent-os/specs/{SPEC_DIR}/supporting-docs/INDEX.md << 'EOF'
+cat >> .praxis-os/specs/{SPEC_DIR}/supporting-docs/INDEX.md << 'EOF'
 
 ---
 
@@ -98,7 +98,7 @@ Review extracted insights for:
 Add a quantitative summary to INDEX.md:
 
 ```bash
-cat >> .agent-os/specs/{SPEC_DIR}/supporting-docs/INDEX.md << 'EOF'
+cat >> .praxis-os/specs/{SPEC_DIR}/supporting-docs/INDEX.md << 'EOF'
 
 ## Insight Summary
 

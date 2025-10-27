@@ -651,11 +651,11 @@ See [docs.rs](https://docs.rs/my_crate)
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/rust-concurrency.md`
-   - `.agent-os/standards/development/rust-testing.md`
-   - `.agent-os/standards/development/rust-dependencies.md`
-   - `.agent-os/standards/development/rust-code-quality.md`
-   - `.agent-os/standards/development/rust-documentation.md`
+   - `.praxis-os/standards/development/rust-concurrency.md`
+   - `.praxis-os/standards/development/rust-testing.md`
+   - `.praxis-os/standards/development/rust-dependencies.md`
+   - `.praxis-os/standards/development/rust-code-quality.md`
+   - `.praxis-os/standards/development/rust-documentation.md`
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

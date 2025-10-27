@@ -7,7 +7,7 @@
 ## 🎯 What You're About To Do
 
 Install prAxIs OS into the target project. This will:
-1. Create `.agent-os/` directory structure
+1. Create `.praxis-os/` directory structure
 2. Copy standards, workflows, and MCP server code
 3. Create Python virtual environment
 4. Configure Cursor to use MCP server
@@ -22,7 +22,7 @@ Install prAxIs OS into the target project. This will:
 
 **These 4 mistakes will break the installation. Read them NOW:**
 
-### Mistake #1: Forgetting `.agent-os/workflows/` Directory
+### Mistake #1: Forgetting `.praxis-os/workflows/` Directory
 **What happens**: MCP server validation fails  
 **Error message**: `❌ workflows_path does not exist`  
 **Prevention**: Step 01 has a checklist - verify ALL 8 directories exist
@@ -91,7 +91,7 @@ Each file:
 **Target Project** (where you're installing):
 ```
 target-project/                 ← Where you're installing TO
-├── .agent-os/                  ← Will be created
+├── .praxis-os/                  ← Will be created
 │   ├── standards/
 │   ├── usage/
 │   ├── workflows/

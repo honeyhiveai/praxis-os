@@ -104,7 +104,7 @@ search_standards("query construction patterns how agents search")
 
 The AI writes the standard file:
 
-**File:** `.agent-os/standards/development/api-error-handling.md`
+**File:** `.praxis-os/standards/development/api-error-handling.md`
 
 ```markdown
 # API Error Handling Standard

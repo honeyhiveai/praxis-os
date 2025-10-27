@@ -162,7 +162,7 @@ What validation is needed? (Target: Automated gates)
 
 **🎯 CREATE: Directory structure**
 ```
-.agent-os/
+.praxis-os/
 ├── standards/
 │   └── {workflow-name}/
 │       ├── core/
@@ -190,8 +190,8 @@ What validation is needed? (Target: Automated gates)
 
 **🛑 EXECUTE-NOW: Copy template**
 ```bash
-cp {source-repo}/.agent-os/standards/ai-assistant/code-generation/tests/v3/core/command-language-glossary.md \
-   {target-repo}/.agent-os/standards/command-language-glossary.md
+cp {source-repo}/.praxis-os/standards/ai-assistant/code-generation/tests/v3/core/command-language-glossary.md \
+   {target-repo}/.praxis-os/standards/command-language-glossary.md
 ```
 
 **⚠️ MUST-CUSTOMIZE**:
@@ -784,7 +784,7 @@ quality_enforcement:
 
 ## 🔗 **References**
 
-- **Source Methodologies**: `/python-sdk/.agent-os/standards/ai-assistant/`
+- **Source Methodologies**: `/python-sdk/.praxis-os/standards/ai-assistant/`
   - `LLM-WORKFLOW-ENGINEERING-METHODOLOGY.md`
   - `DETERMINISTIC-LLM-OUTPUT-METHODOLOGY.md`
   - `code-generation/tests/v3/` (V3 workflow implementation)

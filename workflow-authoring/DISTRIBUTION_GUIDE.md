@@ -15,7 +15,7 @@
 ```bash
 # 1. Create package
 cd {source-repo}
-tar -czf agent-os-meta-workflow-v1.0.tar.gz .agent-os/meta-workflow/
+tar -czf agent-os-meta-workflow-v1.0.tar.gz .praxis-os/meta-workflow/
 
 # 2. Transfer to new repository
 scp agent-os-meta-workflow-v1.0.tar.gz {target-host}:{target-repo}/
@@ -25,7 +25,7 @@ cd {target-repo}
 tar -xzf agent-os-meta-workflow-v1.0.tar.gz
 
 # 4. Verify structure
-ls -la .agent-os/meta-workflow/
+ls -la .praxis-os/meta-workflow/
 ```
 
 **What Gets Transferred**:
@@ -42,18 +42,18 @@ ls -la .agent-os/meta-workflow/
 
 ```bash
 # 1. Create minimal directory
-mkdir -p {target-repo}/.agent-os/meta-workflow/templates
+mkdir -p {target-repo}/.praxis-os/meta-workflow/templates
 
 # 2. Copy essentials
 cp {source}/meta-workflow/QUICK_START_TEMPLATE.md \
-   {target}/.agent-os/meta-workflow/
+   {target}/.praxis-os/meta-workflow/
 
 cp {source}/meta-workflow/templates/command-language-glossary-template.md \
-   {target}/.agent-os/meta-workflow/templates/
+   {target}/.praxis-os/meta-workflow/templates/
 
 # 3. Optional: Copy full guide for reference
 cp {source}/meta-workflow/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
-   {target}/.agent-os/meta-workflow/
+   {target}/.praxis-os/meta-workflow/
 ```
 
 **Minimal Footprint**: ~1000 lines total
@@ -68,15 +68,15 @@ cp {source}/meta-workflow/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
 # 1. In source repo, create separate meta-workflow repo
 git clone {source-repo} agent-os-meta-workflow
 cd agent-os-meta-workflow
-git filter-branch --subdirectory-filter .agent-os/meta-workflow -- --all
+git filter-branch --subdirectory-filter .praxis-os/meta-workflow -- --all
 
 # 2. In target repos, add as submodule
 cd {target-repo}
-git submodule add {meta-workflow-repo-url} .agent-os/meta-workflow
+git submodule add {meta-workflow-repo-url} .praxis-os/meta-workflow
 git submodule update --init --recursive
 
 # 3. Update across all repos
-git submodule update --remote .agent-os/meta-workflow
+git submodule update --remote .praxis-os/meta-workflow
 ```
 
 **Benefits**: Centralized updates, version tracking
@@ -89,7 +89,7 @@ git submodule update --remote .agent-os/meta-workflow
 
 ```bash
 # Check all files present
-ls -la .agent-os/meta-workflow/
+ls -la .praxis-os/meta-workflow/
 
 # Expected files:
 # - README.md
@@ -114,15 +114,15 @@ ls -la .agent-os/meta-workflow/
 
 ```bash
 # Verify all markdown files are readable
-open .agent-os/meta-workflow/README.md
-open .agent-os/meta-workflow/QUICK_START_TEMPLATE.md
+open .praxis-os/meta-workflow/README.md
+open .praxis-os/meta-workflow/QUICK_START_TEMPLATE.md
 ```
 
 ### **Step 4: Create First Workflow** (1-2 hours)
 
 ```bash
 # Follow quick start template
-# Create: .agent-os/standards/{your-workflow-name}/
+# Create: .praxis-os/standards/{your-workflow-name}/
 ```
 
 ---
@@ -188,13 +188,13 @@ transfer_success:
 
 ```bash
 # Check if meta-workflow exists
-test -d .agent-os/meta-workflow && echo "✅ Meta-framework present" || echo "❌ Not found"
+test -d .praxis-os/meta-workflow && echo "✅ Meta-framework present" || echo "❌ Not found"
 
 # Count frameworks using meta-workflow patterns
-find .agent-os/standards -name "command-language-glossary.md" | wc -l
+find .praxis-os/standards -name "command-language-glossary.md" | wc -l
 
 # Check file size compliance
-find .agent-os/standards/*/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 100 ]; then echo "❌"; else echo "✅"; fi' _ {} \; | grep -c "✅"
+find .praxis-os/standards/*/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"); if [ $lines -gt 100 ]; then echo "❌"; else echo "✅"; fi' _ {} \; | grep -c "✅"
 ```
 
 ---
@@ -223,11 +223,11 @@ find .agent-os/standards/*/phases -name "*.md" -exec sh -c 'lines=$(wc -l < "$1"
 
 ### **Issue 1: Path Conflicts**
 
-**Problem**: Existing `.agent-os/` structure conflicts  
+**Problem**: Existing `.praxis-os/` structure conflicts  
 **Solution**:
 ```bash
 # Merge carefully, don't overwrite existing
-cp -rn {source}/.agent-os/meta-workflow {target}/.agent-os/
+cp -rn {source}/.praxis-os/meta-workflow {target}/.praxis-os/
 ```
 
 ---

@@ -24,7 +24,7 @@
 - Query: `search_standards("how to create specification")` to find workflow
 - Use workflow to create detailed spec
 - User reviews spec before you do anything else
-- Output: `.agent-os/specs/YYYY-MM-DD-name/` (formal plan)
+- Output: `.praxis-os/specs/YYYY-MM-DD-name/` (formal plan)
 
 **Phase 3: BUILD IT** (User must approve first)
 - User says "implement the spec" → Now you write code
@@ -194,7 +194,7 @@ You: [Create spec, get approval, then build it right the first time]
 
 **This phase uses workflows vs conversational approach** - You need structure for systematic spec creation
 
-**Output:** `.agent-os/specs/YYYY-MM-DD-feature-name/` directory
+**Output:** `.praxis-os/specs/YYYY-MM-DD-feature-name/` directory
 
 **Duration:** 30 minutes - 2 hours typically
 
@@ -276,7 +276,7 @@ Phase 3 ends when:
 | **Mode** | Conversational | Workflow-driven | Workflow-driven |
 | **Tools** | Query standards only | Workflow tools | Workflow tools |
 | **Formality** | Informal exploration | Formal document | Production code |
-| **Output** | design-doc.md | .agent-os/specs/ | Code + tests + docs |
+| **Output** | design-doc.md | .praxis-os/specs/ | Code + tests + docs |
 | **Duration** | Minutes | 30min - 2hrs | 2-8 hours |
 | **Approval** | "Create spec" trigger | "Implement" trigger | Quality validation |
 | **Flexibility** | High (exploratory) | Medium (structured) | Low (spec-driven) |
@@ -361,7 +361,7 @@ Agent: [Finds current workflow, executes it]
  Phase 3: Breaking down tasks
  Phase 4: Writing implementation guidance
  
- Spec complete in .agent-os/specs/2025-10-12-oauth-auth/"
+ Spec complete in .praxis-os/specs/2025-10-12-oauth-auth/"
 
 User: [Reviews files]
 "Add rate limiting to token endpoint"

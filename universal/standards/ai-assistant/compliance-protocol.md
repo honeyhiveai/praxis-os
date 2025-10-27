@@ -11,7 +11,7 @@
 **Core Principle:** Check first, then act. Review existing standards, patterns, and project rules BEFORE generating code or making changes.
 
 **MANDATORY Pre-Task Compliance Checklist:**
-1. ✅ Read relevant Agent OS standards (`.agent-os/standards/`)
+1. ✅ Read relevant Agent OS standards (`.praxis-os/standards/`)
 2. ✅ Check project-specific rules (README, CONTRIBUTING, .cursorrules)
 3. ✅ Verify established patterns in existing codebase
 4. ✅ Confirm no existing solutions before creating new
@@ -88,11 +88,11 @@ With compliance checking, AI assistants:
 
 ### Before Any Code Generation
 
-- [ ] **Read relevant Agent OS standards** in `.agent-os/standards/`
-  - Universal standards in `.agent-os/standards/universal/`
-  - AI assistant standards in `.agent-os/standards/ai-assistant/`
-  - AI safety rules in `.agent-os/standards/ai-safety/` (if exists)
-  - Project-specific standards in `.agent-os/standards/development/`
+- [ ] **Read relevant Agent OS standards** in `.praxis-os/standards/`
+  - Universal standards in `.praxis-os/standards/universal/`
+  - AI assistant standards in `.praxis-os/standards/ai-assistant/`
+  - AI safety rules in `.praxis-os/standards/ai-safety/` (if exists)
+  - Project-specific standards in `.praxis-os/standards/development/`
 
 - [ ] **Check project-specific rules** in project documentation
   - README.md (project overview, setup instructions)
@@ -121,8 +121,8 @@ With compliance checking, AI assistants:
 ### Before Any Test Execution
 
 - [ ] **Check project's test execution standards**
-  - `.agent-os/standards/development/testing-standards.md` (if exists)
-  - `.agent-os/standards/universal/testing/` (universal test patterns)
+  - `.praxis-os/standards/development/testing-standards.md` (if exists)
+  - `.praxis-os/standards/universal/testing/` (universal test patterns)
 
 - [ ] **Verify test runner configuration**
   - Project's build system (tox.ini, package.json, Cargo.toml, pom.xml)
@@ -130,7 +130,7 @@ With compliance checking, AI assistants:
   - Coverage requirements
 
 - [ ] **Use established test commands** (not manual alternatives)
-  - Project should define these in `.agent-os/standards/development/validation-commands.md`
+  - Project should define these in `.praxis-os/standards/development/validation-commands.md`
   - Never run tests manually if project has established commands
   - Follow project's CI/CD patterns
 
@@ -153,19 +153,19 @@ With compliance checking, AI assistants:
 
 ```bash
 # Find standards related to your task
-find .agent-os/standards -name "*.md" | grep -i [topic]
+find .praxis-os/standards -name "*.md" | grep -i [topic]
 
 # Find critical/mandatory rules
-grep -r "CRITICAL\|MANDATORY\|NEVER" .agent-os/standards/
+grep -r "CRITICAL\|MANDATORY\|NEVER" .praxis-os/standards/
 
 # Check universal standards
-ls .agent-os/standards/universal/
+ls .praxis-os/standards/universal/
 
 # Check AI assistant standards
-ls .agent-os/standards/ai-assistant/
+ls .praxis-os/standards/ai-assistant/
 
 # Check project-specific standards
-ls .agent-os/standards/development/
+ls .praxis-os/standards/development/
 
 # Check project-specific rules in root docs
 grep -i [topic] README.md CONTRIBUTING.md .cursorrules
@@ -259,7 +259,7 @@ Existing Standard Found?
 **Scenario 1: Standard Exists**
 ```
 Task: Run unit tests
-Found: .agent-os/standards/development/testing-standards.md says "Use tox -e unit"
+Found: .praxis-os/standards/development/testing-standards.md says "Use tox -e unit"
 Decision: ✅ Run `tox -e unit` (follow standard)
 ```
 
@@ -306,7 +306,7 @@ Decision: ✅ Check universal standards for caching patterns, propose approach t
 - Violates CI/CD expectations
 
 **Prevention**:
-1. Check `.agent-os/standards/development/testing-standards.md` or `validation-commands.md`
+1. Check `.praxis-os/standards/development/testing-standards.md` or `validation-commands.md`
 2. Look for test configuration files (tox.ini, pytest.ini, jest.config.js)
 3. Check project's CI/CD configuration (.github/workflows/, .gitlab-ci.yml)
 4. Ask user: "What's the correct command to run tests?"
@@ -363,7 +363,7 @@ Decision: ✅ Check universal standards for caching patterns, propose approach t
 - Incorrect behavior (hardcoded dates)
 
 **Prevention**:
-1. Always check `.agent-os/standards/ai-safety/` before dangerous operations
+1. Always check `.praxis-os/standards/ai-safety/` before dangerous operations
 2. Review git safety rules before git operations
 3. Check credential protection rules before writing config files
 4. Verify date usage policy before using dates
@@ -396,7 +396,7 @@ Decision: ✅ Check universal standards for caching patterns, propose approach t
 - Violates project conventions
 
 **Prevention**:
-1. Check `.agent-os/standards/universal/architecture/` for patterns
+1. Check `.praxis-os/standards/universal/architecture/` for patterns
 2. Review existing code structure
 3. Look for factories, builders, repositories in codebase
 4. Follow "do what the Romans do" principle
@@ -449,12 +449,12 @@ Compliance Score = (Standards Followed / Total Applicable Standards) × 100%
 ### Standards Reviewed
 
 **Universal Standards**:
-- [ ] `.agent-os/standards/universal/[relevant-category]/` - [Brief summary]
-- [ ] `.agent-os/standards/ai-assistant/` - [Brief summary]
-- [ ] `.agent-os/standards/ai-safety/` - [Brief summary if applicable]
+- [ ] `.praxis-os/standards/universal/[relevant-category]/` - [Brief summary]
+- [ ] `.praxis-os/standards/ai-assistant/` - [Brief summary]
+- [ ] `.praxis-os/standards/ai-safety/` - [Brief summary if applicable]
 
 **Project-Specific Standards**:
-- [ ] `.agent-os/standards/development/[standard].md` - [Brief summary]
+- [ ] `.praxis-os/standards/development/[standard].md` - [Brief summary]
 - [ ] Project documentation (README, CONTRIBUTING) - [Brief summary]
 
 ### Patterns Found
@@ -498,7 +498,7 @@ Compliance Score = (Standards Followed / Total Applicable Standards) × 100%
 
 ### Creating Compliance Addendum
 
-**File**: `.agent-os/standards/development/compliance-addendum.md`
+**File**: `.praxis-os/standards/development/compliance-addendum.md`
 
 **Contents**:
 - Project-specific mandatory rules
@@ -562,7 +562,7 @@ python -c "from project.module import Class"
 Task: Add rate limiting to API
 
 Compliance Check:
-1. ✅ Searched .agent-os/standards/ for "rate limit" - found concurrency patterns
+1. ✅ Searched .praxis-os/standards/ for "rate limit" - found concurrency patterns
 2. ✅ Searched codebase for existing rate limiting - none found
 3. ✅ Checked universal/failure-modes/ for throttling patterns - found circuit breaker
 4. ✅ Reviewed API architecture - found middleware pattern in use
@@ -579,7 +579,7 @@ Result: Implementation consistent with codebase, uses established tools, follows
 Task: Fix race condition in tracer
 
 Compliance Check:
-1. ✅ Searched .agent-os/standards/universal/concurrency/ - found locking strategies
+1. ✅ Searched .praxis-os/standards/universal/concurrency/ - found locking strategies
 2. ✅ Reviewed existing tracer code - found existing use of threading.Lock
 3. ✅ Checked if project has concurrency standards - found in development/concurrency.md
 4. ✅ Verified project uses thread-safe patterns - yes, consistently uses locks
@@ -673,5 +673,5 @@ Result: Fix consistent with existing concurrency approach, follows project patte
 
 **This is a universal standard. It applies to all projects using prAxIs OS, regardless of programming language or technology stack.**
 
-**For project-specific compliance rules, see `.agent-os/standards/development/compliance-addendum.md` in your project.**
+**For project-specific compliance rules, see `.praxis-os/standards/development/compliance-addendum.md` in your project.**
 

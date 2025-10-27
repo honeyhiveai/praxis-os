@@ -119,7 +119,7 @@
       "Need audit trail of implementation decisions"
     ],
     "prerequisites": [
-      "Complete spec in .agent-os/specs/YYYY-MM-DD-name/",
+      "Complete spec in .praxis-os/specs/YYYY-MM-DD-name/",
       "tasks.md with phased task breakdown",
       "specs.md with technical design",
       "implementation.md with patterns and guidance",
@@ -127,9 +127,9 @@
     ],
     "example_invocation": {
       "workflow_type": "spec_execution_v1",
-      "target_file": ".agent-os/specs/2025-10-07-mcp-server-modular-redesign",
+      "target_file": ".praxis-os/specs/2025-10-07-mcp-server-modular-redesign",
       "options": {
-        "spec_path": ".agent-os/specs/2025-10-07-mcp-server-modular-redesign"
+        "spec_path": ".praxis-os/specs/2025-10-07-mcp-server-modular-redesign"
       }
     }
   },

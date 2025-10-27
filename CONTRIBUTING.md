@@ -8,7 +8,7 @@ Thank you for your interest in contributing! This guide will help you add univer
 
 ### The Copy Workflow
 
-**DO NOT use symlinks. Always copy framework source to `.agent-os/`.**
+**DO NOT use symlinks. Always copy framework source to `.praxis-os/`.**
 
 #### Editing Framework Source (universal/)
 
@@ -16,11 +16,11 @@ Thank you for your interest in contributing! This guide will help you add univer
 # 1. Edit framework source
 vim universal/standards/ai-safety/production-code-checklist.md
 
-# 2. Copy to .agent-os/ (like consumers do)
-cp -r universal/standards .agent-os/standards/universal
+# 2. Copy to .praxis-os/ (like consumers do)
+cp -r universal/standards .praxis-os/standards/universal
 
 # 3. File watcher auto-rebuilds RAG index
-# (triggered by file change in .agent-os/)
+# (triggered by file change in .praxis-os/)
 
 # 4. Restart MCP server if you edited server code
 # Cursor → Settings → MCP → Restart agent-os-rag
@@ -29,7 +29,7 @@ cp -r universal/standards .agent-os/standards/universal
 # Query MCP to verify your changes appear
 
 # 6. Commit BOTH source and installed copy
-git add universal/standards/ .agent-os/standards/universal/
+git add universal/standards/ .praxis-os/standards/universal/
 git commit -m "docs: your change"
 ```
 
@@ -39,11 +39,11 @@ git commit -m "docs: your change"
 - ✅ Same experience as consumers
 - ✅ Installation bugs caught early
 
-#### Editing Project-Specific Files (.agent-os/standards/development/)
+#### Editing Project-Specific Files (.praxis-os/standards/development/)
 
 ```bash
 # These are NOT framework source - edit directly
-vim .agent-os/standards/development/python-testing.md
+vim .praxis-os/standards/development/python-testing.md
 
 # File watcher auto-rebuilds index
 # No copy needed
@@ -51,7 +51,7 @@ vim .agent-os/standards/development/python-testing.md
 
 ### Key Rules
 
-1. **NEVER edit `.agent-os/standards/universal/`** - it's managed by copy
+1. **NEVER edit `.praxis-os/standards/universal/`** - it's managed by copy
 2. **ALWAYS edit `universal/`** - it's the source of truth
 3. **ALWAYS copy** after editing framework source
 4. **File watcher auto-rebuilds** - don't manually rebuild
@@ -62,13 +62,13 @@ vim .agent-os/standards/development/python-testing.md
 ```
 ✅ Tracked (committed):
 - universal/                    # Framework source
-- .agent-os/standards/universal/  # Installed copy (example for consumers)
-- .agent-os/standards/development/  # Project-specific
-- .agent-os/config.json
+- .praxis-os/standards/universal/  # Installed copy (example for consumers)
+- .praxis-os/standards/development/  # Project-specific
+- .praxis-os/config.json
 
 ❌ Not tracked (gitignored):
-- .agent-os/venv/               # Python virtualenv
-- .agent-os/.cache/             # RAG vector index
+- .praxis-os/venv/               # Python virtualenv
+- .praxis-os/.cache/             # RAG vector index
 ```
 
 See `ARCHITECTURE.md` for detailed explanation of dogfooding model.
@@ -154,8 +154,8 @@ Add new sub-agents or enhance RAG capabilities.
 ## Language-Specific Implementation
 
 **This document covers universal concepts. For language-specific implementations:**
-- See `.agent-os/standards/development/python-[topic].md` (Python)
-- See `.agent-os/standards/development/go-[topic].md` (Go)
+- See `.praxis-os/standards/development/python-[topic].md` (Python)
+- See `.praxis-os/standards/development/go-[topic].md` (Go)
 - Etc.
 
 ---

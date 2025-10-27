@@ -168,12 +168,12 @@ def clone_repository() -> Path:
 
 def create_directories(target: Path):
     """
-    Create .agent-os directory structure.
+    Create .praxis-os directory structure.
     
     Args:
         target: Target installation directory
     """
-    base = target / ".agent-os"
+    base = target / ".praxis-os"
     
     # Core directories that need to exist
     directories = [
@@ -236,10 +236,10 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
     Copy files from source to target using simple recursive copies.
     
     Behavior:
-      - universal/workflows → .agent-os/workflows (flatten)
-      - universal/standards → .agent-os/standards/universal (keep namespace)
-      - mcp_server → .agent-os/mcp_server (direct copy)
-      - scripts → .agent-os/scripts (RAG index builder, etc.)
+      - universal/workflows → .praxis-os/workflows (flatten)
+      - universal/standards → .praxis-os/standards/universal (keep namespace)
+      - mcp_server → .praxis-os/mcp_server (direct copy)
+      - scripts → .praxis-os/scripts (RAG index builder, etc.)
     
     After each copy, validates that source and destination file counts match.
     
@@ -253,14 +253,14 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
     Raises:
         SystemExit: If copy or validation fails
     """
-    base = target / ".agent-os"
+    base = target / ".praxis-os"
     stats = {}
     
     # Patterns to ignore during copy
     ignore_patterns = shutil.ignore_patterns(
         '__pycache__', '*.pyc', '.DS_Store',
         '.pytest_cache', '.mypy_cache',
-        '.agent-os', '.cursor'  # Don't copy nested artifacts from mcp_server
+        '.praxis-os', '.cursor'  # Don't copy nested artifacts from mcp_server
     )
     
     try:
@@ -340,7 +340,7 @@ def count_files(directory: Path, respect_ignore_patterns: bool = False) -> int:
         Number of files (not directories)
     """
     # Patterns to exclude (matching copy_files ignore patterns)
-    ignore_names = {'__pycache__', '.DS_Store', '.pytest_cache', '.mypy_cache', '.agent-os', '.cursor'}
+    ignore_names = {'__pycache__', '.DS_Store', '.pytest_cache', '.mypy_cache', '.praxis-os', '.cursor'}
     ignore_extensions = {'.pyc'}
     
     count = 0
@@ -376,7 +376,7 @@ def validate_installation(target: Path, stats: Dict[str, int]):
     Raises:
         SystemExit: If validation fails
     """
-    base = target / ".agent-os"
+    base = target / ".praxis-os"
     
     # Check that all expected directories exist
     required_dirs = [
@@ -415,7 +415,7 @@ def create_venv_and_install(target: Path):
     Raises:
         SystemExit: If venv creation or pip install fails
     """
-    base = target / ".agent-os"
+    base = target / ".praxis-os"
     venv_path = base / "venv"
     
     # Create virtual environment
@@ -470,9 +470,9 @@ def configure_gitignore(target: Path):
     agent_os_patterns = [
         "",
         "# Agent OS Enhanced - Ephemeral Files",
-        ".agent-os/.cache/",
-        ".agent-os/venv/",
-        ".agent-os/.mcp_server_state.json",
+        ".praxis-os/.cache/",
+        ".praxis-os/venv/",
+        ".praxis-os/.mcp_server_state.json",
         ""
     ]
     
@@ -483,7 +483,7 @@ def configure_gitignore(target: Path):
             existing_content = f.read()
     
     # Check if already configured
-    if ".agent-os/.cache/" in existing_content:
+    if ".praxis-os/.cache/" in existing_content:
         print("✓ .gitignore already configured for Agent OS")
         return
     
@@ -496,9 +496,9 @@ def configure_gitignore(target: Path):
     print("✓ .gitignore configured")
     print()
     print("  Added patterns to .gitignore:")
-    print("    • .agent-os/.cache/          (RAG index, ~50MB)")
-    print("    • .agent-os/venv/            (Python dependencies, ~250MB)")
-    print("    • .agent-os/.mcp_server_state.json  (MCP runtime state)")
+    print("    • .praxis-os/.cache/          (RAG index, ~50MB)")
+    print("    • .praxis-os/venv/            (Python dependencies, ~250MB)")
+    print("    • .praxis-os/.mcp_server_state.json  (MCP runtime state)")
     print()
     print("  These files are ephemeral and should not be committed.")
 
@@ -514,12 +514,12 @@ def create_rebuild_flag(target: Path):
     Args:
         target: Target installation directory
     """
-    flag_path = target / ".agent-os" / "standards" / ".rebuild_index"
+    flag_path = target / ".praxis-os" / "standards" / ".rebuild_index"
     flag_path.touch()
     
     print("✓ RAG index build scheduled")
     print()
-    print("  Created: .agent-os/standards/.rebuild_index")
+    print("  Created: .praxis-os/standards/.rebuild_index")
     print("  When MCP server starts:")
     print("    • Watcher detects flag")
     print("    • Builds index (universal + development standards)")
@@ -555,7 +555,7 @@ def print_success(target: Path, stats: Dict[str, int]):
     print("✅ MECHANICAL INSTALLATION COMPLETE")
     print("=" * 60)
     print()
-    print(f"Installed to: {target}/.agent-os")
+    print(f"Installed to: {target}/.praxis-os")
     print()
     print("Files copied:")
     print(f"  • Standards: {stats['standards']} files")
@@ -565,7 +565,7 @@ def print_success(target: Path, stats: Dict[str, int]):
     print(f"  • Total: {stats['total']} files")
     print()
     print("Environment:")
-    print(f"  • Virtual environment: .agent-os/venv/")
+    print(f"  • Virtual environment: .praxis-os/venv/")
     print(f"  • Dependencies: Installed from requirements.txt")
     print(f"  • .gitignore: Configured (ephemeral files excluded)")
     print(f"  • RAG index: Scheduled (.rebuild_index flag created)")
@@ -579,7 +579,7 @@ def print_success(target: Path, stats: Dict[str, int]):
     print("   → Identify framework (FastAPI, Express, etc.)")
     print()
     print("2. Generate language-specific standards")
-    print("   → Create standards in .agent-os/standards/development/")
+    print("   → Create standards in .praxis-os/standards/development/")
     print("   → Follow language-specific patterns")
     print()
     print("3. Agent integration (branch based on agent/editor)")

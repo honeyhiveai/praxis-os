@@ -1,0 +1,36 @@
+{
+  "project": {
+    "language": "python",
+    "name": "agent-os-enhanced",
+    "venv_path": "${workspaceFolder}/.praxis-os/venv",
+    "venv_python": "${workspaceFolder}/.praxis-os/venv/bin/python",
+    "venv_pip": "${workspaceFolder}/.praxis-os/venv/bin/pip",
+    "venv_tox": "${workspaceFolder}/.praxis-os/venv/bin/tox",
+    "test_command": "tox",
+    "test_unit_command": "tox -e unit",
+    "test_integration_command": "tox -e integration",
+    "note": "Currently using Agent OS venv for project code. Consider creating separate project venv."
+  },
+  "agent_os": {
+    "venv_path": ".praxis-os/venv",
+    "mcp_python": "${workspaceFolder}/.praxis-os/venv/bin/python",
+    "mcp_server_path": "mcp_server"
+  },
+  "installation": {
+    "installed_at": "2025-10-05T10:00:00Z",
+    "version": "1.0.0",
+    "installed_standards": [
+      "python-concurrency",
+      "python-testing",
+      "python-dependencies",
+      "python-code-quality",
+      "python-documentation",
+      "python-virtual-environments"
+    ]
+  },
+  "rag": {
+    "index_path": ".praxis-os/.cache/vector_index",
+    "standards_path": ".praxis-os/standards",
+    "embedding_provider": "local"
+  }
+}

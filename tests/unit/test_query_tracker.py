@@ -239,7 +239,9 @@ class TestQueryTracker:
             timings.append((end - start) * 1000)  # Convert to ms
 
         avg_time_ms = sum(timings) / len(timings)
-        assert avg_time_ms <= 2.0, f"Average record_query time {avg_time_ms:.2f}ms exceeds 2ms target"
+        assert (
+            avg_time_ms <= 2.0
+        ), f"Average record_query time {avg_time_ms:.2f}ms exceeds 2ms target"
 
 
 class TestGetTracker:
@@ -304,4 +306,3 @@ def test_module_exports() -> None:
     assert hasattr(query_tracker, "QueryStats")
     assert hasattr(query_tracker, "QueryTracker")
     assert hasattr(query_tracker, "get_tracker")
-

@@ -15,7 +15,7 @@ One of the most powerful aspects of prAxIs OS is its ability to get smarter abou
 
 **Purpose:** Reusable patterns AI discovers automatically via RAG
 
-**Location:** `.agent-os/standards/development/`
+**Location:** `.praxis-os/standards/development/`
 
 **Access:** `search_standards("pattern")`
 
@@ -30,9 +30,9 @@ One of the most powerful aspects of prAxIs OS is its ability to get smarter abou
 
 **Purpose:** Detailed history of decisions, requirements, and evolution
 
-**Location:** `.agent-os/specs/YYYY-MM-DD-feature-name/`
+**Location:** `.praxis-os/specs/YYYY-MM-DD-feature-name/`
 
-**Access:** `read_file(".agent-os/specs/...")` when needed
+**Access:** `read_file(".praxis-os/specs/...")` when needed
 
 **Example:**
 - You create: Spec for authentication system with design decisions

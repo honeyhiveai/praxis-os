@@ -8,7 +8,7 @@
 
 ## 🎯 What This Step Does
 
-Create the complete `.agent-os/` directory structure that the MCP server requires.
+Create the complete `.praxis-os/` directory structure that the MCP server requires.
 
 **Why this matters**: The MCP server validates that these directories exist at startup. If any are missing, the server will fail to start with a validation error.
 
@@ -21,7 +21,7 @@ Create the complete `.agent-os/` directory structure that the MCP server require
 The MCP server requires exactly these directories:
 
 ```
-.agent-os/
+.praxis-os/
 ├── standards/
 │   └── universal/          # Universal CS fundamentals
 ├── usage/                   # Agent OS usage docs
@@ -36,18 +36,18 @@ The MCP server requires exactly these directories:
 .cursor/                     # Cursor configuration
 ```
 
-**Total**: 7 directories under `.agent-os/` + 1 `.cursor/` directory
+**Total**: 7 directories under `.praxis-os/` + 1 `.cursor/` directory
 
 ---
 
 ## ⚠️ Critical Directory: workflows/
 
-**Most commonly forgotten directory**: `.agent-os/workflows/`
+**Most commonly forgotten directory**: `.praxis-os/workflows/`
 
 The MCP server's `ConfigValidator` explicitly checks for:
-- `.agent-os/standards/`
-- `.agent-os/usage/`
-- `.agent-os/workflows/` ← **If this is missing, server won't start!**
+- `.praxis-os/standards/`
+- `.praxis-os/usage/`
+- `.praxis-os/workflows/` ← **If this is missing, server won't start!**
 
 From `mcp_server/config/validator.py`:
 ```python
@@ -67,14 +67,14 @@ import os
 
 # Create all required directories
 directories = [
-    ".agent-os/standards/universal",
-    ".agent-os/usage",
-    ".agent-os/workflows",          # ← Don't forget this!
-    ".agent-os/specs/review",       # Specs awaiting approval
-    ".agent-os/specs/approved",     # Specs ready to implement
-    ".agent-os/specs/completed",    # Finished implementations
-    ".agent-os/mcp_server",
-    ".agent-os/.cache",
+    ".praxis-os/standards/universal",
+    ".praxis-os/usage",
+    ".praxis-os/workflows",          # ← Don't forget this!
+    ".praxis-os/specs/review",       # Specs awaiting approval
+    ".praxis-os/specs/approved",     # Specs ready to implement
+    ".praxis-os/specs/completed",    # Finished implementations
+    ".praxis-os/mcp_server",
+    ".praxis-os/.cache",
     ".cursor",
 ]
 
@@ -89,27 +89,27 @@ print("\n✅ All directories created")
 
 **Linux / macOS / WSL2**:
 ```bash
-mkdir -p .agent-os/standards/universal
-mkdir -p .agent-os/usage
-mkdir -p .agent-os/workflows
-mkdir -p .agent-os/specs/review
-mkdir -p .agent-os/specs/approved
-mkdir -p .agent-os/specs/completed
-mkdir -p .agent-os/mcp_server
-mkdir -p .agent-os/.cache
+mkdir -p .praxis-os/standards/universal
+mkdir -p .praxis-os/usage
+mkdir -p .praxis-os/workflows
+mkdir -p .praxis-os/specs/review
+mkdir -p .praxis-os/specs/approved
+mkdir -p .praxis-os/specs/completed
+mkdir -p .praxis-os/mcp_server
+mkdir -p .praxis-os/.cache
 mkdir -p .cursor
 ```
 
 **Windows (PowerShell)**:
 ```powershell
-New-Item -ItemType Directory -Force -Path ".agent-os\standards\universal"
-New-Item -ItemType Directory -Force -Path ".agent-os\usage"
-New-Item -ItemType Directory -Force -Path ".agent-os\workflows"
-New-Item -ItemType Directory -Force -Path ".agent-os\specs\review"
-New-Item -ItemType Directory -Force -Path ".agent-os\specs\approved"
-New-Item -ItemType Directory -Force -Path ".agent-os\specs\completed"
-New-Item -ItemType Directory -Force -Path ".agent-os\mcp_server"
-New-Item -ItemType Directory -Force -Path ".agent-os\.cache"
+New-Item -ItemType Directory -Force -Path ".praxis-os\standards\universal"
+New-Item -ItemType Directory -Force -Path ".praxis-os\usage"
+New-Item -ItemType Directory -Force -Path ".praxis-os\workflows"
+New-Item -ItemType Directory -Force -Path ".praxis-os\specs\review"
+New-Item -ItemType Directory -Force -Path ".praxis-os\specs\approved"
+New-Item -ItemType Directory -Force -Path ".praxis-os\specs\completed"
+New-Item -ItemType Directory -Force -Path ".praxis-os\mcp_server"
+New-Item -ItemType Directory -Force -Path ".praxis-os\.cache"
 New-Item -ItemType Directory -Force -Path ".cursor"
 ```
 
@@ -123,14 +123,14 @@ After creating directories, verify they all exist:
 import os
 
 required_dirs = [
-    ".agent-os/standards/universal",
-    ".agent-os/usage",
-    ".agent-os/workflows",       # ← Most important!
-    ".agent-os/specs/review",
-    ".agent-os/specs/approved",
-    ".agent-os/specs/completed",
-    ".agent-os/mcp_server",
-    ".agent-os/.cache",
+    ".praxis-os/standards/universal",
+    ".praxis-os/usage",
+    ".praxis-os/workflows",       # ← Most important!
+    ".praxis-os/specs/review",
+    ".praxis-os/specs/approved",
+    ".praxis-os/specs/completed",
+    ".praxis-os/mcp_server",
+    ".praxis-os/.cache",
     ".cursor",
 ]
 
@@ -157,7 +157,7 @@ else:
 You can also manually check:
 
 ```bash
-ls -la .agent-os/
+ls -la .praxis-os/
 ```
 
 **Expected output**:
@@ -171,7 +171,7 @@ drwxr-xr-x  workflows/      ← Must be present!
 ```
 
 ```bash
-ls -la .agent-os/specs/
+ls -la .praxis-os/specs/
 ```
 
 **Expected output**:
@@ -182,7 +182,7 @@ drwxr-xr-x  completed/      ← Finished implementations
 ```
 
 ```bash
-ls -la .agent-os/standards/
+ls -la .praxis-os/standards/
 ```
 
 **Expected output**:
@@ -211,17 +211,17 @@ pwd    # Should show your project root
 
 **This is normal at this stage!** Directories are empty right now. The next step (02-copy-files.md) will populate them with content.
 
-### Issue: ".agent-os already exists"
+### Issue: ".praxis-os already exists"
 
 **Cause**: Agent OS might already be installed  
 **Options**:
-1. **Update**: Remove old `.agent-os/` and reinstall
+1. **Update**: Remove old `.praxis-os/` and reinstall
 2. **Keep**: If it's a valid installation, skip to validation
 3. **Ask user**: What would they like to do?
 
 ```python
-if os.path.exists(".agent-os"):
-    print("⚠️  .agent-os/ already exists. Options:")
+if os.path.exists(".praxis-os"):
+    print("⚠️  .praxis-os/ already exists. Options:")
     print("1. Remove and reinstall (fresh install)")
     print("2. Keep and skip to validation")
     print("3. Cancel installation")
@@ -233,7 +233,7 @@ if os.path.exists(".agent-os"):
 ## 📊 Progress Check
 
 At this point you should have:
-- ✅ 7 directories under `.agent-os/`
+- ✅ 7 directories under `.praxis-os/`
 - ✅ 1 `.cursor/` directory
 - ✅ All directories are empty (normal)
 - ✅ Validation checkpoint passed

@@ -45,25 +45,25 @@ start_workflow(
 
 The workflow updates:
 
-1. **Universal Standards** (`.agent-os/standards/universal/`)
+1. **Universal Standards** (`.praxis-os/standards/universal/`)
    - Concurrency patterns
    - Architecture patterns
    - Testing strategies
    - Failure modes
    - Security patterns
 
-2. **Usage Documentation** (`.agent-os/usage/`)
+2. **Usage Documentation** (`.praxis-os/usage/`)
    - MCP tool guides
    - Operating model
    - Update procedures
 
-3. **Workflows** (`.agent-os/workflows/`)
+3. **Workflows** (`.praxis-os/workflows/`)
    - `spec_creation_v1`
    - `spec_execution_v1`
    - `agent_os_upgrade_v1`
    - Any new workflows
 
-4. **MCP Server** (`.agent-os/mcp_server/`)
+4. **MCP Server** (`.praxis-os/mcp_server/`)
    - Server code
    - Dependencies
    - Bug fixes
@@ -77,9 +77,9 @@ The workflow updates:
 
 Your customizations are **never** overwritten:
 
-- ✅ **User Specs** (`.agent-os/specs/`) - Completely untouched
-- ✅ **Development Standards** (`.agent-os/standards/development/`) - Your language-specific standards
-- ✅ **Custom Documentation** (`.agent-os/usage/`) - New docs added, yours preserved
+- ✅ **User Specs** (`.praxis-os/specs/`) - Completely untouched
+- ✅ **Development Standards** (`.praxis-os/standards/development/`) - Your language-specific standards
+- ✅ **Custom Documentation** (`.praxis-os/usage/`) - New docs added, yours preserved
 - ✅ **Project Configuration** - `.cursorrules`, `mcp.json`
 
 ---
@@ -100,7 +100,7 @@ Validates everything before starting:
 
 Creates safety net:
 
-- Timestamped backup: `.agent-os.backup.YYYYMMDD_HHMMSS/`
+- Timestamped backup: `.praxis-os.backup.YYYYMMDD_HHMMSS/`
 - Checksum manifest for validation
 - Upgrade lock to prevent concurrent upgrades
 
@@ -157,7 +157,7 @@ If anything goes wrong, automatic rollback restores from backup:
 If any phase fails (2, 3, or 4), the workflow automatically:
 
 1. Stops immediately
-2. Restores from `.agent-os.backup.*/`
+2. Restores from `.praxis-os.backup.*/`
 3. Releases upgrade lock
 4. Reports what failed
 
@@ -171,8 +171,8 @@ If you need to manually rollback:
 # Stop MCP server (restart Cursor)
 
 # Restore from backup
-rm -rf .agent-os
-mv .agent-os.backup.YYYYMMDD_HHMMSS .agent-os
+rm -rf .praxis-os
+mv .praxis-os.backup.YYYYMMDD_HHMMSS .praxis-os
 
 # Restart Cursor to reload MCP server
 ```
@@ -185,7 +185,7 @@ prAxIs OS tracks what's installed:
 
 ```bash
 # Check current version
-cat .agent-os/VERSION.txt
+cat .praxis-os/VERSION.txt
 
 # Shows:
 # version_installed=2025-10-08T12:00:00Z
@@ -224,7 +224,7 @@ If you need manual control:
 ### 1. Backup Current Installation
 
 ```bash
-cp -r .agent-os .agent-os.backup.$(date +%Y%m%d_%H%M%S)
+cp -r .praxis-os .praxis-os.backup.$(date +%Y%m%d_%H%M%S)
 ```
 
 ### 2. Pull Latest Source
@@ -242,23 +242,23 @@ git clone https://github.com/honeyhiveai/agent-os-enhanced.git /tmp/agent-os-lat
 
 ```bash
 # Update standards (prAxIs OS owned)
-rsync -av --delete agent-os-enhanced/universal/standards/ .agent-os/standards/universal/
+rsync -av --delete agent-os-enhanced/universal/standards/ .praxis-os/standards/universal/
 
 # Update usage (preserve user docs)
-rsync -av agent-os-enhanced/universal/usage/ .agent-os/usage/
+rsync -av agent-os-enhanced/universal/usage/ .praxis-os/usage/
 
 # Update workflows
-rsync -av --delete agent-os-enhanced/universal/workflows/ .agent-os/workflows/
+rsync -av --delete agent-os-enhanced/universal/workflows/ .praxis-os/workflows/
 ```
 
 ### 4. Update MCP Server
 
 ```bash
 # Copy server code
-rsync -av --delete agent-os-enhanced/mcp_server/ .agent-os/mcp_server/
+rsync -av --delete agent-os-enhanced/mcp_server/ .praxis-os/mcp_server/
 
 # Update dependencies
-cd .agent-os
+cd .praxis-os
 ./venv/bin/pip install -r mcp_server/requirements.txt
 
 # Restart Cursor
@@ -268,7 +268,7 @@ cd .agent-os
 
 ```bash
 # Check for new required entries
-# See: .agent-os/standards/universal/installation/gitignore-requirements.md
+# See: .praxis-os/standards/universal/installation/gitignore-requirements.md
 ```
 
 ---
@@ -291,8 +291,8 @@ cd .agent-os
 **Fix:**
 ```bash
 # Rebuild virtualenv
-rm -rf .agent-os/venv
-cd .agent-os
+rm -rf .praxis-os/venv
+cd .praxis-os
 python -m venv venv
 ./venv/bin/pip install -r mcp_server/requirements.txt
 
@@ -306,7 +306,7 @@ python -m venv venv
 **Fix:**
 ```bash
 # Remove stale lock
-rm -f .agent-os/.upgrade_lock
+rm -f .praxis-os/.upgrade_lock
 
 # Re-run workflow
 ```
@@ -318,10 +318,10 @@ rm -f .agent-os/.upgrade_lock
 **Fix:**
 ```bash
 # Check backup size
-du -sh .agent-os.backup.*
+du -sh .praxis-os.backup.*
 
 # Safe to delete after 7 days of stable operation
-rm -rf .agent-os.backup.20251001_*
+rm -rf .praxis-os.backup.20251001_*
 ```
 
 **Note:** Backups are NOT committed to git (in `.gitignore`)

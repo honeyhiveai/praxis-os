@@ -201,7 +201,9 @@ class TestExtractSessionIdFromContext:
             timings.append((end - start) * 1000)  # Convert to ms
 
         avg_time_ms = sum(timings) / len(timings)
-        assert avg_time_ms <= 0.1, f"Average extraction time {avg_time_ms:.4f}ms exceeds 0.1ms target"
+        assert (
+            avg_time_ms <= 0.1
+        ), f"Average extraction time {avg_time_ms:.4f}ms exceeds 0.1ms target"
 
 
 class TestHashSessionId:
@@ -266,7 +268,9 @@ class TestHashSessionId:
             timings.append((end - start) * 1000)  # Convert to ms
 
         avg_time_ms = sum(timings) / len(timings)
-        assert avg_time_ms <= 1.0, f"Average hash time {avg_time_ms:.4f}ms exceeds 1ms target"
+        assert (
+            avg_time_ms <= 1.0
+        ), f"Average hash time {avg_time_ms:.4f}ms exceeds 1ms target"
 
 
 class TestCleanupStaleSessions:
@@ -284,7 +288,9 @@ class TestCleanupStaleSessions:
 
         # Create session with recent timestamp
         recent_time = time.time()
-        _session_states["recent_client"] = SessionState("recent_client", 0, recent_time, 1)
+        _session_states["recent_client"] = SessionState(
+            "recent_client", 0, recent_time, 1
+        )
 
         # Clean up sessions older than 300 seconds
         removed_count = cleanup_stale_sessions(300)
@@ -384,4 +390,3 @@ def test_module_exports() -> None:
     assert hasattr(session_id_extractor, "hash_session_id")
     assert hasattr(session_id_extractor, "cleanup_stale_sessions")
     assert hasattr(session_id_extractor, "get_session_stats")
-

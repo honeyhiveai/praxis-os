@@ -33,7 +33,7 @@ export default function SessionEvolution(): React.ReactElement {
           title="Early in Session"
           icon="🌱"
           content={`AI: "Creating file at workspace/feature.md"
-Human: "No, use .agent-os/workspace/design/"`}
+Human: "No, use .praxis-os/workspace/design/"`}
           color="var(--honeyhive-orange-border)"
         />
         
@@ -59,7 +59,7 @@ AI: search_standards("workspace organization")
         <Stage
           title="Late in Session"
           icon="✅"
-          content={`AI: "Creating at .agent-os/workspace/design/YYYY-MM-DD-feature.md"
+          content={`AI: "Creating at .praxis-os/workspace/design/YYYY-MM-DD-feature.md"
 Human: "Correct!"`}
           color="var(--honeyhive-orange)"
         />

@@ -48,7 +48,7 @@ The Cursor agent will follow the installation guide in `installation/` directory
 ```
 your-project/
 ├── .cursorrules              # Universal (26 lines, copied from repo)
-├── .agent-os/
+├── .praxis-os/
 │   ├── standards/
 │   │   ├── universal/        # Copied from this repo
 │   │   └── development/      # Generated for your language
@@ -114,7 +114,7 @@ agent-os-enhanced/
 
 ### What's Generated (Optional, Context-Aware)
 
-- **`.agent-os/standards/development/`**: Language-specific standards (Python: GIL, Go: goroutines, etc.)
+- **`.praxis-os/standards/development/`**: Language-specific standards (Python: GIL, Go: goroutines, etc.)
 - **Project context integration**: References your actual frameworks, tools, and patterns
 
 ### What Gets Updated (Version Releases)
@@ -130,7 +130,7 @@ agent-os-enhanced/
 
 ### True Dogfooding (No Shortcuts)
 
-Our `.agent-os/` directory is a **real installation** with copied files (not symlinks):
+Our `.praxis-os/` directory is a **real installation** with copied files (not symlinks):
 
 ```
 agent-os-enhanced/
@@ -139,7 +139,7 @@ agent-os-enhanced/
 │   ├── usage/
 │   └── workflows/
 │
-├── .agent-os/                    # ← LOCAL INSTALL (like consumers)
+├── .praxis-os/                    # ← LOCAL INSTALL (like consumers)
 │   ├── standards/universal/     # ✅ COPIED from ../universal/standards/
 │   ├── usage/                   # ✅ COPIED from ../universal/usage/
 │   ├── workflows/               # ✅ COPIED from ../universal/workflows/
@@ -161,8 +161,8 @@ agent-os-enhanced/
 # 1. Edit source
 vim universal/standards/ai-safety/production-code-checklist.md
 
-# 2. Copy to .agent-os/ (like consumers do)
-cp -r universal/standards .agent-os/standards/universal
+# 2. Copy to .praxis-os/ (like consumers do)
+cp -r universal/standards .praxis-os/standards/universal
 
 # 3. File watcher auto-rebuilds RAG index
 # (no manual rebuild needed!)
@@ -171,7 +171,7 @@ cp -r universal/standards .agent-os/standards/universal
 # Query MCP to verify changes
 
 # 5. Commit both
-git add universal/ .agent-os/standards/universal/
+git add universal/ .praxis-os/standards/universal/
 git commit -m "docs: update checklist"
 ```
 
@@ -180,7 +180,7 @@ git commit -m "docs: update checklist"
 - Catches bugs consumers would hit
 - No special shortcuts = real dogfooding
 
-See `.agent-os/standards/development/agent-os-architecture.md` for detailed explanation and `CONTRIBUTING.md` for contribution guidelines.
+See `.praxis-os/standards/development/agent-os-architecture.md` for detailed explanation and `CONTRIBUTING.md` for contribution guidelines.
 
 ---
 
@@ -245,7 +245,7 @@ Agent OS now supports **dual-transport mode**, enabling seamless multi-agent wor
 │  Sub-Agents (Cline, Aider, Custom Scripts)         │
 │        │                                            │
 │        │ Auto-discovery via                         │
-│        │ .agent-os/.mcp_server_state.json           │
+│        │ .praxis-os/.mcp_server_state.json           │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -271,7 +271,7 @@ Sub-agents discover the MCP server automatically:
 ```python
 from mcp_server.sub_agents import discover_mcp_server
 
-# Find the server (reads .agent-os/.mcp_server_state.json)
+# Find the server (reads .praxis-os/.mcp_server_state.json)
 url = discover_mcp_server()
 if url:
     # Connect and use tools
@@ -280,7 +280,7 @@ if url:
 
 #### 📊 State File
 
-Server writes connection info to `.agent-os/.mcp_server_state.json`:
+Server writes connection info to `.praxis-os/.mcp_server_state.json`:
 
 ```json
 {
@@ -303,7 +303,7 @@ Server writes connection info to `.agent-os/.mcp_server_state.json`:
 {
   "mcpServers": {
     "agent-os-rag": {
-      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "mcp_server",
@@ -342,7 +342,7 @@ url = discover_mcp_server()
 
 ### Configuration Examples
 
-See `.agent-os/specs/2025-10-11-mcp-dual-transport/IDE-CONFIGURATION.md` for:
+See `.praxis-os/specs/2025-10-11-mcp-dual-transport/IDE-CONFIGURATION.md` for:
 - Cursor setup
 - Windsurf setup
 - Claude Desktop setup

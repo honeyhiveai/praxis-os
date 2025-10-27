@@ -26,7 +26,7 @@ async def handle_start(
     target_file: Optional[str] = None,
     options: Optional[Dict[str, Any]] = None,
     workflow_engine: Optional[Any] = None,
-    **kwargs: Any,  # Accept unused parameters from dispatcher
+    **_kwargs: Any,  # Accept unused parameters from dispatcher
 ) -> Dict[str, Any]:
     """
     Handle start action.
@@ -35,10 +35,12 @@ async def handle_start(
     Validates inputs and delegates to WorkflowEngine.
 
     Args:
-        workflow_type: Workflow identifier (e.g., "test_generation_v3", "spec_execution_v1")
+        workflow_type: Workflow identifier (e.g., "test_generation_v3",
+            "spec_execution_v1")
         target_file: Target file path (validated for security)
         options: Optional workflow options (e.g., spec_path for dynamic workflows)
         workflow_engine: WorkflowEngine instance (injected by dispatcher)
+        **_kwargs: Unused parameters from dispatcher (accepted for compatibility)
 
     Returns:
         Dictionary with session info and Phase 1 content

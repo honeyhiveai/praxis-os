@@ -91,10 +91,10 @@ import AuthenticationExample from '@site/src/components/AuthenticationExample';
 
 ```bash
 # Count RAG queries per session
-grep "search_standards" .agent-os/logs/session-*.log | wc -l
+grep "search_standards" .praxis-os/logs/session-*.log | wc -l
 
 # Verify standards influenced implementation
-diff <(grep "import" auth.py) <(grep "import" .agent-os/standards/auth-patterns.md)
+diff <(grep "import" auth.py) <(grep "import" .praxis-os/standards/auth-patterns.md)
 ```
 
 **Target:** AI queries standards before implementing (not after failure)
@@ -107,13 +107,13 @@ diff <(grep "import" auth.py) <(grep "import" .agent-os/standards/auth-patterns.
 
 ```bash
 # Phase skip rate
-grep "skip phase" .agent-os/logs/ || echo "0 skips"
+grep "skip phase" .praxis-os/logs/ || echo "0 skips"
 
 # Evidence completeness  
-jq '.phases[] | select(.evidence == null)' .agent-os/sessions/*/state.json | wc -l
+jq '.phases[] | select(.evidence == null)' .praxis-os/sessions/*/state.json | wc -l
 
 # Quality at phase boundaries
-jq '.phases[] | .validation_result' .agent-os/sessions/*/state.json
+jq '.phases[] | .validation_result' .praxis-os/sessions/*/state.json
 ```
 
 **Target:** 0% phase skips, 100% evidence provided, all validations pass
@@ -188,7 +188,7 @@ pytest tests/ --cov=src --cov-report=json | jq '.totals.percent_covered'
 **Behavioral compliance:**
 ```bash
 # Framework violations
-grep -r "bypass\|skip\|override" .agent-os/logs/ | wc -l  # Target: 0
+grep -r "bypass\|skip\|override" .praxis-os/logs/ | wc -l  # Target: 0
 
 # Quality gate bypasses
 git log --all-match --grep="no-verify" --since="30 days" | wc -l  # Target: 0

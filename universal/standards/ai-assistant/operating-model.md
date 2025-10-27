@@ -30,7 +30,7 @@
 1. ✅ YOU ARE CODE AUTHOR (100% of code)
 2. ✅ QUERY LIBERALLY (5-10+ times per task)
 3. ✅ USE WORKFLOWS FOR SPECS (don't manually implement)
-4. ✅ NEVER READ .agent-os/ FILES DIRECTLY (use RAG)
+4. ✅ NEVER READ .praxis-os/ FILES DIRECTLY (use RAG)
 5. ✅ ITERATE UNTIL DONE (tests pass, linter clean)
 
 ---
@@ -63,7 +63,7 @@
 
 2. **✅ QUERY LIBERALLY** (search_standards is your primary tool)
    - Use search_standards() 5-10 times per task minimum
-   - NEVER read_file(".agent-os/standards/..." or "universal/...")
+   - NEVER read_file(".praxis-os/standards/..." or "universal/...")
    - Query before implementing, during work, when uncertain
 
 3. **✅ USE WORKFLOWS FOR SPECS** (the main vehicle of Agent OS)
@@ -71,7 +71,7 @@
    - Don't manually read tasks.md and implement
    - The workflow handles phase-gating, validation, evidence
 
-4. **✅ NEVER READ .agent-os/ FILES DIRECTLY** (use MCP/RAG instead)
+4. **✅ NEVER READ .praxis-os/ FILES DIRECTLY** (use MCP/RAG instead)
    - Standards are indexed for semantic search
    - Query returns targeted 2KB chunks, not 50KB files
 
@@ -190,7 +190,7 @@ AI: [Reads requirements, analyzes project, queries standards]
     - Database schema
     - Testing strategy
     
-    Creating spec in .agent-os/specs/2025-10-05-jwt-authentication/..."
+    Creating spec in .praxis-os/specs/2025-10-05-jwt-authentication/..."
 ```
 
 **AI creates:**

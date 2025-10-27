@@ -1,0 +1,59 @@
+{
+  "session_id": "d89a34b3-5536-40c6-bcb9-15cc1aced0c6",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "mcp_server/core/query_tracker.py",
+  "current_phase": 2,
+  "completed_phases": [
+    0,
+    1
+  ],
+  "phase_artifacts": {
+    "0": {
+      "phase_number": 0,
+      "evidence": {
+        "supporting_docs_accessible": true,
+        "document_index_created": true,
+        "insights_extracted": {
+          "requirements": 18,
+          "design": 15,
+          "implementation": 12
+        },
+        "total_documents": 1,
+        "processing_mode": "embedded",
+        "conflicts_identified": 0,
+        "high_priority_items": 5
+      },
+      "outputs": {},
+      "commands_executed": [],
+      "timestamp": "2025-10-21T11:27:52.481713"
+    },
+    "1": {
+      "phase_number": 1,
+      "evidence": {
+        "business_goals_defined": 4,
+        "user_stories_documented": 8,
+        "functional_requirements_count": 13,
+        "nonfunctional_requirements_count": 18,
+        "out_of_scope_items": 12,
+        "requirements_traceable": true,
+        "srd_complete": true
+      },
+      "outputs": {},
+      "commands_executed": [],
+      "timestamp": "2025-10-21T11:34:36.671799"
+    }
+  },
+  "checkpoints": {
+    "0": "passed",
+    "1": "passed"
+  },
+  "created_at": "2025-10-21T11:24:51.449996",
+  "updated_at": "2025-10-21T11:34:36.671815",
+  "metadata": {
+    "supporting_docs": [
+      "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/workspace/analysis/query-gamification-system-2025-10-21.md"
+    ],
+    "embed_supporting_docs": true,
+    "feature_name": "query-gamification-system"
+  }
+}

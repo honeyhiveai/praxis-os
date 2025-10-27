@@ -1,0 +1,66 @@
+{
+  "session_id": "6bc23573-0698-4044-8063-5bf2aa32d101",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "aos-workflow-tool",
+  "current_phase": 2,
+  "completed_phases": [
+    0,
+    1
+  ],
+  "phase_artifacts": {
+    "0": {
+      "phase_number": 0,
+      "evidence": {
+        "spec_directory_created": true,
+        "spec_dir": "review/2025-10-22-aos-workflow-tool",
+        "supporting_docs_accessible": true,
+        "document_index_created": true,
+        "insights_extracted": {
+          "requirements": 15,
+          "design": 20,
+          "implementation": 12
+        },
+        "total_documents": 1,
+        "processing_mode": "embedded",
+        "conflicts_identified": 0,
+        "high_priority_items": 5
+      },
+      "outputs": {},
+      "commands_executed": [],
+      "timestamp": "2025-10-22T18:22:40.874704"
+    },
+    "1": {
+      "phase_number": 1,
+      "evidence": {
+        "srd_created": true,
+        "business_goals_defined": 3,
+        "user_stories_documented": 7,
+        "functional_requirements": 10,
+        "nonfunctional_requirements": 18,
+        "out_of_scope_clarified": true,
+        "requirements_categories": [
+          "Performance",
+          "Reliability",
+          "Maintainability",
+          "Compatibility",
+          "Usability",
+          "Scalability"
+        ],
+        "traceability_matrix_complete": true,
+        "supporting_docs_referenced": true
+      },
+      "outputs": {},
+      "commands_executed": [],
+      "timestamp": "2025-10-22T18:26:32.504691"
+    }
+  },
+  "checkpoints": {
+    "0": "passed",
+    "1": "passed"
+  },
+  "created_at": "2025-10-22T18:20:51.340518",
+  "updated_at": "2025-10-22T18:26:32.504710",
+  "metadata": {
+    "supporting_doc_path": ".praxis-os/workspace/analysis/consolidated-workflow-tool-design-2025-10-15.md"
+  }
+}

@@ -30,7 +30,7 @@ Create README.md with full template structure (document index, quick start by ro
 
 ```bash
 # Copy template and customize
-cat core/readme-template.md > .agent-os/specs/{SPEC_DIR}/README.md
+cat core/readme-template.md > .praxis-os/specs/{SPEC_DIR}/README.md
 # Then edit with project specifics
 ```
 

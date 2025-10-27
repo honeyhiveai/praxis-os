@@ -117,51 +117,56 @@ class AgentOSFileWatcher(FileSystemEventHandler):
     def check_rebuild_flag(self) -> None:
         """
         Check for .rebuild_index flag and trigger incremental rebuild if present.
-        
+
         This flag is created by the install script to schedule a RAG index build
         on MCP server startup. The incremental logic will detect all new files
         (including development standards created by LLM) and index them efficiently.
-        
+
         The flag is removed after the rebuild completes.
         """
         flag_path = self.standards_path / ".rebuild_index"
-        
+
         if not flag_path.exists():
             return  # No flag, nothing to do
-        
+
         logger.info("🔄 .rebuild_index flag detected - building RAG index...")
-        
+
         try:
             # Import here to avoid circular dependency
             sys.path.insert(0, str(self.index_path.parent.parent))
             from scripts.build_rag_index import IndexBuilder
-            
+
             builder = IndexBuilder(
                 index_path=self.index_path,
                 standards_path=self.standards_path,
                 embedding_provider=self.embedding_provider,
             )
-            
+
             # Incremental build - will index all files if no metadata exists,
             # otherwise only new/modified files
             result = builder.build_index(force=False, incremental=True)
-            
+
             # Reload RAG engine with thread-safe locking
             if self.rag_engine and result["status"] == "success":
                 self.rag_engine.reload_index()
-                logger.info("✅ Index built and RAG engine loaded with %d chunks", 
-                           result.get("total_chunks", 0))
+                logger.info(
+                    "✅ Index built and RAG engine loaded with %d chunks",
+                    result.get("total_chunks", 0),
+                )
             elif result["status"] == "success":
-                logger.info("✅ Index built with %d chunks", 
-                           result.get("total_chunks", 0))
+                logger.info(
+                    "✅ Index built with %d chunks", result.get("total_chunks", 0)
+                )
             else:
-                logger.warning("⚠️  Index build had issues: %s",
-                             result.get("message", "Unknown error"))
-            
+                logger.warning(
+                    "⚠️  Index build had issues: %s",
+                    result.get("message", "Unknown error"),
+                )
+
             # Remove flag after successful build
             flag_path.unlink()
             logger.info("✅ .rebuild_index flag removed - index is ready")
-            
+
         except Exception as e:
             logger.error("❌ Failed to build index from flag: %s", e, exc_info=True)
             # Don't remove flag on error so it can be retried

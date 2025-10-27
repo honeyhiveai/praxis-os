@@ -11,7 +11,7 @@ You will generate 6 Python-specific standard files by:
 2. Analyzing the target Python project
 3. Applying Python-specific context (GIL, threading, pytest, tox, venvs, etc.)
 4. Integrating project-specific patterns (detected frameworks, tools)
-5. Creating `.agent-os/config.json` with venv paths and test commands
+5. Creating `.praxis-os/config.json` with venv paths and test commands
 
 ## File 1: `python-concurrency.md`
 
@@ -423,7 +423,7 @@ Document the **two-venv architecture** required for Python projects using Agent 
 
 #### Two Separate Virtual Environments
 
-**1. Agent OS MCP Server venv** (`.agent-os/venv/`)
+**1. Agent OS MCP Server venv** (`.praxis-os/venv/`)
 - Purpose: Run Agent OS MCP server in isolation
 - Dependencies: lancedb, mcp, sentence-transformers, watchdog, honeyhive
 - Used by: Cursor's MCP integration (configured in `.cursor/mcp.json`)
@@ -448,7 +448,7 @@ Python projects using Agent OS require **two separate virtual environments**.
 
 ### 1. Agent OS MCP Server venv
 
-**Location**: `.agent-os/venv/`
+**Location**: `.praxis-os/venv/`
 
 **Purpose**: Isolated Python environment for Agent OS MCP server
 
@@ -465,7 +465,7 @@ Python projects using Agent OS require **two separate virtual environments**.
 {
   "mcpServers": {
     "agent-os-rag": {
-      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"]
     }
   }
@@ -492,7 +492,7 @@ Python projects using Agent OS require **two separate virtual environments**.
 
 ## Configuration File
 
-Create `.agent-os/config.json`:
+Create `.praxis-os/config.json`:
 ```json
 {
   "project": {
@@ -503,8 +503,8 @@ Create `.agent-os/config.json`:
     "test_command": "tox" or "pytest tests/"
   },
   "agent_os": {
-    "venv_path": ".agent-os/venv",
-    "mcp_python": "${workspaceFolder}/.agent-os/venv/bin/python"
+    "venv_path": ".praxis-os/venv",
+    "mcp_python": "${workspaceFolder}/.praxis-os/venv/bin/python"
   }
 }
 ```
@@ -541,7 +541,7 @@ tox
 
 ### When to Use Agent OS venv (NEVER directly)
 
-❌ **The AI should NEVER directly use `.agent-os/venv/`**
+❌ **The AI should NEVER directly use `.praxis-os/venv/`**
 - It's managed automatically by Cursor
 - Only used for MCP server process
 
@@ -549,18 +549,18 @@ tox
 
 ### Issue: Tests fail with import errors
 **Cause**: Tests running with Agent OS venv instead of project venv
-**Solution**: Verify `.agent-os/config.json` has correct project venv path
+**Solution**: Verify `.praxis-os/config.json` has correct project venv path
 
 ### Issue: MCP server fails to start
 **Cause**: Agent OS venv missing/corrupted
-**Solution**: Recreate with `python -m venv .agent-os/venv --clear`
+**Solution**: Recreate with `python -m venv .praxis-os/venv --clear`
 
 ## Best Practices
 
 1. **Never mix environments**: Keep Agent OS and project dependencies separate
 2. **Use absolute paths**: Store absolute paths in config for reliability
 3. **Document in README**: Explain two-venv architecture to team
-4. **Git ignore both**: Add both `.agent-os/venv/` and project venv to `.gitignore`
+4. **Git ignore both**: Add both `.praxis-os/venv/` and project venv to `.gitignore`
 ```
 
 ### Installation Detection Steps
@@ -585,7 +585,7 @@ When generating this file:
    - Ask user if they want to create .venv
    - Or ask for path to existing venv
 
-4. **Create `.agent-os/config.json`:**
+4. **Create `.praxis-os/config.json`:**
    - Store both venv paths (absolute)
    - Store Python/pytest/pip executable paths
    - Determine test_command ("tox" if tox.ini exists, otherwise "pytest tests/")
@@ -612,12 +612,12 @@ When generating this file:
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/python-concurrency.md`
-   - `.agent-os/standards/development/python-testing.md` (with tox protocol at top if tox.ini detected)
-   - `.agent-os/standards/development/python-dependencies.md`
-   - `.agent-os/standards/development/python-code-quality.md`
-   - `.agent-os/standards/development/python-documentation.md`
-   - `.agent-os/standards/development/python-virtual-environments.md` (two-venv architecture)
+   - `.praxis-os/standards/development/python-concurrency.md`
+   - `.praxis-os/standards/development/python-testing.md` (with tox protocol at top if tox.ini detected)
+   - `.praxis-os/standards/development/python-dependencies.md`
+   - `.praxis-os/standards/development/python-code-quality.md`
+   - `.praxis-os/standards/development/python-documentation.md`
+   - `.praxis-os/standards/development/python-virtual-environments.md` (two-venv architecture)
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

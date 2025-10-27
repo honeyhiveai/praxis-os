@@ -2,7 +2,7 @@
 
 **Date**: 2025-10-02  
 **Purpose**: Identify gaps between current DSL workflow implementation and established Agent OS best practices  
-**Reference**: `/python-sdk/.agent-os/standards/ai-assistant/` methodologies
+**Reference**: `/python-sdk/.praxis-os/standards/ai-assistant/` methodologies
 
 ---
 
@@ -92,7 +92,7 @@ Summary: 14/28 phase files violate Tier 1 constraint (50% non-compliance)
 
 **Current Structure**:
 ```
-.agent-os/standards/provider-schema-extraction/
+.praxis-os/standards/provider-schema-extraction/
 ├── WORKFLOW_ENTRY_POINT.md     # Mixed purpose
 ├── README.md                     # Mixed purpose (too large)
 ├── phases/*/                     # Execution files (too large)
@@ -101,7 +101,7 @@ Summary: 14/28 phase files violate Tier 1 constraint (50% non-compliance)
 
 **Expected Structure** (from python-sdk pattern):
 ```
-.agent-os/standards/provider-schema-extraction/
+.praxis-os/standards/provider-schema-extraction/
 ├── core/
 │   └── command-language-glossary.md      # TIER 1: Must-read
 ├── WORKFLOW_ENTRY_POINT.md              # TIER 1: ≤100 lines, routing
@@ -327,8 +327,8 @@ Based on python-sdk V3 workflow results:
 
 ### **1. Create Command Language Glossary (HIGH PRIORITY)**
 ```bash
-cp /python-sdk/.agent-os/standards/ai-assistant/code-generation/tests/v3/core/command-language-glossary.md \
-   /honeyhive-dsl/.agent-os/standards/command-language-glossary.md
+cp /python-sdk/.praxis-os/standards/ai-assistant/code-generation/tests/v3/core/command-language-glossary.md \
+   /honeyhive-dsl/.praxis-os/standards/command-language-glossary.md
 ```
 
 ### **2. Update WORKFLOW_ENTRY_POINT.md (HIGH PRIORITY)**
@@ -339,12 +339,12 @@ Add at top:
 
 ### **3. Audit File Sizes (HIGH PRIORITY)**
 ```bash
-find .agent-os/standards/provider-schema-extraction/phases -name "*.md" -exec wc -l {} \;
+find .praxis-os/standards/provider-schema-extraction/phases -name "*.md" -exec wc -l {} \;
 ```
 
 ### **4. Create Tier 2 Methodology Directory (MEDIUM PRIORITY)**
 ```bash
-mkdir -p .agent-os/standards/provider-schema-extraction/methodology/
+mkdir -p .praxis-os/standards/provider-schema-extraction/methodology/
 ```
 
 ---

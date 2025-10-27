@@ -29,7 +29,7 @@ export default function DataFlowDiagram(): React.ReactElement {
       
       <div className={styles.flowBox}>
         <span className={styles.flowIcon}>📁</span>
-        <span className={styles.flowLabel}>.agent-os/</span>
+        <span className={styles.flowLabel}>.praxis-os/</span>
       </div>
     </div>
   );

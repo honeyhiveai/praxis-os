@@ -29,7 +29,7 @@ The Cursor agent will:
 ```
 your-project/
 ├── .cursorrules                  # 26 lines - AI behavioral triggers
-├── .agent-os/
+├── .praxis-os/
 │   ├── standards/
 │   │   ├── universal/            # Copied from repo
 │   │   │   ├── concurrency/      # Race conditions, deadlocks, etc.
@@ -75,9 +75,9 @@ Cursor agent analyzes your project:
 
 ```bash
 # From repo → your project
-cp -r agent-os-enhanced/universal/standards/ .agent-os/standards/universal/
-cp -r agent-os-enhanced/universal/usage/ .agent-os/usage/
-cp -r agent-os-enhanced/universal/workflows/ .agent-os/workflows/
+cp -r agent-os-enhanced/universal/standards/ .praxis-os/standards/universal/
+cp -r agent-os-enhanced/universal/usage/ .praxis-os/usage/
+cp -r agent-os-enhanced/universal/workflows/ .praxis-os/workflows/
 ```
 
 **What's copied:**
@@ -95,7 +95,7 @@ Cursor agent generates standards for your specific language:
 **Python project example:**
 ```bash
 # Cursor agent generates:
-.agent-os/standards/development/
+.praxis-os/standards/development/
 ├── python-concurrency.md        # GIL, threading, asyncio
 ├── python-testing.md            # pytest, unittest, coverage
 ├── python-architecture.md       # FastAPI/Django patterns
@@ -114,10 +114,10 @@ Cursor agent generates standards for your specific language:
 
 ```bash
 # Copy MCP server code
-cp -r agent-os-enhanced/mcp_server/ .agent-os/mcp_server/
+cp -r agent-os-enhanced/mcp_server/ .praxis-os/mcp_server/
 
 # Create virtualenv
-cd .agent-os
+cd .praxis-os
 python -m venv venv
 
 # Install dependencies
@@ -140,7 +140,7 @@ Create `.cursor/mcp.json`:
 {
   "mcpServers": {
     "agent-os-rag": {
-      "command": "${workspaceFolder}/.agent-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "mcp_server",
@@ -151,7 +151,7 @@ Create `.cursor/mcp.json`:
       ],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.agent-os",
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [
@@ -185,8 +185,8 @@ First time the MCP server starts, it builds the vector index:
 ```python
 # Auto-runs on first startup
 Building RAG index...
-- Scanning .agent-os/standards/
-- Scanning .agent-os/workflows/
+- Scanning .praxis-os/standards/
+- Scanning .praxis-os/workflows/
 - Chunking markdown files
 - Generating embeddings
 - Building vector index
@@ -216,7 +216,7 @@ Should return relevant chunks from universal/development standards.
 
 ```bash
 # Check state file
-cat .agent-os/.mcp_server_state.json
+cat .praxis-os/.mcp_server_state.json
 
 # Should show:
 # - transport: "dual"
@@ -244,10 +244,10 @@ Should initialize workflow and show Phase 0.
 
 ```bash
 # Check files were copied
-ls -la .agent-os/standards/universal/concurrency/
+ls -la .praxis-os/standards/universal/concurrency/
 # Should see: race-conditions.md, deadlocks.md, etc.
 
-ls -la .agent-os/standards/development/
+ls -la .praxis-os/standards/development/
 # Should see language-specific files
 ```
 
@@ -283,11 +283,11 @@ git clone https://github.com/honeyhiveai/agent-os-enhanced.git
 # 2. Copy to your project
 cd your-project
 cp agent-os-enhanced/.cursorrules .
-cp -r agent-os-enhanced/universal .agent-os/standards/universal
-cp -r agent-os-enhanced/mcp_server .agent-os/mcp_server
+cp -r agent-os-enhanced/universal .praxis-os/standards/universal
+cp -r agent-os-enhanced/mcp_server .praxis-os/mcp_server
 
 # 3. Setup MCP server
-cd .agent-os
+cd .praxis-os
 python -m venv venv
 ./venv/bin/pip install -r mcp_server/requirements.txt
 
@@ -316,7 +316,7 @@ cat ~/.cursor/logs/mcp.log
 
 ```bash
 # Manual rebuild
-cd .agent-os
+cd .praxis-os
 ./venv/bin/python -c "
 from mcp_server.rag_engine import RAGEngine
 engine = RAGEngine(project_root='.')
@@ -330,7 +330,7 @@ Cursor agent may not have generated them. Manually create:
 
 ```bash
 # Python example
-cp agent-os-enhanced/language-instructions/python.md .agent-os/
+cp agent-os-enhanced/language-instructions/python.md .praxis-os/
 # Follow instructions to generate standards
 ```
 

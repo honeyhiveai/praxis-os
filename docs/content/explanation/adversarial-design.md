@@ -186,7 +186,7 @@ prAxIs OS applies adversarial design at three levels:
 **Phase checkpoints require proof artifacts:**
 
 ```yaml
-# .agent-os/workflows/spec_execution_v1/phases/3/gate-definition.yaml
+# .praxis-os/workflows/spec_execution_v1/phases/3/gate-definition.yaml
 evidence_required:
   implementation_files:
     type: array
@@ -348,8 +348,8 @@ AI agents want to:
 ## Further Reading
 
 **From the Python SDK development:**
-- [Operating Model](https://github.com/honeyhiveai/python-sdk/blob/main/.agent-os/standards/ai-assistant/OPERATING-MODEL.md) - AI as code author paradigm
-- [AI-Assisted Development Case Study](https://github.com/honeyhiveai/python-sdk/blob/main/.agent-os/standards/ai-assistant/AI-ASSISTED-DEVELOPMENT-PLATFORM-CASE-STUDY.md) - Where this methodology originated
+- [Operating Model](https://github.com/honeyhiveai/python-sdk/blob/main/.praxis-os/standards/ai-assistant/OPERATING-MODEL.md) - AI as code author paradigm
+- [AI-Assisted Development Case Study](https://github.com/honeyhiveai/python-sdk/blob/main/.praxis-os/standards/ai-assistant/AI-ASSISTED-DEVELOPMENT-PLATFORM-CASE-STUDY.md) - Where this methodology originated
 
 **Quote from the case study:**
 

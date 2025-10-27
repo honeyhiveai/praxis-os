@@ -119,7 +119,7 @@ Returns: ...
 ```markdown
 ❌ Don't recreate:
 "SOLID Principles" or "Test Pyramid"
-→ Already in `.agent-os/standards/universal/`
+→ Already in `.praxis-os/standards/universal/`
 ```
 
 **High-Level Overview:**
@@ -224,7 +224,7 @@ search_standards("testing strategies")
 
 AI writes the markdown file following learned patterns:
 
-**File location:** `.agent-os/standards/development/[topic].md`
+**File location:** `.praxis-os/standards/development/[topic].md`
 
 **Structure:**
 
@@ -378,7 +378,7 @@ error codes, structured errors, consistent error format
 
 Verify the file exists:
 ```bash
-ls .agent-os/standards/development/[your-standard].md
+ls .praxis-os/standards/development/[your-standard].md
 ```
 
 ### 2. RAG Indexed
@@ -537,8 +537,8 @@ Include version info in standard:
 Don't delete—archive:
 
 ```bash
-mv .agent-os/standards/development/old-pattern.md \
-   .agent-os/standards/development/archived/old-pattern.md
+mv .praxis-os/standards/development/old-pattern.md \
+   .praxis-os/standards/development/archived/old-pattern.md
 ```
 
 Add note in archived file:
@@ -703,7 +703,7 @@ because our API serves mobile clients with limited connectivity.
 For complex topics, organize as:
 
 ```
-.agent-os/standards/development/
+.praxis-os/standards/development/
   authentication/
     _index.md          # Overview with links
     jwt-patterns.md    # JWT specifics
@@ -718,7 +718,7 @@ For complex topics, organize as:
 Organize by domain:
 
 ```
-.agent-os/standards/development/
+.praxis-os/standards/development/
   api/
     error-handling.md
     pagination.md

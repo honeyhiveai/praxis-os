@@ -528,11 +528,11 @@ See [examples/](./examples/) directory
    - Include code examples
 
 4. **Create files**
-   - `.agent-os/standards/development/javascript-concurrency.md`
-   - `.agent-os/standards/development/javascript-testing.md`
-   - `.agent-os/standards/development/javascript-dependencies.md`
-   - `.agent-os/standards/development/javascript-code-quality.md`
-   - `.agent-os/standards/development/javascript-documentation.md`
+   - `.praxis-os/standards/development/javascript-concurrency.md`
+   - `.praxis-os/standards/development/javascript-testing.md`
+   - `.praxis-os/standards/development/javascript-dependencies.md`
+   - `.praxis-os/standards/development/javascript-code-quality.md`
+   - `.praxis-os/standards/development/javascript-documentation.md`
 
 5. **Cross-reference universal standards**
    - Link back to `../../universal/standards/` files

@@ -101,7 +101,7 @@ AI: search_standards("how to organize feature design")
             icon: '💾',
             content: (
               <pre className={styles.code}>
-{`Design doc written to: .agent-os/workspace/design/YYYY-MM-DD-feature.md
+{`Design doc written to: .praxis-os/workspace/design/YYYY-MM-DD-feature.md
 Preserves: Why this approach, what alternatives considered, key decisions`}
               </pre>
             ),
@@ -158,7 +158,7 @@ Result: Detailed, executable specification`}
             icon: '💾',
             content: (
               <pre className={styles.code}>
-{`Spec written to: .agent-os/specs/YYYY-MM-DD-feature-spec.md
+{`Spec written to: .praxis-os/specs/YYYY-MM-DD-feature-spec.md
 If new patterns emerge → Update standards for next time`}
               </pre>
             ),

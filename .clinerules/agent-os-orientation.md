@@ -26,12 +26,12 @@ AFTER failures: search_standards("debugging X")
 
 ## File Operations
 
-❌ NEVER: read_file(".agent-os/standards/...")
-❌ NEVER: read_file(".agent-os/workflows/...")
-❌ NEVER: read_file(".agent-os/usage/...")
+❌ NEVER: read_file(".praxis-os/standards/...")
+❌ NEVER: read_file(".praxis-os/workflows/...")
+❌ NEVER: read_file(".praxis-os/usage/...")
 ✅ ALWAYS: search_standards() for indexed content
 
-✅ DO: read_file(".agent-os/specs/...") - your specs, not indexed
+✅ DO: read_file(".praxis-os/specs/...") - your specs, not indexed
 
 ## Git Safety
 

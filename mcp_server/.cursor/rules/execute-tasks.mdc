@@ -13,7 +13,7 @@ Execute tasks from a specification's tasks.md file, following the breakdown syst
 
 ### 1. Locate Spec
 ```
-Find: .agent-os/specs/YYYY-MM-DD-feature-name/
+Find: .praxis-os/specs/YYYY-MM-DD-feature-name/
 Required files:
   - tasks.md (task breakdown)
   - specs.md (technical design)

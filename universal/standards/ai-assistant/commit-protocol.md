@@ -665,7 +665,7 @@ All quality gates now pass. Ready to commit.
 
 ### Creating Commit Protocol Addendum
 
-**File**: `.agent-os/standards/development/commit-protocol-addendum.md`
+**File**: `.praxis-os/standards/development/commit-protocol-addendum.md`
 
 **Example Contents**:
 
@@ -836,5 +836,5 @@ wip
 
 **This is a universal standard. It applies to all projects using prAxIs OS, regardless of programming language or technology stack.**
 
-**For project-specific commit requirements, see `.agent-os/standards/development/commit-protocol-addendum.md` in your project.**
+**For project-specific commit requirements, see `.praxis-os/standards/development/commit-protocol-addendum.md` in your project.**
 

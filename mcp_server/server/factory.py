@@ -109,7 +109,7 @@ class ServerFactory:
         logger.info("⚠️  RAG index not found, building...")
 
         try:
-            # Import IndexBuilder from .agent-os/scripts/
+            # Import IndexBuilder from .praxis-os/scripts/
             sys.path.insert(0, str(self.config.base_path))
             from scripts.build_rag_index import IndexBuilder
 
@@ -196,7 +196,7 @@ class ServerFactory:
         self.observers.append(observer)
 
         logger.info("✅ File watchers started (hot reload enabled)")
-        
+
         # Check for .rebuild_index flag (created by install script)
         watcher.check_rebuild_flag()
 

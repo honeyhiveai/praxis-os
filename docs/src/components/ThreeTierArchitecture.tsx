@@ -105,7 +105,7 @@ export default function ThreeTierArchitecture(): React.ReactElement {
         </div>
         <div className={styles.tierContent}>
           <div className={styles.fileTree}>
-            <div className={styles.directory}>.agent-os/specs/2025-10-12-user-auth/</div>
+            <div className={styles.directory}>.praxis-os/specs/2025-10-12-user-auth/</div>
             <div className={styles.fileList}>
               <div className={styles.fileItem}>
                 <span className={styles.fileIcon}>✨</span>
