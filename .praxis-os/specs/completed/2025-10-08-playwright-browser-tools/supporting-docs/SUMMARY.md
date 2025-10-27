@@ -8,7 +8,7 @@
 
 ## 🎯 What We're Building
 
-**Add Playwright browser automation tools to Agent OS Enhanced MCP server** to enable:
+**Add Playwright browser automation tools to prAxIs OS MCP server** to enable:
 - ✅ Dark mode emulation for documentation testing
 - ✅ Full browser context control (viewport, geolocation, permissions)
 - ✅ Comprehensive screenshot capabilities
@@ -27,7 +27,7 @@
 - Cannot validate documentation sites properly
 - Cannot test dark mode themes
 - Limited browser automation for testing workflows
-- Agent OS Enhanced should be self-sufficient for web testing
+- prAxIs OS should be self-sufficient for web testing
 
 ---
 
@@ -92,7 +92,7 @@
 1. **Functional**: Can emulate dark mode and test our Docusaurus site
 2. **Performant**: Browser instance persists across calls (no launch overhead)
 3. **Reliable**: Proper cleanup on server shutdown
-4. **Maintainable**: Follows Agent OS patterns (DI, logging, HoneyHive hooks)
+4. **Maintainable**: Follows prAxIs OS patterns (DI, logging, HoneyHive hooks)
 5. **Documented**: Clear usage examples + API reference
 
 ---
@@ -137,7 +137,7 @@ Phase 1: BrowserManager
 
 - **Research Doc**: `RESEARCH.md` (this directory)
 - **Playwright Python**: https://playwright.dev/python/
-- **Agent OS Patterns**: `.praxis-os/standards/workflows/`
+- **prAxIs OS Patterns**: `.praxis-os/standards/workflows/`
 - **Reference Implementation**: https://github.com/microsoft/playwright-mcp
 
 ---

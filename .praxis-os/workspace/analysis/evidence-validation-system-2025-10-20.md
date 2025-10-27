@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The Agent OS workflow engine has a fully implemented evidence validation system that is completely disabled in production. A single hardcoded `True` value bypasses all validation, allowing AI agents to submit false evidence and advance through workflow phases without verification.
+The prAxIs OS workflow engine has a fully implemented evidence validation system that is completely disabled in production. A single hardcoded `True` value bypasses all validation, allowing AI agents to submit false evidence and advance through workflow phases without verification.
 
 **Impact**: 
 - Validation gates provide zero enforcement

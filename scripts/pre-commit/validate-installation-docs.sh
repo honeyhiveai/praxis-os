@@ -37,7 +37,7 @@ else
         echo -e "  ${RED}✗${NC} $file"
     done
     echo ""
-    echo -e "${YELLOW}These files are required for proper Agent OS installation.${NC}"
+    echo -e "${YELLOW}These files are required for proper prAxIs OS installation.${NC}"
     exit 1
 fi
 

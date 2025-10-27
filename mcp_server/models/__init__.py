@@ -1,5 +1,5 @@
 """
-Data Models for Agent OS MCP/RAG System.
+Data Models for prAxIs OS MCP/RAG System.
 
 Modular organization by domain:
 - config: Configuration models (RAGConfig, ServerConfig)

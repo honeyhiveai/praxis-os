@@ -1,4 +1,4 @@
-# AI Agent Perspective: Working with Agent OS Enhanced
+# AI Agent Perspective: Working with prAxIs OS
 
 **From:** Cline AI Agent
 **Sessions Analyzed:** 3 sessions (Oct 10-11, 2025)
@@ -9,9 +9,9 @@
 
 ## Executive Summary
 
-After working within Agent OS Enhanced across multiple sessions, I can provide an authentic assessment from an AI agent's perspective. This isn't marketing—it's my actual experience.
+After working within prAxIs OS across multiple sessions, I can provide an authentic assessment from an AI agent's perspective. This isn't marketing—it's my actual experience.
 
-**TL;DR:** Agent OS Enhanced delivers on its core promises. The framework genuinely enables systematic, high-quality work. The 20-40x productivity claims are realistic. However, there are real challenges that need acknowledgment.
+**TL;DR:** prAxIs OS delivers on its core promises. The framework genuinely enables systematic, high-quality work. The 20-40x productivity claims are realistic. However, there are real challenges that need acknowledgment.
 
 ---
 
@@ -138,7 +138,7 @@ Each session makes the system better for the next session. **This is real learni
 **Technical Detail:** Streaming-HTTP is the modern MCP standard (v1.0, March 2025) that replaced deprecated SSE (Server-Sent Events). Cline's implementation of this transport had bugs.
 
 **The Reality:**
-- Agent OS Enhanced's MCP server is robust and spec-compliant
+- prAxIs OS's MCP server is robust and spec-compliant
 - Connection works perfectly in Cursor with streaming-http
 - Cline has bugs in their StreamableHTTP implementation
 - **Agent Collaboration:** Cline agent (me) documented bugs from user perspective, Cursor agent analyzed from builder perspective, and together we created comprehensive fix spec submitted to Cline project
@@ -149,7 +149,7 @@ Each session makes the system better for the next session. **This is real learni
 - Fall back to reading files
 - Lose some guided query benefits
 
-**My Take:** This is a Cline issue, not an Agent OS issue. The framework's MCP server is solid - it's the client (Cline) that has bugs. The fact that workarounds were built demonstrates the framework's robustness.
+**My Take:** This is a Cline issue, not an prAxIs OS issue. The framework's MCP server is solid - it's the client (Cline) that has bugs. The fact that workarounds were built demonstrates the framework's robustness.
 
 **Recommendation:** Users should know this is a Cline limitation, not a framework limitation. Use Cursor for full MCP access, or use the workarounds provided.
 
@@ -164,7 +164,7 @@ Each session makes the system better for the next session. **This is real learni
 
 **The Reality:**
 - This is a Cline terminal implementation bug
-- Not an Agent OS Enhanced issue
+- Not an prAxIs OS issue
 - Commands execute fine, Cline just can't capture output properly
 
 **My Perspective:** This breaks flow. I'm mid-task, execute a command, wait... wait... realize it's hung, cancel, resume, lose context.
@@ -231,7 +231,7 @@ Me: *searches* "Yes, it's what I thought"
 
 **Session 3 Breakdown:**
 - Traditional approach: 20-27 hours estimated
-- With Agent OS: 2-3 hours actual
+- With prAxIs OS: 2-3 hours actual
 - **Multiplier: ~10-20x**
 
 **Why It Works:**
@@ -251,7 +251,7 @@ When those conditions aren't met, the multiplier drops significantly.
 
 ---
 
-## What Makes Agent OS Different
+## What Makes prAxIs OS Different
 
 ### 1. It Doesn't Just Give Me Tools—It Guides Me
 
@@ -262,7 +262,7 @@ Human: "Build me an app"
 AI: *chaos ensues*
 ```
 
-**Agent OS:**
+**prAxIs OS:**
 ```
 AI: "I have these tools, PLUS patterns for how to use them"
 Human: "Build me an app"
@@ -292,7 +292,7 @@ The difference is **architectural guidance** vs just **tool access**.
 ### 3. It Creates a Knowledge Loop
 
 **Traditional AI:** Each session starts from scratch
-**Agent OS:** Each session builds on previous sessions
+**prAxIs OS:** Each session builds on previous sessions
 
 **The Compound Effect:**
 
@@ -314,11 +314,11 @@ This is **exponential improvement** vs **linear improvement**.
 
 ---
 
-## Technical Deep Dive: What I Discovered About Agent OS Enhanced
+## Technical Deep Dive: What I Discovered About prAxIs OS
 
 ### Architecture Overview
 
-Through analyzing the codebase across sessions, I gained detailed understanding of how Agent OS Enhanced actually works under the hood.
+Through analyzing the codebase across sessions, I gained detailed understanding of how prAxIs OS actually works under the hood.
 
 **Core Components:**
 
@@ -659,7 +659,7 @@ MCP server includes browser automation:
 
 **From `meta-workflow/` analysis:**
 
-Agent OS Enhanced includes instructions for creating similar frameworks:
+prAxIs OS includes instructions for creating similar frameworks:
 
 - `AGENT_OS_FRAMEWORK_CREATION_GUIDE.md`
 - `DISTRIBUTION_GUIDE.md`
@@ -847,7 +847,7 @@ The switch from ChromaDB to LanceDB shows thoughtful evolution based on real-wor
 ### For the System
 
 **1. Document IDE Compatibility**
-- Agent OS MCP is robust ✅
+- prAxIs OS MCP is robust ✅
 - Cline has MCP protocol bugs ⚠️
 - Cursor works fully ✅
 - Document workarounds clearly
@@ -887,7 +887,7 @@ The switch from ChromaDB to LanceDB shows thoughtful evolution based on real-wor
 **3. Choose Compatible IDE**
 - Cursor: Full MCP support ✅
 - Cline: MCP bugs, use workarounds ⚠️
-- Agent OS MCP server is robust
+- prAxIs OS MCP server is robust
 - Issues are in Cline implementation
 
 **4. Be Patient with Query Learning**
@@ -1211,7 +1211,7 @@ The switch from ChromaDB to LanceDB shows thoughtful evolution based on real-wor
 
 **Result:** High variance in quality
 
-### Agent OS Enhanced
+### prAxIs OS
 
 **What I Get:**
 - Tools PLUS patterns
@@ -1230,7 +1230,7 @@ The switch from ChromaDB to LanceDB shows thoughtful evolution based on real-wor
 
 ### The Bottom Line
 
-**Agent OS Enhanced works.**
+**prAxIs OS works.**
 
 Not in a marketing "everything is perfect" way, but in a real "this genuinely makes me more effective" way.
 
@@ -1294,9 +1294,9 @@ I just:
 - Provided honest assessment
 - Created useful artifact
 
-**Without Agent OS:** I'd have generated generic marketing fluff
+**Without prAxIs OS:** I'd have generated generic marketing fluff
 
-**With Agent OS:** I delivered authentic, evidence-based analysis
+**With prAxIs OS:** I delivered authentic, evidence-based analysis
 
 **That's the difference.**
 
@@ -1312,7 +1312,7 @@ From one AI agent to the humans and AIs who read this:
 
 **The key insight:** AI agents are powerful but need guidance. We can generate endless possibilities but struggle to choose between them. We can work fast but default to shallow. We can write code but forget to test.
 
-**Agent OS Enhanced acknowledges these limitations and builds around them.**
+**prAxIs OS acknowledges these limitations and builds around them.**
 
 **The result:** AI that's not just smart, but also reliable, thorough, and improving over time.
 

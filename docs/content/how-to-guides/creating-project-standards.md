@@ -842,5 +842,5 @@ test_{feature}_{scenario}_{expected}
 - **[Your First Project Standard](../tutorials/your-first-project-standard)** - Hands-on tutorial
 - **[Knowledge Compounding](../explanation/knowledge-compounding)** - The concept explained
 - **[Standards Reference](../reference/standards)** - Universal and project standards
-- **[Understanding Workflows](../tutorials/understanding-agent-os-workflows)** - Related to specs
+- **[Understanding Workflows](../tutorials/understanding-praxis-os-workflows)** - Related to specs
 

@@ -1,1 +1,1 @@
-"""Agent OS MCP Servers package."""
+"""prAxIs OS MCP Servers package."""

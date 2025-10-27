@@ -4,7 +4,7 @@
 
 **Date**: 2025-10-09  
 **Status**: Active  
-**Scope**: Agent OS development and maintenance  
+**Scope**: prAxIs OS development and maintenance  
 **Context**: AI agents must be thorough - this checklist ensures nothing is missed
 
 ---
@@ -160,7 +160,7 @@ grep "~=" mcp_server/requirements.txt
 
 **Required Updates**:
 - [ ] `installation/04-gitignore.md` - Verify reads from canonical source
-- [ ] `universal/workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md` - Verify reads from canonical source
+- [ ] `universal/workflows/praxis_os_upgrade_v1/phases/2/task-3-update-gitignore.md` - Verify reads from canonical source
 - [ ] Root `.gitignore` - Update repo's own gitignore if needed
 - [ ] `mcp_server/CHANGELOG.md` - Document what patterns changed
 
@@ -168,7 +168,7 @@ grep "~=" mcp_server/requirements.txt
 ```bash
 # Verify both installation and upgrade reference the standard
 grep "gitignore-requirements.md" installation/04-gitignore.md
-grep "gitignore-requirements.md" universal/workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md
+grep "gitignore-requirements.md" universal/workflows/praxis_os_upgrade_v1/phases/2/task-3-update-gitignore.md
 ```
 
 ---
@@ -314,7 +314,7 @@ grep "validate_workflow" mcp_server/CHANGELOG.md
 
 ### Example 3: Modifying Workflow Phase
 
-**Change**: Added task to `agent_os_upgrade_v1` Phase 2
+**Change**: Added task to `praxis_os_upgrade_v1` Phase 2
 
 **Impact Analysis**:
 1. Workflow change → Type 2a
@@ -326,9 +326,9 @@ grep "validate_workflow" mcp_server/CHANGELOG.md
 
 **Verification**:
 ```bash
-ls -1 universal/workflows/agent_os_upgrade_v1/phases/2/task-*.md | wc -l  # Should be 4
-grep "4 tasks" universal/workflows/agent_os_upgrade_v1/phases/2/phase.md
-grep "~3 minutes 35 seconds" universal/workflows/agent_os_upgrade_v1/README.md
+ls -1 universal/workflows/praxis_os_upgrade_v1/phases/2/task-*.md | wc -l  # Should be 4
+grep "4 tasks" universal/workflows/praxis_os_upgrade_v1/phases/2/phase.md
+grep "~3 minutes 35 seconds" universal/workflows/praxis_os_upgrade_v1/README.md
 ```
 
 ---

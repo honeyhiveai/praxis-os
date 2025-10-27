@@ -110,7 +110,7 @@ validators:
 
 ## 🎯 Purpose
 
-Define the YAML structure, semantics, and best practices for gate-definition.yaml files that enable systematic, automated checkpoint validation in Agent OS workflows. These files are the first tier in the three-tier fallback validation strategy, providing explicit, machine-readable requirements that prevent phase advancement without proper evidence.
+Define the YAML structure, semantics, and best practices for gate-definition.yaml files that enable systematic, automated checkpoint validation in prAxIs OS workflows. These files are the first tier in the three-tier fallback validation strategy, providing explicit, machine-readable requirements that prevent phase advancement without proper evidence.
 
 **Core Principle**: gate-definition.yaml files provide precise validation specifications that eliminate ambiguity, prevent gaming, and enforce quality systematically.
 

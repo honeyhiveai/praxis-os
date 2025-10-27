@@ -1,5 +1,5 @@
 """
-Integration tests for Agent OS Upgrade Workflow Phases 0-1.
+Integration tests for prAxIs OS Upgrade Workflow Phases 0-1.
 
 Tests the complete flow from pre-flight checks through backup creation.
 """
@@ -18,7 +18,7 @@ from mcp_server.validation_module import ValidationModule
 @pytest.fixture
 def mock_source_repo(tmp_path):
     """Create a complete mock source repository."""
-    source = tmp_path / "agent-os-enhanced"
+    source = tmp_path / "praxis-os-enhanced"
     source.mkdir()
 
     # Create required directories

@@ -50,10 +50,10 @@ Should the user specify both IDE AND usage mode in the prompt?
 
 **Examples:**
 ```
-Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor (chat mode)
-Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor (autonomous mode)
-Install Agent OS from github.com/honeyhiveai/praxis-os for Claude Desktop (MCP-only)
-Install Agent OS from github.com/honeyhiveai/praxis-os for Cline (autonomous)
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cursor (chat mode)
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cursor (autonomous mode)
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for Claude Desktop (MCP-only)
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cline (autonomous)
 ```
 
 Or should the installation instructions adapt based on detected capabilities?
@@ -87,11 +87,11 @@ The user revealed a complex setup that breaks the simple "one IDE = one agent" m
 2. **Multiple agents can share one MCP server**
    - Cursor launches MCP with dual transport
    - Cline connects to the same instance via HTTP
-   - No need to install Agent OS twice
+   - No need to install prAxIs OS twice
 
 3. **The installation prompt must specify the PRIMARY IDE:**
    ```
-   Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor
+   Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cursor
    ```
    - This configures `.cursor/mcp.json` 
    - Enables stdio transport (primary)
@@ -145,7 +145,7 @@ All three agents:
 - Documentation should promote multi-agent workflows, not treat them as advanced
 - Installation prompt could be:
   ```
-  Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor
+  Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cursor
   
   ✅ Installed for Cursor IDE (primary)
   ❓ Enable multi-agent access? (Recommended) [Y/n]
@@ -240,9 +240,9 @@ We already have `.praxis-os/bin/update-cline-mcp.py` which:
 **Installation Design Decision:**
 - Installation prompt should ask for **PRIMARY IDE** (not agent)
 - Examples:
-  - "Install Agent OS for Cursor" → `.cursor/mcp.json`
-  - "Install Agent OS for VS Code" → `.vscode/mcp.json` (works for Cline, Copilot, etc.)
-  - "Install Agent OS for Claude Desktop" → `claude_desktop_config.json`
+  - "Install prAxIs OS for Cursor" → `.cursor/mcp.json`
+  - "Install prAxIs OS for VS Code" → `.vscode/mcp.json` (works for Cline, Copilot, etc.)
+  - "Install prAxIs OS for Claude Desktop" → `claude_desktop_config.json`
 
 **Multi-Project Complexity (2025-10-24):**
 
@@ -260,8 +260,8 @@ We already have `.praxis-os/bin/update-cline-mcp.py` which:
 **The Global Config Problem:**
 
 When Claude Desktop or Windsurf uses a SINGLE global config:
-- User has Project A with Agent OS installed
-- User has Project B with Agent OS installed
+- User has Project A with prAxIs OS installed
+- User has Project B with prAxIs OS installed
 - User has Project C WITHOUT Agent OS
 - **All three projects would need to be listed in ONE config file**
 

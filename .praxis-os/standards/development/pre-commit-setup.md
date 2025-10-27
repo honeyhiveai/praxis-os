@@ -1,4 +1,4 @@
-# Pre-commit Hook Setup - Agent OS Enhanced
+# Pre-commit Hook Setup - prAxIs OS
 
 **🎯 Automatic quality enforcement before every commit**
 
@@ -8,8 +8,8 @@ Pre-commit hooks automatically enforce code quality standards before allowing co
 
 **Paradigm Context**:
 - **Python-SDK**: Prototype that proved the AI-assisted development platform
-- **Agent OS Enhanced**: Extracted reusable paradigm/framework
-- **These standards**: Battle-tested in python-sdk, adapted for Agent OS
+- **prAxIs OS**: Extracted reusable paradigm/framework
+- **These standards**: Battle-tested in python-sdk, adapted for prAxIs OS
 
 **Key Differences from python-sdk**:
 - **Documentation**: Uses Docusaurus instead of Sphinx
@@ -74,7 +74,7 @@ tox -e unit    # All unit tests must pass
 - **Purpose**: Ensure critical installation files exist
 - **Action**: Verifies build_rag_index.py and installation docs present
 - **Scope**: installation/, scripts/, .praxis-os/standards/
-- **Note**: Agent OS uses Docusaurus for docs (not Sphinx)
+- **Note**: prAxIs OS uses Docusaurus for docs (not Sphinx)
   - Docusaurus builds run separately: `cd docs && npm run build`
   - Pre-commit validates markdown content only
 

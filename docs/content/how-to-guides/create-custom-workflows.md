@@ -18,7 +18,7 @@ By following this guide, AI agents will create workflows with:
 
 ## Prerequisites
 
-- Understanding of prAxIs OS workflows ([Understanding prAxIs OS Workflows](../tutorials/understanding-agent-os-workflows))
+- Understanding of prAxIs OS workflows ([Understanding prAxIs OS Workflows](../tutorials/understanding-praxis-os-workflows))
 - prAxIs OS installed in your project
 - **AI agents**: Heavy querying of standards throughout creation
 
@@ -815,7 +815,7 @@ Phase files should be overview only (~80 lines). Move detailed content to task f
 
 ## Related Documentation
 
-- **[Understanding prAxIs OS Workflows](../tutorials/understanding-agent-os-workflows)** - Learn workflow concepts
+- **[Understanding prAxIs OS Workflows](../tutorials/understanding-praxis-os-workflows)** - Learn workflow concepts
 - **[Reference: Workflows](../reference/workflows)** - Complete workflow system reference
 - **Standards: workflow-construction-standards.md** - Detailed construction rules
 - **Standards: workflow-metadata-standards.md** - Metadata.json specification

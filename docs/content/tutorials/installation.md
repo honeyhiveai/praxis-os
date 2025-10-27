@@ -139,7 +139,7 @@ Create `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "praxis-os-rag": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
@@ -260,7 +260,7 @@ When new versions are released, use the upgrade workflow:
 "Run the prAxIs OS upgrade workflow"
 ```
 
-The `agent_os_upgrade_v1` workflow will:
+The `praxis_os_upgrade_v1` workflow will:
 1. ✅ Create automatic backup
 2. ✅ Update standards, workflows, and MCP server
 3. ✅ **Preserve your customizations** (specs, development standards)

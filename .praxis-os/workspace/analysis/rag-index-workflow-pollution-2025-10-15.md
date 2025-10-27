@@ -370,7 +370,7 @@ def _build_workflow_searchable_text(self, metadata: Dict) -> str:
 # File: scripts/build_rag_index.py
 
 def build_index(self, force: bool = False, incremental: bool = True) -> Dict[str, Any]:
-    """Build vector index from Agent OS files."""
+    """Build vector index from prAxIs OS files."""
     
     # ... existing code ...
     

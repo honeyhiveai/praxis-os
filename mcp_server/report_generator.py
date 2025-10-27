@@ -1,5 +1,5 @@
 """
-Report Generator for Agent OS Upgrade Workflow.
+Report Generator for prAxIs OS Upgrade Workflow.
 
 Generates upgrade reports and updates documentation.
 """
@@ -37,8 +37,8 @@ class ReportGenerator:
             base_path: Optional base path for .praxis-os directory
         """
         self.base_path = base_path or Path.cwd()
-        self.agent_os_dir = self.base_path / ".praxis-os"
-        self.cache_dir = self.agent_os_dir / ".cache"
+        self.praxis_os_dir = self.base_path / ".praxis-os"
+        self.cache_dir = self.praxis_os_dir / ".cache"
 
         # Ensure cache directory exists
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -70,7 +70,7 @@ class ReportGenerator:
 
         # Build report content
         content = [
-            "# Agent OS Upgrade Summary",
+            "# prAxIs OS Upgrade Summary",
             "",
             f"**Session ID:** {session_id}",
             f"**Workflow:** {workflow_type}",
@@ -151,7 +151,7 @@ class ReportGenerator:
         """
         logger.info("Updating installation summary")
 
-        summary_path = self.agent_os_dir / "INSTALLATION_SUMMARY.md"
+        summary_path = self.praxis_os_dir / "INSTALLATION_SUMMARY.md"
 
         # Create upgrade entry
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -173,7 +173,7 @@ class ReportGenerator:
             content = summary_path.read_text()
             content += "\n".join(entry)
         else:
-            content = "# Agent OS Installation Summary\n\n" + "\n".join(entry)
+            content = "# prAxIs OS Installation Summary\n\n" + "\n".join(entry)
 
         summary_path.write_text(content)
 
@@ -189,7 +189,7 @@ class ReportGenerator:
         """
         logger.info("Appending to update log: version %s", version)
 
-        log_path = self.agent_os_dir / "UPDATE_LOG.txt"
+        log_path = self.praxis_os_dir / "UPDATE_LOG.txt"
 
         # Create log entry
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -215,7 +215,7 @@ class ReportGenerator:
             content = log_path.read_text()
             content += "\n".join(entry)
         else:
-            content = "Agent OS Update Log\n\n" + "\n".join(entry)
+            content = "prAxIs OS Update Log\n\n" + "\n".join(entry)
 
         log_path.write_text(content)
 

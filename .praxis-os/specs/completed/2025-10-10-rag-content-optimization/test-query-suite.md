@@ -238,7 +238,7 @@ Queries are organized by content category, with expected top result(s) documente
 **Category:** Meta-Framework
 
 ### Query 8.4: Workflow Creation
-**Query:** `"how to create Agent OS workflow"`  
+**Query:** `"how to create prAxIs OS workflow"`  
 **Expected Top Result:** `workflow-construction-standards.md` → "How to Create a New Workflow?"  
 **Category:** Workflows
 
@@ -281,13 +281,13 @@ Queries are organized by content category, with expected top result(s) documente
 ## Category 10: Installation & Setup (2 queries)
 
 ### Query 10.1: Gitignore Requirements
-**Query:** `"what to add to gitignore for Agent OS"`  
+**Query:** `"what to add to gitignore for prAxIs OS"`  
 **Expected Top Result:** `gitignore-requirements.md` → "Required Entries"  
 **Category:** Installation
 
-### Query 10.2: Agent OS Update
-**Query:** `"how to update Agent OS"`  
-**Expected Top Result:** `update-procedures.md` → "How to Execute an Agent OS Update"  
+### Query 10.2: prAxIs OS Update
+**Query:** `"how to update prAxIs OS"`  
+**Expected Top Result:** `update-procedures.md` → "How to Execute an prAxIs OS Update"  
 **Category:** Installation
 
 ---
@@ -295,7 +295,7 @@ Queries are organized by content category, with expected top result(s) documente
 ## Category 11: Usage & Behavioral Guides (2 queries)
 
 ### Query 11.1: AI Agent Behavior
-**Query:** `"how to behave as AI agent in Agent OS"`  
+**Query:** `"how to behave as AI agent in prAxIs OS"`  
 **Expected Top Result:** `ai-agent-quickstart.md` → TL;DR or behavioral scenarios  
 **Category:** Usage
 

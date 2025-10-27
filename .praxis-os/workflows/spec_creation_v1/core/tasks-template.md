@@ -22,7 +22,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 - **Phase 2:** {hours} ({description})
 - **Total:** {hours} ({days})
 
-### AI Agent + Human Orchestration (Agent OS Enhanced)
+### AI Agent + Human Orchestration (prAxIs OS)
 - **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)
 - **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)
 - **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)
@@ -39,7 +39,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 - [ ] **Task 1.1**: {Task name}
   - **Human Baseline:** {hours} ({S/M/L})
-  - **Agent OS:** {wall hours}h wall, {active min} min active ({leverage}x)
+  - **prAxIs OS:** {wall hours}h wall, {active min} min active ({leverage}x)
   
   - {Action item}
   - {Action item}
@@ -51,7 +51,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 - [ ] **Task 1.2**: {Task name}
   - **Human Baseline:** {hours} ({S/M/L})
-  - **Agent OS:** {wall hours}h wall, {active min} min active ({leverage}x)
+  - **prAxIs OS:** {wall hours}h wall, {active min} min active ({leverage}x)
   
   - {Action item}
   
@@ -108,7 +108,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
@@ -220,7 +220,7 @@ Phase 1
 
 ### Dual Estimation: Human vs AI Agent
 
-Agent OS Enhanced requires **two time estimates** to show the leverage multiplier (20-40x typical).
+prAxIs OS requires **two time estimates** to show the leverage multiplier (20-40x typical).
 
 **For complete dual estimation guidance, query these standards:**
 
@@ -277,7 +277,7 @@ Typical: H=4h, M=1.0, W=4h, O=0.05, A=12min → L=20x
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys

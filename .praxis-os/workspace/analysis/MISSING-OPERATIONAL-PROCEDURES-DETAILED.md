@@ -101,7 +101,7 @@ Result: Reinvents wheels, violates standards
 #### Section 1: Pre-Task Compliance Checklist
 ```markdown
 ### Before Any Code Generation
-- [ ] Read relevant Agent OS standards in `.praxis-os/standards/`
+- [ ] Read relevant prAxIs OS standards in `.praxis-os/standards/`
 - [ ] Check project-specific rules in `.cursorrules`
 - [ ] Verify established patterns in existing codebase
 - [ ] Confirm no existing solutions before creating new ones

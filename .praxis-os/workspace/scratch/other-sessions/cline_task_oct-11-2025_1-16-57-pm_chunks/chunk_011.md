@@ -44,7 +44,7 @@ ACT MODE
 <path>../python-sdk/.praxis-os/standards/ai-assistant</path>
 <recursive>false</recursive>
 <task_progress>
-- [x] Understood Agent OS Enhanced specs
+- [x] Understood prAxIs OS specs
 - [x] Found python-sdk standards directory
 - [ ] Read ai-assistant standards from Python SDK
 - [ ] Understand the origin story
@@ -104,10 +104,10 @@ ACT MODE
 <read_file>
 <path>../python-sdk/.praxis-os/standards/ai-assistant/AI-ASSISTED-DEVELOPMENT-PLATFORM-CASE-STUDY.md</path>
 <task_progress>
-- [x] Understood Agent OS Enhanced specs
+- [x] Understood prAxIs OS specs
 - [x] Found python-sdk ai-assistant standards
 - [ ] Read the case study on AI-assisted development platform
-- [ ] Understand how Agent OS Enhanced was extracted
+- [ ] Understand how prAxIs OS was extracted
 - [ ] Complete the full story
 </task_progress>
 </read_file>
@@ -131,7 +131,7 @@ This document presents a comprehensive case study of the HoneyHive Python SDK de
 
 **Business Context**: Architectural transformation from legacy Traceloop-dependent SDK to modern BYOI (Bring Your Own Instrumentor) architecture, eliminating "dependency hell" while enabling flexible LLM provider integration across 13+ providers.
 
-**Development Model**: 100% AI-assisted development using Claude 4 Sonnet via Cursor IDE, implementing systematic Agent OS frameworks for deterministic, high-quality outcomes.
+**Development Model**: 100% AI-assisted development using Claude 4 Sonnet via Cursor IDE, implementing systematic prAxIs OS frameworks for deterministic, high-quality outcomes.
 
 **Scope**: Complete platform encompassing code generation, testing infrastructure, documentation automation, quality enforcement, and production deployment - representing a paradigm shift from "AI as coding assistant" to "AI as systematic development partner."
 
@@ -166,7 +166,7 @@ This document presents a comprehensive case study of the HoneyHive Python SDK de
 
 **Architecture Transformation Scale**:
 - **13+ LLM providers** supported through BYOI architecture
-- **301 Agent OS documentation files** providing systematic guidance
+- **301 prAxIs OS documentation files** providing systematic guidance
 - **198 code generation framework files** enabling deterministic outcomes
 - **11 automated quality gates** enforcing enterprise standards
 
@@ -299,7 +299,7 @@ Dual Instrumentor Support:
 
 **Phase 1: Foundation & Architecture (August 11-20, 2025)**
 - **Duration**: 10 days
-- **Key Deliverables**: BYOI architecture design, Agent OS framework setup
+- **Key Deliverables**: BYOI architecture design, prAxIs OS framework setup
 - **Commits**: 45 commits (4.5/day average)
 - **Focus**: Architectural foundation and systematic framework establishment
 
@@ -327,7 +327,7 @@ Dual Instrumentor Support:
 - **Scope Management**: No feature creep, systematic focus on core requirements
 - **Risk Mitigation**: Continuous validation preventing quality debt accumulation
 
-## 2. Agent OS Framework: Systematic AI Development Infrastructure
+## 2. prAxIs OS Framework: Systematic AI Development Infrastructure
 
 ### 2.1 Comprehensive Framework Architecture Analysis
 
@@ -361,7 +361,7 @@ Dual Instrumentor Support:
 ```
 
 **Framework Scale Analysis**:
-- **301 total Agent OS files** providing comprehensive systematic guidance
+- **301 total prAxIs OS files** providing comprehensive systematic guidance
 - **198 code generation framework files** enabling deterministic AI behavior
 - **65 V3 phase files** with archive-depth analysis restoration
 - **31 V3 task files** providing granular execution guidance
@@ -537,7 +537,7 @@ Quality Enforcement (automated validation gates)
   language: system
   files: '^tests/integration/.*\.py$'
 ```
-**Purpose**: Enforces Agent OS policy requiring real API usage in integration tests
+**Purpose**: Enforces prAxIs OS policy requiring real API usage in integration tests
 **Critical Importance**: Prevents mock usage that would invalidate end-to-end validation
 **Scope**: All integration test files (`tests/integration/`)
 **Enforcement**: Must run first - structural validation before code quality
@@ -604,7 +604,7 @@ Quality Enforcement (automated validation gates)
 ```
 **Purpose**: Ensures all documentation builds successfully with Sphinx
 **Warnings as Errors**: Sphinx configured to treat warnings as build failures
-**Scope**: All documentation files including Agent OS standards
+**Scope**: All documentation files including prAxIs OS standards
 **Quality Assurance**: Professional documentation standards enforcement
 
 **Gate 8: Documentation Navigation Validation**
@@ -630,7 +630,7 @@ Quality Enforcement (automated validation gates)
 ```
 **Purpose**: Ensures feature catalog stays synchronized between code and documentation
 **Automation**: Detects new features and validates documentation coverage
-**Scope**: Production code, reference documentation, Agent OS feature catalog
+**Scope**: Production code, reference documentation, prAxIs OS feature catalog
 **Quality Assurance**: Prevents documentation drift from implementation
 
 **Gate 10: Documentation Compliance Enforcement**
@@ -718,7 +718,7 @@ Testing Architecture (2,777 total tests):
 ### 4.2 Unit Testing Strategy: Comprehensive Isolation
 
 **Unit Testing Philosophy**:
-Following Agent OS V3 framework "mock external dependencies" strategy (corrected from V2's failed "mock everything" approach that caused 22% pass rate failure).
+Following prAxIs OS V3 framework "mock external dependencies" strategy (corrected from V2's failed "mock everything" approach that caused 22% pass rate failure).
 
 **Unit Test Architecture**:
 ```
@@ -746,7 +746,7 @@ Based on systematic analysis of unit test effectiveness:
 - **Execution Speed**: Fast execution enabling frequent validation cycles
 
 **Unit Test Framework Compliance**:
-All unit tests follow Agent OS V3 framework requirements:
+All unit tests follow prAxIs OS V3 framework requirements:
 - **AST Parsing**: Complete function signature extraction and validation
 - **Attribute Detection**: Comprehensive mock attribute planning
 - **Coverage Analysis**: Branch and edge case systematic coverage
@@ -755,7 +755,7 @@ All unit tests follow Agent OS V3 framework requirements:
 ### 4.3 Integration Testing Strategy: Real API Validation
 
 **Integration Testing Philosophy**:
-Agent OS "no-mock policy" ensuring end-to-end validation with real API endpoints, enforced by pre-commit hook validation.
+prAxIs OS "no-mock policy" ensuring end-to-end validation with real API endpoints, enforced by pre-commit hook validation.
 
 **Integration Test Architecture**:
 ```

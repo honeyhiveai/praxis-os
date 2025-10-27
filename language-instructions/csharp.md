@@ -1,6 +1,6 @@
 # C# Language-Specific Standards Generation Instructions
 
-**For the Cursor Agent: When installing Agent OS in a C# project, use these instructions to generate language-specific standards by applying universal CS fundamentals to C#-specific contexts.**
+**For the Cursor Agent: When installing prAxIs OS in a C# project, use these instructions to generate language-specific standards by applying universal CS fundamentals to C#-specific contexts.**
 
 ---
 

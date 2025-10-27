@@ -1,6 +1,6 @@
 # config.json Configuration Guide
 
-**Guide for configuring Agent OS MCP/RAG paths in consuming projects**
+**Guide for configuring prAxIs OS MCP/RAG paths in consuming projects**
 
 ---
 
@@ -394,4 +394,4 @@ ln -s ../.praxis-os-source/workflows universal/workflows
 
 ---
 
-**Remember:** `config.json` is optional. Without it, Agent OS uses default paths (`universal/standards`, `universal/usage`, `universal/workflows`).
+**Remember:** `config.json` is optional. Without it, prAxIs OS uses default paths (`universal/standards`, `universal/usage`, `universal/workflows`).

@@ -1,4 +1,4 @@
-# Microsoft Amplifier → Agent OS Enhanced: Recommendations
+# Microsoft Amplifier → prAxIs OS: Recommendations
 
 **Date:** October 20, 2025  
 **Purpose:** Actionable recommendations for integrating Amplifier patterns into Agent OS
@@ -7,12 +7,12 @@
 
 ## Executive Summary
 
-Microsoft Amplifier and Agent OS Enhanced share similar philosophies but serve different purposes:
+Microsoft Amplifier and prAxIs OS share similar philosophies but serve different purposes:
 
 - **Amplifier:** Exploratory, parallel experimentation, knowledge amplification
-- **Agent OS:** Systematic, quality-gated, spec-driven development
+- **prAxIs OS:** Systematic, quality-gated, spec-driven development
 
-This document identifies specific patterns from Amplifier that could enhance Agent OS without compromising its structured workflow approach.
+This document identifies specific patterns from Amplifier that could enhance prAxIs OS without compromising its structured workflow approach.
 
 ---
 
@@ -20,7 +20,7 @@ This document identifies specific patterns from Amplifier that could enhance Age
 
 ### 1. Add Knowledge Graph Capabilities to RAG System
 
-**Current State:** Agent OS uses vector search for standards  
+**Current State:** prAxIs OS uses vector search for standards  
 **Amplifier Pattern:** NetworkX graph with relationships and tension detection
 
 **Recommendation:** Enhance RAG with graph layer
@@ -638,7 +638,7 @@ async def get_workflow_dashboard(session_id: str = None) -> str:
 ### 1. Free-Form Exploration
 
 **Amplifier:** Loose, exploratory agent orchestration  
-**Agent OS:** Structured, gated workflows
+**prAxIs OS:** Structured, gated workflows
 
 **Recommendation:** Don't adopt  
 **Reason:** Agent OS's structure is its strength
@@ -646,7 +646,7 @@ async def get_workflow_dashboard(session_id: str = None) -> str:
 ### 2. Multiple Tool Implementations
 
 **Amplifier:** Many overlapping tools (blog writer, tips synthesizer, etc.)  
-**Agent OS:** Clear workflow-based tools
+**prAxIs OS:** Clear workflow-based tools
 
 **Recommendation:** Don't adopt  
 **Reason:** Tool proliferation creates confusion
@@ -654,18 +654,18 @@ async def get_workflow_dashboard(session_id: str = None) -> str:
 ### 3. Experimental Status
 
 **Amplifier:** "No stability guarantees", "we break things frequently"  
-**Agent OS:** Stable, production-ready workflows
+**prAxIs OS:** Stable, production-ready workflows
 
 **Recommendation:** Don't adopt  
-**Reason:** Agent OS needs reliability
+**Reason:** prAxIs OS needs reliability
 
 ### 4. Scenario Tools as Primary Interface
 
 **Amplifier:** Scenario tools for specific use cases  
-**Agent OS:** Universal workflows
+**prAxIs OS:** Universal workflows
 
 **Recommendation:** Don't adopt  
-**Reason:** Agent OS workflows more general-purpose
+**Reason:** prAxIs OS workflows more general-purpose
 
 ---
 
@@ -686,7 +686,7 @@ async def get_workflow_dashboard(session_id: str = None) -> str:
 - Systematic approach
 
 **Best of Both Worlds:**
-- Agent OS structure + Amplifier patterns
+- prAxIs OS structure + Amplifier patterns
 - Systematic execution + knowledge amplification
 - Quality gates + exploratory tools
 - Disciplined process + parallel experimentation

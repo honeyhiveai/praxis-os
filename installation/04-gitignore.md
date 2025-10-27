@@ -7,7 +7,7 @@
 
 ## 🎯 Objective
 
-Add Agent OS entries to your project's `.gitignore` to prevent committing ~2.7GB of ephemeral files.
+Add prAxIs OS entries to your project's `.gitignore` to prevent committing ~2.7GB of ephemeral files.
 
 **📖 Canonical Source**: `.praxis-os/standards/universal/installation/gitignore-requirements.md`
 
@@ -22,7 +22,7 @@ Add Agent OS entries to your project's `.gitignore` to prevent committing ~2.7GB
 - ❌ GitHub will reject pushes over file size limits
 
 **With proper .gitignore:**
-- ✅ Only track meaningful Agent OS content
+- ✅ Only track meaningful prAxIs OS content
 - ✅ Ephemeral files stay local
 - ✅ Clean, portable repository
 
@@ -69,7 +69,7 @@ if not os.path.exists(".gitignore"):
     
     if create_new == "yes":
         with open(".gitignore", "w") as f:
-            f.write("# Created for Agent OS installation\n")
+            f.write("# Created for prAxIs OS installation\n")
         print("✅ Created .gitignore")
     else:
         print("❌ Installation cannot proceed without .gitignore")
@@ -91,7 +91,7 @@ header_line = None
 for line in lines:
     stripped = line.strip()
     if stripped.startswith("#"):
-        if "Agent OS" in stripped:
+        if "prAxIs OS" in stripped:
             header_line = stripped
     elif stripped:  # Non-empty, non-comment
         required_patterns.append(stripped)
@@ -110,7 +110,7 @@ import os
 if not os.path.exists(".gitignore"):
     print("⚠️  No .gitignore found, creating...")
     with open(".gitignore", "w") as f:
-        f.write("# Created for Agent OS installation\n")
+        f.write("# Created for prAxIs OS installation\n")
     current_content = ""
 else:
     with open(".gitignore", "r") as f:
@@ -127,7 +127,7 @@ else:
 missing = [p for p in required_patterns if p not in current_content]
 
 if not missing:
-    print("✅ All Agent OS entries already present")
+    print("✅ All prAxIs OS entries already present")
 else:
     print(f"⚠️  Missing {len(missing)} entries:")
     for p in missing:
@@ -147,8 +147,8 @@ if missing:
                 f.write("\n")
             f.write("\n")
         
-        # Add header if this is first Agent OS section
-        if "# Agent OS" not in current_content and header_line:
+        # Add header if this is first prAxIs OS section
+        if "# prAxIs OS" not in current_content and header_line:
             f.write(f"{header_line}\n")
         
         # Add missing entries
@@ -255,7 +255,7 @@ __pycache__/                # Python bytecode
 Before proceeding to step 05:
 
 - [ ] `.gitignore` file exists ✅/❌
-- [ ] Agent OS entries added ✅/❌
+- [ ] prAxIs OS entries added ✅/❌
 - [ ] `.praxis-os/.cache/` is ignored (verified) ✅/❌
 - [ ] `.praxis-os.backup.*` is ignored (verified) ✅/❌
 - [ ] No warnings from verification ✅/❌
@@ -291,7 +291,7 @@ git rm -r --cached .praxis-os/venv/
 git rm --cached .praxis-os.backup.*
 
 # Commit the removal
-git commit -m "chore: remove ephemeral Agent OS files from git"
+git commit -m "chore: remove ephemeral prAxIs OS files from git"
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Workflow Construction Standards
 
-**Purpose:** Define standards for creating workflows within the Agent OS workflow engine.  
+**Purpose:** Define standards for creating workflows within the prAxIs OS workflow engine.  
 **Audience:** Workflow authors, spec creators  
 **Last Updated:** 2025-10-07
 
@@ -94,7 +94,7 @@ workflows/{workflow_name}/
 
 ## 🎯 Overview
 
-This document defines the **structural standards** for building workflows in the Agent OS workflow engine. It applies meta-workflow principles specifically to workflow construction.
+This document defines the **structural standards** for building workflows in the prAxIs OS workflow engine. It applies meta-workflow principles specifically to workflow construction.
 
 **Related Standards:**
 - [Meta-Framework Principles](../meta-workflow/framework-creation-principles.md) - Foundation principles
@@ -312,7 +312,7 @@ See: [Command Language Standard](../meta-workflow/command-language.md)
 
 ## How to Validate Workflow Quality?
 
-Use this checklist to ensure your workflow meets Agent OS standards before deployment:
+Use this checklist to ensure your workflow meets prAxIs OS standards before deployment:
 
 Before considering a workflow complete:
 

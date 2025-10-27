@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This specification defines a dual-transport architecture for the Agent OS MCP server that enables:
+This specification defines a dual-transport architecture for the prAxIs OS MCP server that enables:
 
 1. **Primary IDE integration** via stdio transport (Cursor, Windsurf, Claude Desktop)
 2. **Sub-agent access** via HTTP transport (Cline, Aider, custom agents)
@@ -52,7 +52,7 @@ This design has been **completely validated** with working code and real MCP SDK
    - Can't serve both IDE (stdio) and sub-agents (HTTP) simultaneously
 
 2. **Port Conflicts**
-   - Multiple Agent OS instances (different Cursor windows) conflict on port 4242
+   - Multiple prAxIs OS instances (different Cursor windows) conflict on port 4242
    - No mechanism to allocate different ports per project
 
 3. **Sub-Agent Access**
@@ -139,7 +139,7 @@ This design has been **completely validated** with working code and real MCP SDK
 
 ## Success Criteria
 
-✅ Multiple Cursor windows can open with Agent OS without conflicts  
+✅ Multiple Cursor windows can open with prAxIs OS without conflicts  
 ✅ Sub-agents discover and connect to MCP server with zero configuration  
 ✅ All existing tools work identically on both stdio and HTTP transports  
 ✅ State file accurately reflects server status and enables discovery  
@@ -164,4 +164,4 @@ See [supporting-docs/INSIGHTS.md](supporting-docs/INSIGHTS.md) for extracted ins
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial specification created via spec_creation_v1 workflow | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial specification created via spec_creation_v1 workflow | prAxIs OS Team |

@@ -3,7 +3,7 @@
 **Version:** 1.0  
 **Date:** October 11, 2025  
 **Status:** Design Phase  
-**Authors:** Agent OS Team
+**Authors:** prAxIs OS Team
 
 ---
 
@@ -32,7 +32,7 @@
 
 ## Executive Summary
 
-This document describes a dual-transport architecture for the Agent OS MCP (Model Context Protocol) server that enables:
+This document describes a dual-transport architecture for the prAxIs OS MCP (Model Context Protocol) server that enables:
 
 1. **Primary IDE integration** via stdio transport (Cursor, Windsurf, Claude Desktop)
 2. **Sub-agent access** via HTTP transport (Cline, Aider, custom agents)
@@ -65,7 +65,7 @@ This design has been completely validated with working code and real MCP SDK tes
    - Can't serve both IDE (stdio) and sub-agents (HTTP) simultaneously
 
 2. **Port Conflicts**
-   - Multiple Agent OS instances (different Cursor windows) conflict on port 4242
+   - Multiple prAxIs OS instances (different Cursor windows) conflict on port 4242
    - No mechanism to allocate different ports per project
 
 3. **Sub-Agent Access**
@@ -442,7 +442,7 @@ def main() -> None:
     
     # 1. Parse CLI arguments
     parser = argparse.ArgumentParser(
-        description="Agent OS MCP Server with dual-transport support"
+        description="prAxIs OS MCP Server with dual-transport support"
     )
     parser.add_argument(
         "--transport",
@@ -470,13 +470,13 @@ def main() -> None:
     )
     
     logger.info("=" * 60)
-    logger.info("Agent OS MCP Server")
+    logger.info("prAxIs OS MCP Server")
     logger.info("Transport Mode: %s", args.transport)
     logger.info("=" * 60)
     
     try:
         # 3. Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
         
         # 4. Load and validate configuration
@@ -563,7 +563,7 @@ def main() -> None:
         logger.info("Shutdown complete")
 
 
-def find_agent_os_directory() -> Path:
+def find_praxis_os_directory() -> Path:
     """
     Find .praxis-os directory.
     
@@ -634,7 +634,7 @@ class ProjectInfoDiscovery:
         - Project name (from git or directory)
         - Project root path (from filesystem)
         - Git repository info (if available)
-        - Agent OS path
+        - prAxIs OS path
 
         ALL values are discovered at runtime.
 
@@ -643,7 +643,7 @@ class ProjectInfoDiscovery:
         return {
             "name": self._get_project_name(),        # Git repo OR dir name
             "root": str(self.project_root),          # Filesystem path
-            "agent_os_path": str(self.base_path),    # Filesystem path
+            "praxis_os_path": str(self.base_path),    # Filesystem path
             "git": self._get_git_info(),             # Git commands OR None
         }
 
@@ -857,7 +857,7 @@ interface ServerInfo {
     project: {
         name: string;                 // DYNAMIC: From git or directory
         root: string;                 // DYNAMIC: Filesystem path
-        agent_os_path: string;        // DYNAMIC: Filesystem path
+        praxis_os_path: string;        // DYNAMIC: Filesystem path
         git: {                        // DYNAMIC: Git commands, null if not repo
             remote: string;           // "git@github.com:user/repo.git"
             branch: string;           // "main"
@@ -1042,7 +1042,7 @@ Server Startup:
   │   │   │   ├─ subprocess.run(["git", "branch", "--show-current"])
   │   │   │   ├─ subprocess.run(["git", "rev-parse", "HEAD"])
   │   │   │   └─ subprocess.run(["git", "status", "--porcelain"])
-  │   │   └─ Returns: {name, root, agent_os_path, git}
+  │   │   └─ Returns: {name, root, praxis_os_path, git}
   │   └─ Write to .mcp_server_state.json
   │
   └─ register_all_tools(project_discovery=...)
@@ -1079,7 +1079,7 @@ Client Calls Tool:
 {
   "mcpServers": {
     "agent-os-rag": {
-      "comment": "Agent OS RAG/Workflow server with dual transport",
+      "comment": "prAxIs OS RAG/Workflow server with dual transport",
       
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
@@ -2180,7 +2180,7 @@ interface MCPServerState {
   
   // Optional metadata
   project_root?: string;
-  agent_os_version?: string;
+  praxis_os_version?: string;
 }
 ```
 
@@ -2189,7 +2189,7 @@ interface MCPServerState {
 ## Appendix B: CLI Reference
 
 ```bash
-# Agent OS MCP Server CLI
+# prAxIs OS MCP Server CLI
 
 python -m mcp_server --help
 

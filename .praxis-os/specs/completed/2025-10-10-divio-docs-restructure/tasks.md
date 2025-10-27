@@ -64,7 +64,7 @@
 - [x] Component integrated into Docusaurus theme via `swizzle` or `docusaurus.config.ts`
 - [x] Badges appear at top of every doc page below title
 - [x] Badges have tooltips explaining each doc type
-- [x] CSS styling matches Agent OS brand (consistent with existing theme)
+- [x] CSS styling matches prAxIs OS brand (consistent with existing theme)
 - [x] Build succeeds: `npm run build`
 - [x] Visual verification on 5+ pages across all doc types
 
@@ -157,13 +157,13 @@ Before advancing to Phase 2:
 
 ## Phase 2: Tutorial Content Creation
 
-**Objective:** Create 2 high-quality, guaranteed-success tutorials teaching Agent OS's main vehicle (spec-driven development) and workflow system.
+**Objective:** Create 2 high-quality, guaranteed-success tutorials teaching prAxIs OS's main vehicle (spec-driven development) and workflow system.
 
 **Estimated Duration:** 8-10 hours
 
 ### Phase 2 Tasks
 
-#### Task 2.1: Write Tutorial 1 - "Your First Agent OS Project"
+#### Task 2.1: Write Tutorial 1 - "Your First prAxIs OS Project"
 
 **Description:** Create comprehensive tutorial teaching complete spec creation → spec execution cycle using a simple example feature (e.g., user profile API endpoint).
 
@@ -179,7 +179,7 @@ Before advancing to Phase 2:
 - [x] Tutorial structure includes:
   - **Learning Goals:** Clear list of what user will learn
   - **Time Estimate:** 15-20 minutes
-  - **Prerequisites:** Agent OS installed
+  - **Prerequisites:** prAxIs OS installed
   - **What You'll Build:** Tangible outcome described
   - **Part 1: Design Conversation** (3 min) - Conversational design with AI
   - **Part 2: Create Specification** (5 min) - Trigger `spec_creation_v1` workflow
@@ -192,7 +192,7 @@ Before advancing to Phase 2:
   - Concrete action (what to say/do)
   - Expected output (what user will see)
   - Success indicator (how to know it worked)
-- [ ] Tutorial tested with 3 users on fresh Agent OS install
+- [ ] Tutorial tested with 3 users on fresh prAxIs OS install
 - [ ] Success rate ≥95% (all 3 users complete successfully)
 - [x] Tutorial takes 15-20 minutes for first-time users
 - [x] No vague instructions - every step is concrete
@@ -208,9 +208,9 @@ Before advancing to Phase 2:
 
 ---
 
-#### Task 2.2: Write Tutorial 2 - "Understanding Agent OS Workflows"
+#### Task 2.2: Write Tutorial 2 - "Understanding prAxIs OS Workflows"
 
-**Description:** Create tutorial teaching the Agent OS workflow system (phase-gated execution, checkpoints, evidence validation, workflow state).
+**Description:** Create tutorial teaching the prAxIs OS workflow system (phase-gated execution, checkpoints, evidence validation, workflow state).
 
 **Acceptance Criteria:**
 - [x] File created: `docs/content/tutorials/understanding-agent-os-workflows.md`
@@ -257,7 +257,7 @@ Before advancing to Phase 3:
 - [x] Type badges display correctly - doc_type set in frontmatter
 - [x] All links verified working - 0 broken links (34 links checked)
 - [x] Divio compliance ≥95% for both tutorials - Tutorial 1: 100%, Tutorial 2: 100%
-- [x] Tutorials demonstrate Agent OS's main vehicle clearly - spec-driven development emphasized throughout
+- [x] Tutorials demonstrate prAxIs OS's main vehicle clearly - spec-driven development emphasized throughout
 
 **Evidence Required:**
 - User testing results (6 users, success rate, time taken, feedback)
@@ -277,7 +277,7 @@ Before advancing to Phase 3:
 
 #### Task 3.1: Write How-To - "Create Custom Workflows"
 
-**Description:** Guide for creating custom Agent OS workflows for specialized needs beyond spec_creation_v1 and spec_execution_v1.
+**Description:** Guide for creating custom prAxIs OS workflows for specialized needs beyond spec_creation_v1 and spec_execution_v1.
 
 **Acceptance Criteria:**
 - [x] File created: `docs/content/how-to-guides/create-custom-workflows.md`
@@ -308,9 +308,9 @@ Before advancing to Phase 3:
 
 ---
 
-#### Task 3.2: Write How-To - "Integrate Agent OS with CI/CD"
+#### Task 3.2: Write How-To - "Integrate prAxIs OS with CI/CD"
 
-**Description:** Guide for integrating Agent OS workflows and validation into GitHub Actions, GitLab CI, or other CI/CD systems.
+**Description:** Guide for integrating prAxIs OS workflows and validation into GitHub Actions, GitLab CI, or other CI/CD systems.
 
 **Acceptance Criteria:**
 - [x] File created: `docs/content/how-to-guides/integrate-cicd.md`
@@ -370,7 +370,7 @@ Before advancing to Phase 3:
 
 #### Task 3.4: Write How-To - "Customize Documentation Theme"
 
-**Description:** Guide for customizing Docusaurus theme, colors, fonts, and layout for Agent OS documentation.
+**Description:** Guide for customizing Docusaurus theme, colors, fonts, and layout for prAxIs OS documentation.
 
 **Acceptance Criteria:**
 - [x] File created: `docs/content/how-to-guides/customize-theme.md`
@@ -534,7 +534,7 @@ Before advancing to Phase 4:
   - Minimal prose
 - [x] `docs/content/reference/workflows.md` updated:
   - Frontmatter: `doc_type: reference`
-  - Lists all available workflows (spec_creation_v1, spec_execution_v1, agent_os_upgrade_v1)
+  - Lists all available workflows (spec_creation_v1, spec_execution_v1, praxis_os_upgrade_v1)
   - For each workflow:
     - Name, purpose, phases, typical duration
   - Table format
@@ -552,7 +552,7 @@ Before advancing to Phase 4:
 
 #### Task 4.4: Create `architecture.md` Explanation Documentation
 
-**Description:** Enhance `architecture.md` to explain Agent OS Enhanced's architecture, design decisions, and trade-offs.
+**Description:** Enhance `architecture.md` to explain prAxIs OS's architecture, design decisions, and trade-offs.
 
 **Acceptance Criteria:**
 - [x] File enhanced: `docs/content/explanation/architecture.md`
@@ -615,7 +615,7 @@ Before advancing to Phase 5:
 
 **Acceptance Criteria:**
 - [ ] Algolia account created or existing account configured
-- [ ] Algolia application created for Agent OS Enhanced docs
+- [ ] Algolia application created for prAxIs OS docs
 - [ ] API keys obtained (search API key, admin API key)
 - [ ] `docusaurus.config.ts` updated with Algolia config:
   ```typescript

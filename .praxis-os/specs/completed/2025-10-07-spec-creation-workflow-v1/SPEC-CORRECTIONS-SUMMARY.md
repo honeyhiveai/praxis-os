@@ -210,4 +210,4 @@ The original spec described a workflow structure that **violated workflow constr
 
 ---
 
-**The spec now accurately reflects how to build a compliant Agent OS workflow following validated patterns.**
+**The spec now accurately reflects how to build a compliant prAxIs OS workflow following validated patterns.**

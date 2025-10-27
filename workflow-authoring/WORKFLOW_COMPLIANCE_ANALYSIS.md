@@ -1,7 +1,7 @@
 # Workflow Compliance Analysis - DSL Repository
 
 **Date**: 2025-10-02  
-**Purpose**: Identify gaps between current DSL workflow implementation and established Agent OS best practices  
+**Purpose**: Identify gaps between current DSL workflow implementation and established prAxIs OS best practices  
 **Reference**: `/python-sdk/.praxis-os/standards/ai-assistant/` methodologies
 
 ---

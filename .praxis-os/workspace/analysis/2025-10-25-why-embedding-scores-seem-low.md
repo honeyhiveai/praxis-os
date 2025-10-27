@@ -301,7 +301,7 @@ Too vague! Could mean:
 - React context API patterns
 - Distributed systems context propagation
 - NLP context window management
-- Agent OS context compaction (what you meant)
+- prAxIs OS context compaction (what you meant)
 
 Model must guess intent from 2 words.
 
@@ -363,7 +363,7 @@ Why even OpenAI isn't at 90%:
 
 ## Part 6: Why Your Model Is Better Than The Score Suggests
 
-### Agent OS Enhanced Reality Check
+### prAxIs OS Reality Check
 
 **MTEB tests on**:
 - Random Wikipedia articles
@@ -373,7 +373,7 @@ Why even OpenAI isn't at 90%:
 - Social media posts
 - Scientific abstracts
 
-**Agent OS Enhanced content**:
+**prAxIs OS content**:
 - Well-structured markdown
 - Explicit section headers
 - RAG-optimized keywords
@@ -384,7 +384,7 @@ Why even OpenAI isn't at 90%:
 **Expected performance boost**:
 ```
 MTEB performance:      56.26 nDCG (diverse, noisy data)
-Agent OS performance:  ~75-80 nDCG (clean, optimized data)
+prAxIs OS performance:  ~75-80 nDCG (clean, optimized data)
 
 Why the difference:
 ✅ Content is RAG-optimized (explicit keywords)

@@ -103,9 +103,9 @@ The design document should add:
 - [x] Review CONTRIBUTING.md guidelines
 - [ ] **Create GitHub issue** (BLOCKING)
 - [ ] **Wait for maintainer approval** (BLOCKING)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Create changeset entry
 - [ ] Run all quality checks (lint, format, test, e2e)
 - [ ] Create PR with proper description
@@ -117,15 +117,15 @@ The design document is comprehensive and technically accurate, but **cannot proc
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
 - [ ] GitHub issue creation (REQUIRED BEFORE IMPLEMENTATION)
 - [ ] Maintainer approval (REQUIRED BEFORE IMPLEMENTATION)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -168,15 +168,15 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
 - [ ] Search GitHub issues for existing reports
 - [ ] Determine if issue creation needed
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </execute_command>
@@ -499,7 +499,7 @@ ACT MODE
    - Added type safety improvements (`as const`)
    - Included RPC handler verification requirement
 4. **Reviewed CONTRIBUTING.md** - Understood contribution requirements
-5. **Learned Agent OS Enhanced** - Prepared for systematic spec creation workflow
+5. **Learned prAxIs OS** - Prepared for systematic spec creation workflow
 
 ### 📋 Current Status:
 
@@ -519,20 +519,20 @@ Given the thorough analysis in MCP_TRANSPORT_ANALYSIS.md, this appears to be a l
 1. Create the GitHub issue now
 2. Reference both analysis documents
 3. Wait for maintainer approval
-4. Then proceed with Cursor using Agent OS Enhanced
+4. Then proceed with Cursor using prAxIs OS
 
 **Option 3: Ask Maintainer Directly**
 Post in Discussions or Discord to confirm if this is a known issue.
 
 ### 📝 What Cursor Needs from You:
 
-For Cursor to create the spec using Agent OS Enhanced, you'll need to:
+For Cursor to create the spec using prAxIs OS, you'll need to:
 
 1. **Confirm Issue Status**: Either find existing issue or create new one
 2. **Get Approval**: Wait for maintainer green light
 3. **Provide Context**: Give Cursor the issue number and design document
 
-Then Cursor can use Agent OS Enhanced to:
+Then Cursor can use prAxIs OS to:
 - Create detailed spec in `.praxis-os/specs/`
 - Implement systematically with phase gating
 - Include all tests and documentation
@@ -558,16 +558,16 @@ The design document is production-ready and waiting for GitHub issue approval to
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
 - [x] Attempt GitHub issue search (terminal hung)
 - [ ] Determine issue status (manual search needed)
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -610,7 +610,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -618,9 +618,9 @@ ACT MODE
 - [ ] Search GitHub issues via browser
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -839,7 +839,7 @@ Console logs:
 
 				- [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -847,9 +847,9 @@ Console logs:
 - [ ] Search GitHub issues via browser
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 
 				
@@ -912,7 +912,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -920,9 +920,9 @@ ACT MODE
 - [ ] Search GitHub issues via browser (in progress)
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -966,7 +966,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -975,9 +975,9 @@ ACT MODE
 - [ ] Check if transport/SSE issue exists
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>

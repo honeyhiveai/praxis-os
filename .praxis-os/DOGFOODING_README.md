@@ -41,7 +41,7 @@ This `.praxis-os/` directory uses REAL COPIES (not symlinks) to experience the e
 
 ### For AI Agents: Your Development Process
 
-**You are the developer. This is your workflow for making changes to Agent OS.**
+**You are the developer. This is your workflow for making changes to prAxIs OS.**
 
 ---
 

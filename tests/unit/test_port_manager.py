@@ -22,7 +22,7 @@ def mock_project_discovery():
     discovery.get_project_info.return_value = {
         "name": "test-project",
         "root": "/path/to/project",
-        "agent_os_path": "/path/to/project/.praxis-os",
+        "praxis_os_path": "/path/to/project/.praxis-os",
         "git": None,
     }
     return discovery

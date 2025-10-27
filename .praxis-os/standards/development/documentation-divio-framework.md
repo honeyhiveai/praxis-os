@@ -28,7 +28,7 @@
 
 ## Purpose
 
-Ensure all Agent OS Enhanced documentation follows the Divio Documentation Framework, organizing content by user intent (learning, problem-solving, lookup, understanding) rather than by topic or feature. This makes documentation discoverable and useful based on what users want to accomplish.
+Ensure all prAxIs OS documentation follows the Divio Documentation Framework, organizing content by user intent (learning, problem-solving, lookup, understanding) rather than by topic or feature. This makes documentation discoverable and useful based on what users want to accomplish.
 
 ---
 
@@ -69,7 +69,7 @@ All documentation must fit into one of four types:
 - Builds confidence through accomplishment
 
 **Example titles:**
-- "Your First Agent OS Enhanced Project"
+- "Your First prAxIs OS Project"
 - "Build a Complete Feature Spec"
 - "Getting Started with Workflows"
 
@@ -404,11 +404,11 @@ doc_type: reference
 
 # MCP Tools Reference
 
-Complete reference of all MCP tools available in Agent OS Enhanced.
+Complete reference of all MCP tools available in prAxIs OS.
 
 ## search_standards
 
-**Purpose:** Semantic search over Agent OS standards
+**Purpose:** Semantic search over prAxIs OS standards
 
 **Parameters:**
 | Parameter | Type | Required | Description |
@@ -454,9 +454,9 @@ Before MCP, every AI integration required custom code. MCP solves this by...
 
 [Conceptual explanation]
 
-## How MCP Works in Agent OS Enhanced
+## How MCP Works in prAxIs OS
 
-Agent OS Enhanced uses MCP to expose three core capabilities:
+prAxIs OS uses MCP to expose three core capabilities:
 
 1. **RAG Search** - Semantic search over standards
 2. **Workflow Execution** - Phase-gated task orchestration  
@@ -614,7 +614,7 @@ doc_type: guide
 
 ## Related Standards
 
-- `documentation-project-naming.md` - Use "Agent OS Enhanced" consistently
+- `documentation-project-naming.md` - Use "prAxIs OS" consistently
 - `documentation-diagrams.md` - Use React components for all doc types
 - `documentation-theming.md` - Theme docs consistently across quadrants
 - `rag-content-authoring.md` - Optimize all doc types for RAG discoverability

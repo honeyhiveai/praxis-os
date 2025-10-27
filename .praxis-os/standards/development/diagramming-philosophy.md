@@ -170,7 +170,7 @@ export default function YourDiagram() {
 
 **1️⃣ Base Installation**
 
-Run the base installer to install Agent OS to your home directory:
+Run the base installer to install prAxIs OS to your home directory:
 
 ```bash
 curl -sSL https://github.com/honeyhiveai/praxis-os | sh
@@ -191,7 +191,7 @@ Navigate to your project:
 cd /path/to/your/project
 ```
 
-Install Agent OS:
+Install prAxIs OS:
 
 ```bash
 ~/.praxis-os/scripts/project-install.sh
@@ -262,7 +262,7 @@ cat .praxis-os/config.yml
 Works with any AI coding tool (Cursor, Codex, Gemini, Windsurf, etc.)
 
 → Use when your tool doesn't support subagents
-→ Agent OS serves as the orchestrator
+→ prAxIs OS serves as the orchestrator
 → Feeding generated prompts to your AI coding agent
 
 **Multi-Agent Mode** 🤖

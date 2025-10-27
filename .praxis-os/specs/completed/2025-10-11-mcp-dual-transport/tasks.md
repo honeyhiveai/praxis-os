@@ -48,7 +48,7 @@
 
 - [x] **Task 1.2**: Implement ProjectInfoDiscovery
   - Create `mcp_server/project_info.py` (55 statements)
-  - Implement `get_project_info()` returning name, root, agent_os_path, git
+  - Implement `get_project_info()` returning name, root, praxis_os_path, git
   - Implement `_get_project_name()` with git repo name or directory fallback
   - Implement `_get_git_info()` returning remote, branch, commit, commit_short, status
   - Implement `_is_git_repo()` checking for .git directory
@@ -149,7 +149,7 @@
   **Acceptance Criteria:**
   - [x] Tool registered with FastMCP
   - [x] Returns server metadata (version, transport, uptime, pid, started_at)
-  - [x] Returns project metadata (name, root, agent_os_path, git)
+  - [x] Returns project metadata (name, root, praxis_os_path, git)
   - [x] Returns capabilities (tools_available, rag_enabled, etc.)
   - [x] All values discovered at runtime (no hardcoding)
   - [x] Tool has comprehensive docstring with example
@@ -738,5 +738,5 @@ Feature considered complete when:
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial task breakdown | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial task breakdown | prAxIs OS Team |
 

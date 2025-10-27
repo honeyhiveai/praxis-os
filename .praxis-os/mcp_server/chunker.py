@@ -1,5 +1,5 @@
 """
-Agent OS Document Chunker
+prAxIs OS Document Chunker
 Intelligent chunking preserving semantic boundaries.
 
 100% AI-authored via human orchestration.
@@ -67,7 +67,7 @@ def parse_markdown_headers(content: str) -> List[Dict[str, Any]]:
                 else:
                     break
 
-            # Only process ## and ### headers (Agent OS convention)
+            # Only process ## and ### headers (prAxIs OS convention)
             if hash_count in (2, 3):
                 # Save previous section if exists
                 if current_section:
@@ -93,14 +93,14 @@ def parse_markdown_headers(content: str) -> List[Dict[str, Any]]:
 
 
 class AgentOSChunker:
-    """Intelligent chunker for Agent OS documentation."""
+    """Intelligent chunker for prAxIs OS documentation."""
 
     MAX_CHUNK_TOKENS = 500
     MIN_CHUNK_TOKENS = 100
 
     def chunk_file(self, filepath: Path) -> List[DocumentChunk]:
         """
-        Chunk a single Agent OS markdown file.
+        Chunk a single prAxIs OS markdown file.
 
         Steps:
         1. Read file content
@@ -472,7 +472,7 @@ class AgentOSChunker:
         Chunk all markdown files in a directory recursively.
 
         Args:
-            directory: Path to directory containing Agent OS files
+            directory: Path to directory containing prAxIs OS files
 
         Returns:
             List of all chunks from all files

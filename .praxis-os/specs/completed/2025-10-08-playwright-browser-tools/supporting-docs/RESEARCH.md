@@ -1,7 +1,7 @@
 # Playwright Browser Tools - Research & Design
 
 **Date**: October 8, 2025
-**Objective**: Design and implement Playwright browser automation tools for Agent OS Enhanced MCP server
+**Objective**: Design and implement Playwright browser automation tools for prAxIs OS MCP server
 
 ---
 
@@ -72,7 +72,7 @@ async with async_playwright() as p:
 3. **Session management**: Reuse contexts for efficiency
 4. **Resource cleanup**: Proper browser shutdown on server exit
 
-### 3. MCP Tool Patterns (Agent OS Enhanced)
+### 3. MCP Tool Patterns (prAxIs OS)
 
 From our codebase analysis:
 
@@ -504,7 +504,7 @@ playwright install chromium
 3. ✅ Can take full-page screenshots
 4. ✅ Browser instance persists across tool calls
 5. ✅ Proper resource cleanup on server shutdown
-6. ✅ Integration follows Agent OS patterns
+6. ✅ Integration follows prAxIs OS patterns
 7. ✅ Documentation updated
 
 ---
@@ -536,9 +536,9 @@ playwright install chromium
 - [Playwright Emulation API](https://playwright.dev/python/docs/emulation)
 - [FastMCP Documentation](https://github.com/jlowin/fastmcp)
 - [Microsoft Playwright MCP](https://github.com/microsoft/playwright-mcp)
-- [Agent OS Workflow Patterns](.praxis-os/standards/workflows/)
+- [prAxIs OS Workflow Patterns](.praxis-os/standards/workflows/)
 
 ---
 
-**Next Steps**: Create spec following Agent OS spec creation workflow
+**Next Steps**: Create spec following prAxIs OS spec creation workflow
 

@@ -78,12 +78,12 @@ If `.cursorrules` exists, you MUST discuss with the user.
 with open(".cursorrules", "r") as f:
     existing_rules = f.read()
 
-# Read Agent OS rules
+# Read prAxIs OS rules
 with open(f"{AGENT_OS_SOURCE}/.cursorrules", "r") as f:
-    agent_os_rules = f.read()
+    praxis_os_rules = f.read()
 
 print(f"📄 Your existing rules: {len(existing_rules.splitlines())} lines")
-print(f"📄 Agent OS rules: {len(agent_os_rules.splitlines())} lines")
+print(f"📄 prAxIs OS rules: {len(praxis_os_rules.splitlines())} lines")
 ```
 
 ### Step 3.3: Present Options to User
@@ -92,13 +92,13 @@ print(f"📄 Agent OS rules: {len(agent_os_rules.splitlines())} lines")
 print("""
 ⚠️  Your project has existing .cursorrules
 
-Agent OS needs to add rules to the TOP of your .cursorrules file
+prAxIs OS needs to add rules to the TOP of your .cursorrules file
 (they contain behavioral triggers that must run before other rules).
 
 Options:
-1. [Recommended] Auto-merge: Agent OS rules at top, your rules below
+1. [Recommended] Auto-merge: prAxIs OS rules at top, your rules below
 2. Manual merge: Show both files, you merge them yourself
-3. Backup and replace: Use Agent OS rules only (your rules backed up)
+3. Backup and replace: Use prAxIs OS rules only (your rules backed up)
 
 Which option? (1/2/3): """)
 
@@ -115,9 +115,9 @@ if user_choice == "1":
     
     # Create merged content
     merged_content = f"""# prAxIs OS Rules
-# (Added during Agent OS installation on {datetime.now().strftime('%Y-%m-%d')})
+# (Added during prAxIs OS installation on {datetime.now().strftime('%Y-%m-%d')})
 
-{agent_os_rules}
+{praxis_os_rules}
 
 # ============================================================================
 # Existing Project Rules (preserved from original .cursorrules)
@@ -134,7 +134,7 @@ if user_choice == "1":
         f.write(merged_content)
     
     print("✅ Rules merged successfully!")
-    print("   Structure: Agent OS rules (top) + Your rules (below)")
+    print("   Structure: prAxIs OS rules (top) + Your rules (below)")
     print("   Backup: .cursorrules.backup")
 ```
 
@@ -142,19 +142,19 @@ if user_choice == "1":
 
 ```python
 elif user_choice == "2":
-    # Save Agent OS rules to temp file for user reference
+    # Save prAxIs OS rules to temp file for user reference
     with open(".cursorrules.praxis-os", "w") as f:
-        f.write(agent_os_rules)
+        f.write(praxis_os_rules)
     
     print("""
 📄 Files for manual merge:
 
 Your existing rules:  .cursorrules
-Agent OS rules:       .cursorrules.praxis-os
+prAxIs OS rules:       .cursorrules.praxis-os
 
 Instructions:
 1. Open both files
-2. Copy Agent OS rules from .cursorrules.praxis-os
+2. Copy prAxIs OS rules from .cursorrules.praxis-os
 3. Paste at the TOP of .cursorrules
 4. Ensure your existing rules remain below
 5. Save .cursorrules
@@ -179,14 +179,14 @@ else:  # Option 3 or invalid input
     
     shutil.copy(".cursorrules", backup_path)
     
-    # Replace with Agent OS rules
+    # Replace with prAxIs OS rules
     shutil.copy(f"{AGENT_OS_SOURCE}/.cursorrules", ".cursorrules")
     
     print(f"✅ Original rules backed up to: {backup_path}")
-    print("   Agent OS rules are now active")
+    print("   prAxIs OS rules are now active")
     print("\n💡 To restore your rules:")
     print("   1. Copy your rules from the backup")
-    print("   2. Append them below Agent OS rules in .cursorrules")
+    print("   2. Append them below prAxIs OS rules in .cursorrules")
 ```
 
 ---
@@ -203,18 +203,18 @@ if not os.path.exists(".cursorrules"):
     print("❌ .cursorrules missing!")
     exit(1)
 
-# Check it has Agent OS content
+# Check it has prAxIs OS content
 with open(".cursorrules", "r") as f:
     content = f.read()
 
-has_agent_os = "Agent OS" in content or "MANDATORY FIRST ACTION" in content
+has_agent_os = "prAxIs OS" in content or "MANDATORY FIRST ACTION" in content
 
 if not has_agent_os:
-    print("⚠️  .cursorrules exists but doesn't contain Agent OS rules")
+    print("⚠️  .cursorrules exists but doesn't contain prAxIs OS rules")
     print("   This might be intentional if you chose manual merge")
-    print("   Verify Agent OS rules are present")
+    print("   Verify prAxIs OS rules are present")
 else:
-    print("✅ .cursorrules configured with Agent OS rules")
+    print("✅ .cursorrules configured with prAxIs OS rules")
 
 # Check backup exists (if there was an existing file)
 if os.path.exists(".cursorrules.backup"):
@@ -234,7 +234,7 @@ head -20 .cursorrules
 **Should show**:
 ```
 # prAxIs OS Rules
-# (Added during Agent OS installation...)
+# (Added during prAxIs OS installation...)
 
 ## 🤖 OPERATING MODEL
 ...
@@ -282,11 +282,11 @@ else:
     print("ℹ️  No backup (probably no existing .cursorrules)")
 ```
 
-### Issue: Agent OS rules not at top
+### Issue: prAxIs OS rules not at top
 
 **Fix manually**:
 1. Open `.cursorrules`
-2. Cut the Agent OS section (starts with `# prAxIs OS Rules`)
+2. Cut the prAxIs OS section (starts with `# prAxIs OS Rules`)
 3. Paste it at the very top of the file
 4. Save
 
@@ -296,7 +296,7 @@ else:
 
 At this point you should have:
 - ✅ `.cursorrules` exists
-- ✅ Contains Agent OS rules
+- ✅ Contains prAxIs OS rules
 - ✅ Original rules preserved (if they existed)
 - ✅ Backup created (if there was an existing file)
 - ✅ Validation checkpoint passed
@@ -322,7 +322,7 @@ You've handled the `.cursorrules` file safely. Now you need to:
 
 That file will:
 1. Configure `.gitignore` to prevent committing 2.6GB of ephemeral files
-2. Add Agent OS entries (cache, backups, venv)
+2. Add prAxIs OS entries (cache, backups, venv)
 3. Verify gitignore is working correctly
 4. Direct you to step 05 (venv and mcp setup)
 

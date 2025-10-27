@@ -40,7 +40,7 @@
 ### Why Now?
 
 1. **A2A Protocol Exists**: Standard agent communication protocol available
-2. **Agent OS Enhanced Stable**: MCP tooling, workflows, validation proven (49+ sessions)
+2. **prAxIs OS Stable**: MCP tooling, workflows, validation proven (49+ sessions)
 3. **HoneyHive Integration Ready**: Tracing/observability for agent behavior analysis
 4. **Enterprise Adoption Coming**: Need to validate multi-agent patterns before scale-up
 5. **Personal Learning**: Founder has 2.5 months AI experience, wants to explore advanced patterns
@@ -50,7 +50,7 @@
 **In Scope:**
 - Browser-IDE module architecture (backend + frontend)
 - Multi-agent coordination via A2A protocol
-- Integration with Agent OS Enhanced MCP server
+- Integration with prAxIs OS MCP server
 - HoneyHive tracing for all agent interactions
 - Specialist agent types (orchestrator, backend, frontend, qa, devops)
 - Agent prompt management (markdown-based system prompts)
@@ -72,7 +72,7 @@
 
 1. **Prove Multi-Agent Feasibility**: Validate that specialist agents can collaborate effectively
 2. **Observability First**: Use HoneyHive to understand agent behavior and improve prompts
-3. **Module System Pattern**: Establish how modules extend Agent OS Enhanced capabilities
+3. **Module System Pattern**: Establish how modules extend prAxIs OS capabilities
 4. **Browser-Based Lightweight UI**: Sub-100MB Python backend + React frontend
 5. **Zero Manual Agent Wiring**: Agents auto-discover MCP server, auto-register with orchestrator
 6. **Prompt-Driven Agent Config**: System prompts in markdown, agents launched dynamically
@@ -94,7 +94,7 @@
 
 ### What Exists Today
 
-**Agent OS Enhanced (Proven):**
+**prAxIs OS (Proven):**
 - ✅ MCP server with 5 tools (workflow, search_standards, browser, server_info, current_date)
 - ✅ Workflow orchestration (49+ sessions, dogfooded)
 - ✅ Phase gating with evidence validation
@@ -194,7 +194,7 @@
                             │ MCP Client Connection
                             │
 ┌─────────────────────────────────────────────────────────────────┐
-│  Agent OS Enhanced MCP Server                                   │
+│  prAxIs OS MCP Server                                   │
 │  (Already exists in .praxis-os/mcp_server/)                      │
 │                                                                  │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
@@ -251,7 +251,7 @@ class GenericAgent(Agent):
         if mcp_url is None:
             mcp_url = self._discover_mcp_server()
         
-        # Connect to MCP server (Agent OS Enhanced tools)
+        # Connect to MCP server (prAxIs OS tools)
         self.mcp = MCPClient(mcp_url)
         
         # Initialize HoneyHive tracing
@@ -910,7 +910,7 @@ Orchestrator:
   - Return trace_id for user to inspect
 ```
 
-### Integration with Agent OS Enhanced
+### Integration with prAxIs OS
 
 **MCP Server Auto-Discovery:**
 
@@ -942,7 +942,7 @@ def _discover_mcp_server(self) -> str:
 
 Agents automatically have access to ALL project standards via `search_standards(...)` tool:
 
-- Universal standards (from Agent OS Enhanced)
+- Universal standards (from prAxIs OS)
 - Project standards (from target project's .praxis-os/standards/)
 - Module standards (from browser-ide/standards/)
 
@@ -1029,7 +1029,7 @@ result = await self.mcp.call_tool(
 - ✅ Observability (HoneyHive traces all decisions)
 - ✅ Lightweight (< 100MB backend, browser frontend)
 - ✅ Prompt-driven (add agents = add markdown file)
-- ✅ Module pattern (extends Agent OS Enhanced)
+- ✅ Module pattern (extends prAxIs OS)
 - ✅ Feasibility exploration (low commitment)
 
 **Cons:**
@@ -1079,7 +1079,7 @@ result = await self.mcp.call_tool(
 
 2. **Observability Critical**: HoneyHive tracing is the whole point - understand agent behavior, improve prompts iteratively.
 
-3. **Module Pattern**: Establishes how to extend Agent OS Enhanced with new capabilities (browser-ide is first module, more to come).
+3. **Module Pattern**: Establishes how to extend prAxIs OS with new capabilities (browser-ide is first module, more to come).
 
 4. **Standard Protocol**: A2A gives interoperability, community support, future-proofing.
 
@@ -1288,7 +1288,7 @@ result = await self.mcp.call_tool(
 
 ### Module System Validation
 
-- [ ] Browser-IDE module installs into Agent OS Enhanced project
+- [ ] Browser-IDE module installs into prAxIs OS project
 - [ ] Module standards accessible via search_standards
 - [ ] Module workflows accessible via pos_workflow
 - [ ] Module can be removed cleanly (no residual state)
@@ -1390,9 +1390,9 @@ None (this is additive)
 
 ## 📚 Related Work & Inspiration
 
-### Agent OS Enhanced (Foundation)
+### prAxIs OS (Foundation)
 
-This entire module builds on Agent OS Enhanced:
+This entire module builds on prAxIs OS:
 - MCP tooling (workflows, standards, browser)
 - Phase gating (validation, evidence)
 - RAG behavioral reinforcement
@@ -1471,7 +1471,7 @@ Browser-IDE is **first module**, not last:
 4. Re-run task, compare traces
 5. Iterate until behavior optimal
 
-**This is the feedback loop Agent OS Enhanced enables.**
+**This is the feedback loop prAxIs OS enables.**
 
 ### 4. Browser UI Is Optional
 
@@ -1529,7 +1529,7 @@ Browser-IDE is **first module**, not last:
 - Multi-agent coordination systems
 - Browser-based development environments
 - Observability infrastructure for AI teams
-- Module ecosystems for Agent OS Enhanced
+- Module ecosystems for prAxIs OS
 
 **Enterprise adoption coming:**
 - HoneyHive projects (company-wide)

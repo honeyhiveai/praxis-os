@@ -1,8 +1,8 @@
-# Meta-Development Patterns: Building Agent OS Enhanced
+# Meta-Development Patterns: Building prAxIs OS
 
 **Keywords for search**: meta-development, building agent os enhanced, dogfooding agent os, framework development, recursive development, builder vs consumer, framework standards vs project standards, bug attribution, design for consumers, meta-complexity, building what you use
 
-**Core Principle:** Building Agent OS Enhanced WITH Agent OS Enhanced is meta-development - you face recursive complexity that consumers don't. Design for THEIR simpler experience (99%), not YOUR complex experience (1%).
+**Core Principle:** Building prAxIs OS WITH prAxIs OS is meta-development - you face recursive complexity that consumers don't. Design for THEIR simpler experience (99%), not YOUR complex experience (1%).
 
 ---
 
@@ -31,7 +31,7 @@
 
 ## 🎯 Purpose
 
-Define behavioral patterns for developing Agent OS Enhanced itself using Agent OS Enhanced. This is project-specific guidance for the unique challenge of meta-development - building the framework while using the framework.
+Define behavioral patterns for developing prAxIs OS itself using prAxIs OS. This is project-specific guidance for the unique challenge of meta-development - building the framework while using the framework.
 
 **Key Distinction:** This standard is for the 1% (developing this framework). Framework standards in `universal/` are for the 99% (consuming this framework). Don't confuse the two.
 
@@ -54,7 +54,7 @@ Define behavioral patterns for developing Agent OS Enhanced itself using Agent O
 
 ## ❓ Questions This Answers
 
-1. "Why is building Agent OS Enhanced harder than using it?"
+1. "Why is building prAxIs OS harder than using it?"
 2. "Should I document this framework bug in consumer standards?"
 3. "How do I know if error is framework bug or my usage mistake?"
 4. "Why do I need to understand internals when consumers don't?"
@@ -148,7 +148,7 @@ Clean, linear, domain-focused
 **When creating standards in `.praxis-os/standards/development/`:**
 
 ✅ **Do this (Project-specific):**
-- Document patterns unique to building Agent OS Enhanced
+- Document patterns unique to building prAxIs OS
 - Explain meta-development complexity
 - Describe bug attribution strategies (framework vs usage)
 - Capture builder workflows and pain points
@@ -224,7 +224,7 @@ Before documenting in `universal/`:
 
 ## ✅ Meta-Development Checklist
 
-When building Agent OS Enhanced:
+When building prAxIs OS:
 - [ ] Recognize my context is meta-development (recursive complexity)
 - [ ] Remember consumers have domain-development (linear complexity)
 - [ ] Design framework standards for THEIR experience, not MINE
@@ -480,7 +480,7 @@ I'll document patterns for THEIR experience, not mine."
 
 ## 🔗 When to Query This Standard
 
-Query this standard when working on Agent OS Enhanced:
+Query this standard when working on prAxIs OS:
 
 | Scenario | Example Query |
 |----------|--------------|
@@ -518,13 +518,13 @@ Query this standard when working on Agent OS Enhanced:
 
 ## 🔗 Related Standards
 
-**Project Standards (for building Agent OS Enhanced):**
+**Project Standards (for building prAxIs OS):**
 - This standard (meta-development patterns)
 - Python code quality standards
 - Testing standards
 
-**Framework Standards (for consuming Agent OS Enhanced):**
-- **[Agent OS Orientation](../../universal/standards/ai-assistant/AGENT-OS-ORIENTATION.md)** - Query: "orientation bootstrap"
+**Framework Standards (for consuming prAxIs OS):**
+- **[prAxIs OS Orientation](../../universal/standards/ai-assistant/AGENT-OS-ORIENTATION.md)** - Query: "orientation bootstrap"
 - **[Workflow Discovery Patterns](../../universal/standards/ai-assistant/workflow-discovery-patterns.md)** - Query: "workflow lifecycle patterns"
 - **[Agent Decision Protocol](../../universal/standards/ai-assistant/agent-decision-protocol.md)** - Query: "decision protocol"
 

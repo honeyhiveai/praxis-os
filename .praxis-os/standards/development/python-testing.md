@@ -97,7 +97,7 @@ pip install pytest pytest-cov pytest-mock
 ```
 praxis-os/
 ├── mcp_server/
-│   ├── agent_os_rag.py
+│   ├── praxis_os_rag.py
 │   ├── rag_engine.py
 │   └── workflow_engine.py
 ├── tests/
@@ -200,7 +200,7 @@ def test_search_various_queries(rag_engine, query, expected_count):
 ```python
 # tests/integration/test_mcp_tools.py
 import pytest
-from mcp_server.agent_os_rag import create_server
+from mcp_server.praxis_os_rag import create_server
 
 @pytest.fixture
 async def mcp_server():

@@ -641,27 +641,27 @@ The design document is now:
 
 ### 🚀 Next Steps:
 
-**For Cursor with Agent OS Enhanced:**
+**For Cursor with prAxIs OS:**
 
-1. **Create Spec** using Agent OS Enhanced `spec_creation_v1` workflow
+1. **Create Spec** using prAxIs OS `spec_creation_v1` workflow
    - Input: This updated design document
    - Output: Detailed implementation spec in `.praxis-os/specs/`
 
 2. **Review Spec** - I'll review the generated spec for accuracy
 
-3. **Execute Spec** using Agent OS Enhanced `spec_execution_v1` workflow
+3. **Execute Spec** using prAxIs OS `spec_execution_v1` workflow
    - Implements all changes systematically
    - Includes tests and documentation
    - Phase-gated execution
 
 4. **Verify** - Final validation of the implementation
 
-The design document incorporates all codebase-specific insights and is production-ready for systematic implementation through Agent OS Enhanced workflows.
+The design document incorporates all codebase-specific insights and is production-ready for systematic implementation through prAxIs OS workflows.
 </result>
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
   - [x] SSE implementation details
@@ -671,9 +671,9 @@ The design document incorporates all codebase-specific insights and is productio
   - [x] Type safety improvements
   - [x] RPC handler verification note
 - [x] Design doc ready for Cursor to create spec
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>

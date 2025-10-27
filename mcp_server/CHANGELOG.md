@@ -1,6 +1,6 @@
-# Agent OS MCP Server - Changelog
+# prAxIs OS MCP Server - Changelog
 
-All notable changes to the Agent OS MCP server will be documented in this file.
+All notable changes to the prAxIs OS MCP server will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed - workflow_creation_v1 (Critical Directory Naming Bug)
 
-**Problem**: workflow_creation_v1 created workflows with incorrect directory names using dashes (e.g., `standards-creation-v1`) instead of underscores (e.g., `standards_creation_v1`). Additionally, it hardcoded `universal/workflows/` path which only exists in the Agent OS repo, breaking workflow creation for all standard installations.
+**Problem**: workflow_creation_v1 created workflows with incorrect directory names using dashes (e.g., `standards-creation-v1`) instead of underscores (e.g., `standards_creation_v1`). Additionally, it hardcoded `universal/workflows/` path which only exists in the prAxIs OS repo, breaking workflow creation for all standard installations.
 
 **Root Cause**: 
 1. Phase 2, Task 1 used `target_workflow_name` (from `name` field with dashes) instead of `target_workflow_type` (from `workflow_type` field with underscores) for directory creation
@@ -49,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Generated workflows were not discoverable by workflow engine (looks for `{workflow_type}/` with underscores)
 - Workflow engine fell back to auto-generated placeholder metadata instead of loading actual metadata.json
 - Complete workflow failure - unusable output
-- Only works in Agent OS repo, breaks everywhere else
+- Only works in prAxIs OS repo, breaks everywhere else
 
 **Fixes Applied**:
 
@@ -68,12 +68,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 3. **Workflow Philosophy Update**
    - Workflows are ALWAYS created in `.praxis-os/workflows/` locally
-   - Manual copy to `universal/workflows/` only when distributing as part of Agent OS repo
+   - Manual copy to `universal/workflows/` only when distributing as part of prAxIs OS repo
    - Build local, distribute manually
 
 **Expected Result**: 
 - Workflows created with correct underscore naming matching `workflow_type` field
-- Works in all installations (not just Agent OS repo)
+- Works in all installations (not just prAxIs OS repo)
 - Workflow engine successfully loads metadata.json
 - No more directory/workflow_type mismatch errors
 
@@ -146,7 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.praxis-os/specs/workflow-creation-v1-comprehensive-analysis-2025-10-13.md` (full verification)
 - `.praxis-os/specs/workflow-creation-v1-implementation-gap-analysis-2025-10-13.md` (original analysis)
 
-**Traceability**: This fix is critical because workflow_creation_v1 is the meta-workflow that generates all other workflows. A broken workflow generator produces broken workflows at scale. These fixes restore the foundational automation layer for the entire Agent OS workflow system.
+**Traceability**: This fix is critical because workflow_creation_v1 is the meta-workflow that generates all other workflows. A broken workflow generator produces broken workflows at scale. These fixes restore the foundational automation layer for the entire prAxIs OS workflow system.
 
 ---
 
@@ -203,7 +203,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **Entry Point** (`__main__.py`):
   - Added `argparse` for CLI argument parsing
-  - Added `find_agent_os_directory()` with multiple fallback paths
+  - Added `find_praxis_os_directory()` with multiple fallback paths
   - Integrated PortManager, TransportManager, and ProjectInfoDiscovery
   - Atomic state file creation and cleanup on shutdown
   - Enhanced error messages with remediation steps
@@ -276,7 +276,7 @@ See `.praxis-os/specs/2025-10-11-mcp-dual-transport/THREAD-SAFETY.md` for detail
   - Git check-ignore verification
 
 - **Upgrade Workflow Phase 2 Task 3**: Gitignore update
-  - `workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md` (147 lines)
+  - `workflows/praxis_os_upgrade_v1/phases/2/task-3-update-gitignore.md` (147 lines)
   - Compares target .gitignore with standards requirements
   - Appends missing entries automatically during upgrade
   - Warns if ephemeral files already committed
@@ -302,7 +302,7 @@ See `.praxis-os/specs/2025-10-11-mcp-dual-transport/THREAD-SAFETY.md` for detail
 
 ### Fixed
 - **CRITICAL SAFETY**: Removed dangerous `--delete` from user-writable directories
-  - **Location**: `workflows/agent_os_upgrade_v1/phases/2/task-2-actual-upgrade.md`
+  - **Location**: `workflows/praxis_os_upgrade_v1/phases/2/task-2-actual-upgrade.md`
   - **Issue**: `rsync --delete` on `.praxis-os/usage/` would delete user docs
   - **Fix**: Changed to `rsync -av` (NO --delete) for usage directory
   - **Added**: Directory classification documentation (system-managed vs user-writable)
@@ -330,7 +330,7 @@ See `.praxis-os/specs/2025-10-11-mcp-dual-transport/THREAD-SAFETY.md` for detail
 - Updated `installation/README.md` with 7-step structure
 - Updated `installation/00-START.md` with step 04 gitignore
 - Updated `installation/SYSTEM-SUMMARY.md` with new architecture
-- Updated `workflows/agent_os_upgrade_v1/README.md` with Phase 2 changes
+- Updated `workflows/praxis_os_upgrade_v1/README.md` with Phase 2 changes
 
 ---
 
@@ -362,7 +362,7 @@ See `.praxis-os/specs/2025-10-11-mcp-dual-transport/THREAD-SAFETY.md` for detail
   - Maintains backward compatibility with existing configs
 
 ### Removed
-- `agent_os_rag.py` (984 lines): Replaced by modular architecture
+- `praxis_os_rag.py` (984 lines): Replaced by modular architecture
 - `models.py` (410 lines): Replaced by models/ module
 - Old `_load_path_config()` function: Replaced by ConfigLoader
 - Old `AgentOSFileWatcher`: Replaced by monitoring/watcher.py with DI
@@ -425,7 +425,7 @@ start_workflow("test-generation-js-ts", "file.ts")
 - **Update Documentation (Critical)**: Comprehensive guides to prevent update mistakes
   
   **Content Updates (No Restart Required):**
-  - **`universal/usage/agent-os-update-guide.md`**: Content update instructions
+  - **`universal/usage/praxis-os-update-guide.md`**: Content update instructions
     - Correct source location (`universal/` not `.praxis-os/`)
     - **File watcher auto-detects `.md`/`.json` changes** - no manual action needed
     - RAG index rebuilds automatically in ~10-30 seconds
@@ -723,7 +723,7 @@ Now agents get complete overview immediately, enabling better planning and progr
   - Returns current date/time in ISO 8601 format (YYYY-MM-DD)
   - Provides multiple formatted outputs (spec directories, headers, readable)
   - Includes day of week, month, year, and unix timestamp
-  - Solves systematic AI date error problem per Agent OS date policy
+  - Solves systematic AI date error problem per prAxIs OS date policy
   - Example use: Create specifications with correct dates, proper directory naming
 
 ### Why This Feature?
@@ -751,7 +751,7 @@ result = await current_date()
     "header": "**Date**: 2025-10-06",  # For markdown headers
     "readable": "October 06, 2025"
   },
-  "usage_note": "Use 'iso_date' (YYYY-MM-DD) for all specifications, directories, and headers per Agent OS date policy"
+  "usage_note": "Use 'iso_date' (YYYY-MM-DD) for all specifications, directories, and headers per prAxIs OS date policy"
 }
 ```
 
@@ -814,7 +814,7 @@ result = await current_date()
 When a new version is released, users can update via:
 
 ```
-"Update Agent OS to latest version"
+"Update prAxIs OS to latest version"
 ```
 
 Cursor agent will:
@@ -827,7 +827,7 @@ Cursor agent will:
 
 ## Version Compatibility
 
-| Agent OS Version | Python | LanceDB | Sentence-Transformers | MCP |
+| prAxIs OS Version | Python | LanceDB | Sentence-Transformers | MCP |
 |------------------|--------|---------|----------------------|-----|
 | 1.0.0            | ≥3.8   | ~=0.25.0 | ≥2.0.0               | ≥1.0.0 |
 
@@ -842,7 +842,7 @@ None yet (initial release).
 ## Contributors
 
 - 100% AI-authored via human orchestration (HoneyHive team)
-- Built on Brian Casel's Builder Methods Agent OS foundation
+- Built on Brian Casel's Builder Methods prAxIs OS foundation
 - Inspired by HoneyHive's LLM Workflow Engineering methodology
 
 ---

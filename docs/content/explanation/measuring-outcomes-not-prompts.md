@@ -150,7 +150,7 @@ Prompt → Response → Manual validation → Iterate until quality
 **Quality:** Probabilistic (depends on prompt quality)
 :::
 
-:::tip Agent OS Approach
+:::tip prAxIs OS Approach
 Prompt → RAG-enhanced response → Workflow execution → Pre-commit validation  
 **Time:** Deterministic (single pass if framework followed)  
 **Quality:** Guaranteed (gates enforce standards)
@@ -261,7 +261,7 @@ Even validated work is verified because:
 
 :::tip Key Insight
 **Traditional:** Good prompt × Probabilistic AI = Variable quality  
-**Agent OS:** Any prompt × Three-layer system = Consistent quality
+**prAxIs OS:** Any prompt × Three-layer system = Consistent quality
 
 **We don't optimize prompts. We build systems that guarantee outcomes.**
 :::

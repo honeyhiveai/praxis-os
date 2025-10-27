@@ -24,7 +24,7 @@ The MCP server requires exactly these directories:
 .praxis-os/
 ├── standards/
 │   └── universal/          # Universal CS fundamentals
-├── usage/                   # Agent OS usage docs
+├── usage/                   # prAxIs OS usage docs
 ├── workflows/               # Workflow definitions (CRITICAL!)
 ├── mcp_server/              # MCP server code
 ├── .cache/                  # Vector index and state files
@@ -213,7 +213,7 @@ pwd    # Should show your project root
 
 ### Issue: ".praxis-os already exists"
 
-**Cause**: Agent OS might already be installed  
+**Cause**: prAxIs OS might already be installed  
 **Options**:
 1. **Update**: Remove old `.praxis-os/` and reinstall
 2. **Keep**: If it's a valid installation, skip to validation

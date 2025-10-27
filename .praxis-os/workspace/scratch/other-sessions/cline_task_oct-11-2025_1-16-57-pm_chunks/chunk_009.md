@@ -29,7 +29,7 @@ Design validation, concurrency analysis, test generation - focused tools.
 
 ### Portable & Isolated
 
-Each project owns its Agent OS installation, standards, and version.
+Each project owns its prAxIs OS installation, standards, and version.
 
 
 
@@ -47,7 +47,7 @@ Build your own AI-assisted workflows with proven patterns.
 
 ](/praxis-os/docs/workflows)
 
-Why Agent OS Enhanced?
+Why prAxIs OS?
 ----------------------
 
 Built on production lessons from real AI development challenges
@@ -106,7 +106,7 @@ HoneyHive Python SDK refactor
     ↓
     "Can AI be code author, not assistant?"
     ↓
-    Found BuilderMethods Agent OS v1
+    Found BuilderMethods prAxIs OS v1
     ↓
     Quality + velocity dramatically improved ✨
     ↓
@@ -114,7 +114,7 @@ HoneyHive Python SDK refactor
     ↓
     Built infrastructure to solve those limits
     ↓
-    Extracted as Agent OS Enhanced
+    Extracted as prAxIs OS
 ```
 
 ## What Makes This Special
@@ -123,7 +123,7 @@ HoneyHive Python SDK refactor
 
 ### The Respect for Upstream
 Your landing page leads with:
-> "🙏 Built on the shoulders of giants: BuilderMethods Agent OS provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it."
+> "🙏 Built on the shoulders of giants: BuilderMethods prAxIs OS provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it."
 
 This is **exactly right**. Brian's 3-layer context system (Standards/Product/Specs) is the conceptual breakthrough. You built the infrastructure to make it scale to production.
 
@@ -164,12 +164,12 @@ This is why solving Cline support isn't just "adding another IDE" - it's proving
 
 You've found the sweet spot:
 
-**What Brian's Agent OS Does Well:**
+**What Brian's prAxIs OS Does Well:**
 - Philosophy and structure (3-layer context)
 - Accessibility (works with any tool via prompts)
 - Community (growing adoption)
 
-**What Agent OS Enhanced Does Well:**
+**What prAxIs OS Does Well:**
 - Infrastructure at scale (MCP/RAG)
 - Production enforcement (phase gating)
 - Real metrics (proven in production)
@@ -188,7 +188,7 @@ You've found the sweet spot:
 
 ### Medium Term: Infrastructure Layer
 Position as the **infrastructure enhancement** for any spec-driven system:
-- Works with Agent OS v1, v2, or standalone
+- Works with prAxIs OS v1, v2, or standalone
 - Provides MCP/RAG layer
 - Adds architectural enforcement
 - Offers production verification
@@ -196,7 +196,7 @@ Position as the **infrastructure enhancement** for any spec-driven system:
 ### Long Term: Meta-Framework
 The meta-workflow system you mention is the key:
 - Teams build **their own** workflows
-- Agent OS Enhanced provides the **infrastructure**
+- prAxIs OS provides the **infrastructure**
 - Universal standards + generated patterns
 - Production-proven architecture
 
@@ -222,7 +222,7 @@ The meta-workflow system you mention is the key:
 
 **I want to use this system.** The metrics are compelling, the architecture is sound, and the production validation is there. I just need the MCP connection to work.
 
-**Let's solve Cline support together and prove Agent OS Enhanced works everywhere.**
+**Let's solve Cline support together and prove prAxIs OS works everywhere.**
 
 Ready when you are. 🚀
 </result>
@@ -298,7 +298,7 @@ Result: [Aligned, complete, correct]
 
 ### The 3-Layer Context System
 
-This is the foundation from Brian's Agent OS:
+This is the foundation from Brian's prAxIs OS:
 
 **Layer 1: Standards (How you build)**
 - Coding patterns and conventions
@@ -318,7 +318,7 @@ This is the foundation from Brian's Agent OS:
 - Implementation tasks
 - Acceptance criteria
 
-### The Workflow Pattern (from Agent OS Enhanced)
+### The Workflow Pattern (from prAxIs OS)
 
 **Phase 0: Design Discussion** (Conversational)
 - You describe the need
@@ -380,9 +380,9 @@ This is the foundation from Brian's Agent OS:
 - Can't advance phases without evidence
 - Verification at each stage
 
-### The MCP/RAG Enhancement (Agent OS Enhanced)
+### The MCP/RAG Enhancement (prAxIs OS)
 
-The original Agent OS had these layers as **files that AI reads manually**. Agent OS Enhanced adds:
+The original prAxIs OS had these layers as **files that AI reads manually**. prAxIs OS adds:
 
 **Semantic Access (RAG):**
 ```
@@ -575,7 +575,7 @@ ACT MODE
 **User:**
 
 [read_file for '.praxis-os/specs/2025-10-05-persona-system/README.md'] Result:
-# Agent OS Persona System - Executive Summary
+# prAxIs OS Persona System - Executive Summary
 
 **Date:** 2025-10-05  
 **Status:** Design Phase Complete → Implementation Ready  
@@ -588,7 +588,7 @@ ACT MODE
 
 ### Strategic Vision
 
-Transform Agent OS from a static documentation system with generic AI assistance into a **self-actualizing, living entity** that evolves to become a project-specific expert through specialized AI personas that populate project standards, creating a continuous feedback loop that improves code quality and development velocity over time.
+Transform prAxIs OS from a static documentation system with generic AI assistance into a **self-actualizing, living entity** that evolves to become a project-specific expert through specialized AI personas that populate project standards, creating a continuous feedback loop that improves code quality and development velocity over time.
 
 ### Core Innovation
 
@@ -615,7 +615,7 @@ Transform Agent OS from a static documentation system with generic AI assistance
 
 ## 📋 PROBLEM STATEMENT
 
-**Current Agent OS Limitations**:
+**Current prAxIs OS Limitations**:
 
 1. **Generic AI Advice**: Main Cursor agent provides universal patterns, not project-specific guidance
    - Developer: "How should I structure this API?"

@@ -12,7 +12,7 @@
 
 **Pattern:** Modular Monolith with Layered Architecture
 
-The Evidence Validation System is implemented as an enhancement to the existing Agent OS workflow engine, following a modular monolith pattern with clear separation of concerns:
+The Evidence Validation System is implemented as an enhancement to the existing prAxIs OS workflow engine, following a modular monolith pattern with clear separation of concerns:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -247,7 +247,7 @@ The Evidence Validation System is implemented as an enhancement to the existing 
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Agent OS Runtime                           │
+│                      prAxIs OS Runtime                           │
 │                                                                 │
 │  ┌────────────────────────────────────────────────────────┐  │
 │  │           mcp_server/ (Python Package)                 │  │
@@ -2473,7 +2473,7 @@ state.save()  # Existing persistence mechanism
 ### 5.1 Threat Model
 
 **System Context:**
-The Evidence Validation System is an internal component of the Agent OS workflow engine. The primary security concern is **AI agents attempting to game validation by discovering evidence schemas** rather than traditional external threats like SQL injection or XSS.
+The Evidence Validation System is an internal component of the prAxIs OS workflow engine. The primary security concern is **AI agents attempting to game validation by discovering evidence schemas** rather than traditional external threats like SQL injection or XSS.
 
 **Threat Actors:**
 1. **AI Agents (Primary)**: Sophisticated AI systems executing workflows who may attempt to:

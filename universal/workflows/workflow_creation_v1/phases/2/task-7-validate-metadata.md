@@ -15,7 +15,7 @@ Run the official validation script to ensure metadata.json complies with workflo
 
 ## Context
 
-📊 **CONTEXT**: The `workflow-metadata-standards.md` document defines 7 required root fields and 6 required phase fields. All Agent OS workflows MUST comply with this standard for proper RAG indexing, AI planning, and workflow engine execution.
+📊 **CONTEXT**: The `workflow-metadata-standards.md` document defines 7 required root fields and 6 required phase fields. All prAxIs OS workflows MUST comply with this standard for proper RAG indexing, AI planning, and workflow engine execution.
 
 🔍 **MUST-SEARCH**: "workflow metadata standards validation"
 

@@ -27,7 +27,7 @@ Percentile interpretation:
 64.58 = 92nd percentile (better than 92% of models)
 ```
 
-**What This Means for Agent OS Enhanced**:
+**What This Means for prAxIs OS**:
 - Current model (all-MiniLM): Finds correct content 48% of the time
 - Upgraded model (bge-small): Finds correct content 52% of the time
 - **Improvement**: 4 percentage points absolute, 8% relative
@@ -181,7 +181,7 @@ MTEB Retrieval Score → Practical Outcome
 - User satisfaction: "Premium experience" (usually first result)
 ```
 
-### Your Actual Agent OS Performance
+### Your Actual prAxIs OS Performance
 
 **Current system** (all-MiniLM-L6-v2):
 ```
@@ -263,7 +263,7 @@ Real examples:
 - 8192 tokens: 15-20 exchanges OR entire session summary
 ```
 
-**Your Agent OS use case**:
+**Your prAxIs OS use case**:
 ```
 Typical conversation exchange:
 User: "What are the 10%, 20% improvement claims?" (10 tokens)
@@ -386,11 +386,11 @@ Current question: {user_query}
 
 ---
 
-## Part 4: Practical Recommendations for Agent OS Enhanced
+## Part 4: Practical Recommendations for prAxIs OS
 
 ### Should You Switch to jina-embeddings-v2?
 
-**For Agent OS standards search (current use)**: **Probably not**
+**For prAxIs OS standards search (current use)**: **Probably not**
 
 **Reasoning**:
 ```

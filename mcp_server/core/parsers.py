@@ -61,7 +61,7 @@ class SourceParser(ABC):
 
 class SpecTasksParser(SourceParser):
     """
-    AST-based parser for Agent OS spec tasks.md files.
+    AST-based parser for prAxIs OS spec tasks.md files.
 
     Uses mistletoe to parse markdown into an AST, then extracts phases,
     tasks, acceptance criteria, dependencies, and validation gates through

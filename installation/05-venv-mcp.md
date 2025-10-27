@@ -14,7 +14,7 @@
 4. **Build RAG index** (enables semantic search)
 5. Validate Python setup
 
-**Why isolated venv**: Prevents Agent OS dependencies from conflicting with your project's dependencies.
+**Why isolated venv**: Prevents prAxIs OS dependencies from conflicting with your project's dependencies.
 
 **Time**: ~3-5 minutes (includes RAG index build)
 
@@ -117,7 +117,7 @@ else:
 
 ## 🔧 Step 5.3: Create .cursor/mcp.json
 
-⚠️ **CRITICAL**: Use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`!
+⚠️ **CRITICAL**: Use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`!
 
 ```python
 import json
@@ -133,7 +133,7 @@ else:
 
 mcp_config = {
     "mcpServers": {
-        "agent-os-rag": {
+        "praxis-os-rag": {
             "command": python_cmd,
             "args": [
                 "-m",
@@ -211,9 +211,9 @@ with open(".cursor/mcp.json", "r") as f:
 
 # Critical checks
 checks = {
-    "agent-os-rag server configured": "agent-os-rag" in config.get("mcpServers", {}),
-    "Module name is 'mcp_server'": config["mcpServers"]["agent-os-rag"]["args"][1] == "mcp_server",
-    "PYTHONPATH is set": "PYTHONPATH" in config["mcpServers"]["agent-os-rag"]["env"],
+    "praxis-os-rag server configured": "praxis-os-rag" in config.get("mcpServers", {}),
+    "Module name is 'mcp_server'": config["mcpServers"]["praxis-os-rag"]["args"][1] == "mcp_server",
+    "PYTHONPATH is set": "PYTHONPATH" in config["mcpServers"]["praxis-os-rag"]["env"],
 }
 
 all_passed = all(checks.values())
@@ -242,7 +242,7 @@ cat .cursor/mcp.json
 ```json
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "praxis-os-rag": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -367,7 +367,7 @@ ls -ld .praxis-os
 
 ⚠️ **CRITICAL STEP**: Without the RAG index, `search_standards` won't work!
 
-The RAG (Retrieval Augmented Generation) index enables semantic search over Agent OS standards.
+The RAG (Retrieval Augmented Generation) index enables semantic search over prAxIs OS standards.
 
 **Linux/macOS/WSL2:**
 ```bash
@@ -405,7 +405,7 @@ INFO - Creating new table with 1247 records...
 
 **Indexed content:**
 - ✅ Standards (~46 files) - Universal CS fundamentals
-- ✅ Usage docs (~5 files) - How to use Agent OS
+- ✅ Usage docs (~5 files) - How to use prAxIs OS
 - ✅ Workflows (~47 files) - Phase-gated workflow definitions
 
 **Time**: 1-2 minutes for ~100 files (first run downloads embedding model ~90MB)  
@@ -430,7 +430,7 @@ dir .praxis-os\.cache\vector_index\
 ```
 
 **You should see:**
-- `agent_os_standards.lance/` - LanceDB table directory
+- `praxis_os_standards.lance/` - LanceDB table directory
 - `metadata.json` - Build metadata (timestamps, file counts, etc.)
 
 **Quick test:**
@@ -475,7 +475,7 @@ At this point you should have:
 - ✅ Python venv at `.praxis-os/venv/`
 - ✅ MCP server dependencies installed
 - ✅ `.cursor/mcp.json` created with correct config
-- ✅ Module name is `"mcp_server"` (not `"mcp_server.agent_os_rag"`)
+- ✅ Module name is `"mcp_server"` (not `"mcp_server.praxis_os_rag"`)
 - ✅ **RAG index built at `.praxis-os/.cache/vector_index/`** (NEW!)
 - ✅ Config validation passes
 - ✅ All validation checkpoints passed

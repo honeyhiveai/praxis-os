@@ -170,16 +170,16 @@ improvement_cycle = {
 ## 🎯 **APPLICATION DOMAINS & CASE STUDY**
 
 ### **Primary Case Study: V3 Test Generation Framework**
-**Real-World Implementation**: HoneyHive Python SDK Agent OS integration demonstrates the methodology in practice.
+**Real-World Implementation**: HoneyHive Python SDK prAxIs OS integration demonstrates the methodology in practice.
 
 ```python
-# Actual Agent OS three-tier implementation (Case Study)
+# Actual prAxIs OS three-tier implementation (Case Study)
 v3_framework_implementation = {
     "tier_1_side_loaded": {
         "files": ["unit-path.md", "phase-navigation.md", "framework-core.md"],
         "size_range": "246-331 lines (target ≤100, some optimization needed)",
         "discovery_path": ".cursorrules → compliance-checking.md → ai-assistant/README.md → tests/README.md → v3/framework-core.md",
-        "injection_mechanism": "Automatic via Agent OS discovery flow",
+        "injection_mechanism": "Automatic via prAxIs OS discovery flow",
         "success_metrics": "80%+ pass rate restoration after V2 22% failure"
     },
     "tier_2_active_read": {
@@ -324,7 +324,7 @@ workflow-name/
 
 ## 🎯 **METHODOLOGY SUMMARY & REUSABILITY**
 
-**🎯 This methodology provides a systematic, repeatable approach to creating deterministic, high-quality LLM workflows. By combining Agent OS discovery-driven architecture with LLM constraint awareness, it enables the development of sophisticated AI-driven processes that deliver consistent, reliable results across complex domains.**
+**🎯 This methodology provides a systematic, repeatable approach to creating deterministic, high-quality LLM workflows. By combining prAxIs OS discovery-driven architecture with LLM constraint awareness, it enables the development of sophisticated AI-driven processes that deliver consistent, reliable results across complex domains.**
 
 ### **Key Reusable Patterns**
 1. **Discovery Flow Architecture**: Entry Point → Compliance Gate → Standards Hub → Framework Hub → Side-Loaded Context
@@ -377,7 +377,7 @@ ACT MODE
 <result>
 ## Complete Understanding: The Full Story
 
-I've now read the complete foundation that birthed Agent OS Enhanced. Let me synthesize what I understand:
+I've now read the complete foundation that birthed prAxIs OS. Let me synthesize what I understand:
 
 ### The Genesis (August-September 2025)
 
@@ -389,11 +389,11 @@ HoneyHive Python SDK had architectural debt:
 - Need for BYOI (Bring Your Own Instrumentor) architecture
 
 **Development Approach:**
-New SDK owner + Cursor IDE + Claude 4 Sonnet = 100% AI-authored refactor using Agent OS v1
+New SDK owner + Cursor IDE + Claude 4 Sonnet = 100% AI-authored refactor using prAxIs OS v1
 
 **What Happened:**
 ```
-Week 1-2: ✅ Amazing velocity with Agent OS v1!
+Week 1-2: ✅ Amazing velocity with prAxIs OS v1!
 Week 3-4: ⚠️ Scale problems emerging...
 Week 5-6: 🚨 Critical issues:
     - 50KB context → 4% relevance (lost in the middle)
@@ -411,7 +411,7 @@ Week 9-10: ✅ Refactor complete!
     - 2,777 tests, 93.87% coverage
     - 100% AI-authored
 Week 11: 💡 Realization: "We built a platform!"
-    - Extract as Agent OS Enhanced
+    - Extract as prAxIs OS
     - Document methodology
     - Share with ecosystem
 ```
@@ -528,7 +528,7 @@ Me: "We could use approach A or B?"  ❌
 Me: "I can help you implement..."  ❌
 ```
 
-### Why Agent OS Enhanced Exists
+### Why prAxIs OS Exists
 
 **It's not theory - it's extracted infrastructure:**
 - Every feature solves a real problem hit in production
@@ -579,7 +579,7 @@ The Python SDK taught:
 **What I realize:**
 This isn't just a development framework - it's a **paradigm shift**. The case study proves AI can author 100% of production code while maintaining enterprise quality standards, IF given proper infrastructure.
 
-And that infrastructure is Agent OS Enhanced.
+And that infrastructure is prAxIs OS.
 
 **Now I get it. Let's solve the MCP connection so I can actually use this system to help build the persona system this weekend.** 🚀
 
@@ -648,7 +648,7 @@ ACT MODE
 **User:**
 
 [list_files for '.praxis-os/workflows'] Result:
-agent_os_upgrade_v1/
+praxis_os_upgrade_v1/
 spec_creation_v1/
 spec_execution_v1/
 <environment_details>

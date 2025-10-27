@@ -1,6 +1,6 @@
 # Technical Specifications
 
-**Project:** Agent OS Enhanced Documentation Restructure  
+**Project:** prAxIs OS Documentation Restructure  
 **Date:** 2025-10-10  
 **Based on:** srd.md (requirements)
 
@@ -144,7 +144,7 @@ Docusaurus Documentation Site (React-based static site)
         ├── Code example testing (all examples must work)
         └── Build test (site must build without errors)
 
-MCP RAG Integration (Agent OS Enhanced feature)
+MCP RAG Integration (prAxIs OS feature)
     ↓
 File Watcher monitors docs/ directory
     ↓
@@ -202,7 +202,7 @@ Deploy Pipeline Triggered
     ↓
 Production Documentation Site Live
     ↓
-File Watcher Detects Changes (Agent OS Enhanced)
+File Watcher Detects Changes (prAxIs OS)
     ↓
 RAG Index Updated (documentation searchable via MCP within 10-30 seconds)
 ```
@@ -422,11 +422,11 @@ This section defines the logical components implementing the documentation restr
 
 ### 2.1 Component: Tutorial Content Module
 
-**Purpose:** Provide hands-on, learning-oriented tutorials teaching Agent OS's main vehicle (spec-driven development) and workflow system.
+**Purpose:** Provide hands-on, learning-oriented tutorials teaching prAxIs OS's main vehicle (spec-driven development) and workflow system.
 
 **Responsibilities:**
-- Create Tutorial 1: "Your First Agent OS Project" - Complete spec creation → spec execution cycle
-- Create Tutorial 2: "Understanding Agent OS Workflows" - Workflow system deep dive
+- Create Tutorial 1: "Your First prAxIs OS Project" - Complete spec creation → spec execution cycle
+- Create Tutorial 2: "Understanding prAxIs OS Workflows" - Workflow system deep dive
 - Ensure tutorials work on fresh installation every time
 - Provide immediate, visible results at each step
 - Maintain learning-oriented focus (build understanding, not just complete tasks)
@@ -438,20 +438,20 @@ This section defines the logical components implementing the documentation restr
 - Business Goal 2: Time to first value <15 minutes
 - NFR-Q1: Tutorial success rate ≥95%
 
-**Tutorial 1 Content Structure: "Your First Agent OS Project"**
+**Tutorial 1 Content Structure: "Your First prAxIs OS Project"**
 ```markdown
-# Tutorial: Your First Agent OS Project
+# Tutorial: Your First prAxIs OS Project
 
 **Learning Goals**: 
-- Understand Agent OS's main vehicle (spec-driven development)
+- Understand prAxIs OS's main vehicle (spec-driven development)
 - Experience the complete spec creation → spec execution cycle
 - See how AI acts as code author while you orchestrate
 
 **Time**: 15-20 minutes
-**Prerequisites**: Agent OS installed
+**Prerequisites**: prAxIs OS installed
 
 ## What You'll Build
-A simple feature (e.g., user profile API endpoint) using the complete Agent OS methodology
+A simple feature (e.g., user profile API endpoint) using the complete prAxIs OS methodology
 
 ## Part 1: Design Conversation (3 minutes)
 [Have conversational design discussion with AI]
@@ -482,18 +482,18 @@ A simple feature (e.g., user profile API endpoint) using the complete Agent OS m
 [Expected: Complete, working feature]
 
 ## What You Learned
-- Spec-driven development is THE way to work in Agent OS
+- Spec-driven development is THE way to work in prAxIs OS
 - AI acts as code author (writes 100%), you orchestrate (provide direction)
 - Workflows (spec_creation_v1, spec_execution_v1) are automatic tools
 - Quality is built-in through phase gating and testing
 
 ## Next Steps
-Try [Tutorial 2: Understanding Agent OS Workflows] to go deeper on workflow system
+Try [Tutorial 2: Understanding prAxIs OS Workflows] to go deeper on workflow system
 ```
 
-**Tutorial 2 Content Structure: "Understanding Agent OS Workflows"**
+**Tutorial 2 Content Structure: "Understanding prAxIs OS Workflows"**
 ```markdown
-# Tutorial: Understanding Agent OS Workflows
+# Tutorial: Understanding prAxIs OS Workflows
 
 **Learning Goals**:
 - Understand what workflows are (phase-gated execution tools)
@@ -505,7 +505,7 @@ Try [Tutorial 2: Understanding Agent OS Workflows] to go deeper on workflow syst
 **Prerequisites**: Tutorial 1 complete
 
 ## What You'll Learn
-How Agent OS workflows provide structure, prevent skipping steps, and ensure quality
+How prAxIs OS workflows provide structure, prevent skipping steps, and ensure quality
 
 ## Part 1: What Are Workflows? (2 minutes)
 [Explanation of phase-gated execution]
@@ -543,9 +543,9 @@ How Agent OS workflows provide structure, prevent skipping steps, and ensure qua
 ```
 
 **Dependencies:**
-- Requires: Agent OS installation with spec_creation_v1 and spec_execution_v1 workflows
+- Requires: prAxIs OS installation with spec_creation_v1 and spec_execution_v1 workflows
 - Requires: Tutorial templates (defined in this component)
-- Provides: Foundational understanding of Agent OS's main vehicle
+- Provides: Foundational understanding of prAxIs OS's main vehicle
 
 **Quality Criteria:**
 - Tutorial 1 teaches complete spec cycle (THE main vehicle)
@@ -618,7 +618,7 @@ How Agent OS workflows provide structure, prevent skipping steps, and ensure qua
 ```
 
 **Dependencies:**
-- Requires: Agent OS installed and understood
+- Requires: prAxIs OS installed and understood
 - Requires: How-to guide template (defined in this component)
 - Provides: Problem resolution for experienced users
 
@@ -687,7 +687,7 @@ Complete reference for {what}
 ```
 
 **Dependencies:**
-- Requires: Agent OS codebase (for API reference accuracy)
+- Requires: prAxIs OS codebase (for API reference accuracy)
 - Requires: Reference template (defined in this component)
 - Provides: Lookup information for integrators
 
@@ -1256,12 +1256,12 @@ keywords: array           # Optional: SEO keywords
 ---
 sidebar_position: 1
 doc_type: tutorial
-title: Your First 5 Minutes with Agent OS
-description: A guaranteed-success tutorial to get started with Agent OS in 5 minutes
+title: Your First 5 Minutes with prAxIs OS
+description: A guaranteed-success tutorial to get started with prAxIs OS in 5 minutes
 keywords: [tutorial, getting started, onboarding, first steps]
 ---
 
-# Tutorial: Your First 5 Minutes with Agent OS
+# Tutorial: Your First 5 Minutes with prAxIs OS
 ...
 ```
 
@@ -1283,7 +1283,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 
 const config: Config = {
-  title: 'Agent OS Enhanced',
+  title: 'prAxIs OS',
   tagline: 'Multi-Agent Development Framework',
   url: 'https://honeyhiveai.github.io',
   baseUrl: '/praxis-os/',
@@ -1291,7 +1291,7 @@ const config: Config = {
   // Theme configuration
   themeConfig: {
     navbar: {
-      title: 'Agent OS Enhanced',
+      title: 'prAxIs OS',
       items: [
         {type: 'doc', docId: 'intro', position: 'left', label: 'Docs'},
         {href: 'https://github.com/honeyhiveai/praxis-os', label: 'GitHub', position: 'right'},
@@ -1471,9 +1471,9 @@ is_compliant = validate_compliance()
 
 ### 3.5 MCP RAG Integration Interface
 
-**Purpose:** Documentation searchable via Agent OS Enhanced MCP tools.
+**Purpose:** Documentation searchable via prAxIs OS MCP tools.
 
-**Note:** This integration already exists in Agent OS Enhanced. Documentation restructure leverages existing capability without modification.
+**Note:** This integration already exists in prAxIs OS. Documentation restructure leverages existing capability without modification.
 
 **How It Works:**
 1. File watcher monitors `docs/` directory for changes

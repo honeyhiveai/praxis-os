@@ -1,5 +1,5 @@
 # Specification Review & Validation
-# Browser Automation Tool for Agent OS MCP Server
+# Browser Automation Tool for prAxIs OS MCP Server
 
 **Version**: 1.0  
 **Date**: October 8, 2025  
@@ -276,7 +276,7 @@
 
 ---
 
-### 3.2 Agent OS Standards Compliance
+### 3.2 prAxIs OS Standards Compliance
 
 **Queried Standards**:
 - [✅] SOLID principles (dependency injection)
@@ -286,11 +286,11 @@
 - [✅] Architecture (separation of concerns, DI)
 
 **Referenced Standards**:
-- srd.md §8.2: 6 Agent OS standards referenced
+- srd.md §8.2: 6 prAxIs OS standards referenced
 - specs.md: SOLID, concurrency standards applied
-- implementation.md: All patterns follow Agent OS conventions
+- implementation.md: All patterns follow prAxIs OS conventions
 
-**Result**: ✅ COMPLIANT with Agent OS Enhanced standards
+**Result**: ✅ COMPLIANT with prAxIs OS standards
 
 ---
 

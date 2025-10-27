@@ -440,7 +440,7 @@ class ServerConfig:
 
 ### Deployment Method
 - No separate deployment (code is the server)
-- Users pull latest code or update via Agent OS update process
+- Users pull latest code or update via prAxIs OS update process
 - MCP server restarts automatically on code change (Cursor restarts it)
 
 ### Rollout Plan

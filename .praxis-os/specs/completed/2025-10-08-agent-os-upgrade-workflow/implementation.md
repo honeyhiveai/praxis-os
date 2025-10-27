@@ -1,11 +1,11 @@
 # Implementation Guide
 
-## Agent OS Upgrade Workflow
+## prAxIs OS Upgrade Workflow
 
 **Version:** 1.0  
 **Date:** 2025-10-08  
 **Status:** Implementation Guidance  
-**Workflow ID:** `agent_os_upgrade_v1`
+**Workflow ID:** `praxis_os_upgrade_v1`
 
 ---
 
@@ -66,7 +66,7 @@ class StateManager:
         
         Example:
             session_id = state_mgr.create_session(
-                workflow_type="agent_os_upgrade_v1",
+                workflow_type="praxis_os_upgrade_v1",
                 target_file="mcp_server",
                 metadata={"source_path": "/path/to/source"}
             )
@@ -372,7 +372,7 @@ class ValidationModule:
             {
                 "valid": True,
                 "path_exists": True,
-                "is_agent_os_repo": True,
+                "is_praxis_os_repo": True,
                 "git_clean": True,
                 "version": "1.2.0",
                 "commit": "abc123def",
@@ -382,7 +382,7 @@ class ValidationModule:
         result = {
             "valid": False,
             "path_exists": False,
-            "is_agent_os_repo": False,
+            "is_praxis_os_repo": False,
             "git_clean": False,
             "version": None,
             "commit": None,
@@ -403,7 +403,7 @@ class ValidationModule:
             result["errors"].append("Not an praxis-os repository")
             return result
         
-        result["is_agent_os_repo"] = True
+        result["is_praxis_os_repo"] = True
         
         # Check git status
         try:
@@ -728,7 +728,7 @@ def state_manager(temp_state_dir, monkeypatch):
 def test_create_session(state_manager):
     """Test session creation."""
     session_id = state_manager.create_session(
-        workflow_type="agent_os_upgrade_v1",
+        workflow_type="praxis_os_upgrade_v1",
         target_file="mcp_server",
         metadata={"source_path": "/test/path"}
     )
@@ -745,7 +745,7 @@ def test_create_session(state_manager):
         state = json.load(f)
     
     assert state["session_id"] == session_id
-    assert state["workflow_type"] == "agent_os_upgrade_v1"
+    assert state["workflow_type"] == "praxis_os_upgrade_v1"
     assert state["current_phase"] == 0
     assert state["completed_phases"] == []
 
@@ -880,7 +880,7 @@ def test_phases_0_1_happy_path(test_environment):
     
     # Start workflow
     session_id = engine.start_workflow(
-        workflow_type="agent_os_upgrade_v1",
+        workflow_type="praxis_os_upgrade_v1",
         target_file="mcp_server",
         options={"source_path": str(test_environment["source"])}
     )["session_id"]
@@ -956,7 +956,7 @@ mcp_server/
     └── upgrade_models.py      (NEW)
 
 universal/workflows/
-└── agent_os_upgrade_v1/
+└── praxis_os_upgrade_v1/
     ├── metadata.json
     ├── phases/
     │   ├── 0-pre-flight-checks.md
@@ -1013,12 +1013,12 @@ pytest tests/unit/ -v --cov=mcp_server --cov-report=term-missing
 
 ```bash
 # Create workflow directory
-mkdir -p universal/workflows/agent_os_upgrade_v1/{phases,supporting-docs}
+mkdir -p universal/workflows/praxis_os_upgrade_v1/{phases,supporting-docs}
 
 # Create metadata.json
-cat > universal/workflows/agent_os_upgrade_v1/metadata.json << 'EOF'
+cat > universal/workflows/praxis_os_upgrade_v1/metadata.json << 'EOF'
 {
-  "name": "agent_os_upgrade_v1",
+  "name": "praxis_os_upgrade_v1",
   "version": "1.0.0",
   ...
 }
@@ -1065,7 +1065,7 @@ pytest tests/integration/test_rollback_scenarios.py -v
 pytest tests/ -v --cov=mcp_server --cov-report=html
 
 # Tag release
-git tag -a v1.0.0 -m "Agent OS Upgrade Workflow v1.0.0"
+git tag -a v1.0.0 -m "prAxIs OS Upgrade Workflow v1.0.0"
 ```
 
 ---

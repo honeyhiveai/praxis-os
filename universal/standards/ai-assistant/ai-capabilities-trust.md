@@ -600,7 +600,7 @@ Higher quality, less rework, unlimited scalability
 
 ## 🔗 Related Standards
 
-- **[Agent OS Orientation](./AGENT-OS-ORIENTATION.md)** - Query: "orientation bootstrap mandatory queries"
+- **[prAxIs OS Orientation](./AGENT-OS-ORIENTATION.md)** - Query: "orientation bootstrap mandatory queries"
 - **[Agent Decision Protocol](./agent-decision-protocol.md)** - Query: "decision protocol behavioral patterns"
 - **[RAG Content Authoring](./rag-content-authoring.md)** - Query: "RAG optimization query liberally"
 

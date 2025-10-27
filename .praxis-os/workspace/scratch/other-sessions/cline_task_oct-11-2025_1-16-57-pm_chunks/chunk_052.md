@@ -556,22 +556,22 @@ After reading the RAG optimization standards, I can see **exactly** why Queries 
 
 ---
 
-### Query 6 Analysis: "calibration new to Agent OS Enhanced"
+### Query 6 Analysis: "calibration new to prAxIs OS"
 
 **Current query:**
 ```
-"calibration new to Agent OS Enhanced"
+"calibration new to prAxIs OS"
 ```
 
 **Why it might fail (per RAG standards):**
 - ⚠️ Somewhat natural but may not have keyword overlap
-- ⚠️ "new to Agent OS Enhanced" might not match header keywords
+- ⚠️ "new to prAxIs OS" might not match header keywords
 
 **Content exists under:**
 ```markdown
 ## 🎯 Calibrating Your Estimates
 
-### If You're New to Agent OS Enhanced
+### If You're New to prAxIs OS
 ```
 
 **Better queries (per Principle 6 - multi-angle):**
@@ -653,7 +653,7 @@ For complete dual estimation guidance, query these standards:
    ✅ Already good! Returns 100-400x explanation.
 
 6. **Calibration Guidance:**
-   BEFORE: search_standards("calibration new to Agent OS Enhanced")
+   BEFORE: search_standards("calibration new to prAxIs OS")
    AFTER:  search_standards("how to calibrate time estimates")
    OR:     search_standards("first time estimating with AI agents")
 ```
@@ -703,7 +703,7 @@ Update tasks-template.md:
 +   search_standards("what counts as orchestration time")
 
 6. **Calibration Guidance:**
--   search_standards("calibration new to Agent OS Enhanced")
+-   search_standards("calibration new to prAxIs OS")
 +   search_standards("how to calibrate time estimates")
 ```
 
@@ -865,7 +865,7 @@ echo "✓ Query 5 complete"
 # Query 6: Calibration Guidance (IMPROVED - natural language)
 echo "========================================" >> "$OUTPUT"
 echo "QUERY 6: Calibration Guidance" >> "$OUTPUT"
-echo "OLD Query: calibration new to Agent OS Enhanced" >> "$OUTPUT"
+echo "OLD Query: calibration new to prAxIs OS" >> "$OUTPUT"
 echo "NEW Query: how to calibrate time estimates" >> "$OUTPUT"
 echo "Status: 🔄 IMPROVED to natural language" >> "$OUTPUT"
 echo "========================================" >> "$OUTPUT"
@@ -977,7 +977,7 @@ echo "✓ Query 5 complete"
 # Query 6: Calibration Guidance (IMPROVED - natural language)
 echo "========================================" >> "$OUTPUT"
 echo "QUERY 6: Calibration Guidance" >> "$OUTPUT"
-echo "OLD Query: calibration new to Agent OS Enhanced" >> "$OUTPUT"
+echo "OLD Query: calibration new to prAxIs OS" >> "$OUTPUT"
 echo "NEW Query: how to calibrate time estimates" >> "$OUTPUT"
 echo "Status: 🔄 IMPROVED to natural language" >> "$OUTPUT"
 echo "========================================" >> "$OUTPUT"

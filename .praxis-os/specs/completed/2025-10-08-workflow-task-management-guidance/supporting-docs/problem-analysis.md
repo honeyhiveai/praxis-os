@@ -1,14 +1,14 @@
 # Problem Analysis: Workflow Task Management Guidance
 
 **Date:** 2025-10-08  
-**Context:** Agent OS MCP Workflow System  
+**Context:** prAxIs OS MCP Workflow System  
 **Issue:** AI creates separate TODO lists while executing MCP workflows
 
 ---
 
 ## Problem Statement
 
-When executing Agent OS workflows via MCP, the AI assistant creates separate TODO lists using Cursor's `todo_write` tool instead of using the workflow system as the sole task management interface. This violates the single-source-of-truth principle and creates confusion about task state.
+When executing prAxIs OS workflows via MCP, the AI assistant creates separate TODO lists using Cursor's `todo_write` tool instead of using the workflow system as the sole task management interface. This violates the single-source-of-truth principle and creates confusion about task state.
 
 ### Example Incident
 
@@ -40,11 +40,11 @@ When executing Agent OS workflows via MCP, the AI assistant creates separate TOD
 1. **Cursor Tools** (built-in to Cursor IDE)
    - `todo_write` - Task management
    - `read_file`, `write`, etc.
-   - ❌ Cannot be modified by Agent OS team
+   - ❌ Cannot be modified by prAxIs OS team
 
-2. **Agent OS MCP Tools** (custom MCP server)
+2. **prAxIs OS MCP Tools** (custom MCP server)
    - `start_workflow`, `complete_phase`, etc.
-   - ✅ Fully under Agent OS control
+   - ✅ Fully under prAxIs OS control
    - Can modify tool responses
 
 ### Why AI Made the Wrong Choice
@@ -67,13 +67,13 @@ When executing Agent OS workflows via MCP, the AI assistant creates separate TOD
 - Doesn't say: "NEVER use inside MCP workflows"
 - This is a Cursor tool we can't modify
 
-**Gap 2: Workflow tool responses (Agent OS-side - CAN fix)**
+**Gap 2: Workflow tool responses (prAxIs OS-side - CAN fix)**
 - `start_workflow()` response doesn't indicate task management mode
 - `get_current_phase()` doesn't warn against external task tools
 - `get_task()` doesn't reinforce workflow-managed execution
 - Nothing makes it explicit that workflow supersedes other task systems
 
-**Gap 3: Workflow phase content (Agent OS-side - CAN fix)**
+**Gap 3: Workflow phase content (prAxIs OS-side - CAN fix)**
 - Phase markdown files don't include workflow execution guidance
 - No header saying "WORKFLOW-MANAGED SESSION"
 - Could inject guidance at runtime
@@ -84,7 +84,7 @@ When executing Agent OS workflows via MCP, the AI assistant creates separate TOD
 
 **Critical limitation:** We cannot modify Cursor's tool descriptions.
 
-**Implication:** All guidance must come from Agent OS MCP tool responses and workflow content.
+**Implication:** All guidance must come from prAxIs OS MCP tool responses and workflow content.
 
 ---
 

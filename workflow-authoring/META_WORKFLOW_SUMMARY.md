@@ -1,4 +1,4 @@
-# Meta-Workflow: Agent OS Portable Pattern
+# Meta-Workflow: prAxIs OS Portable Pattern
 
 **Created**: 2025-10-02  
 **Purpose**: Reusable workflow creation methodology for any repository  
@@ -76,7 +76,7 @@ A **"workflow for creating workflows"** - a complete, portable methodology for b
 
 ---
 
-## 🎯 **Core Principles** (The "DNA" of Agent OS Workflows)
+## 🎯 **Core Principles** (The "DNA" of prAxIs OS Workflows)
 
 ### **1. Three-Tier Architecture**
 

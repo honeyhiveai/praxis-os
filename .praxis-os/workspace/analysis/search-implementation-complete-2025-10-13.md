@@ -7,7 +7,7 @@
 
 ## Summary
 
-Successfully implemented local search for Agent OS Enhanced documentation using `@easyops-cn/docusaurus-search-local` plugin.
+Successfully implemented local search for prAxIs OS documentation using `@easyops-cn/docusaurus-search-local` plugin.
 
 ---
 
@@ -124,7 +124,7 @@ Click result → Navigate to page with terms highlighted
 - External dependency: ⚠️ Yes
 - Privacy: ⚠️ (queries sent to Algolia)
 
-**Verdict:** Local search is perfect for Agent OS Enhanced docs size and meets all requirements.
+**Verdict:** Local search is perfect for prAxIs OS docs size and meets all requirements.
 
 ---
 

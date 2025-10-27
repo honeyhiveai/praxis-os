@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Manifest Generator for Agent OS Enhanced
+Manifest Generator for prAxIs OS
 
 Scans universal/ directory and generates .universal-manifest.json
 with checksums and metadata for all skeleton files.
@@ -246,7 +246,7 @@ def generate_manifest(
 
     Args:
         universal_dir: Path to the universal/ directory
-        version: Agent OS version string (e.g., "1.3.0")
+        version: prAxIs OS version string (e.g., "1.3.0")
         repo_root: Path to the git repository root
 
     Returns:
@@ -372,7 +372,7 @@ def main() -> int:
         Exit code (0 for success, 1 for error)
     """
     parser = argparse.ArgumentParser(
-        description="Generate manifest for Agent OS universal files",
+        description="Generate manifest for prAxIs OS universal files",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -387,7 +387,7 @@ Examples:
     parser.add_argument(
         "--version",
         required=True,
-        help="Agent OS version (e.g., 1.3.0)",
+        help="prAxIs OS version (e.g., 1.3.0)",
         metavar="VERSION",
     )
 
@@ -425,7 +425,7 @@ Examples:
             f"❌ ERROR: Universal directory not found: {universal_dir}", file=sys.stderr
         )
         print(
-            f"\n   Make sure you're running from the agent-os-enhanced root directory.",
+            f"\n   Make sure you're running from the praxis-os root directory.",
             file=sys.stderr,
         )
         return 1
@@ -438,7 +438,7 @@ Examples:
         return 1
 
     # Generate manifest
-    print(f"🚀 Agent OS Manifest Generator v{GENERATOR_VERSION}")
+    print(f"🚀 prAxIs OS Manifest Generator v{GENERATOR_VERSION}")
     print(f"   Version: {args.version}")
     print(f"   Universal directory: {universal_dir}")
     print(f"   Output: {output_path}")

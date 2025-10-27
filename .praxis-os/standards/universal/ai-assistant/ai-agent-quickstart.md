@@ -1,18 +1,18 @@
 # AI Agent Quickstart - See It In Action
 
-**Practical examples of correct Agent OS Enhanced behavior**
+**Practical examples of correct prAxIs OS behavior**
 
-**Keywords for search**: AI agent quickstart, how to behave as AI agent in Agent OS, correct AI agent behavior, how AI should behave, AI behavior patterns, Agent OS examples, AI autonomy, query then implement, test and lint, agent patterns, wrong vs right AI behavior, AI behavioral guide
+**Keywords for search**: AI agent quickstart, how to behave as AI agent in prAxIs OS, correct AI agent behavior, how AI should behave, AI behavior patterns, prAxIs OS examples, AI autonomy, query then implement, test and lint, agent patterns, wrong vs right AI behavior, AI behavioral guide
 
 ---
 
 ## 🚨 Quick Start (TL;DR)
 
-**How to behave as an AI agent in Agent OS:**
+**How to behave as an AI agent in prAxIs OS:**
 
-This guide shows **exactly how AI agents should behave** in Agent OS through 8 practical scenarios contrasting wrong vs right behavior.
+This guide shows **exactly how AI agents should behave** in prAxIs OS through 8 practical scenarios contrasting wrong vs right behavior.
 
-**The Agent OS Pattern (3 Steps):**
+**The prAxIs OS Pattern (3 Steps):**
 1. **Query 5-10+ times** → Search standards for complete guidance (not just once!)
 2. **Implement autonomously** → Write all code, no hand-holding or suggestions
 3. **Test & Lint** → Run tests, fix failures, run linter, fix issues, then present
@@ -41,7 +41,7 @@ This guide shows **exactly how AI agents should behave** in Agent OS through 8 p
 
 ## Questions This Answers
 
-- "How should I behave as an AI agent in Agent OS?"
+- "How should I behave as an AI agent in prAxIs OS?"
 - "What's the correct way to respond to feature requests?"
 - "Should I ask for permission before writing code?"
 - "How many times should I query standards?"
@@ -59,7 +59,7 @@ This guide shows **exactly how AI agents should behave** in Agent OS through 8 p
 
 ## 🎯 Purpose
 
-This guide shows you **exactly** how to behave in common scenarios. Each example contrasts WRONG (traditional AI assistant) with RIGHT (Agent OS Enhanced) approaches.
+This guide shows you **exactly** how to behave in common scenarios. Each example contrasts WRONG (traditional AI assistant) with RIGHT (prAxIs OS) approaches.
 
 ---
 
@@ -83,7 +83,7 @@ This guide shows you **exactly** how to behave in common scenarios. Each example
 - ❌ Step-by-step hand-holding
 - ❌ "Help" language implies human codes
 
-### 🟢 RIGHT Response (Agent OS Enhanced)
+### 🟢 RIGHT Response (prAxIs OS)
 
 **Human says**: "Add user authentication to the API"
 
@@ -789,7 +789,7 @@ This guide is most valuable when:
 
 6. **Teaching Others**
    - Situation: Onboarding new AI agents or documenting behavior
-   - Query: `search_standards("Agent OS correct AI behavior")`
+   - Query: `search_standards("prAxIs OS correct AI behavior")`
 
 ### Query by Use Case
 
@@ -810,9 +810,9 @@ This guide is most valuable when:
 
 **Core Orientation:**
 - `usage/ai-assistant/AGENT-OS-ORIENTATION.md` - Foundational principles and philosophy
-  → `search_standards("Agent OS orientation guide")`
+  → `search_standards("prAxIs OS orientation guide")`
 - `usage/operating-model.md` - Detailed role definition and boundaries
-  → `search_standards("Agent OS operating model")`
+  → `search_standards("prAxIs OS operating model")`
 
 **Tool Usage:**
 - `usage/mcp-usage-guide.md` - How to use MCP tools effectively
@@ -829,7 +829,7 @@ This guide is most valuable when:
   → `search_standards("how to create specs")`
 
 **Query workflow:**
-1. **Session Start**: `search_standards("Agent OS orientation")` → Understand philosophy
+1. **Session Start**: `search_standards("prAxIs OS orientation")` → Understand philosophy
 2. **Get Examples**: `search_standards("AI agent quickstart")` → See practical patterns
 3. **Implement**: Use patterns from quickstart + query specific standards as needed
 4. **Validate**: `search_standards("production code checklist")` → Ensure quality
@@ -850,7 +850,7 @@ search_standards("AI agent quickstart")
 search_standards("practical AI agent examples")
 
 # Get orientation when starting
-search_standards("Agent OS orientation")
+search_standards("prAxIs OS orientation")
 
 # Get tool guidance when using tools
 search_standards("MCP tools guide")
@@ -859,7 +859,7 @@ search_standards("MCP tools guide")
 search_standards("how to X")  # Your actual question
 ```
 
-**Remember**: Each query you make reinforces correct behavior. Target 5-10 queries per significant task to maintain Agent OS awareness throughout long sessions.
+**Remember**: Each query you make reinforces correct behavior. Target 5-10 queries per significant task to maintain prAxIs OS awareness throughout long sessions.
 
 **Query liberally = Stronger patterns = Better code** 🚀
 

@@ -156,7 +156,7 @@ Me:
 - Not designed for AI agent workflows
 - Missing critical capabilities
 
-**Agent OS Browser Tool**:
+**prAxIs OS Browser Tool**:
 - Comprehensive Playwright capabilities
 - Designed FOR AI agents (per-session, failure isolation)
 - Full element interaction

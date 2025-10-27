@@ -96,7 +96,7 @@ Specification created: .praxis-os/specs/2025-10-10-user-profile/
 
 **Success Indicator:** You see "Specification created" message with a path to the spec directory.
 
-**What's happening:** The AI is systematically creating requirements, design, tasks, and implementation guidance documents. This is Agent OS's main vehicle for development.
+**What's happening:** The AI is systematically creating requirements, design, tasks, and implementation guidance documents. This is prAxIs OS's main vehicle for development.
 ```
 
 **Anti-Pattern (Tutorial):**
@@ -420,7 +420,7 @@ doc_type: explanation
 ```markdown
 ## Why Spec-Driven Development?
 
-Agent OS uses specifications as the primary vehicle for development because of how LLMs process information. When you ask an AI to "build user authentication," the request is ambiguous. Does it include social auth? What's the session duration? Which database?
+prAxIs OS uses specifications as the primary vehicle for development because of how LLMs process information. When you ask an AI to "build user authentication," the request is ambiguous. Does it include social auth? What's the session duration? Which database?
 
 Without a spec, the AI must make assumptions. Different assumptions lead to different implementations. The result is non-deterministic - sometimes you get what you want, sometimes you don't.
 
@@ -435,7 +435,7 @@ Specs solve this by forcing requirement clarification *before* implementation. T
 - Upfront time investment (30-60 min to create spec)
 - Not suitable for 5-minute tasks (overhead too high)
 
-This is why spec creation → spec execution is THE MAIN VEHICLE for Agent OS.
+This is why spec creation → spec execution is THE MAIN VEHICLE for prAxIs OS.
 ```
 
 **Anti-Pattern (Explanation):**
@@ -461,11 +461,11 @@ Documentation testing is different from code testing. This section outlines how 
 
 **Step 1: Recruit Test Users**
 - Target: 3-5 users per tutorial
-- Profile: Users matching tutorial's target audience (e.g., new Agent OS users for Tutorial 1)
+- Profile: Users matching tutorial's target audience (e.g., new prAxIs OS users for Tutorial 1)
 - Diversity: Mix of OS (macOS, Linux, Windows), experience levels
 
 **Step 2: Conduct Tests**
-- Provide: Fresh Agent OS installation, tutorial document
+- Provide: Fresh prAxIs OS installation, tutorial document
 - Observe: User follows tutorial without intervention
 - Measure:
   - Success: Did user complete successfully? (Yes/No)
@@ -895,7 +895,7 @@ agent-os --version
 
 Expected output:
 ```
-Agent OS Enhanced v2.1.0
+prAxIs OS v2.1.0
 ```
 
 If you see this, continue to next step.
@@ -1213,8 +1213,8 @@ algolia: {
 - **Divio Documentation System:** https://documentation.divio.com/
 - **Docusaurus Docs:** https://docusaurus.io/docs
 - **Algolia DocSearch:** https://docsearch.algolia.com/
-- **Agent OS Workflow Standards:** `universal/workflows/workflow-construction-standards.md`
-- **Agent OS Operating Model:** `universal/usage/operating-model.md`
+- **prAxIs OS Workflow Standards:** `universal/workflows/workflow-construction-standards.md`
+- **prAxIs OS Operating Model:** `universal/usage/operating-model.md`
 
 ---
 

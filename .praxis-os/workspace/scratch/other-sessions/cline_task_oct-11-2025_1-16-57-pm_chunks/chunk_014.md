@@ -56,7 +56,7 @@
 
 The HoneyHive Python SDK represents a **complete LLM-integrated development ecosystem** that extends far beyond just deterministic output methodology. This is a **comprehensive AI-assisted development platform** with systematic automation at every level:
 
-#### **🏗️ Agent OS: Complete AI Development Framework**
+#### **🏗️ prAxIs OS: Complete AI Development Framework**
 
 **Agent OS Structure** (198 AI-optimized files):
 - **📋 Standards Hierarchy**: 4-tier documentation system with automatic discovery paths
@@ -119,11 +119,11 @@ The HoneyHive Python SDK represents a **complete LLM-integrated development ecos
 
 **CI/CD Path Detection**:
 - **🎯 Smart Workflow Triggers**: Path-based exclusions prevent unnecessary runs
-- **⚡ Resource Optimization**: Agent OS spec changes don't trigger full test suites
+- **⚡ Resource Optimization**: prAxIs OS spec changes don't trigger full test suites
 - **📊 Workflow Efficiency**: Reduced CI/CD noise and faster feedback cycles
 
 **Git Safety Enforcement**:
-- **🛡️ Forbidden Operations**: `git commit --no-verify` blocked by Agent OS standards
+- **🛡️ Forbidden Operations**: `git commit --no-verify` blocked by prAxIs OS standards
 - **📋 Commit Message Standards**: Structured commit validation
 - **🔒 Quality Gate Enforcement**: Pre-commit hooks cannot be bypassed
 
@@ -179,7 +179,7 @@ The HoneyHive Python SDK represents a **complete LLM-integrated development ecos
 
 This comprehensive LLM integration ecosystem demonstrates:
 
-1. **🔄 Cross-Project Transferability**: Agent OS patterns applicable to any codebase
+1. **🔄 Cross-Project Transferability**: prAxIs OS patterns applicable to any codebase
 2. **🌐 Cross-Language Adaptability**: Framework concepts work beyond Python
 3. **📈 Scalable Quality Enforcement**: Systematic automation scales with project complexity
 4. **🤖 AI-Assisted Development Evolution**: LLM implementing and optimizing its own methodology
@@ -377,16 +377,16 @@ graph TD
 
 ### **Agent OS Adaptation for LLM Workflows**
 ```python
-# Traditional Agent OS (Human-Centric)
-agent_os_traditional = {
+# Traditional prAxIs OS (Human-Centric)
+praxis_os_traditional = {
     "specs": "Comprehensive documents (500-2000 lines)",
     "tasks": "Complex, multi-faceted requirements", 
     "execution": "Human interpretation and adaptation",
     "validation": "Manual review and iteration"
 }
 
-# LLM-Optimized Agent OS (AI-Centric)
-agent_os_llm_optimized = {
+# LLM-Optimized prAxIs OS (AI-Centric)
+praxis_os_llm_optimized = {
     "specs": "Modular documents (<100-150 lines each)",
     "tasks": "Single-responsibility, focused requirements",
     "execution": "Systematic, step-by-step instruction following",

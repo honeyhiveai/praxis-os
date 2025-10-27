@@ -57,7 +57,7 @@ For complete dual estimation guidance, query these standards:
 
 6. **Calibration Guidance:**
    ```
-   search_standards("calibration new to Agent OS Enhanced")
+   search_standards("calibration new to prAxIs OS")
    ```
    Returns: Conservative starting point, refinement over 5-10 tasks
 ```
@@ -125,7 +125,7 @@ search_standards("reading task specification giving direction reviewing output")
 
 **Line to find:**
 ```
-search_standards("calibration new to Agent OS Enhanced")
+search_standards("calibration new to prAxIs OS")
 ```
 
 **Replace with:**
@@ -186,7 +186,7 @@ search_standards("start conservative 1.2x multiplier 8-10% orchestration")
 
 ### Query 6: Calibration Guidance ✅
 - **Query:** `"start conservative 1.2x multiplier 8-10% orchestration"`
-- **Returns:** "If You're New to Agent OS Enhanced" section
+- **Returns:** "If You're New to prAxIs OS" section
 - **Relevance:** 0.95
 - **Position:** #1 result
 - **Status:** EXACT TARGET AS TOP RESULT
@@ -227,7 +227,7 @@ For Cursor to apply these changes:
 - [ ] Find the "Time Estimation Guidelines" section
 - [ ] Locate Query 3: "INCLUDES EXCLUDES human active time"
 - [ ] Replace with: "reading task specification giving direction reviewing output"
-- [ ] Locate Query 6: "calibration new to Agent OS Enhanced"
+- [ ] Locate Query 6: "calibration new to prAxIs OS"
 - [ ] Replace with: "start conservative 1.2x multiplier 8-10% orchestration"
 - [ ] Verify all 6 queries are present and correctly formatted
 - [ ] Test queries using MCP search_standards tool

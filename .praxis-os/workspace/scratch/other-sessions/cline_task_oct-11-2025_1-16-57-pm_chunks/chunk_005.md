@@ -68,13 +68,13 @@ ACT MODE
 
 <attempt_completion>
 <result>
-You've identified a **fundamental architectural mismatch** between Agent OS and Cline's MCP system:
+You've identified a **fundamental architectural mismatch** between prAxIs OS and Cline's MCP system:
 
 **The Problem:**
 - **Agent OS**: Installs per-project in `.praxis-os/` (different path for each repo)
 - **Cline MCP**: Uses global config with absolute paths (points to ONE location)
 
-This means if you have Agent OS in multiple projects:
+This means if you have prAxIs OS in multiple projects:
 ```
 /path/to/project-a/.praxis-os/mcp_server  ← Can only configure ONE
 /path/to/project-b/.praxis-os/mcp_server  ← of these at a time
@@ -83,7 +83,7 @@ This means if you have Agent OS in multiple projects:
 
 **Why this is broken:**
 - You'd need to **manually reconfigure** Cline's global MCP settings every time you switch projects
-- Or only work on one Agent OS project at a time
+- Or only work on one prAxIs OS project at a time
 - No way to have project-specific MCP servers with Cline's current design
 
 **Possible Solutions:**
@@ -97,7 +97,7 @@ This means if you have Agent OS in multiple projects:
    - Launches correct `.praxis-os/mcp_server` for that workspace
    - Configure Cline to call the wrapper instead
 
-3. **Install Agent OS globally** (defeats its portability)
+3. **Install prAxIs OS globally** (defeats its portability)
    - Not recommended
 
 4. **Use Cursor instead of Cline** for Agent OS
@@ -105,7 +105,7 @@ This means if you have Agent OS in multiple projects:
    - Works per-workspace as designed
 
 **The harsh reality:**
-Agent OS's per-project design and Cline's global MCP config are incompatible architectures. Either Agent OS needs to work differently, or you need to use Cursor (which supports workspace-relative MCP configs) instead of Cline.
+Agent OS's per-project design and Cline's global MCP config are incompatible architectures. Either prAxIs OS needs to work differently, or you need to use Cursor (which supports workspace-relative MCP configs) instead of Cline.
 
 This is a design limitation, not a configuration problem.
 </result>
@@ -174,9 +174,9 @@ This combination is rare in the MCP ecosystem.
 
 **Real-world impact:**
 
-For developers using Agent OS across multiple projects, this means:
+For developers using prAxIs OS across multiple projects, this means:
 - Manual MCP config switching between projects
-- OR only using Agent OS in one active project
+- OR only using prAxIs OS in one active project
 - OR staying in Cursor where `${workspaceFolder}` works
 
 **Potential solutions:**
@@ -188,19 +188,19 @@ For developers using Agent OS across multiple projects, this means:
    ```
    Configure Cline to call this wrapper
 
-2. **Document the limitation clearly** in Agent OS docs:
+2. **Document the limitation clearly** in prAxIs OS docs:
    - "Cline support requires manual configuration per project"
-   - Recommend Cursor for Agent OS users
+   - Recommend Cursor for prAxIs OS users
 
 3. **Feature request to Cline** for workspace variable support in MCP configs
 
-4. **Alternative Agent OS architecture** - Single global installation with workspace detection
+4. **Alternative prAxIs OS architecture** - Single global installation with workspace detection
 
 This is a legitimate architectural gap between per-project tooling and global MCP configuration.
 </result>
 <task_progress>
 - [x] Explained why this doesn't affect most Cline users
-- [x] Identified Agent OS as edge case (project-specific local MCP)
+- [x] Identified prAxIs OS as edge case (project-specific local MCP)
 - [x] Acknowledged this is a real limitation
 - [x] Suggested practical workarounds
 - [x] Recommended documenting this limitation

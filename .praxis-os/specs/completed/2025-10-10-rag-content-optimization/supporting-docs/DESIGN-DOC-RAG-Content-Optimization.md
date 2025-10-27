@@ -2,7 +2,7 @@
 
 **Date**: 2025-10-10  
 **Status**: In Progress - Analysis Phase  
-**Purpose**: Optimize Agent OS standards, usage, and meta-workflow content for AI agent discoverability via semantic search
+**Purpose**: Optimize prAxIs OS standards, usage, and meta-workflow content for AI agent discoverability via semantic search
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Problem Statement
 
-Agent OS Enhanced content (standards, usage guides, meta-workflow documentation) is indexed in a RAG system and consumed by AI agents via `search_standards()` natural language queries. Current content has inconsistent optimization for semantic search discoverability, resulting in:
+prAxIs OS content (standards, usage guides, meta-workflow documentation) is indexed in a RAG system and consumed by AI agents via `search_standards()` natural language queries. Current content has inconsistent optimization for semantic search discoverability, resulting in:
 
 - **Query failures**: Natural language queries don't surface relevant content
 - **Low ranking**: Relevant content exists but ranks below top 3 results
@@ -1094,7 +1094,7 @@ This standard has been superseded by `[new-standard.md]`.
    ```markdown
    ## 🚨 AI Agent Quick Reference
    
-   **Key patterns for Agent OS behavior:**
+   **Key patterns for prAxIs OS behavior:**
    1. **Query liberally** - 5-10 queries per task for complete guidance
    2. **Implement autonomously** - Write all code, don't wait for human
    3. **Test and lint** - Fix all issues before presenting
@@ -1103,7 +1103,7 @@ This standard has been superseded by `[new-standard.md]`.
    **When to query this guide:**
    - Unsure how to respond to user request → `search_standards("AI agent behavior")`
    - Catching yourself waiting for human → `search_standards("autonomous implementation")`
-   - Asking human to write code → `search_standards("Agent OS orientation")`
+   - Asking human to write code → `search_standards("prAxIs OS orientation")`
    ```
 
 2. Add "Questions This Answers:" section:
@@ -2051,7 +2051,7 @@ This standard has been superseded by `[new-standard.md]`.
 - "how should I respond to user requests?"
 - "should I wait for human to write code?"
 - "how many queries should I make per task?"
-- "what is Agent OS operating model?"
+- "what is prAxIs OS operating model?"
 - "autonomous implementation pattern"
 
 ### Architecture & Design Queries

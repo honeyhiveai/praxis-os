@@ -1,7 +1,7 @@
 """
 File system monitoring module.
 
-Provides file watching capabilities for Agent OS content changes
+Provides file watching capabilities for prAxIs OS content changes
 with incremental index rebuilding and hot reload support.
 """
 

@@ -8,7 +8,7 @@
 
 ## Overview
 
-The Agent OS MCP server now supports **dual-transport mode**, allowing:
+The prAxIs OS MCP server now supports **dual-transport mode**, allowing:
 - **Main IDE** (Cursor, Windsurf, etc.) connects via **stdio**
 - **Sub-agents** (Cline, Aider, custom scripts) connect via **HTTP**
 
@@ -235,7 +235,7 @@ The discovery utility:
   "project": {
     "name": "praxis-os",
     "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
-    "agent_os_path": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os"
+    "praxis_os_path": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os"
   },
   "started_at": "2025-10-11T14:30:00Z"
 }

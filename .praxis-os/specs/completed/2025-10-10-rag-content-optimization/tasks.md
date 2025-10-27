@@ -264,7 +264,7 @@ Minor optimizations to `usage/mcp-usage-guide.md` (431 lines, already 8/10).
 
 ---
 
-### Task 2.5: Optimize Agent OS Update Guide
+### Task 2.5: Optimize prAxIs OS Update Guide
 
 **Estimated Time:** 2 hours  
 **Dependencies:** Phase 1 complete  
@@ -702,7 +702,7 @@ Create comprehensive guide for future content authors to maintain optimization s
 - [ ] Scoring rubric published
 - [ ] Pattern catalog (Appendix C) complete
 - [ ] Examples of good vs poor optimization
-- [ ] Guide integrated into Agent OS documentation
+- [ ] Guide integrated into prAxIs OS documentation
 
 ---
 

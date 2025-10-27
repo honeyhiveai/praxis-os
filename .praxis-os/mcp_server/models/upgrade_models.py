@@ -1,5 +1,5 @@
 """
-Data Models for Agent OS Upgrade Workflow.
+Data Models for prAxIs OS Upgrade Workflow.
 
 Provides type-safe data structures for workflow evidence and state.
 """
@@ -236,7 +236,7 @@ class UpgradeReport:
             Formatted markdown string
         """
         lines = [
-            "# Agent OS Upgrade Report",
+            "# prAxIs OS Upgrade Report",
             "",
             f"**Session ID:** {self.session_id}",
             f"**Workflow:** {self.workflow_type}",
@@ -294,7 +294,7 @@ class UpgradeReport:
 @dataclass
 class UpgradeWorkflowSession:
     """
-    Complete workflow session state for agent_os_upgrade_v1.
+    Complete workflow session state for praxis_os_upgrade_v1.
 
     Extends base WorkflowState with upgrade-specific fields.
     """

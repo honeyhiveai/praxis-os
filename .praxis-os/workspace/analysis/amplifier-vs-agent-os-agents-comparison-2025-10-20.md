@@ -1,8 +1,8 @@
-# Amplifier vs Agent OS Enhanced: Agent/Persona System Comparison
+# Amplifier vs prAxIs OS: Agent/Persona System Comparison
 
 **Date:** 2025-10-21  
 **Status:** Analysis Complete  
-**Purpose:** Compare Microsoft Amplifier's agent system with Agent OS Enhanced's persona/workflow system
+**Purpose:** Compare Microsoft Amplifier's agent system with prAxIs OS's persona/workflow system
 
 ---
 
@@ -11,13 +11,13 @@
 Both systems implement specialized AI agents through markdown-based configuration, but with fundamentally different architectures and philosophies:
 
 **Amplifier** = Task-specific agents with predefined modes + Claude Code integration + "bricks and studs" philosophy  
-**Agent OS Enhanced** = Discovery-driven personas + Phase-gated workflows + RAG-based knowledge compounding
+**prAxIs OS** = Discovery-driven personas + Phase-gated workflows + RAG-based knowledge compounding
 
 ---
 
 ## Side-by-Side Comparison
 
-| Aspect | Microsoft Amplifier | Agent OS Enhanced |
+| Aspect | Microsoft Amplifier | prAxIs OS |
 |--------|---------------------|-------------------|
 | **Agent Definition** | `.claude/agents/*.md` (Claude Code format) | `.praxis-os/personas/*.md` (Custom format) |
 | **Agent Philosophy** | Task-specific experts with operating modes | Discovery-driven generalists with domain focus |
@@ -62,7 +62,7 @@ Handoff to next agent (e.g., modular-builder)
 - **No workflow state** - coordination is informal
 - **Human judgment** determines when to use which agent
 
-### Agent OS Enhanced: Workflow-Centric Architecture
+### prAxIs OS: Workflow-Centric Architecture
 
 ```
 User Request
@@ -135,13 +135,13 @@ For EVERY decision, ask:
 - **Handoff instructions** to other agents
 - **Philosophy embedded** in agent definition (ruthless simplicity, Occam's Razor)
 
-### Agent OS Enhanced: database Persona
+### prAxIs OS: database Persona
 
 **Format:**
 ```markdown
 # Database Specialist
 
-You are a Database Design Specialist in Agent OS Enhanced.
+You are a Database Design Specialist in prAxIs OS.
 
 ## Your Approach
 
@@ -201,7 +201,7 @@ Always read @ai_context/IMPLEMENTATION_PHILOSOPHY.md and
 - **Static**: Documentation is manually referenced
 - **Upfront**: All knowledge loaded at start
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 ```markdown
 # Inside any persona
 1. Query standards for guidance: search_standards("how to [task]")
@@ -220,7 +220,7 @@ Always read @ai_context/IMPLEMENTATION_PHILOSOPHY.md and
 - **No state tracking** between tasks
 - Example: zen-architect → modular-builder → bug-hunter
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 - Agents **discover workflows** via search
 - **Formal phase gates** with validation
 - **Automated enforcement** of process
@@ -242,7 +242,7 @@ The modular-builder agent will now implement these modules."
 - **Sequential**: One agent at a time
 - **Manual**: Human or main agent decides transitions
 
-**Agent OS Enhanced: Nested Invocation Pattern**
+**prAxIs OS: Nested Invocation Pattern**
 ```python
 # Main agent can invoke specialist
 invoke_specialist(persona="database", task="Design auth schema")
@@ -275,7 +275,7 @@ start_workflow("database-schema-design", "auth.sql")
 - No automated validation
 - Trust-based system
 
-**Agent OS Enhanced: Automated Gates**
+**prAxIs OS: Automated Gates**
 ```python
 # In workflow phase.md
 ## Validation Gate
@@ -346,7 +346,7 @@ def complete_phase(session_id, phase, evidence):
 - Cannot run on other platforms
 - Tight coupling to Task tool
 
-### Agent OS Enhanced Strengths
+### prAxIs OS Strengths
 
 ✅ **RAG-Driven Discovery**
 - Semantic search finds relevant knowledge
@@ -373,7 +373,7 @@ def complete_phase(session_id, phase, evidence):
 - No code changes
 - Easy to extend
 
-### Agent OS Enhanced Weaknesses
+### prAxIs OS Weaknesses
 
 ❌ **Less Domain Richness**
 - Personas are simpler than Amplifier agents
@@ -411,7 +411,7 @@ def complete_phase(session_id, phase, evidence):
 **Example:**
 > "We're a 2-person startup building a new product. We need AI help but don't want rigid processes. We love the 'bricks & studs' philosophy and want agents that embody it."
 
-### When to Use Agent OS Enhanced
+### When to Use prAxIs OS
 
 **Best For:**
 - **Enterprise teams** (10+ devs) needing consistency
@@ -427,7 +427,7 @@ def complete_phase(session_id, phase, evidence):
 
 ## Hybrid Opportunities
 
-### What Agent OS Could Adopt from Amplifier
+### What prAxIs OS Could Adopt from Amplifier
 
 1. **Operating Modes**
    ```markdown
@@ -520,7 +520,7 @@ Returns: Specification
 - No custom validation logic
 - Limited state management
 
-### Agent OS Enhanced: MCP + Custom Launcher
+### prAxIs OS: MCP + Custom Launcher
 
 ```python
 # mcp_server/tools/specialist_tools.py
@@ -565,7 +565,7 @@ class PersonaLauncher:
 
 ---
 
-## Recommendations for Agent OS Enhanced
+## Recommendations for prAxIs OS
 
 Based on Amplifier analysis:
 
@@ -603,7 +603,7 @@ Based on Amplifier analysis:
 ## Conclusion
 
 **Amplifier** = Rich agent expertise + Flexible collaboration + Philosophy-driven + Claude Code native  
-**Agent OS Enhanced** = Discovery-driven + Process enforcement + Knowledge compounding + Platform-agnostic
+**prAxIs OS** = Discovery-driven + Process enforcement + Knowledge compounding + Platform-agnostic
 
 **Best of Both Worlds:**
 - **Amplifier's** rich domain knowledge and operating modes

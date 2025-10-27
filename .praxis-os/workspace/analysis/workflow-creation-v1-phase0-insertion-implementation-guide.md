@@ -11,7 +11,7 @@
 
 ### Problem Statement
 
-The `workflow_creation_v1` workflow currently expects a YAML definition file as input. However, in the Agent OS Enhanced operating model, the natural output of Phase 2 (Spec Creation) is a **markdown design document** (e.g., `design-spec.md`).
+The `workflow_creation_v1` workflow currently expects a YAML definition file as input. However, in the prAxIs OS operating model, the natural output of Phase 2 (Spec Creation) is a **markdown design document** (e.g., `design-spec.md`).
 
 **Current Flow (Broken):**
 ```

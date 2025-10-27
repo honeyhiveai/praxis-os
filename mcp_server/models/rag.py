@@ -26,7 +26,7 @@ class ChunkMetadata:
 
 @dataclass
 class DocumentChunk:
-    """Represents a chunk of Agent OS documentation."""
+    """Represents a chunk of prAxIs OS documentation."""
 
     chunk_id: str  # MD5 hash of content
     file_path: str  # Source file path

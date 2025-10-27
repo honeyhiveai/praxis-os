@@ -1,5 +1,5 @@
 """
-File system monitoring for Agent OS content changes.
+File system monitoring for prAxIs OS content changes.
 
 Watches standards directory for changes and triggers incremental index rebuilds
 with debouncing.
@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 
 class AgentOSFileWatcher(FileSystemEventHandler):
-    """Watches Agent OS directories for content changes and triggers index rebuild."""
+    """Watches prAxIs OS directories for content changes and triggers index rebuild."""
 
     def __init__(
         self,
@@ -83,7 +83,7 @@ class AgentOSFileWatcher(FileSystemEventHandler):
         if not (event.src_path.endswith(".md") or event.src_path.endswith(".json")):
             return
 
-        logger.info("📝 Agent OS content modified: %s", Path(event.src_path).name)
+        logger.info("📝 prAxIs OS content modified: %s", Path(event.src_path).name)
         self._schedule_rebuild()
 
     def on_created(self, event: Any) -> None:
@@ -97,7 +97,7 @@ class AgentOSFileWatcher(FileSystemEventHandler):
 
         # Handle both markdown and JSON files (workflows metadata)
         if event.src_path.endswith(".md") or event.src_path.endswith(".json"):
-            logger.info("📝 New Agent OS content: %s", Path(event.src_path).name)
+            logger.info("📝 New prAxIs OS content: %s", Path(event.src_path).name)
             self._schedule_rebuild()
 
     def on_deleted(self, event: Any) -> None:
@@ -111,7 +111,7 @@ class AgentOSFileWatcher(FileSystemEventHandler):
 
         # Handle both markdown and JSON files (workflows metadata)
         if event.src_path.endswith(".md") or event.src_path.endswith(".json"):
-            logger.info("🗑️  Agent OS content deleted: %s", Path(event.src_path).name)
+            logger.info("🗑️  prAxIs OS content deleted: %s", Path(event.src_path).name)
             self._schedule_rebuild()
 
     def check_rebuild_flag(self) -> None:
@@ -185,7 +185,7 @@ class AgentOSFileWatcher(FileSystemEventHandler):
             time.sleep(self.debounce_seconds)
 
             logger.info(
-                "🔄 Incrementally updating index after Agent OS content changes..."
+                "🔄 Incrementally updating index after prAxIs OS content changes..."
             )
             try:
                 # Import here to avoid circular dependency

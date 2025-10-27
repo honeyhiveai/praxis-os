@@ -34,7 +34,7 @@ Cursor has an existing Playwright MCP server with tools like:
 
 **Key Observation**: Cursor's Playwright tools are **namespaced** with `mcp_cursor-playwright_` prefix.
 
-### Agent OS Enhanced MCP Tools (Current)
+### prAxIs OS MCP Tools (Current)
 From `.cursor/mcp.json` and our codebase:
 - `search_standards` ✅ No conflict
 - `start_workflow` ✅ No conflict
@@ -100,16 +100,16 @@ async def browser(action: str, **kwargs) -> Dict:
 ```python
 @mcp.tool()
 async def pos_browser(action: str, **kwargs) -> Dict:
-    """Agent OS browser automation tool."""
+    """prAxIs OS browser automation tool."""
 ```
 
-**Naming Convention**: `pos_` (Agent OS) prefix
+**Naming Convention**: `pos_` (prAxIs OS) prefix
 - `pos_browser` - Browser automation
 - `pos_persona` (future) - Persona consultations
 - Current tools unchanged (grandfather them in)
 
 **Pros:**
-- ✅ Clear ownership (Agent OS)
+- ✅ Clear ownership (prAxIs OS)
 - ✅ No conflict with Cursor tools
 - ✅ Future-proof
 - ✅ Consistent namespace for new tools
@@ -123,8 +123,8 @@ async def pos_browser(action: str, **kwargs) -> Dict:
 ### Option C: Full Server Name Prefix
 ```python
 @mcp.tool()
-async def agent_os_browser(action: str, **kwargs) -> Dict:
-    """Agent OS browser automation tool."""
+async def praxis_os_browser(action: str, **kwargs) -> Dict:
+    """prAxIs OS browser automation tool."""
 ```
 
 **Pros:**
@@ -180,18 +180,18 @@ get_current_phase   - Core workflow functionality
 
 **Rationale**:
 1. **No Breaking Changes**: Existing tools keep their names
-2. **Clear Namespace**: New tools clearly belong to Agent OS
+2. **Clear Namespace**: New tools clearly belong to prAxIs OS
 3. **Future-Proof**: Won't conflict with Cursor additions
 4. **Reasonable Length**: `pos_` is short (4 chars)
-5. **Discoverable**: AI can easily find "Agent OS tools" by prefix
+5. **Discoverable**: AI can easily find "prAxIs OS tools" by prefix
 
 ---
 
 ## 📊 Name Collision Check
 
-### Current Agent OS Tools vs Cursor Built-ins
+### Current prAxIs OS Tools vs Cursor Built-ins
 
-| Agent OS Tool | Cursor Conflict? | Safe? |
+| prAxIs OS Tool | Cursor Conflict? | Safe? |
 |---------------|------------------|-------|
 | `search_standards` | No Cursor tool with this name | ✅ Safe |
 | `start_workflow` | No Cursor tool with this name | ✅ Safe |
@@ -208,7 +208,7 @@ get_current_phase   - Core workflow functionality
 |---------------|------------------|----------|
 | `browser` | No direct conflict, but Cursor has `mcp_cursor-playwright_browser_*` | ⚠️ Potentially confusing |
 | `pos_browser` | No conflict | ✅ **SAFE** |
-| `agent_os_browser` | No conflict | ✅ Safe but verbose |
+| `praxis_os_browser` | No conflict | ✅ Safe but verbose |
 
 ---
 
@@ -223,8 +223,8 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
     """
     Register browser automation tools with MCP server.
     
-    Tool name: pos_browser (Agent OS Browser)
-    Namespace: pos_ (Agent OS)
+    Tool name: pos_browser (prAxIs OS Browser)
+    Namespace: pos_ (prAxIs OS)
     """
     
     @mcp.tool()
@@ -241,10 +241,10 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
         timeout: int = 30000,
     ) -> Dict[str, Any]:
         """
-        Agent OS browser automation tool.
+        prAxIs OS browser automation tool.
         
         Provides browser automation with persistent session management.
-        Complementary to Cursor's Playwright tools but with Agent OS integration.
+        Complementary to Cursor's Playwright tools but with prAxIs OS integration.
         
         Actions:
             navigate: Navigate to URL
@@ -277,13 +277,13 @@ pos_browser(action="screenshot", screenshot_path="/tmp/dark-mode.png")
 ```markdown
 ## Browser Automation
 
-Agent OS provides the `pos_browser` tool for programmatic browser control:
+prAxIs OS provides the `pos_browser` tool for programmatic browser control:
 
 - Test documentation sites in light/dark mode
 - Capture screenshots for validation
 - Automate visual regression testing
 
-Note: This complements Cursor's Playwright tools with Agent OS-specific features.
+Note: This complements Cursor's Playwright tools with prAxIs OS-specific features.
 ```
 
 ---
@@ -329,12 +329,12 @@ async def pos_browser(
     color_scheme: Optional[str] = None,
     # ... other params
 ) -> Dict[str, Any]:
-    """Agent OS browser automation tool."""
+    """prAxIs OS browser automation tool."""
 ```
 
 **Benefits**:
 - ✅ No collision with Cursor's tools
-- ✅ Clear ownership (Agent OS)
+- ✅ Clear ownership (prAxIs OS)
 - ✅ Future-proof
 - ✅ Short enough to be practical (11 chars)
 - ✅ Establishes namespace pattern for future tools

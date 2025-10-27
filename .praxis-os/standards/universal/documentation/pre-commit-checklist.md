@@ -1,10 +1,10 @@
-# Pre-Commit Checklist - Agent OS Development
+# Pre-Commit Checklist - prAxIs OS Development
 
 **CRITICAL: Run this checklist before EVERY commit. No exceptions.**
 
 **Date**: 2025-10-09  
 **Status**: Active  
-**Scope**: All Agent OS commits  
+**Scope**: All prAxIs OS commits  
 **Context**: Prevent incomplete work from entering the repository
 
 ---
@@ -154,7 +154,7 @@ grep -r "standard-name" universal/workflows/
 ```bash
 # Verify both flows reference canonical source
 grep "gitignore-requirements.md" installation/04-gitignore.md
-grep "gitignore-requirements.md" universal/workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md
+grep "gitignore-requirements.md" universal/workflows/praxis_os_upgrade_v1/phases/2/task-3-update-gitignore.md
 ```
 
 - [ ] `universal/standards/installation/gitignore-requirements.md` updated

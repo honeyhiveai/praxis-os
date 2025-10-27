@@ -183,7 +183,7 @@ Result: Binding, rarely ignored, ~85% compliance
 ```markdown
 ## What Is the Binding Workflow Contract?
 
-The contract is a formal commitment that distinguishes Agent OS workflows from simple guidelines. Workflows that adopt this contract achieve 95%+ success rates.
+The contract is a formal commitment that distinguishes prAxIs OS workflows from simple guidelines. Workflows that adopt this contract achieve 95%+ success rates.
 
 **MANDATORY ACKNOWLEDGMENT BEFORE PROCEEDING**
 
@@ -363,7 +363,7 @@ These common mistakes undermine workflow effectiveness. Recognize and eliminate 
 
 ## What Are Workflow Success Criteria?
 
-Use these criteria to validate that your workflow meets Agent OS standards.
+Use these criteria to validate that your workflow meets prAxIs OS standards.
 
 A workflow is successful when:
 

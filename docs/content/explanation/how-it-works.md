@@ -485,6 +485,6 @@ This works **with** AI's probabilistic nature by **continuously weighting the pr
 
 - **[MCP Tools Reference](../reference/mcp-tools)** - Complete API documentation for `search_standards` and other tools
 - **[Architecture](./architecture)** - Technical details of MCP/RAG implementation
-- **[Your First prAxIs OS Project](../tutorials/your-first-agent-os-project)** - See this in action through a hands-on tutorial
+- **[Your First prAxIs OS Project](../tutorials/your-first-praxis-os-project)** - See this in action through a hands-on tutorial
 - **[Workflows Reference](../reference/workflows)** - How workflows use RAG for quality enforcement
 

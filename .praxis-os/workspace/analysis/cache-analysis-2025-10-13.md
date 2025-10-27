@@ -1,4 +1,4 @@
-# Comprehensive Cache Analysis: Agent OS Workflow System
+# Comprehensive Cache Analysis: prAxIs OS Workflow System
 **Date:** 2025-10-13  
 **Analysis Depth:** Complete system architecture  
 **Scope:** All caching mechanisms and their interactions
@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-The Agent OS workflow system has **7 distinct cache layers** operating at different scopes with varying lifecycles and invalidation strategies. The current metadata caching issue revealed fundamental architectural tensions between **development agility** and **production performance**.
+The prAxIs OS workflow system has **7 distinct cache layers** operating at different scopes with varying lifecycles and invalidation strategies. The current metadata caching issue revealed fundamental architectural tensions between **development agility** and **production performance**.
 
 **Key Finding:** File watcher invalidates RAG index but NOT metadata/session caches, creating **stale state divergence**.
 
@@ -151,7 +151,7 @@ self._sessions: Dict[str, WorkflowSession] = {}
 - **Invalidation:** Full rebuild (--force flag) or incremental update
 - **Scope:** Persistent across server restarts
 
-**Purpose:** Vector search over Agent OS content
+**Purpose:** Vector search over prAxIs OS content
 
 **Thread Safety:** LanceDB internal locking + RAGEngine._lock
 
@@ -204,8 +204,8 @@ File Watcher Detects (monitoring/watcher.py)
 
 ### 3.2 File Change (dogfooding scenario)
 ```
-1. Edit universal/workflows/agent_os_upgrade_v1/metadata.json
-2. Copy to .praxis-os/workflows/agent_os_upgrade_v1/metadata.json
+1. Edit universal/workflows/praxis_os_upgrade_v1/metadata.json
+2. Copy to .praxis-os/workflows/praxis_os_upgrade_v1/metadata.json
 3. File watcher detects .json change
 4. Wait 5 seconds (debounce)
 5. Rebuild RAG index (incremental)
@@ -221,8 +221,8 @@ File Watcher Detects (monitoring/watcher.py)
 
 ### 3.3 Workflow Start (after file change)
 ```
-1. start_workflow(workflow_type="agent_os_upgrade_v1", ...)
-2. Call load_workflow_metadata("agent_os_upgrade_v1")
+1. start_workflow(workflow_type="praxis_os_upgrade_v1", ...)
+2. Call load_workflow_metadata("praxis_os_upgrade_v1")
    - Check _metadata_cache
    - CACHE HIT! ❌ Returns stale metadata
 3. Create or resume session
@@ -256,7 +256,7 @@ File Watcher Detects (monitoring/watcher.py)
 1. **Most workflows have stable metadata** - Don't edit metadata.json often
 2. **Server restarts during development** - Clears cache naturally
 3. **Dynamic workflows use RAG fallback** - Masks the issue
-4. **Dogfooding revealed it** - Rapid iteration on workflow_creation_v1 and agent_os_upgrade_v1
+4. **Dogfooding revealed it** - Rapid iteration on workflow_creation_v1 and praxis_os_upgrade_v1
 
 ---
 
@@ -292,7 +292,7 @@ File Watcher Detects (monitoring/watcher.py)
 |---------------|----------------|--------------|
 | Static (test_generation_v3) | Tasks from metadata.json | Stale cache breaks get_task() |
 | Dynamic (spec_execution_v1) | Phase 0 from metadata, 1-N dynamic | Hybrid - partial impact |
-| Hybrid (agent_os_upgrade_v1) | All phases from metadata | Critical - all tasks fail |
+| Hybrid (praxis_os_upgrade_v1) | All phases from metadata | Critical - all tasks fail |
 
 ---
 

@@ -1,4 +1,4 @@
-# Cursor Integration Analysis - Agent OS vs Builder Methods
+# Cursor Integration Analysis - prAxIs OS vs Builder Methods
 
 **Date:** 2025-10-07  
 **Purpose:** Compare our MCP-based approach with Builder Methods' `.cursor/rules/` approach
@@ -7,7 +7,7 @@
 
 ## 🔍 Key Difference
 
-### Builder Methods Agent OS Approach
+### Builder Methods prAxIs OS Approach
 **Location:** `.cursor/rules/` directory  
 **Method:** Cursor-specific command files (`.mdc` files)  
 **Architecture:** Commands define what Cursor should do
@@ -29,7 +29,7 @@
 - User invokes commands in Cursor
 - Cursor executes according to `.mdc` instructions
 
-### HoneyHive Agent OS Enhanced Approach
+### HoneyHive prAxIs OS Approach
 **Location:** `.cursor/mcp.json` + MCP server  
 **Method:** Model Context Protocol (MCP) with tools  
 **Architecture:** MCP server provides tools, Cursor/Claude calls them
@@ -41,7 +41,7 @@
 
 .praxis-os/
 ├── mcp_server/       # MCP server code
-│   ├── agent_os_rag.py
+│   ├── praxis_os_rag.py
 │   ├── workflow_engine.py
 │   └── ...
 ├── standards/        # Indexed by RAG
@@ -163,9 +163,9 @@
 
 **Example `.cursor/rules/quick-search.mdc`:**
 ```markdown
-# Quick Search Agent OS
+# Quick Search prAxIs OS
 
-Query the Agent OS standards via MCP.
+Query the prAxIs OS standards via MCP.
 
 **Usage:** Type a question and I'll search standards for you.
 
@@ -227,7 +227,7 @@ Use the `search_standards` MCP tool with the user's query.
 
 ## 📚 References
 
-- [Builder Methods Agent OS](https://buildermethods.com/agent-os)
+- [Builder Methods prAxIs OS](https://buildermethods.com/agent-os)
 - [Model Context Protocol Specification](https://modelcontextprotocol.io/)
 - [Our MCP Tool Design Best Practices](./universal/standards/development/mcp-tool-design-best-practices.md)
 - [Our MCP Server Architecture Redesign](./MCP_SERVER_ARCHITECTURE_REDESIGN.md)

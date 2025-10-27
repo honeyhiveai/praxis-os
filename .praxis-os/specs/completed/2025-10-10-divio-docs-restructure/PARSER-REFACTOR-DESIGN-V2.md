@@ -593,7 +593,7 @@ def _build_description(self, nodes: List) -> str:
     - "**Acceptance Criteria"
     - "**Validation Gate"
     - "**Human Baseline"
-    - "**Agent OS"
+    - "**prAxIs OS"
     
     Args:
         nodes: Task content nodes
@@ -620,7 +620,7 @@ def _build_description(self, nodes: List) -> str:
         "Acceptance Criteria",
         "Validation Gate",
         "Human Baseline",
-        "Agent OS",
+        "prAxIs OS",
     ]
     
     for node in nodes:
@@ -1019,7 +1019,7 @@ def _find_next_phase_index(self, start_idx: int, nodes: List) -> int:
 ```python
 class SpecTasksParser(SourceParser):
     """
-    Semantic AST-based parser for Agent OS spec tasks.md files.
+    Semantic AST-based parser for prAxIs OS spec tasks.md files.
     
     DESIGN: Semantic understanding over pattern matching
     - Identifies content by meaning, not structure

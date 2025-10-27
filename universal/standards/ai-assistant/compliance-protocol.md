@@ -11,7 +11,7 @@
 **Core Principle:** Check first, then act. Review existing standards, patterns, and project rules BEFORE generating code or making changes.
 
 **MANDATORY Pre-Task Compliance Checklist:**
-1. ✅ Read relevant Agent OS standards (`.praxis-os/standards/`)
+1. ✅ Read relevant prAxIs OS standards (`.praxis-os/standards/`)
 2. ✅ Check project-specific rules (README, CONTRIBUTING, .cursorrules)
 3. ✅ Verify established patterns in existing codebase
 4. ✅ Confirm no existing solutions before creating new
@@ -88,7 +88,7 @@ With compliance checking, AI assistants:
 
 ### Before Any Code Generation
 
-- [ ] **Read relevant Agent OS standards** in `.praxis-os/standards/`
+- [ ] **Read relevant prAxIs OS standards** in `.praxis-os/standards/`
   - Universal standards in `.praxis-os/standards/universal/`
   - AI assistant standards in `.praxis-os/standards/ai-assistant/`
   - AI safety rules in `.praxis-os/standards/ai-safety/` (if exists)
@@ -97,7 +97,7 @@ With compliance checking, AI assistants:
 - [ ] **Check project-specific rules** in project documentation
   - README.md (project overview, setup instructions)
   - CONTRIBUTING.md (contribution guidelines)
-  - .cursorrules (Agent OS behavioral triggers)
+  - .cursorrules (prAxIs OS behavioral triggers)
   - Any domain-specific documentation
 
 - [ ] **Verify established patterns** in existing codebase
@@ -659,7 +659,7 @@ Result: Fix consistent with existing concurrency approach, follows project patte
 - `standards/ai-assistant/pre-generation-validation.md` - What to validate before code → `search_standards("pre-generation validation")`
 - `standards/ai-assistant/commit-protocol.md` - Review and commit changes → `search_standards("commit protocol")`
 - `standards/ai-assistant/analysis-methodology.md` - Comprehensive analysis → `search_standards("analysis methodology")`
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core principles → `search_standards("Agent OS orientation")`
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core principles → `search_standards("prAxIs OS orientation")`
 
 **AI Safety:**
 - `standards/ai-safety/production-code-checklist.md` - Code quality requirements → `search_standards("production code checklist")`

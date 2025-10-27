@@ -54,8 +54,8 @@ docs/content/
 
 ### Phase 2: Tutorial Content Creation (0% Complete)
 **Planned Work:**
-- Tutorial 1: "Your First Agent OS Project"
-- Tutorial 2: "Understanding Agent OS Workflows"
+- Tutorial 1: "Your First prAxIs OS Project"
+- Tutorial 2: "Understanding prAxIs OS Workflows"
 
 **Actual Status:**
 - ❌ No tutorial content created

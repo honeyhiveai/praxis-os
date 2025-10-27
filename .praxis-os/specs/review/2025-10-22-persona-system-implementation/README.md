@@ -142,7 +142,7 @@ Knowledge Layer (RAG, Workflows, Standards)
 
 ### Timeline
 
-**Total Estimated Time:** 60 hours human baseline → 6.5 hours Agent OS active (9.2x leverage)
+**Total Estimated Time:** 60 hours human baseline → 6.5 hours prAxIs OS active (9.2x leverage)
 
 **Phases:**
 1. **Phase 1 (16h/1.5h active):** Core Infrastructure - PersonaLauncher, LLMClient, MCPClient, agentic loop
@@ -247,7 +247,7 @@ Knowledge Layer (RAG, Workflows, Standards)
 
 4. **[tasks.md](tasks.md)** - Implementation Tasks (737 lines)
    - 4 implementation phases
-   - 25 tasks with dual time estimates (Human baseline vs Agent OS)
+   - 25 tasks with dual time estimates (Human baseline vs prAxIs OS)
    - Dependencies mapped
    - Validation gates per phase
    - Testing strategy
@@ -322,7 +322,7 @@ Knowledge Layer (RAG, Workflows, Standards)
 - [ ] Comprehensive test coverage (80%+)
 - [ ] Documentation complete (architecture, API, persona creation guide)
 - [ ] End-to-end scenarios validated
-- [ ] Production deployment completed (dogfooding in Agent OS development)
+- [ ] Production deployment completed (dogfooding in prAxIs OS development)
 
 ---
 
@@ -340,7 +340,7 @@ Knowledge Layer (RAG, Workflows, Standards)
 1. **Setup:** Create project structure and dependencies
 2. **Implement:** Follow tasks.md phase by phase
 3. **Test:** Validate acceptance criteria
-4. **Dogfood:** Use in Agent OS development
+4. **Dogfood:** Use in prAxIs OS development
 5. **Iterate:** Refine based on usage
 
 ---

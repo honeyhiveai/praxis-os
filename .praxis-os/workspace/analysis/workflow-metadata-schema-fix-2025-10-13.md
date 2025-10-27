@@ -65,7 +65,7 @@ python scripts/validate_workflow_metadata.py <workflow_path>
 - Already compliant (dynamic workflow)
 - ✅ VALID
 
-**agent_os_upgrade_v1:**
+**praxis_os_upgrade_v1:**
 - Already compliant
 - ✅ VALID
 
@@ -125,7 +125,7 @@ python scripts/validate_workflow_metadata.py <workflow_path>
 All 3 workflows now **PASS** official validation:
 
 ```
-✅ agent_os_upgrade_v1  - VALID
+✅ praxis_os_upgrade_v1  - VALID
 ✅ spec_creation_v1     - VALID
 ✅ spec_execution_v1    - VALID (dynamic workflow)
 ```

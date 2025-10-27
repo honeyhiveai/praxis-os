@@ -19,7 +19,7 @@ class TestDualTransportBasics:
     """Basic integration tests for dual-transport mode."""
 
     @pytest.fixture
-    def agent_os_path(self, tmp_path):
+    def praxis_os_path(self, tmp_path):
         """Create a temporary .praxis-os directory structure for testing."""
         agent_os = tmp_path / ".praxis-os"
         agent_os.mkdir()
@@ -106,11 +106,11 @@ index building in integration test scenarios.
 
         return agent_os
 
-    def test_server_creates_state_file_in_dual_mode(self, agent_os_path):
+    def test_server_creates_state_file_in_dual_mode(self, praxis_os_path):
         """Test that server creates state file when started in dual mode."""
         # Save and change directory
         original_dir = os.getcwd()
-        os.chdir(agent_os_path.parent)
+        os.chdir(praxis_os_path.parent)
 
         try:
             # Get project root
@@ -137,12 +137,12 @@ index building in integration test scenarios.
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                cwd=str(agent_os_path.parent),
+                cwd=str(praxis_os_path.parent),
                 env=env,
             )
 
             # Wait for state file to appear
-            state_file = agent_os_path / ".mcp_server_state.json"
+            state_file = praxis_os_path / ".mcp_server_state.json"
             max_wait = 30
             start_time = time.time()
             state_was_created = False
@@ -206,10 +206,10 @@ index building in integration test scenarios.
         finally:
             os.chdir(original_dir)
 
-    def test_http_mode_creates_state_file(self, agent_os_path):
+    def test_http_mode_creates_state_file(self, praxis_os_path):
         """Test that server creates state file in HTTP-only mode."""
         original_dir = os.getcwd()
-        os.chdir(agent_os_path.parent)
+        os.chdir(praxis_os_path.parent)
 
         try:
             project_root = Path(__file__).parent.parent.parent
@@ -233,12 +233,12 @@ index building in integration test scenarios.
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                cwd=str(agent_os_path.parent),
+                cwd=str(praxis_os_path.parent),
                 env=env,
             )
 
             # Wait for state file
-            state_file = agent_os_path / ".mcp_server_state.json"
+            state_file = praxis_os_path / ".mcp_server_state.json"
             max_wait = 30
             start_time = time.time()
 
@@ -283,10 +283,10 @@ index building in integration test scenarios.
         finally:
             os.chdir(original_dir)
 
-    def test_stdio_mode_creates_state_file(self, agent_os_path):
+    def test_stdio_mode_creates_state_file(self, praxis_os_path):
         """Test that server creates state file in stdio-only mode."""
         original_dir = os.getcwd()
-        os.chdir(agent_os_path.parent)
+        os.chdir(praxis_os_path.parent)
 
         try:
             project_root = Path(__file__).parent.parent.parent
@@ -310,12 +310,12 @@ index building in integration test scenarios.
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                cwd=str(agent_os_path.parent),
+                cwd=str(praxis_os_path.parent),
                 env=env,
             )
 
             # Wait for state file
-            state_file = agent_os_path / ".mcp_server_state.json"
+            state_file = praxis_os_path / ".mcp_server_state.json"
             max_wait = 30
             start_time = time.time()
 

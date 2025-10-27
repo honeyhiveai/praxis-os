@@ -1,5 +1,5 @@
 """
-Backup Manager for Agent OS Upgrade Workflow.
+Backup Manager for prAxIs OS Upgrade Workflow.
 
 Manages backup creation, verification, restoration, and archival operations.
 Ensures safe rollback capability for upgrade workflows.
@@ -55,7 +55,7 @@ class BackupManager:
                       (defaults to current directory)
         """
         self.base_path = base_path or Path.cwd()
-        self.agent_os_dir = self.base_path / ".praxis-os"
+        self.praxis_os_dir = self.base_path / ".praxis-os"
         self.backup_dir = self.base_path / self.BACKUP_DIR
 
         # Ensure backup directory exists
@@ -105,7 +105,7 @@ class BackupManager:
 
         # Backup directories
         for dir_name in directories:
-            source = self.agent_os_dir / dir_name
+            source = self.praxis_os_dir / dir_name
             if source.exists():
                 dest = backup_path / dir_name
                 logger.debug("Backing up directory: %s -> %s", source, dest)
@@ -117,7 +117,7 @@ class BackupManager:
 
         # Backup individual files
         for file_name in files:
-            source = self.agent_os_dir / file_name
+            source = self.praxis_os_dir / file_name
             if source.exists():
                 dest = backup_path / file_name
                 logger.debug("Backing up file: %s -> %s", source, dest)
@@ -284,7 +284,7 @@ class BackupManager:
 
         for dir_name in directories:
             source = backup_path / dir_name
-            dest = self.agent_os_dir / dir_name
+            dest = self.praxis_os_dir / dir_name
 
             if source.exists():
                 # Remove existing directory if present
@@ -301,7 +301,7 @@ class BackupManager:
 
         for file_name in files:
             source = backup_path / file_name
-            dest = self.agent_os_dir / file_name
+            dest = self.praxis_os_dir / file_name
 
             if source.exists():
                 logger.debug("Restoring file: %s -> %s", source, dest)

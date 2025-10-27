@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This design proposes a **project-specific RAG system** to complement Agent OS Enhanced's existing standards RAG. The system enables AI agents to efficiently discover specific implementation content (code, docs, upstream frameworks) through fast, targeted search, improving token efficiency and discovery speed.
+This design proposes a **project-specific RAG system** to complement prAxIs OS's existing standards RAG. The system enables AI agents to efficiently discover specific implementation content (code, docs, upstream frameworks) through fast, targeted search, improving token efficiency and discovery speed.
 
 **Key Innovation:** Separation of concerns between behavioral guidance (standards) and information retrieval (project RAG):
 - **Standards** → "How should I work?" (patterns, conventions, decisions affecting behavior)
@@ -308,7 +308,7 @@ async def search_project(
     Semantic search over project-specific knowledge.
     
     Searches code, docs, and curated upstream documentation.
-    Use for project-specific questions. For Agent OS patterns,
+    Use for project-specific questions. For prAxIs OS patterns,
     use search_standards() instead.
     
     For usage patterns, query: search_standards("how to use search_project")
@@ -774,7 +774,7 @@ async def search_project(query: str, ...) -> dict:
 ## When to Use
 ✅ Project architecture questions
 ✅ Framework integration patterns
-❌ Agent OS workflows (use search_standards)
+❌ prAxIs OS workflows (use search_standards)
 
 ## Query Patterns
 ### Architecture Discovery
@@ -1162,7 +1162,7 @@ search_project("FastAPI dependency injection", framework_filter="fastapi")
 
 ## Conclusion
 
-The project-specific RAG system addresses a critical discovery gap in Agent OS Enhanced. By complementing universal standards with project-specific knowledge, AI agents can efficiently discover:
+The project-specific RAG system addresses a critical discovery gap in prAxIs OS. By complementing universal standards with project-specific knowledge, AI agents can efficiently discover:
 
 1. **Project architecture and patterns**
 2. **Codebase structure and examples**

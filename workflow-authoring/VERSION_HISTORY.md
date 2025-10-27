@@ -1,11 +1,11 @@
-# Agent OS Meta-Workflow - Version History
+# prAxIs OS Meta-Workflow - Version History
 
 ---
 
 ## v1.0 - Initial Release (2025-10-02)
 
 ### **Overview**
-First production-ready release of the Agent OS Meta-Workflow - a portable "workflow for creating workflows" methodology.
+First production-ready release of the prAxIs OS Meta-Workflow - a portable "workflow for creating workflows" methodology.
 
 ### **Components Added**
 - ✅ Complete workflow creation methodology
@@ -133,7 +133,7 @@ meta-workflow/
 ## Contributors
 
 - Initial extraction and documentation: 2025-10-02
-- Source methodologies: python-sdk Agent OS team
+- Source methodologies: python-sdk prAxIs OS team
 - Validation: DSL repository workflow audit
 
 ---

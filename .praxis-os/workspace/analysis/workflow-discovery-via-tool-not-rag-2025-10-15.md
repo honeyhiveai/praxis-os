@@ -80,7 +80,7 @@ workflow(
 
 **Include**:
 - Behavioral patterns (when to query, when to use workflows)
-- Meta-patterns (how Agent OS works)
+- Meta-patterns (how prAxIs OS works)
 - Quality standards (code quality, testing)
 - Architecture principles
 - Development process (2-workflow model)

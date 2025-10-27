@@ -11,7 +11,7 @@
 
 ### Strategic Vision
 
-The Agent OS MCP Server has grown organically from a proof-of-concept to a production system, but its architecture has not kept pace with its responsibilities. This redesign transforms the server from a monolithic 984-line module with scattered configuration and tight coupling into a **modular, scalable, production-grade Python application** that follows Agent OS's own standards for dependency injection, separation of concerns, and extensibility.
+The prAxIs OS MCP Server has grown organically from a proof-of-concept to a production system, but its architecture has not kept pace with its responsibilities. This redesign transforms the server from a monolithic 984-line module with scattered configuration and tight coupling into a **modular, scalable, production-grade Python application** that follows prAxIs OS's own standards for dependency injection, separation of concerns, and extensibility.
 
 This is not just a refactoring—it's establishing the architectural foundation for **sub-agents, horizontal scaling, and sustainable growth** while ensuring we dogfood our own quality standards.
 
@@ -44,7 +44,7 @@ This is not just a refactoring—it's establishing the architectural foundation 
 The current MCP server architecture has multiple critical issues preventing sustainable growth:
 
 1. **Configuration Sprawl**: Defaults scattered across 3 locations (function, class, JSON)
-2. **God Module**: `agent_os_rag.py` (984 lines) handles too many responsibilities
+2. **God Module**: `praxis_os_rag.py` (984 lines) handles too many responsibilities
 3. **No Dependency Injection**: Components create their own dependencies
 4. **Tight Coupling**: Hard to test, hard to extend
 5. **Tool Scalability Risk**: No strategy for managing 20-30+ tools with sub-agents
@@ -99,5 +99,5 @@ The current MCP server architecture has multiple critical issues preventing sust
 
 ---
 
-**This is our path to a production-grade, sustainable MCP server architecture that can scale to support the next generation of Agent OS features.**
+**This is our path to a production-grade, sustainable MCP server architecture that can scale to support the next generation of prAxIs OS features.**
 

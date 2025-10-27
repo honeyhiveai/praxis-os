@@ -11,7 +11,7 @@
 
 ### 1.1 Purpose
 
-This document specifies the requirements for extending the Agent OS workflow engine to support dynamically-generated workflow content and refactoring to a session-scoped architecture.
+This document specifies the requirements for extending the prAxIs OS workflow engine to support dynamically-generated workflow content and refactoring to a session-scoped architecture.
 
 ### 1.2 Scope
 
@@ -26,7 +26,7 @@ The system shall:
 
 - **AI Agents:** Primary users of workflows, need reliable enforcement
 - **Workflow Authors:** Create reusable workflow frameworks
-- **Agent OS Developers:** Maintain and extend workflow engine
+- **prAxIs OS Developers:** Maintain and extend workflow engine
 - **End Users:** Benefit from consistent, high-quality AI output
 
 ---
@@ -86,7 +86,7 @@ The system shall:
 **Description:** System shall parse external sources into structured phase/task data.
 
 **Requirements:**
-- FR-3.1: System shall parse Agent OS spec `tasks.md` format
+- FR-3.1: System shall parse prAxIs OS spec `tasks.md` format
 - FR-3.2: Parser shall extract phase headers, names, descriptions
 - FR-3.3: Parser shall extract task lists with acceptance criteria
 - FR-3.4: Parser shall extract validation gates per phase
@@ -281,7 +281,7 @@ The system shall:
 
 - No breaking changes to existing workflows
 - Must be testable without external dependencies
-- Must follow Agent OS coding standards
+- Must follow prAxIs OS coding standards
 - Must include comprehensive documentation
 
 ---

@@ -9,7 +9,7 @@
 
 ## Objective
 
-Create the root directory for the target workflow in the correct location within the Agent OS structure.
+Create the root directory for the target workflow in the correct location within the prAxIs OS structure.
 
 ---
 

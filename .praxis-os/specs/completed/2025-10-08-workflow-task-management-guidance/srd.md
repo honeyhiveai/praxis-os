@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for adding explicit task management guidance to Agent OS MCP workflow tool responses to prevent AI from creating parallel TODO lists during workflow execution.
+This document defines the requirements for adding explicit task management guidance to prAxIs OS MCP workflow tool responses to prevent AI from creating parallel TODO lists during workflow execution.
 
 ### 1.2 Scope
 This feature will inject standardized guidance into all MCP workflow tool responses (`start_workflow`, `get_current_phase`, `get_task`, `complete_phase`) indicating that the workflow system manages tasks and external task tools should not be used.
@@ -43,7 +43,7 @@ This feature will inject standardized guidance into all MCP workflow tool respon
 - **User trust in workflow system**: Unknown (current) → Measurable increase through dogfooding feedback (target)
 
 **Business Impact:**
-- **Agent OS adoption**: More reliable workflows → increased user adoption
+- **prAxIs OS adoption**: More reliable workflows → increased user adoption
 - **Dogfooding success**: Internal teams can confidently use workflows for complex tasks
 - **Meta-framework validation**: Demonstrates workflows as complete, self-contained execution systems
 
@@ -74,7 +74,7 @@ User stories describe the feature from the user's perspective.
 
 ### Story 1: AI Assistant Receives Clear Task Management Guidance
 
-**As an** AI assistant executing an Agent OS workflow  
+**As an** AI assistant executing an prAxIs OS workflow  
 **I want to** receive explicit guidance in every workflow tool response that the workflow system manages all tasks  
 **So that** I don't create parallel TODO lists and maintain single-source-of-truth for task state
 
@@ -122,7 +122,7 @@ User stories describe the feature from the user's perspective.
 
 ### Story 4: Workflow System Signals Operating Mode
 
-**As the** Agent OS workflow system  
+**As the** prAxIs OS workflow system  
 **I want to** clearly communicate my role as the task manager for active sessions  
 **So that** AI assistants understand they should delegate task management to me
 
@@ -320,7 +320,7 @@ NFRs define quality attributes and system constraints.
 **NFR-M2: Code Quality**
 - 100% unit test coverage for response wrapper function
 - Integration test validates end-to-end behavior (no TODO creation during workflow)
-- Code follows existing Agent OS Python conventions and style
+- Code follows existing prAxIs OS Python conventions and style
 
 **NFR-M3: Documentation**
 - Implementation documented in code comments
@@ -375,7 +375,7 @@ NFRs define quality attributes and system constraints.
 ### 5.6 Implementation Constraints
 
 **NFR-I1: No External Dependencies**
-- Implementation uses only Python standard library and existing Agent OS dependencies
+- Implementation uses only Python standard library and existing prAxIs OS dependencies
 - No new package requirements
 - No new infrastructure requirements
 
@@ -436,7 +436,7 @@ Explicitly defines what is NOT included. Items may be considered for future phas
 
 6. **Guidance Localization/Translation**
    - **Reason:** English-only for initial release
-   - **Future Consideration:** If Agent OS adds i18n support, guidance could be localized
+   - **Future Consideration:** If prAxIs OS adds i18n support, guidance could be localized
 
 ---
 
@@ -543,7 +543,7 @@ This feature is complete when:
 ### 8.2 Glossary
 
 - **MCP**: Model Context Protocol - the interface between AI and tools
-- **Workflow**: Structured, phase-gated execution framework in Agent OS
+- **Workflow**: Structured, phase-gated execution framework in prAxIs OS
 - **TODO**: Task management item created via Cursor's todo_write tool
 - **Guidance**: Advisory fields injected into workflow tool responses
 - **Checkpoint**: Phase boundary validation gate in workflow execution

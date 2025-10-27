@@ -38,7 +38,7 @@ class TestDualTransportIntegration:
     """Integration tests for dual-transport mode."""
 
     @pytest.fixture(scope="class")
-    def agent_os_path(self, tmp_path_factory):
+    def praxis_os_path(self, tmp_path_factory):
         """Create a temporary .praxis-os directory structure for testing."""
         tmp_path = tmp_path_factory.mktemp("integration_test")
         agent_os = tmp_path / ".praxis-os"
@@ -127,13 +127,13 @@ index building in integration test scenarios.
         return agent_os
 
     @pytest.fixture(scope="class")
-    def server_process(self, agent_os_path):
+    def server_process(self, praxis_os_path):
         """Start MCP server in dual mode as subprocess."""
         # Save current directory
         original_dir = os.getcwd()
 
         # Change to temp directory so server finds .praxis-os
-        os.chdir(agent_os_path.parent)
+        os.chdir(praxis_os_path.parent)
 
         # Get project root (where mcp_server module is)
         project_root = Path(__file__).parent.parent.parent
@@ -160,13 +160,13 @@ index building in integration test scenarios.
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            cwd=str(agent_os_path.parent),
+            cwd=str(praxis_os_path.parent),
             env=env,
         )
 
         # Wait for server to start with exponential backoff
         # Note: First start needs time for RAG index building
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         max_wait = 60  # seconds (allows time for RAG index building)
         start_time = time.time()
         wait_time = 0.1  # Initial wait time
@@ -222,18 +222,18 @@ index building in integration test scenarios.
         # Restore original directory
         os.chdir(original_dir)
 
-    def test_server_starts_in_dual_mode(self, server_process, agent_os_path):
+    def test_server_starts_in_dual_mode(self, server_process, praxis_os_path):
         """Test that server starts successfully in HTTP mode within 60 seconds."""
         # server_process fixture already validates this
         assert server_process.poll() is None  # Process should still be running
 
         # Verify state file exists
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         assert state_file.exists()
 
-    def test_state_file_has_correct_fields(self, server_process, agent_os_path):
+    def test_state_file_has_correct_fields(self, server_process, praxis_os_path):
         """Test that state file contains all required fields."""
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         assert state_file.exists()
 
         with open(state_file) as f:
@@ -256,12 +256,12 @@ index building in integration test scenarios.
         assert state["pid"] == server_process.pid
 
     @pytest.mark.asyncio
-    async def test_http_endpoint_accessible(self, server_process, agent_os_path):
+    async def test_http_endpoint_accessible(self, server_process, praxis_os_path):
         """Test that HTTP endpoint responds to requests using MCP SDK."""
         if not HAS_MCP_CLIENT:
             pytest.skip("MCP client library not available")
 
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file) as f:
             state = json.load(f)
 
@@ -285,12 +285,12 @@ index building in integration test scenarios.
             pytest.fail(f"MCP client connection failed: {e}")
 
     @pytest.mark.asyncio
-    async def test_http_tool_listing(self, server_process, agent_os_path):
+    async def test_http_tool_listing(self, server_process, praxis_os_path):
         """Test that HTTP endpoint can list tools via MCP SDK."""
         if not HAS_MCP_CLIENT:
             pytest.skip("MCP client library not available")
 
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file) as f:
             state = json.load(f)
 
@@ -323,15 +323,15 @@ index building in integration test scenarios.
 
     def test_state_file_deleted_after_shutdown(self, tmp_path):
         """Test that state file is cleaned up after server shutdown."""
-        # Create a fresh temp directory for this test (don't use class-scoped agent_os_path)
-        agent_os_path = tmp_path / ".praxis-os"
-        agent_os_path.mkdir()
-        (agent_os_path / "standards").mkdir()
-        (agent_os_path / "workflows").mkdir()  # Required by validation
-        (agent_os_path / ".cache").mkdir()  # Required for RAG index
-        (agent_os_path / "usage").mkdir()  # Required by validation
+        # Create a fresh temp directory for this test (don't use class-scoped praxis_os_path)
+        praxis_os_path = tmp_path / ".praxis-os"
+        praxis_os_path.mkdir()
+        (praxis_os_path / "standards").mkdir()
+        (praxis_os_path / "workflows").mkdir()  # Required by validation
+        (praxis_os_path / ".cache").mkdir()  # Required for RAG index
+        (praxis_os_path / "usage").mkdir()  # Required by validation
 
-        # Create substantial content for RAG index (reuse pattern from agent_os_path fixture)
+        # Create substantial content for RAG index (reuse pattern from praxis_os_path fixture)
         standards_content = """# Test Standard for Cleanup
 
 ## Overview
@@ -350,7 +350,7 @@ When the server receives a shutdown signal (SIGINT or SIGTERM), it must:
 
 This content ensures the RAG index can be built successfully during the test.
 """
-        (agent_os_path / "standards" / "test.md").write_text(standards_content)
+        (praxis_os_path / "standards" / "test.md").write_text(standards_content)
 
         # Save and change directory
         original_dir = os.getcwd()
@@ -378,12 +378,12 @@ This content ensures the RAG index can be built successfully during the test.
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            cwd=str(agent_os_path.parent),
+            cwd=str(praxis_os_path.parent),
             env=env,
         )
 
         # Wait for state file
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         max_wait = 30  # seconds (allows time for RAG index building)
         start_time = time.time()
 

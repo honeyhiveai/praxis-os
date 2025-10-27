@@ -19,7 +19,7 @@ from typing import Any, Dict, List, Optional
 
 
 class WorkflowValidator:
-    """Validates workflow structure against Agent OS standards."""
+    """Validates workflow structure against prAxIs OS standards."""
 
     # File size guidelines from workflow-construction-standards.md
     PHASE_FILE_TARGET = 80

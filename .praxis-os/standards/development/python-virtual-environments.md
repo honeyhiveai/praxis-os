@@ -2,17 +2,17 @@
 
 ## Overview
 
-Python projects using Agent OS require **two separate virtual environments** to maintain isolation between Agent OS infrastructure and project dependencies.
+Python projects using prAxIs OS require **two separate virtual environments** to maintain isolation between prAxIs OS infrastructure and project dependencies.
 
 ---
 
 ## Virtual Environment Architecture
 
-### 1. Agent OS MCP Server venv
+### 1. prAxIs OS MCP Server venv
 
 **Location**: `.praxis-os/venv/`
 
-**Purpose**: Isolated Python environment for Agent OS MCP server
+**Purpose**: Isolated Python environment for prAxIs OS MCP server
 
 **Dependencies**:
 - `lancedb` - Vector database for RAG
@@ -22,7 +22,7 @@ Python projects using Agent OS require **two separate virtual environments** to 
 - `honeyhive` (optional) - Observability integration
 
 **Usage**: 
-- Automatically created during Agent OS installation
+- Automatically created during prAxIs OS installation
 - Used exclusively by `.cursor/mcp.json` to run the MCP server
 - Should NOT be used for project code execution
 
@@ -119,7 +119,7 @@ Create `.praxis-os/config.json`:
 
 ## Usage Guidelines for AI Assistants
 
-### When to Use Agent OS venv (`.praxis-os/venv/`)
+### When to Use prAxIs OS venv (`.praxis-os/venv/`)
 
 **NEVER** - The AI should never directly use this venv. It's managed automatically by Cursor for the MCP server.
 
@@ -160,7 +160,7 @@ Create `.praxis-os/config.json`:
 /path/to/project/venv/bin/pip install pytest coverage
 
 # Wrong ❌
-.praxis-os/venv/bin/pip install pytest  # Pollutes Agent OS environment
+.praxis-os/venv/bin/pip install pytest  # Pollutes prAxIs OS environment
 ```
 
 ---
@@ -215,7 +215,7 @@ os.system(f"{project_python} -m pylint mcp_server/")
 
 ### Issue: Tests fail with import errors
 
-**Cause**: Tests are being run with Agent OS venv instead of project venv
+**Cause**: Tests are being run with prAxIs OS venv instead of project venv
 
 **Solution**: 
 1. Check `.praxis-os/config.json` for correct project venv path
@@ -224,10 +224,10 @@ os.system(f"{project_python} -m pylint mcp_server/")
 
 ### Issue: MCP server fails to start
 
-**Cause**: Agent OS venv is missing or corrupted
+**Cause**: prAxIs OS venv is missing or corrupted
 
 **Solution**:
-1. Recreate Agent OS venv: `python -m venv .praxis-os/venv --clear`
+1. Recreate prAxIs OS venv: `python -m venv .praxis-os/venv --clear`
 2. Reinstall dependencies: `.praxis-os/venv/bin/pip install -r mcp_server/requirements.txt`
 3. Restart Cursor to reload MCP server
 
@@ -243,7 +243,7 @@ os.system(f"{project_python} -m pylint mcp_server/")
 
 ## Best Practices
 
-1. **Never mix environments**: Keep Agent OS and project dependencies completely separate
+1. **Never mix environments**: Keep prAxIs OS and project dependencies completely separate
 2. **Use absolute paths**: Store absolute paths in config for reliability
 3. **Document in README**: Add section explaining the two-venv architecture
 4. **Git ignore both**: Add both `.praxis-os/venv/` and project venv to `.gitignore`
@@ -255,7 +255,7 @@ os.system(f"{project_python} -m pylint mcp_server/")
 
 For the `praxis-os` project:
 
-**Agent OS venv**: `.praxis-os/venv/`
+**prAxIs OS venv**: `.praxis-os/venv/`
 - Purpose: Run MCP server
 - Used by: Cursor's MCP integration
 
@@ -267,4 +267,4 @@ For the `praxis-os` project:
 
 ---
 
-**Key Insight**: This two-venv architecture ensures Agent OS can be installed in any Python project without dependency conflicts, while maintaining clean isolation between infrastructure and application code.
+**Key Insight**: This two-venv architecture ensures prAxIs OS can be installed in any Python project without dependency conflicts, while maintaining clean isolation between infrastructure and application code.

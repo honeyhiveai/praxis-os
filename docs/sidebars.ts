@@ -16,8 +16,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'tutorials/intro',
         'tutorials/installation',
-        'tutorials/your-first-agent-os-project',
-        'tutorials/understanding-agent-os-workflows',
+        'tutorials/your-first-praxis-os-project',
+        'tutorials/understanding-praxis-os-workflows',
         'tutorials/your-first-project-standard',
       ],
     },

@@ -76,7 +76,7 @@ Rather than building complex enforcement systems, we leverage:
 - Reference existing tools (tox, pytest, mypy)
 - Include examples from this project
 
-**For Agent OS Enhanced Specifically:**
+**For prAxIs OS Specifically:**
 - Testing: pytest, tox, >85% coverage
 - Docs: Google-style docstrings, update READMEs
 - Quality: mypy, no linter errors, Path objects
@@ -334,7 +334,7 @@ Tests, docs, linting - all must pass.
 ```markdown
 # Baseline Quality Requirements
 
-**Project:** Agent OS Enhanced  
+**Project:** prAxIs OS  
 **Last Updated:** 2025-10-07
 
 ---
@@ -560,7 +560,7 @@ This document should evolve with the project.
 
 No modifications to:
 - `workflow_engine.py`
-- `agent_os_rag.py`
+- `praxis_os_rag.py`
 - MCP tools
 - Any Python code
 

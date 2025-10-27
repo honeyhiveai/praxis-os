@@ -1,5 +1,5 @@
 # Implementation Guidance
-# Browser Automation Tool for Agent OS MCP Server
+# Browser Automation Tool for prAxIs OS MCP Server
 
 **Version**: 1.0  
 **Date**: October 8, 2025  
@@ -12,7 +12,7 @@
 
 ## 1. Overview
 
-This document provides concrete implementation patterns, code examples, and troubleshooting guidance for building the browser automation tool. Follow these patterns to ensure consistency with Agent OS standards.
+This document provides concrete implementation patterns, code examples, and troubleshooting guidance for building the browser automation tool. Follow these patterns to ensure consistency with prAxIs OS standards.
 
 ---
 
@@ -1101,7 +1101,7 @@ class ServerFactory:
         """Create MCP server with all tools."""
         from mcp_server.server.tools import register_all_tools
         
-        mcp = FastMCP("Agent OS RAG")
+        mcp = FastMCP("prAxIs OS RAG")
         
         tool_count = register_all_tools(
             mcp=mcp,

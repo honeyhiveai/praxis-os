@@ -260,7 +260,7 @@ universal/usage/mcp-server-update-guide.md
 universal/usage/mcp-usage-guide.md
 universal/usage/operating-model.md
 universal/workflows/
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 universal/workflows/spec_creation_v1/
 universal/workflows/spec_execution_v1/
 
@@ -295,7 +295,7 @@ ACT MODE
 
 [Unexpected content type]
 
-I need to orient myself with the Agent OS standards first before proceeding with the analysis.
+I need to orient myself with the prAxIs OS standards first before proceeding with the analysis.
 
 <use_mcp_tool>
 <server_name>praxis-os</server_name>
@@ -306,7 +306,7 @@ I need to orient myself with the Agent OS standards first before proceeding with
 }
 </arguments>
 <task_progress>
-- [ ] Orient with Agent OS standards
+- [ ] Orient with prAxIs OS standards
 - [ ] Examine project structure and purpose
 - [ ] Analyze key components and architecture
 - [ ] Review documentation and standards
@@ -350,7 +350,7 @@ I'll analyze the project by examining key files and structure. Let me start with
 <read_file>
 <path>README.md</path>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [ ] Examine project structure and purpose
 - [ ] Analyze key components and architecture
 - [ ] Review documentation and standards
@@ -366,13 +366,13 @@ I'll analyze the project by examining key files and structure. Let me start with
 **User:**
 
 [read_file for 'README.md'] Result:
-# Agent OS Enhanced - Portable Multi-Agent Development Framework
+# prAxIs OS - Portable Multi-Agent Development Framework
 
-**A portable Agent OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
+**A portable prAxIs OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
 
 ## 🎯 Overview
 
-Agent OS Enhanced is a portable development framework that combines:
+prAxIs OS is a portable development framework that combines:
 - **Universal CS Fundamentals**: Timeless patterns applicable to any language
 - **Language-Specific Generation**: LLM generates tailored guidance per project
 - **MCP RAG Server**: Semantic search over standards with 90% context reduction
@@ -395,7 +395,7 @@ The documentation site includes:
 
 ```
 Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/praxis-os"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will follow the installation guide in `installation/` directory:
@@ -448,7 +448,7 @@ praxis-os/
 │   │   ├── architecture/        # Dependency injection, API design, separation of concerns
 │   │   ├── testing/             # Test pyramid, test doubles, property-based testing
 │   │   └── documentation/       # Code comments, API docs, README templates
-│   ├── usage/                   # Agent OS usage documentation
+│   ├── usage/                   # prAxIs OS usage documentation
 │   │   ├── creating-specs.md    # How to create specifications
 │   │   ├── operating-model.md   # AI-human collaboration model
 │   │   └── mcp-usage-guide.md   # MCP tool reference
@@ -477,7 +477,7 @@ praxis-os/
 - **`.cursorrules`**: Behavioral triggers and MCP routing (26 lines, language-agnostic)
 - **`universal/standards/`**: CS fundamentals (race conditions, test pyramid, API design)
 - **`universal/workflows/`**: Phase-gated workflow definitions
-- **`universal/usage/`**: Agent OS usage documentation
+- **`universal/usage/`**: prAxIs OS usage documentation
 
 ### What's Generated (Optional, Context-Aware)
 
@@ -493,7 +493,7 @@ praxis-os/
 
 ## 🔧 Development & Dogfooding
 
-**This repository dogfoods Agent OS - we use our own framework to develop itself.**
+**This repository dogfoods prAxIs OS - we use our own framework to develop itself.**
 
 ### True Dogfooding (No Shortcuts)
 
@@ -557,8 +557,8 @@ See `.praxis-os/standards/development/agent-os-architecture.md` for detailed exp
 2. **Adaptive**: Same standards, different language contexts
 3. **Intelligent**: RAG + sub-agents provide targeted guidance
 4. **Conversational**: Cursor agent handles installation and configuration
-5. **Isolated**: Each project owns its Agent OS installation
-6. **Versionable**: Project controls which Agent OS version to use
+5. **Isolated**: Each project owns its prAxIs OS installation
+6. **Versionable**: Project controls which prAxIs OS version to use
 7. **Customizable**: Generated standards can be tuned per project
 
 ## 🚀 Usage After Installation
@@ -585,10 +585,10 @@ Once installed in your project, use MCP tools:
 
 ## 📊 Maintenance Model
 
-### Updating Agent OS in Your Project
+### Updating prAxIs OS in Your Project
 
 ```
-"Update Agent OS to latest version"
+"Update prAxIs OS to latest version"
 
 Cursor agent will:
 1. Pull latest from this repo
@@ -647,7 +647,7 @@ ACT MODE
 <read_file>
 <path>.cursorrules</path>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [ ] Analyze key components and architecture
 - [ ] Review documentation and standards
@@ -663,7 +663,7 @@ ACT MODE
 **User:**
 
 [read_file for '.cursorrules'] Result:
-# Agent OS Enhanced
+# prAxIs OS
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -721,7 +721,7 @@ ACT MODE
 <read_file>
 <path>mcp_server/__main__.py</path>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [ ] Analyze key components and architecture
 - [ ] Review documentation and standards
@@ -738,7 +738,7 @@ ACT MODE
 
 [read_file for 'mcp_server/__main__.py'] Result:
 """
-Entry point for Agent OS MCP server when run as a module.
+Entry point for prAxIs OS MCP server when run as a module.
 
 Allows execution via:
     python -m mcp_server
@@ -848,7 +848,7 @@ ACT MODE
 <read_file>
 <path>mcp_server/rag_engine.py</path>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [x] Analyze key components and architecture (examining MCP server)
 - [ ] Review documentation and standards
@@ -865,7 +865,7 @@ ACT MODE
 
 [read_file for 'mcp_server/rag_engine.py'] Result:
 """
-Agent OS RAG Engine - LanceDB Implementation
+prAxIs OS RAG Engine - LanceDB Implementation
 Semantic search with metadata filtering and fallback mechanisms.
 
 Switched from ChromaDB to LanceDB for:
@@ -914,7 +914,7 @@ logger = logging.getLogger(__name__)
 
 class RAGEngine:
     """
-    Semantic search engine for Agent OS standards.
+    Semantic search engine for prAxIs OS standards.
 
     Features:
     - Vector similarity search via LanceDB
@@ -937,7 +937,7 @@ class RAGEngine:
 
         Args:
             index_path: Path to LanceDB index
-            standards_path: Path to Agent OS standards for grep fallback
+            standards_path: Path to prAxIs OS standards for grep fallback
             embedding_provider: Provider for embeddings ("local" default or "openai")
             embedding_model: Model to use for embeddings
             cache_ttl_seconds: Cache time-to-live in seconds (default: 1 hour)
@@ -967,7 +967,7 @@ class RAGEngine:
         try:
             logger.info("Initializing RAG engine with index at %s", index_path)
             self.db = lancedb.connect(str(index_path))
-            self.table = self.db.open_table("agent_os_standards")
+            self.table = self.db.open_table("praxis_os_standards")
             chunk_count = self.table.count_rows()
             logger.info("LanceDB table loaded: %s chunks", chunk_count)
             self.vector_search_available = True
@@ -985,7 +985,7 @@ class RAGEngine:
         filters: Optional[Dict] = None,
     ) -> SearchResult:
         """
-        Search Agent OS standards with intelligent retrieval.
+        Search prAxIs OS standards with intelligent retrieval.
 
         Steps:
         1. Check cache for recent identical query

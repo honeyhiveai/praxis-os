@@ -2,7 +2,7 @@
 
 **Purpose**: Minimal starting point for new AI-assisted workflows  
 **Time to Setup**: 1-2 hours for basic workflow  
-**Based On**: Agent OS Workflow Creation Guide v1.0
+**Based On**: prAxIs OS Workflow Creation Guide v1.0
 
 ---
 

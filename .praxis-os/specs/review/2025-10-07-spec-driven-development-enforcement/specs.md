@@ -109,7 +109,7 @@ See project-specific `.praxis-os/standards/baseline-quality.md`
 **Content Structure:**
 ```markdown
 # Baseline Quality Requirements
-## Project: Agent OS Enhanced
+## Project: prAxIs OS
 
 ### Testing Requirements
 - Unit tests for all new functions/classes

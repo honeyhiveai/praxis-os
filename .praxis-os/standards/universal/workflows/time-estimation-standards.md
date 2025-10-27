@@ -1,14 +1,14 @@
 # Time Estimation Standards: Dual Estimation (Human vs AI Agent)
 
-**Keywords for search**: time estimation, dual estimation, AI agent time, human baseline, wall clock duration, active time, leverage multiplier, task estimation, Agent OS estimation, how to estimate tasks, orchestration time, parallel leverage, estimation calibration, autonomous work, AI implementation time, task sizing
+**Keywords for search**: time estimation, dual estimation, AI agent time, human baseline, wall clock duration, active time, leverage multiplier, task estimation, prAxIs OS estimation, how to estimate tasks, orchestration time, parallel leverage, estimation calibration, autonomous work, AI implementation time, task sizing
 
-**This standard defines how to estimate task duration in Agent OS Enhanced using dual estimation that shows both human baseline and AI agent execution with human orchestration.**
+**This standard defines how to estimate task duration in prAxIs OS using dual estimation that shows both human baseline and AI agent execution with human orchestration.**
 
 ---
 
 ## 🎯 TL;DR - Dual Estimation Quick Reference
 
-**Core Principle:** Agent OS Enhanced requires TWO time estimates to demonstrate the 20-40x productivity multiplier.
+**Core Principle:** prAxIs OS requires TWO time estimates to demonstrate the 20-40x productivity multiplier.
 
 **Quick Formula:**
 ```
@@ -20,12 +20,12 @@
 **Task Format:**
 ```markdown
 - **Human Baseline:** 4 hours (M)
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 
 **Why Dual Estimation:**
 - Shows human time savings per task
-- Demonstrates Agent OS value proposition  
+- Demonstrates prAxIs OS value proposition  
 - Enables ROI calculations
 - Accounts for autonomous work advantage
 - Reveals parallel work multiplication (100-400x)
@@ -40,7 +40,7 @@
 
 ## ❓ Questions This Answers
 
-1. "How do I estimate tasks in Agent OS Enhanced?"
+1. "How do I estimate tasks in prAxIs OS?"
 2. "What's the difference between human baseline and AI agent estimates?"
 3. "How do I calculate leverage multiplier?"
 4. "What is wall clock duration vs human active time?"
@@ -65,7 +65,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 4. **Calculate leverage multiplier** (7-50x typical range)
 5. **Distinguish wall clock from active time** (prevents confusion)
 6. **Account for parallel work effects** (100-400x multiplication)
-7. **Enable ROI calculations** (justify Agent OS adoption)
+7. **Enable ROI calculations** (justify prAxIs OS adoption)
 8. **Set realistic expectations** (AI isn't always faster, but autonomous)
 
 ---
@@ -74,7 +74,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 
 **Without dual estimation:**
 
-- ❌ Humans don't see Agent OS value proposition
+- ❌ Humans don't see prAxIs OS value proposition
 - ❌ Time estimates mislead (looks same as traditional dev)
 - ❌ Can't calculate ROI or justify adoption
 - ❌ Confuse wall clock time with actual human effort
@@ -83,7 +83,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 - ❌ Can't communicate why 30KB spec created in 2 hours
 - ❌ Underestimate or overestimate orchestration needs
 
-**Result:** Agent OS Enhanced looks like traditional development with "AI helper" instead of showing the true 20-40x productivity gain from autonomous work.
+**Result:** prAxIs OS looks like traditional development with "AI helper" instead of showing the true 20-40x productivity gain from autonomous work.
 
 ---
 
@@ -188,7 +188,7 @@ Hour 0-4: ████████████████████ (Human wo
 Result: 4 hours human effort
 ```
 
-**Agent OS Enhanced (same 4-hour task):**
+**prAxIs OS (same 4-hour task):**
 ```
 Minute 0-5:     █ (Human: Give direction to AI)
 Hour 0-4:       [AI works autonomously - human does other work]
@@ -207,7 +207,7 @@ Result: 12 minutes human effort, 3h 48m saved
 Traditional: 4 hours human effort
 ├─────────────────────────────┤ (Human working)
 
-Agent OS: 12 minutes human effort
+prAxIs OS: 12 minutes human effort
 ├─┤                           ├┤ (5 min setup, 7 min review)
     └──[AI works for 4 hours]──┘ (Autonomous, human does other work)
 
@@ -267,7 +267,7 @@ Total human effort saved: 3 hours 43 minutes
 - 40 hours/week capacity
 - 10 tasks @ 4h each = 10 weeks
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 - Human orchestrates multiple AI agents
 - Each agent works autonomously in parallel
 - Human active time: 12 min per task
@@ -290,7 +290,7 @@ Traditional Human:
 - Must do serially (one at a time)
 - Result: 10 weeks to completion
 
-Agent OS Enhanced:
+prAxIs OS:
 - 100 tasks × 12 min = 20 hours human effort (0.5 weeks)
 - Can orchestrate all tasks in parallel
 - Wall clock: 4 hours (longest task)
@@ -334,7 +334,7 @@ Leverage:
 
 ## 🎯 Calibrating Your Estimates
 
-### If You're New to Agent OS Enhanced
+### If You're New to prAxIs OS
 
 **Start conservative:**
 - Use 1.2x multiplier (assume AI is same speed or slower)
@@ -392,7 +392,7 @@ Leverage:
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
@@ -442,7 +442,7 @@ Leverage:
 **Right:**
 ```markdown
 - **Human Baseline:** 4 hours (M)
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 
 ### 2. Confusing Wall Clock with Active Time
@@ -469,7 +469,7 @@ Total: 10 tasks × 4 hours = 40 hours
 **Complete:**
 ```markdown
 Human Baseline: 10 tasks × 4h = 40 hours
-Agent OS: 10 tasks × 12 min = 2 hours active (20x per task)
+prAxIs OS: 10 tasks × 12 min = 2 hours active (20x per task)
 Parallel: Can start all 10 simultaneously (100x effective)
 ```
 
@@ -492,7 +492,7 @@ Parallel: Can start all 10 simultaneously (100x effective)
 
 Use this to validate your time estimates:
 
-- [ ] Both human baseline and Agent OS estimates provided
+- [ ] Both human baseline and prAxIs OS estimates provided
 - [ ] Wall clock duration calculated using task type multiplier
 - [ ] Human active time calculated using orchestration percentage
 - [ ] Leverage multiplier shown (H ÷ A)
@@ -557,7 +557,7 @@ Can orchestrate: 20 similar tasks in parallel
 ```markdown
 - [ ] **Task 2.3**: Implement REST API endpoints
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Create GET /users, POST /users, PUT /users/:id, DELETE /users/:id
   - Add request validation using Pydantic models
@@ -593,7 +593,7 @@ Can orchestrate: 20 similar tasks in parallel
 → That's OK! Leverage remains high because of autonomous work. Track it for calibration.
 
 **Should I always use dual estimation?**
-→ Yes, for any Agent OS Enhanced workflow. It demonstrates the value proposition.
+→ Yes, for any prAxIs OS workflow. It demonstrates the value proposition.
 
 **Can I skip tracking actuals?**
 → You can, but your estimates won't improve. Recommended: track first 10 tasks.

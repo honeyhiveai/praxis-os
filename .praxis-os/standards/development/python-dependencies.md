@@ -56,7 +56,7 @@ honeyhive>=0.1.0         # ⚠️ Consider: ~=0.1.0
 #### Recommendations
 
 ```txt
-# Agent OS MCP/RAG Server Dependencies
+# prAxIs OS MCP/RAG Server Dependencies
 
 # Vector database for RAG (locked to 0.25.x for stability)
 lancedb~=0.25.0

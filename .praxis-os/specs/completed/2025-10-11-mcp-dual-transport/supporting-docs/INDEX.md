@@ -10,7 +10,7 @@
 
 **File:** `DESIGN-DOC-MCP-Dual-Transport.md`  
 **Type:** Comprehensive Design Document  
-**Purpose:** Complete architectural design for implementing dual-transport (stdio + HTTP) support in Agent OS MCP server, including validation results proving feasibility.
+**Purpose:** Complete architectural design for implementing dual-transport (stdio + HTTP) support in prAxIs OS MCP server, including validation results proving feasibility.
 
 **Relevance:** Requirements [H], Design [H], Implementation [H]
 

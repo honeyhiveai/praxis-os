@@ -37,7 +37,7 @@ ACT MODE
 **User:**
 
 [read_file for 'mcp_server/requirements.txt'] Result:
-# Agent OS MCP/RAG Server Dependencies
+# prAxIs OS MCP/RAG Server Dependencies
 # 100% AI-authored via human orchestration
 
 # Vector database for RAG (switched from ChromaDB to LanceDB for better filtering)

@@ -15,7 +15,7 @@ This document defines the requirements for implementing a config-driven speciali
 
 ### 1.2 Scope
 
-This feature will implement the Persona System component of Agent OS Enhanced, consisting of:
+This feature will implement the Persona System component of prAxIs OS, consisting of:
 - PersonaLauncher execution engine for running specialist agents
 - MCP tool integration for invoking specialists
 - Persona file format and loading mechanism
@@ -756,7 +756,7 @@ This feature will implement the Persona System component of Agent OS Enhanced, c
 - [ ] Documentation complete (architecture, API, persona creation guide)
 - [ ] End-to-end scenarios validated (see Story 1-4)
 - [ ] User acceptance testing passed
-- [ ] Production deployment completed (dogfooding in Agent OS development)
+- [ ] Production deployment completed (dogfooding in prAxIs OS development)
 
 ---
 

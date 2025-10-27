@@ -9,11 +9,11 @@
 ---
 
 ## Category 1: CORE PARADIGM (HIGH PRIORITY - Must Adopt)
-**These define HOW to use Agent OS effectively**
+**These define HOW to use prAxIs OS effectively**
 
 ### 1. `DETERMINISTIC-LLM-OUTPUT-METHODOLOGY.md` (42KB)
 **Content Assessment**:
-- ✅ **Paradigm Concept**: How to make LLM output deterministic using Agent OS principles
+- ✅ **Paradigm Concept**: How to make LLM output deterministic using prAxIs OS principles
 - ✅ **Universal Patterns**: Discovery-driven architecture, horizontal scaling, systematic frameworks
 - ⚠️  **Adaptation Needed**: Remove python-sdk specific examples, keep the methodology
 
@@ -28,7 +28,7 @@
 - ✅ **Universal Patterns**: Workflow construction, phase design, validation gates
 - ⚠️  **Adaptation Needed**: Generalize from python-sdk context
 
-**Why Critical**: Explains the engineering discipline behind Agent OS workflows.
+**Why Critical**: Explains the engineering discipline behind prAxIs OS workflows.
 
 **Recommendation**: **ADOPT** - Adapt for general usage
 
@@ -125,11 +125,11 @@
 
 ### 11. `specification-standards.md`
 **Content Assessment**:
-- ✅ **Paradigm Concept**: How to structure Agent OS specs (srd.md, specs.md, tasks.md)
+- ✅ **Paradigm Concept**: How to structure prAxIs OS specs (srd.md, specs.md, tasks.md)
 - ✅ **Universal Structure**: Standard spec file organization
 - ⚠️  **Minor Update**: Title says "HoneyHive Python SDK" but content is universal
 
-**Why Critical**: Defines the spec structure that all Agent OS projects use.
+**Why Critical**: Defines the spec structure that all prAxIs OS projects use.
 
 **Recommendation**: **ADOPT** - Remove SDK reference from title
 
@@ -140,7 +140,7 @@
 - ⚠️  **Adaptation Needed**: References to `main` vs `complete-refactor` branches specific to SDK
 - ✅ **Universal Patterns**: Conventional commits, branch lifecycle, PR workflow
 
-**Why Critical**: Maintains clean git history across Agent OS projects.
+**Why Critical**: Maintains clean git history across prAxIs OS projects.
 
 **Recommendation**: **ADOPT** - Generalize branch strategy
 

@@ -13,7 +13,7 @@
 **Type:** Architecture Design Document  
 **Date:** 2025-10-12  
 **Status:** Design Complete  
-**Authors:** Research Session Analysis (Aider architecture study, Agent OS dogfooding)  
+**Authors:** Research Session Analysis (Aider architecture study, prAxIs OS dogfooding)  
 **Location:** `supporting-docs/ARCHITECTURE-Agent-OS-Persona-And-Workflow-System.md`  
 **Mode:** Embedded (full copy in supporting-docs/)
 

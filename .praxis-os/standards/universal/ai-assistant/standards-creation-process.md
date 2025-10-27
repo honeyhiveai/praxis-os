@@ -1,6 +1,6 @@
 # Standards Creation Process
 
-**Standard for creating, structuring, and maintaining standards in Agent OS Enhanced.**
+**Standard for creating, structuring, and maintaining standards in prAxIs OS.**
 
 ---
 
@@ -326,7 +326,7 @@ Complete workflow from identifying a gap through validation and publication.
 - Is this knowledge that agents need to query?
 
 **Example**: 
-- "Agents keep breaking out of Agent OS patterns"
+- "Agents keep breaking out of prAxIs OS patterns"
 - "Content isn't discoverable through RAG"
 - "Code quality is inconsistent"
 
@@ -394,7 +394,7 @@ search_standards("avoid generic questions use unique values")
 3. **Front-load TL;DR** with high keyword density
 
 4. **Use specific headers** that match how agents think
-   - ✅ "How to Build Features in Agent OS"
+   - ✅ "How to Build Features in prAxIs OS"
    - ❌ "Usage" or "Examples"
 
 5. **Test from multiple angles** (Step 6)
@@ -673,7 +673,7 @@ search_standards("[topic] anti-patterns")
 
 ## What Examples of Good Standards Exist?
 
-Learn from these exemplar Agent OS standards that demonstrate best practices.
+Learn from these exemplar prAxIs OS standards that demonstrate best practices.
 
 Study these as templates:
 
@@ -757,7 +757,7 @@ Track effectiveness:
 → Ask: "Is this HOW to work (standard) or WHAT to build (spec)?"
 
 **Can I create a standard without formal approval?**
-→ Yes! Agent OS is dogfooded. Experience a need → Create standard → Test it → Ship it.
+→ Yes! prAxIs OS is dogfooded. Experience a need → Create standard → Test it → Ship it.
 
 **What if my standard conflicts with an existing standard?**
 → Query to find existing: `search_standards("[topic]")`. Update existing or document why new one is needed.
@@ -808,7 +808,7 @@ Track effectiveness:
 
 **Usage:**
 - `usage/creating-specs.md` - Spec creation guide → `search_standards("creating specs")`
-- `usage/operating-model.md` - Agent OS principles → `search_standards("operating model")`
+- `usage/operating-model.md` - prAxIs OS principles → `search_standards("operating model")`
 
 ---
 

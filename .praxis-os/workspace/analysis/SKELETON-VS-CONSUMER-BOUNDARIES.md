@@ -1,5 +1,5 @@
 # Skeleton vs Consumer Project Boundaries
-## What Belongs in Agent OS Skeleton vs What Projects Define
+## What Belongs in prAxIs OS Skeleton vs What Projects Define
 
 **Date**: October 9, 2025  
 **Core Question**: Where does the paradigm end and project-specific implementation begin?
@@ -189,7 +189,7 @@ See your project's `.praxis-os/standards/development/` for project-specific stan
 ## Pre-Task Compliance Checklist
 
 ### Before Any Code Generation
-- [ ] Read relevant Agent OS standards in `.praxis-os/standards/`
+- [ ] Read relevant prAxIs OS standards in `.praxis-os/standards/`
 - [ ] Check project-specific rules (README, .cursorrules, contribution docs)
 - [ ] Verify established patterns in existing codebase
 - [ ] Confirm no existing solutions before creating new ones
@@ -357,7 +357,7 @@ Projects should create `.praxis-os/standards/development/compliance-addendum.md`
 
 **Content**:
 ```markdown
-# Agent OS Enhanced - Compliance Addendum
+# prAxIs OS - Compliance Addendum
 
 ## Project-Specific Mandatory Rules
 
@@ -702,7 +702,7 @@ Projects should define in `.praxis-os/standards/development/validation-commands.
 
 **Content**:
 ```markdown
-# Agent OS Enhanced - Validation Commands
+# prAxIs OS - Validation Commands
 
 ## Environment Validation
 
@@ -910,11 +910,11 @@ cd ..
 
 ---
 
-## 📝 Implementation for Agent OS Enhanced
+## 📝 Implementation for prAxIs OS
 
 ### As the Skeleton Project
 
-**Agent OS Enhanced should have**:
+**prAxIs OS should have**:
 
 1. **Universal standards** (85-95% universal)
    - Location: `universal/ai-assistant/`
@@ -923,16 +923,16 @@ cd ..
 2. **Templates/Examples** (60-70% universal)
    - Location: `universal/examples/python/`
    - These are REFERENCED, not copied
-   - Show how Agent OS Enhanced implements the paradigm
+   - Show how prAxIs OS implements the paradigm
 
 3. **Local project standards** (project-specific)
    - Location: `.praxis-os/standards/development/`
-   - Agent OS Enhanced's own implementation
+   - prAxIs OS's own implementation
    - Serves as example for other projects
 
 ### As a Consumer Project
 
-**When someone installs Agent OS Enhanced, they get**:
+**When someone installs prAxIs OS, they get**:
 
 1. **Universal standards copied** to their `.praxis-os/standards/ai-assistant/`
    - Paradigm-level guidance
@@ -951,7 +951,7 @@ cd ..
 
 ## 🔄 The Authorship vs Consumption Distinction
 
-### When Working ON Agent OS Enhanced (Authorship Mode)
+### When Working ON prAxIs OS (Authorship Mode)
 
 **You CAN**:
 - Read universal standards directly from `universal/`
@@ -959,7 +959,7 @@ cd ..
 - Create new universal standards
 - Update templates
 
-### When Using Agent OS Enhanced (Consumption Mode)
+### When Using prAxIs OS (Consumption Mode)
 
 **You SHOULD**:
 - Read standards from `.praxis-os/standards/` (copied from universal)
@@ -983,8 +983,8 @@ Based on this analysis, we should create:
 5. `universal/examples/python/python-quick-reference-template.md`
 6. `universal/examples/python/python-error-patterns-template.md`
 
-### Phase 3: Agent OS Enhanced's Own Standards (Ongoing)
-7. Refine `.praxis-os/standards/development/` with Agent OS Enhanced specifics
+### Phase 3: prAxIs OS's Own Standards (Ongoing)
+7. Refine `.praxis-os/standards/development/` with prAxIs OS specifics
 
 **Ready to proceed with Phase 1?**
 

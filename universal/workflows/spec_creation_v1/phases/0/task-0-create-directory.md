@@ -56,7 +56,7 @@ From the workflow options and project context, determine the descriptive name:
 Use the `current_date` tool to ensure correct date:
 
 ```python
-# AI should call: mcp_agent-os-rag_current_date()
+# AI should call: mcp_praxis-os-rag_current_date()
 # Returns: {"date": "YYYY-MM-DD", ...}
 ```
 

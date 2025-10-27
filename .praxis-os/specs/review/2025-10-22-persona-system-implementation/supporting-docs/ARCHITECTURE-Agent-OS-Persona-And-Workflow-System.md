@@ -1,15 +1,15 @@
-# Agent OS Enhanced: Persona & Workflow System Architecture
+# prAxIs OS: Persona & Workflow System Architecture
 
 **Version:** 1.0.0  
 **Date:** 2025-10-12  
 **Status:** Design Document  
-**Authors:** Research Session Analysis (Aider architecture study, Agent OS dogfooding)
+**Authors:** Research Session Analysis (Aider architecture study, prAxIs OS dogfooding)
 
 ---
 
 ## Executive Summary
 
-This document defines the architecture for Agent OS Enhanced's persona and workflow system, enabling config-driven specialist agents that discover structured processes dynamically through RAG-based semantic search.
+This document defines the architecture for prAxIs OS's persona and workflow system, enabling config-driven specialist agents that discover structured processes dynamically through RAG-based semantic search.
 
 **Key Principles:**
 - Config-driven over code-driven
@@ -97,7 +97,7 @@ This document defines the architecture for Agent OS Enhanced's persona and workf
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
-│                    Agent OS Architecture                      │
+│                    prAxIs OS Architecture                      │
 ├───────────────────────────────────────────────────────────────┤
 │                                                               │
 │  ┌─────────────────────────────────────────────────────┐    │
@@ -163,7 +163,7 @@ class WorkflowEngine:
 #### RAGEngine
 ```python
 class RAGEngine:
-    """Semantic search over Agent OS knowledge base."""
+    """Semantic search over prAxIs OS knowledge base."""
     
     def search(self, query: str, n_results: int = 5) -> SearchResult
     def index(self, documents: List[str]) -> None
@@ -189,7 +189,7 @@ class RAGEngine:
 ```markdown
 # Persona Name
 
-You are a [Domain] Specialist in Agent OS Enhanced.
+You are a [Domain] Specialist in prAxIs OS.
 
 ## Your Approach
 
@@ -502,7 +502,7 @@ create_workflow(
 
 **Problem:** Research says complex tools cause param errors.
 
-**Agent OS Solution:** Self-teaching tools.
+**prAxIs OS Solution:** Self-teaching tools.
 
 ```python
 @mcp.tool()
@@ -729,7 +729,7 @@ search_standards("database connection optimization")
 
 ```
 .praxis-os/standards/
-├── universal/              (Shipped with Agent OS)
+├── universal/              (Shipped with prAxIs OS)
 │   ├── concurrency/
 │   ├── testing/
 │   ├── architecture/
@@ -1129,10 +1129,10 @@ my-project/
 └── src/
 
 Usage:
-- Developer bootstraps Agent OS locally
+- Developer bootstraps prAxIs OS locally
 - Uses personas/workflows for productivity
 - Commits outputs (code, specs), not tooling
-- Other devs don't need Agent OS
+- Other devs don't need prAxIs OS
 ```
 
 #### Pattern 2: Team Adoption (Power Users)
@@ -1144,19 +1144,19 @@ team-project/
 │   ├── personas/           ← Team-specific specialists
 │   ├── workflows/          ← Team-specific processes
 │   └── standards/
-│       ├── universal/      ← From Agent OS
+│       ├── universal/      ← From prAxIs OS
 │       └── project/        ← Team knowledge
 ├── .cursorrules            ← Committed
 └── src/
 
 Usage:
-- Whole team uses Agent OS
+- Whole team uses prAxIs OS
 - Shared personas/workflows/standards
 - Knowledge compounds across team
 - New members inherit accumulated wisdom
 ```
 
-#### Pattern 3: Framework Development (Agent OS Itself)
+#### Pattern 3: Framework Development (prAxIs OS Itself)
 ```
 praxis-os/
 
@@ -1171,7 +1171,7 @@ praxis-os/
 │   └── cache/
 
 Usage:
-- Dogfooding - use Agent OS to build Agent OS
+- Dogfooding - use prAxIs OS to build prAxIs OS
 - True testing of installation process
 - No shortcuts, feel all pain points
 ```
@@ -1182,7 +1182,7 @@ Usage:
 
 ```
 User in ANY project:
-"Install Agent OS from github.com/honeyhiveai/praxis-os"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 
 Cursor agent:
 1. Reads: installation/00-START.md
@@ -1217,7 +1217,7 @@ Result:
 **Workflows:**
 - `.praxis-os/workflows/test-generation-js-ts/` (9-phase example)
 - `.praxis-os/workflows/spec_creation_v1/` (Spec creation)
-- `.praxis-os/workflows/agent_os_upgrade_v1/` (Self-upgrade)
+- `.praxis-os/workflows/praxis_os_upgrade_v1/` (Self-upgrade)
 
 **Implementation:**
 - `mcp_server/workflow_engine.py` (1270 lines)
@@ -1231,7 +1231,7 @@ Result:
 - ~100 lines of LLM client code (REST wrapper)
 - Prompts are configuration, not code
 
-**From Agent OS Dogfooding:**
+**From prAxIs OS Dogfooding:**
 - Config-driven beats code-driven
 - Discovery beats hardcoding
 - RAG enables self-teaching tools
@@ -1344,8 +1344,8 @@ Result:
 ### For Developers
 
 ```bash
-# Install Agent OS in your project
-"Install Agent OS from github.com/honeyhiveai/praxis-os"
+# Install prAxIs OS in your project
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 
 # Use a specialist
 "Use database specialist to design auth schema"
@@ -1369,13 +1369,13 @@ create_workflow(
 ### For Teams
 
 ```bash
-# Commit Agent OS to project
+# Commit prAxIs OS to project
 git add .praxis-os/
-git commit -m "Add Agent OS with team personas"
+git commit -m "Add prAxIs OS with team personas"
 
 # Team members pull and use immediately
 git pull
-# Agent OS ready!
+# prAxIs OS ready!
 
 # Build team knowledge
 # Specialists automatically write to .praxis-os/standards/project/

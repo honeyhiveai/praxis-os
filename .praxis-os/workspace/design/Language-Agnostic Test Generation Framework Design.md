@@ -2,7 +2,7 @@
 
 **Document Version:** 1.0  
 **Date:** October 9, 2025  
-**Author:** Agent OS Framework Design  
+**Author:** prAxIs OS Framework Design  
 **Status:** Design Specification
 
 ---

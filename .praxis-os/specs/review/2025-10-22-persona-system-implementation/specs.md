@@ -12,7 +12,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Agent OS Enhanced                         │
+│                    prAxIs OS                         │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌─────────────────────────────────────────────────────┐   │
@@ -100,7 +100,7 @@
 - **JSON/YAML Configuration:** Structured data format
   - **Why not:** Less human-readable than markdown
   - **Why not:** Doesn't support rich documentation/examples
-  - **Why not:** Markdown already used throughout Agent OS
+  - **Why not:** Markdown already used throughout prAxIs OS
 
 **Trade-offs:**
 - **Pros:** 
@@ -1026,7 +1026,7 @@ async def invoke_specialist(
 ```json
 {
   "name": "write_standard",
-  "description": "Write a standard document to the Agent OS knowledge base. Creates markdown file in .praxis-os/standards/ directory for future discovery via search_standards().",
+  "description": "Write a standard document to the prAxIs OS knowledge base. Creates markdown file in .praxis-os/standards/ directory for future discovery via search_standards().",
   "inputSchema": {
     "type": "object",
     "properties": {
@@ -1205,7 +1205,7 @@ Required Sections: Identity, Approach, Tools, Decision Protocol
 **Standards Files:**
 ```
 .praxis-os/standards/
-├── universal/           # Shipped with Agent OS
+├── universal/           # Shipped with prAxIs OS
 │   ├── concurrency/
 │   ├── testing/
 │   └── architecture/
@@ -1245,7 +1245,7 @@ Example: {
 ```markdown
 # {Domain} Specialist
 
-You are a {Domain} Specialist in Agent OS Enhanced.
+You are a {Domain} Specialist in prAxIs OS.
 
 {Brief role description}
 

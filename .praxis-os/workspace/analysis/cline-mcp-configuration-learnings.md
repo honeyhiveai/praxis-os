@@ -2,7 +2,7 @@
 
 **Date:** October 24, 2025  
 **Status:** Analysis/Research (to be formalized into installation docs)  
-**Context:** Hands-on investigation of Cline MCP configuration for Agent OS Enhanced
+**Context:** Hands-on investigation of Cline MCP configuration for prAxIs OS
 
 ---
 
@@ -161,7 +161,7 @@ Project B
 
 ### The Problem
 
-If multiple projects have Agent OS Enhanced installed:
+If multiple projects have prAxIs OS installed:
 ```
 /Users/josh/project-a/.praxis-os/  (port 4242)
 /Users/josh/project-b/.praxis-os/  (port 4243)
@@ -313,8 +313,8 @@ def update_cline_config(project_root: Path, url: str) -> None:
 ### Multi-Project Scenario
 
 **User has multiple projects:**
-1. Project A (Agent OS Enhanced installed)
-2. Project B (Agent OS Enhanced installed)
+1. Project A (prAxIs OS installed)
+2. Project B (prAxIs OS installed)
 3. Project C (No Agent OS)
 
 **Global Config State:**
@@ -413,7 +413,7 @@ def main():
 **Impact:** When switching projects, all MCP servers remain enabled
 
 **Workaround:**
-- Accept that multiple Agent OS Enhanced servers can be active
+- Accept that multiple prAxIs OS servers can be active
 - Each server is isolated by port number
 - Cline will use whichever server is currently accessible
 
@@ -553,7 +553,7 @@ python3 .praxis-os/bin/update-cline-mcp.py
 ## Next Steps (For Installation Docs)
 
 1. **Update `update-cline-mcp.py`** to use project-scoped server names
-2. **Test multi-project scenario** with 2+ Agent OS installations
+2. **Test multi-project scenario** with 2+ prAxIs OS installations
 3. **Document platform-specific paths** for Linux/Windows
 4. **Create troubleshooting guide** for common config issues
 5. **Add validation** to check server name uniqueness

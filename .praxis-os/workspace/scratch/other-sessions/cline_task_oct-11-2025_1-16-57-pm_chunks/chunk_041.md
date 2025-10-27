@@ -416,7 +416,7 @@ ACT MODE
 
 [read_file for 'mcp_server/__main__.py'] Result:
 """
-Entry point for Agent OS MCP server when run as a module.
+Entry point for prAxIs OS MCP server when run as a module.
 
 Allows execution via:
     python -m mcp_server --transport dual
@@ -441,7 +441,7 @@ from .transport_manager import TransportManager
 logger = logging.getLogger(__name__)
 
 
-def find_agent_os_directory() -> Path:
+def find_praxis_os_directory() -> Path:
     """
     Find .praxis-os directory in project.
     
@@ -552,7 +552,7 @@ Examples:
     
     try:
         # Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
         
         # Load and validate configuration

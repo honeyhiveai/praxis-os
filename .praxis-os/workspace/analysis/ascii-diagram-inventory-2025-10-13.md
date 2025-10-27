@@ -1,7 +1,7 @@
 # ASCII Diagram Inventory - Conversion to React Components
 
 **Date:** 2025-10-13
-**Purpose:** Inventory of all ASCII diagrams in Agent OS Enhanced documentation that need to be converted to React components per `documentation-diagrams.md` standard.
+**Purpose:** Inventory of all ASCII diagrams in prAxIs OS documentation that need to be converted to React components per `documentation-diagrams.md` standard.
 
 ---
 
@@ -113,7 +113,7 @@
 │   │       ├── python-concurrency.md  # (if Python project)
 │   │       ├── python-testing.md
 │   │       └── python-architecture.md
-│   ├── usage/                    # How to use Agent OS Enhanced
+│   ├── usage/                    # How to use prAxIs OS
 │   ├── workflows/                # Phase-gated workflows
 │   │   ├── spec_creation_v1/
 │   │   └── spec_execution_v1/
@@ -221,7 +221,7 @@
 
 **1. `explanation/architecture.md` - MCP System Architecture (Line 53-84)**
 - **Why:** This is a complex system architecture diagram showing relationships between components
-- **Impact:** Central to understanding Agent OS Enhanced architecture
+- **Impact:** Central to understanding prAxIs OS architecture
 - **Complexity:** High (nested boxes, arrows, multiple layers)
 - **Existing Similar Component:** See `StandardsFlowDiagram.tsx` for reference pattern
 - **New Component:** `MCPArchitectureDiagram.tsx`

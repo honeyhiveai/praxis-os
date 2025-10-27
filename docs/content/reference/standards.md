@@ -28,8 +28,8 @@ Standards for AI agent behavior and decision-making.
 | Standard | Purpose |
 |----------|---------|
 | [Agent Decision Protocol](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/agent-decision-protocol.md) | Query-first approach, multi-angle thinking, probabilistic behavior management |
-| [Agent OS Orientation](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/AGENT-OS-ORIENTATION.md) | 8 mandatory bootstrap queries for AI agents |
-| [Agent OS Development Process](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/agent-os-development-process.md) | Systematic development workflow patterns |
+| [prAxIs OS Orientation](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/AGENT-OS-ORIENTATION.md) | 8 mandatory bootstrap queries for AI agents |
+| [prAxIs OS Development Process](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/praxis-os-development-process.md) | Systematic development workflow patterns |
 | [Analysis Methodology](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/analysis-methodology.md) | Problem analysis and decomposition strategies |
 | [Commit Protocol](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/commit-protocol.md) | Commit message standards and git workflows |
 | [Compliance Protocol](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/ai-assistant/compliance-protocol.md) | Ensuring adherence to project standards |

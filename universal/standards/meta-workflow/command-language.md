@@ -530,7 +530,7 @@ When done, move to the next phase.
 - `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
 
 **AI Assistant:**
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core AI behavior → `search_standards("Agent OS orientation")`
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core AI behavior → `search_standards("prAxIs OS orientation")`
 
 ---
 

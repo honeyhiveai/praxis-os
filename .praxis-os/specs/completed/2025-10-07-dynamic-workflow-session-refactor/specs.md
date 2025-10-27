@@ -370,7 +370,7 @@ class SourceParser(ABC):
 
 class SpecTasksParser(SourceParser):
     """
-    Parser for Agent OS spec tasks.md files.
+    Parser for prAxIs OS spec tasks.md files.
     
     Expected Format:
     ### Phase N: Name

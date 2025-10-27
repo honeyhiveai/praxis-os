@@ -1,9 +1,9 @@
-# Agent OS Workflow Creation Guide
+# prAxIs OS Workflow Creation Guide
 
 **Version**: 1.0  
 **Purpose**: Portable methodology for creating deterministic, high-quality AI-assisted workflows  
 **Transferability**: Apply to any repository or domain requiring systematic AI execution  
-**Source**: Distilled from python-sdk Agent OS methodologies and V3 workflow success patterns
+**Source**: Distilled from python-sdk prAxIs OS methodologies and V3 workflow success patterns
 
 ---
 

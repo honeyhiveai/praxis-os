@@ -95,13 +95,13 @@
 
 ### Task 1.4: Code Review and Refactoring
 
-**Description:** Review implementation for code quality, style, and adherence to Agent OS conventions.
+**Description:** Review implementation for code quality, style, and adherence to prAxIs OS conventions.
 
 **Requirements Satisfied:** NFR-M2
 
 **Acceptance Criteria:**
 - [ ] Code follows PEP 8 style guidelines
-- [ ] Follows existing Agent OS Python conventions
+- [ ] Follows existing prAxIs OS Python conventions
 - [ ] No code duplication
 - [ ] Clear variable and function names
 - [ ] Comments explain non-obvious decisions

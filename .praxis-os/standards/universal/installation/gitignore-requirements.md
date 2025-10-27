@@ -1,18 +1,18 @@
-# Agent OS .gitignore Requirements
+# prAxIs OS .gitignore Requirements
 
-**Purpose**: Canonical list of required .gitignore entries for Agent OS installations
+**Purpose**: Canonical list of required .gitignore entries for prAxIs OS installations
 
 ---
 
 ## 🎯 TL;DR - .gitignore Requirements Quick Reference
 
-**Keywords for search**: gitignore requirements, Agent OS gitignore, what to ignore, .gitignore patterns, ephemeral content, do not commit, version control, .praxis-os cache, vector index
+**Keywords for search**: gitignore requirements, prAxIs OS gitignore, what to ignore, .gitignore patterns, ephemeral content, do not commit, version control, .praxis-os cache, vector index
 
 **Core Principle:** Ignore ephemeral, machine-specific content. Commit everything else.
 
 **MANDATORY .gitignore Entries:**
 ```gitignore
-# Agent OS - Ephemeral content (do not commit)
+# prAxIs OS - Ephemeral content (do not commit)
 .praxis-os/.cache/          # ~1.3GB - Vector index
 .praxis-os/venv/            # ~100MB - Python virtual environment
 .praxis-os/mcp_server/__pycache__/  # ~5MB - Python bytecode
@@ -52,7 +52,7 @@ git rm --cached -r .praxis-os/.cache/
 ```
 
 **Installation Validation:**
-- Run `git status` after Agent OS install
+- Run `git status` after prAxIs OS install
 - Should NOT see `.praxis-os/.cache/` or `.praxis-os/venv/`
 - If you do → .gitignore entries missing or incorrect
 
@@ -60,9 +60,9 @@ git rm --cached -r .praxis-os/.cache/
 
 ## ❓ Questions This Answers
 
-1. "What should I add to .gitignore for Agent OS?"
-2. "Why is my repo so large after Agent OS install?"
-3. "What Agent OS files should be committed?"
+1. "What should I add to .gitignore for prAxIs OS?"
+2. "Why is my repo so large after prAxIs OS install?"
+3. "What prAxIs OS files should be committed?"
 4. "How to ignore .praxis-os cache?"
 5. "What are required gitignore entries?"
 6. "Why ignore .praxis-os/venv/?"
@@ -75,10 +75,10 @@ git rm --cached -r .praxis-os/.cache/
 
 ## Required Entries
 
-All Agent OS installations MUST include these entries in the project's `.gitignore`:
+All prAxIs OS installations MUST include these entries in the project's `.gitignore`:
 
 ```gitignore
-# Agent OS - Ephemeral content (do not commit)
+# prAxIs OS - Ephemeral content (do not commit)
 .praxis-os/.cache/
 .praxis-os/venv/
 .praxis-os/mcp_server/__pycache__/
@@ -107,11 +107,11 @@ Understanding the purpose and impact of each pattern.
 
 ---
 
-## What Agent OS Files SHOULD Be Committed?
+## What prAxIs OS Files SHOULD Be Committed?
 
 Content that should be tracked in version control for team collaboration.
 
-Agent OS content that should be tracked in version control:
+prAxIs OS content that should be tracked in version control:
 
 | Directory | Purpose | Commit? |
 |-----------|---------|---------|
@@ -127,12 +127,12 @@ Agent OS content that should be tracked in version control:
 
 ## What Is the Correct .gitignore Format?
 
-Standard format for adding Agent OS entries to .gitignore.
+Standard format for adding prAxIs OS entries to .gitignore.
 
 The entries should be added as a single section:
 
 ```gitignore
-# Agent OS - Ephemeral content (do not commit)
+# prAxIs OS - Ephemeral content (do not commit)
 .praxis-os/.cache/
 .praxis-os/venv/
 .praxis-os/mcp_server/__pycache__/
@@ -142,7 +142,7 @@ The entries should be added as a single section:
 ```
 
 **Rules**:
-- Section header: `# Agent OS - Ephemeral content (do not commit)`
+- Section header: `# prAxIs OS - Ephemeral content (do not commit)`
 - One pattern per line
 - Blank line before and after section (for readability)
 - Append to existing `.gitignore` if present
@@ -234,11 +234,11 @@ To add a new required entry:
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Agent OS installation** | `search_standards("gitignore requirements")` |
-| **Large repo after install** | `search_standards("why is repo large after Agent OS")` |
-| **What to commit** | `search_standards("what Agent OS files to commit")` |
+| **prAxIs OS installation** | `search_standards("gitignore requirements")` |
+| **Large repo after install** | `search_standards("why is repo large after prAxIs OS")` |
+| **What to commit** | `search_standards("what prAxIs OS files to commit")` |
 | **Cache in git status** | `search_standards("ignore agent-os cache")` |
-| **Setup .gitignore** | `search_standards("Agent OS gitignore")` |
+| **Setup .gitignore** | `search_standards("prAxIs OS gitignore")` |
 | **Accidentally committed cache** | `search_standards("remove agent-os cache from git")` |
 | **Writing workflows** | `search_standards("gitignore for workflows")` |
 
@@ -249,20 +249,20 @@ To add a new required entry:
 **Query workflow for .gitignore setup:**
 
 1. **Start with requirements** → `search_standards("gitignore requirements")` (this document)
-2. **Learn update procedures** → `search_standards("Agent OS update")` → `standards/installation/update-procedures.md`
+2. **Learn update procedures** → `search_standards("prAxIs OS update")` → `standards/installation/update-procedures.md`
 3. **Understand git safety** → `search_standards("git safety rules")` → `standards/ai-safety/git-safety-rules.md`
 
 **By Category:**
 
 **Installation:**
-- `standards/installation/update-procedures.md` - Update process → `search_standards("Agent OS update")`
+- `standards/installation/update-procedures.md` - Update process → `search_standards("prAxIs OS update")`
 
 **AI Safety:**
 - `standards/ai-safety/git-safety-rules.md` - Git operations → `search_standards("git safety rules")`
 - `standards/ai-safety/credential-file-protection.md` - File protection → `search_standards("credential file protection")`
 
 **Workflows:**
-- `workflows/agent_os_upgrade_v1/` - Automated upgrade → `search_standards("upgrade workflow")`
+- `workflows/praxis_os_upgrade_v1/` - Automated upgrade → `search_standards("upgrade workflow")`
 
 ---
 

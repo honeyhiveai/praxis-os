@@ -1,6 +1,6 @@
 # Time Estimation Standards: Dual Estimation (Human vs AI Agent)
 
-**Keywords for search**: time estimation, dual estimation, AI agent time, human baseline, wall clock duration, active time, leverage multiplier, task estimation, Agent OS estimation, how to estimate tasks, orchestration time, parallel leverage, estimation calibration, autonomous work, AI implementation time, task sizing
+**Keywords for search**: time estimation, dual estimation, AI agent time, human baseline, wall clock duration, active time, leverage multiplier, task estimation, prAxIs OS estimation, how to estimate tasks, orchestration time, parallel leverage, estimation calibration, autonomous work, AI implementation time, task sizing
 
 **This standard defines how to estimate task duration in prAxIs OS using dual estimation that shows both human baseline and AI agent execution with human orchestration.**
 
@@ -20,12 +20,12 @@
 **Task Format:**
 ```markdown
 - **Human Baseline:** 4 hours (M)
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 
 **Why Dual Estimation:**
 - Shows human time savings per task
-- Demonstrates Agent OS value proposition  
+- Demonstrates prAxIs OS value proposition  
 - Enables ROI calculations
 - Accounts for autonomous work advantage
 - Reveals parallel work multiplication (100-400x)
@@ -65,7 +65,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 4. **Calculate leverage multiplier** (7-50x typical range)
 5. **Distinguish wall clock from active time** (prevents confusion)
 6. **Account for parallel work effects** (100-400x multiplication)
-7. **Enable ROI calculations** (justify Agent OS adoption)
+7. **Enable ROI calculations** (justify prAxIs OS adoption)
 8. **Set realistic expectations** (AI isn't always faster, but autonomous)
 
 ---
@@ -74,7 +74,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 
 **Without dual estimation:**
 
-- ❌ Humans don't see Agent OS value proposition
+- ❌ Humans don't see prAxIs OS value proposition
 - ❌ Time estimates mislead (looks same as traditional dev)
 - ❌ Can't calculate ROI or justify adoption
 - ❌ Confuse wall clock time with actual human effort
@@ -207,7 +207,7 @@ Result: 12 minutes human effort, 3h 48m saved
 Traditional: 4 hours human effort
 ├─────────────────────────────┤ (Human working)
 
-Agent OS: 12 minutes human effort
+prAxIs OS: 12 minutes human effort
 ├─┤                           ├┤ (5 min setup, 7 min review)
     └──[AI works for 4 hours]──┘ (Autonomous, human does other work)
 
@@ -392,7 +392,7 @@ Leverage:
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
@@ -442,7 +442,7 @@ Leverage:
 **Right:**
 ```markdown
 - **Human Baseline:** 4 hours (M)
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 
 ### 2. Confusing Wall Clock with Active Time
@@ -469,7 +469,7 @@ Total: 10 tasks × 4 hours = 40 hours
 **Complete:**
 ```markdown
 Human Baseline: 10 tasks × 4h = 40 hours
-Agent OS: 10 tasks × 12 min = 2 hours active (20x per task)
+prAxIs OS: 10 tasks × 12 min = 2 hours active (20x per task)
 Parallel: Can start all 10 simultaneously (100x effective)
 ```
 
@@ -492,7 +492,7 @@ Parallel: Can start all 10 simultaneously (100x effective)
 
 Use this to validate your time estimates:
 
-- [ ] Both human baseline and Agent OS estimates provided
+- [ ] Both human baseline and prAxIs OS estimates provided
 - [ ] Wall clock duration calculated using task type multiplier
 - [ ] Human active time calculated using orchestration percentage
 - [ ] Leverage multiplier shown (H ÷ A)
@@ -557,7 +557,7 @@ Can orchestrate: 20 similar tasks in parallel
 ```markdown
 - [ ] **Task 2.3**: Implement REST API endpoints
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Create GET /users, POST /users, PUT /users/:id, DELETE /users/:id
   - Add request validation using Pydantic models

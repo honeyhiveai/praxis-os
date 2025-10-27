@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This specification addresses a critical architectural gap in the Agent OS workflow engine: the inability to enforce workflow patterns for dynamically-generated phases. The current implementation successfully guides AI agents through Phase 0 of workflows, but loses enforcement at phase boundaries when content is dynamically sourced (e.g., from spec `tasks.md` files).
+This specification addresses a critical architectural gap in the prAxIs OS workflow engine: the inability to enforce workflow patterns for dynamically-generated phases. The current implementation successfully guides AI agents through Phase 0 of workflows, but loses enforcement at phase boundaries when content is dynamically sourced (e.g., from spec `tasks.md` files).
 
 Additionally, this spec refactors the workflow engine from a stateless service pattern to a session-scoped object pattern, improving code quality, testability, and enabling natural implementation of dynamic workflow features.
 

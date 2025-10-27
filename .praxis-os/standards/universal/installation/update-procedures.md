@@ -1,19 +1,19 @@
-# Agent OS Update Standards (Discovery Guide)
+# prAxIs OS Update Standards (Discovery Guide)
 
-**Guide for discovering and understanding Agent OS updates**
+**Guide for discovering and understanding prAxIs OS updates**
 
 ---
 
-## 🚨 Agent OS Update Quick Reference (TL;DR)
+## 🚨 prAxIs OS Update Quick Reference (TL;DR)
 
 **Keywords for search**: agent os update, upgrade agent os, how to update agent os, agent os installation update, update standards workflows, sync from universal, agent os upgrade workflow, update procedure
 
 **Questions This Answers:**
-- "How do I update Agent OS?"
-- "User wants to upgrade Agent OS"
+- "How do I update prAxIs OS?"
+- "User wants to upgrade prAxIs OS"
 - "How do I get the latest standards and workflows?"
 - "How do I safely update without breaking custom content?"
-- "When should I update Agent OS?"
+- "When should I update prAxIs OS?"
 - "What's the difference between content and server updates?"
 
 **Critical: Use the automated workflow, not manual commands!**
@@ -21,7 +21,7 @@
 ```python
 # ✅ CORRECT: Use the automated workflow
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={
         "source_path": "/path/to/praxis-os",
@@ -45,14 +45,14 @@ start_workflow(
 
 ## 🎯 Purpose
 
-This standard helps AI agents **discover and understand** when and how to update Agent OS installations. It explains:
+This standard helps AI agents **discover and understand** when and how to update prAxIs OS installations. It explains:
 
 - **WHEN** to update (triggers, frequency, urgency)
 - **WHY** the directory structure matters (universal/ namespace, custom protection)
-- **HOW** to execute updates (via `agent_os_upgrade_v1` workflow)
+- **HOW** to execute updates (via `praxis_os_upgrade_v1` workflow)
 - **WHAT** to validate (directory structure, file counts, functionality)
 
-**This is a discovery guide, not a command reference.** Use the `agent_os_upgrade_v1` workflow for actual updates.
+**This is a discovery guide, not a command reference.** Use the `praxis_os_upgrade_v1` workflow for actual updates.
 
 ---
 
@@ -63,7 +63,7 @@ This standard helps AI agents **discover and understand** when and how to update
 Updating standards, workflows, and usage documentation:
 - **Source**: `universal/` directory in praxis-os repository
 - **Destination**: `.praxis-os/` directory in your project
-- **Method**: Via `agent_os_upgrade_v1` workflow
+- **Method**: Via `praxis_os_upgrade_v1` workflow
 - **Time**: ~2 minutes
 - **Requires**: File watcher auto-rebuilds RAG index (10-30 seconds)
 - **No server restart needed** for content-only updates
@@ -72,13 +72,13 @@ Updating standards, workflows, and usage documentation:
 
 Updating the MCP server software:
 - **Source**: `mcp_server/` directory or PyPI package
-- **Method**: Via `agent_os_upgrade_v1` workflow (handles pip install)
+- **Method**: Via `praxis_os_upgrade_v1` workflow (handles pip install)
 - **Time**: ~1.5 minutes
 - **Requires**: MCP server restart (workflow handles this)
 
 ### Combined Updates
 
-The `agent_os_upgrade_v1` workflow handles **both types** in a single execution:
+The `praxis_os_upgrade_v1` workflow handles **both types** in a single execution:
 - Phase 0-2: Validate, backup, update content
 - Phase 3: Update and restart MCP server (workflow survives restart)
 - Phase 4-5: Validate and cleanup
@@ -89,7 +89,7 @@ The `agent_os_upgrade_v1` workflow handles **both types** in a single execution:
 
 ### Understanding the Universal Namespace
 
-**STANDARD:** Agent OS content MUST be namespaced under `universal/` to preserve custom content.
+**STANDARD:** prAxIs OS content MUST be namespaced under `universal/` to preserve custom content.
 
 **Source Repository Structure:**
 ```
@@ -104,7 +104,7 @@ praxis-os/
 │   └── workflows/
 │       ├── test_generation_v3/
 │       ├── spec_execution_v1/
-│       └── agent_os_upgrade_v1/
+│       └── praxis_os_upgrade_v1/
 │
 └── .praxis-os/                    ← LOCAL BUILD (praxis-os only)
     ├── standards/
@@ -119,7 +119,7 @@ praxis-os/
 your-project/
 └── .praxis-os/
     ├── standards/
-    │   ├── universal/            ← Agent OS provided (synced with --delete)
+    │   ├── universal/            ← prAxIs OS provided (synced with --delete)
     │   │   ├── ai-assistant/
     │   │   ├── development/
     │   │   ├── testing/
@@ -127,11 +127,11 @@ your-project/
     │   └── development/          ← Project-specific (NEVER touched by sync)
     │       └── my-custom-standards.md
     │
-    ├── usage/                    ← Mixed (Agent OS + custom, NO --delete)
-    │   ├── mcp-usage-guide.md    ← Agent OS provided
+    ├── usage/                    ← Mixed (prAxIs OS + custom, NO --delete)
+    │   ├── mcp-usage-guide.md    ← prAxIs OS provided
     │   └── project-guide.md      ← Project-specific
     │
-    ├── workflows/                ← Agent OS managed (synced with --delete)
+    ├── workflows/                ← prAxIs OS managed (synced with --delete)
     │   └── test_generation_v3/
     │
     ├── specs/                    ← Project-only (NEVER touched by sync)
@@ -144,7 +144,7 @@ your-project/
 **Why This Structure:**
 
 1. **Universal Namespace Isolation**: 
-   - Agent OS content lives in `.praxis-os/standards/universal/`
+   - prAxIs OS content lives in `.praxis-os/standards/universal/`
    - Custom content lives in `.praxis-os/standards/development/`
    - Updates can safely use `--delete` on `universal/` without touching custom content
 
@@ -204,7 +204,7 @@ If commit hashes differ, an update is available.
 
 ### Use the Automated Workflow
 
-**STANDARD:** All updates MUST use the `agent_os_upgrade_v1` workflow.
+**STANDARD:** All updates MUST use the `praxis_os_upgrade_v1` workflow.
 
 ```python
 # Discover the workflow first
@@ -212,7 +212,7 @@ search_standards("agent os upgrade workflow")
 
 # Start the workflow
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={
         "source_path": "/path/to/praxis-os",
@@ -252,7 +252,7 @@ get_workflow_state(session_id)
 Verify the structure matches the standard:
 
 ```bash
-# Should exist - Agent OS universal content
+# Should exist - prAxIs OS universal content
 test -d .praxis-os/standards/universal/ai-assistant/ && echo "✅ Universal standards present"
 
 # Should exist if you have custom content
@@ -370,7 +370,7 @@ ls .praxis-os/standards/
 # Use the workflow with a fresh target
 # The workflow will detect and fix the structure
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={"source_path": "/path/to/praxis-os"}
 )
@@ -398,7 +398,7 @@ rm -rf .praxis-os/standards/testing/
 # Keep: .praxis-os/standards/universal/ and .praxis-os/standards/development/
 
 # 3. Run the workflow to ensure consistency
-start_workflow(workflow_type="agent_os_upgrade_v1", ...)
+start_workflow(workflow_type="praxis_os_upgrade_v1", ...)
 
 # 4. Restore custom content if needed
 cp -r /tmp/my-custom-standards/ .praxis-os/standards/development/
@@ -422,7 +422,7 @@ cp -r .praxis-os.backup.TIMESTAMP/standards/development/ .praxis-os/standards/
 # 3. Use workflow for future updates to prevent this
 ```
 
-**Prevention:** Always use the `agent_os_upgrade_v1` workflow.
+**Prevention:** Always use the `praxis_os_upgrade_v1` workflow.
 
 ---
 
@@ -433,12 +433,12 @@ cp -r .praxis-os.backup.TIMESTAMP/standards/development/ .praxis-os/standards/
 After updates, check `.praxis-os/VERSION.txt`:
 
 ```txt
-Agent OS Content Version
+prAxIs OS Content Version
 
 Repository: https://github.com/honeyhiveai/praxis-os
 Last Updated: 2025-10-10 18:30:00
 Source Commit: abc123def
-Updated By: agent_os_upgrade_v1 workflow
+Updated By: praxis_os_upgrade_v1 workflow
 Previous Version: v1.2.3
 Current Version: v1.3.0
 Notes: Updated for horizontal scaling features
@@ -475,10 +475,10 @@ search_standards("why nested standards structure")
 
 - [Workflow System Overview](../workflows/workflow-system-overview.md) - How workflows work
 - [Workflow Metadata Standards](../workflows/workflow-metadata-standards.md) - Workflow discovery
-- [Dogfooding Model](../development/dogfooding-model.md) - How praxis-os uses Agent OS
+- [Dogfooding Model](../development/dogfooding-model.md) - How praxis-os uses prAxIs OS
 
 **Related Workflows:**
-- `agent_os_upgrade_v1` - Automated upgrade with validation and rollback
+- `praxis_os_upgrade_v1` - Automated upgrade with validation and rollback
 - `spec_execution_v1` - How to execute specifications after update
 
 ---
@@ -487,7 +487,7 @@ search_standards("why nested standards structure")
 
 After reading this standard, you should understand:
 
-- [ ] Why to use `agent_os_upgrade_v1` workflow instead of manual commands
+- [ ] Why to use `praxis_os_upgrade_v1` workflow instead of manual commands
 - [ ] When to trigger an update (security, bugs, features, maintenance)
 - [ ] Why the universal/ namespace exists (custom content protection)
 - [ ] What directory structure looks like after correct update
@@ -499,7 +499,7 @@ After reading this standard, you should understand:
 ```python
 # Start the upgrade workflow
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={"source_path": "/path/to/praxis-os"}
 )
@@ -507,4 +507,4 @@ start_workflow(
 
 ---
 
-**This is a discovery standard, not an execution manual. Use the `agent_os_upgrade_v1` workflow for actual updates.**
+**This is a discovery standard, not an execution manual. Use the `praxis_os_upgrade_v1` workflow for actual updates.**

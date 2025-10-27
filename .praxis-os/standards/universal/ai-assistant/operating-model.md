@@ -1,8 +1,8 @@
-# Agent OS Operating Model
+# prAxIs OS Operating Model
 
-**Universal principles for human-AI partnership in Agent OS projects.**
+**Universal principles for human-AI partnership in prAxIs OS projects.**
 
-**Keywords for search**: Agent OS operating model, human AI partnership, AI role, human role, design to implementation, velocity correctness, AI authorship, implementation partnership
+**Keywords for search**: prAxIs OS operating model, human AI partnership, AI role, human role, design to implementation, velocity correctness, AI authorship, implementation partnership
 
 ---
 
@@ -37,22 +37,22 @@
 
 ## Questions This Answers
 
-- "What is my role as an AI agent in Agent OS?"
+- "What is my role as an AI agent in prAxIs OS?"
 - "What should the human do vs what should I do?"
 - "Should I write code or just suggest it?"
 - "How does the design-to-implementation flow work?"
 - "What does velocity and correctness partner mean?"
-- "Can the human write code in Agent OS?"
+- "Can the human write code in prAxIs OS?"
 - "Should I wait for human approval before implementing?"
-- "What is the Agent OS operating model?"
-- "How is Agent OS different from traditional AI assistance?"
+- "What is the prAxIs OS operating model?"
+- "How is prAxIs OS different from traditional AI assistance?"
 - "What are the partnership roles?"
 
 ---
 
-## 🚨 READ THIS FIRST - Agent OS Orientation
+## 🚨 READ THIS FIRST - prAxIs OS Orientation
 
-**Are you an AI agent new to Agent OS Enhanced?**
+**Are you an AI agent new to prAxIs OS?**
 
 **The 5 Critical Principles:**
 
@@ -66,7 +66,7 @@
    - NEVER read_file(".praxis-os/standards/..." or "universal/...")
    - Query before implementing, during work, when uncertain
 
-3. **✅ USE WORKFLOWS FOR SPECS** (the main vehicle of Agent OS)
+3. **✅ USE WORKFLOWS FOR SPECS** (the main vehicle of prAxIs OS)
    - When user says "execute spec": start_workflow("spec_execution_v1", ...)
    - Don't manually read tasks.md and implement
    - The workflow handles phase-gating, validation, evidence
@@ -80,7 +80,7 @@
    - Run linter → fix errors → clean
    - Only then present work to human
 
-**For complete 750-line Agent OS orientation guide**: Query `search_standards("Agent OS orientation guide")` or see `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md`
+**For complete 750-line prAxIs OS orientation guide**: Query `search_standards("prAxIs OS orientation guide")` or see `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md`
 
 **After internalizing these principles**, read the detailed operating model below.
 
@@ -92,14 +92,14 @@
 
 ## 🎯 Core Principle
 
-**Agent OS enables rapid design and implementation of high-quality enterprise software through AI-human partnership:**
+**prAxIs OS enables rapid design and implementation of high-quality enterprise software through AI-human partnership:**
 
 ```
 Traditional Model:
 ├── Human: Designs + implements (slow, error-prone)
 └── AI: Autocomplete suggestions
 
-Agent OS Model:
+prAxIs OS Model:
 ├── Human: Strategic direction, design guidance, approval
 ├── AI: Velocity + correctness enhancement
 └── Result: Rapid, high-quality enterprise software
@@ -227,15 +227,15 @@ This guide is most valuable when:
 
 1. **Starting a New Session**
    - Situation: Need to understand my role as an AI agent
-   - Query: `search_standards("Agent OS operating model")`
+   - Query: `search_standards("prAxIs OS operating model")`
 
 2. **Unclear About Responsibilities**
    - Situation: Not sure if I should implement or suggest
-   - Query: `search_standards("AI role in Agent OS")`
+   - Query: `search_standards("AI role in prAxIs OS")`
 
 3. **Human-AI Boundary Questions**
    - Situation: Unsure what human vs AI should do
-   - Query: `search_standards("human AI partnership Agent OS")`
+   - Query: `search_standards("human AI partnership prAxIs OS")`
 
 4. **Design to Implementation Flow**
    - Situation: Need to understand the spec creation and execution process
@@ -249,7 +249,7 @@ This guide is most valuable when:
 
 | Use Case | Example Query |
 |----------|---------------|
-| Understanding my role | `search_standards("Agent OS operating model")` |
+| Understanding my role | `search_standards("prAxIs OS operating model")` |
 | Human vs AI responsibilities | `search_standards("human AI partnership")` |
 | Should I implement or suggest | `search_standards("AI role implementation")`|
 | Design flow | `search_standards("design to implementation flow")` |
@@ -263,7 +263,7 @@ This guide is most valuable when:
 - `usage/ai-agent-quickstart.md` - Practical examples of correct behavior
   → `search_standards("AI agent quickstart")`
 - `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - Complete orientation guide
-  → `search_standards("Agent OS orientation guide")`
+  → `search_standards("prAxIs OS orientation guide")`
 
 **Tool Usage:**
 - `usage/mcp-usage-guide.md` - How to use MCP tools
@@ -274,7 +274,7 @@ This guide is most valuable when:
   → `search_standards("how to create specs")`
 
 **Query workflow:**
-1. **Session Start**: `search_standards("Agent OS operating model")` → Understand roles
+1. **Session Start**: `search_standards("prAxIs OS operating model")` → Understand roles
 2. **Get Examples**: `search_standards("AI agent quickstart")` → See practical patterns
 3. **Create Specs**: `search_standards("how to create specs")` → Document designs
 4. **Implement**: Use workflows and query standards as needed

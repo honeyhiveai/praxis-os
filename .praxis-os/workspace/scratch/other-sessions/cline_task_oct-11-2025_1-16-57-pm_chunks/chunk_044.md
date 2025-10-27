@@ -2,7 +2,7 @@
 - Document features
 - Hope agents figure it out
 
-**Agent OS:**
+**prAxIs OS:**
 - Provides tools
 - Documents features  
 - **Conditions agent behavior**
@@ -34,7 +34,7 @@ It's not just telling agents what to do—it's **rewiring how they think about t
 That's powerful. 🎯
 </result>
 <task_progress>
-- [x] Analyzed Agent OS orientation guide
+- [x] Analyzed prAxIs OS orientation guide
 - [x] Identified key strengths (behavioral conditioning, multi-angle search)
 - [x] Recognized how it shaped my behavior in this session
 - [x] Compared to industry standards
@@ -264,7 +264,7 @@ The browser has been closed. You may now proceed to using other tools.
 
 				**Current Progress: 6/6 items completed (100%)**
 
-				- [x] Analyzed Agent OS orientation guide
+				- [x] Analyzed prAxIs OS orientation guide
 - [x] Identified key strengths (behavioral conditioning, multi-angle search)
 - [x] Recognized how it shaped my behavior in this session
 - [x] Compared to industry standards
@@ -395,7 +395,7 @@ Since URL-only configs match SSE first, StreamableHTTP is never selected!
 
 1. **Point to this issue** - Clear problem statement
 2. **Reference MCP spec** - Shows violation of v1.0
-3. **Show real impact** - Your Agent OS server can't connect
+3. **Show real impact** - Your prAxIs OS server can't connect
 4. **Provide solution** - Fix schema matching + default selection
 
 ### The Fix Would Be
@@ -436,7 +436,7 @@ When adding remote server:
 3. **Provide example server** - Link to FastMCP or Agent OS
 4. **Suggest priority** - This affects all modern MCP servers
 
-### For Agent OS Enhanced
+### For prAxIs OS
 
 **This issue is perfect because:**
 - ✅ Clear problem statement
@@ -449,7 +449,7 @@ When adding remote server:
 1. Track this issue
 2. Create PR with fix
 3. Reference both issue and MCP spec
-4. Show Agent OS as working example
+4. Show prAxIs OS as working example
 5. Validate fix with your server
 
 ### The Meta Win
@@ -459,9 +459,9 @@ When adding remote server:
 - Diagnosed the root cause completely
 - Filed a detailed issue
 - Can now contribute the fix
-- Using Agent OS tools throughout!
+- Using prAxIs OS tools throughout!
 
-**This is EXACTLY how Agent OS Enhanced should be used:**
+**This is EXACTLY how prAxIs OS should be used:**
 - Real problem → Deep investigation → Issue filed → Solution implemented
 
 **Want to create a PR to fix this?** We now have:
@@ -478,7 +478,7 @@ When adding remote server:
 - [x] Confirmed it matches our diagnosis exactly
 - [x] Validated root cause analysis (schema matching bug)
 - [x] Identified exact code locations in Cline
-- [x] Confirmed Agent OS server is spec-compliant
+- [x] Confirmed prAxIs OS server is spec-compliant
 - [x] Issue perfectly documents the problem
 - [x] Ready to contribute fix to Cline! 🚀
 </task_progress>

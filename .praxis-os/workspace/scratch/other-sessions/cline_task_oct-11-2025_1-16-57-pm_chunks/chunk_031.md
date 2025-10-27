@@ -462,7 +462,7 @@ mcp_server/__main__.py           # Entry point
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial implementation guidance | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial implementation guidance | prAxIs OS Team |
 
 
 </file_content>
@@ -916,7 +916,7 @@ class ProjectInfoDiscovery:
         - Project name (from git or directory)
         - Project root path (from filesystem)
         - Git repository info (if available)
-        - Agent OS path
+        - prAxIs OS path
 
         ALL values are discovered at runtime.
 
@@ -925,14 +925,14 @@ class ProjectInfoDiscovery:
             {
                 "name": str,
                 "root": str,
-                "agent_os_path": str,
+                "praxis_os_path": str,
                 "git": {...} | None
             }
         """
         return {
             "name": self._get_project_name(),
             "root": str(self.project_root),
-            "agent_os_path": str(self.base_path),
+            "praxis_os_path": str(self.base_path),
             "git": self._get_git_info(),
         }
 

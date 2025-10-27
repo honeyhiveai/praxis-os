@@ -1,4 +1,4 @@
-# Extracted Insights - Agent OS Upgrade Workflow
+# Extracted Insights - prAxIs OS Upgrade Workflow
 
 **Source:** agent-os-upgrade-workflow-design.md  
 **Date:** 2025-10-08  
@@ -374,7 +374,7 @@ append_to_update_log()
 # Optional git commit
 if config.get("git_commit_after"):
     subprocess.run(["git", "add", ".praxis-os/"])
-    subprocess.run(["git", "commit", "-m", "Upgrade Agent OS to v1.2.0"])
+    subprocess.run(["git", "commit", "-m", "Upgrade prAxIs OS to v1.2.0"])
 ```
 
 **Evidence:**

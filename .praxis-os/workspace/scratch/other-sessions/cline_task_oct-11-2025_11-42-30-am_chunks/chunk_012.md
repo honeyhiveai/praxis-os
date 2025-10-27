@@ -22,7 +22,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -30,9 +30,9 @@ ACT MODE
 - [ ] Search GitHub issues via browser (checking different search terms)
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -76,7 +76,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -84,9 +84,9 @@ ACT MODE
 - [x] Search GitHub issues via browser
 - [ ] Determine issue status and report findings
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -201,7 +201,7 @@ Full technical analysis available in PR (to be created after approval):
 
 **3. Implementation (After Approval)**
 Once approved, proceed with:
-- Cursor creates spec using Agent OS Enhanced
+- Cursor creates spec using prAxIs OS
 - Systematic implementation via workflow
 - Comprehensive testing
 - PR with changeset
@@ -217,7 +217,7 @@ Would you like me to draft the complete GitHub issue text, or would you prefer t
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -226,9 +226,9 @@ Would you like me to draft the complete GitHub issue text, or would you prefer t
 - [x] Determine issue status - NO DUPLICATE FOUND
 - [ ] Create GitHub issue (user decision needed)
 - [ ] Get maintainer approval (required before implementation)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -275,7 +275,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -284,9 +284,9 @@ ACT MODE
 - [ ] Review issue #3315 about StreamableHttpTransport
 - [ ] Determine if our bug matches existing issue
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -330,7 +330,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -339,9 +339,9 @@ ACT MODE
 - [ ] Review issue #3315 (CLOSED) about StreamableHttpTransport - reading details
 - [ ] Determine if our bug matches existing issue
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -385,7 +385,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -394,9 +394,9 @@ ACT MODE
 - [ ] Review issue #3315 (CLOSED) - different bug, reading resolution
 - [ ] Determine if our bug matches existing issue
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -440,7 +440,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -449,9 +449,9 @@ ACT MODE
 - [ ] Review issue #3315 (CLOSED) - PR #3413 submitted, still broken per comments
 - [ ] Check if related to our default transport bug
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -495,7 +495,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -504,9 +504,9 @@ ACT MODE
 - [ ] Review issue #3315 - Different bug (HTTP method), reading user configs showing manual type specification
 - [ ] Determine if default transport selection has been discussed
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -550,7 +550,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -560,9 +560,9 @@ ACT MODE
 - [ ] Report findings and recommend creating new issue
 - [ ] Create new GitHub issue for default transport bug
 - [ ] Get maintainer approval
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -687,7 +687,7 @@ New remote servers should default to `streamableHttp` transport per MCP v1.0 spe
 1. **Create Issue** on GitHub with above template
 2. **Wait for Maintainer Approval** (required per CONTRIBUTING.md)
 3. **Once Approved**:
-   - Cursor creates spec using Agent OS Enhanced
+   - Cursor creates spec using prAxIs OS
    - Systematic implementation via phase-gated workflow
    - Create PR with changeset (type: patch)
    - Include comprehensive tests
@@ -701,12 +701,12 @@ New remote servers should default to `streamableHttp` transport per MCP v1.0 spe
 **Duplicate Check:** No duplicate found ✅  
 **Issue Template:** Prepared ✅
 
-The MCP transport default bug has been thoroughly analyzed and is ready for GitHub issue creation and subsequent implementation through Agent OS Enhanced workflow.
+The MCP transport default bug has been thoroughly analyzed and is ready for GitHub issue creation and subsequent implementation through prAxIs OS workflow.
 </result>
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -717,9 +717,9 @@ The MCP transport default bug has been thoroughly analyzed and is ready for GitH
 - [x] Prepare GitHub issue template
 - [ ] User creates GitHub issue (action required)
 - [ ] Get maintainer approval (required before implementation)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>

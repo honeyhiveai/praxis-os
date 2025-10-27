@@ -464,7 +464,7 @@ Feature considered complete when:
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial task breakdown | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial task breakdown | prAxIs OS Team |
 
 
 </file_content>

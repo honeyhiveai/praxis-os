@@ -11,7 +11,7 @@
 
 ### 1.1 Purpose
 
-This document defines the requirements for implementing dual-transport support in the Agent OS MCP server, enabling simultaneous stdio (for IDEs) and HTTP (for sub-agents) communication with automatic port allocation and zero-conflict multi-project support.
+This document defines the requirements for implementing dual-transport support in the prAxIs OS MCP server, enabling simultaneous stdio (for IDEs) and HTTP (for sub-agents) communication with automatic port allocation and zero-conflict multi-project support.
 
 ### 1.2 Scope
 
@@ -35,7 +35,7 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 
 ### Goal 1: Enable Sub-Agent Ecosystem
 
-**Objective:** Allow sub-agents (Cline, Aider, custom agents) to access Agent OS MCP server alongside primary IDE, creating a collaborative multi-agent workflow environment.
+**Objective:** Allow sub-agents (Cline, Aider, custom agents) to access prAxIs OS MCP server alongside primary IDE, creating a collaborative multi-agent workflow environment.
 
 **Success Metrics:**
 - Sub-agent connection success rate: 0% → 95%+ (currently impossible)
@@ -43,9 +43,9 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 - Developer setup steps for sub-agents: Manual config → Zero configuration
 
 **Business Impact:**
-- Enables Agent OS ecosystem expansion beyond IDE integration
+- Enables prAxIs OS ecosystem expansion beyond IDE integration
 - Reduces friction for developers using multiple AI agents
-- Positions Agent OS as multi-agent collaboration platform
+- Positions prAxIs OS as multi-agent collaboration platform
 
 ### Goal 2: Eliminate Multi-Project Port Conflicts
 
@@ -63,7 +63,7 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 
 ### Goal 3: Maintain Backward Compatibility
 
-**Objective:** Ensure existing Agent OS deployments continue working without changes while enabling new dual-transport capabilities.
+**Objective:** Ensure existing prAxIs OS deployments continue working without changes while enabling new dual-transport capabilities.
 
 **Success Metrics:**
 - Breaking changes: 0 (stdio-only mode preserved)
@@ -82,7 +82,7 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 ### Story 1: Developer Opens Multiple Projects
 
 **As a** software developer working on multiple projects  
-**I want to** open 3+ Cursor windows with Agent OS enabled simultaneously  
+**I want to** open 3+ Cursor windows with prAxIs OS enabled simultaneously  
 **So that** I can work across projects without port conflicts or server crashes
 
 **Acceptance Criteria:**
@@ -98,10 +98,10 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 
 **As a** Cline agent running in a project  
 **I want to** automatically discover the project's MCP server HTTP endpoint  
-**So that** I can access Agent OS tools without manual configuration
+**So that** I can access prAxIs OS tools without manual configuration
 
 **Acceptance Criteria:**
-- Given Agent OS MCP server running in dual mode
+- Given prAxIs OS MCP server running in dual mode
 - When Cline agent starts in the project
 - Then Cline reads `.praxis-os/.mcp_server_state.json`
 - And extracts HTTP URL (e.g., `http://127.0.0.1:4243/mcp`)
@@ -112,7 +112,7 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 
 ### Story 3: IDE Uses stdio, Sub-Agent Uses HTTP
 
-**As an** Agent OS user  
+**As an** prAxIs OS user  
 **I want** Cursor (stdio) and Cline (HTTP) to access the same MCP server simultaneously  
 **So that** both agents share the same RAG index, workflow state, and tools
 
@@ -431,7 +431,7 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
    - **Future Consideration:** Phase 2 with proper security layer
 
 2. **Load Balancing Across Multiple Servers**
-   - **Reason:** Single server per project is sufficient for Agent OS use case
+   - **Reason:** Single server per project is sufficient for prAxIs OS use case
    - **Future Consideration:** Enterprise deployment scenario
 
 3. **Hot Reload of Transport Mode**
@@ -478,7 +478,7 @@ See `supporting-docs/INSIGHTS.md` for detailed extracted insights.
 
 This feature will be considered successful when:
 
-✅ Multiple Cursor windows can open with Agent OS without conflicts  
+✅ Multiple Cursor windows can open with prAxIs OS without conflicts  
 ✅ Sub-agents discover and connect to MCP server with zero configuration  
 ✅ All existing tools work identically on both stdio and HTTP transports  
 ✅ State file accurately reflects server status and enables discovery  
@@ -511,5 +511,5 @@ This feature will be considered successful when:
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial requirements document | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial requirements document | prAxIs OS Team |
 

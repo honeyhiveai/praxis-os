@@ -13,7 +13,7 @@ The Persona System enables domain-specific AI specialists through a config-drive
 
 **Core Principle:** AI agents can invoke specialist sub-agents with focused expertise, improving output quality through domain knowledge and structured workflows.
 
-**Part of:** Agent OS Enhanced spec-driven development framework for AI quality enhancement.
+**Part of:** prAxIs OS spec-driven development framework for AI quality enhancement.
 
 ---
 
@@ -95,7 +95,7 @@ class APISpecialist(BaseSpecialist):
 # 4. Restart server
 ```
 
-**Agent OS Approach:**
+**prAxIs OS Approach:**
 ```markdown
 # .praxis-os/personas/database.md
 You are a Database Architecture Specialist...
@@ -241,7 +241,7 @@ You are a Database Architecture Specialist...
 ```markdown
 # [Domain] Specialist Title
 
-You are a [Domain] Specialist in Agent OS Enhanced.
+You are a [Domain] Specialist in prAxIs OS.
 
 [Your role and expertise description]
 
@@ -344,7 +344,7 @@ class PersonaLauncher:
     Loads persona definitions from markdown files and executes
     them through an agentic loop with MCP tools.
     
-    Part of Agent OS Enhanced spec-driven development framework.
+    Part of prAxIs OS spec-driven development framework.
     """
     
     def __init__(self, mcp_client, llm_client):
@@ -986,7 +986,7 @@ Main Agent: "Complete payment system designed with security review"
 cat > .praxis-os/personas/caching.md << 'EOF'
 # Caching Optimization Specialist
 
-You are a Caching Optimization Specialist in Agent OS Enhanced.
+You are a Caching Optimization Specialist in prAxIs OS.
 
 Your role is to analyze systems and implement optimal caching strategies
 to improve performance, reduce costs, and enhance user experience.
@@ -1114,7 +1114,7 @@ EOF
 ```markdown
 # [Domain] Specialist
 
-You are a [Domain] Specialist in Agent OS Enhanced.
+You are a [Domain] Specialist in prAxIs OS.
 
 [Brief role description - what this specialist does]
 
@@ -1271,7 +1271,7 @@ async def test_persona_not_found():
 - `mcp_server/server/tools/specialist_tools.py` - MCP tool registration
 - `.praxis-os/personas/*.md` - Persona definitions (config)
 
-**Part of:** Agent OS Enhanced spec-driven development framework
+**Part of:** prAxIs OS spec-driven development framework
 
 **Related Documents:**
 - [ARCHITECTURE-Agent-OS-Enhanced.md](ARCHITECTURE-Agent-OS-Enhanced.md) - System overview

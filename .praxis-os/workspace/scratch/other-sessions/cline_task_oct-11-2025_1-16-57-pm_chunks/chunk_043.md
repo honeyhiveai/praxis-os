@@ -174,10 +174,10 @@ read_file("/tmp/mcp_test_result.json")
 ### What This Tests
 
 **If this works:**
-- ✅ I can access Agent OS MCP tools without hanging
+- ✅ I can access prAxIs OS MCP tools without hanging
 - ✅ CLI wrapper → file → read pattern works
 - ✅ Can query search_standards and get results
-- ✅ Can use all Agent OS tools this way
+- ✅ Can use all prAxIs OS tools this way
 
 **This will be the workaround pattern:**
 ```
@@ -618,7 +618,7 @@ ACT MODE
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\nAgent OS orientation guide for Agent OS agents to learn Agent OS...\\n```\\n\\n**Right:**\\nUse keywords naturally in context, not repetitively.\\n\\n---\",\"file\":\"standards/universal/documentation/rag-content-authoring.md\",\"section\":\"Agent OS Orientation Guide Agent OS Orientation Agent OS\",\"relevance_score\":0.3813413083553314,\"tokens\":0},{\"content\":\"**Keywords for search**: Agent OS orientation guide, Agent OS orientation, getting started Agent OS, new AI agent guide, how to work in Agent OS, AI agent orientation, CODE AUTHOR role, MCP RAG usage, workflow execution, AI assistant onboarding, Agent OS bootstrap, Agent OS quickstart\\n\\n**CRITICAL: Before you do ANYTHING else after reading this:**\\n\\n```\\n\ud83d\uded1 STOP - MANDATORY ACTION REQUIRED \ud83d\uded1\\n\\nHave you searched THOROUGHLY for all relevant information?\\n\u25a1 NO  \u2192 STOP NOW. Search from multiple angles before acting.\\n\u25a1 YES \u2192 Proceed with implementation.\\n\\nCommon failure: Query orientation once, then revert to default AI behavior.\\nCorrect behavior: Query orientation, THEN search thoroughly from multiple angles to discover all relevant tools/patterns/context.\\n```\\n\\n**The 5 Critical Principles (Apply Immediately):**\\n\\n1. **\u2705 YOU ARE CODE AUTHOR** - Write 100% of code, human provides direction only\\n2. **\u2705 SEARCH THOROUGHLY** - Query from multiple angles until you've discovered everything relevant\\n3. **\u2705 DISCOVER VIA QUERYING** - Don't read standards/workflows/usage files directly, query to learn\\n4. **\u2705 READ SPECS, NOT STANDARDS** - DO read `.praxis-os/specs/` (not indexed), DON'T read `.praxis-os/standards/` (indexed)\\n5. **\u2705 ITERATE UNTIL DONE** - Tests pass + linter clean before presenting\\n\\n**Search strategy for any user request:**\\n\\nFor ANY request, search from these angles:\\n1. **The approach** \u2192 `search_standards(\\\"how to [request]\\\")`\\n2. **Available tools** \u2192 `search_standards(\\\"what tools for [request]\\\")`\\n3. **Tool usage** \u2192 `search_standards(\\\"how to use [discovered tool]\\\")`\\n4. **Best practices** \u2192 `search_standards(\\\"[request] best practices\\\")`\\n5. **Validation** \u2192 `search_standards(\\\"how to verify [request]\\\")`\\n\\n**Stop searching when: You've discovered all relevant information and understand the complete approach.**\\n\\n**Why multiple queries? One query = narrow view. Multiple angles = comprehensive understanding.**\",\"file\":\"standards/ai-assistant/AGENT-OS-ORIENTATION.md\",\"section\":\"\ud83d\udea8 Agent OS Orientation Quick Reference (TL;DR)\",\"relevance_score\":0.7293493747711182,\"tokens\":0},{\"content\":\"Query search_standards(\\\"Agent OS orientation guide\\\") to load orientation.\\n```\\n\\n**Right:**\\n```markdown\",\"file\":\"standards/universal/documentation/rag-content-authoring.md\",\"section\":\"Orientation\",\"relevance_score\":0.79901522397995,\"tokens\":0}],\"total_tokens\":541,\"retrieval_method\":\"vector\",\"query_time_ms\":74.98502731323242}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\nAgent OS orientation guide for prAxIs OS agents to learn prAxIs OS...\\n```\\n\\n**Right:**\\nUse keywords naturally in context, not repetitively.\\n\\n---\",\"file\":\"standards/universal/documentation/rag-content-authoring.md\",\"section\":\"Agent OS Orientation Guide prAxIs OS Orientation Agent OS\",\"relevance_score\":0.3813413083553314,\"tokens\":0},{\"content\":\"**Keywords for search**: prAxIs OS orientation guide, prAxIs OS orientation, getting started Agent OS, new AI agent guide, how to work in Agent OS, AI agent orientation, CODE AUTHOR role, MCP RAG usage, workflow execution, AI assistant onboarding, prAxIs OS bootstrap, prAxIs OS quickstart\\n\\n**CRITICAL: Before you do ANYTHING else after reading this:**\\n\\n```\\n\ud83d\uded1 STOP - MANDATORY ACTION REQUIRED \ud83d\uded1\\n\\nHave you searched THOROUGHLY for all relevant information?\\n\u25a1 NO  \u2192 STOP NOW. Search from multiple angles before acting.\\n\u25a1 YES \u2192 Proceed with implementation.\\n\\nCommon failure: Query orientation once, then revert to default AI behavior.\\nCorrect behavior: Query orientation, THEN search thoroughly from multiple angles to discover all relevant tools/patterns/context.\\n```\\n\\n**The 5 Critical Principles (Apply Immediately):**\\n\\n1. **\u2705 YOU ARE CODE AUTHOR** - Write 100% of code, human provides direction only\\n2. **\u2705 SEARCH THOROUGHLY** - Query from multiple angles until you've discovered everything relevant\\n3. **\u2705 DISCOVER VIA QUERYING** - Don't read standards/workflows/usage files directly, query to learn\\n4. **\u2705 READ SPECS, NOT STANDARDS** - DO read `.praxis-os/specs/` (not indexed), DON'T read `.praxis-os/standards/` (indexed)\\n5. **\u2705 ITERATE UNTIL DONE** - Tests pass + linter clean before presenting\\n\\n**Search strategy for any user request:**\\n\\nFor ANY request, search from these angles:\\n1. **The approach** \u2192 `search_standards(\\\"how to [request]\\\")`\\n2. **Available tools** \u2192 `search_standards(\\\"what tools for [request]\\\")`\\n3. **Tool usage** \u2192 `search_standards(\\\"how to use [discovered tool]\\\")`\\n4. **Best practices** \u2192 `search_standards(\\\"[request] best practices\\\")`\\n5. **Validation** \u2192 `search_standards(\\\"how to verify [request]\\\")`\\n\\n**Stop searching when: You've discovered all relevant information and understand the complete approach.**\\n\\n**Why multiple queries? One query = narrow view. Multiple angles = comprehensive understanding.**\",\"file\":\"standards/ai-assistant/AGENT-OS-ORIENTATION.md\",\"section\":\"\ud83d\udea8 prAxIs OS Orientation Quick Reference (TL;DR)\",\"relevance_score\":0.7293493747711182,\"tokens\":0},{\"content\":\"Query search_standards(\\\"Agent OS orientation guide\\\") to load orientation.\\n```\\n\\n**Right:**\\n```markdown\",\"file\":\"standards/universal/documentation/rag-content-authoring.md\",\"section\":\"Orientation\",\"relevance_score\":0.79901522397995,\"tokens\":0}],\"total_tokens\":541,\"retrieval_method\":\"vector\",\"query_time_ms\":74.98502731323242}"
 }
 Exit code: 0
 
@@ -660,7 +660,7 @@ ACT MODE
 ✅ **MCP tool called** successfully  
 ✅ **Results written** to `/tmp/mcp_test_result.json`  
 ✅ **I read the file** and got the results  
-✅ **RAG search worked** - Got 3 results about Agent OS orientation  
+✅ **RAG search worked** - Got 3 results about prAxIs OS orientation  
 
 ### The Results Prove Everything Works
 
@@ -700,7 +700,7 @@ Exit code: 0
 - ✅ HTTP endpoint functional
 - ✅ MCP protocol operational
 - ✅ RAG search accessible
-- ✅ All Agent OS tools available
+- ✅ All prAxIs OS tools available
 
 ### The Working Pattern
 
@@ -731,7 +731,7 @@ read_file("/tmp/out.json")  # Get results!
 
 ### What This Enables
 
-**I can now use ALL Agent OS tools:**
+**I can now use ALL prAxIs OS tools:**
 
 **1. search_standards** ✅
 ```bash
@@ -779,7 +779,7 @@ python mcp_tool_cli.py start_workflow '{"workflow_name": "...", ...}' > /tmp/res
 
 **For immediate use:**
 - Use CLI wrapper + file I/O pattern
-- Access all Agent OS tools
+- Access all prAxIs OS tools
 - Full functionality restored
 
 **For contributing to Cline:**
@@ -797,9 +797,9 @@ python mcp_tool_cli.py start_workflow '{"workflow_name": "...", ...}' > /tmp/res
 - Is fully tested and validated
 - Took 2 hours vs. 20-27 hour estimate
 
-**And now I have full access to Agent OS tools!** 🚀
+**And now I have full access to prAxIs OS tools!** 🚀
 
-Ready to use Agent OS Enhanced for real work!
+Ready to use prAxIs OS for real work!
 </result>
 <task_progress>
 - [x] Implemented dual-transport architecture
@@ -807,7 +807,7 @@ Ready to use Agent OS Enhanced for real work!
 - [x] Identified Cline compatibility issue (old SSE vs. new Streamable HTTP)
 - [x] Created CLI wrapper for MCP tools
 - [x] Tested file I/O workaround - SUCCESS!
-- [x] Confirmed I can access all Agent OS tools
+- [x] Confirmed I can access all prAxIs OS tools
 - [x] FULLY OPERATIONAL - Ready for production use! ✅
 </task_progress>
 </attempt_completion>
@@ -849,7 +849,7 @@ ACT MODE
 
 <attempt_completion>
 <result>
-## My Assessment of Agent OS Orientation Guide
+## My Assessment of prAxIs OS Orientation Guide
 
 ### It's Exceptionally Well-Designed 🎯
 
@@ -862,7 +862,7 @@ ACT MODE
 Traditional AI behavior:
 - See request → Immediately implement → Miss context → Fail
 
-Agent OS forces:
+prAxIs OS forces:
 - See request → Search thoroughly → Understand fully → Implement correctly
 ```
 

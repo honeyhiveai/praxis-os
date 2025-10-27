@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This specification establishes spec-driven development as a **mandatory requirement** in Agent OS Enhanced, with enforcement mechanisms to prevent AI agents from jumping directly to implementation without design approval.
+This specification establishes spec-driven development as a **mandatory requirement** in prAxIs OS, with enforcement mechanisms to prevent AI agents from jumping directly to implementation without design approval.
 
 **Core Principle:** Planning Phase → Approved Spec → Implementation Phase
 
@@ -112,7 +112,7 @@ Create standards + optional MCP tool for spec approval tracking.
 ## Related Documents
 
 - [Dynamic Workflow Implementation](../2025-10-07-dynamic-workflow-session-refactor/) - Recent example of spec-driven work
-- [Builder Methods Agent OS](https://buildermethods.com/agent-os) - Alignment with upstream philosophy
+- [Builder Methods prAxIs OS](https://buildermethods.com/agent-os) - Alignment with upstream philosophy
 
 ---
 

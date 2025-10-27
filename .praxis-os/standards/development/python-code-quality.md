@@ -55,7 +55,7 @@ black mcp_server/
 black --check mcp_server/
 
 # Format specific file
-black mcp_server/agent_os_rag.py
+black mcp_server/praxis_os_rag.py
 
 # See what would change
 black --diff mcp_server/
@@ -179,7 +179,7 @@ max-statements = 50
 pylint mcp_server/
 
 # Analyze specific file
-pylint mcp_server/agent_os_rag.py
+pylint mcp_server/praxis_os_rag.py
 
 # Generate config file
 pylint --generate-rcfile > .pylintrc
@@ -268,7 +268,7 @@ ignore_missing_imports = true
 mypy mcp_server/
 
 # Type check specific file
-mypy mcp_server/agent_os_rag.py
+mypy mcp_server/praxis_os_rag.py
 
 # Show error codes
 mypy --show-error-codes mcp_server/
@@ -387,9 +387,9 @@ def search(
 ```python
 class RAGEngine:
     """
-    RAG (Retrieval-Augmented Generation) engine for Agent OS standards.
+    RAG (Retrieval-Augmented Generation) engine for prAxIs OS standards.
     
-    This class provides semantic search over Agent OS standards using
+    This class provides semantic search over prAxIs OS standards using
     LanceDB vector database and sentence transformers for embeddings.
     
     The engine supports:
@@ -425,10 +425,10 @@ class RAGEngine:
 
 ```python
 """
-Agent OS MCP/RAG Server - Main Integration Point.
+prAxIs OS MCP/RAG Server - Main Integration Point.
 
 This module provides the MCP (Model Context Protocol) server that exposes
-Agent OS standards via semantic search and workflow management.
+prAxIs OS standards via semantic search and workflow management.
 
 Tools:
     - search_standards: Semantic search over standards
@@ -445,11 +445,11 @@ Features:
 Example:
     Run the MCP server:
     
-    $ python -m mcp_server.agent_os_rag
+    $ python -m mcp_server.praxis_os_rag
     
     Or from Python:
     
-    >>> from mcp_server.agent_os_rag import create_server
+    >>> from mcp_server.praxis_os_rag import create_server
     >>> server = create_server()
 """
 ```

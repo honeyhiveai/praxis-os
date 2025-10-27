@@ -61,7 +61,7 @@
 2. **Dependency Injection**: ServerFactory with full DI
 3. **Tool Scalability**: Selective loading, performance monitoring
 4. **Configuration Management**: Single source of truth with validation
-5. **Standards Compliance**: Follows Agent OS production code checklist
+5. **Standards Compliance**: Follows prAxIs OS production code checklist
 
 ### Research-Based Design
 - **Tool count monitoring** based on Microsoft Research (85% degradation >20 tools)
@@ -126,7 +126,7 @@
 
 ## 🔄 Standards Compliance
 
-**Agent OS Spec Standards:**
+**prAxIs OS Spec Standards:**
 - ✅ Followed standard structure from `creating-specs.md`
 - ✅ Used provided templates
 - ✅ Concrete examples throughout
@@ -174,5 +174,5 @@
 
 ---
 
-**This spec is ready for implementation. All Agent OS standards have been followed.**
+**This spec is ready for implementation. All prAxIs OS standards have been followed.**
 

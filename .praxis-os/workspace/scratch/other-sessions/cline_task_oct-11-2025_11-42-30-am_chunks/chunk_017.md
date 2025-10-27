@@ -465,7 +465,7 @@ gh issue create \
    - Request changes
    - Suggest different approach
 4. **Once Approved** - I can then:
-   - Create detailed spec using Agent OS Enhanced
+   - Create detailed spec using prAxIs OS
    - Implement the fix systematically
    - Create PR with comprehensive tests
    - Submit with proper changeset
@@ -500,7 +500,7 @@ Once maintainers approve, all analysis is complete and ready:
 - [x] Attempted browser posting (requires manual authentication)
 - [ ] **User posts issue manually** ⬅️ ACTION REQUIRED
 - [ ] Get maintainer approval on issue
-- [ ] Create spec using Agent OS Enhanced
+- [ ] Create spec using prAxIs OS
 - [ ] Implement fix systematically
 - [ ] Submit PR with tests
 </task_progress>

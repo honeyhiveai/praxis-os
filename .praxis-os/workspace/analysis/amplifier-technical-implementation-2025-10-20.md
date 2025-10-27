@@ -942,7 +942,7 @@ async def process_batch_resilient(items):
 ✅ **Retry logic** for LLMs  
 ✅ **Defensive parsing** for responses
 
-### What Agent OS Can Learn
+### What prAxIs OS Can Learn
 
 1. **Knowledge graph approach** (vs flat RAG)
 2. **Event-driven pipelines** (audit trails)

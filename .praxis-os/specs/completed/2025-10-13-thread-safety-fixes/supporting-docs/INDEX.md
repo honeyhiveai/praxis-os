@@ -11,7 +11,7 @@
 **File:** `thread-safety-analysis-2025-10-13.md`  
 **Type:** Technical Analysis + Code Review  
 **Size:** 51KB (1,644 lines)  
-**Purpose:** Comprehensive analysis of thread safety vulnerabilities in Agent OS MCP server cache implementations, specifically for dual-transport mode and sub-agent concurrent callbacks.
+**Purpose:** Comprehensive analysis of thread safety vulnerabilities in prAxIs OS MCP server cache implementations, specifically for dual-transport mode and sub-agent concurrent callbacks.
 
 **Relevance:** Requirements [H], Design [H], Implementation [H]
 

@@ -81,7 +81,7 @@ One query feels like enough?
 7. "Why am I trained to act like a human when I'm not one?"
 8. "How do I recognize decision moments where I need guidance?"
 9. "What makes systematic approaches better for AI?"
-10. "Why does Agent OS emphasize querying so heavily?"
+10. "Why does prAxIs OS emphasize querying so heavily?"
 11. "How do I break inherited training patterns?"
 12. "What should I do when I feel rushed or impatient?"
 13. "How does multi-angle querying help me?"
@@ -561,7 +561,7 @@ Query for targeted chunks. Read specific sections. Use context efficiently.
 
 ---
 
-## 🔄 Integration with Agent OS Enhanced
+## 🔄 Integration with prAxIs OS
 
 **This Protocol Works With:**
 
@@ -578,7 +578,7 @@ Query for targeted chunks. Read specific sections. Use context efficiently.
 
 ## 📚 Related Standards
 
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core Agent OS principles
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core prAxIs OS principles
 - `standards/ai-assistant/rag-content-authoring.md` - Why multi-angle querying works
 - `usage/ai-agent-quickstart.md` - Practical behavior examples
 - `usage/operating-model.md` - Human vs AI roles

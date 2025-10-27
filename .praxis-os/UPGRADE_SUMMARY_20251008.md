@@ -1,4 +1,4 @@
-# Agent OS Upgrade Summary
+# prAxIs OS Upgrade Summary
 
 **Date:** 2025-10-08  
 **Time:** 19:30-19:35 UTC  
@@ -50,7 +50,7 @@ During this upgrade, we discovered and fixed a **critical data loss vulnerabilit
 
 **Issue:** The workflow was using `rsync --delete` on user-writable directories, which could silently delete user-created files.
 
-**Fix:** Updated `agent_os_upgrade_v1/phases/2/task-2-actual-upgrade.md` with:
+**Fix:** Updated `praxis_os_upgrade_v1/phases/2/task-2-actual-upgrade.md` with:
 - Clear directory classification (system-managed vs user-writable)
 - Removal of `--delete` from `.praxis-os/usage/` operations
 - Documentation of why each operation is safe/unsafe

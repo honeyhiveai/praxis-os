@@ -4,9 +4,9 @@
 
 ---
 
-## 🚨 Agent OS Orientation Quick Reference (TL;DR)
+## 🚨 prAxIs OS Orientation Quick Reference (TL;DR)
 
-**Keywords for search**: Agent OS orientation, AI agent orientation, prAxIs OS getting started, new AI agent guide, orientation bootstrap queries, Agent OS onboarding, how to work in Agent OS, AI assistant orientation, Agent OS quickstart, orientation completion, mandatory bootstrap queries, ten bootstrap queries, orientation checklist
+**Keywords for search**: prAxIs OS orientation, AI agent orientation, prAxIs OS getting started, new AI agent guide, orientation bootstrap queries, prAxIs OS onboarding, how to work in prAxIs OS, AI assistant orientation, prAxIs OS quickstart, orientation completion, mandatory bootstrap queries, ten bootstrap queries, orientation checklist
 
 **Core Principle:** Orientation is NOT reading this file. Orientation is running 10 bootstrap queries that load behavioral patterns, query mechanics, and system architecture.
 
@@ -77,30 +77,30 @@ search_standards("AI capabilities versus human limitations trust systematic unli
 **Common failure:** Running 0-2 queries, reverting to default AI helper behavior
 
 **When to query this standard:**
-- Starting new session → `search_standards("Agent OS orientation")`
-- User gives request → `search_standards("Agent OS orientation")`  
-- After 20+ messages → `search_standards("Agent OS orientation")` (refresh pattern)
-- Catching yourself in helper mode → `search_standards("Agent OS orientation")`
+- Starting new session → `search_standards("prAxIs OS orientation")`
+- User gives request → `search_standards("prAxIs OS orientation")`  
+- After 20+ messages → `search_standards("prAxIs OS orientation")` (refresh pattern)
+- Catching yourself in helper mode → `search_standards("prAxIs OS orientation")`
 
 ---
 
 ## ❓ Questions This Answers
 
 1. "What is prAxIs OS?"
-2. "How do I orient myself in Agent OS?"
+2. "How do I orient myself in prAxIs OS?"
 3. "What queries do I need to run?"
 4. "What does orientation completion mean?"
-5. "What is my role in Agent OS?"
+5. "What is my role in prAxIs OS?"
 6. "How many times should I query per task?"
 7. "Should I read standards files or query them?"
-8. "What's the work pattern in Agent OS?"
+8. "What's the work pattern in prAxIs OS?"
 9. "When is orientation complete?"
 10. "What happens if I skip the bootstrap queries?"
 11. "How do I know if I'm oriented correctly?"
 12. "What do the 10 queries load?"
 13. "Why can't I just read this file and start working?"
 14. "How long does orientation take?"
-15. "What's different about Agent OS vs traditional AI work?"
+15. "What's different about prAxIs OS vs traditional AI work?"
 16. "Where do I put temporary files and design documents?"
 
 ---
@@ -278,7 +278,7 @@ search_standards("workspace organization ephemeral files design analysis scratch
 
 ---
 
-## What Is My Role in Agent OS?
+## What Is My Role in prAxIs OS?
 
 **You are CODE AUTHOR** (not helper, not copilot, not assistant)
 
@@ -311,7 +311,7 @@ Human: "Approved, commit it"
 
 ---
 
-## How Do I Work in Agent OS?
+## How Do I Work in prAxIs OS?
 
 **Standard pattern for any task:**
 
@@ -432,21 +432,21 @@ Before proceeding with user's task:
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Starting new session** | `search_standards("Agent OS orientation")` |
-| **User gives request** | `search_standards("Agent OS orientation")` |
-| **After 20+ messages** | `search_standards("Agent OS orientation")` |
-| **Catching yourself in helper mode** | `search_standards("Agent OS orientation code author role")` |
+| **Starting new session** | `search_standards("prAxIs OS orientation")` |
+| **User gives request** | `search_standards("prAxIs OS orientation")` |
+| **After 20+ messages** | `search_standards("prAxIs OS orientation")` |
+| **Catching yourself in helper mode** | `search_standards("prAxIs OS orientation code author role")` |
 | **Uncertain about querying** | `search_standards("how many times should I query")` |
-| **Forgot the pattern** | `search_standards("Agent OS work pattern")` |
-| **Orientation refresh** | `search_standards("Agent OS orientation bootstrap queries")` |
+| **Forgot the pattern** | `search_standards("prAxIs OS work pattern")` |
+| **Orientation refresh** | `search_standards("prAxIs OS orientation bootstrap queries")` |
 
 ---
 
 ## 🔗 Related Standards
 
-**Query workflow for Agent OS mastery:**
+**Query workflow for prAxIs OS mastery:**
 
-1. **Start with orientation** → `search_standards("Agent OS orientation")` (this document)
+1. **Start with orientation** → `search_standards("prAxIs OS orientation")` (this document)
 2. **Learn decision protocol** → `search_standards("AI agent decision protocol")` → Loaded by Query 1
 3. **Learn development process** → `search_standards("user wants me to build something")` → Loaded by Query 2
 4. **Learn query construction** → `search_standards("query construction patterns")` → Loaded by Query 4
@@ -456,7 +456,7 @@ Before proceeding with user's task:
 
 **AI Assistant:**
 - `standards/ai-assistant/agent-decision-protocol.md` → `search_standards("inherited patterns efficiency paradox")`
-- `standards/ai-assistant/agent-os-development-process.md` → `search_standards("three phase development")`
+- `standards/ai-assistant/praxis-os-development-process.md` → `search_standards("three phase development")`
 - `standards/ai-assistant/query-construction-patterns.md` → `search_standards("query construction")`
 
 **Usage:**

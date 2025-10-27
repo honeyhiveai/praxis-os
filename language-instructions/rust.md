@@ -1,6 +1,6 @@
 # Rust Language-Specific Standards Generation Instructions
 
-**For the Cursor Agent: When installing Agent OS in a Rust project, use these instructions to generate language-specific standards by applying universal CS fundamentals to Rust-specific contexts.**
+**For the Cursor Agent: When installing prAxIs OS in a Rust project, use these instructions to generate language-specific standards by applying universal CS fundamentals to Rust-specific contexts.**
 
 ---
 

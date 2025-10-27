@@ -671,11 +671,11 @@ async def start_workflow(workflow_type, target_file, options=None):
 - Database operations (database) - if we add database support
 - Git operations (git) - if we add git automation
 
-### The Complete Agent OS Enhanced Tool Surface
+### The Complete prAxIs OS Tool Surface
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ Agent OS Enhanced - 5 Tools (Exceptionally Optimal)    │
+│ prAxIs OS - 5 Tools (Exceptionally Optimal)    │
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
 │ Core Feature: Workflows (1 tool)                       │

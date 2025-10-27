@@ -6,15 +6,15 @@
 
 ## Executive Summary
 
-A minimal browser-based IDE that provides an agent-first development environment, complementing existing desktop IDEs (Cursor, Claude Desktop) by offering a lightweight, accessible alternative. The project leverages existing open-source components (Monaco Editor, xterm.js) and integrates with the established Agent OS Enhanced MCP infrastructure.
+A minimal browser-based IDE that provides an agent-first development environment, complementing existing desktop IDEs (Cursor, Claude Desktop) by offering a lightweight, accessible alternative. The project leverages existing open-source components (Monaco Editor, xterm.js) and integrates with the established prAxIs OS MCP infrastructure.
 
 ## Problem Statement
 
-Agent OS Enhanced currently requires desktop IDE installation (Cursor, Claude Desktop), creating barriers for:
+prAxIs OS currently requires desktop IDE installation (Cursor, Claude Desktop), creating barriers for:
 - Quick remote access scenarios
 - Educational/demonstration purposes  
 - Platform-constrained environments (Chromebooks, tablets)
-- Users wanting to try Agent OS without installing desktop software
+- Users wanting to try prAxIs OS without installing desktop software
 
 ## Proposed Solution
 
@@ -102,7 +102,7 @@ A browser-based IDE with minimal scope: code editor, file tree, agent chat, and 
 
 **Infrastructure:**
 - Docker (containerization)
-- Agent OS Enhanced MCP server (existing)
+- prAxIs OS MCP server (existing)
 
 ## Implementation Phases
 

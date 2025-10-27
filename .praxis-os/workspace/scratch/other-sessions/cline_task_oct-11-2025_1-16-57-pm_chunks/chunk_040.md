@@ -5,7 +5,7 @@
 ```
 You: "Execute the Cline streamable-http spec"
 
-Agent OS will:
+prAxIs OS will:
 1. Load the spec
 2. Work through each task
 3. Write code following Cline's patterns
@@ -18,15 +18,15 @@ Agent OS will:
 
 **Self-improvement loop:**
 ```
-Agent OS Enhanced → Build spec for Cline
+prAxIs OS → Build spec for Cline
                  → Implement in Cline
-                 → Cline supports Agent OS better
+                 → Cline supports prAxIs OS better
                  → More developers use Agent OS
-                 → Agent OS improves
+                 → prAxIs OS improves
                  → Cycle continues
 ```
 
-**Demonstrates Agent OS value:**
+**Demonstrates prAxIs OS value:**
 - Structured approach to contributions
 - High-quality specs and implementation
 - Reproducible workflow
@@ -35,15 +35,15 @@ Agent OS Enhanced → Build spec for Cline
 ### The Meta Aspect
 
 **You're using:**
-- Agent OS workflows (spec_creation, spec_execution)
-- Agent OS standards (production code checklist)
-- Agent OS RAG (query best practices)
-- Agent OS tools (search_standards, execute tasks)
+- prAxIs OS workflows (spec_creation, spec_execution)
+- prAxIs OS standards (production code checklist)
+- prAxIs OS RAG (query best practices)
+- prAxIs OS tools (search_standards, execute tasks)
 
 **To contribute:**
 - Better MCP support to Cline
-- Which enables Agent OS to work with Cline
-- Which validates Agent OS methodology
+- Which enables prAxIs OS to work with Cline
+- Which validates prAxIs OS methodology
 - Which demonstrates its power
 
 ### Next Steps
@@ -61,13 +61,13 @@ Agent OS Enhanced → Build spec for Cline
    - Use spec as foundation
    - Explain benefits to Cline community
 
-**This is exactly what Agent OS Enhanced was built for - structured, high-quality contributions to open source projects!**
+**This is exactly what prAxIs OS was built for - structured, high-quality contributions to open source projects!**
 
 Ready to start? 🚀
 </result>
 <task_progress>
 - [x] Outlined process for contributing to Cline
-- [x] Explained using Agent OS workflows (spec_creation, spec_execution)
+- [x] Explained using prAxIs OS workflows (spec_creation, spec_execution)
 - [x] Described spec structure for the contribution
 - [x] Highlighted the self-improvement loop (Agent OS improves tools that improve Agent OS)
 - [x] Ready to start spec creation workflow
@@ -111,9 +111,9 @@ ACT MODE
 <path>mcp_tool_cli.py</path>
 <content>#!/usr/bin/env python3
 """
-CLI wrapper for Agent OS MCP tools.
+CLI wrapper for prAxIs OS MCP tools.
 
-Allows Cline to call Agent OS MCP tools via command line
+Allows Cline to call prAxIs OS MCP tools via command line
 until native streamable-http support is added to Cline.
 
 Usage:
@@ -130,7 +130,7 @@ from fastmcp import Client
 
 
 async def call_tool(tool_name: str, arguments: dict):
-    """Call an Agent OS MCP tool and return the result."""
+    """Call an prAxIs OS MCP tool and return the result."""
     
     # Read state file to get server URL
     state_file = Path(".praxis-os/.mcp_server_state.json")
@@ -198,10 +198,10 @@ if __name__ == "__main__":
     main()
 </content>
 <task_progress>
-- [x] Created CLI wrapper for Agent OS MCP tools
+- [x] Created CLI wrapper for prAxIs OS MCP tools
 - [ ] Test the wrapper
 - [ ] Use wrapper to call search_standards
-- [ ] Validate I can access Agent OS tools via CLI
+- [ ] Validate I can access prAxIs OS tools via CLI
 </task_progress>
 </write_to_file>
 
@@ -217,9 +217,9 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path="mcp_tool_cli.py">
 #!/usr/bin/env python3
 """
-CLI wrapper for Agent OS MCP tools.
+CLI wrapper for prAxIs OS MCP tools.
 
-Allows Cline to call Agent OS MCP tools via command line
+Allows Cline to call prAxIs OS MCP tools via command line
 until native streamable-http support is added to Cline.
 
 Usage:
@@ -236,7 +236,7 @@ from fastmcp import Client
 
 
 async def call_tool(tool_name: str, arguments: dict):
-    """Call an Agent OS MCP tool and return the result."""
+    """Call an prAxIs OS MCP tool and return the result."""
     
     # Read state file to get server URL
     state_file = Path(".praxis-os/.mcp_server_state.json")
@@ -350,7 +350,7 @@ ACT MODE
 <task_progress>
 - [x] Created CLI wrapper for MCP tools
 - [ ] Test search_standards via CLI
-- [ ] Confirm I can access Agent OS tools this way
+- [ ] Confirm I can access prAxIs OS tools this way
 - [ ] Ready to use for Cline contribution work
 </task_progress>
 </execute_command>
@@ -369,10 +369,10 @@ python test_mcp_client.py
 josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ pyenv shell 3.13.5                             [10:24:48]
 josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ python test_mcp_client.py                      [10:24:48]
 ============================================================
-Agent OS MCP Client Test
+prAxIs OS MCP Client Test
 ============================================================
 
-🔗 Connecting to Agent OS MCP server at http://127.0.0.1:4242/mcp
+🔗 Connecting to prAxIs OS MCP server at http://127.0.0.1:4242/mcp
    Project: praxis-os
    Transport: dual
    PID: 95431
@@ -384,7 +384,7 @@ Agent OS MCP Client Test
    - get_server_info: Get comprehensive server and project information.
 
 Returns r...
-   - search_standards: Semantic search over Agent OS documentation.
+   - search_standards: Semantic search over prAxIs OS documentation.
 
 Performs RAG-b...
    - start_workflow: Start new workflow session with phase gating.
@@ -448,7 +448,7 @@ ACT MODE
 - [x] Created CLI wrapper
 - [x] Testing with get_server_info (simpler tool)
 - [ ] Validate CLI wrapper works
-- [ ] Ready to use for accessing Agent OS tools
+- [ ] Ready to use for accessing prAxIs OS tools
 </task_progress>
 </execute_command>
 
@@ -794,7 +794,7 @@ ACT MODE
 **Quick Fix:** Change transport to "sse" in transport_manager.py
 **Long-term:** Contribute streamable-http support to Cline
 
-### Using Agent OS to Contribute to Cline
+### Using prAxIs OS to Contribute to Cline
 
 **The Process:**
 
@@ -826,7 +826,7 @@ Phase 4: PR
 1. **Use CLI wrapper:** `python mcp_tool_cli.py search_standards '{...}'`
 2. **Use Python client directly:** See `test_mcp_client.py`
 
-Both work perfectly and access all Agent OS tools via HTTP!
+Both work perfectly and access all prAxIs OS tools via HTTP!
 
 ### Next Steps
 
@@ -838,7 +838,7 @@ Both work perfectly and access all Agent OS tools via HTTP!
 - Cline should connect
 
 **Option B: Contribute to Cline**
-- Use Agent OS workflows to create spec
+- Use prAxIs OS workflows to create spec
 - Implement streamable-http support in Cline
 - Submit PR
 - Then everyone benefits!

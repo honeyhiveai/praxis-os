@@ -1,10 +1,10 @@
-# Production Code Checklist - Agent OS Framework
+# Production Code Checklist - prAxIs OS Framework
 
 **CRITICAL: ALL code written by AI must meet these standards - NO EXCEPTIONS**
 
 **Date**: October 6, 2025  
 **Status**: Active  
-**Scope**: Every code change in Agent OS Framework  
+**Scope**: Every code change in prAxIs OS Framework  
 **Context**: We are building a framework that guides other projects - our code must exemplify the standards we teach
 
 ---
@@ -39,7 +39,7 @@
 - "What should I check before committing code?"
 - "How do I ensure my code is production-ready?"
 - "What are the quality standards for AI-written code?"
-- "How do I handle configuration in Agent OS?"
+- "How do I handle configuration in prAxIs OS?"
 - "When do I need concurrency analysis?"
 - "How should I handle failures gracefully?"
 - "What documentation is required for production code?"
@@ -51,7 +51,7 @@
 
 **"AI has no excuse for shortcuts - especially when building a quality framework."**
 
-**We are Agent OS - we dogfood our own standards.**
+**We are prAxIs OS - we dogfood our own standards.**
 
 If we ship bugs, we undermine the entire framework. Every line must be production-grade because:
 - AI doesn't get tired
@@ -67,7 +67,7 @@ If we ship bugs, we undermine the entire framework. Every line must be productio
 
 **Question**: Does this code read or modify configuration?
 
-**Configuration sources in Agent OS:**
+**Configuration sources in prAxIs OS:**
 - `config.json` - User-editable configuration
 - Environment variables
 - Dataclass defaults (in `models.py`)
@@ -124,7 +124,7 @@ self.path = base / "standards"  # ❌ Not from config
 
 **Question**: Does this code access shared state?
 
-**Shared state in Agent OS:**
+**Shared state in prAxIs OS:**
 - Vector index (LanceDB table)
 - Workflow state (JSON files)
 - File watcher rebuild state
@@ -220,7 +220,7 @@ except:  # ❌ Bare except
 
 **Question**: Does this manage resources?
 
-**Resources in Agent OS:**
+**Resources in prAxIs OS:**
 - File handles (config.json, workflow files)
 - Vector database connections
 - File watcher observers
@@ -326,7 +326,7 @@ class ServerFactory:
 **Modules:**
 ```python
 """
-Configuration management for Agent OS MCP Server.
+Configuration management for prAxIs OS MCP Server.
 
 This module provides configuration loading, validation, and management
 for the MCP server. It implements a single source of truth for all
@@ -397,7 +397,7 @@ def test_failure_mode():
 
 **Question**: Does this code handle installation/file-copying logic?
 
-**Agent OS dogfoods itself - validate consumer experience:**
+**prAxIs OS dogfoods itself - validate consumer experience:**
 - [ ] Does this work with real copied files (not symlinks)?
 - [ ] Does this handle both source (`universal/`) and installed (`.praxis-os/`)?
 - [ ] Are paths resolved relative to correct base?
@@ -474,7 +474,7 @@ def reload_index(self) -> None:
                 del self.table
             
             # Reload
-            self.table = self.db.open_table("agent_os_index")
+            self.table = self.db.open_table("praxis_os_index")
             logger.info("✅ Index reloaded successfully")
         except Exception as e:
             logger.error(f"❌ Index reload failed: {e}")
@@ -595,8 +595,8 @@ search_standards("code quality standards AI")
 # When debugging quality issues
 search_standards("common code quality mistakes")
 
-# When onboarding to Agent OS
-search_standards("Agent OS code standards")
+# When onboarding to prAxIs OS
+search_standards("prAxIs OS code standards")
 ```
 
 ---
@@ -613,4 +613,4 @@ search_standards("Agent OS code standards")
 
 **Remember: We teach quality standards - we must exemplify them.**
 
-**This is not optional. This is the baseline for Agent OS Framework code.**
+**This is not optional. This is the baseline for prAxIs OS Framework code.**

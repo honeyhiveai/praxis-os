@@ -271,7 +271,7 @@ Horizontal decomposition delivers measurable improvements across all quality met
 
 ## How to Validate Decomposition Quality?
 
-Use these metrics to ensure your decomposition meets Agent OS standards.
+Use these metrics to ensure your decomposition meets prAxIs OS standards.
 
 ```bash
 # Check task file sizes

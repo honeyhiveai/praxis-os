@@ -356,7 +356,7 @@ This specification addresses critical thread safety vulnerabilities in the MCP S
 
 ## Related Documentation
 
-- **Agent OS Standards:** `universal/standards/` (RAG-indexed, use `search_standards()`)
+- **prAxIs OS Standards:** `universal/standards/` (RAG-indexed, use `search_standards()`)
 - **Workflow Construction:** `universal/workflows/workflow-construction-standards.md`
 - **Python Threading:** specs.md Section 5.8.2 (GIL considerations)
 - **CERT Secure Coding:** CON50-J, CON51-J, CON52-J (referenced in specs.md Section 5.8.1)

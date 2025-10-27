@@ -51,7 +51,7 @@ class ProjectInfoDiscovery:
         - Project name (from git remote or directory name)
         - Project root path (from filesystem)
         - Git repository info (if available, None otherwise)
-        - Agent OS path
+        - prAxIs OS path
 
         ALL values discovered at runtime - no hardcoded values.
 
@@ -60,7 +60,7 @@ class ProjectInfoDiscovery:
             {
                 "name": str,               # Project name (dynamic)
                 "root": str,               # Absolute path to project root
-                "agent_os_path": str,      # Absolute path to .praxis-os
+                "praxis_os_path": str,      # Absolute path to .praxis-os
                 "git": dict | None         # Git info or None if not git repo
             }
 
@@ -72,7 +72,7 @@ class ProjectInfoDiscovery:
         return {
             "name": self._get_project_name(),
             "root": str(self.project_root),
-            "agent_os_path": str(self.base_path),
+            "praxis_os_path": str(self.base_path),
             "git": self._get_git_info(),
         }
 
@@ -85,7 +85,7 @@ class ProjectInfoDiscovery:
         2. Directory name (fallback for non-git projects)
 
         Examples:
-            git@github.com:user/agent-os-enhanced.git → "agent-os-enhanced"
+            git@github.com:user/praxis-os-enhanced.git → "praxis-os-enhanced"
             https://github.com/user/my-project.git → "my-project"
             /home/user/my-project/ → "my-project"
 
@@ -113,7 +113,7 @@ class ProjectInfoDiscovery:
 
         Example:
             >>> name = discovery._get_git_repo_name()
-            >>> print(name)  # e.g., "agent-os-enhanced"
+            >>> print(name)  # e.g., "praxis-os-enhanced"
         """
         remote = self._get_git_remote()
         if not remote:

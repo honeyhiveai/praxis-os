@@ -1,6 +1,6 @@
 # MCP Tool Usage Guide
 
-**Guide for using Model Context Protocol (MCP) tools in Agent OS projects.**
+**Guide for using Model Context Protocol (MCP) tools in prAxIs OS projects.**
 
 **Keywords for search**: MCP tools, Model Context Protocol, how to use MCP tools, search_standards, start_workflow, workflow tools, MCP usage, semantic search, phase gating, tool discovery
 
@@ -11,7 +11,7 @@
 **What is MCP?** Model Context Protocol - standardized interface for AI assistants to access tools and information.
 
 **8 Core MCP Tools:**
-1. **`search_standards`** - Semantic search over Agent OS docs (use 5-10+ times per task)
+1. **`search_standards`** - Semantic search over prAxIs OS docs (use 5-10+ times per task)
 2. **`start_workflow`** - Initialize phase-gated workflows
 3. **`get_current_phase`** - Retrieve current workflow phase
 4. **`get_task`** - Get specific task details (NEW in v1.3.0)
@@ -29,7 +29,7 @@
 
 ## Questions This Answers
 
-- "How do I use MCP tools in Agent OS?"
+- "How do I use MCP tools in prAxIs OS?"
 - "What is the Model Context Protocol?"
 - "How do I search for standards using MCP?"
 - "How do I start a workflow?"
@@ -44,7 +44,7 @@
 
 ## 🎯 What Is MCP?
 
-**Model Context Protocol (MCP)** allows AI assistants to access tools and information through a standardized interface. In Agent OS, MCP provides:
+**Model Context Protocol (MCP)** allows AI assistants to access tools and information through a standardized interface. In prAxIs OS, MCP provides:
 
 - 📚 **Semantic search** over standards and docs
 - 🔄 **Workflow execution** with phase gating
@@ -59,7 +59,7 @@
 
 ### 1. `search_standards`
 
-**Purpose:** Semantic search over all Agent OS standards and documentation
+**Purpose:** Semantic search over all prAxIs OS standards and documentation
 
 **When to use:**
 - Need guidance on a pattern or practice
@@ -462,7 +462,7 @@ When in a workflow:
 This guide is most valuable when:
 
 1. **Starting to Use MCP Tools**
-   - Situation: First time using Agent OS MCP tools
+   - Situation: First time using prAxIs OS MCP tools
    - Query: `search_standards("how to use MCP tools")`
 
 2. **Choosing Between Tools**
@@ -498,8 +498,8 @@ This guide is most valuable when:
 **Core Orientation:**
 - `usage/ai-agent-quickstart.md` - Practical examples of using MCP tools
   → `search_standards("AI agent quickstart")`
-- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - MCP in context of Agent OS principles
-  → `search_standards("Agent OS orientation")`
+- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - MCP in context of prAxIs OS principles
+  → `search_standards("prAxIs OS orientation")`
 
 **Workflows:**
 - `workflows/spec_execution_v1/` - Example of phase-gated workflow
@@ -527,4 +527,4 @@ This guide is most valuable when:
 
 ---
 
-**Remember:** MCP tools are your primary interface to Agent OS knowledge. Use them instead of direct file access for 90% context reduction and better AI assistance!
+**Remember:** MCP tools are your primary interface to prAxIs OS knowledge. Use them instead of direct file access for 90% context reduction and better AI assistance!

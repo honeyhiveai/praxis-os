@@ -197,7 +197,7 @@ class LinkValidator:
                 line_number=line_num,
                 link_text=link_text,
                 link_target=link_target,
-                issue=f"Link escapes docs/ directory (Docusaurus will fail to build). Use GitHub URL instead: https://github.com/honeyhiveai/agent-os-enhanced/blob/main/{target_file.relative_to(docs_root.parent)}",
+                issue=f"Link escapes docs/ directory (Docusaurus will fail to build). Use GitHub URL instead: https://github.com/honeyhiveai/praxis-os-enhanced/blob/main/{target_file.relative_to(docs_root.parent)}",
                 link_type='escape'
             ))
             return

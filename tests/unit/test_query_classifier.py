@@ -218,7 +218,7 @@ class TestAccuracyRequirement:
             ("What's the purpose?", "definition"),
             ("Understand the concept", "definition"),
             ("Overview of system", "definition"),
-            ("Introduction to Agent OS", "definition"),
+            ("Introduction to prAxIs OS", "definition"),
             ("What is this?", "definition"),
             # Location (10)
             ("Where is the parser?", "location"),

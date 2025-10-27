@@ -658,7 +658,7 @@ Here is the full, updated content of the file that was saved:
 
 <final_file_content path="mcp_server/__main__.py">
 """
-Entry point for Agent OS MCP server when run as a module.
+Entry point for prAxIs OS MCP server when run as a module.
 
 Allows execution via:
     python -m mcp_server

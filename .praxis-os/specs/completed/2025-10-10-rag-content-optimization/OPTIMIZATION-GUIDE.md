@@ -1,6 +1,6 @@
 # RAG Content Optimization Guide for Future Authors
 
-**Purpose:** Comprehensive guide for creating and maintaining RAG-optimized content in Agent OS  
+**Purpose:** Comprehensive guide for creating and maintaining RAG-optimized content in prAxIs OS  
 **Date:** 2025-10-11  
 **Status:** Gold Standard Template
 
@@ -8,7 +8,7 @@
 
 ## 🎯 Quick Start
 
-**When creating new Agent OS content:**
+**When creating new prAxIs OS content:**
 1. ✅ Use the RAG Optimization Template (Section 2)
 2. ✅ Follow the 7-component structure
 3. ✅ Write query-oriented headers
@@ -105,7 +105,7 @@
 1. "What should I check before committing code?"
 2. "How do I ensure my code is production-ready?"
 3. "What are the quality standards for AI-written code?"
-4. "How do I handle configuration in Agent OS?"
+4. "How do I handle configuration in prAxIs OS?"
 5. "When do I need concurrency analysis?"
 6. "How should I handle failures gracefully?"
 7. "What documentation is required for production code?"
@@ -661,7 +661,7 @@ Study these files as gold standards:
 
 ## 🎓 Final Checklist for New Content
 
-Before publishing new Agent OS content:
+Before publishing new prAxIs OS content:
 
 - [ ] TL;DR section is FIRST and complete
 - [ ] Keywords field has 10-15 relevant search terms
@@ -677,7 +677,7 @@ Before publishing new Agent OS content:
 
 ---
 
-**This guide ensures all Agent OS content maintains the high discoverability standards established by the RAG Content Optimization project.**
+**This guide ensures all prAxIs OS content maintains the high discoverability standards established by the RAG Content Optimization project.**
 
 **Questions? Search:** `search_standards("RAG content optimization")`
 

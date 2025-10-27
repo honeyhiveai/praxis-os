@@ -294,7 +294,7 @@ ACT MODE
 
 [Unexpected content type]
 
-I'll help you fix the bug with streaminghttp mode for MCP tool calls. Let me start by orienting myself with the Agent OS guidelines, then investigate the issue.
+I'll help you fix the bug with streaminghttp mode for MCP tool calls. Let me start by orienting myself with the prAxIs OS guidelines, then investigate the issue.
 
 <search_standards>
 <query>Agent OS orientation guide</query>
@@ -5045,12 +5045,12 @@ ACT MODE
 
 [Unexpected content type]
 
-Based on the `.cursorrules` file in this project, I can see **Agent OS Enhanced** is referenced as a documentation/knowledge management system with specific usage patterns:
+Based on the `.cursorrules` file in this project, I can see **prAxIs OS** is referenced as a documentation/knowledge management system with specific usage patterns:
 
-## What I Know About Agent OS Enhanced:
+## What I Know About prAxIs OS:
 
 ### Core Concept
-Agent OS Enhanced appears to be a **standards-based development system** that uses a `search_standards()` function to query indexed documentation and best practices.
+prAxIs OS appears to be a **standards-based development system** that uses a `search_standards()` function to query indexed documentation and best practices.
 
 ### Key Features from .cursorrules:
 
@@ -5072,20 +5072,20 @@ Agent OS Enhanced appears to be a **standards-based development system** that us
 ### Current Status in This Environment:
 
 However, I notice that **`search_standards()` is not available** in my current tool set. This suggests either:
-- Agent OS Enhanced is not fully configured in this Cline environment
+- prAxIs OS is not fully configured in this Cline environment
 - It may require an MCP server connection
 - The .cursorrules reference might be aspirational/incomplete
 
 <ask_followup_question>
-<question>Would you like me to help set up Agent OS Enhanced in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?</question>
-<options>["Help set up Agent OS Enhanced", "Continue with MCP transport fix", "Explain how to integrate Agent OS with Cline", "Something else"]</options>
+<question>Would you like me to help set up prAxIs OS in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?</question>
+<options>["Help set up prAxIs OS", "Continue with MCP transport fix", "Explain how to integrate prAxIs OS with Cline", "Something else"]</options>
 </ask_followup_question>
 
 ---
 
 **User:**
 
-[ask_followup_question for 'Would you like me to help set up Agent OS Enhanced in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
+[ask_followup_question for 'Would you like me to help set up prAxIs OS in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
 <answer>
 read the docs https://honeyhiveai.github.io/praxis-os/
 </answer>
@@ -5123,7 +5123,7 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
-  Agent OS Enhanced  
+  prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
@@ -5174,7 +5174,7 @@ Infrastructure Built
 
 Production Proven
 
-### Extracted Agent OS Enhanced
+### Extracted prAxIs OS
 
 2,777 tests, 10.0/10 Pylint, 100% AI-authored
 
@@ -5182,7 +5182,7 @@ Complete AI development platform
 
 🙏 **Built on the shoulders of giants:** [BuilderMethods Agent OS](https://buildermethods.com/agent-os) provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it.
 
-[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
+[Visit Original prAxIs OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
 
 Get Started
 -----------
@@ -5296,7 +5296,7 @@ Design validation, concurrency analysis, test generation - focused tools.
 
 ### Portable & Isolated
 
-Each project owns its Agent OS installation, standards, and version.
+Each project owns its prAxIs OS installation, standards, and version.
 
 
 
@@ -5314,7 +5314,7 @@ Build your own AI-assisted workflows with proven patterns.
 
 ](/praxis-os/docs/workflows)
 
-Why Agent OS Enhanced?
+Why prAxIs OS?
 ----------------------
 
 Built on production lessons from real AI development challenges
@@ -5372,18 +5372,18 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/docs/intro'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/docs/intro:
 
-  Introduction | Agent OS Enhanced  
+  Introduction | prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
 On this page
 
-**Agent OS Enhanced** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
+**prAxIs OS** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
 
-What is Agent OS Enhanced?[​](#what-is-praxis-os "Direct link to What is Agent OS Enhanced?")
+What is prAxIs OS?[​](#what-is-praxis-os "Direct link to What is prAxIs OS?")
 -----------------------------------------------------------------------------------------------------
 
-Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
+prAxIs OS builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
 
 *   **90% context reduction** through semantic search (MCP/RAG)
 *   **Architectural phase gating** that enforces workflows in code
@@ -5393,9 +5393,9 @@ Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://
 Quick Start[​](#quick-start "Direct link to Quick Start")
 ---------------------------------------------------------
 
-Install Agent OS Enhanced in your project:
+Install prAxIs OS in your project:
 
-    # Open your project in Cursor and say:"Install Agent OS from github.com/honeyhiveai/praxis-os"
+    # Open your project in Cursor and say:"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 
 The Cursor agent will:
 
@@ -5433,7 +5433,7 @@ Timeless CS fundamentals that apply to any programming language:
 
 ### Language-Specific Generation[​](#language-specific-generation "Direct link to Language-Specific Generation")
 
-For each project, Agent OS generates language-specific implementations of universal standards:
+For each project, prAxIs OS generates language-specific implementations of universal standards:
 
 *   **Python:** GIL, threading, asyncio, pytest patterns
 *   **Go:** Goroutines, channels, sync primitives, table-driven tests
@@ -5488,13 +5488,13 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/docs/how-it-works'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/docs/how-it-works:
 
-  How It Works | Agent OS Enhanced  
+  How It Works | prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
 On this page
 
-Agent OS Enhanced changes how you work with AI - from prompting to orchestration. Here's the complete workflow pattern.
+prAxIs OS changes how you work with AI - from prompting to orchestration. Here's the complete workflow pattern.
 
 The Human-AI Partnership Model[​](#the-human-ai-partnership-model "Direct link to The Human-AI Partnership Model")
 ------------------------------------------------------------------------------------------------------------------
@@ -5862,7 +5862,7 @@ Real Example: End-to-End[​](#real-example-end-to-end "Direct link to Real Exam
 Next Steps[​](#next-steps "Direct link to Next Steps")
 ------------------------------------------------------
 
-*   **[Installation](/praxis-os/docs/installation)** - Set up Agent OS Enhanced
+*   **[Installation](/praxis-os/docs/installation)** - Set up prAxIs OS
 *   **[Workflows](/praxis-os/docs/workflows)** - Understand workflow details
 *   **[Architecture](/praxis-os/docs/architecture)** - How tool calls work under the hood
 <environment_details>
@@ -5888,9 +5888,9 @@ ACT MODE
 
 [Unexpected content type]
 
-Now I understand Agent OS Enhanced! Here's what I learned:
+Now I understand prAxIs OS! Here's what I learned:
 
-## Agent OS Enhanced - Key Insights
+## prAxIs OS - Key Insights
 
 ### 🎯 Core Concept
 It's a **portable multi-agent development framework** that transforms AI from assistant to **velocity-enhancing development partner** through structured orchestration.
@@ -5967,7 +5967,7 @@ Built from real challenges refactoring HoneyHive Python SDK:
 
 ### 🎁 Key Benefits vs Original Agent OS
 
-| Aspect | Original Agent OS | Agent OS Enhanced |
+| Aspect | Original prAxIs OS | prAxIs OS |
 |--------|------------------|-------------------|
 | **Context** | Side-loaded files | MCP/RAG semantic search |
 | **Relevance** | 4% relevant | 95% relevant |
@@ -5996,7 +5996,7 @@ Given this context, I should:
 
 However, for our **immediate MCP transport fix**, this is a straightforward code correction that doesn't require a full spec workflow - just targeted implementation.
 
-Would you like me to proceed with the MCP transport fix using this Agent OS Enhanced approach, or set up Agent OS Enhanced in this Cline project first?
+Would you like me to proceed with the MCP transport fix using this prAxIs OS approach, or set up prAxIs OS in this Cline project first?
 
 ---
 
@@ -6054,15 +6054,15 @@ ACT MODE
 [Unexpected content type]
 
 <ask_followup_question>
-<question>I've now learned about Agent OS Enhanced and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?</question>
-<options>["Install Agent OS Enhanced in this Cline project", "Proceed with the MCP transport fix (streamableHttp bug)", "Create a spec for the MCP transport fix using Agent OS workflow", "Something else"]</options>
+<question>I've now learned about prAxIs OS and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?</question>
+<options>["Install prAxIs OS in this Cline project", "Proceed with the MCP transport fix (streamableHttp bug)", "Create a spec for the MCP transport fix using prAxIs OS workflow", "Something else"]</options>
 </ask_followup_question>
 
 ---
 
 **User:**
 
-[ask_followup_question for 'I've now learned about Agent OS Enhanced and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?'] Result:
+[ask_followup_question for 'I've now learned about prAxIs OS and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?'] Result:
 <answer>
 since you cannot access the mcp yet, you cannot make proper use of agent os enhanced
 </answer>
@@ -6155,7 +6155,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced (not yet configured)
+- [x] Learn about prAxIs OS (not yet configured)
 - [ ] Fix addRemoteServer() to default to streamableHttp
 - [ ] Reorder schema union to prioritize StreamableHTTP
 - [ ] Add deprecation warnings for SSE usage
@@ -6202,11 +6202,11 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [ ] Provide detailed review of design doc with codebase-specific feedback
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </read_file>
@@ -7292,16 +7292,16 @@ The design document is **95% accurate** but needs these additions:
 
 **RECOMMENDATION**: Design doc is solid and ready for spec creation with these minor additions. The core approach is sound and maintains backward compatibility correctly.
 
-**NEXT STEP**: Cursor should create Agent OS Enhanced spec incorporating these corrections.
+**NEXT STEP**: Cursor should create prAxIs OS spec incorporating these corrections.
 </result>
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc with codebase-specific feedback
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -7477,12 +7477,12 @@ if (parsedConfig.type === "sse") {
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [ ] Update design doc with corrections (in progress)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </replace_in_file>
@@ -8496,15 +8496,15 @@ case "sse": {
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with SSE implementation corrections
 - [ ] Add telemetry section to design doc
 - [ ] Add additional test cases to design doc
 - [ ] Add implementation order refinement
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </replace_in_file>
@@ -9565,15 +9565,15 @@ export type LegacyMcpTransportType = "stdio" | "sse" | "http"
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with SSE implementation corrections
 - [x] Add telemetry and error message enhancements
 - [ ] Add additional test cases
 - [ ] Add refined implementation order
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </replace_in_file>
@@ -10641,27 +10641,27 @@ The design document is now:
 
 ### 🚀 Next Steps:
 
-**For Cursor with Agent OS Enhanced:**
+**For Cursor with prAxIs OS:**
 
-1. **Create Spec** using Agent OS Enhanced `spec_creation_v1` workflow
+1. **Create Spec** using prAxIs OS `spec_creation_v1` workflow
    - Input: This updated design document
    - Output: Detailed implementation spec in `.praxis-os/specs/`
 
 2. **Review Spec** - I'll review the generated spec for accuracy
 
-3. **Execute Spec** using Agent OS Enhanced `spec_execution_v1` workflow
+3. **Execute Spec** using prAxIs OS `spec_execution_v1` workflow
    - Implements all changes systematically
    - Includes tests and documentation
    - Phase-gated execution
 
 4. **Verify** - Final validation of the implementation
 
-The design document incorporates all codebase-specific insights and is production-ready for systematic implementation through Agent OS Enhanced workflows.
+The design document incorporates all codebase-specific insights and is production-ready for systematic implementation through prAxIs OS workflows.
 </result>
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
   - [x] SSE implementation details
@@ -10671,9 +10671,9 @@ The design document incorporates all codebase-specific insights and is productio
   - [x] Type safety improvements
   - [x] RPC handler verification note
 - [x] Design doc ready for Cursor to create spec
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -11103,9 +11103,9 @@ The design document should add:
 - [x] Review CONTRIBUTING.md guidelines
 - [ ] **Create GitHub issue** (BLOCKING)
 - [ ] **Wait for maintainer approval** (BLOCKING)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Create changeset entry
 - [ ] Run all quality checks (lint, format, test, e2e)
 - [ ] Create PR with proper description
@@ -11117,15 +11117,15 @@ The design document is comprehensive and technically accurate, but **cannot proc
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
 - [ ] GitHub issue creation (REQUIRED BEFORE IMPLEMENTATION)
 - [ ] Maintainer approval (REQUIRED BEFORE IMPLEMENTATION)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -11168,15 +11168,15 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
 - [ ] Search GitHub issues for existing reports
 - [ ] Determine if issue creation needed
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </execute_command>
@@ -11499,7 +11499,7 @@ ACT MODE
    - Added type safety improvements (`as const`)
    - Included RPC handler verification requirement
 4. **Reviewed CONTRIBUTING.md** - Understood contribution requirements
-5. **Learned Agent OS Enhanced** - Prepared for systematic spec creation workflow
+5. **Learned prAxIs OS** - Prepared for systematic spec creation workflow
 
 ### 📋 Current Status:
 
@@ -11519,20 +11519,20 @@ Given the thorough analysis in MCP_TRANSPORT_ANALYSIS.md, this appears to be a l
 1. Create the GitHub issue now
 2. Reference both analysis documents
 3. Wait for maintainer approval
-4. Then proceed with Cursor using Agent OS Enhanced
+4. Then proceed with Cursor using prAxIs OS
 
 **Option 3: Ask Maintainer Directly**
 Post in Discussions or Discord to confirm if this is a known issue.
 
 ### 📝 What Cursor Needs from You:
 
-For Cursor to create the spec using Agent OS Enhanced, you'll need to:
+For Cursor to create the spec using prAxIs OS, you'll need to:
 
 1. **Confirm Issue Status**: Either find existing issue or create new one
 2. **Get Approval**: Wait for maintainer green light
 3. **Provide Context**: Give Cursor the issue number and design document
 
-Then Cursor can use Agent OS Enhanced to:
+Then Cursor can use prAxIs OS to:
 - Create detailed spec in `.praxis-os/specs/`
 - Implement systematically with phase gating
 - Include all tests and documentation
@@ -11558,16 +11558,16 @@ The design document is production-ready and waiting for GitHub issue approval to
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
 - [x] Attempt GitHub issue search (terminal hung)
 - [ ] Determine issue status (manual search needed)
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -11610,7 +11610,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -11618,9 +11618,9 @@ ACT MODE
 - [ ] Search GitHub issues via browser
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -11839,7 +11839,7 @@ Console logs:
 
 				- [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -11847,9 +11847,9 @@ Console logs:
 - [ ] Search GitHub issues via browser
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 
 				
@@ -11912,7 +11912,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -11920,9 +11920,9 @@ ACT MODE
 - [ ] Search GitHub issues via browser (in progress)
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -11966,7 +11966,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -11975,9 +11975,9 @@ ACT MODE
 - [ ] Check if transport/SSE issue exists
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12022,7 +12022,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12030,9 +12030,9 @@ ACT MODE
 - [ ] Search GitHub issues via browser (checking different search terms)
 - [ ] Determine issue status
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12076,7 +12076,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12084,9 +12084,9 @@ ACT MODE
 - [x] Search GitHub issues via browser
 - [ ] Determine issue status and report findings
 - [ ] Get maintainer approval if new issue
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12201,7 +12201,7 @@ Full technical analysis available in PR (to be created after approval):
 
 **3. Implementation (After Approval)**
 Once approved, proceed with:
-- Cursor creates spec using Agent OS Enhanced
+- Cursor creates spec using prAxIs OS
 - Systematic implementation via workflow
 - Comprehensive testing
 - PR with changeset
@@ -12217,7 +12217,7 @@ Would you like me to draft the complete GitHub issue text, or would you prefer t
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12226,9 +12226,9 @@ Would you like me to draft the complete GitHub issue text, or would you prefer t
 - [x] Determine issue status - NO DUPLICATE FOUND
 - [ ] Create GitHub issue (user decision needed)
 - [ ] Get maintainer approval (required before implementation)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -12275,7 +12275,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12284,9 +12284,9 @@ ACT MODE
 - [ ] Review issue #3315 about StreamableHttpTransport
 - [ ] Determine if our bug matches existing issue
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12330,7 +12330,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12339,9 +12339,9 @@ ACT MODE
 - [ ] Review issue #3315 (CLOSED) about StreamableHttpTransport - reading details
 - [ ] Determine if our bug matches existing issue
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12385,7 +12385,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12394,9 +12394,9 @@ ACT MODE
 - [ ] Review issue #3315 (CLOSED) - different bug, reading resolution
 - [ ] Determine if our bug matches existing issue
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12440,7 +12440,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12449,9 +12449,9 @@ ACT MODE
 - [ ] Review issue #3315 (CLOSED) - PR #3413 submitted, still broken per comments
 - [ ] Check if related to our default transport bug
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12495,7 +12495,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12504,9 +12504,9 @@ ACT MODE
 - [ ] Review issue #3315 - Different bug (HTTP method), reading user configs showing manual type specification
 - [ ] Determine if default transport selection has been discussed
 - [ ] Decide on next steps
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12550,7 +12550,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12560,9 +12560,9 @@ ACT MODE
 - [ ] Report findings and recommend creating new issue
 - [ ] Create new GitHub issue for default transport bug
 - [ ] Get maintainer approval
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </browser_action>
@@ -12687,7 +12687,7 @@ New remote servers should default to `streamableHttp` transport per MCP v1.0 spe
 1. **Create Issue** on GitHub with above template
 2. **Wait for Maintainer Approval** (required per CONTRIBUTING.md)
 3. **Once Approved**:
-   - Cursor creates spec using Agent OS Enhanced
+   - Cursor creates spec using prAxIs OS
    - Systematic implementation via phase-gated workflow
    - Create PR with changeset (type: patch)
    - Include comprehensive tests
@@ -12701,12 +12701,12 @@ New remote servers should default to `streamableHttp` transport per MCP v1.0 spe
 **Duplicate Check:** No duplicate found ✅  
 **Issue Template:** Prepared ✅
 
-The MCP transport default bug has been thoroughly analyzed and is ready for GitHub issue creation and subsequent implementation through Agent OS Enhanced workflow.
+The MCP transport default bug has been thoroughly analyzed and is ready for GitHub issue creation and subsequent implementation through prAxIs OS workflow.
 </result>
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -12717,9 +12717,9 @@ The MCP transport default bug has been thoroughly analyzed and is ready for GitH
 - [x] Prepare GitHub issue template
 - [ ] User creates GitHub issue (action required)
 - [ ] Get maintainer approval (required before implementation)
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -14346,7 +14346,7 @@ case "sse": {
 
 **Impact:** Non-breaking, backward compatible, aligns with MCP v1.0 specification
 
-**Status:** Ready for GitHub issue creation and systematic implementation via Agent OS Enhanced workflow.
+**Status:** Ready for GitHub issue creation and systematic implementation via prAxIs OS workflow.
 
 ---
 
@@ -14356,7 +14356,7 @@ All bugs identified, documented, and ready for implementation.
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -14368,8 +14368,8 @@ All bugs identified, documented, and ready for implementation.
 - [x] Document complete bug analysis
 - [ ] User creates GitHub issue
 - [ ] Get maintainer approval
-- [ ] Cursor creates spec using Agent OS Enhanced
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor creates spec using prAxIs OS
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>
@@ -15888,7 +15888,7 @@ Complete technical analysis and implementation plan available:
 ## After Approval
 
 Once this issue is approved by maintainers, I'm ready to:
-1. Create comprehensive spec using Agent OS Enhanced workflow
+1. Create comprehensive spec using prAxIs OS workflow
 2. Implement the fix with full test coverage
 3. Submit PR with changeset (type: patch)
 4. Update documentation
@@ -16148,7 +16148,7 @@ Complete technical analysis and implementation plan:
 ## After Approval
 
 Once this issue is approved by maintainers, I'm ready to:
-1. Create comprehensive spec using Agent OS Enhanced workflow  
+1. Create comprehensive spec using prAxIs OS workflow  
 2. Implement the fix with full test coverage
 3. Submit PR with changeset (type: patch)
 4. Update documentation and examples
@@ -17465,7 +17465,7 @@ gh issue create \
    - Request changes
    - Suggest different approach
 4. **Once Approved** - I can then:
-   - Create detailed spec using Agent OS Enhanced
+   - Create detailed spec using prAxIs OS
    - Implement the fix systematically
    - Create PR with comprehensive tests
    - Submit with proper changeset
@@ -17500,7 +17500,7 @@ Once maintainers approve, all analysis is complete and ready:
 - [x] Attempted browser posting (requires manual authentication)
 - [ ] **User posts issue manually** ⬅️ ACTION REQUIRED
 - [ ] Get maintainer approval on issue
-- [ ] Create spec using Agent OS Enhanced
+- [ ] Create spec using prAxIs OS
 - [ ] Implement fix systematically
 - [ ] Submit PR with tests
 </task_progress>
@@ -18865,7 +18865,7 @@ ACT MODE
   - Assign to someone
 
 **2. Once Approved** 🛠️
-- Create detailed spec using Agent OS Enhanced workflow
+- Create detailed spec using prAxIs OS workflow
 - Implement fix systematically with phase gating
 - Create comprehensive test suite
 - Submit PR with changeset (type: patch)
@@ -18900,7 +18900,7 @@ All analysis complete:
 - [x] Create and run script to post issue
 - [x] GitHub issue #6767 successfully created
 - [ ] **Monitor for maintainer approval** ⬅️ NEXT STEP
-- [ ] Create spec using Agent OS Enhanced
+- [ ] Create spec using prAxIs OS
 - [ ] Implement fix systematically
 - [ ] Submit PR with tests
 </task_progress>

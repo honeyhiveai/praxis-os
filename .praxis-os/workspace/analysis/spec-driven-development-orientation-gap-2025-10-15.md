@@ -18,7 +18,7 @@ I think:
 2. Start implementing
 3. Write code directly
 
-### Correct Agent OS Model ✅
+### Correct prAxIs OS Model ✅
 
 ```
 Design Doc → spec_creation_v1 → Formal Spec → spec_execution_v1 → Implementation
@@ -84,7 +84,7 @@ When I run the 8 bootstrap queries, I don't think I get clear guidance on:
 - "Design → spec_creation → spec_execution"
 - "Never implement directly from design docs"
 
-### Gap 2: Agent OS Development Process Not Emphasized
+### Gap 2: prAxIs OS Development Process Not Emphasized
 
 The operating model is there, but the **2-workflow process** isn't emphasized enough.
 
@@ -163,7 +163,7 @@ Should explicitly state:
 ```markdown
 ## The 2-Workflow Model
 
-Agent OS uses TWO separate workflows for feature development:
+prAxIs OS uses TWO separate workflows for feature development:
 
 ### Workflow 1: Specification Creation (spec_creation_v1)
 - **Input**: Design discussion, notes, or rough design doc

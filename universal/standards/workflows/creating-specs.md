@@ -1,6 +1,6 @@
-# Creating Agent OS Specifications
+# Creating prAxIs OS Specifications
 
-**Universal documentation for writing design specifications in any Agent OS project.**
+**Universal documentation for writing design specifications in any prAxIs OS project.**
 
 **Keywords for search**: creating specs, how to write specifications, spec structure, design documents, software requirements document, SRD, specification templates, task breakdown, implementation planning
 
@@ -38,7 +38,7 @@
 
 ## Questions This Answers
 
-- "How do I create a specification in Agent OS?"
+- "How do I create a specification in prAxIs OS?"
 - "What files should be in a spec directory?"
 - "What's the difference between srd.md and specs.md?"
 - "How do I structure tasks in tasks.md?"
@@ -66,7 +66,7 @@ A **specification (spec)** is a design document that details a feature, enhancem
 
 ## What is the Standard Spec Directory Structure?
 
-All specs follow this standard structure (inspired by python-sdk Agent OS):
+All specs follow this standard structure (inspired by python-sdk prAxIs OS):
 
 ```
 .praxis-os/specs/YYYY-MM-DD-feature-name/

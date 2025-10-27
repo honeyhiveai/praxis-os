@@ -1,7 +1,7 @@
 # Aider AI Coding Assistant - Deep Architecture Analysis
 
 **Date**: 2025-10-12  
-**Purpose**: Understand agent design patterns for Agent OS persona system  
+**Purpose**: Understand agent design patterns for prAxIs OS persona system  
 **Source**: https://github.com/paul-gauthier/aider (2,485 lines base_coder.py)
 
 ---
@@ -304,7 +304,7 @@ def summarize_end(self):
 
 **Key Insight:** **Task-specific optimization** - Different prompts and edit formats for different use cases.
 
-### How Agent OS Could Use This
+### How prAxIs OS Could Use This
 
 **Agent OS Personas = Aider's Coders:**
 - Database Specialist = Specialized prompt + domain knowledge
@@ -313,7 +313,7 @@ def summarize_end(self):
 
 **Difference:**
 - Aider: Human switches modes via commands
-- Agent OS: Main agent invokes specialists via MCP tools
+- prAxIs OS: Main agent invokes specialists via MCP tools
 
 ---
 
@@ -341,10 +341,10 @@ system_reminder:
   - Common mistakes to avoid
 ```
 
-**For Agent OS Personas:**
+**For prAxIs OS Personas:**
 ```python
 SPECIALIST_SYSTEM_PROMPT = """
-You are a {role} specialist for Agent OS Enhanced.
+You are a {role} specialist for prAxIs OS.
 
 MANDATORY BOOTSTRAP:
 1. search_standards("{role} decision protocol")
@@ -364,7 +364,7 @@ REMEMBER: Query project-specific standards first, not generic advice.
 """
 ```
 
-**Key additions for Agent OS:**
+**Key additions for prAxIs OS:**
 - ✅ Bootstrap sequence (Aider doesn't have this)
 - ✅ Standards-building mission (Aider is purely reactive)
 - ✅ Query-first emphasis (Aider assumes file context given)
@@ -376,7 +376,7 @@ REMEMBER: Query project-specific standards first, not generic advice.
 - Clear "these are the files you can edit" message
 - Trust message: "This IS the true content"
 
-**For Agent OS:**
+**For prAxIs OS:**
 - Specialists should also have explicit file context
 - Clear boundaries: "These files are your scope"
 - Helps prevent specialists from roaming too wide
@@ -388,7 +388,7 @@ REMEMBER: Query project-specific standards first, not generic advice.
 - Token costs matter
 - Different models prefer different formats
 
-**For Agent OS:**
+**For prAxIs OS:**
 - Don't need multiple edit formats (main agent handles that)
 - BUT do need multiple specialist types
 - Each specialist optimized for their domain
@@ -401,7 +401,7 @@ REMEMBER: Query project-specific standards first, not generic advice.
 - `/undo`, `/diff` - Git operations
 - `/clear`, `/reset` - Context management
 
-**For Agent OS:**
+**For prAxIs OS:**
 - Main agent has this control layer
 - Specialists don't need it (short-lived, focused)
 - MCP tools provide equivalent control
@@ -414,7 +414,7 @@ REMEMBER: Query project-specific standards first, not generic advice.
 - Returns relevant file summaries
 - Helps agent discover what files to edit
 
-**For Agent OS:**
+**For prAxIs OS:**
 - `codebase_search` provides similar functionality
 - Specialists should use it to discover context
 - **This is what we want to encourage vs grep!**
@@ -450,9 +450,9 @@ REMEMBER: Query project-specific standards first, not generic advice.
    - Long sessions still degrade
    - No self-reinforcing patterns
 
-### What Agent OS Adds
+### What prAxIs OS Adds
 
-| Feature | Aider | Agent OS |
+| Feature | Aider | prAxIs OS |
 |---------|-------|----------|
 | Tool layer | ❌ Native only | ✅ MCP tools |
 | Knowledge accumulation | ❌ None | ✅ Standards population |
@@ -528,9 +528,9 @@ Any other messages in the chat may contain outdated versions of the files' conte
 
 ## 📊 ARCHITECTURE COMPARISON
 
-### Aider vs Agent OS Specialists
+### Aider vs prAxIs OS Specialists
 
-| Aspect | Aider | Agent OS Specialists |
+| Aspect | Aider | prAxIs OS Specialists |
 |--------|-------|---------------------|
 | **Lifecycle** | Long-running session | Short-lived (one task) |
 | **Invocation** | Human command | Main agent MCP call |
@@ -541,7 +541,7 @@ Any other messages in the chat may contain outdated versions of the files' conte
 | **Bootstrap** | None | Enforced in system prompt |
 | **Decision guidance** | Implicit in training | Explicit via protocol |
 
-**Key Difference:** Agent OS specialists are both **executors** and **teachers** (for future specialists).
+**Key Difference:** prAxIs OS specialists are both **executors** and **teachers** (for future specialists).
 
 ---
 
@@ -553,7 +553,7 @@ Any other messages in the chat may contain outdated versions of the files' conte
 PERSONA_SYSTEM_PROMPT = """
 {main_system}      # Role, scope, mission (200-300 tokens)
 
-{bootstrap}        # Agent OS addition (100 tokens)
+{bootstrap}        # prAxIs OS addition (100 tokens)
 
 {process_steps}    # How to work (100-200 tokens)
 
@@ -636,7 +636,7 @@ System prompt:
 5. **Git integration** - Every change is reversible
 6. **Human control** - Commands give fine-grained control
 
-### What Agent OS Adds On Top
+### What prAxIs OS Adds On Top
 
 1. **MCP tool layer** - Structured knowledge access
 2. **Bootstrap enforcement** - Specialists start with foundation
@@ -653,7 +653,7 @@ System prompt:
 - Reactive to requests
 - Resets each session
 
-**Agent OS:**
+**prAxIs OS:**
 - Agents as specialists in ecosystem
 - Agents discover context via tools
 - Proactive about standards
@@ -665,7 +665,7 @@ System prompt:
 
 Based on this analysis, we should:
 
-1. ✅ **Design specialist system prompts** using Aider's structure + Agent OS additions
+1. ✅ **Design specialist system prompts** using Aider's structure + prAxIs OS additions
 2. ✅ **Define bootstrap sequences** for each specialist type
 3. ✅ **Create few-shot examples** showing desired specialist behavior
 4. ✅ **Document decision protocols** specific to each domain
@@ -674,7 +674,7 @@ Based on this analysis, we should:
 
 ---
 
-**Key Takeaway:** Aider proves that **multiple specialized agents with clear prompts work**. Agent OS adds **knowledge accumulation** and **behavioral guidance** on top of that foundation.
+**Key Takeaway:** Aider proves that **multiple specialized agents with clear prompts work**. prAxIs OS adds **knowledge accumulation** and **behavioral guidance** on top of that foundation.
 
 This analysis gives us a proven blueprint to build from.
 

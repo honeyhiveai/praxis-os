@@ -141,7 +141,7 @@
 
 **Tasks:**
 
-- [x] **Task 3.1**: Remove old `_load_path_config()` from agent_os_rag.py
+- [x] **Task 3.1**: Remove old `_load_path_config()` from praxis_os_rag.py
   - **Estimated Time**: 1 hour
   - **Dependencies**: Phase 2 complete
   - **Acceptance Criteria**:
@@ -149,12 +149,12 @@
     - [x] All references updated to use ConfigLoader
     - [x] No broken imports
 
-- [x] **Task 3.2**: Remove old tool registration from agent_os_rag.py
+- [x] **Task 3.2**: Remove old tool registration from praxis_os_rag.py
   - **Estimated Time**: 2 hours
   - **Dependencies**: Task 3.1
   - **Acceptance Criteria**:
     - [x] Tool definitions moved to server/tools/
-    - [x] `create_server()` removed from agent_os_rag.py (entire file deleted)
+    - [x] `create_server()` removed from praxis_os_rag.py (entire file deleted)
     - [x] File reduced to utilities only (deleted, replaced by modular architecture)
 
 - [x] **Task 3.3**: Move models from models.py to models/ module
@@ -169,7 +169,7 @@
   - **Estimated Time**: 1 hour
   - **Dependencies**: Tasks 3.1-3.3
   - **Acceptance Criteria**:
-    - [x] Old AgentOSFileWatcher removed (deleted with agent_os_rag.py)
+    - [x] Old AgentOSFileWatcher removed (deleted with praxis_os_rag.py)
     - [x] Only new monitoring/watcher.py used
     - [x] All watchers use configured paths
 

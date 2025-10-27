@@ -9,7 +9,7 @@ doc_type: tutorial
 
 ## What is prAxIs OS?
 
-prAxIs OS builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
+prAxIs OS builds on the foundation of [prAxIs OS by Brian Casel](https://buildermethods.com/praxis-os), addressing key limitations discovered through production use:
 
 - **90% context reduction** through semantic search (MCP/RAG)
 - **Architectural phase gating** that enforces workflows in code

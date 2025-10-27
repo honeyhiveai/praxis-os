@@ -1,4 +1,4 @@
-# Agent OS Enhanced Documentation - ASCII Diagram Conversion Summary
+# prAxIs OS Documentation - ASCII Diagram Conversion Summary
 
 **Date:** 2025-10-13
 **Task:** Convert ASCII diagrams to React components per documentation standards

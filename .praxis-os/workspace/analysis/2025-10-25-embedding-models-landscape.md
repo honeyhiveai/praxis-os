@@ -128,14 +128,14 @@ Your Infrastructure Analogy:
 - Already using OpenAI for LLM (infrastructure reuse)
 - Don't have privacy constraints
 
-**Your Agent OS Enhanced Reality**:
+**Your prAxIs OS Reality**:
 ```python
 # build_rag_index.py:50
 embedding_provider: str = "local",  # Default
 embedding_model: str = "all-MiniLM-L6-v2",
 
 # You chose: local (FREE, private, offline)
-# Cost to index Agent OS: $0.00
+# Cost to index prAxIs OS: $0.00
 # OpenAI alternative cost: ~$0.60 one-time + $0.02/month for updates
 ```
 
@@ -211,7 +211,7 @@ Use Case:     When you have very long documents
 **Multilingual**: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
 **Finance**: `ProsusAI/finbert`
 
-**When you need these**: Probably never for Agent OS Enhanced (English technical docs)
+**When you need these**: Probably never for prAxIs OS (English technical docs)
 
 ---
 
@@ -457,7 +457,7 @@ Same with embeddings:
 
 ---
 
-## Practical Recommendations for Agent OS Enhanced
+## Practical Recommendations for prAxIs OS
 
 ### Recommendation 1: Stay with all-MiniLM-L6-v2 for Now
 
@@ -515,7 +515,7 @@ If bge-small wins on <50% → Stick with all-MiniLM
 
 ### Recommendation 3: Consider OpenAI for Enterprise Offering
 
-**Scenario**: If you offer Agent OS Enhanced as a paid service
+**Scenario**: If you offer prAxIs OS as a paid service
 
 **Cost-benefit**:
 ```
@@ -531,7 +531,7 @@ ROI: Spend $0.84, gain $10 = 1000% ROI
 ```
 
 **When to do this**:
-- You're charging for Agent OS Enhanced
+- You're charging for prAxIs OS
 - Search quality is a differentiation factor
 - Privacy is NOT a selling point (enterprise has other privacy controls)
 
@@ -709,7 +709,7 @@ bge-large-en-v1.5:   1.3 GB, 1024 dim, 92nd percentile quality
 
 Question: Is 17% quality improvement worth 16x storage?
 
-For Agent OS (400 chunks):
+For prAxIs OS (400 chunks):
 - Small: 600 KB storage, 15ms search
 - Large: 9.6 MB storage, 35ms search
 
@@ -747,7 +747,7 @@ Free (all-MiniLM-L6-v2):
 
 Paid (OpenAI):
 - Quality: 95th percentile
-- Cost: $25/year (for Agent OS scale)
+- Cost: $25/year (for prAxIs OS scale)
 - Privacy: Data sent to OpenAI
 - Dependency: API availability, internet, API keys
 
@@ -759,7 +759,7 @@ For enterprise SaaS: Probably yes (quality matters more)
 
 ---
 
-## Action Items for Agent OS Enhanced
+## Action Items for prAxIs OS
 
 ### Immediate (Next Sprint)
 
@@ -842,7 +842,7 @@ Baseline (all-MiniLM-L6-v2):
 5. Monitor and iterate (just like infrastructure)
 ```
 
-**Recommended path for Agent OS Enhanced**:
+**Recommended path for prAxIs OS**:
 1. Stay with all-MiniLM-L6-v2 (current choice is solid)
 2. Add quality monitoring (measure before optimizing)
 3. Test bge-small-en-v1.5 when you have data (free upgrade)

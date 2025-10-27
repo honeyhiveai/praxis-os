@@ -1,17 +1,17 @@
 # System Requirements Document (SRD)
 
-## Agent OS Upgrade Workflow
+## prAxIs OS Upgrade Workflow
 
 **Version:** 1.0  
 **Date:** 2025-10-08  
 **Status:** Requirements Phase  
-**Workflow ID:** `agent_os_upgrade_v1`
+**Workflow ID:** `praxis_os_upgrade_v1`
 
 ---
 
 ## 1. Business Goals
 
-### BG-1: Automate Agent OS Upgrades
+### BG-1: Automate prAxIs OS Upgrades
 
 **Objective:** Eliminate manual upgrade steps and reduce upgrade time from 10+ minutes (manual) to under 2 minutes (automated).
 
@@ -49,7 +49,7 @@
 
 ### BG-3: Demonstrate Meta-Framework for Operational Tasks
 
-**Objective:** Showcase Agent OS meta-workflow handling complex operational workflows with state persistence across server restarts.
+**Objective:** Showcase prAxIs OS meta-workflow handling complex operational workflows with state persistence across server restarts.
 
 **Success Metrics:**
 - **Resumability:** 100% success rate resuming after server restart
@@ -58,10 +58,10 @@
 - **Complexity Handling:** Successfully handles 6-phase workflow with server restart
 
 **Business Impact:**
-- Validates Agent OS architecture for production use
+- Validates prAxIs OS architecture for production use
 - Creates reusable patterns for complex workflows
 - Demonstrates value to potential enterprise users
-- Increases confidence in Agent OS capabilities
+- Increases confidence in prAxIs OS capabilities
 
 ---
 
@@ -69,8 +69,8 @@
 
 ### US-1: Safe Upgrade with Automatic Rollback
 
-**As a** developer using Agent OS in my project  
-**I want** to upgrade Agent OS with a single command and automatic rollback if something fails  
+**As a** developer using prAxIs OS in my project  
+**I want** to upgrade prAxIs OS with a single command and automatic rollback if something fails  
 **So that** I can stay current without fear of breaking my development environment
 
 **Acceptance Criteria:**
@@ -89,7 +89,7 @@
 
 ### US-2: Resume Upgrade After Server Restart
 
-**As a** developer upgrading Agent OS  
+**As a** developer upgrading prAxIs OS  
 **I want** the upgrade workflow to survive the MCP server restart  
 **So that** the workflow can upgrade the server itself without manual intervention
 
@@ -289,7 +289,7 @@ The upgrade workflow consists of 6 phases:
 ```json
 {
   "session_id": "uuid",
-  "workflow_type": "agent_os_upgrade_v1",
+  "workflow_type": "praxis_os_upgrade_v1",
   "target_file": "mcp_server",
   "current_phase": 3,
   "completed_phases": [0, 1, 2],

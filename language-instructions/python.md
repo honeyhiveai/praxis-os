@@ -1,6 +1,6 @@
 # Python Language-Specific Standards Generation Instructions
 
-**For the Cursor Agent: When installing Agent OS in a Python project, use these instructions to generate language-specific standards by applying universal CS fundamentals to Python-specific contexts.**
+**For the Cursor Agent: When installing prAxIs OS in a Python project, use these instructions to generate language-specific standards by applying universal CS fundamentals to Python-specific contexts.**
 
 ---
 
@@ -417,14 +417,14 @@ def calculate(x: float, y: float, operation: str = "add") -> float:
 ## File 6: `python-virtual-environments.md`
 
 ### Purpose
-Document the **two-venv architecture** required for Python projects using Agent OS.
+Document the **two-venv architecture** required for Python projects using prAxIs OS.
 
 ### Critical Concepts
 
 #### Two Separate Virtual Environments
 
-**1. Agent OS MCP Server venv** (`.praxis-os/venv/`)
-- Purpose: Run Agent OS MCP server in isolation
+**1. prAxIs OS MCP Server venv** (`.praxis-os/venv/`)
+- Purpose: Run prAxIs OS MCP server in isolation
 - Dependencies: lancedb, mcp, sentence-transformers, watchdog, honeyhive
 - Used by: Cursor's MCP integration (configured in `.cursor/mcp.json`)
 - **Never used for project code execution**
@@ -442,21 +442,21 @@ Document the **two-venv architecture** required for Python projects using Agent 
 
 ## Overview
 
-Python projects using Agent OS require **two separate virtual environments**.
+Python projects using prAxIs OS require **two separate virtual environments**.
 
 ## Virtual Environment Architecture
 
-### 1. Agent OS MCP Server venv
+### 1. prAxIs OS MCP Server venv
 
 **Location**: `.praxis-os/venv/`
 
-**Purpose**: Isolated Python environment for Agent OS MCP server
+**Purpose**: Isolated Python environment for prAxIs OS MCP server
 
 **Dependencies**:
 - lancedb, mcp, sentence-transformers, watchdog, honeyhive (optional)
 
 **Usage**: 
-- Automatically created during Agent OS installation
+- Automatically created during prAxIs OS installation
 - Used exclusively by `.cursor/mcp.json`
 - **Should NOT be used for project code execution**
 
@@ -464,7 +464,7 @@ Python projects using Agent OS require **two separate virtual environments**.
 ```json
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "praxis-os-rag": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"]
     }
@@ -539,7 +539,7 @@ tox
 {PROJECT_VENV}/bin/pip install -r requirements.txt
 ```
 
-### When to Use Agent OS venv (NEVER directly)
+### When to Use prAxIs OS venv (NEVER directly)
 
 ❌ **The AI should NEVER directly use `.praxis-os/venv/`**
 - It's managed automatically by Cursor
@@ -548,16 +548,16 @@ tox
 ## Troubleshooting
 
 ### Issue: Tests fail with import errors
-**Cause**: Tests running with Agent OS venv instead of project venv
+**Cause**: Tests running with prAxIs OS venv instead of project venv
 **Solution**: Verify `.praxis-os/config.json` has correct project venv path
 
 ### Issue: MCP server fails to start
-**Cause**: Agent OS venv missing/corrupted
+**Cause**: prAxIs OS venv missing/corrupted
 **Solution**: Recreate with `python -m venv .praxis-os/venv --clear`
 
 ## Best Practices
 
-1. **Never mix environments**: Keep Agent OS and project dependencies separate
+1. **Never mix environments**: Keep prAxIs OS and project dependencies separate
 2. **Use absolute paths**: Store absolute paths in config for reliability
 3. **Document in README**: Explain two-venv architecture to team
 4. **Git ignore both**: Add both `.praxis-os/venv/` and project venv to `.gitignore`

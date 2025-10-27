@@ -1,6 +1,6 @@
 # Workflow System v1 Completion Design
 **Date**: 2025-10-23  
-**Author**: Agent OS Team  
+**Author**: prAxIs OS Team  
 **Status**: Design Phase  
 **Target**: Workflow System v1.0 Production Ready
 
@@ -8,7 +8,7 @@
 
 ## Problem Statement
 
-The Agent OS Enhanced workflow system is **architecturally complete** but has **critical implementation gaps** that prevent it from being production-ready:
+The prAxIs OS workflow system is **architecturally complete** but has **critical implementation gaps** that prevent it from being production-ready:
 
 ### What's Broken
 1. **Validation system bypassed** - Implemented Oct 20 but never enabled (session.py:504: `checkpoint_passed = True`)
@@ -34,7 +34,7 @@ The Agent OS Enhanced workflow system is **architecturally complete** but has **
 - **Bootstrap problem**: Validation system validated itself while validation off
 
 ### Why This Matters
-Agent OS Enhanced is 16 days old with impressive velocity (35 commits, 4 core workflows). But the validation system is a **fortress with open gates** - beautifully designed but not protecting anything. Session state requires **AI to do math** instead of reading status. This blocks v1.0 production readiness.
+prAxIs OS is 16 days old with impressive velocity (35 commits, 4 core workflows). But the validation system is a **fortress with open gates** - beautifully designed but not protecting anything. Session state requires **AI to do math** instead of reading status. This blocks v1.0 production readiness.
 
 ---
 
@@ -116,7 +116,7 @@ StateManager (JSON persistence, file locking, lifecycle)
 - `spec_creation_v1`: Create comprehensive specs (6 phases)
 - `spec_execution_v1`: Execute specs dynamically (Phase 0 + dynamic 1-N)
 - `workflow_creation_v1`: Create new workflows (meta-framework, 6 phases)
-- `agent_os_upgrade_v1`: Safe upgrade system (6 phases)
+- `praxis_os_upgrade_v1`: Safe upgrade system (6 phases)
 
 ### What's Broken
 

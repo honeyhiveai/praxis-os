@@ -1,17 +1,17 @@
 # Implementation Tasks
 
-## Agent OS Upgrade Workflow
+## prAxIs OS Upgrade Workflow
 
 **Version:** 1.0  
 **Date:** 2025-10-08  
 **Status:** Task Breakdown  
-**Workflow ID:** `agent_os_upgrade_v1`
+**Workflow ID:** `praxis_os_upgrade_v1`
 
 ---
 
 ## Overview
 
-This document breaks down the implementation of the Agent OS Upgrade Workflow into actionable tasks across 5 implementation phases plus the creation of 6 workflow execution phases.
+This document breaks down the implementation of the prAxIs OS Upgrade Workflow into actionable tasks across 5 implementation phases plus the creation of 6 workflow execution phases.
 
 **Total Estimated Time:** 4-5 weeks
 
@@ -42,7 +42,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Set up the workflow directory structure with all required files.
 
 **Acceptance Criteria:**
-- [ ] Directory created: `universal/workflows/agent_os_upgrade_v1/`
+- [ ] Directory created: `universal/workflows/praxis_os_upgrade_v1/`
 - [ ] `metadata.json` created with all phase definitions
 - [ ] `phases/` directory created
 - [ ] `supporting-docs/` directory created with docs from spec
@@ -229,7 +229,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Create Phase 0 markdown file with pre-flight check guidance.
 
 **Acceptance Criteria:**
-- [ ] File created: `universal/workflows/agent_os_upgrade_v1/phases/0-pre-flight-checks.md`
+- [ ] File created: `universal/workflows/praxis_os_upgrade_v1/phases/0-pre-flight-checks.md`
 - [ ] Contains: Objective, Prerequisites, Commands, Validation Gate
 - [ ] Commands for: validate source, check git, check disk space, check lock
 - [ ] Checkpoint evidence schema defined
@@ -251,7 +251,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Create Phase 1 markdown file with backup preparation guidance.
 
 **Acceptance Criteria:**
-- [ ] File created: `universal/workflows/agent_os_upgrade_v1/phases/1-backup-preparation.md`
+- [ ] File created: `universal/workflows/praxis_os_upgrade_v1/phases/1-backup-preparation.md`
 - [ ] Contains: Objective, Prerequisites, Commands, Validation Gate
 - [ ] Commands for: create backup, generate manifest, verify integrity, acquire lock
 - [ ] Checkpoint evidence schema defined
@@ -363,7 +363,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Create Phase 2 markdown file with content upgrade guidance.
 
 **Acceptance Criteria:**
-- [ ] File created: `universal/workflows/agent_os_upgrade_v1/phases/2-content-upgrade.md`
+- [ ] File created: `universal/workflows/praxis_os_upgrade_v1/phases/2-content-upgrade.md`
 - [ ] Contains: Objective, Prerequisites, Commands, Validation Gate
 - [ ] Commands for: safe-upgrade.py dry-run, actual run, version update
 - [ ] Checkpoint evidence schema defined
@@ -385,7 +385,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Create Phase 3 markdown file with MCP server upgrade guidance.
 
 **Acceptance Criteria:**
-- [ ] File created: `universal/workflows/agent_os_upgrade_v1/phases/3-mcp-server-upgrade.md`
+- [ ] File created: `universal/workflows/praxis_os_upgrade_v1/phases/3-mcp-server-upgrade.md`
 - [ ] Contains: Objective, Prerequisites, Commands, Validation Gate
 - [ ] Commands for: copy server, install deps, post-install, restart
 - [ ] **State persistence** instructions before restart
@@ -526,7 +526,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Create Phase 4 markdown file with post-upgrade validation guidance.
 
 **Acceptance Criteria:**
-- [ ] File created: `universal/workflows/agent_os_upgrade_v1/phases/4-post-upgrade-validation.md`
+- [ ] File created: `universal/workflows/praxis_os_upgrade_v1/phases/4-post-upgrade-validation.md`
 - [ ] Contains: Objective, Prerequisites, Commands, Validation Gate
 - [ ] Commands for: check tools, smoke tests, RAG search, browser test
 - [ ] Checkpoint evidence schema defined
@@ -547,7 +547,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Description:** Create Phase 5 markdown file with cleanup guidance.
 
 **Acceptance Criteria:**
-- [ ] File created: `universal/workflows/agent_os_upgrade_v1/phases/5-cleanup-documentation.md`
+- [ ] File created: `universal/workflows/praxis_os_upgrade_v1/phases/5-cleanup-documentation.md`
 - [ ] Contains: Objective, Prerequisites, Commands, Validation Gate
 - [ ] Commands for: release lock, archive backups, generate reports
 - [ ] Checkpoint evidence schema defined
@@ -666,7 +666,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 
 ---
 
-### Task 5.1: Dogfooding Test 1 - Agent OS Enhanced
+### Task 5.1: Dogfooding Test 1 - prAxIs OS
 
 **Description:** Test upgrade workflow on praxis-os itself.
 
@@ -747,7 +747,7 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 **Time Estimate:** 1 day
 
 **Deliverables:**
-- `universal/workflows/agent_os_upgrade_v1/README.md`
+- `universal/workflows/praxis_os_upgrade_v1/README.md`
 - Usage guide
 - Troubleshooting guide
 

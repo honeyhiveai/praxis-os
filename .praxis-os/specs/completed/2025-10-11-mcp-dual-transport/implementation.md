@@ -362,7 +362,7 @@ class RAGEngine:
 def main() -> None:
     """Entry point with explicit argument parsing."""
     parser = argparse.ArgumentParser(
-        description="Agent OS MCP Server with dual-transport support"
+        description="prAxIs OS MCP Server with dual-transport support"
     )
     parser.add_argument(
         "--transport",
@@ -386,7 +386,7 @@ def main() -> None:
     
     # Log chosen mode clearly
     logger.info("=" * 60)
-    logger.info("Agent OS MCP Server")
+    logger.info("prAxIs OS MCP Server")
     logger.info(f"Transport Mode: {args.transport}")
     logger.info("=" * 60)
 ```
@@ -1115,5 +1115,5 @@ mcp_server/__main__.py           # Entry point
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial implementation guidance | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial implementation guidance | prAxIs OS Team |
 

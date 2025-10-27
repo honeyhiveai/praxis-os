@@ -8,7 +8,7 @@
 
 ## 🎯 Purpose
 
-Capture the research and design for integrating Agent OS Enhanced with GitHub Copilot's Agent Mode via MCP (Model Context Protocol).
+Capture the research and design for integrating prAxIs OS with GitHub Copilot's Agent Mode via MCP (Model Context Protocol).
 
 ---
 
@@ -44,7 +44,7 @@ GitHub Copilot Agent Mode supports MCP (Model Context Protocol), enabling integr
 
 ---
 
-## MCP Configuration for Agent OS Enhanced
+## MCP Configuration for prAxIs OS
 
 ### VS Code Configuration
 
@@ -164,28 +164,28 @@ installation/
 ### `agent-integrations/README.md` (Proposed)
 
 ```markdown
-# Agent OS Enhanced - AI Agent Integrations
+# prAxIs OS - AI Agent Integrations
 
 **Which AI agent are you using?**
 
-Agent OS Enhanced works with multiple AI coding assistants via the Model Context Protocol (MCP).
+prAxIs OS works with multiple AI coding assistants via the Model Context Protocol (MCP).
 
 ## Supported Agents
 
 ### ✅ Cursor (Fully Supported)
 - **Guide:** [cursor.md](cursor.md)
 - **Status:** Primary development platform, fully tested
-- **Features:** All Agent OS tools, dual-transport mode, auto-approval
+- **Features:** All prAxIs OS tools, dual-transport mode, auto-approval
 
 ### ✅ GitHub Copilot (VS Code) (Fully Supported)
 - **Guide:** [github-copilot.md](github-copilot.md)
 - **Status:** Tested with Copilot Agent Mode
-- **Features:** All Agent OS tools via MCP
+- **Features:** All prAxIs OS tools via MCP
 
 ### 🚧 Visual Studio (Experimental)
 - **Guide:** [visual-studio.md](visual-studio.md)
 - **Status:** Configuration documented, needs testing
-- **Features:** All Agent OS tools via MCP
+- **Features:** All prAxIs OS tools via MCP
 
 ### 🔮 Future Support
 - **Windsurf** - Community requested
@@ -194,7 +194,7 @@ Agent OS Enhanced works with multiple AI coding assistants via the Model Context
 
 ## Quick Start
 
-1. **Install Agent OS Enhanced** (follow main installation guide)
+1. **Install prAxIs OS** (follow main installation guide)
 2. **Choose your agent** from the list above
 3. **Follow agent-specific guide** for MCP configuration
 4. **Restart your editor**
@@ -203,7 +203,7 @@ Agent OS Enhanced works with multiple AI coding assistants via the Model Context
 ## Prerequisites
 
 All agents require:
-- ✅ Agent OS Enhanced installed (steps 01-04 complete)
+- ✅ prAxIs OS installed (steps 01-04 complete)
 - ✅ Python venv created (step 05)
 - ✅ MCP server dependencies installed
 - ✅ RAG index built
@@ -218,13 +218,13 @@ Only the MCP configuration differs between agents.
 
 **For:** GitHub Copilot in VS Code  
 **Status:** Fully supported  
-**Prerequisites:** Agent OS Enhanced installation complete (steps 01-05)
+**Prerequisites:** prAxIs OS installation complete (steps 01-05)
 
 ---
 
 ## What This Guide Covers
 
-After Agent OS Enhanced mechanical installation is complete, this guide shows you how to configure GitHub Copilot to use Agent OS tools via MCP.
+After prAxIs OS mechanical installation is complete, this guide shows you how to configure GitHub Copilot to use prAxIs OS tools via MCP.
 
 ---
 
@@ -311,7 +311,7 @@ After creating `mcp.json`:
 
 ## Step 4: Verify Integration
 
-Test that Copilot can access Agent OS tools:
+Test that Copilot can access prAxIs OS tools:
 
 **In Copilot chat:**
 ```
@@ -319,7 +319,7 @@ Can you search_standards for "test patterns"?
 ```
 
 **Expected response:**
-Copilot should invoke the `search_standards` MCP tool and return results about testing patterns from Agent OS standards.
+Copilot should invoke the `search_standards` MCP tool and return results about testing patterns from prAxIs OS standards.
 
 **Alternative test:**
 ```
@@ -336,7 +336,7 @@ After integration verified, Copilot should run orientation:
 
 **Ask Copilot:**
 ```
-Run Agent OS orientation queries
+Run prAxIs OS orientation queries
 ```
 
 Copilot should automatically run the 9 bootstrap queries and reply with "✅ Oriented. Ready."
@@ -348,7 +348,7 @@ Copilot should automatically run the 9 bootstrap queries and reply with "✅ Ori
 Once integrated, Copilot has access to:
 
 ### RAG Tools
-- `search_standards` - Semantic search over Agent OS standards
+- `search_standards` - Semantic search over prAxIs OS standards
 - `current_date` - Get current date (prevents AI date errors)
 
 ### Workflow Tools
@@ -509,7 +509,7 @@ LLM: Build RAG index, validate
 
 1. **Setup:**
    - Fresh project
-   - Install Agent OS Enhanced
+   - Install prAxIs OS
    - Create `mcp.json` for Copilot
    - Restart VS Code
 

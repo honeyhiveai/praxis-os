@@ -134,7 +134,7 @@ def main() -> None:
     
     try:
         # 3. Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
         
         # 4. Load and validate configuration
@@ -221,7 +221,7 @@ def main() -> None:
         logger.info("Shutdown complete")
 
 
-def find_agent_os_directory() -> Path:
+def find_praxis_os_directory() -> Path:
     """
     Find .praxis-os directory.
     

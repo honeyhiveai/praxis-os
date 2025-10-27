@@ -35,7 +35,7 @@ We systematically:
 
 ## Context
 
-📊 **CONTEXT**: This is the entry phase for workflow_creation_v1. In the Agent OS Enhanced operating model, Phase 2 (Spec Creation) outputs design documents in markdown format. This phase bridges that output to the YAML format expected by the rest of the workflow.
+📊 **CONTEXT**: This is the entry phase for workflow_creation_v1. In the prAxIs OS operating model, Phase 2 (Spec Creation) outputs design documents in markdown format. This phase bridges that output to the YAML format expected by the rest of the workflow.
 
 **Primary Use Case (90%):** Design document input  
 **Expert Use Case (10%):** Pre-built YAML definition input

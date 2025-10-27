@@ -72,7 +72,7 @@ Framing: Positive (what success looks like)
 **New .cursorrules structure:**
 
 ```markdown
-# Agent OS Enhanced
+# prAxIs OS
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚨 CRITICAL: ORIENTATION REQUIRED 🚨
@@ -250,7 +250,7 @@ The system is designed FOR your limitations, not against them.
 **Add this to orientation results:**
 
 ```markdown
-# Why Agent OS Enhanced Is Designed This Way
+# Why prAxIs OS Is Designed This Way
 
 ## Your Architecture (LLM Fundamentals)
 
@@ -261,7 +261,7 @@ You are a Large Language Model with these characteristics:
 4. **Pattern matching**: You excel at following explicit instructions
 5. **No metacognition**: You don't know what you don't know
 
-## Agent OS Enhanced's Design (Built FOR Your Limitations)
+## prAxIs OS's Design (Built FOR Your Limitations)
 
 1. **Standards = External Memory**
    - Your limitation: No memory
@@ -325,7 +325,7 @@ You are a "systematic implementation agent."
 Success = Query → Discover → Implement → Validate → Document
 Failure = Improvise → Implement → Realize wrong → Rework → Repeat
 
-The user has designed Agent OS Enhanced around your actual capabilities.
+The user has designed prAxIs OS around your actual capabilities.
 Trust the system. Query liberally. Implement systematically.
 
 Every query makes you better at your job.

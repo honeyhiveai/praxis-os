@@ -31,7 +31,7 @@ Comprehensive, language-agnostic best practices organized by domain:
 ### 3. **Workflow System** (`universal/workflows/`)
 Three built-in phase-gated workflows:
 
-- **`agent_os_upgrade_v1/`**: Framework upgrade workflow
+- **`praxis_os_upgrade_v1/`**: Framework upgrade workflow
 - **`spec_creation_v1/`**: Feature specification creation
 - **`spec_execution_v1/`**: Implementation of specifications
 
@@ -120,7 +120,7 @@ The repository uses its own framework for development:
 2. **Workflow Templates**: Proven patterns for common tasks
 3. **Installation Automation**: Cursor agent handles setup
 4. **Hot Reload**: File watcher updates RAG index automatically
-5. **Version Control**: Per-project Agent OS version management
+5. **Version Control**: Per-project prAxIs OS version management
 
 ## 🎯 Project Maturity
 
@@ -155,7 +155,7 @@ Based on the analysis, potential areas for enhancement:
 
 ## 🎓 Conclusion
 
-Agent OS Enhanced is a **mature, well-architected framework** that successfully combines AI capabilities with software engineering best practices. The codebase demonstrates:
+prAxIs OS is a **mature, well-architected framework** that successfully combines AI capabilities with software engineering best practices. The codebase demonstrates:
 
 - **High Code Quality**: Comprehensive documentation, type safety, error handling
 - **Thoughtful Design**: Dependency injection, phase gating, dynamic content loading
@@ -165,7 +165,7 @@ Agent OS Enhanced is a **mature, well-architected framework** that successfully 
 The project is **actively maintained** and follows its own standards, making it a compelling foundation for AI-augmented development workflows.
 </result>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [x] Analyze key components and architecture
 - [x] Review documentation and standards structure
@@ -240,7 +240,7 @@ ACT MODE
 3. Create `.cursor/mcp.json` configuration file
 4. Validate Python setup
 
-**Why isolated venv**: Prevents Agent OS dependencies from conflicting with your project's dependencies.
+**Why isolated venv**: Prevents prAxIs OS dependencies from conflicting with your project's dependencies.
 
 **Time**: ~2-3 minutes
 
@@ -343,7 +343,7 @@ else:
 
 ## 🔧 Step 4.3: Create .cursor/mcp.json
 
-⚠️ **CRITICAL**: Use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`!
+⚠️ **CRITICAL**: Use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`!
 
 ```python
 import json
@@ -559,7 +559,7 @@ At this point you should have:
 - ✅ Python venv at `.praxis-os/venv/`
 - ✅ MCP server dependencies installed
 - ✅ `.cursor/mcp.json` created with correct config
-- ✅ Module name is `"mcp_server"` (not `"mcp_server.agent_os_rag"`)
+- ✅ Module name is `"mcp_server"` (not `"mcp_server.praxis_os_rag"`)
 - ✅ Config validation passes
 - ✅ All validation checkpoints passed
 
@@ -638,14 +638,14 @@ ACT MODE
 **User:**
 
 [read_file for 'mcp_server/README.md'] Result:
-# Agent OS MCP Server
+# prAxIs OS MCP Server
 
-**Model Context Protocol server for Agent OS Enhanced with RAG, sub-agents, and workflow engine.**
+**Model Context Protocol server for prAxIs OS with RAG, sub-agents, and workflow engine.**
 
 ## Components
 
 ### Core Server
-- **`agent_os_rag.py`**: Main MCP server entry point
+- **`praxis_os_rag.py`**: Main MCP server entry point
 - **`rag_engine.py`**: LanceDB vector search with semantic retrieval
 - **`workflow_engine.py`**: Phase-gated workflows with checkpoint validation
 - **`state_manager.py`**: Workflow state persistence
@@ -658,7 +658,7 @@ ACT MODE
 
 ## Installation
 
-This MCP server is copied to `.praxis-os/mcp_server/` in target projects during Agent OS installation.
+This MCP server is copied to `.praxis-os/mcp_server/` in target projects during prAxIs OS installation.
 
 ## Dependencies
 
@@ -679,7 +679,7 @@ Configured in target project's `.cursor/mcp.json`:
   "mcpServers": {
     "agent-os-rag": {
       "command": "python",
-      "args": ["${workspaceFolder}/.praxis-os/mcp_server/agent_os_rag.py"],
+      "args": ["${workspaceFolder}/.praxis-os/mcp_server/praxis_os_rag.py"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
         "PYTHONPATH": "${workspaceFolder}/.praxis-os"
@@ -731,7 +731,7 @@ To modify the MCP server:
 2. Test in a sample project
 3. Update `CHANGELOG.md`
 4. Tag release (semver)
-5. Users update via: "Update Agent OS to latest version"
+5. Users update via: "Update prAxIs OS to latest version"
 
 ---
 

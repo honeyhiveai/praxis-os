@@ -9,7 +9,7 @@
 
 ## 📋 Package Contents
 
-This specification package contains complete documentation for optimizing Agent OS knowledge documents for RAG (Retrieval Augmented Generation) discoverability.
+This specification package contains complete documentation for optimizing prAxIs OS knowledge documents for RAG (Retrieval Augmented Generation) discoverability.
 
 ### Core Specification Documents
 
@@ -39,7 +39,7 @@ This specification package contains complete documentation for optimizing Agent 
 
 ### Problem Statement
 
-Agent OS ships 48 knowledge documents (standards, usage guides, meta-workflow docs) that are indexed by a RAG system for AI agent discovery. Current discoverability is suboptimal:
+prAxIs OS ships 48 knowledge documents (standards, usage guides, meta-workflow docs) that are indexed by a RAG system for AI agent discovery. Current discoverability is suboptimal:
 - AI agents require 3-4 queries to find relevant information
 - Query success rate <50% (relevant content not in top 3 results)
 - Content structured for human reading, not semantic search
@@ -76,7 +76,7 @@ Systematically optimize all 48 knowledge documents using 5 critical optimization
 ### Out of Scope
 - Workflow execution files (already optimized for execution, not RAG)
 - RAG system engine changes (content-only optimization)
-- Consumer project documentation (Agent OS core only)
+- Consumer project documentation (prAxIs OS core only)
 - Non-markdown content (images, config files, etc.)
 
 ---
@@ -314,7 +314,7 @@ Knowledge Documents (48 files)
 
 - **Design Document:** `supporting-docs/DESIGN-DOC-RAG-Content-Optimization.md`
 - **RAG Content Authoring Standard:** `universal/standards/ai-assistant/rag-content-authoring.md`
-- **Agent OS Standards:** `universal/standards/`
+- **prAxIs OS Standards:** `universal/standards/`
 
 ### External Resources
 
@@ -350,7 +350,7 @@ Knowledge Documents (48 files)
 ✅ Query success rate **90%+** (up from <50%)  
 ✅ All knowledge documents score **≥7/10** (consistent quality)  
 ✅ New content uses **gold standard template** from day 1  
-✅ Agent OS Enhanced becomes **example of RAG-optimized docs**
+✅ prAxIs OS becomes **example of RAG-optimized docs**
 
 ---
 

@@ -183,7 +183,7 @@ Result: Binding, rarely ignored, ~85% compliance
 ```markdown
 ## What Is the Binding Framework Contract?
 
-The contract is a formal commitment that distinguishes Agent OS frameworks from simple guidelines. Frameworks that adopt this contract achieve 95%+ success rates.
+The contract is a formal commitment that distinguishes prAxIs OS frameworks from simple guidelines. Frameworks that adopt this contract achieve 95%+ success rates.
 
 **MANDATORY ACKNOWLEDGMENT BEFORE PROCEEDING**
 
@@ -363,7 +363,7 @@ These common mistakes undermine framework effectiveness. Recognize and eliminate
 
 ## What Are Framework Success Criteria?
 
-Use these criteria to validate that your framework meets Agent OS standards.
+Use these criteria to validate that your framework meets prAxIs OS standards.
 
 A framework is successful when:
 

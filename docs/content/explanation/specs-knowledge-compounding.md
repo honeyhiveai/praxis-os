@@ -570,8 +570,8 @@ Use database to store users.
 ## Next Steps
 
 **Learn to Create Specs:**
-- **[Your First Project](../tutorials/your-first-agent-os-project)** - Includes spec creation
-- **[Understanding Workflows](../tutorials/understanding-agent-os-workflows)** - Spec execution
+- **[Your First Project](../tutorials/your-first-praxis-os-project)** - Includes spec creation
+- **[Understanding Workflows](../tutorials/understanding-praxis-os-workflows)** - Spec execution
 
 **Understand the Full Picture:**
 - **[Knowledge Compounding](./knowledge-compounding)** - Overview of both mechanisms
@@ -586,6 +586,6 @@ Use database to store users.
 
 - **[Knowledge Compounding](./knowledge-compounding)** - Overview of both mechanisms
 - **[Standards Compounding](./standards-knowledge-compounding)** - Pattern discovery
-- **[Your First Project](../tutorials/your-first-agent-os-project)** - Includes spec creation
-- **[Understanding Workflows](../tutorials/understanding-agent-os-workflows)** - How specs are used
+- **[Your First Project](../tutorials/your-first-praxis-os-project)** - Includes spec creation
+- **[Understanding Workflows](../tutorials/understanding-praxis-os-workflows)** - How specs are used
 

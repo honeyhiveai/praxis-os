@@ -2,13 +2,13 @@
 
 **Date**: 2025-10-17  
 **Status**: Design Phase  
-**Objective**: Add model-agnostic Skills support to Agent OS Enhanced
+**Objective**: Add model-agnostic Skills support to prAxIs OS
 
 ---
 
 ## Executive Summary
 
-Add a consolidated `skill` MCP tool to Agent OS Enhanced, bringing Anthropic's Skills pattern to any model. Skills complement workflows by providing ad-hoc, deterministic operations while workflows handle complex multi-phase processes. Skills can be discovered, loaded, and executed both independently and from within workflows.
+Add a consolidated `skill` MCP tool to prAxIs OS, bringing Anthropic's Skills pattern to any model. Skills complement workflows by providing ad-hoc, deterministic operations while workflows handle complex multi-phase processes. Skills can be discovered, loaded, and executed both independently and from within workflows.
 
 **Key Benefits:**
 - Model-agnostic Skills support (not just Claude)
@@ -90,7 +90,7 @@ Add `skill` MCP tool following the consolidated pattern (like pos_browser, workf
 name: pdf-processing
 description: Fill and manipulate PDF forms
 version: 1.0.0
-author: Agent OS Enhanced
+author: prAxIs OS
 requires: ["pypdf2", "reportlab"]
 keywords: ["pdf", "forms", "document"]
 ---
@@ -306,7 +306,7 @@ Get detailed metadata for specific skill.
   "name": "pdf-processing",
   "description": "Fill and manipulate PDF forms",
   "version": "1.0.0",
-  "author": "Agent OS Enhanced",
+  "author": "prAxIs OS",
   "requires": ["pypdf2", "reportlab"],
   "keywords": ["pdf", "forms", "document"],
   "scripts": [
@@ -807,7 +807,7 @@ Use the pdf-processing skill to automate form filling.
 ### Skill Installation
 
 **Trusted Sources:**
-- Official Agent OS Enhanced skills (pre-approved)
+- Official prAxIs OS skills (pre-approved)
 - Community skills (requires review)
 - Private skills (user responsibility)
 
@@ -822,7 +822,7 @@ Use the pdf-processing skill to automate form filling.
 
 ### Compatibility
 
-Agent OS Enhanced skills use **compatible format** with Anthropic Skills:
+prAxIs OS skills use **compatible format** with Anthropic Skills:
 - Same SKILL.md structure
 - Same YAML frontmatter
 - Same progressive disclosure pattern
@@ -842,7 +842,7 @@ claude-skills/pdf-processing/
 └── extract_fields.py
 ```
 
-**Agent OS Enhanced Skill:** (Same!)
+**prAxIs OS Skill:** (Same!)
 ```bash
 .praxis-os/skills/pdf-processing/
 ├── SKILL.md
@@ -943,7 +943,7 @@ claude-skills/pdf-processing/
 
 ## Conclusion
 
-Adding the `skill` MCP tool brings Anthropic's Skills pattern to Agent OS Enhanced in a model-agnostic way. Skills complement workflows perfectly:
+Adding the `skill` MCP tool brings Anthropic's Skills pattern to prAxIs OS in a model-agnostic way. Skills complement workflows perfectly:
 - **Skills:** Quick, deterministic operations (context-efficient)
 - **Workflows:** Complex, multi-phase processes (enforced quality)
 

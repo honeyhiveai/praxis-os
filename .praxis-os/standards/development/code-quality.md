@@ -1,6 +1,6 @@
-# Code Quality Standards - Agent OS Enhanced
+# Code Quality Standards - prAxIs OS
 
-**🎯 Comprehensive code quality requirements for Agent OS Enhanced**
+**🎯 Comprehensive code quality requirements for prAxIs OS**
 
 This document defines the mandatory code quality standards, tools, and processes that ensure consistent, maintainable, and reliable code across the project.
 
@@ -301,6 +301,6 @@ tox -e unit -- tests/unit/test_specific.py::test_function
 - **Tests**: All passing
 
 **Next Review**: Weekly score checks and systematic violation fixing  
-**Maintained By**: AI assistants following Agent OS standards  
+**Maintained By**: AI assistants following prAxIs OS standards  
 **Non-Negotiable**: Zero mypy errors at all times
 

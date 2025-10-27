@@ -1,7 +1,7 @@
 # Standards Gap Analysis: python-sdk → praxis-os
 
 ## Context
-Python-SDK is the prototype where the AI-assisted development paradigm was proven. Agent OS Enhanced is the extracted reusable framework. This document identifies standards from python-sdk that should be adapted for praxis-os.
+Python-SDK is the prototype where the AI-assisted development paradigm was proven. prAxIs OS is the extracted reusable framework. This document identifies standards from python-sdk that should be adapted for praxis-os.
 
 ---
 
@@ -114,7 +114,7 @@ Python-SDK is the prototype where the AI-assisted development paradigm was prove
 ## 🎯 Recommended Adoption Priority
 
 ### Phase 1: IMMEDIATE (Core Paradigm)
-**These define HOW to use Agent OS - without them, users can't effectively use the framework**
+**These define HOW to use prAxIs OS - without them, users can't effectively use the framework**
 
 1. ✅ Copy `/ai-assistant/DETERMINISTIC-LLM-OUTPUT-METHODOLOGY.md` → Adapt for agent-os
 2. ✅ Copy `/ai-assistant/LLM-WORKFLOW-ENGINEERING-METHODOLOGY.md` → Adapt for agent-os

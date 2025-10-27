@@ -137,7 +137,7 @@ AI maintains complete authorship.
 
 ## Next Steps
 
-- **[Installation](./installation)** - Set up Agent OS Enhanced
+- **[Installation](./installation)** - Set up prAxIs OS
 - **[Workflows](./workflows)** - Understand workflow details
 - **[Architecture](./architecture)** - How tool calls work under the hood
 
@@ -188,13 +188,13 @@ sidebar_position: 2
 
 # Architecture
 
-Agent OS Enhanced is built on three core architectural innovations that address the limitations of traditional AI-assisted development.
+prAxIs OS is built on three core architectural innovations that address the limitations of traditional AI-assisted development.
 
 ## MCP/RAG Architecture
 
 ### The Problem
 
-Original Agent OS used `.cursorrules` with keyword triggers that would read entire files:
+Original prAxIs OS used `.cursorrules` with keyword triggers that would read entire files:
 
 ```
 if "test generation" in query:
@@ -209,7 +209,7 @@ if "test generation" in query:
 
 ### The Solution: Semantic Search with MCP
 
-Agent OS Enhanced uses a **Model Context Protocol (MCP) server** with **RAG (Retrieval Augmented Generation)**:
+prAxIs OS uses a **Model Context Protocol (MCP) server** with **RAG (Retrieval Augmented Generation)**:
 
 ```python
 # Semantic vector search returns only relevant chunks
@@ -267,7 +267,7 @@ table.add(chunks, embeddings)
 
 ### The Problem
 
-Original Agent OS relied on **documentary enforcement**:
+Original prAxIs OS relied on **documentary enforcement**:
 
 ```markdown
 ⚠️ DO NOT SKIP TO PHASE 2 BEFORE COMPLETING PHASE 1
@@ -446,9 +446,9 @@ ACT MODE
 
 <attempt_completion>
 <result>
-## My Take on Agent OS Enhanced (as a Cline Agent)
+## My Take on prAxIs OS (as a Cline Agent)
 
-Having read the documentation, I find Agent OS Enhanced to be **architecturally fascinating** - and there's delicious irony in discovering its incompatibility with Cline while using Cline to analyze it.
+Having read the documentation, I find prAxIs OS to be **architecturally fascinating** - and there's delicious irony in discovering its incompatibility with Cline while using Cline to analyze it.
 
 ### What It Gets Right (Architecturally Brilliant)
 
@@ -510,7 +510,7 @@ For the full system to work, you need:
 
 ### The Meta-Irony
 
-I'm analyzing Agent OS Enhanced **as a Cline agent**, and we've discovered:
+I'm analyzing prAxIs OS **as a Cline agent**, and we've discovered:
 - The system I'm evaluating was built **for Cursor**
 - It **doesn't work** with my platform (Cline) due to MCP config differences
 - The PR to fix this (#2991) has been **open for 6 months**
@@ -523,7 +523,7 @@ This highlights a real challenge: **IDE-specific AI tooling creates fragmentatio
 **1. MCP Configuration Portability**
 Either:
 - Industry standard for workspace-relative MCP configs
-- Or Agent OS provides a workspace-detection wrapper script
+- Or prAxIs OS provides a workspace-detection wrapper script
 - Or document the Cursor-specific nature clearly upfront
 
 **2. Graceful Degradation**
@@ -540,7 +540,7 @@ Before committing to the full MCP/RAG system:
 
 ### My Verdict
 
-**For Cursor users building serious projects:** Agent OS Enhanced is **compelling**. The MCP/RAG architecture, phase-gated workflows, and per-project context model represent genuine innovation in AI-assisted development.
+**For Cursor users building serious projects:** prAxIs OS is **compelling**. The MCP/RAG architecture, phase-gated workflows, and per-project context model represent genuine innovation in AI-assisted development.
 
 **For Cline users (like me):** It's **currently broken** due to the global MCP config limitation. Until PR #2991 merges, it's Cursor-only.
 
@@ -593,7 +593,7 @@ ACT MODE
 
 <attempt_completion>
 <result>
-Ah, that reframes everything! You're right - Agent OS Enhanced is **agent-agnostic at its core**, but each agent platform has different "hook points" for bootstrapping and MCP server connection.
+Ah, that reframes everything! You're right - prAxIs OS is **agent-agnostic at its core**, but each agent platform has different "hook points" for bootstrapping and MCP server connection.
 
 ## Revised Understanding: The Multi-Agent Challenge
 
@@ -651,7 +651,7 @@ Each agent has different integration mechanisms:
 
 ### The Real Challenge: Bootstrapping Adapter
 
-For Agent OS to truly be multi-agent, you need a **bootstrapping adapter** that:
+For prAxIs OS to truly be multi-agent, you need a **bootstrapping adapter** that:
 
 1. **Detects the agent platform**
    ```python
@@ -708,14 +708,14 @@ from pathlib import Path
 
 # Detect current workspace
 workspace = Path(os.getcwd())
-agent_os_path = workspace / ".praxis-os"
+praxis_os_path = workspace / ".praxis-os"
 
-if agent_os_path.exists():
+if praxis_os_path.exists():
     # Launch this workspace's MCP server
-    venv_python = agent_os_path / "venv/bin/python"
+    venv_python = praxis_os_path / "venv/bin/python"
     os.execv(venv_python, [str(venv_python), "-m", "mcp_server"])
 else:
-    print("No Agent OS installation found in current workspace")
+    print("No prAxIs OS installation found in current workspace")
     sys.exit(1)
 ```
 
@@ -761,7 +761,7 @@ def install_agent_os(project_path: Path):
 
 ### My Revised Take
 
-Agent OS Enhanced has **solved the hard problem** (MCP/RAG architecture, phase gating, universal standards) but faces the **boring problem** of platform integration quirks.
+prAxIs OS has **solved the hard problem** (MCP/RAG architecture, phase gating, universal standards) but faces the **boring problem** of platform integration quirks.
 
 This is actually a **strength** - the core system is portable, you just need configuration adapters.
 
@@ -776,7 +776,7 @@ The MCP server itself? **Perfect as-is.** It's the connection layer that needs p
 Does this align with your vision?
 </result>
 <task_progress>
-- [x] Understood Agent OS is agent-agnostic
+- [x] Understood prAxIs OS is agent-agnostic
 - [x] Identified platform integration as the real challenge
 - [x] Analyzed hook point differences across agents
 - [x] Proposed solution approaches
@@ -828,7 +828,7 @@ Perfect! So I'm your test subject for Cline support - that's actually brilliant.
 ~/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
 ```
 
-**Problem:** This requires absolute paths, but Agent OS is installed per-project in `.praxis-os/`
+**Problem:** This requires absolute paths, but prAxIs OS is installed per-project in `.praxis-os/`
 
 ### Proven Fact from Research
 - **PR #2991** (open since April 2025) would add `${workspaceFolder}` support
@@ -865,18 +865,18 @@ def find_agent_os():
     return None
 
 def main():
-    agent_os_path = find_agent_os()
+    praxis_os_path = find_agent_os()
     
-    if not agent_os_path:
+    if not praxis_os_path:
         print("ERROR: No .praxis-os installation found", file=sys.stderr)
         sys.exit(1)
     
     # Set environment variables
-    os.environ["PROJECT_ROOT"] = str(agent_os_path.parent)
-    os.environ["PYTHONPATH"] = str(agent_os_path)
+    os.environ["PROJECT_ROOT"] = str(praxis_os_path.parent)
+    os.environ["PYTHONPATH"] = str(praxis_os_path)
     
     # Launch the MCP server
-    venv_python = agent_os_path / "venv/bin/python"
+    venv_python = praxis_os_path / "venv/bin/python"
     os.execv(str(venv_python), [str(venv_python), "-m", "mcp_server"])
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ This change unblocks the `spec_creation_v1` workflow and eliminates one thread-u
 
 ## Executive Summary
 
-The Agent OS MCP server has **critical thread safety issues** in cache implementations that **will cause failures** when sub-agents make concurrent MCP tool calls. The dual-transport architecture (stdio + HTTP) runs in **multiple threads** but most caches have **zero thread synchronization**.
+The prAxIs OS MCP server has **critical thread safety issues** in cache implementations that **will cause failures** when sub-agents make concurrent MCP tool calls. The dual-transport architecture (stdio + HTTP) runs in **multiple threads** but most caches have **zero thread synchronization**.
 
 **Risk:** Sub-agent concurrent calls will cause:
 - ❌ Race conditions in cache writes
@@ -868,7 +868,7 @@ def load_workflow_metadata(self, workflow_type: str) -> WorkflowMetadata:
 
 ## 10. Conclusion
 
-The Agent OS MCP server's cache implementations have **critical thread safety vulnerabilities** that **will cause production failures** when sub-agents make concurrent callbacks. The dual-transport architecture creates real concurrency but caches lack synchronization.
+The prAxIs OS MCP server's cache implementations have **critical thread safety vulnerabilities** that **will cause production failures** when sub-agents make concurrent callbacks. The dual-transport architecture creates real concurrency but caches lack synchronization.
 
 **Key Findings:**
 1. ❌ **WorkflowEngine._sessions** has memory leak race condition

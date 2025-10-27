@@ -39,7 +39,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 - [ ] **Task 1.1**: {Task name}
   - **Human Baseline:** {hours} ({S/M/L})
-  - **Agent OS:** {wall hours}h wall, {active min} min active ({leverage}x)
+  - **prAxIs OS:** {wall hours}h wall, {active min} min active ({leverage}x)
   
   - {Action item}
   - {Action item}
@@ -51,7 +51,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 - [ ] **Task 1.2**: {Task name}
   - **Human Baseline:** {hours} ({S/M/L})
-  - **Agent OS:** {wall hours}h wall, {active min} min active ({leverage}x)
+  - **prAxIs OS:** {wall hours}h wall, {active min} min active ({leverage}x)
   
   - {Action item}
   
@@ -108,7 +108,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
@@ -124,7 +124,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 ```
 
 **Why Good:**
-- Dual time estimates (human baseline vs Agent OS)
+- Dual time estimates (human baseline vs prAxIs OS)
 - Shows leverage multiplier (20x)
 - Clear wall clock vs active time distinction
 - Specific action items
@@ -244,7 +244,7 @@ prAxIs OS requires **two time estimates** to show the leverage multiplier (20-40
 
 4. **Task Format:**
    ```
-   search_standards("task format example Human Baseline Agent OS")
+   search_standards("task format example Human Baseline prAxIs OS")
    ```
    Returns: Template format with leverage multiplier shown
 
@@ -277,7 +277,7 @@ Typical: H=4h, M=1.0, W=4h, O=0.05, A=12min → L=20x
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys

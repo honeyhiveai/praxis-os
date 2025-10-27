@@ -11,7 +11,7 @@
 
 This specification defines the consolidation of 17+ fragmented workflow management tools into a single, powerful `pos_workflow` tool, following the proven `pos_browser` pattern. This consolidation will dramatically improve AI agent performance, reduce cognitive load, and enhance maintainability.
 
-**Problem:** Agent OS currently has ~24 MCP tools, with 17+ dedicated to workflow operations. This high tool count degrades LLM performance by 85% and creates a fragmented, inconsistent interface.
+**Problem:** prAxIs OS currently has ~24 MCP tools, with 17+ dedicated to workflow operations. This high tool count degrades LLM performance by 85% and creates a fragmented, inconsistent interface.
 
 **Solution:** Consolidate all workflow operations into a single `pos_workflow` tool with 14 actions, reducing total tool count from ~24 to ~6 (optimal range for LLM performance).
 

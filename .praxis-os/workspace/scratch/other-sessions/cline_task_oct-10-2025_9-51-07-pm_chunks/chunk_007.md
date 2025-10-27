@@ -18,7 +18,7 @@ print(f"✅ Source ready at: {AGENT_OS_SOURCE}")
 
 ### Option B: User Provides Path
 
-If the user already has Agent OS cloned somewhere:
+If the user already has prAxIs OS cloned somewhere:
 
 ```python
 # Ask user where they've cloned praxis-os
@@ -150,7 +150,7 @@ Create `installation/00-detect-agent.py`:
 
 ```python
 """
-Agent OS - Multi-Agent Detection
+prAxIs OS - Multi-Agent Detection
 Automatically detects which AI coding agent is being used.
 """
 
@@ -411,7 +411,7 @@ class AdvancedAgentDetector:
 Create `installation/00-START.md` (updated):
 
 ```markdown
-# Agent OS Installation - START HERE
+# prAxIs OS Installation - START HERE
 
 ## 🤖 Step 0: Detect Your AI Agent
 
@@ -505,7 +505,7 @@ if os.path.exists(rules_file):
     print(f"⚠️  {rules_file} already exists")
     print("   Options:")
     print("   1. Backup and replace")
-    print("   2. Merge (append Agent OS section)")
+    print("   2. Merge (append prAxIs OS section)")
     print("   3. Skip (keep existing)")
     
     choice = input("Enter choice (1/2/3): ")
@@ -514,11 +514,11 @@ else:
     print(f"✅ {rules_file} does not exist, will create fresh")
 ```
 
-### Agent OS Rules Content
+### prAxIs OS Rules Content
 
 ```python
 AGENT_OS_RULES = """
-# Agent OS Enhanced - {AGENT_NAME} Configuration
+# prAxIs OS - {AGENT_NAME} Configuration
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -530,7 +530,7 @@ If NO: Run it now via MCP tool, then reply "✅ Oriented. Ready."
 If YES: Proceed with user's request.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[... rest of standard Agent OS rules ...]
+[... rest of standard prAxIs OS rules ...]
 """
 
 # Write rules file
@@ -663,7 +663,7 @@ class MCPConfigGenerator:
 Create `installation/INSTALL-COMPLETE.md`:
 
 ```markdown
-# ✅ Agent OS Installation Complete!
+# ✅ prAxIs OS Installation Complete!
 
 ## 📊 Installation Summary
 
@@ -752,7 +752,7 @@ Create `install.py` in root:
 
 ```python
 """
-Agent OS Enhanced - Universal Installer
+prAxIs OS - Universal Installer
 Supports: Cursor, Cline, Windsurf, Continue, VS Code
 """
 
@@ -766,7 +766,7 @@ from agent_detector import AgentDetector
 from installation_orchestrator import InstallationOrchestrator
 
 def main():
-    print("🚀 Agent OS Enhanced - Universal Installer\n")
+    print("🚀 prAxIs OS - Universal Installer\n")
     
     # Detect agent
     detector = AgentDetector()
@@ -873,7 +873,7 @@ installation/
 **Update `00-START.md`** to include agent detection logic that the AI can follow:
 
 ```markdown
-# Agent OS Installation - START HERE
+# prAxIs OS Installation - START HERE
 
 ## 🤖 Step 0: Detect Your Environment
 
@@ -949,7 +949,7 @@ if exists(".vscode/"):
 > Here's what I'm about to do:
 > 1. Create `.praxis-os/` directory structure
 > 2. Copy standards, workflows, and MCP server from source
-> 3. Create `{RULES_FILE}` with Agent OS behaviors
+> 3. Create `{RULES_FILE}` with prAxIs OS behaviors
 > 4. Configure MCP in `{MCP_CONFIG}`
 > 5. Set up Python virtual environment
 > 
@@ -959,9 +959,9 @@ if exists(".vscode/"):
 
 ## 📂 Source Repository Location
 
-**AI: Ask the user where to get Agent OS source:**
+**AI: Ask the user where to get prAxIs OS source:**
 
-> I need the Agent OS Enhanced source code. Where should I get it from?
+> I need the prAxIs OS source code. Where should I get it from?
 > 
 > **Option 1** (Recommended): I'll clone it to a temporary directory
 > ```bash
@@ -994,7 +994,7 @@ installation/
 │   ├── continue-settings.json   # Template for Continue
 │   ├── vscode-settings.json     # Generic VS Code
 │   │
-│   ├── cursorrules.md           # Agent OS rules for Cursor
-│   ├── clinerules.md            # Agent OS rules for Cline
-│   ├── windsurfrules.md         # Agent OS rules for Windsurf
-│   ├── continuerules.md         # Agent OS rules for Continue
+│   ├── cursorrules.md           # prAxIs OS rules for Cursor
+│   ├── clinerules.md            # prAxIs OS rules for Cline
+│   ├── windsurfrules.md         # prAxIs OS rules for Windsurf
+│   ├── continuerules.md         # prAxIs OS rules for Continue

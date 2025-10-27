@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for optimizing Agent OS Enhanced content (standards, usage guides, meta-workflow documentation) for AI agent discoverability via semantic search (RAG system).
+This document defines the requirements for optimizing prAxIs OS content (standards, usage guides, meta-workflow documentation) for AI agent discoverability via semantic search (RAG system).
 
 ### 1.2 Scope
 This feature will systematically apply RAG optimization principles to ~48 knowledge documents to improve semantic search discoverability, reduce query inefficiency, and enable self-reinforcing agent behavior through explicit query pattern teaching.
@@ -32,7 +32,7 @@ This feature will systematically apply RAG optimization principles to ~48 knowle
 - AI agents spend less time searching, more time implementing
 - Reduced context window waste from failed queries
 - Improved autonomous task completion rates
-- Better developer experience for Agent OS Enhanced users
+- Better developer experience for prAxIs OS users
 
 ---
 
@@ -110,7 +110,7 @@ User stories describe the feature from the user's perspective.
 
 ### Story 1: AI Agent Discovering Standards
 
-**As an** AI agent working in Agent OS Enhanced  
+**As an** AI agent working in prAxIs OS  
 **I want to** discover relevant standards through natural language queries  
 **So that** I can implement features correctly without trial-and-error searching
 
@@ -124,7 +124,7 @@ User stories describe the feature from the user's perspective.
 
 ### Story 2: AI Agent Learning Query Patterns
 
-**As an** AI agent new to Agent OS Enhanced  
+**As an** AI agent new to prAxIs OS  
 **I want** standards to teach me when and how to query related topics  
 **So that** I develop efficient query habits organically
 
@@ -138,7 +138,7 @@ User stories describe the feature from the user's perspective.
 
 ### Story 3: Content Author Creating Standards
 
-**As a** content author writing new Agent OS standards  
+**As a** content author writing new prAxIs OS standards  
 **I want** clear RAG optimization guidelines and templates  
 **So that** my standards are discoverable and follow best practices
 
@@ -150,9 +150,9 @@ User stories describe the feature from the user's perspective.
 
 ---
 
-### Story 4: Agent OS Maintainer Ensuring Quality
+### Story 4: prAxIs OS Maintainer Ensuring Quality
 
-**As an** Agent OS maintainer  
+**As an** prAxIs OS maintainer  
 **I want** consistent RAG optimization across all standards  
 **So that** AI agents have predictable, reliable access to knowledge
 
@@ -164,9 +164,9 @@ User stories describe the feature from the user's perspective.
 
 ---
 
-### Story 5: Developer Using Agent OS
+### Story 5: Developer Using prAxIs OS
 
-**As a** developer using Agent OS Enhanced  
+**As a** developer using prAxIs OS  
 **I want** AI agents that find answers quickly without repeated queries  
 **So that** I spend less time waiting and more time building
 
@@ -384,7 +384,7 @@ User stories describe the feature from the user's perspective.
 - Test query suite can grow beyond 50 queries
 - Works for corpus size 50-500 documents
 
-**Rationale:** Agent OS will grow; framework must accommodate expansion
+**Rationale:** prAxIs OS will grow; framework must accommodate expansion
 
 ---
 
@@ -447,7 +447,7 @@ This section explicitly states what will NOT be included in this feature to prev
 ---
 
 ### NOT INCLUDED: Supporting Documentation
-**Rationale:** Design documents, analysis files, and temporary artifacts are not RAG-optimized. Only canonical standards that ship with Agent OS installations are in scope.
+**Rationale:** Design documents, analysis files, and temporary artifacts are not RAG-optimized. Only canonical standards that ship with prAxIs OS installations are in scope.
 
 ---
 
@@ -472,7 +472,7 @@ This section explicitly states what will NOT be included in this feature to prev
 ---
 
 ### NOT INCLUDED: External Documentation
-**Rationale:** Third-party documentation, external links, and reference materials are not modified. Only content owned and maintained by Agent OS Enhanced is optimized.
+**Rationale:** Third-party documentation, external links, and reference materials are not modified. Only content owned and maintained by prAxIs OS is optimized.
 
 ---
 

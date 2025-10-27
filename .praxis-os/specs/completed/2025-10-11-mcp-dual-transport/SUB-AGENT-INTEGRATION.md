@@ -8,7 +8,7 @@
 
 ## Overview
 
-This guide shows how to integrate sub-agents (Cline, Aider, custom scripts) with the Agent OS MCP server. Sub-agents discover and connect to the server via HTTP while your main IDE uses stdio.
+This guide shows how to integrate sub-agents (Cline, Aider, custom scripts) with the prAxIs OS MCP server. Sub-agents discover and connect to the server via HTTP while your main IDE uses stdio.
 
 **Prerequisites:**
 - MCP server running in dual transport mode (`--transport dual`)
@@ -324,13 +324,13 @@ from typing import Optional
 class MCPConnection:
     """Manages MCP server connection for custom agent."""
     
-    def __init__(self, agent_os_path: Optional[Path] = None):
-        self.agent_os_path = agent_os_path
+    def __init__(self, praxis_os_path: Optional[Path] = None):
+        self.praxis_os_path = praxis_os_path
         self.url: Optional[str] = None
     
     def discover(self) -> bool:
         """Discover MCP server."""
-        self.url = discover_mcp_server(self.agent_os_path)
+        self.url = discover_mcp_server(self.praxis_os_path)
         return self.url is not None
     
     async def call_tool(self, tool_name: str, params: dict):
@@ -373,7 +373,7 @@ if __name__ == "__main__":
 
 When working with multiple projects, each has its own MCP server:
 
-**Scenario:** You're running Agent OS in 3 different projects
+**Scenario:** You're running prAxIs OS in 3 different projects
 
 ```
 ~/projects/
@@ -415,12 +415,12 @@ print(f"Project C: {url_c}")  # http://127.0.0.1:4244/mcp
 
 ### Discovery API
 
-#### `discover_mcp_server(agent_os_path: Optional[Path] = None) -> Optional[str]`
+#### `discover_mcp_server(praxis_os_path: Optional[Path] = None) -> Optional[str]`
 
 Discover a running MCP server's HTTP endpoint.
 
 **Parameters:**
-- `agent_os_path`: Path to `.praxis-os` directory. If None, searches from current directory upward.
+- `praxis_os_path`: Path to `.praxis-os` directory. If None, searches from current directory upward.
 
 **Returns:**
 - HTTP URL string (e.g., `"http://127.0.0.1:4242/mcp"`) if server found and alive
@@ -448,7 +448,7 @@ url = discover_mcp_server(Path("/path/to/.praxis-os"))  # Explicit
   "project": {
     "name": "project-name",     // Project name
     "root": "/path/to/project", // Project root
-    "agent_os_path": "/path/to/project/.praxis-os",
+    "praxis_os_path": "/path/to/project/.praxis-os",
     "git": {                    // Git info (if available)
       "remote": "https://...",
       "branch": "main",

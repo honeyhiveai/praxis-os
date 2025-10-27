@@ -1,5 +1,5 @@
 """
-Validation Module for Agent OS Upgrade Workflow.
+Validation Module for prAxIs OS Upgrade Workflow.
 
 Provides comprehensive validation functions for pre-flight checks,
 post-upgrade validation, and system state verification.
@@ -45,7 +45,7 @@ class ValidationModule:
 
         Checks:
         - Path exists
-        - Is agent-os-enhanced repository
+        - Is praxis-os repository
         - Git status is clean (no uncommitted changes)
         - Extract version and commit hash
 
@@ -56,7 +56,7 @@ class ValidationModule:
             {
                 "valid": bool,
                 "path_exists": bool,
-                "is_agent_os_repo": bool,
+                "is_praxis_os_repo": bool,
                 "git_clean": bool,
                 "version": str | None,
                 "commit": str | None,
@@ -68,7 +68,7 @@ class ValidationModule:
         result: Dict[str, Any] = {
             "valid": False,
             "path_exists": False,
-            "is_agent_os_repo": False,
+            "is_praxis_os_repo": False,
             "git_clean": False,
             "version": None,
             "commit": None,
@@ -84,16 +84,16 @@ class ValidationModule:
 
         result["path_exists"] = True
 
-        # Check is agent-os-enhanced repo
+        # Check is praxis-os repo
         if not (source / "mcp_server").exists():
-            result["errors"].append("Not an agent-os-enhanced repository")
+            result["errors"].append("Not an praxis-os repository")
             return result
 
         if not (source / "universal").exists():
             result["errors"].append("Missing universal/ directory")
             return result
 
-        result["is_agent_os_repo"] = True
+        result["is_praxis_os_repo"] = True
 
         # Check git status
         try:
@@ -459,14 +459,14 @@ class ValidationModule:
         if not state_path.exists():
             return True
 
-        # Check for active agent_os_upgrade_v1 sessions
+        # Check for active praxis_os_upgrade_v1 sessions
         for state_file in state_path.glob("*.json"):
             try:
                 import json
 
                 state = json.loads(state_file.read_text())
                 if (
-                    state.get("workflow_type") == "agent_os_upgrade_v1"
+                    state.get("workflow_type") == "praxis_os_upgrade_v1"
                     and state.get("current_phase", 0) < 5
                 ):
                     logger.warning(

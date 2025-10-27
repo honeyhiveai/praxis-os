@@ -343,6 +343,6 @@ This specification package contains:
 - Check implementation.md Section 4 for troubleshooting
 - Reference test files for concrete examples
 
-**Specification Maintainer:** Agent OS Team  
+**Specification Maintainer:** prAxIs OS Team  
 **Last Updated:** 2025-10-08
 

@@ -10,7 +10,7 @@
 1. **Establish Production-Grade Architecture** - Transform MCP server from prototype to sustainable, maintainable system
 2. **Enable Sub-Agent Ecosystem** - Create foundation for design validators, concurrency analyzers, and other specialized agents
 3. **Reduce Bug Rate** - Improve testability and reduce configuration errors through better architecture
-4. **Demonstrate Standards Compliance** - Dogfood Agent OS production code standards in our own codebase
+4. **Demonstrate Standards Compliance** - Dogfood prAxIs OS production code standards in our own codebase
 
 ### Success Criteria
 - [ ] All modules follow single responsibility principle (<200 lines/file)
@@ -25,7 +25,7 @@
 ## 👥 STAKEHOLDERS
 
 ### Primary Stakeholders
-- **AI Agents (Consuming Agent OS)**: Need stable, high-quality MCP tools with good performance
+- **AI Agents (Consuming prAxIs OS)**: Need stable, high-quality MCP tools with good performance
   - *Concerns*: Breaking changes, tool discovery, performance with >20 tools
   
 - **Framework Maintainers**: Need sustainable, extensible architecture
@@ -35,7 +35,7 @@
   - *Concerns*: Plugin architecture, tool registration, performance monitoring
 
 ### Secondary Stakeholders
-- **Agent OS Contributors**: Need clear code organization to contribute
+- **prAxIs OS Contributors**: Need clear code organization to contribute
   - *Concerns*: Findability, documentation, patterns to follow
 
 ---
@@ -97,7 +97,7 @@
 
 ### FR-6: Standards Compliance
 **Priority:** Must Have  
-**Description:** Code must follow Agent OS production code standards  
+**Description:** Code must follow prAxIs OS production code standards  
 **Acceptance Criteria:**
 - [ ] Complete type annotations
 - [ ] Proper error handling (no bare except)
@@ -156,7 +156,7 @@
 ## 🎭 USER STORIES
 
 ### User Story 1: AI Agent Using MCP Tools
-**As an** AI agent consuming Agent OS via MCP  
+**As an** AI agent consuming prAxIs OS via MCP  
 **I want** stable, performant tools that don't break  
 **So that** I can reliably assist users without errors
 
@@ -189,7 +189,7 @@
 - [ ] Can enable/disable via config
 
 ### User Story 4: Configuration Administrator
-**As an** admin configuring Agent OS for a project  
+**As an** admin configuring prAxIs OS for a project  
 **I want** a single, validated config file with clear defaults  
 **So that** I don't have to hunt for hidden settings or debug path issues
 

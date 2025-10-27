@@ -54,15 +54,15 @@ ACT MODE
 [Unexpected content type]
 
 <ask_followup_question>
-<question>I've now learned about Agent OS Enhanced and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?</question>
-<options>["Install Agent OS Enhanced in this Cline project", "Proceed with the MCP transport fix (streamableHttp bug)", "Create a spec for the MCP transport fix using Agent OS workflow", "Something else"]</options>
+<question>I've now learned about prAxIs OS and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?</question>
+<options>["Install prAxIs OS in this Cline project", "Proceed with the MCP transport fix (streamableHttp bug)", "Create a spec for the MCP transport fix using prAxIs OS workflow", "Something else"]</options>
 </ask_followup_question>
 
 ---
 
 **User:**
 
-[ask_followup_question for 'I've now learned about Agent OS Enhanced and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?'] Result:
+[ask_followup_question for 'I've now learned about prAxIs OS and understand its MCP/RAG architecture, phase-gated workflows, and human-AI partnership model. What would you like to do next?'] Result:
 <answer>
 since you cannot access the mcp yet, you cannot make proper use of agent os enhanced
 </answer>
@@ -155,7 +155,7 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced (not yet configured)
+- [x] Learn about prAxIs OS (not yet configured)
 - [ ] Fix addRemoteServer() to default to streamableHttp
 - [ ] Reorder schema union to prioritize StreamableHTTP
 - [ ] Add deprecation warnings for SSE usage
@@ -202,11 +202,11 @@ ACT MODE
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [ ] Provide detailed review of design doc with codebase-specific feedback
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </read_file>

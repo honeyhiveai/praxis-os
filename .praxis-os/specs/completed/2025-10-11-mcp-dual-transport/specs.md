@@ -446,7 +446,7 @@ class ProjectInfoDiscovery:
         - Project name (from git or directory)
         - Project root path (from filesystem)
         - Git repository info (if available)
-        - Agent OS path
+        - prAxIs OS path
 
         ALL values are discovered at runtime.
 
@@ -455,14 +455,14 @@ class ProjectInfoDiscovery:
             {
                 "name": str,
                 "root": str,
-                "agent_os_path": str,
+                "praxis_os_path": str,
                 "git": {...} | None
             }
         """
         return {
             "name": self._get_project_name(),
             "root": str(self.project_root),
-            "agent_os_path": str(self.base_path),
+            "praxis_os_path": str(self.base_path),
             "git": self._get_git_info(),
         }
 
@@ -796,7 +796,7 @@ def main() -> None:
     
     # 1. Parse CLI arguments
     parser = argparse.ArgumentParser(
-        description="Agent OS MCP Server with dual-transport support"
+        description="prAxIs OS MCP Server with dual-transport support"
     )
     parser.add_argument(
         "--transport",
@@ -824,13 +824,13 @@ def main() -> None:
     )
     
     logger.info("=" * 60)
-    logger.info("Agent OS MCP Server")
+    logger.info("prAxIs OS MCP Server")
     logger.info("Transport Mode: %s", args.transport)
     logger.info("=" * 60)
     
     try:
         # 3. Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
         
         # 4. Load and validate configuration
@@ -1032,7 +1032,7 @@ interface ServerInfo {
     project: {
         name: string;                 // DYNAMIC: From git or directory
         root: string;                 // DYNAMIC: Filesystem path
-        agent_os_path: string;        // DYNAMIC: Filesystem path
+        praxis_os_path: string;        // DYNAMIC: Filesystem path
         git: {                        // DYNAMIC: Git commands, null if not repo
             remote: string;           // "git@github.com:user/repo.git"
             branch: string;           // "main"
@@ -1767,5 +1767,5 @@ All new functionality uses Python stdlib (threading, socket, subprocess, json, p
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-10-11 | 1.0 | Initial technical specifications | Agent OS Team |
+| 2025-10-11 | 1.0 | Initial technical specifications | prAxIs OS Team |
 

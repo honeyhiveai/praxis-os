@@ -565,7 +565,7 @@ git commit -m "Complete implementation of feature"
 
 ---
 
-## 🔗 Integration with Agent OS Development Process
+## 🔗 Integration with prAxIs OS Development Process
 
 **Phase 1: Conversational Design**
 - ✅ Work in `workspace/design/YYYY-MM-DD-feature.md`

@@ -214,7 +214,7 @@ class ServerFactory:
         logger.info("Creating FastMCP server...")
 
         # Create FastMCP instance
-        mcp = FastMCP("agent-os-rag")
+        mcp = FastMCP("praxis-os-rag")
 
         # Register tools with selective loading
         tool_count = register_all_tools(

@@ -1,11 +1,11 @@
 # Technical Specifications
 
-## Agent OS Upgrade Workflow
+## prAxIs OS Upgrade Workflow
 
 **Version:** 1.0  
 **Date:** 2025-10-08  
 **Status:** Design Phase  
-**Workflow ID:** `agent_os_upgrade_v1`
+**Workflow ID:** `praxis_os_upgrade_v1`
 
 ---
 
@@ -13,7 +13,7 @@
 
 ### 1.1 System Architecture
 
-The upgrade workflow follows the **Agent OS Meta-Framework Three-Tier Architecture** with an emphasis on **state persistence** and **resumability**.
+The upgrade workflow follows the **prAxIs OS Meta-Framework Three-Tier Architecture** with an emphasis on **state persistence** and **resumability**.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -89,7 +89,7 @@ sequenceDiagram
     participant FileSystem
     participant MCPServer
 
-    User->>AI: start agent_os_upgrade_v1
+    User->>AI: start praxis_os_upgrade_v1
     AI->>Workflow: start_workflow()
     Workflow->>StateManager: create_session()
     StateManager->>FileSystem: Write state to disk
@@ -212,7 +212,7 @@ class WorkflowEngine:
         Initialize workflow session.
         
         Args:
-            workflow_type: "agent_os_upgrade_v1"
+            workflow_type: "praxis_os_upgrade_v1"
             target_file: "mcp_server"
             options: {"source_path": "/path/to/praxis-os"}
             
@@ -343,7 +343,7 @@ class StateManager:
 ```python
 {
     "session_id": "uuid-string",
-    "workflow_type": "agent_os_upgrade_v1",
+    "workflow_type": "praxis_os_upgrade_v1",
     "target_file": "mcp_server",
     "current_phase": 3,
     "completed_phases": [0, 1, 2],
@@ -725,7 +725,7 @@ class WorkflowSession:
     """Represents an active workflow session."""
     
     session_id: str  # UUID
-    workflow_type: str  # "agent_os_upgrade_v1"
+    workflow_type: str  # "praxis_os_upgrade_v1"
     target_file: str  # "mcp_server"
     current_phase: int  # 0-5
     completed_phases: list[int]
@@ -883,7 +883,7 @@ The workflow is invoked via MCP tools:
 ```python
 # Start workflow
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={
         "source_path": "/path/to/praxis-os",
@@ -1167,7 +1167,7 @@ def rollback_upgrade(session_id: str, reason: str) -> dict:
 
 **Test Environments:**
 
-1. **Agent OS Enhanced (Self):** Upgrade itself
+1. **prAxIs OS (Self):** Upgrade itself
 2. **Python SDK Project:** Real-world customer scenario
 3. **Clean Installation:** Fresh .praxis-os/ setup
 4. **Modified Installation:** Custom files present
@@ -1187,7 +1187,7 @@ def rollback_upgrade(session_id: str, reason: str) -> dict:
 **Location:**
 
 ```
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 ├── metadata.json
 ├── phases/
 │   ├── 0-pre-flight-checks.md
@@ -1206,9 +1206,9 @@ universal/workflows/agent_os_upgrade_v1/
 
 ```json
 {
-  "name": "agent_os_upgrade_v1",
+  "name": "praxis_os_upgrade_v1",
   "version": "1.0.0",
-  "description": "AI-guided Agent OS upgrade with validation and rollback",
+  "description": "AI-guided prAxIs OS upgrade with validation and rollback",
   "phases": [
     {
       "number": 0,

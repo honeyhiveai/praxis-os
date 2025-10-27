@@ -2,21 +2,21 @@
 """
 Safe Upgrade Tool for Agent OS
 
-Safely upgrades local .praxis-os/ directory from agent-os-enhanced source
+Safely upgrades local .praxis-os/ directory from praxis-os source
 with conflict detection and interactive prompts.
 
 This tool compares checksums between the source manifest and local files,
 automatically updating unchanged files while prompting for conflicts.
 
 Usage:
-    python scripts/safe-upgrade.py --source /path/to/agent-os-enhanced --target .praxis-os
+    python scripts/safe-upgrade.py --source /path/to/praxis-os --target .praxis-os
 
 Examples:
     # Preview changes (dry-run)
-    python scripts/safe-upgrade.py --source ../agent-os-enhanced --dry-run
+    python scripts/safe-upgrade.py --source ../praxis-os --dry-run
 
     # Execute upgrade
-    python scripts/safe-upgrade.py --source ../agent-os-enhanced --target .praxis-os
+    python scripts/safe-upgrade.py --source ../praxis-os --target .praxis-os
 """
 
 import argparse
@@ -420,25 +420,25 @@ def main() -> int:
         Exit code (0 for success, 1 for error)
     """
     parser = argparse.ArgumentParser(
-        description="Safe Agent OS upgrade tool with conflict detection",
+        description="Safe prAxIs OS upgrade tool with conflict detection",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Preview changes (dry-run)
-  %(prog)s --source /path/to/agent-os-enhanced --dry-run
+  %(prog)s --source /path/to/praxis-os --dry-run
   
   # Execute upgrade with custom target
-  %(prog)s --source /path/to/agent-os-enhanced --target .praxis-os
+  %(prog)s --source /path/to/praxis-os --target .praxis-os
   
   # Non-interactive mode (auto-confirm)
-  %(prog)s --source /path/to/agent-os-enhanced --yes
+  %(prog)s --source /path/to/praxis-os --yes
         """,
     )
 
     parser.add_argument(
         "--source",
         required=True,
-        help="Path to agent-os-enhanced repository",
+        help="Path to praxis-os repository",
         metavar="DIR",
     )
 
@@ -469,7 +469,7 @@ Examples:
     if not source_dir.exists():
         print(f"❌ ERROR: Source directory not found: {source_dir}", file=sys.stderr)
         print(
-            f"\n   Make sure the path points to the agent-os-enhanced repository.",
+            f"\n   Make sure the path points to the praxis-os repository.",
             file=sys.stderr,
         )
         print(f"   Expected universal/ subdirectory in: {args.source}", file=sys.stderr)
@@ -489,7 +489,7 @@ Examples:
         print(f"   ", file=sys.stderr)
         print(f"   To fix:", file=sys.stderr)
         print(
-            f"   1. Ensure you're using agent-os-enhanced v1.3.0 or later",
+            f"   1. Ensure you're using praxis-os v1.3.0 or later",
             file=sys.stderr,
         )
         print(
@@ -502,7 +502,7 @@ Examples:
     log_file = target_dir / "UPGRADE_LOG.txt" if not args.dry_run else None
 
     # Header
-    print(f"🚀 Agent OS Safe Upgrade Tool")
+    print(f"🚀 prAxIs OS Safe Upgrade Tool")
     print(f"{'='*60}")
     print(f"Source: {source_dir}")
     print(f"Target: {target_dir}")

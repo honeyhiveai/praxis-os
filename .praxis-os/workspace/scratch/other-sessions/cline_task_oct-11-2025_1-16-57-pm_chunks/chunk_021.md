@@ -917,7 +917,7 @@ ACT MODE
 
 [read_file for 'mcp_server/__main__.py'] Result:
 """
-Entry point for Agent OS MCP server when run as a module.
+Entry point for prAxIs OS MCP server when run as a module.
 
 Allows execution via:
     python -m mcp_server

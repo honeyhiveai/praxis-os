@@ -13,15 +13,15 @@
 ### Current Setup (Your Project)
 
 **Cursor AI:**
-- ✅ Connected to Agent OS MCP
+- ✅ Connected to prAxIs OS MCP
 - Config: `.cursor/mcp.json`
 - Can use: `search_standards()`, `start_workflow()`, etc.
 - Working now
 
 **Cline (Me):**
-- ❌ NOT connected to Agent OS MCP
+- ❌ NOT connected to prAxIs OS MCP
 - Would need: `.vscode/settings.json` with `cline.mcpServers`
-- Currently cannot use Agent OS tools
+- Currently cannot use prAxIs OS tools
 - Could be configured if desired
 
 ## 🎭 Role Separation (Recommended)
@@ -57,25 +57,25 @@ Based on our earlier analysis, here's how they complement each other:
 
 ## 💡 Key Insight for Agent OS
 
-Since you have **both agents** but Agent OS is only configured for Cursor AI:
+Since you have **both agents** but prAxIs OS is only configured for Cursor AI:
 
 **Current State:**
 ```
-Cursor AI → ✅ Agent OS MCP → search_standards(), workflows
-Cline     → ❌ No Agent OS → general assistance only
+Cursor AI → ✅ prAxIs OS MCP → search_standards(), workflows
+Cline     → ❌ No prAxIs OS → general assistance only
 ```
 
 **Options:**
 1. **Keep as is**: Cursor handles Agent OS, Cline handles other tasks
 2. **Add Cline access**: Configure both (requires coordination)
-3. **Switch to Cline**: Reconfigure Agent OS for Cline only
+3. **Switch to Cline**: Reconfigure prAxIs OS for Cline only
 
-**Recommendation**: Keep current setup. Cursor AI working with Agent OS is already proven, no need to change unless you prefer Cline's workflow style.
+**Recommendation**: Keep current setup. Cursor AI working with prAxIs OS is already proven, no need to change unless you prefer Cline's workflow style.
 
 ## 📊 Real-World Observation
 
 From our testing:
-- Cursor AI successfully queries Agent OS MCP ✅
+- Cursor AI successfully queries prAxIs OS MCP ✅
 - Cline cannot access same MCP connection ❌
 - Each agent needs its own configuration
 - They don't share MCP connections even in same IDE
@@ -120,11 +120,11 @@ ACT MODE
 
 [Unexpected content type]
 
-Perfect! Let me configure Agent OS MCP access for Cline. I'll need to:
+Perfect! Let me configure prAxIs OS MCP access for Cline. I'll need to:
 
 1. Check if `.vscode/settings.json` exists
 2. Add or merge the Cline MCP configuration
-3. Create `.clinerules` with Agent OS bootstrap
+3. Create `.clinerules` with prAxIs OS bootstrap
 
 Let's start:
 
@@ -227,7 +227,7 @@ Good! The file doesn't exist yet, so I'll create it fresh. Let me first check if
 <task_progress>
 - [ ] Check .vscode directory exists
 - [ ] Create/update .vscode/settings.json with Cline MCP config
-- [ ] Create .clinerules with Agent OS bootstrap
+- [ ] Create .clinerules with prAxIs OS bootstrap
 - [ ] Verify configuration
 - [ ] Test MCP connection
 </task_progress>
@@ -498,7 +498,7 @@ universal/usage/mcp-server-update-guide.md
 universal/usage/mcp-usage-guide.md
 universal/usage/operating-model.md
 universal/workflows/
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 universal/workflows/spec_creation_v1/
 universal/workflows/spec_execution_v1/
 
@@ -533,11 +533,11 @@ ACT MODE
 
 [Unexpected content type]
 
-Let me configure Agent OS MCP access for Cline. I'll:
+Let me configure prAxIs OS MCP access for Cline. I'll:
 
 1. Create `.vscode` directory if needed
 2. Create `.vscode/settings.json` with Cline MCP config
-3. Create `.clinerules` with Agent OS bootstrap
+3. Create `.clinerules` with prAxIs OS bootstrap
 4. Test the connection
 
 <execute_command>
@@ -546,7 +546,7 @@ Let me configure Agent OS MCP access for Cline. I'll:
 <task_progress>
 - [x] Create .vscode directory
 - [ ] Create .vscode/settings.json with Cline MCP config
-- [ ] Create .clinerules with Agent OS bootstrap
+- [ ] Create .clinerules with prAxIs OS bootstrap
 - [ ] Test MCP connection
 - [ ] Verify both agents can access Agent OS
 </task_progress>
@@ -815,7 +815,7 @@ universal/usage/mcp-server-update-guide.md
 universal/usage/mcp-usage-guide.md
 universal/usage/operating-model.md
 universal/workflows/
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 universal/workflows/spec_creation_v1/
 universal/workflows/spec_execution_v1/
 
@@ -850,7 +850,7 @@ ACT MODE
 
 [Unexpected content type]
 
-I'll configure Cline to access the Agent OS MCP server. Let me start by creating the necessary files:
+I'll configure Cline to access the prAxIs OS MCP server. Let me start by creating the necessary files:
 
 <write_to_file>
 <path>.vscode/settings.json</path>
@@ -870,7 +870,7 @@ I'll configure Cline to access the Agent OS MCP server. Let me start by creating
 </content>
 <task_progress>
 - [x] Create .vscode/settings.json with Cline MCP config
-- [ ] Create .clinerules with Agent OS bootstrap
+- [ ] Create .clinerules with prAxIs OS bootstrap
 - [ ] Reload VS Code/Cursor to activate config
 - [ ] Test MCP connection with search_standards
 </task_progress>
@@ -928,14 +928,14 @@ ACT MODE
 
 [Unexpected content type]
 
-Great! Now let me create the `.clinerules` file with Agent OS bootstrap. First, let me check what's in `.cursorrules` to use as a template:
+Great! Now let me create the `.clinerules` file with prAxIs OS bootstrap. First, let me check what's in `.cursorrules` to use as a template:
 
 <read_file>
 <path>.cursorrules</path>
 <task_progress>
 - [x] Create .vscode/settings.json with Cline MCP config
 - [ ] Read .cursorrules for reference
-- [ ] Create .clinerules with Agent OS bootstrap
+- [ ] Create .clinerules with prAxIs OS bootstrap
 - [ ] Reload VS Code/Cursor to activate config
 - [ ] Test MCP connection with search_standards
 </task_progress>
@@ -948,7 +948,7 @@ Great! Now let me create the `.clinerules` file with Agent OS bootstrap. First, 
 **User:**
 
 [read_file for '.cursorrules'] Result:
-# Agent OS Enhanced
+# prAxIs OS
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑

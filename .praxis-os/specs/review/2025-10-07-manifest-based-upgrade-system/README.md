@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Implement a safe, manifest-based upgrade system that allows consuming projects to update their Agent OS skeleton files without risk of losing custom content.
+Implement a safe, manifest-based upgrade system that allows consuming projects to update their prAxIs OS skeleton files without risk of losing custom content.
 
 **Core Innovation:** Checksum-based tracking with interactive prompts for conflicts.
 

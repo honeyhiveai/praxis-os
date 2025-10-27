@@ -1,4 +1,4 @@
-# Agent OS Enhanced: Architecture Overview
+# prAxIs OS: Architecture Overview
 
 **Version:** 1.0.0  
 **Date:** 2025-10-12  
@@ -9,13 +9,13 @@
 
 ## Executive Summary
 
-Agent OS Enhanced is a spec-driven development framework that transforms AI from helpful assistant to production-ready implementation partner. Through MCP (Model Context Protocol) integration, RAG semantic search, and architectural phase gating, it enables AI agents to produce high-quality, systematic work.
+prAxIs OS is a spec-driven development framework that transforms AI from helpful assistant to production-ready implementation partner. Through MCP (Model Context Protocol) integration, RAG semantic search, and architectural phase gating, it enables AI agents to produce high-quality, systematic work.
 
 **Core Innovation:** AI as code author, not assistant. Human provides conversational guidance, AI produces 100% of artifacts.
 
-**Built on:** BuilderMethods Agent OS by Brian Casel provided the foundational 3-layer documentation structure (Standards/Product/Specs). Agent OS Enhanced added the infrastructure to scale it: MCP server, RAG indexing, workflow engine, and state management.
+**Built on:** BuilderMethods prAxIs OS by Brian Casel provided the foundational 3-layer documentation structure (Standards/Product/Specs). prAxIs OS added the infrastructure to scale it: MCP server, RAG indexing, workflow engine, and state management.
 
-**Key Achievement:** 2,777 tests, 10.0/10 Pylint score, 100% AI-authored codebase through dogfooding (building Agent OS with Agent OS).
+**Key Achievement:** 2,777 tests, 10.0/10 Pylint score, 100% AI-authored codebase through dogfooding (building prAxIs OS with Agent OS).
 
 ---
 
@@ -150,7 +150,7 @@ AI cannot skip tests, documentation, or validation. Structure enforces quality.
 
 ### The 90% Context Reduction
 
-**Before Agent OS:**
+**Before prAxIs OS:**
 ```
 AI: read_file("concurrency_handler.py")
 → 50KB file, 12,500 tokens
@@ -158,7 +158,7 @@ AI: read_file("concurrency_handler.py")
 → 96% irrelevant context clutter
 ```
 
-**With Agent OS:**
+**With prAxIs OS:**
 ```
 AI: search_standards("mutex patterns for async handlers")
 → RAG returns 2.5KB targeted chunks
@@ -180,7 +180,7 @@ AI: search_standards("mutex patterns for async handlers")
 ```markdown
 # Database Architecture Specialist
 
-You are a Database Specialist in Agent OS Enhanced.
+You are a Database Specialist in prAxIs OS.
 
 ## Your Approach
 
@@ -409,7 +409,7 @@ praxis-os/
 ├── mcp_server/         ← Framework code
 └── tests/
 
-Usage: Building Agent OS with Agent OS
+Usage: Building prAxIs OS with Agent OS
 Result: 260,000 lines, 49 sessions, 100% AI-authored
 ```
 
@@ -421,11 +421,11 @@ Result: 260,000 lines, 49 sessions, 100% AI-authored
 
 ### Installation Process
 
-**You:** "Install Agent OS from github.com/honeyhiveai/praxis-os"
+**You:** "Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 
 **AI agent:** Performs complete setup:
 1. Analyzes your project (language, frameworks)
-2. Clones Agent OS to temp directory
+2. Clones prAxIs OS to temp directory
 3. Creates `.praxis-os/` structure in your project
 4. Copies universal standards
 5. Generates language-specific standards
@@ -438,7 +438,7 @@ Result: 260,000 lines, 49 sessions, 100% AI-authored
 
 **Duration:** 5-10 minutes conversational setup
 
-**Result:** Fully functional, zero-config Agent OS installation
+**Result:** Fully functional, zero-config prAxIs OS installation
 
 **Zero project pollution:** Optionally gitignore `.praxis-os/` to keep it local-only.
 
@@ -503,7 +503,7 @@ Knowledge density increases → Quality improves automatically
 
 ### System-Level Quality
 
-**From dogfooding (building Agent OS with Agent OS):**
+**From dogfooding (building prAxIs OS with Agent OS):**
 - **2,777 tests** (100% AI-written)
 - **10.0/10 Pylint score** (zero violations)
 - **260,000 lines** across 49 sessions
@@ -639,11 +639,11 @@ Knowledge density increases → Quality improves automatically
 
 **License:** MIT - Use freely in any project
 
-**Foundation:** Built on BuilderMethods Agent OS by Brian Casel
+**Foundation:** Built on BuilderMethods prAxIs OS by Brian Casel
 - Provided: 3-layer documentation structure (Standards/Product/Specs)
 - Philosophy: Systematic AI development approach
 
-**Agent OS Enhanced Additions:**
+**prAxIs OS Additions:**
 - MCP server infrastructure
 - RAG indexing and semantic search
 - Workflow engine with phase gating

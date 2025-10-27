@@ -1,11 +1,11 @@
-# Agent OS MCP Server
+# prAxIs OS MCP Server
 
-**Model Context Protocol server for Agent OS Enhanced with RAG, sub-agents, and workflow engine.**
+**Model Context Protocol server for prAxIs OS with RAG, sub-agents, and workflow engine.**
 
 ## Components
 
 ### Core Server
-- **`agent_os_rag.py`**: Main MCP server entry point
+- **`praxis_os_rag.py`**: Main MCP server entry point
 - **`rag_engine.py`**: LanceDB vector search with semantic retrieval
 - **`workflow_engine.py`**: Phase-gated workflows with checkpoint validation
 - **`state_manager.py`**: Workflow state persistence
@@ -18,7 +18,7 @@
 
 ## Installation
 
-This MCP server is copied to `.praxis-os/mcp_server/` in target projects during Agent OS installation.
+This MCP server is copied to `.praxis-os/mcp_server/` in target projects during prAxIs OS installation.
 
 ## Dependencies
 
@@ -39,7 +39,7 @@ Configured in target project's `.cursor/mcp.json`:
   "mcpServers": {
     "agent-os-rag": {
       "command": "python",
-      "args": ["${workspaceFolder}/.praxis-os/mcp_server/agent_os_rag.py"],
+      "args": ["${workspaceFolder}/.praxis-os/mcp_server/praxis_os_rag.py"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
         "PYTHONPATH": "${workspaceFolder}/.praxis-os"
@@ -91,7 +91,7 @@ To modify the MCP server:
 2. Test in a sample project
 3. Update `CHANGELOG.md`
 4. Tag release (semver)
-5. Users update via: "Update Agent OS to latest version"
+5. Users update via: "Update prAxIs OS to latest version"
 
 ---
 

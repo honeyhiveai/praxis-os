@@ -5,7 +5,7 @@
 Multiple agents need access to the same MCP server:
 - **Cursor Agent** (primary) - needs stdio for IDE integration
 - **Sub-agents** (Cline, Aider, custom agents) - need HTTP for remote access
-- **Multiple projects** - each with its own Agent OS instance
+- **Multiple projects** - each with its own prAxIs OS instance
 - **Port conflicts** - can't all use the same port
 
 ## Solution: Dual Transport with Dynamic Ports

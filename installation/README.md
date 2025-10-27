@@ -1,4 +1,4 @@
-# Agent OS Installation Guide
+# prAxIs OS Installation Guide
 
 **How to install prAxIs OS into a target project**
 
@@ -6,7 +6,7 @@
 
 ## 🎯 Quick Start
 
-When a user says: **"Install Agent OS from github.com/honeyhiveai/praxis-os"**
+When a user says: **"Install prAxIs OS from github.com/honeyhiveai/praxis-os"**
 
 **Start here** → Read `00-START.md` and follow the chain.
 
@@ -46,7 +46,7 @@ COMPLETE! ✅
 
 ## 🎯 Design Principle: Bootstrapping Problem
 
-**The Problem**: Agent OS helps LLMs follow complex instructions, but we need an LLM to install Agent OS (before it has our enhancements).
+**The Problem**: prAxIs OS helps LLMs follow complex instructions, but we need an LLM to install prAxIs OS (before it has our enhancements).
 
 **The Solution**: These guides work for **vanilla LLMs**:
 - ✅ Short files (~250 lines each)
@@ -74,7 +74,7 @@ The most common mistake: forgetting `.praxis-os/workflows/` directory. The MCP s
 
 ### 4. Use Correct Module Name
 
-In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`. The entry point is `mcp_server/__main__.py`.
+In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`. The entry point is `mcp_server/__main__.py`.
 
 ---
 
@@ -122,7 +122,7 @@ praxis-os/
 
 **During Installation** (temp directory):
 ```
-/tmp/agent-os-install-xyz/
+/tmp/praxis-os-install-xyz/
 └── [same structure as above]
     ← Cloned here temporarily
     ← Deleted at end of step 05
@@ -154,7 +154,7 @@ checks = {
     ".praxis-os/workflows/": exists and has ~47 files,
     ".praxis-os/venv/": exists with working Python,
     ".praxis-os/.cache/vector_index/": exists with RAG index,
-    ".cursorrules": exists with Agent OS rules,
+    ".cursorrules": exists with prAxIs OS rules,
     ".cursor/mcp.json": exists with "mcp_server" module,
     "Temp directory": deleted (cleaned up),
 }
@@ -167,7 +167,7 @@ checks = {
 | Issue | Cause | Fix |
 |-------|-------|-----|
 | Missing workflows/ | Forgot step 01 | Create `.praxis-os/workflows/` |
-| Wrong module name | Used `mcp_server.agent_os_rag` | Change to `mcp_server` in mcp.json |
+| Wrong module name | Used `mcp_server.praxis_os_rag` | Change to `mcp_server` in mcp.json |
 | Empty workflows/ | Forgot step 02 | Copy files from `universal/workflows/` |
 | Git repo left behind | Forgot step 05 | Delete temp directory manually |
 | .cursorrules overwritten | Didn't follow step 03 | Restore from `.cursorrules.backup` |

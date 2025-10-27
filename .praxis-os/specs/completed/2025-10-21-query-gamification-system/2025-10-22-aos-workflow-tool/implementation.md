@@ -78,7 +78,7 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime
 import logging
 
-# Agent OS imports
+# prAxIs OS imports
 from mcp_server.core.workflow_engine import WorkflowEngine
 from mcp_server.core.state_manager import StateManager
 

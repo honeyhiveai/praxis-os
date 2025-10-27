@@ -9,7 +9,7 @@
 - Need to implement 5 features
 - Each feature: 20 tasks averaging 4 hours
 - Traditional: 100 tasks × 4h = 400 hours (10 weeks)
-- Agent OS: 100 tasks × 12 min = 20 hours (0.5 weeks)
+- prAxIs OS: 100 tasks × 12 min = 20 hours (0.5 weeks)
 - Leverage: 20x per task, 20x overall
 - But you can START all tasks simultaneously
 - Result: Deliver in days, not weeks
@@ -73,7 +73,7 @@ Total human effort saved: 3 hours 43 minutes
 ```markdown
 ## Calibrating Your Estimates
 
-### If You're New to Agent OS Enhanced
+### If You're New to prAxIs OS
 
 **Start conservative:**
 - Use 1.2x multiplier (assume AI is same speed or slower)
@@ -198,7 +198,7 @@ Typical ranges:
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys
@@ -316,7 +316,7 @@ Leverage Multiplier = Human Time ÷ Human Orchestration Time
 Traditional: 4 hours human effort
 ├─────────────────────────────┤ (Human working)
 
-Agent OS: 12 minutes human effort
+prAxIs OS: 12 minutes human effort
 ├─┤                           ├┤ (5 min setup, 7 min review)
     └──[AI works for 4 hours]──┘ (Autonomous, human does other work)
 
@@ -346,7 +346,7 @@ Result: 3h 48m saved, 20x leverage
 
 **Example impact:**
 - Traditional: 1 developer, 40 hours/week, 1 task at a time
-- Agent OS: 1 developer, 40 hours/week, 20+ tasks in parallel
+- prAxIs OS: 1 developer, 40 hours/week, 20+ tasks in parallel
 - Effective output: 20-40 developer equivalents
 - Quality: Higher (spec-driven, standards compliance)
 - Cost: Same (one human + AI agents)
@@ -364,7 +364,7 @@ Result: 3h 48m saved, 20x leverage
 Total: 20 hours (half a week)
 ```
 
-**Agent OS Enhanced contribution:**
+**prAxIs OS contribution:**
 ```
 1. Find bug
 2. Create comprehensive spec (30 min)
@@ -396,7 +396,7 @@ Total: 1 hour human effort (same day completion)
 
 **Overall Rating: 9/10**
 
-The dual estimation framework is **fundamentally sound** and captures the key insight that drives Agent OS Enhanced's productivity gains. The core formula, task-specific multipliers, and realistic expectations are excellent.
+The dual estimation framework is **fundamentally sound** and captures the key insight that drives prAxIs OS's productivity gains. The core formula, task-specific multipliers, and realistic expectations are excellent.
 
 **Main improvement needed:**
 - Terminology clarity (Wall Clock Duration vs Human Active Time)
@@ -417,7 +417,7 @@ This enables:
 - **Parallel leverage:** 100-400x across tasks (simultaneous execution)
 - **Compound leverage:** More tasks → better specs → higher quality → faster execution
 
-**This is why Agent OS Enhanced can:**
+**This is why prAxIs OS can:**
 - Create 30KB spec in 2 hours
 - Contribute to major projects same day
 - Maintain high quality throughout
@@ -435,7 +435,7 @@ This enables:
 **Then ship it!**
 
 This framework will help users:
-- Understand Agent OS Enhanced's value prop
+- Understand prAxIs OS's value prop
 - Set realistic expectations
 - Communicate leverage to others
 - Plan projects effectively
@@ -651,7 +651,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 - **Phase 2:** {hours} ({description})
 - **Total:** {hours} ({days})
 
-### AI Agent + Human Orchestration (Agent OS Enhanced)
+### AI Agent + Human Orchestration (prAxIs OS)
 - **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)
 - **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)
 - **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)
@@ -668,7 +668,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 - [ ] **Task 1.1**: {Task name}
   - **Human Baseline:** {hours} ({S/M/L})
-  - **Agent OS:** {wall hours}h wall, {active min} min active ({leverage}x)
+  - **prAxIs OS:** {wall hours}h wall, {active min} min active ({leverage}x)
   
   - {Action item}
   - {Action item}
@@ -680,7 +680,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 
 - [ ] **Task 1.2**: {Task name}
   - **Human Baseline:** {hours} ({S/M/L})
-  - **Agent OS:** {wall hours}h wall, {active min} min active ({leverage}x)
+  - **prAxIs OS:** {wall hours}h wall, {active min} min active ({leverage}x)
   
   - {Action item}
   
@@ -737,7 +737,7 @@ Template for creating tasks.md during Phase 3 (Task Breakdown).
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
@@ -849,7 +849,7 @@ Phase 1
 
 ### Dual Estimation: Human vs AI Agent
 
-Agent OS Enhanced requires **two time estimates** to show the leverage multiplier (20-40x typical).
+prAxIs OS requires **two time estimates** to show the leverage multiplier (20-40x typical).
 
 **For complete dual estimation guidance, query these standards:**
 
@@ -885,7 +885,7 @@ Agent OS Enhanced requires **two time estimates** to show the leverage multiplie
 
 6. **Calibration Guidance:**
    ```
-   search_standards("calibration new to Agent OS Enhanced")
+   search_standards("calibration new to prAxIs OS")
    ```
    Returns: Conservative starting point, refinement over 5-10 tasks
 
@@ -906,7 +906,7 @@ Typical: H=4h, M=1.0, W=4h, O=0.05, A=12min → L=20x
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys

@@ -101,7 +101,7 @@ During this design session, we experienced context compaction **twice**:
 
 ### Critical Constraint
 
-**Agent OS Enhanced controls NONE of these agents**:
+**prAxIs OS controls NONE of these agents**:
 - Claude Code: Anthropic's proprietary agent
 - Cursor: Cursor's proprietary agent
 - Cline: Open source, but we don't control maintainers
@@ -122,7 +122,7 @@ During this design session, we experienced context compaction **twice**:
 
 ### Empirical Validation Summary
 
-**Critical Note**: Agent OS Enhanced is a passive observer. We extract from platform storage but control none of these agents.
+**Critical Note**: prAxIs OS is a passive observer. We extract from platform storage but control none of these agents.
 
 | Platform | Ownership | Storage Accessibility | Data Completeness | Extraction Strategy |
 |----------|-----------|----------------------|-------------------|---------------------|

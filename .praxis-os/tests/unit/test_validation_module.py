@@ -22,7 +22,7 @@ def validator():
 @pytest.fixture
 def mock_source_repo(tmp_path):
     """Create a mock source repository structure."""
-    source = tmp_path / "agent-os-enhanced"
+    source = tmp_path / "praxis-os"
     source.mkdir()
 
     # Create required directories
@@ -79,7 +79,7 @@ class TestValidateSourceRepo:
 
         assert result["valid"] is True
         assert result["path_exists"] is True
-        assert result["is_agent_os_repo"] is True
+        assert result["is_praxis_os_repo"] is True
         assert result["git_clean"] is True
         assert result["version"] == "1.0.0"
         assert len(result["errors"]) == 0
@@ -101,8 +101,8 @@ class TestValidateSourceRepo:
         result = validator.validate_source_repo(str(not_agent_os))
 
         assert result["valid"] is False
-        assert result["is_agent_os_repo"] is False
-        assert "not an agent-os-enhanced repository" in result["errors"][0].lower()
+        assert result["is_praxis_os_repo"] is False
+        assert "not an praxis-os repository" in result["errors"][0].lower()
 
     def test_validate_source_repo_dirty_git(self, validator, mock_source_repo):
         """Test validation fails for dirty git status."""
@@ -385,7 +385,7 @@ class TestValidateWorkflowNotInProgress:
 
         # Create active workflow state
         state_file = state_dir / "session-123.json"
-        state_data = {"workflow_type": "agent_os_upgrade_v1", "current_phase": 2}
+        state_data = {"workflow_type": "praxis_os_upgrade_v1", "current_phase": 2}
         state_file.write_text(json.dumps(state_data))
 
         result = validator.validate_workflow_not_in_progress(str(state_dir))
@@ -402,7 +402,7 @@ class TestValidateWorkflowNotInProgress:
         # Create completed workflow state
         state_file = state_dir / "session-123.json"
         state_data = {
-            "workflow_type": "agent_os_upgrade_v1",
+            "workflow_type": "praxis_os_upgrade_v1",
             "current_phase": 6,  # Completed (> 5)
         }
         state_file.write_text(json.dumps(state_data))

@@ -888,7 +888,7 @@ Complete technical analysis and implementation plan available:
 ## After Approval
 
 Once this issue is approved by maintainers, I'm ready to:
-1. Create comprehensive spec using Agent OS Enhanced workflow
+1. Create comprehensive spec using prAxIs OS workflow
 2. Implement the fix with full test coverage
 3. Submit PR with changeset (type: patch)
 4. Update documentation

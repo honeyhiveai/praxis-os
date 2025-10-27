@@ -127,7 +127,7 @@
 
 | Query | Expected Result | Actual Top Result | Rank | Success |
 |-------|----------------|-------------------|------|---------|
-| "what to add to gitignore for Agent OS" | `gitignore-requirements.md` → required entries | `gitignore-requirements.md` → "❓ Questions This Answers" | #1 | ✅ |
+| "what to add to gitignore for prAxIs OS" | `gitignore-requirements.md` → required entries | `gitignore-requirements.md` → "❓ Questions This Answers" | #1 | ✅ |
 
 **Success Rate:** 1/1 = 100%
 
@@ -138,7 +138,7 @@
 
 | Query | Expected Result | Actual Top Result | Rank | Success |
 |-------|----------------|-------------------|------|---------|
-| "how to behave as AI agent in Agent OS" | `ai-agent-quickstart.md` → behavioral guide | `ai-agent-quickstart.md` → "🚨 Quick Start (TL;DR)" | #1 | ✅ |
+| "how to behave as AI agent in prAxIs OS" | `ai-agent-quickstart.md` → behavioral guide | `ai-agent-quickstart.md` → "🚨 Quick Start (TL;DR)" | #1 | ✅ |
 
 **Success Rate:** 1/1 = 100%
 

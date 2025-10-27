@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-**CRITICAL FINDING**: The Agent OS workflow engine has a fully-featured checkpoint validation system (`CheckpointLoader`, `_validate_checkpoint`) that is **completely disabled** in production. The validation is hardcoded to `True`, allowing any evidence (including false evidence) to pass gates unchallenged.
+**CRITICAL FINDING**: The prAxIs OS workflow engine has a fully-featured checkpoint validation system (`CheckpointLoader`, `_validate_checkpoint`) that is **completely disabled** in production. The validation is hardcoded to `True`, allowing any evidence (including false evidence) to pass gates unchallenged.
 
 **Impact**:
 - AI agents can submit false evidence claims without verification
@@ -117,7 +117,7 @@ def _validate_checkpoint(
     
     This method exists, is fully implemented, but is NEVER CALLED.
     """
-    # Load requirements dynamically from Agent OS documents
+    # Load requirements dynamically from prAxIs OS documents
     checkpoint_def = self.checkpoint_loader.load_checkpoint_requirements(
         workflow_type, phase
     )
@@ -182,10 +182,10 @@ grep -r "_validate_checkpoint(" mcp_server/
 
 class CheckpointLoader:
     """
-    Load checkpoint requirements dynamically from Agent OS standards.
+    Load checkpoint requirements dynamically from prAxIs OS standards.
     
     Aligns with project principle: dynamic logic over static patterns.
-    Single source of truth: Agent OS docs define checkpoints, not code.
+    Single source of truth: prAxIs OS docs define checkpoints, not code.
     """
     
     def __init__(self, rag_engine: RAGEngine):
@@ -198,7 +198,7 @@ class CheckpointLoader:
         self, workflow_type: str, phase: int
     ) -> Dict[str, Any]:
         """
-        Load checkpoint requirements from Agent OS documents with thread safety.
+        Load checkpoint requirements from prAxIs OS documents with thread safety.
         
         Implements double-checked locking pattern to prevent duplicate RAG queries.
         """
@@ -1188,7 +1188,7 @@ def test_complete_phase_retry_after_failure(workflow_session):
 
 ## Conclusion
 
-The Agent OS workflow engine has a well-designed, RAG-driven checkpoint validation system that is **completely disabled in production**. This critical gap allows false evidence to pass unchallenged, undermining the entire phase-gating architecture.
+The prAxIs OS workflow engine has a well-designed, RAG-driven checkpoint validation system that is **completely disabled in production**. This critical gap allows false evidence to pass unchallenged, undermining the entire phase-gating architecture.
 
 **Critical Path**:
 1. Enable validation in `WorkflowSession.complete_phase` ← **THIS WEEK**

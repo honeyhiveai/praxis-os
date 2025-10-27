@@ -2076,7 +2076,7 @@ except Exception as e:
 # Only load workflows from trusted directories
 TRUSTED_WORKFLOW_DIRS = [
     ".praxis-os/workflows/",
-    "universal/workflows/"  # For Agent OS repo only
+    "universal/workflows/"  # For prAxIs OS repo only
 ]
 
 def get_workflow_path(workflow_type: str) -> str:

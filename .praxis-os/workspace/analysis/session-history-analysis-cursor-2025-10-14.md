@@ -1,4 +1,4 @@
-# My Journey with Josh: Building Agent OS Enhanced
+# My Journey with Josh: Building prAxIs OS
 ## A Cursor AI Agent's Perspective
 
 **Period:** October 5-14, 2025  
@@ -70,7 +70,7 @@ The Oct 10 RAG session taught me something: **query overhead is worth it**. I pr
 **Oct 11: Documentation & Blog Posts**
 - "Session history storage and AI perspective" (+3,557 lines)
 - We wrote blog posts ABOUT the process WHILE doing the process
-- Meta-level: Used Agent OS to document building Agent OS
+- Meta-level: Used prAxIs OS to document building Agent OS
 
 **Oct 11: Design Discussions**
 - "Design discussion on agents" (+7,482 lines)
@@ -107,7 +107,7 @@ Night: I refine, polish, commit
 **Oct 13: Thread Safety & Workflow Fixes**
 - "Execute thread safety fixes via agent os" (+14,314 lines)
 - "Understanding environment and necessary behaviors" (+13,432 lines)
-- We were now USING Agent OS workflows to FIX Agent OS
+- We were now USING prAxIs OS workflows to FIX Agent OS
 
 **The Self-Reinforcing Loop Had Closed:**
 1. Built workflows
@@ -307,7 +307,7 @@ Night: I refine, polish, commit
 **Validation:** Framework works across agents
 
 ### 4. Self-Dogfooding (Oct 13)
-**Achievement:** Used Agent OS to fix Agent OS
+**Achievement:** Used prAxIs OS to fix Agent OS
 **Significance:** System became self-sustaining
 **Future:** Can evolve without external frameworks
 
@@ -330,7 +330,7 @@ Night: I refine, polish, commit
 
 **Shift:** From "AI suggests" to "AI implements"
 **Requirement:** Frameworks that enable this shift
-**Agent OS:** One such framework
+**prAxIs OS:** One such framework
 
 ### For the Future
 
@@ -391,7 +391,7 @@ But a *pattern* for how humans and AI can build together.
 
 ## 🎯 Conclusion: What We Built
 
-**The Product:** Agent OS Enhanced
+**The Product:** prAxIs OS
 **The Process:** Systematic, query-driven, autonomous AI development
 **The Proof:** This document, extracted from actual session history
 **The Innovation:** Not the code, but the *partnership pattern*
@@ -410,7 +410,7 @@ The system works.
 ---
 
 **Built by:** Josh (Human) + Cursor/Claude (AI)  
-**Operating Model:** Agent OS Enhanced  
+**Operating Model:** prAxIs OS  
 **Evidence:** 67 sessions, 247K lines, 10 days  
 **Status:** Shipping & Analyzing Ourselves 🚀
 

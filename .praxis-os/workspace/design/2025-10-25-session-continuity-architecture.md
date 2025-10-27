@@ -9,7 +9,7 @@
 
 ## The Core Problem
 
-**Your Insight**: "A unified experience for all Agent OS Enhanced users should be the goal"
+**Your Insight**: "A unified experience for all prAxIs OS users should be the goal"
 
 **The Constraint**: MCP tools are **stateless request-response** - they don't have access to the ongoing conversation
 
@@ -18,7 +18,7 @@ Agent Platform (Cursor/Claude Code/Cline)
   ↓ Has: Full conversation history
   ↓ Sends: Individual tool requests
   ↓
-MCP Server (Agent OS Enhanced)
+MCP Server (prAxIs OS)
   ↓ Receives: search_standards("query")
   ↓ Has: NO access to conversation context
   ↓ Problem: Can't extract session to index it

@@ -438,7 +438,7 @@ copy_file(source, dest)
 move_file(source, dest)
 ```
 
-**Option B: Agent OS Pattern (Consolidated)**
+**Option B: prAxIs OS Pattern (Consolidated)**
 ```python
 # Single tool with actions (1 tool)
 pos_filesystem(
@@ -452,8 +452,8 @@ pos_filesystem(
 **Recommendation:** Option B (consolidated) because:
 - ✅ Consistent with `pos_workflow` and `pos_browser`
 - ✅ Keeps tool count low (6 total vs 13+)
-- ✅ Agent OS teaches dynamic discovery (overcomes consolidation complexity)
-- ✅ Microsoft research applies to generic agents (not Agent OS trained agents)
+- ✅ prAxIs OS teaches dynamic discovery (overcomes consolidation complexity)
+- ✅ Microsoft research applies to generic agents (not prAxIs OS trained agents)
 
 ### Insight 2: Essential Operations
 
@@ -554,7 +554,7 @@ async def pos_filesystem(
     max_size_mb: int = 10              # Safety limit for read
 ) -> Dict[str, Any]:
     """
-    File system operations for Agent OS sub-agents.
+    File system operations for prAxIs OS sub-agents.
     
     Provides OS-level file I/O capabilities to autonomous agents.
     All paths are workspace-scoped for security.

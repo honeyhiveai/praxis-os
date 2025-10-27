@@ -10,24 +10,24 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from mcp_server.__main__ import find_agent_os_directory, main
+from mcp_server.__main__ import find_praxis_os_directory, main
 
 
 class TestFindAgentOsDirectory:
-    """Test find_agent_os_directory function."""
+    """Test find_praxis_os_directory function."""
 
     def test_finds_in_current_directory(self, tmp_path, monkeypatch):
         """Test finding .praxis-os in current directory."""
         # Create .praxis-os in temp directory
-        agent_os_dir = tmp_path / ".praxis-os"
-        agent_os_dir.mkdir()
+        praxis_os_dir = tmp_path / ".praxis-os"
+        praxis_os_dir.mkdir()
 
         # Change to temp directory
         monkeypatch.chdir(tmp_path)
 
-        result = find_agent_os_directory()
+        result = find_praxis_os_directory()
 
-        assert result == agent_os_dir
+        assert result == praxis_os_dir
 
     def test_finds_in_home_directory(self, tmp_path, monkeypatch):
         """Test finding .praxis-os in home directory."""
@@ -37,14 +37,14 @@ class TestFindAgentOsDirectory:
         # Create .praxis-os in home
         home_dir = tmp_path / "home"
         home_dir.mkdir()
-        agent_os_dir = home_dir / ".praxis-os"
-        agent_os_dir.mkdir()
+        praxis_os_dir = home_dir / ".praxis-os"
+        praxis_os_dir.mkdir()
 
         with patch("mcp_server.__main__.Path.cwd", return_value=mock_cwd):
             with patch("mcp_server.__main__.Path.home", return_value=home_dir):
-                result = find_agent_os_directory()
+                result = find_praxis_os_directory()
 
-                assert result == agent_os_dir
+                assert result == praxis_os_dir
 
     def test_exits_if_not_found(self, tmp_path, monkeypatch):
         """Test exits with error if .praxis-os not found."""
@@ -61,7 +61,7 @@ class TestFindAgentOsDirectory:
                 str(nonexistent_file / "mcp_server" / "__main__.py"),
             ):
                 with pytest.raises(SystemExit) as exc_info:
-                    find_agent_os_directory()
+                    find_praxis_os_directory()
 
                 assert exc_info.value.code == 1
 
@@ -70,7 +70,7 @@ class TestMainFunction:
     """Test main function with various scenarios."""
 
     @patch("mcp_server.__main__.argparse.ArgumentParser.parse_args")
-    @patch("mcp_server.__main__.find_agent_os_directory")
+    @patch("mcp_server.__main__.find_praxis_os_directory")
     @patch("mcp_server.__main__.ConfigLoader.load")
     @patch("mcp_server.__main__.ConfigValidator.validate")
     @patch("mcp_server.__main__.ProjectInfoDiscovery")
@@ -129,7 +129,7 @@ class TestMainFunction:
         mock_port_mgr.cleanup_state.assert_called_once()
 
     @patch("mcp_server.__main__.argparse.ArgumentParser.parse_args")
-    @patch("mcp_server.__main__.find_agent_os_directory")
+    @patch("mcp_server.__main__.find_praxis_os_directory")
     @patch("mcp_server.__main__.ConfigLoader.load")
     @patch("mcp_server.__main__.ConfigValidator.validate")
     @patch("mcp_server.__main__.ProjectInfoDiscovery")
@@ -180,7 +180,7 @@ class TestMainFunction:
         mock_port_mgr.cleanup_state.assert_called_once()
 
     @patch("mcp_server.__main__.argparse.ArgumentParser.parse_args")
-    @patch("mcp_server.__main__.find_agent_os_directory")
+    @patch("mcp_server.__main__.find_praxis_os_directory")
     @patch("mcp_server.__main__.ConfigLoader.load")
     @patch("mcp_server.__main__.ConfigValidator.validate")
     @patch("mcp_server.__main__.ProjectInfoDiscovery")
@@ -239,7 +239,7 @@ class TestMainFunction:
         mock_port_mgr.cleanup_state.assert_called_once()
 
     @patch("mcp_server.__main__.argparse.ArgumentParser.parse_args")
-    @patch("mcp_server.__main__.find_agent_os_directory")
+    @patch("mcp_server.__main__.find_praxis_os_directory")
     @patch("mcp_server.__main__.ConfigLoader.load")
     @patch("mcp_server.__main__.ConfigValidator.validate")
     def test_main_exits_on_config_errors(
@@ -264,7 +264,7 @@ class TestMainFunction:
         assert exc_info.value.code == 1
 
     @patch("mcp_server.__main__.argparse.ArgumentParser.parse_args")
-    @patch("mcp_server.__main__.find_agent_os_directory")
+    @patch("mcp_server.__main__.find_praxis_os_directory")
     @patch("mcp_server.__main__.ConfigLoader.load")
     @patch("mcp_server.__main__.ConfigValidator.validate")
     @patch("mcp_server.__main__.ProjectInfoDiscovery")
@@ -320,7 +320,7 @@ class TestDocstrings:
 
     def test_functions_have_docstrings(self):
         """Test all functions have docstrings."""
-        functions = [find_agent_os_directory, main]
+        functions = [find_praxis_os_directory, main]
 
         for func in functions:
             assert func.__doc__ is not None

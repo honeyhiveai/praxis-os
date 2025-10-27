@@ -1,4 +1,4 @@
-# Design Document: Agent OS Enhanced Documentation Restructure
+# Design Document: prAxIs OS Documentation Restructure
 
 **Date**: 2025-10-10  
 **Status**: Draft  
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This design document outlines a comprehensive restructuring of Agent OS Enhanced documentation to align with the [Divio Documentation System](https://docs.divio.com/documentation-system/), addressing critical gaps identified through systematic analysis. The current documentation achieves 46% Divio compliance with **zero tutorials**, inadequate how-to guides, and mixed content types. This restructure will increase compliance to 90%+, dramatically improving user onboarding, retention, and support efficiency.
+This design document outlines a comprehensive restructuring of prAxIs OS documentation to align with the [Divio Documentation System](https://docs.divio.com/documentation-system/), addressing critical gaps identified through systematic analysis. The current documentation achieves 46% Divio compliance with **zero tutorials**, inadequate how-to guides, and mixed content types. This restructure will increase compliance to 90%+, dramatically improving user onboarding, retention, and support efficiency.
 
 **Key Metrics**:
 - Current state: 46% Divio compliance (heavily skewed toward explanation)
@@ -22,9 +22,9 @@ This design document outlines a comprehensive restructuring of Agent OS Enhanced
 
 ## 0. Background & Context
 
-### 0.1 What is Agent OS Enhanced?
+### 0.1 What is prAxIs OS?
 
-**Agent OS Enhanced** is a portable multi-agent development framework designed for AI-assisted development. It enables AI agents (like Claude in Cursor) to build high-quality software systematically through structured workflows, semantic knowledge retrieval, and quality enforcement gates.
+**prAxIs OS** is a portable multi-agent development framework designed for AI-assisted development. It enables AI agents (like Claude in Cursor) to build high-quality software systematically through structured workflows, semantic knowledge retrieval, and quality enforcement gates.
 
 **Core Innovation**: Treats AI as the primary consumer of documentation, with humans as orchestrators who provide direction and approval, while AI writes 100% of the code.
 
@@ -270,7 +270,7 @@ workflow_name_v1/
 
 **90% Context Reduction**:
 - Traditional: Load 50KB file → AI distracted by 96% irrelevant content
-- Agent OS: Query RAG → Get 2-5KB targeted chunks → AI focuses on 95% relevant content
+- prAxIs OS: Query RAG → Get 2-5KB targeted chunks → AI focuses on 95% relevant content
 
 **Why This Matters**:
 1. **Token Cost**: 50KB → 2KB = 25x cost reduction per query
@@ -309,10 +309,10 @@ Side-Loaded Context (Task files ≤100 lines)
 
 ### 0.5 Dogfooding Principle
 
-**Agent OS is Built Using Agent OS**:
+**prAxIs OS is Built Using prAxIs OS**:
 
 **Why This Matters**:
-1. **Validates Framework**: If Agent OS can build itself, framework works
+1. **Validates Framework**: If prAxIs OS can build itself, framework works
 2. **Ensures Accuracy**: Docs must be accurate because we depend on them
 3. **Improves Continuously**: Pain points we hit, users will hit - we fix them
 4. **Quality Guarantee**: Pre-commit hooks enforced on our code too
@@ -326,27 +326,27 @@ Side-Loaded Context (Task files ≤100 lines)
 **Example**: When creating this design doc:
 1. Query: "design document structure specifications template"
 2. Get: Spec creation workflow guidance
-3. Apply: Use Agent OS's own framework to structure this doc
+3. Apply: Use prAxIs OS's own framework to structure this doc
 4. Result: Doc follows same patterns we recommend
 
 ### 0.6 Problem This Documentation Restructure Solves
 
-**Core Issue**: Agent OS Enhanced has excellent *explanation* documentation but lacks *tutorials* and *how-to guides*, creating high user abandonment and support burden.
+**Core Issue**: prAxIs OS has excellent *explanation* documentation but lacks *tutorials* and *how-to guides*, creating high user abandonment and support burden.
 
 **Why This Happens**: Common documentation anti-pattern - creators explain what they built but don't teach how to use it or solve specific problems.
 
 **Impact**:
-- Users install Agent OS → Don't know how to use it → Abandon
+- Users install prAxIs OS → Don't know how to use it → Abandon
 - Experienced users hit problems → Can't find answers → Support tickets
 - Documentation doesn't match Divio best practices → Poor user experience
 
 **This Project**: Restructure documentation following Divio framework to create balanced, usable documentation that serves users at every stage of their journey.
 
-**Success = Documentation that enables AI agents to autonomously build high-quality software with Agent OS Enhanced.**
+**Success = Documentation that enables AI agents to autonomously build high-quality software with prAxIs OS.**
 
-### 0.7 Using Agent OS Enhanced for This Project
+### 0.7 Using prAxIs OS for This Project
 
-**This documentation restructure project will itself use Agent OS Enhanced workflows**, demonstrating dogfooding in action.
+**This documentation restructure project will itself use prAxIs OS workflows**, demonstrating dogfooding in action.
 
 #### 0.7.1 Workflow Sequence
 
@@ -385,8 +385,8 @@ Side-Loaded Context (Task files ≤100 lines)
 4. **Accountability**: Evidence-based checkpoints ensure deliverables meet criteria
 5. **Resumability**: Can pause/resume across multiple sessions
 
-**Validation That Agent OS Works**:
-- If Agent OS can successfully restructure its own documentation using its own workflows, that proves the framework is production-ready
+**Validation That prAxIs OS Works**:
+- If prAxIs OS can successfully restructure its own documentation using its own workflows, that proves the framework is production-ready
 - This project becomes a case study for future users
 - Any pain points discovered improve the framework for all users
 
@@ -504,14 +504,14 @@ Querying becomes dominant behavior
 
 #### 0.8.3 Bootstrap + Persistence Strategy
 
-**The Challenge**: How to ensure a new AI session immediately understands Agent OS Enhanced and maintains that understanding throughout long sessions.
+**The Challenge**: How to ensure a new AI session immediately understands prAxIs OS and maintains that understanding throughout long sessions.
 
 **The Solution**: Minimal bootstrap hook + comprehensive standards + self-reinforcing reminders
 
 **Bootstrap Hook** (`.cursorrules` - 24 lines):
 ```markdown
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NEW SESSION: search_standards("Agent OS orientation") FIRST
+NEW SESSION: search_standards("prAxIs OS orientation") FIRST
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 BEFORE implementing: search_standards("how to X")
@@ -625,7 +625,7 @@ AI: "I can help! Would you like JWT or OAuth? What database? Should I add tests?
 [Seeks permission, asks questions, presents options]
 ```
 
-**Clear Role** (Agent OS Enhanced):
+**Clear Role** (prAxIs OS):
 ```
 Human: "Add authentication"
 AI: [Queries standards 7 times]
@@ -697,7 +697,7 @@ AI: [Queries standards 7 times]
 - Describe self-reinforcing patterns
 - Cover probabilistic behavior reality
 
-**This is Agent OS Enhanced's competitive advantage: documentation designed around how AI agents actually work (probabilistic, context-limited, pattern-responsive), not how we wish they worked (deterministic, perfect memory, rule-following).**
+**This is prAxIs OS's competitive advantage: documentation designed around how AI agents actually work (probabilistic, context-limited, pattern-responsive), not how we wish they worked (deterministic, perfect memory, rule-following).**
 
 ---
 
@@ -707,7 +707,7 @@ AI: [Queries standards 7 times]
 
 **Current State Issues**:
 
-1. **No Tutorials (0% coverage)**: Users install Agent OS but don't know how to use it
+1. **No Tutorials (0% coverage)**: Users install prAxIs OS but don't know how to use it
    - **Symptom**: High abandonment after installation
    - **Evidence**: User confusion between "what is this?" and "how do I use this?"
    - **Impact**: Lost potential users, wasted installation effort
@@ -720,7 +720,7 @@ AI: [Queries standards 7 times]
 3. **Incomplete Reference (60% coverage)**: API/structure information scattered
    - **Symptom**: Users don't know what files are safe to edit
    - **Evidence**: Missing command language, metadata, file structure references
-   - **Impact**: Accidental breaking of Agent OS, confusion
+   - **Impact**: Accidental breaking of prAxIs OS, confusion
 
 4. **Mixed Content Types**: Documentation violates separation of concerns
    - **Symptom**: `how-it-works.md` mixes explanation with instruction
@@ -735,11 +735,11 @@ AI: [Queries standards 7 times]
 1. **Onboarding Success Rate**: New users complete first tutorial → 80%+ success
 2. **Time to First Value**: User goes from install to working feature → <15 minutes
 3. **Support Ticket Reduction**: Common questions answered in docs → -40% tickets
-4. **User Retention**: Users who complete tutorials continue using Agent OS → 70%+
+4. **User Retention**: Users who complete tutorials continue using prAxIs OS → 70%+
 5. **Documentation Findability**: Users find answers without external help → 85%+
 
 **Secondary Goals**:
-- Establish Agent OS as documentation best-practice example
+- Establish prAxIs OS as documentation best-practice example
 - Enable community contributions through clear structure
 - Reduce onboarding time for new team members
 
@@ -747,7 +747,7 @@ AI: [Queries standards 7 times]
 
 **US-1: New User Onboarding**
 ```
-As a developer new to Agent OS,
+As a developer new to prAxIs OS,
 I want a hands-on tutorial that guarantees success,
 So that I gain confidence and understand the value before investing more time.
 
@@ -760,7 +760,7 @@ Acceptance Criteria:
 
 **US-2: Problem Solving**
 ```
-As an experienced Agent OS user,
+As an experienced prAxIs OS user,
 I want step-by-step guides for specific problems,
 So that I can quickly solve issues without reading conceptual explanations.
 
@@ -773,7 +773,7 @@ Acceptance Criteria:
 
 **US-3: API Reference**
 ```
-As a developer integrating Agent OS,
+As a developer integrating prAxIs OS,
 I want complete technical reference documentation,
 So that I can look up syntax, parameters, and file structures without guessing.
 
@@ -788,7 +788,7 @@ Acceptance Criteria:
 ```
 As a technical decision-maker,
 I want deep explanations of architecture and design decisions,
-So that I can understand why Agent OS works this way and evaluate fit.
+So that I can understand why prAxIs OS works this way and evaluate fit.
 
 Acceptance Criteria:
 - Explains "why" not "how"
@@ -927,16 +927,16 @@ docs/
 
 #### 2.2.1 Tutorial System
 
-**Tutorial 1: "Your First 5 Minutes with Agent OS"**
+**Tutorial 1: "Your First 5 Minutes with prAxIs OS"**
 
 **Structure** (following Divio principles):
 ```markdown
-# Tutorial: Your First 5 Minutes with Agent OS
+# Tutorial: Your First 5 Minutes with prAxIs OS
 
 **Learning Goals**: Query MCP, get guidance, implement, see results
 
 **Time**: 5-10 minutes
-**Prerequisites**: Agent OS installed
+**Prerequisites**: prAxIs OS installed
 
 ## What You'll Build
 A simple function with race condition protection, discovered and implemented via MCP.
@@ -1062,9 +1062,9 @@ Read [Explanation: Workflows] to understand why it works this way
 ```markdown
 # How To: Create Custom Standards
 
-**Problem**: You want to add project-specific patterns to Agent OS standards
+**Problem**: You want to add project-specific patterns to prAxIs OS standards
 **Time**: 10-15 minutes
-**Prerequisites**: Agent OS installed, understand RAG concept
+**Prerequisites**: prAxIs OS installed, understand RAG concept
 
 ## Quick Answer
 Create `.md` file in `.praxis-os/standards/development/`, write structured content, verify RAG indexes it, query to test.
@@ -1118,7 +1118,7 @@ Query MCP: "What are our React custom hook patterns?"
 ```markdown
 # Reference: Command Language
 
-Complete reference for Agent OS command language symbols used in workflows and frameworks.
+Complete reference for prAxIs OS command language symbols used in workflows and frameworks.
 
 ## Overview
 Command language creates binding obligations for AI execution through standardized symbols.
@@ -1151,7 +1151,7 @@ Cannot proceed until executed.
 [How commands structure workflow phases]
 
 ## Compliance Enforcement
-[How Agent OS detects violations]
+[How prAxIs OS detects violations]
 ```
 
 **File Structure Reference**:
@@ -1159,19 +1159,19 @@ Cannot proceed until executed.
 ```markdown
 # Reference: File Structure
 
-Complete reference for Agent OS directory structure with edit safety matrix.
+Complete reference for prAxIs OS directory structure with edit safety matrix.
 
 ## Directory Tree
 
 ```
 .praxis-os/
 ├── standards/              [mixed ownership]
-│   ├── universal/         [🔒 Agent OS owned - overwritten on upgrade]
+│   ├── universal/         [🔒 prAxIs OS owned - overwritten on upgrade]
 │   └── development/       [✅ User owned - safe to edit]
-├── usage/                 [🔒 Agent OS owned]
-├── workflows/             [🔒 Agent OS owned]
-├── specs/                 [✅ User owned - never touched by Agent OS]
-├── mcp_server/            [🔒 Agent OS owned - updated on upgrade]
+├── usage/                 [🔒 prAxIs OS owned]
+├── workflows/             [🔒 prAxIs OS owned]
+├── specs/                 [✅ User owned - never touched by prAxIs OS]
+├── mcp_server/            [🔒 prAxIs OS owned - updated on upgrade]
 ├── .cache/               [⚠️ Gitignored - auto-generated]
 └── venv/                 [⚠️ Gitignored - recreatable]
 ```
@@ -1180,11 +1180,11 @@ Complete reference for Agent OS directory structure with edit safety matrix.
 
 | Directory | Safe to Edit? | Overwritten on Upgrade? | Purpose |
 |-----------|---------------|-------------------------|---------|
-| `standards/universal/` | ❌ No | ✅ Yes | Agent OS maintained standards |
+| `standards/universal/` | ❌ No | ✅ Yes | prAxIs OS maintained standards |
 | `standards/development/` | ✅ Yes | ❌ No | Your project-specific standards |
 | `specs/` | ✅ Yes | ❌ Never | Your specifications |
-| `usage/` | ⚠️ Carefully | 🔄 Merged | Agent OS usage docs (additions preserved) |
-| `workflows/` | ❌ No | ✅ Yes | Agent OS workflows |
+| `usage/` | ⚠️ Carefully | 🔄 Merged | prAxIs OS usage docs (additions preserved) |
+| `workflows/` | ❌ No | ✅ Yes | prAxIs OS workflows |
 | `mcp_server/` | ❌ No | ✅ Yes | MCP server code |
 | `.cache/` | ❌ No | N/A | Auto-regenerated |
 
@@ -1202,7 +1202,7 @@ Complete reference for Agent OS directory structure with edit safety matrix.
 ```markdown
 # Explanation: Key Concepts
 
-Understanding Agent OS terminology and core concepts.
+Understanding prAxIs OS terminology and core concepts.
 
 ## RAG (Retrieval Augmented Generation)
 
@@ -1226,7 +1226,7 @@ Understanding Agent OS terminology and core concepts.
 
 **What it is**: Protocol for AI agents to query external services and tools.
 
-**Why it matters**: Enables AI to access information and capabilities beyond its context window. Agent OS uses MCP to provide RAG search, workflow management, and browser automation.
+**Why it matters**: Enables AI to access information and capabilities beyond its context window. prAxIs OS uses MCP to provide RAG search, workflow management, and browser automation.
 
 **How it works**:
 1. Cursor connects to MCP server
@@ -1586,7 +1586,7 @@ graph TD
 ### 3.3 Testing Strategy
 
 **Tutorial Testing**:
-1. **Fresh Install Test**: Run on brand new Agent OS installation
+1. **Fresh Install Test**: Run on brand new prAxIs OS installation
 2. **Multi-OS Test**: Test on macOS, Linux, Windows
 3. **User Testing**: 5+ users complete tutorial, measure:
    - Success rate (target: 95%+)
@@ -1674,7 +1674,7 @@ graph TD
 | "The tutorials helped me get started" | 90%+ agree |
 | "I could solve my problem using how-to guides" | 80%+ agree |
 | "The reference documentation is complete" | 75%+ agree |
-| "I understand how Agent OS works" | 85%+ agree |
+| "I understand how prAxIs OS works" | 85%+ agree |
 | Overall satisfaction (1-5) | 4.2+ average |
 
 **Community Health**:
@@ -1724,7 +1724,7 @@ graph TD
 ### 5.2 Assumptions
 
 **Critical Assumptions**:
-1. Users have Agent OS installed (tutorials start post-install)
+1. Users have prAxIs OS installed (tutorials start post-install)
 2. Users have basic programming knowledge
 3. Docusaurus supports needed customizations
 4. Existing documentation can be refactored (no content is sacred)
@@ -1782,7 +1782,7 @@ graph TD
 **Phase 3 (6 months post-launch)**:
 - Community contribution system
 - Translation to other languages
-- Versioned documentation (multiple Agent OS versions)
+- Versioned documentation (multiple prAxIs OS versions)
 - Advanced search features (faceted search, AI-powered)
 
 **Phase 4 (12 months post-launch)**:
@@ -1795,7 +1795,7 @@ graph TD
 
 ## 8. Appendix
 
-### 8.1 Agent OS Enhanced Technical Details
+### 8.1 prAxIs OS Technical Details
 
 #### 8.1.1 Technology Stack
 
@@ -1837,7 +1837,7 @@ LanceDB (Vector Store)
 
 #### 8.1.3 Meta-Framework for Workflow Creation
 
-**Purpose**: Ensures new workflows follow Agent OS principles and maintain consistency.
+**Purpose**: Ensures new workflows follow prAxIs OS principles and maintain consistency.
 
 **Key Principles** (from `meta-workflow/`):
 1. **Compliance Gates**: New workflows must enforce standards checking
@@ -1866,7 +1866,7 @@ mcp_agent-os-rag_create_workflow(
 
 #### 8.1.4 Measured Results (Case Study)
 
-**Project**: Python SDK for Agent OS  
+**Project**: Python SDK for prAxIs OS  
 **Location**: `../python-sdk/.praxis-os/standards/ai-assistant/`  
 **Duration**: 6 months of development
 
@@ -1892,9 +1892,9 @@ mcp_agent-os-rag_create_workflow(
 
 **Two-Venv Architecture**:
 - **Project venv**: User's project dependencies
-- **MCP venv**: Agent OS MCP server dependencies (isolated)
+- **MCP venv**: prAxIs OS MCP server dependencies (isolated)
 
-**Why**: Prevents dependency conflicts between project and Agent OS.
+**Why**: Prevents dependency conflicts between project and prAxIs OS.
 
 **Installation Flow**:
 1. Analyze project (language, frameworks)
@@ -1910,7 +1910,7 @@ mcp_agent-os-rag_create_workflow(
 #### 8.1.6 Key Existing Documents
 
 **Documentation** (in `docs/content/`):
-- `intro.md` - Overview of Agent OS Enhanced
+- `intro.md` - Overview of prAxIs OS
 - `architecture.md` - MCP/RAG and phase gating details
 - `how-it-works.md` - Human-AI partnership model
 - `installation.md` - Setup instructions
@@ -1943,7 +1943,7 @@ mcp_agent-os-rag_create_workflow(
 **Workflows** (in `universal/workflows/`):
 - `spec_creation_v1/` - Create specifications
 - `spec_execution_v1/` - Execute specifications
-- `agent_os_upgrade_v1/` - Safe upgrade with backups
+- `praxis_os_upgrade_v1/` - Safe upgrade with backups
 - Each has `metadata.json` and `phases/` directory structure
 
 ### 8.2 References
@@ -1952,8 +1952,8 @@ mcp_agent-os-rag_create_workflow(
 - [Docusaurus Documentation](https://docusaurus.io/)
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
 - [LanceDB Documentation](https://lancedb.github.io/lancedb/)
-- Agent OS Enhanced Repository Structure (this repo)
-- Current Agent OS Enhanced documentation analysis (preceding sections)
+- prAxIs OS Repository Structure (this repo)
+- Current prAxIs OS documentation analysis (preceding sections)
 - Divio compliance comparison analysis (section 0.6)
 
 ### 8.3 Document History
@@ -1971,4 +1971,4 @@ mcp_agent-os-rag_create_workflow(
 1. Review and approve this design document
 2. **Use `spec_creation_v1` workflow in next session** to create formal specification
 3. **Use `spec_execution_v1` workflow in subsequent session** to implement
-4. Validate dogfooding: Agent OS builds Agent OS documentation
+4. Validate dogfooding: prAxIs OS builds prAxIs OS documentation

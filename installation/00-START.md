@@ -1,4 +1,4 @@
-# Agent OS Installation - START HERE
+# prAxIs OS Installation - START HERE
 
 **Read this file first. It will direct you to the next steps.**
 
@@ -29,7 +29,7 @@ Install prAxIs OS into the target project. This will:
 
 ### Mistake #2: Wrong Module Name in mcp.json
 **What happens**: Python module not found error  
-**Wrong**: `"mcp_server.agent_os_rag"`  
+**Wrong**: `"mcp_server.praxis_os_rag"`  
 **Correct**: `"mcp_server"`  
 **Prevention**: Step 05 has the exact JSON to copy
 
@@ -69,7 +69,7 @@ Each file:
 
 **Source Repository** (praxis-os):
 ```
-/tmp/agent-os-install-xyz/      ← Temp clone (will delete after!)
+/tmp/praxis-os-install-xyz/      ← Temp clone (will delete after!)
 ├── installation/               ← These guides
 │   ├── 00-START.md            ← YOU ARE HERE
 │   ├── 01-directories.md
@@ -106,7 +106,7 @@ target-project/                 ← Where you're installing TO
 
 ## 🔍 Pre-Installation: Get Source Repository
 
-**IMPORTANT**: You need the Agent OS source code, but you CANNOT clone it directly into the target project (that would litter a git repo inside their repo).
+**IMPORTANT**: You need the prAxIs OS source code, but you CANNOT clone it directly into the target project (that would litter a git repo inside their repo).
 
 ### Option A: Clone to Temp Directory (Recommended)
 
@@ -116,7 +116,7 @@ import subprocess
 import os
 
 # Create temp directory
-temp_dir = tempfile.mkdtemp(prefix="agent-os-install-")
+temp_dir = tempfile.mkdtemp(prefix="praxis-os-install-")
 print(f"📦 Cloning to temp location: {temp_dir}")
 
 # Clone repo to temp
@@ -135,7 +135,7 @@ print(f"✅ Source ready at: {AGENT_OS_SOURCE}")
 
 ### Option B: User Provides Path
 
-If the user already has Agent OS cloned somewhere:
+If the user already has prAxIs OS cloned somewhere:
 
 ```python
 # Ask user where they've cloned praxis-os

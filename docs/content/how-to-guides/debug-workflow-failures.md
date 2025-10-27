@@ -18,7 +18,7 @@ By following this guide, you will:
 
 ## Prerequisites
 
-- Understanding of prAxIs OS workflows ([Understanding prAxIs OS Workflows](../tutorials/understanding-agent-os-workflows))
+- Understanding of prAxIs OS workflows ([Understanding prAxIs OS Workflows](../tutorials/understanding-praxis-os-workflows))
 - Active or failed workflow to debug
 - Access to Cursor chat with MCP tools
 
@@ -453,7 +453,7 @@ After resolving a failure, verify:
 
 ## Related Documentation
 
-- **[Understanding prAxIs OS Workflows](../tutorials/understanding-agent-os-workflows)** - Learn workflow concepts
+- **[Understanding prAxIs OS Workflows](../tutorials/understanding-praxis-os-workflows)** - Learn workflow concepts
 - **[Create Custom Workflows](./create-custom-workflows)** - Build workflows with proper checkpoints
 - **[Reference: Workflows](../reference/workflows)** - Workflow system reference
 

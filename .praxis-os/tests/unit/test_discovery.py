@@ -12,7 +12,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from mcp_server.sub_agents.discovery import (
-    _find_agent_os_directory,
+    _find_praxis_os_directory,
     _is_process_alive,
     discover_mcp_server,
 )
@@ -22,14 +22,14 @@ class TestDiscoverMCPServer:
     """Test suite for discover_mcp_server() function."""
 
     @pytest.fixture
-    def agent_os_path(self, tmp_path):
+    def praxis_os_path(self, tmp_path):
         """Create a temporary .praxis-os directory."""
         agent_os = tmp_path / ".praxis-os"
         agent_os.mkdir()
         return agent_os
 
     @pytest.fixture
-    def valid_state_file(self, agent_os_path):
+    def valid_state_file(self, praxis_os_path):
         """Create a valid state file with HTTP transport."""
         state = {
             "transport": "dual",
@@ -39,17 +39,17 @@ class TestDiscoverMCPServer:
             "project": {"name": "test-project"},
             "started_at": "2023-10-27T10:00:00Z",
         }
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(state, f)
         return state_file
 
-    def test_discover_mcp_server_success(self, agent_os_path, valid_state_file):
+    def test_discover_mcp_server_success(self, praxis_os_path, valid_state_file):
         """Test successful discovery of running MCP server."""
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url == "http://127.0.0.1:4242/mcp"
 
-    def test_discover_mcp_server_http_mode(self, agent_os_path):
+    def test_discover_mcp_server_http_mode(self, praxis_os_path):
         """Test discovery with HTTP-only transport mode."""
         state = {
             "transport": "http",
@@ -58,19 +58,19 @@ class TestDiscoverMCPServer:
             "pid": os.getpid(),
             "project": {"name": "test-project"},
         }
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(state, f)
 
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url == "http://127.0.0.1:5000/mcp"
 
-    def test_discover_mcp_server_state_file_missing(self, agent_os_path):
+    def test_discover_mcp_server_state_file_missing(self, praxis_os_path):
         """Test discovery when state file does not exist."""
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url is None
 
-    def test_discover_mcp_server_stdio_only(self, agent_os_path):
+    def test_discover_mcp_server_stdio_only(self, praxis_os_path):
         """Test discovery returns None for stdio-only transport."""
         state = {
             "transport": "stdio",
@@ -79,14 +79,14 @@ class TestDiscoverMCPServer:
             "pid": os.getpid(),
             "project": {"name": "test-project"},
         }
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(state, f)
 
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url is None
 
-    def test_discover_mcp_server_stale_pid(self, agent_os_path):
+    def test_discover_mcp_server_stale_pid(self, praxis_os_path):
         """Test discovery returns None for stale PID (process not running)."""
         state = {
             "transport": "dual",
@@ -95,69 +95,69 @@ class TestDiscoverMCPServer:
             "pid": 99999999,  # Very unlikely to be a real PID
             "project": {"name": "test-project"},
         }
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(state, f)
 
         with patch(
             "mcp_server.sub_agents.discovery._is_process_alive", return_value=False
         ):
-            url = discover_mcp_server(agent_os_path)
+            url = discover_mcp_server(praxis_os_path)
             assert url is None
 
-    def test_discover_mcp_server_corrupted_json(self, agent_os_path):
+    def test_discover_mcp_server_corrupted_json(self, praxis_os_path):
         """Test discovery handles corrupted JSON gracefully."""
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         state_file.write_text("{ corrupted json")
 
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url is None
 
-    def test_discover_mcp_server_invalid_format(self, agent_os_path):
+    def test_discover_mcp_server_invalid_format(self, praxis_os_path):
         """Test discovery handles invalid state format (not a dict)."""
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(["not", "a", "dict"], f)
 
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url is None
 
-    def test_discover_mcp_server_missing_required_fields(self, agent_os_path):
+    def test_discover_mcp_server_missing_required_fields(self, praxis_os_path):
         """Test discovery handles missing required fields."""
         # Missing 'url' and 'pid'
         state = {
             "transport": "dual",
         }
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(state, f)
 
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url is None
 
-    def test_discover_mcp_server_missing_transport_field(self, agent_os_path):
+    def test_discover_mcp_server_missing_transport_field(self, praxis_os_path):
         """Test discovery handles missing transport field."""
         state = {
             "url": "http://127.0.0.1:4242/mcp",
             "pid": os.getpid(),
         }
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         with open(state_file, "w") as f:
             json.dump(state, f)
 
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
         assert url is None
 
-    def test_discover_mcp_server_file_read_error(self, agent_os_path):
+    def test_discover_mcp_server_file_read_error(self, praxis_os_path):
         """Test discovery handles file read errors gracefully."""
-        state_file = agent_os_path / ".mcp_server_state.json"
+        state_file = praxis_os_path / ".mcp_server_state.json"
         state_file.write_text('{"transport": "dual", "url": "http://test", "pid": 1}')
 
         # Simulate read error by removing read permissions
         state_file.chmod(0o000)
 
         try:
-            url = discover_mcp_server(agent_os_path)
+            url = discover_mcp_server(praxis_os_path)
             assert url is None
         finally:
             # Restore permissions for cleanup
@@ -187,7 +187,7 @@ class TestDiscoverMCPServer:
         url = discover_mcp_server()  # No explicit path
         assert url == "http://127.0.0.1:4242/mcp"
 
-    def test_discover_mcp_server_auto_find_agent_os_not_found(
+    def test_discover_mcp_server_auto_find_praxis_os_not_found(
         self, tmp_path, monkeypatch
     ):
         """Test discovery returns None when .praxis-os not found."""
@@ -200,7 +200,7 @@ class TestDiscoverMCPServer:
 
 
 class TestFindAgentOsDirectory:
-    """Test suite for _find_agent_os_directory() helper."""
+    """Test suite for _find_praxis_os_directory() helper."""
 
     def test_find_in_current_directory(self, tmp_path, monkeypatch):
         """Test finding .praxis-os in current directory."""
@@ -208,7 +208,7 @@ class TestFindAgentOsDirectory:
         agent_os.mkdir()
         monkeypatch.chdir(tmp_path)
 
-        result = _find_agent_os_directory()
+        result = _find_praxis_os_directory()
         assert result == agent_os
 
     def test_find_in_parent_directory(self, tmp_path, monkeypatch):
@@ -220,7 +220,7 @@ class TestFindAgentOsDirectory:
         subdir.mkdir(parents=True)
         monkeypatch.chdir(subdir)
 
-        result = _find_agent_os_directory()
+        result = _find_praxis_os_directory()
         assert result == agent_os
 
     def test_not_found(self, tmp_path, monkeypatch):
@@ -229,7 +229,7 @@ class TestFindAgentOsDirectory:
         empty_dir.mkdir()
         monkeypatch.chdir(empty_dir)
 
-        result = _find_agent_os_directory()
+        result = _find_praxis_os_directory()
         assert result is None
 
     def test_stops_at_home_directory(self, tmp_path, monkeypatch):
@@ -244,7 +244,7 @@ class TestFindAgentOsDirectory:
         mock_home.mkdir()
         monkeypatch.setattr(Path, "home", lambda: mock_home)
 
-        result = _find_agent_os_directory()
+        result = _find_praxis_os_directory()
         # Should not find .praxis-os (it doesn't exist in the test hierarchy)
         assert result is None
 
@@ -344,5 +344,5 @@ class TestDiscoveryDocumentation:
 
     def test_helper_functions_have_docstrings(self):
         """Test that helper functions have docstrings."""
-        assert _find_agent_os_directory.__doc__ is not None
+        assert _find_praxis_os_directory.__doc__ is not None
         assert _is_process_alive.__doc__ is not None

@@ -238,7 +238,7 @@ start_workflow("spec_creation_v1", ...)
 
 ---
 
-## Implementation for Agent OS Enhanced
+## Implementation for prAxIs OS
 
 ### Update These Standards Files
 
@@ -277,7 +277,7 @@ Read docs → Find workflow name → Use it
                 (Goes stale)
 ```
 
-### Agent OS Pattern (Fresh)
+### prAxIs OS Pattern (Fresh)
 
 ```
 Situation → Query → Discover → Use → Success

@@ -1,6 +1,6 @@
 # MCP Server Update Guide
 
-**How to update the Agent OS MCP server software in consuming projects**
+**How to update the prAxIs OS MCP server software in consuming projects**
 
 **Keywords for search**: MCP server update, update MCP server, upgrade MCP server, server software update, MCP Python code update, server restart, dependency update
 
@@ -10,14 +10,14 @@
 
 **Two types of updates:**
 
-1. **Content Updates** (standards/workflows) → Use `agent_os_upgrade_v1` workflow
+1. **Content Updates** (standards/workflows) → Use `praxis_os_upgrade_v1` workflow
    - No server restart needed
    - RAG index rebuilds automatically
 
 2. **MCP Server Updates** (Python code) → Covered in this guide
    - ⚠️ **Requires server restart**
    - May have breaking changes
-   - Use `agent_os_upgrade_v1` workflow (recommended) or manual method
+   - Use `praxis_os_upgrade_v1` workflow (recommended) or manual method
 
 **Recommended: Use the workflow for both types**
 
@@ -80,7 +80,7 @@ The **MCP server** is the Python application that:
 ```
 praxis-os/
 └── mcp_server/              ← The server software
-    ├── agent_os_rag.py      ← Main server
+    ├── praxis_os_rag.py      ← Main server
     ├── workflow_engine.py   ← Workflow logic
     ├── rag_engine.py        ← RAG search
     ├── requirements.txt     ← Dependencies
@@ -115,7 +115,7 @@ git log -1 --oneline
 
 ## 📦 Installation Method
 
-Agent OS uses a **copy-based installation** where `mcp_server/` from the source repository is copied to your project's `.praxis-os/mcp_server/` directory.
+prAxIs OS uses a **copy-based installation** where `mcp_server/` from the source repository is copied to your project's `.praxis-os/mcp_server/` directory.
 
 **Architecture:**
 ```
@@ -256,7 +256,7 @@ mcp_agent-os-rag_search_standards(
 # From your project root
 cd /path/to/your-project
 
-# Check for outdated packages in Agent OS venv
+# Check for outdated packages in prAxIs OS venv
 .praxis-os/venv/bin/pip list --outdated
 
 # Update all from requirements.txt
@@ -393,7 +393,7 @@ After updating, verify:
 
 # 2. Verify copy completed
 ls -la .praxis-os/mcp_server/
-# Should see __init__.py, agent_os_rag.py, etc.
+# Should see __init__.py, praxis_os_rag.py, etc.
 
 # 3. Reinstall dependencies in isolated venv
 .praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt --force-reinstall
@@ -607,7 +607,7 @@ set -e
 AGENT_OS_REPO="/path/to/praxis-os"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-echo "🔄 Updating Agent OS (Content + Server)..."
+echo "🔄 Updating prAxIs OS (Content + Server)..."
 
 # 1. Pull latest source
 cd "$AGENT_OS_REPO"
@@ -689,10 +689,10 @@ This guide is most valuable when:
 
 **Update Standards:**
 - `standards/installation/update-procedures.md` - Content update procedures
-  → `search_standards("Agent OS update standards")`
+  → `search_standards("prAxIs OS update standards")`
 
 **Workflows:**
-- `workflows/agent_os_upgrade_v1/` - Automated upgrade workflow (handles both content and server)
+- `workflows/praxis_os_upgrade_v1/` - Automated upgrade workflow (handles both content and server)
   → `search_standards("agent OS upgrade workflow")`
 
 **MCP Documentation:**
@@ -703,7 +703,7 @@ This guide is most valuable when:
 **Query workflow:**
 1. **Before Update**: `search_standards("how to update MCP server")` → Learn process
 2. **Check Changes**: Read CHANGELOG.md for breaking changes
-3. **Execute**: Use `agent_os_upgrade_v1` workflow (recommended) or manual method
+3. **Execute**: Use `praxis_os_upgrade_v1` workflow (recommended) or manual method
 4. **Validate**: Test MCP tools after restart
 5. **Troubleshoot**: `search_standards("MCP server update issues")` if needed
 

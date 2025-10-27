@@ -9,11 +9,11 @@
 
 ## Overview
 
-Agent OS Enhanced provides a comprehensive MCP toolkit that serves as a universal operating environment for AI agents. This document defines the tool strategy, design trade-offs, and implementation patterns for consistent, high-quality agent behavior.
+prAxIs OS provides a comprehensive MCP toolkit that serves as a universal operating environment for AI agents. This document defines the tool strategy, design trade-offs, and implementation patterns for consistent, high-quality agent behavior.
 
 **Core Strategy:** Provide complete agent capabilities through MCP, enabling consistent behavior across all MCP-compatible agents and improving output quality through systematic tool usage.
 
-**Part of:** Agent OS Enhanced spec-driven development framework for AI quality enhancement.
+**Part of:** prAxIs OS spec-driven development framework for AI quality enhancement.
 
 ---
 
@@ -47,7 +47,7 @@ Cursor Agent native tools:
 ├─ run_terminal_cmd(cmd) - Built-in
 └─ [LLM trained to use these from training data]
 
-Agent OS MCP tools:
+prAxIs OS MCP tools:
 ├─ search_standards(query) - Must compete for attention
 ├─ start_workflow(type, file) - Must compete for attention
 ├─ access_file(name, mode) - Must compete for attention
@@ -70,7 +70,7 @@ File reading:
 ├─ Claude Desktop: Different API
 └─ Custom agents: All different
 
-Agent OS teachings only work for one agent!
+prAxIs OS teachings only work for one agent!
 Cannot build universal patterns.
 ```
 
@@ -79,14 +79,14 @@ Cannot build universal patterns.
 **Inconsistent behavior:**
 
 ```
-Without Agent OS tools:
+Without prAxIs OS tools:
 Human: "Implement authentication"
 AI: [Skips specs, writes code directly]
 AI: [Skips tests "to move faster"]
 AI: [Minimal documentation]
 Result: 60-70% quality, requires rework
 
-With Agent OS tools:
+With prAxIs OS tools:
 Human: "Implement authentication"
 AI: search_standards("authentication patterns")
 AI: start_workflow("spec_creation_v1", "authentication")
@@ -103,7 +103,7 @@ Result: 85-95% quality, production-ready
 Native tools:
 read_file("auth.ts") → No tracking, no metrics, cannot optimize
 
-Agent OS tools:
+prAxIs OS tools:
 access_file("auth.ts", "read") → Optional tracking, metrics, cost analysis
 → Can measure: Which files accessed most? Where are bottlenecks?
 → Can improve: Based on actual usage data
@@ -140,10 +140,10 @@ Applications use OS, not hardware directly.
 Consistency, portability, capabilities.
 ```
 
-**Agent OS Enhanced provides:**
+**prAxIs OS provides:**
 
 ```
-Agent OS Capabilities:
+prAxIs OS Capabilities:
 ├─ File system (access_file, list_directory)
 ├─ Process management (execute_command, invoke_specialist)
 ├─ Knowledge management (search_standards, search_codebase, write_standard)
@@ -154,7 +154,7 @@ Agent OS Capabilities:
 = Complete operating environment for AI agents!
 ```
 
-**Agents use Agent OS tools, not direct file I/O.**
+**Agents use prAxIs OS tools, not direct file I/O.**
 - Consistency across all MCP agents
 - Portability (same API everywhere)
 - Enhanced capabilities (RAG, workflows, specialists)
@@ -167,7 +167,7 @@ Agent OS Capabilities:
 ### The Complete Tool Set (14 Tools)
 
 ```
-Agent OS MCP Tools:
+prAxIs OS MCP Tools:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 KNOWLEDGE LAYER (Core Differentiator)
@@ -313,7 +313,7 @@ write_standard(
 ) -> Dict
 
 # Characteristics:
-- Unique to Agent OS (no native equivalents)
+- Unique to prAxIs OS (no native equivalents)
 - High value per call
 - Enable systematic work
 - Knowledge compounding
@@ -483,7 +483,7 @@ Success rate: 95%+ vs 60% without guidance
 │ - Short description                          │
 │                                              │
 │ Agent/Cursor framework provides this         │
-│ No Agent OS involvement needed               │
+│ No prAxIs OS involvement needed               │
 └──────────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────────┐
@@ -498,7 +498,7 @@ Success rate: 95%+ vs 60% without guidance
 │ - Integration with other tools               │
 │ - Best practices                             │
 │                                              │
-│ Agent OS provides this                       │
+│ prAxIs OS provides this                       │
 │ Retrieved as needed, not upfront             │
 └──────────────────────────────────────────────┘
 
@@ -520,7 +520,7 @@ read_file(path)         → Fast, direct
 write_file(path, content) → Fast, direct
 run_command(cmd)        → Fast, direct
 
-# Agent OS provides anyway:
+# prAxIs OS provides anyway:
 access_file(name, "read")           → +10-50ms MCP overhead
 access_file(name, "write", content) → +10-50ms MCP overhead
 execute_command(cmd)                → +10-50ms MCP overhead
@@ -530,15 +530,15 @@ Cost: ~100 lines wrapper code, slight latency per call
 
 ### Trade-off Matrix
 
-| Aspect | Native Tools | Agent OS Tools | Winner | Impact |
+| Aspect | Native Tools | prAxIs OS Tools | Winner | Impact |
 |--------|--------------|----------------|--------|---------|
 | **Performance** | Direct (0ms) | MCP (+10-50ms) | Native | 50ms per call |
-| **Consistency** | Varies by agent | Same everywhere | Agent OS | Universal patterns |
-| **Observability** | None | Full tracing | Agent OS | Can optimize |
-| **Trainability** | Cannot guide | RAG teaches | Agent OS | Higher quality |
-| **Portability** | Agent-specific | Works in all MCP agents | Agent OS | No retraining |
-| **Enhancement** | Fixed API | Can add intelligence | Agent OS | Future-proof |
-| **Quality** | Ad-hoc usage | Systematic patterns | Agent OS | 85-95% vs 60-70% |
+| **Consistency** | Varies by agent | Same everywhere | prAxIs OS | Universal patterns |
+| **Observability** | None | Full tracing | prAxIs OS | Can optimize |
+| **Trainability** | Cannot guide | RAG teaches | prAxIs OS | Higher quality |
+| **Portability** | Agent-specific | Works in all MCP agents | prAxIs OS | No retraining |
+| **Enhancement** | Fixed API | Can add intelligence | prAxIs OS | Future-proof |
+| **Quality** | Ad-hoc usage | Systematic patterns | prAxIs OS | 85-95% vs 60-70% |
 
 **Verdict:** Trade 50ms performance for consistency, observability, quality.
 
@@ -595,7 +595,7 @@ Cost: ~100 lines wrapper code, slight latency per call
 
 ## 7. Behavioral Training
 
-### Goal: Prefer Agent OS Tools Over Native
+### Goal: Prefer prAxIs OS Tools Over Native
 
 **Challenge:** AI agents trained to use native tools from training data.
 
@@ -610,7 +610,7 @@ Cost: ~100 lines wrapper code, slight latency per call
 search_standards("Agent OS orientation guide")
 → This ONE query establishes behavioral foundation
 
-Agent OS Enhanced provides comprehensive tools:
+prAxIs OS provides comprehensive tools:
 - search_standards() - Knowledge on-demand
 - start_workflow() - Structured execution
 - invoke_specialist() - Domain expertise
@@ -627,19 +627,19 @@ Query for guidance before using.
 
 ## Tool Usage Priority
 
-Agent OS Enhanced provides comprehensive capabilities.
+prAxIs OS provides comprehensive capabilities.
 
 **HIGH PRIORITY (use first):**
 1. search_standards(query) - Query before implementing
 2. start_workflow(type, file) - Use structured processes
 3. invoke_specialist(persona, task) - Domain expertise
 
-**FILE OPERATIONS (use Agent OS versions):**
+**FILE OPERATIONS (use prAxIs OS versions):**
 - access_file(name, mode) not read_file(path)
 - list_directory(path) not ls or find
 - execute_command(cmd) not run_terminal_cmd(cmd)
 
-**Why Agent OS tools?**
+**Why prAxIs OS tools?**
 1. Consistent across all agents (Cursor, Cline, Windsurf)
 2. Observable and traceable (can measure, improve)
 3. Integrated with systematic patterns
@@ -684,7 +684,7 @@ Use `access_file()` for all file operations.
 **Why use access_file over native read_file?**
 - ✅ Consistent interface (Cursor, Cline, Windsurf)
 - ✅ Observable with HoneyHive (can track, optimize)
-- ✅ Enhanced with Agent OS context
+- ✅ Enhanced with prAxIs OS context
 - ✅ Works identically in specialists
 - ✅ Self-teaching via RAG
 - ✅ Part of systematic approach
@@ -701,14 +701,14 @@ access_file("path/to/file.ts", "write", content="...")
 access_file("logs/app.log", "append", content="...")
 ```
 
-**This is the Agent OS way - systematic, observable, consistent.**
+**This is the prAxIs OS way - systematic, observable, consistent.**
 ```
 
 ### Reinforcement Loop
 
 ```
 Session 1:
-├─ .cursorrules mentions Agent OS tools
+├─ .cursorrules mentions prAxIs OS tools
 ├─ Agent uses native tools (trained behavior)
 ├─ Works, but orientation delivered
 └─ Slight weight shift toward Agent OS
@@ -839,7 +839,7 @@ Results:
 Data-driven optimization: Invest more in high-performing patterns!
 ```
 
-**Note:** HoneyHive integration is optional. Agent OS works without observability.
+**Note:** HoneyHive integration is optional. prAxIs OS works without observability.
 
 ---
 
@@ -859,7 +859,7 @@ async def list_directory(
     📖 USAGE GUIDANCE:
     Query: search_standards("how to use list_directory")
     
-    Part of Agent OS universal file system operations.
+    Part of prAxIs OS universal file system operations.
     
     Args:
         path: Directory path (default: current directory)
@@ -1118,7 +1118,7 @@ Bad naming:
 ✅ **Strategic Duplication:** Accept 50ms overhead for consistency, quality, observability  
 ✅ **Self-Teaching:** Tools guide their own usage via RAG (95%+ success vs 60%)  
 ✅ **Observable:** Optional HoneyHive integration for tracking and optimization  
-✅ **Trainable:** RAG reinforces Agent OS tool preference over native tools  
+✅ **Trainable:** RAG reinforces prAxIs OS tool preference over native tools  
 ✅ **Cross-Agent:** Same interface in Cursor, Cline, Windsurf, any MCP agent  
 ✅ **Quality Enhancement:** Systematic tool usage → 85-95% output quality
 
@@ -1133,7 +1133,7 @@ Bad naming:
 - `universal/standards/development/tool-usage/` - Usage guides
 - `universal/standards/universal/ai-assistant/` - Behavioral training
 
-**Part of:** Agent OS Enhanced spec-driven development framework
+**Part of:** prAxIs OS spec-driven development framework
 
 **Related Documents:**
 - [ARCHITECTURE-Agent-OS-Enhanced.md](ARCHITECTURE-Agent-OS-Enhanced.md) - System overview

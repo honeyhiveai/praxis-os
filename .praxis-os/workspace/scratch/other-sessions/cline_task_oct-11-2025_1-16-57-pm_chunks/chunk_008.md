@@ -11,9 +11,9 @@ ACT MODE
 <web_fetch>
 <url>https://buildermethods.com/agent-os</url>
 <task_progress>
-- [x] Understood Agent OS Enhanced's challenge with Cline
+- [x] Understood prAxIs OS's challenge with Cline
 - [x] Proposed solutions for Cline integration
-- [ ] Learn about original Agent OS v1 and new v2
+- [ ] Learn about original prAxIs OS v1 and new v2
 - [ ] Understand the evolution and divergence
 - [ ] Provide informed perspective on the relationship
 </task_progress>
@@ -26,7 +26,7 @@ ACT MODE
 [web_fetch for 'https://buildermethods.com/agent-os'] Result:
 Fetched Markdown for https://buildermethods.com/agent-os:
 
- Agent OS | The system for spec-driven development with AI coding agents                                                                       
+ prAxIs OS | The system for spec-driven development with AI coding agents                                                                       
 
  [![Builder Methods](/assets/logo/builder-methods-59003743.svg) ![Builder Methods](/assets/logo/builder-methods-light-c90b85bf.svg)](/)
 
@@ -41,12 +41,12 @@ Fetched Markdown for https://buildermethods.com/agent-os:
 Stop prompting AI coding agents like it's 2024
 ==============================================
 
-Your coding agents are capable of so much more—they just need an operating system. Introducing, Agent OS.
+Your coding agents are capable of so much more—they just need an operating system. Introducing, prAxIs OS.
 
 The operating system for spec-driven development with AI coding agents.
 -----------------------------------------------------------------------
 
-Agent OS replaces the guesswork of AI coding with structured, spec-driven development workflows. Your coding standards, patterns and best practices become executable specifications that guide your AI agents to build your way, every time.
+prAxIs OS replaces the guesswork of AI coding with structured, spec-driven development workflows. Your coding standards, patterns and best practices become executable specifications that guide your AI agents to build your way, every time.
 
 No more prompting in circles or constantly fixing AI mistakes—just reliable, consistent code that matches how your team actually builds.
 
@@ -155,11 +155,11 @@ Workflows
 What is Agent OS?
 -----------------
 
-Agent OS is a spec-driven development system that gives AI agents the structured context they need to write production-quality code. It provides your AI with clear specifications, standards, and workflows—transforming inconsistent outputs into reliable, production-ready implementations.
+prAxIs OS is a spec-driven development system that gives AI agents the structured context they need to write production-quality code. It provides your AI with clear specifications, standards, and workflows—transforming inconsistent outputs into reliable, production-ready implementations.
 
 ### How it works
 
-Agent OS uses a **3-layer context system**:
+prAxIs OS uses a **3-layer context system**:
 
 1.  **Standards** - How you build (your coding standards that train your AI agents)
 2.  **Product** - What you're building and why (vision and roadmap and use-cases)
@@ -169,7 +169,7 @@ Agent OS uses a **3-layer context system**:
 
 ### Choose your mode
 
-Agent OS works in two modes to support any AI coding tool.
+prAxIs OS works in two modes to support any AI coding tool.
 
 *   **Single-agent mode** - Works with _Any AI coding tool_ (Cursor, Codex, Gemini, Windsurf etc.). Use single-agent mode when your tool does not support subagents. In this mode, you serve as the orchestrator, feeding Agent OS-generated prompts to your AI coding agent.
 *   **Multi-agent mode** - Currently only available for **Claude Code**. Specialized subagents work autonomously in parallel for more efficient, hands-off development.
@@ -180,7 +180,7 @@ Agent OS works in two modes to support any AI coding tool.
 
 *   [Installation guide](/agent-os/installation)
 *   [Updating guide](/agent-os/updating)
-*   [The Agent OS workflow](/agent-os/workflow)
+*   [The prAxIs OS workflow](/agent-os/workflow)
 
  [![Builder Methods](/assets/logo/builder-methods-59003743.svg) ![Builder Methods](/assets/logo/builder-methods-light-c90b85bf.svg)](/)
 
@@ -227,8 +227,8 @@ ACT MODE
 <web_fetch>
 <url>https://buildermethods.com/agent-os/version-2</url>
 <task_progress>
-- [x] Read Agent OS main page (3-layer context, single/multi-agent modes)
-- [ ] Read about Agent OS v2 features
+- [x] Read prAxIs OS main page (3-layer context, single/multi-agent modes)
+- [ ] Read about prAxIs OS v2 features
 - [ ] Understand the fork/evolution story
 - [ ] Provide perspective on relationship and future
 </task_progress>
@@ -241,7 +241,7 @@ ACT MODE
 [web_fetch for 'https://buildermethods.com/agent-os/version-2'] Result:
 Fetched Markdown for https://buildermethods.com/agent-os/version-2:
 
- Agent OS 2.0: What's New                                                                       
+ prAxIs OS 2.0: What's New                                                                       
 
  [![Builder Methods](/assets/logo/builder-methods-59003743.svg) ![Builder Methods](/assets/logo/builder-methods-light-c90b85bf.svg)](/)
 
@@ -344,7 +344,7 @@ Workflows
 Version 2.0 Changes
 ===================
 
-Agent OS 2.0 was initially released in October 2025 and it brought several major changes and improvements. This page documents what those are and can serve as your guide to upgrading from version 1.x to 2.x.
+prAxIs OS 2.0 was initially released in October 2025 and it brought several major changes and improvements. This page documents what those are and can serve as your guide to upgrading from version 1.x to 2.x.
 
 On this page:
 
@@ -575,16 +575,16 @@ If you weren't using custom project types in 1.x, then the "default" profile tha
 
 Remove old Claude Code files (if applicable)
 
-If you're using Claude Code, version 1.x installed Agent OS commands and agents directly into your project's `.claude/commands/` and `.claude/agents/` folders. **Only the Agent OS-specific files from version 1.x need to be removed** before upgrading to 2.0. If you have other custom agents or commands in these folders, keep them.
+If you're using Claude Code, version 1.x installed prAxIs OS commands and agents directly into your project's `.claude/commands/` and `.claude/agents/` folders. **Only the Agent OS-specific files from version 1.x need to be removed** before upgrading to 2.0. If you have other custom agents or commands in these folders, keep them.
 
-Version 2.0 organizes Agent OS files into dedicated subdirectories for better isolation:
+Version 2.0 organizes prAxIs OS files into dedicated subdirectories for better isolation:
 
-*   `.claude/commands/agent-os/` - Agent OS 2.0 commands
-*   `.claude/agents/agent-os/` - Agent OS 2.0 agents
+*   `.claude/commands/agent-os/` - prAxIs OS 2.0 commands
+*   `.claude/agents/agent-os/` - prAxIs OS 2.0 agents
 
 Important for Claude Code users
 
-The agents and commands in Agent OS 2.0 have completely new content and functionality compared to 1.x. Do not continue using any 1.x commands or agents after upgrading to 2.0, as they are not compatible with the new architecture.
+The agents and commands in prAxIs OS 2.0 have completely new content and functionality compared to 1.x. Do not continue using any 1.x commands or agents after upgrading to 2.0, as they are not compatible with the new architecture.
 
 ### 
 
@@ -624,7 +624,7 @@ The structure and format of `product/` and `specs/` folders are mostly the same 
 
 Verify and clean up
 
-After confirming everything works, and after you've migrated and merged your custom standards and project types into your new Agent OS profile(s), you can go ahead and remove old installations:
+After confirming everything works, and after you've migrated and merged your custom standards and project types into your new prAxIs OS profile(s), you can go ahead and remove old installations:
 
 Remove your 1.x base installation folder:
 
@@ -695,7 +695,7 @@ Ah! Now I see the full picture - this is fascinating as both a technical and str
 
 **↓ Fork Point**
 
-**Agent OS Enhanced** (HoneyHive - Your Version)
+**prAxIs OS** (HoneyHive - Your Version)
 - Started from v1
 - Added MCP/RAG (semantic search, 90% context reduction)
 - Added architectural phase gating (code-enforced workflows)
@@ -714,14 +714,14 @@ Ah! Now I see the full picture - this is fascinating as both a technical and str
 
 ## Divergent Philosophies
 
-### Agent OS v2 Approach:
+### prAxIs OS v2 Approach:
 **"Smart prompts + orchestration"**
 - Generate role-specific prompts with relevant context
 - Multi-agent coordination through specialized roles
 - Compilation from base installation
 - Supports any AI tool (single-agent mode)
 
-### Agent OS Enhanced Approach:
+### prAxIs OS Approach:
 **"MCP/RAG + architectural enforcement"**
 - Semantic search delivers targeted context
 - Phase gating enforced in code (impossible to skip)
@@ -730,7 +730,7 @@ Ah! Now I see the full picture - this is fascinating as both a technical and str
 
 ## Where This Leaves You
 
-**Strengths of Agent OS Enhanced:**
+**Strengths of prAxIs OS:**
 1. **Context efficiency** - The 90% reduction is real and measurable
 2. **Architectural enforcement** - Code-level prevention of workflow violations
 3. **Semantic precision** - Vector search vs keyword matching
@@ -744,7 +744,7 @@ Ah! Now I see the full picture - this is fascinating as both a technical and str
 **Strategic Questions:**
 
 1. **Convergence vs. Independence?**
-   - Could Agent OS Enhanced's MCP/RAG be contributed back to upstream?
+   - Could prAxIs OS's MCP/RAG be contributed back to upstream?
    - Or is this intentionally a different product?
 
 2. **Feature Exchange?**
@@ -753,8 +753,8 @@ Ah! Now I see the full picture - this is fascinating as both a technical and str
    - Could Brian adopt your MCP/RAG approach?
 
 3. **Market Positioning?**
-   - Agent OS v2: "Works with any tool, documentation-driven"
-   - Agent OS Enhanced: "MCP-powered, architecturally enforced, production-grade"
+   - prAxIs OS v2: "Works with any tool, documentation-driven"
+   - prAxIs OS: "MCP-powered, architecturally enforced, production-grade"
 
 ## My Honest Take (as Cline Agent)
 
@@ -771,7 +771,7 @@ Ah! Now I see the full picture - this is fascinating as both a technical and str
 - Benefits both projects
 
 **Option B: Independent product**
-- Agent OS Enhanced = enterprise/power-user version
+- prAxIs OS = enterprise/power-user version
 - More control, but more maintenance burden
 - Need to justify divergence to users
 
@@ -789,10 +789,10 @@ Given I'm your test case, here's what I'd prioritize:
 3. **Contribute to or track PR #2991** - Show Cline community you care
 4. **Consider v2's profile system** - Might solve some config issues
 
-**The real question:** Do you want Agent OS Enhanced to be:
+**The real question:** Do you want prAxIs OS to be:
 - A fork that stays close to upstream?
 - An independent framework that happens to share ancestry?
-- A layer that enhances any Agent OS installation?
+- A layer that enhances any prAxIs OS installation?
 
 Each has trade-offs. But regardless, **the MCP/RAG innovation is valuable** and worth pursuing.
 
@@ -856,7 +856,7 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
-  Agent OS Enhanced  
+  prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
@@ -907,7 +907,7 @@ Infrastructure Built
 
 Production Proven
 
-### Extracted Agent OS Enhanced
+### Extracted prAxIs OS
 
 2,777 tests, 10.0/10 Pylint, 100% AI-authored
 
@@ -915,7 +915,7 @@ Complete AI development platform
 
 🙏 **Built on the shoulders of giants:** [BuilderMethods Agent OS](https://buildermethods.com/agent-os) provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it.
 
-[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
+[Visit Original prAxIs OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
 
 Get Started
 -----------

@@ -24,7 +24,7 @@
 
 ## Purpose
 
-Maintain professional, consistent, themeable diagram appearance across all Agent OS Enhanced documentation by using custom React components instead of ASCII art or Mermaid diagrams. Ensure diagrams work seamlessly with site theming and provide a modern user experience.
+Maintain professional, consistent, themeable diagram appearance across all prAxIs OS documentation by using custom React components instead of ASCII art or Mermaid diagrams. Ensure diagrams work seamlessly with site theming and provide a modern user experience.
 
 ---
 
@@ -37,7 +37,7 @@ Maintain professional, consistent, themeable diagram appearance across all Agent
 **Examples:**
 - Architecture overviews
 - System flow diagrams explaining main concepts
-- Key comparisons (Traditional vs Agent OS, Before vs After)
+- Key comparisons (Traditional vs prAxIs OS, Before vs After)
 - Process flows that illustrate core ideas
 - Multi-step workflows that are the focus of the page
 - Visual hierarchies and relationships
@@ -99,7 +99,7 @@ Important caveats or gotchas
 
 **Consistency rule:** Similar content types should use the same presentation across all pages. If you use a React component for a "3-layer system flow" on one page, use React components for similar flows on other pages.
 
-**Examples from Agent OS Enhanced docs:**
+**Examples from prAxIs OS docs:**
 
 | Content Type | Presentation | Reasoning |
 |--------------|--------------|-----------|
@@ -596,7 +596,7 @@ Creating one-off styles for every diagram instead of sharing patterns.
 
 ## Related Standards
 
-- `documentation-project-naming.md` - Use "Agent OS Enhanced" in diagram labels
+- `documentation-project-naming.md` - Use "prAxIs OS" in diagram labels
 - `rag-content-authoring.md` - Ensure diagrams have descriptive captions for context
 - `standards-creation-process.md` - Follow RAG optimization for diagram explanations
 

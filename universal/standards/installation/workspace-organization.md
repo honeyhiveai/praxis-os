@@ -171,7 +171,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-
 - User feedback iterations
 
 **analysis/** - Research and investigation
-- Comparison documents (e.g., "amplifier vs agent-os")
+- Comparison documents (e.g., "amplifier vs praxis-os")
 - Technical research
 - Performance analysis
 - Security investigations
@@ -439,7 +439,7 @@ git commit -m "Add authentication system spec"
 
 ---
 
-## 🔗 Integration with Agent OS Development Process
+## 🔗 Integration with prAxIs OS Development Process
 
 **Phase 1: Conversational Design**
 - ✅ Create `workspace/design/YYYY-MM-DD-feature.md`
@@ -456,7 +456,7 @@ git commit -m "Add authentication system spec"
 - ✅ No workspace files needed
 
 **Related Standards:**
-- `agent-os-development-process.md` - Three-phase development workflow
+- `praxis-os-development-process.md` - Three-phase development workflow
 - `gitignore-requirements.md` - Git safety and ephemeral content handling
 - `rag-content-authoring.md` - Content optimization for discovery
 

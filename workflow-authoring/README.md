@@ -1,4 +1,4 @@
-# Agent OS Meta-Workflow v1.0
+# prAxIs OS Meta-Workflow v1.0
 
 **A portable "workflow for creating workflows" for deterministic AI-assisted workflows**
 
@@ -199,12 +199,12 @@ Based on proven implementation in python-sdk:
 ### **Package for Transfer**
 ```bash
 # Create tarball
-tar -czf agent-os-meta-workflow-v1.0.tar.gz \
+tar -czf praxis-os-meta-workflow-v1.0.tar.gz \
   .praxis-os/meta-workflow/
 
 # Transfer to new repo
 cd {new-repo}
-tar -xzf agent-os-meta-workflow-v1.0.tar.gz
+tar -xzf praxis-os-meta-workflow-v1.0.tar.gz
 ```
 
 ### **Selective Transfer**

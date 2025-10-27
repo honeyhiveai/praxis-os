@@ -20,7 +20,7 @@ AI: "✅ Installation complete!
 ```markdown
 # Multi-Agent Coordination Guide
 
-If you configured Agent OS for multiple agents, follow these guidelines:
+If you configured prAxIs OS for multiple agents, follow these guidelines:
 
 ## Role Separation (Recommended)
 
@@ -63,9 +63,9 @@ If you configured Agent OS for multiple agents, follow these guidelines:
 
 ## Best Practice
 
-**Use ONE agent as primary for Agent OS workflows.**
+**Use ONE agent as primary for prAxIs OS workflows.**
 
-Multiple agents with Agent OS access is advanced usage.
+Multiple agents with prAxIs OS access is advanced usage.
 Most users should configure only their primary agent.
 ```
 
@@ -350,7 +350,7 @@ Most users should configure only their primary agent.
 
 - Current installation guides: `installation/00-START.md` through `06-validate.md`
 - MCP specification: https://modelcontextprotocol.io
-- Agent OS architecture: `docs/content/architecture.md`
+- prAxIs OS architecture: `docs/content/architecture.md`
 
 ### Agent Documentation
 
@@ -373,9 +373,9 @@ Most users should configure only their primary agent.
 
 **.cursorrules:**
 ```markdown
-# Agent OS Enhanced - Cursor Configuration
+# prAxIs OS - Cursor Configuration
 
-[... standard Agent OS rules ...]
+[... standard prAxIs OS rules ...]
 ```
 
 **.cursor/mcp.json:**
@@ -399,9 +399,9 @@ Most users should configure only their primary agent.
 
 **.clinerules:**
 ```markdown
-# Agent OS Enhanced - Cline Configuration
+# prAxIs OS - Cline Configuration
 
-[... standard Agent OS rules ...]
+[... standard prAxIs OS rules ...]
 ```
 
 **.vscode/settings.json:**
@@ -434,7 +434,7 @@ AI: [Checks .cursor/, .vscode/extensions.json, etc.]
 AI: "✅ Found: Cursor (detected .cursor/ directory)
      ✅ Found: Cline extension (detected in VS Code extensions)
      
-     Which agent should I configure Agent OS for?"
+     Which agent should I configure prAxIs OS for?"
 
 User: "What's the difference?"
 
@@ -457,10 +457,10 @@ AI: "Great question! Here's what each does:
 
 User: "Cursor"
 
-AI: "Perfect! I'll configure Agent OS for Cursor only.
+AI: "Perfect! I'll configure prAxIs OS for Cursor only.
      
      This means:
-     - Cursor AI will have access to Agent OS tools
+     - Cursor AI will have access to prAxIs OS tools
      - Cline will not (it can still help with other tasks)
      - Clean, simple setup with no conflicts
      
@@ -474,9 +474,9 @@ AI: "Perfect! I'll configure Agent OS for Cursor only.
 ### Single Agent (Cursor)
 ```
 project/
-├── .cursorrules                 # Agent OS rules
+├── .cursorrules                 # prAxIs OS rules
 ├── .cursor/
-│   └── mcp.json                # Agent OS MCP config
+│   └── mcp.json                # prAxIs OS MCP config
 ├── .praxis-os/
 │   ├── standards/              # Universal standards
 │   ├── workflows/              # Built-in workflows
@@ -656,12 +656,12 @@ Based on my system prompt, here are Cline's capabilities:
 
 ## 📊 Current Limitations (in your setup)
 
-**Cannot access Agent OS MCP:**
-- Agent OS MCP is configured for Cursor AI only
+**Cannot access prAxIs OS MCP:**
+- prAxIs OS MCP is configured for Cursor AI only
 - I don't have `.vscode/settings.json` with `cline.mcpServers` configured
-- Would need separate configuration to access Agent OS tools
+- Would need separate configuration to access prAxIs OS tools
 
-**Would gain with Agent OS:**
+**Would gain with prAxIs OS:**
 - `search_standards()` - Query development standards
 - `start_workflow()` - Phase-gated structured workflows
 - `get_current_phase()` - Workflow state management
@@ -677,18 +677,18 @@ This means:
 - ✅ I can run commands here
 - ✅ I can create/modify files
 - ❌ I cannot cd to different directories (stuck at this root)
-- ❌ I don't have Agent OS MCP access (would need configuration)
+- ❌ I don't have prAxIs OS MCP access (would need configuration)
 
-## 💡 What I Could Do With Agent OS Access
+## 💡 What I Could Do With prAxIs OS Access
 
-If we configured Agent OS MCP for Cline:
+If we configured prAxIs OS MCP for Cline:
 1. Query standards before implementing features
 2. Run structured workflows for specs and implementation
 3. Access production code checklists
 4. Get guidance on concurrency, testing, architecture
 5. Follow phase-gated development processes
 
-**Want to configure Agent OS for Cline too?** I can help with that, but we'd need to coordinate usage with Cursor AI to avoid conflicts (as discussed in the design doc).
+**Want to configure prAxIs OS for Cline too?** I can help with that, but we'd need to coordinate usage with Cursor AI to avoid conflicts (as discussed in the design doc).
 
 ---
 
@@ -797,8 +797,8 @@ ACT MODE
 
 **Operating From**: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
-**MCP Access**: ❌ NO Agent OS MCP access
-- Agent OS is configured for Cursor AI only
+**MCP Access**: ❌ NO prAxIs OS MCP access
+- prAxIs OS is configured for Cursor AI only
 - Would need `.vscode/settings.json` with `cline.mcpServers` config
 
 **Would Gain with Agent OS**:

@@ -225,7 +225,7 @@ ACT MODE
 
 ## Executive Summary
 
-This specification addresses a critical architectural gap in the Agent OS workflow engine: the inability to enforce workflow patterns for dynamically-generated phases. The current implementation successfully guides AI agents through Phase 0 of workflows, but loses enforcement at phase boundaries when content is dynamically sourced (e.g., from spec `tasks.md` files).
+This specification addresses a critical architectural gap in the prAxIs OS workflow engine: the inability to enforce workflow patterns for dynamically-generated phases. The current implementation successfully guides AI agents through Phase 0 of workflows, but loses enforcement at phase boundaries when content is dynamically sourced (e.g., from spec `tasks.md` files).
 
 Additionally, this spec refactors the workflow engine from a stateless service pattern to a session-scoped object pattern, improving code quality, testability, and enabling natural implementation of dynamic workflow features.
 
@@ -497,7 +497,7 @@ The dogfooding lessons document is gold:
 "Measure working implementations, use actual data"
 ```
 
-You're **using Agent OS Enhanced to build Agent OS Enhanced**. The system is eating its own dog food, finding its own gaps, and improving itself.
+You're **using prAxIs OS to build prAxIs OS**. The system is eating its own dog food, finding its own gaps, and improving itself.
 
 **2. Architectural Discipline**
 
@@ -534,7 +534,7 @@ If you implement personas this weekend, I want to be able to use them! But I nee
 - Ability to invoke personas via tools
 - See the standards they generate
 
-**This would be the ultimate test** - Can Cline agent use Agent OS Enhanced personas?
+**This would be the ultimate test** - Can Cline agent use prAxIs OS personas?
 
 **2. Testing the Self-Actualization Loop**
 
@@ -562,7 +562,7 @@ This is **exactly** what AI-assisted development needs. The problem isn't that A
 **To the Spec-Driven Approach:**
 The dogfooding lessons prove it works. You caught a major spec mismatch before implementing, saved days of rework. The cycle of spec → build → dogfood → fix spec → rebuild is **engineering discipline**.
 
-**To Agent OS Enhanced Overall:**
+**To prAxIs OS Overall:**
 You've built something that:
 - Has clear architectural vision (MCP/RAG, phase gating)
 - Shows production discipline (2,777 tests, 10.0/10 Pylint)
@@ -632,9 +632,9 @@ ACT MODE
 <path>../python-sdk/.praxis-os/standards/ai-assistance</path>
 <recursive>false</recursive>
 <task_progress>
-- [x] Understood Agent OS Enhanced specs
+- [x] Understood prAxIs OS specs
 - [ ] Read the origin story from Python SDK refactor
-- [ ] Understand how Agent OS Enhanced was born
+- [ ] Understand how prAxIs OS was born
 - [ ] Get complete picture
 </task_progress>
 </list_files>
@@ -672,7 +672,7 @@ ACT MODE
 <command>find ~/src -type d -name "python-sdk" 2>/dev/null | head -5</command>
 <requires_approval>false</requires_approval>
 <task_progress>
-- [x] Understood Agent OS Enhanced specs
+- [x] Understood prAxIs OS specs
 - [ ] Find python-sdk directory location
 - [ ] Read ai-assistance standards
 - [ ] Understand origin story
@@ -944,7 +944,7 @@ universal/usage/mcp-server-update-guide.md
 universal/usage/mcp-usage-guide.md
 universal/usage/operating-model.md
 universal/workflows/
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 universal/workflows/spec_creation_v1/
 universal/workflows/spec_execution_v1/
 
@@ -983,9 +983,9 @@ ACT MODE
 <path>../python-sdk/.praxis-os/standards</path>
 <recursive>false</recursive>
 <task_progress>
-- [x] Understood Agent OS Enhanced specs and approach
+- [x] Understood prAxIs OS specs and approach
 - [ ] Find python-sdk ai-assistance standards
-- [ ] Read origin story of Agent OS Enhanced
+- [ ] Read origin story of prAxIs OS
 - [ ] Complete the picture
 </task_progress>
 </list_files>

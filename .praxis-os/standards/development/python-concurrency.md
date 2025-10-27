@@ -267,7 +267,7 @@ for w in workers:
 
 ### Detected Patterns
 
-✅ **Threading usage detected**: `mcp_server/agent_os_rag.py`, `mcp_server/rag_engine.py`  
+✅ **Threading usage detected**: `mcp_server/praxis_os_rag.py`, `mcp_server/rag_engine.py`  
 ❌ **No asyncio detected**: Consider adding async support for I/O operations  
 ✅ **File watching**: Uses `watchdog` for monitoring standards changes  
 ✅ **MCP server**: Long-running server process with concurrent tool invocations
@@ -279,7 +279,7 @@ for w in workers:
 The `AgentOSFileWatcher` uses threading for monitoring file changes:
 
 ```python
-# From agent_os_rag.py
+# From praxis_os_rag.py
 class AgentOSFileWatcher(FileSystemEventHandler):
     def __init__(self, ...):
         self._rebuild_lock = threading.Lock()

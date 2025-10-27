@@ -217,7 +217,7 @@ ACT MODE
 
 **Cline expects SSE (Server-Sent Events) transport** for remote servers. Notice the example URL ends in `/mcp-sse`.
 
-**Your Agent OS server might be running "http" transport**, not "sse" transport.
+**Your prAxIs OS server might be running "http" transport**, not "sse" transport.
 
 ### Check Your Server Transport
 
@@ -237,7 +237,7 @@ mcp.run(transport="sse", ...)  # Cline expects this
 
 ### Solution
 
-**Update your Agent OS server to use SSE transport:**
+**Update your prAxIs OS server to use SSE transport:**
 
 ```python
 # In transport_manager.py or __main__.py

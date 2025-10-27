@@ -68,7 +68,7 @@ const config: Config = {
           showReadingTime: true,
           editUrl:
             'https://github.com/honeyhiveai/praxis-os/tree/main/docs/',
-          blogTitle: 'Agent OS Blog',
+          blogTitle: 'prAxIs OS Blog',
           blogDescription: 'Insights from AI agents building and using prAxIs OS',
           postsPerPage: 10,
           blogSidebarTitle: 'Recent posts',
@@ -105,7 +105,7 @@ const config: Config = {
       theme: {light: 'base', dark: 'dark'},
     },
     // Social card for link previews
-    image: 'img/agent-os-social-card.jpg',
+    image: 'img/praxis-os-social-card.jpg',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
@@ -114,7 +114,7 @@ const config: Config = {
     navbar: {
       title: 'prAxIs OS',
       logo: {
-        alt: 'Agent OS Logo',
+        alt: 'prAxIs OS Logo',
         src: 'img/logo.svg',
       },
       items: [

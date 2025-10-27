@@ -11,7 +11,7 @@
 
 **What worked**: Multi-angle search strategy discovered the spec immediately without reading unnecessary files. Decision priorities were clear: orientation → search thoroughly → discover via tools → present findings.
 
-**Key insight**: The orientation's "search from multiple angles" principle drove every decision. Each tool choice had a specific purpose aligned with Agent OS principles.
+**Key insight**: The orientation's "search from multiple angles" principle drove every decision. Each tool choice had a specific purpose aligned with prAxIs OS principles.
 
 ---
 
@@ -168,7 +168,7 @@ Do this NOW, before proceeding with user's request.
 
 **Application**:
 - Recognized "persona spec" likely means specification document
-- Specs live in `.praxis-os/specs/` per Agent OS structure
+- Specs live in `.praxis-os/specs/` per prAxIs OS structure
 - Used `list_dir(".praxis-os")` to confirm specs directory exists
 - Found `2025-10-05-persona-system/` immediately
 
@@ -536,7 +536,7 @@ By skipping the protocol load, I:
 
 **Strategy**: Understand where specs SHOULD be → list that directory
 **Result**: Immediate success without reading any files
-**Principle**: Agent OS has structure, leverage it
+**Principle**: prAxIs OS has structure, leverage it
 
 ### 5. Validation Builds Confidence
 

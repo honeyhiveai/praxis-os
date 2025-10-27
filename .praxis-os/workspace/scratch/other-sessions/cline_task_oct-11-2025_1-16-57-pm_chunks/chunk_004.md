@@ -282,7 +282,7 @@ ACT MODE
 
 [Unexpected content type]
 
-You're absolutely right - this is a significant issue! If Agent OS is installed per-project in `.praxis-os/`, then Cline's global MCP configuration with absolute paths doesn't work well.
+You're absolutely right - this is a significant issue! If prAxIs OS is installed per-project in `.praxis-os/`, then Cline's global MCP configuration with absolute paths doesn't work well.
 
 <web_fetch>
 <url>https://docs.cline.bot/features/multiroot-workspace</url>

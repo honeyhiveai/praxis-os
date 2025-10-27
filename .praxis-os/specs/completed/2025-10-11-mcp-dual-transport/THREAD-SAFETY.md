@@ -64,10 +64,10 @@ FastMCP handles internal synchronization.
 **Code:**
 ```python
 # Safe: Multiple threads reading state
-state = PortManager.read_state(agent_os_path)
+state = PortManager.read_state(praxis_os_path)
 
 # Safe: Multiple threads discovering project info
-info = ProjectInfoDiscovery(agent_os_path).get_project_info()
+info = ProjectInfoDiscovery(praxis_os_path).get_project_info()
 
 # Safe: Concurrent tool calls via dual transport
 # FastMCP instance is shared, handles internal locks
@@ -226,8 +226,8 @@ port_mgr.write_state("dual", 4242)
 server.run()  # Blocks, serves requests
 
 # Pattern 2: Multiple readers
-state = PortManager.read_state(agent_os_path)  # Safe from any thread
-project_info = ProjectInfoDiscovery(agent_os_path).get_project_info()  # Safe
+state = PortManager.read_state(praxis_os_path)  # Safe from any thread
+project_info = ProjectInfoDiscovery(praxis_os_path).get_project_info()  # Safe
 
 # Pattern 3: Multiple projects
 # Each has separate .praxis-os/ directory, no conflicts

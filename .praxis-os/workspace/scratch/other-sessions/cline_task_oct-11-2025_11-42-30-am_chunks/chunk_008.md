@@ -496,15 +496,15 @@ case "sse": {
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with SSE implementation corrections
 - [ ] Add telemetry section to design doc
 - [ ] Add additional test cases to design doc
 - [ ] Add implementation order refinement
-- [ ] Cursor creates spec using Agent OS Enhanced
+- [ ] Cursor creates spec using prAxIs OS
 - [ ] Review the spec created by Cursor
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </replace_in_file>

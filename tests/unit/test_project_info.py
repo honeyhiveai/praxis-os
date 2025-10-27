@@ -17,9 +17,9 @@ from mcp_server.project_info import ProjectInfoDiscovery
 def project_discovery(tmp_path):
     """Create ProjectInfoDiscovery instance with temp directory."""
     # Create .praxis-os directory
-    agent_os_path = tmp_path / "test-project" / ".praxis-os"
-    agent_os_path.mkdir(parents=True)
-    return ProjectInfoDiscovery(agent_os_path)
+    praxis_os_path = tmp_path / "test-project" / ".praxis-os"
+    praxis_os_path.mkdir(parents=True)
+    return ProjectInfoDiscovery(praxis_os_path)
 
 
 @pytest.fixture
@@ -29,9 +29,9 @@ def git_project_discovery(tmp_path):
     project_path = tmp_path / "test-git-project"
     project_path.mkdir()
     (project_path / ".git").mkdir()
-    agent_os_path = project_path / ".praxis-os"
-    agent_os_path.mkdir()
-    return ProjectInfoDiscovery(agent_os_path)
+    praxis_os_path = project_path / ".praxis-os"
+    praxis_os_path.mkdir()
+    return ProjectInfoDiscovery(praxis_os_path)
 
 
 class TestGetProjectInfo:
@@ -44,7 +44,7 @@ class TestGetProjectInfo:
         assert isinstance(info, dict)
         assert "name" in info
         assert "root" in info
-        assert "agent_os_path" in info
+        assert "praxis_os_path" in info
         assert "git" in info
 
     def test_get_project_info_non_git_project(self, project_discovery):
@@ -53,7 +53,7 @@ class TestGetProjectInfo:
 
         assert info["name"] == "test-project"  # Directory name
         assert info["root"].endswith("test-project")
-        assert info["agent_os_path"].endswith(".praxis-os")
+        assert info["praxis_os_path"].endswith(".praxis-os")
         assert info["git"] is None  # Not a git repo
 
 
@@ -65,13 +65,13 @@ class TestProjectNameDiscovery:
 
         def mock_run_git(args):
             if args == ["remote", "get-url", "origin"]:
-                return "git@github.com:user/agent-os-enhanced.git"
+                return "git@github.com:user/praxis-os-enhanced.git"
             return None
 
         monkeypatch.setattr(git_project_discovery, "_run_git_command", mock_run_git)
 
         name = git_project_discovery._get_project_name()
-        assert name == "agent-os-enhanced"
+        assert name == "praxis-os-enhanced"
 
     def test_get_project_name_from_https_url(self, git_project_discovery, monkeypatch):
         """Test project name extracted from HTTPS URL."""
@@ -334,7 +334,7 @@ class TestDocstringsAndTypeHints:
         source = inspect.getsource(ProjectInfoDiscovery)
 
         # Should NOT contain hardcoded project names
-        assert "agent-os-enhanced" not in source.lower().replace("agent-os", "")
+        assert "praxis-os-enhanced" not in source.lower().replace("praxis-os", "")
         # Should NOT contain hardcoded user paths
         assert "/Users/josh" not in source
         assert "/Users/specific" not in source

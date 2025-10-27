@@ -24,7 +24,7 @@ def mock_workflow_state():
     """Create mock workflow state."""
     return {
         "session_id": "test-session-123",
-        "workflow_type": "agent_os_upgrade_v1",
+        "workflow_type": "praxis_os_upgrade_v1",
         "current_phase": 5,
         "completed_phases": [0, 1, 2, 3, 4],
         "phase_artifacts": {
@@ -61,9 +61,9 @@ class TestGenerateUpgradeSummary:
         content = Path(report_path).read_text()
 
         # Check for expected sections
-        assert "# Agent OS Upgrade Summary" in content
+        assert "# prAxIs OS Upgrade Summary" in content
         assert "test-session-123" in content
-        assert "agent_os_upgrade_v1" in content
+        assert "praxis_os_upgrade_v1" in content
         assert "Phase 0" in content or "Phase" in content
 
     def test_generate_upgrade_summary_with_artifacts(

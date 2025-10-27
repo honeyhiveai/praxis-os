@@ -28,7 +28,7 @@
 
 ### Key Characteristics
 
-- **Core Workflow**: Ships with Agent OS Enhanced to all consumers
+- **Core Workflow**: Ships with prAxIs OS to all consumers
 - **Dynamic**: Uses template-based iteration for target workflow phases
 - **Spec-Driven**: Requires workflow definition YAML as input
 - **Bootstrap**: Hand-created once, then used for all future workflows
@@ -748,7 +748,7 @@ How do we create `workflow_creation_v1` when we need `workflow_creation_v1` to c
 
 **Step 3**: Mark as core workflow
 - Already in `universal/workflows/`
-- Ships with Agent OS Enhanced
+- Ships with prAxIs OS
 - Available to all consumers
 
 **Step 4**: Self-improvement (optional)
@@ -903,7 +903,7 @@ Need to build `WorkflowDefinitionParser` class:
 
 ### Terminology Note
 
-**Important**: We use "workflow" consistently throughout Agent OS Enhanced.
+**Important**: We use "workflow" consistently throughout prAxIs OS.
 
 **Workflow** (Instance):
 - A specific structured process (e.g., `workflow_creation_v1`, `test-generation-js-ts-v1`)

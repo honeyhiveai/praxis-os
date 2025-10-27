@@ -1,6 +1,6 @@
 # Divio Documentation System Restructure - Specification
 
-**Project:** Agent OS Enhanced Documentation Restructure  
+**Project:** prAxIs OS Documentation Restructure  
 **Created:** 2025-10-10  
 **Status:** ✅ Complete - Ready for Implementation  
 **Spec Version:** 1.0  
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This specification defines a comprehensive restructuring of Agent OS Enhanced documentation using the Divio Documentation System framework. The project reorganizes existing content into four quadrants (Tutorials, How-To Guides, Reference, Explanation), creates new tutorial content teaching Agent OS's main vehicle (spec-driven development), and implements automated quality enforcement.
+This specification defines a comprehensive restructuring of prAxIs OS documentation using the Divio Documentation System framework. The project reorganizes existing content into four quadrants (Tutorials, How-To Guides, Reference, Explanation), creates new tutorial content teaching prAxIs OS's main vehicle (spec-driven development), and implements automated quality enforcement.
 
 **Key Objectives:**
 - **Improve onboarding:** Create guaranteed-success tutorials (≥95% success rate)
@@ -69,18 +69,18 @@ This specification consists of four core documents:
 ## Key Deliverables
 
 ### New Content Creation
-1. **Tutorial 1:** "Your First Agent OS Project" (15-20 min)
+1. **Tutorial 1:** "Your First prAxIs OS Project" (15-20 min)
    - Teaches complete spec-driven development cycle (design → spec_creation_v1 → spec_execution_v1)
-   - **This teaches THE MAIN VEHICLE of Agent OS**
+   - **This teaches THE MAIN VEHICLE of prAxIs OS**
    - Guaranteed ≥95% success rate
 
-2. **Tutorial 2:** "Understanding Agent OS Workflows" (10-15 min)
+2. **Tutorial 2:** "Understanding prAxIs OS Workflows" (10-15 min)
    - Teaches workflow system (phase-gating, checkpoints, evidence)
    - Guaranteed ≥95% success rate
 
 3. **5 How-To Guides:**
    - Create Custom Workflows
-   - Integrate Agent OS with CI/CD
+   - Integrate prAxIs OS with CI/CD
    - Debug Workflow Failures
    - Customize Documentation Theme
    - Migrate Existing Docs to Divio
@@ -131,8 +131,8 @@ This specification consists of four core documents:
 ---
 
 ### Phase 2: Tutorial Content Creation (8-10 hours)
-- Write Tutorial 1: "Your First Agent OS Project"
-- Write Tutorial 2: "Understanding Agent OS Workflows"
+- Write Tutorial 1: "Your First prAxIs OS Project"
+- Write Tutorial 2: "Understanding prAxIs OS Workflows"
 - Test with 3 users per tutorial
 - Iterate based on feedback until ≥95% success rate
 
@@ -226,7 +226,7 @@ This specification consists of four core documents:
 
 ### AD-4: Tutorial 1 Teaches Spec-Driven Development
 **Decision:** First tutorial covers complete spec cycle (design → spec_creation_v1 → spec_execution_v1)  
-**Rationale:** This IS Agent OS - users must understand the main vehicle first  
+**Rationale:** This IS prAxIs OS - users must understand the main vehicle first  
 **Alternative:** Simple MCP query tutorial (rejected - misses core methodology)
 
 ### AD-5: User Testing Required for Tutorials
@@ -284,7 +284,7 @@ This specification consists of four core documents:
 **Impact:** High - Can't verify tutorial success rate  
 **Probability:** Medium  
 **Mitigation:**
-- Use internal team members unfamiliar with Agent OS
+- Use internal team members unfamiliar with prAxIs OS
 - Post in community forums/Discord for volunteer testers
 - Offer incentives (e.g., early access, swag)
 - Accept smaller sample size (3 users minimum) if recruitment difficult
@@ -309,7 +309,7 @@ The following are explicitly **NOT** included in this project:
 12. **Legacy Content Archive:** Old docs deleted, not archived (clean slate)
 13. **Mobile-Specific Optimizations:** Responsive only (no native mobile app)
 14. **Offline Documentation:** Online-only (no offline bundles)
-15. **Third-Party Integration Testing:** Focus on Agent OS, not every possible integration
+15. **Third-Party Integration Testing:** Focus on prAxIs OS, not every possible integration
 
 **Rationale:** These features require significant additional resources, complexity, or ongoing maintenance. Focus remains on core Divio restructure and quality automation.
 
@@ -429,7 +429,7 @@ Additional context and background documents are located in `supporting-docs/`:
 
 **Specification Owner:** Josh (Project Lead)  
 **Created By:** AI Agent (Cursor IDE with Claude Sonnet 4.5)  
-**Creation Method:** Agent OS Enhanced `spec_creation_v1` workflow  
+**Creation Method:** prAxIs OS `spec_creation_v1` workflow  
 **Approval Status:** Pending Review
 
 ---

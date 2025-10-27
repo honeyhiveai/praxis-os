@@ -1,7 +1,7 @@
 # prAxIs OS
 ### *praxis, the ai os*
 
-**A portable Agent OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
+**A portable prAxIs OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
 
 ## 🎯 Overview
 
@@ -28,7 +28,7 @@ The documentation site includes:
 
 ```
 Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/praxis-os"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will follow the installation guide in `installation/` directory:
@@ -81,7 +81,7 @@ praxis-os/
 │   │   ├── architecture/        # Dependency injection, API design, separation of concerns
 │   │   ├── testing/             # Test pyramid, test doubles, property-based testing
 │   │   └── documentation/       # Code comments, API docs, README templates
-│   ├── usage/                   # Agent OS usage documentation
+│   ├── usage/                   # prAxIs OS usage documentation
 │   │   ├── creating-specs.md    # How to create specifications
 │   │   ├── operating-model.md   # AI-human collaboration model
 │   │   └── mcp-usage-guide.md   # MCP tool reference
@@ -101,7 +101,7 @@ praxis-os/
    └── CHANGELOG.md              # Version history
 ```
 
-**For AI Installing Agent OS**: Start at [`installation/00-START.md`](installation/00-START.md)
+**For AI Installing prAxIs OS**: Start at [`installation/00-START.md`](installation/00-START.md)
 
 ## 🎯 Design Philosophy
 
@@ -110,7 +110,7 @@ praxis-os/
 - **`.cursorrules`**: Behavioral triggers and MCP routing (26 lines, language-agnostic)
 - **`universal/standards/`**: CS fundamentals (race conditions, test pyramid, API design)
 - **`universal/workflows/`**: Phase-gated workflow definitions
-- **`universal/usage/`**: Agent OS usage documentation
+- **`universal/usage/`**: prAxIs OS usage documentation
 
 ### What's Generated (Optional, Context-Aware)
 
@@ -126,7 +126,7 @@ praxis-os/
 
 ## 🔧 Development & Dogfooding
 
-**This repository dogfoods Agent OS - we use our own framework to develop itself.**
+**This repository dogfoods prAxIs OS - we use our own framework to develop itself.**
 
 ### True Dogfooding (No Shortcuts)
 
@@ -190,8 +190,8 @@ See `.praxis-os/standards/development/agent-os-architecture.md` for detailed exp
 2. **Adaptive**: Same standards, different language contexts
 3. **Intelligent**: RAG + sub-agents provide targeted guidance
 4. **Conversational**: Cursor agent handles installation and configuration
-5. **Isolated**: Each project owns its Agent OS installation
-6. **Versionable**: Project controls which Agent OS version to use
+5. **Isolated**: Each project owns its prAxIs OS installation
+6. **Versionable**: Project controls which prAxIs OS version to use
 7. **Customizable**: Generated standards can be tuned per project
 
 ## 🚀 Usage After Installation
@@ -220,7 +220,7 @@ Once installed in your project, use MCP tools:
 
 **Multi-Agent Collaboration with Zero Conflicts**
 
-Agent OS now supports **dual-transport mode**, enabling seamless multi-agent workflows:
+prAxIs OS now supports **dual-transport mode**, enabling seamless multi-agent workflows:
 
 ### Architecture
 
@@ -259,7 +259,7 @@ Agent OS now supports **dual-transport mode**, enabling seamless multi-agent wor
 
 #### 🚀 Zero-Conflict Multi-Project
 
-Run multiple Agent OS projects simultaneously:
+Run multiple prAxIs OS projects simultaneously:
 - Each project gets a unique port (auto-allocated from `4242-5242`)
 - No manual port configuration required
 - Works across multiple IDE instances
@@ -302,7 +302,7 @@ Server writes connection info to `.praxis-os/.mcp_server_state.json`:
 ```json
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "praxis-os-rag": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
@@ -371,10 +371,10 @@ See `.praxis-os/specs/2025-10-11-mcp-dual-transport/IDE-CONFIGURATION.md` for:
 
 ## 📊 Maintenance Model
 
-### Updating Agent OS in Your Project
+### Updating prAxIs OS in Your Project
 
 ```
-"Update Agent OS to latest version"
+"Update prAxIs OS to latest version"
 
 Cursor agent will:
 1. Pull latest from this repo
@@ -394,7 +394,7 @@ Found a great pattern in your project? Contribute it back:
 
 ## 🎯 Credits
 
-- **Foundation**: [Builder Methods Agent OS](https://buildermethods.com/agent-os) by Brian Casel
+- **Foundation**: [Builder Methods prAxIs OS](https://buildermethods.com/agent-os) by Brian Casel
 - **Evolution**: HoneyHive's LLM Workflow Engineering methodology
 - **Implementation**: MCP/RAG architecture with specialized sub-agents
 

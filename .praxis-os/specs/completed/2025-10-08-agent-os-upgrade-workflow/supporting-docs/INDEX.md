@@ -1,6 +1,6 @@
 # Supporting Documents Index
 
-**Spec:** Agent OS Upgrade Workflow  
+**Spec:** prAxIs OS Upgrade Workflow  
 **Date:** 2025-10-08  
 **Processing Mode:** Embedded (documents copied into spec directory)
 
@@ -19,7 +19,7 @@
 **Version:** 1.0
 
 **Purpose:**  
-Comprehensive design document for an AI-guided workflow to safely upgrade Agent OS installations with automatic validation, rollback capability, and state persistence across server restarts.
+Comprehensive design document for an AI-guided workflow to safely upgrade prAxIs OS installations with automatic validation, rollback capability, and state persistence across server restarts.
 
 **Key Sections:**
 - Executive Summary

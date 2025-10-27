@@ -14,7 +14,7 @@ def mock_current_date_implementation() -> Dict[str, Any]:
     """
     Mock implementation matching the actual current_date tool.
 
-    This mirrors the logic in agent_os_rag.py without requiring
+    This mirrors the logic in praxis_os_rag.py without requiring
     the full MCP server infrastructure and dependencies.
     """
     now = datetime.now()
@@ -31,7 +31,7 @@ def mock_current_date_implementation() -> Dict[str, Any]:
             "header": f"**Date**: {now.strftime('%Y-%m-%d')}",
             "readable": now.strftime("%B %d, %Y"),
         },
-        "usage_note": "Use 'iso_date' (YYYY-MM-DD) for all specifications, directories, and headers per Agent OS date policy",
+        "usage_note": "Use 'iso_date' (YYYY-MM-DD) for all specifications, directories, and headers per prAxIs OS date policy",
     }
 
 

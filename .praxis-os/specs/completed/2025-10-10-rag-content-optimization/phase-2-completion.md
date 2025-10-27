@@ -33,7 +33,7 @@ Phase 2 successfully optimized 5 usage guide files and identified/removed 1 dupl
 **Approach:** Full transformation with validation iteration
 
 **Changes Applied:**
-1. ✅ Added TL;DR: "How to behave as an AI agent in Agent OS" with 3-step pattern
+1. ✅ Added TL;DR: "How to behave as an AI agent in prAxIs OS" with 3-step pattern
 2. ✅ Added "Questions This Answers" (13 natural questions)
 3. ✅ Transformed all scenario headers to query-oriented:
    - "Scenario 1: New Feature Request" → "How to Handle New Feature Requests (Scenario 1)"
@@ -41,16 +41,16 @@ Phase 2 successfully optimized 5 usage guide files and identified/removed 1 dupl
    - Applied to all 8 scenarios
 4. ✅ Added "When to Query This Guide" (6 scenarios + query table)
 5. ✅ Added cross-references (orientation, operating model, MCP tools, standards, spec creation)
-6. ✅ Added keywords: "how to behave as AI agent in Agent OS, correct AI agent behavior, AI behavior patterns..."
+6. ✅ Added keywords: "how to behave as AI agent in prAxIs OS, correct AI agent behavior, AI behavior patterns..."
 
 **Validation & Iteration:**
-- **Initial Test Failed:** Query "how to behave as AI agent in Agent OS" returned workflow-system-overview.md at rank #1
+- **Initial Test Failed:** Query "how to behave as AI agent in prAxIs OS" returned workflow-system-overview.md at rank #1
 - **Root Cause:** Insufficient keyword density and TL;DR emphasis
-- **Fix Applied:** Strengthened keywords and added explicit "How to behave as an AI agent in Agent OS:" header in TL;DR
+- **Fix Applied:** Strengthened keywords and added explicit "How to behave as an AI agent in prAxIs OS:" header in TL;DR
 - **Retest Passed:** ✅ ai-agent-quickstart.md now ranks #1 (relevance_score: 0.521)
 
 **Test Queries Validated:**
-- ✅ "how to behave as AI agent in Agent OS" → ai-agent-quickstart.md rank #1
+- ✅ "how to behave as AI agent in prAxIs OS" → ai-agent-quickstart.md rank #1
 - ✅ "AI agent quickstart practical examples" → ai-agent-quickstart.md rank #1  
 - ✅ "how to handle feature requests as AI" → ai-agent-quickstart.md rank #1
 
@@ -112,7 +112,7 @@ Phase 2 successfully optimized 5 usage guide files and identified/removed 1 dupl
 6. ✅ Added keywords for search
 
 **Test Queries Validated:**
-- ✅ "Agent OS operating model human AI partnership" → operating-model.md rank #1 (score: 0.526)
+- ✅ "prAxIs OS operating model human AI partnership" → operating-model.md rank #1 (score: 0.526)
 
 **Findings:**
 - Well-structured files require less transformation
@@ -149,17 +149,17 @@ Phase 2 successfully optimized 5 usage guide files and identified/removed 1 dupl
 
 ---
 
-### Task 2.5: Agent OS Update Guide (`usage/agent-os-update-guide.md`)
+### Task 2.5: prAxIs OS Update Guide (`usage/agent-os-update-guide.md`)
 
 **Baseline Score:** 7/10  
 **Final Score:** N/A (File deleted)  
 **Approach:** Identified and removed duplicate content
 
 **Analysis:**
-This file contained 713 lines covering "how to update Agent OS" with manual rsync instructions. During Phase 1, we already optimized `standards/installation/update-procedures.md` which covers the same topic and prioritizes the `agent_os_upgrade_v1` workflow.
+This file contained 713 lines covering "how to update prAxIs OS" with manual rsync instructions. During Phase 1, we already optimized `standards/installation/update-procedures.md` which covers the same topic and prioritizes the `praxis_os_upgrade_v1` workflow.
 
 **Duplicate Content Issue:**
-- ❌ Two files covering identical topic ("how to update Agent OS")
+- ❌ Two files covering identical topic ("how to update prAxIs OS")
 - ❌ Confusing search results (which one ranks for update queries?)
 - ❌ Maintenance burden (update both files)
 - ❌ Diluted RAG relevance scores
@@ -187,7 +187,7 @@ This file contained 713 lines covering "how to update Agent OS" with manual rsyn
 1. ✅ Added TL;DR: Two types of updates (content vs server) + workflow recommendation
 2. ✅ Added "Questions This Answers" (8 questions)
 3. ✅ Fixed broken reference: Changed `agent-os-update-guide.md` → `standards/installation/update-procedures.md`
-4. ✅ Emphasized `agent_os_upgrade_v1` workflow as primary method (manual as fallback)
+4. ✅ Emphasized `praxis_os_upgrade_v1` workflow as primary method (manual as fallback)
 5. ✅ Headers already well-structured (minimal changes needed)
 6. ✅ Added "When to Query This Guide" (5 scenarios + query table)
 7. ✅ Added cross-references (update procedures, upgrade workflow, MCP tools, CHANGELOG)
@@ -341,7 +341,7 @@ From Phase 1 retrospective, we committed to:
 ✅ **Task 2.2:** Creating Specs - COMPLETE (full transformation)  
 ✅ **Task 2.3:** Operating Model - COMPLETE (validated)  
 ✅ **Task 2.4:** MCP Usage Guide - COMPLETE (validated, overlap noted)  
-✅ **Task 2.5:** Agent OS Update Guide - COMPLETE (deleted duplicate)  
+✅ **Task 2.5:** prAxIs OS Update Guide - COMPLETE (deleted duplicate)  
 ✅ **Task 2.6:** MCP Server Update Guide - COMPLETE (validated)  
 ✅ **Task 2.7:** Phase 2 Summary - COMPLETE (this document)
 

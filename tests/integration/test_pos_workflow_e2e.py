@@ -54,18 +54,18 @@ class RAGEngineStub:
 
 
 @pytest.fixture
-def temp_agent_os_dir():
+def temp_praxis_os_dir():
     """Create temporary .praxis-os directory structure for testing."""
     temp_dir = tempfile.mkdtemp()
-    agent_os_dir = Path(temp_dir) / ".praxis-os"
-    agent_os_dir.mkdir()
+    praxis_os_dir = Path(temp_dir) / ".praxis-os"
+    praxis_os_dir.mkdir()
 
     # Create state directory
-    state_dir = agent_os_dir / "state"
+    state_dir = praxis_os_dir / "state"
     state_dir.mkdir()
 
     # Create workflows directory with a test workflow
-    workflows_dir = agent_os_dir / "workflows" / "test_workflow_v1"
+    workflows_dir = praxis_os_dir / "workflows" / "test_workflow_v1"
     workflows_dir.mkdir(parents=True)
 
     # Create metadata.json
@@ -134,22 +134,22 @@ Final phase content.
     with open(phase2_dir / "phase.md", "w") as f:
         f.write(phase2_content)
 
-    yield agent_os_dir
+    yield praxis_os_dir
 
     # Cleanup
     shutil.rmtree(temp_dir)
 
 
 @pytest.fixture
-def workflow_engine(temp_agent_os_dir):
+def workflow_engine(temp_praxis_os_dir):
     """Create WorkflowEngine with temporary directory."""
     # Change to temp directory so WorkflowEngine uses it
     original_cwd = os.getcwd()
-    os.chdir(temp_agent_os_dir.parent)
+    os.chdir(temp_praxis_os_dir.parent)
 
     try:
         # Create StateManager with state directory
-        state_dir = temp_agent_os_dir / "state"
+        state_dir = temp_praxis_os_dir / "state"
         state_manager = StateManager(state_dir=state_dir)
 
         # Create minimal RAGEngine implementation for testing
@@ -160,7 +160,7 @@ def workflow_engine(temp_agent_os_dir):
         engine = WorkflowEngine(
             state_manager=state_manager,
             rag_engine=rag_engine,
-            workflows_base_path=temp_agent_os_dir / "workflows",
+            workflows_base_path=temp_praxis_os_dir / "workflows",
         )
         yield engine
     finally:
@@ -207,7 +207,7 @@ class TestCompleteWorkflowLifecycle:
 
     @pytest.mark.asyncio
     async def test_start_workflow_creates_session(
-        self, pos_workflow_tool, temp_agent_os_dir
+        self, pos_workflow_tool, temp_praxis_os_dir
     ):
         """Verify starting a workflow creates a valid session."""
         # Start workflow
@@ -221,7 +221,7 @@ class TestCompleteWorkflowLifecycle:
         session_id = result["session_id"]
 
         # Verify session file was created
-        state_dir = temp_agent_os_dir / "state"
+        state_dir = temp_praxis_os_dir / "state"
         session_files = list(state_dir.glob(f"{session_id}.json"))
         assert len(session_files) == 1
 
@@ -346,7 +346,7 @@ class TestSessionManagement:
 
     @pytest.mark.asyncio
     async def test_delete_session_removes_session(
-        self, pos_workflow_tool, temp_agent_os_dir
+        self, pos_workflow_tool, temp_praxis_os_dir
     ):
         """Verify delete_session removes session and state file."""
         # Create session
@@ -356,7 +356,7 @@ class TestSessionManagement:
         session_id = start_result["session_id"]
 
         # Verify session exists
-        state_dir = temp_agent_os_dir / "state"
+        state_dir = temp_praxis_os_dir / "state"
         session_file = state_dir / f"{session_id}.json"
         assert session_file.exists()
 
@@ -505,7 +505,7 @@ class TestWorkflowDiscovery:
 
     @pytest.mark.asyncio
     async def test_list_workflows_finds_installed_workflows(
-        self, pos_workflow_tool, temp_agent_os_dir
+        self, pos_workflow_tool, temp_praxis_os_dir
     ):
         """Verify list_workflows returns available workflows."""
         # Clear metadata cache to ensure fresh scan

@@ -1,6 +1,6 @@
 # Meta-Workflow Distribution Guide
 
-**Purpose**: Step-by-step instructions for transferring the Agent OS Meta-Workflow to other repositories  
+**Purpose**: Step-by-step instructions for transferring the prAxIs OS Meta-Workflow to other repositories  
 **Version**: 1.0  
 **Date**: 2025-10-02
 
@@ -15,14 +15,14 @@
 ```bash
 # 1. Create package
 cd {source-repo}
-tar -czf agent-os-meta-workflow-v1.0.tar.gz .praxis-os/meta-workflow/
+tar -czf praxis-os-meta-workflow-v1.0.tar.gz .praxis-os/meta-workflow/
 
 # 2. Transfer to new repository
-scp agent-os-meta-workflow-v1.0.tar.gz {target-host}:{target-repo}/
+scp praxis-os-meta-workflow-v1.0.tar.gz {target-host}:{target-repo}/
 
 # 3. Extract in target repo
 cd {target-repo}
-tar -xzf agent-os-meta-workflow-v1.0.tar.gz
+tar -xzf praxis-os-meta-workflow-v1.0.tar.gz
 
 # 4. Verify structure
 ls -la .praxis-os/meta-workflow/
@@ -66,8 +66,8 @@ cp {source}/meta-workflow/AGENT_OS_WORKFLOW_CREATION_GUIDE.md \
 
 ```bash
 # 1. In source repo, create separate meta-workflow repo
-git clone {source-repo} agent-os-meta-workflow
-cd agent-os-meta-workflow
+git clone {source-repo} praxis-os-meta-workflow
+cd praxis-os-meta-workflow
 git filter-branch --subdirectory-filter .praxis-os/meta-workflow -- --all
 
 # 2. In target repos, add as submodule
@@ -349,7 +349,7 @@ Transfer is successful when:
 ## 📦 **Distribution Package Manifest**
 
 ```
-agent-os-meta-workflow-v1.0/
+praxis-os-meta-workflow-v1.0/
 ├── README.md                                 # Package overview
 ├── DISTRIBUTION_GUIDE.md                     # This file
 ├── AGENT_OS_WORKFLOW_CREATION_GUIDE.md      # Complete methodology

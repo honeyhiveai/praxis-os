@@ -1,6 +1,6 @@
 # MCP Tools - Dynamic Discovery Guide
 
-**How to discover and use Agent OS MCP tools through dynamic introspection**
+**How to discover and use prAxIs OS MCP tools through dynamic introspection**
 
 ---
 
@@ -10,7 +10,7 @@
 
 **Core Principle:** Tools are self-documenting via MCP protocol. Discover dynamically through IDE, never memorize.
 
-**The Agent OS Way:**
+**The prAxIs OS Way:**
 1. ✅ **Start typing in IDE** → Autocomplete shows all available tools + schemas
 2. ✅ **Use tools/list** → Always-current source of truth
 3. ✅ **Query for patterns** → `search_standards("how to use X tool")`
@@ -48,7 +48,7 @@ Solution: Create self-reinforcing habits through tools
 ## ❓ Questions This Answers
 
 1. "How do I discover what MCP tools are available?"
-2. "Why doesn't Agent OS document all tools statically?"
+2. "Why doesn't prAxIs OS document all tools statically?"
 3. "How does tools/list work?"
 4. "Why can't I just memorize the tools?"
 5. "What is probabilistic reality?"
@@ -62,7 +62,7 @@ Solution: Create self-reinforcing habits through tools
 
 ## Why Dynamic Discovery Over Static Documentation?
 
-Agent OS tools are self-documenting and evolutionary. Static documentation creates maintenance burden and guaranteed drift.
+prAxIs OS tools are self-documenting and evolutionary. Static documentation creates maintenance burden and guaranteed drift.
 
 **The Problem with Static Documentation:**
 
@@ -70,7 +70,7 @@ Agent OS tools are self-documenting and evolutionary. Static documentation creat
 Traditional Approach:
 Code changes → Docs lag → Docs wrong → User confused → Time wasted
 
-Agent OS Approach:
+prAxIs OS Approach:
 Code IS documentation → Always accurate → IDE shows it → User succeeds
 ```
 
@@ -303,7 +303,7 @@ search_standards("how to test web UI with pos_browser")  # Patterns
 - ✅ Clarify the probabilistic reality you face
 - ✅ Provide mental models for tool selection
 
-**The unique value:** Understanding the SCIENCE of why Agent OS uses dynamic discovery, not documenting specific tools.
+**The unique value:** Understanding the SCIENCE of why prAxIs OS uses dynamic discovery, not documenting specific tools.
 
 ---
 
@@ -325,14 +325,14 @@ search_standards("how to test web UI with pos_browser")  # Patterns
 **Query workflow for tool mastery:**
 
 1. **Start with dynamic discovery** → `search_standards("MCP dynamic discovery")` (this document)
-2. **Learn orientation** → `search_standards("Agent OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
+2. **Learn orientation** → `search_standards("prAxIs OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
 3. **See practical examples** → `search_standards("AI agent examples")` → `usage/ai-agent-quickstart.md`
 4. **Understand workflows** → `search_standards("workflow system")` → `standards/workflows/workflow-system-overview.md`
 
 **By Category:**
 
 **AI Assistant:**
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core Agent OS concepts → `search_standards("Agent OS orientation")`
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core prAxIs OS concepts → `search_standards("prAxIs OS orientation")`
 - `usage/mcp-usage-guide.md` - MCP protocol usage → `search_standards("MCP usage guide")`
 
 **Usage:**

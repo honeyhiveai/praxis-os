@@ -9,7 +9,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  Agent OS Enhanced (Source)                  │
+│                  prAxIs OS (Source)                  │
 │                                                              │
 │  ┌────────────────────────────────────────────────┐        │
 │  │  1. Generate Manifest (Release Process)        │        │
@@ -62,7 +62,7 @@ class FileMetadata(TypedDict):
     last_updated: str    # ISO 8601 datetime
 
 class Manifest(TypedDict):
-    version: str                    # Agent OS version
+    version: str                    # prAxIs OS version
     generated: str                  # ISO 8601 datetime
     generator_version: str          # Script version
     files: Dict[str, FileMetadata]  # Relative path → metadata
@@ -147,7 +147,7 @@ def generate_manifest(universal_dir: Path, version: str) -> Manifest:
     
     Args:
         universal_dir: Path to universal/ directory
-        version: Agent OS version string
+        version: prAxIs OS version string
         
     Returns:
         Manifest dictionary
@@ -409,7 +409,7 @@ def show_diff(local_file: Path, source_file: Path):
 **Main Function:**
 ```python
 def main():
-    parser = argparse.ArgumentParser(description="Safe Agent OS upgrade tool")
+    parser = argparse.ArgumentParser(description="Safe prAxIs OS upgrade tool")
     parser.add_argument("--source", required=True, help="Path to praxis-os repo")
     parser.add_argument("--target", default=".praxis-os", help="Path to local .praxis-os directory")
     parser.add_argument("--dry-run", action="store_true", help="Preview changes without applying")
@@ -432,7 +432,7 @@ def main():
     with open(manifest_path) as f:
         manifest = json.load(f)
     
-    print(f"Agent OS Upgrade Tool")
+    print(f"prAxIs OS Upgrade Tool")
     print(f"{'='*60}")
     print(f"Source: {source_dir}")
     print(f"Target: {args.target}")

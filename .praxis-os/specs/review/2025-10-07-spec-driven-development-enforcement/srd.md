@@ -7,7 +7,7 @@
 
 ## 1. Introduction
 
-This document defines the requirements for establishing spec-driven development as a mandatory practice in Agent OS Enhanced.
+This document defines the requirements for establishing spec-driven development as a mandatory practice in prAxIs OS.
 
 ### 1.1 Purpose
 
@@ -47,7 +47,7 @@ This requirement applies to:
 - **MUST** query standards for guidance on process
 - **SHOULD** use workflows to implement approved specs
 
-### 2.3 Project (Agent OS Enhanced)
+### 2.3 Project (prAxIs OS)
 - **MUST** maintain consistent development process
 - **MUST** have auditable design decisions
 - **SHOULD** integrate with existing MCP/workflow infrastructure
@@ -116,7 +116,7 @@ User Request → Planning Phase → Create Spec → Seek Approval → Implementa
 
 ### 4.3 Alignment
 
-**NFR-6:** Standard **MUST** align with Builder Methods Agent OS philosophy  
+**NFR-6:** Standard **MUST** align with Builder Methods prAxIs OS philosophy  
 **NFR-7:** Standard **MUST** support existing workflow infrastructure
 
 ---
@@ -144,7 +144,7 @@ User Request → Planning Phase → Create Spec → Seek Approval → Implementa
 - [ ] Baseline quality concept explained
 
 ### 6.2 Project Configuration
-- [ ] Baseline quality defined for Agent OS Enhanced project
+- [ ] Baseline quality defined for prAxIs OS project
 - [ ] `.cursorrules` references spec-driven requirement
 - [ ] MCP RAG can find and return standard
 
@@ -185,8 +185,8 @@ User Request → Planning Phase → Create Spec → Seek Approval → Implementa
 
 ## 10. References
 
-- [Agent OS Operating Model](universal/usage/operating-model.md)
-- [Builder Methods Agent OS](https://buildermethods.com/agent-os)
+- [prAxIs OS Operating Model](universal/usage/operating-model.md)
+- [Builder Methods prAxIs OS](https://buildermethods.com/agent-os)
 - [Dynamic Workflow Implementation Spec](../2025-10-07-dynamic-workflow-session-refactor/)
 
 ---

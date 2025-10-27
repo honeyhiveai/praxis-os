@@ -1,5 +1,5 @@
 # Technical Specifications
-# Browser Automation Tool for Agent OS MCP Server
+# Browser Automation Tool for prAxIs OS MCP Server
 
 **Version**: 1.0  
 **Date**: October 8, 2025  
@@ -22,7 +22,7 @@
                   │ stdio transport
                   ↓
 ┌─────────────────────────────────────────────────────────┐
-│ Agent OS MCP Server (Long-Running Process)              │
+│ prAxIs OS MCP Server (Long-Running Process)              │
 │  ┌──────────────────────────────────────────────────┐  │
 │  │ ServerFactory (DI Container)                      │  │
 │  │  ├─> RAGEngine                                    │  │

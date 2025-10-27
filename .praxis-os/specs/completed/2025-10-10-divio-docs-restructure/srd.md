@@ -1,6 +1,6 @@
 # Software Requirements Document
 
-**Project:** Agent OS Enhanced Documentation Restructure  
+**Project:** prAxIs OS Documentation Restructure  
 **Date:** 2025-10-10  
 **Priority:** High  
 **Category:** Enhancement
@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for restructuring Agent OS Enhanced documentation to achieve Divio framework compliance. The project focuses on reorganizing existing documentation, adding missing content types (tutorials and how-to guides), and refactoring mixed-type content to improve user onboarding, retention, and support efficiency.
+This document defines the requirements for restructuring prAxIs OS documentation to achieve Divio framework compliance. The project focuses on reorganizing existing documentation, adding missing content types (tutorials and how-to guides), and refactoring mixed-type content to improve user onboarding, retention, and support efficiency.
 
 ### 1.2 Scope
 This feature will reorganize the existing `docs/` directory structure to align with the Divio 4-quadrant framework (Tutorials, How-To Guides, Reference, Explanation), create new tutorial and how-to guide content to fill critical gaps, refactor existing mixed-content files to ensure type purity, and implement validation automation to maintain documentation quality standards.
@@ -23,7 +23,7 @@ This feature will reorganize the existing `docs/` directory structure to align w
 
 ### Goal 1: Increase Documentation Usability and Accessibility
 
-**Objective:** Transform Agent OS documentation from 46% Divio compliant to 90%+ compliant, dramatically improving findability and usability for users at all experience levels.
+**Objective:** Transform prAxIs OS documentation from 46% Divio compliant to 90%+ compliant, dramatically improving findability and usability for users at all experience levels.
 
 **Success Metrics:**
 - **Divio Compliance Score**: 46% → 90%+
@@ -35,12 +35,12 @@ This feature will reorganize the existing `docs/` directory structure to align w
 **Business Impact:**
 - Reduces user abandonment after installation
 - Enables self-service problem-solving
-- Establishes Agent OS as documentation best-practice example
+- Establishes prAxIs OS as documentation best-practice example
 - Decreases onboarding friction for new users and team members
 
 ### Goal 2: Reduce Time to First Value
 
-**Objective:** Enable new users to progress from Agent OS installation to implementing their first working feature in under 15 minutes through guaranteed-success tutorials.
+**Objective:** Enable new users to progress from prAxIs OS installation to implementing their first working feature in under 15 minutes through guaranteed-success tutorials.
 
 **Success Metrics:**
 - **Time to First Value**: Unknown → <15 minutes
@@ -75,7 +75,7 @@ This feature will reorganize the existing `docs/` directory structure to align w
 **Objective:** Increase user retention by providing documentation that serves users throughout their entire journey from novice to expert.
 
 **Success Metrics:**
-- **User Retention**: Unknown baseline → 70%+ (users who complete tutorials continue using Agent OS)
+- **User Retention**: Unknown baseline → 70%+ (users who complete tutorials continue using prAxIs OS)
 - **Documentation Satisfaction**: Unknown → 4.2+/5.0 average rating
 - **Advanced Feature Adoption**: Unknown → measurable increase (users progress beyond basic usage)
 - **Community Engagement**: Current level → measurable increase (users contribute back)
@@ -95,13 +95,13 @@ The business goals above are informed by comprehensive analysis documented in:
 
 See `supporting-docs/INDEX.md` for complete insights extraction organized by requirements, design, and implementation categories (73 total insights extracted).
 
-**Key Insight from Supporting Docs:** Current documentation achieves 46% Divio compliance heavily skewed toward explanation content. Critical gaps include zero tutorials (users don't know how to use Agent OS after install), inadequate how-to guides (users can't solve specific problems), incomplete reference documentation, and mixed content types that violate separation of concerns. This restructure will address all four gaps through strategic reorganization and selective content additions.
+**Key Insight from Supporting Docs:** Current documentation achieves 46% Divio compliance heavily skewed toward explanation content. Critical gaps include zero tutorials (users don't know how to use prAxIs OS after install), inadequate how-to guides (users can't solve specific problems), incomplete reference documentation, and mixed content types that violate separation of concerns. This restructure will address all four gaps through strategic reorganization and selective content additions.
 
 ---
 
 ## 3. User Stories
 
-User stories describe the documentation needs from different user perspectives throughout their journey with Agent OS.
+User stories describe the documentation needs from different user perspectives throughout their journey with prAxIs OS.
 
 ### Story Format
 
@@ -113,13 +113,13 @@ User stories describe the documentation needs from different user perspectives t
 
 ### Story 1: New User Onboarding
 
-**As a** developer new to Agent OS  
+**As a** developer new to prAxIs OS  
 **I want to** a hands-on tutorial that walks me through the complete spec-driven development cycle  
-**So that** I understand how to use Agent OS's main vehicle (spec creation → spec execution) to build features
+**So that** I understand how to use prAxIs OS's main vehicle (spec creation → spec execution) to build features
 
 **Acceptance Criteria:**
-- Given I have Agent OS installed
-- When I follow the "Your First Agent OS Project" tutorial
+- Given I have prAxIs OS installed
+- When I follow the "Your First prAxIs OS Project" tutorial
 - Then I successfully:
   - Have a design conversation with AI about a simple feature
   - Use "create a spec" to trigger `spec_creation_v1` workflow
@@ -128,17 +128,17 @@ User stories describe the documentation needs from different user perspectives t
   - See working implementation with tests
 - And the tutorial takes 15-20 minutes
 - And success is guaranteed (works every time on any OS)
-- And I understand that THIS is how you work in Agent OS
+- And I understand that THIS is how you work in prAxIs OS
 
 **Priority:** Critical
 
-**Rationale:** The spec creation → spec execution cycle is THE MAIN VEHICLE for working in Agent OS. Without understanding this, users don't understand Agent OS. Tutorial must teach this end-to-end flow as the foundation, not just MCP/RAG queries.
+**Rationale:** The spec creation → spec execution cycle is THE MAIN VEHICLE for working in prAxIs OS. Without understanding this, users don't understand prAxIs OS. Tutorial must teach this end-to-end flow as the foundation, not just MCP/RAG queries.
 
 ---
 
 ### Story 2: Problem-Solving for Experienced Users
 
-**As an** experienced Agent OS user  
+**As an** experienced prAxIs OS user  
 **I want to** step-by-step guides for specific problems  
 **So that** I can quickly solve issues without reading conceptual explanations
 
@@ -152,13 +152,13 @@ User stories describe the documentation needs from different user perspectives t
 
 **Priority:** Critical
 
-**Rationale:** Experienced users know how Agent OS works but need quick answers for specific tasks. Searching through explanation docs is frustrating and time-consuming. How-to guides provide efficient problem resolution.
+**Rationale:** Experienced users know how prAxIs OS works but need quick answers for specific tasks. Searching through explanation docs is frustrating and time-consuming. How-to guides provide efficient problem resolution.
 
 ---
 
 ### Story 3: API and Structure Reference
 
-**As a** developer integrating Agent OS into workflows  
+**As a** developer integrating prAxIs OS into workflows  
 **I want to** complete technical reference documentation  
 **So that** I can look up syntax, parameters, and file structures without guessing
 
@@ -173,18 +173,18 @@ User stories describe the documentation needs from different user perspectives t
 
 **Priority:** High
 
-**Rationale:** Users break Agent OS by editing the wrong files or misusing MCP tools due to incomplete reference documentation. Complete reference prevents errors and builds user confidence.
+**Rationale:** Users break prAxIs OS by editing the wrong files or misusing MCP tools due to incomplete reference documentation. Complete reference prevents errors and builds user confidence.
 
 ---
 
 ### Story 4: Understanding Architecture and Design Decisions
 
-**As a** technical decision-maker evaluating Agent OS for adoption  
+**As a** technical decision-maker evaluating prAxIs OS for adoption  
 **I want to** deep explanations of architecture and design decisions  
-**So that** I can understand why Agent OS works this way and evaluate fitness for our needs
+**So that** I can understand why prAxIs OS works this way and evaluate fitness for our needs
 
 **Acceptance Criteria:**
-- Given I need to understand how Agent OS works conceptually
+- Given I need to understand how prAxIs OS works conceptually
 - When I access explanation documentation
 - Then I find "why" not "how" content explaining rationale
 - And alternatives are discussed with tradeoffs
@@ -193,7 +193,7 @@ User stories describe the documentation needs from different user perspectives t
 
 **Priority:** High
 
-**Rationale:** Decision-makers need to understand Agent OS philosophy, architecture, and design rationale before committing to adoption. Pure explanation content serves this need without mixing in instructional steps.
+**Rationale:** Decision-makers need to understand prAxIs OS philosophy, architecture, and design rationale before committing to adoption. Pure explanation content serves this need without mixing in instructional steps.
 
 ---
 
@@ -208,10 +208,10 @@ User stories describe the documentation needs from different user perspectives t
 - Story 4: Understanding Architecture and Design Decisions - Maintains existing strong explanation content, serves decision-maker needs
 
 **User Personas Identified:**
-1. **Primary Persona:** New Developer - Just installed Agent OS, technical background, wants to understand value quickly
-2. **Secondary Persona:** Experienced User - Using Agent OS for a project, hits specific problems, needs quick solutions
-3. **Tertiary Persona:** Integrator - Building workflows with Agent OS, needs API/config reference
-4. **Quaternary Persona:** Decision-Maker - Evaluating Agent OS for team/organization adoption, needs conceptual understanding
+1. **Primary Persona:** New Developer - Just installed prAxIs OS, technical background, wants to understand value quickly
+2. **Secondary Persona:** Experienced User - Using prAxIs OS for a project, hits specific problems, needs quick solutions
+3. **Tertiary Persona:** Integrator - Building workflows with prAxIs OS, needs API/config reference
+4. **Quaternary Persona:** Decision-Maker - Evaluating prAxIs OS for team/organization adoption, needs conceptual understanding
 
 ---
 
@@ -239,14 +239,14 @@ Functional requirements specify capabilities the documentation restructure must 
 **Related User Stories:** Story 1 (New User Onboarding)
 
 **Acceptance Criteria:**
-- Tutorial 1 "Your First Agent OS Project" created covering complete spec-driven cycle:
+- Tutorial 1 "Your First prAxIs OS Project" created covering complete spec-driven cycle:
   - Design conversation with AI about simple feature
   - "Create a spec" → AI uses `spec_creation_v1` workflow automatically
   - Review spec artifacts (srd.md, specs.md, tasks.md, implementation.md)
   - "Implement the spec" → AI uses `spec_execution_v1` workflow automatically
   - See working code with tests
   - Duration: 15-20 minutes
-- Tutorial 2 "Understanding Agent OS Workflows" created covering workflow system:
+- Tutorial 2 "Understanding prAxIs OS Workflows" created covering workflow system:
   - What workflows are (phase-gated execution tools)
   - Checkpoint evidence requirements
   - Workflow state and resumption
@@ -258,7 +258,7 @@ Functional requirements specify capabilities the documentation restructure must 
 - Each step provides immediate, visible results
 - Concrete steps with minimum explanation
 
-**Implementation Notes:** These are NEW content creations - tutorials do not currently exist (0% coverage). Tutorial 1 teaches THE MAIN VEHICLE of Agent OS (spec-driven development), not peripheral features.
+**Implementation Notes:** These are NEW content creations - tutorials do not currently exist (0% coverage). Tutorial 1 teaches THE MAIN VEHICLE of prAxIs OS (spec-driven development), not peripheral features.
 
 ---
 
@@ -305,7 +305,7 @@ Functional requirements specify capabilities the documentation restructure must 
 - All references are information-oriented (describe, don't instruct)
 - Every MCP tool documented with usage examples
 - Every command symbol documented with meaning, usage, AI obligations
-- File tree shows Agent OS owned vs user owned directories
+- File tree shows prAxIs OS owned vs user owned directories
 - Edit safety matrix shows what's overwritten on upgrade
 
 **Implementation Notes:** Mix of enhancement (mcp-tools.md) and new creation (3 new references). Current reference coverage is 60%, incomplete.
@@ -522,7 +522,7 @@ NFRs define quality attributes and system constraints for the documentation rest
 - Tutorial success rate ≥95% measured through user testing
 - Testing with minimum 5 users per tutorial across different operating systems (macOS, Linux, Windows)
 - Success defined as: User completes tutorial without external help, achieves expected outcome, within estimated time ±20%
-- Tutorials work on fresh Agent OS installation every time
+- Tutorials work on fresh prAxIs OS installation every time
 
 **NFR-Q2: Code Example Quality**
 - All code examples in documentation must be tested and working
@@ -701,16 +701,16 @@ Explicitly defines what is NOT included in this documentation restructure projec
    - **Future Consideration:** Phase 3 (6 months post-launch) - Translations if significant non-English user demand identified
 
 4. **Versioned Documentation**
-   - **Reason:** Currently single version of Agent OS in active use. Versioned docs add complexity (multiple doc builds, version switcher, maintaining multiple doc branches). Implement when Agent OS has multiple supported versions.
-   - **Future Consideration:** When Agent OS releases v2.0 with breaking changes requiring parallel documentation
+   - **Reason:** Currently single version of prAxIs OS in active use. Versioned docs add complexity (multiple doc builds, version switcher, maintaining multiple doc branches). Implement when prAxIs OS has multiple supported versions.
+   - **Future Consideration:** When prAxIs OS releases v2.0 with breaking changes requiring parallel documentation
 
 5. **Community Forums / Q&A System**
    - **Reason:** Different infrastructure and moderation requirements than static documentation. Forums/Q&A complement docs but require ongoing moderation resources. Focus on self-service documentation first.
    - **Future Consideration:** Phase 4 (12 months post-launch) - Integration with support ticketing or community platform if documentation alone proves insufficient
 
 6. **Migration Guides from Other Systems**
-   - **Reason:** Agent OS is unique framework without direct competitors. Migration guides require identifying comparable systems and documenting differences. No clear migration path to document currently.
-   - **Future Consideration:** If Agent OS becomes established and users migrate from other AI frameworks, migration guides become valuable
+   - **Reason:** prAxIs OS is unique framework without direct competitors. Migration guides require identifying comparable systems and documenting differences. No clear migration path to document currently.
+   - **Future Consideration:** If prAxIs OS becomes established and users migrate from other AI frameworks, migration guides become valuable
 
 7. **Advanced Performance Tuning Guides (Tier 4)**
    - **Reason:** Advanced optimization is niche use case. Core documentation (tutorials, how-to guides, reference, explanation) serves 95% of users. Advanced tuning is power-user territory better served after core docs are solid.
@@ -726,7 +726,7 @@ Explicitly defines what is NOT included in this documentation restructure projec
 - **Non-Documentation Website Changes**: Changes to branding, styling (beyond type badges), homepage design, or marketing content are out of scope.
   - **Reason:** Focus on documentation structure and content. Website design is separate concern.
 
-- **Documentation for Unreleased Features**: Documentation scope limited to currently released Agent OS features. Future feature docs created when features release.
+- **Documentation for Unreleased Features**: Documentation scope limited to currently released prAxIs OS features. Future feature docs created when features release.
   - **Reason:** Documenting unreleased features risks documentation-code drift and wasted effort if features change.
 
 #### Platforms
@@ -765,7 +765,7 @@ Explicitly defines what is NOT included in this documentation restructure projec
 **Potential Phase 3 (6 Months Post-Launch):**
 - Interactive code playgrounds
 - Translation to other languages (Spanish, Chinese, Japanese based on demand)
-- Versioned documentation (if Agent OS v2.0 releases)
+- Versioned documentation (if prAxIs OS v2.0 releases)
 - Advanced reference documentation (internal API docs, architecture deep-dives)
 
 **Potential Phase 4 (12 Months Post-Launch):**
@@ -778,7 +778,7 @@ Explicitly defines what is NOT included in this documentation restructure projec
 **Explicitly Not Planned:**
 - Complete rewrite of existing documentation (reorganization only)
 - Non-documentation website changes (branding, marketing)
-- Documentation for Agent OS forks or variants
+- Documentation for prAxIs OS forks or variants
 - Commercial support documentation (separate concern)
 - Documentation in formats other than web (PDF, ePub, print)
 

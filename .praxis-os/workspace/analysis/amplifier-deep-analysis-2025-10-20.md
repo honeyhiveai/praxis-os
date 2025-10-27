@@ -633,7 +633,7 @@ scenarios/my_tool/
 
 ---
 
-## Comparison to Agent OS Enhanced
+## Comparison to prAxIs OS
 
 ### Similarities
 
@@ -644,17 +644,17 @@ scenarios/my_tool/
 
 2. **Specialized Agents**
    - Amplifier: 20+ specialized agents (zen-architect, bug-hunter, etc.)
-   - Agent OS: Workflow-based specialization (spec creation, test generation)
+   - prAxIs OS: Workflow-based specialization (spec creation, test generation)
 
 3. **Knowledge Management**
    - Both extract and synthesize knowledge
    - Both provide querying capabilities
-   - Agent OS: RAG-based standards search
+   - prAxIs OS: RAG-based standards search
    - Amplifier: Graph-based knowledge network
 
 4. **Modular Architecture**
    - Amplifier: "Bricks and studs" (≤150 line modules)
-   - Agent OS: Task-based decomposition (≤100-170 line task files)
+   - prAxIs OS: Task-based decomposition (≤100-170 line task files)
 
 5. **Resume/State Management**
    - Both support interrupted workflows
@@ -663,7 +663,7 @@ scenarios/my_tool/
 
 ### Differences
 
-| Aspect | Amplifier | Agent OS Enhanced |
+| Aspect | Amplifier | prAxIs OS |
 |--------|-----------|-------------------|
 | **Primary Focus** | AI development environment | Structured workflow execution |
 | **Structure** | Loose, exploratory | Rigid, gated workflows |
@@ -687,7 +687,7 @@ scenarios/my_tool/
 - Exploratory, experimental, parallel exploration
 - AI generates entire modules from natural language
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 - "Workflow discipline" - structured phase progression
 - "Evidence-based gates" - prove before proceeding
 - "Standards compliance" - query standards liberally
@@ -703,7 +703,7 @@ scenarios/my_tool/
 - Wanting AI to generate entire modules
 - Experimenting with different approaches simultaneously
 
-**Use Agent OS when:**
+**Use prAxIs OS when:**
 - Following established development workflows
 - Need quality gates and evidence validation
 - Want structured, repeatable processes
@@ -714,10 +714,10 @@ scenarios/my_tool/
 
 Could combine strengths:
 - Use Amplifier for exploration/ideation phase
-- Use Agent OS for execution/implementation phase
-- Amplifier's knowledge graph → Agent OS standards
-- Agent OS workflows → Amplifier scenario tools
-- Amplifier agents → Agent OS workflow tasks
+- Use prAxIs OS for execution/implementation phase
+- Amplifier's knowledge graph → prAxIs OS standards
+- prAxIs OS workflows → Amplifier scenario tools
+- Amplifier agents → prAxIs OS workflow tasks
 
 ---
 
@@ -814,15 +814,15 @@ Could combine strengths:
 
 ## Potential Use Cases
 
-### For Agent OS Enhanced
+### For prAxIs OS
 
 1. **Knowledge Extraction Inspiration**
-   - Amplifier's graph-based approach could enhance Agent OS standards search
+   - Amplifier's graph-based approach could enhance prAxIs OS standards search
    - Tension detection could identify conflicting standards
    - Cross-document synthesis could improve RAG quality
 
 2. **Modular Builder Pattern**
-   - Contract-first development aligns with Agent OS spec-driven approach
+   - Contract-first development aligns with prAxIs OS spec-driven approach
    - AI module regeneration could complement spec execution workflows
    - Isolation principles could improve task decomposition
 
@@ -832,7 +832,7 @@ Could combine strengths:
    - Reduce rework from wrong architectural choices
 
 4. **Scenario Tools Pattern**
-   - "Metacognitive recipes" concept applicable to Agent OS workflows
+   - "Metacognitive recipes" concept applicable to prAxIs OS workflows
    - Natural language → workflow tool creation
    - Resume capability and state management patterns
 
@@ -841,23 +841,23 @@ Could combine strengths:
    - Session restoration for long-running workflows
    - Conversation search for debugging
 
-### For Agent OS Users
+### For prAxIs OS Users
 
 1. **Complementary Tools**
    - Use Amplifier for exploration (parallel worktrees)
-   - Use Agent OS for execution (structured workflows)
+   - Use prAxIs OS for execution (structured workflows)
    - Amplifier's blog writer for documentation
-   - Agent OS test generation for validation
+   - prAxIs OS test generation for validation
 
 2. **Knowledge Integration**
    - Extract knowledge from project docs with Amplifier
    - Query via Amplifier's graph
-   - Reference in Agent OS workflow standards
+   - Reference in prAxIs OS workflow standards
 
 3. **Agent Inspiration**
    - Study Amplifier's 20+ agents
-   - Adapt patterns for Agent OS workflows
-   - Create Agent OS workflow-specific agents
+   - Adapt patterns for prAxIs OS workflows
+   - Create prAxIs OS workflow-specific agents
 
 ---
 
@@ -930,7 +930,7 @@ Could combine strengths:
 ### Amplifier → Agent OS
 
 1. **Knowledge Graph**
-   - Add graph capabilities to Agent OS RAG
+   - Add graph capabilities to prAxIs OS RAG
    - Enable concept navigation
    - Detect standard conflicts
 
@@ -955,7 +955,7 @@ Could combine strengths:
    - Test generation agent
    - Evidence validation agent
 
-### Agent OS → Amplifier
+### prAxIs OS → Amplifier
 
 1. **Structured Workflows**
    - Add explicit phases to Amplifier tools
@@ -992,7 +992,7 @@ Could combine strengths:
 - Parallel experimentation framework
 - Accumulated learnings
 
-**Applies to Agent OS:**
+**Applies to prAxIs OS:**
 - MCP tools are interchangeable
 - Workflows work with any compliant AI
 - Standards are AI-agnostic
@@ -1022,16 +1022,16 @@ However, its experimental nature means:
 - Gaps in documentation
 - Unclear tool boundaries
 
-**For Agent OS Enhanced users**, Amplifier offers:
+**For prAxIs OS users**, Amplifier offers:
 - Inspiration for knowledge management
 - Patterns for parallel development
 - Ideas for tool creation
 - Complement to structured workflows
 
-**Key Takeaway:** Amplifier and Agent OS are complementary. Amplifier excels at exploration and ideation, Agent OS at systematic execution. Together, they could provide:
+**Key Takeaway:** Amplifier and prAxIs OS are complementary. Amplifier excels at exploration and ideation, prAxIs OS at systematic execution. Together, they could provide:
 
 - **Explore** with Amplifier (parallel worktrees, knowledge extraction)
-- **Execute** with Agent OS (structured workflows, quality gates)
+- **Execute** with prAxIs OS (structured workflows, quality gates)
 - **Amplify** with both (AI-powered knowledge + disciplined process)
 
 The "ruthless simplicity" and "bricks and studs" philosophies from Amplifier align well with Agent OS's task decomposition and evidence-based validation. Both projects recognize that the future of development is **human creativity amplified by AI capability**.
@@ -1050,6 +1050,6 @@ The "ruthless simplicity" and "bricks and studs" philosophies from Amplifier ali
   - scenarios/blog_writer/HOW_TO_CREATE_YOUR_OWN.md - Exemplar
 
 **Analysis Completed:** October 20, 2025  
-**Analyst:** Agent OS Enhanced AI Assistant  
+**Analyst:** prAxIs OS AI Assistant  
 **Clone Location:** /tmp/amplifier
 

@@ -1,4 +1,4 @@
-# Agent OS Architecture
+# prAxIs OS Architecture
 
 **Last Updated:** 2025-10-06  
 **Status:** TRUE DOGFOODING (no symlinks)
@@ -7,10 +7,10 @@
 
 ## 🎯 Core Principles
 
-1. **Dogfooding** - We use Agent OS exactly like consumers do
+1. **Dogfooding** - We use prAxIs OS exactly like consumers do
 2. **No Shortcuts** - No symlinks, no special cases, feel all the pain
 3. **Two-Venv Architecture** - MCP server and project code run in separate virtualenvs
-4. **MCP-First** - All Agent OS knowledge accessed via MCP tools, not direct file reading
+4. **MCP-First** - All prAxIs OS knowledge accessed via MCP tools, not direct file reading
 
 ---
 
@@ -39,7 +39,7 @@ praxis-os/
 │       └── production_code_v2/
 │
 ├── mcp_server/                       # MCP SERVER SOURCE (edit this)
-│   ├── agent_os_rag.py              # Main MCP server
+│   ├── praxis_os_rag.py              # Main MCP server
 │   ├── rag_engine.py                # RAG search engine
 │   ├── workflow_engine.py           # Workflow phase gating
 │   ├── state_manager.py             # Workflow state persistence
@@ -161,7 +161,7 @@ These files are NOT distributed - safe to edit in place.
 
 ```bash
 # 1. Edit source
-vim mcp_server/agent_os_rag.py
+vim mcp_server/praxis_os_rag.py
 
 # 2. Copy to .praxis-os/
 cp -r mcp_server .praxis-os/
@@ -179,7 +179,7 @@ Server code changes require manual restart.
 
 ## 🧩 Component Architecture
 
-### 1. MCP Server (`mcp_server/agent_os_rag.py`)
+### 1. MCP Server (`mcp_server/praxis_os_rag.py`)
 
 **Responsibilities:**
 - Expose MCP tools to AI agents
@@ -187,7 +187,7 @@ Server code changes require manual restart.
 - Watch installed files for changes (`.praxis-os/`)
 
 **MCP Tools:**
-- `search_standards` - Semantic search over Agent OS documentation
+- `search_standards` - Semantic search over prAxIs OS documentation
 - `start_workflow` - Begin phase-gated workflow with overview
 - `get_current_phase` - Get current phase content and task metadata
 - `get_task` - Get full content for one task (horizontal scaling)
@@ -201,7 +201,7 @@ Server code changes require manual restart.
 ### 2. RAG Engine (`mcp_server/rag_engine.py`)
 
 **Responsibilities:**
-- Vector search over Agent OS documentation
+- Vector search over prAxIs OS documentation
 - Local embeddings (sentence-transformers, no API costs)
 - LanceDB for vector storage
 

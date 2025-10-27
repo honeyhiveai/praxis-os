@@ -82,7 +82,7 @@ The MCP protocol provides `tools/list` endpoint that returns complete tool infor
   "tools": [
     {
       "name": "search_standards",
-      "description": "Semantic search over Agent OS documentation...",
+      "description": "Semantic search over prAxIs OS documentation...",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -332,7 +332,7 @@ Result: Excellent results (informed query)
 
 **Tool Usage:**
 - Query dynamically: `search_standards("how to use [tool-name]")`
-- Examples in orientation: `search_standards("Agent OS orientation")`
+- Examples in orientation: `search_standards("prAxIs OS orientation")`
 
 ---
 

@@ -99,17 +99,17 @@ The user denied this operation. The file was not updated, and maintains its orig
 10/11/2025, 11:08:01 AM (Americ
 
 [Chunk 5]
-[ask_followup_question for 'Would you like me to help set up Agent OS Enhanced in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
+[ask_followup_question for 'Would you like me to help set up prAxIs OS in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
 <answer>
-read the docs https://honeyhiveai.github.io/agent-os-enhanced/
+read the docs https://honeyhiveai.github.io/praxis-os/
 </answer>
 <environment_det
 
 [Chunk 5]
-[web_fetch for 'https://honeyhiveai.github.io/agent-os-enhanced/'] Result:
-Fetched Markdown for https://honeyhiveai.github.io/agent-os-enhanced/:
+[web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
+Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
-  Agent OS Enhanced  
+  prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 

@@ -1,12 +1,12 @@
 # Observability Integration Guide
 
-**Instructions for the Cursor Agent: How to add observability tracing to the Agent OS MCP server when a user requests it.**
+**Instructions for the Cursor Agent: How to add observability tracing to the prAxIs OS MCP server when a user requests it.**
 
 ---
 
 ## Overview
 
-By default, the Agent OS MCP server has **no-op observability hooks**. Users can add their preferred observability platform:
+By default, the prAxIs OS MCP server has **no-op observability hooks**. Users can add their preferred observability platform:
 - HoneyHive (AI-specific observability)
 - OpenTelemetry (universal observability)
 - DataDog, New Relic, etc.
@@ -17,7 +17,7 @@ This document shows how to integrate each platform.
 
 ## Integration Pattern
 
-The MCP server has observability hooks in `agent_os_rag.py`:
+The MCP server has observability hooks in `praxis_os_rag.py`:
 
 ```python
 # Hooks (no-op by default)
@@ -63,7 +63,7 @@ watchdog>=3.0.0
 + honeyhive>=0.1.0  # AI observability
 ```
 
-### Step 2: Replace observability hooks in agent_os_rag.py
+### Step 2: Replace observability hooks in praxis_os_rag.py
 
 ```python
 # Replace the no-op hooks with:
@@ -101,7 +101,7 @@ def _init_tracer():
         tracer = HoneyHiveTracer.init(
             api_key=api_key,
             project=project,
-            source="agent-os-mcp-server",
+            source="praxis-os-mcp-server",
             verbose=True
         )
         logger.info(f"🍯 HoneyHive tracing enabled (project: {project})")
@@ -137,9 +137,9 @@ Update `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "praxis-os-rag": {
       "command": "python",
-      "args": ["${workspaceFolder}/.praxis-os/mcp_server/agent_os_rag.py"],
+      "args": ["${workspaceFolder}/.praxis-os/mcp_server/praxis_os_rag.py"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
         "PYTHONPATH": "${workspaceFolder}/.praxis-os",
@@ -184,7 +184,7 @@ watchdog>=3.0.0
 + opentelemetry-exporter-otlp>=1.20.0
 ```
 
-### Step 2: Replace observability hooks in agent_os_rag.py
+### Step 2: Replace observability hooks in praxis_os_rag.py
 
 ```python
 # Replace the no-op hooks with:
@@ -213,7 +213,7 @@ def _init_tracer():
     provider.add_span_processor(processor)
     otel_trace.set_tracer_provider(provider)
     
-    tracer = otel_trace.get_tracer("agent-os-mcp-server")
+    tracer = otel_trace.get_tracer("praxis-os-mcp-server")
     OBSERVABILITY_ENABLED = True
     logger.info("OpenTelemetry tracing enabled")
 
@@ -253,9 +253,9 @@ Update `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "praxis-os-rag": {
       "command": "python",
-      "args": ["${workspaceFolder}/.praxis-os/mcp_server/agent_os_rag.py"],
+      "args": ["${workspaceFolder}/.praxis-os/mcp_server/praxis_os_rag.py"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
         "PYTHONPATH": "${workspaceFolder}/.praxis-os",
@@ -318,7 +318,7 @@ Update `.cursor/mcp.json`:
 You (Cursor agent) should:
 1. Follow "Option 1: HoneyHive Integration" above
 2. Update `requirements.txt`
-3. Update `agent_os_rag.py` with HoneyHive code
+3. Update `praxis_os_rag.py` with HoneyHive code
 4. Update `.cursor/mcp.json` with env vars
 5. Explain how to set HH_API_KEY and HH_PROJECT
 
@@ -327,14 +327,14 @@ You (Cursor agent) should:
 You (Cursor agent) should:
 1. Follow "Option 2: OpenTelemetry Integration" above
 2. Update `requirements.txt`
-3. Update `agent_os_rag.py` with OTEL code
+3. Update `praxis_os_rag.py` with OTEL code
 4. Update `.cursor/mcp.json` with env vars
 5. Explain how to set OTEL endpoint
 
 ### User says: "I don't need tracing"
 
 You (Cursor agent) should:
-- Say: "Perfect! Agent OS MCP server works great without tracing. The hooks are no-ops by default."
+- Say: "Perfect! prAxIs OS MCP server works great without tracing. The hooks are no-ops by default."
 
 ---
 
@@ -342,11 +342,11 @@ You (Cursor agent) should:
 
 1. **Environment variables over hardcoding:** Always use env vars for API keys
 2. **Graceful degradation:** If observability fails to initialize, MCP server should still work
-3. **No-op by default:** Never require observability to use Agent OS
+3. **No-op by default:** Never require observability to use prAxIs OS
 4. **Document clearly:** Update README if adding observability
 
 ---
 
 **End of Observability Integration Guide**
 
-This ensures Agent OS MCP server remains platform-neutral while supporting any observability platform users want to add.
+This ensures prAxIs OS MCP server remains platform-neutral while supporting any observability platform users want to add.

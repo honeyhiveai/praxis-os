@@ -1,8 +1,8 @@
-# Agent OS Update Guide
+# prAxIs OS Update Guide
 
-**How to properly update Agent OS content in consuming projects**
+**How to properly update prAxIs OS content in consuming projects**
 
-**Keywords for search**: Agent OS update, how to update Agent OS, sync from universal, update procedures, content sync, MCP server upgrade, rsync commands, safe upgrade, Agent OS installation update
+**Keywords for search**: prAxIs OS update, how to update prAxIs OS, sync from universal, update procedures, content sync, MCP server upgrade, rsync commands, safe upgrade, prAxIs OS installation update
 
 ---
 
@@ -21,18 +21,18 @@
 rsync -av --delete /path/to/praxis-os/universal/ /path/to/your-project/.praxis-os/
 ```
 
-**Recommended:** Use `agent_os_upgrade_v1` workflow for safe, automated updates with validation and rollback.
+**Recommended:** Use `praxis_os_upgrade_v1` workflow for safe, automated updates with validation and rollback.
 
 ---
 
 ## Questions This Answers
 
-- "How do I update Agent OS in my project?"
-- "Where do I sync Agent OS content from?"
+- "How do I update prAxIs OS in my project?"
+- "Where do I sync prAxIs OS content from?"
 - "Should I sync from .praxis-os or universal?"
 - "How do I update standards and workflows?"
 - "Does the RAG index rebuild automatically?"
-- "How often should I update Agent OS?"
+- "How often should I update prAxIs OS?"
 - "What's the safe way to update?"
 - "How do I use the safe-upgrade script?"
 - "What gets synced during an update?"
@@ -97,7 +97,7 @@ praxis-os/
 
 ```
 your-project/
-├── .praxis-os/              # ✅ Your local Agent OS installation
+├── .praxis-os/              # ✅ Your local prAxIs OS installation
 │   ├── standards/          # Synced from universal/standards/
 │   ├── usage/              # Synced from universal/usage/
 │   └── workflows/          # Synced from universal/workflows/
@@ -199,7 +199,7 @@ python -m agent_os.scripts.build_rag_index
 ### Optional Content
 
 ⚠️ **Workflows** - `universal/workflows/` → `.praxis-os/workflows/`
-- Only sync if you use Agent OS workflows
+- Only sync if you use prAxIs OS workflows
 - Test generation workflows
 - Production code workflows
 - Can customize or replace with your own
@@ -225,7 +225,7 @@ set -e
 AGENT_OS_REPO="/path/to/praxis-os"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-echo "🔄 Updating Agent OS content..."
+echo "🔄 Updating prAxIs OS content..."
 
 # Use safe-upgrade tool (never deletes customer content)
 echo "📦 Running safe upgrade..."
@@ -233,7 +233,7 @@ python "$AGENT_OS_REPO/scripts/safe-upgrade.py" \
   --source "$AGENT_OS_REPO" \
   --target "$PROJECT_ROOT/.praxis-os"
 
-echo "✅ Agent OS content updated!"
+echo "✅ prAxIs OS content updated!"
 echo "💡 File watcher will automatically rebuild RAG index"
 echo "⏱️  Wait ~10-30 seconds for index update to complete"
 ```
@@ -310,7 +310,7 @@ grep -r "Version:" .praxis-os/standards/ | head -5
 Create `.praxis-os/VERSION.txt`:
 
 ```txt
-Agent OS Content Version
+prAxIs OS Content Version
 
 Last Updated: 2025-10-06
 Source Commit: abc123def
@@ -322,7 +322,7 @@ Update this file each time you sync:
 
 ```bash
 cat > .praxis-os/VERSION.txt << EOF
-Agent OS Content Version
+prAxIs OS Content Version
 
 Last Updated: $(date +%Y-%m-%d)
 Source Commit: $(cd /path/to/praxis-os && git rev-parse --short HEAD)
@@ -556,7 +556,7 @@ python "$AGENT_OS_REPO/scripts/safe-upgrade.py" \
 
 ## 📚 Related Documentation
 
-- **Installation Guide**: How to set up Agent OS initially
+- **Installation Guide**: How to set up prAxIs OS initially
 - **MCP Usage Guide**: How to use MCP tools after updating
 - **RAG Configuration**: How to configure custom RAG paths
 
@@ -651,9 +651,9 @@ If you encounter issues:
 
 This guide is most valuable when:
 
-1. **Updating Agent OS**
+1. **Updating prAxIs OS**
    - Situation: Need to get latest standards and workflows
-   - Query: `search_standards("how to update Agent OS")`
+   - Query: `search_standards("how to update prAxIs OS")`
 
 2. **Unsure About Sync Source**
    - Situation: Don't know if I should sync from `.praxis-os` or `universal`
@@ -669,15 +669,15 @@ This guide is most valuable when:
 
 5. **Update Frequency**
    - Situation: How often should I update?
-   - Query: `search_standards("Agent OS update frequency")`
+   - Query: `search_standards("prAxIs OS update frequency")`
 
 ### Query by Use Case
 
 | Use Case | Example Query |
 |----------|---------------|
-| Update process | `search_standards("how to update Agent OS")` |
+| Update process | `search_standards("how to update prAxIs OS")` |
 | Sync source | `search_standards("sync from universal")` |
-| Safe upgrade | `search_standards("safe upgrade Agent OS")` |
+| Safe upgrade | `search_standards("safe upgrade prAxIs OS")` |
 | RAG index | `search_standards("RAG index rebuild")` |
 | MCP server update | `search_standards("update MCP server")` |
 
@@ -687,21 +687,21 @@ This guide is most valuable when:
 
 **Update Standards:**
 - `standards/installation/update-procedures.md` - Update procedures standard (discovery guide)
-  → `search_standards("Agent OS update standards")`
+  → `search_standards("prAxIs OS update standards")`
 
 **Workflows:**
-- `workflows/agent_os_upgrade_v1/` - Automated safe upgrade workflow
+- `workflows/praxis_os_upgrade_v1/` - Automated safe upgrade workflow
   → `search_standards("agent OS upgrade workflow")`
 
 **Installation:**
 - `usage/installation-guide.md` - Initial installation (if available)
-  → `search_standards("Agent OS installation")`
+  → `search_standards("prAxIs OS installation")`
 
 **Query workflow:**
-1. **Before Update**: `search_standards("how to update Agent OS")` → Learn process
-2. **Execute**: Use `agent_os_upgrade_v1` workflow for safe update
+1. **Before Update**: `search_standards("how to update prAxIs OS")` → Learn process
+2. **Execute**: Use `praxis_os_upgrade_v1` workflow for safe update
 3. **Verify**: Check RAG index rebuilt automatically
-4. **Troubleshoot**: `search_standards("Agent OS update issues")` if needed
+4. **Troubleshoot**: `search_standards("prAxIs OS update issues")` if needed
 
 ---
 

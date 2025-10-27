@@ -1,4 +1,4 @@
-# Date Usage Policy - Agent OS
+# Date Usage Policy - prAxIs OS
 
 **Category**: AI Safety  
 **Priority**: Critical  
@@ -84,7 +84,7 @@ These errors create confusion, unprofessional appearance, and maintenance issues
 
 ## How to Get the Current Date? (current_date Tool)
 
-Agent OS provides a `current_date` MCP tool that AI assistants MUST use when dealing with dates.
+prAxIs OS provides a `current_date` MCP tool that AI assistants MUST use when dealing with dates.
 
 ### Tool Usage
 

@@ -85,7 +85,7 @@ def register_server_info_tools(
                 "project": {
                     "name": project_info["name"],
                     "root": project_info["root"],
-                    "agent_os_path": project_info["agent_os_path"],
+                    "praxis_os_path": project_info["praxis_os_path"],
                     "git": project_info.get("git"),
                 },
                 "capabilities": {
@@ -150,7 +150,7 @@ def register_server_info_tools(
             },
             "usage_note": (
                 "Use 'iso_date' (YYYY-MM-DD) for all specifications, "
-                "directories, and headers per Agent OS date policy"
+                "directories, and headers per prAxIs OS date policy"
             ),
         }
 

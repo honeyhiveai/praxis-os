@@ -57,13 +57,13 @@ search_standards("INCLUDES EXCLUDES human active time reading giving reviewing")
 
 **Query:**
 ```
-search_standards("task format example Human Baseline Agent OS wall clock active leverage")
+search_standards("task format example Human Baseline prAxIs OS wall clock active leverage")
 ```
 
 **Returns:**
 - ✅ TL;DR with quick formula
 - ✅ Task format template
-- ✅ Example: "**Human Baseline:** 4 hours (M), **Agent OS:** 4h wall clock, 12 min active (20x leverage)"
+- ✅ Example: "**Human Baseline:** 4 hours (M), **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)"
 
 ---
 
@@ -109,7 +109,7 @@ search_standards("parallel multiplier effect 100-400x")
 
 **Query:**
 ```
-search_standards("calibration new to Agent OS Enhanced conservative")
+search_standards("calibration new to prAxIs OS conservative")
 ```
 
 **Returns:**
@@ -160,7 +160,7 @@ search_standards("calibration new to Agent OS Enhanced conservative")
 
 6. **Calibration:**
    ```
-   search_standards("calibration new to Agent OS Enhanced")
+   search_standards("calibration new to prAxIs OS")
    ```
    Returns: Conservative starting point, refinement guidance
 ```

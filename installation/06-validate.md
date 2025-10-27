@@ -98,7 +98,7 @@ try:
     with open(".cursor/mcp.json", "r") as f:
         mcp_config = json.load(f)
     
-    module_name = mcp_config["mcpServers"]["agent-os-rag"]["args"][1]
+    module_name = mcp_config["mcpServers"]["praxis-os-rag"]["args"][1]
     if module_name == "mcp_server":
         print(f"  ✅ Module name correct: {module_name}")
     else:
@@ -109,17 +109,17 @@ except Exception as e:
     print(f"  ❌ mcp.json parse error: {e}")
     errors.append("mcp.json is invalid")
 
-# Check 6: .cursorrules has Agent OS content
+# Check 6: .cursorrules has prAxIs OS content
 print("\n📜 Checking .cursorrules...")
 try:
     with open(".cursorrules", "r") as f:
         cursorrules = f.read()
     
-    if "Agent OS" in cursorrules or "MANDATORY FIRST ACTION" in cursorrules:
-        print("  ✅ Agent OS rules present")
+    if "prAxIs OS" in cursorrules or "MANDATORY FIRST ACTION" in cursorrules:
+        print("  ✅ prAxIs OS rules present")
     else:
-        print("  ⚠️  Agent OS rules not detected")
-        warnings.append("cursorrules may not have Agent OS content")
+        print("  ⚠️  prAxIs OS rules not detected")
+        warnings.append("cursorrules may not have prAxIs OS content")
 except Exception as e:
     print(f"  ❌ Error reading .cursorrules: {e}")
     errors.append(".cursorrules unreadable")
@@ -128,7 +128,7 @@ except Exception as e:
 print("\n📚 Checking RAG index...")
 rag_checks = {
     "Index directory": os.path.exists(".praxis-os/.cache/vector_index"),
-    "LanceDB data": os.path.exists(".praxis-os/.cache/vector_index/agent_os_standards.lance"),
+    "LanceDB data": os.path.exists(".praxis-os/.cache/vector_index/praxis_os_standards.lance"),
     "Metadata file": os.path.exists(".praxis-os/.cache/vector_index/metadata.json"),
 }
 
@@ -200,7 +200,7 @@ else:
 
 ```bash
 # If the script didn't delete it, do it manually
-rm -rf /tmp/agent-os-install-*
+rm -rf /tmp/praxis-os-install-*
 ```
 
 ---
@@ -237,7 +237,7 @@ Next Steps:
    Option B: Enable without restarting
    - Open Cursor Settings (Cmd/Ctrl + ,)
    - Navigate to: Features → Model Context Protocol
-   - Find "agent-os-rag" server
+   - Find "praxis-os-rag" server
    - Click "Enable" or toggle it on
 
 2. ✅ Verify MCP Server is Running:

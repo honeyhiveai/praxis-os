@@ -238,7 +238,7 @@ mcp_server/CHANGELOG.md                      (added release notes)
 
 **Spec Author**: User (Josh)  
 **Implementation**: AI Assistant (Claude Sonnet 4.5)  
-**Methodology**: Agent OS Enhanced three-phase process (Discuss → Spec → Implement)  
+**Methodology**: prAxIs OS three-phase process (Discuss → Spec → Implement)  
 **Workflow**: `spec_execution_v1` (dogfooding!)  
 **Total Development Time**: ~6 hours (including spec creation, implementation, testing, debugging)
 

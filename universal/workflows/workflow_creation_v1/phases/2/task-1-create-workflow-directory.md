@@ -9,13 +9,13 @@
 
 ## Objective
 
-Create the root directory for the target workflow in the correct location within the Agent OS structure.
+Create the root directory for the target workflow in the correct location within the prAxIs OS structure.
 
 ---
 
 ## Context
 
-📊 **CONTEXT**: All workflows are stored in `universal/workflows/` following the Agent OS directory structure. The workflow name comes from Phase 0 Task 5 preparation.
+📊 **CONTEXT**: All workflows are stored in `universal/workflows/` following the prAxIs OS directory structure. The workflow name comes from Phase 0 Task 5 preparation.
 
 ---
 

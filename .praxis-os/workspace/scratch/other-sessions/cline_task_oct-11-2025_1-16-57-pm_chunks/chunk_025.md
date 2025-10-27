@@ -68,7 +68,7 @@ ACT MODE
 [search_files for 'mcp.*\.json|mcpServers' in '*.json'] Result:
 Found 1 result.
 
-universal/workflows/agent_os_upgrade_v1/metadata.json
+universal/workflows/praxis_os_upgrade_v1/metadata.json
 │----
 │        "All files backed up (mcp_server, standards, usage, workflows, config.json)",
 │        "Checksum manifest generated",
@@ -671,7 +671,7 @@ read 'DESIGN-DOC-MCP-Dual-Transport.md' (see below for file content) and offer y
 **Version:** 1.0  
 **Date:** October 11, 2025  
 **Status:** Design Phase  
-**Authors:** Agent OS Team
+**Authors:** prAxIs OS Team
 
 ---
 
@@ -699,7 +699,7 @@ read 'DESIGN-DOC-MCP-Dual-Transport.md' (see below for file content) and offer y
 
 ## Executive Summary
 
-This document describes a dual-transport architecture for the Agent OS MCP (Model Context Protocol) server that enables:
+This document describes a dual-transport architecture for the prAxIs OS MCP (Model Context Protocol) server that enables:
 
 1. **Primary IDE integration** via stdio transport (Cursor, Windsurf, Claude Desktop)
 2. **Sub-agent access** via HTTP transport (Cline, Aider, custom agents)
@@ -723,7 +723,7 @@ This document describes a dual-transport architecture for the Agent OS MCP (Mode
    - Can't serve both IDE (stdio) and sub-agents (HTTP) simultaneously
 
 2. **Port Conflicts**
-   - Multiple Agent OS instances (different Cursor windows) conflict on port 4242
+   - Multiple prAxIs OS instances (different Cursor windows) conflict on port 4242
    - No mechanism to allocate different ports per project
 
 3. **Sub-Agent Access**

@@ -16,7 +16,7 @@ The simplest way to upgrade:
 "Run the prAxIs OS upgrade workflow"
 ```
 
-The AI will use the `agent_os_upgrade_v1` workflow to safely upgrade your installation with automatic backup and validation.
+The AI will use the `praxis_os_upgrade_v1` workflow to safely upgrade your installation with automatic backup and validation.
 
 **Total Time:** ~3-4 minutes
 
@@ -24,14 +24,14 @@ The AI will use the `agent_os_upgrade_v1` workflow to safely upgrade your instal
 
 ## Upgrade Workflow (Recommended)
 
-The `agent_os_upgrade_v1` workflow provides a safe, automated upgrade process:
+The `praxis_os_upgrade_v1` workflow provides a safe, automated upgrade process:
 
 ### Start the Workflow
 
 ```python
 # Via MCP tools
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={
         "source_path": "/path/to/praxis-os",  # Or GitHub URL
@@ -60,7 +60,7 @@ The workflow updates:
 3. **Workflows** (`.praxis-os/workflows/`)
    - `spec_creation_v1`
    - `spec_execution_v1`
-   - `agent_os_upgrade_v1`
+   - `praxis_os_upgrade_v1`
    - Any new workflows
 
 4. **MCP Server** (`.praxis-os/mcp_server/`)
@@ -235,7 +235,7 @@ cd /path/to/praxis-os
 git pull origin main
 
 # Or fresh clone
-git clone https://github.com/honeyhiveai/praxis-os.git /tmp/agent-os-latest
+git clone https://github.com/honeyhiveai/praxis-os.git /tmp/praxis-os-latest
 ```
 
 ### 3. Update Content

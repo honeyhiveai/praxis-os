@@ -26,7 +26,7 @@
 - What should I include in a design doc?
 - How much detail is appropriate?
 - What should I leave out of a design doc?
-- How does a design doc fit into the Agent OS workflow?
+- How does a design doc fit into the prAxIs OS workflow?
 - What's the difference between a design doc and a spec?
 - How do design docs support AI agent development?
 
@@ -172,7 +172,7 @@ For each risk:
 
 ### Sprint Planning / Resource Allocation
 **Don't**: "Alice works on backend, Bob on frontend, needs 2 engineers"
-**Why**: Agent OS uses AI agents, not human resource planning.
+**Why**: prAxIs OS uses AI agents, not human resource planning.
 **Instead**: Describe work scope, AI execution handles the "who."
 
 ### Implementation Code Samples
@@ -237,7 +237,7 @@ For each risk:
 - ❌ Low risk, well-understood problem
 - ❌ Time-sensitive (spike then decide)
 
-### How to Use Design Docs with Agent OS
+### How to Use Design Docs with prAxIs OS
 
 **Step 1: Create Design Doc**
 ```

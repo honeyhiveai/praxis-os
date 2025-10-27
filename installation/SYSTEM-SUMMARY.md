@@ -7,7 +7,7 @@
 
 ## 🎯 What We Built
 
-A **horizontally-scaled installation guide system** that solves the bootstrapping problem: vanilla LLMs (without Agent OS enhancements) can successfully install Agent OS.
+A **horizontally-scaled installation guide system** that solves the bootstrapping problem: vanilla LLMs (without prAxIs OS enhancements) can successfully install prAxIs OS.
 
 ---
 
@@ -35,7 +35,7 @@ installation/
 ## 🔗 Sequential Chain Design
 
 ```
-User says: "Install Agent OS"
+User says: "Install prAxIs OS"
     ↓
 LLM reads: 00-START.md
     ↓ (creates temp clone)
@@ -70,7 +70,7 @@ Instead of one 800-line file, we have 7 files of ~200-350 lines each. This match
 
 ### 2. No Git Repo Littering
 
-**Critical fix**: Source repo is cloned to `/tmp/agent-os-install-xyz/` and **deleted in step 05**. We never leave a git repo inside the consumer's project.
+**Critical fix**: Source repo is cloned to `/tmp/praxis-os-install-xyz/` and **deleted in step 05**. We never leave a git repo inside the consumer's project.
 
 ### 3. Safe .cursorrules Handling
 
@@ -82,7 +82,7 @@ Each step has explicit validation. If something fails, it fails fast with clear 
 
 ### 5. Bootstrapping-Friendly
 
-Works for **vanilla LLMs** without Agent OS:
+Works for **vanilla LLMs** without prAxIs OS:
 - Short files
 - Scannable format
 - Critical mistakes upfront
@@ -98,7 +98,7 @@ Based on user feedback (Windows WSL2 Ubuntu installation failure):
 | Issue | Impact | Fix | File |
 |-------|--------|-----|------|
 | Missing workflows/ directory | MCP server won't start | Added to directory creation | 01-directories.md |
-| Wrong module name in mcp.json | Python module error | Use `"mcp_server"` not `"mcp_server.agent_os_rag"` | 05-venv-mcp.md |
+| Wrong module name in mcp.json | Python module error | Use `"mcp_server"` not `"mcp_server.praxis_os_rag"` | 05-venv-mcp.md |
 | Missing workflow files | Empty workflows directory | Added explicit copy step | 02-copy-files.md |
 | Blindly overwriting .cursorrules | Destroys user's rules | Check and offer merge options | 03-cursorrules.md |
 | Missing .gitignore configuration | 2.7GB ephemeral files committed | Read from standards and append | 04-gitignore.md |
@@ -122,11 +122,11 @@ checks = {
     ".cursor/": exists,
     
     # Files
-    ".cursorrules": exists with Agent OS rules,
+    ".cursorrules": exists with prAxIs OS rules,
     ".cursor/mcp.json": exists with correct config,
     
     # Configuration
-    "mcp.json module": "mcp_server" (not "mcp_server.agent_os_rag"),
+    "mcp.json module": "mcp_server" (not "mcp_server.praxis_os_rag"),
     "Python venv": working and has dependencies installed,
     "Config validation": passes MCP server validation,
     
@@ -235,7 +235,7 @@ This installation system is **production-ready**.
 - 📝 Windows Native (documented, not tested)
 
 **Ready for**:
-- Users installing Agent OS in their projects
+- Users installing prAxIs OS in their projects
 - LLMs following installation instructions
 - Automated installation scripts
 

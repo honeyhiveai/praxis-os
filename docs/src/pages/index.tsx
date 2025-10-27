@@ -149,7 +149,7 @@ function KeyFeatures() {
     {
       icon: '📦',
       title: 'Portable & Isolated',
-      description: 'Each project owns its Agent OS installation, standards, and version.',
+      description: 'Each project owns its prAxIs OS installation, standards, and version.',
       link: '/docs/tutorials/installation',
     },
     {
@@ -197,7 +197,7 @@ function TheJourney() {
     {
       icon: '💡',
       phase: 'Discovery',
-      title: 'Found BuilderMethods Agent OS',
+      title: 'Found BuilderMethods prAxIs OS',
       description: '3-layer doc structure (Standards/Product/Specs)',
       highlight: 'Quality and velocity dramatically improved',
     },
@@ -252,8 +252,8 @@ function TheJourney() {
         <div className={styles.journeyCredit}>
           <p>
             🙏 <strong>Built on the shoulders of giants:</strong>{' '}
-            <a href="https://buildermethods.com/agent-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
-              BuilderMethods Agent OS
+            <a href="https://buildermethods.com/praxis-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
+              BuilderMethods prAxIs OS
             </a>
             {' '}provided the 3-layer structure and philosophical foundation. 
             We built the infrastructure to scale it.
@@ -263,9 +263,9 @@ function TheJourney() {
         <div className={styles.journeyLinks}>
           <Link
             className="button button--secondary button--lg"
-            to="https://buildermethods.com/agent-os"
+            to="https://buildermethods.com/praxis-os"
             target="_blank">
-            Visit Original Agent OS →
+            Visit Original prAxIs OS →
           </Link>
           <Link
             className="button button--primary button--lg"

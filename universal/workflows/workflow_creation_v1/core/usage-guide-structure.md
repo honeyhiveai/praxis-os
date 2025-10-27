@@ -478,7 +478,7 @@ Prioritize quality over speed:
 
 ### Standards to Read
 
-Relevant Agent OS standards:
+Relevant prAxIs OS standards:
 
 - 🔍 Search: "{primary standard topic}"
 - 🔍 Search: "{secondary standard topic}"
@@ -504,7 +504,7 @@ Relevant Agent OS standards:
 For questions or issues:
 1. Review this usage guide thoroughly
 2. Check troubleshooting section
-3. Search Agent OS standards for related topics
+3. Search prAxIs OS standards for related topics
 4. Consult with workflow maintainers
 ```
 

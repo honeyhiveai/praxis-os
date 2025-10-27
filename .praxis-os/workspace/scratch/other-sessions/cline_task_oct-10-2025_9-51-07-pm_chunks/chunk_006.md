@@ -144,11 +144,11 @@ ACT MODE
 
 <attempt_completion>
 <result>
-# Integrating Agent OS MCP Server into Cline
+# Integrating prAxIs OS MCP Server into Cline
 
 ## 🎯 Overview
 
-Cline (like Cursor) supports MCP (Model Context Protocol) servers and has a similar configuration approach. Here's how to integrate the local Agent OS MCP server with Cline:
+Cline (like Cursor) supports MCP (Model Context Protocol) servers and has a similar configuration approach. Here's how to integrate the local prAxIs OS MCP server with Cline:
 
 ## 📝 Part 1: MCP Server Configuration
 
@@ -212,7 +212,7 @@ Cline uses **`.clinerules`** (equivalent to Cursor's `.cursorrules`) for behavio
 **Create this file in your project root:**
 
 ```markdown
-# Agent OS Enhanced - Cline Configuration
+# prAxIs OS - Cline Configuration
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -245,7 +245,7 @@ Target: 5-10 queries per task
 
 ## Available MCP Tools
 
-This project has Agent OS Enhanced MCP server configured with these tools:
+This project has prAxIs OS MCP server configured with these tools:
 
 - **search_standards(query, n_results, filters)**: Semantic search over standards
 - **start_workflow(workflow_type, target_file, metadata)**: Initialize phase-gated workflows
@@ -281,13 +281,13 @@ Each MCP query is cheap, mistakes are expensive
 
 ## 📦 Part 3: Complete Installation Steps
 
-### Step 1: Install Agent OS (if not already done)
+### Step 1: Install prAxIs OS (if not already done)
 
 ```bash
 # In your project directory
 cd /path/to/your/project
 
-# Follow Agent OS installation process
+# Follow prAxIs OS installation process
 # (See installation/00-START.md in praxis-os repo)
 ```
 
@@ -443,7 +443,7 @@ Once configured, you can:
    Execute tasks from .praxis-os/specs/YYYY-MM-DD-feature/
    ```
 
-The MCP server will provide Cline with access to all Agent OS standards, workflows, and specialized tools, just like in Cursor!
+The MCP server will provide Cline with access to all prAxIs OS standards, workflows, and specialized tools, just like in Cursor!
 </result>
 <task_progress>
 - [x] Analyze current project
@@ -492,7 +492,7 @@ ACT MODE
 
 ## 🎯 The Setup: Dual MCP Configuration
 
-You're running **Cline extension** (VS Code-based agent) **inside Cursor IDE** (which has its own AI agent). Both want to connect to the same Agent OS MCP server.
+You're running **Cline extension** (VS Code-based agent) **inside Cursor IDE** (which has its own AI agent). Both want to connect to the same prAxIs OS MCP server.
 
 ```
 ┌─────────────────────────────────────┐
@@ -512,7 +512,7 @@ You're running **Cline extension** (VS Code-based agent) **inside Cursor IDE** (
                │
                ▼
     ┌──────────────────────┐
-    │  Agent OS MCP Server │
+    │  prAxIs OS MCP Server │
     │  (Single Instance)   │
     └──────────────────────┘
 ```
@@ -523,7 +523,7 @@ You're running **Cline extension** (VS Code-based agent) **inside Cursor IDE** (
 
 **What Happens:**
 - Each MCP client (Cursor AI + Cline) spawns its own MCP server process
-- The Agent OS MCP server runs via stdio transport (one process per client)
+- The prAxIs OS MCP server runs via stdio transport (one process per client)
 - You'll have **two separate server processes** running simultaneously
 
 **Impact:**
@@ -562,7 +562,7 @@ python -m mcp_server  # Cline's connection
 
 **Memory Usage:**
 ```
-Agent OS MCP Server × 2:
+prAxIs OS MCP Server × 2:
 - 2 Python processes
 - 2 LanceDB connections
 - 2 sets of loaded embeddings
@@ -594,12 +594,12 @@ Both point to same server but:
 
 ### Option 1: Primary Agent (Recommended)
 
-**Choose ONE agent as primary for Agent OS workflows:**
+**Choose ONE agent as primary for prAxIs OS workflows:**
 
 **Use Cursor AI as Primary:**
 ```bash
-# Keep: .cursor/mcp.json with Agent OS config
-# Keep: .cursorrules with Agent OS bootstrap
+# Keep: .cursor/mcp.json with prAxIs OS config
+# Keep: .cursorrules with prAxIs OS bootstrap
 
 # Remove/disable Cline's MCP connection
 # Delete: .clinerules or leave minimal
@@ -607,8 +607,8 @@ Both point to same server but:
 
 **Use Cline as Primary:**
 ```bash
-# Keep: .vscode/settings.json with Agent OS config
-# Keep: .clinerules with Agent OS bootstrap
+# Keep: .vscode/settings.json with prAxIs OS config
+# Keep: .clinerules with prAxIs OS bootstrap
 
 # Disable Cursor AI or don't configure MCP for it
 ```
@@ -620,28 +620,28 @@ Both point to same server but:
 **Cursor AI (General Development):**
 - General coding assistance
 - Quick edits and refactoring
-- NO Agent OS MCP access
+- NO prAxIs OS MCP access
 - Minimal .cursorrules
 
 **Cline (Agent OS Workflows):**
 - Spec creation and execution
 - Standards queries
 - Structured workflows
-- ONLY one with Agent OS MCP access
+- ONLY one with prAxIs OS MCP access
 
 **Configuration:**
 
 `.cursorrules` (Minimal - No MCP):
 ```markdown
 # Cursor AI Configuration
-# General coding assistant - NO Agent OS access
+# General coding assistant - NO prAxIs OS access
 
 ## Role
 You provide general coding assistance, refactoring, and quick edits.
 For structured workflows and standards queries, user will switch to Cline.
 
 ## Rules
-- Do not attempt to use Agent OS tools
+- Do not attempt to use prAxIs OS tools
 - For spec creation, suggest: "Use Cline for this"
 - Focus on immediate coding tasks
 ```
@@ -649,9 +649,9 @@ For structured workflows and standards queries, user will switch to Cline.
 `.clinerules` (Full Agent OS):
 ```markdown
 # Cline Configuration
-# Agent OS Enhanced - Full MCP Access
+# prAxIs OS - Full MCP Access
 
-[... full Agent OS bootstrap as before ...]
+[... full prAxIs OS bootstrap as before ...]
 ```
 
 `.vscode/settings.json` (Cline only):
@@ -744,7 +744,7 @@ def reload_index(self) -> None:
 
 **For your specific case (Cline in Cursor):**
 
-### 1. Use Cline as Agent OS Primary
+### 1. Use Cline as prAxIs OS Primary
 
 **Why:**
 - Cline has better task/workflow management UI
@@ -754,11 +754,11 @@ def reload_index(self) -> None:
 **Configuration:**
 
 ```bash
-# Agent OS MCP access
+# prAxIs OS MCP access
 .vscode/settings.json  # ✅ Configure Cline MCP
-.clinerules           # ✅ Full Agent OS bootstrap
+.clinerules           # ✅ Full prAxIs OS bootstrap
 
-# No Agent OS for Cursor AI
+# No prAxIs OS for Cursor AI
 .cursor/mcp.json      # ❌ Leave empty or remove
 .cursorrules          # ✅ Basic rules, no MCP references
 ```
@@ -771,11 +771,11 @@ Keep `.cursorrules` minimal:
 # Cursor AI - Quick Assistance Only
 
 You provide quick coding assistance and edits.
-You do NOT have access to Agent OS tools.
+You do NOT have access to prAxIs OS tools.
 
 For workflows and structured development:
 - User will switch to Cline extension
-- Do not attempt Agent OS operations
+- Do not attempt prAxIs OS operations
 
 Focus on:
 - Code completion and suggestions
@@ -820,7 +820,7 @@ ps aux | grep python | grep mcp_server  # Should see 1, not 2
 | Role separation | 🟡 MEDIUM | Acceptable with care |
 | Locking implemented | 🟢 SAFE | Best if both needed |
 
-**Bottom line:** Configure Agent OS MCP for **ONLY Cline**, use Cursor AI for general assistance without Agent OS access.
+**Bottom line:** Configure prAxIs OS MCP for **ONLY Cline**, use Cursor AI for general assistance without prAxIs OS access.
 </result>
 <task_progress>
 - [x] Analyze current project
@@ -882,7 +882,7 @@ ACT MODE
 **User:**
 
 [read_file for 'installation/00-START.md'] Result:
-# Agent OS Installation - START HERE
+# prAxIs OS Installation - START HERE
 
 **Read this file first. It will direct you to the next steps.**
 
@@ -890,7 +890,7 @@ ACT MODE
 
 ## 🎯 What You're About To Do
 
-Install Agent OS Enhanced into the target project. This will:
+Install prAxIs OS into the target project. This will:
 1. Create `.praxis-os/` directory structure
 2. Copy standards, workflows, and MCP server code
 3. Create Python virtual environment
@@ -913,7 +913,7 @@ Install Agent OS Enhanced into the target project. This will:
 
 ### Mistake #2: Wrong Module Name in mcp.json
 **What happens**: Python module not found error  
-**Wrong**: `"mcp_server.agent_os_rag"`  
+**Wrong**: `"mcp_server.praxis_os_rag"`  
 **Correct**: `"mcp_server"`  
 **Prevention**: Step 05 has the exact JSON to copy
 
@@ -989,7 +989,7 @@ target-project/                 ← Where you're installing TO
 
 ## 🔍 Pre-Installation: Get Source Repository
 
-**IMPORTANT**: You need the Agent OS source code, but you CANNOT clone it directly into the target project (that would litter a git repo inside their repo).
+**IMPORTANT**: You need the prAxIs OS source code, but you CANNOT clone it directly into the target project (that would litter a git repo inside their repo).
 
 ### Option A: Clone to Temp Directory (Recommended)
 

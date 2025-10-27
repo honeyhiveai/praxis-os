@@ -294,7 +294,7 @@ ACT MODE
 
 [Unexpected content type]
 
-I'll help you fix the bug with streaminghttp mode for MCP tool calls. Let me start by orienting myself with the Agent OS guidelines, then investigate the issue.
+I'll help you fix the bug with streaminghttp mode for MCP tool calls. Let me start by orienting myself with the prAxIs OS guidelines, then investigate the issue.
 
 <search_standards>
 <query>Agent OS orientation guide</query>

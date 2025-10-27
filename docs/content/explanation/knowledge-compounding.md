@@ -188,8 +188,8 @@ Specs are **detailed design documents** that preserve decision history.
 
 **Next Steps:**
 - **[Understanding Specs](./specs-knowledge-compounding)** - How specs compound knowledge
-- **[Creating Specs](../tutorials/your-first-agent-os-project#creating-a-spec)** - Spec creation workflow
-- **[Spec Execution](../tutorials/understanding-agent-os-workflows)** - How workflows use specs
+- **[Creating Specs](../tutorials/your-first-praxis-os-project#creating-a-spec)** - Spec creation workflow
+- **[Spec Execution](../tutorials/understanding-praxis-os-workflows)** - How workflows use specs
 
 ---
 
@@ -227,8 +227,8 @@ Specs are **detailed design documents** that preserve decision history.
 
 **Specs (History):**
 - **[Understanding Specs](./specs-knowledge-compounding)** - Deep dive on specs compounding
-- **[Your First Project](../tutorials/your-first-agent-os-project)** - Includes spec creation
-- **[Understanding Workflows](../tutorials/understanding-agent-os-workflows)** - Spec execution
+- **[Your First Project](../tutorials/your-first-praxis-os-project)** - Includes spec creation
+- **[Understanding Workflows](../tutorials/understanding-praxis-os-workflows)** - Spec execution
 
 **Related Concepts:**
 - **[How It Works: RAG](./how-it-works)** - The RAG mechanism that powers standards discovery

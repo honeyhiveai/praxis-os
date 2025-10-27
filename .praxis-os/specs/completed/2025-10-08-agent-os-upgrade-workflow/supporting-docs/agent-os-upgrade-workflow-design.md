@@ -1,15 +1,15 @@
-# Agent OS Upgrade Workflow - Design Document
+# prAxIs OS Upgrade Workflow - Design Document
 
 **Version:** 1.0  
 **Date:** 2025-10-08  
 **Status:** Design Phase  
-**Workflow ID:** `agent_os_upgrade_v1`
+**Workflow ID:** `praxis_os_upgrade_v1`
 
 ---
 
 ## Executive Summary
 
-An AI-guided workflow for safely upgrading Agent OS installations (content + MCP server) with automatic validation, rollback capability, and persistence across server restarts. Demonstrates meta-workflow principles for complex operational tasks.
+An AI-guided workflow for safely upgrading prAxIs OS installations (content + MCP server) with automatic validation, rollback capability, and persistence across server restarts. Demonstrates meta-workflow principles for complex operational tasks.
 
 **Key Innovation:** Workflow state persists to disk (`.praxis-os/.cache/state/`), enabling the workflow to survive MCP server restarts during the upgrade process.
 
@@ -39,7 +39,7 @@ An AI-guided workflow for safely upgrading Agent OS installations (content + MCP
 
 ```bash
 # User runs one command
-pos_workflow start agent_os_upgrade_v1 --source /path/to/praxis-os
+pos_workflow start praxis_os_upgrade_v1 --source /path/to/praxis-os
 
 # AI handles:
 ✅ Pre-upgrade validation (git status, backups exist, etc.)
@@ -102,7 +102,7 @@ pos_workflow start agent_os_upgrade_v1 --source /path/to/praxis-os
 ### 3.1 Workflow Structure
 
 ```
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 ├── metadata.json              # Workflow metadata (phases, dependencies)
 ├── srd.md                     # System Requirements Document (this doc)
 ├── phases/
@@ -126,7 +126,7 @@ universal/workflows/agent_os_upgrade_v1/
 .praxis-os/.cache/state/{session-id}.json
 {
   "session_id": "uuid",
-  "workflow_type": "agent_os_upgrade_v1",
+  "workflow_type": "praxis_os_upgrade_v1",
   "target_file": "mcp_server",
   "current_phase": 3,
   "completed_phases": [0, 1, 2],
@@ -169,7 +169,7 @@ sequenceDiagram
     participant SafeUpgrade
     participant MCPServer
 
-    User->>AI: start workflow agent_os_upgrade_v1
+    User->>AI: start workflow praxis_os_upgrade_v1
     AI->>Workflow: start_workflow()
     Workflow->>StateManager: create_session()
     StateManager->>StateManager: Save to disk
@@ -490,9 +490,9 @@ workflow.update_state(status="rolled_back", reason="...")
 
 ```json
 {
-  "name": "agent_os_upgrade_v1",
+  "name": "praxis_os_upgrade_v1",
   "version": "1.0.0",
-  "description": "AI-guided Agent OS upgrade with validation and rollback",
+  "description": "AI-guided prAxIs OS upgrade with validation and rollback",
   "phases": [
     {
       "number": 0,
@@ -628,7 +628,7 @@ workflow.update_state(status="rolled_back", reason="...")
 ### Phase 3 (v2.0)
 - **Auto-update schedule:** Cron job for automatic upgrades
 - **Canary deployments:** Test on subset of workflows first
-- **Multi-project upgrades:** Upgrade all Agent OS installations at once
+- **Multi-project upgrades:** Upgrade all prAxIs OS installations at once
 - **Cloud sync:** Backup to cloud for disaster recovery
 
 ---

@@ -103,7 +103,7 @@ export default function ParadigmComparison(): React.ReactElement {
             <span className={styles.summaryFormula}>Good prompt × Probabilistic AI = Variable quality</span>
           </div>
           <div className={`${styles.summaryItem} ${styles.summaryItemPreferred}`}>
-            <span className={styles.summaryLabel}>Agent OS:</span>
+            <span className={styles.summaryLabel}>prAxIs OS:</span>
             <span className={styles.summaryFormula}>Any prompt × Three-layer system = Consistent quality</span>
           </div>
         </div>

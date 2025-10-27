@@ -1,6 +1,6 @@
 # Workflow System Overview
 
-**Agent OS Phase-Gated Workflow System Standards**
+**prAxIs OS Phase-Gated Workflow System Standards**
 
 ---
 
@@ -55,7 +55,7 @@ get_workflow_state(session_id)
 
 ## ❓ Questions This Answers
 
-1. "What is the Agent OS workflow system?"
+1. "What is the prAxIs OS workflow system?"
 2. "How do workflows work?"
 3. "How do I start a workflow?"
 4. "How do I use workflow MCP tools?"
@@ -65,14 +65,14 @@ get_workflow_state(session_id)
 8. "How do I complete a phase?"
 9. "How does workflow state management work?"
 10. "How do I create a new workflow?"
-11. "What are standard Agent OS workflows?"
+11. "What are standard prAxIs OS workflows?"
 12. "What are workflow best practices?"
 
 ---
 
 ## 🎯 Purpose
 
-The Agent OS workflow system provides structured, phase-gated execution for complex AI-assisted tasks. This document defines standards for understanding, using, and creating workflows.
+The prAxIs OS workflow system provides structured, phase-gated execution for complex AI-assisted tasks. This document defines standards for understanding, using, and creating workflows.
 
 ---
 
@@ -332,7 +332,7 @@ await mcp_agent-os-rag_complete_phase(
 
 ## How to Create New Workflows?
 
-Guidelines for designing and implementing new workflows that follow Agent OS standards.
+Guidelines for designing and implementing new workflows that follow prAxIs OS standards.
 
 ### Step 1: Define Metadata
 
@@ -392,7 +392,7 @@ result = await mcp_agent-os-rag_search_standards(
 
 ## What Standard Workflows Are Available?
 
-Agent OS includes battle-tested workflows for common development tasks.
+prAxIs OS includes battle-tested workflows for common development tasks.
 
 ### test_generation_v3
 
@@ -601,7 +601,7 @@ if not result["checkpoint_passed"]:
 
 **Usage:**
 - `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`
-- `usage/operating-model.md` - Agent OS principles → `search_standards("Agent OS operating model")`
+- `usage/operating-model.md` - prAxIs OS principles → `search_standards("prAxIs OS operating model")`
 
 ---
 

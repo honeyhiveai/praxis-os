@@ -19,7 +19,7 @@ def backup_manager(tmp_path):
 
 
 @pytest.fixture
-def mock_agent_os_dir(tmp_path):
+def mock_praxis_os_dir(tmp_path):
     """Create a mock .praxis-os directory structure."""
     agent_os = tmp_path / ".praxis-os"
     agent_os.mkdir(exist_ok=True)
@@ -44,7 +44,7 @@ def test_backup_manager_init(backup_manager):
     assert backup_manager.backup_dir.name == ".backups"
 
 
-def test_create_backup_structure(backup_manager, mock_agent_os_dir):
+def test_create_backup_structure(backup_manager, mock_praxis_os_dir):
     """Test backup creation creates proper structure."""
     result = backup_manager.create_backup()
 
@@ -66,7 +66,7 @@ def test_create_backup_structure(backup_manager, mock_agent_os_dir):
     assert manifest_path.exists()
 
 
-def test_backup_integrity_verification(backup_manager, mock_agent_os_dir):
+def test_backup_integrity_verification(backup_manager, mock_praxis_os_dir):
     """Test backup integrity verification."""
     result = backup_manager.create_backup()
     backup_path = Path(result["backup_path"])
@@ -76,7 +76,7 @@ def test_backup_integrity_verification(backup_manager, mock_agent_os_dir):
     assert integrity_ok is True
 
 
-def test_list_backups(backup_manager, mock_agent_os_dir):
+def test_list_backups(backup_manager, mock_praxis_os_dir):
     """Test listing available backups."""
     # Create two backups with delay to ensure different timestamps
     backup_manager.create_backup()
@@ -91,7 +91,7 @@ def test_list_backups(backup_manager, mock_agent_os_dir):
     assert all("timestamp" in b for b in backups)
 
 
-def test_archive_old_backups(backup_manager, mock_agent_os_dir):
+def test_archive_old_backups(backup_manager, mock_praxis_os_dir):
     """Test archiving old backups."""
     # Create multiple backups with delays
     for i in range(5):
@@ -110,7 +110,7 @@ def test_archive_old_backups(backup_manager, mock_agent_os_dir):
     assert len(backups) == 2
 
 
-def test_get_latest_backup(backup_manager, mock_agent_os_dir):
+def test_get_latest_backup(backup_manager, mock_praxis_os_dir):
     """Test getting the latest backup."""
     # Create backups with delay to ensure different timestamps
     backup_manager.create_backup()

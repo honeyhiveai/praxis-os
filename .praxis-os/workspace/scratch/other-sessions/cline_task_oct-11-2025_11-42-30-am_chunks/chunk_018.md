@@ -865,7 +865,7 @@ ACT MODE
   - Assign to someone
 
 **2. Once Approved** 🛠️
-- Create detailed spec using Agent OS Enhanced workflow
+- Create detailed spec using prAxIs OS workflow
 - Implement fix systematically with phase gating
 - Create comprehensive test suite
 - Submit PR with changeset (type: patch)
@@ -900,7 +900,7 @@ All analysis complete:
 - [x] Create and run script to post issue
 - [x] GitHub issue #6767 successfully created
 - [ ] **Monitor for maintainer approval** ⬅️ NEXT STEP
-- [ ] Create spec using Agent OS Enhanced
+- [ ] Create spec using prAxIs OS
 - [ ] Implement fix systematically
 - [ ] Submit PR with tests
 </task_progress>

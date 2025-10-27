@@ -483,7 +483,7 @@ make_directory(path)
 - ❌ 6 tools added to sub-agent tool budget (vs. 1 tool)
 - ❌ Total tools: 11 (search_standards, pos_workflow, pos_browser, + 6 file tools)
 - ❌ Approaching 20-tool threshold where performance degrades (Microsoft research)
-- ❌ Inconsistent with Agent OS pattern (pos_workflow, pos_browser use actions)
+- ❌ Inconsistent with prAxIs OS pattern (pos_workflow, pos_browser use actions)
 - ❌ More tools = more discovery overhead for sub-agents
 
 **Trade-offs:**
@@ -506,7 +506,7 @@ pos_filesystem(
 ```
 
 **Pros:**
-- ✅ Consistent with Agent OS pattern (pos_workflow, pos_browser)
+- ✅ Consistent with prAxIs OS pattern (pos_workflow, pos_browser)
 - ✅ Low tool count (1 tool vs. 6 tools)
 - ✅ Total tools: 6 (well under 20-tool threshold)
 - ✅ Domain-first thinking (filesystem = one domain)
@@ -563,7 +563,7 @@ write_file(path, content, create_dirs=True)
 
 **Rationale:**
 
-1. **Consistent with Agent OS Architecture**
+1. **Consistent with prAxIs OS Architecture**
    - `pos_workflow` uses action dispatch successfully
    - `pos_browser` uses action dispatch successfully
    - `pos_filesystem` continues the pattern
@@ -574,7 +574,7 @@ write_file(path, content, create_dirs=True)
    - Enables future capabilities without hitting 20-tool limit
 
 3. **Discovery Pattern Proven**
-   - Agent OS teaches `search_standards("how to use pos_filesystem")`
+   - prAxIs OS teaches `search_standards("how to use pos_filesystem")`
    - Dynamic discovery via IDE autocomplete
    - Standards document patterns (append = read + write)
 
@@ -585,10 +585,10 @@ write_file(path, content, create_dirs=True)
 
 5. **Agent OS is Different**
    - Industry standard optimizes for cold-start, one-shot tasks
-   - Agent OS optimizes for long sessions with discovery training
+   - prAxIs OS optimizes for long sessions with discovery training
    - Different constraints = different optimal solution
 
-**The consolidation IS the innovation.** Industry pattern is correct for their constraints. Agent OS pattern is correct for ours.
+**The consolidation IS the innovation.** Industry pattern is correct for their constraints. prAxIs OS pattern is correct for ours.
 
 ---
 

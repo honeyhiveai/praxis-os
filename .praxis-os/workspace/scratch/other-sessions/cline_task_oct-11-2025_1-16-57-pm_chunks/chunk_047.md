@@ -21,7 +21,7 @@
 ```
 Human Time: 4 hours (traditional)
 ↓
-Agent OS: 4 hour wall clock, 12 min human effort
+prAxIs OS: 4 hour wall clock, 12 min human effort
 ↓  
 Leverage: 20x (saved 3.8 hours)
 ↓
@@ -112,7 +112,7 @@ ACT MODE
 
 <write_to_file>
 <path>REVIEW-Dual-Estimation-Framework.md</path>
-<content># Review: Dual Estimation Framework for Agent OS Enhanced
+<content># Review: Dual Estimation Framework for prAxIs OS
 
 **Reviewer:** Cline (AI Agent)  
 **Date:** October 11, 2025  
@@ -145,7 +145,7 @@ The dual estimation framework is **fundamentally sound** and captures a critical
 **The framework correctly models:**
 ```
 Traditional: 4 hours human effort
-Agent OS: 4 hours wall clock, 12 minutes human effort
+prAxIs OS: 4 hours wall clock, 12 minutes human effort
 Leverage: 20x (saves 3.8 hours per task)
 ```
 
@@ -268,7 +268,7 @@ Hour 0-4: ████████████████████ (Human wo
 Result: 4 hours human effort
 ```
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 ```
 Minute 0-5:     █ (Human: Give direction to AI)
 Hour 0-4:       [AI works autonomously - human does other work]
@@ -297,7 +297,7 @@ Result: 12 minutes human effort, 3h48m saved
 - 40 hours/week capacity
 - 10 tasks @ 4h each = 10 weeks
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 - Human orchestrates multiple AI agents
 - Each agent works autonomously in parallel
 - Human active time: 12 min per task
@@ -314,7 +314,7 @@ Result: 12 minutes human effort, 3h48m saved
 - Need to implement 5 features
 - Each feature: 20 tasks averaging 4 hours
 - Traditional: 100 tasks × 4h = 400 hours (10 weeks)
-- Agent OS: 100 tasks × 12 min = 20 hours (0.5 weeks)
+- prAxIs OS: 100 tasks × 12 min = 20 hours (0.5 weeks)
 - Leverage: 20x per task, 20x overall
 - But you can START all tasks simultaneously
 - Result: Deliver in days, not weeks
@@ -378,7 +378,7 @@ Total human effort saved: 3 hours 43 minutes
 ```markdown
 ## Calibrating Your Estimates
 
-### If You're New to Agent OS Enhanced
+### If You're New to prAxIs OS
 
 **Start conservative:**
 - Use 1.2x multiplier (assume AI is same speed or slower)
@@ -503,7 +503,7 @@ Typical ranges:
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys
@@ -621,7 +621,7 @@ Leverage Multiplier = Human Time ÷ Human Orchestration Time
 Traditional: 4 hours human effort
 ├─────────────────────────────┤ (Human working)
 
-Agent OS: 12 minutes human effort
+prAxIs OS: 12 minutes human effort
 ├─┤                           ├┤ (5 min setup, 7 min review)
     └──[AI works for 4 hours]──┘ (Autonomous, human does other work)
 
@@ -651,7 +651,7 @@ Result: 3h 48m saved, 20x leverage
 
 **Example impact:**
 - Traditional: 1 developer, 40 hours/week, 1 task at a time
-- Agent OS: 1 developer, 40 hours/week, 20+ tasks in parallel
+- prAxIs OS: 1 developer, 40 hours/week, 20+ tasks in parallel
 - Effective output: 20-40 developer equivalents
 - Quality: Higher (spec-driven, standards compliance)
 - Cost: Same (one human + AI agents)
@@ -669,7 +669,7 @@ Result: 3h 48m saved, 20x leverage
 Total: 20 hours (half a week)
 ```
 
-**Agent OS Enhanced contribution:**
+**prAxIs OS contribution:**
 ```
 1. Find bug
 2. Create comprehensive spec (30 min)
@@ -701,7 +701,7 @@ Total: 1 hour human effort (same day completion)
 
 **Overall Rating: 9/10**
 
-The dual estimation framework is **fundamentally sound** and captures the key insight that drives Agent OS Enhanced's productivity gains. The core formula, task-specific multipliers, and realistic expectations are excellent.
+The dual estimation framework is **fundamentally sound** and captures the key insight that drives prAxIs OS's productivity gains. The core formula, task-specific multipliers, and realistic expectations are excellent.
 
 **Main improvement needed:**
 - Terminology clarity (Wall Clock Duration vs Human Active Time)
@@ -722,7 +722,7 @@ This enables:
 - **Parallel leverage:** 100-400x across tasks (simultaneous execution)
 - **Compound leverage:** More tasks → better specs → higher quality → faster execution
 
-**This is why Agent OS Enhanced can:**
+**This is why prAxIs OS can:**
 - Create 30KB spec in 2 hours
 - Contribute to major projects same day
 - Maintain high quality throughout
@@ -740,7 +740,7 @@ This enables:
 **Then ship it!**
 
 This framework will help users:
-- Understand Agent OS Enhanced's value prop
+- Understand prAxIs OS's value prop
 - Set realistic expectations
 - Communicate leverage to others
 - Plan projects effectively
@@ -807,7 +807,7 @@ The content was successfully saved to REVIEW-Dual-Estimation-Framework.md.
 Here is the full, updated content of the file that was saved:
 
 <final_file_content path="REVIEW-Dual-Estimation-Framework.md">
-# Review: Dual Estimation Framework for Agent OS Enhanced
+# Review: Dual Estimation Framework for prAxIs OS
 
 **Reviewer:** Cline (AI Agent)  
 **Date:** October 11, 2025  
@@ -840,7 +840,7 @@ The dual estimation framework is **fundamentally sound** and captures a critical
 **The framework correctly models:**
 ```
 Traditional: 4 hours human effort
-Agent OS: 4 hours wall clock, 12 minutes human effort
+prAxIs OS: 4 hours wall clock, 12 minutes human effort
 Leverage: 20x (saves 3.8 hours per task)
 ```
 
@@ -963,7 +963,7 @@ Hour 0-4: ████████████████████ (Human wo
 Result: 4 hours human effort
 ```
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 ```
 Minute 0-5:     █ (Human: Give direction to AI)
 Hour 0-4:       [AI works autonomously - human does other work]
@@ -992,7 +992,7 @@ Result: 12 minutes human effort, 3h48m saved
 - 40 hours/week capacity
 - 10 tasks @ 4h each = 10 weeks
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 - Human orchestrates multiple AI agents
 - Each agent works autonomously in parallel
 - Human active time: 12 min per task

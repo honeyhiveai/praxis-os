@@ -1119,7 +1119,7 @@ curl https://api.production.com/tools/list | jq '.tools[] | select(.name == "pos
 
 **Steps:**
 1. Update main README with pos_workflow usage
-2. Update Agent OS documentation site
+2. Update prAxIs OS documentation site
 3. Create announcement/changelog
 4. Update any dependent workflows
 5. Send deployment notification

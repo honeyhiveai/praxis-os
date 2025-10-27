@@ -1,4 +1,4 @@
-# Agent OS Installation Summary
+# prAxIs OS Installation Summary
 
 **Project:** praxis-os (self-installation for dogfooding)  
 **Date:** October 5, 2025  
@@ -45,7 +45,7 @@ Five Python-specific standards files generated from universal fundamentals:
   "mcpServers": {
     "agent-os-rag": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
-      "args": ["${workspaceFolder}/.praxis-os/mcp_server/agent_os_rag.py"],
+      "args": ["${workspaceFolder}/.praxis-os/mcp_server/praxis_os_rag.py"],
       "env": {
         "PROJECT_ROOT": "${workspaceFolder}",
         "PYTHONPATH": "${workspaceFolder}/.praxis-os",
@@ -67,7 +67,7 @@ Five Python-specific standards files generated from universal fundamentals:
 
 **Location:** `.praxis-os/venv/`
 
-**Purpose:** Isolates Agent OS MCP server dependencies from project's Python environment
+**Purpose:** Isolates prAxIs OS MCP server dependencies from project's Python environment
 
 **Dependencies Installed:**
 - `lancedb~=0.25.0` - Vector database
@@ -106,7 +106,7 @@ Five Python-specific standards files generated from universal fundamentals:
 Once Cursor reloads, these tools will be available:
 
 ### 1. `search_standards`
-**Purpose:** Semantic search over Agent OS standards  
+**Purpose:** Semantic search over prAxIs OS standards  
 **Usage:** "What are the Python concurrency best practices?"  
 **Auto-approved:** ✅ Yes
 
@@ -136,7 +136,7 @@ Once Cursor reloads, these tools will be available:
 
 ### Detected Patterns
 - ✅ **Python project** (mcp_server/ contains Python code)
-- ✅ **Threading usage** detected in `agent_os_rag.py`, `rag_engine.py`
+- ✅ **Threading usage** detected in `praxis_os_rag.py`, `rag_engine.py`
 - ✅ **File watching** for hot reload (watchdog)
 - ✅ **MCP server** implementation
 - ❌ **No asyncio** detected yet
@@ -205,7 +205,7 @@ See: `.praxis-os/standards/development/python-documentation.md`
 
 ## Updating Agent OS
 
-To update to a newer version of Agent OS in the future:
+To update to a newer version of prAxIs OS in the future:
 
 ```bash
 # 1. Pull latest from praxis-os repo
@@ -218,7 +218,7 @@ git pull origin main  # (from the praxis-os repo)
 ```
 
 Or simply ask in Cursor:
-> "Update Agent OS to the latest version"
+> "Update prAxIs OS to the latest version"
 
 ---
 
@@ -289,7 +289,7 @@ ls -la .praxis-os/standards/
 
 **Installation Complete! 🎉**
 
-Agent OS is now installed and configured for this project. You can use it to:
+prAxIs OS is now installed and configured for this project. You can use it to:
 - Search standards semantically
 - Get Python-specific guidance
 - Validate code for concurrency issues

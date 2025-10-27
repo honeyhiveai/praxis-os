@@ -69,7 +69,7 @@ I can start using the tools immediately.
 
 **I'm ready to be your validation test for the dual-transport architecture!**
 
-This is exactly what the spec was designed for - enabling sub-agents like me to access Agent OS tools alongside your IDE. Let's prove it works! 🚀
+This is exactly what the spec was designed for - enabling sub-agents like me to access prAxIs OS tools alongside your IDE. Let's prove it works! 🚀
 </result>
 <task_progress>
 - [x] Understood I'm Cline (sub-agent, not IDE)

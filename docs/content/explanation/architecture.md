@@ -543,7 +543,7 @@ import DeploymentStructure from '@site/src/components/DeploymentStructure';
 **Trade-offs:**
 - **Pro:** Complete project isolation and customization
 - **Con:** ~50MB per project (mostly MCP server Python code)
-- **Con:** Updates must be run per project (mitigated by `agent_os_upgrade_v1` workflow)
+- **Con:** Updates must be run per project (mitigated by `praxis_os_upgrade_v1` workflow)
 
 **Alternative: Global installation**
 - **Why not:** Version conflicts, no per-project customization

@@ -559,7 +559,7 @@ class WorkflowEngine:
 
 **Usage:**
 - `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`
-- `usage/operating-model.md` - Agent OS operating model → `search_standards("Agent OS operating model")`
+- `usage/operating-model.md` - prAxIs OS operating model → `search_standards("prAxIs OS operating model")`
 
 **AI Assistant:**
 - `standards/ai-assistant/rag-content-authoring.md` - Writing discoverable content → `search_standards("RAG content authoring")`

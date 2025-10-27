@@ -56,9 +56,9 @@ echo "✓ Query 5 complete"
 # Query 6: Calibration Guidance
 echo "========================================" >> "$OUTPUT"
 echo "QUERY 6: Calibration Guidance" >> "$OUTPUT"
-echo "Query: calibration new to Agent OS Enhanced" >> "$OUTPUT"
+echo "Query: calibration new to prAxIs OS" >> "$OUTPUT"
 echo "========================================" >> "$OUTPUT"
-python mcp_tool_cli.py search_standards '{"query": "calibration new to Agent OS Enhanced", "n_results": 3}' >> "$OUTPUT" 2>&1
+python mcp_tool_cli.py search_standards '{"query": "calibration new to prAxIs OS", "n_results": 3}' >> "$OUTPUT" 2>&1
 echo "" >> "$OUTPUT"
 echo "✓ Query 6 complete"
 

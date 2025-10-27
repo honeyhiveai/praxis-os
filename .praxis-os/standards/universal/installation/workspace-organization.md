@@ -439,7 +439,7 @@ git commit -m "Add authentication system spec"
 
 ---
 
-## 🔗 Integration with Agent OS Development Process
+## 🔗 Integration with prAxIs OS Development Process
 
 **Phase 1: Conversational Design**
 - ✅ Create `.praxis-os/workspace/design/YYYY-MM-DD-feature.md`

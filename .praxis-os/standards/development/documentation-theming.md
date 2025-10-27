@@ -24,7 +24,7 @@
 
 ## Purpose
 
-Ensure all Agent OS Enhanced documentation components respect Docusaurus theming, work in both light and dark modes, and provide a consistent, professional appearance. Using CSS variables makes components theme-aware and maintainable.
+Ensure all prAxIs OS documentation components respect Docusaurus theming, work in both light and dark modes, and provide a consistent, professional appearance. Using CSS variables makes components theme-aware and maintainable.
 
 ---
 

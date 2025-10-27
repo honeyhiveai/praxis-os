@@ -1,6 +1,6 @@
 # TypeScript Language-Specific Standards Generation Instructions
 
-**For the Cursor Agent: When installing Agent OS in a TypeScript project, use these instructions to generate language-specific standards by applying universal CS fundamentals to TypeScript-specific contexts.**
+**For the Cursor Agent: When installing prAxIs OS in a TypeScript project, use these instructions to generate language-specific standards by applying universal CS fundamentals to TypeScript-specific contexts.**
 
 ---
 

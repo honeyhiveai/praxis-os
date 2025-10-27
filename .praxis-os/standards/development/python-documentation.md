@@ -38,7 +38,7 @@ def search_standards(
     filters: Optional[Dict[str, str]] = None
 ) -> List[SearchResult]:
     """
-    Search the Agent OS standards using semantic search.
+    Search the prAxIs OS standards using semantic search.
     
     Performs vector similarity search over the indexed standards
     and returns the most relevant chunks based on the query.
@@ -73,7 +73,7 @@ def search_standards(
 
 ```python
 def search_standards(query, n_results=5, filters=None):
-    """Search the Agent OS standards using semantic search.
+    """Search the prAxIs OS standards using semantic search.
     
     Performs vector similarity search over the indexed standards
     and returns the most relevant chunks based on the query.
@@ -103,7 +103,7 @@ def search_standards(query, n_results=5, filters=None):
 ```python
 def search_standards(query, n_results=5, filters=None):
     """
-    Search the Agent OS standards using semantic search.
+    Search the prAxIs OS standards using semantic search.
     
     Parameters
     ----------
@@ -168,16 +168,16 @@ praxis-os/
 ### Configuration (`docs/source/conf.py`)
 
 ```python
-"""Sphinx configuration for Agent OS Enhanced."""
+"""Sphinx configuration for prAxIs OS."""
 
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
 # Project information
-project = 'Agent OS Enhanced'
-copyright = '2025, Agent OS Team'
-author = 'Agent OS Team'
+project = 'prAxIs OS'
+copyright = '2025, prAxIs OS Team'
+author = 'prAxIs OS Team'
 version = '1.0'
 release = '1.0.0'
 
@@ -277,16 +277,16 @@ make html
 Your current README is good! Here are some enhancements:
 
 ```markdown
-# Agent OS Enhanced - Portable Multi-Agent Development Framework
+# prAxIs OS - Portable Multi-Agent Development Framework
 
-**A portable Agent OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
+**A portable prAxIs OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 ## 🎯 Overview
 
-Agent OS Enhanced is a portable development framework that combines:
+prAxIs OS is a portable development framework that combines:
 - **Universal CS Fundamentals**: Timeless patterns applicable to any language
 - **Language-Specific Generation**: LLM generates tailored guidance per project
 - **MCP RAG Server**: Semantic search over standards with 90% context reduction
@@ -304,7 +304,7 @@ Agent OS Enhanced is a portable development framework that combines:
 
 ```bash
 # In Cursor IDE, open your project and say:
-"Install Agent OS from github.com/honeyhiveai/praxis-os"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 
 # The Cursor agent will:
 # 1. Analyze your project (detect language, frameworks)
@@ -367,7 +367,7 @@ MIT License - Use freely in any project. See [LICENSE](LICENSE) for details.
 
 ## 🙏 Credits
 
-- **Foundation**: [Builder Methods Agent OS](https://buildermethods.com/agent-os) by Brian Casel
+- **Foundation**: [Builder Methods prAxIs OS](https://buildermethods.com/agent-os) by Brian Casel
 - **Evolution**: HoneyHive's LLM Workflow Engineering methodology
 - **Implementation**: MCP/RAG architecture with specialized sub-agents
 
@@ -476,7 +476,7 @@ def calculate_median(values):
 
 4. **Add inline documentation:**
    - Complex logic in `rag_engine.py`
-   - File watcher logic in `agent_os_rag.py`
+   - File watcher logic in `praxis_os_rag.py`
    - Workflow state machine
 
 5. **Create CHANGELOG.md at root:**

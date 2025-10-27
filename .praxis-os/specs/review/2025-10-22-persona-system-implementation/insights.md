@@ -33,7 +33,7 @@ The supporting documents provide comprehensive design for a config-driven specia
 **Source:** ARCHITECTURE Section 3.4 (Lines 288-312), DESIGN Section 10 (Lines 977-1185)
 
 - **Traditional Approach:** Add specialist = Write Python class + Register + Deploy
-- **Agent OS Approach:** Add specialist = Create .md file (< 5 minutes)
+- **prAxIs OS Approach:** Add specialist = Create .md file (< 5 minutes)
 - **Result:** Teams can create custom specialists without framework changes
 - **Benefit:** Rapid adaptation to project-specific needs
 
@@ -199,7 +199,7 @@ Documents learnings via write_standard()
 ```markdown
 # [Domain] Specialist
 
-You are a [Domain] Specialist in Agent OS Enhanced.
+You are a [Domain] Specialist in prAxIs OS.
 
 ## Your Approach
 1. Query first: search_standards("how to [task]")
@@ -511,7 +511,7 @@ Expected: Helpful error with available personas
 
 **Process:**
 ```
-User: "Install Agent OS from github.com/..."
+User: "Install prAxIs OS from github.com/..."
     ↓
 Cursor agent:
 1. Reads: installation/00-START.md
@@ -587,7 +587,7 @@ write_standard(
 
 ```
 .praxis-os/standards/
-├── universal/              (Shipped with Agent OS)
+├── universal/              (Shipped with prAxIs OS)
 │   ├── concurrency/
 │   ├── testing/
 │   └── architecture/

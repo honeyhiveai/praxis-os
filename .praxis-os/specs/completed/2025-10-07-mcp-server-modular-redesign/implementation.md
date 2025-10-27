@@ -12,7 +12,7 @@ This document provides detailed guidance for implementing the MCP Server Modular
 1. **No breaking changes** - Existing MCP tools must work identically
 2. **Dependency injection** - Components receive dependencies, don't create them
 3. **Single responsibility** - Each module <200 lines, clear purpose
-4. **Standards compliance** - Follow Agent OS production code checklist
+4. **Standards compliance** - Follow prAxIs OS production code checklist
 
 ---
 
@@ -69,7 +69,7 @@ New optional section:
 ### Before (Current)
 ```
 mcp_server/
-├── agent_os_rag.py          # 984 lines - MONOLITHIC
+├── praxis_os_rag.py          # 984 lines - MONOLITHIC
 ├── models.py                # 411 lines - ALL models
 ├── rag_engine.py
 ├── workflow_engine.py
@@ -748,9 +748,9 @@ class TestServerCreation:
 
 - [MCP Server Architecture Redesign Document](../../../MCP_SERVER_ARCHITECTURE_REDESIGN.md)
 - [MCP Tool Scalability Research](../../../MCP_TOOL_SCALABILITY_SUMMARY.md)
-- [Agent OS Production Code Checklist](.praxis-os/standards/development/production-code-checklist.md)
+- [prAxIs OS Production Code Checklist](.praxis-os/standards/development/production-code-checklist.md)
 - [Dependency Injection Pattern](.praxis-os/standards/architecture/dependency-injection.md)
 
 ---
 
-**Follow this implementation guide to ensure high-quality, maintainable code that follows Agent OS standards.**
+**Follow this implementation guide to ensure high-quality, maintainable code that follows prAxIs OS standards.**

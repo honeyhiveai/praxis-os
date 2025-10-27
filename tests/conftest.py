@@ -1,5 +1,5 @@
 """
-Pytest configuration for Agent OS Enhanced tests.
+Pytest configuration for prAxIs OS tests.
 
 Registers custom pytest options and markers.
 """

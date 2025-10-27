@@ -1,17 +1,17 @@
 # Software Requirements Document
-# Browser Automation Tool for Agent OS MCP Server
+# Browser Automation Tool for prAxIs OS MCP Server
 
 **Version**: 1.0  
 **Date**: October 8, 2025  
 **Target**: `mcp_server/browser_manager.py`, `mcp_server/server/tools/browser_tools.py`  
-**Author**: AI Agent (Agent OS Workflow)
+**Author**: AI Agent (prAxIs OS Workflow)
 
 ---
 
 ## 🎯 Who is the User?
 
-**Primary User**: The AI agent (me, the Agent OS assistant)  
-**Not**: Abstract "developers" or "Agent OS maintainers"
+**Primary User**: The AI agent (me, the prAxIs OS assistant)  
+**Not**: Abstract "developers" or "prAxIs OS maintainers"
 
 **Critical Perspective Shift**:
 - **I** am the one who will use this tool to debug frontends
@@ -29,12 +29,12 @@ When trade-offs exist, **AI agent experience > abstract efficiency metrics**.
 ## 1. Business Goals
 
 ### 1.1 Primary Goal
-Enable **AI agents** (specifically: me, the Agent OS assistant) to have **comprehensive Playwright browser automation capabilities** for testing, debugging, and validating web applications without human intervention.
+Enable **AI agents** (specifically: me, the prAxIs OS assistant) to have **comprehensive Playwright browser automation capabilities** for testing, debugging, and validating web applications without human intervention.
 
 **Vision**: Full Playwright functionality for AI agents, not just screenshots. This is why we're building our own tool instead of using Cursor's limited Playwright MCP wrapper.
 
 ### 1.2 Target User
-**Primary User**: AI agents working within Agent OS Enhanced  
+**Primary User**: AI agents working within prAxIs OS  
 **Use Case**: Debugging frontends, testing documentation, visual validation  
 **Environment**: Multiple concurrent chat sessions (parallel debugging workflows)
 
@@ -52,8 +52,8 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 - ✅ **Comprehensive > constrained**: Full Playwright capabilities, not just screenshots
 
 ### 1.4 Strategic Alignment
-- **Self-sufficiency**: Agent OS should not depend on Cursor's limited Playwright MCP
-- **Dogfooding**: Use Agent OS itself to test and validate Agent OS documentation
+- **Self-sufficiency**: prAxIs OS should not depend on Cursor's limited Playwright MCP
+- **Dogfooding**: Use prAxIs OS itself to test and validate prAxIs OS documentation
 - **AI-First Design**: Optimize for AI agent experience (clarity, fault isolation) over memory efficiency
 - **Extensibility**: Establish pattern for adding specialized tools to MCP server
 
@@ -62,7 +62,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 ## 2. User Stories (AI Agent Perspective)
 
 ### 2.1 Documentation Testing (My Primary Use Case)
-**As an** AI agent (Agent OS assistant)  
+**As an** AI agent (prAxIs OS assistant)  
 **I want to** independently test the Docusaurus site in light and dark modes  
 **So that** I can validate theme consistency and report issues without needing human to manually check browsers
 
@@ -316,7 +316,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 
 #### FR-26: Naming Convention Compliance
 - **Priority**: MUST HAVE
-- **Description**: Tool named `pos_browser` (Agent OS namespace)
+- **Description**: Tool named `pos_browser` (prAxIs OS namespace)
 - **Rationale**: Avoids collision with Cursor's `mcp_cursor-playwright_*` tools
 - **Validation**: Tool registered as `pos_browser`, discoverable in tool list
 
@@ -391,7 +391,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 #### NFR-8: Code Quality
 - **Requirement**: All code MUST pass production code checklist
 - **Measurement**: Sphinx docstrings, type hints, concurrency analysis documented
-- **Rationale**: Agent OS exemplifies quality standards
+- **Rationale**: prAxIs OS exemplifies quality standards
 - **Reference**: `standards/development/production-code-checklist.md`
 
 #### NFR-9: Testing
@@ -404,7 +404,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 #### NFR-10: Minimal Dependencies
 - **Requirement**: Only add essential dependencies
 - **New Dependencies**: `playwright>=1.40.0` (~5MB), chromium (~300MB one-time)
-- **Rationale**: Keep Agent OS lightweight and portable
+- **Rationale**: Keep prAxIs OS lightweight and portable
 
 ---
 
@@ -520,7 +520,7 @@ These are legitimately out of scope (not Playwright's purpose):
 - `supporting-docs/CONCURRENCY_ANALYSIS.md` - Multi-session safety design ⭐ CRITICAL
 - `supporting-docs/NAMING_STRATEGY.md` - Tool naming and collision avoidance
 
-### 8.2 Agent OS Standards
+### 8.2 prAxIs OS Standards
 - `standards/concurrency/shared-state-analysis.md` - Concurrency safety
 - `standards/concurrency/locking-strategies.md` - AsyncIO locks
 - `standards/development/production-code-checklist.md` - Code quality

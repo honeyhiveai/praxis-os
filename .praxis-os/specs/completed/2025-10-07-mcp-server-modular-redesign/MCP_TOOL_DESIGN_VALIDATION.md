@@ -37,7 +37,7 @@ Based on comprehensive MCP best practices research from AWS, Anthropic, StackOne
 
 ```python
 1. search_standards(query, n_results, filter_phase, filter_tags)
-   Purpose: Semantic search over Agent OS documentation
+   Purpose: Semantic search over prAxIs OS documentation
    Category: RAG
    
 2. start_workflow(workflow_type, target_file, options)

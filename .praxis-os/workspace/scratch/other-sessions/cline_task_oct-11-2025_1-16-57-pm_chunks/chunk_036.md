@@ -152,7 +152,7 @@ The "Not connected" error from Cline is **expected and normal**. It means:
 - Or manual session initialization in Cline
 - Or waiting for Cline to add HTTP support
 
-**But the Agent OS dual-transport architecture is proven working!**
+**But the prAxIs OS dual-transport architecture is proven working!**
 
 ### Summary
 
@@ -277,7 +277,7 @@ Cline might auto-connect on first tool use.
 - `search_standards()` - Query your RAG
 - `get_server_info()` - Verify project
 - `get_workflow_state()` - Check workflows
-- All other Agent OS tools
+- All other prAxIs OS tools
 
 ### What I'll Do After You Reload
 
@@ -479,7 +479,7 @@ async with Client("http://127.0.0.1:4242/mcp") as client:
 - The 40x error suggests connection failure
 - Not an issue with the server (server works fine)
 
-**This is a Cline limitation, not an Agent OS issue.**
+**This is a Cline limitation, not an prAxIs OS issue.**
 
 Want me to help write a Python client script instead to test the HTTP endpoint?
 </result>
@@ -772,7 +772,7 @@ ACT MODE
 <web_fetch>
 <url>https://docs.cline.bot/mcp</url>
 <task_progress>
-- [x] Searched project (found Agent OS server docs, not Cline client docs)
+- [x] Searched project (found prAxIs OS server docs, not Cline client docs)
 - [ ] Fetch Cline MCP documentation
 - [ ] Show user the correct config format
 </task_progress>

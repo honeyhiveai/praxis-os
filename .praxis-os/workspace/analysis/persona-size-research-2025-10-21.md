@@ -8,7 +8,7 @@
 
 ## The Question
 
-**What is the optimal size for Agent OS Enhanced persona files?**
+**What is the optimal size for prAxIs OS persona files?**
 
 Current competing claims:
 - Architecture doc template: ~50 lines
@@ -90,11 +90,11 @@ Amplifier Agent File:
 
 ---
 
-## Agent OS Current Approach (~50 lines)
+## prAxIs OS Current Approach (~50 lines)
 
 **Breakdown:**
 ```
-Agent OS Persona:
+prAxIs OS Persona:
 ├─ Identity: ~10 lines
 ├─ Approach (discovery pattern): ~15 lines
 ├─ Tool list: ~15 lines
@@ -130,7 +130,7 @@ Remaining for work: 75,500 tokens
 Quality: Approaching degradation threshold (15-25%)
 ```
 
-### Agent OS Current (50-line persona)
+### prAxIs OS Current (50-line persona)
 ```
 Context Budget: 100,000 tokens
 
@@ -285,7 +285,7 @@ You are a [Domain] Specialist.
 
 ---
 
-## Specific Recommendation for Agent OS Enhanced
+## Specific Recommendation for prAxIs OS
 
 **Phase 1: Start with Tier 2 (100-150 lines)**
 

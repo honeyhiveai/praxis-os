@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Configure Claude Code extension with Agent OS MCP server.
+Configure Claude Code extension with prAxIs OS MCP server.
 
 This script creates/updates .mcp.json in the project root to configure
-the Claude Code extension to use the Agent OS MCP server via HTTP transport.
+the Claude Code extension to use the prAxIs OS MCP server via HTTP transport.
 
 Similar to update-cline-mcp.py, this configures HTTP connection to an
 EXISTING MCP server (launched by Cursor or another primary IDE).
@@ -59,7 +59,7 @@ def read_mcp_state(project_root: Path) -> Dict[str, Any]:
     if not state_file.exists():
         raise ValueError(
             "MCP server state file not found. "
-            "Make sure Cursor (or primary IDE) is running with Agent OS MCP server active."
+            "Make sure Cursor (or primary IDE) is running with prAxIs OS MCP server active."
         )
     
     try:
@@ -79,7 +79,7 @@ def read_mcp_state(project_root: Path) -> Dict[str, Any]:
 
 def create_claude_code_config(url: str) -> Dict[str, Any]:
     """
-    Create Claude Code MCP configuration for Agent OS.
+    Create Claude Code MCP configuration for prAxIs OS.
     
     :param url: HTTP URL of running MCP server
     :return: Configuration dictionary
@@ -97,7 +97,7 @@ def create_claude_code_config(url: str) -> Dict[str, Any]:
 
 def update_mcp_json(project_root: Path, url: str, port: int) -> None:
     """
-    Update .mcp.json with Agent OS server configuration using official CLI.
+    Update .mcp.json with prAxIs OS server configuration using official CLI.
     
     Uses 'claude mcp add --scope project' to write project-local config.
     This is the official method per https://docs.claude.com/en/docs/claude-code/mcp.md
@@ -152,8 +152,8 @@ def update_mcp_json(project_root: Path, url: str, port: int) -> None:
             config["mcpServers"] = {}
         
         # Update or create agent-os-rag configuration
-        agent_os_config = create_claude_code_config(url)
-        config["mcpServers"].update(agent_os_config)
+        praxis_os_config = create_claude_code_config(url)
+        config["mcpServers"].update(praxis_os_config)
         
         # Write updated config
         with open(mcp_json, 'w', encoding='utf-8') as f:
@@ -240,7 +240,7 @@ def main() -> int:
     
     :return: Exit code (0 = success, 1 = error)
     """
-    print("🔍 Agent OS MCP - Claude Code Configuration")
+    print("🔍 prAxIs OS MCP - Claude Code Configuration")
     print("=" * 60)
     
     # Step 1: Find project root
@@ -250,8 +250,8 @@ def main() -> int:
     if not project_root:
         print("❌ ERROR: Could not find .praxis-os directory")
         print("\nMake sure:")
-        print("  1. You're in an Agent OS Enhanced project")
-        print("  2. Agent OS has been installed")
+        print("  1. You're in an prAxIs OS project")
+        print("  2. prAxIs OS has been installed")
         print("  3. Run from project root or subdirectory")
         return 1
     
@@ -292,7 +292,7 @@ def main() -> int:
         update_mcp_json(project_root, url, port)
         
         print("\n" + "=" * 60)
-        print("🎉 SUCCESS! Claude Code is now configured for Agent OS")
+        print("🎉 SUCCESS! Claude Code is now configured for prAxIs OS")
         print("\nConfiguration:")
         print("  - Method: Official 'claude mcp add --scope project'")
         print("  - MCP Config: .mcp.json (project-local, shareable)")

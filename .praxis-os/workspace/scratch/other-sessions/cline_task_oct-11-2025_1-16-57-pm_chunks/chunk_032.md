@@ -300,7 +300,7 @@ def main() -> None:
     
     try:
         # 3. Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
         
         # 4. Load and validate configuration
@@ -502,7 +502,7 @@ interface ServerInfo {
     project: {
         name: string;                 // DYNAMIC: From git or directory
         root: string;                 // DYNAMIC: Filesystem path
-        agent_os_path: string;        // DYNAMIC: Filesystem path
+        praxis_os_path: string;        // DYNAMIC: Filesystem path
         git: {                        // DYNAMIC: Git commands, null if not repo
             remote: string;           // "git@github.com:user/repo.git"
             branch: string;           // "main"

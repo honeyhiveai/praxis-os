@@ -1,6 +1,6 @@
 # Workflow System Overview
 
-**Agent OS Phase-Gated Workflow System Standards**
+**prAxIs OS Phase-Gated Workflow System Standards**
 
 ---
 
@@ -55,7 +55,7 @@ get_workflow_state(session_id)
 
 ## ❓ Questions This Answers
 
-1. "What is the Agent OS workflow system?"
+1. "What is the prAxIs OS workflow system?"
 2. "How do workflows work?"
 3. "How do I start a workflow?"
 4. "How do I use workflow MCP tools?"
@@ -65,14 +65,14 @@ get_workflow_state(session_id)
 8. "How do I complete a phase?"
 9. "How does workflow state management work?"
 10. "How do I create a new workflow?"
-11. "What are standard Agent OS workflows?"
+11. "What are standard prAxIs OS workflows?"
 12. "What are workflow best practices?"
 
 ---
 
 ## 🎯 Purpose
 
-The Agent OS workflow system provides structured, phase-gated execution for complex AI-assisted tasks. This document defines standards for understanding, using, and creating workflows.
+The prAxIs OS workflow system provides structured, phase-gated execution for complex AI-assisted tasks. This document defines standards for understanding, using, and creating workflows.
 
 ---
 
@@ -149,13 +149,13 @@ Complete workflow usage from discovery through execution to completion.
 
 ```python
 # Example 1: Code-based workflow (test generation)
-result = await mcp_agent-os-rag_start_workflow(
+result = await mcp_praxis-os-rag_start_workflow(
     workflow_type="test_generation_v3",
     target_file="src/auth.py"  # File path for code workflows
 )
 
 # Example 2: Spec-based workflow (spec execution)
-result = await mcp_agent-os-rag_start_workflow(
+result = await mcp_praxis-os-rag_start_workflow(
     workflow_type="spec_execution_v1",
     target_file="manifest-upgrade-system",  # Simple identifier, NOT full path
     options={"spec_path": ".praxis-os/specs/2025-10-07-manifest-upgrade-system"}
@@ -197,14 +197,14 @@ RAG-based workflow discovery enables AI agents to find relevant workflows throug
 
 ```python
 # Find workflows for specific tasks
-result = await mcp_agent-os-rag_search_standards(
+result = await mcp_praxis-os-rag_search_standards(
     query="How do I generate comprehensive tests for Python code?",
     n_results=5
 )
 # Returns: test_generation_v3 workflow information
 
 # Discover available workflows
-result = await mcp_agent-os-rag_search_standards(
+result = await mcp_praxis-os-rag_search_standards(
     query="What workflows are available for production code generation?",
     n_results=3
 )
@@ -232,7 +232,7 @@ Each phase has **checkpoint requirements**:
 
 ```python
 # Submit evidence to complete phase
-await mcp_agent-os-rag_complete_phase(
+await mcp_praxis-os-rag_complete_phase(
     session_id="session_123",
     phase=1,
     evidence={
@@ -265,14 +265,14 @@ Workflows now enforce **horizontal scaling** - working on one task at a time ins
 
 ```python
 # Step 1: Get phase overview (task metadata only)
-phase = await mcp_agent-os-rag_get_current_phase(session_id="session_123")
+phase = await mcp_praxis-os-rag_get_current_phase(session_id="session_123")
 
 print(f"Phase {phase['current_phase']}: {len(phase['phase_content']['tasks'])} tasks")
 for task_meta in phase['phase_content']['tasks']:
     print(f"  {task_meta['task_number']}: {task_meta['task_name']}")
 
 # Step 2: Get FIRST task's full content
-task = await mcp_agent-os-rag_get_task(
+task = await mcp_praxis-os-rag_get_task(
     session_id="session_123",
     phase=1,
     task_number=1
@@ -295,11 +295,11 @@ for step in task['steps']:
             evidence[step['evidence_required']] = parse(result)
 
 # Step 4: Get NEXT task and repeat
-task2 = await mcp_agent-os-rag_get_task(session_id="session_123", phase=1, task_number=2)
+task2 = await mcp_praxis-os-rag_get_task(session_id="session_123", phase=1, task_number=2)
 # ... execute task 2 ...
 
 # Step 5: Complete phase with evidence
-await mcp_agent-os-rag_complete_phase(
+await mcp_praxis-os-rag_complete_phase(
     session_id="session_123",
     phase=1,
     evidence=evidence
@@ -332,7 +332,7 @@ await mcp_agent-os-rag_complete_phase(
 
 ## How to Create New Workflows?
 
-Guidelines for designing and implementing new workflows that follow Agent OS standards.
+Guidelines for designing and implementing new workflows that follow prAxIs OS standards.
 
 ### Step 1: Define Metadata
 
@@ -381,7 +381,7 @@ Metadata is automatically indexed when:
 
 ```python
 # Verify workflow is discoverable
-result = await mcp_agent-os-rag_search_standards(
+result = await mcp_praxis-os-rag_search_standards(
     query="API validation workflow",
     n_results=3
 )
@@ -392,7 +392,7 @@ result = await mcp_agent-os-rag_search_standards(
 
 ## What Standard Workflows Are Available?
 
-Agent OS includes battle-tested workflows for common development tasks.
+prAxIs OS includes battle-tested workflows for common development tasks.
 
 ### test_generation_v3
 
@@ -444,7 +444,7 @@ Workflows maintain **persistent state**:
 
 ```python
 # Start workflow (or resume if session exists)
-result = await mcp_agent-os-rag_start_workflow(
+result = await mcp_praxis-os-rag_start_workflow(
     workflow_type="test_generation_v3",
     target_file="auth.py"
 )
@@ -601,7 +601,7 @@ if not result["checkpoint_passed"]:
 
 **Usage:**
 - `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`
-- `usage/operating-model.md` - Agent OS principles → `search_standards("Agent OS operating model")`
+- `usage/operating-model.md` - prAxIs OS principles → `search_standards("prAxIs OS operating model")`
 
 ---
 

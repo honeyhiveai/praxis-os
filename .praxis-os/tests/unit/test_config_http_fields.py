@@ -16,8 +16,8 @@ from mcp_server.models.config import MCPConfig, RAGConfig, ServerConfig
 def temp_config_paths(tmp_path):
     """Create temporary config directories."""
     # Create .praxis-os directory
-    agent_os_dir = tmp_path / ".praxis-os"
-    agent_os_dir.mkdir()
+    praxis_os_dir = tmp_path / ".praxis-os"
+    praxis_os_dir.mkdir()
 
     # Create required directories in project root (parent of .praxis-os)
     (tmp_path / "standards").mkdir()
@@ -25,7 +25,7 @@ def temp_config_paths(tmp_path):
     (tmp_path / "workflows").mkdir()
     (tmp_path / ".cache").mkdir()
 
-    return agent_os_dir
+    return praxis_os_dir
 
 
 @pytest.fixture

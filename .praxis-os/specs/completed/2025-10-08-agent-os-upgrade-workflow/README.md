@@ -1,15 +1,15 @@
-# Agent OS Upgrade Workflow - Specification
+# prAxIs OS Upgrade Workflow - Specification
 
 **Version:** 1.0  
 **Date:** 2025-10-08  
 **Status:** ✅ Complete  
-**Workflow ID:** `agent_os_upgrade_v1`
+**Workflow ID:** `praxis_os_upgrade_v1`
 
 ---
 
 ## Executive Summary
 
-An AI-guided workflow for safely upgrading Agent OS installations (content + MCP server) with automatic validation, rollback capability, and persistence across server restarts. Demonstrates meta-workflow principles for complex operational tasks.
+An AI-guided workflow for safely upgrading prAxIs OS installations (content + MCP server) with automatic validation, rollback capability, and persistence across server restarts. Demonstrates meta-workflow principles for complex operational tasks.
 
 **Key Innovation:** Workflow state persists to disk (`.praxis-os/.cache/state/`), enabling the workflow to survive MCP server restarts during the upgrade process.
 
@@ -27,7 +27,7 @@ An AI-guided workflow for safely upgrading Agent OS installations (content + MCP
 
 ## What This Workflow Does
 
-The Agent OS Upgrade Workflow automates the entire upgrade process:
+The prAxIs OS Upgrade Workflow automates the entire upgrade process:
 
 1. **Phase 0: Pre-Flight Checks** (30s)
    - Validates source repository
@@ -74,7 +74,7 @@ If any phase fails (2, 3, or 4), the workflow automatically rolls back to the ba
 
 ### ✅ State Persistence
 
-Workflow state is saved to disk after each phase, enabling the workflow to survive the MCP server restart in Phase 3. This is a first for Agent OS workflows.
+Workflow state is saved to disk after each phase, enabling the workflow to survive the MCP server restart in Phase 3. This is a first for prAxIs OS workflows.
 
 ### ✅ Safety First
 
@@ -304,7 +304,7 @@ User → AI Assistant → Workflow Engine → State Manager → Disk
 ```python
 # Start upgrade workflow
 result = start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="mcp_server",
     options={
         "source_path": "/path/to/praxis-os",

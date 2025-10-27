@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Update Cline MCP configuration with current Agent OS MCP server port.
+Update Cline MCP configuration with current prAxIs OS MCP server port.
 
 This script reads the dynamically allocated port from .praxis-os/.mcp_server_state.json
 and updates the Cline MCP settings to connect via HTTP to that port.
@@ -98,7 +98,7 @@ def find_cline_config() -> Optional[Path]:
 
 def update_cline_config(config_file: Path, url: str, port: int) -> None:
     """
-    Update Cline MCP config with Agent OS server settings.
+    Update Cline MCP config with prAxIs OS server settings.
     
     :param config_file: Path to cline_mcp_settings.json
     :param url: MCP server URL
@@ -150,7 +150,7 @@ def main() -> int:
     
     :return: Exit code (0 = success, 1 = error)
     """
-    print("🔍 Agent OS MCP - Cline Configuration Updater")
+    print("🔍 prAxIs OS MCP - Cline Configuration Updater")
     print("=" * 60)
     
     # Step 1: Find MCP state file
@@ -160,7 +160,7 @@ def main() -> int:
     if not state_file:
         print("❌ ERROR: Could not find .praxis-os/.mcp_server_state.json")
         print("\nMake sure:")
-        print("  1. You're in an Agent OS Enhanced project")
+        print("  1. You're in an prAxIs OS project")
         print("  2. The MCP server is running")
         print("  3. Run from project root or subdirectory")
         return 1
@@ -200,7 +200,7 @@ def main() -> int:
     try:
         update_cline_config(config_file, url, port)
         print("\n" + "=" * 60)
-        print("🎉 SUCCESS! Cline is now configured for Agent OS Enhanced")
+        print("🎉 SUCCESS! Cline is now configured for prAxIs OS")
         print("\nNext steps:")
         print("  1. Restart Cline (reload VSCode/Cursor window)")
         print("  2. Open Cline and verify 'agent-os-rag' server is connected")

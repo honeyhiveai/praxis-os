@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The `workflow_creation_v1` workflow is a **sophisticated, self-reinforcing meta-workflow** that systematically creates Agent OS workflows from structured YAML definitions. It embodies all 5 meta-workflow principles and includes embedded compliance auditing.
+The `workflow_creation_v1` workflow is a **sophisticated, self-reinforcing meta-workflow** that systematically creates prAxIs OS workflows from structured YAML definitions. It embodies all 5 meta-workflow principles and includes embedded compliance auditing.
 
 **Key Finding:** Critical input preprocessing gap identified - workflow assumes YAML definition pre-exists but provides no mechanism to convert design documents to YAML format.
 
@@ -705,7 +705,7 @@ def pre_flight_check(definition_path):
 
 ## Conclusion
 
-The `workflow_creation_v1` workflow is a **masterfully designed meta-workflow** that embodies all Agent OS principles. Its dynamic phase system, embedded compliance auditing, and template-driven generation make it a powerful tool for systematic workflow creation.
+The `workflow_creation_v1` workflow is a **masterfully designed meta-workflow** that embodies all prAxIs OS principles. Its dynamic phase system, embedded compliance auditing, and template-driven generation make it a powerful tool for systematic workflow creation.
 
 **Key Strengths:**
 1. ✅ Self-reinforcing (enforces principles it was built with)

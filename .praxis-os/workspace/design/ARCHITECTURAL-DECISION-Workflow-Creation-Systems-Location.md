@@ -144,7 +144,7 @@ start_workflow("test_generation_python_v1", "src/module.py")
 **Installation Flow:**
 
 ```bash
-# Agent OS installation script
+# prAxIs OS installation script
 pip install agent-os  # Does NOT include workflow-types/
 
 # User wants test generation
@@ -245,7 +245,7 @@ Source Repository (github.com/honeyhiveai/praxis-os):
 ├── meta-workflow/workflow-types/      ← Workflow creation systems
 │   ├── test-generation/
 │   └── production-code-generation/
-└── [other Agent OS source]
+└── [other prAxIs OS source]
 
 User Project (~/my-project/):
 ├── .praxis-os/
@@ -480,7 +480,7 @@ def _should_index_file(self, file_path: str) -> bool:
 ```markdown
 ## Workflow Creation
 
-Agent OS includes workflow creation systems for common patterns:
+prAxIs OS includes workflow creation systems for common patterns:
 
 ### Test Generation
 

@@ -268,7 +268,7 @@
         Returns:
             Tuple of (passed: bool, missing_fields: List[str])
         """
-        # Load requirements dynamically from Agent OS documents
+        # Load requirements dynamically from prAxIs OS documents
         checkpoint_def = self.checkpoint_loader.load_checkpoint_requirements(
             workflow_type, phase
         )
@@ -781,7 +781,7 @@ ACT MODE
 <list_code_definition_names>
 <path>mcp_server/server</path>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [x] Analyze key components and architecture
 - [ ] Review documentation and standards structure
@@ -874,7 +874,7 @@ ACT MODE
 <path>universal/standards</path>
 <recursive>false</recursive>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [x] Analyze key components and architecture
 - [ ] Review documentation and standards structure
@@ -929,7 +929,7 @@ ACT MODE
 <path>universal/workflows</path>
 <recursive>false</recursive>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [x] Analyze key components and architecture
 - [x] Review documentation and standards structure
@@ -943,7 +943,7 @@ ACT MODE
 **User:**
 
 [list_files for 'universal/workflows'] Result:
-agent_os_upgrade_v1/
+praxis_os_upgrade_v1/
 spec_creation_v1/
 spec_execution_v1/
 <environment_details>
@@ -972,11 +972,11 @@ ACT MODE
 
 <attempt_completion>
 <result>
-# Agent OS Enhanced - Project Analysis
+# prAxIs OS - Project Analysis
 
 ## 📋 Executive Summary
 
-**Agent OS Enhanced** is a portable, AI-first development framework that combines universal computer science fundamentals with AI-powered semantic search (RAG) and phase-gated workflows. It's designed to be installed in any project to enhance AI agent capabilities through structured guidance, standards enforcement, and intelligent context retrieval.
+**prAxIs OS** is a portable, AI-first development framework that combines universal computer science fundamentals with AI-powered semantic search (RAG) and phase-gated workflows. It's designed to be installed in any project to enhance AI agent capabilities through structured guidance, standards enforcement, and intelligent context retrieval.
 
 ## 🎯 Core Purpose
 

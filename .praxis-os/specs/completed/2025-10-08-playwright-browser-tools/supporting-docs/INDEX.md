@@ -1,6 +1,6 @@
 # Supporting Documents Index
 
-**Spec**: Browser Automation Tool for Agent OS MCP Server  
+**Spec**: Browser Automation Tool for prAxIs OS MCP Server  
 **Target**: `mcp_server/browser_manager.py`  
 **Created**: October 8, 2025
 

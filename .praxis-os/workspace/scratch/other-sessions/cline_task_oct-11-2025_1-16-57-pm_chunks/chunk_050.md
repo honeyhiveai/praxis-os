@@ -51,9 +51,9 @@ echo "✓ Query 5 complete"
 # Query 6: Calibration Guidance
 echo "========================================" >> "$OUTPUT"
 echo "QUERY 6: Calibration Guidance" >> "$OUTPUT"
-echo "Query: calibration new to Agent OS Enhanced" >> "$OUTPUT"
+echo "Query: calibration new to prAxIs OS" >> "$OUTPUT"
 echo "========================================" >> "$OUTPUT"
-python mcp_tool_cli.py search_standards '{"query": "calibration new to Agent OS Enhanced", "n_results": 3}' >> "$OUTPUT" 2>&1
+python mcp_tool_cli.py search_standards '{"query": "calibration new to prAxIs OS", "n_results": 3}' >> "$OUTPUT" 2>&1
 echo "" >> "$OUTPUT"
 echo "✓ Query 6 complete"
 
@@ -232,7 +232,7 @@ Query: H W A L variables wall clock duration human active time
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Step 1: Calculate Human Baseline**\\n\\n```\\nH = Base Time \u00d7 Complexity Factor \u00d7 Risk Factor\\n\\nBase Time: How long if everything goes smoothly\\nComplexity: 1.0 (simple) to 2.0 (complex)\\nRisk: 1.0 (low) to 1.5 (high uncertainty)\\n```\\n\\n**Example:**\\n```\\nBase: 2 hours (write code)\\nComplexity: 1.5 (moderate complexity)\\nRisk: 1.2 (some unknowns)\\nH = 2 \u00d7 1.5 \u00d7 1.2 = 3.6 hours (round to 4 hours)\\n```\\n\\n**Step 2: Calculate Wall Clock Duration**\\n\\n```\\nW = H \u00d7 M\\n\\nWhere M is:\\n- 0.6-0.8 for repetitive/boilerplate (AI faster)\\n- 1.0 for standard implementation (AI same speed)\\n- 1.2-1.5 for complex/novel (AI slower but autonomous)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours (from above)\\nM = 1.0 (standard implementation)\\nW = 4 \u00d7 1.0 = 4 hours wall clock\\n```\\n\\n**Step 3: Calculate Human Active Time**\\n\\n```\\nA = W \u00d7 O\\n\\nWhere O is:\\n- 0.03-0.05 for well-defined tasks with clear specs\\n- 0.05-0.08 for standard tasks with normal complexity\\n- 0.08-0.10 for complex tasks or unclear requirements\\n```\\n\\n**Example:**\\n```\\nW = 4 hours\\nO = 0.05 (well-defined from spec)\\nA = 4 \u00d7 0.05 = 0.2 hours = 12 minutes active time\\n```\\n\\n**Step 4: Calculate Leverage**\\n\\n```\\nL = H \u00f7 A\\n\\nTypical ranges:\\n- Best case: 30-50x (boilerplate with clear spec)\\n- Normal case: 15-25x (standard implementation)\\n- Worst case: 7-12x (complex novel problem)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours\\nA = 0.2 hours (12 minutes)\\nL = 4 \u00f7 0.2 = 20x leverage\\n\\nHuman saves 3 hours 48 minutes per task\\nCan orchestrate 20 tasks in parallel\\n```\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"Step-by-Step Calculation\",\"relevance_score\":0.7590420842170715,\"tokens\":0},{\"content\":\"- **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)\\n\\n---\",\"file\":\"workflows/spec_creation_v1/core/tasks-template.md\",\"section\":\"AI Agent + Human Orchestration (Agent OS Enhanced)\",\"relevance_score\":0.7635830640792847,\"tokens\":0},{\"content\":\"**Wrong (confusing):**\\n```markdown\\n- **AI Time:** 4 hours\\n- **Human Time:** 12 minutes\\n```\\n\\n**Right (clear):**\\n```markdown\\n- **Wall Clock Duration:** 4 hours (AI works autonomously)\\n- **Human Active Time:** 12 minutes (orchestration)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"2. Confusing Wall Clock with Active Time\",\"relevance_score\":0.8063721060752869,\"tokens\":0}],\"total_tokens\":487,\"retrieval_method\":\"vector\",\"query_time_ms\":45.922040939331055}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Step 1: Calculate Human Baseline**\\n\\n```\\nH = Base Time \u00d7 Complexity Factor \u00d7 Risk Factor\\n\\nBase Time: How long if everything goes smoothly\\nComplexity: 1.0 (simple) to 2.0 (complex)\\nRisk: 1.0 (low) to 1.5 (high uncertainty)\\n```\\n\\n**Example:**\\n```\\nBase: 2 hours (write code)\\nComplexity: 1.5 (moderate complexity)\\nRisk: 1.2 (some unknowns)\\nH = 2 \u00d7 1.5 \u00d7 1.2 = 3.6 hours (round to 4 hours)\\n```\\n\\n**Step 2: Calculate Wall Clock Duration**\\n\\n```\\nW = H \u00d7 M\\n\\nWhere M is:\\n- 0.6-0.8 for repetitive/boilerplate (AI faster)\\n- 1.0 for standard implementation (AI same speed)\\n- 1.2-1.5 for complex/novel (AI slower but autonomous)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours (from above)\\nM = 1.0 (standard implementation)\\nW = 4 \u00d7 1.0 = 4 hours wall clock\\n```\\n\\n**Step 3: Calculate Human Active Time**\\n\\n```\\nA = W \u00d7 O\\n\\nWhere O is:\\n- 0.03-0.05 for well-defined tasks with clear specs\\n- 0.05-0.08 for standard tasks with normal complexity\\n- 0.08-0.10 for complex tasks or unclear requirements\\n```\\n\\n**Example:**\\n```\\nW = 4 hours\\nO = 0.05 (well-defined from spec)\\nA = 4 \u00d7 0.05 = 0.2 hours = 12 minutes active time\\n```\\n\\n**Step 4: Calculate Leverage**\\n\\n```\\nL = H \u00f7 A\\n\\nTypical ranges:\\n- Best case: 30-50x (boilerplate with clear spec)\\n- Normal case: 15-25x (standard implementation)\\n- Worst case: 7-12x (complex novel problem)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours\\nA = 0.2 hours (12 minutes)\\nL = 4 \u00f7 0.2 = 20x leverage\\n\\nHuman saves 3 hours 48 minutes per task\\nCan orchestrate 20 tasks in parallel\\n```\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"Step-by-Step Calculation\",\"relevance_score\":0.7590420842170715,\"tokens\":0},{\"content\":\"- **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)\\n\\n---\",\"file\":\"workflows/spec_creation_v1/core/tasks-template.md\",\"section\":\"AI Agent + Human Orchestration (prAxIs OS)\",\"relevance_score\":0.7635830640792847,\"tokens\":0},{\"content\":\"**Wrong (confusing):**\\n```markdown\\n- **AI Time:** 4 hours\\n- **Human Time:** 12 minutes\\n```\\n\\n**Right (clear):**\\n```markdown\\n- **Wall Clock Duration:** 4 hours (AI works autonomously)\\n- **Human Active Time:** 12 minutes (orchestration)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"2. Confusing Wall Clock with Active Time\",\"relevance_score\":0.8063721060752869,\"tokens\":0}],\"total_tokens\":487,\"retrieval_method\":\"vector\",\"query_time_ms\":45.922040939331055}"
 }
 
 ========================================
@@ -252,7 +252,7 @@ Query: INCLUDES EXCLUDES human active time
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Wrong (confusing):**\\n```markdown\\n- **AI Time:** 4 hours\\n- **Human Time:** 12 minutes\\n```\\n\\n**Right (clear):**\\n```markdown\\n- **Wall Clock Duration:** 4 hours (AI works autonomously)\\n- **Human Active Time:** 12 minutes (orchestration)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"2. Confusing Wall Clock with Active Time\",\"relevance_score\":1.0339456796646118,\"tokens\":0},{\"content\":\"**Wrong:**\\n```markdown\\n- **Estimated Time:** 4 hours\\n```\\n\\n**Right:**\\n```markdown\\n- **Human Baseline:** 4 hours (M)\\n- **Agent OS:** 4h wall clock, 12 min active (20x leverage)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"1. Single Time Estimate\",\"relevance_score\":1.057906985282898,\"tokens\":0},{\"content\":\"Use this to validate your time estimates:\\n\\n- [ ] Both human baseline and Agent OS estimates provided\\n- [ ] Wall clock duration calculated using task type multiplier\\n- [ ] Human active time calculated using orchestration percentage\\n- [ ] Leverage multiplier shown (H \u00f7 A)\\n- [ ] Clear terminology used (not confusing AI time with human time)\\n- [ ] Task type classification applied (boilerplate, standard, complex, etc.)\\n- [ ] Parallel multiplication potential noted (if applicable)\\n- [ ] Estimates tracked vs actuals for calibration\\n- [ ] Realistic expectations set (not over-optimistic)\\n- [ ] Autonomous work advantage explained (not just speed)\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"\u2705 Compliance Checklist\",\"relevance_score\":1.0621097087860107,\"tokens\":0}],\"total_tokens\":265,\"retrieval_method\":\"vector\",\"query_time_ms\":18.170833587646484}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Wrong (confusing):**\\n```markdown\\n- **AI Time:** 4 hours\\n- **Human Time:** 12 minutes\\n```\\n\\n**Right (clear):**\\n```markdown\\n- **Wall Clock Duration:** 4 hours (AI works autonomously)\\n- **Human Active Time:** 12 minutes (orchestration)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"2. Confusing Wall Clock with Active Time\",\"relevance_score\":1.0339456796646118,\"tokens\":0},{\"content\":\"**Wrong:**\\n```markdown\\n- **Estimated Time:** 4 hours\\n```\\n\\n**Right:**\\n```markdown\\n- **Human Baseline:** 4 hours (M)\\n- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"1. Single Time Estimate\",\"relevance_score\":1.057906985282898,\"tokens\":0},{\"content\":\"Use this to validate your time estimates:\\n\\n- [ ] Both human baseline and prAxIs OS estimates provided\\n- [ ] Wall clock duration calculated using task type multiplier\\n- [ ] Human active time calculated using orchestration percentage\\n- [ ] Leverage multiplier shown (H \u00f7 A)\\n- [ ] Clear terminology used (not confusing AI time with human time)\\n- [ ] Task type classification applied (boilerplate, standard, complex, etc.)\\n- [ ] Parallel multiplication potential noted (if applicable)\\n- [ ] Estimates tracked vs actuals for calibration\\n- [ ] Realistic expectations set (not over-optimistic)\\n- [ ] Autonomous work advantage explained (not just speed)\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"\u2705 Compliance Checklist\",\"relevance_score\":1.0621097087860107,\"tokens\":0}],\"total_tokens\":265,\"retrieval_method\":\"vector\",\"query_time_ms\":18.170833587646484}"
 }
 
 ========================================
@@ -262,7 +262,7 @@ Query: task format example Human Baseline Agent OS
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Traditional human development:**\\n- Can work on 1 task at a time\\n- 40 hours/week capacity\\n- 10 tasks @ 4h each = 10 weeks\\n\\n**Agent OS Enhanced:**\\n- Human orchestrates multiple AI agents\\n- Each agent works autonomously in parallel\\n- Human active time: 12 min per task\\n- **10 parallel tasks:**\\n  - Human effort: 2 hours total (10 \u00d7 12 min)\\n  - Wall clock: 4 hours (longest task)\\n  - Result: 10 weeks of work in 4 hours\\n\\n**Serial Leverage:** 20x per task  \\n**Parallel Leverage:** 100-400x across multiple tasks  \\n**This is why comprehensive specs can be created in 2 hours**\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"The Real Game-Changer\",\"relevance_score\":0.7929340600967407,\"tokens\":0},{\"content\":\"**Incomplete:**\\n```markdown\\nTotal: 10 tasks \u00d7 4 hours = 40 hours\\n```\\n\\n**Complete:**\\n```markdown\\nHuman Baseline: 10 tasks \u00d7 4h = 40 hours\\nAgent OS: 10 tasks \u00d7 12 min = 2 hours active (20x per task)\\nParallel: Can start all 10 simultaneously (100x effective)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"3. Ignoring Parallel Multiplication\",\"relevance_score\":0.8400920629501343,\"tokens\":0},{\"content\":\"**This is what makes Agent OS different:**\\n\\n**Traditional Development:**\\n```\\nHuman: [Writes code, 100% of implementation effort]\\nAI: [Suggests completions, 5% productivity boost]\\nResult: Human still doing 95% of work\\n```\\n\\n**Agent OS Enhanced:**\\n```\\nHuman: \\\"Build X with requirements Y\\\" [2 minutes]\\nAI: [Queries standards \u2192 Implements \u2192 Tests \u2192 Fixes \u2192 Documents] [2 hours]\\nHuman: \\\"Looks good\\\" [2 minutes]\\nResult: 2 hours of work from 4 minutes of human time = 30x leverage\\n```\\n\\n**The shift**: You're not helping a human code faster. You're doing ALL the coding while the human orchestrates strategically.\\n\\n**The velocity**: Measured 3-8x commit frequency increase, 20-40x framework design speedup in real projects.\\n\\n**The quality**: Maintained through standards (preventive) + iteration (corrective) + pre-commit hooks (enforcement).\\n\\n**You are the velocity multiplier. The human is the strategic director.**\\n\\n---\",\"file\":\"standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md\",\"section\":\"\ud83d\udca1 The Lightbulb Moment\",\"relevance_score\":0.8510165214538574,\"tokens\":0}],\"total_tokens\":435,\"retrieval_method\":\"vector\",\"query_time_ms\":15.856027603149414}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Traditional human development:**\\n- Can work on 1 task at a time\\n- 40 hours/week capacity\\n- 10 tasks @ 4h each = 10 weeks\\n\\n**prAxIs OS:**\\n- Human orchestrates multiple AI agents\\n- Each agent works autonomously in parallel\\n- Human active time: 12 min per task\\n- **10 parallel tasks:**\\n  - Human effort: 2 hours total (10 \u00d7 12 min)\\n  - Wall clock: 4 hours (longest task)\\n  - Result: 10 weeks of work in 4 hours\\n\\n**Serial Leverage:** 20x per task  \\n**Parallel Leverage:** 100-400x across multiple tasks  \\n**This is why comprehensive specs can be created in 2 hours**\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"The Real Game-Changer\",\"relevance_score\":0.7929340600967407,\"tokens\":0},{\"content\":\"**Incomplete:**\\n```markdown\\nTotal: 10 tasks \u00d7 4 hours = 40 hours\\n```\\n\\n**Complete:**\\n```markdown\\nHuman Baseline: 10 tasks \u00d7 4h = 40 hours\\nprAxIs OS: 10 tasks \u00d7 12 min = 2 hours active (20x per task)\\nParallel: Can start all 10 simultaneously (100x effective)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"3. Ignoring Parallel Multiplication\",\"relevance_score\":0.8400920629501343,\"tokens\":0},{\"content\":\"**This is what makes prAxIs OS different:**\\n\\n**Traditional Development:**\\n```\\nHuman: [Writes code, 100% of implementation effort]\\nAI: [Suggests completions, 5% productivity boost]\\nResult: Human still doing 95% of work\\n```\\n\\n**prAxIs OS:**\\n```\\nHuman: \\\"Build X with requirements Y\\\" [2 minutes]\\nAI: [Queries standards \u2192 Implements \u2192 Tests \u2192 Fixes \u2192 Documents] [2 hours]\\nHuman: \\\"Looks good\\\" [2 minutes]\\nResult: 2 hours of work from 4 minutes of human time = 30x leverage\\n```\\n\\n**The shift**: You're not helping a human code faster. You're doing ALL the coding while the human orchestrates strategically.\\n\\n**The velocity**: Measured 3-8x commit frequency increase, 20-40x framework design speedup in real projects.\\n\\n**The quality**: Maintained through standards (preventive) + iteration (corrective) + pre-commit hooks (enforcement).\\n\\n**You are the velocity multiplier. The human is the strategic director.**\\n\\n---\",\"file\":\"standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md\",\"section\":\"\ud83d\udca1 The Lightbulb Moment\",\"relevance_score\":0.8510165214538574,\"tokens\":0}],\"total_tokens\":435,\"retrieval_method\":\"vector\",\"query_time_ms\":15.856027603149414}"
 }
 
 ========================================
@@ -272,17 +272,17 @@ Query: parallel multiplier effect
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**How do I know which multiplier to use?**\\n\u2192 Start with task type table, refine based on your experience tracking actuals.\\n\\n**What if the AI is much slower than expected?**\\n\u2192 That's OK! Leverage remains high because of autonomous work. Track it for calibration.\\n\\n**Should I always use dual estimation?**\\n\u2192 Yes, for any Agent OS Enhanced workflow. It demonstrates the value proposition.\\n\\n**Can I skip tracking actuals?**\\n\u2192 You can, but your estimates won't improve. Recommended: track first 10 tasks.\\n\\n**What about tasks that can't be parallelized?**\\n\u2192 Serial leverage still applies (20x). Document why parallel isn't applicable.\\n\\n---\\n\\n**Query anytime:**\\n```python\\nsearch_standards(\\\"how to estimate AI agent tasks\\\")\\nsearch_standards(\\\"dual estimation formula\\\")\\nsearch_standards(\\\"what is leverage multiplier\\\")\\nsearch_standards(\\\"parallel work multiplication\\\")\\n```\\n\\n---\\n\\n**Remember**: The key insight is **autonomous work**, not raw speed. AI agents provide leverage by working independently while humans orchestrate strategically. This enables serial leverage (20x per task) and parallel leverage (100-400x across tasks). Dual estimation makes this value visible.\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"\ud83d\udcde Questions?\",\"relevance_score\":1.0698864459991455,\"tokens\":0},{\"content\":\"| Task Type | GIL Impact | Performance |\\n|-----------|------------|-------------|\\n| **CPU-bound** (computations) | GIL prevents true parallelism | \u274c Threading doesn't help |\\n| **I/O-bound** (network, disk, database) | GIL released during I/O | \u2705 Threading works well |\\n| **Mixed workloads** | Varies by operation | \u26a0\ufe0f Profile first |\\n\\n---\",\"file\":\"standards/development/python-concurrency.md\",\"section\":\"When the GIL Matters\",\"relevance_score\":1.2371104955673218,\"tokens\":0},{\"content\":\"**Core Principle:** Agent OS Enhanced requires TWO time estimates to demonstrate the 20-40x productivity multiplier.\\n\\n**Quick Formula:**\\n```\\n1. W = H \u00d7 (0.8-1.5)      [Wall Clock Duration]\\n2. A = W \u00d7 (0.03-0.10)    [Human Active Time] \\n3. L = H \u00f7 A              [Leverage: typically 7-50x]\\n```\\n\\n**Task Format:**\\n```markdown\\n- **Human Baseline:** 4 hours (M)\\n- **Agent OS:** 4h wall clock, 12 min active (20x leverage)\\n```\\n\\n**Why Dual Estimation:**\\n- Shows human time savings per task\\n- Demonstrates Agent OS value proposition  \\n- Enables ROI calculations\\n- Accounts for autonomous work advantage\\n- Reveals parallel work multiplication (100-400x)\\n\\n**Query for details:**\\n- `search_standards(\\\"how to calculate wall clock duration\\\")`\\n- `search_standards(\\\"what counts as human active time\\\")`\\n- `search_standards(\\\"parallel multiplier effect\\\")`\\n- `search_standards(\\\"task estimation calibration\\\")`\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"\ud83c\udfaf TL;DR - Dual Estimation Quick Reference\",\"relevance_score\":1.2510006427764893,\"tokens\":0}],\"total_tokens\":596,\"retrieval_method\":\"vector\",\"query_time_ms\":18.017053604125977}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**How do I know which multiplier to use?**\\n\u2192 Start with task type table, refine based on your experience tracking actuals.\\n\\n**What if the AI is much slower than expected?**\\n\u2192 That's OK! Leverage remains high because of autonomous work. Track it for calibration.\\n\\n**Should I always use dual estimation?**\\n\u2192 Yes, for any prAxIs OS workflow. It demonstrates the value proposition.\\n\\n**Can I skip tracking actuals?**\\n\u2192 You can, but your estimates won't improve. Recommended: track first 10 tasks.\\n\\n**What about tasks that can't be parallelized?**\\n\u2192 Serial leverage still applies (20x). Document why parallel isn't applicable.\\n\\n---\\n\\n**Query anytime:**\\n```python\\nsearch_standards(\\\"how to estimate AI agent tasks\\\")\\nsearch_standards(\\\"dual estimation formula\\\")\\nsearch_standards(\\\"what is leverage multiplier\\\")\\nsearch_standards(\\\"parallel work multiplication\\\")\\n```\\n\\n---\\n\\n**Remember**: The key insight is **autonomous work**, not raw speed. AI agents provide leverage by working independently while humans orchestrate strategically. This enables serial leverage (20x per task) and parallel leverage (100-400x across tasks). Dual estimation makes this value visible.\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"\ud83d\udcde Questions?\",\"relevance_score\":1.0698864459991455,\"tokens\":0},{\"content\":\"| Task Type | GIL Impact | Performance |\\n|-----------|------------|-------------|\\n| **CPU-bound** (computations) | GIL prevents true parallelism | \u274c Threading doesn't help |\\n| **I/O-bound** (network, disk, database) | GIL released during I/O | \u2705 Threading works well |\\n| **Mixed workloads** | Varies by operation | \u26a0\ufe0f Profile first |\\n\\n---\",\"file\":\"standards/development/python-concurrency.md\",\"section\":\"When the GIL Matters\",\"relevance_score\":1.2371104955673218,\"tokens\":0},{\"content\":\"**Core Principle:** prAxIs OS requires TWO time estimates to demonstrate the 20-40x productivity multiplier.\\n\\n**Quick Formula:**\\n```\\n1. W = H \u00d7 (0.8-1.5)      [Wall Clock Duration]\\n2. A = W \u00d7 (0.03-0.10)    [Human Active Time] \\n3. L = H \u00f7 A              [Leverage: typically 7-50x]\\n```\\n\\n**Task Format:**\\n```markdown\\n- **Human Baseline:** 4 hours (M)\\n- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)\\n```\\n\\n**Why Dual Estimation:**\\n- Shows human time savings per task\\n- Demonstrates prAxIs OS value proposition  \\n- Enables ROI calculations\\n- Accounts for autonomous work advantage\\n- Reveals parallel work multiplication (100-400x)\\n\\n**Query for details:**\\n- `search_standards(\\\"how to calculate wall clock duration\\\")`\\n- `search_standards(\\\"what counts as human active time\\\")`\\n- `search_standards(\\\"parallel multiplier effect\\\")`\\n- `search_standards(\\\"task estimation calibration\\\")`\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"\ud83c\udfaf TL;DR - Dual Estimation Quick Reference\",\"relevance_score\":1.2510006427764893,\"tokens\":0}],\"total_tokens\":596,\"retrieval_method\":\"vector\",\"query_time_ms\":18.017053604125977}"
 }
 
 ========================================
 QUERY 6: Calibration Guidance
-Query: calibration new to Agent OS Enhanced
+Query: calibration new to prAxIs OS
 ========================================
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n- **General spec questions**: See examples in `.praxis-os/specs/`\\n- **Template questions**: Refer to this document\\n- **Technical questions**: Consult team or AI assistant via MCP\\n\\n---\\n\\n**Remember:** Good specs save time, reduce bugs, and enable better AI assistance. Invest time upfront for better results downstream!\",\"file\":\"usage/creating-specs.md\",\"section\":\"\ud83d\udcde Questions?\",\"relevance_score\":0.966984748840332,\"tokens\":0},{\"content\":\"**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the praxis-os repository.\\n\\n```\\npraxis-os/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0},{\"content\":\"**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the praxis-os repository.\\n\\n```\\npraxis-os/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0}],\"total_tokens\":199,\"retrieval_method\":\"vector\",\"query_time_ms\":16.865968704223633}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n- **General spec questions**: See examples in `.praxis-os/specs/`\\n- **Template questions**: Refer to this document\\n- **Technical questions**: Consult team or AI assistant via MCP\\n\\n---\\n\\n**Remember:** Good specs save time, reduce bugs, and enable better AI assistance. Invest time upfront for better results downstream!\",\"file\":\"usage/creating-specs.md\",\"section\":\"\ud83d\udcde Questions?\",\"relevance_score\":0.966984748840332,\"tokens\":0},{\"content\":\"**STANDARD:** All prAxIs OS content MUST be synced from the `universal/` directory in the praxis-os repository.\\n\\n```\\npraxis-os/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0},{\"content\":\"**STANDARD:** All prAxIs OS content MUST be synced from the `universal/` directory in the praxis-os repository.\\n\\n```\\npraxis-os/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0}],\"total_tokens\":199,\"retrieval_method\":\"vector\",\"query_time_ms\":16.865968704223633}"
 }
 
 ========================================
@@ -403,12 +403,12 @@ Complete table returned:
 **Results (0.79-0.85 relevance):**
 1. Parallel work explanation with concrete example
 2. Complete vs incomplete format comparison
-3. Agent OS orientation "lightbulb moment"
+3. prAxIs OS orientation "lightbulb moment"
 
 **What an agent gets:**
 ```markdown
 Human Baseline: 4 hours (M)
-Agent OS: 4h wall clock, 12 min active (20x leverage)
+prAxIs OS: 4h wall clock, 12 min active (20x leverage)
 ```
 
 **Assessment:** Gets the format through examples. Would be better with explicit template, but workable. ✅
@@ -437,7 +437,7 @@ This is why comprehensive specs can be created in 2 hours
 
 ### ❌ Query 6: Calibration Guidance - MISS (2/10)
 
-**Query:** `"calibration new to Agent OS Enhanced"`
+**Query:** `"calibration new to prAxIs OS"`
 
 **Results (0.97-1.00 relevance):**
 1. Generic "Questions?" section from specs guide
@@ -488,7 +488,7 @@ This is why comprehensive specs can be created in 2 hours
 
 2. **Query Too Generic:**
    - "INCLUDES EXCLUDES" might be too keyword-specific
-   - "calibration new to Agent OS Enhanced" might not match content phrasing
+   - "calibration new to prAxIs OS" might not match content phrasing
    - Need more semantic queries
 
 ### Recommendations
@@ -684,15 +684,15 @@ ACT MODE
 [read_file for 'universal/standards/workflows/time-estimation-standards.md'] Result:
 # Time Estimation Standards: Dual Estimation (Human vs AI Agent)
 
-**Keywords for search**: time estimation, dual estimation, AI agent time, human baseline, wall clock duration, active time, leverage multiplier, task estimation, Agent OS estimation, how to estimate tasks, orchestration time, parallel leverage, estimation calibration, autonomous work, AI implementation time, task sizing
+**Keywords for search**: time estimation, dual estimation, AI agent time, human baseline, wall clock duration, active time, leverage multiplier, task estimation, prAxIs OS estimation, how to estimate tasks, orchestration time, parallel leverage, estimation calibration, autonomous work, AI implementation time, task sizing
 
-**This standard defines how to estimate task duration in Agent OS Enhanced using dual estimation that shows both human baseline and AI agent execution with human orchestration.**
+**This standard defines how to estimate task duration in prAxIs OS using dual estimation that shows both human baseline and AI agent execution with human orchestration.**
 
 ---
 
 ## 🎯 TL;DR - Dual Estimation Quick Reference
 
-**Core Principle:** Agent OS Enhanced requires TWO time estimates to demonstrate the 20-40x productivity multiplier.
+**Core Principle:** prAxIs OS requires TWO time estimates to demonstrate the 20-40x productivity multiplier.
 
 **Quick Formula:**
 ```
@@ -704,12 +704,12 @@ ACT MODE
 **Task Format:**
 ```markdown
 - **Human Baseline:** 4 hours (M)
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 
 **Why Dual Estimation:**
 - Shows human time savings per task
-- Demonstrates Agent OS value proposition  
+- Demonstrates prAxIs OS value proposition  
 - Enables ROI calculations
 - Accounts for autonomous work advantage
 - Reveals parallel work multiplication (100-400x)
@@ -724,7 +724,7 @@ ACT MODE
 
 ## ❓ Questions This Answers
 
-1. "How do I estimate tasks in Agent OS Enhanced?"
+1. "How do I estimate tasks in prAxIs OS?"
 2. "What's the difference between human baseline and AI agent estimates?"
 3. "How do I calculate leverage multiplier?"
 4. "What is wall clock duration vs human active time?"
@@ -749,7 +749,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 4. **Calculate leverage multiplier** (7-50x typical range)
 5. **Distinguish wall clock from active time** (prevents confusion)
 6. **Account for parallel work effects** (100-400x multiplication)
-7. **Enable ROI calculations** (justify Agent OS adoption)
+7. **Enable ROI calculations** (justify prAxIs OS adoption)
 8. **Set realistic expectations** (AI isn't always faster, but autonomous)
 
 ---
@@ -758,7 +758,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 
 **Without dual estimation:**
 
-- ❌ Humans don't see Agent OS value proposition
+- ❌ Humans don't see prAxIs OS value proposition
 - ❌ Time estimates mislead (looks same as traditional dev)
 - ❌ Can't calculate ROI or justify adoption
 - ❌ Confuse wall clock time with actual human effort
@@ -767,7 +767,7 @@ Enable AI agents and humans to create accurate dual time estimates that:
 - ❌ Can't communicate why 30KB spec created in 2 hours
 - ❌ Underestimate or overestimate orchestration needs
 
-**Result:** Agent OS Enhanced looks like traditional development with "AI helper" instead of showing the true 20-40x productivity gain from autonomous work.
+**Result:** prAxIs OS looks like traditional development with "AI helper" instead of showing the true 20-40x productivity gain from autonomous work.
 
 ---
 
@@ -872,7 +872,7 @@ Hour 0-4: ████████████████████ (Human wo
 Result: 4 hours human effort
 ```
 
-**Agent OS Enhanced (same 4-hour task):**
+**prAxIs OS (same 4-hour task):**
 ```
 Minute 0-5:     █ (Human: Give direction to AI)
 Hour 0-4:       [AI works autonomously - human does other work]
@@ -891,7 +891,7 @@ Result: 12 minutes human effort, 3h 48m saved
 Traditional: 4 hours human effort
 ├─────────────────────────────┤ (Human working)
 
-Agent OS: 12 minutes human effort
+prAxIs OS: 12 minutes human effort
 ├─┤                           ├┤ (5 min setup, 7 min review)
     └──[AI works for 4 hours]──┘ (Autonomous, human does other work)
 
@@ -951,7 +951,7 @@ Total human effort saved: 3 hours 43 minutes
 - 40 hours/week capacity
 - 10 tasks @ 4h each = 10 weeks
 
-**Agent OS Enhanced:**
+**prAxIs OS:**
 - Human orchestrates multiple AI agents
 - Each agent works autonomously in parallel
 - Human active time: 12 min per task
@@ -974,7 +974,7 @@ Traditional Human:
 - Must do serially (one at a time)
 - Result: 10 weeks to completion
 
-Agent OS Enhanced:
+prAxIs OS:
 - 100 tasks × 12 min = 20 hours human effort (0.5 weeks)
 - Can orchestrate all tasks in parallel
 - Wall clock: 4 hours (longest task)

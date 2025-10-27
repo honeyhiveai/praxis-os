@@ -18,7 +18,7 @@
 
 ## 🎯 Calibrating Your Estimates
 
-### If You're New to Agent OS Enhanced
+### If You're New to prAxIs OS
 
 **Start conservative:**
 - Use 1.2x multiplier (assume AI is same speed or slower)
@@ -76,7 +76,7 @@
 ```markdown
 - [ ] **Task 1.1**: Create database schema
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Define tables for users, resources, tags
   - Add indexes for foreign keys and frequently queried columns
@@ -126,7 +126,7 @@
 **Right:**
 ```markdown
 - **Human Baseline:** 4 hours (M)
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 
 ### 2. Confusing Wall Clock with Active Time
@@ -153,7 +153,7 @@ Total: 10 tasks × 4 hours = 40 hours
 **Complete:**
 ```markdown
 Human Baseline: 10 tasks × 4h = 40 hours
-Agent OS: 10 tasks × 12 min = 2 hours active (20x per task)
+prAxIs OS: 10 tasks × 12 min = 2 hours active (20x per task)
 Parallel: Can start all 10 simultaneously (100x effective)
 ```
 
@@ -176,7 +176,7 @@ Parallel: Can start all 10 simultaneously (100x effective)
 
 Use this to validate your time estimates:
 
-- [ ] Both human baseline and Agent OS estimates provided
+- [ ] Both human baseline and prAxIs OS estimates provided
 - [ ] Wall clock duration calculated using task type multiplier
 - [ ] Human active time calculated using orchestration percentage
 - [ ] Leverage multiplier shown (H ÷ A)
@@ -241,7 +241,7 @@ Can orchestrate: 20 similar tasks in parallel
 ```markdown
 - [ ] **Task 2.3**: Implement REST API endpoints
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+  - **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
   
   - Create GET /users, POST /users, PUT /users/:id, DELETE /users/:id
   - Add request validation using Pydantic models
@@ -277,7 +277,7 @@ Can orchestrate: 20 similar tasks in parallel
 → That's OK! Leverage remains high because of autonomous work. Track it for calibration.
 
 **Should I always use dual estimation?**
-→ Yes, for any Agent OS Enhanced workflow. It demonstrates the value proposition.
+→ Yes, for any prAxIs OS workflow. It demonstrates the value proposition.
 
 **Can I skip tracking actuals?**
 → You can, but your estimates won't improve. Recommended: track first 10 tasks.
@@ -367,14 +367,14 @@ ACT MODE
 
 ---
 
-### Query 6: "calibration new to Agent OS Enhanced"
+### Query 6: "calibration new to prAxIs OS"
 
 **Content EXISTS (lines 343-403):**
 
 ```markdown
 ## 🎯 Calibrating Your Estimates
 
-### If You're New to Agent OS Enhanced
+### If You're New to prAxIs OS
 
 **Start conservative:**
 - Use 1.2x multiplier (assume AI is same speed or slower)
@@ -472,7 +472,7 @@ python scripts/build_rag_index.py
 2. **Used Agent OS's own RAG system** for discovery
 3. **Kept template lightweight** with query examples
 4. **Made content maintainable** in one place
-5. **Followed Agent OS philosophy** (search, don't read)
+5. **Followed prAxIs OS philosophy** (search, don't read)
 
 **This is better than what I proposed!**
 
@@ -552,7 +552,7 @@ The framework is complete:
 
 **What I proposed:** 18KB review document with everything  
 **What Cursor did:** Focused standards file + query-based discovery  
-**Winner:** Cursor's approach (cleaner, more maintainable, uses Agent OS correctly)  
+**Winner:** Cursor's approach (cleaner, more maintainable, uses prAxIs OS correctly)  
 
 **Action:** Run `python scripts/build_rag_index.py` and ship! 🚀
 </result>

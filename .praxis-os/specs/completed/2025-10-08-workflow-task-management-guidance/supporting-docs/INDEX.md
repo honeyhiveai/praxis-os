@@ -27,7 +27,7 @@
 
 **Common Themes:**
 - Single-source-of-truth principle for task management
-- Architectural separation between Cursor tools and Agent OS MCP tools
+- Architectural separation between Cursor tools and prAxIs OS MCP tools
 - Need for explicit guidance in tool responses
 
 **Potential Conflicts:**
@@ -70,7 +70,7 @@ This index will be used in Task 3 to systematically extract insights from each d
 ### Design Insights (Phase 2)
 
 #### From problem-analysis.md:
-- **Architecture:** Two-provider system (Cursor tools vs Agent OS MCP tools) - can only control MCP side
+- **Architecture:** Two-provider system (Cursor tools vs prAxIs OS MCP tools) - can only control MCP side
 - **Component:** Workflow engine must inject guidance into all tool responses
 - **Solution Pattern (Recommended - Option 1):** Prepend guidance fields to all workflow tool responses
   - Add `⚠️_WORKFLOW_EXECUTION_MODE: "ACTIVE"` field

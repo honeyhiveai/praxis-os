@@ -1,5 +1,5 @@
 """
-Server Manager for Agent OS Upgrade Workflow.
+Server Manager for prAxIs OS Upgrade Workflow.
 
 Manages MCP server restart and health verification.
 """

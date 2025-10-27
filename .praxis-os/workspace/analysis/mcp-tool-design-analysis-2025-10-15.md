@@ -93,7 +93,7 @@ Tool: start_workflow
 
 ---
 
-## Current Agent OS Tool Count
+## Current prAxIs OS Tool Count
 
 ### Inventory
 
@@ -442,7 +442,7 @@ Agent: Let me find the right workflow...
    - Less complex parameter interaction
    - Easier to understand purpose
 
-### Current Agent OS Tool Complexity
+### Current prAxIs OS Tool Complexity
 
 **Simple tools** (1-3 parameters):
 ```python

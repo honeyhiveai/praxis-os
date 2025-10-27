@@ -10,7 +10,7 @@
 ### Discovered Workflows (7 total)
 
 From `.praxis-os/workflows/`:
-1. **agent_os_upgrade_v1** (new!) - Self-upgrade workflow
+1. **praxis_os_upgrade_v1** (new!) - Self-upgrade workflow
 2. **spec_creation_v1** (new!) - Create project specifications
 3. **spec_execution_v1** - Execute tasks from tasks.md
 4. **workflow_creation_v1** - Meta-workflow for creating workflows
@@ -35,7 +35,7 @@ From code references:
 - spec_execution_v1
 
 **System Workflows** (output: system changes)
-- agent_os_upgrade_v1
+- praxis_os_upgrade_v1
 
 ### Extensibility Needs
 
@@ -288,7 +288,7 @@ Agent: Let me find the right workflow...
 | Execute spec | spec_execution_v1 | meta |
 | Create standards | standards_creation_v1 | documentation |
 | Create project spec | spec_creation_v1 | documentation |
-| Upgrade Agent OS | agent_os_upgrade_v1 | system |
+| Upgrade prAxIs OS | praxis_os_upgrade_v1 | system |
 | Generate production code | production_code_v2 | code_generation |
 
 ## By Category

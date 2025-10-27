@@ -33,7 +33,7 @@ Template location: installation/config-templates/{DETECTED_AGENT_LOWER}rules.md
 
 **If file doesn't exist:**
 
-> I need to create `{RULES_FILE}` with Agent OS configuration.
+> I need to create `{RULES_FILE}` with prAxIs OS configuration.
 > 
 > This file tells me to:
 > - Run `search_standards()` before implementing features
@@ -48,8 +48,8 @@ Template location: installation/config-templates/{DETECTED_AGENT_LOWER}rules.md
 > I see `{RULES_FILE}` already exists in your project.
 > 
 > Options:
-> 1. **Backup and replace** - I'll save your current file as `{RULES_FILE}.backup` and create a fresh Agent OS configuration
-> 2. **Merge** - I'll add Agent OS section to your existing rules (preserving your current rules)
+> 1. **Backup and replace** - I'll save your current file as `{RULES_FILE}.backup` and create a fresh prAxIs OS configuration
+> 2. **Merge** - I'll add prAxIs OS section to your existing rules (preserving your current rules)
 > 3. **Skip** - Keep your existing file unchanged
 > 
 > What would you prefer?
@@ -111,7 +111,7 @@ PYTHONPATH = "${workspaceFolder}/.praxis-os"
 > }
 > ```
 > 
-> This tells Cursor how to start the Agent OS MCP server.
+> This tells Cursor how to start the prAxIs OS MCP server.
 > Ready to create this file?
 
 ---
@@ -120,7 +120,7 @@ PYTHONPATH = "${workspaceFolder}/.praxis-os"
 
 **AI: Explain what you're adding:**
 
-> I'm adding Agent OS MCP configuration to `.vscode/settings.json`:
+> I'm adding prAxIs OS MCP configuration to `.vscode/settings.json`:
 > 
 > ```json
 > {
@@ -217,7 +217,7 @@ installation/
 ```
 User: "Install Agent OS"
 
-AI: "I'll help you install Agent OS Enhanced. First, let me detect your environment..."
+AI: "I'll help you install prAxIs OS. First, let me detect your environment..."
 
 AI: *checks for .cursor/, .vscode/extensions.json, etc.*
 
@@ -231,10 +231,10 @@ AI: "I detected you're using Cursor based on the .cursor/ directory.
 User: "Yes"
 
 AI: "Great! Here's the installation plan:
-     1. Clone Agent OS source to /tmp/agent-os-install-abc123
+     1. Clone prAxIs OS source to /tmp/agent-os-install-abc123
      2. Create .praxis-os/ directory structure
      3. Copy standards, workflows, MCP server
-     4. Create .cursorrules with Agent OS behaviors
+     4. Create .cursorrules with prAxIs OS behaviors
      5. Configure .cursor/mcp.json for MCP connection
      6. Set up Python venv and install dependencies
      7. Build RAG index
@@ -258,7 +258,7 @@ AI: "Step 2: Creating directories..."
 
 AI: "✅ Installation complete!
      
-     I've configured Agent OS for Cursor with:
+     I've configured prAxIs OS for Cursor with:
      - Rules file: .cursorrules (29 lines)
      - MCP server: .cursor/mcp.json
      - Standards: .praxis-os/standards/ (12 categories)
@@ -274,7 +274,7 @@ AI: "✅ Installation complete!
 ## 🎁 Benefits of This Approach
 
 1. **Trust Building**: User sees every step
-2. **Educational**: User learns what Agent OS is installing
+2. **Educational**: User learns what prAxIs OS is installing
 3. **Flexible**: Easy to support new agents (just add template)
 4. **Transparent**: No hidden scripts or magic
 5. **Conversational**: Natural interaction, not script execution
@@ -342,7 +342,7 @@ ACT MODE
 [Unexpected content type]
 
 I don't currently see any MCP servers listed in my environment details, which means either:
-1. The Agent OS MCP server isn't configured for this Cursor instance yet
+1. The prAxIs OS MCP server isn't configured for this Cursor instance yet
 2. The MCP connection information isn't being shown to me
 
 Let me try to use the `search_standards` tool to see if it's available:
@@ -363,7 +363,7 @@ Let me try to use the `search_standards` tool to see if it's available:
 - [x] Redesign as markdown-guided installation
 - [x] Create conversational flow patterns
 - [x] Define template system for agent configs
-- [ ] Test if Agent OS MCP is currently accessible
+- [ ] Test if prAxIs OS MCP is currently accessible
 </task_progress>
 </use_mcp_tool>
 
@@ -407,7 +407,7 @@ ACT MODE
 ## 🔍 What Just Happened
 
 **Observation:**
-- User confirms: Agent OS MCP server IS running in Cursor
+- User confirms: prAxIs OS MCP server IS running in Cursor
 - Cursor's AI agent CAN access it successfully
 - Cline (me) CANNOT access it - got "No connection found"
 
@@ -421,13 +421,13 @@ ACT MODE
 │                                         │
 │  ┌─────────────────────────────────┐   │
 │  │   Cursor's AI Agent             │   │
-│  │   ✅ Connected to Agent OS MCP  │   │
+│  │   ✅ Connected to prAxIs OS MCP  │   │
 │  │   (via .cursor/mcp.json)        │   │
 │  └────────────┬────────────────────┘   │
 │               │                         │
 │               │ Has access              │
 │               ▼                         │
-│         Agent OS MCP                    │
+│         prAxIs OS MCP                    │
 │         Server Running                  │
 │               ▲                         │
 │               │ No access               │
@@ -461,7 +461,7 @@ Even though both agents run in the same IDE:
 
 When installing Agent OS, we must ask:
 
-**❓ "Which AI agent(s) should I configure Agent OS for?"**
+**❓ "Which AI agent(s) should I configure prAxIs OS for?"**
 
 Options:
 - [ ] Cursor's built-in AI (`.cursor/mcp.json`)
@@ -482,9 +482,9 @@ Detected agents in this project:
 ❌ Continue (not found)
 ```
 
-**Question 2: Which agents should have Agent OS access?**
+**Question 2: Which agents should have prAxIs OS access?**
 ```markdown
-Which agent(s) should I configure Agent OS for?
+Which agent(s) should I configure prAxIs OS for?
 
 1. Cursor only (recommended if you primarily use Cursor AI)
 2. Cline only (recommended if you primarily use Cline)
@@ -496,7 +496,7 @@ Which agent(s) should I configure Agent OS for?
 - Multiple MCP server processes (higher RAM usage)
 - File editing race conditions
 
-Recommendation: Choose ONE primary agent for Agent OS workflows.
+Recommendation: Choose ONE primary agent for prAxIs OS workflows.
 ```
 
 ### Configuration Matrix - Your Current Project
@@ -504,7 +504,7 @@ Recommendation: Choose ONE primary agent for Agent OS workflows.
 ```
 Current State:
 ┌────────────────┬──────────┬─────────────────────┐
-│ Agent          │ Present? │ Agent OS Configured │
+│ Agent          │ Present? │ prAxIs OS Configured │
 ├────────────────┼──────────┼─────────────────────┤
 │ Cursor AI      │ ✅ Yes   │ ✅ Yes              │
 │ Cline          │ ✅ Yes   │ ❌ No               │
@@ -514,8 +514,8 @@ Current State:
 ```
 
 **Your situation:**
-- Cursor AI has full Agent OS access (working now)
-- Cline does NOT have Agent OS access (that's me - can't access it)
+- Cursor AI has full prAxIs OS access (working now)
+- Cline does NOT have prAxIs OS access (that's me - can't access it)
 
 **If you wanted to give Cline access too**, we would:
 1. Add configuration to `.vscode/settings.json`
@@ -528,7 +528,7 @@ Current State:
 ### `installation/00-START.md` (Enhanced)
 
 ```markdown
-# Agent OS Installation - START HERE
+# prAxIs OS Installation - START HERE
 
 ## 🤖 Step 0: Detect Environment & Choose Agent
 
@@ -564,7 +564,7 @@ fi
 > - ✅ Cursor
 > - ✅ Cline extension
 > 
-> Which agent should I configure Agent OS for?
+> Which agent should I configure prAxIs OS for?
 > 
 > **Recommendation**: Choose the agent you use most frequently.
 > 
@@ -624,8 +624,8 @@ You have two options:
 
 ### Option A: Keep Current Setup (Cursor Only)
 **Status Quo:**
-- Cursor AI continues using Agent OS ✅
-- Cline remains without Agent OS access
+- Cursor AI continues using prAxIs OS ✅
+- Cline remains without prAxIs OS access
 - Simple, no conflicts
 
 **When to choose:**
@@ -634,18 +634,18 @@ You have two options:
 
 ### Option B: Add Cline Configuration
 **New Setup:**
-- Configure Agent OS for Cline too
+- Configure prAxIs OS for Cline too
 - Cline would get its own MCP server process
 - Need coordination protocol (one agent for workflows at a time)
 
 **When to choose:**
-- You want to use Cline for Agent OS workflows
+- You want to use Cline for prAxIs OS workflows
 - You're willing to manage coordination between agents
 - You want to experiment with which agent works better
 
 ### Option C: Migrate to Cline Only
 **Complete Switch:**
-- Remove Cursor's Agent OS configuration
+- Remove Cursor's prAxIs OS configuration
 - Configure only for Cline
 - Single agent, no conflicts
 
@@ -658,7 +658,7 @@ You have two options:
 
 Given your current working setup with Cursor AI:
 
-**Keep Cursor as primary** for Agent OS workflows.
+**Keep Cursor as primary** for prAxIs OS workflows.
 
 Use Cline (me) for:
 - General assistance without Agent OS
@@ -672,7 +672,7 @@ Use Cline (me) for:
 - Clear separation of concerns
 - Avoids conflict risks
 
-**If you want Cline to access Agent OS too**, we can configure it, but I'd recommend implementing the coordination protocol first (file locking, session management).
+**If you want Cline to access prAxIs OS too**, we can configure it, but I'd recommend implementing the coordination protocol first (file locking, session management).
 
 ---
 
@@ -734,19 +734,19 @@ ACT MODE
 **Status:** Proposal  
 **Date:** 2025-10-10  
 **Author:** Cline (AI Assistant)  
-**Stakeholders:** Agent OS Enhanced contributors and users
+**Stakeholders:** prAxIs OS contributors and users
 
 ---
 
 ## Executive Summary
 
-This design document proposes enhancing Agent OS Enhanced's installation system to support multiple AI coding agents (Cursor, Cline, Windsurf, Continue, etc.) through an intelligent, conversation-driven installation process. The key insight is that **MCP connections are agent-specific, not workspace-specific**, requiring different configuration for each agent even within the same project.
+This design document proposes enhancing prAxIs OS's installation system to support multiple AI coding agents (Cursor, Cline, Windsurf, Continue, etc.) through an intelligent, conversation-driven installation process. The key insight is that **MCP connections are agent-specific, not workspace-specific**, requiring different configuration for each agent even within the same project.
 
 ### Key Findings
 
 1. **MCP Isolation Verified**: Testing confirmed that Cursor's AI agent and Cline extension maintain separate MCP connections, even when both run in the same Cursor IDE
 2. **Agent-Specific Configuration**: Each agent requires its own configuration files (e.g., `.cursorrules` vs `.clinerules`, `.cursor/mcp.json` vs `.vscode/settings.json`)
-3. **Concurrent Access Risks**: Multiple agents accessing Agent OS simultaneously can cause workflow state conflicts and race conditions
+3. **Concurrent Access Risks**: Multiple agents accessing prAxIs OS simultaneously can cause workflow state conflicts and race conditions
 4. **Trust-Building Opportunity**: Installation process itself can build user trust by being transparent and conversational rather than script-driven
 
 ---
@@ -755,7 +755,7 @@ This design document proposes enhancing Agent OS Enhanced's installation system 
 
 ### Current State
 
-Agent OS Enhanced installation is designed exclusively for Cursor:
+prAxIs OS installation is designed exclusively for Cursor:
 - Installation guides assume Cursor IDE
 - Configuration creates only `.cursorrules` and `.cursor/mcp.json`
 - No detection or support for other agents
@@ -771,7 +771,7 @@ Agent OS Enhanced installation is designed exclusively for Cursor:
 ### User Impact
 
 - Cline users cannot install Agent OS
-- Windsurf users cannot install Agent OS  
+- Windsurf users cannot install prAxIs OS  
 - Users with multiple agents must choose one or risk conflicts
 - No guidance on multi-agent coordination
 
@@ -891,7 +891,7 @@ AI says:
 > - ✅ {agent1}
 > - ✅ {agent2}
 > 
-> Which should I configure Agent OS for?
+> Which should I configure prAxIs OS for?
 > 1. {agent1} only (recommended)
 > 2. {agent2} only
 > 3. Both (advanced - requires coordination)
@@ -955,7 +955,7 @@ AI: [Reads 00-START.md]
     
     "✅ Detected: Cursor and Cline extension
      
-     Which should I configure Agent OS for?
+     Which should I configure prAxIs OS for?
      1. Cursor only (recommended)
      2. Cline only  
      3. Both (advanced)
@@ -968,7 +968,7 @@ User: "1"
 AI: "Great! Configuring for Cursor only.
      
      Installation plan:
-     1. Clone Agent OS source to temp directory
+     1. Clone prAxIs OS source to temp directory
      2. Create .praxis-os/ structure
      3. Copy standards, workflows, MCP server
      4. Create .cursorrules (from cursor/rules.md template)

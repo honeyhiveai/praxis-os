@@ -9,7 +9,7 @@
 
 ### 1.1 Purpose
 
-Define requirements for a safe upgrade system that enables consuming projects to update their Agent OS skeleton files from `universal/` without risk of losing custom content.
+Define requirements for a safe upgrade system that enables consuming projects to update their prAxIs OS skeleton files from `universal/` without risk of losing custom content.
 
 ### 1.2 Scope
 
@@ -31,7 +31,7 @@ This system provides:
 
 ## 2. Stakeholder Requirements
 
-### 2.1 Agent OS Enhanced Maintainers
+### 2.1 prAxIs OS Maintainers
 
 **SR-1:** MUST be able to generate manifest automatically  
 **SR-2:** MUST track all files in `universal/` directory  
@@ -319,7 +319,7 @@ Backup: .praxis-os.backup.20251007_143022
 
 - [Upgrade Strategy Analysis](../../../uograde-strategy-analysis.md)
 - [Update Procedures Standard](../../../universal/standards/installation/update-procedures.md)
-- [Agent OS Operating Model](../../../universal/usage/operating-model.md)
+- [prAxIs OS Operating Model](../../../universal/usage/operating-model.md)
 
 ---
 

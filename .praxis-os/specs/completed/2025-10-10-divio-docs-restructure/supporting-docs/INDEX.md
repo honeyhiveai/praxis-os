@@ -1,6 +1,6 @@
 # Supporting Documents Index
 
-**Spec:** Agent OS Enhanced Documentation Restructure  
+**Spec:** prAxIs OS Documentation Restructure  
 **Created:** 2025-10-10  
 **Total Documents:** 1
 
@@ -10,7 +10,7 @@
 
 **File:** `DESIGN-DOC-Divio-Documentation-Restructure.md`  
 **Type:** Comprehensive Design Document  
-**Purpose:** Analyzes current Agent OS Enhanced documentation (46% Divio compliance), identifies critical gaps (zero tutorials, inadequate how-to guides, mixed content types), and provides complete design for restructuring existing documentation into Divio framework with specific content additions.
+**Purpose:** Analyzes current prAxIs OS documentation (46% Divio compliance), identifies critical gaps (zero tutorials, inadequate how-to guides, mixed content types), and provides complete design for restructuring existing documentation into Divio framework with specific content additions.
 
 **Relevance:** Requirements [H], Design [H], Implementation [H]
 
@@ -101,7 +101,7 @@
 #### From DESIGN-DOC-Divio-Documentation-Restructure.md:
 
 **Current State Problems:**
-- **Gap:** Zero tutorials (0% coverage) - users install but don't know how to use Agent OS
+- **Gap:** Zero tutorials (0% coverage) - users install but don't know how to use prAxIs OS
 - **Gap:** Inadequate how-to guides (8% coverage) - users can't solve specific problems
 - **Gap:** Incomplete reference (60% coverage) - API/structure information scattered
 - **Issue:** Mixed content types violating separation of concerns (e.g., how-it-works.md mixes explanation with instruction)
@@ -183,7 +183,7 @@
 
 **Reference Structure:**
 - **Command Language Reference:** Complete list of blocking (🛑), evidence (📊), warning (⚠️), navigation (🎯) commands with usage, meaning, examples, AI obligations
-- **File Structure Reference:** Directory tree + edit safety matrix showing Agent OS owned vs user owned, overwritten on upgrade vs preserved
+- **File Structure Reference:** Directory tree + edit safety matrix showing prAxIs OS owned vs user owned, overwritten on upgrade vs preserved
 - **Metadata Reference:** workflow metadata.json schema and required fields
 
 **Type Badge System:**

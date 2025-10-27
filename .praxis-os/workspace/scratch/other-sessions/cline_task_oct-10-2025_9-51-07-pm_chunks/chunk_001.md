@@ -387,13 +387,13 @@
 
         .. code-block:: python
 
-            # After editing Agent OS content
+            # After editing prAxIs OS content
             rag_engine.reload_index()  # Picks up new content immediately
 
         **Note:**
 
         This is typically called automatically by the file watcher when
-        Agent OS content changes are detected.
+        prAxIs OS content changes are detected.
         """
         # Acquire write lock to block all reads during reload
         with self._lock:
@@ -409,7 +409,7 @@
 
                 # Reconnect to index
                 self.db = lancedb.connect(str(self.index_path))
-                self.table = self.db.open_table("agent_os_standards")
+                self.table = self.db.open_table("praxis_os_standards")
                 chunk_count = self.table.count_rows()
                 logger.info("Index reloaded: %s chunks", chunk_count)
                 self.vector_search_available = True
@@ -450,7 +450,7 @@ ACT MODE
 <read_file>
 <path>mcp_server/workflow_engine.py</path>
 <task_progress>
-- [x] Orient with Agent OS standards (MCP not available, proceeding with direct analysis)
+- [x] Orient with prAxIs OS standards (MCP not available, proceeding with direct analysis)
 - [x] Examine project structure and purpose
 - [x] Analyze key components and architecture (RAG engine completed)
 - [ ] Review documentation and standards
@@ -511,10 +511,10 @@ logger = logging.getLogger(__name__)
 
 class CheckpointLoader:
     """
-    Load checkpoint requirements dynamically from Agent OS standards.
+    Load checkpoint requirements dynamically from prAxIs OS standards.
 
     Aligns with project principle: dynamic logic over static patterns.
-    Single source of truth: Agent OS docs define checkpoints, not code.
+    Single source of truth: prAxIs OS docs define checkpoints, not code.
     """
 
     def __init__(self, rag_engine: RAGEngine):
@@ -522,7 +522,7 @@ class CheckpointLoader:
         Initialize checkpoint loader.
 
         Args:
-            rag_engine: RAG engine for querying Agent OS docs
+            rag_engine: RAG engine for querying prAxIs OS docs
         """
         self.rag_engine = rag_engine
         self._checkpoint_cache: Dict[str, Dict] = {}
@@ -531,7 +531,7 @@ class CheckpointLoader:
         self, workflow_type: str, phase: int
     ) -> Dict[str, Any]:
         """
-        Load checkpoint requirements from Agent OS documents dynamically.
+        Load checkpoint requirements from prAxIs OS documents dynamically.
 
         Args:
             workflow_type: Workflow type (e.g., "test_generation_v3")

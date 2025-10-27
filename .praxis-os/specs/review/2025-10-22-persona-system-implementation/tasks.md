@@ -15,7 +15,7 @@
 - **Phase 4:** 8 hours (Documentation and polish)
 - **Total:** 60 hours (7.5 days @ 8 hours/day)
 
-### AI Agent + Human Orchestration (Agent OS Enhanced)
+### AI Agent + Human Orchestration (prAxIs OS)
 - **Phase 1:** 16h wall clock, 1.5h active (10.7x leverage)
 - **Phase 2:** 24h wall clock, 2.5h active (9.6x leverage)
 - **Phase 3:** 12h wall clock, 1.5h active (8x leverage)
@@ -30,13 +30,13 @@
 
 **Objective:** Implement the foundational components (PersonaLauncher, LLMClient, MCPClient) and establish the agentic loop execution pattern.
 
-**Estimated Duration:** 16 hours human baseline, 1.5 hours active with Agent OS
+**Estimated Duration:** 16 hours human baseline, 1.5 hours active with prAxIs OS
 
 ### Phase 1 Tasks
 
 - [ ] **Task 1.1**: Create PersonaLauncher class structure
   - **Human Baseline:** 3 hours (M)
-  - **Agent OS:** 3h wall clock, 18 min active (10x leverage)
+  - **prAxIs OS:** 3h wall clock, 18 min active (10x leverage)
   
   - Create `mcp_server/persona_launcher.py` file
   - Define PersonaLauncher class with `__init__` method
@@ -49,12 +49,12 @@
   - [ ] PersonaLauncher class created with correct imports
   - [ ] SpecialistResult dataclass defined with all fields (persona, result, tools_used, artifacts, iterations, duration_ms, tokens, cost, error)
   - [ ] Type hints used throughout
-  - [ ] Docstrings follow Agent OS standards
+  - [ ] Docstrings follow prAxIs OS standards
   - [ ] File passes mypy type checking
 
 - [ ] **Task 1.2**: Implement persona file loading
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 10 min active (12x leverage)
+  - **prAxIs OS:** 2h wall clock, 10 min active (12x leverage)
   
   - Implement `_load_persona()` method
   - Handle file not found with helpful error message
@@ -71,7 +71,7 @@
 
 - [ ] **Task 1.3**: Create LLMClient unified interface
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 24 min active (10x leverage)
+  - **prAxIs OS:** 4h wall clock, 24 min active (10x leverage)
   
   - Create `mcp_server/llm_client.py` file
   - Define LLMUsage, ToolCall, LLMResponse dataclasses
@@ -91,7 +91,7 @@
 
 - [ ] **Task 1.4**: Create MCPClient wrapper
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `mcp_server/mcp_client.py` file
   - Define MCPClient class
@@ -110,7 +110,7 @@
 
 - [ ] **Task 1.5**: Implement agentic loop
   - **Human Baseline:** 5 hours (M)
-  - **Agent OS:** 5h wall clock, 30 min active (10x leverage)
+  - **prAxIs OS:** 5h wall clock, 30 min active (10x leverage)
   
   - Implement `_agentic_loop()` method in PersonaLauncher
   - Handle LLM responses with tool calls
@@ -146,13 +146,13 @@ Before advancing to Phase 2:
 
 **Objective:** Implement MCP tool registration, persona file loading, write_standard tool, and file system organization.
 
-**Estimated Duration:** 24 hours human baseline, 2.5 hours active with Agent OS
+**Estimated Duration:** 24 hours human baseline, 2.5 hours active with prAxIs OS
 
 ### Phase 2 Tasks
 
 - [ ] **Task 2.1**: Implement invoke_specialist MCP tool
   - **Human Baseline:** 3 hours (M)
-  - **Agent OS:** 3h wall clock, 18 min active (10x leverage)
+  - **prAxIs OS:** 3h wall clock, 18 min active (10x leverage)
   
   - Create or update `mcp_server/server/tools/specialist_tools.py`
   - Register `invoke_specialist` tool using @mcp.tool() decorator
@@ -171,7 +171,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.2**: Implement tool subset filtering
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Implement `_get_tool_schemas()` method in PersonaLauncher
   - Define included_tools list (search_standards, start_workflow, etc.)
@@ -188,7 +188,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.3**: Implement write_standard MCP tool
   - **Human Baseline:** 3 hours (M)
-  - **Agent OS:** 3h wall clock, 18 min active (10x leverage)
+  - **prAxIs OS:** 3h wall clock, 18 min active (10x leverage)
   
   - Create or update `mcp_server/server/tools/knowledge_tools.py`
   - Register `write_standard` tool using @mcp.tool()
@@ -208,7 +208,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.4**: Implement PersonaLoader utility
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `mcp_server/persona_loader.py` file
   - Implement PersonaLoader class (static methods)
@@ -226,7 +226,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.5**: Implement cost calculation
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Implement `_calculate_cost()` method in PersonaLauncher
   - Support Claude pricing (Sonnet 3.5)
@@ -243,7 +243,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.6**: Implement run() method
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 24 min active (10x leverage)
+  - **prAxIs OS:** 4h wall clock, 24 min active (10x leverage)
   
   - Implement `run()` method in PersonaLauncher
   - Load persona via `_load_persona()`
@@ -264,7 +264,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.7**: Create directory structure
   - **Human Baseline:** 1 hour (S)
-  - **Agent OS:** 1h wall clock, 6 min active (10x leverage)
+  - **prAxIs OS:** 1h wall clock, 6 min active (10x leverage)
   
   - Create `.praxis-os/personas/` directory
   - Create `.praxis-os/standards/universal/` (if not exists)
@@ -280,7 +280,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.8**: Security hardening
   - **Human Baseline:** 4 hours (M)
-  - **Agent OS:** 4h wall clock, 24 min active (10x leverage)
+  - **prAxIs OS:** 4h wall clock, 24 min active (10x leverage)
   
   - Implement path validation for file operations
   - Implement command execution safety checks
@@ -300,7 +300,7 @@ Before advancing to Phase 2:
 
 - [ ] **Task 2.9**: Performance optimizations
   - **Human Baseline:** 3 hours (M)
-  - **Agent OS:** 3h wall clock, 18 min active (10x leverage)
+  - **prAxIs OS:** 3h wall clock, 18 min active (10x leverage)
   
   - Implement message history pruning
   - Add memory limits checks
@@ -334,13 +334,13 @@ Before advancing to Phase 3:
 
 **Objective:** Create base persona definitions (database, api, security, testing), persona template, and comprehensive test suite.
 
-**Estimated Duration:** 12 hours human baseline, 1.5 hours active with Agent OS
+**Estimated Duration:** 12 hours human baseline, 1.5 hours active with prAxIs OS
 
 ### Phase 3 Tasks
 
 - [ ] **Task 3.1**: Create persona template
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `.praxis-os/personas/_template.md`
   - Include all required sections with placeholders
@@ -359,7 +359,7 @@ Before advancing to Phase 3:
 
 - [ ] **Task 3.2**: Create database specialist persona
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `.praxis-os/personas/database.md`
   - Define database architecture specialist identity
@@ -378,7 +378,7 @@ Before advancing to Phase 3:
 
 - [ ] **Task 3.3**: Create API specialist persona
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `.praxis-os/personas/api.md`
   - Define API design specialist identity
@@ -397,7 +397,7 @@ Before advancing to Phase 3:
 
 - [ ] **Task 3.4**: Create security specialist persona
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `.praxis-os/personas/security.md`
   - Define security review specialist identity
@@ -416,7 +416,7 @@ Before advancing to Phase 3:
 
 - [ ] **Task 3.5**: Create testing specialist persona
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `.praxis-os/personas/testing.md`
   - Define test generation specialist identity
@@ -435,7 +435,7 @@ Before advancing to Phase 3:
 
 - [ ] **Task 3.6**: Create unit test suite
   - **Human Baseline:** 2 hours (M)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `tests/test_persona_launcher.py`
   - Test PersonaLauncher methods (_load_persona, _get_tool_schemas, _agentic_loop)
@@ -469,13 +469,13 @@ Before advancing to Phase 4:
 
 **Objective:** Create comprehensive documentation, persona creation guide, finalize implementation, and validate against requirements.
 
-**Estimated Duration:** 8 hours human baseline, 1 hour active with Agent OS
+**Estimated Duration:** 8 hours human baseline, 1 hour active with prAxIs OS
 
 ### Phase 4 Tasks
 
 - [ ] **Task 4.1**: Create persona creation guide
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create `docs/persona-creation-guide.md` or similar
   - Step-by-step guide for creating custom personas
@@ -494,7 +494,7 @@ Before advancing to Phase 4:
 
 - [ ] **Task 4.2**: Create API documentation
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Document invoke_specialist tool API
   - Document write_standard tool API
@@ -511,9 +511,9 @@ Before advancing to Phase 4:
 
 - [ ] **Task 4.3**: Update architecture documentation
   - **Human Baseline:** 1 hour (S)
-  - **Agent OS:** 1h wall clock, 6 min active (10x leverage)
+  - **prAxIs OS:** 1h wall clock, 6 min active (10x leverage)
   
-  - Add persona system to Agent OS architecture docs
+  - Add persona system to prAxIs OS architecture docs
   - Include architecture diagrams
   - Document component interactions
   - Update README with persona system overview
@@ -526,7 +526,7 @@ Before advancing to Phase 4:
 
 - [ ] **Task 4.4**: End-to-end testing
   - **Human Baseline:** 2 hours (S)
-  - **Agent OS:** 2h wall clock, 12 min active (10x leverage)
+  - **prAxIs OS:** 2h wall clock, 12 min active (10x leverage)
   
   - Create end-to-end test scenarios
   - Test complete specialist execution flow
@@ -546,7 +546,7 @@ Before advancing to Phase 4:
 
 - [ ] **Task 4.5**: Requirements validation
   - **Human Baseline:** 1 hour (S)
-  - **Agent OS:** 1h wall clock, 6 min active (10x leverage)
+  - **prAxIs OS:** 1h wall clock, 6 min active (10x leverage)
   
   - Validate all functional requirements (FR-001 through FR-015)
   - Validate non-functional requirements

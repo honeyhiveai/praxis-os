@@ -808,7 +808,7 @@ async def search_standards(
     filter_tags: list[str] | None = None,
     ctx: Context = None,  # FastMCP injects Context automatically
 ) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
-    """Semantic search over Agent OS documentation with query gamification."""
+    """Semantic search over prAxIs OS documentation with query gamification."""
     
     try:
         # NEW: Get session ID using dynamic countdown timer (1 line)
@@ -979,7 +979,7 @@ The query gamification system integrates with the existing MCP tool interface. N
 
 #### MCP Tool: search_standards()
 
-**Purpose:** Semantic search over Agent OS documentation with gamification feedback
+**Purpose:** Semantic search over prAxIs OS documentation with gamification feedback
 
 **Protocol:** Model Context Protocol (MCP)
 

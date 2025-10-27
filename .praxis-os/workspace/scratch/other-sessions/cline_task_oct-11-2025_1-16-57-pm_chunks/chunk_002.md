@@ -155,7 +155,7 @@ universal/usage/mcp-server-update-guide.md
 universal/usage/mcp-usage-guide.md
 universal/usage/operating-model.md
 universal/workflows/
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 universal/workflows/spec_creation_v1/
 universal/workflows/spec_execution_v1/
 
@@ -645,7 +645,7 @@ universal/usage/mcp-server-update-guide.md
 universal/usage/mcp-usage-guide.md
 universal/usage/operating-model.md
 universal/workflows/
-universal/workflows/agent_os_upgrade_v1/
+universal/workflows/praxis_os_upgrade_v1/
 universal/workflows/spec_creation_v1/
 universal/workflows/spec_execution_v1/
 

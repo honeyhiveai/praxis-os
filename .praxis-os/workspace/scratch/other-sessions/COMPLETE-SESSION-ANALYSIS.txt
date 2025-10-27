@@ -51,7 +51,7 @@ Error executing MCP tool: No connection found for server: agent-os-mcp. Please m
 [read_file for 'mcp_server/README.md'] Result:
 # Agent OS MCP Server
 
-**Model Context Protocol server for Agent OS Enhanced with RAG, sub-agents, and workflow engine.**
+**Model Context Protocol server for prAxIs OS with RAG, sub-agents, and workflow engine.**
 
 ## Components
 
@@ -135,7 +135,7 @@ The command's output could not be captured due to some technical issue, however 
 pye
 
 [Chunk 0]
-[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has 
+[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has 
 
 ... [middle messages omitted] ...
 
@@ -191,7 +191,7 @@ ERRORS ENCOUNTERED
 [Chunk 1] ERROR: - [x] Identified root cause (different IDE)
 [Chunk 1] ERROR: - [ ] Find Cline MCP configuration
 [Chunk 2] ERROR: - [ ] Test MCP server access
-[Chunk 2] ERROR: executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP s
+[Chunk 2] ERROR: executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP s
 [Chunk 2] ERROR: - [x] Identify connection problem
 [Chunk 5] ERROR: for cline and mcp servers
 [Chunk 5] ERROR: - [ ] Research if this is a known problem in Cline community
@@ -199,7 +199,7 @@ ERRORS ENCOUNTERED
 
 SUCCESSES
 --------------------------------------------------------------------------------
-[Chunk 2] SUCCESS: Configuration exists: `.vscode/settings.json` has `agent-os-enhanced` MCP server
+[Chunk 2] SUCCESS: Configuration exists: `.vscode/settings.json` has `praxis-os` MCP server
 [Chunk 2] SUCCESS: Works in Cursor: You confirmed it works there
 [Chunk 6] SUCCESS: Same for all projects
 [Chunk 7] SUCCESS: SRD created (250 lines)

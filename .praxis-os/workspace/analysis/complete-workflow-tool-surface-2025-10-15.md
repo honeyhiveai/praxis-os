@@ -817,7 +817,7 @@ BROWSER_TOOLS = [
 
 ### The Real Insight
 
-**Workflows are the core feature of Agent OS Enhanced**. The tool surface must comprehensively support:
+**Workflows are the core feature of prAxIs OS**. The tool surface must comprehensively support:
 1. **Discovery**: Find and understand workflows
 2. **Execution**: Run workflows reliably
 3. **Management**: See, pause, resume, delete sessions

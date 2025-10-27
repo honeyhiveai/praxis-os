@@ -111,7 +111,7 @@
 ## Quality Standards Applied
 
 Throughout updates, I have:
-- ✅ Queried Agent OS standards for best practices
+- ✅ Queried prAxIs OS standards for best practices
 - ✅ Maintained requirements traceability
 - ✅ Emphasized per-session architecture (AI agent UX)
 - ✅ Documented comprehensive scope (not artificial limits)

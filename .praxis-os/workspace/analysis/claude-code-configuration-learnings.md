@@ -2,7 +2,7 @@
 
 **Date:** October 24, 2025  
 **Status:** Analysis/Research (to be formalized into installation docs)  
-**Context:** Hands-on investigation of Claude Code MCP configuration for Agent OS Enhanced
+**Context:** Hands-on investigation of Claude Code MCP configuration for prAxIs OS
 
 ---
 
@@ -354,7 +354,7 @@ claude "search standards for orientation"
 ### Test Scenarios
 
 **Scenario 1: Fresh Installation (Secondary Agent)**
-1. Install Agent OS Enhanced in Cursor
+1. Install prAxIs OS in Cursor
 2. Run `configure-claude-code-mcp.py`
 3. Reload VS Code window
 4. Open Claude Code extension
@@ -420,7 +420,7 @@ python3 .praxis-os/bin/configure-claude-code-mcp.py
 
 - [Claude Code MCP Documentation](https://docs.claude.com/en/docs/claude-code/mcp.md)
 - Official CLI: `claude mcp add --help`
-- Agent OS Enhanced: `.praxis-os/bin/configure-claude-code-mcp.py`
+- prAxIs OS: `.praxis-os/bin/configure-claude-code-mcp.py`
 - Related: `.praxis-os/bin/update-cline-mcp.py` (similar pattern)
 
 ---

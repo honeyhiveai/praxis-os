@@ -1,6 +1,6 @@
 # MCP Tool Usage Guide
 
-**Guide for using Model Context Protocol (MCP) tools in Agent OS projects.**
+**Guide for using Model Context Protocol (MCP) tools in prAxIs OS projects.**
 
 **Keywords for search**: MCP tools, Model Context Protocol, how to use MCP tools, search_standards, start_workflow, workflow tools, MCP usage, semantic search, phase gating, tool discovery
 
@@ -11,7 +11,7 @@
 **What is MCP?** Model Context Protocol - standardized interface for AI assistants to access tools and information.
 
 **8 Core MCP Tools:**
-1. **`search_standards`** - Semantic search over Agent OS docs (use 5-10+ times per task)
+1. **`search_standards`** - Semantic search over prAxIs OS docs (use 5-10+ times per task)
 2. **`start_workflow`** - Initialize phase-gated workflows
 3. **`get_current_phase`** - Retrieve current workflow phase
 4. **`get_task`** - Get specific task details (NEW in v1.3.0)
@@ -29,7 +29,7 @@
 
 ## Questions This Answers
 
-- "How do I use MCP tools in Agent OS?"
+- "How do I use MCP tools in prAxIs OS?"
 - "What is the Model Context Protocol?"
 - "How do I search for standards using MCP?"
 - "How do I start a workflow?"
@@ -44,7 +44,7 @@
 
 ## 🎯 What Is MCP?
 
-**Model Context Protocol (MCP)** allows AI assistants to access tools and information through a standardized interface. In Agent OS, MCP provides:
+**Model Context Protocol (MCP)** allows AI assistants to access tools and information through a standardized interface. In prAxIs OS, MCP provides:
 
 - 📚 **Semantic search** over standards and docs
 - 🔄 **Workflow execution** with phase gating
@@ -59,7 +59,7 @@
 
 ### 1. `search_standards`
 
-**Purpose:** Semantic search over all Agent OS standards and documentation
+**Purpose:** Semantic search over all prAxIs OS standards and documentation
 
 **When to use:**
 - Need guidance on a pattern or practice
@@ -69,7 +69,7 @@
 
 **Example:**
 ```python
-mcp_agent-os-rag_search_standards(
+mcp_praxis-os-rag_search_standards(
     query="How should I handle race conditions in concurrent code?",
     n_results=5
 )
@@ -93,13 +93,13 @@ mcp_agent-os-rag_search_standards(
 **Example:**
 ```python
 # Example 1: Test generation workflow
-session = mcp_agent-os-rag_start_workflow(
+session = mcp_praxis-os-rag_start_workflow(
     workflow_type="test_generation_v3",
     target_file="auth.py"  # File path for code workflows
 )
 
 # Example 2: Spec execution workflow (different pattern!)
-session = mcp_agent-os-rag_start_workflow(
+session = mcp_praxis-os-rag_start_workflow(
     workflow_type="spec_execution_v1",
     target_file="my-feature-name",  # Simple identifier, NOT a path
     options={"spec_path": ".praxis-os/specs/2025-10-07-my-feature-name"}  # Full path in options
@@ -124,7 +124,7 @@ for phase in overview["phases"]:
 **Discovery Tip:** Use `search_standards` to discover available workflows before starting:
 ```python
 # Find workflows for your task
-result = mcp_agent-os-rag_search_standards(
+result = mcp_praxis-os-rag_search_standards(
     query="What workflows are available for testing Python code?",
     n_results=5
 )
@@ -146,7 +146,7 @@ result = mcp_agent-os-rag_search_standards(
 
 **Example:**
 ```python
-phase = mcp_agent-os-rag_get_current_phase(
+phase = mcp_praxis-os-rag_get_current_phase(
     session_id="workflow_session_123"
 )
 
@@ -185,10 +185,10 @@ for task_meta in phase['phase_content']['tasks']:
 **Example:**
 ```python
 # Step 1: See what tasks exist
-phase = mcp_agent-os-rag_get_current_phase(session_id="workflow_123")
+phase = mcp_praxis-os-rag_get_current_phase(session_id="workflow_123")
 
 # Step 2: Get first task's full content
-task = mcp_agent-os-rag_get_task(
+task = mcp_praxis-os-rag_get_task(
     session_id="workflow_123",
     phase=1,
     task_number=1
@@ -258,7 +258,7 @@ complete_phase(session_id, phase['current_phase'], evidence)
 
 **Example:**
 ```python
-mcp_agent-os-rag_complete_phase(
+mcp_praxis-os-rag_complete_phase(
     session_id="workflow_session_123",
     phase=0,
     evidence={"functions_identified": 5, "classes_identified": 2}
@@ -280,7 +280,7 @@ mcp_agent-os-rag_complete_phase(
 
 **Example:**
 ```python
-mcp_agent-os-rag_get_workflow_state(
+mcp_praxis-os-rag_get_workflow_state(
     session_id="workflow_session_123"
 )
 ```
@@ -300,7 +300,7 @@ mcp_agent-os-rag_get_workflow_state(
 
 **Example:**
 ```python
-mcp_agent-os-rag_create_workflow(
+mcp_praxis-os-rag_create_workflow(
     name="api-documentation",
     workflow_type="documentation",
     phases=["Analysis", "Generation", "Validation"],
@@ -323,7 +323,7 @@ mcp_agent-os-rag_create_workflow(
 
 **Example:**
 ```python
-date_info = mcp_agent-os-rag_current_date()
+date_info = mcp_praxis-os-rag_current_date()
 print(date_info["iso_date"])  # "2025-10-07"
 print(date_info["iso_datetime"])  # "2025-10-07T14:30:00-07:00"
 ```
@@ -369,7 +369,7 @@ with open(".praxis-os/standards/testing/test-pyramid.md") as f:
 ✅ **DO:**
 ```python
 # Use MCP tool
-mcp_agent-os-rag_search_standards(
+mcp_praxis-os-rag_search_standards(
     query="test pyramid principles"
 )
 ```
@@ -462,7 +462,7 @@ When in a workflow:
 This guide is most valuable when:
 
 1. **Starting to Use MCP Tools**
-   - Situation: First time using Agent OS MCP tools
+   - Situation: First time using prAxIs OS MCP tools
    - Query: `search_standards("how to use MCP tools")`
 
 2. **Choosing Between Tools**
@@ -498,8 +498,8 @@ This guide is most valuable when:
 **Core Orientation:**
 - `usage/ai-agent-quickstart.md` - Practical examples of using MCP tools
   → `search_standards("AI agent quickstart")`
-- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - MCP in context of Agent OS principles
-  → `search_standards("Agent OS orientation")`
+- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - MCP in context of prAxIs OS principles
+  → `search_standards("prAxIs OS orientation")`
 
 **Workflows:**
 - `workflows/spec_execution_v1/` - Example of phase-gated workflow
@@ -527,4 +527,4 @@ This guide is most valuable when:
 
 ---
 
-**Remember:** MCP tools are your primary interface to Agent OS knowledge. Use them instead of direct file access for 90% context reduction and better AI assistance!
+**Remember:** MCP tools are your primary interface to prAxIs OS knowledge. Use them instead of direct file access for 90% context reduction and better AI assistance!

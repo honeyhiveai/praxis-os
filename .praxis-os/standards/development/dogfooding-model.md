@@ -2,13 +2,13 @@
 
 **Date:** 2025-10-06  
 **Status:** Design Approved, Implementation Pending  
-**Critical:** This document defines how Agent OS development validates installation/updates
+**Critical:** This document defines how prAxIs OS development validates installation/updates
 
 ---
 
 ## 🎯 Core Principle
 
-**"Use Agent OS exactly like consumers do"**
+**"Use prAxIs OS exactly like consumers do"**
 
 If we use special symlinks or shortcuts, we can't validate:
 - Installation process
@@ -81,7 +81,7 @@ praxis-os/
 │   └── config.json
 │
 └── mcp_server/                   # MCP server SOURCE (for distribution)
-    └── agent_os_rag.py
+    └── praxis_os_rag.py
 ```
 
 ### Benefits
@@ -156,7 +156,7 @@ vim .praxis-os/standards/development/python-concurrency.md
 **Steps:**
 ```bash
 # 1. Edit source
-vim mcp_server/agent_os_rag.py
+vim mcp_server/praxis_os_rag.py
 
 # 2. Restart MCP server
 # Cursor → Settings → MCP → Restart agent-os-rag

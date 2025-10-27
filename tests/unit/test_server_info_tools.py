@@ -88,7 +88,7 @@ class TestGetServerInfoTool:
         discovery.get_project_info.return_value = {
             "name": "test-project",
             "root": "/path/to/project",
-            "agent_os_path": "/path/to/project/.praxis-os",
+            "praxis_os_path": "/path/to/project/.praxis-os",
             "git": {
                 "remote": "https://github.com/user/test-project.git",
                 "branch": "main",
@@ -151,13 +151,13 @@ class TestGetServerInfoTool:
         # Check all required fields
         assert "name" in project
         assert "root" in project
-        assert "agent_os_path" in project
+        assert "praxis_os_path" in project
         assert "git" in project
 
         # Verify values match mock
         assert project["name"] == "test-project"
         assert project["root"] == "/path/to/project"
-        assert project["agent_os_path"] == "/path/to/project/.praxis-os"
+        assert project["praxis_os_path"] == "/path/to/project/.praxis-os"
         assert project["git"]["remote"] == "https://github.com/user/test-project.git"
 
     @pytest.mark.asyncio
@@ -280,7 +280,7 @@ class TestGetServerInfoTool:
         mock_project_discovery.get_project_info.return_value = {
             "name": "different-project",
             "root": "/different/path",
-            "agent_os_path": "/different/path/.praxis-os",
+            "praxis_os_path": "/different/path/.praxis-os",
             "git": None,
         }
 

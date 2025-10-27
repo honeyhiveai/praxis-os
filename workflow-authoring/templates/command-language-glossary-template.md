@@ -1,10 +1,10 @@
-# Agent OS Command Language Glossary
+# prAxIs OS Command Language Glossary
 
 **🎯 Standardized Command Language for AI Control Within File Size Constraints**
 
 *This glossary defines command-level language that creates binding obligations for AI execution. Each term has specific behavioral requirements that cannot be bypassed.*
 
-🚨 **CRITICAL**: This glossary MUST be read before any Agent OS workflow execution  
+🚨 **CRITICAL**: This glossary MUST be read before any prAxIs OS workflow execution  
 🛑 **BINDING**: All commands create non-negotiable obligations  
 ⚠️ **MANDATORY**: Reading this glossary is required by all systematic workflows
 
@@ -264,5 +264,5 @@ Instead of repeating full instructions:
 
 **Workflow Version**: 1.0 (Adapted for HoneyHive DSL)  
 **Last Updated**: 2025-10-02  
-**Source**: Adapted from python-sdk Agent OS workflow
+**Source**: Adapted from python-sdk prAxIs OS workflow
 

@@ -392,9 +392,9 @@ ACT MODE
 <path>test_mcp_client.py</path>
 <content>#!/usr/bin/env python3
 """
-Test MCP client for Agent OS dual-transport server.
+Test MCP client for prAxIs OS dual-transport server.
 
-This script connects to the Agent OS MCP server via HTTP
+This script connects to the prAxIs OS MCP server via HTTP
 and tests tool calls to validate the dual-transport architecture.
 """
 
@@ -406,8 +406,8 @@ from pathlib import Path
 from fastmcp import Client
 
 
-async def test_agent_os_connection():
-    """Test connection to Agent OS MCP server."""
+async def test_praxis_os_connection():
+    """Test connection to prAxIs OS MCP server."""
     
     # Read state file to get server URL
     state_file = Path(".praxis-os/.mcp_server_state.json")
@@ -420,7 +420,7 @@ async def test_agent_os_connection():
     state = json.loads(state_file.read_text())
     server_url = state["url"]
     
-    print(f"🔗 Connecting to Agent OS MCP server at {server_url}")
+    print(f"🔗 Connecting to prAxIs OS MCP server at {server_url}")
     print(f"   Project: {state['project']['name']}")
     print(f"   Transport: {state['transport']}")
     print(f"   PID: {state['pid']}")
@@ -499,7 +499,7 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
     
-    asyncio.run(test_agent_os_connection())
+    asyncio.run(test_praxis_os_connection())
 </content>
 <task_progress>
 - [x] Created Python test script using FastMCP Client
@@ -522,9 +522,9 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path="test_mcp_client.py">
 #!/usr/bin/env python3
 """
-Test MCP client for Agent OS dual-transport server.
+Test MCP client for prAxIs OS dual-transport server.
 
-This script connects to the Agent OS MCP server via HTTP
+This script connects to the prAxIs OS MCP server via HTTP
 and tests tool calls to validate the dual-transport architecture.
 """
 
@@ -536,8 +536,8 @@ from pathlib import Path
 from fastmcp import Client
 
 
-async def test_agent_os_connection():
-    """Test connection to Agent OS MCP server."""
+async def test_praxis_os_connection():
+    """Test connection to prAxIs OS MCP server."""
     
     # Read state file to get server URL
     state_file = Path(".praxis-os/.mcp_server_state.json")
@@ -550,7 +550,7 @@ async def test_agent_os_connection():
     state = json.loads(state_file.read_text())
     server_url = state["url"]
     
-    print(f"🔗 Connecting to Agent OS MCP server at {server_url}")
+    print(f"🔗 Connecting to prAxIs OS MCP server at {server_url}")
     print(f"   Project: {state['project']['name']}")
     print(f"   Transport: {state['transport']}")
     print(f"   PID: {state['pid']}")
@@ -629,7 +629,7 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
     
-    asyncio.run(test_agent_os_connection())
+    asyncio.run(test_praxis_os_connection())
 
 </final_file_content>
 
@@ -699,10 +699,10 @@ ACT MODE
 Command executed.
 Output:
 ============================================================
-Agent OS MCP Client Test
+prAxIs OS MCP Client Test
 ============================================================
 
-🔗 Connecting to Agent OS MCP server at http://127.0.0.1:4242/mcp
+🔗 Connecting to prAxIs OS MCP server at http://127.0.0.1:4242/mcp
    Project: praxis-os
    Transport: dual
    PID: 95431
@@ -714,7 +714,7 @@ Agent OS MCP Client Test
    - get_server_info: Get comprehensive server and project information.
 
 Returns r...
-   - search_standards: Semantic search over Agent OS documentation.
+   - search_standards: Semantic search over prAxIs OS documentation.
 
 Performs RAG-b...
    - start_workflow: Start new workflow session with phase gating.
@@ -889,13 +889,13 @@ ACT MODE
 
 <attempt_completion>
 <result>
-## Yes! Use Agent OS Enhanced to Contribute to Cline 🚀
+## Yes! Use prAxIs OS to Contribute to Cline 🚀
 
 This is a **perfect use case** for Agent OS's workflow system! You can use the very tools you built to contribute back to Cline.
 
-### The Process: Agent OS → Cline Contribution
+### The Process: prAxIs OS → Cline Contribution
 
-**Phase 1: Research (Use Agent OS Tools)**
+**Phase 1: Research (Use prAxIs OS Tools)**
 ```
 Goal: Understand Cline's codebase and MCP implementation
 
@@ -909,7 +909,7 @@ Tools to use:
 ```
 Goal: Create comprehensive spec for streamable-http support
 
-Use Agent OS workflow:
+Use prAxIs OS workflow:
 1. start_workflow("spec_creation", {
      "feature_name": "streamable-http-transport-support",
      "project": "Cline"
@@ -966,7 +966,7 @@ README.md           - Executive summary
 srd.md             - Requirements:
                      * Business goal: Support modern FastMCP servers
                      * User stories: As developer, I want to connect to streamable-http
-                     * Success criteria: Connect to Agent OS servers
+                     * Success criteria: Connect to prAxIs OS servers
                      
 specs.md           - Technical design:
                      * Current SSE implementation
@@ -993,7 +993,7 @@ implementation.md  - Detailed guidance:
 ```
 You: "Create spec for adding streamable-http transport support to Cline"
 
-Agent OS will:
+prAxIs OS will:
 1. Query standards for spec creation best practices
 2. Ask clarifying questions about Cline's architecture
 3. Research Cline's codebase structure

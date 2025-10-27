@@ -9,7 +9,7 @@ For Cursor to apply these changes:
 - [ ] Find the "Time Estimation Guidelines" section
 - [ ] Locate Query 3: "INCLUDES EXCLUDES human active time"
 - [ ] Replace with: "reading task specification giving direction reviewing output"
-- [ ] Locate Query 6: "calibration new to Agent OS Enhanced"
+- [ ] Locate Query 6: "calibration new to prAxIs OS"
 - [ ] Replace with: "start conservative 1.2x multiplier 8-10% orchestration"
 - [ ] Verify all 6 queries are present and correctly formatted
 - [ ] Test queries using MCP search_standards tool
@@ -144,7 +144,7 @@ ACT MODE
 
 **Query 6:**
 ```diff
-- search_standards("calibration new to Agent OS Enhanced")
+- search_standards("calibration new to prAxIs OS")
 + search_standards("start conservative 1.2x multiplier 8-10% orchestration")
 ```
 
@@ -189,7 +189,7 @@ ACT MODE
 **Success rate improvement:** 83% → 100% (+17 percentage points)  
 **System status:** Production ready 🚀
 
-**This was a thorough, systematic validation of the dual estimation framework - exactly what Agent OS orientation teaches!** 🎯
+**This was a thorough, systematic validation of the dual estimation framework - exactly what prAxIs OS orientation teaches!** 🎯
 </result>
 <task_progress>
 - [x] Created OPTIMAL-QUERIES-FOR-TASKS-TEMPLATE.md
@@ -218,7 +218,7 @@ read 'universal/standards/ai-assistant/query-construction-patterns.md' (see belo
 
 **Keywords for search**: query construction, search_standards patterns, how to query effectively, semantic search best practices, RAG query optimization, finding standards content, query anti-patterns, effective queries, query strategy, search patterns
 
-**This standard defines how AI assistants should construct effective `search_standards()` queries to discover Agent OS content reliably.**
+**This standard defines how AI assistants should construct effective `search_standards()` queries to discover prAxIs OS content reliably.**
 
 ---
 
@@ -835,7 +835,7 @@ Then:
 
 **Related Standards:**
 - `standards/ai-assistant/rag-content-authoring.md` - How to WRITE content for RAG (authoring side)
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Overall Agent OS usage
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Overall prAxIs OS usage
 - `standards/ai-assistant/standards-creation-process.md` - Creating new standards
 
 **Query anytime:**
@@ -904,7 +904,7 @@ ACT MODE
 3. **Codified as standard** (query-construction-patterns.md)
 4. **Made discoverable via RAG** (future agents can query it!)
 
-**This is Agent OS Enhanced eating its own dog food at the highest level!** 🎯
+**This is prAxIs OS eating its own dog food at the highest level!** 🎯
 
 ---
 

@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 async def connect_and_use_mcp_server(
-    agent_os_path: Optional[Path] = None,
+    praxis_os_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
     """
     Connect to the MCP server and demonstrate tool usage.
@@ -38,7 +38,7 @@ async def connect_and_use_mcp_server(
     - Call a tool (search_standards)
 
     Args:
-        agent_os_path: Path to .praxis-os directory. If None, will auto-discover.
+        praxis_os_path: Path to .praxis-os directory. If None, will auto-discover.
 
     Returns:
         Dictionary with results from the connection attempt, including:
@@ -59,7 +59,7 @@ async def connect_and_use_mcp_server(
     try:
         # Step 1: Discover the MCP server using the discovery utility
         logger.info("🔍 Discovering MCP server...")
-        url = discover_mcp_server(agent_os_path)
+        url = discover_mcp_server(praxis_os_path)
 
         if url is None:
             error_msg = (
@@ -141,7 +141,7 @@ async def _mock_list_tools(_url: str) -> List[str]:
     # Simulate network delay
     await asyncio.sleep(0.1)
 
-    # Return expected tools from Agent OS
+    # Return expected tools from prAxIs OS
     return [
         "search_standards",
         "start_workflow",
@@ -213,7 +213,7 @@ def get_mcp_config_for_cline() -> Optional[Dict[str, Any]]:
         ```json
         {
           "mcpServers": {
-            "agent-os-rag": {
+            "praxis-os-rag": {
               "transport": "streamable-http",
               "url": "http://127.0.0.1:4242/mcp"
             }
@@ -236,7 +236,7 @@ def get_mcp_config_for_cline() -> Optional[Dict[str, Any]]:
 
     return {
         "mcpServers": {
-            "agent-os-rag": {
+            "praxis-os-rag": {
                 "transport": "streamable-http",
                 "url": url,
             }

@@ -510,6 +510,6 @@ Teach new team members to query 5-10 times per task.
 
 ---
 
-**This standard emerged from dogfooding: We analyzed our own 85 sessions (67 Cursor + 18 Cline) to understand how Agent OS Enhanced was built. The insights validated our operating model and became this standard.**
+**This standard emerged from dogfooding: We analyzed our own 85 sessions (67 Cursor + 18 Cline) to understand how prAxIs OS was built. The insights validated our operating model and became this standard.**
 
 

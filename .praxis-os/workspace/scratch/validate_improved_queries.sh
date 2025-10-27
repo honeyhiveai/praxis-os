@@ -62,7 +62,7 @@ echo "✓ Query 5 complete"
 # Query 6: Calibration Guidance (IMPROVED - natural language)
 echo "========================================" >> "$OUTPUT"
 echo "QUERY 6: Calibration Guidance" >> "$OUTPUT"
-echo "OLD Query: calibration new to Agent OS Enhanced" >> "$OUTPUT"
+echo "OLD Query: calibration new to prAxIs OS" >> "$OUTPUT"
 echo "NEW Query: how to calibrate time estimates" >> "$OUTPUT"
 echo "Status: 🔄 IMPROVED to natural language" >> "$OUTPUT"
 echo "========================================" >> "$OUTPUT"

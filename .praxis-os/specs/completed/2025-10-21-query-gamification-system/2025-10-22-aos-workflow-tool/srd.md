@@ -47,7 +47,7 @@ This feature will replace the current fragmented workflow tool surface (8+ separ
 - Developer understanding: Clear when to consolidate vs when to keep separate
 
 **Business Impact:**
-- Establishes scalable architecture pattern for Agent OS growth
+- Establishes scalable architecture pattern for prAxIs OS growth
 - Reduces future technical debt through consistent design
 - Enables faster feature development (proven pattern to follow)
 - Improves developer onboarding (consistent patterns across tool surface)

@@ -60,7 +60,7 @@
         logger.info("Shutdown complete")
 
 
-def find_agent_os_directory() -> Path:
+def find_praxis_os_directory() -> Path:
     """
     Find .praxis-os directory.
     
@@ -131,7 +131,7 @@ class ProjectInfoDiscovery:
         - Project name (from git or directory)
         - Project root path (from filesystem)
         - Git repository info (if available)
-        - Agent OS path
+        - prAxIs OS path
 
         ALL values are discovered at runtime.
 
@@ -140,7 +140,7 @@ class ProjectInfoDiscovery:
         return {
             "name": self._get_project_name(),        # Git repo OR dir name
             "root": str(self.project_root),          # Filesystem path
-            "agent_os_path": str(self.base_path),    # Filesystem path
+            "praxis_os_path": str(self.base_path),    # Filesystem path
             "git": self._get_git_info(),             # Git commands OR None
         }
 
@@ -354,7 +354,7 @@ interface ServerInfo {
     project: {
         name: string;                 // DYNAMIC: From git or directory
         root: string;                 // DYNAMIC: Filesystem path
-        agent_os_path: string;        // DYNAMIC: Filesystem path
+        praxis_os_path: string;        // DYNAMIC: Filesystem path
         git: {                        // DYNAMIC: Git commands, null if not repo
             remote: string;           // "git@github.com:user/repo.git"
             branch: string;           // "main"
@@ -539,7 +539,7 @@ Server Startup:
   │   │   │   ├─ subprocess.run(["git", "branch", "--show-current"])
   │   │   │   ├─ subprocess.run(["git", "rev-parse", "HEAD"])
   │   │   │   └─ subprocess.run(["git", "status", "--porcelain"])
-  │   │   └─ Returns: {name, root, agent_os_path, git}
+  │   │   └─ Returns: {name, root, praxis_os_path, git}
   │   └─ Write to .mcp_server_state.json
   │
   └─ register_all_tools(project_discovery=...)

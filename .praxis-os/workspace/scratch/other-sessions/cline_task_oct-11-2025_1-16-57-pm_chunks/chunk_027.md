@@ -94,7 +94,7 @@ interface MCPServerState {
   
   // Optional metadata
   project_root?: string;
-  agent_os_version?: string;
+  praxis_os_version?: string;
 }
 ```
 
@@ -103,7 +103,7 @@ interface MCPServerState {
 ## Appendix B: CLI Reference
 
 ```bash
-# Agent OS MCP Server CLI
+# prAxIs OS MCP Server CLI
 
 python -m mcp_server --help
 
@@ -500,7 +500,7 @@ ACT MODE
 **Version:** 1.0  
 **Date:** October 11, 2025  
 **Status:** Design Phase  
-**Authors:** Agent OS Team
+**Authors:** prAxIs OS Team
 
 ---
 
@@ -529,7 +529,7 @@ ACT MODE
 
 ## Executive Summary
 
-This document describes a dual-transport architecture for the Agent OS MCP (Model Context Protocol) server that enables:
+This document describes a dual-transport architecture for the prAxIs OS MCP (Model Context Protocol) server that enables:
 
 1. **Primary IDE integration** via stdio transport (Cursor, Windsurf, Claude Desktop)
 2. **Sub-agent access** via HTTP transport (Cline, Aider, custom agents)
@@ -562,7 +562,7 @@ This design has been completely validated with working code and real MCP SDK tes
    - Can't serve both IDE (stdio) and sub-agents (HTTP) simultaneously
 
 2. **Port Conflicts**
-   - Multiple Agent OS instances (different Cursor windows) conflict on port 4242
+   - Multiple prAxIs OS instances (different Cursor windows) conflict on port 4242
    - No mechanism to allocate different ports per project
 
 3. **Sub-Agent Access**
@@ -973,7 +973,7 @@ def main() -> None:
     
     try:
         # 3. Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
         
         # 4. Load and validate configuration

@@ -379,7 +379,7 @@ The Cline team **knows about this** and it's tracked internally, but:
 
 ## Recommendations:
 
-**For Agent OS + Cline:**
+**For prAxIs OS + Cline:**
 1. Document this limitation prominently
 2. Recommend Cursor over Cline for Agent OS
 3. Consider workaround: wrapper script that detects workspace
@@ -430,9 +430,9 @@ ACT MODE
 
 <attempt_completion>
 <result>
-Agent OS Enhanced's architecture is unique because it combines several characteristics that are **rarely seen together** in MCP servers:
+prAxIs OS's architecture is unique because it combines several characteristics that are **rarely seen together** in MCP servers:
 
-## What Makes Agent OS Unique:
+## What Makes prAxIs OS Unique:
 
 ### 1. **Per-Project Installation + Project-Specific Context**
 ```
@@ -454,7 +454,7 @@ project-b/.praxis-os/
 
 ### 2. **Local STDIO + Context Awareness**
 
-Agent OS uses:
+prAxIs OS uses:
 - **STDIO transport** (runs locally as subprocess)
 - **RAG over project content** (searches *this* project's standards)
 - **Workflow engine** (executes *this* project's workflows)
@@ -466,7 +466,7 @@ Most local MCP servers are **context-free**:
 
 ### 3. **Portable Framework, Not Global Install**
 
-Agent OS is designed to:
+prAxIs OS is designed to:
 - Be copied into any project's `.praxis-os/` directory
 - Bring project-specific standards/workflows with it
 - Work differently in each project
@@ -486,7 +486,7 @@ This is like having a **project-specific AI assistant** that knows your project'
 
 **The mismatch:**
 - Cline: "I have ONE global config for MCP servers"
-- Agent OS: "I need DIFFERENT servers for each project"
+- prAxIs OS: "I need DIFFERENT servers for each project"
 
 ## Most MCP Servers Don't Have This Issue:
 
@@ -494,7 +494,7 @@ This is like having a **project-specific AI assistant** that knows your project'
 2. **Global tools** (global STDIO) - one installation, serves all projects
 3. **Context-free tools** - don't need to know about project structure
 
-Agent OS is rare because it's:
+prAxIs OS is rare because it's:
 - **Project-aware** (knows project standards/workflows)
 - **Locally installed** (per-project, not global)
 - **Context-dependent** (different behavior per project)
@@ -542,12 +542,12 @@ ACT MODE
 
 [Unexpected content type]
 
-Let me read through the Agent OS Enhanced documentation to give you an informed perspective:
+Let me read through the prAxIs OS documentation to give you an informed perspective:
 
 <read_file>
 <path>docs/content/intro.md</path>
 <task_progress>
-- [ ] Read Agent OS documentation
+- [ ] Read prAxIs OS documentation
 - [ ] Understand the system's goals and design
 - [ ] Form perspective as Cline agent
 - [ ] Provide thoughtful analysis
@@ -567,11 +567,11 @@ sidebar_position: 1
 
 # Introduction
 
-**Agent OS Enhanced** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
+**prAxIs OS** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
 
-## What is Agent OS Enhanced?
+## What is prAxIs OS?
 
-Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
+prAxIs OS builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
 
 - **90% context reduction** through semantic search (MCP/RAG)
 - **Architectural phase gating** that enforces workflows in code
@@ -580,11 +580,11 @@ Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://
 
 ## Quick Start
 
-Install Agent OS Enhanced in your project:
+Install prAxIs OS in your project:
 
 ```bash
 # Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/praxis-os"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will:
@@ -631,7 +631,7 @@ Timeless CS fundamentals that apply to any programming language:
 
 ### Language-Specific Generation
 
-For each project, Agent OS generates language-specific implementations of universal standards:
+For each project, prAxIs OS generates language-specific implementations of universal standards:
 
 - **Python:** GIL, threading, asyncio, pytest patterns
 - **Go:** Goroutines, channels, sync primitives, table-driven tests
@@ -704,7 +704,7 @@ sidebar_position: 2
 
 # How It Works
 
-Agent OS Enhanced changes how you work with AI - from prompting to orchestration. Here's the complete workflow pattern.
+prAxIs OS changes how you work with AI - from prompting to orchestration. Here's the complete workflow pattern.
 
 ## The Human-AI Partnership Model
 

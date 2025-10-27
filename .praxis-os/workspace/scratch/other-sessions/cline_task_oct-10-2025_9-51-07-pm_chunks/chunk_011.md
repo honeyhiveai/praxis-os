@@ -2,11 +2,11 @@
 
 [Unexpected content type]
 
-Perfect! Now I'll create `.clinerules` with the same Agent OS bootstrap:
+Perfect! Now I'll create `.clinerules` with the same prAxIs OS bootstrap:
 
 <write_to_file>
 <path>.clinerules</path>
-<content># Agent OS Enhanced - Cline Configuration
+<content># prAxIs OS - Cline Configuration
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -40,7 +40,7 @@ Query liberally = better code
 <task_progress>
 - [x] Create .vscode/settings.json with Cline MCP config
 - [x] Read .cursorrules for reference
-- [x] Create .clinerules with Agent OS bootstrap
+- [x] Create .clinerules with prAxIs OS bootstrap
 - [ ] Reload VS Code/Cursor to activate config
 - [ ] Test MCP connection with search_standards
 </task_progress>
@@ -56,7 +56,7 @@ The content was successfully saved to .clinerules.
 Here is the full, updated content of the file that was saved:
 
 <final_file_content path=".clinerules">
-# Agent OS Enhanced - Cline Configuration
+# prAxIs OS - Cline Configuration
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -130,7 +130,7 @@ Excellent! Configuration is complete. Now let me try to test the MCP connection:
 <task_progress>
 - [x] Create .vscode/settings.json with Cline MCP config
 - [x] Read .cursorrules for reference
-- [x] Create .clinerules with Agent OS bootstrap
+- [x] Create .clinerules with prAxIs OS bootstrap
 - [ ] Reload VS Code/Cursor to activate config
 - [ ] Test MCP connection with search_standards
 </task_progress>
@@ -170,17 +170,17 @@ ACT MODE
 <result>
 # ✅ Cline MCP Configuration Complete!
 
-I've successfully configured Cline to access the Agent OS MCP server:
+I've successfully configured Cline to access the prAxIs OS MCP server:
 
 ## 📁 Files Created
 
 1. **`.vscode/settings.json`**
    - Added `cline.mcpServers` configuration
-   - Points to Agent OS MCP server at `.praxis-os/venv/bin/python`
+   - Points to prAxIs OS MCP server at `.praxis-os/venv/bin/python`
    - Includes proper environment variables
 
 2. **`.clinerules`**
-   - Agent OS behavioral bootstrap
+   - prAxIs OS behavioral bootstrap
    - Instructs Cline to use `search_standards()` before implementing
    - Same rules as Cursor AI for consistency
 
@@ -210,14 +210,14 @@ If successful, I'll respond with:
 ✅ Oriented. Ready.
 ```
 
-And I'll have access to all Agent OS tools!
+And I'll have access to all prAxIs OS tools!
 
 ## 📊 Current Configuration Status
 
 ```
 Agent Configuration Matrix:
 ┌────────────────┬──────────┬─────────────────────┐
-│ Agent          │ Present? │ Agent OS Configured │
+│ Agent          │ Present? │ prAxIs OS Configured │
 ├────────────────┼──────────┼─────────────────────┤
 │ Cursor AI      │ ✅ Yes   │ ✅ Yes              │
 │ Cline          │ ✅ Yes   │ ✅ Yes (NEW!)       │
@@ -226,7 +226,7 @@ Agent Configuration Matrix:
 
 ## ⚠️ Multi-Agent Coordination
 
-Now that **both agents have Agent OS access**, remember:
+Now that **both agents have prAxIs OS access**, remember:
 
 **Best Practice:** Use ONE agent at a time for workflows
 - **Don't** have both agents working on the same workflow simultaneously
@@ -239,7 +239,7 @@ Now that **both agents have Agent OS access**, remember:
 - Query standards: `search_standards()`
 - Start workflows: `start_workflow()`
 - Execute specs: Phase-gated task execution
-- Access all Agent OS standards and best practices
+- Access all prAxIs OS standards and best practices
 
 **Unique to Cline:**
 - Browser automation (Puppeteer)
@@ -260,7 +260,7 @@ Now that **both agents have Agent OS access**, remember:
 <task_progress>
 - [x] Create .vscode/settings.json with Cline MCP config
 - [x] Read .cursorrules for reference
-- [x] Create .clinerules with Agent OS bootstrap
+- [x] Create .clinerules with prAxIs OS bootstrap
 - [x] Document reload requirement
 - [x] Provide testing instructions
 </task_progress>

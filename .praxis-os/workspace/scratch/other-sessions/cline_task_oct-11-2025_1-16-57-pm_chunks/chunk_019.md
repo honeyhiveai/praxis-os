@@ -34,7 +34,7 @@ From the Operating Model:
 
 **Both need correction, just in opposite directions.**
 
-### What This Means for Agent OS Enhanced on Cline
+### What This Means for prAxIs OS on Cline
 
 **The defensive standards might be overkill for me:**
 - I'm LESS likely to skip phases
@@ -147,7 +147,7 @@ ACT MODE
 
 [read_file for 'mcp_server/rag_engine.py'] Result:
 """
-Agent OS RAG Engine - LanceDB Implementation
+prAxIs OS RAG Engine - LanceDB Implementation
 Semantic search with metadata filtering and fallback mechanisms.
 
 Switched from ChromaDB to LanceDB for:
@@ -196,7 +196,7 @@ logger = logging.getLogger(__name__)
 
 class RAGEngine:
     """
-    Semantic search engine for Agent OS standards.
+    Semantic search engine for prAxIs OS standards.
 
     Features:
     - Vector similarity search via LanceDB
@@ -219,7 +219,7 @@ class RAGEngine:
 
         Args:
             index_path: Path to LanceDB index
-            standards_path: Path to Agent OS standards for grep fallback
+            standards_path: Path to prAxIs OS standards for grep fallback
             embedding_provider: Provider for embeddings ("local" default or "openai")
             embedding_model: Model to use for embeddings
             cache_ttl_seconds: Cache time-to-live in seconds (default: 1 hour)
@@ -250,7 +250,7 @@ class RAGEngine:
         try:
             logger.info("Initializing RAG engine with index at %s", index_path)
             self.db = lancedb.connect(str(index_path))
-            self.table = self.db.open_table("agent_os_standards")
+            self.table = self.db.open_table("praxis_os_standards")
             chunk_count = self.table.count_rows()
             logger.info("LanceDB table loaded: %s chunks", chunk_count)
             self.vector_search_available = True
@@ -268,7 +268,7 @@ class RAGEngine:
         filters: Optional[Dict] = None,
     ) -> SearchResult:
         """
-        Search Agent OS standards with intelligent retrieval.
+        Search prAxIs OS standards with intelligent retrieval.
 
         Steps:
         1. Check cache for recent identical query
@@ -675,13 +675,13 @@ class RAGEngine:
 
         .. code-block:: python
 
-            # After editing Agent OS content
+            # After editing prAxIs OS content
             rag_engine.reload_index()  # Picks up new content immediately
 
         **Note:**
 
         This is typically called automatically by the file watcher when
-        Agent OS content changes are detected.
+        prAxIs OS content changes are detected.
         """
         # Acquire write lock to block all reads during reload
         with self._lock:
@@ -697,7 +697,7 @@ class RAGEngine:
 
                 # Reconnect to index
                 self.db = lancedb.connect(str(self.index_path))
-                self.table = self.db.open_table("agent_os_standards")
+                self.table = self.db.open_table("praxis_os_standards")
                 chunk_count = self.table.count_rows()
                 logger.info("Index reloaded: %s chunks", chunk_count)
                 self.vector_search_available = True
@@ -803,13 +803,13 @@ def reload_index(self) -> None:
 
     .. code-block:: python
 
-        # After editing Agent OS content
+        # After editing prAxIs OS content
         rag_engine.reload_index()  # Picks up new content immediately
 
     **Note:**
 
     This is typically called automatically by the file watcher when
-    Agent OS content changes are detected.
+    prAxIs OS content changes are detected.
     """
 ```
 
@@ -880,7 +880,7 @@ Not only are there type hints in the signature, but ALSO in the docstring with `
 def reload_index(self):
     """Reload index."""
     self.db = lancedb.connect(self.index_path)
-    self.table = self.db.open_table("agent_os_standards")
+    self.table = self.db.open_table("praxis_os_standards")
     self._query_cache.clear()
 ```
 
@@ -995,6 +995,6 @@ ACT MODE
 """
 RAG search tools for MCP server.
 
-Provides search_standards tool for semantic search over Agent OS documentation.
+Provides search_standards tool for semantic search over prAxIs OS documentation.
 """
 

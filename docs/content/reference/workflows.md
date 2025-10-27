@@ -27,7 +27,7 @@ Workflows are structured, multi-phase processes with architectural enforcement o
 |----------|---------|--------|----------|--------|
 | [spec_creation_v1](#spec_creation_v1) | Create comprehensive design specifications | 6 phases | 2-4 hours | Production |
 | [spec_execution_v1](#spec_execution_v1) | Implement specifications systematically | Dynamic (spec-driven) | Varies by spec | Production |
-| [agent_os_upgrade_v1](#agent_os_upgrade_v1) | Upgrade prAxIs OS safely with rollback | 6 phases | 15-30 min | Production |
+| [praxis_os_upgrade_v1](#praxis_os_upgrade_v1) | Upgrade prAxIs OS safely with rollback | 6 phases | 15-30 min | Production |
 
 ---
 
@@ -128,7 +128,7 @@ start_workflow(
 
 ---
 
-### agent_os_upgrade_v1
+### praxis_os_upgrade_v1
 
 Upgrade prAxIs OS safely with automatic rollback on failure.
 
@@ -157,7 +157,7 @@ Upgrade prAxIs OS safely with automatic rollback on failure.
 **Usage:**
 ```python
 start_workflow(
-    workflow_type="agent_os_upgrade_v1",
+    workflow_type="praxis_os_upgrade_v1",
     target_file="upgrade"
 )
 ```
@@ -269,7 +269,7 @@ result = complete_phase(session_id="abc", phase=1, evidence=evidence)
 All production workflows have complete gate coverage:
 - spec_creation_v1: 6/6 phases
 - spec_execution_v1: 1/1 phase
-- agent_os_upgrade_v1: 6/6 phases
+- praxis_os_upgrade_v1: 6/6 phases
 - workflow_creation_v1: 6/6 phases
 
 ### File Size Standards
@@ -466,7 +466,7 @@ validate_workflow(
 | New feature or major change | `spec_creation_v1` → `spec_execution_v1` |
 | Bug fix (non-trivial) | `spec_creation_v1` → `spec_execution_v1` |
 | Simple bug fix | Ad-hoc (no workflow needed) |
-| Upgrade prAxIs OS | `agent_os_upgrade_v1` |
+| Upgrade prAxIs OS | `praxis_os_upgrade_v1` |
 | Custom process | Create custom workflow |
 
 ---

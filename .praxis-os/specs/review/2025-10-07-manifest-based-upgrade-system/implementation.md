@@ -64,7 +64,7 @@
 ```python
 #!/usr/bin/env python3
 """
-Manifest Generator for Agent OS Enhanced
+Manifest Generator for prAxIs OS
 
 Scans universal/ directory and generates .universal-manifest.json
 with checksums and metadata for all skeleton files.
@@ -105,12 +105,12 @@ def validate_manifest(manifest: Dict[str, Any]) -> bool:
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="Generate manifest for Agent OS universal files"
+        description="Generate manifest for prAxIs OS universal files"
     )
     parser.add_argument(
         "--version",
         required=True,
-        help="Agent OS version (e.g., 1.3.0)"
+        help="prAxIs OS version (e.g., 1.3.0)"
     )
     parser.add_argument(
         "--universal-dir",
@@ -249,7 +249,7 @@ if __name__ == "__main__":
 ```python
 #!/usr/bin/env python3
 """
-Safe Upgrade Tool for Agent OS
+Safe Upgrade Tool for prAxIs OS
 
 Safely upgrades local .praxis-os/ directory from praxis-os source
 with conflict detection and interactive prompts.
@@ -507,10 +507,10 @@ $ python scripts/generate-manifest.py --help
 usage: generate-manifest.py [-h] --version VERSION [--universal-dir DIR]
                            [--output FILE] [--repo-root DIR]
 
-Generate manifest for Agent OS universal files
+Generate manifest for prAxIs OS universal files
 
 Arguments:
-  --version VERSION    Agent OS version (e.g., 1.3.0)
+  --version VERSION    prAxIs OS version (e.g., 1.3.0)
   --universal-dir DIR  Path to universal directory (default: universal)
   --output FILE        Output path (default: universal/.universal-manifest.json)
   --repo-root DIR      Git repository root (default: current directory)

@@ -288,147 +288,147 @@
       "size": 9822,
       "last_updated": "2025-10-10"
     },
-    "workflows/agent_os_upgrade_v1/README.md": {
+    "workflows/praxis_os_upgrade_v1/README.md": {
       "checksum": "sha256:f33e4e2dd7a50f7b9a735cdfd30010071f828d318ffd4d531ae0258bc34c4602",
       "size": 6734,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/metadata.json": {
+    "workflows/praxis_os_upgrade_v1/metadata.json": {
       "checksum": "sha256:eb8144ad4a5a3b7bc29e1502378920a10ac7d037c18956fbae2bc57137b1da2a",
       "size": 7581,
       "last_updated": "2025-10-10"
     },
-    "workflows/agent_os_upgrade_v1/phases/0/phase.md": {
+    "workflows/praxis_os_upgrade_v1/phases/0/phase.md": {
       "checksum": "sha256:b87b2fca9cd795c5cd0edbd307079c010865fd2be802a98cebbbb882caf73231",
       "size": 1995,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/0/task-1-validate-source.md": {
+    "workflows/praxis_os_upgrade_v1/phases/0/task-1-validate-source.md": {
       "checksum": "sha256:1e191ba020f417dd86881157d4b96715ea53b2bffc559ce60973e3432af3effc",
       "size": 1414,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/0/task-2-validate-target.md": {
+    "workflows/praxis_os_upgrade_v1/phases/0/task-2-validate-target.md": {
       "checksum": "sha256:810374077aa602578fa107563b9da833de30b72d7b251fc7eb68dcf6b2f53133",
       "size": 526,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/0/task-3-check-disk-space.md": {
+    "workflows/praxis_os_upgrade_v1/phases/0/task-3-check-disk-space.md": {
       "checksum": "sha256:c5b1177d418bbcf471eee9ca2bcbabe359cff8ccfe7b095e5a7d38e7cd8c86bb",
       "size": 490,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/0/task-4-check-concurrent.md": {
+    "workflows/praxis_os_upgrade_v1/phases/0/task-4-check-concurrent.md": {
       "checksum": "sha256:8975a4cef4b31163117bb078e7596e9d9683209f44cdfb04f1a5d00d61169625",
       "size": 518,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/1/phase.md": {
+    "workflows/praxis_os_upgrade_v1/phases/1/phase.md": {
       "checksum": "sha256:9393d5f1ffd7ed68cb06c81679f143bc76fd4a5e45a7d1aaa92acd0cfc79d269",
       "size": 641,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/1/task-1-create-backup.md": {
+    "workflows/praxis_os_upgrade_v1/phases/1/task-1-create-backup.md": {
       "checksum": "sha256:fd2dfccafba8b41e9dd6f62cfbf3fd0c217a90448189d8eee2cd047ddc6bf7de",
       "size": 488,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/1/task-2-verify-backup.md": {
+    "workflows/praxis_os_upgrade_v1/phases/1/task-2-verify-backup.md": {
       "checksum": "sha256:2e941deee9f6a3c56f245589370118872343f803b70153b704f5aff5f4bfefda",
       "size": 508,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/1/task-3-acquire-lock.md": {
+    "workflows/praxis_os_upgrade_v1/phases/1/task-3-acquire-lock.md": {
       "checksum": "sha256:d7015251d202abb604382695f056c81ee3760d7e6e48e1eeb84c03e90345bd83",
       "size": 506,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/2/phase.md": {
+    "workflows/praxis_os_upgrade_v1/phases/2/phase.md": {
       "checksum": "sha256:acdc6a3a1e4b91d43d36a3b9429f69712cb73bd3c3985c39788bea1c0a0892e3",
       "size": 692,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/2/task-1-dry-run.md": {
+    "workflows/praxis_os_upgrade_v1/phases/2/task-1-dry-run.md": {
       "checksum": "sha256:aa06c687bf21f6656919bd7e031c5b96005299e299b3618275c1ad772946425b",
       "size": 472,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/2/task-2-actual-upgrade.md": {
+    "workflows/praxis_os_upgrade_v1/phases/2/task-2-actual-upgrade.md": {
       "checksum": "sha256:ce6cd12332a0bd6a6e209f945ae3bfd1c93d82a916150909e579f4839605190b",
       "size": 2639,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/2/task-3-update-gitignore.md": {
+    "workflows/praxis_os_upgrade_v1/phases/2/task-3-update-gitignore.md": {
       "checksum": "sha256:bf8f43d1410a654f9b0b28e6d921cf0b2d0f1af27476ae2ac46a9c8af3ef9d1b",
       "size": 3383,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/2/task-4-verify-checksums.md": {
+    "workflows/praxis_os_upgrade_v1/phases/2/task-4-verify-checksums.md": {
       "checksum": "sha256:81049437029e6bd3240e8fa35b646b109ec037b20208d249aabc167b83c619a5",
       "size": 486,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/3/phase.md": {
+    "workflows/praxis_os_upgrade_v1/phases/3/phase.md": {
       "checksum": "sha256:64838cb1300b1295728c12ef8eccba05e5c21dae0d3a8b02bf22426fc6c5e252",
       "size": 635,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/3/task-1-copy-server.md": {
+    "workflows/praxis_os_upgrade_v1/phases/3/task-1-copy-server.md": {
       "checksum": "sha256:34b306fc2520abea1218fa47926439d5fae500f89c41d6a7254386a9f6dd848b",
       "size": 482,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/3/task-2-install-deps.md": {
+    "workflows/praxis_os_upgrade_v1/phases/3/task-2-install-deps.md": {
       "checksum": "sha256:5b6cbeee105741a8cbf6e3326cb29c8cd1a0bd3d2a24c318bf97ecb84c9d0503",
       "size": 482,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/3/task-3-restart-server.md": {
+    "workflows/praxis_os_upgrade_v1/phases/3/task-3-restart-server.md": {
       "checksum": "sha256:2ddbd0371440d351188293241ebae03fa92d4a18f15a9d3825c686a49ff45edb",
       "size": 488,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/4/phase.md": {
+    "workflows/praxis_os_upgrade_v1/phases/4/phase.md": {
       "checksum": "sha256:558148ec5141d6097fe1cb7bae16113a8fe7a3f405d98c691f9225c73fd3e954",
       "size": 650,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/4/task-1-validate-tools.md": {
+    "workflows/praxis_os_upgrade_v1/phases/4/task-1-validate-tools.md": {
       "checksum": "sha256:df6ce7aae51ea6d43c238b93f9e232b71366824c2aaac6422fe4c0689b66554b",
       "size": 492,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/4/task-2-smoke-tests.md": {
+    "workflows/praxis_os_upgrade_v1/phases/4/task-2-smoke-tests.md": {
       "checksum": "sha256:0921d5c2e65ddb289fe1489e9c66db77717fea89625d6c704b93eb5b77ff73d8",
       "size": 488,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/4/task-3-generate-report.md": {
+    "workflows/praxis_os_upgrade_v1/phases/4/task-3-generate-report.md": {
       "checksum": "sha256:23a442f0048f4ef26cadfee5868bd906160d5c9033c8f23383c587295664831f",
       "size": 490,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/5/phase.md": {
+    "workflows/praxis_os_upgrade_v1/phases/5/phase.md": {
       "checksum": "sha256:70a3ff8ce2c2108e6ec4937ba68e810c01fee9364baec18a3bbdfdb463e7147d",
       "size": 650,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/5/task-1-release-lock.md": {
+    "workflows/praxis_os_upgrade_v1/phases/5/task-1-release-lock.md": {
       "checksum": "sha256:ed59b09ab6553cf20fcf3aa8bb6b0d006fe2e2c46ef1240219482c3f8d197e78",
       "size": 474,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/5/task-2-archive-backups.md": {
+    "workflows/praxis_os_upgrade_v1/phases/5/task-2-archive-backups.md": {
       "checksum": "sha256:88824c2de2f0c127e339ee747149a0c2691db646383f84d573bc9ac9f356233a",
       "size": 472,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/phases/5/task-3-generate-summary.md": {
+    "workflows/praxis_os_upgrade_v1/phases/5/task-3-generate-summary.md": {
       "checksum": "sha256:e48ef0db807a9db6bf81fae285706b251e76b6a0a84c6d80f63fc34b6af5c19e",
       "size": 486,
       "last_updated": "2025-10-08"
     },
-    "workflows/agent_os_upgrade_v1/supporting-docs/rollback-procedure.md": {
+    "workflows/praxis_os_upgrade_v1/supporting-docs/rollback-procedure.md": {
       "checksum": "sha256:3d750cfebbba5c178354397c349149ed88dff6fc2fe57c113333e3caf17835a1",
       "size": 6661,
       "last_updated": "2025-10-08"

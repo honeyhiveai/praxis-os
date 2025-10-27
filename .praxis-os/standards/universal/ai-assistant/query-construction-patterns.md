@@ -2,7 +2,7 @@
 
 **Keywords for search**: query construction, search_standards patterns, how to query effectively, semantic search best practices, RAG query optimization, finding standards content, query anti-patterns, effective queries, query strategy, search patterns
 
-**This standard defines how AI assistants should construct effective `search_standards()` queries to discover Agent OS content reliably.**
+**This standard defines how AI assistants should construct effective `search_standards()` queries to discover prAxIs OS content reliably.**
 
 ---
 
@@ -619,7 +619,7 @@ Then:
 
 **Related Standards:**
 - `standards/ai-assistant/rag-content-authoring.md` - How to WRITE content for RAG (authoring side)
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Overall Agent OS usage
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Overall prAxIs OS usage
 - `standards/ai-assistant/standards-creation-process.md` - Creating new standards
 
 **Query anytime:**

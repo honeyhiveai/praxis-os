@@ -34,8 +34,8 @@ When starting a new task, it is recommended to create a todo list.
 3. Use markdown format: - [ ] for incomplete, -
 
 [Chunk 0]
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -45,18 +45,18 @@ universal/stand
 
 [Chunk 0]
 [read_file for 'README.md'] Result:
-# Agent OS Enhanced - Portable Multi-Agent Development Framework
+# prAxIs OS - Portable Multi-Agent Development Framework
 
 **A portable Agent OS implementation with MCP RAG, sub-agents, and universal CS fundamentals.**
 
 ## 🎯 Overview
 
-Agent OS Enhanced is a portable development framework that combines:
+prAxIs OS is a portable development framework that combines:
 - **Universal CS 
 
 [Chunk 0]
 [read_file for '.cursorrules'] Result:
-# Agent OS Enhanced
+# prAxIs OS
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -161,7 +161,7 @@ universal/standards/ai-assistant/MCP-TOOLS-GUIDE.md
 
 
 [Chunk 10]
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not 
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not 
 
 [Chunk 10]
 [write_to_file for '.vscode/settings.json'] Result:
@@ -172,12 +172,12 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path=".vscode/settings.json">
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${
 
 [Chunk 10]
 [read_file for '.cursorrules'] Result:
-# Agent OS Enhanced
+# prAxIs OS
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -193,15 +193,15 @@ The content was successfully saved to .clinerules.
 Here is the full, updated content of the file that was saved:
 
 <final_file_content path=".clinerules">
-# Agent OS Enhanced - Cline Configuration
+# prAxIs OS - Cline Configuration
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
 
 
 [Chunk 11]
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 .clinerules
@@ -213,7 +213,7 @@ Error executing MCP tool: No connection found for server: agent-os-enhanced. Ple
 
 ERRORS ENCOUNTERED
 --------------------------------------------------------------------------------
-[Chunk 0] ERROR: executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP s
+[Chunk 0] ERROR: executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP s
 [Chunk 0] ERROR: %s", e, exc_info=True)
 [Chunk 0] ERROR: to initialize LanceDB: %s", e)
 [Chunk 1] ERROR: %s", e, exc_info=True)

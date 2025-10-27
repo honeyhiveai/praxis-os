@@ -346,7 +346,7 @@ case "sse": {
 
 **Impact:** Non-breaking, backward compatible, aligns with MCP v1.0 specification
 
-**Status:** Ready for GitHub issue creation and systematic implementation via Agent OS Enhanced workflow.
+**Status:** Ready for GitHub issue creation and systematic implementation via prAxIs OS workflow.
 
 ---
 
@@ -356,7 +356,7 @@ All bugs identified, documented, and ready for implementation.
 <task_progress>
 - [x] Review MCP_TRANSPORT_ANALYSIS.md
 - [x] Review MCP_TRANSPORT_FIX_DESIGN.md
-- [x] Learn about Agent OS Enhanced
+- [x] Learn about prAxIs OS
 - [x] Provide detailed review of design doc
 - [x] Update design doc with all corrections
 - [x] Review CONTRIBUTING.md guidelines
@@ -368,8 +368,8 @@ All bugs identified, documented, and ready for implementation.
 - [x] Document complete bug analysis
 - [ ] User creates GitHub issue
 - [ ] Get maintainer approval
-- [ ] Cursor creates spec using Agent OS Enhanced
-- [ ] Cursor implements using Agent OS Enhanced workflow
+- [ ] Cursor creates spec using prAxIs OS
+- [ ] Cursor implements using prAxIs OS workflow
 - [ ] Final verification
 </task_progress>
 </attempt_completion>

@@ -36,7 +36,7 @@ The Query Gamification System uses completion mechanics (progress indicators lik
 
 ### Who It's For
 
-- **Primary Users:** AI agents executing Agent OS Enhanced workflows who need sustained query behavior
+- **Primary Users:** AI agents executing prAxIs OS workflows who need sustained query behavior
 - **Secondary Users:** Human users who benefit from higher-quality, more thoroughly researched agent outputs
 
 ### Success Metrics

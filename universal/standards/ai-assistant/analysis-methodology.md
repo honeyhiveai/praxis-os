@@ -309,7 +309,7 @@ AI: "Um..."
 
 **Problem**: Can't verify completeness
 
-**Fix**: "After examining 23 files in python-sdk and querying agent-os MCP 8 times, I found..."
+**Fix**: "After examining 23 files in python-sdk and querying praxis-os MCP 8 times, I found..."
 
 ### ❌ Anti-Pattern 5: No Prioritization
 ```
@@ -340,7 +340,7 @@ NOT appropriate: Full correlation matrix of all safety standards
 
 ### Example 2: Comprehensive Analysis (15-30 minutes)
 ```markdown
-User: "Comprehensive analysis: python-sdk vs agent-os standards"
+User: "Comprehensive analysis: python-sdk vs praxis-os standards"
 
 Appropriate Response:
 1. List ALL files in both locations
@@ -540,7 +540,7 @@ Action: Build comprehensive correlation matrices
 **AI Assistant:**
 - `standards/ai-assistant/compliance-protocol.md` - Check standards before analysis → `search_standards("compliance protocol")`
 - `standards/ai-assistant/standards-creation-process.md` - Creating standards → `search_standards("standards creation")`
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core principles → `search_standards("Agent OS orientation")`
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core principles → `search_standards("prAxIs OS orientation")`
 
 **AI Safety:**
 - `standards/ai-safety/production-code-checklist.md` - Analysis is step 1 → `search_standards("production code checklist")`

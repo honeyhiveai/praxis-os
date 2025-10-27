@@ -221,11 +221,11 @@ class TestConfigHelpers:
 
         assert config is not None
         assert "mcpServers" in config
-        assert "agent-os-rag" in config["mcpServers"]
+        assert "praxis-os-rag" in config["mcpServers"]
         assert (
-            config["mcpServers"]["agent-os-rag"]["url"] == "http://127.0.0.1:4242/mcp"
+            config["mcpServers"]["praxis-os-rag"]["url"] == "http://127.0.0.1:4242/mcp"
         )
-        assert config["mcpServers"]["agent-os-rag"]["transport"] == "streamable-http"
+        assert config["mcpServers"]["praxis-os-rag"]["transport"] == "streamable-http"
 
     def test_get_mcp_config_for_cline_not_found(self):
         """Test Cline config generation when server not found."""

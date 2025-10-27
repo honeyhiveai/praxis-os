@@ -36,7 +36,7 @@ The updated orientation guide successfully enforced correct behavior from conver
 - Jumping directly to file searches
 - Guessing file locations
 - Using wrong search strategies
-- Missing critical context about how Agent OS works
+- Missing critical context about how prAxIs OS works
 
 ### Step 2: Task Analysis
 **User Request**: "find the persona spec"
@@ -102,7 +102,7 @@ User: "find the persona spec"
 "I don't see a persona spec file. Can you provide more details?"
   ↓
 ❌ FAILURE: Didn't know to check .praxis-os/specs/
-❌ FAILURE: Didn't understand Agent OS patterns
+❌ FAILURE: Didn't understand prAxIs OS patterns
 ❌ FAILURE: Required multiple user corrections
 ```
 
@@ -237,7 +237,7 @@ YOU ARE CODE AUTHOR - Write 100% of code, human provides direction only
 6. AI: "Found it!"
 ```
 
-**Root cause**: No orientation = no knowledge of Agent OS patterns
+**Root cause**: No orientation = no knowledge of prAxIs OS patterns
 **Solution**: Forced orientation = knowledge loaded before any action
 
 ---
@@ -329,7 +329,7 @@ This isn't guidance - it's enforcement. The difference between "you should do th
 ### Behavioral Impact
 
 Before: Generic AI assistant that requires user education  
-After: Agent OS agent that self-orients and follows system patterns
+After: prAxIs OS agent that self-orients and follows system patterns
 
 The fix transforms behavior at the earliest possible moment - before any task execution - which prevents all downstream failures that would result from missing orientation.
 

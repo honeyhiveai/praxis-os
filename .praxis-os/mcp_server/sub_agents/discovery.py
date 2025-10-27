@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 # pylint: disable=too-many-return-statements
 def discover_mcp_server(
-    agent_os_path: Optional[Path] = None,
+    praxis_os_path: Optional[Path] = None,
 ) -> Optional[str]:
     """
     Discover a running MCP server's HTTP endpoint by reading its state file.
@@ -34,7 +34,7 @@ def discover_mcp_server(
     5. Returns None if server not found, stale, or stdio-only
 
     Args:
-        agent_os_path: Path to the .praxis-os directory. If None, searches
+        praxis_os_path: Path to the .praxis-os directory. If None, searches
                       for .praxis-os in the current directory and parent
                       directories up to the home directory.
 
@@ -86,14 +86,14 @@ def discover_mcp_server(
         - PortManager.read_state(): Low-level state file reader
     """
     # Locate .praxis-os directory
-    if agent_os_path is None:
-        agent_os_path = _find_agent_os_directory()
-        if agent_os_path is None:
+    if praxis_os_path is None:
+        praxis_os_path = _find_praxis_os_directory()
+        if praxis_os_path is None:
             logger.debug("Could not locate .praxis-os directory")
             return None
 
     # Read state file
-    state_file = agent_os_path / ".mcp_server_state.json"
+    state_file = praxis_os_path / ".mcp_server_state.json"
     if not state_file.exists():
         logger.debug("State file not found at %s", state_file)
         return None
@@ -139,7 +139,7 @@ def discover_mcp_server(
     return url
 
 
-def _find_agent_os_directory() -> Optional[Path]:
+def _find_praxis_os_directory() -> Optional[Path]:
     """
     Search for the .praxis-os directory starting from the current directory.
 

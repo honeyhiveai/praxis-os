@@ -4,7 +4,7 @@ Thank you for your interest in contributing! This guide will help you add univer
 
 ## 🔄 Development Workflow (CRITICAL)
 
-**We dogfood Agent OS - our local installation mirrors consumer experience.**
+**We dogfood prAxIs OS - our local installation mirrors consumer experience.**
 
 ### The Copy Workflow
 
@@ -230,7 +230,7 @@ finally:
 ```markdown
 # [Language] Language-Specific Standards Generation Instructions
 
-**For the Cursor Agent: When installing Agent OS in a [Language] project, use these instructions...**
+**For the Cursor Agent: When installing prAxIs OS in a [Language] project, use these instructions...**
 
 ## Instructions Overview
 
@@ -329,7 +329,7 @@ Explain:
        # Implementation
    ```
 
-2. **Register in agent_os_rag.py**
+2. **Register in praxis_os_rag.py**
    ```python
    from sub_agents.api_design_critic import critique_api_design
    

@@ -1,7 +1,7 @@
 """
 RAG Index Builder - LanceDB Implementation.
 
-Builds vector index from Agent OS standards using LanceDB for semantic search.
+Builds vector index from prAxIs OS standards using LanceDB for semantic search.
 Switched from ChromaDB to LanceDB for:
 - Better metadata filtering (WHERE clauses at DB level)
 - Cleaner hot reload (no singleton client conflicts)
@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 
 
 class IndexBuilder:
-    """Builds and maintains LanceDB vector index for Agent OS standards."""
+    """Builds and maintains LanceDB vector index for prAxIs OS standards."""
 
     def __init__(
         self,
@@ -46,7 +46,7 @@ class IndexBuilder:
 
         Args:
             index_path: Path to store vector index (LanceDB directory)
-            standards_path: Path to Agent OS standards directory (all AI-facing content)
+            standards_path: Path to prAxIs OS standards directory (all AI-facing content)
             embedding_provider: Provider for embeddings ("local" default/free or "openai" costs money)
             embedding_model: Model to use (all-MiniLM-L6-v2 for local, text-embedding-3-small for openai)
         """
@@ -122,7 +122,7 @@ class IndexBuilder:
         self, force: bool = False, incremental: bool = True
     ) -> Dict[str, Any]:
         """
-        Build vector index from Agent OS files.
+        Build vector index from prAxIs OS files.
 
         Steps:
         1. Check if rebuild needed (unless force=True)
@@ -151,7 +151,7 @@ class IndexBuilder:
             return {"status": "skipped", "reason": "index_fresh"}
 
         # Determine build strategy
-        table_exists = "agent_os_standards" in self.db.table_names()
+        table_exists = "praxis_os_standards" in self.db.table_names()
         use_incremental = incremental and table_exists and not force
 
         if use_incremental:
@@ -166,7 +166,7 @@ class IndexBuilder:
             files_to_process = changed_files
 
             # Open existing table
-            table = self.db.open_table("agent_os_standards")
+            table = self.db.open_table("praxis_os_standards")
 
             # Delete old chunks for changed files
             logger.info("🗑️  Removing old chunks for changed files...")
@@ -261,12 +261,12 @@ class IndexBuilder:
             try:
                 if table_exists:
                     logger.info("Dropping existing table for full rebuild")
-                    self.db.drop_table("agent_os_standards")
+                    self.db.drop_table("praxis_os_standards")
             except Exception as e:
                 logger.warning(f"Could not drop existing table: {e}")
 
             logger.info(f"Creating new table with {len(records)} records...")
-            table = self.db.create_table("agent_os_standards", records)
+            table = self.db.create_table("praxis_os_standards", records)
             total_chunks = len(records)
             logger.info(f"✅ Table created with {total_chunks} records")
 
@@ -348,9 +348,9 @@ class IndexBuilder:
             if deleted_files:
                 logger.info(f"Detected {len(deleted_files)} deleted files")
                 # Delete chunks for deleted files from the index
-                if "agent_os_standards" in self.db.table_names():
+                if "praxis_os_standards" in self.db.table_names():
                     try:
-                        table = self.db.open_table("agent_os_standards")
+                        table = self.db.open_table("praxis_os_standards")
                         for deleted_path in deleted_files:
                             try:
                                 table.delete(f"file_path = '{deleted_path}'")
@@ -388,7 +388,7 @@ class IndexBuilder:
             return False
 
         # Check if table exists
-        if "agent_os_standards" not in self.db.table_names():
+        if "praxis_os_standards" not in self.db.table_names():
             return False
 
         try:
@@ -414,7 +414,7 @@ class IndexBuilder:
 def main():
     """CLI entry point for index builder."""
     parser = argparse.ArgumentParser(
-        description="Build RAG vector index from Agent OS standards"
+        description="Build RAG vector index from prAxIs OS standards"
     )
 
     parser.add_argument(
@@ -452,7 +452,7 @@ def main():
         "--standards-path",
         type=Path,
         default=None,
-        help="Path to Agent OS standards (default: .praxis-os/standards)",
+        help="Path to prAxIs OS standards (default: .praxis-os/standards)",
     )
 
     parser.add_argument(
@@ -474,7 +474,7 @@ def main():
 
     # Default paths depend on whether we're in source repo or installed location
     # If script is at .praxis-os/scripts/, then repo_root is .praxis-os/
-    # If script is at agent-os-enhanced/scripts/, then repo_root is agent-os-enhanced/
+    # If script is at praxis-os-enhanced/scripts/, then repo_root is praxis-os-enhanced/
 
     # Detect if we're in an installed location
     is_installed = (repo_root / "standards").exists() and not (

@@ -21,7 +21,7 @@
 
 **Why This Matters Now:**
 - **Enterprise Adoption**: Companies want fast, reliable, auditable installations
-- **Customer Interest**: HoneyHive customers and FAANG contacts evaluating Agent OS Enhanced
+- **Customer Interest**: HoneyHive customers and FAANG contacts evaluating prAxIs OS
 - **Trust Building**: Installation is the FIRST interaction - must build trust immediately
 - **Scale**: As we go from 10 → 100 → 1000 users, installation reliability becomes critical
 
@@ -59,7 +59,7 @@
 
 **User Experience:**
 ```
-User: "Install Agent OS Enhanced"
+User: "Install prAxIs OS"
 
 LLM: "I'll use the fast installer script..."
 [30 seconds: Script clones, copies 337 files, validates]
@@ -188,7 +188,7 @@ LLM: "I'll use the fast installer script..."
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ USER: "Install Agent OS Enhanced"                           │
+│ USER: "Install prAxIs OS"                           │
 └────────────────────┬────────────────────────────────────────┘
                      │
                      ▼
@@ -261,7 +261,7 @@ def print_next_steps()         # What LLM should do next
 
 **Output Example:**
 ```
-Agent OS Enhanced Installer v1.0.0
+prAxIs OS Installer v1.0.0
 
 Step 1/4: Checking prerequisites
 ✓ Git detected
@@ -382,12 +382,12 @@ Complete installation
 **Cons:**
 - ❌ Can't adapt to project context (language detection brittle)
 - ❌ Can't merge .cursorrules intelligently (needs LLM context)
-- ❌ Misses the point - Agent OS is about AI-enhanced development
+- ❌ Misses the point - prAxIs OS is about AI-enhanced development
 - ❌ Complex script maintenance (language templates, etc.)
 - ❌ No trust building - user doesn't see AI working
 
 **Why Rejected:**
-This defeats the purpose of Agent OS Enhanced. We WANT the LLM to be involved in intelligent tasks (language detection, standards generation). The script should only handle mechanical operations.
+This defeats the purpose of prAxIs OS. We WANT the LLM to be involved in intelligent tasks (language detection, standards generation). The script should only handle mechanical operations.
 
 ### Option 2: Hybrid Script + LLM (Proposed) ✅
 
@@ -514,7 +514,7 @@ If LLMs ignore script, make it more explicit in docs/cursorrules
 ## ❓ Open Questions
 
 ### Question 1: Should script be fast path or default path?
-**Context:** Users say "Install Agent OS Enhanced" - which path should LLM choose?
+**Context:** Users say "Install prAxIs OS" - which path should LLM choose?
 
 **Options:**
 - **A:** Script is default, guided is fallback ("unless you want manual control")
@@ -631,7 +631,7 @@ If LLMs ignore script, make it more explicit in docs/cursorrules
 ### Files to Keep (No Changes)
 
 1. **`installation/01-06-*.md`** - Keep as guided path fallback
-2. **`universal/workflows/agent_os_upgrade_v1/`** - Upgrade is separate
+2. **`universal/workflows/praxis_os_upgrade_v1/`** - Upgrade is separate
 
 ---
 
@@ -667,7 +667,7 @@ If LLMs ignore script, make it more explicit in docs/cursorrules
 ### Dogfooding
 
 **Test in Real Projects:**
-1. Agent OS Enhanced (Python, this repo)
+1. prAxIs OS (Python, this repo)
 2. hive-kube (JavaScript/TypeScript, monorepo)
 3. python-sdk (Python, smaller repo)
 4. Fresh empty directory

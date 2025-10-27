@@ -1,5 +1,5 @@
 """
-Browser automation manager for Agent OS MCP server.
+Browser automation manager for prAxIs OS MCP server.
 
 Provides Playwright-based browser automation with per-session isolation
 for multi-chat safety. Each session gets its own browser process for

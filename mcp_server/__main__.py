@@ -1,5 +1,5 @@
 """
-Entry point for Agent OS MCP server when run as a module.
+Entry point for prAxIs OS MCP server when run as a module.
 
 Allows execution via:
     python -m mcp_server --transport dual
@@ -25,7 +25,7 @@ from .transport_manager import TransportManager
 logger = logging.getLogger(__name__)
 
 
-def find_agent_os_directory() -> Path:
+def find_praxis_os_directory() -> Path:
     """
     Find .praxis-os directory in project.
 
@@ -106,7 +106,7 @@ def main() -> None:  # pylint: disable=too-many-statements
     """
     # Parse CLI arguments
     parser = argparse.ArgumentParser(
-        description="Agent OS MCP Server with dual-transport support",
+        description="prAxIs OS MCP Server with dual-transport support",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Transport modes:
@@ -141,7 +141,7 @@ Examples:
     )
 
     logger.info("=" * 60)
-    logger.info("Agent OS MCP Server")
+    logger.info("prAxIs OS MCP Server")
     logger.info("Transport Mode: %s", args.transport)
     logger.info("Log Level: %s", args.log_level)
     logger.info("=" * 60)
@@ -152,7 +152,7 @@ Examples:
 
     try:
         # Find and validate .praxis-os directory
-        base_path = find_agent_os_directory()
+        base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
 
         # Load and validate configuration

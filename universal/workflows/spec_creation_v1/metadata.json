@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "name": "Specification Creation Workflow",
   "description": "Systematically create comprehensive specifications with phase-gated validation",
-  "author": "Agent OS Team",
+  "author": "prAxIs OS Team",
   "total_phases": 6,
   "estimated_duration": "1-2 hours (+ supporting docs review time)",
   "primary_outputs": [

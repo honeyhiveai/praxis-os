@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for fixing the critical evidence validation bug in the Agent OS workflow engine and implementing config-driven gate definitions to prevent false evidence submission.
+This document defines the requirements for fixing the critical evidence validation bug in the prAxIs OS workflow engine and implementing config-driven gate definitions to prevent false evidence submission.
 
 ### 1.2 Scope
 This feature will enable actual validation of workflow checkpoint evidence, prevent AI agents from submitting false claims, and establish a systematic approach to validation gate management across all workflows.
@@ -677,7 +677,7 @@ NFRs define quality attributes and system constraints.
 
 **NFR-C1: Python Version**
 - Minimum Python 3.8 (for lambda syntax, type hints)
-- Compatible with current Agent OS runtime environment
+- Compatible with current prAxIs OS runtime environment
 - No new dependencies required (uses existing pyyaml)
 
 **NFR-C2: Workflow Engine**
@@ -787,7 +787,7 @@ Explicitly defines what is NOT included. Items may be considered for future phas
 
 **Not Supported:**
 
-- **External API Consumers**: Validation system is internal to Agent OS workflow engine, not exposed as public API
+- **External API Consumers**: Validation system is internal to prAxIs OS workflow engine, not exposed as public API
 - **Non-Workflow Users**: Validation only applies to workflow checkpoint evidence, not general-purpose validation
 - **Manual Overriders Without Workflow Context**: Override capability exists but must be through workflow system (not standalone validation service)
 
@@ -852,7 +852,7 @@ Explicitly defines what is NOT included. Items may be considered for future phas
 - Multi-agent peer review integration
 
 **Explicitly Not Planned:**
-- Public validation API (internal to Agent OS only)
+- Public validation API (internal to prAxIs OS only)
 - Standalone validation service (tightly coupled to workflow engine)
 - Support for Python < 3.8 (technical limitation)
 - Non-YAML gate formats (YAML sufficient, no need for alternatives)

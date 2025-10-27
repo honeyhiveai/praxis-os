@@ -1,7 +1,7 @@
 """
 RAG search tools for MCP server.
 
-Provides search_standards tool for semantic search over Agent OS documentation.
+Provides search_standards tool for semantic search over prAxIs OS documentation.
 """
 
 # pylint: disable=broad-exception-caught
@@ -46,9 +46,9 @@ def register_rag_tools(mcp: Any, rag_engine: Any) -> int:
         filter_tags: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """
-        Semantic search over Agent OS documentation.
+        Semantic search over prAxIs OS documentation.
 
-        Performs RAG-based semantic search to find relevant Agent OS content.
+        Performs RAG-based semantic search to find relevant prAxIs OS content.
         Replaces reading entire framework documents with targeted retrieval.
 
         Args:

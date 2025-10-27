@@ -321,7 +321,7 @@ ls .praxis-os/mcp_server/__main__.py
 ```
 
 **Solution:**
-Reinstall Agent OS (see installation guide).
+Reinstall prAxIs OS (see installation guide).
 
 #### E. IDE Needs Restart
 

@@ -26,7 +26,7 @@ ACT MODE
 **This is BETTER because:**
 - ✅ Keeps template focused and clean
 - ✅ Avoids content duplication
-- ✅ Uses Agent OS Enhanced's own tools
+- ✅ Uses prAxIs OS's own tools
 - ✅ Information is discoverable, not buried
 - ✅ Shows users HOW to search for details
 - ✅ Content stays in one place (RAG indexed standards)
@@ -45,7 +45,7 @@ Clear distinction between elapsed time and human effort!
 
 **2. Task Format Updates** ✅
 ```markdown
-- **Agent OS:** 4h wall clock, 12 min active (20x leverage)
+- **prAxIs OS:** 4h wall clock, 12 min active (20x leverage)
 ```
 Perfect! Shows both dimensions and leverage.
 
@@ -78,7 +78,7 @@ For complete dual estimation guidance, query these standards:
    search_standards("parallel multiplier effect")
 
 6. Calibration Guidance:
-   search_standards("calibration new to Agent OS Enhanced")
+   search_standards("calibration new to prAxIs OS")
 ```
 
 **Why this is brilliant:**
@@ -146,7 +146,7 @@ Complete examples showing the new format.
 
 ### What This Demonstrates
 
-**Agent OS Enhanced eating its own dog food:**
+**prAxIs OS eating its own dog food:**
 
 1. **Template** - Lightweight, points to knowledge
 2. **RAG System** - Holds detailed knowledge
@@ -184,7 +184,7 @@ Returns the visual timeline showing AI autonomous work vs human active time.
 - ✅ Single source of truth
 
 **Cursor demonstrated:**
-- Deep understanding of Agent OS philosophy
+- Deep understanding of prAxIs OS philosophy
 - Smart use of the RAG system
 - Clean information architecture
 - Better solution than what I proposed
@@ -194,7 +194,7 @@ Returns the visual timeline showing AI autonomous work vs human active time.
 **I suggested duplicating content** (detailed formulas in template)  
 **Cursor showed a better way** (use search_standards for details)
 
-This is exactly the Agent OS orientation principle:
+This is exactly the prAxIs OS orientation principle:
 > "Don't read files, query to learn"
 
 **Cursor applied this to the template itself!**
@@ -214,7 +214,7 @@ Instead of reading a long document, agents now:
 The implementation is:
 - Clean
 - Elegant  
-- Uses Agent OS correctly
+- Uses prAxIs OS correctly
 - Better than my suggestion
 - Production-ready
 
@@ -276,7 +276,7 @@ ACT MODE
 <content>#!/bin/bash
 # Validate all search_standards queries from tasks-template.md
 
-echo "Validating Agent OS Dual Estimation Framework Queries"
+echo "Validating prAxIs OS Dual Estimation Framework Queries"
 echo "====================================================="
 echo ""
 
@@ -328,7 +328,7 @@ echo ""
 # Query 6: Calibration Guidance
 echo "Query 6: Calibration Guidance"
 python mcp_tool_cli.py search_standards '{
-  "query": "calibration new to Agent OS Enhanced",
+  "query": "calibration new to prAxIs OS",
   "n_results": 3
 }' > /tmp/query6_calibration.json
 echo "✓ Saved to /tmp/query6_calibration.json"
@@ -360,7 +360,7 @@ Here is the full, updated content of the file that was saved:
 #!/bin/bash
 # Validate all search_standards queries from tasks-template.md
 
-echo "Validating Agent OS Dual Estimation Framework Queries"
+echo "Validating prAxIs OS Dual Estimation Framework Queries"
 echo "====================================================="
 echo ""
 
@@ -412,7 +412,7 @@ echo ""
 # Query 6: Calibration Guidance
 echo "Query 6: Calibration Guidance"
 python mcp_tool_cli.py search_standards '{
-  "query": "calibration new to Agent OS Enhanced",
+  "query": "calibration new to prAxIs OS",
   "n_results": 3
 }' > /tmp/query6_calibration.json
 echo "✓ Saved to /tmp/query6_calibration.json"
@@ -735,7 +735,7 @@ The user has provided feedback on the results. Consider their input to continue 
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Step 1: Calculate Human Baseline**\\n\\n```\\nH = Base Time \u00d7 Complexity Factor \u00d7 Risk Factor\\n\\nBase Time: How long if everything goes smoothly\\nComplexity: 1.0 (simple) to 2.0 (complex)\\nRisk: 1.0 (low) to 1.5 (high uncertainty)\\n```\\n\\n**Example:**\\n```\\nBase: 2 hours (write code)\\nComplexity: 1.5 (moderate complexity)\\nRisk: 1.2 (some unknowns)\\nH = 2 \u00d7 1.5 \u00d7 1.2 = 3.6 hours (round to 4 hours)\\n```\\n\\n**Step 2: Calculate Wall Clock Duration**\\n\\n```\\nW = H \u00d7 M\\n\\nWhere M is:\\n- 0.6-0.8 for repetitive/boilerplate (AI faster)\\n- 1.0 for standard implementation (AI same speed)\\n- 1.2-1.5 for complex/novel (AI slower but autonomous)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours (from above)\\nM = 1.0 (standard implementation)\\nW = 4 \u00d7 1.0 = 4 hours wall clock\\n```\\n\\n**Step 3: Calculate Human Active Time**\\n\\n```\\nA = W \u00d7 O\\n\\nWhere O is:\\n- 0.03-0.05 for well-defined tasks with clear specs\\n- 0.05-0.08 for standard tasks with normal complexity\\n- 0.08-0.10 for complex tasks or unclear requirements\\n```\\n\\n**Example:**\\n```\\nW = 4 hours\\nO = 0.05 (well-defined from spec)\\nA = 4 \u00d7 0.05 = 0.2 hours = 12 minutes active time\\n```\\n\\n**Step 4: Calculate Leverage**\\n\\n```\\nL = H \u00f7 A\\n\\nTypical ranges:\\n- Best case: 30-50x (boilerplate with clear spec)\\n- Normal case: 15-25x (standard implementation)\\n- Worst case: 7-12x (complex novel problem)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours\\nA = 0.2 hours (12 minutes)\\nL = 4 \u00f7 0.2 = 20x leverage\\n\\nHuman saves 3 hours 48 minutes per task\\nCan orchestrate 20 tasks in parallel\\n```\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"Step-by-Step Calculation\",\"relevance_score\":0.7590420842170715,\"tokens\":0},{\"content\":\"- **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)\\n\\n---\",\"file\":\"workflows/spec_creation_v1/core/tasks-template.md\",\"section\":\"AI Agent + Human Orchestration (Agent OS Enhanced)\",\"relevance_score\":0.7635830640792847,\"tokens\":0},{\"content\":\"**Wrong (confusing):**\\n```markdown\\n- **AI Time:** 4 hours\\n- **Human Time:** 12 minutes\\n```\\n\\n**Right (clear):**\\n```markdown\\n- **Wall Clock Duration:** 4 hours (AI works autonomously)\\n- **Human Active Time:** 12 minutes (orchestration)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"2. Confusing Wall Clock with Active Time\",\"relevance_score\":0.8063721060752869,\"tokens\":0}],\"total_tokens\":487,\"retrieval_method\":\"vector\",\"query_time_ms\":45.922040939331055}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n**Step 1: Calculate Human Baseline**\\n\\n```\\nH = Base Time \u00d7 Complexity Factor \u00d7 Risk Factor\\n\\nBase Time: How long if everything goes smoothly\\nComplexity: 1.0 (simple) to 2.0 (complex)\\nRisk: 1.0 (low) to 1.5 (high uncertainty)\\n```\\n\\n**Example:**\\n```\\nBase: 2 hours (write code)\\nComplexity: 1.5 (moderate complexity)\\nRisk: 1.2 (some unknowns)\\nH = 2 \u00d7 1.5 \u00d7 1.2 = 3.6 hours (round to 4 hours)\\n```\\n\\n**Step 2: Calculate Wall Clock Duration**\\n\\n```\\nW = H \u00d7 M\\n\\nWhere M is:\\n- 0.6-0.8 for repetitive/boilerplate (AI faster)\\n- 1.0 for standard implementation (AI same speed)\\n- 1.2-1.5 for complex/novel (AI slower but autonomous)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours (from above)\\nM = 1.0 (standard implementation)\\nW = 4 \u00d7 1.0 = 4 hours wall clock\\n```\\n\\n**Step 3: Calculate Human Active Time**\\n\\n```\\nA = W \u00d7 O\\n\\nWhere O is:\\n- 0.03-0.05 for well-defined tasks with clear specs\\n- 0.05-0.08 for standard tasks with normal complexity\\n- 0.08-0.10 for complex tasks or unclear requirements\\n```\\n\\n**Example:**\\n```\\nW = 4 hours\\nO = 0.05 (well-defined from spec)\\nA = 4 \u00d7 0.05 = 0.2 hours = 12 minutes active time\\n```\\n\\n**Step 4: Calculate Leverage**\\n\\n```\\nL = H \u00f7 A\\n\\nTypical ranges:\\n- Best case: 30-50x (boilerplate with clear spec)\\n- Normal case: 15-25x (standard implementation)\\n- Worst case: 7-12x (complex novel problem)\\n```\\n\\n**Example:**\\n```\\nH = 4 hours\\nA = 0.2 hours (12 minutes)\\nL = 4 \u00f7 0.2 = 20x leverage\\n\\nHuman saves 3 hours 48 minutes per task\\nCan orchestrate 20 tasks in parallel\\n```\\n\\n---\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"Step-by-Step Calculation\",\"relevance_score\":0.7590420842170715,\"tokens\":0},{\"content\":\"- **Phase 1:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Phase 2:** {wall clock hours}h wall, {human minutes} min active ({leverage}x)\\n- **Total:** {wall clock hours}h wall, {human hours}h active ({leverage}x leverage)\\n\\n---\",\"file\":\"workflows/spec_creation_v1/core/tasks-template.md\",\"section\":\"AI Agent + Human Orchestration (prAxIs OS)\",\"relevance_score\":0.7635830640792847,\"tokens\":0},{\"content\":\"**Wrong (confusing):**\\n```markdown\\n- **AI Time:** 4 hours\\n- **Human Time:** 12 minutes\\n```\\n\\n**Right (clear):**\\n```markdown\\n- **Wall Clock Duration:** 4 hours (AI works autonomously)\\n- **Human Active Time:** 12 minutes (orchestration)\\n```\",\"file\":\"standards/universal/workflows/time-estimation-standards.md\",\"section\":\"2. Confusing Wall Clock with Active Time\",\"relevance_score\":0.8063721060752869,\"tokens\":0}],\"total_tokens\":487,\"retrieval_method\":\"vector\",\"query_time_ms\":45.922040939331055}"
 }
 </feedback>
 <environment_details>
@@ -953,9 +953,9 @@ echo "✓ Query 5 complete"
 # Query 6: Calibration Guidance
 echo "========================================" >> "$OUTPUT"
 echo "QUERY 6: Calibration Guidance" >> "$OUTPUT"
-echo "Query: calibration new to Agent OS Enhanced" >> "$OUTPUT"
+echo "Query: calibration new to prAxIs OS" >> "$OUTPUT"
 echo "========================================" >> "$OUTPUT"
-python mcp_tool_cli.py search_standards '{"query": "calibration new to Agent OS Enhanced", "n_results": 3}' >> "$OUTPUT" 2>&1
+python mcp_tool_cli.py search_standards '{"query": "calibration new to prAxIs OS", "n_results": 3}' >> "$OUTPUT" 2>&1
 echo "" >> "$OUTPUT"
 echo "✓ Query 6 complete"
 

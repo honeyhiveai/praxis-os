@@ -208,7 +208,7 @@ The system learns **how to learn**:
 Structured execution with phase gates:
 - `spec_creation_v1`: Design → Structured Spec
 - `spec_execution_v1`: Spec → Implementation
-- `agent_os_upgrade_v1`: Backup → Update → Verify
+- `praxis_os_upgrade_v1`: Backup → Update → Verify
 
 **Enforced via:** Code-level phase gating (cannot skip phases)
 
@@ -285,7 +285,7 @@ That's praxis.
 - [Workflows](../reference/workflows) - Phase-gated execution
 
 **See praxis in practice:**
-- [Your First Project](../tutorials/your-first-agent-os-project) - Spec-driven development
+- [Your First Project](../tutorials/your-first-praxis-os-project) - Spec-driven development
 - [Creating Standards](../how-to-guides/creating-project-standards) - Capture patterns
 - [Custom Workflows](../how-to-guides/create-custom-workflows) - Define processes
 

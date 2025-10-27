@@ -45,12 +45,12 @@ ACT MODE
 
 [Unexpected content type]
 
-Based on the `.cursorrules` file in this project, I can see **Agent OS Enhanced** is referenced as a documentation/knowledge management system with specific usage patterns:
+Based on the `.cursorrules` file in this project, I can see **prAxIs OS** is referenced as a documentation/knowledge management system with specific usage patterns:
 
-## What I Know About Agent OS Enhanced:
+## What I Know About prAxIs OS:
 
 ### Core Concept
-Agent OS Enhanced appears to be a **standards-based development system** that uses a `search_standards()` function to query indexed documentation and best practices.
+prAxIs OS appears to be a **standards-based development system** that uses a `search_standards()` function to query indexed documentation and best practices.
 
 ### Key Features from .cursorrules:
 
@@ -72,20 +72,20 @@ Agent OS Enhanced appears to be a **standards-based development system** that us
 ### Current Status in This Environment:
 
 However, I notice that **`search_standards()` is not available** in my current tool set. This suggests either:
-- Agent OS Enhanced is not fully configured in this Cline environment
+- prAxIs OS is not fully configured in this Cline environment
 - It may require an MCP server connection
 - The .cursorrules reference might be aspirational/incomplete
 
 <ask_followup_question>
-<question>Would you like me to help set up Agent OS Enhanced in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?</question>
-<options>["Help set up Agent OS Enhanced", "Continue with MCP transport fix", "Explain how to integrate Agent OS with Cline", "Something else"]</options>
+<question>Would you like me to help set up prAxIs OS in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?</question>
+<options>["Help set up prAxIs OS", "Continue with MCP transport fix", "Explain how to integrate prAxIs OS with Cline", "Something else"]</options>
 </ask_followup_question>
 
 ---
 
 **User:**
 
-[ask_followup_question for 'Would you like me to help set up Agent OS Enhanced in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
+[ask_followup_question for 'Would you like me to help set up prAxIs OS in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
 <answer>
 read the docs https://honeyhiveai.github.io/praxis-os/
 </answer>
@@ -123,7 +123,7 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
-  Agent OS Enhanced  
+  prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
@@ -174,7 +174,7 @@ Infrastructure Built
 
 Production Proven
 
-### Extracted Agent OS Enhanced
+### Extracted prAxIs OS
 
 2,777 tests, 10.0/10 Pylint, 100% AI-authored
 
@@ -182,7 +182,7 @@ Complete AI development platform
 
 🙏 **Built on the shoulders of giants:** [BuilderMethods Agent OS](https://buildermethods.com/agent-os) provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it.
 
-[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
+[Visit Original prAxIs OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
 
 Get Started
 -----------
@@ -296,7 +296,7 @@ Design validation, concurrency analysis, test generation - focused tools.
 
 ### Portable & Isolated
 
-Each project owns its Agent OS installation, standards, and version.
+Each project owns its prAxIs OS installation, standards, and version.
 
 
 
@@ -314,7 +314,7 @@ Build your own AI-assisted workflows with proven patterns.
 
 ](/praxis-os/docs/workflows)
 
-Why Agent OS Enhanced?
+Why prAxIs OS?
 ----------------------
 
 Built on production lessons from real AI development challenges
@@ -372,18 +372,18 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/docs/intro'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/docs/intro:
 
-  Introduction | Agent OS Enhanced  
+  Introduction | prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
 On this page
 
-**Agent OS Enhanced** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
+**prAxIs OS** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
 
-What is Agent OS Enhanced?[​](#what-is-praxis-os "Direct link to What is Agent OS Enhanced?")
+What is prAxIs OS?[​](#what-is-praxis-os "Direct link to What is prAxIs OS?")
 -----------------------------------------------------------------------------------------------------
 
-Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
+prAxIs OS builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
 
 *   **90% context reduction** through semantic search (MCP/RAG)
 *   **Architectural phase gating** that enforces workflows in code
@@ -393,9 +393,9 @@ Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://
 Quick Start[​](#quick-start "Direct link to Quick Start")
 ---------------------------------------------------------
 
-Install Agent OS Enhanced in your project:
+Install prAxIs OS in your project:
 
-    # Open your project in Cursor and say:"Install Agent OS from github.com/honeyhiveai/praxis-os"
+    # Open your project in Cursor and say:"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 
 The Cursor agent will:
 
@@ -433,7 +433,7 @@ Timeless CS fundamentals that apply to any programming language:
 
 ### Language-Specific Generation[​](#language-specific-generation "Direct link to Language-Specific Generation")
 
-For each project, Agent OS generates language-specific implementations of universal standards:
+For each project, prAxIs OS generates language-specific implementations of universal standards:
 
 *   **Python:** GIL, threading, asyncio, pytest patterns
 *   **Go:** Goroutines, channels, sync primitives, table-driven tests
@@ -488,13 +488,13 @@ ACT MODE
 [web_fetch for 'https://honeyhiveai.github.io/praxis-os/docs/how-it-works'] Result:
 Fetched Markdown for https://honeyhiveai.github.io/praxis-os/docs/how-it-works:
 
-  How It Works | Agent OS Enhanced  
+  How It Works | prAxIs OS  
 
 [Skip to main content](#__docusaurus_skipToContent_fallback)
 
 On this page
 
-Agent OS Enhanced changes how you work with AI - from prompting to orchestration. Here's the complete workflow pattern.
+prAxIs OS changes how you work with AI - from prompting to orchestration. Here's the complete workflow pattern.
 
 The Human-AI Partnership Model[​](#the-human-ai-partnership-model "Direct link to The Human-AI Partnership Model")
 ------------------------------------------------------------------------------------------------------------------
@@ -862,7 +862,7 @@ Real Example: End-to-End[​](#real-example-end-to-end "Direct link to Real Exam
 Next Steps[​](#next-steps "Direct link to Next Steps")
 ------------------------------------------------------
 
-*   **[Installation](/praxis-os/docs/installation)** - Set up Agent OS Enhanced
+*   **[Installation](/praxis-os/docs/installation)** - Set up prAxIs OS
 *   **[Workflows](/praxis-os/docs/workflows)** - Understand workflow details
 *   **[Architecture](/praxis-os/docs/architecture)** - How tool calls work under the hood
 <environment_details>
@@ -888,9 +888,9 @@ ACT MODE
 
 [Unexpected content type]
 
-Now I understand Agent OS Enhanced! Here's what I learned:
+Now I understand prAxIs OS! Here's what I learned:
 
-## Agent OS Enhanced - Key Insights
+## prAxIs OS - Key Insights
 
 ### 🎯 Core Concept
 It's a **portable multi-agent development framework** that transforms AI from assistant to **velocity-enhancing development partner** through structured orchestration.
@@ -967,7 +967,7 @@ Built from real challenges refactoring HoneyHive Python SDK:
 
 ### 🎁 Key Benefits vs Original Agent OS
 
-| Aspect | Original Agent OS | Agent OS Enhanced |
+| Aspect | Original prAxIs OS | prAxIs OS |
 |--------|------------------|-------------------|
 | **Context** | Side-loaded files | MCP/RAG semantic search |
 | **Relevance** | 4% relevant | 95% relevant |
@@ -996,5 +996,5 @@ Given this context, I should:
 
 However, for our **immediate MCP transport fix**, this is a straightforward code correction that doesn't require a full spec workflow - just targeted implementation.
 
-Would you like me to proceed with the MCP transport fix using this Agent OS Enhanced approach, or set up Agent OS Enhanced in this Cline project first?
+Would you like me to proceed with the MCP transport fix using this prAxIs OS approach, or set up prAxIs OS in this Cline project first?
 

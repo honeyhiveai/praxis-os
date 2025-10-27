@@ -16,7 +16,7 @@
 - **Project Isolation:** Each project's MCP server must be independent (separate state, RAG, ports)
 
 **Business Goals:**
-- Enable sub-agent ecosystem around Agent OS
+- Enable sub-agent ecosystem around prAxIs OS
 - Reduce friction for multi-project workflows
 - Maintain backward compatibility with existing deployments
 - Zero configuration required for sub-agents

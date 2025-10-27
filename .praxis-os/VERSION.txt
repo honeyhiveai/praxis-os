@@ -1,6 +1,6 @@
 Agent OS Content Version
 
-Repository: https://github.com/honeyhiveai/agent-os-enhanced
+Repository: https://github.com/honeyhiveai/praxis-os
 Last Updated: 2025-10-06 19:12:58
 Source Commit: N/A (pre-git)
 Updated By: AI-authored workflow creation

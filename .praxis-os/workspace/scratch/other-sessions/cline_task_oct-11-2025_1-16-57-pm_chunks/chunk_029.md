@@ -677,7 +677,7 @@ interface MCPServerState {
   
   // Optional metadata
   project_root?: string;
-  agent_os_version?: string;
+  praxis_os_version?: string;
 }
 ```
 
@@ -686,7 +686,7 @@ interface MCPServerState {
 ## Appendix B: CLI Reference
 
 ```bash
-# Agent OS MCP Server CLI
+# prAxIs OS MCP Server CLI
 
 python -m mcp_server --help
 

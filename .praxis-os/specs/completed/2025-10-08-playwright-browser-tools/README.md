@@ -1,4 +1,4 @@
-# Browser Automation Tool for Agent OS MCP Server
+# Browser Automation Tool for prAxIs OS MCP Server
 ## Complete Specification Package
 
 **Version**: 1.0  
@@ -10,7 +10,7 @@
 
 ## 📋 Overview
 
-This specification defines a **browser automation tool** for Agent OS Enhanced's MCP server, enabling AI agents to:
+This specification defines a **browser automation tool** for prAxIs OS's MCP server, enabling AI agents to:
 
 - 🌐 Navigate web pages and test documentation sites
 - 🎨 Emulate dark mode and media features
@@ -18,7 +18,7 @@ This specification defines a **browser automation tool** for Agent OS Enhanced's
 - 🔒 Maintain session isolation for multi-chat safety
 - ⚡ Stay under the 20-tool performance limit (uses 1 tool slot)
 
-**Primary Use Case**: Testing the Agent OS Enhanced Docusaurus site in light/dark modes without manual browser interaction.
+**Primary Use Case**: Testing the prAxIs OS Docusaurus site in light/dark modes without manual browser interaction.
 
 ---
 
@@ -160,7 +160,7 @@ _sessions: Dict[session_id, BrowserSession]
 **Metric**: MCP server startup <2s, browser init on first call
 
 ### 5. Tool Naming (pos_browser)
-**Decision**: `pos_` prefix for Agent OS namespace  
+**Decision**: `pos_` prefix for prAxIs OS namespace  
 **Rationale**: Avoids collision with Cursor's `mcp_cursor-playwright_*` tools  
 **Evidence**: supporting-docs/NAMING_STRATEGY.md
 
@@ -214,7 +214,7 @@ _sessions: Dict[session_id, BrowserSession]
 
 ### Standards Compliance
 - [✅] Production code checklist addressed (NFR-8)
-- [✅] Agent OS standards queried and applied
+- [✅] prAxIs OS standards queried and applied
 - [✅] Concurrency analysis documented (per-session isolation)
 - [✅] Error messages include remediation
 - [✅] AI agent as primary user documented ⭐ NEW
@@ -274,7 +274,7 @@ See tasks.md → Phase 1: Core Infrastructure (7 tasks, 4-6 hours)
 **Created Using**: spec_creation_v1 workflow  
 **Session ID**: 768808cc-10df-48a8-a852-1b619e48bd4f  
 **Phases Completed**: 0 → 1 → 2 → 3 → 4 → 5 (All ✅)  
-**Agent OS Version**: Enhanced (MCP RAG)  
+**prAxIs OS Version**: Enhanced (MCP RAG)  
 **Workflow Features Used**:
 - ✅ Phase 0: Supporting docs indexed (6 research docs)
 - ✅ Phase 1: Requirements defined (srd.md)
@@ -297,7 +297,7 @@ This specification demonstrates:
 6. **Concurrency Safety**: Deep analysis of shared state and protection
 7. **Production Ready**: Error handling, remediation, troubleshooting
 
-**Use this as a template** for future Agent OS specifications.
+**Use this as a template** for future prAxIs OS specifications.
 
 ---
 
@@ -317,7 +317,7 @@ This specification demonstrates:
 ### For Questions
 - See implementation.md §6 (Troubleshooting)
 - Check supporting-docs/INDEX.md for document guide
-- Query Agent OS standards via MCP
+- Query prAxIs OS standards via MCP
 
 ---
 

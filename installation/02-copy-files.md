@@ -12,7 +12,7 @@ Copy all required content from the source repository (`praxis-os/`) to your proj
 
 **What gets copied**:
 1. Universal standards (CS fundamentals)
-2. Usage documentation (how to use Agent OS)
+2. Usage documentation (how to use prAxIs OS)
 3. Workflows (spec_creation_v1, spec_execution_v1)
 4. MCP server code (Python code that runs the server)
 
@@ -50,7 +50,7 @@ print("✅ Copied universal standards")
 
 **Source**: `praxis-os/universal/usage/`  
 **Destination**: `.praxis-os/usage/`  
-**Contents**: ~5 markdown files explaining how to use Agent OS
+**Contents**: ~5 markdown files explaining how to use prAxIs OS
 
 ```python
 shutil.copytree(

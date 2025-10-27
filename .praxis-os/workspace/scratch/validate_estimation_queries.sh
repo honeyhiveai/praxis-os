@@ -53,7 +53,7 @@ echo ""
 # Query 6: Calibration Guidance
 echo "Query 6: Calibration Guidance"
 python mcp_tool_cli.py search_standards '{
-  "query": "calibration new to Agent OS Enhanced",
+  "query": "calibration new to prAxIs OS",
   "n_results": 3
 }' > /tmp/query6_calibration.json
 echo "✓ Saved to /tmp/query6_calibration.json"

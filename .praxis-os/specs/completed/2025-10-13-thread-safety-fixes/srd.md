@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for implementing thread-safe caching mechanisms in the Agent OS MCP server to enable reliable sub-agent concurrent callbacks and dual-transport mode operation without race conditions, memory leaks, or data corruption.
+This document defines the requirements for implementing thread-safe caching mechanisms in the prAxIs OS MCP server to enable reliable sub-agent concurrent callbacks and dual-transport mode operation without race conditions, memory leaks, or data corruption.
 
 ### 1.2 Scope
 This feature will:
@@ -113,7 +113,7 @@ See `supporting-docs/INDEX.md` for complete document catalog and `supporting-doc
 ### 3.1 Primary Stakeholders
 - **Sub-Agent Users:** Developers building multi-agent workflows
 - **Production Users:** Customers using dual-transport mode (IDE + HTTP)
-- **Workflow Developers:** Internal team dogfooding Agent OS workflows
+- **Workflow Developers:** Internal team dogfooding prAxIs OS workflows
 
 ### 3.2 Secondary Stakeholders
 - **Platform Team:** Responsible for MCP server reliability
@@ -181,7 +181,7 @@ User stories describe the feature from the user's perspective, focusing on user 
 
 ### Story 3: Rapid Workflow Development Iteration
 
-**As a** workflow developer dogfooding Agent OS  
+**As a** workflow developer dogfooding prAxIs OS  
 **I want** changes to workflow metadata.json to take effect immediately  
 **So that** I can iterate quickly on workflow design without restarting the MCP server
 

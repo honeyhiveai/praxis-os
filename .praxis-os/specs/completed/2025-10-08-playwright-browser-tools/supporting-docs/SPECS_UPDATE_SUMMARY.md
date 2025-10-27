@@ -53,7 +53,7 @@ Given the scope (28 FRs, 30+ actions, comprehensive specs), I recommend:
 **Option A: High-Level Specs (Faster)**
 - Keep specs.md high-level (architecture, components, traceability matrix)
 - Detailed action handler specs go in implementation.md (code patterns)
-- This aligns with Agent OS pattern: specs.md = architecture, implementation.md = details
+- This aligns with prAxIs OS pattern: specs.md = architecture, implementation.md = details
 
 **Option B: Comprehensive Specs (Complete but time-intensive)**
 - Add full specification for each of 30+ actions in specs.md

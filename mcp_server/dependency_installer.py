@@ -1,5 +1,5 @@
 """
-Dependency Installer for Agent OS Upgrade Workflow.
+Dependency Installer for prAxIs OS Upgrade Workflow.
 
 Manages Python dependency installation and post-install steps.
 """

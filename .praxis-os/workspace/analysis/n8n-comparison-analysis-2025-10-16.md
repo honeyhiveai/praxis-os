@@ -1,29 +1,29 @@
-# n8n vs Agent OS Enhanced: Comparative Analysis & Insights
+# n8n vs prAxIs OS: Comparative Analysis & Insights
 **Date**: 2025-10-16  
-**Purpose**: Document findings from comparing n8n workflow system with Agent OS Enhanced  
-**Key Insight**: Agent OS Enhanced is an AI quality framework, not a workflow system
+**Purpose**: Document findings from comparing n8n workflow system with prAxIs OS  
+**Key Insight**: prAxIs OS is an AI quality framework, not a workflow system
 
 ---
 
 ## Executive Summary
 
-Initial comparison of n8n (human workflow automation tool) with Agent OS Enhanced revealed:
+Initial comparison of n8n (human workflow automation tool) with prAxIs OS revealed:
 1. **Category error**: Comparing human tool vs AI framework - fundamentally different purposes
 2. **Existing work**: Major improvements already designed (validation fix, tool consolidation, dynamic discovery)
 3. **New insights**: Visualization, simulation, and metrics gaps identified through comparison
-4. **Architecture validation**: Agent OS Enhanced's conditional routing is sophisticated and purpose-appropriate
+4. **Architecture validation**: prAxIs OS's conditional routing is sophisticated and purpose-appropriate
 
-**Key finding**: Agent OS Enhanced doesn't need n8n's flexibility - it needs better **visibility** (visualization), **testing** (simulation), and **measurement** (metrics).
+**Key finding**: prAxIs OS doesn't need n8n's flexibility - it needs better **visibility** (visualization), **testing** (simulation), and **measurement** (metrics).
 
 ---
 
-## Understanding Agent OS Enhanced's True Purpose
+## Understanding prAxIs OS's True Purpose
 
 ### NOT: Workflow Automation for Humans
-Agent OS Enhanced is not designed to make workflows flexible or convenient for humans.
+prAxIs OS is not designed to make workflows flexible or convenient for humans.
 
 ### YES: AI Behavioral Quality Framework
-Agent OS Enhanced uses workflows to **enforce AI code quality** through structural constraints.
+prAxIs OS uses workflows to **enforce AI code quality** through structural constraints.
 
 ### The Operating Model
 
@@ -54,7 +54,7 @@ From `.praxis-os/usage/operating-model.md`:
 
 ---
 
-## How Agent OS Enhanced Uses Conditional Routing
+## How prAxIs OS Uses Conditional Routing
 
 ### Type 1: Evidence-Based Path Selection
 
@@ -115,7 +115,7 @@ Phase N+1: Blocked until Phase N complete
 
 ## Existing Improvement Designs
 
-Based on scratch specs in `.praxis-os/specs/`, Agent OS Enhanced has already identified:
+Based on scratch specs in `.praxis-os/specs/`, prAxIs OS has already identified:
 
 ### 1. Validation Fix (Priority 1) ⚡
 **File**: `config-driven-validation-design-2025-10-15.md`  
@@ -143,7 +143,7 @@ Based on scratch specs in `.praxis-os/specs/`, Agent OS Enhanced has already ide
 
 **Tool surface after consolidation**:
 ```
-Agent OS Enhanced - 5 Tools (Exceptionally Optimal)
+prAxIs OS - 5 Tools (Exceptionally Optimal)
 ├── workflow (18 actions: discovery, execution, management, recovery, debugging)
 ├── search_standards (RAG semantic search)
 ├── get_server_info (Server metadata)
@@ -245,7 +245,7 @@ workflow(
 
 **n8n strength**: Visual canvas shows entire workflow graph
 
-**Agent OS Enhanced opportunity**:
+**prAxIs OS opportunity**:
 ```
 Visual renderer that:
 1. Reads metadata.json and phase files
@@ -281,7 +281,7 @@ Visual renderer that:
 
 **n8n equivalent**: "Test workflow" mode
 
-**Agent OS Enhanced opportunity**:
+**prAxIs OS opportunity**:
 ```python
 # Simulate workflow execution
 result = workflow(
@@ -319,7 +319,7 @@ result = workflow(
 
 **n8n equivalent**: Execution history with success/failure rates
 
-**Agent OS Enhanced opportunity**:
+**prAxIs OS opportunity**:
 ```
 Dashboard showing:
 - Workflow success rates (by workflow_type)
@@ -354,7 +354,7 @@ Dashboard showing:
 **Current**: Manual nesting mentioned in notes  
 **n8n equivalent**: Sub-workflow execution with parameter passing
 
-**Agent OS Enhanced opportunity**:
+**prAxIs OS opportunity**:
 ```yaml
 # In tasks.md or metadata.json
 Phase 3: Testing
@@ -388,7 +388,7 @@ Phase 3: Testing
 
 **Gap**: Limited debugging capabilities
 
-**Agent OS Enhanced opportunity**:
+**prAxIs OS opportunity**:
 ```
 Enhanced debugging:
 - Step-through execution (pause at phase boundaries)
@@ -410,7 +410,7 @@ Enhanced debugging:
 
 ### What Doesn't Apply: Human-Centric Features
 
-These n8n features don't fit Agent OS Enhanced's purpose:
+These n8n features don't fit prAxIs OS's purpose:
 
 #### Real-Time Reactive Branching ❌
 **n8n**: Branch based on live data during execution  
@@ -425,7 +425,7 @@ These n8n features don't fit Agent OS Enhanced's purpose:
 #### Service Integration Focus ❌
 **n8n**: 1700+ pre-built integrations with external APIs  
 **Agent OS**: Focus on code quality, not external services  
-**Why not applicable**: Agent OS uses MCP for extensibility, focus is AI guidance not API orchestration
+**Why not applicable**: prAxIs OS uses MCP for extensibility, focus is AI guidance not API orchestration
 
 #### Human-Centric UX ❌
 **n8n**: Visual builder optimized for humans  
@@ -434,11 +434,11 @@ These n8n features don't fit Agent OS Enhanced's purpose:
 
 ---
 
-## What Agent OS Enhanced Does Better Than n8n
+## What prAxIs OS Does Better Than n8n
 
 ### 1. RAG-Driven Behavioral Reinforcement
 
-**n8n can't do this**. Agent OS Enhanced uses semantic search to deliver guidance at decision points, creating self-reinforcing quality behaviors.
+**n8n can't do this**. prAxIs OS uses semantic search to deliver guidance at decision points, creating self-reinforcing quality behaviors.
 
 **Mechanism**:
 ```
@@ -453,7 +453,7 @@ AI queries standards → Gets reminders to query
 
 **n8n workflows** can skip steps or fake completion.
 
-**Agent OS Enhanced** structurally enforces evidence submission and validation:
+**prAxIs OS** structurally enforces evidence submission and validation:
 ```python
 complete_phase(session_id, phase=0, evidence={
     "tasks_completed": ["0.1", "0.2", "0.3"],
@@ -470,7 +470,7 @@ Missing or invalid evidence → Blocked advancement.
 
 **n8n workflows** are static - defined at design time.
 
-**Agent OS Enhanced** generates workflows from specifications at runtime:
+**prAxIs OS** generates workflows from specifications at runtime:
 ```
 Parse tasks.md → Discover 8 phases → Generate workflow → Execute
 ```
@@ -481,7 +481,7 @@ Same workflow definition, different runtime structure based on spec.
 
 **n8n** optimizes for human UX (visual, flexible, reactive).
 
-**Agent OS Enhanced** optimizes for AI quality enforcement (structured, evidence-based, deliberate).
+**prAxIs OS** optimizes for AI quality enforcement (structured, evidence-based, deliberate).
 
 **Design decisions favor AI quality**:
 - Sequential execution (focused attention)
@@ -493,7 +493,7 @@ Same workflow definition, different runtime structure based on spec.
 
 **n8n** executes tasks (what you define is what runs).
 
-**Agent OS Enhanced** enforces quality standards structurally:
+**prAxIs OS** enforces quality standards structurally:
 - Sphinx-style docstrings (checked in validation)
 - Type hints (verified by linter)
 - Error handling (required for phase completion)
@@ -504,7 +504,7 @@ Same workflow definition, different runtime structure based on spec.
 
 ## Comparison Matrix
 
-| Capability | n8n | Agent OS (Test Gen) | Agent OS (Spec Exec) |
+| Capability | n8n | prAxIs OS (Test Gen) | prAxIs OS (Spec Exec) |
 |------------|-----|---------------------|----------------------|
 | **Purpose** | Human automation | AI quality (code gen) | AI quality (spec exec) |
 | Visual builder | ✅ Best-in-class | ❌ None | ❌ None |
@@ -574,13 +574,13 @@ Same workflow definition, different runtime structure based on spec.
 
 ## Key Insights
 
-### 1. Agent OS Enhanced Is Not a Workflow System
+### 1. prAxIs OS Is Not a Workflow System
 
 It's an **AI quality framework** that uses workflows for behavioral enforcement.
 
 **Mental model**:
 - n8n: Workflow system for automating tasks
-- Agent OS Enhanced: Quality framework that guides AI to produce good code
+- prAxIs OS: Quality framework that guides AI to produce good code
 
 ### 2. Conditional Routing Serves Quality, Not Flexibility
 
@@ -592,7 +592,7 @@ The conditional paths aren't for user convenience - they're for:
 
 ### 3. Existing Designs Address Major Gaps
 
-The scratch specs show Agent OS Enhanced has already identified:
+The scratch specs show prAxIs OS has already identified:
 - Critical validation bug (fix designed)
 - Tool surface optimization (consolidation designed)
 - Dynamic discovery pattern (implementation path clear)
@@ -607,7 +607,7 @@ n8n comparison reveals gaps in:
 - Composition (nested workflows not formal)
 - Debugging (limited introspection)
 
-### 5. Agent OS Enhanced's Architecture Is Sound
+### 5. prAxIs OS's Architecture Is Sound
 
 The comparison validates that:
 - Evidence-based selection is sophisticated
@@ -634,7 +634,7 @@ The comparison validates that:
 
 ### What This Analysis Reveals
 
-1. **Category clarity**: Agent OS Enhanced is an AI quality framework, not workflow automation
+1. **Category clarity**: prAxIs OS is an AI quality framework, not workflow automation
 2. **Architecture validation**: Conditional routing and dynamic generation are sophisticated and appropriate
 3. **Existing work**: Major improvements already identified and designed
 4. **New opportunities**: Visualization, simulation, and metrics gaps revealed
@@ -650,16 +650,16 @@ The comparison validates that:
 
 ### Final Verdict
 
-Agent OS Enhanced doesn't need to be more like n8n. It needs to **amplify what makes it unique**:
+prAxIs OS doesn't need to be more like n8n. It needs to **amplify what makes it unique**:
 - Better visibility (visualization)
 - Better testing (simulation)  
 - Better measurement (metrics)
 - Better composition (nested workflows)
 
-The comparison was valuable not because Agent OS Enhanced should adopt n8n's features, but because it clarified what Agent OS Enhanced truly is and what would make it better at its actual purpose: guiding AI to produce high-quality code through structured, evidence-based workflows.
+The comparison was valuable not because prAxIs OS should adopt n8n's features, but because it clarified what prAxIs OS truly is and what would make it better at its actual purpose: guiding AI to produce high-quality code through structured, evidence-based workflows.
 
 ---
 
 **Date**: 2025-10-16  
-**Author**: Analysis based on n8n comparison and Agent OS Enhanced architecture review  
+**Author**: Analysis based on n8n comparison and prAxIs OS architecture review  
 **Status**: Complete - Ready for reference

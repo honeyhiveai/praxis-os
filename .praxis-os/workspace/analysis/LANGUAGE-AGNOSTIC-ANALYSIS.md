@@ -70,7 +70,7 @@ Phase 3: Validation
 ## Pre-Task Compliance Checklist
 
 ### Before Any Code Generation
-- [ ] Read relevant Agent OS standards
+- [ ] Read relevant prAxIs OS standards
 - [ ] Check project-specific rules (.cursorrules, README)
 - [ ] Verify established patterns in codebase
 - [ ] Confirm no existing solutions before creating new

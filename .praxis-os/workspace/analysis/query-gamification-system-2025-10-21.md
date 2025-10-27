@@ -489,7 +489,7 @@ async def search_standards(
     filter_tags: list[str] | None = None,
 ) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
     """
-    Semantic search over Agent OS documentation.
+    Semantic search over prAxIs OS documentation.
     
     [Keep existing docstring...]
     """
@@ -1384,7 +1384,7 @@ AI: "Based on comprehensive discovery, I'll implement..."
 
 **Action item:** Investigate Cline source code to see if they do something similar.
 
-### Agent OS Workflows
+### prAxIs OS Workflows
 
 **Current:** Workflows have phase gates that require evidence.
 
