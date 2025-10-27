@@ -35,6 +35,10 @@ Agent OS Enhanced solves this through **just-in-time behavioral reinforcement vi
 
 Agent OS Enhanced is fundamentally different from traditional AI coding assistants. Rather than relying on static instructions that fade as conversation grows, it uses **dynamic retrieval** to continuously reinforce correct behaviors. The key insight: **content that teaches agents to query creates agents that query thoroughly** - a self-sustaining loop that counteracts the probabilistic nature of LLMs.
 
+## The Foundation: Enabling Praxis
+
+This RAG mechanism is the foundation that enables **[praxis](./praxis)** - the integration of theory and practice through continuous learning cycles. By retrieving project-specific standards at decision points, the system compounds knowledge across sessions. The AI doesn't get smarter; **the system does**. Session 50 is measurably better than Session 1 because every cycle of action, reflection, and learning enriches the knowledge base that future queries retrieve from.
+
 ---
 
 ## The Probabilistic Reality
@@ -59,20 +63,9 @@ Large Language Models are trained on millions of tokens of human behavior data. 
 
 As conversation length grows, initial instructions become statistically irrelevant:
 
-```
-Message 1:
-├── Initial orientation: 15,000 tokens (75% of context)
-└── User message: 5,000 tokens (25%)
-→ Rules have HIGH statistical influence
+import ContextDegradation from '@site/src/components/ContextDegradation';
 
-Message 30:
-├── Initial orientation: 15,000 tokens (still 15k)
-├── 29 messages: 2,485,000 tokens (99.4%)
-└── Latest message: 5,000 tokens
-→ Rules have NEGLIGIBLE influence (0.6%)
-```
-
-**Mathematical Reality:** Initial guidance fades to noise. Static instructions don't scale.
+<ContextDegradation />
 
 ---
 
@@ -109,28 +102,11 @@ import RAGDecisionFlowDiagram from '@site/src/components/RAGDecisionFlowDiagram'
 
 Without RAG, AI agents must work from either:
 
-**Option A: Static Instructions**
-```
-Problem: Initial instructions (15K tokens)
-As conversation grows → Statistical influence drops to <1%
-Result: Agent "forgets" patterns, quality degrades
-```
+import RAGEfficiencyComparison from '@site/src/components/RAGEfficiencyComparison';
 
-**Option B: Read Everything**
-```
-Problem: Read entire standards files (50KB each)
-Context fills to 90%+ → Attention quality drops to <70%
-Result: Poor performance, missed details, failures
-```
+<RAGEfficiencyComparison />
 
 ### The RAG Solution
-
-```
-Query retrieves: 2-5KB targeted chunks (vs 50KB files)
-Context utilization: 15-25% (vs 90%+)
-Attention quality: 95%+ (vs <70%)
-Token efficiency: 90% reduction (12,500 → 625 tokens)
-```
 
 **How It Works:**
 
@@ -161,62 +137,17 @@ LLM attention degrades as context fills:
 
 RAG delivers information **at decision moments** rather than upfront:
 
-**Traditional Approach:**
-```
-Start of conversation:
-→ Load all documentation (200KB)
-→ Context at 80%
-→ Agent works with degraded attention
-→ By message 20, can barely remember anything
-```
+import TimingComparison from '@site/src/components/TimingComparison';
 
-**RAG Approach:**
-```
-Start of conversation:
-→ Minimal initial context (5KB)
-→ Context at 5%
-
-Message 5 - needs concurrency guidance:
-→ Query "race conditions"
-→ Retrieve 2KB chunk
-→ Context at 7%
-→ Implement correctly
-
-Message 10 - needs testing patterns:
-→ Query "test coverage"
-→ Retrieve 2KB chunk
-→ Context at 9%
-→ Write comprehensive tests
-
-Message 30 - still fresh context:
-→ Context at 20%
-→ Attention quality still 95%
-```
+<TimingComparison />
 
 ### Dynamic Discovery Pattern
 
 Agent OS Enhanced content teaches **dynamic discovery** rather than memorization:
 
-```markdown
-# ❌ Static Instruction (Wrong)
-"For race conditions, always use mutexes with proper error handling"
+import DiscoveryComparison from '@site/src/components/DiscoveryComparison';
 
-Problem: 
-- May not apply to this situation
-- Agent can't remember after 20 messages
-- Doesn't teach the skill
-
-# ✅ Dynamic Discovery (Right)
-"When you encounter shared state, query standards:
-→ search_standards('race conditions shared state')
-→ Apply patterns from results"
-
-Benefit:
-- Agent learns to query
-- Gets context-specific guidance
-- Skill reinforces itself
-- Works at any conversation depth
-```
+<DiscoveryComparison />
 
 ---
 
@@ -226,22 +157,19 @@ Benefit:
 
 Standards are written with **multiple query angles** to maximize discoverability:
 
-**Query Hooks:**
-```markdown
-❓ Questions This Answers:
+:::tip Query Hooks Example
+**❓ Questions This Answers:**
 1. "How do I handle race conditions?"
 2. "What are concurrency best practices?"
 3. "How to prevent deadlocks?"
 4. "When should I use locks vs channels?"
 5. "How to test concurrent code?"
 
-Keywords for search: race conditions, concurrency, 
-deadlocks, shared state, mutex, goroutines, async
-```
+**Keywords for search:** race conditions, concurrency, deadlocks, shared state, mutex, goroutines, async
+:::
 
-**TL;DR Sections:**
-```markdown
-🚨 Race Conditions Quick Reference
+:::tip TL;DR Section Example
+**🚨 Race Conditions Quick Reference**
 
 **Critical:** Always query before implementing
 
@@ -250,8 +178,8 @@ deadlocks, shared state, mutex, goroutines, async
 3. Test with race detector
 4. Document locking strategy
 
-Keywords: race conditions, concurrency, shared state
-```
+**Keywords:** race conditions, concurrency, shared state
+:::
 
 **Why This Works:**
 - High keyword density → Returns in top 3 results
@@ -267,16 +195,17 @@ Each chunk includes:
 - **Relevance score**: For ranking (cosine similarity)
 - **Token count**: For context management
 
-Example:
-```python
+:::info Metadata Structure Example
+```json
 {
   "content": "Query standards before implementing...",
   "file": "standards/concurrency/race-conditions.md",
   "section": "Detection Strategies",
-  "relevance_score": 0.89,  # 0-1, higher is better
+  "relevance_score": 0.89,
   "tokens": 156
 }
 ```
+:::
 
 ---
 
@@ -303,26 +232,9 @@ Agent OS Enhanced separates content by consumption model:
 
 ### Why This Separation Matters
 
-**Without separation:**
-```
-Single 5000-line file
-→ Agent must read entire file to find one pattern
-→ Context at 90%+
-→ Attention quality <70%
-→ Failure rate 40%+
-```
+import SeparationComparison from '@site/src/components/SeparationComparison';
 
-**With separation:**
-```
-50 × 100-line files
-→ Agent queries for specific pattern
-→ Retrieves one 100-line file
-→ Context at 15%
-→ Attention quality 95%+
-→ Success rate 85%+
-```
-
-**Result:** 3-4x improvement in success rate through context efficiency.
+<SeparationComparison />
 
 ---
 
@@ -332,16 +244,11 @@ Single 5000-line file
 
 Agents learn to query multiple times from different angles:
 
-```python
-# Query 1: General concept
-search_standards("error handling best practices")
-
-# Query 2: Specific concern
-search_standards("error handling network timeouts")
-
-# Query 3: Testing angle
-search_standards("how to test error handling")
-```
+:::note Multi-Query Pattern
+**Query 1 - General concept:** `search_standards("error handling best practices")`  
+**Query 2 - Specific concern:** `search_standards("error handling network timeouts")`  
+**Query 3 - Testing angle:** `search_standards("how to test error handling")`
+:::
 
 **Why:** Each query reinforces querying behavior, creating thorough investigation patterns.
 
@@ -349,19 +256,12 @@ search_standards("how to test error handling")
 
 Agents learn to check standards before making assumptions:
 
-```python
-# Instead of guessing
-→ Query standards first
-
-# Query confirms
-→ Implement based on verified pattern
-
-# Query includes reminder
-→ "Always verify patterns before implementing"
-
-# Next time
-→ Agent more likely to query first
-```
+:::note Verification Pattern
+**Instead of guessing** → Query standards first  
+**Query confirms** → Implement based on verified pattern  
+**Query includes reminder** → "Always verify patterns before implementing"  
+**Next time** → Agent more likely to query first
+:::
 
 **Why:** Behavioral reminders in query results create self-reinforcing verification habits.
 
@@ -369,16 +269,11 @@ Agents learn to check standards before making assumptions:
 
 Agents learn to approach problems from multiple perspectives:
 
-```python
-# Functional angle
-search_standards("user authentication implementation")
-
-# Security angle  
-search_standards("authentication security best practices")
-
-# Testing angle
-search_standards("testing authentication flows")
-```
+:::note Multi-Angle Query Pattern
+**Functional angle:** `search_standards("user authentication implementation")`  
+**Security angle:** `search_standards("authentication security best practices")`  
+**Testing angle:** `search_standards("testing authentication flows")`
+:::
 
 **Why:** Standards teach "consider multiple angles," which prompts more queries, which reinforces the pattern.
 
@@ -386,19 +281,19 @@ search_standards("testing authentication flows")
 
 Agents learn that systematic approaches (query → implement → test) succeed more reliably than quick shortcuts:
 
-```python
-# Inherited human pattern: Act quickly
-→ Skip querying
-→ Implement based on probability
-→ High chance of mistakes
+:::note Pattern Evolution
+**❌ Inherited human pattern: Act quickly**  
+→ Skip querying  
+→ Implement based on probability  
+→ High chance of mistakes  
 → Costly rework
 
-# Learned AI pattern: Be systematic
-→ Query standards
-→ Implement verified pattern
-→ Success rate 6x higher
+**✅ Learned AI pattern: Be systematic**  
+→ Query standards  
+→ Implement verified pattern  
+→ Success rate 6x higher  
 → Reinforces systematic approach
-```
+:::
 
 **Why:** Each query retrieves "be systematic" message, counteracting inherited efficiency pressure.
 

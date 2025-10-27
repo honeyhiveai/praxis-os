@@ -47,26 +47,9 @@ One of the most powerful aspects of Agent OS Enhanced is its ability to get smar
 
 Both work together but serve different purposes:
 
-```
-AI starting new task
-  ↓
-Queries standards (discovers reusable patterns)
-  ↓
-Implements following established patterns
-  ↓
-If needs historical context:
-  → Reads relevant spec to understand "why"
-  ↓
-Creates spec for new work (documents decisions)
-  ↓
-Identifies reusable pattern
-  ↓
-Creates standard (makes pattern discoverable)
-  ↓
-Both committed to git
-  ↓
-Knowledge compounds over time
-```
+import KnowledgeCompoundingFlow from '@site/src/components/KnowledgeCompoundingFlow';
+
+<KnowledgeCompoundingFlow />
 
 ---
 
@@ -106,37 +89,9 @@ Knowledge compounds over time
 
 ## The Compounding Effect
 
-### Week 1: Foundation
-```
-Universal standards: 100 documents
-Project standards: 0 documents
-Project specs: 0 specs
-```
-**AI knowledge:** Generic best practices only
+import KnowledgeProgressionTimeline from '@site/src/components/KnowledgeProgressionTimeline';
 
-### Week 4: Project Awareness
-```
-Universal standards: 100 documents
-Project standards: 15 documents
-Project specs: 3 specs (authentication, API design, database schema)
-```
-**AI knowledge:** Your conventions + context on major decisions
-
-### Week 12: Project Expertise
-```
-Universal standards: 100 documents
-Project standards: 50 documents
-Project specs: 12 specs (major features documented)
-```
-**AI knowledge:** Deep understanding of your patterns + full history
-
-### Week 24: Organizational Memory
-```
-Universal standards: 100 documents
-Project standards: 100+ documents
-Project specs: 25+ specs (comprehensive history)
-```
-**AI knowledge:** Expert-level on your project + complete decision history
+<KnowledgeProgressionTimeline />
 
 ---
 

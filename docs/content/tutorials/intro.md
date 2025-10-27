@@ -5,7 +5,7 @@ doc_type: tutorial
 
 # Introduction
 
-**Agent OS Enhanced** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
+**Agent OS Enhanced** is a portable multi-agent development framework built on **praxis** - the integration of theory and practice through continuous learning. It transforms AI from helpful assistant to velocity-enhancing development partner that gets better with every interaction.
 
 ## What is Agent OS Enhanced?
 
@@ -50,6 +50,29 @@ your-project/
 
 ## Core Concepts
 
+### Praxis: Theory ⇄ Practice Integration
+
+Agent OS Enhanced is a **praxis engine** - every interaction creates learning that improves future interactions:
+
+**The Cycle:**
+1. **Action:** AI executes task using standards
+2. **Reflection:** Evidence validates what worked/failed  
+3. **Learning:** Capture pattern as new standard
+4. **Refined Action:** Next AI queries and applies that learning
+
+**The Result:**
+
+```
+Session 1:  AI + 0 standards  → 70% quality
+Session 50: AI + 95 standards → 95% quality
+```
+
+The AI doesn't get smarter. **The system does.**
+
+Through accumulated praxis cycles, Agent OS Enhanced transforms probabilistic AI behavior into deterministic quality. Each session teaches the system. Each mistake becomes impossible to repeat. Knowledge compounds across all future work.
+
+[Read more: Praxis Philosophy](../explanation/praxis)
+
 ### MCP/RAG Architecture
 
 Instead of reading entire 50KB files, the MCP server uses semantic search to deliver 2-5KB targeted chunks:
@@ -90,7 +113,8 @@ def can_access_phase(self, phase: int) -> bool:
 
 ## Next Steps
 
-- **[How It Works](../explanation/how-it-works)** - **Start here** - Complete human-AI collaboration pattern
+- **[Praxis Philosophy](../explanation/praxis)** - **Start here** - Why Agent OS Enhanced works
+- **[How It Works](../explanation/how-it-works)** - RAG-driven behavioral reinforcement
 - **[Installation](./installation)** - Set up in your project
 - **[Architecture](../explanation/architecture)** - MCP/RAG system deep-dive
 - **[Standards](../reference/standards)** - Universal CS fundamentals

@@ -1,0 +1,188 @@
+/* SessionEvolution.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 700px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stage {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.stageIcon {
+  font-size: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 3px solid;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 2;
+}
+
+.stageContent {
+  flex-grow: 1;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 0.25rem;
+}
+
+.stageTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  margin-bottom: 0.5rem;
+}
+
+.stageCode {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: var(--ifm-code-background);
+  color: var(--ifm-code-color);
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 2rem;
+  position: relative;
+  margin-left: 1.5rem;
+}
+
+.connectorLine {
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--honeyhive-orange),
+    var(--honeyhive-orange-border)
+  );
+  border-radius: 2px;
+}
+
+.connectorDot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--honeyhive-orange);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--ifm-background-color);
+}
+
+.insight {
+  font-size: 1rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  padding: 1.25rem;
+  margin-top: 2rem;
+  background: var(--honeyhive-orange-bg);
+  border-radius: 8px;
+  border: 2px solid var(--honeyhive-orange-border);
+  border-left: 4px solid var(--honeyhive-orange);
+  font-style: italic;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .stageContent {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .connectorDot {
+  box-shadow: 0 0 0 3px var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .insight {
+  background: var(--honeyhive-orange-bg);
+  border-color: var(--honeyhive-orange-border);
+  border-left-color: var(--honeyhive-orange);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .stage {
+    gap: 0.75rem;
+  }
+
+  .stageIcon {
+    font-size: 1.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .stageContent {
+    padding: 0.75rem;
+  }
+
+  .stageTitle {
+    font-size: 0.9rem;
+  }
+
+  .stageCode {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .connector {
+    height: 1.5rem;
+    margin-left: 1.25rem;
+  }
+
+  .insight {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+}
+

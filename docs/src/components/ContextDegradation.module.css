@@ -1,0 +1,157 @@
+/* ContextDegradation.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.scenario {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.scenarioTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--honeyhive-orange);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+}
+
+.itemLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.itemValue {
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--honeyhive-orange-bg);
+  border-radius: 6px;
+  border: 1px solid var(--honeyhive-orange-border);
+}
+
+.arrow {
+  font-size: 1.25rem;
+  color: var(--honeyhive-orange);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.resultText {
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color);
+  line-height: 1.4;
+}
+
+.resultText strong {
+  color: var(--honeyhive-orange);
+  font-weight: 700;
+}
+
+.evolutionArrow {
+  font-size: 2rem;
+  color: var(--honeyhive-orange);
+  text-align: center;
+  padding: 0.75rem 0;
+  font-weight: bold;
+}
+
+.insight {
+  font-size: 1rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-left: 4px solid var(--honeyhive-orange);
+  border-radius: 8px;
+}
+
+.insight strong {
+  color: var(--honeyhive-orange);
+  font-weight: 700;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .scenario {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .insight {
+  background: var(--honeyhive-orange-bg);
+  border-color: var(--honeyhive-orange-border);
+  border-left-color: var(--honeyhive-orange);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .scenario {
+    padding: 1rem;
+  }
+
+  .scenarioTitle {
+    font-size: 1rem;
+  }
+
+  .itemLabel {
+    font-size: 0.8rem;
+  }
+
+  .itemValue {
+    font-size: 0.85rem;
+  }
+
+  .resultText {
+    font-size: 0.85rem;
+  }
+
+  .evolutionArrow {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .insight {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+}
+

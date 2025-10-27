@@ -12,12 +12,12 @@
 3. **scratch/** - Experiments, session notes, and truly temporary content
 
 **Workspace Usage Checklist:**
-- [ ] Phase 1 design docs go in `workspace/design/`
-- [ ] Research/analysis goes in `workspace/analysis/`
-- [ ] Temporary notes go in `workspace/scratch/`
+- [ ] Phase 1 design docs go in `.agent-os/workspace/design/`
+- [ ] Research/analysis goes in `.agent-os/workspace/analysis/`
+- [ ] Temporary notes go in `.agent-os/workspace/scratch/`
 - [ ] Files named with date prefix: `YYYY-MM-DD-topic.md`
 - [ ] Files deleted or archived after promotion to formal spec
-- [ ] Workspace/ is .gitignored (never committed)
+- [ ] `.agent-os/workspace/` is .gitignored (never committed)
 
 **Common Anti-Patterns:**
 - ❌ Creating design docs in `.agent-os/specs/` root
@@ -98,9 +98,9 @@ Define rules for managing temporary development artifacts in `.agent-os/workspac
 **For AI Agents:**
 
 ✅ **DO:**
-- Create Phase 1 design docs in `workspace/design/`
-- Use `workspace/analysis/` for research documents
-- Use `workspace/scratch/` for experiments and notes
+- Create Phase 1 design docs in `.agent-os/workspace/design/`
+- Use `.agent-os/workspace/analysis/` for research documents
+- Use `.agent-os/workspace/scratch/` for experiments and notes
 - Name files with dates: `YYYY-MM-DD-topic.md`
 - Include "DRAFT" or "WIP" in document headers
 - Clean up after promoting to formal spec
@@ -137,7 +137,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.agent-o
 
 ```
 1. EXPLORATION (Phase 1)
-   └─ Create: workspace/design/2025-10-21-feature.md
+   └─ Create: .agent-os/workspace/design/2025-10-21-feature.md
    └─ Iterate with user through conversation
    └─ Refine approach based on feedback
 
@@ -151,7 +151,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.agent-o
    └─ Create structured spec files (srd.md, specs.md, etc.)
 
 4. CLEANUP
-   └─ Delete workspace/design/2025-10-21-feature.md
+   └─ Delete .agent-os/workspace/design/2025-10-21-feature.md
    └─ OR move to specs/2025-10-21-feature/supporting-docs/
    └─ Purpose served, formal spec is source of truth
 ```
@@ -196,7 +196,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.agent-o
 - [ ] Added DRAFT/WIP header if appropriate
 
 **During Phase 1 (Conversational Design):**
-- [ ] Working in `workspace/design/` file
+- [ ] Working in `.agent-os/workspace/design/` file
 - [ ] Updating as conversation evolves
 - [ ] NOT creating formal spec until user triggers
 - [ ] Incorporating user feedback iteratively
@@ -426,30 +426,30 @@ git commit -m "Add authentication system spec"
 
 ## 🔍 Questions This Answers
 
-- **Where do I put temporary design documents?** → `workspace/design/`
-- **Where do Phase 1 design explorations go?** → `workspace/design/`
+- **Where do I put temporary design documents?** → `.agent-os/workspace/design/`
+- **Where do Phase 1 design explorations go?** → `.agent-os/workspace/design/`
 - **What do I do with design docs after creating formal spec?** → Delete or archive
-- **Can I commit workspace files?** → No, workspace/ is .gitignored
-- **Where do research and analysis documents go?** → `workspace/analysis/`
-- **Where do quick experiments and notes go?** → `workspace/scratch/`
+- **Can I commit workspace files?** → No, `.agent-os/workspace/` is .gitignored
+- **Where do research and analysis documents go?** → `.agent-os/workspace/analysis/`
+- **Where do quick experiments and notes go?** → `.agent-os/workspace/scratch/`
 - **How do I name workspace files?** → `YYYY-MM-DD-topic.md`
 - **When do I clean up workspace files?** → After promoting to formal spec
-- **What's the difference between workspace and specs?** → workspace = ephemeral, specs = permanent
-- **How do I prevent git pollution with temporary files?** → Use workspace/ (it's .gitignored)
+- **What's the difference between workspace and specs?** → `.agent-os/workspace/` = ephemeral, specs = permanent
+- **How do I prevent git pollution with temporary files?** → Use `.agent-os/workspace/` (it's .gitignored)
 
 ---
 
 ## 🔗 Integration with Agent OS Development Process
 
 **Phase 1: Conversational Design**
-- ✅ Create `workspace/design/YYYY-MM-DD-feature.md`
+- ✅ Create `.agent-os/workspace/design/YYYY-MM-DD-feature.md`
 - ✅ Iterate with user
 - ✅ Wait for "create spec" trigger (NOT auto-advancing)
 
 **Phase 2: Structured Spec**
 - ✅ Create `.agent-os/specs/YYYY-MM-DD-feature/`
-- ✅ Extract insights from `workspace/design/` file
-- ✅ Delete `workspace/design/` file (or archive in supporting-docs/)
+- ✅ Extract insights from `.agent-os/workspace/design/` file
+- ✅ Delete `.agent-os/workspace/design/` file (or archive in supporting-docs/)
 
 **Phase 3: Structured Implementation**
 - ✅ Work from formal spec only
@@ -484,7 +484,7 @@ ls .agent-os/specs/ | grep feature-name
 
 ### During Conversational Design (Phase 1)
 
-- Work in `workspace/design/` file
+- Work in `.agent-os/workspace/design/` file
 - Update as conversation evolves
 - Don't create formal spec until user triggers
 - Incorporate feedback iteratively
@@ -498,13 +498,13 @@ ls .agent-os/specs/ | grep feature-name
 
 ### For Ad-Hoc Analysis
 
-- Create in `workspace/analysis/`
+- Create in `.agent-os/workspace/analysis/`
 - Use for research, investigation, comparison
 - Delete when insights incorporated elsewhere
 
 ### For Quick Experiments
 
-- Create in `workspace/scratch/`
+- Create in `.agent-os/workspace/scratch/`
 - Use for temporary tests and notes
 - Delete when no longer needed
 

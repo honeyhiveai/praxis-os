@@ -1,0 +1,150 @@
+/* TimingComparison.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.approaches {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.approach {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.approachGood {
+  border-color: var(--honeyhive-orange-border);
+  border-width: 3px;
+}
+
+.approachHeader {
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+  text-align: center;
+}
+
+.approachGood .approachHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+.approachBadge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-heading-color);
+  display: inline-block;
+}
+
+.approachBadgeGood {
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  color: var(--honeyhive-orange);
+}
+
+.timeline {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timelineItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.timelineLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--honeyhive-orange);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--honeyhive-orange-border);
+}
+
+.timelineSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1rem;
+}
+
+.step {
+  font-size: 0.9rem;
+  color: var(--ifm-heading-color);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+  position: relative;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--honeyhive-orange);
+  border-radius: 50%;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .approach {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .approachGood {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .approachHeader {
+  border-bottom-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .approachGood .approachHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 996px) {
+  .approaches {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .approachHeader {
+    padding: 0.75rem;
+  }
+
+  .approachBadge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .timeline {
+    padding: 1rem;
+  }
+
+  .timelineLabel {
+    font-size: 0.85rem;
+  }
+
+  .step {
+    font-size: 0.85rem;
+  }
+}
+

@@ -1,0 +1,132 @@
+/* StandardsGenerationFlow.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-radius: 8px;
+}
+
+.file {
+  width: 100%;
+  background: var(--ifm-background-color);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-left: 4px solid var(--honeyhive-orange);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fileGenerated {
+  border-color: var(--honeyhive-orange-border);
+  border-width: 3px;
+  border-left-width: 4px;
+  background: var(--honeyhive-orange-bg);
+}
+
+.fileHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.fileGenerated .fileHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+.fileIcon {
+  font-size: 1.5rem;
+}
+
+.fileName {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+  word-break: break-all;
+}
+
+.fileDescription {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  font-style: italic;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: var(--honeyhive-orange);
+  font-weight: bold;
+}
+
+.processStep {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .file {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .fileGenerated {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .fileHeader {
+  border-bottom-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .fileGenerated .fileHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .flow {
+    padding: 1.5rem 1rem;
+  }
+
+  .fileHeader {
+    padding: 0.75rem 1rem;
+  }
+
+  .fileName {
+    font-size: 0.8rem;
+  }
+
+  .fileDescription {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .processStep {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+  }
+}
+

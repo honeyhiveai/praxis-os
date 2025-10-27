@@ -28,6 +28,90 @@ Maintain professional, consistent, themeable diagram appearance across all Agent
 
 ---
 
+## When to Use React Components vs Docusaurus Admonitions
+
+### React Components (Orange HoneyHive Branding)
+
+**Use for:** Core conceptual diagrams that are central to page understanding
+
+**Examples:**
+- Architecture overviews
+- System flow diagrams explaining main concepts
+- Key comparisons (Traditional vs Agent OS, Before vs After)
+- Process flows that illustrate core ideas
+- Multi-step workflows that are the focus of the page
+- Visual hierarchies and relationships
+
+**Visual style:** 
+- Orange borders (`var(--honeyhive-orange-border)`)
+- Dark backgrounds (`var(--ifm-background-surface-color)`)
+- Prominent placement in content flow
+- Custom styling with `.module.css` files
+
+**When to create:** If the diagram is explaining **the main concept** the page is teaching, use a React component.
+
+### Docusaurus Admonitions (Blue/Teal Callouts)
+
+**Use for:** Supplementary information, tips, notes, warnings, and supporting examples
+
+**Examples:**
+- Code examples and patterns
+- Quick reference tips
+- Important notes or warnings
+- Supplementary explanations
+- Best practices reminders
+- Command examples
+- Configuration snippets
+
+**Visual style:**
+- Blue/teal borders (HoneyHive brand consistency)
+- Subtle backgrounds
+- Supporting content placement
+- Built-in Docusaurus styling
+
+**Admonition types:**
+```markdown
+:::info
+Core information or process flows (use for most cases)
+:::
+
+:::tip
+Helpful suggestions or best practices
+:::
+
+:::note
+Additional context or clarifications
+:::
+
+:::warning
+Important caveats or gotchas
+:::
+```
+
+**When to use:** If the content is **supporting the main concept** with examples, tips, or supplementary information, use an admonition.
+
+### Decision Framework
+
+**Ask yourself:** "Is this diagram explaining a **core concept** of the page, or is it **supporting information**?"
+
+- **Core concept** → React component with orange HoneyHive branding
+- **Supporting info** → Docusaurus admonition with blue/teal styling
+
+**Consistency rule:** Similar content types should use the same presentation across all pages. If you use a React component for a "3-layer system flow" on one page, use React components for similar flows on other pages.
+
+**Examples from Agent OS Enhanced docs:**
+
+| Content Type | Presentation | Reasoning |
+|--------------|--------------|-----------|
+| Context degradation comparison (Message 1 vs 30) | React component | Core concept explaining RAG necessity |
+| RAG efficiency comparison (3 approaches) | React component | Core concept showing system advantage |
+| Behavioral pattern examples | Admonition | Supporting examples of concepts |
+| Query construction tips | Admonition | Supplementary guidance |
+| Layer 1/2/3 system flows | React component | Core concepts explaining the main system |
+| Bash measurement commands | Code block | Actual executable commands |
+
+---
+
 ## The Problem
 
 **Without diagram standards:**

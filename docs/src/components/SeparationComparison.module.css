@@ -1,0 +1,209 @@
+/* SeparationComparison.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.scenario {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scenario:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.scenarioGood {
+  border-color: var(--honeyhive-orange-border);
+  border-width: 3px;
+}
+
+.scenarioHeader {
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+  text-align: center;
+}
+
+.scenarioGood .scenarioHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+.scenarioBadge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-heading-color);
+  display: inline-block;
+}
+
+.scenarioBadgeGood {
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  color: var(--honeyhive-orange);
+}
+
+.scenarioContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.structure {
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-radius: 6px;
+  text-align: center;
+  border: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.scenarioGood .structure {
+  border-color: var(--honeyhive-orange-border);
+}
+
+.structureLabel {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flowStep {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--ifm-color-emphasis-400);
+  border-radius: 4px;
+}
+
+.scenarioGood .flowStep {
+  border-left-color: var(--honeyhive-orange);
+}
+
+.arrow {
+  font-size: 1.25rem;
+  color: var(--honeyhive-orange);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.flowText {
+  font-size: 0.9rem;
+  color: var(--ifm-heading-color);
+  line-height: 1.4;
+}
+
+.insight {
+  font-size: 1.1rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  padding: 1.25rem;
+  margin-top: 2rem;
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-left: 4px solid var(--honeyhive-orange);
+  border-radius: 8px;
+}
+
+.insight strong {
+  color: var(--honeyhive-orange);
+  font-weight: 700;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .scenario {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .scenarioGood {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .scenarioHeader {
+  border-bottom-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .scenarioGood .scenarioHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .structure {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .scenarioGood .structure {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .flowStep {
+  border-left-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .scenarioGood .flowStep {
+  border-left-color: var(--honeyhive-orange);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 996px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .scenarioHeader {
+    padding: 0.75rem;
+  }
+
+  .scenarioBadge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .scenarioContent {
+    padding: 1rem;
+  }
+
+  .structure {
+    padding: 0.75rem;
+  }
+
+  .structureLabel {
+    font-size: 0.95rem;
+  }
+
+  .flowText {
+    font-size: 0.85rem;
+  }
+
+  .insight {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+}
+

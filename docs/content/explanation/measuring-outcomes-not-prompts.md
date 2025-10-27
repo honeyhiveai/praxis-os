@@ -26,21 +26,15 @@ Agent OS Enhanced doesn't measure prompt quality. It measures product quality ac
 
 ## The System: Three Layers of Quality
 
+import ThreeLayerSystem from '@site/src/components/ThreeLayerSystem';
+
+<ThreeLayerSystem />
+
 ### Layer 1: RAG Behavioral Reinforcement
 
 **Problem:** Even suboptimal prompts need to produce quality responses.
 
 **Solution:** Dynamic knowledge injection via `search_standards`.
-
-```
-User prompt: "Implement authentication"
-    ↓
-AI queries: search_standards("authentication API design")
-    ↓
-Retrieved: Project standards, security requirements, examples
-    ↓
-AI response: Informed by project-specific context (not just training data)
-```
 
 **Effect on response quality:**
 - **Suboptimal prompt:** "Add auth"
@@ -57,22 +51,6 @@ AI response: Informed by project-specific context (not just training data)
 
 **Solution:** Structured workflows (design → spec → execute) with validation gates.
 
-```
-Workflow: spec_execution_v1
-    ↓
-Phase 1: Requirements Analysis
-    └── Gate: Must query standards, document understanding
-    ↓
-Phase 2: Design Planning  
-    └── Gate: Must show architecture, identify dependencies
-    ↓
-Phase 3: Implementation
-    └── Gate: Must provide code, tests, documentation
-    ↓
-Phase 4: Validation
-    └── Gate: Must show Pylint 10.0, MyPy 0 errors, tests passing
-```
-
 **Effect on quality:**
 - **Without workflows:** AI skips analysis, implements immediately
 - **With workflows:** Systematic execution, quality checkpoints
@@ -87,21 +65,6 @@ Phase 4: Validation
 
 **Solution:** Automated pre-commit hooks (11 gates).
 
-```bash
-# Pre-commit runs automatically on git commit
-1. YAML validation
-2. No mocks in integration tests
-3. Code formatting (Black + isort)
-4. Code quality (Pylint + MyPy)
-5. Unit tests (100% pass required)
-6. Integration tests (real APIs)
-7. Documentation build
-8. Documentation navigation
-9. Feature documentation sync
-10. Documentation compliance
-11. Invalid pattern prevention
-```
-
 **Effect on quality:**
 - **Without pre-commit:** Quality issues reach codebase
 - **With pre-commit:** Nothing commits unless quality gates pass
@@ -114,56 +77,9 @@ Phase 4: Validation
 
 ## How the Layers Work Together
 
-### Example: Implementing Authentication API
+import AuthenticationExample from '@site/src/components/AuthenticationExample';
 
-**Layer 1 (RAG) - Response Quality:**
-```
-User: "Implement authentication"
-    ↓
-AI: search_standards("authentication security requirements")
-    ↓
-Retrieved: "Use JWT with 15-min expiry, bcrypt for passwords, rate limiting"
-    ↓
-AI Response: Implementation following project security standards
-```
-
-**Layer 2 (Workflow) - Systematic Execution:**
-```
-Phase 1: Analysis
-├── AI queries: search_standards("authentication patterns")
-├── Evidence: Security requirements documented
-└── Gate: Pass ✓
-
-Phase 2: Design
-├── AI plans: JWT structure, endpoints, error handling
-├── Evidence: Architecture diagram, API contracts
-└── Gate: Pass ✓
-
-Phase 3: Implementation  
-├── AI generates: Code + tests + docs
-├── Evidence: Files created, tests written
-└── Gate: Pass ✓
-
-Phase 4: Validation
-├── AI runs: Pylint, MyPy, pytest
-├── Evidence: 10.0/10 Pylint, 0 errors, tests green
-└── Gate: Pass ✓
-```
-
-**Layer 3 (Pre-commit) - Final Validation:**
-```bash
-$ git commit -m "Implement authentication API"
-    ↓
-Pre-commit hook runs:
-├── Formatting check: ✓ Pass
-├── Linting check: ✓ Pass (10.0/10 Pylint)
-├── Type checking: ✓ Pass (0 MyPy errors)
-├── Unit tests: ✓ Pass (100%)
-├── Integration tests: ✓ Pass (real API tested)
-└── Documentation: ✓ Pass (sync validated)
-    ↓
-Commit succeeds → Code is production-ready
-```
+<AuthenticationExample />
 
 ---
 
@@ -228,19 +144,17 @@ pytest tests/ --quiet                           # Target: All pass
 
 ### The Compound Effect
 
-**Traditional approach:**
-```
-Prompt → Response → Manual validation → Iterate until quality
-Time: Variable (2-10 iterations common)
-Quality: Probabilistic (depends on prompt quality)
-```
+:::note Traditional Approach
+Prompt → Response → Manual validation → Iterate until quality  
+**Time:** Variable (2-10 iterations common)  
+**Quality:** Probabilistic (depends on prompt quality)
+:::
 
-**Agent OS approach:**
-```
-Prompt → RAG-enhanced response → Workflow execution → Pre-commit validation
-Time: Deterministic (single pass if framework followed)
-Quality: Guaranteed (gates enforce standards)
-```
+:::tip Agent OS Approach
+Prompt → RAG-enhanced response → Workflow execution → Pre-commit validation  
+**Time:** Deterministic (single pass if framework followed)  
+**Quality:** Guaranteed (gates enforce standards)
+:::
 
 ### Measuring System Effectiveness
 
@@ -345,65 +259,20 @@ Even validated work is verified because:
 
 ### Combined Result: Deterministic Quality
 
-```
-Traditional: Good prompt × Probabilistic AI = Variable quality
-Agent OS:    Any prompt × Three-layer system = Consistent quality
-```
+:::tip Key Insight
+**Traditional:** Good prompt × Probabilistic AI = Variable quality  
+**Agent OS:** Any prompt × Three-layer system = Consistent quality
 
 **We don't optimize prompts. We build systems that guarantee outcomes.**
+:::
 
 ---
 
 ## Two Approaches Compared
 
-### Approach 1: Prompt Optimization (Stochastic)
+import ParadigmComparison from '@site/src/components/ParadigmComparison';
 
-**Model:**
-```
-Given prompt P, AI produces output O with probability distribution D.
-Goal: Tune P to maximize P(O = correct)
-```
-
-**Method:**
-- Run prompt 100 times
-- Measure response variance
-- Optimize prompt/temperature/examples
-- Target: 95%+ probability of correct output
-
-**When it makes sense:**
-- ✅ Single-shot tasks (chat responses, code completion)
-- ✅ Well-defined, narrow problems
-- ✅ Real-time requirements (low latency critical)
-
-**Limitations:**
-- ❌ Each task needs new tuning
-- ❌ Model updates break prompts
-- ❌ 95% success = 5% production failures
-
-### Approach 2: System Design (Deterministic Constraints)
-
-**Model:**
-```
-Given framework F and goal G, constrain AI behavior B to achieve G.
-Goal: Design F such that B consistently produces high-quality outcomes
-```
-
-**Method:**
-- Build systematic framework (phase gating, quality gates, evidence requirements)
-- Inject framework continuously (RAG, side-loaded context)
-- Constrain behavior (automated validation, pre-commit hooks)
-- Measure product outcomes (Pylint, MyPy, test pass rates)
-
-**When it makes sense:**
-- ✅ Complex, multi-phase workflows
-- ✅ Sustained quality requirements
-- ✅ Enterprise-grade deliverables
-- ✅ Objective quality metrics
-
-**Advantages:**
-- ✅ Framework scales across tasks
-- ✅ Model-agnostic (works with any LLM)
-- ✅ Quality guaranteed by gates (not probabilistic)
+<ParadigmComparison />
 
 ---
 

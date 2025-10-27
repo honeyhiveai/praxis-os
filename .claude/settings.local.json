@@ -6,7 +6,20 @@
       "Bash(python3:*)",
       "Bash(printf:*)",
       "mcp__agent-os-rag__search_standards",
-      "Bash(~/.local/bin/claude:*)"
+      "Bash(~/.local/bin/claude:*)",
+      "Read(//Users/josh/Library/**)",
+      "Bash(test:*)",
+      "Bash(sqlite3:*)",
+      "Bash(for db in \"/Users/josh/Library/Application Support/Cursor/User/workspaceStorage/\"*/state.vscdb)",
+      "Bash(do echo \"=== $db ===\")",
+      "Bash(done)",
+      "Bash(while read dir)",
+      "Bash(do dbpath=\"/Users/josh/Library/Application Support/Cursor/User/workspaceStorage/$dir/state.vscdb\")",
+      "Bash(if [ -f \"$dbpath\" ])",
+      "Bash(then echo \"=== $dir ===\")",
+      "Bash(fi)",
+      "Bash(cat:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

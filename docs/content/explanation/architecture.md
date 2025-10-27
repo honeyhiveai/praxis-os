@@ -150,23 +150,9 @@ Research shows LLMs struggle with information buried in long contexts. Relevant 
 - Chunks ranked by cosine similarity
 - Present in order of relevance (most relevant first)
 
-**Before (Cursor Rules):**
-```
-Context: 50KB standards file
-Relevant: 2KB (4%)
-Irrelevant: 48KB (96%)
-Attention quality: ~60%
-Success rate: 70%
-```
+import ContextReductionComparison from '@site/src/components/ContextReductionComparison';
 
-**After (MCP/RAG):**
-```
-Context: 3 chunks × 800 tokens = 2.4KB
-Relevant: 2.3KB (95%)
-Irrelevant: 0.1KB (5%)
-Attention quality: ~95%
-Success rate: 92%
-```
+<ContextReductionComparison />
 
 ---
 
@@ -314,55 +300,51 @@ Neither scales:
 **Decision:** Write once (universal), generate many (language-specific).
 
 **Architecture:**
-```
-universal/standards/concurrency/race-conditions.md
-  (Timeless CS fundamentals, 2-3 pages)
-  ↓ LLM generation during install
-  ↓ (Analyzes project: language, frameworks, patterns)
-  ↓
-.agent-os/standards/development/python-concurrency.md
-  (Python-specific: threading, asyncio, GIL, pytest)
-```
 
-**Universal standard structure:**
-```markdown
-# Race Conditions (Universal)
+import StandardsGenerationFlow from '@site/src/components/StandardsGenerationFlow';
 
-## Definition
+<StandardsGenerationFlow />
+
+:::info Universal Standard Structure Example
+
+**Race Conditions (Universal)**
+
+**Definition**  
 Race condition occurs when:
 1. Multiple execution contexts access shared state
 2. At least one performs a write operation
 3. Timing affects the result
 
-## Detection
+**Detection**
 - Non-deterministic behavior
 - "Works on my machine" bugs
 - Sporadic test failures
 
-## Prevention
+**Prevention**
 - Mutual exclusion (locks)
 - Atomic operations
 - Immutable data structures
 - Message passing (actor model)
 
-## Testing
+**Testing**
 - Run tests under load (10x parallelism)
 - Use race detectors
 - Property-based testing with random scheduling
-```
 
-**Generated Python-specific:**
-```markdown
-# Race Conditions (Python)
+:::
 
-## Python-Specific Concerns
+:::tip Generated Python-Specific Standard Example
 
-### GIL (Global Interpreter Lock)
+**Race Conditions (Python)**
+
+**Python-Specific Concerns**
+
+*GIL (Global Interpreter Lock)*
 - Protects Python object access
 - Does NOT prevent race conditions
 - Switching happens between bytecode instructions
 
-### Threading Module
+*Threading Module*
 ```python
 import threading
 
@@ -375,7 +357,7 @@ def increment():
         counter += 1  # Critical section
 ```
 
-### Asyncio Module
+*Asyncio Module*
 ```python
 import asyncio
 
@@ -388,7 +370,7 @@ async def increment():
         counter += 1
 ```
 
-### Testing with pytest
+*Testing with pytest*
 ```python
 import pytest
 import threading
@@ -409,7 +391,8 @@ def test_race_condition():
     
     assert counter == 10000  # Would fail without lock
 ```
-```
+
+:::
 
 **Generation process:**
 1. **Detect project language** (pyproject.toml, package.json, go.mod, etc.)
@@ -465,46 +448,9 @@ def test_race_condition():
 
 **Decision:** Break workflows into three tiers by consumption pattern, not abstraction.
 
-**Tier 1: Execution Files (≤100 lines)**
-```
-workflows/spec_creation_v1/phases/1/
-├── task-1-business-goals.md        # 65 lines
-├── task-2-user-stories.md          # 78 lines
-├── task-3-functional-requirements.md  # 92 lines
-└── task-4-nonfunctional-requirements.md  # 88 lines
-```
+import ThreeTierArchitecture from '@site/src/components/ThreeTierArchitecture';
 
-**Purpose:** Immediate execution guidance
-- Consumed: Every time task runs
-- Contains: Commands, steps, examples, acceptance criteria
-- Size: ≤100 lines (optimal attention)
-
-**Tier 2: Methodology Files (200-500 lines)**
-```
-workflows/spec_creation_v1/core/
-├── srd-template.md        # 320 lines
-├── specs-template.md      # 280 lines
-└── tasks-template.md      # 210 lines
-```
-
-**Purpose:** Comprehensive guidance (referenced, not always loaded)
-- Consumed: When explicitly requested or first-time context
-- Contains: Methodology, principles, complete templates
-- Size: 200-500 lines (acceptable for active reading)
-
-**Tier 3: Output Files (Unlimited)**
-```
-.agent-os/specs/2025-10-12-user-auth/
-├── README.md              # Generated (3KB)
-├── srd.md                 # Generated (15KB)
-├── specs.md               # Generated (25KB)
-└── tasks.md               # Generated (8KB)
-```
-
-**Purpose:** AI-generated artifacts
-- Consumed: By humans or AI for reference
-- Contains: Specs, designs, implementation plans
-- Size: Unlimited (generated output)
+<ThreeTierArchitecture />
 
 **Why three tiers:**
 1. **Different consumption patterns** → Different size requirements
@@ -581,19 +527,10 @@ workflows/spec_creation_v1/core/
 **Decision:** Each project gets its own Agent OS Enhanced copy.
 
 **Structure:**
-```
-my-project/
-├── .agent-os/
-│   ├── mcp_server/        # Complete server copy
-│   ├── universal/         # Standard library
-│   ├── standards/         # Generated for this project
-│   ├── workflows/         # Available workflows
-│   ├── specs/             # Project-specific specs
-│   ├── state/             # Workflow state
-│   └── .cache/            # Vector index
-├── pyproject.toml         # Project dependencies
-└── src/                   # Project code
-```
+
+import DeploymentStructure from '@site/src/components/DeploymentStructure';
+
+<DeploymentStructure />
 
 **Why per-project, not global:**
 

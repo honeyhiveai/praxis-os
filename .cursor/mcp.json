@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "agent-os-rag": {
+    "agent-os-enhanced": {
       "command": "${workspaceFolder}/.agent-os/venv/bin/python",
       "args": [
         "-m",

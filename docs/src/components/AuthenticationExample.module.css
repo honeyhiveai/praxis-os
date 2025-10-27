@@ -1,0 +1,247 @@
+/* AuthenticationExample.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.layer {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.layerHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--ifm-background-color);
+  border-bottom: 2px solid var(--honeyhive-orange-border);
+}
+
+.layerBadge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  border: 2px solid var(--honeyhive-orange);
+  background: var(--ifm-background-surface-color);
+  color: var(--honeyhive-orange);
+  flex-shrink: 0;
+}
+
+.layerTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+.layerContent {
+  padding: 1.5rem;
+}
+
+/* Layer 1: Flow */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flowItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+}
+
+.flowLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--honeyhive-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.flowText {
+  font-size: 0.9rem;
+  color: var(--ifm-heading-color);
+  line-height: 1.5;
+}
+
+.flowArrow {
+  font-size: 1.5rem;
+  color: var(--honeyhive-orange);
+  text-align: center;
+  font-weight: bold;
+}
+
+.code {
+  background: var(--honeyhive-orange-bg);
+  border: 1px solid var(--honeyhive-orange-border);
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+  color: var(--honeyhive-orange);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85em;
+}
+
+/* Layer 2: Phases */
+.phases {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.phase {
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+}
+
+.phaseTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  margin-bottom: 0.75rem;
+}
+
+.phaseDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.phaseItem {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  font-family: var(--ifm-font-family-monospace);
+  line-height: 1.6;
+}
+
+.phaseItem code {
+  background: var(--honeyhive-orange-bg);
+  border: 1px solid var(--honeyhive-orange-border);
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+  color: var(--honeyhive-orange);
+  font-size: 0.9em;
+}
+
+/* Layer 3: Pre-commit */
+.precommit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.command {
+  padding: 0.75rem 1rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+}
+
+.command code {
+  font-size: 0.9rem;
+  color: var(--honeyhive-orange);
+}
+
+.precommitTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  margin-top: 0.5rem;
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+}
+
+.check {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  font-family: var(--ifm-font-family-monospace);
+  line-height: 1.6;
+}
+
+.result {
+  padding: 0.75rem 1rem;
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+}
+
+.result strong {
+  color: var(--honeyhive-orange);
+  font-weight: 700;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .layer {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .layerHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .layerHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .layerContent {
+    padding: 1rem;
+  }
+
+  .flowItem,
+  .phase,
+  .command,
+  .checks {
+    padding: 0.75rem;
+  }
+
+  .flowText,
+  .phaseItem,
+  .check {
+    font-size: 0.85rem;
+  }
+}
+

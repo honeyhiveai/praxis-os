@@ -1,0 +1,229 @@
+/* ThreeTierArchitecture.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tier {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-left: 4px solid var(--honeyhive-orange);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tierOutput {
+  border-color: var(--honeyhive-orange-border);
+  border-width: 3px;
+  border-left-width: 4px;
+  background: var(--honeyhive-orange-bg);
+}
+
+.tierHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--ifm-background-color);
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.tierOutput .tierHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+.tierBadge {
+  padding: 0.4rem 0.75rem;
+  background: var(--ifm-color-emphasis-200);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+.tierBadgeOutput {
+  background: var(--honeyhive-orange-bg);
+  border-color: var(--honeyhive-orange-border);
+  color: var(--honeyhive-orange);
+}
+
+.tierTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+.tierContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fileTree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.directory {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--honeyhive-orange);
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--honeyhive-orange);
+  border-radius: 4px;
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-background-color);
+  border-radius: 4px;
+}
+
+.fileIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.fileNameSmall {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  color: var(--ifm-heading-color);
+  flex: 1;
+}
+
+.fileSize {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  font-family: var(--ifm-font-family-monospace);
+  flex-shrink: 0;
+}
+
+.tierMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-top: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+}
+
+.tierOutput .tierMeta {
+  border-top-color: var(--honeyhive-orange-border);
+}
+
+.metaItem {
+  font-size: 0.9rem;
+  color: var(--ifm-font-color-base);
+  line-height: 1.5;
+}
+
+.metaItem strong {
+  color: var(--honeyhive-orange);
+  font-weight: 700;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .tier {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .tierOutput {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .tierHeader {
+  border-bottom-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .tierOutput .tierHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .tierMeta {
+  border-top-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .tierOutput .tierMeta {
+  border-top-color: var(--honeyhive-orange-border);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .tierHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .tierBadge {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .tierTitle {
+    font-size: 1rem;
+  }
+
+  .tierContent {
+    padding: 1rem;
+  }
+
+  .directory {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .fileList {
+    padding-left: 1rem;
+  }
+
+  .fileItem {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .fileIcon {
+    font-size: 1rem;
+  }
+
+  .fileNameSmall {
+    font-size: 0.75rem;
+  }
+
+  .fileSize {
+    font-size: 0.7rem;
+  }
+
+  .tierMeta {
+    padding: 0.75rem;
+  }
+
+  .metaItem {
+    font-size: 0.85rem;
+  }
+}
+

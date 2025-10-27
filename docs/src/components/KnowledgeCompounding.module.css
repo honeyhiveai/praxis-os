@@ -1,0 +1,291 @@
+/* KnowledgeCompounding.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 700px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.milestone {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.milestone:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.milestoneHeader {
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+  border-bottom: 3px solid;
+  background: var(--ifm-background-surface-color);
+}
+
+.monthLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.milestoneContent {
+  padding: 1.25rem;
+  background: var(--ifm-background-color);
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statArrow {
+  font-size: 1.5rem;
+  color: var(--ifm-color-primary);
+  font-weight: bold;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-700);
+  text-align: center;
+  font-style: italic;
+  padding: 0.75rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 6px;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: var(--ifm-color-primary);
+  text-align: center;
+  padding: 0.75rem 0;
+  font-weight: bold;
+}
+
+.insight {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-primary);
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.insightTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.insightText {
+  font-size: 1.05rem;
+  color: var(--ifm-heading-color);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.insightText strong {
+  color: var(--ifm-color-primary-dark);
+  font-weight: 700;
+}
+
+.insightSubtext {
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-700);
+  font-style: italic;
+}
+
+.insightSubtext strong {
+  color: var(--ifm-color-primary-dark);
+  font-weight: 700;
+}
+
+.progression {
+  margin-top: 2rem;
+}
+
+.progressionBar {
+  height: 8px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressionFill {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    var(--ifm-color-warning),
+    var(--ifm-color-info),
+    var(--ifm-color-success)
+  );
+  transition: width 1s ease;
+}
+
+.progressionLabels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.progressionLabels span:first-child,
+.progressionLabels span:last-child {
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .milestone {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .description {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .insight {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-primary-dark);
+  border-left-color: var(--ifm-color-primary-light);
+}
+
+[data-theme='dark'] .insightTitle {
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .insightText strong,
+[data-theme='dark'] .insightSubtext strong {
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .progressionBar {
+  background: var(--ifm-color-emphasis-700);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .milestoneHeader {
+    padding: 0.6rem 1rem;
+  }
+
+  .monthLabel {
+    font-size: 0.9rem;
+  }
+
+  .milestoneContent {
+    padding: 1rem;
+  }
+
+  .stats {
+    gap: 0.75rem;
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .statArrow {
+    font-size: 1.25rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .insight {
+    padding: 1.25rem;
+  }
+
+  .insightTitle {
+    font-size: 1rem;
+  }
+
+  .insightText {
+    font-size: 0.95rem;
+  }
+
+  .insightSubtext {
+    font-size: 0.85rem;
+  }
+
+  .progressionLabels {
+    font-size: 0.8rem;
+  }
+}
+

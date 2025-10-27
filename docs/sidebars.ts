@@ -43,6 +43,7 @@ const sidebars: SidebarsConfig = {
       collapsible: true,
       collapsed: true,
       items: [
+        'explanation/praxis',
         'explanation/how-it-works',
         'explanation/architecture',
         'explanation/adversarial-design',

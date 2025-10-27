@@ -1,0 +1,146 @@
+/* ContextReductionComparison.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.approach {
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.approachGood {
+  border-color: var(--honeyhive-orange-border);
+  border-width: 3px;
+}
+
+.approachHeader {
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+  text-align: center;
+}
+
+.approachGood .approachHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+.badge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-heading-color);
+  display: inline-block;
+}
+
+.badgeGood {
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  color: var(--honeyhive-orange);
+}
+
+.approachContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-background-color);
+  border-left: 3px solid var(--ifm-color-emphasis-400);
+  border-radius: 4px;
+}
+
+.approachGood .metric {
+  border-left-color: var(--honeyhive-orange);
+}
+
+.metricLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metricValue {
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .approach {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .approachGood {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .approachHeader {
+  border-bottom-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .approachGood .approachHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .metric {
+  border-left-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .approachGood .metric {
+  border-left-color: var(--honeyhive-orange);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 996px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .approachHeader {
+    padding: 0.75rem;
+  }
+
+  .badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .approachContent {
+    padding: 1rem;
+  }
+
+  .metricLabel {
+    font-size: 0.75rem;
+  }
+
+  .metricValue {
+    font-size: 0.85rem;
+  }
+}
+

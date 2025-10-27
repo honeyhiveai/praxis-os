@@ -1,0 +1,191 @@
+/* KnowledgeProgressionTimeline.module.css */
+.container {
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--honeyhive-orange-border);
+  border-radius: 8px;
+}
+
+.milestone {
+  background: var(--ifm-background-color);
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-left: 4px solid var(--honeyhive-orange);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.milestoneFinal {
+  border-color: var(--honeyhive-orange-border);
+  border-width: 3px;
+  border-left-width: 4px;
+  background: var(--honeyhive-orange-bg);
+}
+
+.milestoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.milestoneFinal .milestoneHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+.week {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--honeyhive-orange);
+}
+
+.phase {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  padding: 0.3rem 0.75rem;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+}
+
+.milestoneFinal .phase {
+  background: var(--honeyhive-orange-bg);
+  border: 2px solid var(--honeyhive-orange-border);
+  color: var(--honeyhive-orange);
+}
+
+.stats {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-700);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  font-size: 0.9rem;
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-font-family-monospace);
+  padding-left: 0.5rem;
+}
+
+.knowledge {
+  padding: 1rem 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border-top: 2px solid var(--ifm-color-emphasis-300);
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color);
+  line-height: 1.5;
+}
+
+.milestoneFinal .knowledge {
+  border-top-color: var(--honeyhive-orange-border);
+}
+
+.knowledge strong {
+  color: var(--honeyhive-orange);
+  font-weight: 700;
+}
+
+.arrow {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--honeyhive-orange);
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .milestone {
+  border-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .milestoneFinal {
+  border-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .milestoneHeader {
+  border-bottom-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .milestoneFinal .milestoneHeader {
+  border-bottom-color: var(--honeyhive-orange-border);
+}
+
+[data-theme='dark'] .knowledge {
+  border-top-color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .milestoneFinal .knowledge {
+  border-top-color: var(--honeyhive-orange-border);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .timeline {
+    padding: 1.5rem 1rem;
+  }
+
+  .milestoneHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .week {
+    font-size: 1rem;
+  }
+
+  .phase {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .stats {
+    padding: 1rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .statValue {
+    font-size: 0.85rem;
+  }
+
+  .knowledge {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+  }
+}
+

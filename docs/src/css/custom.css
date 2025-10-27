@@ -23,6 +23,12 @@
   --ifm-color-primary-lighter: #ff8c5d;
   --ifm-color-primary-lightest: #ffa77e;
   
+  /* HoneyHive Brand Colors (explicit aliases for diagram components) */
+  --honeyhive-orange: #ff8c5d;
+  --honeyhive-orange-border: #ff6b35;
+  --honeyhive-orange-bg: rgba(255, 140, 93, 0.08);
+  --honeyhive-orange-shadow: rgba(255, 107, 53, 0.2);
+  
   /* Inter font (matching HoneyHive) */
   --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --ifm-font-family-monospace: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Dank Mono', 'Source Code Pro', monospace;
@@ -59,6 +65,12 @@
   --ifm-color-primary-light: #ffa17a;
   --ifm-color-primary-lighter: #ffac8a;
   --ifm-color-primary-lightest: #ffc7ad;
+  
+  /* HoneyHive Brand Colors (explicit aliases for diagram components) */
+  --honeyhive-orange: #ff8c5d;
+  --honeyhive-orange-border: #ff6b35;
+  --honeyhive-orange-bg: rgba(255, 140, 93, 0.08);
+  --honeyhive-orange-shadow: rgba(255, 107, 53, 0.25);
   
   /* Deep, rich backgrounds (HoneyHive style) */
   --ifm-background-color: #0a0c10;
@@ -273,16 +285,95 @@ h1 {
   stroke: #ff8c5d !important;
 }
 
-/* Admonitions (Info, Warning, etc.) with HoneyHive styling */
+/* ========================================
+ * Admonitions - HoneyHive Blue/Teal Style
+ * ======================================== 
+ * Matching docs.honeyhive.ai callout boxes
+ * All admonitions use blue/teal (not rainbow colors)
+ */
+
+/* Base admonition styling - blue/teal like HoneyHive */
 [data-theme='dark'] .admonition {
-  border-left: 4px solid #ff8c5d;
-  background-color: rgba(255, 140, 93, 0.08);
-  border-radius: 4px;
+  border-left: 3px solid #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
 }
 
 [data-theme='dark'] .admonition-heading {
-  color: #ffffff;
+  color: #60a5fa;
   font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+[data-theme='dark'] .admonition-content {
+  color: #e5e7eb;
+}
+
+/* Override all admonition types to use blue/teal (HoneyHive style) */
+[data-theme='dark'] .alert--info,
+[data-theme='dark'] .alert--tip,
+[data-theme='dark'] .alert--note,
+[data-theme='dark'] .alert--warning,
+[data-theme='dark'] .alert--danger {
+  border-left-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+[data-theme='dark'] .alert--info .admonition-heading,
+[data-theme='dark'] .alert--tip .admonition-heading,
+[data-theme='dark'] .alert--note .admonition-heading,
+[data-theme='dark'] .alert--warning .admonition-heading,
+[data-theme='dark'] .alert--danger .admonition-heading {
+  color: #60a5fa;
+}
+
+/* Icon colors - all blue/teal */
+[data-theme='dark'] .alert--info .admonition-icon svg,
+[data-theme='dark'] .alert--tip .admonition-icon svg,
+[data-theme='dark'] .alert--note .admonition-icon svg,
+[data-theme='dark'] .alert--warning .admonition-icon svg,
+[data-theme='dark'] .alert--danger .admonition-icon svg {
+  fill: #60a5fa;
+}
+
+/* Light mode admonitions */
+:root .admonition {
+  border-left: 3px solid #2563eb;
+  background-color: rgba(37, 99, 235, 0.08);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+
+:root .admonition-heading {
+  color: #1d4ed8;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+:root .alert--info,
+:root .alert--tip,
+:root .alert--note,
+:root .alert--warning,
+:root .alert--danger {
+  border-left-color: #2563eb;
+  background-color: rgba(37, 99, 235, 0.08);
+}
+
+:root .alert--info .admonition-heading,
+:root .alert--tip .admonition-heading,
+:root .alert--note .admonition-heading,
+:root .alert--warning .admonition-heading,
+:root .alert--danger .admonition-heading {
+  color: #1d4ed8;
+}
+
+:root .alert--info .admonition-icon svg,
+:root .alert--tip .admonition-icon svg,
+:root .alert--note .admonition-icon svg,
+:root .alert--warning .admonition-icon svg,
+:root .alert--danger .admonition-icon svg {
+  fill: #2563eb;
 }
 
 /* Hero sections (for landing pages) */
