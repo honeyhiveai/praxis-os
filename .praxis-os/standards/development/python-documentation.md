@@ -1,5 +1,5 @@
 # Python Documentation Standards
-# Generated for: agent-os-enhanced
+# Generated for: praxis-os
 
 ## Universal Documentation Principles
 
@@ -148,7 +148,7 @@ pip install sphinx sphinx-rtd-theme sphinx-autodoc-typehints
 ### Project Structure
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── docs/
 │   ├── source/
 │   │   ├── conf.py           # Sphinx configuration
@@ -304,7 +304,7 @@ Agent OS Enhanced is a portable development framework that combines:
 
 ```bash
 # In Cursor IDE, open your project and say:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 
 # The Cursor agent will:
 # 1. Analyze your project (detect language, frameworks)
@@ -319,8 +319,8 @@ Agent OS Enhanced is a portable development framework that combines:
 
 ```bash
 # Clone repository
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git
-cd agent-os-enhanced
+git clone https://github.com/honeyhiveai/praxis-os.git
+cd praxis-os
 
 # Create virtual environment
 python -m venv venv
@@ -373,8 +373,8 @@ MIT License - Use freely in any project. See [LICENSE](LICENSE) for details.
 
 ## 📧 Support
 
-- **Issues**: [GitHub Issues](https://github.com/honeyhiveai/agent-os-enhanced/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/honeyhiveai/agent-os-enhanced/discussions)
+- **Issues**: [GitHub Issues](https://github.com/honeyhiveai/praxis-os/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/honeyhiveai/praxis-os/discussions)
 ```
 
 ---
@@ -443,7 +443,7 @@ def calculate_median(values):
 
 ---
 
-## Your Project Context: agent-os-enhanced
+## Your Project Context: praxis-os
 
 ### Current State
 
@@ -510,4 +510,4 @@ Before releasing a feature:
 
 ---
 
-**Generated for agent-os-enhanced. Set up Sphinx for professional API documentation.**
+**Generated for praxis-os. Set up Sphinx for professional API documentation.**

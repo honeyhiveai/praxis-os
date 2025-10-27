@@ -627,7 +627,7 @@ Each agent has different integration mechanisms:
 ```json
 // ~/Library/.../cline_mcp_settings.json (global!)
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "command": "/absolute/path/to/.praxis-os/venv/bin/python",  // ❌ Needs absolute path
     "args": ["-m", "mcp_server"]
   }
@@ -887,7 +887,7 @@ if __name__ == "__main__":
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "/Users/josh/.local/bin/agent-os-mcp-launcher",
       "args": [],
       "disabled": false
@@ -909,12 +909,12 @@ For now, manually configure per project:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
-      "command": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/venv/bin/python",
+    "praxis-os": {
+      "command": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
-        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
-        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os"
+        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
+        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os"
       },
       "disabled": false
     }
@@ -931,7 +931,7 @@ If/when Cline merges workspace variable support, you could use:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {

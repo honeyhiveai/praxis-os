@@ -1,7 +1,7 @@
 {
   "project": {
     "language": "python",
-    "name": "agent-os-enhanced",
+    "name": "praxis-os",
     "venv_path": "${workspaceFolder}/.praxis-os/venv",
     "venv_python": "${workspaceFolder}/.praxis-os/venv/bin/python",
     "venv_pip": "${workspaceFolder}/.praxis-os/venv/bin/pip",

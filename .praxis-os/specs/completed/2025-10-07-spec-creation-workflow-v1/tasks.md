@@ -288,7 +288,7 @@
   - [ ] Validation gates enforce quality
   - [ ] All files created with correct structure
 
-- [ ] **Task 4.3**: Dogfood workflow on agent-os-enhanced
+- [ ] **Task 4.3**: Dogfood workflow on praxis-os
   - Use spec_creation_v1 to create a real spec
   - Choose a simple feature to spec (e.g., helper script)
   - Work through all phases manually

@@ -22,7 +22,7 @@ Install prAxIs OS in your project:
 
 ```bash
 # Open your project in Cursor and say:
-"Install prAxIs OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will:

@@ -27,7 +27,7 @@ Cline uses a **global configuration architecture** fundamentally different from 
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {      // ← Project name = natural isolation
+    "praxis-os": {      // ← Project name = natural isolation
       "url": "http://127.0.0.1:4242/mcp"
     },
     "honeyhive-pki": {           // ← Different project, different name
@@ -42,7 +42,7 @@ Cline uses a **global configuration architecture** fundamentally different from 
 | Problem | Generic Names | Project Names |
 |---------|--------------|---------------|
 | **Collision** | Multiple projects overwrite each other | Each project = unique name |
-| **Recognition** | "What is agent-os-rag?" | "Oh, the agent-os-enhanced assistant!" |
+| **Recognition** | "What is agent-os-rag?" | "Oh, the praxis-os assistant!" |
 | **Multi-Project** | Manual disambiguation needed | Automatic clarity |
 | **Psychology** | Tool among tools | Native project capability |
 | **Discovery** | Requires documentation | Self-documenting |
@@ -62,7 +62,7 @@ Cline uses a **global configuration architecture** fundamentally different from 
 **Cline's Model:**
 ```
 Global Config File (cline_mcp_settings.json)
-  ├── agent-os-enhanced (Project A)
+  ├── praxis-os (Project A)
   ├── honeyhive-pki (Project B)
   ├── hive-kube (Project C)
   └── ... all projects share this file
@@ -127,7 +127,7 @@ Project B
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced-project-name": {
+    "praxis-os-project-name": {
       "type": "streamableHttp",
       "url": "http://127.0.0.1:4242/mcp",
       "alwaysAllow": [
@@ -172,21 +172,21 @@ All three try to write to the same global `cline_mcp_settings.json`. Without uni
 
 ### Solution: Project-Scoped Server Names
 
-**Pattern:** `agent-os-enhanced-{project-directory-name}`
+**Pattern:** `praxis-os-{project-directory-name}`
 
 **Example:**
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced-project-a": {
+    "praxis-os-project-a": {
       "type": "streamableHttp",
       "url": "http://127.0.0.1:4242/mcp"
     },
-    "agent-os-enhanced-project-b": {
+    "praxis-os-project-b": {
       "type": "streamableHttp",
       "url": "http://127.0.0.1:4243/mcp"
     },
-    "agent-os-enhanced-project-c": {
+    "praxis-os-project-c": {
       "type": "streamableHttp",
       "url": "http://127.0.0.1:4244/mcp"
     }
@@ -206,12 +206,12 @@ def get_server_name(project_root: Path) -> str:
         project_root: Path to project root directory
     
     Returns:
-        str: Unique server name (e.g., "agent-os-enhanced-my-project")
+        str: Unique server name (e.g., "praxis-os-my-project")
     """
     project_name = project_root.name
     # Sanitize name (alphanumeric and hyphens only)
     safe_name = "".join(c if c.isalnum() or c == "-" else "-" for c in project_name)
-    return f"agent-os-enhanced-{safe_name}"
+    return f"praxis-os-{safe_name}"
 ```
 
 ---
@@ -283,7 +283,7 @@ def update_cline_config(project_root: Path, url: str) -> None:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced-my-project": {
+    "praxis-os-my-project": {
       "type": "stdio",
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
@@ -321,11 +321,11 @@ def update_cline_config(project_root: Path, url: str) -> None:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced-project-a": {
+    "praxis-os-project-a": {
       "url": "http://127.0.0.1:4242/mcp",
       "disabled": false
     },
-    "agent-os-enhanced-project-b": {
+    "praxis-os-project-b": {
       "url": "http://127.0.0.1:4243/mcp",
       "disabled": false
     }
@@ -335,9 +335,9 @@ def update_cline_config(project_root: Path, url: str) -> None:
 
 **Workflow:**
 1. Open Project A in Cursor → MCP server starts on port 4242
-2. Cline connects to `agent-os-enhanced-project-a` (port 4242)
+2. Cline connects to `praxis-os-project-a` (port 4242)
 3. Switch to Project B → MCP server starts on port 4243
-4. Cline connects to `agent-os-enhanced-project-b` (port 4243)
+4. Cline connects to `praxis-os-project-b` (port 4243)
 5. Both servers can be active simultaneously if both IDEs are open
 
 **Manual Management:**
@@ -376,7 +376,7 @@ def main():
     update_cline_config(project_root, config_file, url)
     
     print(f"✅ Updated Cline config for {project_root.name}")
-    print(f"   Server: agent-os-enhanced-{project_root.name}")
+    print(f"   Server: praxis-os-{project_root.name}")
     print(f"   URL: {url}")
 ```
 
@@ -441,7 +441,7 @@ cat ~/Library/Application\ Support/Cursor/User/globalStorage/saoudrizwan.claude-
 **Expected output:**
 ```json
 {
-  "agent-os-enhanced-my-project": {
+  "praxis-os-my-project": {
     "type": "streamableHttp",
     "url": "http://127.0.0.1:4242/mcp",
     "disabled": false

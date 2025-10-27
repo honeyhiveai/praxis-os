@@ -253,7 +253,7 @@ os.system(f"{project_python} -m pylint mcp_server/")
 
 ## Example: Current Project Configuration
 
-For the `agent-os-enhanced` project:
+For the `praxis-os` project:
 
 **Agent OS venv**: `.praxis-os/venv/`
 - Purpose: Run MCP server

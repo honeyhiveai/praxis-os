@@ -239,7 +239,7 @@ class GenericAgent(Agent):
         agent_id: str,
         prompt_file: str,
         mcp_url: str = None,
-        honeyhive_project: str = "agent-os-enhanced",
+        honeyhive_project: str = "praxis-os",
         a2a_registry: str = "http://localhost:8000/a2a"
     ):
         super().__init__(agent_id=agent_id)
@@ -538,7 +538,7 @@ class AgentTracer:
     - Agent decisions and reasoning
     """
     
-    def __init__(self, project: str = "agent-os-enhanced"):
+    def __init__(self, project: str = "praxis-os"):
         self.hh = HoneyHive(project=project)
     
     def trace_agent_task(self, agent_id: str):
@@ -610,7 +610,7 @@ app.add_middleware(
 # Global services
 launcher = AgentLauncher(prompts_dir="prompts")
 file_ops = FileOperations(project_root="../../../../")  # Target project
-tracer = AgentTracer(project="agent-os-enhanced")
+tracer = AgentTracer(project="praxis-os")
 
 @app.on_event("startup")
 async def startup():

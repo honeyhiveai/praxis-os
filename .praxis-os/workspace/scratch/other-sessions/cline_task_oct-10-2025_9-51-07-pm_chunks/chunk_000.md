@@ -62,7 +62,7 @@ universal/standards/ai-assistant/MCP-TOOLS-GUIDE.md
 # Current Time
 10/10/2025, 9:21:02 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .cursorrules
 .gitignore
 .pre-commit-config.yaml
@@ -269,10 +269,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -298,7 +298,7 @@ ACT MODE
 I need to orient myself with the Agent OS standards first before proceeding with the analysis.
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -319,8 +319,8 @@ I need to orient myself with the Agent OS standards first before proceeding with
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -381,7 +381,7 @@ Agent OS Enhanced is a portable development framework that combines:
 
 ## 📖 Documentation
 
-**Full documentation available at:** https://honeyhiveai.github.io/agent-os-enhanced/
+**Full documentation available at:** https://honeyhiveai.github.io/praxis-os/
 
 The documentation site includes:
 - Comprehensive guides and tutorials
@@ -395,7 +395,7 @@ The documentation site includes:
 
 ```
 Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will follow the installation guide in `installation/` directory:
@@ -428,7 +428,7 @@ your-project/
 ## 📁 Repository Structure
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── README.md                     # This file
 ├── .cursorrules                  # Universal behavioral triggers (26 lines)
 │
@@ -500,7 +500,7 @@ agent-os-enhanced/
 Our `.praxis-os/` directory is a **real installation** with copied files (not symlinks):
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                    # ← Framework SOURCE (edit this)
 │   ├── standards/
 │   ├── usage/

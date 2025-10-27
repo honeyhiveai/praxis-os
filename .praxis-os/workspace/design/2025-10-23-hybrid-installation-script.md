@@ -53,7 +53,7 @@
 - Complete replacement of installation guides (keep as fallback/manual option)
 - GUI installer or web-based installation
 - Automatic language detection in script (LLM handles this)
-- Package manager integration (pip install agent-os-enhanced comes later)
+- Package manager integration (pip install praxis-os comes later)
 
 ### Success Looks Like
 
@@ -114,7 +114,7 @@ LLM: "I'll use the fast installer script..."
 
 1. **Complete automation** - LLM still handles intelligent tasks (language detection, standards generation)
 2. **GUI installer** - Command-line script is sufficient
-3. **Package manager** - `pip install agent-os-enhanced` is future work
+3. **Package manager** - `pip install praxis-os` is future work
 4. **Deprecate manual install** - Keep guides as fallback
 5. **Auto-update** - Upgrade workflow handles updates, not installation script
 6. **Custom IDE support** - Focus on Cursor, expand later
@@ -683,8 +683,8 @@ If LLMs ignore script, make it more explicit in docs/cursorrules
 ## 🔮 Future Enhancements (Out of Scope)
 
 ### Phase 2: Package Manager Integration
-- `pip install agent-os-enhanced` (Python projects)
-- `npx agent-os-enhanced` (JavaScript projects)
+- `pip install praxis-os` (Python projects)
+- `npx praxis-os` (JavaScript projects)
 - Script becomes backend for package installers
 
 ### Phase 3: Update Mechanism

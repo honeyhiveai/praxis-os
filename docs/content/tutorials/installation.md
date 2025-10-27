@@ -11,7 +11,7 @@ Install prAxIs OS in any project with a simple conversation. The Cursor agent ha
 
 ```bash
 # Open your project in Cursor and say:
-"Install prAxIs OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will:
@@ -75,9 +75,9 @@ Cursor agent analyzes your project:
 
 ```bash
 # From repo → your project
-cp -r agent-os-enhanced/universal/standards/ .praxis-os/standards/universal/
-cp -r agent-os-enhanced/universal/usage/ .praxis-os/usage/
-cp -r agent-os-enhanced/universal/workflows/ .praxis-os/workflows/
+cp -r praxis-os/universal/standards/ .praxis-os/standards/universal/
+cp -r praxis-os/universal/usage/ .praxis-os/usage/
+cp -r praxis-os/universal/workflows/ .praxis-os/workflows/
 ```
 
 **What's copied:**
@@ -114,7 +114,7 @@ Cursor agent generates standards for your specific language:
 
 ```bash
 # Copy MCP server code
-cp -r agent-os-enhanced/mcp_server/ .praxis-os/mcp_server/
+cp -r praxis-os/mcp_server/ .praxis-os/mcp_server/
 
 # Create virtualenv
 cd .praxis-os
@@ -278,13 +278,13 @@ If you prefer manual control:
 
 ```bash
 # 1. Clone repo
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git
+git clone https://github.com/honeyhiveai/praxis-os.git
 
 # 2. Copy to your project
 cd your-project
-cp agent-os-enhanced/.cursorrules .
-cp -r agent-os-enhanced/universal .praxis-os/standards/universal
-cp -r agent-os-enhanced/mcp_server .praxis-os/mcp_server
+cp praxis-os/.cursorrules .
+cp -r praxis-os/universal .praxis-os/standards/universal
+cp -r praxis-os/mcp_server .praxis-os/mcp_server
 
 # 3. Setup MCP server
 cd .praxis-os
@@ -330,7 +330,7 @@ Cursor agent may not have generated them. Manually create:
 
 ```bash
 # Python example
-cp agent-os-enhanced/language-instructions/python.md .praxis-os/
+cp praxis-os/language-instructions/python.md .praxis-os/
 # Follow instructions to generate standards
 ```
 

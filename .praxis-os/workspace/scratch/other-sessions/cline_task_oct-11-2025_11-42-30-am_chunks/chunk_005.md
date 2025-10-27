@@ -87,7 +87,7 @@ However, I notice that **`search_standards()` is not available** in my current t
 
 [ask_followup_question for 'Would you like me to help set up Agent OS Enhanced in this environment, or were you asking about something else regarding the MCP transport bug we were discussing?'] Result:
 <answer>
-read the docs https://honeyhiveai.github.io/agent-os-enhanced/
+read the docs https://honeyhiveai.github.io/praxis-os/
 </answer>
 <environment_details>
 # Cursor Visible Files
@@ -113,15 +113,15 @@ ACT MODE
 [Unexpected content type]
 
 <web_fetch>
-<url>https://honeyhiveai.github.io/agent-os-enhanced/</url>
+<url>https://honeyhiveai.github.io/praxis-os/</url>
 </web_fetch>
 
 ---
 
 **User:**
 
-[web_fetch for 'https://honeyhiveai.github.io/agent-os-enhanced/'] Result:
-Fetched Markdown for https://honeyhiveai.github.io/agent-os-enhanced/:
+[web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
+Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
   Agent OS Enhanced  
 
@@ -182,7 +182,7 @@ Complete AI development platform
 
 🙏 **Built on the shoulders of giants:** [BuilderMethods Agent OS](https://buildermethods.com/agent-os) provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it.
 
-[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/agent-os-enhanced/docs/intro)
+[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
 
 Get Started
 -----------
@@ -199,7 +199,7 @@ Install in your project with one command
 
 →
 
-](/agent-os-enhanced/docs/intro)
+](/praxis-os/docs/intro)
 
 [
 
@@ -211,7 +211,7 @@ Understand MCP, RAG, and phase gating
 
 →
 
-](/agent-os-enhanced/docs/how-it-works)
+](/praxis-os/docs/how-it-works)
 
 [
 
@@ -223,7 +223,7 @@ Detailed setup and configuration guide
 
 →
 
-](/agent-os-enhanced/docs/installation)
+](/praxis-os/docs/installation)
 
 [
 
@@ -235,7 +235,7 @@ Learn about spec creation and execution
 
 →
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 Core Features
 -------------
@@ -252,7 +252,7 @@ Production-ready AI development infrastructure
 
 
 
-](/agent-os-enhanced/docs/architecture)
+](/praxis-os/docs/architecture)
 
 [
 
@@ -264,7 +264,7 @@ Timeless CS fundamentals that work across any language with smart generation.
 
 
 
-](/agent-os-enhanced/docs/standards)
+](/praxis-os/docs/standards)
 
 [
 
@@ -276,7 +276,7 @@ Workflows enforced in code. AI cannot skip phases or bypass quality gates.
 
 
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 [
 
@@ -288,7 +288,7 @@ Design validation, concurrency analysis, test generation - focused tools.
 
 
 
-](/agent-os-enhanced/docs/architecture)
+](/praxis-os/docs/architecture)
 
 [
 
@@ -300,7 +300,7 @@ Each project owns its Agent OS installation, standards, and version.
 
 
 
-](/agent-os-enhanced/docs/installation)
+](/praxis-os/docs/installation)
 
 [
 
@@ -312,7 +312,7 @@ Build your own AI-assisted workflows with proven patterns.
 
 
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 Why Agent OS Enhanced?
 ----------------------
@@ -337,7 +337,7 @@ Phase Compliance
 
 Architectural gating prevents workflow bypassing
 
-[Learn How It Works →](/agent-os-enhanced/docs/how-it-works)
+[Learn How It Works →](/praxis-os/docs/how-it-works)
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -362,15 +362,15 @@ ACT MODE
 [Unexpected content type]
 
 <web_fetch>
-<url>https://honeyhiveai.github.io/agent-os-enhanced/docs/intro</url>
+<url>https://honeyhiveai.github.io/praxis-os/docs/intro</url>
 </web_fetch>
 
 ---
 
 **User:**
 
-[web_fetch for 'https://honeyhiveai.github.io/agent-os-enhanced/docs/intro'] Result:
-Fetched Markdown for https://honeyhiveai.github.io/agent-os-enhanced/docs/intro:
+[web_fetch for 'https://honeyhiveai.github.io/praxis-os/docs/intro'] Result:
+Fetched Markdown for https://honeyhiveai.github.io/praxis-os/docs/intro:
 
   Introduction | Agent OS Enhanced  
 
@@ -380,7 +380,7 @@ On this page
 
 **Agent OS Enhanced** is a portable multi-agent development framework that transforms AI from helpful assistant to velocity-enhancing development partner.
 
-What is Agent OS Enhanced?[​](#what-is-agent-os-enhanced "Direct link to What is Agent OS Enhanced?")
+What is Agent OS Enhanced?[​](#what-is-praxis-os "Direct link to What is Agent OS Enhanced?")
 -----------------------------------------------------------------------------------------------------
 
 Agent OS Enhanced builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/agent-os), addressing key limitations discovered through production use:
@@ -395,7 +395,7 @@ Quick Start[​](#quick-start "Direct link to Quick Start")
 
 Install Agent OS Enhanced in your project:
 
-    # Open your project in Cursor and say:"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+    # Open your project in Cursor and say:"Install Agent OS from github.com/honeyhiveai/praxis-os"
 
 The Cursor agent will:
 
@@ -449,11 +449,11 @@ Workflows enforce progression through code, not documentation:
 Next Steps[​](#next-steps "Direct link to Next Steps")
 ------------------------------------------------------
 
-*   **[How It Works](/agent-os-enhanced/docs/how-it-works)** - **Start here** - Complete human-AI collaboration pattern
-*   **[Installation](/agent-os-enhanced/docs/installation)** - Set up in your project
-*   **[Architecture](/agent-os-enhanced/docs/architecture)** - MCP/RAG system deep-dive
-*   **[Standards](/agent-os-enhanced/docs/standards)** - Universal CS fundamentals
-*   **[Workflows](/agent-os-enhanced/docs/workflows)** - Phase-gated workflows
+*   **[How It Works](/praxis-os/docs/how-it-works)** - **Start here** - Complete human-AI collaboration pattern
+*   **[Installation](/praxis-os/docs/installation)** - Set up in your project
+*   **[Architecture](/praxis-os/docs/architecture)** - MCP/RAG system deep-dive
+*   **[Standards](/praxis-os/docs/standards)** - Universal CS fundamentals
+*   **[Workflows](/praxis-os/docs/workflows)** - Phase-gated workflows
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -478,15 +478,15 @@ ACT MODE
 [Unexpected content type]
 
 <web_fetch>
-<url>https://honeyhiveai.github.io/agent-os-enhanced/docs/how-it-works</url>
+<url>https://honeyhiveai.github.io/praxis-os/docs/how-it-works</url>
 </web_fetch>
 
 ---
 
 **User:**
 
-[web_fetch for 'https://honeyhiveai.github.io/agent-os-enhanced/docs/how-it-works'] Result:
-Fetched Markdown for https://honeyhiveai.github.io/agent-os-enhanced/docs/how-it-works:
+[web_fetch for 'https://honeyhiveai.github.io/praxis-os/docs/how-it-works'] Result:
+Fetched Markdown for https://honeyhiveai.github.io/praxis-os/docs/how-it-works:
 
   How It Works | Agent OS Enhanced  
 
@@ -862,9 +862,9 @@ Real Example: End-to-End[​](#real-example-end-to-end "Direct link to Real Exam
 Next Steps[​](#next-steps "Direct link to Next Steps")
 ------------------------------------------------------
 
-*   **[Installation](/agent-os-enhanced/docs/installation)** - Set up Agent OS Enhanced
-*   **[Workflows](/agent-os-enhanced/docs/workflows)** - Understand workflow details
-*   **[Architecture](/agent-os-enhanced/docs/architecture)** - How tool calls work under the hood
+*   **[Installation](/praxis-os/docs/installation)** - Set up Agent OS Enhanced
+*   **[Workflows](/praxis-os/docs/workflows)** - Understand workflow details
+*   **[Architecture](/praxis-os/docs/architecture)** - How tool calls work under the hood
 <environment_details>
 # Cursor Visible Files
 (No visible files)

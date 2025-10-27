@@ -710,7 +710,7 @@ Projects should define in `.praxis-os/standards/development/validation-commands.
 ```bash
 # Verify venv active
 which python
-# Expected: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.venv/bin/python
+# Expected: /Users/josh/src/github.com/honeyhiveai/praxis-os/.venv/bin/python
 
 # Verify Python version
 python --version

@@ -1396,7 +1396,7 @@ module.exports = {
   themeConfig: {
     algolia: {
       apiKey: 'YOUR_API_KEY',
-      indexName: 'agent-os-enhanced',
+      indexName: 'praxis-os',
       appId: 'YOUR_APP_ID',
     },
   },

@@ -87,7 +87,7 @@ See `CHANGELOG.md` for version history and updates.
 ## Development
 
 To modify the MCP server:
-1. Make changes in `agent-os-enhanced/mcp_server/`
+1. Make changes in `praxis-os/mcp_server/`
 2. Test in a sample project
 3. Update `CHANGELOG.md`
 4. Tag release (semver)

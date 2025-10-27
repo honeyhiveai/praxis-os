@@ -62,7 +62,7 @@ universal/standards/ai-assistant/MCP-TOOLS-GUIDE.md
 # Current Time
 10/10/2025, 9:21:02 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .cursorrules
 .gitignore
 .pre-commit-config.yaml
@@ -269,10 +269,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -298,7 +298,7 @@ ACT MODE
 I need to orient myself with the Agent OS standards first before proceeding with the analysis.
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -319,8 +319,8 @@ I need to orient myself with the Agent OS standards first before proceeding with
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -381,7 +381,7 @@ Agent OS Enhanced is a portable development framework that combines:
 
 ## 📖 Documentation
 
-**Full documentation available at:** https://honeyhiveai.github.io/agent-os-enhanced/
+**Full documentation available at:** https://honeyhiveai.github.io/praxis-os/
 
 The documentation site includes:
 - Comprehensive guides and tutorials
@@ -395,7 +395,7 @@ The documentation site includes:
 
 ```
 Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will follow the installation guide in `installation/` directory:
@@ -428,7 +428,7 @@ your-project/
 ## 📁 Repository Structure
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── README.md                     # This file
 ├── .cursorrules                  # Universal behavioral triggers (26 lines)
 │
@@ -500,7 +500,7 @@ agent-os-enhanced/
 Our `.praxis-os/` directory is a **real installation** with copied files (not symlinks):
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                    # ← Framework SOURCE (edit this)
 │   ├── standards/
 │   ├── usage/
@@ -3727,7 +3727,7 @@ See `CHANGELOG.md` for version history and updates.
 ## Development
 
 To modify the MCP server:
-1. Make changes in `agent-os-enhanced/mcp_server/`
+1. Make changes in `praxis-os/mcp_server/`
 2. Test in a sample project
 3. Update `CHANGELOG.md`
 4. Tag release (semver)
@@ -6173,7 +6173,7 @@ Based on Cline's architecture, add this to your VS Code settings.json:
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -6190,7 +6190,7 @@ Based on Cline's architecture, add this to your VS Code settings.json:
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/Scripts/python.exe",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -6288,7 +6288,7 @@ Each MCP query is cheap, mistakes are expensive
 cd /path/to/your/project
 
 # Follow Agent OS installation process
-# (See installation/00-START.md in agent-os-enhanced repo)
+# (See installation/00-START.md in praxis-os repo)
 ```
 
 ### Step 2: Verify Python Environment
@@ -6310,7 +6310,7 @@ Create/edit `.vscode/settings.json` in your project:
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -6658,7 +6658,7 @@ For structured workflows and standards queries, user will switch to Cline.
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -6951,7 +6951,7 @@ Each file:
 
 ## 🏗️ Architecture Context
 
-**Source Repository** (agent-os-enhanced):
+**Source Repository** (praxis-os):
 ```
 /tmp/agent-os-install-xyz/      ← Temp clone (will delete after!)
 ├── installation/               ← These guides
@@ -7005,7 +7005,7 @@ print(f"📦 Cloning to temp location: {temp_dir}")
 # Clone repo to temp
 subprocess.run([
     "git", "clone", 
-    "https://github.com/honeyhiveai/agent-os-enhanced.git",
+    "https://github.com/honeyhiveai/praxis-os.git",
     temp_dir
 ], check=True)
 
@@ -7021,8 +7021,8 @@ print(f"✅ Source ready at: {AGENT_OS_SOURCE}")
 If the user already has Agent OS cloned somewhere:
 
 ```python
-# Ask user where they've cloned agent-os-enhanced
-AGENT_OS_SOURCE = input("Path to agent-os-enhanced clone: ")
+# Ask user where they've cloned praxis-os
+AGENT_OS_SOURCE = input("Path to praxis-os clone: ")
 
 # Validate it
 assert os.path.exists(f"{AGENT_OS_SOURCE}/universal/"), "Invalid path"
@@ -7045,9 +7045,9 @@ assert os.access(".", os.W_OK), "Target directory not writable"
 import sys
 assert sys.version_info >= (3, 8), "Python 3.8+ required"
 
-# 4. Check NOT inside agent-os-enhanced repo itself
+# 4. Check NOT inside praxis-os repo itself
 current_dir = os.path.basename(os.getcwd())
-assert current_dir != "agent-os-enhanced", "Don't install inside source repo!"
+assert current_dir != "praxis-os", "Don't install inside source repo!"
 ```
 
 **If any checks fail, stop and fix before continuing.**
@@ -7562,7 +7562,7 @@ class MCPConfigGenerator:
         """Generate .cursor/mcp.json"""
         return {
             "mcpServers": {
-                "agent-os-enhanced": {
+                "praxis-os": {
                     "command": python_path,
                     "args": ["-m", "mcp_server"],
                     "env": {
@@ -7579,7 +7579,7 @@ class MCPConfigGenerator:
         """Generate settings for .vscode/settings.json"""
         return {
             "cline.mcpServers": {
-                "agent-os-enhanced": {
+                "praxis-os": {
                     "command": python_path,
                     "args": ["-m", "mcp_server"],
                     "env": {
@@ -7596,7 +7596,7 @@ class MCPConfigGenerator:
         """Generate .windsurf/mcp.json"""
         return {
             "mcpServers": {
-                "agent-os-enhanced": {
+                "praxis-os": {
                     "command": python_path,
                     "args": ["-m", "mcp_server"],
                     "env": {
@@ -7704,7 +7704,7 @@ Create spec for [your feature name]
 
 ## 📚 Documentation
 
-- Full docs: https://honeyhiveai.github.io/agent-os-enhanced/
+- Full docs: https://honeyhiveai.github.io/praxis-os/
 - Usage guide: `.praxis-os/usage/operating-model.md`
 - Standards: `.praxis-os/standards/`
 
@@ -7965,7 +7965,7 @@ if exists(".vscode/"):
 > 
 > **Option 1** (Recommended): I'll clone it to a temporary directory
 > ```bash
-> git clone https://github.com/honeyhiveai/agent-os-enhanced.git /tmp/agent-os-install-{random}
+> git clone https://github.com/honeyhiveai/praxis-os.git /tmp/agent-os-install-{random}
 > ```
 > 
 > **Option 2**: You tell me where you've already cloned it
@@ -8098,7 +8098,7 @@ PYTHONPATH = "${workspaceFolder}/.praxis-os"
 > ```json
 > {
 >   "mcpServers": {
->     "agent-os-enhanced": {
+>     "praxis-os": {
 >       "command": "{PYTHON_PATH}",
 >       "args": ["-m", "mcp_server"],
 >       "env": {
@@ -8125,7 +8125,7 @@ PYTHONPATH = "${workspaceFolder}/.praxis-os"
 > ```json
 > {
 >   "cline.mcpServers": {
->     "agent-os-enhanced": {
+>     "praxis-os": {
 >       "command": "{PYTHON_PATH}",
 >       "args": ["-m", "mcp_server"],
 >       "env": {
@@ -8348,7 +8348,7 @@ I don't currently see any MCP servers listed in my environment details, which me
 Let me try to use the `search_standards` tool to see if it's available:
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -8375,8 +8375,8 @@ The user provided the following feedback:
 <feedback>
 it is running in this cursor instance, the cursor agent has been making heavy use of it,
 </feedback>
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -9382,7 +9382,7 @@ Most users should configure only their primary agent.
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -9408,7 +9408,7 @@ Most users should configure only their primary agent.
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -9670,7 +9670,7 @@ Based on my system prompt, here are Cline's capabilities:
 
 ## 🔧 Current Working Directory
 
-I'm operating from: `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+I'm operating from: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
 This means:
 - ✅ I can read/edit files in this project
@@ -9795,7 +9795,7 @@ ACT MODE
 
 ## 📊 Current Status in Your Setup
 
-**Operating From**: `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+**Operating From**: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
 **MCP Access**: ❌ NO Agent OS MCP access
 - Agent OS is configured for Cursor AI only
@@ -9889,7 +9889,7 @@ python ../python-sdk/script.py
 ## 🔧 Technical Details
 
 **My Current Working Directory:**
-- Locked at: `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+- Locked at: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 - All commands execute from this directory
 - But I can reference files anywhere using relative/absolute paths
 
@@ -9912,7 +9912,7 @@ I can absolutely look at `../python-sdk` for you!
 1. List its directory structure?
 2. Read specific files?
 3. Search for something specific?
-4. Compare it with agent-os-enhanced?
+4. Compare it with praxis-os?
 5. Something else?
 
 Just let me know and I'll explore the python-sdk repository!
@@ -10147,7 +10147,7 @@ Let's start:
 [read_file for '.vscode/settings.json'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.vscode/settings.json
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/.vscode/settings.json
 </error>
 
 
@@ -10237,7 +10237,7 @@ Good! The file doesn't exist yet, so I'll create it fresh. Let me first check if
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -10300,7 +10300,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:48:51 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .cursorrules
 .gitignore
 .pre-commit-config.yaml
@@ -10507,10 +10507,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -10556,7 +10556,7 @@ Let me configure Agent OS MCP access for Cline. I'll:
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -10617,7 +10617,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:49:35 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .cursorrules
 .gitignore
 .pre-commit-config.yaml
@@ -10824,10 +10824,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -10856,7 +10856,7 @@ I'll configure Cline to access the Agent OS MCP server. Let me start by creating
 <path>.vscode/settings.json</path>
 <content>{
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -10888,7 +10888,7 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path=".vscode/settings.json">
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -11119,7 +11119,7 @@ ACT MODE
 Excellent! Configuration is complete. Now let me try to test the MCP connection:
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -11140,8 +11140,8 @@ Excellent! Configuration is complete. Now let me try to test the MCP connection:
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 .clinerules

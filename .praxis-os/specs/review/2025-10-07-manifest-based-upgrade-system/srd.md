@@ -21,7 +21,7 @@ This system provides:
 ### 1.3 Definitions
 
 - **Skeleton Files**: Files from `universal/` that are copied to `.praxis-os/` on initial install
-- **Universal Files**: Original files in agent-os-enhanced's `universal/` directory
+- **Universal Files**: Original files in praxis-os's `universal/` directory
 - **Local Files**: Files in consuming project's `.praxis-os/` directory
 - **Manifest**: JSON file tracking checksums of all skeleton files
 - **Divergence**: When both local and universal versions of a file have changed

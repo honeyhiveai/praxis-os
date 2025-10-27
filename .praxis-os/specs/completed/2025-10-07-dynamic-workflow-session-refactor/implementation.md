@@ -35,7 +35,7 @@ response = start_workflow(
 
 **Setup:**
 ```bash
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 python -m pytest tests/  # Ensure existing tests pass
 ```
 

@@ -221,7 +221,7 @@ def get_last_modified_date(file_path: Path) -> str:
 
 **Usage:**
 ```bash
-cd agent-os-enhanced/
+cd praxis-os/
 python scripts/generate-manifest.py --version 1.3.0 --output universal/.universal-manifest.json
 ```
 
@@ -410,7 +410,7 @@ def show_diff(local_file: Path, source_file: Path):
 ```python
 def main():
     parser = argparse.ArgumentParser(description="Safe Agent OS upgrade tool")
-    parser.add_argument("--source", required=True, help="Path to agent-os-enhanced repo")
+    parser.add_argument("--source", required=True, help="Path to praxis-os repo")
     parser.add_argument("--target", default=".praxis-os", help="Path to local .praxis-os directory")
     parser.add_argument("--dry-run", action="store_true", help="Preview changes without applying")
     parser.add_argument("--yes", action="store_true", help="Auto-confirm all prompts (dangerous)")
@@ -515,7 +515,7 @@ Update `universal/standards/installation/update-procedures.md`:
 ```markdown
 ## Recommended Update Process
 
-1. Pull latest agent-os-enhanced
+1. Pull latest praxis-os
 2. Run manifest generator (if developing)
 3. Run safe-upgrade tool with dry-run
 4. Review preview
@@ -580,7 +580,7 @@ def test_classify_file_conflict():
 
 **Test:** Dogfood on python-sdk
 
-1. Generate manifest from agent-os-enhanced
+1. Generate manifest from praxis-os
 2. Run safe-upgrade on python-sdk in dry-run mode
 3. Verify detection of:
    - New files (if any added)

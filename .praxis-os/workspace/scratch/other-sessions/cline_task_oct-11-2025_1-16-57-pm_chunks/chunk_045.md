@@ -806,7 +806,7 @@ const serverConfig = {
 https://github.com/josh-hhai/cline/tree/fix-streamablehttp-default
 
 You can test with this MCP server:
-https://github.com/honeyhiveai/agent-os-enhanced
+https://github.com/honeyhiveai/praxis-os
 
 Before/After screenshots:
 [show config defaulting to sse]

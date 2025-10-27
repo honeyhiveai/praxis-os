@@ -981,7 +981,7 @@ search_standards("your test query")
 **Solution:**
 ```bash
 # 1. Rebuild RAG index
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 python scripts/build_rag_index.py
 
 # Expected output:

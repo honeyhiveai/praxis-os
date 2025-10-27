@@ -147,7 +147,7 @@ Let's start:
 [read_file for '.vscode/settings.json'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.vscode/settings.json
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/.vscode/settings.json
 </error>
 
 
@@ -237,7 +237,7 @@ Good! The file doesn't exist yet, so I'll create it fresh. Let me first check if
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -300,7 +300,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:48:51 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .cursorrules
 .gitignore
 .pre-commit-config.yaml
@@ -507,10 +507,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -556,7 +556,7 @@ Let me configure Agent OS MCP access for Cline. I'll:
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -617,7 +617,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:49:35 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .cursorrules
 .gitignore
 .pre-commit-config.yaml
@@ -824,10 +824,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -856,7 +856,7 @@ I'll configure Cline to access the Agent OS MCP server. Let me start by creating
 <path>.vscode/settings.json</path>
 <content>{
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -888,7 +888,7 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path=".vscode/settings.json">
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {

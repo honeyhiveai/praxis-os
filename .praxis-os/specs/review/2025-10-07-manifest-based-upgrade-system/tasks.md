@@ -94,8 +94,8 @@
   - [ ] Validation catches missing fields
   - [ ] Validation catches malformed checksums
 
-- [x] **Task 1.6**: Generate manifest for agent-os-enhanced
-  - Run script on actual agent-os-enhanced repo
+- [x] **Task 1.6**: Generate manifest for praxis-os
+  - Run script on actual praxis-os repo
   - Review generated manifest for accuracy
   - Verify file count matches expected (~55 files)
   - Spot-check checksums
@@ -322,8 +322,8 @@
   - [ ] All FileState cases tested
   - [ ] Tests are isolated (no cross-contamination)
 
-- [x] **Task 4.3**: Dogfood on agent-os-enhanced itself (dry-run) (completed in Phase 2: successfully analyzed 94 files)
-  - Generate manifest for agent-os-enhanced
+- [x] **Task 4.3**: Dogfood on praxis-os itself (dry-run) (completed in Phase 2: successfully analyzed 94 files)
+  - Generate manifest for praxis-os
   - Create manual backup of .praxis-os/
   - Run safe-upgrade on local .praxis-os/ with --dry-run
   - Review preview output
@@ -337,7 +337,7 @@
   - [ ] No false positives (incorrect classification)
   - [ ] Performance acceptable (<30 seconds)
 
-- [x] **Task 4.4**: Dogfood on agent-os-enhanced itself (execute) (implementation complete - safe for manual testing)
+- [x] **Task 4.4**: Dogfood on praxis-os itself (execute) (implementation complete - safe for manual testing)
   - Run safe-upgrade on local .praxis-os/ (live)
   - Respond to prompts if any conflicts
   - Verify backup created automatically
@@ -457,7 +457,7 @@ Cannot dogfood without complete, working tool.
 
 ### Integration Tests
 - Dogfooding on python-sdk (dry-run then execute)
-- Self-upgrade on agent-os-enhanced
+- Self-upgrade on praxis-os
 - Rollback procedure test
 
 ### Manual Tests
@@ -487,7 +487,7 @@ Cannot dogfood without complete, working tool.
 - [ ] Summary report is clear and complete
 
 ### Integration
-- [ ] Successfully self-upgrades (agent-os-enhanced's own .praxis-os/)
+- [ ] Successfully self-upgrades (praxis-os's own .praxis-os/)
 - [ ] No data loss
 - [ ] MCP queries work after upgrade
 - [ ] RAG index auto-rebuilds

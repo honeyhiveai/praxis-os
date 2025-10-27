@@ -945,7 +945,7 @@ class ProjectInfoDiscovery:
         2. Directory name (fallback)
 
         Examples:
-        - git@github.com:user/agent-os-enhanced.git → "agent-os-enhanced"
+        - git@github.com:user/praxis-os.git → "praxis-os"
         - /Users/josh/my-project/ → "my-project"
 
         Returns:

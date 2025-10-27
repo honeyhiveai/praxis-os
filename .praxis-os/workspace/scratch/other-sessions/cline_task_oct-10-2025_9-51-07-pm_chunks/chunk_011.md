@@ -119,7 +119,7 @@ ACT MODE
 Excellent! Configuration is complete. Now let me try to test the MCP connection:
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -140,8 +140,8 @@ Excellent! Configuration is complete. Now let me try to test the MCP connection:
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 .clinerules

@@ -67,7 +67,7 @@ Implement two complementary tools:
 ## Architecture Overview
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/
 │   ├── .universal-manifest.json  ← Generated manifest
 │   ├── standards/

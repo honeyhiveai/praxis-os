@@ -382,7 +382,7 @@ Most users should configure only their primary agent.
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -408,7 +408,7 @@ Most users should configure only their primary agent.
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -670,7 +670,7 @@ Based on my system prompt, here are Cline's capabilities:
 
 ## 🔧 Current Working Directory
 
-I'm operating from: `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+I'm operating from: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
 This means:
 - ✅ I can read/edit files in this project
@@ -795,7 +795,7 @@ ACT MODE
 
 ## 📊 Current Status in Your Setup
 
-**Operating From**: `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+**Operating From**: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
 **MCP Access**: ❌ NO Agent OS MCP access
 - Agent OS is configured for Cursor AI only
@@ -889,7 +889,7 @@ python ../python-sdk/script.py
 ## 🔧 Technical Details
 
 **My Current Working Directory:**
-- Locked at: `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+- Locked at: `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 - All commands execute from this directory
 - But I can reference files anywhere using relative/absolute paths
 
@@ -912,7 +912,7 @@ I can absolutely look at `../python-sdk` for you!
 1. List its directory structure?
 2. Read specific files?
 3. Search for something specific?
-4. Compare it with agent-os-enhanced?
+4. Compare it with praxis-os?
 5. Something else?
 
 Just let me know and I'll explore the python-sdk repository!

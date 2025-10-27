@@ -128,7 +128,7 @@ Cons:
 
 ```bash
 # One-time: Generate workflow
-cd ~/agent-os-enhanced/  # Clone source repo
+cd ~/praxis-os/  # Clone source repo
 cd meta-workflow/workflow-types/test-generation/
 python scripts/generate-test-workflow.py --language python --project ~/my-project/
 
@@ -148,7 +148,7 @@ start_workflow("test_generation_python_v1", "src/module.py")
 pip install agent-os  # Does NOT include workflow-types/
 
 # User wants test generation
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git ~/agent-os-source
+git clone https://github.com/honeyhiveai/praxis-os.git ~/agent-os-source
 # OR visit GitHub directly
 
 # Generate workflow
@@ -241,7 +241,7 @@ def _should_index_file(self, file_path: str) -> bool:
 ### Architecture
 
 ```
-Source Repository (github.com/honeyhiveai/agent-os-enhanced):
+Source Repository (github.com/honeyhiveai/praxis-os):
 ├── meta-workflow/workflow-types/      ← Workflow creation systems
 │   ├── test-generation/
 │   └── production-code-generation/
@@ -278,7 +278,7 @@ pip install agent-os-workflow-generators
 agent-os generate-workflow test-generation --language python
 
 # Option B: Clone source and run directly
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git ~/agent-os-source
+git clone https://github.com/honeyhiveai/praxis-os.git ~/agent-os-source
 python ~/agent-os-source/meta-workflow/workflow-types/test-generation/scripts/generate-test-workflow.py \
     --language python \
     --project ~/my-project/
@@ -373,7 +373,7 @@ agent-os generate-workflow test-generation --language python
 # No pip install for generators
 # Users clone source repo when needed
 
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git
+git clone https://github.com/honeyhiveai/praxis-os.git
 cd meta-workflow/workflow-types/test-generation/
 python scripts/generate-test-workflow.py --language python --project ~/my-project/
 ```
@@ -492,7 +492,7 @@ pip install agent-os-workflow-generators
 agent-os generate-workflow test-generation --language python
 
 # Option 2: Use source directly
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git
+git clone https://github.com/honeyhiveai/praxis-os.git
 cd meta-workflow/workflow-types/test-generation/
 python scripts/generate-test-workflow.py --language python --project ~/my-project/
 ```

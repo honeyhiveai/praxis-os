@@ -173,7 +173,7 @@ export default function YourDiagram() {
 Run the base installer to install Agent OS to your home directory:
 
 ```bash
-curl -sSL https://github.com/honeyhiveai/agent-os-enhanced | sh
+curl -sSL https://github.com/honeyhiveai/praxis-os | sh
 ```
 
 This creates `~/.praxis-os/` with the default profile containing standards, workflows, and commands.

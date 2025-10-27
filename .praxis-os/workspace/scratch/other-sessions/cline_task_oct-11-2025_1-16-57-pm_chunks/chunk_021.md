@@ -299,7 +299,7 @@ transport = SseServerTransport("/messages")
 ```json
 // .cursor/mcp.json or cline_mcp_settings.json
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",
     "url": "http://localhost:8080",
     "timeout": 30000
@@ -468,7 +468,7 @@ else:
 ```json
 // Cursor config
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",  // NEW
     "url": "http://localhost:8080"  // NEW
   }
@@ -476,7 +476,7 @@ else:
 
 // Cline config
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",  // NEW
     "url": "http://localhost:8080"  // NEW
   }
@@ -544,7 +544,7 @@ async def test_session_isolation():
 # It already supports this!
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("agent-os-enhanced")
+mcp = FastMCP("praxis-os")
 # Register all your tools...
 
 if __name__ == "__main__":
@@ -620,7 +620,7 @@ Of course! **HTTP unblocks the entire Cline integration problem we've been tryin
 ```json
 // Global config requires absolute paths
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "command": "/absolute/path/to/.praxis-os/venv/bin/python",
     "args": ["-m", "mcp_server"]
   }
@@ -639,7 +639,7 @@ Of course! **HTTP unblocks the entire Cline integration problem we've been tryin
 ```json
 // ONE global config for ALL projects
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",
     "url": "http://localhost:8080"
   }
@@ -829,7 +829,7 @@ systemctl --user start agent-os-mcp
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:8080",
       "enabled": true

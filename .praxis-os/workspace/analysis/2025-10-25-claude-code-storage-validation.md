@@ -22,7 +22,7 @@
 
 **Example**:
 ```
-~/.claude/projects/-Users-josh-src-github-com-honeyhiveai-agent-os-enhanced/abc97593-1886-4e8f-b5f6-6923e029a97e.jsonl
+~/.claude/projects/-Users-josh-src-github-com-honeyhiveai-praxis-os/abc97593-1886-4e8f-b5f6-6923e029a97e.jsonl
 ```
 
 **Project path encoding**: Slashes become dashes (`/` → `-`)
@@ -45,7 +45,7 @@
     "parentUuid": null,
     "isSidechain": true,
     "userType": "external",
-    "cwd": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
+    "cwd": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
     "sessionId": "abc97593-1886-4e8f-b5f6-6923e029a97e",
     "version": "2.0.26",
     "gitBranch": "main",
@@ -65,7 +65,7 @@
     "parentUuid": "ee69cfa4-f4c1-4c7f-a9d2-7e0daeb4936f",
     "isSidechain": true,
     "userType": "external",
-    "cwd": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
+    "cwd": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
     "sessionId": "abc97593-1886-4e8f-b5f6-6923e029a97e",
     "version": "2.0.26",
     "gitBranch": "main",
@@ -146,7 +146,7 @@
     "display": "what mcp servers do you see",
     "pastedContents": {},
     "timestamp": 1761343856281,
-    "project": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "project": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
 }
 ```
 

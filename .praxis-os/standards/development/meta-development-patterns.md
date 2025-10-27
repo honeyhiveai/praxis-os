@@ -347,7 +347,7 @@ Fix usage, continue work
 
 **Your orchestration (Josh):**
 ```
-Session 1: agent-os-enhanced (meta-development)
+Session 1: praxis-os (meta-development)
   └── AI: Build Query Gamification System
       - Meta-complexity: Building framework WITH framework
       - Must understand internals, validation gates, architecture

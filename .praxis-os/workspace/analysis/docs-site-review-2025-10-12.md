@@ -1,13 +1,13 @@
 # Agent OS Enhanced Documentation Site Review
 **Date:** October 12, 2025  
 **Reviewer:** Cline AI Assistant  
-**Site URL:** http://localhost:3000/agent-os-enhanced/
+**Site URL:** http://localhost:3000/praxis-os/
 
 ---
 
 ## Executive Summary
 
-I've completed a thorough review of your documentation site at http://localhost:3000/agent-os-enhanced/. Overall, the site demonstrates **professional quality** with excellent structure, clear content, and modern design. The implementation of the Diátaxis framework is solid, and the site effectively communicates the value proposition of Agent OS Enhanced.
+I've completed a thorough review of your documentation site at http://localhost:3000/praxis-os/. Overall, the site demonstrates **professional quality** with excellent structure, clear content, and modern design. The implementation of the Diátaxis framework is solid, and the site effectively communicates the value proposition of Agent OS Enhanced.
 
 **Overall Grade: A- (Excellent with room for polish)**
 

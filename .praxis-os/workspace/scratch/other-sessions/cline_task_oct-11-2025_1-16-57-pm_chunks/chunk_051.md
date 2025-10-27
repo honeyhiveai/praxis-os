@@ -503,7 +503,7 @@ python scripts/build_rag_index.py
 
 **1. Rebuild RAG Index:**
 ```bash
-cd /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced
+cd /Users/josh/src/github.com/honeyhiveai/praxis-os
 python scripts/build_rag_index.py
 ```
 
@@ -629,7 +629,7 @@ ACT MODE
 [read_file for 'universal/standards/documentation/rag-content-authoring.md'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/universal/standards/documentation/rag-content-authoring.md
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/universal/standards/documentation/rag-content-authoring.md
 </error>
 <environment_details>
 # Cursor Visible Files
@@ -681,7 +681,7 @@ ACT MODE
 [read_file for 'universal/standards/universal/documentation/rag-content-authoring.md'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/universal/standards/universal/documentation/rag-content-authoring.md
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/universal/standards/universal/documentation/rag-content-authoring.md
 </error>
 <environment_details>
 # Cursor Visible Files

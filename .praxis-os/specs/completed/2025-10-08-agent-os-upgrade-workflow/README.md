@@ -133,7 +133,7 @@ The implementation is broken into 5 phases over 4-5 weeks:
 
 - **Unit Tests:** > 85% coverage for all components
 - **Integration Tests:** End-to-end workflow scenarios
-- **Dogfooding:** Test on agent-os-enhanced itself
+- **Dogfooding:** Test on praxis-os itself
 - **Performance:** Validate all timing targets
 
 ---
@@ -307,7 +307,7 @@ result = start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
     options={
-        "source_path": "/path/to/agent-os-enhanced",
+        "source_path": "/path/to/praxis-os",
         "dry_run": false,
         "auto_restart": true
     }

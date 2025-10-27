@@ -17,8 +17,8 @@
 
 **Quick Update Command:**
 ```bash
-# Sync from agent-os-enhanced/universal/ to your-project/.praxis-os/
-rsync -av --delete /path/to/agent-os-enhanced/universal/ /path/to/your-project/.praxis-os/
+# Sync from praxis-os/universal/ to your-project/.praxis-os/
+rsync -av --delete /path/to/praxis-os/universal/ /path/to/your-project/.praxis-os/
 ```
 
 **Recommended:** Use `agent_os_upgrade_v1` workflow for safe, automated updates with validation and rollback.
@@ -44,11 +44,11 @@ rsync -av --delete /path/to/agent-os-enhanced/universal/ /path/to/your-project/.
 
 ### ❌ WRONG - Do NOT Sync From
 
-**NEVER sync from the `.praxis-os/` directory in the agent-os-enhanced repo:**
+**NEVER sync from the `.praxis-os/` directory in the praxis-os repo:**
 
 ```bash
 # ❌ WRONG - This is a build artifact, not source!
-rsync -av /path/to/agent-os-enhanced/.praxis-os/ .praxis-os/
+rsync -av /path/to/praxis-os/.praxis-os/ .praxis-os/
 ```
 
 **Why this is wrong:**
@@ -59,11 +59,11 @@ rsync -av /path/to/agent-os-enhanced/.praxis-os/ .praxis-os/
 
 ### ✅ CORRECT - Sync From Universal
 
-**ALWAYS sync from the `universal/` directory in the agent-os-enhanced repo:**
+**ALWAYS sync from the `universal/` directory in the praxis-os repo:**
 
 ```bash
 # ✅ CORRECT - Sync from source
-rsync -av /path/to/agent-os-enhanced/universal/ .praxis-os/
+rsync -av /path/to/praxis-os/universal/ .praxis-os/
 ```
 
 **Why this is correct:**
@@ -76,10 +76,10 @@ rsync -av /path/to/agent-os-enhanced/universal/ .praxis-os/
 
 ## 📂 Directory Structure Clarification
 
-### In agent-os-enhanced Repo (Source)
+### In praxis-os Repo (Source)
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/              # ✅ SOURCE - Sync from here
 │   ├── standards/          # Canonical standards content
 │   ├── usage/              # Usage documentation  
@@ -109,10 +109,10 @@ your-project/
 
 ## 🔄 Update Process
 
-### Step 1: Pull Latest from agent-os-enhanced
+### Step 1: Pull Latest from praxis-os
 
 ```bash
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 git pull origin main
 ```
 
@@ -124,8 +124,8 @@ git pull origin main
 cd /path/to/your-project
 
 # Use manifest-based safe upgrade tool (never deletes customer content)
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-  --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+  --source /path/to/praxis-os \
   --target .praxis-os
 
 # See interactive prompts for conflicts
@@ -138,13 +138,13 @@ python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
 cd /path/to/your-project
 
 # Sync standards (adds/updates only, never deletes)
-rsync -av /path/to/agent-os-enhanced/universal/standards/ .praxis-os/standards/
+rsync -av /path/to/praxis-os/universal/standards/ .praxis-os/standards/
 
 # Sync usage docs
-rsync -av /path/to/agent-os-enhanced/universal/usage/ .praxis-os/usage/
+rsync -av /path/to/praxis-os/universal/usage/ .praxis-os/usage/
 
 # Sync workflows (optional - only if you use them)
-rsync -av /path/to/agent-os-enhanced/universal/workflows/ .praxis-os/workflows/
+rsync -av /path/to/praxis-os/universal/workflows/ .praxis-os/workflows/
 ```
 
 **Note:** Manual sync does NOT delete files. Old files remain. Use safe-upgrade.py for conflict detection.
@@ -222,7 +222,7 @@ Create `scripts/update-agent-os.sh` in your project:
 set -e
 
 # Configuration
-AGENT_OS_REPO="/path/to/agent-os-enhanced"
+AGENT_OS_REPO="/path/to/praxis-os"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "🔄 Updating Agent OS content..."
@@ -254,13 +254,13 @@ Run it:
 #!/bin/bash
 set -e
 
-AGENT_OS_REPO="/path/to/agent-os-enhanced"
+AGENT_OS_REPO="/path/to/praxis-os"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 # Validation: Check source exists
 if [ ! -d "$AGENT_OS_REPO/universal" ]; then
     echo "❌ ERROR: Cannot find $AGENT_OS_REPO/universal/"
-    echo "💡 Make sure AGENT_OS_REPO points to the agent-os-enhanced repository"
+    echo "💡 Make sure AGENT_OS_REPO points to the praxis-os repository"
     exit 1
 fi
 
@@ -268,7 +268,7 @@ fi
 if [[ "$AGENT_OS_REPO" == *".praxis-os"* ]]; then
     echo "❌ ERROR: Attempting to sync from .praxis-os directory!"
     echo "💡 You must sync from the 'universal/' directory, not '.praxis-os/'"
-    echo "💡 Update AGENT_OS_REPO to point to the agent-os-enhanced repository root"
+    echo "💡 Update AGENT_OS_REPO to point to the praxis-os repository root"
     exit 1
 fi
 
@@ -325,7 +325,7 @@ cat > .praxis-os/VERSION.txt << EOF
 Agent OS Content Version
 
 Last Updated: $(date +%Y-%m-%d)
-Source Commit: $(cd /path/to/agent-os-enhanced && git rev-parse --short HEAD)
+Source Commit: $(cd /path/to/praxis-os && git rev-parse --short HEAD)
 Updated By: $(whoami)
 Notes: Regular update
 EOF
@@ -359,8 +359,8 @@ The manifest-based upgrade system uses checksums to detect conflicts between loc
 
 ```bash
 cd /path/to/your-project
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-  --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+  --source /path/to/praxis-os \
   --dry-run
 ```
 
@@ -383,8 +383,8 @@ python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
 
 ```bash
 # Run without --dry-run to execute
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-  --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+  --source /path/to/praxis-os \
   --target .praxis-os
 ```
 
@@ -445,7 +445,7 @@ mv .praxis-os.backup.20251007_120000 .praxis-os
 
 ### Requirements
 
-- **agent-os-enhanced v1.3.0+** (includes manifest)
+- **praxis-os v1.3.0+** (includes manifest)
 - **Python 3.8+** (for upgrade script)
 - **Manifest file**: `universal/.universal-manifest.json`
 
@@ -454,7 +454,7 @@ mv .praxis-os.backup.20251007_120000 .praxis-os
 If you're maintaining a fork:
 
 ```bash
-cd agent-os-enhanced
+cd praxis-os
 python scripts/generate-manifest.py --version 1.3.0
 # Creates universal/.universal-manifest.json
 ```
@@ -467,7 +467,7 @@ python scripts/generate-manifest.py --version 1.3.0
 
 ```bash
 # WRONG - This syncs build artifacts
-rsync -av agent-os-enhanced/.praxis-os/ .praxis-os/
+rsync -av praxis-os/.praxis-os/ .praxis-os/
 ```
 
 **Fix:** Sync from `universal/` directory instead.
@@ -478,8 +478,8 @@ If you have custom workflows, the safe-upgrade tool will detect and preserve the
 
 ```bash
 # Safe-upgrade automatically detects custom content
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-  --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+  --source /path/to/praxis-os \
   --target .praxis-os
 
 # You'll be prompted:
@@ -493,7 +493,7 @@ python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
 
 ```bash
 # WRONG - Includes state files
-rsync -av agent-os-enhanced/.praxis-os/ .praxis-os/
+rsync -av praxis-os/.praxis-os/ .praxis-os/
 ```
 
 **Fix:** Always use source-controlled content from `universal/`, never `.praxis-os/`.
@@ -507,7 +507,7 @@ After updating content, always rebuild or restart MCP server to rebuild index.
 ## 📋 Update Checklist
 
 Before updating:
-- [ ] Pull latest from agent-os-enhanced repo
+- [ ] Pull latest from praxis-os repo
 - [ ] Review changelog for breaking changes
 - [ ] Backup current `.praxis-os/` directory (optional but recommended)
 
@@ -592,8 +592,8 @@ rm -rf .praxis-os
 mv .praxis-os.backup.20251006_120000 .praxis-os
 
 # Next time, use safe-upgrade tool which detects conflicts
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-    --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+    --source /path/to/praxis-os \
     --target .praxis-os
 # Will prompt before overwriting any custom content
 ```
@@ -608,8 +608,8 @@ python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
 rm -rf .praxis-os/
 mkdir -p .praxis-os/
 
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-    --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+    --source /path/to/praxis-os \
     --target .praxis-os
 ```
 
@@ -629,7 +629,7 @@ python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
 
 ## 🔐 Security Considerations
 
-- **Source validation**: Verify you're syncing from the official agent-os-enhanced repo
+- **Source validation**: Verify you're syncing from the official praxis-os repo
 - **Content inspection**: Review major updates before applying
 - **Access control**: Restrict who can run update scripts
 - **Audit trail**: Log all updates (use VERSION.txt)
@@ -640,7 +640,7 @@ python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
 
 If you encounter issues:
 1. Check this guide for common mistakes
-2. Review the changelog in agent-os-enhanced repo
+2. Review the changelog in praxis-os repo
 3. Verify you're syncing from `universal/` not `.praxis-os/`
 4. Check file watchers are running (auto-rebuild)
 5. Try a clean reinstall from `universal/`

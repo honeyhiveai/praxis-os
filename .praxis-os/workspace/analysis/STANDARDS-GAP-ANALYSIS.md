@@ -1,7 +1,7 @@
-# Standards Gap Analysis: python-sdk → agent-os-enhanced
+# Standards Gap Analysis: python-sdk → praxis-os
 
 ## Context
-Python-SDK is the prototype where the AI-assisted development paradigm was proven. Agent OS Enhanced is the extracted reusable framework. This document identifies standards from python-sdk that should be adapted for agent-os-enhanced.
+Python-SDK is the prototype where the AI-assisted development paradigm was proven. Agent OS Enhanced is the extracted reusable framework. This document identifies standards from python-sdk that should be adapted for praxis-os.
 
 ---
 
@@ -14,7 +14,7 @@ Python-SDK is the prototype where the AI-assisted development paradigm was prove
 - `.pre-commit-config.yaml` - 11-gate quality enforcement
 - 7 pre-commit validation scripts
 
-### ✅ Already in agent-os-enhanced (universal)
+### ✅ Already in praxis-os (universal)
 - Universal standards (database, concurrency, failure-modes, testing, workflows, meta-workflow)
 - Security patterns
 - Architecture principles
@@ -166,7 +166,7 @@ These document the python-sdk development journey, not the paradigm itself:
 When copying standards, ensure:
 1. **Remove python-sdk specific references** (e.g., "HoneyHive SDK")
 2. **Generalize examples** to be framework-agnostic
-3. **Update paths** from python-sdk structure to agent-os-enhanced structure
+3. **Update paths** from python-sdk structure to praxis-os structure
 4. **Maintain paradigm principles** - the core methodology should transfer intact
 5. **Update tool references** - Docusaurus vs Sphinx, etc.
 
@@ -177,7 +177,7 @@ When copying standards, ensure:
 1. Review this gap analysis
 2. Approve Phase 1 standards for immediate adoption
 3. Systematically copy and adapt approved standards
-4. Update agent-os-enhanced `.cursorrules` to reference new standards
+4. Update praxis-os `.cursorrules` to reference new standards
 5. Test MCP RAG index rebuild with expanded standards
 
 

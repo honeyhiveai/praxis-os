@@ -6,7 +6,7 @@
 
 ## 🎯 Quick Start
 
-When a user says: **"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"**
+When a user says: **"Install Agent OS from github.com/honeyhiveai/praxis-os"**
 
 **Start here** → Read `00-START.md` and follow the chain.
 
@@ -62,7 +62,7 @@ COMPLETE! ✅
 
 ### 1. Don't Litter Git Repos!
 
-The source repo (`agent-os-enhanced`) is **cloned to a temp directory** and **deleted at the end**. We do NOT leave a git repo inside the consumer's project.
+The source repo (`praxis-os`) is **cloned to a temp directory** and **deleted at the end**. We do NOT leave a git repo inside the consumer's project.
 
 ### 2. Don't Overwrite .cursorrules!
 
@@ -103,7 +103,7 @@ In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.agent_os_rag"`. The entry poi
 
 **Source Repository** (this repo):
 ```
-agent-os-enhanced/
+praxis-os/
 ├── installation/          ← Installation guides
 │   ├── 00-START.md       ← Entry point
 │   ├── 01-directories.md

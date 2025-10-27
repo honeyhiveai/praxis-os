@@ -1158,7 +1158,7 @@ Usage:
 
 #### Pattern 3: Framework Development (Agent OS Itself)
 ```
-agent-os-enhanced/
+praxis-os/
 
 ├── universal/              ← Source (edit this)
 │   ├── standards/
@@ -1182,7 +1182,7 @@ Usage:
 
 ```
 User in ANY project:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 
 Cursor agent:
 1. Reads: installation/00-START.md
@@ -1345,7 +1345,7 @@ Result:
 
 ```bash
 # Install Agent OS in your project
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 
 # Use a specialist
 "Use database specialist to design auth schema"

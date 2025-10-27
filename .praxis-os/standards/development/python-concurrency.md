@@ -1,5 +1,5 @@
 # Python Concurrency Standards
-# Generated for: agent-os-enhanced
+# Generated for: praxis-os
 
 ## Universal Concurrency Principles
 
@@ -263,7 +263,7 @@ for w in workers:
 
 ---
 
-## Your Project Context: agent-os-enhanced
+## Your Project Context: praxis-os
 
 ### Detected Patterns
 
@@ -482,4 +482,4 @@ def append_items():
 
 ---
 
-**Generated for agent-os-enhanced MCP server project. This document applies universal concurrency principles to Python-specific contexts.**
+**Generated for praxis-os MCP server project. This document applies universal concurrency principles to Python-specific contexts.**

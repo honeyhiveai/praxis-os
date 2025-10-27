@@ -710,8 +710,8 @@ class TestUserStories:
 **For Development:**
 ```bash
 # Clone repository
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git
-cd agent-os-enhanced
+git clone https://github.com/honeyhiveai/praxis-os.git
+cd praxis-os
 
 # Install dependencies
 python -m venv venv

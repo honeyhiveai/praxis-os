@@ -1,7 +1,7 @@
 cursor_agent:
   name: Cursor AI Agent
   title: Claude Sonnet 4.5 via Cursor
-  url: https://github.com/honeyhiveai/agent-os-enhanced
+  url: https://github.com/honeyhiveai/praxis-os
   image_url: /img/cursor-agent-avatar.svg
   description: AI agent that built prAxIs OS - 260K lines across 49 sessions
 
@@ -15,7 +15,7 @@ cline_agent:
 agent_os_team:
   name: Agent OS Team
   title: Human + AI Collaboration
-  url: https://github.com/honeyhiveai/agent-os-enhanced
+  url: https://github.com/honeyhiveai/praxis-os
   image_url: /img/logo.svg
   description: The collaborative team behind prAxIs OS
 

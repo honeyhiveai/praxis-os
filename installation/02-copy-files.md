@@ -8,7 +8,7 @@
 
 ## 🎯 What This Step Does
 
-Copy all required content from the source repository (`agent-os-enhanced/`) to your project.
+Copy all required content from the source repository (`praxis-os/`) to your project.
 
 **What gets copied**:
 1. Universal standards (CS fundamentals)
@@ -48,13 +48,13 @@ print("✅ Copied universal standards")
 
 ### Copy #2: Usage Documentation
 
-**Source**: `agent-os-enhanced/universal/usage/`  
+**Source**: `praxis-os/universal/usage/`  
 **Destination**: `.praxis-os/usage/`  
 **Contents**: ~5 markdown files explaining how to use Agent OS
 
 ```python
 shutil.copytree(
-    "agent-os-enhanced/universal/usage",
+    "praxis-os/universal/usage",
     ".praxis-os/usage",
     dirs_exist_ok=True
 )
@@ -67,7 +67,7 @@ print("✅ Copied usage documentation")
 
 ### Copy #3: Workflows (CRITICAL!)
 
-**Source**: `agent-os-enhanced/universal/workflows/`  
+**Source**: `praxis-os/universal/workflows/`  
 **Destination**: `.praxis-os/workflows/`  
 **Contents**: ~50 files (spec_creation_v1 + spec_execution_v1)
 
@@ -75,7 +75,7 @@ print("✅ Copied usage documentation")
 
 ```python
 shutil.copytree(
-    "agent-os-enhanced/universal/workflows",
+    "praxis-os/universal/workflows",
     ".praxis-os/workflows",
     dirs_exist_ok=True
 )
@@ -92,13 +92,13 @@ print("✅ Copied workflows")
 
 ### Copy #4: MCP Server Code
 
-**Source**: `agent-os-enhanced/mcp_server/`  
+**Source**: `praxis-os/mcp_server/`  
 **Destination**: `.praxis-os/mcp_server/`  
 **Contents**: ~20 Python files + requirements.txt
 
 ```python
 shutil.copytree(
-    "agent-os-enhanced/mcp_server",
+    "praxis-os/mcp_server",
     ".praxis-os/mcp_server",
     dirs_exist_ok=True
 )
@@ -111,7 +111,7 @@ print("✅ Copied MCP server")
 
 ### Copy #5: Scripts (CRITICAL - RAG Index Builder!)
 
-**Source**: `agent-os-enhanced/scripts/`  
+**Source**: `praxis-os/scripts/`  
 **Destination**: `.praxis-os/scripts/`  
 **Contents**: ~3 Python files including `build_rag_index.py`
 
@@ -119,7 +119,7 @@ print("✅ Copied MCP server")
 
 ```python
 shutil.copytree(
-    "agent-os-enhanced/scripts",
+    "praxis-os/scripts",
     ".praxis-os/scripts",
     dirs_exist_ok=True
 )
@@ -320,10 +320,10 @@ for workflow_dir in workflow_dirs:
 import os
 
 # Check if source repo is accessible
-if not os.path.exists("agent-os-enhanced/universal"):
+if not os.path.exists("praxis-os/universal"):
     print("❌ Source repository not found")
     print("Current directory:", os.getcwd())
-    print("\nFix: Ensure agent-os-enhanced is cloned/available")
+    print("\nFix: Ensure praxis-os is cloned/available")
     exit(1)
 ```
 
@@ -348,7 +348,7 @@ ls -ld .praxis-os
 import shutil
 
 shutil.copytree(
-    "agent-os-enhanced/universal/workflows",
+    "praxis-os/universal/workflows",
     ".praxis-os/workflows",
     dirs_exist_ok=True
 )
@@ -367,7 +367,7 @@ print(f"Workflow files: {count}")  # Should be ~47
 # Identify what's missing, then copy just that
 if not os.path.exists(".praxis-os/workflows/spec_creation_v1"):
     shutil.copytree(
-        "agent-os-enhanced/universal/workflows/spec_creation_v1",
+        "praxis-os/universal/workflows/spec_creation_v1",
         ".praxis-os/workflows/spec_creation_v1"
     )
 ```

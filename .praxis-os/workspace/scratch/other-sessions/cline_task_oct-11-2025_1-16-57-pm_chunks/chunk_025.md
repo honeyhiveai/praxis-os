@@ -473,7 +473,7 @@ curl http://localhost:4242/mcp
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:4242/mcp"
     }
@@ -543,22 +543,22 @@ ACT MODE
 
 <attempt_completion>
 <result>
-## Yes - Edited Local agent-os-enhanced Files
+## Yes - Edited Local praxis-os Files
 
-**Working directory:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+**Working directory:** `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
 **Files modified (all in current project):**
 
 ### 1. `mcp_server/models/config.py`
-**Full path:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/mcp_server/models/config.py`
+**Full path:** `/Users/josh/src/github.com/honeyhiveai/praxis-os/mcp_server/models/config.py`
 - Added HTTP config to MCPConfig dataclass
 
 ### 2. `mcp_server/__main__.py`  
-**Full path:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/mcp_server/__main__.py`
+**Full path:** `/Users/josh/src/github.com/honeyhiveai/praxis-os/mcp_server/__main__.py`
 - Changed from `mcp.run(transport="stdio")` to `mcp.run(transport="http", ...)`
 
 ### 3. `.cursor/mcp.json`
-**Full path:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.cursor/mcp.json`
+**Full path:** `/Users/josh/src/github.com/honeyhiveai/praxis-os/.cursor/mcp.json`
 - Added `"transport": "http"` and `"url": "http://127.0.0.1:4242/mcp"`
 
 **I did NOT edit:**
@@ -581,7 +581,7 @@ So when Cursor restarts, it will:
 **Correct?**
 </result>
 <task_progress>
-- [x] Confirmed editing agent-os-enhanced files
+- [x] Confirmed editing praxis-os files
 - [x] Listed exact file paths modified
 - [x] Clarified no external files touched
 - [x] Verified Cursor will use local server
@@ -900,7 +900,7 @@ Both agents access SAME RAG index, SAME tools, SAME state!
 ### System Components
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├─ .praxis-os/
 │  ├─ venv/                              # Required for all dependencies
 │  ├─ standards/                          # Watched by file watcher

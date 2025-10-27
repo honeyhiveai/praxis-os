@@ -61,7 +61,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:53:50 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -268,10 +268,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -450,7 +450,7 @@ See `CHANGELOG.md` for version history and updates.
 ## Development
 
 To modify the MCP server:
-1. Make changes in `agent-os-enhanced/mcp_server/`
+1. Make changes in `praxis-os/mcp_server/`
 2. Test in a sample project
 3. Update `CHANGELOG.md`
 4. Tag release (semver)
@@ -802,13 +802,13 @@ The command's output could not be captured due to some technical issue, however 
 
 pyenv shell 3.13.5
 ls -la .praxis-os/venv/bin/python*
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ pyenv shell 3.13.5                        [21:56:18]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ ls -la .praxis-os/venv/bin/python*         [21:56:19]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ pyenv shell 3.13.5                        [21:56:18]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ ls -la .praxis-os/venv/bin/python*         [21:56:19]
 lrwxr-xr-x@ 1 josh  staff  10 Oct  7 08:31 .praxis-os/venv/bin/python -> python3.13
 lrwxr-xr-x@ 1 josh  staff  10 Oct  7 08:31 .praxis-os/venv/bin/python3 -> python3.13
 lrwxr-xr-x@ 1 josh  staff  44 Oct  7 08:31 .praxis-os/venv/bin/python3.13 -> /opt/homebrew/opt/python@3.13/bin/python3.13
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced git:(main*) $                               [21:56:19]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced git:(main*) $ .praxis-os/venv/bin/python -m mcp_server -
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os git:(main*) $                               [21:56:19]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os git:(main*) $ .praxis-os/venv/bin/python -m mcp_server -
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -850,7 +850,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -911,7 +911,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:57:33 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore

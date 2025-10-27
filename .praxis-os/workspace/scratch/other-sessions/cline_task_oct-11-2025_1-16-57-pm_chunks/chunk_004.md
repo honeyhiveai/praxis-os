@@ -219,12 +219,12 @@ This is **intentional** - Cline's MCP servers are configured once globally and a
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
-      "command": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/venv/bin/python",
+    "praxis-os": {
+      "command": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
-        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
-        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os",
+        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
+        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "alwaysAllow": ["search_standards", "get_current_phase", "get_workflow_state"],

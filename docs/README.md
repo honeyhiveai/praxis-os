@@ -82,7 +82,7 @@ npm run serve
 ### Automatic (via GitHub Actions)
 
 Pushes to `main` branch automatically trigger deployment to GitHub Pages:
-- **URL**: https://honeyhiveai.github.io/agent-os-enhanced/
+- **URL**: https://honeyhiveai.github.io/praxis-os/
 - **Workflow**: `.github/workflows/deploy-docs.yml`
 
 ### Manual Deployment

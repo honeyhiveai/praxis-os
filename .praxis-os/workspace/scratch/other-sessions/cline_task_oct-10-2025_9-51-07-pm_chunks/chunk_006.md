@@ -173,7 +173,7 @@ Based on Cline's architecture, add this to your VS Code settings.json:
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -190,7 +190,7 @@ Based on Cline's architecture, add this to your VS Code settings.json:
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/Scripts/python.exe",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -288,7 +288,7 @@ Each MCP query is cheap, mistakes are expensive
 cd /path/to/your/project
 
 # Follow Agent OS installation process
-# (See installation/00-START.md in agent-os-enhanced repo)
+# (See installation/00-START.md in praxis-os repo)
 ```
 
 ### Step 2: Verify Python Environment
@@ -310,7 +310,7 @@ Create/edit `.vscode/settings.json` in your project:
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -658,7 +658,7 @@ For structured workflows and standards queries, user will switch to Cline.
 ```json
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -951,7 +951,7 @@ Each file:
 
 ## 🏗️ Architecture Context
 
-**Source Repository** (agent-os-enhanced):
+**Source Repository** (praxis-os):
 ```
 /tmp/agent-os-install-xyz/      ← Temp clone (will delete after!)
 ├── installation/               ← These guides

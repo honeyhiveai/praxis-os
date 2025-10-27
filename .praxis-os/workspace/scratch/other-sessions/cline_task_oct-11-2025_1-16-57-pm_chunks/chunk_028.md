@@ -153,7 +153,7 @@ class ProjectInfoDiscovery:
         2. Directory name (fallback)
 
         Examples:
-        - git@github.com:user/agent-os-enhanced.git → "agent-os-enhanced"
+        - git@github.com:user/praxis-os.git → "praxis-os"
         - /Users/josh/my-project/ → "my-project"
 
         :return: Project name (NEVER hardcoded)
@@ -215,8 +215,8 @@ class ProjectInfoDiscovery:
   "started_at": "2025-10-11T10:30:00Z",
   
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 ```
@@ -308,7 +308,7 @@ def register_server_info_tools(
         Example:
             >>> info = get_server_info()
             >>> print(f"Connected to: {info['project']['name']}")
-            agent-os-enhanced
+            praxis-os
             >>> print(f"Git branch: {info['project']['git']['branch']}")
             main
             >>> print(f"Tools: {info['capabilities']['tools_available']}")
@@ -534,7 +534,7 @@ Server Startup:
   │   │   │   ├─ subprocess.run(["git", "remote", "get-url", "origin"])
   │   │   │   │   Success → extract repo name
   │   │   │   │   Failure → use directory name
-  │   │   │   └─ Returns: "agent-os-enhanced" (NOT hardcoded!)
+  │   │   │   └─ Returns: "praxis-os" (NOT hardcoded!)
   │   │   ├─ _get_git_info()
   │   │   │   ├─ subprocess.run(["git", "branch", "--show-current"])
   │   │   │   ├─ subprocess.run(["git", "rev-parse", "HEAD"])

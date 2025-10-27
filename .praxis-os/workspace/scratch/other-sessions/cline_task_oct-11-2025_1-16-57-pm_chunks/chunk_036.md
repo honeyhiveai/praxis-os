@@ -57,10 +57,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "7cdef7eaf42925b3537c12b0dbd0ef5c3bebf30c"
     }
@@ -253,14 +253,14 @@ Full restart ensures Cline picks up the new MCP config.
 ```
 In Cline UI, look for:
 - MCP servers section
-- Should show "agent-os-enhanced"
+- Should show "praxis-os"
 - Status should be "connected" or "ready"
 ```
 
 **Option 4: Try the Tool Again**
 ```
 After reload, I can retry:
-use_mcp_tool with agent-os-enhanced server
+use_mcp_tool with praxis-os server
 ```
 Cline might auto-connect on first tool use.
 
@@ -268,7 +268,7 @@ Cline might auto-connect on first tool use.
 
 **When Cline connects:**
 1. Reads config: `cline_mcp_settings.json`
-2. Sees: "agent-os-enhanced" at http://127.0.0.1:4242/mcp
+2. Sees: "praxis-os" at http://127.0.0.1:4242/mcp
 3. Establishes HTTP connection
 4. Initializes MCP session
 5. Tools become available to me
@@ -399,7 +399,7 @@ Look at Cline's documentation or code:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "sse",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -411,7 +411,7 @@ FastMCP supports SSE, maybe Cline expects that?
 **Check 3: Does Cline show the server?**
 ```
 In Cline UI:
-- Is "agent-os-enhanced" listed?
+- Is "praxis-os" listed?
 - What's its status?
 - Any error messages?
 ```
@@ -541,7 +541,7 @@ ACT MODE
 [read_file for '../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json'] Result:
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -582,7 +582,7 @@ ACT MODE
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": { ... }
+    "praxis-os": { ... }
   }
 }
 ```
@@ -596,7 +596,7 @@ ACT MODE
 ```json
 {
   "remoteMcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "type": "sse",
       "url": "http://127.0.0.1:4242/mcp",
       "timeout": 60
@@ -610,7 +610,7 @@ OR possibly:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "type": "sse",
       "url": "http://127.0.0.1:4242/mcp",
       "transport": "sse",  // explicit transport

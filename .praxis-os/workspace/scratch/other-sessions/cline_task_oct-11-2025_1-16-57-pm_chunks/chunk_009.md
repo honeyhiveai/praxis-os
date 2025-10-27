@@ -9,7 +9,7 @@ Workflows enforced in code. AI cannot skip phases or bypass quality gates.
 
 
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 [
 
@@ -21,7 +21,7 @@ Design validation, concurrency analysis, test generation - focused tools.
 
 
 
-](/agent-os-enhanced/docs/architecture)
+](/praxis-os/docs/architecture)
 
 [
 
@@ -33,7 +33,7 @@ Each project owns its Agent OS installation, standards, and version.
 
 
 
-](/agent-os-enhanced/docs/installation)
+](/praxis-os/docs/installation)
 
 [
 
@@ -45,7 +45,7 @@ Build your own AI-assisted workflows with proven patterns.
 
 
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 Why Agent OS Enhanced?
 ----------------------
@@ -70,7 +70,7 @@ Phase Compliance
 
 Architectural gating prevents workflow bypassing
 
-[Learn How It Works →](/agent-os-enhanced/docs/how-it-works)
+[Learn How It Works →](/praxis-os/docs/how-it-works)
 <environment_details>
 # Cursor Visible Files
 ../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json

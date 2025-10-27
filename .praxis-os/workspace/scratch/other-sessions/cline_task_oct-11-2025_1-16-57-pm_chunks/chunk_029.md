@@ -971,7 +971,7 @@ print(f"   Commit: {info['project']['git']['commit_short']}")
   "started_at": "2025-10-11T10:30:00Z",
   
   "project": {
-    "name": "agent-os-enhanced",  // ← DYNAMIC from git/directory
+    "name": "praxis-os",  // ← DYNAMIC from git/directory
     "root": "/Users/josh/src/..."  // ← DYNAMIC from filesystem
   }
 }

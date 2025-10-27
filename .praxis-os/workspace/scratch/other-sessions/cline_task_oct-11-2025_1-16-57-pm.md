@@ -61,7 +61,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:53:50 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -268,10 +268,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -450,7 +450,7 @@ See `CHANGELOG.md` for version history and updates.
 ## Development
 
 To modify the MCP server:
-1. Make changes in `agent-os-enhanced/mcp_server/`
+1. Make changes in `praxis-os/mcp_server/`
 2. Test in a sample project
 3. Update `CHANGELOG.md`
 4. Tag release (semver)
@@ -802,13 +802,13 @@ The command's output could not be captured due to some technical issue, however 
 
 pyenv shell 3.13.5
 ls -la .praxis-os/venv/bin/python*
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ pyenv shell 3.13.5                        [21:56:18]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ ls -la .praxis-os/venv/bin/python*         [21:56:19]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ pyenv shell 3.13.5                        [21:56:18]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ ls -la .praxis-os/venv/bin/python*         [21:56:19]
 lrwxr-xr-x@ 1 josh  staff  10 Oct  7 08:31 .praxis-os/venv/bin/python -> python3.13
 lrwxr-xr-x@ 1 josh  staff  10 Oct  7 08:31 .praxis-os/venv/bin/python3 -> python3.13
 lrwxr-xr-x@ 1 josh  staff  44 Oct  7 08:31 .praxis-os/venv/bin/python3.13 -> /opt/homebrew/opt/python@3.13/bin/python3.13
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced git:(main*) $                               [21:56:19]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced git:(main*) $ .praxis-os/venv/bin/python -m mcp_server -
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os git:(main*) $                               [21:56:19]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os git:(main*) $ .praxis-os/venv/bin/python -m mcp_server -
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -850,7 +850,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -911,7 +911,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:57:33 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -1118,10 +1118,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -1163,7 +1163,7 @@ Let me continue diagnosing the MCP server setup. I'll check if the dependencies 
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -1226,7 +1226,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:58:12 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -1433,10 +1433,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -1486,9 +1486,9 @@ The command's output could not be captured due to some technical issue, however 
 pyenv shell 3.13.5
 
 .praxis-os/venv/bin/pip list | grep -E "(mcp|lancedb|sentence-transformers)"                                              
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ pyenv shell 3.13.5                        [21:58:22]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $                                           [21:58:22]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ .praxis-os/venv/bin/pip list | grep -E "(mcp|lancedb|s
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ pyenv shell 3.13.5                        [21:58:22]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $                                           [21:58:22]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ .praxis-os/venv/bin/pip list | grep -E "(mcp|lancedb|s
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -1505,7 +1505,7 @@ josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ .praxis-os/v
 # Current Mode
 ACT MODE
 </environment_details>
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -1572,7 +1572,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 9:58:28 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -1779,10 +1779,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -1892,7 +1892,7 @@ Let me check for Cline's MCP configuration:
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 New instructions for task continuation:
@@ -1957,7 +1957,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 10:00:16 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -2164,10 +2164,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -2211,7 +2211,7 @@ Let me search for Cline's MCP configuration more directly:
 [read_file for '.vscode/settings.json'] Result:
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -2246,10 +2246,10 @@ ACT MODE
 
 [Unexpected content type]
 
-Now I can see the Cline MCP configuration! The server is named `agent-os-enhanced` in Cline. Let me try accessing it:
+Now I can see the Cline MCP configuration! The server is named `praxis-os` in Cline. Let me try accessing it:
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -2269,8 +2269,8 @@ Now I can see the Cline MCP configuration! The server is named `agent-os-enhance
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -2299,7 +2299,7 @@ ACT MODE
 The MCP server configuration exists in `.vscode/settings.json` but the server is **not currently connected** to Cline.
 
 **Status:**
-- ✅ Configuration exists: `.vscode/settings.json` has `agent-os-enhanced` MCP server
+- ✅ Configuration exists: `.vscode/settings.json` has `praxis-os` MCP server
 - ❌ Connection: Server is not active/connected to Cline
 - ✅ Works in Cursor: You confirmed it works there
 
@@ -2384,7 +2384,7 @@ Since Cursor was restarted, let me check if there are any MCP servers showing as
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -2447,7 +2447,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 10:01:46 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -2654,10 +2654,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -2688,7 +2688,7 @@ I still cannot access the MCP server from Cline, even after Cursor was restarted
 - I'm running in **Cline** (a VSCode/Cursor extension)
 - MCP server configuration exists in `.vscode/settings.json` 
 - But the server shows as **not connected** to Cline
-- The environment shows: "No connection found for server: agent-os-enhanced"
+- The environment shows: "No connection found for server: praxis-os"
 
 **What this means:**
 The MCP server needs to be connected in **Cline's** MCP manager, not just configured. Configuration exists, but connection isn't established.
@@ -2697,7 +2697,7 @@ The MCP server needs to be connected in **Cline's** MCP manager, not just config
 
 1. **Check Cline's MCP Status:**
    - Look for Cline's MCP server connection status in the UI
-   - Should show `agent-os-enhanced` as a connected server
+   - Should show `praxis-os` as a connected server
    - If not connected, there should be an option to connect/start it
 
 2. **Possible issues:**
@@ -4219,12 +4219,12 @@ This is **intentional** - Cline's MCP servers are configured once globally and a
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
-      "command": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/venv/bin/python",
+    "praxis-os": {
+      "command": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
-        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
-        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os",
+        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
+        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "alwaysAllow": ["search_standards", "get_current_phase", "get_workflow_state"],
@@ -6584,7 +6584,7 @@ Install Agent OS Enhanced in your project:
 
 ```bash
 # Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will:
@@ -7627,7 +7627,7 @@ Each agent has different integration mechanisms:
 ```json
 // ~/Library/.../cline_mcp_settings.json (global!)
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "command": "/absolute/path/to/.praxis-os/venv/bin/python",  // ❌ Needs absolute path
     "args": ["-m", "mcp_server"]
   }
@@ -7887,7 +7887,7 @@ if __name__ == "__main__":
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "/Users/josh/.local/bin/agent-os-mcp-launcher",
       "args": [],
       "disabled": false
@@ -7909,12 +7909,12 @@ For now, manually configure per project:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
-      "command": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/venv/bin/python",
+    "praxis-os": {
+      "command": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
-        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
-        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os"
+        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
+        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os"
       },
       "disabled": false
     }
@@ -7931,7 +7931,7 @@ If/when Cline merges workspace variable support, you could use:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -8814,7 +8814,7 @@ Want to test the Cline launcher approach now and prove it can work?
 [attempt_completion] Result:
 The user has provided feedback on the results. Consider their input to continue the task, and then attempt completion again.
 <feedback>
-here is our docs site, the journey on the landing page should help https://honeyhiveai.github.io/agent-os-enhanced/
+here is our docs site, the journey on the landing page should help https://honeyhiveai.github.io/praxis-os/
 </feedback>
 <environment_details>
 # Cursor Visible Files
@@ -8840,7 +8840,7 @@ ACT MODE
 [Unexpected content type]
 
 <web_fetch>
-<url>https://honeyhiveai.github.io/agent-os-enhanced/</url>
+<url>https://honeyhiveai.github.io/praxis-os/</url>
 <task_progress>
 - [x] Understood the fork relationship and divergence
 - [ ] Read HoneyHive's docs landing page about their journey
@@ -8853,8 +8853,8 @@ ACT MODE
 
 **User:**
 
-[web_fetch for 'https://honeyhiveai.github.io/agent-os-enhanced/'] Result:
-Fetched Markdown for https://honeyhiveai.github.io/agent-os-enhanced/:
+[web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
+Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
   Agent OS Enhanced  
 
@@ -8915,7 +8915,7 @@ Complete AI development platform
 
 🙏 **Built on the shoulders of giants:** [BuilderMethods Agent OS](https://buildermethods.com/agent-os) provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it.
 
-[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/agent-os-enhanced/docs/intro)
+[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
 
 Get Started
 -----------
@@ -8932,7 +8932,7 @@ Install in your project with one command
 
 →
 
-](/agent-os-enhanced/docs/intro)
+](/praxis-os/docs/intro)
 
 [
 
@@ -8944,7 +8944,7 @@ Understand MCP, RAG, and phase gating
 
 →
 
-](/agent-os-enhanced/docs/how-it-works)
+](/praxis-os/docs/how-it-works)
 
 [
 
@@ -8956,7 +8956,7 @@ Detailed setup and configuration guide
 
 →
 
-](/agent-os-enhanced/docs/installation)
+](/praxis-os/docs/installation)
 
 [
 
@@ -8968,7 +8968,7 @@ Learn about spec creation and execution
 
 →
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 Core Features
 -------------
@@ -8985,7 +8985,7 @@ Production-ready AI development infrastructure
 
 
 
-](/agent-os-enhanced/docs/architecture)
+](/praxis-os/docs/architecture)
 
 [
 
@@ -8997,7 +8997,7 @@ Timeless CS fundamentals that work across any language with smart generation.
 
 
 
-](/agent-os-enhanced/docs/standards)
+](/praxis-os/docs/standards)
 
 [
 
@@ -9009,7 +9009,7 @@ Workflows enforced in code. AI cannot skip phases or bypass quality gates.
 
 
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 [
 
@@ -9021,7 +9021,7 @@ Design validation, concurrency analysis, test generation - focused tools.
 
 
 
-](/agent-os-enhanced/docs/architecture)
+](/praxis-os/docs/architecture)
 
 [
 
@@ -9033,7 +9033,7 @@ Each project owns its Agent OS installation, standards, and version.
 
 
 
-](/agent-os-enhanced/docs/installation)
+](/praxis-os/docs/installation)
 
 [
 
@@ -9045,7 +9045,7 @@ Build your own AI-assisted workflows with proven patterns.
 
 
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 Why Agent OS Enhanced?
 ----------------------
@@ -9070,7 +9070,7 @@ Phase Compliance
 
 Architectural gating prevents workflow bypassing
 
-[Learn How It Works →](/agent-os-enhanced/docs/how-it-works)
+[Learn How It Works →](/praxis-os/docs/how-it-works)
 <environment_details>
 # Cursor Visible Files
 ../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
@@ -10683,7 +10683,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -10746,7 +10746,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 10:28:04 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -10953,10 +10953,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -21299,7 +21299,7 @@ transport = SseServerTransport("/messages")
 ```json
 // .cursor/mcp.json or cline_mcp_settings.json
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",
     "url": "http://localhost:8080",
     "timeout": 30000
@@ -21468,7 +21468,7 @@ else:
 ```json
 // Cursor config
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",  // NEW
     "url": "http://localhost:8080"  // NEW
   }
@@ -21476,7 +21476,7 @@ else:
 
 // Cline config
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",  // NEW
     "url": "http://localhost:8080"  // NEW
   }
@@ -21544,7 +21544,7 @@ async def test_session_isolation():
 # It already supports this!
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("agent-os-enhanced")
+mcp = FastMCP("praxis-os")
 # Register all your tools...
 
 if __name__ == "__main__":
@@ -21620,7 +21620,7 @@ Of course! **HTTP unblocks the entire Cline integration problem we've been tryin
 ```json
 // Global config requires absolute paths
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "command": "/absolute/path/to/.praxis-os/venv/bin/python",
     "args": ["-m", "mcp_server"]
   }
@@ -21639,7 +21639,7 @@ Of course! **HTTP unblocks the entire Cline integration problem we've been tryin
 ```json
 // ONE global config for ALL projects
 {
-  "agent-os-enhanced": {
+  "praxis-os": {
     "transport": "http",
     "url": "http://localhost:8080"
   }
@@ -21829,7 +21829,7 @@ systemctl --user start agent-os-mcp
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:8080",
       "enabled": true
@@ -24830,7 +24830,7 @@ mcp.run(
 // Cline global config - WORKS NOW!
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:4242/mcp"
     }
@@ -24895,7 +24895,7 @@ curl -X POST http://localhost:4242/mcp \
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:4242/mcp"
     }
@@ -25473,7 +25473,7 @@ curl http://localhost:4242/mcp
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:4242/mcp"
     }
@@ -25543,22 +25543,22 @@ ACT MODE
 
 <attempt_completion>
 <result>
-## Yes - Edited Local agent-os-enhanced Files
+## Yes - Edited Local praxis-os Files
 
-**Working directory:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced`
+**Working directory:** `/Users/josh/src/github.com/honeyhiveai/praxis-os`
 
 **Files modified (all in current project):**
 
 ### 1. `mcp_server/models/config.py`
-**Full path:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/mcp_server/models/config.py`
+**Full path:** `/Users/josh/src/github.com/honeyhiveai/praxis-os/mcp_server/models/config.py`
 - Added HTTP config to MCPConfig dataclass
 
 ### 2. `mcp_server/__main__.py`  
-**Full path:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/mcp_server/__main__.py`
+**Full path:** `/Users/josh/src/github.com/honeyhiveai/praxis-os/mcp_server/__main__.py`
 - Changed from `mcp.run(transport="stdio")` to `mcp.run(transport="http", ...)`
 
 ### 3. `.cursor/mcp.json`
-**Full path:** `/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.cursor/mcp.json`
+**Full path:** `/Users/josh/src/github.com/honeyhiveai/praxis-os/.cursor/mcp.json`
 - Added `"transport": "http"` and `"url": "http://127.0.0.1:4242/mcp"`
 
 **I did NOT edit:**
@@ -25581,7 +25581,7 @@ So when Cursor restarts, it will:
 **Correct?**
 </result>
 <task_progress>
-- [x] Confirmed editing agent-os-enhanced files
+- [x] Confirmed editing praxis-os files
 - [x] Listed exact file paths modified
 - [x] Clarified no external files touched
 - [x] Verified Cursor will use local server
@@ -25900,7 +25900,7 @@ Both agents access SAME RAG index, SAME tools, SAME state!
 ### System Components
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├─ .praxis-os/
 │  ├─ venv/                              # Required for all dependencies
 │  ├─ standards/                          # Watched by file watcher
@@ -27739,7 +27739,7 @@ Both agents access SAME RAG index, SAME tools, SAME state!
 ### System Components
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├─ .praxis-os/
 │  ├─ venv/                              # Required for all dependencies
 │  ├─ standards/                          # Watched by file watcher
@@ -28153,7 +28153,7 @@ class ProjectInfoDiscovery:
         2. Directory name (fallback)
 
         Examples:
-        - git@github.com:user/agent-os-enhanced.git → "agent-os-enhanced"
+        - git@github.com:user/praxis-os.git → "praxis-os"
         - /Users/josh/my-project/ → "my-project"
 
         :return: Project name (NEVER hardcoded)
@@ -28215,8 +28215,8 @@ class ProjectInfoDiscovery:
   "started_at": "2025-10-11T10:30:00Z",
   
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 ```
@@ -28308,7 +28308,7 @@ def register_server_info_tools(
         Example:
             >>> info = get_server_info()
             >>> print(f"Connected to: {info['project']['name']}")
-            agent-os-enhanced
+            praxis-os
             >>> print(f"Git branch: {info['project']['git']['branch']}")
             main
             >>> print(f"Tools: {info['capabilities']['tools_available']}")
@@ -28534,7 +28534,7 @@ Server Startup:
   │   │   │   ├─ subprocess.run(["git", "remote", "get-url", "origin"])
   │   │   │   │   Success → extract repo name
   │   │   │   │   Failure → use directory name
-  │   │   │   └─ Returns: "agent-os-enhanced" (NOT hardcoded!)
+  │   │   │   └─ Returns: "praxis-os" (NOT hardcoded!)
   │   │   ├─ _get_git_info()
   │   │   │   ├─ subprocess.run(["git", "branch", "--show-current"])
   │   │   │   ├─ subprocess.run(["git", "rev-parse", "HEAD"])
@@ -29971,7 +29971,7 @@ print(f"   Commit: {info['project']['git']['commit_short']}")
   "started_at": "2025-10-11T10:30:00Z",
   
   "project": {
-    "name": "agent-os-enhanced",  // ← DYNAMIC from git/directory
+    "name": "praxis-os",  // ← DYNAMIC from git/directory
     "root": "/Users/josh/src/..."  // ← DYNAMIC from filesystem
   }
 }
@@ -30011,7 +30011,7 @@ This enables persona systems working across multiple projects!
 **Problem with hardcoding:**
 ```python
 # BAD: Hardcoded values
-PROJECT_NAME = "agent-os-enhanced"
+PROJECT_NAME = "praxis-os"
 PROJECT_ROOT = "/Users/josh/src/..."
 
 # Breaks when:
@@ -30045,7 +30045,7 @@ if not name:
 Server Startup:
   ├─ ProjectInfoDiscovery(base_path)
   │   ├─ Run git commands
-  │   │   └─ Extract: "agent-os-enhanced"
+  │   │   └─ Extract: "praxis-os"
   │   ├─ Determine paths from filesystem
   │   └─ Cache discovery service
   │
@@ -30545,7 +30545,7 @@ class ProjectInfoDiscovery:
 # DON'T: Hardcode project info
 def get_project_info():
     return {
-        "name": "agent-os-enhanced",  # BAD: Hardcoded
+        "name": "praxis-os",  # BAD: Hardcoded
         "root": "/Users/josh/projects/agent-os"  # BAD: Machine-specific
     }
 ```
@@ -31945,7 +31945,7 @@ class ProjectInfoDiscovery:
         2. Directory name (fallback)
 
         Examples:
-        - git@github.com:user/agent-os-enhanced.git → "agent-os-enhanced"
+        - git@github.com:user/praxis-os.git → "praxis-os"
         - /Users/josh/my-project/ → "my-project"
 
         Returns:
@@ -32458,7 +32458,7 @@ def get_server_info() -> dict:
     Example:
         >>> info = get_server_info()
         >>> print(f"Connected to: {info['project']['name']}")
-        agent-os-enhanced
+        praxis-os
         >>> print(f"Git branch: {info['project']['git']['branch']}")
         main
         >>> print(f"Tools: {info['capabilities']['tools_available']}")
@@ -32594,8 +32594,8 @@ class ProjectInfo:
   "pid": 12345,
   "started_at": "2025-10-11T10:30:00Z",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 ```
@@ -32612,8 +32612,8 @@ class ProjectInfo:
   "pid": 12346,
   "started_at": "2025-10-11T10:31:00Z",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 ```
@@ -33820,7 +33820,7 @@ This feature will be considered successful when:
   - Verify discovery works for both git and non-git projects
   
   **Acceptance Criteria:**
-  - [ ] Project name extracted from git remote URL (e.g., "agent-os-enhanced" from git@github.com:user/agent-os-enhanced.git)
+  - [ ] Project name extracted from git remote URL (e.g., "praxis-os" from git@github.com:user/praxis-os.git)
   - [ ] Falls back to directory name if not a git repo
   - [ ] Git info returned with remote, branch, commit, commit_short, status
   - [ ] Returns None for git info if not a git repo (graceful fallback)
@@ -34518,7 +34518,7 @@ The spec is built on **proven code**, not theory:
 **3. ✅ No Hardcoding - All Dynamic**
 ```python
 # BAD (what we avoided):
-PROJECT_NAME = "agent-os-enhanced"  # Hardcoded
+PROJECT_NAME = "praxis-os"  # Hardcoded
 
 # GOOD (what spec requires):
 name = _get_git_repo_name()  # Runtime discovery
@@ -34967,14 +34967,14 @@ This is exciting - I can be your first real sub-agent test case!
 
 1. **State File Path**
 ```bash
-/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/.mcp_server_state.json
+/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/.mcp_server_state.json
 ```
 
 2. **MCP Server Config for Cline**
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"  // Or whatever port from state file
     }
@@ -35024,7 +35024,7 @@ server_url = state["url"]  # e.g., "http://127.0.0.1:4243/mcp"
 // You provide me with Cline MCP config:
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:XXXX/mcp"  // Fill in actual port
     }
@@ -35050,7 +35050,7 @@ I can start using the tools immediately.
 
 **If working correctly:**
 1. I connect without errors
-2. `get_server_info` confirms project "agent-os-enhanced"
+2. `get_server_info` confirms project "praxis-os"
 3. `search_standards("testing")` returns RAG results
 4. No interference with your Cursor usage
 5. Both of us can work simultaneously
@@ -35140,8 +35140,8 @@ ACT MODE
   "pid": 95431,
   "started_at": "2025-10-11T17:06:46.031434+00:00",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 <environment_details>
@@ -35218,7 +35218,7 @@ ACT MODE
 <path>../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json</path>
 <content>{
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -35245,7 +35245,7 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path="../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json">
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -35285,7 +35285,7 @@ ACT MODE
 [Unexpected content type]
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>get_server_info</tool_name>
 <arguments>
 {}
@@ -35302,7 +35302,7 @@ ACT MODE
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
+[use_mcp_tool for 'praxis-os'] Result:
 Error executing MCP tool: Not connected
 <environment_details>
 # Cursor Visible Files
@@ -35339,8 +35339,8 @@ ACT MODE
   "url": "http://127.0.0.1:4242/mcp",
   "transport": "dual",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   },
   "pid": 95431
 }
@@ -35350,7 +35350,7 @@ ACT MODE
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -35475,7 +35475,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -35536,7 +35536,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/11/2025, 10:14:12 AM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -35743,10 +35743,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "7cdef7eaf42925b3537c12b0dbd0ef5c3bebf30c"
     }
@@ -35785,7 +35785,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 New instructions for task continuation:
@@ -35850,7 +35850,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/11/2025, 10:15:32 AM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -36057,10 +36057,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "7cdef7eaf42925b3537c12b0dbd0ef5c3bebf30c"
     }
@@ -36253,14 +36253,14 @@ Full restart ensures Cline picks up the new MCP config.
 ```
 In Cline UI, look for:
 - MCP servers section
-- Should show "agent-os-enhanced"
+- Should show "praxis-os"
 - Status should be "connected" or "ready"
 ```
 
 **Option 4: Try the Tool Again**
 ```
 After reload, I can retry:
-use_mcp_tool with agent-os-enhanced server
+use_mcp_tool with praxis-os server
 ```
 Cline might auto-connect on first tool use.
 
@@ -36268,7 +36268,7 @@ Cline might auto-connect on first tool use.
 
 **When Cline connects:**
 1. Reads config: `cline_mcp_settings.json`
-2. Sees: "agent-os-enhanced" at http://127.0.0.1:4242/mcp
+2. Sees: "praxis-os" at http://127.0.0.1:4242/mcp
 3. Establishes HTTP connection
 4. Initializes MCP session
 5. Tools become available to me
@@ -36399,7 +36399,7 @@ Look at Cline's documentation or code:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "sse",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -36411,7 +36411,7 @@ FastMCP supports SSE, maybe Cline expects that?
 **Check 3: Does Cline show the server?**
 ```
 In Cline UI:
-- Is "agent-os-enhanced" listed?
+- Is "praxis-os" listed?
 - What's its status?
 - Any error messages?
 ```
@@ -36541,7 +36541,7 @@ ACT MODE
 [read_file for '../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json'] Result:
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -36582,7 +36582,7 @@ ACT MODE
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": { ... }
+    "praxis-os": { ... }
   }
 }
 ```
@@ -36596,7 +36596,7 @@ ACT MODE
 ```json
 {
   "remoteMcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "type": "sse",
       "url": "http://127.0.0.1:4242/mcp",
       "timeout": 60
@@ -36610,7 +36610,7 @@ OR possibly:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "type": "sse",
       "url": "http://127.0.0.1:4242/mcp",
       "transport": "sse",  // explicit transport
@@ -38201,7 +38201,7 @@ ACT MODE
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -39703,7 +39703,7 @@ Agent OS MCP Client Test
 ============================================================
 
 🔗 Connecting to Agent OS MCP server at http://127.0.0.1:4242/mcp
-   Project: agent-os-enhanced
+   Project: praxis-os
    Transport: dual
    PID: 95431
 
@@ -40366,14 +40366,14 @@ The command's output could not be captured due to some technical issue, however 
 
 pyenv shell 3.13.5
 python test_mcp_client.py                                                                                                     
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ pyenv shell 3.13.5                             [10:24:48]
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced $ python test_mcp_client.py                      [10:24:48]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ pyenv shell 3.13.5                             [10:24:48]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os $ python test_mcp_client.py                      [10:24:48]
 ============================================================
 Agent OS MCP Client Test
 ============================================================
 
 🔗 Connecting to Agent OS MCP server at http://127.0.0.1:4242/mcp
-   Project: agent-os-enhanced
+   Project: praxis-os
    Transport: dual
    PID: 95431
 
@@ -40413,9 +40413,9 @@ Summary:
 ✅ MCP protocol is functional
 ✅ Tools are accessible
 ✅ Dual-transport architecture validated!
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced git:(main*) $                                    [10:24:49]
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os git:(main*) $                                    [10:24:49]
 python mcp_tool_cli.py search_standards '{"query": "Agent OS orientation guide", "n_results": 3}'                             
-josh@Mac:/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced git:(main*) $ python mcp_tool_cli.py search_standards '{"que
+josh@Mac:/Users/josh/src/github.com/honeyhiveai/praxis-os git:(main*) $ python mcp_tool_cli.py search_standards '{"que
 <environment_details>
 # Cursor Visible Files
 mcp_tool_cli.py
@@ -40456,7 +40456,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 New instructions for task continuation:
@@ -40523,7 +40523,7 @@ mcp_tool_cli.py
 # Current Time
 10/11/2025, 10:28:33 AM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -40730,10 +40730,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "7cdef7eaf42925b3537c12b0dbd0ef5c3bebf30c"
     }
@@ -40972,7 +40972,7 @@ In `cline_mcp_settings.json`:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "type": "sse",
       "url": "http://127.0.0.1:4242/mcp",
       "headers": {
@@ -42309,7 +42309,7 @@ ACT MODE
 [read_file for '../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json'] Result:
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -42348,7 +42348,7 @@ ACT MODE
 ------- SEARCH
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -42359,7 +42359,7 @@ ACT MODE
 =======
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "transport": "http",
@@ -42394,7 +42394,7 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path="../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json">
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "transport": "http",
@@ -43296,7 +43296,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -43366,7 +43366,7 @@ test_mcp_access.sh
 # Current Time
 10/11/2025, 10:48:55 AM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -43573,10 +43573,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "7cdef7eaf42925b3537c12b0dbd0ef5c3bebf30c"
     }
@@ -44640,7 +44640,7 @@ installation/05-venv-mcp.md
 # Current Mode
 ACT MODE
 </environment_details>
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -44711,7 +44711,7 @@ installation/05-venv-mcp.md
 # Current Time
 10/11/2025, 12:10:06 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -44918,10 +44918,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "c2abd8f638c7bf0e8061e2f712b75a2e0992ff62"
     }
@@ -45806,7 +45806,7 @@ const serverConfig = {
 https://github.com/josh-hhai/cline/tree/fix-streamablehttp-default
 
 You can test with this MCP server:
-https://github.com/honeyhiveai/agent-os-enhanced
+https://github.com/honeyhiveai/praxis-os
 
 Before/After screenshots:
 [show config defaulting to sse]
@@ -50282,7 +50282,7 @@ Query: calibration new to Agent OS Enhanced
 {
   "success": true,
   "tool": "search_standards",
-  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n- **General spec questions**: See examples in `.praxis-os/specs/`\\n- **Template questions**: Refer to this document\\n- **Technical questions**: Consult team or AI assistant via MCP\\n\\n---\\n\\n**Remember:** Good specs save time, reduce bugs, and enable better AI assistance. Invest time upfront for better results downstream!\",\"file\":\"usage/creating-specs.md\",\"section\":\"\ud83d\udcde Questions?\",\"relevance_score\":0.966984748840332,\"tokens\":0},{\"content\":\"**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the agent-os-enhanced repository.\\n\\n```\\nagent-os-enhanced/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0},{\"content\":\"**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the agent-os-enhanced repository.\\n\\n```\\nagent-os-enhanced/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0}],\"total_tokens\":199,\"retrieval_method\":\"vector\",\"query_time_ms\":16.865968704223633}"
+  "result": "{\"results\":[{\"content\":\"\u2699\ufe0f AGENT OS REMINDER: Quality work is ensured, by completing it in a thorough, systematic manner, ensuring accuracy over speed. Doing it right the first time is our goal.\\n\\n---\\n\\n- **General spec questions**: See examples in `.praxis-os/specs/`\\n- **Template questions**: Refer to this document\\n- **Technical questions**: Consult team or AI assistant via MCP\\n\\n---\\n\\n**Remember:** Good specs save time, reduce bugs, and enable better AI assistance. Invest time upfront for better results downstream!\",\"file\":\"usage/creating-specs.md\",\"section\":\"\ud83d\udcde Questions?\",\"relevance_score\":0.966984748840332,\"tokens\":0},{\"content\":\"**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the praxis-os repository.\\n\\n```\\npraxis-os/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0},{\"content\":\"**STANDARD:** All Agent OS content MUST be synced from the `universal/` directory in the praxis-os repository.\\n\\n```\\npraxis-os/\\n\u2514\u2500\u2500 universal/          \u2190 SYNC FROM HERE\\n    \u251c\u2500\u2500 standards/\\n    \u251c\u2500\u2500 usage/\\n    \u2514\u2500\u2500 workflows/\\n```\",\"file\":\"standards/standards/installation/update-procedures.md\",\"section\":\"Content Source Location\",\"relevance_score\":0.9963626861572266,\"tokens\":0}],\"total_tokens\":199,\"retrieval_method\":\"vector\",\"query_time_ms\":16.865968704223633}"
 }
 
 ========================================
@@ -50632,7 +50632,7 @@ ACT MODE
 [read_file for 'universal/standards/universal/workflows/time-estimation-standards.md'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/universal/standards/universal/workflows/time-estimation-standards.md
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/universal/standards/universal/workflows/time-estimation-standards.md
 </error>
 <environment_details>
 # Cursor Visible Files
@@ -51503,7 +51503,7 @@ python scripts/build_rag_index.py
 
 **1. Rebuild RAG Index:**
 ```bash
-cd /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced
+cd /Users/josh/src/github.com/honeyhiveai/praxis-os
 python scripts/build_rag_index.py
 ```
 
@@ -51629,7 +51629,7 @@ ACT MODE
 [read_file for 'universal/standards/documentation/rag-content-authoring.md'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/universal/standards/documentation/rag-content-authoring.md
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/universal/standards/documentation/rag-content-authoring.md
 </error>
 <environment_details>
 # Cursor Visible Files
@@ -51681,7 +51681,7 @@ ACT MODE
 [read_file for 'universal/standards/universal/documentation/rag-content-authoring.md'] Result:
 The tool execution failed with the following error:
 <error>
-Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/universal/standards/universal/documentation/rag-content-authoring.md
+Error executing read_file: File not found: /Users/josh/src/github.com/honeyhiveai/praxis-os/universal/standards/universal/documentation/rag-content-authoring.md
 </error>
 <environment_details>
 # Cursor Visible Files

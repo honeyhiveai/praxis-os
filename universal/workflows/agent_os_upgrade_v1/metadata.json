@@ -186,7 +186,7 @@
       "Prefer structured upgrade over manual file copying"
     ],
     "prerequisites": [
-      "Source agent-os-enhanced repository (clean, no uncommitted changes)",
+      "Source praxis-os repository (clean, no uncommitted changes)",
       "Existing .praxis-os installation to upgrade",
       "Python environment with pip",
       "Sufficient disk space (2x current installation size)",
@@ -196,7 +196,7 @@
       "workflow_type": "agent_os_upgrade_v1",
       "target_file": ".praxis-os",
       "options": {
-        "source_path": "/path/to/agent-os-enhanced",
+        "source_path": "/path/to/praxis-os",
         "dry_run": false,
         "skip_backup": false
       }

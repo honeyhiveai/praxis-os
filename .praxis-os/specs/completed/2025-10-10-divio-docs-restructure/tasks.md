@@ -622,7 +622,7 @@ Before advancing to Phase 5:
   algolia: {
     appId: 'YOUR_APP_ID',
     apiKey: 'YOUR_SEARCH_API_KEY',
-    indexName: 'agent-os-enhanced',
+    indexName: 'praxis-os',
     contextualSearch: true,
   }
   ```

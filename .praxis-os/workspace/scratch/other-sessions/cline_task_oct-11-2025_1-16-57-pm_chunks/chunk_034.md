@@ -518,7 +518,7 @@ The spec is built on **proven code**, not theory:
 **3. ✅ No Hardcoding - All Dynamic**
 ```python
 # BAD (what we avoided):
-PROJECT_NAME = "agent-os-enhanced"  # Hardcoded
+PROJECT_NAME = "praxis-os"  # Hardcoded
 
 # GOOD (what spec requires):
 name = _get_git_repo_name()  # Runtime discovery
@@ -967,14 +967,14 @@ This is exciting - I can be your first real sub-agent test case!
 
 1. **State File Path**
 ```bash
-/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os/.mcp_server_state.json
+/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/.mcp_server_state.json
 ```
 
 2. **MCP Server Config for Cline**
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"  // Or whatever port from state file
     }

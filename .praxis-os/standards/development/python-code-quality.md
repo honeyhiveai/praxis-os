@@ -1,5 +1,5 @@
 # Python Code Quality Standards
-# Generated for: agent-os-enhanced
+# Generated for: praxis-os
 
 ## Code Quality Tools
 
@@ -488,7 +488,7 @@ Before committing code, verify:
 
 ---
 
-## Your Project Context: agent-os-enhanced
+## Your Project Context: praxis-os
 
 ### Recommendations
 
@@ -534,4 +534,4 @@ pre-commit install
 
 ---
 
-**Generated for agent-os-enhanced. Implement these code quality standards to maintain high code quality and consistency.**
+**Generated for praxis-os. Implement these code quality standards to maintain high code quality and consistency.**

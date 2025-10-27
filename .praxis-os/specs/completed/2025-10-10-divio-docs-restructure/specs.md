@@ -862,7 +862,7 @@ module.exports = {
   themeConfig: {
     algolia: {
       apiKey: 'YOUR_API_KEY',
-      indexName: 'agent-os-enhanced',
+      indexName: 'praxis-os',
       appId: 'YOUR_APP_ID',
       contextualSearch: true,
       searchParameters: {
@@ -1286,7 +1286,7 @@ const config: Config = {
   title: 'Agent OS Enhanced',
   tagline: 'Multi-Agent Development Framework',
   url: 'https://honeyhiveai.github.io',
-  baseUrl: '/agent-os-enhanced/',
+  baseUrl: '/praxis-os/',
   
   // Theme configuration
   themeConfig: {
@@ -1294,14 +1294,14 @@ const config: Config = {
       title: 'Agent OS Enhanced',
       items: [
         {type: 'doc', docId: 'intro', position: 'left', label: 'Docs'},
-        {href: 'https://github.com/honeyhiveai/agent-os-enhanced', label: 'GitHub', position: 'right'},
+        {href: 'https://github.com/honeyhiveai/praxis-os', label: 'GitHub', position: 'right'},
       ],
     },
     
     // Search integration (Algolia preferred)
     algolia: {
       apiKey: 'YOUR_API_KEY',
-      indexName: 'agent-os-enhanced',
+      indexName: 'praxis-os',
       appId: 'YOUR_APP_ID',
       contextualSearch: true,
     },
@@ -1550,13 +1550,13 @@ jobs:
 // Algolia configuration
 {
   apiKey: 'search-only-api-key',  // Public search key
-  indexName: 'agent-os-enhanced',
+  indexName: 'praxis-os',
   appId: 'application-id',
   
   // Algolia crawler configuration (algolia-config.json)
   {
-    "index_name": "agent-os-enhanced",
-    "start_urls": ["https://honeyhiveai.github.io/agent-os-enhanced/"],
+    "index_name": "praxis-os",
+    "start_urls": ["https://honeyhiveai.github.io/praxis-os/"],
     "selectors": {
       "lvl0": "header h1",
       "lvl1": "article h2",
@@ -1571,7 +1571,7 @@ jobs:
 - Source: `gh-pages` branch
 - Build: `npm run build` → `build/` directory
 - Deploy: Push `build/` contents to `gh-pages` branch
-- URL: `https://honeyhiveai.github.io/agent-os-enhanced/`
+- URL: `https://honeyhiveai.github.io/praxis-os/`
 
 **Alternative: Netlify Deployment:**
 - Build command: `cd docs && npm run build`
@@ -1976,7 +1976,7 @@ npx webpack-bundle-analyzer docs/build
 **Measurement:**
 ```bash
 # Lighthouse audit
-npx lighthouse https://honeyhiveai.github.io/agent-os-enhanced/
+npx lighthouse https://honeyhiveai.github.io/praxis-os/
 
 # Target scores:
 # Performance: >90

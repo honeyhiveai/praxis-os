@@ -39,7 +39,7 @@ An AI-guided workflow for safely upgrading Agent OS installations (content + MCP
 
 ```bash
 # User runs one command
-aos_workflow start agent_os_upgrade_v1 --source /path/to/agent-os-enhanced
+aos_workflow start agent_os_upgrade_v1 --source /path/to/praxis-os
 
 # AI handles:
 ✅ Pre-upgrade validation (git status, backups exist, etc.)
@@ -132,7 +132,7 @@ universal/workflows/agent_os_upgrade_v1/
   "completed_phases": [0, 1, 2],
   "phase_artifacts": {
     "0": {
-      "source_path": "/path/to/agent-os-enhanced",
+      "source_path": "/path/to/praxis-os",
       "source_version": "1.2.0",
       "source_commit": "abc123",
       "validation_passed": true
@@ -212,7 +212,7 @@ sequenceDiagram
 **Purpose:** Validate source and target before any modifications.
 
 **Tasks:**
-1. Validate source path exists and is agent-os-enhanced repo
+1. Validate source path exists and is praxis-os repo
 2. Check source repo git status (clean, no uncommitted changes)
 3. Extract source version and commit hash
 4. Validate target .praxis-os/ directory structure
@@ -223,7 +223,7 @@ sequenceDiagram
 **Checkpoint Evidence:**
 ```json
 {
-  "source_path": "/path/to/agent-os-enhanced",
+  "source_path": "/path/to/praxis-os",
   "source_version": "1.2.0",
   "source_commit": "abc123def",
   "source_git_clean": true,
@@ -236,7 +236,7 @@ sequenceDiagram
 ```
 
 **Exit Criteria:**
-- ✅ Source repo is valid agent-os-enhanced
+- ✅ Source repo is valid praxis-os
 - ✅ Source git status is clean
 - ✅ Target .praxis-os/ structure is valid
 - ✅ Sufficient disk space
@@ -543,7 +543,7 @@ workflow.update_state(status="rolled_back", reason="...")
 
 ```json
 {
-  "source_path": "/path/to/agent-os-enhanced",
+  "source_path": "/path/to/praxis-os",
   "dry_run": false,
   "auto_restart": true,
   "skip_tests": false,
@@ -611,7 +611,7 @@ workflow.update_state(status="rolled_back", reason="...")
 - Test rollback scenarios
 
 ### Dogfooding Tests
-- Run on agent-os-enhanced itself
+- Run on praxis-os itself
 - Run on python-sdk project
 - Run on customer projects (with permission)
 
@@ -679,7 +679,7 @@ workflow.update_state(status="rolled_back", reason="...")
 - [ ] Write integration tests
 
 ### Phase 4: Dogfooding (Week 4)
-- [ ] Test on agent-os-enhanced
+- [ ] Test on praxis-os
 - [ ] Test on python-sdk
 - [ ] Document lessons learned
 - [ ] Refine error messages and prompts

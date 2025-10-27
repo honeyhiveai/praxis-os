@@ -21,7 +21,7 @@ This document provides detailed guidance for implementing the MCP Server Modular
 ### Environment Setup
 ```bash
 # Navigate to project
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 
 # Ensure MCP server venv activated
 source .praxis-os/venv/bin/activate

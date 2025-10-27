@@ -57,7 +57,7 @@
   - Verify discovery works for both git and non-git projects
   
   **Acceptance Criteria:**
-  - [x] Project name extracted from git remote URL (e.g., "agent-os-enhanced" from git@github.com:user/agent-os-enhanced.git)
+  - [x] Project name extracted from git remote URL (e.g., "praxis-os" from git@github.com:user/praxis-os.git)
   - [x] Falls back to directory name if not a git repo
   - [x] Git info returned with remote, branch, commit, commit_short, status
   - [x] Returns None for git info if not a git repo (graceful fallback)

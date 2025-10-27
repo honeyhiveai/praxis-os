@@ -1,4 +1,4 @@
-# Standards Content Analysis: python-sdk → agent-os-enhanced
+# Standards Content Analysis: python-sdk → praxis-os
 ## Methodology: Content-Based Applicability Assessment
 
 **Analysis Method**: Read each standard's CONTENT and assess:
@@ -106,7 +106,7 @@
 
 **Why Critical**: Entry point for AI to understand standards structure.
 
-**Recommendation**: **ADOPT** - Update for agent-os-enhanced structure
+**Recommendation**: **ADOPT** - Update for praxis-os structure
 
 ---
 
@@ -185,7 +185,7 @@
 
 ### 18. `date-standards.md`
 **Content Assessment**: *Need to read*
-- Date handling for AI (we have date-usage-policy.md in agent-os-enhanced)
+- Date handling for AI (we have date-usage-policy.md in praxis-os)
 
 **Recommendation**: **COMPARE** with existing date-usage-policy.md
 
@@ -252,7 +252,7 @@
 
 ## Success Criteria
 
-After adoption, agent-os-enhanced should have:
+After adoption, praxis-os should have:
 - ✅ Complete "how to use Agent OS" instructions for AI
 - ✅ All paradigm-level methodologies documented
 - ✅ Quality and development standards for consistency

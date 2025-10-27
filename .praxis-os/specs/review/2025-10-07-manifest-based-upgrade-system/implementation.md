@@ -25,7 +25,7 @@
 2. Implement checksum calculation
 3. Implement directory scanning
 4. Add git integration for dates
-5. Generate manifest for agent-os-enhanced
+5. Generate manifest for praxis-os
 6. Validate manifest structure
 
 ### Phase 2: Safe Upgrade Tool (Core)
@@ -251,7 +251,7 @@ if __name__ == "__main__":
 """
 Safe Upgrade Tool for Agent OS
 
-Safely upgrades local .praxis-os/ directory from agent-os-enhanced source
+Safely upgrades local .praxis-os/ directory from praxis-os source
 with conflict detection and interactive prompts.
 """
 
@@ -377,8 +377,8 @@ def calculate_checksum(file_path: Path) -> str:
    The source directory may be outdated or corrupt.
    
    To fix:
-   1. Ensure you're using agent-os-enhanced v1.3.0 or later
-   2. Run: cd agent-os-enhanced && python scripts/generate-manifest.py --version 1.3.0
+   1. Ensure you're using praxis-os v1.3.0 or later
+   2. Run: cd praxis-os && python scripts/generate-manifest.py --version 1.3.0
 ```
 
 **Bad:**
@@ -447,11 +447,11 @@ def test_classify_conflict():
 
 ### 5.2 Integration Test Plan
 
-**Test on agent-os-enhanced itself (dogfooding):**
+**Test on praxis-os itself (dogfooding):**
 
 1. **Setup:**
    ```bash
-   cd /Users/josh/src/github.com/honeyhiveai/agent-os-enhanced
+   cd /Users/josh/src/github.com/honeyhiveai/praxis-os
    cp -r .praxis-os .praxis-os.test-backup
    ```
 
@@ -491,7 +491,7 @@ def test_classify_conflict():
    rm -rf .praxis-os.test-backup
    ```
 
-**Note:** This is true dogfooding - upgrading agent-os-enhanced's own `.praxis-os/` from its own `universal/` directory. This tests the self-upgrade scenario.
+**Note:** This is true dogfooding - upgrading praxis-os's own `.praxis-os/` from its own `universal/` directory. This tests the self-upgrade scenario.
 
 ---
 
@@ -536,13 +536,13 @@ Add new section:
 ### Prerequisites
 
 - Python 3.11 or later
-- agent-os-enhanced repository (v1.3.0+)
+- praxis-os repository (v1.3.0+)
 - Backup of .praxis-os/ (recommended)
 
 ### Step 1: Pull Latest Source
 
 ```bash
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 git pull origin main
 git log -1  # Note commit hash
 ```
@@ -551,8 +551,8 @@ git log -1  # Note commit hash
 
 ```bash
 cd /path/to/your-project
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-    --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+    --source /path/to/praxis-os \
     --target .praxis-os \
     --dry-run
 ```
@@ -566,8 +566,8 @@ Review the preview:
 ### Step 3: Execute Upgrade
 
 ```bash
-python /path/to/agent-os-enhanced/scripts/safe-upgrade.py \
-    --source /path/to/agent-os-enhanced \
+python /path/to/praxis-os/scripts/safe-upgrade.py \
+    --source /path/to/praxis-os \
     --target .praxis-os
 ```
 
@@ -598,7 +598,7 @@ mv .praxis-os.backup.YYYYMMDD_HHMMSS .praxis-os
 ### Troubleshooting
 
 **Q: Script says "manifest not found"**
-A: Source repo is too old. Update to agent-os-enhanced v1.3.0+
+A: Source repo is too old. Update to praxis-os v1.3.0+
 
 **Q: I accidentally replaced my custom file**
 A: Restore from backup: .praxis-os.backup.YYYYMMDD_HHMMSS
@@ -615,12 +615,12 @@ A: Safe to re-run. Idempotent design allows multiple runs.
 
 1. Implement on feature branch
 2. Unit tests passing
-3. Generate manifest for agent-os-enhanced
+3. Generate manifest for praxis-os
 4. Commit manifest to repo
 
 ### 7.2 Dogfooding Phase
 
-1. Test on agent-os-enhanced itself (self-upgrade, dry-run first)
+1. Test on praxis-os itself (self-upgrade, dry-run first)
 2. Document any issues
 3. Fix and iterate
 4. Test on external project (python-sdk) if needed for additional validation
@@ -635,7 +635,7 @@ A: Safe to re-run. Idempotent design allows multiple runs.
 
 ### 7.4 Adoption Phase
 
-1. Users pull latest agent-os-enhanced
+1. Users pull latest praxis-os
 2. Users run safe-upgrade.py
 3. Collect feedback
 4. Iterate on prompts/UX

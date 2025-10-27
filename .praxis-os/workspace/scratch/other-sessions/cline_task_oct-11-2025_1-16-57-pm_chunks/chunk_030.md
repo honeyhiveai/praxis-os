@@ -11,7 +11,7 @@ This enables persona systems working across multiple projects!
 **Problem with hardcoding:**
 ```python
 # BAD: Hardcoded values
-PROJECT_NAME = "agent-os-enhanced"
+PROJECT_NAME = "praxis-os"
 PROJECT_ROOT = "/Users/josh/src/..."
 
 # Breaks when:
@@ -45,7 +45,7 @@ if not name:
 Server Startup:
   ├─ ProjectInfoDiscovery(base_path)
   │   ├─ Run git commands
-  │   │   └─ Extract: "agent-os-enhanced"
+  │   │   └─ Extract: "praxis-os"
   │   ├─ Determine paths from filesystem
   │   └─ Cache discovery service
   │
@@ -545,7 +545,7 @@ class ProjectInfoDiscovery:
 # DON'T: Hardcode project info
 def get_project_info():
     return {
-        "name": "agent-os-enhanced",  # BAD: Hardcoded
+        "name": "praxis-os",  # BAD: Hardcoded
         "root": "/Users/josh/projects/agent-os"  # BAD: Machine-specific
     }
 ```

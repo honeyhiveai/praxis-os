@@ -24,7 +24,7 @@ If we use special symlinks or shortcuts, we can't validate:
 ### What We Have Now
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                    # Framework source
 │   └── standards/
 │       └── ai-safety/
@@ -63,7 +63,7 @@ agent-os-enhanced/
 ### What We Should Have
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                    # Framework SOURCE (for distribution)
 │   ├── standards/                # Edit these to change framework
 │   ├── usage/
@@ -177,8 +177,8 @@ vim mcp_server/agent_os_rag.py
 
 ```bash
 # Clone framework (consumers: install from package)
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git
-cd agent-os-enhanced
+git clone https://github.com/honeyhiveai/praxis-os.git
+cd praxis-os
 
 # Run installation script
 python scripts/install_agent_os.py
@@ -207,7 +207,7 @@ git pull origin main
 python scripts/install_agent_os.py --force
 
 # Option 2: Package update (for distributed version)
-pip install --upgrade agent-os-enhanced
+pip install --upgrade praxis-os
 agent-os update
 ```
 

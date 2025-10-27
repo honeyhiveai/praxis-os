@@ -202,7 +202,7 @@ export default {
   algolia: {
     appId: 'YOUR_APP_ID',
     apiKey: 'YOUR_SEARCH_API_KEY',
-    indexName: 'agent-os-enhanced',
+    indexName: 'praxis-os',
     contextualSearch: true,
   },
 };
@@ -815,12 +815,12 @@ Algolia can crawl your deployed site automatically. Configure the crawler:
 
 ```json
 {
-  "index_name": "agent-os-enhanced",
+  "index_name": "praxis-os",
   "start_urls": [
-    "https://yourdomain.github.io/agent-os-enhanced/"
+    "https://yourdomain.github.io/praxis-os/"
   ],
   "sitemap_urls": [
-    "https://yourdomain.github.io/agent-os-enhanced/sitemap.xml"
+    "https://yourdomain.github.io/praxis-os/sitemap.xml"
   ],
   "selectors": {
     "lvl0": ".docusaurus-content h1",
@@ -838,7 +838,7 @@ If you need to trigger reindex immediately:
 
 ```bash
 # Using Algolia CLI (requires installation and API key)
-algolia reindex --index agent-os-enhanced
+algolia reindex --index praxis-os
 ```
 
 **Step 3: Verify Search Works**
@@ -1142,7 +1142,7 @@ Run Algolia crawler or manual indexing (see Section 3.4).
 Verify index name matches Algolia dashboard:
 ```typescript
 algolia: {
-  indexName: 'agent-os-enhanced',  // Must match Algolia index
+  indexName: 'praxis-os',  // Must match Algolia index
 }
 ```
 

@@ -214,7 +214,7 @@ class WorkflowEngine:
         Args:
             workflow_type: "agent_os_upgrade_v1"
             target_file: "mcp_server"
-            options: {"source_path": "/path/to/agent-os-enhanced"}
+            options: {"source_path": "/path/to/praxis-os"}
             
         Returns:
             {
@@ -349,7 +349,7 @@ class StateManager:
     "completed_phases": [0, 1, 2],
     "phase_artifacts": {
         "0": {
-            "source_path": "/path/to/agent-os-enhanced",
+            "source_path": "/path/to/praxis-os",
             "source_version": "1.2.0",
             "source_commit": "abc123def",
             "source_git_clean": true,
@@ -404,7 +404,7 @@ class StateManager:
 ```python
 # Command-line interface (subprocess call)
 python scripts/safe-upgrade.py \
-    --source /path/to/agent-os-enhanced \
+    --source /path/to/praxis-os \
     --target .praxis-os \
     [--dry-run]
 
@@ -516,7 +516,7 @@ def validate_source_repo(source_path: str) -> dict:
     
     Checks:
     - Path exists
-    - Is agent-os-enhanced repo
+    - Is praxis-os repo
     - Git status clean
     - Extract version and commit hash
     
@@ -886,7 +886,7 @@ start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
     options={
-        "source_path": "/path/to/agent-os-enhanced",
+        "source_path": "/path/to/praxis-os",
         "dry_run": false,
         "auto_restart": true
     }
@@ -958,7 +958,7 @@ get_workflow_state(session_id=session_id)
 
 ```bash
 python scripts/safe-upgrade.py \
-    --source /path/to/agent-os-enhanced \
+    --source /path/to/praxis-os \
     --target .praxis-os \
     [--dry-run]
 ```

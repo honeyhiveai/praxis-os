@@ -668,10 +668,10 @@ This document breaks down the implementation of the Agent OS Upgrade Workflow in
 
 ### Task 5.1: Dogfooding Test 1 - Agent OS Enhanced
 
-**Description:** Test upgrade workflow on agent-os-enhanced itself.
+**Description:** Test upgrade workflow on praxis-os itself.
 
 **Acceptance Criteria:**
-- [ ] Run full upgrade on agent-os-enhanced
+- [ ] Run full upgrade on praxis-os
 - [ ] Document any issues encountered
 - [ ] Validate all phases complete successfully
 - [ ] Validate rollback works if needed

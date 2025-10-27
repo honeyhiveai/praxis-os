@@ -428,7 +428,7 @@ After integration complete:
 ## Support
 
 **Issues:**
-- GitHub Issues: https://github.com/honeyhiveai/agent-os-enhanced/issues
+- GitHub Issues: https://github.com/honeyhiveai/praxis-os/issues
 - Tag: `integration:copilot`
 
 **Documentation:**

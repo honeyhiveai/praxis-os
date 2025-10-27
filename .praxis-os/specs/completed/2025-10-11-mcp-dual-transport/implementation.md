@@ -198,7 +198,7 @@ class ProjectInfoDiscovery:
 # DON'T: Hardcode project info
 def get_project_info():
     return {
-        "name": "agent-os-enhanced",  # BAD: Hardcoded
+        "name": "praxis-os",  # BAD: Hardcoded
         "root": "/Users/josh/projects/agent-os"  # BAD: Machine-specific
     }
 ```

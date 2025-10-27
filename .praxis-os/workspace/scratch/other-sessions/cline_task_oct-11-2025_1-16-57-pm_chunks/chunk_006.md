@@ -584,7 +584,7 @@ Install Agent OS Enhanced in your project:
 
 ```bash
 # Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will:

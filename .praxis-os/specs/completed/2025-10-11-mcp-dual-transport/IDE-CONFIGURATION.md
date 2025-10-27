@@ -233,9 +233,9 @@ The discovery utility:
   "path": "/mcp",
   "pid": 12345,
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced",
-    "agent_os_path": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced/.praxis-os"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
+    "agent_os_path": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os"
   },
   "started_at": "2025-10-11T14:30:00Z"
 }

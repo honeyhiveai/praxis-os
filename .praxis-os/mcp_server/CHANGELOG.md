@@ -818,7 +818,7 @@ When a new version is released, users can update via:
 ```
 
 Cursor agent will:
-1. Pull latest from agent-os-enhanced repo
+1. Pull latest from praxis-os repo
 2. Update MCP server code
 3. Preserve user customizations
 4. Rebuild RAG index if needed

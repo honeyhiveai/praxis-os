@@ -29,7 +29,7 @@ Pre-commit hooks automatically enforce code quality standards before allowing co
 pip install pre-commit
 
 # 2. Install the hooks into your git repository
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 pre-commit install
 
 # 3. (Optional) Run on all files to verify setup

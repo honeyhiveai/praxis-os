@@ -166,7 +166,7 @@
 
 | ID | Requirement | Priority | Rationale |
 |----|-------------|----------|-----------|
-| FR-13 | Check source path exists and is `agent-os-enhanced` repo | MUST | Prevent invalid source |
+| FR-13 | Check source path exists and is `praxis-os` repo | MUST | Prevent invalid source |
 | FR-14 | Check git status is clean (no uncommitted changes) in source | MUST | Prevent partial upgrades |
 | FR-15 | Validate target `.praxis-os/` directory structure | MUST | Prevent corruption |
 | FR-16 | Check available disk space (need 2x current `.praxis-os` size) | MUST | Prevent out-of-space failures |
@@ -295,7 +295,7 @@ The upgrade workflow consists of 6 phases:
   "completed_phases": [0, 1, 2],
   "phase_artifacts": {
     "0": {
-      "source_path": "/path/to/agent-os-enhanced",
+      "source_path": "/path/to/praxis-os",
       "source_version": "1.2.0",
       "source_commit": "abc123",
       "validation_passed": true
@@ -410,7 +410,7 @@ A rollback is considered successful if:
 
 ### Assumptions
 
-1. User has `agent-os-enhanced` repository cloned locally
+1. User has `praxis-os` repository cloned locally
 2. Source repository is on `main` branch (or specified branch)
 3. Python 3.8+ and pip are available
 4. Sufficient disk space (2x current `.praxis-os` size)

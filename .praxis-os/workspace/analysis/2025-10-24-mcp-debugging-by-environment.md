@@ -50,10 +50,10 @@ Should the user specify both IDE AND usage mode in the prompt?
 
 **Examples:**
 ```
-Install Agent OS from github.com/honeyhiveai/agent-os-enhanced for Cursor (chat mode)
-Install Agent OS from github.com/honeyhiveai/agent-os-enhanced for Cursor (autonomous mode)
-Install Agent OS from github.com/honeyhiveai/agent-os-enhanced for Claude Desktop (MCP-only)
-Install Agent OS from github.com/honeyhiveai/agent-os-enhanced for Cline (autonomous)
+Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor (chat mode)
+Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor (autonomous mode)
+Install Agent OS from github.com/honeyhiveai/praxis-os for Claude Desktop (MCP-only)
+Install Agent OS from github.com/honeyhiveai/praxis-os for Cline (autonomous)
 ```
 
 Or should the installation instructions adapt based on detected capabilities?
@@ -91,7 +91,7 @@ The user revealed a complex setup that breaks the simple "one IDE = one agent" m
 
 3. **The installation prompt must specify the PRIMARY IDE:**
    ```
-   Install Agent OS from github.com/honeyhiveai/agent-os-enhanced for Cursor
+   Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor
    ```
    - This configures `.cursor/mcp.json` 
    - Enables stdio transport (primary)
@@ -145,7 +145,7 @@ All three agents:
 - Documentation should promote multi-agent workflows, not treat them as advanced
 - Installation prompt could be:
   ```
-  Install Agent OS from github.com/honeyhiveai/agent-os-enhanced for Cursor
+  Install Agent OS from github.com/honeyhiveai/praxis-os for Cursor
   
   ✅ Installed for Cursor IDE (primary)
   ❓ Enable multi-agent access? (Recommended) [Y/n]

@@ -30,7 +30,7 @@ What's Generated (Optional, Context-Aware):
 
 **Dogfooding Model**:
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/              # ← Framework SOURCE (edit this)
 │   ├── standards/
 │   └── workflows/
@@ -167,7 +167,7 @@ We're adding a NEW universal category (`ai-assistant/`) that gets copied just li
 
 **Agent OS Enhanced Says**:
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/              # SOURCE (edit this)
 ├── .praxis-os/             # LOCAL INSTALL
 │   ├── standards/universal/  # COPIED from ../universal/
@@ -176,7 +176,7 @@ agent-os-enhanced/
 
 **Our Proposed Boundaries Say**:
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/ai-assistant/          # SOURCE
 ├── .praxis-os/
 │   ├── standards/ai-assistant/      # COPIED from ../universal/ai-assistant/

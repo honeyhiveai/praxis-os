@@ -171,7 +171,7 @@ not os.path.exists(".praxis-os/.upgrade-lock")
 **Evidence:**
 ```json
 {
-  "source_path": "/path/to/agent-os-enhanced",
+  "source_path": "/path/to/praxis-os",
   "source_version": "1.2.0",
   "source_commit": "abc123def",
   "source_git_clean": true,

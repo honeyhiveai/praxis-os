@@ -398,9 +398,9 @@ class ValidationModule:
         
         result["path_exists"] = True
         
-        # Check is agent-os-enhanced repo
+        # Check is praxis-os repo
         if not (source / "mcp_server").exists():
-            result["errors"].append("Not an agent-os-enhanced repository")
+            result["errors"].append("Not an praxis-os repository")
             return result
         
         result["is_agent_os_repo"] = True
@@ -1044,7 +1044,7 @@ pytest tests/integration/test_rollback_scenarios.py -v
 **Step 4: Dogfooding (Week 4-5)**
 
 ```bash
-# Test on agent-os-enhanced itself
+# Test on praxis-os itself
 # (Manual test, documented in Task 5.1)
 
 # Test on customer project
@@ -1073,7 +1073,7 @@ git tag -a v1.0.0 -m "Agent OS Upgrade Workflow v1.0.0"
 ### 4.3 Rollout Strategy
 
 **Phase 1: Internal Testing (Week 4)**
-- Test on agent-os-enhanced dev environment
+- Test on praxis-os dev environment
 - Fix critical issues
 - Document edge cases
 

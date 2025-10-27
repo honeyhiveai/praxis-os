@@ -14,7 +14,7 @@ prAxIs OS is a portable development framework that combines:
 
 ## 📖 Documentation
 
-**Full documentation available at:** https://honeyhiveai.github.io/agent-os-enhanced/
+**Full documentation available at:** https://honeyhiveai.github.io/praxis-os/
 
 The documentation site includes:
 - Comprehensive guides and tutorials
@@ -28,7 +28,7 @@ The documentation site includes:
 
 ```
 Open your project in Cursor and say:
-"Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+"Install Agent OS from github.com/honeyhiveai/praxis-os"
 ```
 
 The Cursor agent will follow the installation guide in `installation/` directory:
@@ -61,7 +61,7 @@ your-project/
 ## 📁 Repository Structure
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── README.md                     # This file
 ├── .cursorrules                  # Universal behavioral triggers (26 lines)
 │
@@ -133,7 +133,7 @@ agent-os-enhanced/
 Our `.praxis-os/` directory is a **real installation** with copied files (not symlinks):
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                    # ← Framework SOURCE (edit this)
 │   ├── standards/
 │   ├── usage/

@@ -1,5 +1,5 @@
 # Python Dependencies Standards
-# Generated for: agent-os-enhanced
+# Generated for: praxis-os
 
 ## Universal Dependency Principles
 
@@ -264,7 +264,7 @@ def process_with_embedder(embedder: Embedder, text: str):
 
 ---
 
-## Your Project Context: agent-os-enhanced
+## Your Project Context: praxis-os
 
 ### Current State
 
@@ -423,4 +423,4 @@ if TYPE_CHECKING:
 
 ---
 
-**Generated for agent-os-enhanced. Consider adding requirements-dev.txt and tightening version specifiers.**
+**Generated for praxis-os. Consider adding requirements-dev.txt and tightening version specifiers.**

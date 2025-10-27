@@ -739,7 +739,7 @@ Both agents access SAME RAG index, SAME tools, SAME state!
 ### System Components
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├─ .praxis-os/
 │  ├─ venv/                              # Required for all dependencies
 │  ├─ standards/                          # Watched by file watcher

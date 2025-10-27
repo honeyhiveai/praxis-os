@@ -27,7 +27,7 @@ start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
     options={
-        "source_path": "/path/to/agent-os-enhanced",
+        "source_path": "/path/to/praxis-os",
         "dry_run": false,
         "auto_restart": true
     }
@@ -112,7 +112,7 @@ Workflow state is saved to disk after each phase, enabling the workflow to survi
 ## Requirements
 
 ### Source Repository
-- Must be agent-os-enhanced repository
+- Must be praxis-os repository
 - Git status must be clean (no uncommitted changes)
 - Must have VERSION.txt file
 
@@ -133,7 +133,7 @@ Workflow state is saved to disk after each phase, enabling the workflow to survi
 
 ```python
 options = {
-    "source_path": "/path/to/agent-os-enhanced",  # Required
+    "source_path": "/path/to/praxis-os",  # Required
     "dry_run": false,           # Preview changes only
     "auto_restart": true,       # Auto-restart server in Phase 3
     "skip_tests": false,        # Skip validation tests

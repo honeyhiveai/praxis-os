@@ -98,7 +98,7 @@ PYTHONPATH = "${workspaceFolder}/.praxis-os"
 > ```json
 > {
 >   "mcpServers": {
->     "agent-os-enhanced": {
+>     "praxis-os": {
 >       "command": "{PYTHON_PATH}",
 >       "args": ["-m", "mcp_server"],
 >       "env": {
@@ -125,7 +125,7 @@ PYTHONPATH = "${workspaceFolder}/.praxis-os"
 > ```json
 > {
 >   "cline.mcpServers": {
->     "agent-os-enhanced": {
+>     "praxis-os": {
 >       "command": "{PYTHON_PATH}",
 >       "args": ["-m", "mcp_server"],
 >       "env": {
@@ -348,7 +348,7 @@ I don't currently see any MCP servers listed in my environment details, which me
 Let me try to use the `search_standards` tool to see if it's available:
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -375,8 +375,8 @@ The user provided the following feedback:
 <feedback>
 it is running in this cursor instance, the cursor agent has been making heavy use of it,
 </feedback>
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)

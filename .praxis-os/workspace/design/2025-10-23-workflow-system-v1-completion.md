@@ -24,7 +24,7 @@ The Agent OS Enhanced workflow system is **architecturally complete** but has **
 
 3. **Core workflow set incomplete** - Missing 5th workflow
    - `standards_creation_v1` exists in hive-kube (since Oct 13)
-   - Not rolled out to agent-os-enhanced
+   - Not rolled out to praxis-os
    - Should be part of universal core set
 
 ### Impact If Not Solved
@@ -201,7 +201,7 @@ High cognitive load, error-prone, inefficient.
 `standards_creation_v1` exists in `../hive-kube/.praxis-os/workflows/` (created Oct 13):
 - 6 phases: Discovery → Content → RAG Optimization → Discoverability Testing → Validation → Integration
 - Well-tested in hive-kube
-- Not rolled out to agent-os-enhanced `universal/workflows/`
+- Not rolled out to praxis-os `universal/workflows/`
 
 Should be part of core set (5 workflows, not 4).
 

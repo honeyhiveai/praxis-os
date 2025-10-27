@@ -67,7 +67,7 @@ Each file:
 
 ## 🏗️ Architecture Context
 
-**Source Repository** (agent-os-enhanced):
+**Source Repository** (praxis-os):
 ```
 /tmp/agent-os-install-xyz/      ← Temp clone (will delete after!)
 ├── installation/               ← These guides
@@ -122,7 +122,7 @@ print(f"📦 Cloning to temp location: {temp_dir}")
 # Clone repo to temp
 subprocess.run([
     "git", "clone", 
-    "https://github.com/honeyhiveai/agent-os-enhanced.git",
+    "https://github.com/honeyhiveai/praxis-os.git",
     temp_dir
 ], check=True)
 
@@ -138,8 +138,8 @@ print(f"✅ Source ready at: {AGENT_OS_SOURCE}")
 If the user already has Agent OS cloned somewhere:
 
 ```python
-# Ask user where they've cloned agent-os-enhanced
-AGENT_OS_SOURCE = input("Path to agent-os-enhanced clone: ")
+# Ask user where they've cloned praxis-os
+AGENT_OS_SOURCE = input("Path to praxis-os clone: ")
 
 # Validate it
 assert os.path.exists(f"{AGENT_OS_SOURCE}/universal/"), "Invalid path"
@@ -162,9 +162,9 @@ assert os.access(".", os.W_OK), "Target directory not writable"
 import sys
 assert sys.version_info >= (3, 8), "Python 3.8+ required"
 
-# 4. Check NOT inside agent-os-enhanced repo itself
+# 4. Check NOT inside praxis-os repo itself
 current_dir = os.path.basename(os.getcwd())
-assert current_dir != "agent-os-enhanced", "Don't install inside source repo!"
+assert current_dir != "praxis-os", "Don't install inside source repo!"
 ```
 
 **If any checks fail, stop and fix before continuing.**

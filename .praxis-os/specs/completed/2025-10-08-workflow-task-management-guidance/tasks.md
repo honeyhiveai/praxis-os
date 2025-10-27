@@ -357,7 +357,7 @@ Phase 2: Testing & Validation
 
 **Rollout Steps:**
 1. Merge implementation to main branch
-2. Deploy to agent-os-enhanced dogfooding environment
+2. Deploy to praxis-os dogfooding environment
 3. Validate via manual workflow execution
 4. Monitor for issues (none expected - fail-safe design)
 5. Document in CHANGELOG.md

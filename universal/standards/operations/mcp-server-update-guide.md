@@ -42,7 +42,7 @@
 
 Updating standards, workflows, and documentation:
 ```bash
-rsync -av agent-os-enhanced/universal/ .praxis-os/
+rsync -av praxis-os/universal/ .praxis-os/
 ```
 
 **Requirements:**
@@ -55,7 +55,7 @@ rsync -av agent-os-enhanced/universal/ .praxis-os/
 Updating the MCP server software itself:
 ```bash
 # Copy updated Python code from source
-cp -r /path/to/agent-os-enhanced/mcp_server .praxis-os/
+cp -r /path/to/praxis-os/mcp_server .praxis-os/
 
 # Update dependencies
 .praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt --upgrade
@@ -78,7 +78,7 @@ The **MCP server** is the Python application that:
 
 **Location in source repo:**
 ```
-agent-os-enhanced/
+praxis-os/
 └── mcp_server/              ← The server software
     ├── agent_os_rag.py      ← Main server
     ├── workflow_engine.py   ← Workflow logic
@@ -107,7 +107,7 @@ Update the MCP server when:
 pip show agent-os-mcp
 
 # If running from source
-cd /path/to/agent-os-enhanced/mcp_server
+cd /path/to/praxis-os/mcp_server
 git log -1 --oneline
 ```
 
@@ -119,7 +119,7 @@ Agent OS uses a **copy-based installation** where `mcp_server/` from the source 
 
 **Architecture:**
 ```
-agent-os-enhanced/              Your Project/
+praxis-os/              Your Project/
 ├── mcp_server/        ──────►  └── .praxis-os/
     └── ...                         └── mcp_server/  (copied)
 ```
@@ -133,7 +133,7 @@ agent-os-enhanced/              Your Project/
 ### Getting Latest MCP Server Code
 
 ```bash
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 
 # Pull latest changes from repository
 git pull origin main
@@ -152,7 +152,7 @@ git log -1 --oneline
 
 ```bash
 # Read the changelog in the source repo
-cat /path/to/agent-os-enhanced/mcp_server/CHANGELOG.md
+cat /path/to/praxis-os/mcp_server/CHANGELOG.md
 
 # Look for "Breaking Changes" or "Changed" sections
 # Example: v1.3.0 changed get_current_phase response structure
@@ -175,7 +175,7 @@ echo "Backup created: $(date)" >> .praxis-os/UPDATE_LOG.txt
 
 ```bash
 # Copy from source to your project
-cp -r /path/to/agent-os-enhanced/mcp_server .praxis-os/
+cp -r /path/to/praxis-os/mcp_server .praxis-os/
 
 # Verify copy completed
 ls -la .praxis-os/mcp_server/
@@ -412,7 +412,7 @@ pkill -f "mcp.*agent-os-rag"
 **Fix:**
 ```bash
 # 1. Verify mcp_server was copied completely
-diff -r /path/to/agent-os-enhanced/mcp_server .praxis-os/mcp_server
+diff -r /path/to/praxis-os/mcp_server .praxis-os/mcp_server
 # Should show no differences (or only version changes)
 
 # 2. Reinstall dependencies
@@ -459,11 +459,11 @@ cat .cursor/mcp.json | grep PYTHONPATH
 **Fix:**
 ```bash
 # 1. Verify what was copied
-diff -r /path/to/agent-os-enhanced/mcp_server .praxis-os/mcp_server
+diff -r /path/to/praxis-os/mcp_server .praxis-os/mcp_server
 
 # 2. Force re-copy
 rm -rf .praxis-os/mcp_server
-cp -r /path/to/agent-os-enhanced/mcp_server .praxis-os/
+cp -r /path/to/praxis-os/mcp_server .praxis-os/
 
 # 3. Restart server (CRITICAL)
 pkill -f "mcp.*agent-os-rag"
@@ -481,14 +481,14 @@ pkill -f "mcp.*agent-os-rag"
 
 ```bash
 # 1. Development environment
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 git pull origin main
 cp -r mcp_server /path/to/dev-project/.praxis-os/
 # Test thoroughly
 # Restart MCP server: pkill -f "mcp.*agent-os-rag"
 
 # 2. Staging environment
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 git checkout v1.3.0  # Pin to specific version
 cp -r mcp_server /path/to/staging-project/.praxis-os/
 # Run integration tests
@@ -604,7 +604,7 @@ EOF
 #!/bin/bash
 set -e
 
-AGENT_OS_REPO="/path/to/agent-os-enhanced"
+AGENT_OS_REPO="/path/to/praxis-os"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "🔄 Updating Agent OS (Content + Server)..."
@@ -725,10 +725,10 @@ This guide is most valuable when:
 
 ```bash
 # Get latest source
-cd /path/to/agent-os-enhanced && git pull origin main
+cd /path/to/praxis-os && git pull origin main
 
 # Copy to your project
-cp -r /path/to/agent-os-enhanced/mcp_server /path/to/your-project/.praxis-os/
+cp -r /path/to/praxis-os/mcp_server /path/to/your-project/.praxis-os/
 
 # Update dependencies
 /path/to/your-project/.praxis-os/venv/bin/pip install -r /path/to/your-project/.praxis-os/mcp_server/requirements.txt --upgrade

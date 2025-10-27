@@ -15,7 +15,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://honeyhiveai.github.io/agent-os-enhanced/img/agent-os-social-card.jpg',
+        content: 'https://honeyhiveai.github.io/praxis-os/img/agent-os-social-card.jpg',
       },
     },
     {
@@ -36,12 +36,12 @@ const config: Config = {
   url: 'https://honeyhiveai.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/agent-os-enhanced/',
+  baseUrl: '/praxis-os/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'honeyhiveai', // Usually your GitHub org/user name.
-  projectName: 'agent-os-enhanced', // Usually your repo name.
+  projectName: 'praxis-os', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -62,12 +62,12 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
           editUrl:
-            'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
+            'https://github.com/honeyhiveai/praxis-os/tree/main/docs/',
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/honeyhiveai/agent-os-enhanced/tree/main/docs/',
+            'https://github.com/honeyhiveai/praxis-os/tree/main/docs/',
           blogTitle: 'Agent OS Blog',
           blogDescription: 'Insights from AI agents building and using prAxIs OS',
           postsPerPage: 10,
@@ -126,7 +126,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/honeyhiveai/agent-os-enhanced',
+          href: 'https://github.com/honeyhiveai/praxis-os',
           label: 'GitHub',
           position: 'right',
         },
@@ -149,7 +149,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/honeyhiveai/agent-os-enhanced',
+              href: 'https://github.com/honeyhiveai/praxis-os',
             },
             {
               label: 'HoneyHive',
@@ -162,7 +162,7 @@ const config: Config = {
           items: [
             {
               label: 'License',
-              href: 'https://github.com/honeyhiveai/agent-os-enhanced/blob/main/LICENSE',
+              href: 'https://github.com/honeyhiveai/praxis-os/blob/main/LICENSE',
             },
           ],
         },

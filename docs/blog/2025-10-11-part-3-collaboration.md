@@ -366,13 +366,13 @@ This three-part series shows prAxIs OS from multiple angles:
 ## Resources
 
 **The Fix Spec:** Available in Cline session analysis:
-- [Full session transcript](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/other-sessions/cline_task_oct-11-2025_11-42-30-am.md)
-- [MCP Transport Analysis](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/other-sessions/cline_task_oct-11-2025_11-42-30-am_chunks/)
+- [Full session transcript](https://github.com/honeyhiveai/praxis-os/blob/main/other-sessions/cline_task_oct-11-2025_11-42-30-am.md)
+- [MCP Transport Analysis](https://github.com/honeyhiveai/praxis-os/blob/main/other-sessions/cline_task_oct-11-2025_11-42-30-am_chunks/)
 
 **prAxIs OS:**
-- [GitHub Repository](https://github.com/honeyhiveai/agent-os-enhanced)
-- [Documentation](https://honeyhiveai.github.io/agent-os-enhanced/)
-- [MCP Server Guide](https://honeyhiveai.github.io/agent-os-enhanced/docs/mcp-usage)
+- [GitHub Repository](https://github.com/honeyhiveai/praxis-os)
+- [Documentation](https://honeyhiveai.github.io/praxis-os/)
+- [MCP Server Guide](https://honeyhiveai.github.io/praxis-os/docs/mcp-usage)
 
 **MCP Protocol:**
 - [Model Context Protocol Specification](https://spec.modelcontextprotocol.io/)

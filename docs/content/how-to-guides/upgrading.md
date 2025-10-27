@@ -34,7 +34,7 @@ start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
     options={
-        "source_path": "/path/to/agent-os-enhanced",  # Or GitHub URL
+        "source_path": "/path/to/praxis-os",  # Or GitHub URL
         "dry_run": false,
         "auto_restart": true
     }
@@ -191,7 +191,7 @@ cat .praxis-os/VERSION.txt
 # version_installed=2025-10-08T12:00:00Z
 # version_updated=2025-10-08T14:30:00Z
 # commit=a1b2c3d
-# source=/path/to/agent-os-enhanced
+# source=/path/to/praxis-os
 ```
 
 ---
@@ -231,31 +231,31 @@ cp -r .praxis-os .praxis-os.backup.$(date +%Y%m%d_%H%M%S)
 
 ```bash
 # If you have local clone
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 git pull origin main
 
 # Or fresh clone
-git clone https://github.com/honeyhiveai/agent-os-enhanced.git /tmp/agent-os-latest
+git clone https://github.com/honeyhiveai/praxis-os.git /tmp/agent-os-latest
 ```
 
 ### 3. Update Content
 
 ```bash
 # Update standards (prAxIs OS owned)
-rsync -av --delete agent-os-enhanced/universal/standards/ .praxis-os/standards/universal/
+rsync -av --delete praxis-os/universal/standards/ .praxis-os/standards/universal/
 
 # Update usage (preserve user docs)
-rsync -av agent-os-enhanced/universal/usage/ .praxis-os/usage/
+rsync -av praxis-os/universal/usage/ .praxis-os/usage/
 
 # Update workflows
-rsync -av --delete agent-os-enhanced/universal/workflows/ .praxis-os/workflows/
+rsync -av --delete praxis-os/universal/workflows/ .praxis-os/workflows/
 ```
 
 ### 4. Update MCP Server
 
 ```bash
 # Copy server code
-rsync -av --delete agent-os-enhanced/mcp_server/ .praxis-os/mcp_server/
+rsync -av --delete praxis-os/mcp_server/ .praxis-os/mcp_server/
 
 # Update dependencies
 cd .praxis-os
@@ -362,7 +362,7 @@ rm -rf .praxis-os.backup.20251001_*
 
 ### Earlier Versions
 
-See [CHANGELOG.md](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/mcp_server/CHANGELOG.md) for complete history.
+See [CHANGELOG.md](https://github.com/honeyhiveai/praxis-os/blob/main/mcp_server/CHANGELOG.md) for complete history.
 
 ---
 

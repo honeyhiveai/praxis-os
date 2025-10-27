@@ -24,7 +24,7 @@
 // You provide me with Cline MCP config:
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:XXXX/mcp"  // Fill in actual port
     }
@@ -50,7 +50,7 @@ I can start using the tools immediately.
 
 **If working correctly:**
 1. I connect without errors
-2. `get_server_info` confirms project "agent-os-enhanced"
+2. `get_server_info` confirms project "praxis-os"
 3. `search_standards("testing")` returns RAG results
 4. No interference with your Cursor usage
 5. Both of us can work simultaneously
@@ -140,8 +140,8 @@ ACT MODE
   "pid": 95431,
   "started_at": "2025-10-11T17:06:46.031434+00:00",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 <environment_details>
@@ -218,7 +218,7 @@ ACT MODE
 <path>../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json</path>
 <content>{
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -245,7 +245,7 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path="../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json">
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -285,7 +285,7 @@ ACT MODE
 [Unexpected content type]
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>get_server_info</tool_name>
 <arguments>
 {}
@@ -302,7 +302,7 @@ ACT MODE
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
+[use_mcp_tool for 'praxis-os'] Result:
 Error executing MCP tool: Not connected
 <environment_details>
 # Cursor Visible Files
@@ -339,8 +339,8 @@ ACT MODE
   "url": "http://127.0.0.1:4242/mcp",
   "transport": "dual",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   },
   "pid": 95431
 }
@@ -350,7 +350,7 @@ ACT MODE
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }
@@ -475,7 +475,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -536,7 +536,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/11/2025, 10:14:12 AM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -743,10 +743,10 @@ universal/workflows/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "7cdef7eaf42925b3537c12b0dbd0ef5c3bebf30c"
     }
@@ -785,7 +785,7 @@ ACT MODE
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted 1 minute ago. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 New instructions for task continuation:
@@ -850,7 +850,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/11/2025, 10:15:32 AM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore

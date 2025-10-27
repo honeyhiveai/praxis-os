@@ -1,6 +1,6 @@
 # Agent OS Installation Summary
 
-**Project:** agent-os-enhanced (self-installation for dogfooding)  
+**Project:** praxis-os (self-installation for dogfooding)  
 **Date:** October 5, 2025  
 **Status:** ✅ **Complete**
 
@@ -132,7 +132,7 @@ Once Cursor reloads, these tools will be available:
 
 ---
 
-## Project Context: agent-os-enhanced
+## Project Context: praxis-os
 
 ### Detected Patterns
 - ✅ **Python project** (mcp_server/ contains Python code)
@@ -208,8 +208,8 @@ See: `.praxis-os/standards/development/python-documentation.md`
 To update to a newer version of Agent OS in the future:
 
 ```bash
-# 1. Pull latest from agent-os-enhanced repo
-git pull origin main  # (from the agent-os-enhanced repo)
+# 1. Pull latest from praxis-os repo
+git pull origin main  # (from the praxis-os repo)
 
 # 2. Rebuild RAG index
 .praxis-os/venv/bin/python .praxis-os/scripts/build_rag_index.py --force

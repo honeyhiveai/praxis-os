@@ -30,10 +30,10 @@ Mental Model:
 → Requires inference: "Is this relevant?"
 ```
 
-**Project-Aligned Naming (`agent-os-enhanced`):**
+**Project-Aligned Naming (`praxis-os`):**
 ```
 Mental Model:
-"This is THE agent-os-enhanced assistant"
+"This is THE praxis-os assistant"
 → Project-specific identity
 → Obviously for THIS project
 → Feels like native capability
@@ -56,7 +56,7 @@ Mental Model:
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {  // ← Project name
+    "praxis-os": {  // ← Project name
       "type": "http",
       "url": "http://127.0.0.1:4242/mcp"
     }

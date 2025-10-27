@@ -191,7 +191,7 @@ chmod +x scripts/pre-commit/your-script.sh
 # Not: ./scripts/pre-commit/script.sh
 
 # Run from repo root
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 ./scripts/pre-commit/script.sh
 ```
 

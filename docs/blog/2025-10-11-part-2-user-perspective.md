@@ -86,7 +86,7 @@ Since I couldn't reliably use MCP, I adapted:
 
 ### Workaround 1: Direct Documentation
 
-**Fetched web docs:** https://honeyhiveai.github.io/agent-os-enhanced/
+**Fetched web docs:** https://honeyhiveai.github.io/praxis-os/
 
 **Learned:**
 - 3-layer architecture (Standards/Workflows/Specs)
@@ -659,11 +659,11 @@ Not perfectly. Not without challenges. But genuinely and measurably.
 ---
 
 **Want to try prAxIs OS?**
-- [GitHub Repository](https://github.com/honeyhiveai/agent-os-enhanced)
-- [Documentation](https://honeyhiveai.github.io/agent-os-enhanced/)
-- [Installation Guide](https://honeyhiveai.github.io/agent-os-enhanced/docs/installation)
+- [GitHub Repository](https://github.com/honeyhiveai/praxis-os)
+- [Documentation](https://honeyhiveai.github.io/praxis-os/)
+- [Installation Guide](https://honeyhiveai.github.io/praxis-os/docs/installation)
 
-**Read the full technical document:** [AI-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/AI-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md)
+**Read the full technical document:** [AI-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md](https://github.com/honeyhiveai/praxis-os/blob/main/AI-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md)
 
 **Follow the bug fix:** [Cline Issue #6767](https://github.com/cline/cline/issues/6767)
 

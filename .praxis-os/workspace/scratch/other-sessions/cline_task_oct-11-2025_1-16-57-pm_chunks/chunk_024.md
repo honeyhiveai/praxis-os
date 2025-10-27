@@ -830,7 +830,7 @@ mcp.run(
 // Cline global config - WORKS NOW!
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:4242/mcp"
     }
@@ -895,7 +895,7 @@ curl -X POST http://localhost:4242/mcp \
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "transport": "http",
       "url": "http://localhost:4242/mcp"
     }

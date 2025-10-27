@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",

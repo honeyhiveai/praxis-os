@@ -201,7 +201,7 @@ ACT MODE
 ```json
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",

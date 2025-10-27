@@ -720,7 +720,7 @@ tox -e integration # Python-specific
    - Shows Python-specific procedures
    - Other projects adapt for their tools
 
-**Alternative**: Put these in `.praxis-os/standards/development/` in agent-os-enhanced as LOCAL standards, not universal.
+**Alternative**: Put these in `.praxis-os/standards/development/` in praxis-os as LOCAL standards, not universal.
 
 ---
 

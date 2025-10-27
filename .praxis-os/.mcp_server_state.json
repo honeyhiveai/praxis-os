@@ -5,8 +5,8 @@
   "host": "127.0.0.1",
   "path": "/mcp",
   "url": "http://127.0.0.1:4242/mcp",
-  "pid": 16061,
-  "started_at": "2025-10-25T17:11:26.867706+00:00",
+  "pid": 76950,
+  "started_at": "2025-10-27T21:11:07.888385+00:00",
   "project": {
     "name": "agent-os-enhanced",
     "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"

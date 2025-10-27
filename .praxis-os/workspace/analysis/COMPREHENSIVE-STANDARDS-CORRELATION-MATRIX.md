@@ -1,5 +1,5 @@
 # Comprehensive Standards Correlation Matrix
-## python-sdk vs agent-os-enhanced Content Analysis
+## python-sdk vs praxis-os Content Analysis
 
 **Analysis Date**: October 9, 2025  
 **Methodology**: Systematic content reading + exhaustive MCP querying  

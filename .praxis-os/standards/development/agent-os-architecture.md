@@ -17,7 +17,7 @@
 ## 📂 Directory Structure
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                        # FRAMEWORK SOURCE (edit this)
 │   ├── standards/                   # Universal standards (all languages)
 │   │   ├── ai-safety/

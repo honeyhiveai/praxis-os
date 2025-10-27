@@ -8,7 +8,7 @@
 
 ## Objective
 
-Verify the source repository is valid, is an agent-os-enhanced repository, has a clean Git state, and contains the required structure.
+Verify the source repository is valid, is an praxis-os repository, has a clean Git state, and contains the required structure.
 
 ---
 
@@ -28,7 +28,7 @@ if not source_result["valid"]:
 
 **Required checks:**
 - [ ] Path exists
-- [ ] Is agent-os-enhanced repository (has mcp_server/, universal/)
+- [ ] Is praxis-os repository (has mcp_server/, universal/)
 - [ ] Git status is clean (no uncommitted changes)
 - [ ] Version extracted from VERSION.txt
 - [ ] Commit hash extracted

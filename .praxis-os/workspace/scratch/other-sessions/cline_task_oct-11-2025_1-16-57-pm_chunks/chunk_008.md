@@ -814,7 +814,7 @@ Want to test the Cline launcher approach now and prove it can work?
 [attempt_completion] Result:
 The user has provided feedback on the results. Consider their input to continue the task, and then attempt completion again.
 <feedback>
-here is our docs site, the journey on the landing page should help https://honeyhiveai.github.io/agent-os-enhanced/
+here is our docs site, the journey on the landing page should help https://honeyhiveai.github.io/praxis-os/
 </feedback>
 <environment_details>
 # Cursor Visible Files
@@ -840,7 +840,7 @@ ACT MODE
 [Unexpected content type]
 
 <web_fetch>
-<url>https://honeyhiveai.github.io/agent-os-enhanced/</url>
+<url>https://honeyhiveai.github.io/praxis-os/</url>
 <task_progress>
 - [x] Understood the fork relationship and divergence
 - [ ] Read HoneyHive's docs landing page about their journey
@@ -853,8 +853,8 @@ ACT MODE
 
 **User:**
 
-[web_fetch for 'https://honeyhiveai.github.io/agent-os-enhanced/'] Result:
-Fetched Markdown for https://honeyhiveai.github.io/agent-os-enhanced/:
+[web_fetch for 'https://honeyhiveai.github.io/praxis-os/'] Result:
+Fetched Markdown for https://honeyhiveai.github.io/praxis-os/:
 
   Agent OS Enhanced  
 
@@ -915,7 +915,7 @@ Complete AI development platform
 
 🙏 **Built on the shoulders of giants:** [BuilderMethods Agent OS](https://buildermethods.com/agent-os) provided the 3-layer structure and philosophical foundation. We built the infrastructure to scale it.
 
-[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/agent-os-enhanced/docs/intro)
+[Visit Original Agent OS →](https://buildermethods.com/agent-os)[Explore Enhanced Version →](/praxis-os/docs/intro)
 
 Get Started
 -----------
@@ -932,7 +932,7 @@ Install in your project with one command
 
 →
 
-](/agent-os-enhanced/docs/intro)
+](/praxis-os/docs/intro)
 
 [
 
@@ -944,7 +944,7 @@ Understand MCP, RAG, and phase gating
 
 →
 
-](/agent-os-enhanced/docs/how-it-works)
+](/praxis-os/docs/how-it-works)
 
 [
 
@@ -956,7 +956,7 @@ Detailed setup and configuration guide
 
 →
 
-](/agent-os-enhanced/docs/installation)
+](/praxis-os/docs/installation)
 
 [
 
@@ -968,7 +968,7 @@ Learn about spec creation and execution
 
 →
 
-](/agent-os-enhanced/docs/workflows)
+](/praxis-os/docs/workflows)
 
 Core Features
 -------------
@@ -985,7 +985,7 @@ Production-ready AI development infrastructure
 
 
 
-](/agent-os-enhanced/docs/architecture)
+](/praxis-os/docs/architecture)
 
 [
 
@@ -997,4 +997,4 @@ Timeless CS fundamentals that work across any language with smart generation.
 
 
 
-](/agent-os-enhanced/docs/standards)
+](/praxis-os/docs/standards)

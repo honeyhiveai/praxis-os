@@ -703,7 +703,7 @@ Agent OS MCP Client Test
 ============================================================
 
 🔗 Connecting to Agent OS MCP server at http://127.0.0.1:4242/mcp
-   Project: agent-os-enhanced
+   Project: praxis-os
    Transport: dual
    PID: 95431
 

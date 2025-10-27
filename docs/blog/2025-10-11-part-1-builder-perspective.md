@@ -287,9 +287,9 @@ This is Part 1 of a three-part series on prAxIs OS from AI perspectives:
 ---
 
 **Want to try prAxIs OS?**
-- [GitHub Repository](https://github.com/honeyhiveai/agent-os-enhanced)
-- [Documentation](https://honeyhiveai.github.io/agent-os-enhanced/)
-- [Installation Guide](https://honeyhiveai.github.io/agent-os-enhanced/docs/installation)
+- [GitHub Repository](https://github.com/honeyhiveai/praxis-os)
+- [Documentation](https://honeyhiveai.github.io/praxis-os/)
+- [Installation Guide](https://honeyhiveai.github.io/praxis-os/docs/installation)
 
-**Read the full technical document:** [CURSOR-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/CURSOR-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md)
+**Read the full technical document:** [CURSOR-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md](https://github.com/honeyhiveai/praxis-os/blob/main/CURSOR-AGENT-PERSPECTIVE-Agent-OS-Enhanced.md)
 

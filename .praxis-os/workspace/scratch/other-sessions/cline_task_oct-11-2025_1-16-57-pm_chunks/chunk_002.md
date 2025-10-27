@@ -164,10 +164,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -211,7 +211,7 @@ Let me search for Cline's MCP configuration more directly:
 [read_file for '.vscode/settings.json'] Result:
 {
   "cline.mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": ["-m", "mcp_server"],
       "env": {
@@ -246,10 +246,10 @@ ACT MODE
 
 [Unexpected content type]
 
-Now I can see the Cline MCP configuration! The server is named `agent-os-enhanced` in Cline. Let me try accessing it:
+Now I can see the Cline MCP configuration! The server is named `praxis-os` in Cline. Let me try accessing it:
 
 <use_mcp_tool>
-<server_name>agent-os-enhanced</server_name>
+<server_name>praxis-os</server_name>
 <tool_name>search_standards</tool_name>
 <arguments>
 {
@@ -269,8 +269,8 @@ Now I can see the Cline MCP configuration! The server is named `agent-os-enhance
 
 **User:**
 
-[use_mcp_tool for 'agent-os-enhanced'] Result:
-Error executing MCP tool: No connection found for server: agent-os-enhanced. Please make sure to use MCP servers available under 'Connected MCP Servers'.
+[use_mcp_tool for 'praxis-os'] Result:
+Error executing MCP tool: No connection found for server: praxis-os. Please make sure to use MCP servers available under 'Connected MCP Servers'.
 <environment_details>
 # Cursor Visible Files
 (No visible files)
@@ -299,7 +299,7 @@ ACT MODE
 The MCP server configuration exists in `.vscode/settings.json` but the server is **not currently connected** to Cline.
 
 **Status:**
-- ✅ Configuration exists: `.vscode/settings.json` has `agent-os-enhanced` MCP server
+- ✅ Configuration exists: `.vscode/settings.json` has `praxis-os` MCP server
 - ❌ Connection: Server is not active/connected to Cline
 - ✅ Works in Cursor: You confirmed it works there
 
@@ -384,7 +384,7 @@ Since Cursor was restarted, let me check if there are any MCP servers showing as
 
 **User:**
 
-[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
+[TASK RESUMPTION] This task was interrupted just now. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. The current working directory is now '/Users/josh/src/github.com/honeyhiveai/praxis-os'. If the task has not been completed, retry the last step before interruption and proceed with completing the task.
 
 Note: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.
 
@@ -447,7 +447,7 @@ Keeping the todo list updated helps track progress and ensures nothing is missed
 # Current Time
 10/10/2025, 10:01:46 PM (America/Los_Angeles, UTC-7:00)
 
-# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced) Files
+# Current Working Directory (/Users/josh/src/github.com/honeyhiveai/praxis-os) Files
 .clinerules
 .cursorrules
 .gitignore
@@ -654,10 +654,10 @@ universal/workflows/spec_execution_v1/
 # Workspace Configuration
 {
   "workspaces": {
-    "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced": {
-      "hint": "agent-os-enhanced",
+    "/Users/josh/src/github.com/honeyhiveai/praxis-os": {
+      "hint": "praxis-os",
       "associatedRemoteUrls": [
-        "origin: git@github.com:honeyhiveai/agent-os-enhanced.git"
+        "origin: git@github.com:honeyhiveai/praxis-os.git"
       ],
       "latestGitCommitHash": "ef1e1ac74eb03828bf52aa489a9a1bda363900f7"
     }
@@ -688,7 +688,7 @@ I still cannot access the MCP server from Cline, even after Cursor was restarted
 - I'm running in **Cline** (a VSCode/Cursor extension)
 - MCP server configuration exists in `.vscode/settings.json` 
 - But the server shows as **not connected** to Cline
-- The environment shows: "No connection found for server: agent-os-enhanced"
+- The environment shows: "No connection found for server: praxis-os"
 
 **What this means:**
 The MCP server needs to be connected in **Cline's** MCP manager, not just configured. Configuration exists, but connection isn't established.
@@ -697,7 +697,7 @@ The MCP server needs to be connected in **Cline's** MCP manager, not just config
 
 1. **Check Cline's MCP Status:**
    - Look for Cline's MCP server connection status in the UI
-   - Should show `agent-os-enhanced` as a connected server
+   - Should show `praxis-os` as a connected server
    - If not connected, there should be an option to connect/start it
 
 2. **Possible issues:**

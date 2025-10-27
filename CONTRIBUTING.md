@@ -377,8 +377,8 @@ Explain:
 
 1. **Fork the repository**
    ```bash
-   git clone github.com/your-org/agent-os-enhanced
-   cd agent-os-enhanced
+   git clone github.com/your-org/praxis-os
+   cd praxis-os
    git checkout -b feature/api-design-patterns
    ```
 

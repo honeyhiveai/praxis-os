@@ -820,7 +820,7 @@ This feature will be considered successful when:
   - Verify discovery works for both git and non-git projects
   
   **Acceptance Criteria:**
-  - [ ] Project name extracted from git remote URL (e.g., "agent-os-enhanced" from git@github.com:user/agent-os-enhanced.git)
+  - [ ] Project name extracted from git remote URL (e.g., "praxis-os" from git@github.com:user/praxis-os.git)
   - [ ] Falls back to directory name if not a git repo
   - [ ] Git info returned with remote, branch, commit, commit_short, status
   - [ ] Returns None for git info if not a git repo (graceful fallback)

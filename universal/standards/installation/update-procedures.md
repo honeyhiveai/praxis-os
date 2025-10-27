@@ -24,7 +24,7 @@ start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
     options={
-        "source_path": "/path/to/agent-os-enhanced",
+        "source_path": "/path/to/praxis-os",
         "dry_run": false,
         "auto_restart": true
     }
@@ -61,7 +61,7 @@ This standard helps AI agents **discover and understand** when and how to update
 ### Content Updates
 
 Updating standards, workflows, and usage documentation:
-- **Source**: `universal/` directory in agent-os-enhanced repository
+- **Source**: `universal/` directory in praxis-os repository
 - **Destination**: `.praxis-os/` directory in your project
 - **Method**: Via `agent_os_upgrade_v1` workflow
 - **Time**: ~2 minutes
@@ -93,7 +93,7 @@ The `agent_os_upgrade_v1` workflow handles **both types** in a single execution:
 
 **Source Repository Structure:**
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/                    ← CANONICAL SOURCE
 │   ├── standards/
 │   │   ├── ai-assistant/
@@ -106,7 +106,7 @@ agent-os-enhanced/
 │       ├── spec_execution_v1/
 │       └── agent_os_upgrade_v1/
 │
-└── .praxis-os/                    ← LOCAL BUILD (agent-os-enhanced only)
+└── .praxis-os/                    ← LOCAL BUILD (praxis-os only)
     ├── standards/
     ├── usage/
     ├── workflows/
@@ -191,7 +191,7 @@ your-project/
 cat .praxis-os/VERSION.txt
 
 # Check latest version in source repo
-cd /path/to/agent-os-enhanced
+cd /path/to/praxis-os
 git pull origin main
 git log -1
 ```
@@ -215,7 +215,7 @@ start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
     options={
-        "source_path": "/path/to/agent-os-enhanced",
+        "source_path": "/path/to/praxis-os",
         "dry_run": false,            # Set true to preview changes
         "auto_restart": true          # Auto-restart MCP server in Phase 3
     }
@@ -305,7 +305,7 @@ echo "Usage docs: $(find .praxis-os/usage -type f -name '*.md' | wc -l)"
 **Why manual commands are dangerous:**
 ```bash
 # ❌ This looks safe but will destroy custom content:
-rsync -av --delete /path/to/agent-os-enhanced/universal/standards/ .praxis-os/standards/
+rsync -av --delete /path/to/praxis-os/universal/standards/ .praxis-os/standards/
 
 # What it does:
 # 1. Deletes .praxis-os/standards/universal/ (OK)
@@ -323,12 +323,12 @@ rsync -av --delete universal/standards/ .praxis-os/standards/universal/
 ### ❌ FORBIDDEN: Syncing from .praxis-os/
 
 ```bash
-# ❌ NEVER sync from the .praxis-os directory in agent-os-enhanced
-rsync -av /path/to/agent-os-enhanced/.praxis-os/ .praxis-os/
+# ❌ NEVER sync from the .praxis-os directory in praxis-os
+rsync -av /path/to/praxis-os/.praxis-os/ .praxis-os/
 ```
 
 **Why this is wrong:**
-- `.praxis-os/` in agent-os-enhanced is a **build artifact directory**
+- `.praxis-os/` in praxis-os is a **build artifact directory**
 - Contains processed files, RAG index, local state
 - Not the canonical source of truth
 - May include development-only or test data
@@ -339,7 +339,7 @@ rsync -av /path/to/agent-os-enhanced/.praxis-os/ .praxis-os/
 
 ```bash
 # ❌ Don't cherry-pick individual files
-cp agent-os-enhanced/universal/standards/testing/test-pyramid.md .praxis-os/standards/universal/testing/
+cp praxis-os/universal/standards/testing/test-pyramid.md .praxis-os/standards/universal/testing/
 ```
 
 **Why this is wrong:**
@@ -372,7 +372,7 @@ ls .praxis-os/standards/
 start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
-    options={"source_path": "/path/to/agent-os-enhanced"}
+    options={"source_path": "/path/to/praxis-os"}
 )
 ```
 
@@ -435,7 +435,7 @@ After updates, check `.praxis-os/VERSION.txt`:
 ```txt
 Agent OS Content Version
 
-Repository: https://github.com/honeyhiveai/agent-os-enhanced
+Repository: https://github.com/honeyhiveai/praxis-os
 Last Updated: 2025-10-10 18:30:00
 Source Commit: abc123def
 Updated By: agent_os_upgrade_v1 workflow
@@ -475,7 +475,7 @@ search_standards("why nested standards structure")
 
 - [Workflow System Overview](../workflows/workflow-system-overview.md) - How workflows work
 - [Workflow Metadata Standards](../workflows/workflow-metadata-standards.md) - Workflow discovery
-- [Dogfooding Model](../development/dogfooding-model.md) - How agent-os-enhanced uses Agent OS
+- [Dogfooding Model](../development/dogfooding-model.md) - How praxis-os uses Agent OS
 
 **Related Workflows:**
 - `agent_os_upgrade_v1` - Automated upgrade with validation and rollback
@@ -501,7 +501,7 @@ After reading this standard, you should understand:
 start_workflow(
     workflow_type="agent_os_upgrade_v1",
     target_file="mcp_server",
-    options={"source_path": "/path/to/agent-os-enhanced"}
+    options={"source_path": "/path/to/praxis-os"}
 )
 ```
 

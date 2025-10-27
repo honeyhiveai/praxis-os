@@ -309,7 +309,7 @@ ACT MODE
 [read_file for '../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json'] Result:
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -348,7 +348,7 @@ ACT MODE
 ------- SEARCH
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "type": "sse",
@@ -359,7 +359,7 @@ ACT MODE
 =======
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "transport": "http",
@@ -394,7 +394,7 @@ Here is the full, updated content of the file that was saved:
 <final_file_content path="../../../../Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json">
 {
   "mcpServers": {
-    "agent-os-enhanced": {
+    "praxis-os": {
       "disabled": false,
       "timeout": 60,
       "transport": "http",

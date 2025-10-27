@@ -1,5 +1,5 @@
 # Python Testing Standards
-# Generated for: agent-os-enhanced
+# Generated for: praxis-os
 
 ## 🚨 CRITICAL: AI Test Execution Protocol
 
@@ -95,7 +95,7 @@ pip install pytest pytest-cov pytest-mock
 ### Project Structure
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── mcp_server/
 │   ├── agent_os_rag.py
 │   ├── rag_engine.py
@@ -524,7 +524,7 @@ tox -e lint
 
 ---
 
-## Your Project Context: agent-os-enhanced
+## Your Project Context: praxis-os
 
 ### Current State
 
@@ -642,4 +642,4 @@ def test_file_watcher_rebuilds_index(temp_dir):
 
 ---
 
-**Generated for agent-os-enhanced MCP server project. Add pytest infrastructure to improve code quality and confidence.**
+**Generated for praxis-os MCP server project. Add pytest infrastructure to improve code quality and confidence.**

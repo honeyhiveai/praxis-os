@@ -475,7 +475,7 @@ class ProjectInfoDiscovery:
         2. Directory name (fallback)
 
         Examples:
-        - git@github.com:user/agent-os-enhanced.git → "agent-os-enhanced"
+        - git@github.com:user/praxis-os.git → "praxis-os"
         - /Users/josh/my-project/ → "my-project"
 
         Returns:
@@ -988,7 +988,7 @@ def get_server_info() -> dict:
     Example:
         >>> info = get_server_info()
         >>> print(f"Connected to: {info['project']['name']}")
-        agent-os-enhanced
+        praxis-os
         >>> print(f"Git branch: {info['project']['git']['branch']}")
         main
         >>> print(f"Tools: {info['capabilities']['tools_available']}")
@@ -1124,8 +1124,8 @@ class ProjectInfo:
   "pid": 12345,
   "started_at": "2025-10-11T10:30:00Z",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 ```
@@ -1142,8 +1142,8 @@ class ProjectInfo:
   "pid": 12346,
   "started_at": "2025-10-11T10:31:00Z",
   "project": {
-    "name": "agent-os-enhanced",
-    "root": "/Users/josh/src/github.com/honeyhiveai/agent-os-enhanced"
+    "name": "praxis-os",
+    "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"
   }
 }
 ```

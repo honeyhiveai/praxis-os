@@ -403,7 +403,7 @@ Benefit: All team members inherit accumulated standards
 ### Model 3: Framework Development (Dogfooding)
 
 ```
-agent-os-enhanced/
+praxis-os/
 ├── universal/          ← Source standards (edit here)
 ├── .praxis-os/          ← Local install (like users have)
 ├── mcp_server/         ← Framework code
@@ -421,7 +421,7 @@ Result: 260,000 lines, 49 sessions, 100% AI-authored
 
 ### Installation Process
 
-**You:** "Install Agent OS from github.com/honeyhiveai/agent-os-enhanced"
+**You:** "Install Agent OS from github.com/honeyhiveai/praxis-os"
 
 **AI agent:** Performs complete setup:
 1. Analyzes your project (language, frameworks)

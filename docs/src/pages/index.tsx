@@ -42,14 +42,14 @@ function HomepageHeader() {
                 <span className={styles.dot}></span>
                 <span className={styles.dot}></span>
                 <span className={styles.dot}></span>
-                <span className={styles.codeTitle}>Install Agent OS</span>
+                <span className={styles.codeTitle}>Install prAxIs OS</span>
               </div>
               <div className={styles.codeBody}>
                 <pre>
 {`# Open your project in Cursor and say:
 
-"Install Agent OS from 
- github.com/honeyhiveai/agent-os-enhanced"
+"Install prAxIs OS from 
+ github.com/honeyhiveai/praxis-os"
 
 # The agent will:
 ✓ Analyze your project structure

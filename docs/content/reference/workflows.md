@@ -443,8 +443,8 @@ validate_workflow(
 
 **See Also:**
 - [How-To: Create Custom Workflows](../how-to-guides/create-custom-workflows)
-- [Workflow Construction Standards](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/universal/standards/workflows/workflow-construction-standards.md)
-- [Workflow Metadata Standards](https://github.com/honeyhiveai/agent-os-enhanced/blob/main/universal/standards/workflows/workflow-metadata-standards.md)
+- [Workflow Construction Standards](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/workflows/workflow-construction-standards.md)
+- [Workflow Metadata Standards](https://github.com/honeyhiveai/praxis-os/blob/main/universal/standards/workflows/workflow-metadata-standards.md)
 
 ---
 

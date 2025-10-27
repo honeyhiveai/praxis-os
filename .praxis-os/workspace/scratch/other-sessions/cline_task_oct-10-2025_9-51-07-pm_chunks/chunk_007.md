@@ -5,7 +5,7 @@ print(f"📦 Cloning to temp location: {temp_dir}")
 # Clone repo to temp
 subprocess.run([
     "git", "clone", 
-    "https://github.com/honeyhiveai/agent-os-enhanced.git",
+    "https://github.com/honeyhiveai/praxis-os.git",
     temp_dir
 ], check=True)
 
@@ -21,8 +21,8 @@ print(f"✅ Source ready at: {AGENT_OS_SOURCE}")
 If the user already has Agent OS cloned somewhere:
 
 ```python
-# Ask user where they've cloned agent-os-enhanced
-AGENT_OS_SOURCE = input("Path to agent-os-enhanced clone: ")
+# Ask user where they've cloned praxis-os
+AGENT_OS_SOURCE = input("Path to praxis-os clone: ")
 
 # Validate it
 assert os.path.exists(f"{AGENT_OS_SOURCE}/universal/"), "Invalid path"
@@ -45,9 +45,9 @@ assert os.access(".", os.W_OK), "Target directory not writable"
 import sys
 assert sys.version_info >= (3, 8), "Python 3.8+ required"
 
-# 4. Check NOT inside agent-os-enhanced repo itself
+# 4. Check NOT inside praxis-os repo itself
 current_dir = os.path.basename(os.getcwd())
-assert current_dir != "agent-os-enhanced", "Don't install inside source repo!"
+assert current_dir != "praxis-os", "Don't install inside source repo!"
 ```
 
 **If any checks fail, stop and fix before continuing.**
@@ -562,7 +562,7 @@ class MCPConfigGenerator:
         """Generate .cursor/mcp.json"""
         return {
             "mcpServers": {
-                "agent-os-enhanced": {
+                "praxis-os": {
                     "command": python_path,
                     "args": ["-m", "mcp_server"],
                     "env": {
@@ -579,7 +579,7 @@ class MCPConfigGenerator:
         """Generate settings for .vscode/settings.json"""
         return {
             "cline.mcpServers": {
-                "agent-os-enhanced": {
+                "praxis-os": {
                     "command": python_path,
                     "args": ["-m", "mcp_server"],
                     "env": {
@@ -596,7 +596,7 @@ class MCPConfigGenerator:
         """Generate .windsurf/mcp.json"""
         return {
             "mcpServers": {
-                "agent-os-enhanced": {
+                "praxis-os": {
                     "command": python_path,
                     "args": ["-m", "mcp_server"],
                     "env": {
@@ -704,7 +704,7 @@ Create spec for [your feature name]
 
 ## 📚 Documentation
 
-- Full docs: https://honeyhiveai.github.io/agent-os-enhanced/
+- Full docs: https://honeyhiveai.github.io/praxis-os/
 - Usage guide: `.praxis-os/usage/operating-model.md`
 - Standards: `.praxis-os/standards/`
 
@@ -965,7 +965,7 @@ if exists(".vscode/"):
 > 
 > **Option 1** (Recommended): I'll clone it to a temporary directory
 > ```bash
-> git clone https://github.com/honeyhiveai/agent-os-enhanced.git /tmp/agent-os-install-{random}
+> git clone https://github.com/honeyhiveai/praxis-os.git /tmp/agent-os-install-{random}
 > ```
 > 
 > **Option 2**: You tell me where you've already cloned it

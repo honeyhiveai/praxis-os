@@ -1,4 +1,4 @@
-# Dogfooding Setup - agent-os-enhanced
+# Dogfooding Setup - praxis-os
 
 **Date:** 2025-10-06  
 **Status:** ✅ TRUE DOGFOODING (no symlinks, real copies)
