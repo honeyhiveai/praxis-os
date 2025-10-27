@@ -18,7 +18,7 @@
   - `project/` - Project-specific standards
 
 **NOT Indexed:**
-- **.praxis-os/workflows/** - Use `aos_workflow` tool for workflow discovery
+- **.praxis-os/workflows/** - Use `pos_workflow` tool for workflow discovery
   - Structured queries provide complete metadata
   - RAG search not appropriate for structured workflow data
 
@@ -54,7 +54,7 @@ builder = IndexBuilder(
 - **Memory usage:** <500MB with index loaded
 
 **Common Errors:**
-- ❌ Querying for workflow metadata via `search_standards()` (use `aos_workflow` tool instead)
+- ❌ Querying for workflow metadata via `search_standards()` (use `pos_workflow` tool instead)
 - ❌ Wrong embedding model (index incompatible with queries)
 - ❌ Not restarting MCP server after config changes
 

@@ -246,7 +246,7 @@ Next Steps:
    - search_standards
    - start_workflow
    - get_current_phase
-   - aos_browser
+   - pos_browser
    - And more...
 
 3. 🎯 Try It Out:

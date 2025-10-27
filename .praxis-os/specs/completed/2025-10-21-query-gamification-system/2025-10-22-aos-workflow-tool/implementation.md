@@ -1,4 +1,4 @@
-# Implementation Guide: aos_workflow Tool
+# Implementation Guide: pos_workflow Tool
 
 **Spec Location:** `.praxis-os/specs/review/2025-10-22-aos-workflow-tool/`  
 **Implementation Strategy:** Clean cutover with comprehensive testing  
@@ -8,7 +8,7 @@
 
 ## Quick Start
 
-This document provides detailed, step-by-step implementation guidance for the `aos_workflow` consolidated tool. Follow the phases sequentially, validate at each gate, and reference the specifications for detailed requirements.
+This document provides detailed, step-by-step implementation guidance for the `pos_workflow` consolidated tool. Follow the phases sequentially, validate at each gate, and reference the specifications for detailed requirements.
 
 **Before You Begin:**
 1. Read `srd.md` for business requirements
@@ -42,7 +42,7 @@ touch mcp_server/server/tools/workflow_tools.py
 touch tests/server/tools/test_workflow_tools.py
 touch tests/server/tools/test_workflow_tools_security.py
 touch tests/server/tools/test_workflow_tools_performance.py
-touch tests/integration/test_aos_workflow_e2e.py
+touch tests/integration/test_pos_workflow_e2e.py
 
 # Verify structure
 ls -la mcp_server/server/tools/
@@ -67,7 +67,7 @@ Provides single unified interface for all workflow operations:
 - Management (5 actions): list_sessions, get_session, delete_session, pause, resume
 - Recovery (3 actions): retry_phase, rollback, get_errors
 
-Follows aos_browser pattern for consistency and LLM performance.
+Follows pos_browser pattern for consistency and LLM performance.
 """
 
 import os
@@ -153,7 +153,7 @@ def register_workflow_tools(mcp_server) -> int:
     """
     
     @mcp_server.tool()
-    async def aos_workflow(
+    async def pos_workflow(
         action: str,
         
         # Session context
@@ -184,7 +184,7 @@ def register_workflow_tools(mcp_server) -> int:
         to_phase: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Consolidated workflow management tool following aos_browser pattern.
+        Consolidated workflow management tool following pos_browser pattern.
         
         Handles all workflow operations through action-based dispatch:
         - Discovery (1 action): list_workflows
@@ -216,19 +216,19 @@ def register_workflow_tools(mcp_server) -> int:
         
         Examples:
             # Discovery
-            result = aos_workflow(action="list_workflows")
-            result = aos_workflow(action="list_workflows", category="code_generation")
+            result = pos_workflow(action="list_workflows")
+            result = pos_workflow(action="list_workflows", category="code_generation")
             
             # Execution
-            session = aos_workflow(action="start", workflow_type="test_generation_v3", target_file="test.py")
-            phase = aos_workflow(action="get_phase", session_id=session["session_id"])
+            session = pos_workflow(action="start", workflow_type="test_generation_v3", target_file="test.py")
+            phase = pos_workflow(action="get_phase", session_id=session["session_id"])
             
             # Management
-            sessions = aos_workflow(action="list_sessions", status="active")
-            aos_workflow(action="pause", session_id=session_id, checkpoint_note="Break for review")
+            sessions = pos_workflow(action="list_sessions", status="active")
+            pos_workflow(action="pause", session_id=session_id, checkpoint_note="Break for review")
             
             # Recovery
-            aos_workflow(action="retry_phase", session_id=session_id, phase=2)
+            pos_workflow(action="retry_phase", session_id=session_id, phase=2)
         """
         try:
             # Validate action
@@ -282,7 +282,7 @@ def register_workflow_tools(mcp_server) -> int:
                 "error_type": "ValueError"
             }
         except Exception as e:
-            logger.error(f"Unexpected error in aos_workflow: {e}", exc_info=True)
+            logger.error(f"Unexpected error in pos_workflow: {e}", exc_info=True)
             return {
                 "status": "error",
                 "action": action,
@@ -684,10 +684,10 @@ pytest tests/server/tools/test_workflow_tools.py -v
 **File:** `tests/server/tools/test_workflow_tools_security.py`
 
 ```python
-"""Security tests for aos_workflow tool."""
+"""Security tests for pos_workflow tool."""
 
 import pytest
-from mcp_server.server.tools.workflow_tools import aos_workflow
+from mcp_server.server.tools.workflow_tools import pos_workflow
 
 
 class TestPathTraversal:
@@ -696,7 +696,7 @@ class TestPathTraversal:
     @pytest.mark.asyncio
     async def test_rejects_parent_directory_traversal(self):
         """Test that ../ is rejected."""
-        result = await aos_workflow(
+        result = await pos_workflow(
             action="start",
             workflow_type="test_gen_v3",
             target_file="../../../etc/passwd"
@@ -708,7 +708,7 @@ class TestPathTraversal:
     @pytest.mark.asyncio
     async def test_rejects_absolute_paths(self):
         """Test that absolute paths are rejected."""
-        result = await aos_workflow(
+        result = await pos_workflow(
             action="start",
             workflow_type="test_gen_v3",
             target_file="/etc/passwd"
@@ -726,7 +726,7 @@ class TestResourceLimits:
         """Test that oversized evidence is rejected."""
         large_evidence = {"data": "x" * (11 * 1024 * 1024)}  # 11 MB
         
-        result = await aos_workflow(
+        result = await pos_workflow(
             action="complete_phase",
             session_id=mock_session["session_id"],
             phase=1,
@@ -742,11 +742,11 @@ class TestResourceLimits:
 **File:** `tests/server/tools/test_workflow_tools_performance.py`
 
 ```python
-"""Performance tests for aos_workflow tool."""
+"""Performance tests for pos_workflow tool."""
 
 import pytest
 import time
-from mcp_server.server.tools.workflow_tools import aos_workflow
+from mcp_server.server.tools.workflow_tools import pos_workflow
 
 
 class TestResponseTimes:
@@ -756,7 +756,7 @@ class TestResponseTimes:
     async def test_list_workflows_under_100ms(self):
         """Test that list_workflows responds in < 100ms."""
         start = time.time()
-        result = await aos_workflow(action="list_workflows")
+        result = await pos_workflow(action="list_workflows")
         elapsed = time.time() - start
         
         assert elapsed < 0.1, f"list_workflows took {elapsed*1000:.1f}ms (target: < 100ms)"
@@ -766,7 +766,7 @@ class TestResponseTimes:
     async def test_start_under_500ms(self):
         """Test that start responds in < 500ms."""
         start = time.time()
-        result = await aos_workflow(
+        result = await pos_workflow(
             action="start",
             workflow_type="test_generation_v3",
             target_file="test.py"
@@ -808,16 +808,16 @@ def setup_server(mcp_server):
 
 ### Step 5.2: Clean Cutover Script
 
-**Create** `scripts/cutover_to_aos_workflow.py`:
+**Create** `scripts/cutover_to_pos_workflow.py`:
 
 ```python
 """
-Clean cutover script: Remove old workflow tools, deploy aos_workflow.
+Clean cutover script: Remove old workflow tools, deploy pos_workflow.
 
 This script performs a clean cutover by:
 1. Backing up current tool registry
 2. Removing old fragmented workflow tools
-3. Verifying aos_workflow is registered
+3. Verifying pos_workflow is registered
 4. Validating tool count reduction
 """
 
@@ -839,14 +839,14 @@ def execute_cutover():
     """Execute clean cutover."""
     logger = logging.getLogger(__name__)
     
-    logger.info("Starting clean cutover to aos_workflow")
+    logger.info("Starting clean cutover to pos_workflow")
     
-    # 1. Verify aos_workflow is available
+    # 1. Verify pos_workflow is available
     try:
         from mcp_server.server.tools.workflow_tools import register_workflow_tools
-        logger.info("✓ aos_workflow module available")
+        logger.info("✓ pos_workflow module available")
     except ImportError as e:
-        logger.error(f"✗ Failed to import aos_workflow: {e}")
+        logger.error(f"✗ Failed to import pos_workflow: {e}")
         return False
     
     # 2. Remove old tool registrations
@@ -856,7 +856,7 @@ def execute_cutover():
         # Tool removal logic here
     
     # 3. Verify new tool registered
-    logger.info("Verifying aos_workflow registration")
+    logger.info("Verifying pos_workflow registration")
     # Verification logic here
     
     logger.info("✓ Clean cutover complete")
@@ -869,7 +869,7 @@ if __name__ == "__main__":
 
 ### Step 5.3: Post-Deployment Validation
 
-**Create** `scripts/validate_aos_workflow.py`:
+**Create** `scripts/validate_pos_workflow.py`:
 
 ```python
 """
@@ -880,7 +880,7 @@ Tests all 14 actions in production environment.
 
 import asyncio
 import sys
-from mcp_server.server.tools.workflow_tools import aos_workflow
+from mcp_server.server.tools.workflow_tools import pos_workflow
 
 
 async def validate_discovery():
@@ -888,7 +888,7 @@ async def validate_discovery():
     print("Testing discovery actions...")
     
     # Test list_workflows
-    result = await aos_workflow(action="list_workflows")
+    result = await pos_workflow(action="list_workflows")
     assert result["status"] == "success", "list_workflows failed"
     assert result["count"] >= 2, "Expected at least 2 workflows"
     print("  ✓ list_workflows")
@@ -899,7 +899,7 @@ async def validate_execution():
     print("Testing execution actions...")
     
     # Test start
-    result = await aos_workflow(
+    result = await pos_workflow(
         action="start",
         workflow_type="test_generation_v3",
         target_file="validation_test.py"
@@ -909,7 +909,7 @@ async def validate_execution():
     print("  ✓ start")
     
     # Test get_phase
-    result = await aos_workflow(action="get_phase", session_id=session_id)
+    result = await pos_workflow(action="get_phase", session_id=session_id)
     assert result["status"] == "success", "get_phase failed"
     print("  ✓ get_phase")
     
@@ -921,7 +921,7 @@ async def validate_execution():
 async def main():
     """Run all validations."""
     print("=" * 60)
-    print("aos_workflow Production Validation")
+    print("pos_workflow Production Validation")
     print("=" * 60)
     
     try:
@@ -944,7 +944,7 @@ if __name__ == "__main__":
 
 **Run validation:**
 ```bash
-python scripts/validate_aos_workflow.py
+python scripts/validate_pos_workflow.py
 # Expected: All checks pass
 ```
 
@@ -1046,7 +1046,7 @@ If issues are discovered post-deployment:
 2. **Restore Old Tools:**
    - Restore old tool registration functions
    - Verify old tools working
-   - Remove aos_workflow registration
+   - Remove pos_workflow registration
 
 3. **Root Cause Analysis:**
    - Review logs for error patterns

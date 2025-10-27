@@ -1,4 +1,4 @@
-# Implementation Tasks: aos_workflow Tool
+# Implementation Tasks: pos_workflow Tool
 
 **Spec:** `.praxis-os/specs/review/2025-10-22-aos-workflow-tool/`  
 **Target Completion:** 2 weeks  
@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document breaks down the implementation of the `aos_workflow` consolidated tool into manageable phases with clear dependencies, acceptance criteria, and validation gates.
+This document breaks down the implementation of the `pos_workflow` consolidated tool into manageable phases with clear dependencies, acceptance criteria, and validation gates.
 
 **Implementation Phases:**
 1. **Foundation** - Core infrastructure and action dispatcher
@@ -74,7 +74,7 @@ pytest tests/server/tools/test_workflow_tools.py -v
 ```bash
 # Start MCP server and check tool count
 python -m mcp_server
-# Verify tools/list includes aos_workflow
+# Verify tools/list includes pos_workflow
 ```
 
 **Traceability:** FR-001 (Single consolidated tool)
@@ -88,7 +88,7 @@ python -m mcp_server
 **Dependencies:** Task 1.2
 
 **Steps:**
-1. Create `aos_workflow()` async function with complete signature
+1. Create `pos_workflow()` async function with complete signature
 2. Implement action validation (check against VALID_ACTIONS set)
 3. Create ACTION_HANDLERS dict mapping actions to handlers
 4. Implement parameter validation for each action
@@ -104,12 +104,12 @@ python -m mcp_server
 **Validation:**
 ```python
 # Test unknown action
-result = aos_workflow(action="invalid_action")
+result = pos_workflow(action="invalid_action")
 assert result["status"] == "error"
 assert "valid_actions" in result
 
 # Test missing parameters
-result = aos_workflow(action="start")  # Missing workflow_type, target_file
+result = pos_workflow(action="start")  # Missing workflow_type, target_file
 assert result["status"] == "error"
 assert "workflow_type" in result["error"]
 ```
@@ -200,13 +200,13 @@ pylint mcp_server/server/tools/workflow_tools.py
 
 **Validation:**
 ```python
-result = aos_workflow(action="list_workflows")
+result = pos_workflow(action="list_workflows")
 assert result["status"] == "success"
 assert len(result["workflows"]) >= 2  # test_generation_v3, spec_creation_v1
 assert all("workflow_type" in w for w in result["workflows"])
 
 # Test filtering
-result = aos_workflow(action="list_workflows", category="code_generation")
+result = pos_workflow(action="list_workflows", category="code_generation")
 assert all(w["category"] == "code_generation" for w in result["workflows"])
 ```
 
@@ -238,7 +238,7 @@ assert all(w["category"] == "code_generation" for w in result["workflows"])
 
 **Validation:**
 ```python
-result = aos_workflow(
+result = pos_workflow(
     action="start",
     workflow_type="test_generation_v3",
     target_file="src/test.py"
@@ -280,9 +280,9 @@ assert os.path.exists(state_file)
 **Validation:**
 ```python
 # Start session first
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 
-result = aos_workflow(action="get_phase", session_id=session["session_id"])
+result = pos_workflow(action="get_phase", session_id=session["session_id"])
 assert result["status"] == "success"
 assert result["current_phase"] == 1
 assert "phase_content" in result
@@ -313,9 +313,9 @@ assert "phase_content" in result
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 
-result = aos_workflow(
+result = pos_workflow(
     action="get_task",
     session_id=session["session_id"],
     phase=1,
@@ -355,10 +355,10 @@ assert "execution_steps" in result["task_content"]
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 
 # Test success case
-result = aos_workflow(
+result = pos_workflow(
     action="complete_phase",
     session_id=session["session_id"],
     phase=1,
@@ -370,7 +370,7 @@ assert result["phase_completed"] == 1
 assert "next_phase" in result
 
 # Test failure case
-result = aos_workflow(
+result = pos_workflow(
     action="complete_phase",
     session_id=session["session_id"],
     phase=1,
@@ -405,9 +405,9 @@ assert "missing_evidence" in result
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 
-result = aos_workflow(action="get_state", session_id=session["session_id"])
+result = pos_workflow(action="get_state", session_id=session["session_id"])
 assert result["status"] == "success"
 assert "workflow_type" in result
 assert "current_phase" in result
@@ -468,14 +468,14 @@ pytest tests/server/tools/test_workflow_tools.py::test_execution_actions -v
 ```python
 # Create multiple sessions
 for i in range(3):
-    aos_workflow(action="start", workflow_type="test_gen_v3", target_file=f"test_{i}.py")
+    pos_workflow(action="start", workflow_type="test_gen_v3", target_file=f"test_{i}.py")
 
-result = aos_workflow(action="list_sessions")
+result = pos_workflow(action="list_sessions")
 assert result["status"] == "success"
 assert result["count"] >= 3
 
 # Test filtering
-result = aos_workflow(action="list_sessions", status="active")
+result = pos_workflow(action="list_sessions", status="active")
 assert all(s["status"] == "active" for s in result["sessions"])
 ```
 
@@ -503,9 +503,9 @@ assert all(s["status"] == "active" for s in result["sessions"])
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 
-result = aos_workflow(action="get_session", session_id=session["session_id"])
+result = pos_workflow(action="get_session", session_id=session["session_id"])
 assert result["status"] == "success"
 assert "session" in result
 assert "phase_history" in result["session"]
@@ -536,10 +536,10 @@ assert "phase_history" in result["session"]
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 session_id = session["session_id"]
 
-result = aos_workflow(action="delete_session", session_id=session_id, reason="Test cleanup")
+result = pos_workflow(action="delete_session", session_id=session_id, reason="Test cleanup")
 assert result["status"] == "success"
 assert result["deleted"] == True
 
@@ -573,9 +573,9 @@ assert not os.path.exists(state_file)
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 
-result = aos_workflow(
+result = pos_workflow(
     action="pause",
     session_id=session["session_id"],
     checkpoint_note="Waiting for review"
@@ -610,10 +610,10 @@ assert result["resume_capable"] == True
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
-aos_workflow(action="pause", session_id=session["session_id"])
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+pos_workflow(action="pause", session_id=session["session_id"])
 
-result = aos_workflow(action="resume", session_id=session["session_id"])
+result = pos_workflow(action="resume", session_id=session["session_id"])
 assert result["status"] == "success"
 assert result["resumed"] == True
 assert result["current_phase"] == 1
@@ -645,11 +645,11 @@ assert "paused_duration_seconds" in result
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 # Simulate failure
-aos_workflow(action="complete_phase", session_id=session["session_id"], phase=1, evidence={})
+pos_workflow(action="complete_phase", session_id=session["session_id"], phase=1, evidence={})
 
-result = aos_workflow(action="retry_phase", session_id=session["session_id"], phase=1)
+result = pos_workflow(action="retry_phase", session_id=session["session_id"], phase=1)
 assert result["status"] == "success"
 assert result["retrying"] == True
 assert "phase_content" in result
@@ -680,11 +680,11 @@ assert "phase_content" in result
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 # Complete phase 1, advance to phase 2
-aos_workflow(action="complete_phase", session_id=session["session_id"], phase=1, evidence={...})
+pos_workflow(action="complete_phase", session_id=session["session_id"], phase=1, evidence={...})
 
-result = aos_workflow(action="rollback", session_id=session["session_id"], to_phase=1)
+result = pos_workflow(action="rollback", session_id=session["session_id"], to_phase=1)
 assert result["status"] == "success"
 assert result["rolled_back"] == True
 assert result["to_phase"] == 1
@@ -714,11 +714,11 @@ assert result["from_phase"] == 2
 
 **Validation:**
 ```python
-session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
 # Cause an error
-aos_workflow(action="complete_phase", session_id=session["session_id"], phase=1, evidence={})
+pos_workflow(action="complete_phase", session_id=session["session_id"], phase=1, evidence={})
 
-result = aos_workflow(action="get_errors", session_id=session["session_id"])
+result = pos_workflow(action="get_errors", session_id=session["session_id"])
 assert result["status"] == "success"
 assert result["error_count"] >= 1
 assert len(result["errors"]) >= 1
@@ -835,7 +835,7 @@ pytest tests/server/tools/test_workflow_tools_performance.py -v
 
 **Validation:**
 ```bash
-pytest tests/integration/test_aos_workflow_e2e.py -v
+pytest tests/integration/test_pos_workflow_e2e.py -v
 # Expected: >= 10 integration tests, all passing
 ```
 
@@ -969,11 +969,11 @@ pytest tests/ -v --cov
 2. Execute cleanup script to remove old tools
 3. Restart MCP server
 4. Verify tool count reduced
-5. Verify aos_workflow registered
+5. Verify pos_workflow registered
 
 **Acceptance Criteria:**
 - [ ] Old tools removed successfully
-- [ ] aos_workflow is only workflow tool
+- [ ] pos_workflow is only workflow tool
 - [ ] Tool count reduced by ~17-18 tools
 - [ ] No tool registration errors
 - [ ] Server restarts cleanly
@@ -985,8 +985,8 @@ curl localhost:8000/tools/list | jq '.tools | length'  # ~24 tools
 
 # After cutover:
 curl localhost:8000/tools/list | jq '.tools | length'  # ~6 tools (down from 24)
-curl localhost:8000/tools/list | jq '.tools[] | select(.name == "aos_workflow")'
-# Expected: aos_workflow present
+curl localhost:8000/tools/list | jq '.tools[] | select(.name == "pos_workflow")'
+# Expected: pos_workflow present
 ```
 
 **Traceability:** FR-009 (Clean cutover)
@@ -1016,8 +1016,8 @@ curl localhost:8000/tools/list | jq '.tools[] | select(.name == "aos_workflow")'
 **Validation:**
 ```bash
 # Test production deployment
-curl https://api.production.com/tools/list | jq '.tools[] | select(.name == "aos_workflow")'
-# Expected: aos_workflow present
+curl https://api.production.com/tools/list | jq '.tools[] | select(.name == "pos_workflow")'
+# Expected: pos_workflow present
 
 # Test workflow execution
 # (Manual test with real workflow)
@@ -1080,7 +1080,7 @@ curl https://api.production.com/tools/list | jq '.tools[] | select(.name == "aos
 
 **Validation Report Template:**
 ```markdown
-# aos_workflow Production Validation Report
+# pos_workflow Production Validation Report
 
 ## Test Execution
 - Date: YYYY-MM-DD
@@ -1118,7 +1118,7 @@ curl https://api.production.com/tools/list | jq '.tools[] | select(.name == "aos
 **Dependencies:** Task 5.5
 
 **Steps:**
-1. Update main README with aos_workflow usage
+1. Update main README with pos_workflow usage
 2. Update Agent OS documentation site
 3. Create announcement/changelog
 4. Update any dependent workflows
@@ -1159,7 +1159,7 @@ Project complete when:
 curl https://api.production.com/tools/list | jq '.tools | length'
 # Expected: ~6 tools (down from ~24)
 
-# Verify aos_workflow working
+# Verify pos_workflow working
 # (Manual workflow execution test)
 
 # Check monitoring dashboard
@@ -1288,7 +1288,7 @@ Phase 5: Deployment & Validation ← Phase 4
 | Phase 3: Management & Recovery | 3 days | 5 management actions, 3 recovery actions |
 | Phase 4: Testing & Documentation | 3 days | Security tests, performance tests, integration tests, docs |
 | Phase 5: Deployment & Validation | 3 days | Staging, production deployment, clean cutover, validation |
-| **Total** | **14 days (2 weeks)** | **Consolidated aos_workflow tool in production** |
+| **Total** | **14 days (2 weeks)** | **Consolidated pos_workflow tool in production** |
 
 ---
 

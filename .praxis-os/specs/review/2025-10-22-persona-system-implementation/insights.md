@@ -234,7 +234,7 @@ DOCUMENT new patterns
 - Workflow: start_workflow, complete_phase, get_current_phase
 - File ops: access_file, list_directory, execute_command
 - Framework: create_workflow, validate_workflow
-- Infrastructure: aos_browser
+- Infrastructure: pos_browser
 
 **Excluded:**
 - invoke_specialist (prevent infinite recursion)

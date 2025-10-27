@@ -78,7 +78,7 @@
 ### 4. Terminology Consistency Check
 
 **Verified Terms**:
-- ✅ "aos_browser" (tool name) - consistent everywhere
+- ✅ "pos_browser" (tool name) - consistent everywhere
 - ✅ "session_id" (parameter name) - consistent everywhere
 - ✅ "BrowserManager" (class name) - consistent everywhere
 - ✅ "BrowserSession" (dataclass name) - consistent everywhere

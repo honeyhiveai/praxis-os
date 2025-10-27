@@ -76,7 +76,7 @@ The workflow system is a **sophisticated, production-ready phase-gating engine**
 
 **Workflow Start:**
 ```
-aos_workflow(action="start") 
+pos_workflow(action="start") 
   → WorkflowEngine.start_workflow()
     → load_workflow_metadata(workflow_type) → metadata.json
     → StateManager.create_session()
@@ -93,7 +93,7 @@ aos_workflow(action="start")
 
 **Task Execution:**
 ```
-aos_workflow(action="get_task", phase=1, task_number=2)
+pos_workflow(action="get_task", phase=1, task_number=2)
   → WorkflowEngine.get_task()
     → get_session(session_id) → WorkflowSession
     → WorkflowSession.get_task(1, 2)
@@ -105,7 +105,7 @@ aos_workflow(action="get_task", phase=1, task_number=2)
 
 **Phase Completion:**
 ```
-aos_workflow(action="complete_phase", phase=1, evidence={...})
+pos_workflow(action="complete_phase", phase=1, evidence={...})
   → WorkflowEngine.complete_phase()
     → get_session(session_id) → WorkflowSession
     → WorkflowSession.complete_phase(1, evidence)
@@ -608,7 +608,7 @@ def complete_phase(self, phase: int, evidence: Dict[str, Any]) -> Dict[str, Any]
 
 12. **Pause/Resume Support**
     - **Impact:** No way to pause workflow midstream
-    - **Fix:** Add `pause()`, `resume()` actions to aos_workflow
+    - **Fix:** Add `pause()`, `resume()` actions to pos_workflow
     - **Risk:** Low - workflow system supports it
     - **Effort:** Implement pause/resume handlers
 

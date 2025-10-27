@@ -402,7 +402,7 @@ WHERE key = 'bubbleId:cffb1f56-...:01d50588-...';
 │                    MCP Tool Interface                        │
 ├─────────────────────────────────────────────────────────────┤
 │  @mcp.tool()                                                │
-│  async def aos_conversation_query(                          │
+│  async def pos_conversation_query(                          │
 │      action: str,                                           │
 │      session_id: Optional[str],                             │
 │      platform: Optional[str],                               │
@@ -2028,7 +2028,7 @@ class ConversationQueryEngine:
 
 ```python
 @mcp.tool()
-async def aos_conversation_query(
+async def pos_conversation_query(
     action: str,
     session_id: Optional[str] = None,
     platform: Optional[str] = None,
@@ -2053,27 +2053,27 @@ async def aos_conversation_query(
 
     Examples:
         # Semantic search
-        aos_conversation_query(
+        pos_conversation_query(
             action="semantic_search",
             query="embedding models comparison"
         )
 
         # Recent turns
-        aos_conversation_query(
+        pos_conversation_query(
             action="recent_turns",
             session_id="abc123",
             n_turns=10
         )
 
         # Topic across all sessions
-        aos_conversation_query(
+        pos_conversation_query(
             action="topic_search",
             query="RAG optimization",
             all_sessions=True
         )
 
         # Temporal query
-        aos_conversation_query(
+        pos_conversation_query(
             action="temporal",
             since="2025-10-24T00:00:00",
             until="2025-10-25T23:59:59"

@@ -1,13 +1,13 @@
 # Workflow Session Consolidation Analysis
 **Date**: 2025-10-15  
 **Issue**: Re-analyzing workflow tools - they ARE a shared domain!  
-**Insight**: User is right - workflow execution tools share session context like aos_browser
+**Insight**: User is right - workflow execution tools share session context like pos_browser
 
 ---
 
 ## The User's Critical Insight
 
-**User's point**: "The workflow tools are designed as actions on a workflow session, how does this differ from aos_browser?"
+**User's point**: "The workflow tools are designed as actions on a workflow session, how does this differ from pos_browser?"
 
 **My mistake**: I claimed workflow tools are "multiple domains" and "don't share context"
 
@@ -24,13 +24,13 @@ get_workflow_state(session_id)                                # Queries session
 
 **Pattern**: 4 out of 5 tools have `session_id` as first parameter, operating on the same workflow session.
 
-**This is IDENTICAL to aos_browser**:
+**This is IDENTICAL to pos_browser**:
 ```python
 # Browser tools - ALL operate on browser session
-aos_browser(action="navigate", session_id, url, ...)          # Creates/navigates session
-aos_browser(action="click", session_id, selector, ...)        # Mutates session
-aos_browser(action="screenshot", session_id, path, ...)       # Queries session
-aos_browser(action="get_cookies", session_id, ...)            # Queries session
+pos_browser(action="navigate", session_id, url, ...)          # Creates/navigates session
+pos_browser(action="click", session_id, selector, ...)        # Mutates session
+pos_browser(action="screenshot", session_id, path, ...)       # Queries session
+pos_browser(action="get_cookies", session_id, ...)            # Queries session
 ```
 
 **I was wrong!** Workflow execution tools ARE a single coherent domain with shared context.
@@ -74,7 +74,7 @@ aos_browser(action="get_cookies", session_id, ...)            # Queries session
 - ✅ Sequential operations: start → get_phase → get_task → complete → get_state
 - ✅ Lifecycle management: create → query → mutate → query
 
-**This is EXACTLY like aos_browser!**
+**This is EXACTLY like pos_browser!**
 
 ### Non-Session Tools (3 tools) ❌ NOT COHERENT
 
@@ -101,7 +101,7 @@ aos_browser(action="get_cookies", session_id, ...)            # Queries session
 
 ### The Case FOR Consolidation
 
-**Following aos_browser pattern**:
+**Following pos_browser pattern**:
 
 ```python
 @mcp.tool()
@@ -166,7 +166,7 @@ async def workflow_session(
 ```
 
 **Benefits**:
-1. ✅ Mirrors aos_browser design (consistency)
+1. ✅ Mirrors pos_browser design (consistency)
 2. ✅ All session operations in one place
 3. ✅ Clear namespace (workflow_session.*)
 4. ✅ Tool count: 11 → 7 (5 consolidated to 1, -4 tools)
@@ -241,7 +241,7 @@ state = workflow_session(
 
 ### The Real Question: Does Consolidation Help?
 
-**aos_browser consolidation was NECESSARY**:
+**pos_browser consolidation was NECESSARY**:
 - 20+ browser actions → 20+ tools → 30 total tools → 85% degradation
 - Consolidation: 1 tool → 11 total tools → optimal performance
 - **Tool count economics: 20 tools saved**
@@ -255,7 +255,7 @@ state = workflow_session(
 
 ## Comparative Analysis
 
-### aos_browser: 20+ Actions → Must Consolidate
+### pos_browser: 20+ Actions → Must Consolidate
 
 **Scale**: 20+ browser operations
 - navigate, click, type, fill, select, screenshot, evaluate, wait
@@ -290,7 +290,7 @@ state = workflow_session(
 - ✅ **Tool count economics: >10 operations** (approaching 20-tool limit)
 - ✅ Frequent addition of new operations (extensibility need)
 
-**Example**: aos_browser (20+ operations, tool count critical)
+**Example**: pos_browser (20+ operations, tool count critical)
 
 ### When Consolidation is OPTIONAL
 
@@ -318,7 +318,7 @@ state = workflow_session(
 
 ### User's Valid Point
 
-**Workflow execution tools share the SAME domain characteristics as aos_browser:**
+**Workflow execution tools share the SAME domain characteristics as pos_browser:**
 - Single entity (workflow session vs. browser session)
 - Shared context (session_id)
 - Sequential operations (start → query → mutate)
@@ -328,13 +328,13 @@ state = workflow_session(
 
 ### The Difference: Scale
 
-**aos_browser**: 20+ operations → consolidation NECESSARY  
+**pos_browser**: 20+ operations → consolidation NECESSARY  
 **workflow_session**: 5 operations → consolidation OPTIONAL
 
 ### The Tradeoff
 
-**Consolidated (like aos_browser)**:
-- ✅ Consistency with aos_browser pattern
+**Consolidated (like pos_browser)**:
+- ✅ Consistency with pos_browser pattern
 - ✅ Saves 4 tools (11 → 7)
 - ✅ Easy to extend (add new actions)
 - ✅ Clear namespace (workflow_session.*)
@@ -346,7 +346,7 @@ state = workflow_session(
 - ✅ Simple parameter sets
 - ✅ Clear docstrings (one per operation)
 - ✅ Natural language alignment
-- ❌ Inconsistent with aos_browser pattern
+- ❌ Inconsistent with pos_browser pattern
 - ❌ Uses 4 more tools (not critical at 11 total)
 
 ---
@@ -355,7 +355,7 @@ state = workflow_session(
 
 **After reconsideration, I lean toward CONSOLIDATING** for these reasons:
 
-1. **Pattern consistency**: If aos_browser uses action dispatch, workflow_session should too
+1. **Pattern consistency**: If pos_browser uses action dispatch, workflow_session should too
 2. **Extensibility**: Easy to add new session operations (pause, resume, fork, etc.)
 3. **Clear namespace**: workflow_session.* groups related operations
 4. **Tool count benefit**: Even small savings (4 tools) compound with future additions
@@ -401,7 +401,7 @@ async def workflow_session(
     Workflow session management.
     
     All operations on workflow sessions: start, query, mutate, inspect.
-    Follows same pattern as aos_browser for consistency.
+    Follows same pattern as pos_browser for consistency.
     
     Actions:
         start: Initialize new workflow session
@@ -472,7 +472,7 @@ async def start_workflow(workflow_type, target_file, options=None):
 
 ### I Was Wrong
 
-**User is correct**: Workflow execution tools share the same domain characteristics as aos_browser:
+**User is correct**: Workflow execution tools share the same domain characteristics as pos_browser:
 - Single entity (workflow session)
 - Shared context (session_id)
 - Sequential operations

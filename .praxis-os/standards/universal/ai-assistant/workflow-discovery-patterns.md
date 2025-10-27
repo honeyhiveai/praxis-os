@@ -1,6 +1,6 @@
 # Workflow Discovery and Execution Patterns
 
-**Keywords for search**: workflow discovery, aos_workflow, how to use workflows, workflow lifecycle, workflow patterns, start workflow, complete phase, workflow session, phase gates, workflow execution, resume workflow, workflow errors, workflow recovery, get task, tools/list, workflow pitfalls, workflow troubleshooting
+**Keywords for search**: workflow discovery, pos_workflow, how to use workflows, workflow lifecycle, workflow patterns, start workflow, complete phase, workflow session, phase gates, workflow execution, resume workflow, workflow errors, workflow recovery, get task, tools/list, workflow pitfalls, workflow troubleshooting
 
 **Core Principle:** Workflows are discovered through `tools/list` and executed through behavioral patterns. Learn the lifecycle, not the parameters. Real work produces valid evidence naturally.
 
@@ -9,7 +9,7 @@
 ## 🎯 TL;DR - Workflow Discovery Quick Reference
 
 **Discovery Pattern:**
-1. Check `tools/list` → See aos_workflow with current actions/parameters
+1. Check `tools/list` → See pos_workflow with current actions/parameters
 2. Query standards → Understand lifecycle patterns (this doc)
 3. Start simple → Begin with basic actions, build understanding
 4. Learn from errors → Error messages guide remediation
@@ -31,7 +31,7 @@ start → list_sessions (get session_id) → get_task → [do work] → complete
 
 ## 🎯 Purpose
 
-Define behavioral patterns for discovering and executing workflows with aos_workflow. This standard teaches HOW to work with workflows through discovery patterns, not WHAT parameters exist (use `tools/list` for that).
+Define behavioral patterns for discovering and executing workflows with pos_workflow. This standard teaches HOW to work with workflows through discovery patterns, not WHAT parameters exist (use `tools/list` for that).
 
 **Key Distinction:** This is about patterns and lifecycle, not documentation. Parameters come from `tools/list` (dynamic, always current). This doc captures observed behavioral patterns that help AI agents work effectively with workflows.
 
@@ -66,7 +66,7 @@ Define behavioral patterns for discovering and executing workflows with aos_work
 11. "Why can't I find validation requirements?"
 12. "How do I move to the next phase?"
 13. "What are common workflow mistakes?"
-14. "Where do I find current aos_workflow parameters?"
+14. "Where do I find current pos_workflow parameters?"
 
 ---
 
@@ -193,7 +193,7 @@ Action: rollback (if need to go back further)
 ## ✅ Workflow Discovery Checklist
 
 Before starting workflow execution:
-- [ ] Checked `tools/list` for current aos_workflow actions
+- [ ] Checked `tools/list` for current pos_workflow actions
 - [ ] Queried this standard for lifecycle patterns
 - [ ] Understand discovery-first approach (not guessing)
 
@@ -221,7 +221,7 @@ When errors occur:
 Scenario: User says "execute the query gamification spec"
 
 ✅ Good:
-1. Check tools/list → See aos_workflow parameters
+1. Check tools/list → See pos_workflow parameters
 2. Query: "how to start workflow"
 3. list_workflows() → Find spec_execution_v1
 4. start(workflow_type="spec_execution_v1", 
@@ -280,7 +280,7 @@ Scenario: complete_phase() returns validation failure
 
 ❌ Bad:
 1. Get error
-2. Assume aos_workflow is broken
+2. Assume pos_workflow is broken
 3. Try to manually advance phase
 4. Skip validation entirely
 5. Quality gate bypassed → technical debt
@@ -317,14 +317,14 @@ Scenario: Conversation interrupted, continuing work
 **Wrong:**
 ```python
 # Guessing from memory or documentation
-aos_workflow(action="start", workflow="spec_execution")  # Wrong param name
+pos_workflow(action="start", workflow="spec_execution")  # Wrong param name
 ```
 
 **Right:**
 ```python
 # Check tools/list first
 # See that it's workflow_type, not workflow
-aos_workflow(action="start", workflow_type="spec_execution_v1")
+pos_workflow(action="start", workflow_type="spec_execution_v1")
 ```
 
 **Why it's wrong:** Parameters change. Documentation drifts. Memory is unreliable. `tools/list` is source of truth.
@@ -335,7 +335,7 @@ aos_workflow(action="start", workflow_type="spec_execution_v1")
 
 **Wrong:**
 ```
-Get error → "aos_workflow must be broken" → Try workarounds
+Get error → "pos_workflow must be broken" → Try workarounds
 ```
 
 **Right:**
@@ -457,7 +457,7 @@ This standard is discoverable from multiple query angles:
 **Tested queries that return this standard:**
 - "how to use workflows"
 - "workflow lifecycle patterns"
-- "aos_workflow discovery"
+- "pos_workflow discovery"
 - "workflow evidence submission"
 - "workflow error recovery"
 - "workflow troubleshooting"

@@ -140,7 +140,7 @@ header = f"# Feature Spec\n{date_info['formatted']['header']}\n"
 
 ## Workflow Tools
 
-### `aos_workflow`
+### `pos_workflow`
 
 Consolidated workflow management tool following action-based dispatch pattern.
 
@@ -165,10 +165,10 @@ All actions accept these parameters:
 
 ```python
 # List all workflows
-aos_workflow(action="list_workflows")
+pos_workflow(action="list_workflows")
 
 # Filter by category
-aos_workflow(action="list_workflows", category="testing")
+pos_workflow(action="list_workflows", category="testing")
 ```
 
 **Returns:**
@@ -198,7 +198,7 @@ aos_workflow(action="list_workflows", category="testing")
 | `target_file` | string | Yes | File or feature being worked on |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="start",
     workflow_type="spec_creation_v1",
     target_file="user_authentication"
@@ -225,7 +225,7 @@ aos_workflow(
 | `session_id` | string | Yes | Workflow session identifier |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="get_phase",
     session_id="ed5481fe..."
 )
@@ -256,7 +256,7 @@ aos_workflow(
 | `task_number` | integer | Yes | Task number within phase |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="get_task",
     session_id="ed5481fe...",
     phase=2,
@@ -288,7 +288,7 @@ aos_workflow(
 | `evidence` | object | Yes | Evidence matching checkpoint criteria (max 10MB) |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="complete_phase",
     session_id="ed5481fe...",
     phase=1,
@@ -328,7 +328,7 @@ aos_workflow(
 | `session_id` | string | Yes | Workflow session identifier |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="get_state",
     session_id="ed5481fe..."
 )
@@ -358,10 +358,10 @@ aos_workflow(
 
 ```python
 # List all sessions
-aos_workflow(action="list_sessions")
+pos_workflow(action="list_sessions")
 
 # Filter by status
-aos_workflow(action="list_sessions", status="active")
+pos_workflow(action="list_sessions", status="active")
 ```
 
 **Returns:**
@@ -390,7 +390,7 @@ aos_workflow(action="list_sessions", status="active")
 | `session_id` | string | Yes | Workflow session identifier |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="get_session",
     session_id="ed5481fe..."
 )
@@ -417,7 +417,7 @@ aos_workflow(
 | `session_id` | string | Yes | Workflow session identifier |
 
 ```python
-aos_workflow(
+pos_workflow(
     action="delete_session",
     session_id="ed5481fe..."
 )
@@ -437,7 +437,7 @@ aos_workflow(
 
 ```python
 # Workflow execution lifecycle
-result = aos_workflow(
+result = pos_workflow(
     action="start",
     workflow_type="spec_creation_v1",
     target_file="auth_system"
@@ -445,13 +445,13 @@ result = aos_workflow(
 session_id = result["session_id"]
 
 # Get current phase
-phase = aos_workflow(
+phase = pos_workflow(
     action="get_phase",
     session_id=session_id
 )
 
 # Get specific task
-task = aos_workflow(
+task = pos_workflow(
     action="get_task",
     session_id=session_id,
     phase=1,
@@ -459,7 +459,7 @@ task = aos_workflow(
 )
 
 # Complete phase
-aos_workflow(
+pos_workflow(
     action="complete_phase",
     session_id=session_id,
     phase=1,
@@ -467,13 +467,13 @@ aos_workflow(
 )
 
 # Check state
-state = aos_workflow(
+state = pos_workflow(
     action="get_state",
     session_id=session_id
 )
 
 # Cleanup
-aos_workflow(
+pos_workflow(
     action="delete_session",
     session_id=session_id
 )
@@ -639,7 +639,7 @@ else:
 
 ## Browser Tools
 
-### `aos_browser`
+### `pos_browser`
 
 Comprehensive browser automation with Playwright.
 
@@ -667,7 +667,7 @@ All actions accept these parameters:
 | `wait_until` | string | No | Wait condition (`"load"`, `"domcontentloaded"`, `"networkidle"`) |
 
 ```python
-aos_browser(
+pos_browser(
     action="navigate",
     url="http://localhost:3000",
     wait_until="networkidle",
@@ -686,7 +686,7 @@ aos_browser(
 | `screenshot_format` | string | No | Format (`"png"`, `"jpeg"`) |
 
 ```python
-aos_browser(
+pos_browser(
     action="screenshot",
     screenshot_path="/tmp/page.png",
     screenshot_full_page=true,
@@ -702,7 +702,7 @@ aos_browser(
 | `query_all` | boolean | No | Return all matches vs first |
 
 ```python
-result = aos_browser(
+result = pos_browser(
     action="query",
     selector=".error-message",
     query_all=true,
@@ -717,7 +717,7 @@ result = aos_browser(
 | `script` | string | Yes | JavaScript code to execute |
 
 ```python
-result = aos_browser(
+result = pos_browser(
     action="evaluate",
     script="document.title",
     session_id="test-1"
@@ -727,7 +727,7 @@ result = aos_browser(
 **`get_cookies`** - Get all cookies
 
 ```python
-cookies = aos_browser(action="get_cookies", session_id="test-1")
+cookies = pos_browser(action="get_cookies", session_id="test-1")
 ```
 
 **`get_local_storage`** - Get local storage item
@@ -737,7 +737,7 @@ cookies = aos_browser(action="get_cookies", session_id="test-1")
 | `storage_key` | string | Yes | Local storage key |
 
 ```python
-value = aos_browser(
+value = pos_browser(
     action="get_local_storage",
     storage_key="auth_token",
     session_id="test-1"
@@ -756,7 +756,7 @@ value = aos_browser(
 | `modifiers` | array[string] | No | Keyboard modifiers (`["Alt", "Control", "Shift"]`) |
 
 ```python
-aos_browser(
+pos_browser(
     action="click",
     selector="#submit-button",
     session_id="test-1"
@@ -771,7 +771,7 @@ aos_browser(
 | `text` | string | Yes | Text to type |
 
 ```python
-aos_browser(
+pos_browser(
     action="type",
     selector="#username",
     text="user@example.com",
@@ -787,7 +787,7 @@ aos_browser(
 | `value` | string | Yes | Value to fill |
 
 ```python
-aos_browser(
+pos_browser(
     action="fill",
     selector="#password",
     value="secret123",
@@ -803,7 +803,7 @@ aos_browser(
 | `value` | string | Yes | Option value to select |
 
 ```python
-aos_browser(
+pos_browser(
     action="select",
     selector="#country",
     value="US",
@@ -822,7 +822,7 @@ aos_browser(
 | `wait_for_timeout` | integer | No | Timeout in ms (default: 30000) |
 
 ```python
-aos_browser(
+pos_browser(
     action="wait",
     selector=".loading",
     wait_for_state="hidden",
@@ -840,7 +840,7 @@ aos_browser(
 | `reduced_motion` | string | No | `"reduce"`, `"no-preference"` |
 
 ```python
-aos_browser(
+pos_browser(
     action="emulate_media",
     color_scheme="dark",
     session_id="test-1"
@@ -855,7 +855,7 @@ aos_browser(
 | `viewport_height` | integer | Yes | Height in pixels |
 
 ```python
-aos_browser(
+pos_browser(
     action="viewport",
     viewport_width=1920,
     viewport_height=1080,
@@ -870,7 +870,7 @@ aos_browser(
 | `cookies` | array[object] | Yes | Cookie objects with name, value, domain, path |
 
 ```python
-aos_browser(
+pos_browser(
     action="set_cookies",
     cookies=[{
         "name": "session",
@@ -891,7 +891,7 @@ aos_browser(
 | `new_tab_url` | string | No | URL for new tab |
 
 ```python
-result = aos_browser(
+result = pos_browser(
     action="new_tab",
     new_tab_url="https://example.com",
     session_id="test-1"
@@ -906,7 +906,7 @@ result = aos_browser(
 | `tab_id` | string | Yes | Tab identifier from `list_tabs` or `new_tab` |
 
 ```python
-aos_browser(
+pos_browser(
     action="switch_tab",
     tab_id="tab-uuid-2",
     session_id="test-1"
@@ -920,7 +920,7 @@ aos_browser(
 | `tab_id` | string | Yes | Tab identifier |
 
 ```python
-aos_browser(
+pos_browser(
     action="close_tab",
     tab_id="tab-uuid-2",
     session_id="test-1"
@@ -930,7 +930,7 @@ aos_browser(
 **`list_tabs`** - List all tabs
 
 ```python
-result = aos_browser(action="list_tabs", session_id="test-1")
+result = pos_browser(action="list_tabs", session_id="test-1")
 # Returns: {"tabs": [{"id": "tab-uuid-1", "active": true}, ...]}
 ```
 
@@ -944,7 +944,7 @@ result = aos_browser(action="list_tabs", session_id="test-1")
 | `file_path` | string | Yes | Path to file to upload |
 
 ```python
-aos_browser(
+pos_browser(
     action="upload_file",
     selector="#file-input",
     file_path="/path/to/file.pdf",
@@ -960,7 +960,7 @@ aos_browser(
 | `file_path` | string | No | Path to save file |
 
 ```python
-aos_browser(
+pos_browser(
     action="download_file",
     download_trigger_selector="#download-button",
     file_path="/tmp/downloaded.zip",
@@ -973,7 +973,7 @@ aos_browser(
 **`close`** - Close session and release resources
 
 ```python
-aos_browser(action="close", session_id="test-1")
+pos_browser(action="close", session_id="test-1")
 ```
 
 #### Complete Example
@@ -983,13 +983,13 @@ aos_browser(action="close", session_id="test-1")
 session_id = "dark-mode-test"
 
 # Navigate
-aos_browser(action="navigate", url="http://localhost:3000", session_id=session_id)
+pos_browser(action="navigate", url="http://localhost:3000", session_id=session_id)
 
 # Set dark mode
-aos_browser(action="emulate_media", color_scheme="dark", session_id=session_id)
+pos_browser(action="emulate_media", color_scheme="dark", session_id=session_id)
 
 # Screenshot
-aos_browser(
+pos_browser(
     action="screenshot",
     screenshot_path="/tmp/dark.png",
     screenshot_full_page=true,
@@ -997,7 +997,7 @@ aos_browser(
 )
 
 # Cleanup
-aos_browser(action="close", session_id=session_id)
+pos_browser(action="close", session_id=session_id)
 ```
 
 **Errors:**

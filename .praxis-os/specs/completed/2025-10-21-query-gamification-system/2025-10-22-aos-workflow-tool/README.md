@@ -1,4 +1,4 @@
-# Specification: aos_workflow Consolidated Tool
+# Specification: pos_workflow Consolidated Tool
 
 **Status:** 🟡 In Review  
 **Created:** 2025-10-22  
@@ -9,15 +9,15 @@
 
 ## Executive Summary
 
-This specification defines the consolidation of 17+ fragmented workflow management tools into a single, powerful `aos_workflow` tool, following the proven `aos_browser` pattern. This consolidation will dramatically improve AI agent performance, reduce cognitive load, and enhance maintainability.
+This specification defines the consolidation of 17+ fragmented workflow management tools into a single, powerful `pos_workflow` tool, following the proven `pos_browser` pattern. This consolidation will dramatically improve AI agent performance, reduce cognitive load, and enhance maintainability.
 
 **Problem:** Agent OS currently has ~24 MCP tools, with 17+ dedicated to workflow operations. This high tool count degrades LLM performance by 85% and creates a fragmented, inconsistent interface.
 
-**Solution:** Consolidate all workflow operations into a single `aos_workflow` tool with 14 actions, reducing total tool count from ~24 to ~6 (optimal range for LLM performance).
+**Solution:** Consolidate all workflow operations into a single `pos_workflow` tool with 14 actions, reducing total tool count from ~24 to ~6 (optimal range for LLM performance).
 
 **Impact:** 
 - **Performance:** Reduce tool count by ~75% (24 → 6 tools)
-- **Consistency:** Single interface following aos_browser pattern
+- **Consistency:** Single interface following pos_browser pattern
 - **Maintainability:** One codebase vs 17+ scattered tools
 - **Discoverability:** Built-in workflow discovery (`list_workflows` action)
 
@@ -36,11 +36,11 @@ Single tool with 14 actions organized by category:
 AI agents can dynamically discover available workflows without hardcoding:
 ```python
 # Discover workflows
-workflows = aos_workflow(action="list_workflows")
+workflows = pos_workflow(action="list_workflows")
 # Returns: test_generation_v3, spec_creation_v1, etc.
 
 # Filter by category
-code_gen_workflows = aos_workflow(action="list_workflows", category="code_generation")
+code_gen_workflows = pos_workflow(action="list_workflows", category="code_generation")
 ```
 
 ### 3. Clean Cutover Strategy
@@ -68,7 +68,7 @@ Delegates to existing `WorkflowEngine` and `StateManager` - no changes to core w
 
 ### Enhanced User Experience
 - **Discovery:** Agents can find workflows dynamically
-- **Consistency:** Same pattern as aos_browser (familiar)
+- **Consistency:** Same pattern as pos_browser (familiar)
 - **Error Messages:** Clear remediation guidance
 - **Result:** Better usability for AI agents
 
@@ -82,8 +82,8 @@ Delegates to existing `WorkflowEngine` and `StateManager` - no changes to core w
 ## Technical Highlights
 
 ### Architecture
-- **Pattern:** Action-based dispatch (like aos_browser)
-- **Implementation:** Single `aos_workflow()` function with `action` parameter
+- **Pattern:** Action-based dispatch (like pos_browser)
+- **Implementation:** Single `pos_workflow()` function with `action` parameter
 - **Dependencies:** Delegates to existing WorkflowEngine and StateManager
 - **State Management:** File-based JSON persistence in `.praxis-os/state/workflows/`
 
@@ -132,7 +132,7 @@ This specification consists of 5 documents:
 | **Phase 3: Management & Recovery** | 3 days | 5 management + 3 recovery actions |
 | **Phase 4: Testing & Documentation** | 3 days | Security, performance, integration tests, docs |
 | **Phase 5: Deployment & Validation** | 3 days | Staging, production deployment, clean cutover, validation |
-| **Total** | **14 days** | **aos_workflow in production** |
+| **Total** | **14 days** | **pos_workflow in production** |
 
 ---
 
@@ -223,29 +223,29 @@ This specification consists of 5 documents:
 ### Discovery
 ```python
 # List all workflows
-aos_workflow(action="list_workflows")
+pos_workflow(action="list_workflows")
 
 # Filter by category
-aos_workflow(action="list_workflows", category="code_generation")
+pos_workflow(action="list_workflows", category="code_generation")
 ```
 
 ### Execution
 ```python
 # Start workflow
-session = aos_workflow(
+session = pos_workflow(
     action="start",
     workflow_type="test_generation_v3",
     target_file="src/myfile.py"
 )
 
 # Get current phase
-phase = aos_workflow(action="get_phase", session_id=session_id)
+phase = pos_workflow(action="get_phase", session_id=session_id)
 
 # Get specific task
-task = aos_workflow(action="get_task", session_id=session_id, phase=1, task_number=1)
+task = pos_workflow(action="get_task", session_id=session_id, phase=1, task_number=1)
 
 # Complete phase
-result = aos_workflow(
+result = pos_workflow(
     action="complete_phase",
     session_id=session_id,
     phase=1,
@@ -253,35 +253,35 @@ result = aos_workflow(
 )
 
 # Get workflow state
-state = aos_workflow(action="get_state", session_id=session_id)
+state = pos_workflow(action="get_state", session_id=session_id)
 ```
 
 ### Management
 ```python
 # List sessions
-sessions = aos_workflow(action="list_sessions", status="active")
+sessions = pos_workflow(action="list_sessions", status="active")
 
 # Get session details
-session_info = aos_workflow(action="get_session", session_id=session_id)
+session_info = pos_workflow(action="get_session", session_id=session_id)
 
 # Delete session
-aos_workflow(action="delete_session", session_id=session_id, reason="Cleanup")
+pos_workflow(action="delete_session", session_id=session_id, reason="Cleanup")
 
 # Pause/resume
-aos_workflow(action="pause", session_id=session_id, checkpoint_note="Break")
-aos_workflow(action="resume", session_id=session_id)
+pos_workflow(action="pause", session_id=session_id, checkpoint_note="Break")
+pos_workflow(action="resume", session_id=session_id)
 ```
 
 ### Recovery
 ```python
 # Retry failed phase
-aos_workflow(action="retry_phase", session_id=session_id, phase=2)
+pos_workflow(action="retry_phase", session_id=session_id, phase=2)
 
 # Rollback to earlier phase
-aos_workflow(action="rollback", session_id=session_id, to_phase=1)
+pos_workflow(action="rollback", session_id=session_id, to_phase=1)
 
 # Get errors
-errors = aos_workflow(action="get_errors", session_id=session_id)
+errors = pos_workflow(action="get_errors", session_id=session_id)
 ```
 
 ---
@@ -376,7 +376,7 @@ errors = aos_workflow(action="get_errors", session_id=session_id)
 
 **To Implement:**
 - Wait for approval
-- Then: `aos_workflow(action="start", workflow_type="spec_execution_v1", target_file="aos-workflow-tool", options={"spec_path": ".praxis-os/specs/approved/2025-10-22-aos-workflow-tool"})`
+- Then: `pos_workflow(action="start", workflow_type="spec_execution_v1", target_file="aos-workflow-tool", options={"spec_path": ".praxis-os/specs/approved/2025-10-22-aos-workflow-tool"})`
 
 ---
 

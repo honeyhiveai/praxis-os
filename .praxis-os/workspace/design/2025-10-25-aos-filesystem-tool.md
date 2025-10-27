@@ -1,4 +1,4 @@
-# aos_filesystem Tool Design Document
+# pos_filesystem Tool Design Document
 
 **Date**: 2025-10-25  
 **Status**: Phase 1 - Design (Awaiting Human Review)  
@@ -48,19 +48,19 @@ A database specialist sub-agent can independently:
 3. **Workspace Sandboxing** - All paths validated and confined to project root (no directory traversal)
 4. **Structured Returns** - JSON-serializable responses with success/error details
 5. **Unix-Inspired Implementation** - Learn from sed/grep/tail algorithms for robust file handling
-6. **Domain Consolidation** - Single `aos_filesystem` tool with action dispatch (consistent with `aos_workflow`, `aos_browser`)
+6. **Domain Consolidation** - Single `pos_filesystem` tool with action dispatch (consistent with `pos_workflow`, `pos_browser`)
 7. **Partial Read Support** - Efficient reading of file ranges (inspired by Cursor and CrewAI patterns)
 8. **Type Safety** - MCP schema validation for all parameters
 
 ### Non-Goals (Out of Scope)
 
-1. **Shell Access** - No `aos_shell` or terminal command execution (security risk)
+1. **Shell Access** - No `pos_shell` or terminal command execution (security risk)
 2. **Advanced Text Processing** - No regex search, no sed-like editing (can be composed from read+write)
 3. **File Operations** - No copy, move, symlink operations (future, if needed)
 4. **Binary File Support** - Text files only (UTF-8 encoding) in MVP
 5. **Permission Management** - No chmod, chown operations
 6. **Approval Flow** - No user approval UI (different from main agent tools like Cursor's read_file)
-7. **Multi-Format Support** - No special handling for images, PDFs, notebooks (future: aos_notebook, aos_image)
+7. **Multi-Format Support** - No special handling for images, PDFs, notebooks (future: pos_notebook, pos_image)
 8. **File Watching** - No real-time file change notifications
 
 ---
@@ -79,8 +79,8 @@ A database specialist sub-agent can independently:
 
 **Sub-Agent Tools (Currently available via PersonaLauncher):**
 1. `search_standards` - RAG search
-2. `aos_workflow` - Workflow operations
-3. `aos_browser` - Web automation
+2. `pos_workflow` - Workflow operations
+3. `pos_browser` - Web automation
 4. `get_server_info` - Server info
 5. `current_date` - Date/time
 
@@ -89,7 +89,7 @@ A database specialist sub-agent can independently:
 ### What works well (keep this)
 
 ✅ **Main agent has full file access** - Read, write, edit patterns work well
-✅ **Domain consolidation** - `aos_workflow` and `aos_browser` use action dispatch successfully
+✅ **Domain consolidation** - `pos_workflow` and `pos_browser` use action dispatch successfully
 ✅ **Partial reads** - Cursor's offset/limit pattern is essential for large files
 ✅ **Sandboxing** - Main agent tools validate paths (we should inherit this)
 ✅ **Structured returns** - JSON responses work better than text streams
@@ -102,7 +102,7 @@ A database specialist sub-agent can independently:
 
 ### What's missing (add this)
 
-🔨 **aos_filesystem tool** - File I/O primitive for sub-agents
+🔨 **pos_filesystem tool** - File I/O primitive for sub-agents
 🔨 **Workspace sandboxing** - Path validation and confinement
 🔨 **tools/list exposure** - Sub-agents need to discover file operations dynamically
 🔨 **Usage patterns documented** - Standards teach composition (append = read + write)
@@ -133,7 +133,7 @@ A database specialist sub-agent can independently:
 ├─────────────────────────────────────────┤
 │                                         │
 │ Needs file I/O:                         │
-│   aos_filesystem(action="write", ...)   │
+│   pos_filesystem(action="write", ...)   │
 │                      │                  │
 └──────────────────────┼──────────────────┘
                        │ MCP Call
@@ -143,7 +143,7 @@ A database specialist sub-agent can independently:
 ├─────────────────────────────────────────┤
 │                                         │
 │ @mcp.tool()                             │
-│ async def aos_filesystem(               │
+│ async def pos_filesystem(               │
 │     action: Literal[...],               │
 │     path: str,                          │
 │     **kwargs                            │
@@ -366,7 +366,7 @@ def _write_file_safe(
 
 ```python
 # Sub-agent writes comprehensive analysis
-result = await aos_filesystem(
+result = await pos_filesystem(
     action="write",
     path="workspace/analysis/database-schema-analysis.md",
     content="""
@@ -398,7 +398,7 @@ result = await aos_filesystem(
 
 ```python
 # Sub-agent reads partial config file (large file)
-result = await aos_filesystem(
+result = await pos_filesystem(
     action="read",
     path="config/settings.py",
     start_line=100,
@@ -421,7 +421,7 @@ result = await aos_filesystem(
 
 ```python
 # Sub-agent checks if API spec exists before generating
-result = await aos_filesystem(
+result = await pos_filesystem(
     action="exists",
     path="docs/api-spec.yaml"
 )
@@ -440,7 +440,7 @@ result = await aos_filesystem(
 
 ```python
 # Sub-agent creates test directory
-result = await aos_filesystem(
+result = await pos_filesystem(
     action="mkdir",
     path="tests/integration/api"
 )
@@ -481,9 +481,9 @@ make_directory(path)
 
 **Cons:**
 - ❌ 6 tools added to sub-agent tool budget (vs. 1 tool)
-- ❌ Total tools: 11 (search_standards, aos_workflow, aos_browser, + 6 file tools)
+- ❌ Total tools: 11 (search_standards, pos_workflow, pos_browser, + 6 file tools)
 - ❌ Approaching 20-tool threshold where performance degrades (Microsoft research)
-- ❌ Inconsistent with Agent OS pattern (aos_workflow, aos_browser use actions)
+- ❌ Inconsistent with Agent OS pattern (pos_workflow, pos_browser use actions)
 - ❌ More tools = more discovery overhead for sub-agents
 
 **Trade-offs:**
@@ -494,11 +494,11 @@ make_directory(path)
 
 ### Option B: Consolidated Tool with Action Dispatch (Agent OS Pattern)
 
-**Approach:** Single `aos_filesystem` tool with action parameter (following aos_workflow, aos_browser pattern)
+**Approach:** Single `pos_filesystem` tool with action parameter (following pos_workflow, pos_browser pattern)
 
 ```python
 # 1 consolidated MCP tool
-aos_filesystem(
+pos_filesystem(
     action: Literal["read", "write", "list", "delete", "exists", "mkdir"],
     path: str,
     **kwargs
@@ -506,7 +506,7 @@ aos_filesystem(
 ```
 
 **Pros:**
-- ✅ Consistent with Agent OS pattern (aos_workflow, aos_browser)
+- ✅ Consistent with Agent OS pattern (pos_workflow, pos_browser)
 - ✅ Low tool count (1 tool vs. 6 tools)
 - ✅ Total tools: 6 (well under 20-tool threshold)
 - ✅ Domain-first thinking (filesystem = one domain)
@@ -564,9 +564,9 @@ write_file(path, content, create_dirs=True)
 **Rationale:**
 
 1. **Consistent with Agent OS Architecture**
-   - `aos_workflow` uses action dispatch successfully
-   - `aos_browser` uses action dispatch successfully
-   - `aos_filesystem` continues the pattern
+   - `pos_workflow` uses action dispatch successfully
+   - `pos_browser` uses action dispatch successfully
+   - `pos_filesystem` continues the pattern
 
 2. **Tool Count Budget is Critical**
    - Sub-agents have tool budget constraints
@@ -574,7 +574,7 @@ write_file(path, content, create_dirs=True)
    - Enables future capabilities without hitting 20-tool limit
 
 3. **Discovery Pattern Proven**
-   - Agent OS teaches `search_standards("how to use aos_filesystem")`
+   - Agent OS teaches `search_standards("how to use pos_filesystem")`
    - Dynamic discovery via IDE autocomplete
    - Standards document patterns (append = read + write)
 
@@ -728,7 +728,7 @@ write_file(path, content, create_dirs=True)
 
 **Options:**
 - **A:** Support binary mode (`encoding="binary"`)
-- **B:** Text only in MVP, defer binary to future tools (aos_image, aos_pdf)
+- **B:** Text only in MVP, defer binary to future tools (pos_image, pos_pdf)
 
 **Recommendation:** B (text only MVP)
 - Sub-agents primarily produce text deliverables
@@ -741,7 +741,7 @@ write_file(path, content, create_dirs=True)
 
 ### Question 4: Should we expose to main agent or sub-agents only?
 
-**Context:** Main agent (Cursor) has its own file tools. Should main agent also use aos_filesystem?
+**Context:** Main agent (Cursor) has its own file tools. Should main agent also use pos_filesystem?
 
 **Options:**
 - **A:** Sub-agents only (PersonaLauncher tool registry)
@@ -752,7 +752,7 @@ write_file(path, content, create_dirs=True)
 - Avoid confusion (two ways to do same thing)
 - Can expose to main agent later if beneficial
 
-**Decision Needed:** Is there value in main agent using aos_filesystem?
+**Decision Needed:** Is there value in main agent using pos_filesystem?
 
 ---
 
@@ -760,7 +760,7 @@ write_file(path, content, create_dirs=True)
 
 ### Quantitative Metrics
 
-1. **Tool Count** - Total sub-agent tools ≤ 10 (currently 5 + 1 aos_filesystem = 6 ✅)
+1. **Tool Count** - Total sub-agent tools ≤ 10 (currently 5 + 1 pos_filesystem = 6 ✅)
 2. **Coverage** - 100% of essential file operations (read, write, list, delete, exists, mkdir)
 3. **Performance** - File operations complete in <100ms for files <1MB
 4. **Safety** - 0 path traversal vulnerabilities (validated by security test suite)
@@ -794,30 +794,30 @@ write_file(path, content, create_dirs=True)
 ### Files to Create
 
 **MCP Tool Registration:**
-- `mcp_server/tools/aos_filesystem/__init__.py` - Tool registration
-- `mcp_server/tools/aos_filesystem/dispatcher.py` - Action routing
+- `mcp_server/tools/pos_filesystem/__init__.py` - Tool registration
+- `mcp_server/tools/pos_filesystem/dispatcher.py` - Action routing
 
 **Implementation Layer:**
-- `mcp_server/tools/aos_filesystem/operations/read.py` - Read implementation
-- `mcp_server/tools/aos_filesystem/operations/write.py` - Write implementation
-- `mcp_server/tools/aos_filesystem/operations/list.py` - List implementation
-- `mcp_server/tools/aos_filesystem/operations/delete.py` - Delete implementation
-- `mcp_server/tools/aos_filesystem/operations/exists.py` - Exists implementation
-- `mcp_server/tools/aos_filesystem/operations/mkdir.py` - Mkdir implementation
+- `mcp_server/tools/pos_filesystem/operations/read.py` - Read implementation
+- `mcp_server/tools/pos_filesystem/operations/write.py` - Write implementation
+- `mcp_server/tools/pos_filesystem/operations/list.py` - List implementation
+- `mcp_server/tools/pos_filesystem/operations/delete.py` - Delete implementation
+- `mcp_server/tools/pos_filesystem/operations/exists.py` - Exists implementation
+- `mcp_server/tools/pos_filesystem/operations/mkdir.py` - Mkdir implementation
 
 **Safety Layer:**
-- `mcp_server/tools/aos_filesystem/safety/validation.py` - Path validation
-- `mcp_server/tools/aos_filesystem/safety/sandboxing.py` - Workspace scoping
+- `mcp_server/tools/pos_filesystem/safety/validation.py` - Path validation
+- `mcp_server/tools/pos_filesystem/safety/sandboxing.py` - Workspace scoping
 
 **Tests:**
-- `mcp_server/tools/aos_filesystem/tests/test_read.py`
-- `mcp_server/tools/aos_filesystem/tests/test_write.py`
-- `mcp_server/tools/aos_filesystem/tests/test_list.py`
-- `mcp_server/tools/aos_filesystem/tests/test_delete.py`
-- `mcp_server/tools/aos_filesystem/tests/test_exists.py`
-- `mcp_server/tools/aos_filesystem/tests/test_mkdir.py`
-- `mcp_server/tools/aos_filesystem/tests/test_security.py` - Path traversal tests
-- `mcp_server/tools/aos_filesystem/tests/test_integration.py` - End-to-end tests
+- `mcp_server/tools/pos_filesystem/tests/test_read.py`
+- `mcp_server/tools/pos_filesystem/tests/test_write.py`
+- `mcp_server/tools/pos_filesystem/tests/test_list.py`
+- `mcp_server/tools/pos_filesystem/tests/test_delete.py`
+- `mcp_server/tools/pos_filesystem/tests/test_exists.py`
+- `mcp_server/tools/pos_filesystem/tests/test_mkdir.py`
+- `mcp_server/tools/pos_filesystem/tests/test_security.py` - Path traversal tests
+- `mcp_server/tools/pos_filesystem/tests/test_integration.py` - End-to-end tests
 
 **Documentation:**
 - `.praxis-os/standards/development/aos-filesystem-usage.md` - Usage patterns
@@ -825,9 +825,9 @@ write_file(path, content, create_dirs=True)
 
 ### Files to Modify
 
-- `mcp_server/server.py` - Register aos_filesystem tool
-- `mcp_server/core/persona_launcher.py` - Add aos_filesystem to sub-agent tool registry
-- `.praxis-os/standards/development/mcp-tool-design-best-practices.md` - Document aos_ pattern
+- `mcp_server/server.py` - Register pos_filesystem tool
+- `mcp_server/core/persona_launcher.py` - Add pos_filesystem to sub-agent tool registry
+- `.praxis-os/standards/development/mcp-tool-design-best-practices.md` - Document pos_ pattern
 
 ### Dependencies Impacted
 
@@ -871,7 +871,7 @@ def test_hidden_file_access()
 # test_integration.py
 async def test_sub_agent_writes_analysis():
     """Test database specialist writes analysis doc."""
-    result = await aos_filesystem(
+    result = await pos_filesystem(
         action="write",
         path="workspace/analysis/test-doc.md",
         content="# Test\n\nContent"
@@ -882,15 +882,15 @@ async def test_sub_agent_writes_analysis():
 async def test_composition_pattern():
     """Test append composition (read + write)."""
     # Write initial content
-    await aos_filesystem(action="write", path="log.txt", content="Line 1\n")
+    await pos_filesystem(action="write", path="log.txt", content="Line 1\n")
     
     # Append by reading + concatenating + writing
-    read_result = await aos_filesystem(action="read", path="log.txt")
+    read_result = await pos_filesystem(action="read", path="log.txt")
     new_content = read_result["content"] + "Line 2\n"
-    await aos_filesystem(action="write", path="log.txt", content=new_content)
+    await pos_filesystem(action="write", path="log.txt", content=new_content)
     
     # Verify
-    final = await aos_filesystem(action="read", path="log.txt")
+    final = await pos_filesystem(action="read", path="log.txt")
     assert "Line 1\nLine 2\n" in final["content"]
 ```
 
@@ -993,7 +993,7 @@ def test_adversarial_paths():
 
 ### A. Research Data
 
-All research repositories cloned to `/tmp/aos_filesystem_research/`:
+All research repositories cloned to `/tmp/pos_filesystem_research/`:
 - `cline/` - Cline file handlers
 - `langchain-community/` - LangChain file management tools
 - `AutoGPT/` - AutoGPT file manager

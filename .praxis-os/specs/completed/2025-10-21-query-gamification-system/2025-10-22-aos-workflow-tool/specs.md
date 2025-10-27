@@ -10,17 +10,17 @@
 
 ### 1.1 Architectural Pattern: Consolidated Tool with Action Dispatch
 
-**Primary Pattern:** Action Dispatch Pattern (proven by `aos_browser`)
+**Primary Pattern:** Action Dispatch Pattern (proven by `pos_browser`)
 
-The `aos_workflow` tool follows a consolidated architecture where a single MCP tool provides multiple operations through an action parameter. This pattern has been successfully implemented in `aos_browser` (20+ actions) and provides optimal performance for AI agent tool selection.
+The `pos_workflow` tool follows a consolidated architecture where a single MCP tool provides multiple operations through an action parameter. This pattern has been successfully implemented in `pos_browser` (20+ actions) and provides optimal performance for AI agent tool selection.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    aos_workflow Tool                     │
+│                    pos_workflow Tool                     │
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
 │  MCP Tool Interface                                      │
-│  ├─ Tool Name: aos_workflow                             │
+│  ├─ Tool Name: pos_workflow                             │
 │  ├─ Required Param: action (str)                        │
 │  └─ Optional Params: session_id, phase, task_number...  │
 │                                                          │
@@ -88,7 +88,7 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 - **Single Entry Point:** All workflow operations through one tool
 - **Action-Based Routing:** Operation determined by `action` parameter
 - **Thin Wrapper:** Delegates to existing WorkflowEngine/StateManager
-- **Consistent Interface:** Same pattern as `aos_browser` for familiarity
+- **Consistent Interface:** Same pattern as `pos_browser` for familiarity
 - **Zero Engine Changes:** No modifications to workflow engine logic
 
 ---
@@ -97,18 +97,18 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 
 #### Decision 1: Action Dispatch Pattern
 
-**Decision:** Implement all workflow operations as actions within a single `aos_workflow` tool rather than maintaining separate tools for each operation.
+**Decision:** Implement all workflow operations as actions within a single `pos_workflow` tool rather than maintaining separate tools for each operation.
 
 **Rationale:**
 - **Addresses FR-001:** Single consolidated tool interface requirement
 - **Addresses NFR-P3:** Tool count reduction (8 tools → 1 tool) improves LLM performance
-- **Proven Pattern:** Successfully used in `aos_browser` (20+ actions)
+- **Proven Pattern:** Successfully used in `pos_browser` (20+ actions)
 - **Better Discoverability:** All operations visible in one tool's documentation
 - **Consistent Namespace:** Clear that all operations are workflow-related
 
 **Alternatives Considered:**
 - **Keep Separate Tools:** Original design with start_workflow, get_current_phase, etc. as separate tools
-  - **Why Rejected:** High tool count degrades LLM performance; inconsistent with aos_browser pattern; harder to discover related operations
+  - **Why Rejected:** High tool count degrades LLM performance; inconsistent with pos_browser pattern; harder to discover related operations
 - **Categorized Sub-Tools:** Group into workflow_execution, workflow_management, workflow_recovery tools
   - **Why Rejected:** Still fragments the surface; arbitrary category boundaries; harder to discover all capabilities
 
@@ -121,7 +121,7 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 
 #### Decision 2: Clean Cutover (No Migration Period)
 
-**Decision:** Replace existing workflow tools completely with `aos_workflow` - no deprecation wrappers or dual support period.
+**Decision:** Replace existing workflow tools completely with `pos_workflow` - no deprecation wrappers or dual support period.
 
 **Rationale:**
 - **Addresses FR-009:** Clean cutover requirement
@@ -171,7 +171,7 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 
 #### Decision 4: Delegate to Existing WorkflowEngine (Zero Modifications)
 
-**Decision:** Implement `aos_workflow` as a thin wrapper that delegates all operations to existing WorkflowEngine and StateManager classes without modifying their internal logic.
+**Decision:** Implement `pos_workflow` as a thin wrapper that delegates all operations to existing WorkflowEngine and StateManager classes without modifying their internal logic.
 
 **Rationale:**
 - **Addresses FR-008:** Workflow engine integration requirement
@@ -197,7 +197,7 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 
 | Requirement | Architectural Element | How Addressed |
 |-------------|----------------------|---------------|
-| FR-001: Single Consolidated Tool | aos_workflow tool with action parameter | Single MCP tool registration, action-based dispatch |
+| FR-001: Single Consolidated Tool | pos_workflow tool with action parameter | Single MCP tool registration, action-based dispatch |
 | FR-002: Session-Based Execution | Action handlers delegate to WorkflowEngine | start, get_phase, get_task, complete_phase, get_state actions |
 | FR-003: Session Management | Action handlers delegate to StateManager | list_sessions, get_session, delete_session, pause, resume actions |
 | FR-004: Error Recovery | Recovery action handlers | retry_phase, rollback, get_errors actions |
@@ -209,10 +209,10 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 | FR-010: Discovery via tools/list | MCP standard mechanism | Comprehensive tool docstring, no custom discovery |
 | NFR-P1: Response Time | Direct delegation (no extra layers) | Minimal dispatch overhead, existing engine performance |
 | NFR-P2: Context Efficiency | Single tool docstring | One comprehensive docstring vs 8 separate ones |
-| NFR-P3: LLM Performance | 5-tool surface | 8 workflow tools → 1 aos_workflow tool |
+| NFR-P3: LLM Performance | 5-tool surface | 8 workflow tools → 1 pos_workflow tool |
 | NFR-R1: Error Handling | Broad exception catching in handlers | Structured error responses with remediation |
 | NFR-R2: State Persistence | Uses existing StateManager | No changes to state file format or I/O |
-| NFR-C3: Pattern Consistency | Action dispatch structure | Follows aos_browser pattern exactly |
+| NFR-C3: Pattern Consistency | Action dispatch structure | Follows pos_browser pattern exactly |
 
 ---
 
@@ -268,8 +268,8 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 │                                            │
 │  Tool Registry                             │
 │  ├─ search_standards                       │
-│  ├─ aos_workflow  ← NEW                    │
-│  ├─ aos_browser                            │
+│  ├─ pos_workflow  ← NEW                    │
+│  ├─ pos_browser                            │
 │  ├─ get_server_info                        │
 │  └─ current_date                           │
 │                                            │
@@ -305,7 +305,7 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 - Tool count automatically reduces from 8 → 1 in workflow group
 
 **Rollout Strategy:**
-- Single PR: Remove old tools, add aos_workflow
+- Single PR: Remove old tools, add pos_workflow
 - No feature flags needed (clean cutover)
 - Update docs in same PR
 - No data migration required (state format unchanged)
@@ -316,7 +316,7 @@ The `aos_workflow` tool follows a consolidated architecture where a single MCP t
 
 ### 2.1 Component: Tool Registration Function
 
-**Purpose:** Register the consolidated `aos_workflow` tool with the FastMCP server.
+**Purpose:** Register the consolidated `pos_workflow` tool with the FastMCP server.
 
 **Responsibilities:**
 - Register single MCP tool with comprehensive docstring
@@ -342,10 +342,10 @@ def register_workflow_tools(
         state_manager: StateManager instance for session management
         
     Returns:
-        int: Number of tools registered (always 1 for aos_workflow)
+        int: Number of tools registered (always 1 for pos_workflow)
     """
     @mcp.tool()
-    async def aos_workflow(...) -> Dict[str, Any]:
+    async def pos_workflow(...) -> Dict[str, Any]:
         # Implementation
         pass
     
@@ -354,14 +354,14 @@ def register_workflow_tools(
 
 **Dependencies:**
 - Requires: FastMCP instance, WorkflowEngine, StateManager
-- Provides: Single aos_workflow tool to MCP ecosystem
+- Provides: Single pos_workflow tool to MCP ecosystem
 
 **Error Handling:**
 - Registration errors logged and propagated to server startup
 
 ---
 
-### 2.2 Component: Main Tool Function (aos_workflow)
+### 2.2 Component: Main Tool Function (pos_workflow)
 
 **Purpose:** Single entry point for all workflow operations, dispatches to appropriate handlers.
 
@@ -378,7 +378,7 @@ def register_workflow_tools(
 
 **Public Interface:**
 ```python
-async def aos_workflow(
+async def pos_workflow(
     action: str,  # Required: operation to perform
     session_id: Optional[str] = None,  # For most operations
     
@@ -446,7 +446,7 @@ async def aos_workflow(
 
 **Implementation Pattern:**
 ```python
-# Inside aos_workflow function
+# Inside pos_workflow function
 try:
     if action == "list_workflows":
         return await _handle_list_workflows(category)
@@ -698,9 +698,9 @@ async def _handle_get_errors(session_id: str) -> Dict[str, Any]:
 ```
 MCP Client
     ↓
-    │ aos_workflow(action="start", ...)
+    │ pos_workflow(action="start", ...)
     ↓
-aos_workflow (Main Tool)
+pos_workflow (Main Tool)
     ↓
     │ Validate action & params
     ↓
@@ -725,12 +725,12 @@ Response to Client
 
 | From | To | Method | Purpose |
 |------|----|--------|---------|
-| MCP Client | aos_workflow | Tool invocation | Execute workflow operation |
-| aos_workflow | Action Dispatcher | Internal routing | Select handler based on action |
+| MCP Client | pos_workflow | Tool invocation | Execute workflow operation |
+| pos_workflow | Action Dispatcher | Internal routing | Select handler based on action |
 | Action Dispatcher | Execution Handlers | Handler invocation | Execute operation |
 | Execution Handlers | WorkflowEngine | Delegation | Leverage existing workflow logic |
 | Management Handlers | StateManager | Delegation | Manage session lifecycle |
-| All Handlers | aos_workflow | Return response | Structured result to client |
+| All Handlers | pos_workflow | Return response | Structured result to client |
 
 ---
 
@@ -741,7 +741,7 @@ Response to Client
 mcp_server/
 ├── server/
 │   └── tools/
-│       ├── workflow_tools.py          ← NEW (aos_workflow implementation)
+│       ├── workflow_tools.py          ← NEW (pos_workflow implementation)
 │       ├── rag_tools.py               ← Existing (unchanged)
 │       └── browser_tools.py           ← Existing (unchanged)
 ├── core/
@@ -757,7 +757,7 @@ def register_workflow_tools(...) -> int:
     \"\"\"Main registration function.\"\"\"
     
     @mcp.tool()
-    async def aos_workflow(...) -> Dict[str, Any]:
+    async def pos_workflow(...) -> Dict[str, Any]:
         \"\"\"Tool implementation with action dispatch.\"\"\"
         # Dispatcher logic
         if action == "start":
@@ -787,8 +787,8 @@ tests/
     └── tools/
         ├── test_workflow_tools.py        ← NEW
         │   ├── test_register_workflow_tools()
-        │   ├── test_aos_workflow_start()
-        │   ├── test_aos_workflow_get_phase()
+        │   ├── test_pos_workflow_start()
+        │   ├── test_pos_workflow_get_phase()
         │   └── ... (one test per action)
         ├── test_rag_tools.py             ← Existing
         └── test_browser_tools.py         ← Existing
@@ -802,7 +802,7 @@ tests/
 
 ```python
 @mcp.tool()
-async def aos_workflow(
+async def pos_workflow(
     action: str,
     
     # Session context
@@ -833,7 +833,7 @@ async def aos_workflow(
     to_phase: Optional[int] = None,
 ) -> Dict[str, Any]:
     """
-    Consolidated workflow management tool following aos_browser pattern.
+    Consolidated workflow management tool following pos_browser pattern.
     
     Handles all workflow operations through action-based dispatch:
     - Discovery (1 action): list_workflows
@@ -920,10 +920,10 @@ async def aos_workflow(
 **Example:**
 ```python
 # List all workflows
-result = aos_workflow(action="list_workflows")
+result = pos_workflow(action="list_workflows")
 
 # Filter by category
-result = aos_workflow(action="list_workflows", category="code_generation")
+result = pos_workflow(action="list_workflows", category="code_generation")
 ```
 
 **Requirements Satisfied:** FR-010, Story 1
@@ -967,7 +967,7 @@ result = aos_workflow(action="list_workflows", category="code_generation")
 
 **Example:**
 ```python
-session = aos_workflow(
+session = pos_workflow(
     action="start",
     workflow_type="test_generation_v3",
     target_file="src/calculator.py",
@@ -1014,7 +1014,7 @@ session_id = session["session_id"]
 
 **Example:**
 ```python
-phase = aos_workflow(action="get_phase", session_id=session_id)
+phase = pos_workflow(action="get_phase", session_id=session_id)
 print(f"Current phase: {phase['current_phase']}/{phase['total_phases']}")
 ```
 
@@ -1065,7 +1065,7 @@ print(f"Current phase: {phase['current_phase']}/{phase['total_phases']}")
 
 **Example:**
 ```python
-task = aos_workflow(
+task = pos_workflow(
     action="get_task",
     session_id=session_id,
     phase=1,
@@ -1126,7 +1126,7 @@ for step in task["task_content"]["execution_steps"]:
 **Example:**
 ```python
 # Submit evidence
-result = aos_workflow(
+result = pos_workflow(
     action="complete_phase",
     session_id=session_id,
     phase=1,
@@ -1181,7 +1181,7 @@ else:
 
 **Example:**
 ```python
-state = aos_workflow(action="get_state", session_id=session_id)
+state = pos_workflow(action="get_state", session_id=session_id)
 print(f"Progress: {len(state['completed_phases'])}/{state['total_phases']} phases")
 print(f"Status: {state['session_status']}")
 ```
@@ -1234,10 +1234,10 @@ print(f"Status: {state['session_status']}")
 **Example:**
 ```python
 # List all sessions
-all_sessions = aos_workflow(action="list_sessions")
+all_sessions = pos_workflow(action="list_sessions")
 
 # List only active sessions
-active = aos_workflow(action="list_sessions", status="active")
+active = pos_workflow(action="list_sessions", status="active")
 ```
 
 **Requirements Satisfied:** FR-003, Story 3
@@ -1282,7 +1282,7 @@ active = aos_workflow(action="list_sessions", status="active")
 
 **Example:**
 ```python
-session_info = aos_workflow(action="get_session", session_id=session_id)
+session_info = pos_workflow(action="get_session", session_id=session_id)
 duration = session_info["session"]["phase_history"][0]["duration_seconds"]
 print(f"Phase 1 took {duration} seconds")
 ```
@@ -1316,7 +1316,7 @@ print(f"Phase 1 took {duration} seconds")
 
 **Example:**
 ```python
-result = aos_workflow(
+result = pos_workflow(
     action="delete_session",
     session_id=session_id,
     reason="Test completed, no longer needed"
@@ -1355,7 +1355,7 @@ print(f"Session deleted: {result['deleted']}")
 
 **Example:**
 ```python
-result = aos_workflow(
+result = pos_workflow(
     action="pause",
     session_id=session_id,
     checkpoint_note="Waiting for code review before continuing"
@@ -1393,7 +1393,7 @@ result = aos_workflow(
 
 **Example:**
 ```python
-result = aos_workflow(action="resume", session_id=session_id)
+result = pos_workflow(action="resume", session_id=session_id)
 print(f"Resumed at phase {result['current_phase']}")
 ```
 
@@ -1434,10 +1434,10 @@ print(f"Resumed at phase {result['current_phase']}")
 **Example:**
 ```python
 # Retry with existing evidence
-result = aos_workflow(action="retry_phase", session_id=session_id, phase=2)
+result = pos_workflow(action="retry_phase", session_id=session_id, phase=2)
 
 # Retry with fresh start
-result = aos_workflow(
+result = pos_workflow(
     action="retry_phase",
     session_id=session_id,
     phase=2,
@@ -1479,7 +1479,7 @@ result = aos_workflow(
 **Example:**
 ```python
 # Roll back to phase 2
-result = aos_workflow(
+result = pos_workflow(
     action="rollback",
     session_id=session_id,
     to_phase=2
@@ -1524,7 +1524,7 @@ print(f"Rolled back from phase {result['from_phase']} to {result['to_phase']}")
 
 **Example:**
 ```python
-errors = aos_workflow(action="get_errors", session_id=session_id)
+errors = pos_workflow(action="get_errors", session_id=session_id)
 for error in errors["errors"]:
     print(f"Phase {error['phase']}: {error['message']}")
 ```
@@ -1543,7 +1543,7 @@ All actions return consistent error format when operations fail:
     "action": "start",  # Echo of requested action
     "error": "Workflow type 'invalid_workflow_v1' not found",
     "error_type": "NotFoundError",
-    "remediation": "Use aos_workflow(action='list_workflows') to see available workflows",
+    "remediation": "Use pos_workflow(action='list_workflows') to see available workflows",
     "valid_actions": ["list_workflows", "start", "get_phase", ...]  # Included for unknown action errors
 }
 ```
@@ -1657,7 +1657,7 @@ All actions return consistent error format when operations fail:
 
 ### 4.3 Action Request Model
 
-**Purpose:** Standardized input format for aos_workflow calls.
+**Purpose:** Standardized input format for pos_workflow calls.
 
 **Model:**
 ```python
@@ -1707,7 +1707,7 @@ class WorkflowActionRequest:
 
 ### 4.4 Action Response Model
 
-**Purpose:** Standardized output format for all aos_workflow actions.
+**Purpose:** Standardized output format for all pos_workflow actions.
 
 **Base Response Schema:**
 ```python
@@ -1747,7 +1747,7 @@ class WorkflowActionRequest:
                 │ {action, session_id, ...}
                 ↓
 ┌─────────────────────────────────────────────────────────┐
-│                  aos_workflow Tool                      │
+│                  pos_workflow Tool                      │
 │  ┌───────────────────────────────────────────────────┐  │
 │  │         Action Dispatcher                         │  │
 │  │  - Validates action                               │  │
@@ -1793,7 +1793,7 @@ class WorkflowActionRequest:
 ```
 
 **Data Flow:**
-1. AI agent calls `aos_workflow(action=..., ...)`
+1. AI agent calls `pos_workflow(action=..., ...)`
 2. Action dispatcher validates and routes request
 3. Handler calls WorkflowEngine or StateManager
 4. State persisted to JSON files
@@ -1809,35 +1809,35 @@ class WorkflowActionRequest:
 ┌────────┐
 │  NULL  │
 └────┬───┘
-     │ aos_workflow(action="start")
+     │ pos_workflow(action="start")
      ↓
 ┌────────────┐
 │   ACTIVE   │ ←──────────────────┐
 └─┬────┬───┬─┘                    │
-  │    │   │ aos_workflow(action="pause")
+  │    │   │ pos_workflow(action="pause")
   │    │   ↓                      │
   │    │ ┌────────┐               │
   │    │ │ PAUSED │───────────────┘
-  │    │ └────────┘ aos_workflow(action="resume")
+  │    │ └────────┘ pos_workflow(action="resume")
   │    │
-  │    │ aos_workflow(action="complete_phase", phase=N, evidence={...})
+  │    │ pos_workflow(action="complete_phase", phase=N, evidence={...})
   │    │ [checkpoint passed for final phase]
   │    ↓
   │ ┌───────────┐
   │ │ COMPLETED │
   │ └───────────┘
   │
-  │ aos_workflow(action="complete_phase")
+  │ pos_workflow(action="complete_phase")
   │ [checkpoint failed]
   ↓
 ┌────────┐
 │ FAILED │ ───┐
-└────────┘    │ aos_workflow(action="retry_phase")
-      ↑       │ or aos_workflow(action="rollback")
+└────────┘    │ pos_workflow(action="retry_phase")
+      ↑       │ or pos_workflow(action="rollback")
       │       ↓
       └───  ACTIVE
 
-Delete: aos_workflow(action="delete_session") from any state
+Delete: pos_workflow(action="delete_session") from any state
 ```
 
 **State Transitions:**
@@ -2183,11 +2183,11 @@ def save_session_with_version_check(session_id: str, state: Dict) -> None:
 def test_path_traversal_protection():
     # Should reject directory traversal
     with pytest.raises(ValueError):
-        aos_workflow(action="start", workflow_type="test_gen_v3", target_file="../../../etc/passwd")
+        pos_workflow(action="start", workflow_type="test_gen_v3", target_file="../../../etc/passwd")
     
     # Should reject absolute paths
     with pytest.raises(ValueError):
-        aos_workflow(action="start", workflow_type="test_gen_v3", target_file="/etc/passwd")
+        pos_workflow(action="start", workflow_type="test_gen_v3", target_file="/etc/passwd")
 ```
 
 **Resource Limit Tests:**
@@ -2196,7 +2196,7 @@ def test_evidence_size_limit():
     large_evidence = {"data": "x" * (11 * 1024 * 1024)}  # 11 MB
     
     with pytest.raises(ValueError, match="Evidence too large"):
-        aos_workflow(action="complete_phase", session_id="test", phase=1, evidence=large_evidence)
+        pos_workflow(action="complete_phase", session_id="test", phase=1, evidence=large_evidence)
 ```
 
 **Concurrency Tests:**
@@ -2282,7 +2282,7 @@ ACTION_HANDLERS = {
     # ... 11 more
 }
 
-async def aos_workflow(action: str, **kwargs) -> Dict[str, Any]:
+async def pos_workflow(action: str, **kwargs) -> Dict[str, Any]:
     handler = ACTION_HANDLERS.get(action)
     if not handler:
         return {"status": "error", "error": f"Unknown action: {action}"}
@@ -2562,7 +2562,7 @@ class WorkflowEnginePool:
 # Usage
 engine_pool = WorkflowEnginePool(pool_size=10)
 
-async def aos_workflow_pooled(action: str, **kwargs) -> Dict:
+async def pos_workflow_pooled(action: str, **kwargs) -> Dict:
     engine = engine_pool.acquire()
     try:
         return await _execute_action(engine, action, **kwargs)
@@ -2606,7 +2606,7 @@ import time
 
 def test_list_workflows_performance():
     start = time.time()
-    result = aos_workflow(action="list_workflows")
+    result = pos_workflow(action="list_workflows")
     elapsed = time.time() - start
     
     assert elapsed < 0.1, f"list_workflows took {elapsed}s (target: < 100ms)"
@@ -2614,7 +2614,7 @@ def test_list_workflows_performance():
 
 def test_start_workflow_performance():
     start = time.time()
-    result = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+    result = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
     elapsed = time.time() - start
     
     assert elapsed < 0.5, f"start took {elapsed}s (target: < 500ms)"
@@ -2627,7 +2627,7 @@ def test_concurrent_sessions():
     
     # Create 100 concurrent sessions
     for i in range(100):
-        result = aos_workflow(
+        result = pos_workflow(
             action="start",
             workflow_type="test_gen_v3",
             target_file=f"test_{i}.py"
@@ -2635,18 +2635,18 @@ def test_concurrent_sessions():
         session_ids.append(result["session_id"])
     
     # Verify all sessions are active
-    sessions = aos_workflow(action="list_sessions", status="active")
+    sessions = pos_workflow(action="list_sessions", status="active")
     assert sessions["count"] >= 100
 
 def test_large_evidence_performance():
     # Create session
-    session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
+    session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file="test.py")
     
     # Large but valid evidence (8 MB)
     large_evidence = {"data": ["x" * 1000] * 8000}
     
     start = time.time()
-    result = aos_workflow(
+    result = pos_workflow(
         action="complete_phase",
         session_id=session["session_id"],
         phase=1,
@@ -2668,8 +2668,8 @@ def test_memory_usage():
     
     # Create 50 sessions with artifacts
     for i in range(50):
-        session = aos_workflow(action="start", workflow_type="test_gen_v3", target_file=f"test_{i}.py")
-        aos_workflow(
+        session = pos_workflow(action="start", workflow_type="test_gen_v3", target_file=f"test_{i}.py")
+        pos_workflow(
             action="complete_phase",
             session_id=session["session_id"],
             phase=1,
@@ -2686,12 +2686,12 @@ def test_memory_usage():
 ```python
 def test_cache_hit_rate():
     # Warm up cache
-    aos_workflow(action="list_workflows")
+    pos_workflow(action="list_workflows")
     
     # Measure cache hits
     start = time.time()
     for _ in range(100):
-        aos_workflow(action="list_workflows")
+        pos_workflow(action="list_workflows")
     elapsed = time.time() - start
     
     avg_time = elapsed / 100
@@ -2735,10 +2735,10 @@ metrics = PerformanceMetrics()
 
 **Instrumentation:**
 ```python
-async def aos_workflow_instrumented(action: str, **kwargs) -> Dict:
+async def pos_workflow_instrumented(action: str, **kwargs) -> Dict:
     start = time.time()
     try:
-        result = await aos_workflow(action, **kwargs)
+        result = await pos_workflow(action, **kwargs)
         success = result["status"] == "success"
         return result
     finally:

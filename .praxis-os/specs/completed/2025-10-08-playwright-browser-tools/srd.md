@@ -133,7 +133,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 #### FR-1: Browser Lifecycle Management
 - **Priority**: MUST HAVE
 - **Description**: Initialize Playwright browser instance on first use (lazy init)
-- **Acceptance**: Browser launches on first `aos_browser()` call, reuses same instance thereafter
+- **Acceptance**: Browser launches on first `pos_browser()` call, reuses same instance thereafter
 - **Validation**: Browser process exists after first call, no additional processes on subsequent calls
 
 #### FR-2: Multi-Session Isolation
@@ -146,7 +146,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 #### FR-3: Graceful Resource Cleanup
 - **Priority**: MUST HAVE
 - **Description**: Clean up browser resources (pages, contexts, processes) on explicit close or timeout
-- **Acceptance**: `aos_browser(action="close")` releases all resources; stale sessions auto-cleanup after 1 hour
+- **Acceptance**: `pos_browser(action="close")` releases all resources; stale sessions auto-cleanup after 1 hour
 - **Validation**: No zombie browser processes after cleanup
 
 ### 3.2 Browser Actions
@@ -297,7 +297,7 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 
 #### FR-25: Consolidated Tool Design
 - **Priority**: MUST HAVE
-- **Description**: Single `aos_browser` tool with action-based dispatch (comprehensive Playwright capabilities)
+- **Description**: Single `pos_browser` tool with action-based dispatch (comprehensive Playwright capabilities)
 - **Rationale**: Saves tool slots vs granular approach, stays under 20-tool limit
 - **Actions (Phase 1 - Core)**:  
   - **Navigation**: navigate, reload, go_back, go_forward
@@ -316,9 +316,9 @@ Enable **AI agents** (specifically: me, the Agent OS assistant) to have **compre
 
 #### FR-26: Naming Convention Compliance
 - **Priority**: MUST HAVE
-- **Description**: Tool named `aos_browser` (Agent OS namespace)
+- **Description**: Tool named `pos_browser` (Agent OS namespace)
 - **Rationale**: Avoids collision with Cursor's `mcp_cursor-playwright_*` tools
-- **Validation**: Tool registered as `aos_browser`, discoverable in tool list
+- **Validation**: Tool registered as `pos_browser`, discoverable in tool list
 
 ### 3.4 Integration
 
@@ -506,7 +506,7 @@ These are legitimately out of scope (not Playwright's purpose):
 - [ ] Documentation clearly explains `session_id` parameter
 - [ ] Error messages provide actionable remediation
 - [ ] Examples show common workflows (dark mode testing)
-- [ ] Auto-approve list includes `aos_browser` for frictionless use
+- [ ] Auto-approve list includes `pos_browser` for frictionless use
 
 ---
 

@@ -64,7 +64,7 @@
 - **Action**: Document selector patterns (CSS, text, role)
 
 #### Section 4: Interface Specifications
-- **Change**: MAJOR - Update aos_browser() signature
+- **Change**: MAJOR - Update pos_browser() signature
 - **Action**: Add all new action parameters
 
 #### Section 13: Requirements Traceability Matrix

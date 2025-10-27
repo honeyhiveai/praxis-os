@@ -138,7 +138,7 @@ Based on scratch specs in `.praxis-os/specs/`, Agent OS Enhanced has already ide
 **File**: `consolidated-workflow-tool-design-2025-10-15.md`  
 **Status**: Design complete  
 **Problem**: 18+ separate workflow tools → degraded LLM performance (85% degradation)  
-**Solution**: Single `workflow()` tool with action dispatch (follows aos_browser pattern)  
+**Solution**: Single `workflow()` tool with action dispatch (follows pos_browser pattern)  
 **Impact**: 24 tools → 5 tools (optimal LLM performance)  
 
 **Tool surface after consolidation**:
@@ -147,7 +147,7 @@ Agent OS Enhanced - 5 Tools (Exceptionally Optimal)
 ├── workflow (18 actions: discovery, execution, management, recovery, debugging)
 ├── search_standards (RAG semantic search)
 ├── get_server_info (Server metadata)
-├── aos_browser (Browser automation - 20+ actions)
+├── pos_browser (Browser automation - 20+ actions)
 └── current_date (Date/time utility)
 ```
 

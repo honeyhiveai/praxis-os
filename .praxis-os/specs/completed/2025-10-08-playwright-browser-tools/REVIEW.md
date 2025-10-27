@@ -149,7 +149,7 @@
 **Term**: BrowserSession  
 ✅ Used consistently across all documents
 
-**Term**: aos_browser  
+**Term**: pos_browser  
 ✅ Tool name consistent (srd, specs, tasks, implementation)
 
 **Term**: session_id  
@@ -209,7 +209,7 @@
 ✅ Consistent (Phase 1 subset) ⭐ UPDATED
 
 **Tool Count**:
-- srd.md: "1 tool (aos_browser)"
+- srd.md: "1 tool (pos_browser)"
 - specs.md: "1 tool registered"
 - tasks.md: "Total tools: 9 (8 existing + 1 browser)"
 ✅ Consistent
@@ -255,7 +255,7 @@
 **Docstrings**:
 - [✅] All classes have Sphinx docstrings (specs.md, implementation.md)
 - [✅] All methods have parameter descriptions
-- [✅] Examples included in aos_browser docstring
+- [✅] Examples included in pos_browser docstring
 
 **Type Hints**:
 - [✅] All parameters typed (BrowserManager, action handlers)
@@ -434,7 +434,7 @@
 - `mcp_server/requirements.txt` (ADD playwright)
 - `mcp_server/server/factory.py` (ADD _create_browser_manager)
 - `mcp_server/server/tools/__init__.py` (ADD browser registration)
-- `.cursor/mcp.json` (ADD aos_browser to autoApprove)
+- `.cursor/mcp.json` (ADD pos_browser to autoApprove)
 
 **Impact**: ✅ LOW - Minimal, backwards-compatible changes
 

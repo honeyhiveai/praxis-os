@@ -1,13 +1,13 @@
 """
 Consolidated workflow management tools.
 
-Single unified interface for all workflow operations following aos_browser pattern.
+Single unified interface for all workflow operations following pos_browser pattern.
 Organized into submodules for maintainability:
 - constants: Action names and validation constants
 - validators: Input validation functions
 - handlers/: Action handlers grouped by category
   (discovery, execution, management, recovery)
-- dispatcher: Main aos_workflow tool with action routing
+- dispatcher: Main pos_workflow tool with action routing
 """
 
 from .constants import MAX_EVIDENCE_SIZE, SESSION_ID_PATTERN, VALID_ACTIONS

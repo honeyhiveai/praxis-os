@@ -245,7 +245,7 @@ You are a Database Specialist in Agent OS Enhanced.
 - **Specialist:** invoke_specialist
 - **Framework:** create_workflow, validate_workflow
 - **File ops:** access_file, list_directory, execute_command
-- **Infrastructure:** aos_browser, get_server_info
+- **Infrastructure:** pos_browser, get_server_info
 
 **See:** [DESIGN-MCP-Tools-Universal-Toolkit.md](DESIGN-MCP-Tools-Universal-Toolkit.md)
 

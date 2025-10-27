@@ -1,7 +1,7 @@
 # Playwright Browser Tools - Functional Test Plan
 
 **Date:** 2025-10-08  
-**Tool:** `aos_browser`  
+**Tool:** `pos_browser`  
 **Version:** 1.0  
 **Tester:** AI Assistant  
 **Environment:** macOS, Chromium installed

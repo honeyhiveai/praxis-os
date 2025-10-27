@@ -1,7 +1,7 @@
-# aos_filesystem Research Findings
+# pos_filesystem Research Findings
 
 **Research Date:** 2025-10-25  
-**Purpose:** Analyze real-world agent file operation patterns to inform `aos_filesystem` tool design
+**Purpose:** Analyze real-world agent file operation patterns to inform `pos_filesystem` tool design
 
 ---
 
@@ -416,13 +416,13 @@ Returns: Success message with full path
 
 ---
 
-## 7. Design Insights for aos_filesystem
+## 7. Design Insights for pos_filesystem
 
 ### Insight 1: Granular vs. Consolidated
 
 **Finding:** ALL frameworks use separate tools, NOT action-based consolidation.
 
-**But:** This conflicts with Agent OS's `aos_` pattern (workflow, browser use actions)
+**But:** This conflicts with Agent OS's `pos_` pattern (workflow, browser use actions)
 
 **Resolution Options:**
 
@@ -441,7 +441,7 @@ move_file(source, dest)
 **Option B: Agent OS Pattern (Consolidated)**
 ```python
 # Single tool with actions (1 tool)
-aos_filesystem(
+pos_filesystem(
     action: "read" | "write" | "append" | "list" | "delete" | "copy" | "move",
     path: str,
     content: Optional[str],
@@ -450,7 +450,7 @@ aos_filesystem(
 ```
 
 **Recommendation:** Option B (consolidated) because:
-- ✅ Consistent with `aos_workflow` and `aos_browser`
+- ✅ Consistent with `pos_workflow` and `pos_browser`
 - ✅ Keeps tool count low (6 total vs 13+)
 - ✅ Agent OS teaches dynamic discovery (overcomes consolidation complexity)
 - ✅ Microsoft research applies to generic agents (not Agent OS trained agents)
@@ -537,13 +537,13 @@ aos_filesystem(
 
 ---
 
-## 8. Recommended aos_filesystem Design
+## 8. Recommended pos_filesystem Design
 
 ### Tool Signature
 
 ```python
 @mcp.tool()
-async def aos_filesystem(
+async def pos_filesystem(
     action: Literal["read", "write", "append", "list", "delete", "exists", "mkdir"],
     path: str,
     content: Optional[str] = None,
@@ -592,14 +592,14 @@ async def aos_filesystem(
     
     Examples:
         # Write analysis document
-        await aos_filesystem(
+        await pos_filesystem(
             action="write",
             path="workspace/analysis/database-schema.md",
             content="# Database Schema\\n\\n..."
         )
         
         # Read file (partial)
-        result = await aos_filesystem(
+        result = await pos_filesystem(
             action="read",
             path="src/models/user.py",
             start_line=50,
@@ -607,17 +607,17 @@ async def aos_filesystem(
         )
         
         # Append to log
-        await aos_filesystem(
+        await pos_filesystem(
             action="append",
             path="workspace/specialist-log.md",
             content="\\n## Database Review Complete\\n"
         )
         
         # List directory
-        result = await aos_filesystem(action="list", path="src/")
+        result = await pos_filesystem(action="list", path="src/")
         
         # Check existence
-        result = await aos_filesystem(action="exists", path="config/settings.json")
+        result = await pos_filesystem(action="exists", path="config/settings.json")
     """
 ```
 
@@ -656,7 +656,7 @@ class FileSystemSafety:
 
 ## 9. Next Steps
 
-1. **Create Detailed Spec** - Full design document for `aos_filesystem`
+1. **Create Detailed Spec** - Full design document for `pos_filesystem`
 2. **Review with User** - Confirm consolidated vs granular decision
 3. **Implement MVP** - Start with essential operations (read, write, append, list, mkdir)
 4. **Test with Sub-Agents** - Validate in persona system
@@ -668,11 +668,11 @@ class FileSystemSafety:
 
 ### Decision 1: Consolidated vs. Granular
 
-**Question:** Use single `aos_filesystem(action, ...)` or separate tools (`read_file`, `write_file`, etc.)?
+**Question:** Use single `pos_filesystem(action, ...)` or separate tools (`read_file`, `write_file`, etc.)?
 
 **Industry Pattern:** All frameworks use granular (separate tools)
 
-**Agent OS Pattern:** Consolidated (`aos_workflow`, `aos_browser`)
+**Agent OS Pattern:** Consolidated (`pos_workflow`, `pos_browser`)
 
 **Recommendation:** Consolidated (consistent with Agent OS, lower tool count)
 
@@ -700,7 +700,7 @@ class FileSystemSafety:
 
 ## Appendix: Research File Locations
 
-All research repos located in: `/tmp/aos_filesystem_research/`
+All research repos located in: `/tmp/pos_filesystem_research/`
 
 - `cline/` - Cline file handlers
 - `langchain-community/` - LangChain file management tools

@@ -551,7 +551,7 @@ Query liberally = better code
 
 **The Problem with Static Lists**:
 ```
-Standards doc lists MCP tools → Add aos_browser → Docs out of sync → AI gets wrong info
+Standards doc lists MCP tools → Add pos_browser → Docs out of sync → AI gets wrong info
 ```
 
 **The Dynamic Discovery Solution**:
@@ -571,13 +571,13 @@ Standards → Teach WHEN/HOW/WHY → Timeless guidance → Never needs updates
 1. **Always Accurate**: Tools define themselves via protocol schemas
 2. **Never Out of Sync**: No manual documentation updates needed
 3. **Self-Documenting**: Parameter types, required/optional in schema
-4. **Evolutionary**: Add `aos_browser_v2` tomorrow, AI discovers it automatically via autocomplete
+4. **Evolutionary**: Add `pos_browser_v2` tomorrow, AI discovers it automatically via autocomplete
 5. **Focus on Value**: Standards teach timeless patterns, not ephemeral API details
 
 **Example**:
-- Today: `aos_browser` added to MCP server
+- Today: `pos_browser` added to MCP server
 - Standards: No update needed (teach "use browser tools for UI testing")
-- Tomorrow: AI starts work, types "aos", autocomplete shows `aos_browser` with full schema
+- Tomorrow: AI starts work, types "aos", autocomplete shows `pos_browser` with full schema
 - AI uses tool, queries standards for "browser testing patterns"
 - Result: Zero documentation lag
 

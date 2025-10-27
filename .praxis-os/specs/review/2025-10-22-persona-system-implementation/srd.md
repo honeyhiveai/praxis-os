@@ -273,7 +273,7 @@ This feature will implement the Persona System component of Agent OS Enhanced, c
 - Included tools: search_standards, search_codebase, write_standard
 - Included tools: start_workflow, complete_phase, get_current_phase
 - Included tools: access_file, list_directory, execute_command
-- Included tools: create_workflow, validate_workflow, aos_browser
+- Included tools: create_workflow, validate_workflow, pos_browser
 - Excluded tools: invoke_specialist (prevent recursion)
 - Tool list provided to LLM with full schemas
 - Tool filtering logic easily configurable per persona

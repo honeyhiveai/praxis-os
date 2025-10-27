@@ -280,7 +280,7 @@ Store:
   - Metadata (timestamp, participants, topic tags)
 
 On Resume:
-  - Query: "Recent conversation about aos_filesystem"
+  - Query: "Recent conversation about pos_filesystem"
   - Retrieve: 3-5 most relevant chunks
   - Load: Compressed + option to expand
 ```
@@ -449,7 +449,7 @@ class SessionManager:
 - Audience: AI agents resuming work across sessions
 - Location: `standards/universal/ai-assistant/`
 
-**Potential Tool**: `aos_session`
+**Potential Tool**: `pos_session`
 - Session state management
 - Conversation history compression
 - Query interface for past exchanges

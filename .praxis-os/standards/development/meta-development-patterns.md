@@ -251,7 +251,7 @@ When stuck on meta-problems:
 
 **Wrong (Builder perspective):**
 ```markdown
-# aos_workflow Tool Guide
+# pos_workflow Tool Guide
 
 ## All 14 Actions
 1. list_workflows - parameters: category (optional)
@@ -299,11 +299,11 @@ start → get_task → [do work] → complete_phase
 
 ### Example 2: Bug Attribution
 
-**Scenario: aos_workflow returns "Internal server error"**
+**Scenario: pos_workflow returns "Internal server error"**
 
 **Builder thought process:**
 ```
-Error from aos_workflow
+Error from pos_workflow
   ↓
 Question: Framework bug or usage mistake?
   ↓
@@ -324,7 +324,7 @@ Test fix, continue work
 
 **Consumer thought process:**
 ```
-Error from aos_workflow
+Error from pos_workflow
   ↓
 Framework is stable
   ↓
@@ -378,7 +378,7 @@ Session 2: hive-kube (domain-development)
 
 **Wrong:**
 ```
-Create comprehensive aos_workflow guide
+Create comprehensive pos_workflow guide
   ↓
 Document all 14 actions with parameters
   ↓

@@ -25,19 +25,19 @@ Cursor IDE
 **Timeline of Disaster:**
 ```python
 # Time T0: Chat A starts
-Chat A: aos_browser(action="navigate", url="http://localhost:3000/docs")
+Chat A: pos_browser(action="navigate", url="http://localhost:3000/docs")
 # BrowserManager._page navigates to /docs
 
 # Time T1: Chat B starts (before A finishes)
-Chat B: aos_browser(action="navigate", url="http://localhost:3000/login")
+Chat B: pos_browser(action="navigate", url="http://localhost:3000/login")
 # BrowserManager._page navigates to /login (SAME PAGE OBJECT)
 
 # Time T2: Chat A continues
-Chat A: aos_browser(action="emulate_media", color_scheme="dark")
+Chat A: pos_browser(action="emulate_media", color_scheme="dark")
 # Sets dark mode on /login page (NOT /docs!)
 
 # Time T3: Chat A takes screenshot
-Chat A: aos_browser(action="screenshot", path="/tmp/docs.png")
+Chat A: pos_browser(action="screenshot", path="/tmp/docs.png")
 # Screenshots /login page in dark mode, not /docs!
 # ❌ WRONG RESULT
 ```
@@ -142,7 +142,7 @@ class BrowserSession:
 
 
 @mcp.tool()
-async def aos_browser(
+async def pos_browser(
     action: str,
     session_id: Optional[str] = None,  # ⭐ REQUIRED for isolation
     **kwargs
@@ -179,16 +179,16 @@ async def aos_browser(
 # Chat A: Generate unique session ID
 session_a = "chat-a-1234"
 
-Chat A: aos_browser(action="navigate", url="/docs", session_id=session_a)
-Chat A: aos_browser(action="emulate_media", color_scheme="dark", session_id=session_a)
-Chat A: aos_browser(action="screenshot", path="/tmp/docs.png", session_id=session_a)
+Chat A: pos_browser(action="navigate", url="/docs", session_id=session_a)
+Chat A: pos_browser(action="emulate_media", color_scheme="dark", session_id=session_a)
+Chat A: pos_browser(action="screenshot", path="/tmp/docs.png", session_id=session_a)
 # ✅ All operate on isolated session
 
 # Chat B: Different session
 session_b = "chat-b-5678"
 
-Chat B: aos_browser(action="navigate", url="/login", session_id=session_b)
-Chat B: aos_browser(action="screenshot", path="/tmp/login.png", session_id=session_b)
+Chat B: pos_browser(action="navigate", url="/login", session_id=session_b)
+Chat B: pos_browser(action="screenshot", path="/tmp/login.png", session_id=session_b)
 # ✅ Completely isolated from Chat A
 ```
 
@@ -212,7 +212,7 @@ Chat B: aos_browser(action="screenshot", path="/tmp/login.png", session_id=sessi
 ```python
 # Hypothetical: If MCP provides context
 @mcp.tool()
-async def aos_browser(
+async def pos_browser(
     action: str,
     context: Optional[MCPContext] = None,  # Injected by FastMCP
     **kwargs
@@ -258,7 +258,7 @@ class BrowserManager:
 
 
 @mcp.tool()
-async def aos_browser(action: str, **kwargs) -> Dict[str, Any]:
+async def pos_browser(action: str, **kwargs) -> Dict[str, Any]:
     """Browser automation with lock-based serialization."""
     async with browser_manager._lock:  # Block other chats
         page = await browser_manager.get_page()
@@ -437,7 +437,7 @@ class BrowserManager:
 
 ```python
 @mcp.tool()
-async def aos_browser(
+async def pos_browser(
     action: str,
     session_id: Optional[str] = None,
     url: Optional[str] = None,
@@ -462,10 +462,10 @@ async def aos_browser(
     
     Examples:
         # Start isolated session
-        aos_browser(action="navigate", url="/docs", session_id="test-dark-mode")
-        aos_browser(action="emulate_media", color_scheme="dark", session_id="test-dark-mode")
-        aos_browser(action="screenshot", path="/tmp/dark.png", session_id="test-dark-mode")
-        aos_browser(action="close", session_id="test-dark-mode")
+        pos_browser(action="navigate", url="/docs", session_id="test-dark-mode")
+        pos_browser(action="emulate_media", color_scheme="dark", session_id="test-dark-mode")
+        pos_browser(action="screenshot", path="/tmp/dark.png", session_id="test-dark-mode")
+        pos_browser(action="close", session_id="test-dark-mode")
     
     Args:
         action: Action to perform
@@ -520,7 +520,7 @@ async def aos_browser(
         # ... other actions
     
     except Exception as e:
-        logger.error(f"aos_browser action '{action}' failed: {e}")
+        logger.error(f"pos_browser action '{action}' failed: {e}")
         return {"status": "error", "error": str(e)}
 ```
 
@@ -563,10 +563,10 @@ page2 = await context_a.new_page()  # Shares cookies with page1
 session_id = f"chat-{random_id()}"  # Generate unique ID
 
 # Use for all operations in this workflow
-aos_browser(action="navigate", url="/docs", session_id=session_id)
-aos_browser(action="emulate_media", color_scheme="dark", session_id=session_id)
-aos_browser(action="screenshot", path="/tmp/test.png", session_id=session_id)
-aos_browser(action="close", session_id=session_id)
+pos_browser(action="navigate", url="/docs", session_id=session_id)
+pos_browser(action="emulate_media", color_scheme="dark", session_id=session_id)
+pos_browser(action="screenshot", path="/tmp/test.png", session_id=session_id)
+pos_browser(action="close", session_id=session_id)
 ```
 
 ### Pattern 2: Human Provides Session ID
@@ -575,8 +575,8 @@ aos_browser(action="close", session_id=session_id)
 Human: "Test dark mode on docs site, use session 'dark-mode-test'"
 
 AI: 
-aos_browser(action="navigate", url="/docs", session_id="dark-mode-test")
-aos_browser(action="emulate_media", color_scheme="dark", session_id="dark-mode-test")
+pos_browser(action="navigate", url="/docs", session_id="dark-mode-test")
+pos_browser(action="emulate_media", color_scheme="dark", session_id="dark-mode-test")
 ...
 ```
 
@@ -584,7 +584,7 @@ aos_browser(action="emulate_media", color_scheme="dark", session_id="dark-mode-t
 
 ```python
 # Omit session_id → uses "default" session
-aos_browser(action="navigate", url="/docs")
+pos_browser(action="navigate", url="/docs")
 # Works, but shared with other chats using default
 ```
 

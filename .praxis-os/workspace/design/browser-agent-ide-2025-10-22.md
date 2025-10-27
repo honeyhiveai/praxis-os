@@ -79,7 +79,7 @@ A browser-based IDE with minimal scope: code editor, file tree, agent chat, and 
 │  (Existing Infrastructure)               │
 │  - search_standards()                    │
 │  - start_workflow()                      │
-│  - aos_browser()                         │
+│  - pos_browser()                         │
 │  - All other MCP tools                   │
 └──────────────────────────────────────────┘
 ```

@@ -1,25 +1,25 @@
 # Consolidated Workflow Tool Design
 **Date**: 2025-10-15  
 **Insight**: Workflows are ONE complex domain, like browser - consolidate into single tool  
-**Pattern**: Follow aos_browser exactly
+**Pattern**: Follow pos_browser exactly
 
 ---
 
 ## The User's Critical Insight
 
-**User's point**: "Roll this up like aos_browser, it is the same kind of complex environment"
+**User's point**: "Roll this up like pos_browser, it is the same kind of complex environment"
 
 **I was wrong AGAIN**: I proposed 17 separate workflow tools when it should be **1 consolidated tool**.
 
 **The parallel**:
-- **aos_browser**: 20+ browser operations → 1 tool with action dispatch
+- **pos_browser**: 20+ browser operations → 1 tool with action dispatch
 - **workflow**: 17 workflow operations → 1 tool with action dispatch
 
 ---
 
 ## Why Workflows ARE Like Browser
 
-### aos_browser Domain Characteristics
+### pos_browser Domain Characteristics
 
 **Single domain**: Browser automation
 - All operations manipulate browser state
@@ -43,11 +43,11 @@
 
 ## Consolidated Design: One Workflow Tool
 
-### Single Tool: `aos_workflow`
+### Single Tool: `pos_workflow`
 
 ```python
 @mcp.tool()
-async def aos_workflow(
+async def pos_workflow(
     action: str,
     
     # Session context (for execution operations)
@@ -83,7 +83,7 @@ async def aos_workflow(
     Comprehensive workflow management tool.
     
     Handles all workflow operations: discovery, execution, management, recovery, debugging.
-    Follows same pattern as aos_browser for consistency.
+    Follows same pattern as pos_browser for consistency.
     
     Actions:
         Discovery:
@@ -267,13 +267,13 @@ async def aos_workflow(
 ## Complete Tool Inventory (5 Tools!)
 
 **Workflow Management** (1 tool):
-- `aos_workflow` - ALL workflow operations (18 actions)
+- `pos_workflow` - ALL workflow operations (18 actions)
 
 **Note**: Workflow authoring (create/validate) is handled through workflows themselves:
 - `workflow_creation_v1` workflow - Generate new workflows
 - `workflow_validation_v1` workflow - Validate workflow structure
 
-This is accessed via: `aos_workflow(action="start", workflow_type="workflow_creation_v1", ...)`
+This is accessed via: `pos_workflow(action="start", workflow_type="workflow_creation_v1", ...)`
 
 **Utility** (1 tool):
 - `current_date` - Date/time
@@ -281,7 +281,7 @@ This is accessed via: `aos_workflow(action="start", workflow_type="workflow_crea
 **Other Domains** (3 tools):
 - `search_standards` - RAG search
 - `get_server_info` - Server info
-- `aos_browser` - Browser automation
+- `pos_browser` - Browser automation
 
 **Total: 5 tools** (EXCEPTIONALLY OPTIMAL!)
 
@@ -350,31 +350,31 @@ get_session_metrics()
 
 **After** (consolidated):
 ```python
-aos_workflow(action="list_workflows")
-aos_workflow(action="get_metadata")
-aos_workflow(action="search")
-aos_workflow(action="start")
-aos_workflow(action="get_phase")
-aos_workflow(action="get_task")
-aos_workflow(action="complete_phase")
-aos_workflow(action="get_state")
-aos_workflow(action="list_sessions")
-aos_workflow(action="get_session")
-aos_workflow(action="delete_session")
-aos_workflow(action="pause")
-aos_workflow(action="resume")
-aos_workflow(action="retry_phase")
-aos_workflow(action="rollback")
-aos_workflow(action="get_errors")
-aos_workflow(action="get_history")
-aos_workflow(action="get_metrics")
+pos_workflow(action="list_workflows")
+pos_workflow(action="get_metadata")
+pos_workflow(action="search")
+pos_workflow(action="start")
+pos_workflow(action="get_phase")
+pos_workflow(action="get_task")
+pos_workflow(action="complete_phase")
+pos_workflow(action="get_state")
+pos_workflow(action="list_sessions")
+pos_workflow(action="get_session")
+pos_workflow(action="delete_session")
+pos_workflow(action="pause")
+pos_workflow(action="resume")
+pos_workflow(action="retry_phase")
+pos_workflow(action="rollback")
+pos_workflow(action="get_errors")
+pos_workflow(action="get_history")
+pos_workflow(action="get_metrics")
 # ... 1 tool (+ 5 other = 6 tools - OPTIMAL!)
 ```
 
 ### Benefits
 
 1. **Tool count**: 21 tools → 7 tools (massive improvement!)
-2. **Consistency**: Same pattern as aos_browser
+2. **Consistency**: Same pattern as pos_browser
 3. **Clear namespace**: All workflow operations under workflow.*
 4. **Extensibility**: Add new actions without adding tools
 5. **Documentation**: Single comprehensive docstring
@@ -388,16 +388,16 @@ aos_workflow(action="get_metrics")
 
 ```python
 # 1. List available workflows
-result = aos_workflow(action="list_workflows", category="code_generation")
+result = pos_workflow(action="list_workflows", category="code_generation")
 print(f"Found {result['total']} workflows")
 
 # 2. Get metadata for specific workflow
-metadata = aos_workflow(action="get_metadata", workflow_type="test_generation_v3")
+metadata = pos_workflow(action="get_metadata", workflow_type="test_generation_v3")
 print(f"Phases: {metadata['total_phases']}")
 print(f"Duration: {metadata['estimated_duration']}")
 
 # 3. Search for workflow
-results = aos_workflow(action="search", search_query="generate tests for Python")
+results = pos_workflow(action="search", search_query="generate tests for Python")
 workflow_type = results["results"][0]["workflow_type"]
 ```
 
@@ -405,7 +405,7 @@ workflow_type = results["results"][0]["workflow_type"]
 
 ```python
 # 4. Start workflow
-session = aos_workflow(
+session = pos_workflow(
     action="start",
     workflow_type="test_generation_v3",
     target_file="myfile.py"
@@ -413,11 +413,11 @@ session = aos_workflow(
 session_id = session["session_id"]
 
 # 5. Get current phase
-phase = aos_workflow(action="get_phase", session_id=session_id)
+phase = pos_workflow(action="get_phase", session_id=session_id)
 print(f"Current phase: {phase['phase_name']}")
 
 # 6. Get specific task
-task = aos_workflow(
+task = pos_workflow(
     action="get_task",
     session_id=session_id,
     phase=1,
@@ -425,7 +425,7 @@ task = aos_workflow(
 )
 
 # 7. Complete phase
-result = aos_workflow(
+result = pos_workflow(
     action="complete_phase",
     session_id=session_id,
     phase=1,
@@ -433,33 +433,33 @@ result = aos_workflow(
 )
 
 # 8. Check state
-state = aos_workflow(action="get_state", session_id=session_id)
+state = pos_workflow(action="get_state", session_id=session_id)
 ```
 
 ### Manage Sessions
 
 ```python
 # 9. List all sessions
-sessions = aos_workflow(action="list_sessions")
+sessions = pos_workflow(action="list_sessions")
 print(f"Active: {sessions['active']}, Stale: {sessions['stale']}")
 
 # 10. Get session details
-details = aos_workflow(action="get_session", session_id=session_id)
+details = pos_workflow(action="get_session", session_id=session_id)
 
 # 11. Pause session
-aos_workflow(
+pos_workflow(
     action="pause",
     session_id=session_id,
     checkpoint_note="Taking a break"
 )
 
 # 12. Resume later
-aos_workflow(action="resume", session_id=session_id)
+pos_workflow(action="resume", session_id=session_id)
 
 # 13. Clean up stale sessions
-stale = aos_workflow(action="list_sessions", status="stale")
+stale = pos_workflow(action="list_sessions", status="stale")
 for session in stale["sessions"]:
-    aos_workflow(
+    pos_workflow(
         action="delete_session",
         session_id=session["session_id"],
         reason="Stale cleanup"
@@ -470,11 +470,11 @@ for session in stale["sessions"]:
 
 ```python
 # 14. Get errors
-errors = aos_workflow(action="get_errors", session_id=session_id)
+errors = pos_workflow(action="get_errors", session_id=session_id)
 print(f"Total errors: {errors['total_errors']}")
 
 # 15. Retry failed phase
-aos_workflow(
+pos_workflow(
     action="retry_phase",
     session_id=session_id,
     phase=2,
@@ -482,7 +482,7 @@ aos_workflow(
 )
 
 # 16. Roll back if needed
-aos_workflow(
+pos_workflow(
     action="rollback",
     session_id=session_id,
     to_phase=1
@@ -493,12 +493,12 @@ aos_workflow(
 
 ```python
 # 17. Get activity history
-history = aos_workflow(action="get_history", session_id=session_id)
+history = pos_workflow(action="get_history", session_id=session_id)
 for event in history["timeline"]:
     print(f"{event['timestamp']}: {event['action']}")
 
 # 18. Get performance metrics
-metrics = aos_workflow(action="get_metrics", session_id=session_id)
+metrics = pos_workflow(action="get_metrics", session_id=session_id)
 print(f"Duration: {metrics['time_metrics']['total_duration_minutes']} min")
 print(f"Progress: {metrics['progress_metrics']['progress_percent']}%")
 ```
@@ -518,7 +518,7 @@ validate_workflow(workflow_path)              # Single function call
 **New reality**: Authoring IS a workflow
 ```python
 # Creating workflows is a multi-phase process with validation gates
-aos_workflow(
+pos_workflow(
     action="start",
     workflow_type="workflow_creation_v1",
     target_file="my_new_workflow_v1",
@@ -526,7 +526,7 @@ aos_workflow(
 )
 
 # Validation can also be a workflow if needed
-aos_workflow(
+pos_workflow(
     action="start", 
     workflow_type="workflow_validation_v1",
     target_file="my_workflow_v1"
@@ -547,7 +547,7 @@ aos_workflow(
 
 ## Comparison: Browser vs. Workflow
 
-### aos_browser (20+ actions, 1 tool) ✅
+### pos_browser (20+ actions, 1 tool) ✅
 
 **Domain**: Browser automation
 - navigate, click, type, fill, select, screenshot
@@ -558,7 +558,7 @@ aos_workflow(
 
 **Pattern**: Action dispatch with session_id
 
-### aos_workflow (18 actions, 1 tool) ✅
+### pos_workflow (18 actions, 1 tool) ✅
 
 **Domain**: Workflow management
 - list_workflows, get_metadata, search
@@ -577,7 +577,7 @@ aos_workflow(
 
 ### Phase 1: Core Actions (Week 1)
 
-Implement `aos_workflow` tool with essential actions:
+Implement `pos_workflow` tool with essential actions:
 - Discovery: list_workflows, get_metadata
 - Execution: start, get_phase, get_task, complete_phase, get_state
 - Management: list_sessions, delete_session
@@ -618,10 +618,10 @@ Keep old tools as wrappers for 1-2 releases:
 
 ```python
 @mcp.tool()
-@deprecated("Use aos_workflow(action='start') instead")
+@deprecated("Use pos_workflow(action='start') instead")
 async def start_workflow(workflow_type, target_file, options=None):
-    """Deprecated: Use aos_workflow(action='start') instead."""
-    return await aos_workflow(
+    """Deprecated: Use pos_workflow(action='start') instead."""
+    return await pos_workflow(
         action="start",
         workflow_type=workflow_type,
         target_file=target_file,
@@ -645,7 +645,7 @@ async def start_workflow(workflow_type, target_file, options=None):
 = **24 tools** (degraded performance zone - 85% performance degradation!)
 
 **After** (consolidated + authoring through workflows):
-- 1 aos_workflow tool (18 actions)
+- 1 pos_workflow tool (18 actions)
 - 0 authoring tools (handled by workflow_creation_v1 workflow)
 - 1 utility
 - 3 other
@@ -674,8 +674,8 @@ async def start_workflow(workflow_type, target_file, options=None):
 **Complex domains with many related operations** → Consolidate into single tool with action parameter
 
 **Examples**:
-- Browser automation (aos_browser) ✅
-- Workflow management (aos_workflow) ✅
+- Browser automation (pos_browser) ✅
+- Workflow management (pos_workflow) ✅
 
 **Future**:
 - File operations (file) - if we add many file operations
@@ -690,25 +690,25 @@ async def start_workflow(workflow_type, target_file, options=None):
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
 │ Core Feature: Workflows (1 tool)                       │
-│   aos_workflow                                          │
+│   pos_workflow                                          │
 │     └─ 18 actions: discovery, execution, management,   │
 │        recovery, debugging                              │
 │                                                         │
 │ Supporting Features: (4 tools)                          │
 │   search_standards    - RAG semantic search             │
 │   get_server_info     - Server metadata                 │
-│   aos_browser         - Browser automation (20+ actions)│
+│   pos_browser         - Browser automation (20+ actions)│
 │   current_date        - Date/time utility               │
 │                                                         │
 │ Workflow Authoring: (0 tools)                           │
 │   → Handled through workflow_creation_v1 workflow       │
-│   → Accessed via aos_workflow(action="start", ...)      │
+│   → Accessed via pos_workflow(action="start", ...)      │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
 
 **Key principles**:
-1. **Complex domains** → Single tool with action dispatch (aos_workflow, aos_browser)
+1. **Complex domains** → Single tool with action dispatch (pos_workflow, pos_browser)
 2. **Simple utilities** → Separate focused tools (search_standards, get_server_info, current_date)
 3. **Complex operations** → Through workflows (authoring via workflow_creation_v1)
 
@@ -716,7 +716,7 @@ async def start_workflow(workflow_type, target_file, options=None):
 
 ### Next Step
 
-**Implement consolidated `aos_workflow` tool** with 18 actions, achieving comprehensive workflow management in a single, powerful, browser-like tool.
+**Implement consolidated `pos_workflow` tool** with 18 actions, achieving comprehensive workflow management in a single, powerful, browser-like tool.
 
 **Remove**: Any separate workflow authoring tools (handled by workflow_creation_v1 workflow)
 

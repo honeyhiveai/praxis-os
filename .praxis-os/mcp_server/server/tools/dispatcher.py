@@ -1,14 +1,14 @@
 """
 Action dispatcher for consolidated workflow tool.
 
-Provides the main aos_workflow tool that routes actions to specific handlers.
+Provides the main pos_workflow tool that routes actions to specific handlers.
 """
 
 # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-locals
-# Justification: aos_workflow is the main MCP tool function with 14 parameters
+# Justification: pos_workflow is the main MCP tool function with 14 parameters
 # (required by FastMCP signature pattern for action dispatch), 17 local variables
 # for parameter validation and routing. This is intentional design following
-# aos_browser pattern where a single consolidated tool provides all workflow
+# pos_browser pattern where a single consolidated tool provides all workflow
 # operations. Alternative would be 14 separate MCP tools which degrades LLM
 # performance (research shows 85% drop with >20 tools).
 
@@ -67,8 +67,8 @@ def register_workflow_tools(
     """
     Register consolidated workflow tool with MCP server.
 
-    Registers a single aos_workflow tool that provides all workflow operations
-    through action-based dispatch, following the aos_browser pattern for
+    Registers a single pos_workflow tool that provides all workflow operations
+    through action-based dispatch, following the pos_browser pattern for
     optimal LLM performance.
 
     :param mcp: FastMCP server instance
@@ -83,7 +83,7 @@ def register_workflow_tools(
     """
 
     @mcp.tool()
-    async def aos_workflow(
+    async def pos_workflow(
         action: str,
         # Session context
         session_id: Optional[str] = None,
@@ -107,7 +107,7 @@ def register_workflow_tools(
         to_phase: Union[int, float, None] = None,
     ) -> Dict[str, Any]:
         """
-        Consolidated workflow management tool following aos_browser pattern.
+        Consolidated workflow management tool following pos_browser pattern.
 
         Handles all workflow operations through action-based dispatch:
         - Discovery (1 action): list_workflows
@@ -202,7 +202,7 @@ def register_workflow_tools(
             return result  # type: ignore[return-value]
 
         except ValueError as e:
-            logger.warning("ValueError in aos_workflow: %s", e)
+            logger.warning("ValueError in pos_workflow: %s", e)
             return {
                 "status": "error",
                 "action": action,
@@ -210,7 +210,7 @@ def register_workflow_tools(
                 "error_type": "ValueError",
             }
         except Exception as e:
-            logger.error("Unexpected error in aos_workflow: %s", e, exc_info=True)
+            logger.error("Unexpected error in pos_workflow: %s", e, exc_info=True)
             return {
                 "status": "error",
                 "action": action,
@@ -219,5 +219,5 @@ def register_workflow_tools(
                 "remediation": "Check server logs for detailed error information",
             }
 
-    logger.info("✅ Registered consolidated aos_workflow tool (14 actions)")
+    logger.info("✅ Registered consolidated pos_workflow tool (14 actions)")
     return 1  # One tool registered

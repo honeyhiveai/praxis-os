@@ -248,7 +248,7 @@ Get human review and approval
 
 **Step 2: Create Spec from Design**
 ```
-aos_workflow(
+pos_workflow(
   action="start",
   workflow_type="spec_creation_v1",
   target_file=".praxis-os/specs/review/YYYY-MM-DD-feature-name"
@@ -260,7 +260,7 @@ Design doc informs SRD, specs, implementation guidance
 
 **Step 3: Execute Spec**
 ```
-aos_workflow(
+pos_workflow(
   action="start",
   workflow_type="spec_execution_v1",
   target_file=".praxis-os/specs/review/YYYY-MM-DD-feature-name",

@@ -13,7 +13,7 @@ Add a consolidated `skill` MCP tool to Agent OS Enhanced, bringing Anthropic's S
 **Key Benefits:**
 - Model-agnostic Skills support (not just Claude)
 - Complementary to workflows (deterministic ops vs. complex processes)
-- Consistent with aos_browser/workflow consolidation pattern
+- Consistent with pos_browser/workflow consolidation pattern
 - Context-efficient (progressive disclosure)
 - Usable from within workflow phases
 
@@ -52,10 +52,10 @@ Add a consolidated `skill` MCP tool to Agent OS Enhanced, bringing Anthropic's S
 
 ## Solution Overview
 
-Add `skill` MCP tool following the consolidated pattern (like aos_browser, workflow).
+Add `skill` MCP tool following the consolidated pattern (like pos_browser, workflow).
 
 **Design principles:**
-1. **One tool, multiple actions** - Follow aos_browser/workflow pattern
+1. **One tool, multiple actions** - Follow pos_browser/workflow pattern
 2. **Progressive disclosure** - Load context only as needed
 3. **Complementary to workflows** - Different purposes, work together
 4. **Model-agnostic** - MCP-based, any LLM can use
@@ -198,7 +198,7 @@ async def skill(
     Consolidated skill management tool.
     
     Handles skill discovery, loading, execution, and management.
-    Follows same pattern as workflow and aos_browser for consistency.
+    Follows same pattern as workflow and pos_browser for consistency.
     
     Actions:
         Discovery:
@@ -732,7 +732,7 @@ Use the pdf-processing skill to automate form filling.
 - workflow (1 tool, 18 actions)
 - search_standards (1 tool)
 - get_server_info (1 tool)
-- aos_browser (1 tool, 20+ actions)
+- pos_browser (1 tool, 20+ actions)
 - current_date (1 tool)
 = **5 tools**
 
@@ -741,7 +741,7 @@ Use the pdf-processing skill to automate form filling.
 - skill (1 tool, 10 actions) ← NEW
 - search_standards (1 tool)
 - get_server_info (1 tool)
-- aos_browser (1 tool, 20+ actions)
+- pos_browser (1 tool, 20+ actions)
 - current_date (1 tool)
 = **6 tools** (Still optimal!)
 

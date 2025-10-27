@@ -99,13 +99,13 @@ async def browser(action: str, **kwargs) -> Dict:
 ### Option B: Server Prefix (Recommended)
 ```python
 @mcp.tool()
-async def aos_browser(action: str, **kwargs) -> Dict:
+async def pos_browser(action: str, **kwargs) -> Dict:
     """Agent OS browser automation tool."""
 ```
 
-**Naming Convention**: `aos_` (Agent OS) prefix
-- `aos_browser` - Browser automation
-- `aos_persona` (future) - Persona consultations
+**Naming Convention**: `pos_` (Agent OS) prefix
+- `pos_browser` - Browser automation
+- `pos_persona` (future) - Persona consultations
 - Current tools unchanged (grandfather them in)
 
 **Pros:**
@@ -161,13 +161,13 @@ async def agentbrowser(action: str, **kwargs) -> Dict:
 
 ## 🎯 Recommended Strategy
 
-### **Use `aos_` Prefix for New Tools**
+### **Use `pos_` Prefix for New Tools**
 
 **Naming Pattern**:
 ```
-aos_browser         - Browser automation (consolidated tool)
-aos_persona         - Persona consultations (future)
-aos_*               - Any future specialized tools
+pos_browser         - Browser automation (consolidated tool)
+pos_persona         - Persona consultations (future)
+pos_*               - Any future specialized tools
 ```
 
 **Keep Existing Tools Unchanged**:
@@ -182,7 +182,7 @@ get_current_phase   - Core workflow functionality
 1. **No Breaking Changes**: Existing tools keep their names
 2. **Clear Namespace**: New tools clearly belong to Agent OS
 3. **Future-Proof**: Won't conflict with Cursor additions
-4. **Reasonable Length**: `aos_` is short (4 chars)
+4. **Reasonable Length**: `pos_` is short (4 chars)
 5. **Discoverable**: AI can easily find "Agent OS tools" by prefix
 
 ---
@@ -207,7 +207,7 @@ get_current_phase   - Core workflow functionality
 | Proposed Name | Cursor Conflict? | Analysis |
 |---------------|------------------|----------|
 | `browser` | No direct conflict, but Cursor has `mcp_cursor-playwright_browser_*` | ⚠️ Potentially confusing |
-| `aos_browser` | No conflict | ✅ **SAFE** |
+| `pos_browser` | No conflict | ✅ **SAFE** |
 | `agent_os_browser` | No conflict | ✅ Safe but verbose |
 
 ---
@@ -223,12 +223,12 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
     """
     Register browser automation tools with MCP server.
     
-    Tool name: aos_browser (Agent OS Browser)
-    Namespace: aos_ (Agent OS)
+    Tool name: pos_browser (Agent OS Browser)
+    Namespace: pos_ (Agent OS)
     """
     
     @mcp.tool()
-    async def aos_browser(
+    async def pos_browser(
         action: str,
         url: Optional[str] = None,
         color_scheme: Optional[str] = None,
@@ -259,7 +259,7 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
         # Implementation
         pass
     
-    logger.info("Registered 1 browser tool: aos_browser")
+    logger.info("Registered 1 browser tool: pos_browser")
     return 1
 ```
 
@@ -268,16 +268,16 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
 **For AI Agent:**
 ```python
 # Enable dark mode on docs site
-aos_browser(action="navigate", url="http://localhost:3000")
-aos_browser(action="emulate_media", color_scheme="dark")
-aos_browser(action="screenshot", screenshot_path="/tmp/dark-mode.png")
+pos_browser(action="navigate", url="http://localhost:3000")
+pos_browser(action="emulate_media", color_scheme="dark")
+pos_browser(action="screenshot", screenshot_path="/tmp/dark-mode.png")
 ```
 
 **In Documentation:**
 ```markdown
 ## Browser Automation
 
-Agent OS provides the `aos_browser` tool for programmatic browser control:
+Agent OS provides the `pos_browser` tool for programmatic browser control:
 
 - Test documentation sites in light/dark mode
 - Capture screenshots for validation
@@ -292,14 +292,14 @@ Note: This complements Cursor's Playwright tools with Agent OS-specific features
 
 ### For Future Tools
 
-**New specialized tools should use `aos_` prefix:**
+**New specialized tools should use `pos_` prefix:**
 
 | Tool | Name | Rationale |
 |------|------|-----------|
-| Browser automation | `aos_browser` | Clear namespace, avoids confusion |
-| Persona consultations | `aos_persona` | Clear namespace |
-| Custom validators | `aos_validate_*` | Clear namespace |
-| Domain-specific tools | `aos_*` | Clear namespace |
+| Browser automation | `pos_browser` | Clear namespace, avoids confusion |
+| Persona consultations | `pos_persona` | Clear namespace |
+| Custom validators | `pos_validate_*` | Clear namespace |
+| Domain-specific tools | `pos_*` | Clear namespace |
 
 **Core RAG/Workflow tools keep existing names:**
 
@@ -310,20 +310,20 @@ Note: This complements Cursor's Playwright tools with Agent OS-specific features
 
 ### Naming Rules
 
-1. **New tool?** → Use `aos_` prefix
+1. **New tool?** → Use `pos_` prefix
 2. **Core RAG/workflow?** → No prefix (established pattern)
-3. **Multiple words?** → Use snake_case: `aos_browser_session`, `aos_run_persona`
+3. **Multiple words?** → Use snake_case: `pos_browser_session`, `pos_run_persona`
 4. **Ambiguous?** → Add prefix for safety
 
 ---
 
 ## ✅ Final Recommendation
 
-**Tool Name**: `aos_browser`
+**Tool Name**: `pos_browser`
 
 **Full Signature**:
 ```python
-async def aos_browser(
+async def pos_browser(
     action: str,
     url: Optional[str] = None,
     color_scheme: Optional[str] = None,
@@ -342,7 +342,7 @@ async def aos_browser(
 **Tool Count**:
 ```
 Current:     8 tools
-+ Browser:   1 tool (aos_browser)
++ Browser:   1 tool (pos_browser)
 ─────────────────────
 Total:       9 tools ✅ (well under 20-tool limit)
 ```
@@ -351,7 +351,7 @@ Total:       9 tools ✅ (well under 20-tool limit)
 
 ## 📝 Documentation Updates Needed
 
-1. **RESEARCH.md**: Update all `browser()` references to `aos_browser()`
+1. **RESEARCH.md**: Update all `browser()` references to `pos_browser()`
 2. **TOOL_CONSOLIDATION.md**: Update tool names
 3. **SUMMARY.md**: Update tool name
 4. **MCP Server README**: Document naming convention
@@ -359,5 +359,5 @@ Total:       9 tools ✅ (well under 20-tool limit)
 
 ---
 
-**Proceed with `aos_browser` as the tool name!** 🎯
+**Proceed with `pos_browser` as the tool name!** 🎯
 

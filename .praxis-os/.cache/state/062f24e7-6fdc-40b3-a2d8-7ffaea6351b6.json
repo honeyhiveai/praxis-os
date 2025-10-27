@@ -155,7 +155,7 @@
           "new_structure": {
             "constants.py": "15 lines - action names & validation constants",
             "validators.py": "145 lines - input validation functions",
-            "dispatcher.py": "202 lines - main aos_workflow tool",
+            "dispatcher.py": "202 lines - main pos_workflow tool",
             "handlers/discovery.py": "105 lines - list_workflows",
             "handlers/execution.py": "329 lines - 5 execution actions",
             "handlers/management.py": "180 lines - 3 management actions (including delete_session)",
@@ -194,7 +194,7 @@
           "tests/server/tools/test_workflow_tools.py",
           "tests/server/tools/test_workflow_tools_security.py",
           "tests/server/tools/test_workflow_tools_performance.py",
-          "tests/integration/test_aos_workflow_e2e.py",
+          "tests/integration/test_pos_workflow_e2e.py",
           "docs/content/reference/mcp-tools.md"
         ],
         "validation_gate": {
@@ -270,7 +270,7 @@
           }
         ],
         "post_deployment_validation": {
-          "tool_registration": "success - aos_workflow registered with 14 actions",
+          "tool_registration": "success - pos_workflow registered with 14 actions",
           "list_workflows_action": "success - returns workflow metadata",
           "get_state_action": "success - returns session state",
           "get_task_action": "success - returns task content with numeric parameters",
@@ -278,7 +278,7 @@
           "numeric_parameters_fix": "verified working after Union type hint change"
         },
         "documentation_updated": {
-          "tool_reference": "docs/content/reference/mcp-tools.md - comprehensive aos_workflow documentation",
+          "tool_reference": "docs/content/reference/mcp-tools.md - comprehensive pos_workflow documentation",
           "actions_documented": 14,
           "examples_provided": true,
           "error_responses_documented": true

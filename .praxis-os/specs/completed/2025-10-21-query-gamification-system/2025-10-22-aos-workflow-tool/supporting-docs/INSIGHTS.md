@@ -6,7 +6,7 @@
 
 **Business Goal:** Optimize AI agent performance by reducing tool count from 24 to 5 tools (79% reduction), achieving optimal LLM performance (~95% accuracy, minimal context pollution)
 
-**User Need:** Comprehensive workflow management through a single, consistent interface that follows established patterns (aos_browser)
+**User Need:** Comprehensive workflow management through a single, consistent interface that follows established patterns (pos_browser)
 
 **Functional Requirements:**
 1. **Discovery Actions** (3):
@@ -38,7 +38,7 @@
    - get_metrics: Get session performance metrics
 
 **Constraints:**
-- Tool name must be `aos_workflow` (not `workflow`) to match `aos_browser` naming pattern
+- Tool name must be `pos_workflow` (not `workflow`) to match `pos_browser` naming pattern
 - Single tool with action dispatch parameter (not 17+ separate tools)
 - Session-based architecture with session_id for most operations
 - Must maintain compatibility during migration (deprecation wrappers acceptable for 1-2 releases)
@@ -53,16 +53,16 @@
 
 ### From Consolidated Workflow Tool Design:
 
-**Architecture:** Single consolidated tool with action dispatch pattern (same as aos_browser)
+**Architecture:** Single consolidated tool with action dispatch pattern (same as pos_browser)
 
 **Component Structure:**
-- Main tool function: `aos_workflow(action, session_id?, ...params)`
+- Main tool function: `pos_workflow(action, session_id?, ...params)`
 - Action dispatcher routing to 18 action handlers
 - Action categories: Discovery, Execution, Management, Recovery, Debugging
 
 **API Contract:**
 ```python
-async def aos_workflow(
+async def pos_workflow(
     action: str,  # Required: action to perform
     session_id: Optional[str] = None,  # Required for most operations
     
@@ -100,7 +100,7 @@ async def aos_workflow(
 - Error responses include remediation guidance
 
 **Session Management:**
-- Persistent sessions across calls (same as aos_browser)
+- Persistent sessions across calls (same as pos_browser)
 - Session ID isolation for multi-chat safety
 - Session states: active, paused, completed, failed, stale
 
@@ -115,7 +115,7 @@ async def aos_workflow(
 - Batch operations possible within single tool call
 
 **Design Patterns:**
-- Follows aos_browser consolidation pattern exactly
+- Follows pos_browser consolidation pattern exactly
 - Complex domains → Single tool with action dispatch
 - Simple utilities → Separate focused tools
 - Complex operations → Through workflows
@@ -193,7 +193,7 @@ test_error_recovery_workflow()
 ## Cross-References
 
 **Validated by Design Document:**
-- Tool consolidation pattern (aos_browser proves viability)
+- Tool consolidation pattern (pos_browser proves viability)
 - 5-tool target (optimal LLM performance)
 - Action dispatch architecture (established pattern)
 - Session-based operations (proven pattern)
@@ -201,9 +201,9 @@ test_error_recovery_workflow()
 **Conflicts:** None
 
 **High-Priority Items:**
-1. Tool name must be `aos_workflow` (not `workflow`)
+1. Tool name must be `pos_workflow` (not `workflow`)
 2. Action dispatch with 18 actions across 5 categories
-3. Consistency with aos_browser pattern
+3. Consistency with pos_browser pattern
 4. Phased implementation (Week 1 → Week 2 → Week 3)
 5. Migration strategy decision (hard cutover vs deprecation)
 
@@ -213,7 +213,7 @@ test_error_recovery_workflow()
 
 **Total:** 47 insights  
 **By Category:** Requirements [15], Design [20], Implementation [12]  
-**Multi-source validated:** 4 (patterns proven by aos_browser)  
+**Multi-source validated:** 4 (patterns proven by pos_browser)  
 **Conflicts to resolve:** 0  
 **High-priority items:** 5
 

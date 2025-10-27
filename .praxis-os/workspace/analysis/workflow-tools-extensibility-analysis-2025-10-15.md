@@ -1,7 +1,7 @@
 # Workflow Tools Extensibility Analysis
 **Date**: 2025-10-15  
 **Goal**: Analyze workflow tools through lens of domain-appropriate complexity  
-**Question**: Should workflow tools be consolidated like aos_browser, or stay granular?
+**Question**: Should workflow tools be consolidated like pos_browser, or stay granular?
 
 ---
 
@@ -71,7 +71,7 @@ From code references:
 
 ### Design Analysis: Are These Appropriately Granular?
 
-Let's apply the aos_browser lens:
+Let's apply the pos_browser lens:
 
 **Question 1: Is this a single coherent domain?**
 
@@ -81,7 +81,7 @@ Let's apply the aos_browser lens:
 - **Workflow Validation** (validate_workflow)
 - **Utility** (current_date)
 
-**Analysis**: Unlike aos_browser (single domain: browser automation), workflow tools span multiple domains.
+**Analysis**: Unlike pos_browser (single domain: browser automation), workflow tools span multiple domains.
 
 **Question 2: Do all operations share context?**
 
@@ -90,7 +90,7 @@ Let's apply the aos_browser lens:
 - Creation/validation don't use session_id
 - Different contexts for different tool groups
 
-**Analysis**: Not like aos_browser where session_id is always required.
+**Analysis**: Not like pos_browser where session_id is always required.
 
 **Question 3: Are operations sequential on same entity?**
 
@@ -133,7 +133,7 @@ workflow(action="validate", ...)
 4. ✅ Action parameter would confuse, not clarify
 5. ✅ Operations are conceptually distinct (not variations)
 
-**Contrast with aos_browser**:
+**Contrast with pos_browser**:
 - Browser: Single domain (browser automation) → parameterized
 - Workflows: Multiple domains (execution, creation, validation) → granular
 
@@ -394,9 +394,9 @@ list_workflows(
 
 ## Domain Analysis: Should Workflows Be One Tool?
 
-### Comparing to aos_browser
+### Comparing to pos_browser
 
-**aos_browser domain**:
+**pos_browser domain**:
 - Single entity: browser page/session
 - Single context: session_id (always required)
 - Sequential operations: navigate → wait → click → type → screenshot
@@ -505,7 +505,7 @@ async def workflow(
 
 **3. Mixed domains**
 - Execution (start, get_phase, complete) vs. Creation (create) vs. Validation (validate) vs. Discovery (list)
-- No coherence like aos_browser (single domain: browser)
+- No coherence like pos_browser (single domain: browser)
 
 **4. No tool count benefit**
 - Current: 8 workflow tools → 11 total tools (optimal)
@@ -636,7 +636,7 @@ list_workflows(category=None)
 
 ### Key Insights
 
-1. **Workflow tools should stay granular** (unlike aos_browser)
+1. **Workflow tools should stay granular** (unlike pos_browser)
    - Multiple domains (execution, creation, validation)
    - Different purposes (not variations of same operation)
    - Tool count not a problem
@@ -658,7 +658,7 @@ list_workflows(category=None)
 
 ### Domain-Appropriate Complexity Applied
 
-**aos_browser**: Complex, parameterized (CORRECT)
+**pos_browser**: Complex, parameterized (CORRECT)
 - Single domain (browser automation)
 - Shared context (session_id)
 - 20+ operations on same entity

@@ -706,7 +706,7 @@ async def get_session_metrics(session_id: str) -> Dict[str, Any]:
 **Other domains** (3 tools):
 - `search_standards` - RAG search
 - `get_server_info` - Server info
-- `aos_browser` - Browser automation
+- `pos_browser` - Browser automation
 
 **Total: 20 tools** (at the threshold, but comprehensive)
 
@@ -752,7 +752,7 @@ WORKFLOW_AUTHORING = [
 
 # Browser tools (opt-in)
 BROWSER_TOOLS = [
-    "aos_browser"
+    "pos_browser"
 ]  # +1 tool = 20 total (at limit)
 ```
 
@@ -766,7 +766,7 @@ BROWSER_TOOLS = [
             "workflow_core",      // 7 tools: execution + discovery + session mgmt
             "workflow_advanced",  // 8 tools: error recovery + debugging
             "workflow_authoring", // 2 tools: create + validate
-            "browser"             // 1 tool: aos_browser
+            "browser"             // 1 tool: pos_browser
         ]
     }
 }

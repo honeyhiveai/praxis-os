@@ -188,25 +188,25 @@ Me:
 ### Login Form Testing
 ```python
 # Navigate
-aos_browser(action="navigate", url="http://localhost:3000/login", session_id="test-1")
+pos_browser(action="navigate", url="http://localhost:3000/login", session_id="test-1")
 
 # Fill form
-aos_browser(action="type", selector="input#email", text="user@example.com", session_id="test-1")
-aos_browser(action="type", selector="input#password", text="secret123", session_id="test-1")
+pos_browser(action="type", selector="input#email", text="user@example.com", session_id="test-1")
+pos_browser(action="type", selector="input#password", text="secret123", session_id="test-1")
 
 # Submit
-aos_browser(action="click", selector="button[type=submit]", session_id="test-1")
+pos_browser(action="click", selector="button[type=submit]", session_id="test-1")
 
 # Verify
-aos_browser(action="wait_for_selector", selector=".dashboard", state="visible", session_id="test-1")
-aos_browser(action="query_element", selector=".welcome", property="text", session_id="test-1")
+pos_browser(action="wait_for_selector", selector=".dashboard", state="visible", session_id="test-1")
+pos_browser(action="query_element", selector=".welcome", property="text", session_id="test-1")
 # Returns: {"status": "success", "text": "Welcome, user@example.com!"}
 ```
 
 ### Checkout Flow Testing
 ```python
 # Fill multi-field form
-aos_browser(
+pos_browser(
     action="fill",
     form_data={
         "input#name": "John Doe",
@@ -218,13 +218,13 @@ aos_browser(
 )
 
 # Check terms
-aos_browser(action="check", selector="input#terms", session_id="checkout-1")
+pos_browser(action="check", selector="input#terms", session_id="checkout-1")
 
 # Submit
-aos_browser(action="click", selector="button#checkout", session_id="checkout-1")
+pos_browser(action="click", selector="button#checkout", session_id="checkout-1")
 
 # Assert success
-aos_browser(
+pos_browser(
     action="wait_for_selector",
     selector=".order-confirmation",
     state="visible",

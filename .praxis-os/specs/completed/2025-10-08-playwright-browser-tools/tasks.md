@@ -300,7 +300,7 @@ await manager.shutdown()  # No exception
 
 ## Phase 2: Core Actions Implementation (12-15 hours)
 
-**Goal**: Implement comprehensive aos_browser tool with 30+ actions
+**Goal**: Implement comprehensive pos_browser tool with 30+ actions
 
 **Scope**: Navigation, inspection, interaction, waiting, context control, session management
 
@@ -311,13 +311,13 @@ await manager.shutdown()  # No exception
 **Dependencies**: Phase 1 complete  
 **Priority**: MUST HAVE
 
-**Description**: Create tool registration module with aos_browser skeleton
+**Description**: Create tool registration module with pos_browser skeleton
 
 **Acceptance Criteria**:
 - [ ] Module-level docstring
 - [ ] Import BrowserManager from mcp_server.browser_manager
 - [ ] Function `register_browser_tools(mcp, browser_manager) -> int`
-- [ ] Skeleton `@mcp.tool() async def aos_browser()` with all parameters
+- [ ] Skeleton `@mcp.tool() async def pos_browser()` with all parameters
 - [ ] Return 1 (tool count)
 - [ ] Comprehensive docstring with all actions, examples
 
@@ -355,13 +355,13 @@ assert count == 1
 **Validation**:
 ```python
 # Success case
-result = await aos_browser(action="navigate", url="https://example.com", session_id="test")
+result = await pos_browser(action="navigate", url="https://example.com", session_id="test")
 assert result["status"] == "success"
 assert result["url"] == "https://example.com"
 assert "title" in result
 
 # Timeout case
-result = await aos_browser(action="navigate", url="https://slow.com", timeout=100)
+result = await pos_browser(action="navigate", url="https://slow.com", timeout=100)
 assert result["status"] == "error"
 assert "timeout" in result["error"].lower()
 ```
@@ -389,7 +389,7 @@ assert "timeout" in result["error"].lower()
 **Validation**:
 ```python
 # Set dark mode
-result = await aos_browser(action="emulate_media", color_scheme="dark", session_id="test")
+result = await pos_browser(action="emulate_media", color_scheme="dark", session_id="test")
 assert result["status"] == "success"
 assert result["color_scheme"] == "dark"
 
@@ -420,7 +420,7 @@ assert result["color_scheme"] == "dark"
 **Validation**:
 ```python
 # Save to file
-result = await aos_browser(
+result = await pos_browser(
     action="screenshot",
     screenshot_path="/tmp/test.png",
     screenshot_full_page=True,
@@ -430,7 +430,7 @@ assert result["status"] == "success"
 assert Path("/tmp/test.png").exists()
 
 # Base64 mode
-result = await aos_browser(action="screenshot", session_id="test")
+result = await pos_browser(action="screenshot", session_id="test")
 assert "base64" in result
 ```
 
@@ -456,12 +456,12 @@ assert "base64" in result
 **Validation**:
 ```python
 # Viewport
-result = await aos_browser(action="set_viewport", viewport_width=1024, viewport_height=768, session_id="test")
+result = await pos_browser(action="set_viewport", viewport_width=1024, viewport_height=768, session_id="test")
 assert result["status"] == "success"
 assert result["viewport"] == {"width": 1024, "height": 768}
 
 # Console (stub)
-result = await aos_browser(action="get_console", session_id="test")
+result = await pos_browser(action="get_console", session_id="test")
 assert result["console_messages"] == []
 ```
 
@@ -486,7 +486,7 @@ assert result["console_messages"] == []
 **Validation**:
 ```python
 # Close session
-result = await aos_browser(action="close", session_id="test")
+result = await pos_browser(action="close", session_id="test")
 assert result["status"] == "success"
 assert result["session_id"] == "test"
 
@@ -581,17 +581,17 @@ assert count == 8  # No browser tool
 **Validation**:
 ```python
 # Success case
-result = await aos_browser(action="click", selector="button#submit", session_id="test")
+result = await pos_browser(action="click", selector="button#submit", session_id="test")
 assert result["status"] == "success"
 assert result["selector"] == "button#submit"
 
 # Element not found
-result = await aos_browser(action="click", selector="#nonexistent")
+result = await pos_browser(action="click", selector="#nonexistent")
 assert result["status"] == "error"
 assert "not found" in result["error"].lower()
 
 # Right click
-result = await aos_browser(action="click", selector=".menu", button="right")
+result = await pos_browser(action="click", selector=".menu", button="right")
 assert result["button"] == "right"
 ```
 
@@ -619,12 +619,12 @@ assert result["button"] == "right"
 **Validation**:
 ```python
 # Success case
-result = await aos_browser(action="type", text="Hello World", session_id="test")
+result = await pos_browser(action="type", text="Hello World", session_id="test")
 assert result["status"] == "success"
 assert result["characters_typed"] == 11
 
 # With delay (human-like typing)
-result = await aos_browser(action="type", text="test", delay=50)
+result = await pos_browser(action="type", text="test", delay=50)
 assert result["delay"] == 50
 ```
 
@@ -654,13 +654,13 @@ assert result["delay"] == 50
 **Validation**:
 ```python
 # Success case
-result = await aos_browser(action="fill", selector="input#email", value="test@example.com")
+result = await pos_browser(action="fill", selector="input#email", value="test@example.com")
 assert result["status"] == "success"
 assert result["selector"] == "input#email"
 assert result["value_length"] == 16
 
 # Not fillable
-result = await aos_browser(action="fill", selector="div#output", value="test")
+result = await pos_browser(action="fill", selector="div#output", value="test")
 assert result["status"] == "error"
 assert "not fillable" in result["error"].lower()
 ```
@@ -691,16 +691,16 @@ assert "not fillable" in result["error"].lower()
 **Validation**:
 ```python
 # Select by value
-result = await aos_browser(action="select", selector="select#country", value="US")
+result = await pos_browser(action="select", selector="select#country", value="US")
 assert result["status"] == "success"
 assert "US" in result["selected_values"]
 
 # Select by label
-result = await aos_browser(action="select", selector="select#country", label="United States")
+result = await pos_browser(action="select", selector="select#country", label="United States")
 assert result["status"] == "success"
 
 # Select by index
-result = await aos_browser(action="select", selector="select#country", index=0)
+result = await pos_browser(action="select", selector="select#country", index=0)
 assert result["status"] == "success"
 ```
 
@@ -734,13 +734,13 @@ assert result["status"] == "success"
 **Validation**:
 ```python
 # Wait for visible
-result = await aos_browser(action="wait", selector="#modal", wait_for="visible", timeout=5000)
+result = await pos_browser(action="wait", selector="#modal", wait_for="visible", timeout=5000)
 assert result["status"] == "success"
 assert result["wait_for"] == "visible"
 assert result["duration_ms"] > 0
 
 # Timeout case
-result = await aos_browser(action="wait", selector="#never-appears", wait_for="visible", timeout=1000)
+result = await pos_browser(action="wait", selector="#never-appears", wait_for="visible", timeout=1000)
 assert result["status"] == "error"
 assert "timeout" in result["error"].lower()
 ```
@@ -776,7 +776,7 @@ assert "timeout" in result["error"].lower()
 **Validation**:
 ```python
 # Query multiple properties
-result = await aos_browser(
+result = await pos_browser(
     action="query", 
     selector="input#email", 
     properties=["text", "value", "visible", "enabled"]
@@ -787,7 +787,7 @@ assert "visible" in result["properties"]
 assert "value" in result["properties"]
 
 # Query attribute
-result = await aos_browser(
+result = await pos_browser(
     action="query", 
     selector="a#link", 
     properties=["attribute.href", "text"]
@@ -821,12 +821,12 @@ assert "href" in result["properties"]
 **Validation**:
 ```python
 # Simple evaluation
-result = await aos_browser(action="evaluate", script="document.title")
+result = await pos_browser(action="evaluate", script="document.title")
 assert result["status"] == "success"
 assert "result" in result
 
 # With arguments
-result = await aos_browser(
+result = await pos_browser(
     action="evaluate", 
     script="(x, y) => x + y", 
     args=[5, 3]
@@ -834,7 +834,7 @@ result = await aos_browser(
 assert result["result"] == 8
 
 # JavaScript error
-result = await aos_browser(action="evaluate", script="throw new Error('test')")
+result = await pos_browser(action="evaluate", script="throw new Error('test')")
 assert result["status"] == "error"
 ```
 
@@ -861,7 +861,7 @@ assert result["status"] == "error"
 **Validation**:
 ```python
 # Get all cookies
-result = await aos_browser(action="get_cookies", session_id="test")
+result = await pos_browser(action="get_cookies", session_id="test")
 assert result["status"] == "success"
 assert "cookies" in result
 assert isinstance(result["cookies"], list)
@@ -892,7 +892,7 @@ assert isinstance(result["cookies"], list)
 **Validation**:
 ```python
 # Set cookies
-result = await aos_browser(
+result = await pos_browser(
     action="set_cookies",
     cookies=[
         {"name": "session", "value": "abc123", "url": "https://example.com"}
@@ -924,7 +924,7 @@ assert result["cookies_set"] == 1
 **Validation**:
 ```python
 # Get local storage
-result = await aos_browser(action="get_local_storage", session_id="test")
+result = await pos_browser(action="get_local_storage", session_id="test")
 assert result["status"] == "success"
 assert "storage" in result
 assert isinstance(result["storage"], dict)
@@ -948,7 +948,7 @@ assert isinstance(result["storage"], dict)
 
 **Phase 2 Validation Gate**:
 - [ ] All 18 tasks complete (Task 2.1-2.18)
-- [ ] `aos_browser` tool registered and callable
+- [ ] `pos_browser` tool registered and callable
 - [ ] All 20+ actions functional
 - [ ] MCP server starts without errors
 - [ ] Tool appears in tool list
@@ -1041,7 +1041,7 @@ assert isinstance(result["storage"], dict)
 **Dependencies**: Phase 2 complete  
 **Priority**: MUST HAVE
 
-**Description**: Test all aos_browser actions end-to-end
+**Description**: Test all pos_browser actions end-to-end
 
 **Test Cases**:
 - `test_navigate_success` - Navigate to real URL
@@ -1279,14 +1279,14 @@ assert isinstance(result["storage"], dict)
 
 ---
 
-### Task 4.3: Document aos_browser Usage
+### Task 4.3: Document pos_browser Usage
 
 **File**: `docs/content/browser-tools.md` (new)  
 **Estimated Time**: 45 minutes  
 **Dependencies**: Phase 2 complete  
 **Priority**: MUST HAVE
 
-**Description**: User-facing documentation for aos_browser
+**Description**: User-facing documentation for pos_browser
 
 **Content**:
 - Overview and use cases
@@ -1311,10 +1311,10 @@ assert isinstance(result["storage"], dict)
 **Dependencies**: Phase 2 complete  
 **Priority**: SHOULD HAVE
 
-**Description**: Add aos_browser to auto-approve list
+**Description**: Add pos_browser to auto-approve list
 
 **Acceptance Criteria**:
-- [ ] Add "aos_browser" to autoApprove array
+- [ ] Add "pos_browser" to autoApprove array
 - [ ] Verify Cursor doesn't prompt for approval
 
 **Traceability**: User Experience Success

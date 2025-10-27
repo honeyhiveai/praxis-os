@@ -172,7 +172,7 @@ class BrowserManager:
 
 ```python
 @mcp.tool()
-async def aos_browser(
+async def pos_browser(
     action: str,
     session_id: Optional[str] = None,
     url: Optional[str] = None,
@@ -190,10 +190,10 @@ async def aos_browser(
     Actions: navigate, emulate_media, screenshot, set_viewport, get_console, close
     
     Examples:
-        >>> aos_browser(action="navigate", url="https://example.com", session_id="test-1")
-        >>> aos_browser(action="emulate_media", color_scheme="dark", session_id="test-1")
-        >>> aos_browser(action="screenshot", screenshot_path="/tmp/dark.png", session_id="test-1")
-        >>> aos_browser(action="close", session_id="test-1")
+        >>> pos_browser(action="navigate", url="https://example.com", session_id="test-1")
+        >>> pos_browser(action="emulate_media", color_scheme="dark", session_id="test-1")
+        >>> pos_browser(action="screenshot", screenshot_path="/tmp/dark.png", session_id="test-1")
+        >>> pos_browser(action="close", session_id="test-1")
     """
     try:
         sid = session_id or "default"
@@ -226,7 +226,7 @@ async def aos_browser(
             }
     
     except Exception as e:
-        logger.error(f"aos_browser({action}) failed: {e}", exc_info=True)
+        logger.error(f"pos_browser({action}) failed: {e}", exc_info=True)
         return {
             "status": "error",
             "action": action,
@@ -1453,7 +1453,7 @@ PLAYWRIGHT_DEBUG=1 python -m mcp_server
    {
      "mcpServers": {
        "agent-os-rag": {
-         "autoApprove": ["search_standards", "get_current_phase", "aos_browser"]
+         "autoApprove": ["search_standards", "get_current_phase", "pos_browser"]
        }
      }
    }
@@ -1467,7 +1467,7 @@ PLAYWRIGHT_DEBUG=1 python -m mcp_server
 5. **Verify Tool Available**:
    In Cursor chat:
    ```
-   aos_browser(action="navigate", url="https://example.com")
+   pos_browser(action="navigate", url="https://example.com")
    ```
 
 ### Post-Deployment Validation
@@ -1485,7 +1485,7 @@ PLAYWRIGHT_DEBUG=1 python -m mcp_server
 
 ### 8.1 Cold Start Optimization
 
-**Current**: Browser launches on first `aos_browser()` call (lazy)
+**Current**: Browser launches on first `pos_browser()` call (lazy)
 
 **Alternative**: Pre-warm on server startup
 ```python

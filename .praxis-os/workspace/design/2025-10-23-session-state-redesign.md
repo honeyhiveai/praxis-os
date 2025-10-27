@@ -2,8 +2,8 @@
 
 **Status:** DRAFT - Design Discussion  
 **Date:** 2025-10-23  
-**Context:** Discovered during aos_workflow implementation that session completion logic is broken  
-**Related Session:** 062f24e7-6fdc-40b3-a2d8-7ffaea6351b6 (aos_workflow spec execution)
+**Context:** Discovered during pos_workflow implementation that session completion logic is broken  
+**Related Session:** 062f24e7-6fdc-40b3-a2d8-7ffaea6351b6 (pos_workflow spec execution)
 
 ---
 
@@ -34,7 +34,7 @@
 
 ### Discovery Context
 
-Found while completing Phase 5 of aos_workflow implementation:
+Found while completing Phase 5 of pos_workflow implementation:
 - Session showed `current_phase: 6` with `completed_phases: [0,1,2,3,4,5]`
 - But `is_complete()` returned `false` ❌
 - Root cause: `6 > 6` comparison fails
@@ -522,8 +522,8 @@ Legacy sessions without new fields will fall back to:
 
 ## Related Context
 
-- **Triggering Issue:** aos_workflow Phase 5 completion showed `is_complete() = false`
+- **Triggering Issue:** pos_workflow Phase 5 completion showed `is_complete() = false`
 - **Root Cause:** `current_phase = 6` with `6 > 6` check
 - **Session:** 062f24e7-6fdc-40b3-a2d8-7ffaea6351b6
-- **Workflow:** spec_execution_v1 for aos_workflow tool
+- **Workflow:** spec_execution_v1 for pos_workflow tool
 

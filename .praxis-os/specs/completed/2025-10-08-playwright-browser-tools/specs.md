@@ -34,7 +34,7 @@
 │  │ MCP Tools                                         │  │
 │  │  ├─> search_standards()                           │  │
 │  │  ├─> start_workflow()                             │  │
-│  │  └─> aos_browser() ⭐ NEW                         │  │
+│  │  └─> pos_browser() ⭐ NEW                         │  │
 │  └──────────────────────────────────────────────────┘  │
 └─────────────────┬───────────────────────────────────────┘
                   │
@@ -167,7 +167,7 @@ class BrowserManager:
     Lifecycle:
         - Lazy initialization on first use
         - Sessions auto-cleanup after timeout
-        - Explicit cleanup via aos_browser(action="close")
+        - Explicit cleanup via pos_browser(action="close")
     
     Example:
         >>> manager = BrowserManager()
@@ -254,7 +254,7 @@ class BrowserManager:
 **Purpose**: MCP tool registration for browser automation
 
 **Responsibilities**:
-- Register `aos_browser()` tool with FastMCP
+- Register `pos_browser()` tool with FastMCP
 - Dispatch actions to appropriate handlers
 - Validate parameters
 - Return structured responses
@@ -273,7 +273,7 @@ def register_browser_tools(mcp: Any, browser_manager: BrowserManager) -> int:
     """
     
     @mcp.tool()
-    async def aos_browser(
+    async def pos_browser(
         action: str,
         session_id: Optional[str] = None,
         # Navigation
@@ -324,10 +324,10 @@ def register_browser_tools(mcp: Any, browser_manager: BrowserManager) -> int:
         
         Examples:
             >>> # Test dark mode
-            >>> aos_browser(action="navigate", url="http://localhost:3000", session_id="test-1")
-            >>> aos_browser(action="emulate_media", color_scheme="dark", session_id="test-1")
-            >>> aos_browser(action="screenshot", screenshot_path="/tmp/dark.png", session_id="test-1")
-            >>> aos_browser(action="close", session_id="test-1")
+            >>> pos_browser(action="navigate", url="http://localhost:3000", session_id="test-1")
+            >>> pos_browser(action="emulate_media", color_scheme="dark", session_id="test-1")
+            >>> pos_browser(action="screenshot", screenshot_path="/tmp/dark.png", session_id="test-1")
+            >>> pos_browser(action="close", session_id="test-1")
         
         Raises:
             ValueError: If required parameters missing for action
@@ -363,7 +363,7 @@ def register_browser_tools(mcp: Any, browser_manager: BrowserManager) -> int:
                     "valid_actions": ["navigate", "emulate_media", "screenshot", "set_viewport", "get_console", "close"]
                 }
         except Exception as e:
-            logger.error(f"aos_browser action '{action}' failed: {e}", exc_info=True)
+            logger.error(f"pos_browser action '{action}' failed: {e}", exc_info=True)
             return {
                 "status": "error",
                 "error": str(e),
@@ -392,7 +392,7 @@ def register_browser_tools(mcp: Any, browser_manager: BrowserManager) -> int:
 
 **Lifecycle**:
 1. Created by `BrowserManager.get_session()`
-2. Reused across multiple `aos_browser()` calls
+2. Reused across multiple `pos_browser()` calls
 3. Cleaned up after timeout or explicit close
 
 **Traceability**: FR-2, NFR-3
@@ -626,7 +626,7 @@ playwright install chromium  # Downloads ~300MB
       "autoApprove": [
         "search_standards",
         "get_current_phase",
-        "aos_browser"
+        "pos_browser"
       ]
     }
   }
@@ -730,13 +730,13 @@ playwright install chromium  # Downloads ~300MB
 | FR-1: Lifecycle | BrowserManager.__init__, initialize() | test_lazy_init |
 | FR-2: Multi-Session | BrowserManager.get_session() | test_session_isolation |
 | FR-3: Cleanup | BrowserManager.close_session(), _cleanup_stale() | test_cleanup |
-| FR-4: Navigate | aos_browser action="navigate" | test_navigate |
-| FR-5: Emulate Media | aos_browser action="emulate_media" | test_dark_mode |
-| FR-6: Screenshot | aos_browser action="screenshot" | test_screenshot |
-| FR-7: Viewport | aos_browser action="set_viewport" | test_viewport |
-| FR-8: Console | aos_browser action="get_console" (stub) | test_console_stub |
-| FR-9: Consolidated Tool | aos_browser() | test_all_actions |
-| FR-10: Naming | Tool name "aos_browser" | test_tool_registered |
+| FR-4: Navigate | pos_browser action="navigate" | test_navigate |
+| FR-5: Emulate Media | pos_browser action="emulate_media" | test_dark_mode |
+| FR-6: Screenshot | pos_browser action="screenshot" | test_screenshot |
+| FR-7: Viewport | pos_browser action="set_viewport" | test_viewport |
+| FR-8: Console | pos_browser action="get_console" (stub) | test_console_stub |
+| FR-9: Consolidated Tool | pos_browser() | test_all_actions |
+| FR-10: Naming | Tool name "pos_browser" | test_tool_registered |
 | FR-11: Integration | ServerFactory._create_browser_manager() | test_factory_integration |
 | FR-12: Selective Loading | enabled_tool_groups check | test_selective_loading |
 | NFR-1: Lazy Init | Not initialized until first call | test_no_init_on_startup |
@@ -774,7 +774,7 @@ playwright install chromium  # Downloads ~300MB
 ✅ **Architecture**: Per-session browsers (fully isolated)  
 ✅ **Scope**: Comprehensive Playwright (not limited)  
 ✅ **Granular vs Consolidated**: Consolidated (1 tool, 30+ actions)  
-✅ **Tool Name**: `aos_browser` (avoids Cursor collision)  
+✅ **Tool Name**: `pos_browser` (avoids Cursor collision)  
 ✅ **Session Isolation**: Per-session browsers (failure isolation)  
 ✅ **Element Interaction**: IN SCOPE Phase 1 (click, type, fill, wait, assert)  
 ✅ **Test Execution**: IN SCOPE Phase 2 (testing contractor use case)  

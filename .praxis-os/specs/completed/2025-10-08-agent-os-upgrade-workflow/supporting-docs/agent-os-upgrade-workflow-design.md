@@ -39,7 +39,7 @@ An AI-guided workflow for safely upgrading Agent OS installations (content + MCP
 
 ```bash
 # User runs one command
-aos_workflow start agent_os_upgrade_v1 --source /path/to/praxis-os
+pos_workflow start agent_os_upgrade_v1 --source /path/to/praxis-os
 
 # AI handles:
 ✅ Pre-upgrade validation (git status, backups exist, etc.)
@@ -373,7 +373,7 @@ After restart, AI queries `get_workflow_state(session_id)` → reads state from 
 **Purpose:** Verify upgrade succeeded and everything works.
 
 **Tasks:**
-1. Query MCP server tools list (verify aos_browser, etc. loaded)
+1. Query MCP server tools list (verify pos_browser, etc. loaded)
 2. Run smoke tests (RAG search, workflow list)
 3. Validate browser tools (if enabled): start session, navigate, close
 4. Check file watcher status

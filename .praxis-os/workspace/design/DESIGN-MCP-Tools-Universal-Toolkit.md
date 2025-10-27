@@ -149,7 +149,7 @@ Agent OS Capabilities:
 ├─ Knowledge management (search_standards, search_codebase, write_standard)
 ├─ Workflow management (start_workflow, complete_phase)
 ├─ Framework management (create_workflow, validate_workflow)
-└─ Infrastructure (aos_browser, get_server_info)
+└─ Infrastructure (pos_browser, get_server_info)
 
 = Complete operating environment for AI agents!
 ```
@@ -247,7 +247,7 @@ FILE SYSTEM LAYER (Universal Operations)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 INFRASTRUCTURE LAYER (Advanced Capabilities)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-13. aos_browser(action, ...)
+13. pos_browser(action, ...)
     → Browser automation (Playwright)
     → Testing, scraping, validation
     → Session management

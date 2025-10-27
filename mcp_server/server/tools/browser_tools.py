@@ -1,11 +1,11 @@
 """
 Browser automation tools for MCP server.
 
-Provides aos_browser tool for comprehensive Playwright-based browser
+Provides pos_browser tool for comprehensive Playwright-based browser
 automation with per-session isolation for multi-chat safety.
 
 Architecture:
-    - Consolidated tool (aos_browser) with action parameter
+    - Consolidated tool (pos_browser) with action parameter
     - Per-session browser isolation for fault tolerance
     - 30+ actions across 6 categories
 
@@ -21,11 +21,11 @@ Traceability:
 # _handle_console has page parameter for future console message collection
 
 # pylint: disable=too-many-arguments,too-many-positional-arguments
-# Justification: aos_browser unified interface accepts 36 parameters to support
+# Justification: pos_browser unified interface accepts 36 parameters to support
 # all browser actions (navigation, interaction, inspection, etc.) in one tool
 
 # pylint: disable=too-many-locals
-# Justification: aos_browser dispatches to 30+ action handlers, requiring
+# Justification: pos_browser dispatches to 30+ action handlers, requiring
 # local variables for each possible parameter type
 
 # pylint: disable=too-many-return-statements,too-many-branches
@@ -54,7 +54,7 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
         browser_manager (BrowserManager): BrowserManager singleton
 
     Returns:
-        int: Number of tools registered (1 - aos_browser)
+        int: Number of tools registered (1 - pos_browser)
 
     Traceability:
         FR-11 (ServerFactory integration)
@@ -62,7 +62,7 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
     """
 
     @mcp.tool()
-    async def aos_browser(
+    async def pos_browser(
         action: str,
         session_id: Optional[str] = None,
         # Navigation (FR-4)
@@ -207,20 +207,20 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
 
         Examples:
             >>> # Navigate and test dark mode
-            >>> aos_browser(action="navigate", url="http://localhost:3000",
+            >>> pos_browser(action="navigate", url="http://localhost:3000",
             ...             session_id="test-1")
-            >>> aos_browser(action="emulate_media", color_scheme="dark",
+            >>> pos_browser(action="emulate_media", color_scheme="dark",
             ...             session_id="test-1")
-            >>> aos_browser(action="screenshot",
+            >>> pos_browser(action="screenshot",
             ...             screenshot_path="/tmp/dark.png", session_id="test-1")
-            >>> aos_browser(action="close", session_id="test-1")
+            >>> pos_browser(action="close", session_id="test-1")
             >>>
             >>> # Click and type
-            >>> aos_browser(action="click", selector="#login-button",
+            >>> pos_browser(action="click", selector="#login-button",
             ...             session_id="test-2")
-            >>> aos_browser(action="type", selector="#username",
+            >>> pos_browser(action="type", selector="#username",
             ...             text="user@example.com", session_id="test-2")
-            >>> aos_browser(action="fill", selector="#password",
+            >>> pos_browser(action="fill", selector="#password",
             ...             value="secret", session_id="test-2")
 
         Raises:
@@ -237,7 +237,7 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
 
             # DEBUG: Log all parameters with types
             logger.debug(
-                "aos_browser called: action=%s, viewport_width=%s (type=%s), "
+                "pos_browser called: action=%s, viewport_width=%s (type=%s), "
                 "viewport_height=%s (type=%s)",
                 action,
                 viewport_width,
@@ -390,7 +390,7 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
             }
 
         except Exception as e:
-            logger.error("aos_browser action '%s' failed: %s", action, e, exc_info=True)
+            logger.error("pos_browser action '%s' failed: %s", action, e, exc_info=True)
             return {
                 "status": "error",
                 "error": str(e),
@@ -398,7 +398,7 @@ def register_browser_tools(mcp: Any, browser_manager: Any) -> int:
                 "session_id": sid if "sid" in locals() else session_id,
             }
 
-    logger.info("✅ Registered 1 browser tool (aos_browser)")
+    logger.info("✅ Registered 1 browser tool (pos_browser)")
     return 1
 
 
@@ -432,7 +432,7 @@ async def _handle_navigate(
             "session_id": session_id,
             "remediation": (
                 "Provide url parameter, e.g., "
-                "aos_browser(action='navigate', url='https://example.com')"
+                "pos_browser(action='navigate', url='https://example.com')"
             ),
         }
 

@@ -9,7 +9,7 @@
 
 **Standard guideline**: "Simple tools with minimal parameters"
 
-**Reality**: `aos_browser` is a **powerful, well-designed tool** with 20+ parameters
+**Reality**: `pos_browser` is a **powerful, well-designed tool** with 20+ parameters
 
 **Question**: Why does this work so well when it violates the "simple tools" principle?
 
@@ -17,7 +17,7 @@
 
 ---
 
-## Why aos_browser Is Actually Well-Designed
+## Why pos_browser Is Actually Well-Designed
 
 ### 1. Domain Coherence
 
@@ -28,10 +28,10 @@
 
 **Single tool models this domain accurately:**
 ```python
-aos_browser(action="navigate", session_id="test1", url="https://example.com")
-aos_browser(action="wait", session_id="test1", selector="#button", wait_for_state="visible")
-aos_browser(action="click", session_id="test1", selector="#button")
-aos_browser(action="screenshot", session_id="test1", screenshot_path="result.png")
+pos_browser(action="navigate", session_id="test1", url="https://example.com")
+pos_browser(action="wait", session_id="test1", selector="#button", wait_for_state="visible")
+pos_browser(action="click", session_id="test1", selector="#button")
+pos_browser(action="screenshot", session_id="test1", screenshot_path="result.png")
 ```
 
 **The action parameter provides clarity** about what operation is being performed, and only the relevant parameters for that action matter.
@@ -88,7 +88,7 @@ browser_screenshot(session_id, ...)
 **When context is shared, consolidation makes sense:**
 ```python
 # Single tool, action dispatch based on shared context
-aos_browser(action="...", session_id="...", ...)
+pos_browser(action="...", session_id="...", ...)
 ```
 
 ### 4. Parameter Clarity Through Action Dispatch
@@ -96,7 +96,7 @@ aos_browser(action="...", session_id="...", ...)
 **Despite 20+ parameters, the design is clear:**
 
 ```python
-aos_browser(
+pos_browser(
     action: str,              # ← Determines which parameters matter
     session_id: Optional[str],
     
@@ -121,13 +121,13 @@ aos_browser(
 **Example call clarity**:
 ```python
 # Navigate: Only url and wait_until matter
-aos_browser(action="navigate", session_id="test", url="https://...", wait_until="load")
+pos_browser(action="navigate", session_id="test", url="https://...", wait_until="load")
 
 # Click: Only selector and button matter
-aos_browser(action="click", session_id="test", selector="#submit", button="left")
+pos_browser(action="click", session_id="test", selector="#submit", button="left")
 
 # Screenshot: Only screenshot_path and screenshot_format matter
-aos_browser(action="screenshot", session_id="test", screenshot_path="./result.png")
+pos_browser(action="screenshot", session_id="test", screenshot_path="./result.png")
 ```
 
 **LLM doesn't need to understand all 20+ parameters for every call** - only the subset relevant to the action.
@@ -146,12 +146,12 @@ aos_browser(action="screenshot", session_id="test", screenshot_path="./result.pn
 # Coherent workflow with persistent session
 session_id = "test_checkout"
 
-aos_browser(action="navigate", session_id=session_id, url="https://shop.com")
-aos_browser(action="wait", session_id=session_id, selector="#product")
-aos_browser(action="click", session_id=session_id, selector="#add-to-cart")
-aos_browser(action="type", session_id=session_id, selector="#quantity", text="5")
-aos_browser(action="screenshot", session_id=session_id, screenshot_path="cart.png")
-aos_browser(action="close", session_id=session_id)
+pos_browser(action="navigate", session_id=session_id, url="https://shop.com")
+pos_browser(action="wait", session_id=session_id, selector="#product")
+pos_browser(action="click", session_id=session_id, selector="#add-to-cart")
+pos_browser(action="type", session_id=session_id, selector="#quantity", text="5")
+pos_browser(action="screenshot", session_id=session_id, screenshot_path="cart.png")
+pos_browser(action="close", session_id=session_id)
 ```
 
 **This models real browser automation workflows accurately.**
@@ -173,7 +173,7 @@ get_current_phase(session_id)  # 1 param: get current phase
 **Complex domain → Complex tool:**
 ```python
 # Browser automation is conceptually complex
-aos_browser(
+pos_browser(
     action="...",          # What to do
     session_id="...",      # Which browser session
     # + domain-specific parameters
@@ -202,7 +202,7 @@ aos_browser(
 - ✅ Tool count economics favor consolidation (20 tools → 1 tool)
 - ✅ Action parameter provides clarity
 
-**Example**: Browser automation (aos_browser)
+**Example**: Browser automation (pos_browser)
 - Single domain: browser interactions
 - Shared context: browser session/page
 - Sequential: navigate → interact → capture
@@ -232,9 +232,9 @@ complete_phase(session_id, phase, evidence)    # Validate & advance
 
 ```python
 # Single domain with many operations, heavy context sharing
-aos_browser(action="navigate", session_id, url, ...)
-aos_browser(action="click", session_id, selector, ...)
-aos_browser(action="screenshot", session_id, path, ...)
+pos_browser(action="navigate", session_id, url, ...)
+pos_browser(action="click", session_id, selector, ...)
+pos_browser(action="screenshot", session_id, path, ...)
 ```
 
 **Why complex works**:
@@ -276,19 +276,19 @@ universal_automation(
 
 ---
 
-## Case Study: Why aos_browser Beats 20 Granular Tools
+## Case Study: Why pos_browser Beats 20 Granular Tools
 
 ### Scenario: Test dark mode on a website
 
-**With aos_browser (1 tool, multiple calls)**:
+**With pos_browser (1 tool, multiple calls)**:
 ```python
 # Clear, coherent workflow
-aos_browser(action="navigate", session_id="dark-test", url="http://localhost:3000")
-aos_browser(action="emulate_media", session_id="dark-test", color_scheme="dark")
-aos_browser(action="screenshot", session_id="dark-test", screenshot_path="dark.png")
-aos_browser(action="emulate_media", session_id="dark-test", color_scheme="light")
-aos_browser(action="screenshot", session_id="dark-test", screenshot_path="light.png")
-aos_browser(action="close", session_id="dark-test")
+pos_browser(action="navigate", session_id="dark-test", url="http://localhost:3000")
+pos_browser(action="emulate_media", session_id="dark-test", color_scheme="dark")
+pos_browser(action="screenshot", session_id="dark-test", screenshot_path="dark.png")
+pos_browser(action="emulate_media", session_id="dark-test", color_scheme="light")
+pos_browser(action="screenshot", session_id="dark-test", screenshot_path="light.png")
+pos_browser(action="close", session_id="dark-test")
 ```
 
 **Tool count**: 11 total (1 browser tool + 10 others)
@@ -310,10 +310,10 @@ browser_close(session_id="dark-test")
 
 ### Which is Better?
 
-**aos_browser approach wins because**:
+**pos_browser approach wins because**:
 1. ✅ Same code clarity (both are readable)
 2. ✅ 11 tools vs. 30 tools (optimal vs. degraded performance)
-3. ✅ Clear namespace (aos_browser.action tells you it's browser-related)
+3. ✅ Clear namespace (pos_browser.action tells you it's browser-related)
 4. ✅ Session management is explicit (session_id in every call)
 5. ✅ Easy to add new browser actions (just add action type, not new tool)
 
@@ -392,7 +392,7 @@ All browser actions are **operations on a browser page**:
 **Consolidating makes sense:**
 ```python
 # GOOD: Single domain with action dispatch
-aos_browser(
+pos_browser(
     action: str,  # "navigate" | "click" | "screenshot" | ...
     session_id: str,  # ← ALWAYS required (shared context)
     # + action-specific params
@@ -418,7 +418,7 @@ This is too dogmatic and misses important nuances.
 **Ask these questions**:
 
 1. **Is this a single coherent domain?**
-   - Yes → Parameterized tool may be better (aos_browser)
+   - Yes → Parameterized tool may be better (pos_browser)
    - No → Granular tools (workflow operations)
 
 2. **Do all operations share context?**
@@ -434,7 +434,7 @@ This is too dogmatic and misses important nuances.
    - Split adds 2-3 tools → Granular is fine
 
 5. **Does action parameter add clarity?**
-   - Yes → Parameterized tool (aos_browser action types are clear)
+   - Yes → Parameterized tool (pos_browser action types are clear)
    - No → Granular tools (action would be confusing)
 
 ---
@@ -469,10 +469,10 @@ database(
 
 **Why**: All operations on database, shared context (connection), sequential operations
 
-**3. Browser Automation** (aos_browser)
+**3. Browser Automation** (pos_browser)
 ```python
 # GOOD: Single domain (browser)
-aos_browser(
+pos_browser(
     action: str,  # "navigate" | "click" | "screenshot" | ...
     session_id: str,
     # + action-specific params
@@ -520,19 +520,19 @@ list_workflows(filter_by)
 ### Key Insights
 
 1. **Domain coherence matters more than parameter count**
-   - aos_browser is well-designed BECAUSE it models a single domain
+   - pos_browser is well-designed BECAUSE it models a single domain
    - 20+ parameters are fine when they're organized by action type
 
 2. **Tool count economics are real**
-   - Splitting aos_browser → 20 tools → 30 total → 85% degradation
-   - Keeping aos_browser → 1 tool → 11 total → optimal performance
+   - Splitting pos_browser → 20 tools → 30 total → 85% degradation
+   - Keeping pos_browser → 1 tool → 11 total → optimal performance
 
 3. **Shared context is a strong signal for consolidation**
    - All browser operations need session_id → parameterized tool
    - Workflow operations have minimal shared context → granular tools
 
 4. **Action parameter provides clarity**
-   - aos_browser(action="click") is clear
+   - pos_browser(action="click") is clear
    - Not confusing which parameters matter for each action
    - Better than 20 separate tools polluting tool catalog
 
@@ -547,7 +547,7 @@ list_workflows(filter_by)
 - ❌ Artificial splitting → hurts performance
 - ❌ Domain mixing → hurts clarity
 
-### aos_browser Is Exemplary Design
+### pos_browser Is Exemplary Design
 
 **It's not an exception to the rule - it's an example of the CORRECT rule applied properly:**
 - Single coherent domain (browser automation)

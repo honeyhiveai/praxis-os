@@ -13,7 +13,7 @@
 
 **Today's workflow:**
 - User works with ONE AI agent in Cursor IDE
-- Agent has full MCP access (aos_workflow, search_standards, aos_browser, etc.)
+- Agent has full MCP access (pos_workflow, search_standards, pos_browser, etc.)
 - Agent executes tasks sequentially via workflows
 - Context compaction happens periodically (loses some detail)
 - User must context-switch between different types of work
@@ -198,7 +198,7 @@
 │  (Already exists in .praxis-os/mcp_server/)                      │
 │                                                                  │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │ aos_workflow │  │ search_      │  │ aos_browser  │          │
+│  │ pos_workflow │  │ search_      │  │ pos_browser  │          │
 │  │              │  │ standards    │  │              │          │
 │  └──────────────┘  └──────────────┘  └──────────────┘          │
 │  ┌──────────────┐  ┌──────────────┐                            │
@@ -298,7 +298,7 @@ class GenericAgent(Agent):
             }
     
     async def _call_llm_with_tools(self, messages):
-        """Call LLM with MCP tools (aos_workflow, search_standards, etc.)"""
+        """Call LLM with MCP tools (pos_workflow, search_standards, etc.)"""
         # Use LLM client (OpenAI, Anthropic, etc.)
         # Expose MCP tools as function calls
         # Let agent use workflows, search standards, etc.
@@ -424,9 +424,9 @@ result = await self.send_task(
 ## Your Tools (via MCP)
 
 You have access to:
-- `aos_workflow`: Start/manage workflows
+- `pos_workflow`: Start/manage workflows
 - `search_standards`: Query project standards
-- `aos_browser`: Test web applications
+- `pos_browser`: Test web applications
 - `get_server_info`: System information
 - `current_date`: Accurate timestamps
 
@@ -484,9 +484,9 @@ You are the **Backend Specialist** on a multi-agent development team.
 
 ## Your Tools (via MCP)
 
-- `aos_workflow`: Use workflows for complex implementations
+- `pos_workflow`: Use workflows for complex implementations
 - `search_standards`: Query backend coding standards
-- `aos_browser`: Test API endpoints
+- `pos_browser`: Test API endpoints
 - File operations: Read/write code files
 
 ## Development Process
@@ -854,7 +854,7 @@ Orchestrator delegates to specialists (A2A)
     ↓
 backend_agent.handle_task(...)
     ↓
-Backend agent uses MCP tools (aos_workflow, search_standards)
+Backend agent uses MCP tools (pos_workflow, search_standards)
     ↓
 Backend agent writes code, runs tests
     ↓
@@ -886,7 +886,7 @@ Orchestrator:
     ↓
 Backend Agent:
   - Query search_standards("backend API implementation")
-  - Start aos_workflow(action="start", workflow_type="spec_execution_v1", ...)
+  - Start pos_workflow(action="start", workflow_type="spec_execution_v1", ...)
   - Implement auth.py
   - Run tests
   - Report completion
@@ -894,7 +894,7 @@ Backend Agent:
 QA Agent:
   - Query search_standards("integration testing")
   - Write test_auth.py
-  - Run tests with aos_browser(...)
+  - Run tests with pos_browser(...)
   - Report completion
     ↓
 Orchestrator:
@@ -953,7 +953,7 @@ All agents can start workflows:
 ```python
 # Backend agent implementing feature
 result = await self.mcp.call_tool(
-    "aos_workflow",
+    "pos_workflow",
     action="start",
     workflow_type="spec_execution_v1",
     target_file=".praxis-os/specs/auth-api",
@@ -1263,7 +1263,7 @@ result = await self.mcp.call_tool(
 
 - [ ] Launch 3+ agents (orchestrator, backend, frontend) successfully
 - [ ] Orchestrator delegates task to specialist, receives result
-- [ ] Specialist uses MCP tools (aos_workflow, search_standards)
+- [ ] Specialist uses MCP tools (pos_workflow, search_standards)
 - [ ] HoneyHive captures full trace (user → orchestrator → specialist → MCP)
 - [ ] Browser UI displays agent activity in real-time
 
@@ -1290,7 +1290,7 @@ result = await self.mcp.call_tool(
 
 - [ ] Browser-IDE module installs into Agent OS Enhanced project
 - [ ] Module standards accessible via search_standards
-- [ ] Module workflows accessible via aos_workflow
+- [ ] Module workflows accessible via pos_workflow
 - [ ] Module can be removed cleanly (no residual state)
 
 ---
@@ -1368,9 +1368,9 @@ None (this is additive)
 - Test: A2A message passing (orchestrator → specialist → response)
 
 **MCP Integration:**
-- Test: Agent calls aos_workflow successfully
+- Test: Agent calls pos_workflow successfully
 - Test: Agent calls search_standards, receives results
-- Test: Agent calls aos_browser, interacts with page
+- Test: Agent calls pos_browser, interacts with page
 
 **HoneyHive Tracing:**
 - Test: Trace captured for full task flow

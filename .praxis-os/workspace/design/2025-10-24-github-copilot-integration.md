@@ -358,7 +358,7 @@ Once integrated, Copilot has access to:
 - `get_workflow_state` - Query complete workflow state
 
 ### Browser Tools (if playwright installed)
-- `aos_browser` - Browser automation for testing
+- `pos_browser` - Browser automation for testing
 
 ### Server Info
 - `get_server_info` - Server and project metadata

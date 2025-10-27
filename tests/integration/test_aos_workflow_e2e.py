@@ -1,5 +1,5 @@
 """
-End-to-end integration tests for aos_workflow tool.
+End-to-end integration tests for pos_workflow tool.
 
 Tests complete workflow lifecycle with real WorkflowEngine and StateManager.
 Verifies all components work together correctly.
@@ -168,8 +168,8 @@ def workflow_engine(temp_agent_os_dir):
 
 
 @pytest.fixture
-def aos_workflow_tool(workflow_engine):
-    """Create aos_workflow tool with real WorkflowEngine."""
+def pos_workflow_tool(workflow_engine):
+    """Create pos_workflow tool with real WorkflowEngine."""
 
     # Simple stub for MCP server registration (captures tool function)
     class MCPStub:
@@ -207,11 +207,11 @@ class TestCompleteWorkflowLifecycle:
 
     @pytest.mark.asyncio
     async def test_start_workflow_creates_session(
-        self, aos_workflow_tool, temp_agent_os_dir
+        self, pos_workflow_tool, temp_agent_os_dir
     ):
         """Verify starting a workflow creates a valid session."""
         # Start workflow
-        result = await aos_workflow_tool(
+        result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
 
@@ -226,10 +226,10 @@ class TestCompleteWorkflowLifecycle:
         assert len(session_files) == 1
 
     @pytest.mark.asyncio
-    async def test_complete_workflow_execution_flow(self, aos_workflow_tool):
+    async def test_complete_workflow_execution_flow(self, pos_workflow_tool):
         """Test full workflow: start → get_phase → get_task → complete_phase."""
         # 1. Start workflow
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
 
@@ -237,7 +237,7 @@ class TestCompleteWorkflowLifecycle:
         session_id = start_result["session_id"]
 
         # 2. Get current phase
-        phase_result = await aos_workflow_tool(
+        phase_result = await pos_workflow_tool(
             action="get_phase", session_id=session_id
         )
 
@@ -245,7 +245,7 @@ class TestCompleteWorkflowLifecycle:
         assert phase_result["current_phase"] == 1
 
         # 3. Get specific task
-        task_result = await aos_workflow_tool(
+        task_result = await pos_workflow_tool(
             action="get_task", session_id=session_id, phase=1, task_number=1
         )
 
@@ -253,7 +253,7 @@ class TestCompleteWorkflowLifecycle:
         assert "task_content" in task_result
 
         # 4. Complete phase with evidence
-        complete_result = await aos_workflow_tool(
+        complete_result = await pos_workflow_tool(
             action="complete_phase",
             session_id=session_id,
             phase=1,
@@ -264,7 +264,7 @@ class TestCompleteWorkflowLifecycle:
         assert complete_result.get("checkpoint_passed") is True
 
         # 5. Verify advanced to phase 2
-        state_result = await aos_workflow_tool(
+        state_result = await pos_workflow_tool(
             action="get_state", session_id=session_id
         )
 
@@ -273,17 +273,17 @@ class TestCompleteWorkflowLifecycle:
         assert state_result["workflow_state"]["current_phase"] >= 1
 
     @pytest.mark.asyncio
-    async def test_workflow_with_invalid_evidence_fails(self, aos_workflow_tool):
+    async def test_workflow_with_invalid_evidence_fails(self, pos_workflow_tool):
         """Verify workflow completes with evidence (checkpoint validation depends on workflow config)."""
         # Start workflow
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
 
         session_id = start_result["session_id"]
 
         # Try to complete phase with minimal evidence
-        complete_result = await aos_workflow_tool(
+        complete_result = await pos_workflow_tool(
             action="complete_phase",
             session_id=session_id,
             phase=1,
@@ -302,12 +302,12 @@ class TestSessionManagement:
     """Test session lifecycle management."""
 
     @pytest.mark.asyncio
-    async def test_list_sessions_shows_active_sessions(self, aos_workflow_tool):
+    async def test_list_sessions_shows_active_sessions(self, pos_workflow_tool):
         """Verify list_sessions returns all active sessions."""
         # Create multiple sessions
         session_ids = []
         for i in range(3):
-            result = await aos_workflow_tool(
+            result = await pos_workflow_tool(
                 action="start",
                 workflow_type="test_workflow_v1",
                 target_file=f"test{i}.py",
@@ -315,7 +315,7 @@ class TestSessionManagement:
             session_ids.append(result["session_id"])
 
         # List all sessions
-        list_result = await aos_workflow_tool(action="list_sessions")
+        list_result = await pos_workflow_tool(action="list_sessions")
 
         assert list_result["status"] == "success"
         assert list_result["count"] >= 3
@@ -326,16 +326,16 @@ class TestSessionManagement:
             assert session_id in returned_ids
 
     @pytest.mark.asyncio
-    async def test_get_session_returns_session_details(self, aos_workflow_tool):
+    async def test_get_session_returns_session_details(self, pos_workflow_tool):
         """Verify get_session returns complete session information."""
         # Create session
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
         session_id = start_result["session_id"]
 
         # Get session details
-        get_result = await aos_workflow_tool(
+        get_result = await pos_workflow_tool(
             action="get_session", session_id=session_id
         )
 
@@ -346,11 +346,11 @@ class TestSessionManagement:
 
     @pytest.mark.asyncio
     async def test_delete_session_removes_session(
-        self, aos_workflow_tool, temp_agent_os_dir
+        self, pos_workflow_tool, temp_agent_os_dir
     ):
         """Verify delete_session removes session and state file."""
         # Create session
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
         session_id = start_result["session_id"]
@@ -361,7 +361,7 @@ class TestSessionManagement:
         assert session_file.exists()
 
         # Delete session
-        delete_result = await aos_workflow_tool(
+        delete_result = await pos_workflow_tool(
             action="delete_session", session_id=session_id
         )
 
@@ -372,7 +372,7 @@ class TestSessionManagement:
         assert not session_file.exists()
 
         # Verify session not in list
-        list_result = await aos_workflow_tool(action="list_sessions")
+        list_result = await pos_workflow_tool(action="list_sessions")
         returned_ids = [s["session_id"] for s in list_result["sessions"]]
         assert session_id not in returned_ids
 
@@ -381,9 +381,9 @@ class TestErrorPropagation:
     """Test that errors propagate correctly across components."""
 
     @pytest.mark.asyncio
-    async def test_invalid_workflow_type_returns_error(self, aos_workflow_tool):
+    async def test_invalid_workflow_type_returns_error(self, pos_workflow_tool):
         """Verify starting nonexistent workflow - WorkflowEngine may create default workflow."""
-        result = await aos_workflow_tool(
+        result = await pos_workflow_tool(
             action="start", workflow_type="nonexistent_workflow", target_file="test.py"
         )
 
@@ -394,11 +394,11 @@ class TestErrorPropagation:
             assert "session_id" in result
 
     @pytest.mark.asyncio
-    async def test_invalid_session_id_returns_error(self, aos_workflow_tool):
+    async def test_invalid_session_id_returns_error(self, pos_workflow_tool):
         """Verify operations on nonexistent session return error."""
         fake_session_id = "550e8400-e29b-41d4-a716-446655440000"
 
-        result = await aos_workflow_tool(action="get_phase", session_id=fake_session_id)
+        result = await pos_workflow_tool(action="get_phase", session_id=fake_session_id)
 
         assert result["status"] == "error"
         assert (
@@ -407,16 +407,16 @@ class TestErrorPropagation:
         )
 
     @pytest.mark.asyncio
-    async def test_invalid_phase_number_returns_error(self, aos_workflow_tool):
+    async def test_invalid_phase_number_returns_error(self, pos_workflow_tool):
         """Verify accessing invalid phase returns error."""
         # Create session
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
         session_id = start_result["session_id"]
 
         # Try to get nonexistent phase
-        result = await aos_workflow_tool(
+        result = await pos_workflow_tool(
             action="get_task", session_id=session_id, phase=999, task_number=1
         )
 
@@ -427,10 +427,10 @@ class TestStatePersistence:
     """Test that workflow state persists correctly."""
 
     @pytest.mark.asyncio
-    async def test_workflow_state_persists_across_operations(self, aos_workflow_tool):
+    async def test_workflow_state_persists_across_operations(self, pos_workflow_tool):
         """Verify workflow state is maintained across multiple operations."""
         # Create session
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start",
             workflow_type="test_workflow_v1",
             target_file="test.py",
@@ -439,13 +439,13 @@ class TestStatePersistence:
         session_id = start_result["session_id"]
 
         # Get state immediately
-        state1 = await aos_workflow_tool(action="get_state", session_id=session_id)
+        state1 = await pos_workflow_tool(action="get_state", session_id=session_id)
 
         # Perform some operation
-        await aos_workflow_tool(action="get_phase", session_id=session_id)
+        await pos_workflow_tool(action="get_phase", session_id=session_id)
 
         # Get state again
-        state2 = await aos_workflow_tool(action="get_state", session_id=session_id)
+        state2 = await pos_workflow_tool(action="get_state", session_id=session_id)
 
         # Core state should be consistent
         assert (
@@ -462,12 +462,12 @@ class TestConcurrentWorkflows:
     """Test multiple workflows running concurrently."""
 
     @pytest.mark.asyncio
-    async def test_multiple_workflows_run_independently(self, aos_workflow_tool):
+    async def test_multiple_workflows_run_independently(self, pos_workflow_tool):
         """Verify multiple workflows can run without interference."""
         # Start 3 workflows
         sessions = []
         for i in range(3):
-            result = await aos_workflow_tool(
+            result = await pos_workflow_tool(
                 action="start",
                 workflow_type="test_workflow_v1",
                 target_file=f"test{i}.py",
@@ -476,7 +476,7 @@ class TestConcurrentWorkflows:
 
         # Verify each session has correct state
         for session in sessions:
-            state_result = await aos_workflow_tool(
+            state_result = await pos_workflow_tool(
                 action="get_state", session_id=session["id"]
             )
 
@@ -484,7 +484,7 @@ class TestConcurrentWorkflows:
             assert state_result["workflow_state"]["target_file"] == session["file"]
 
         # Complete phase in one workflow
-        complete_result = await aos_workflow_tool(
+        complete_result = await pos_workflow_tool(
             action="complete_phase",
             session_id=sessions[0]["id"],
             phase=1,
@@ -493,7 +493,7 @@ class TestConcurrentWorkflows:
 
         # Verify other workflows unaffected
         for session in sessions[1:]:
-            state_result = await aos_workflow_tool(
+            state_result = await pos_workflow_tool(
                 action="get_state", session_id=session["id"]
             )
             # Other sessions should still be on phase 1
@@ -505,7 +505,7 @@ class TestWorkflowDiscovery:
 
     @pytest.mark.asyncio
     async def test_list_workflows_finds_installed_workflows(
-        self, aos_workflow_tool, temp_agent_os_dir
+        self, pos_workflow_tool, temp_agent_os_dir
     ):
         """Verify list_workflows returns available workflows."""
         # Clear metadata cache to ensure fresh scan
@@ -514,7 +514,7 @@ class TestWorkflowDiscovery:
         discovery._workflow_metadata_cache = None
 
         # List workflows
-        result = await aos_workflow_tool(action="list_workflows")
+        result = await pos_workflow_tool(action="list_workflows")
 
         assert result["status"] == "success"
         assert result["count"] >= 1
@@ -524,10 +524,10 @@ class TestWorkflowDiscovery:
         assert "test_workflow_v1" in workflow_types
 
     @pytest.mark.asyncio
-    async def test_list_workflows_with_category_filter(self, aos_workflow_tool):
+    async def test_list_workflows_with_category_filter(self, pos_workflow_tool):
         """Verify category filtering works in integration."""
         # List testing workflows
-        result = await aos_workflow_tool(action="list_workflows", category="testing")
+        result = await pos_workflow_tool(action="list_workflows", category="testing")
 
         assert result["status"] == "success"
         # Should find at least our test workflow
@@ -542,10 +542,10 @@ class TestDataIntegrity:
     """Test data integrity across components."""
 
     @pytest.mark.asyncio
-    async def test_large_evidence_handled_correctly(self, aos_workflow_tool):
+    async def test_large_evidence_handled_correctly(self, pos_workflow_tool):
         """Verify large (but valid) evidence is handled correctly."""
         # Start workflow
-        start_result = await aos_workflow_tool(
+        start_result = await pos_workflow_tool(
             action="start", workflow_type="test_workflow_v1", target_file="test.py"
         )
         session_id = start_result["session_id"]
@@ -554,7 +554,7 @@ class TestDataIntegrity:
         large_evidence = {"task_complete": True, "data": "x" * (5 * 1024 * 1024)}
 
         # Should handle without error
-        result = await aos_workflow_tool(
+        result = await pos_workflow_tool(
             action="complete_phase",
             session_id=session_id,
             phase=1,
@@ -566,7 +566,7 @@ class TestDataIntegrity:
         assert "action" in result
 
     @pytest.mark.asyncio
-    async def test_special_characters_in_target_file(self, aos_workflow_tool):
+    async def test_special_characters_in_target_file(self, pos_workflow_tool):
         """Verify special characters in file paths are handled."""
         # Start workflow with various file names
         test_files = [
@@ -576,7 +576,7 @@ class TestDataIntegrity:
         ]
 
         for filename in test_files:
-            result = await aos_workflow_tool(
+            result = await pos_workflow_tool(
                 action="start", workflow_type="test_workflow_v1", target_file=filename
             )
 

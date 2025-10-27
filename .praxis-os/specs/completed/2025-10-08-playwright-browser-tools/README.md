@@ -38,7 +38,7 @@ This specification defines a **browser automation tool** for Agent OS Enhanced's
    - Technical Specifications Document
    - Architecture diagrams (per-session browser design)
    - BrowserManager (fully threaded) and BrowserSession (dataclass)
-   - aos_browser tool specification (**30+ actions** across 6 categories)
+   - pos_browser tool specification (**30+ actions** across 6 categories)
    - Security, performance, error handling
    - **Full requirements traceability matrix (28 FRs)**
 
@@ -113,10 +113,10 @@ This specification defines a **browser automation tool** for Agent OS Enhanced's
 - Cross-browser support
 - Headful mode
 
-### 2. Consolidated Tool (aos_browser)
+### 2. Consolidated Tool (pos_browser)
 **Decision**: Single tool with action parameter  
 **Rationale**: Saves 20+ tool slots vs granular approach (stay under 20-tool limit)  
-**Implementation**: One `aos_browser` tool with 30+ actions
+**Implementation**: One `pos_browser` tool with 30+ actions
 
 ### 3. Per-Session Browser Architecture (Fully Threaded)
 **Decision**: One Chromium browser process PER session (fully isolated)  
@@ -159,8 +159,8 @@ _sessions: Dict[session_id, BrowserSession]
 **Rationale**: Fast server startup (NFR-1), browser only loaded if needed  
 **Metric**: MCP server startup <2s, browser init on first call
 
-### 5. Tool Naming (aos_browser)
-**Decision**: `aos_` prefix for Agent OS namespace  
+### 5. Tool Naming (pos_browser)
+**Decision**: `pos_` prefix for Agent OS namespace  
 **Rationale**: Avoids collision with Cursor's `mcp_cursor-playwright_*` tools  
 **Evidence**: supporting-docs/NAMING_STRATEGY.md
 

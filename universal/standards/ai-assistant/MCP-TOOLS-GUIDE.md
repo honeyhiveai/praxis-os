@@ -35,7 +35,7 @@ Solution: Create self-reinforcing habits through tools
 **Tool Categories (High-Level):**
 - **Discovery:** `search_standards` (most important)
 - **Workflows:** Phase-gated execution tools
-- **Browser:** `aos_browser` (browse web like a human - extract themes, compare UIs, research, test)
+- **Browser:** `pos_browser` (browse web like a human - extract themes, compare UIs, research, test)
 - **System:** Date, validation, framework tools
 
 **When to Query This Guide:**
@@ -181,7 +181,7 @@ Dynamic discovery becomes automatic
 search_standards("what tools for browser testing")
 
 # Know tool name, need usage pattern
-search_standards("how to use aos_browser")
+search_standards("how to use pos_browser")
 
 # Know category, need specific capability
 search_standards("workflow tools")
@@ -263,12 +263,12 @@ mcp_[autocomplete shows: search_standards, search_workflow, etc.]
 
 **Wrong:**
 ```python
-search_standards("aos_browser parameters")  # IDE already shows this
+search_standards("pos_browser parameters")  # IDE already shows this
 ```
 
 **Right:**
 ```python
-search_standards("how to test web UI with aos_browser")  # Patterns
+search_standards("how to test web UI with pos_browser")  # Patterns
 ```
 
 ### 3. Embrace Evolution

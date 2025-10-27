@@ -277,7 +277,7 @@ search_standards("test generation workflow")
 # Should return test_generation_v3
 
 # Test browser tool (if applicable)
-aos_browser(action="navigate", url="https://example.com", session_id="test-123")
+pos_browser(action="navigate", url="https://example.com", session_id="test-123")
 ```
 
 ### File Count Validation

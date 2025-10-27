@@ -120,7 +120,7 @@ $ grep -r "@mcp.tool()" mcp_server/server/tools/ | wc -l
 9. `get_server_info` - Server metadata and capabilities
 
 **Browser Tools (1 tool)**:
-10. `aos_browser` - Browser automation (Playwright wrapper)
+10. `pos_browser` - Browser automation (Playwright wrapper)
 
 **Date Tools (1 tool)**:
 11. `current_date` - Get current date/time (AI date error prevention)
@@ -163,7 +163,7 @@ validate_workflow()     # 1 responsibility: validate structure
 **Current design**:
 ```python
 @mcp.tool()
-async def aos_browser(
+async def pos_browser(
     action: str,  # "navigate", "screenshot", "click", "type", etc.
     session_id: Optional[str] = None,
     url: Optional[str] = None,
@@ -458,7 +458,7 @@ get_server_info()                                            # 0 params
 
 **Complex tool** (20+ parameters):
 ```python
-aos_browser(
+pos_browser(
     action,              # required
     session_id,          # optional
     url,                 # optional
@@ -488,7 +488,7 @@ aos_browser(
 ) -> Dict
 ```
 
-**Analysis**: aos_browser violates MCP best practices on multiple dimensions:
+**Analysis**: pos_browser violates MCP best practices on multiple dimensions:
 1. ❌ Parameterized action dispatch (not granular)
 2. ❌ 20+ parameters (not minimal)
 3. ❌ Complex validation (which params for which action?)
@@ -674,7 +674,7 @@ Server: 1 tool
   - get_server_info
 
 Browser: 1 tool
-  - aos_browser (parameterized anti-pattern but acceptable tradeoff)
+  - pos_browser (parameterized anti-pattern but acceptable tradeoff)
 
 Utility: 1 tool
   - current_date

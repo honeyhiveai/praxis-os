@@ -478,7 +478,7 @@ class PersonaLauncher:
             "create_workflow",
             "validate_workflow",
             # Infrastructure
-            "aos_browser"
+            "pos_browser"
         ]
         
         # Excluded: invoke_specialist (prevent recursion)

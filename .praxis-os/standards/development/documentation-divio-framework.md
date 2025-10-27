@@ -428,7 +428,7 @@ Complete reference of all MCP tools available in Agent OS Enhanced.
 search_standards("how to write tests")
 ```
 
-## aos_browser
+## pos_browser
 
 [Similar technical reference format]
 ```

@@ -582,12 +582,12 @@ Agent: "Tool must be broken, let me offer a workaround"
 
 **Real Example:**
 ```
-Agent: aos_workflow(action="list_workflows", category="development")
+Agent: pos_workflow(action="list_workflows", category="development")
 System: "Internal server error"
 Agent: "Tool is broken, let's do manual spec creation instead"
 
 Should have been:
-Agent: aos_workflow(...) → Error → search_standards("how to use aos_workflow") 
+Agent: pos_workflow(...) → Error → search_standards("how to use pos_workflow") 
 → Learn correct parameters → Try again with action="start", workflow_type="spec_creation_v1"
 ```
 

@@ -20,7 +20,7 @@
 
 **Critical Sections**:
 - Component Design: BrowserManager class structure
-- Browser Tools: aos_browser tool implementation
+- Browser Tools: pos_browser tool implementation
 - Integration: ServerFactory modifications needed
 
 ---
@@ -30,7 +30,7 @@
 **Purpose**: Executive summary and decision log  
 **Key Insights**:
 - Problem statement: Cursor's Playwright MCP is limited
-- Solution: aos_browser tool with full context control
+- Solution: pos_browser tool with full context control
 - Design decisions table (singleton, lazy init, chromium-only)
 - Implementation estimate: 4-6 hours MVP
 - Success criteria defined
@@ -97,13 +97,13 @@
 **Key Insights**:
 - Cursor has `mcp_cursor-playwright_*` namespaced tools
 - No current collisions with our 8 existing tools
-- Recommendation: `aos_` prefix for new specialized tools
-- Final name: `aos_browser` (not just `browser`)
+- Recommendation: `pos_` prefix for new specialized tools
+- Final name: `pos_browser` (not just `browser`)
 - Establishes namespace pattern for future tools
 
 **Critical Sections**:
 - Name Collision Check table
-- Recommended name: `aos_browser`
+- Recommended name: `pos_browser`
 - Naming consistency guidelines
 
 ---
@@ -117,7 +117,7 @@
 
 ### Design Decisions
 - TOOL_CONSOLIDATION.md → Why 1 tool not 6
-- NAMING_STRATEGY.md → Why `aos_browser` not `browser`
+- NAMING_STRATEGY.md → Why `pos_browser` not `browser`
 - SUMMARY.md → Records all key decisions
 
 ### Implementation Priority
@@ -147,7 +147,7 @@
 
 ## ✅ Key Takeaways for Spec
 
-1. **Tool Name**: `aos_browser` (with `aos_` namespace)
+1. **Tool Name**: `pos_browser` (with `pos_` namespace)
 2. **Architecture**: Multi-session BrowserManager with isolated contexts
 3. **Tool Structure**: Single consolidated tool with action parameter
 4. **Parameters**: Requires `session_id` for concurrency safety

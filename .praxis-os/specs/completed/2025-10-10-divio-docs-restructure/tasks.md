@@ -468,7 +468,7 @@ Before advancing to Phase 4:
     - **Workflow Tools:** `start_workflow`, `get_current_phase`, `get_task`, `complete_phase`, `get_workflow_state`
     - **RAG Tools:** `search_standards`, `current_date`
     - **Workflow Creation Tools:** `create_workflow`, `validate_workflow`
-    - **Browser Tools:** `aos_browser` (with all actions)
+    - **Browser Tools:** `pos_browser` (with all actions)
   - Each tool documented with:
     - **Function Signature:** Full signature with types
     - **Parameters:** Table with name, type, required/optional, description

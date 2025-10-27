@@ -182,7 +182,7 @@ class ServerFactory:
             index_path=self.paths["index_path"],
             standards_path=self.paths["standards_path"],
             usage_path=None,  # No longer used (content moved to standards/)
-            workflows_path=None,  # Not indexed (aos_workflow tool provides discovery)
+            workflows_path=None,  # Not indexed (pos_workflow tool provides discovery)
             embedding_provider=self.config.rag.embedding_provider,
             rag_engine=rag_engine,
             debounce_seconds=5,

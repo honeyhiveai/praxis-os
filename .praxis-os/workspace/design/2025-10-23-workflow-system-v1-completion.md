@@ -101,7 +101,7 @@ StateManager (JSON persistence, file locking, lifecycle)
 - Thread-safe session management (double-checked locking, RLock)
 - Dynamic workflow system (SpecTasksParser, WorkflowDefinitionParser)
 - Modular design (clean separation of concerns)
-- Comprehensive MCP tool (`aos_workflow` with 14 actions)
+- Comprehensive MCP tool (`pos_workflow` with 14 actions)
 - 151 tests (150 passing), 99.3% coverage
 
 **✅ Evidence Validation System (Complete, Disabled)**
@@ -420,11 +420,11 @@ def get_resumption_context(self) -> ResumptionContext:
     if self.lifecycle.completed:
         next_actions = ["Workflow complete - no further actions"]
     elif self.lifecycle.paused:
-        next_actions = [f"Resume workflow: aos_workflow(action='resume', session_id='{self.session_id}')"]
+        next_actions = [f"Resume workflow: pos_workflow(action='resume', session_id='{self.session_id}')"]
     else:
         next_actions = [
-            f"Get current phase: aos_workflow(action='get_phase', session_id='{self.session_id}')",
-            f"Or get specific task: aos_workflow(action='get_task', session_id='{self.session_id}', phase={self.current_phase}, task_number=1)"
+            f"Get current phase: pos_workflow(action='get_phase', session_id='{self.session_id}')",
+            f"Or get specific task: pos_workflow(action='get_task', session_id='{self.session_id}', phase={self.current_phase}, task_number=1)"
         ]
     
     # Compute discovery suggestions:

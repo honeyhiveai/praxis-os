@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document defines the requirements for consolidating 17+ separate workflow management tools into a single unified `aos_workflow` tool with action-based dispatch, following the proven pattern established by `aos_browser`.
+This document defines the requirements for consolidating 17+ separate workflow management tools into a single unified `pos_workflow` tool with action-based dispatch, following the proven pattern established by `pos_browser`.
 
 ### 1.2 Scope
 This feature will replace the current fragmented workflow tool surface (8+ separate MCP tools) with a single consolidated tool that handles all workflow operations through an action parameter, dramatically reducing tool count while maintaining full functionality and improving AI agent performance.
@@ -38,10 +38,10 @@ This feature will replace the current fragmented workflow tool surface (8+ separ
 
 ### Goal 2: Establish Consistent Design Pattern for Complex Domains
 
-**Objective:** Apply the proven `aos_browser` consolidation pattern to workflow management, creating a reusable architectural pattern for future complex domains.
+**Objective:** Apply the proven `pos_browser` consolidation pattern to workflow management, creating a reusable architectural pattern for future complex domains.
 
 **Success Metrics:**
-- Pattern consistency: `aos_browser` (20+ actions, 1 tool) → `aos_workflow` (18 actions, 1 tool)
+- Pattern consistency: `pos_browser` (20+ actions, 1 tool) → `pos_workflow` (18 actions, 1 tool)
 - Pattern documentation: 0 → 1 comprehensive design pattern guide
 - Future tool candidates: Database, File, Git operations identified for consolidation
 - Developer understanding: Clear when to consolidate vs when to keep separate
@@ -74,7 +74,7 @@ This feature will replace the current fragmented workflow tool surface (8+ separ
 ## 2.1 Supporting Documentation
 
 The business goals above are informed by:
-- **Consolidated Workflow Tool Design (2025-10-15)**: Comprehensive analysis showing 79% tool reduction opportunity, performance impact analysis, and proven pattern from `aos_browser` implementation
+- **Consolidated Workflow Tool Design (2025-10-15)**: Comprehensive analysis showing 79% tool reduction opportunity, performance impact analysis, and proven pattern from `pos_browser` implementation
 
 See `supporting-docs/INSIGHTS.md` for complete analysis with 47 extracted insights (15 requirements, 20 design, 12 implementation).
 
@@ -100,7 +100,7 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given I need to find a workflow for test generation
-- When I call `aos_workflow(action="list_workflows")`
+- When I call `pos_workflow(action="list_workflows")`
 - Then I receive a list of available workflow definitions with metadata
 - And I can filter by category or search by name
 
@@ -116,7 +116,7 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given I want to create a specification
-- When I call `aos_workflow(action="start", workflow_type="spec_creation_v1", target_file="my-feature")`
+- When I call `pos_workflow(action="start", workflow_type="spec_creation_v1", target_file="my-feature")`
 - Then I receive a session_id and Phase 0 content
 - And I can progress through phases by completing checkpoints
 
@@ -132,7 +132,7 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given I have multiple active workflow sessions
-- When I call `aos_workflow(action="list_sessions", status="active")`
+- When I call `pos_workflow(action="list_sessions", status="active")`
 - Then I see all active sessions with metadata
 - And I can pause, resume, or delete specific sessions
 
@@ -148,7 +148,7 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given a phase completion failed validation
-- When I call `aos_workflow(action="get_errors", session_id="xyz")`
+- When I call `pos_workflow(action="get_errors", session_id="xyz")`
 - Then I receive detailed error information with remediation guidance
 - And I can retry the phase or rollback to fix issues
 
@@ -164,7 +164,7 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given I'm in Phase 2 with 6 tasks
-- When I call `aos_workflow(action="get_task", session_id="xyz", phase=2, task_number=3)`
+- When I call `pos_workflow(action="get_task", session_id="xyz", phase=2, task_number=3)`
 - Then I receive only Task 3 content (not all 6 tasks)
 - And the content is under 100 lines for optimal context usage
 
@@ -180,7 +180,7 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given a completed workflow session
-- When I call `aos_workflow(action="get_metrics", session_id="xyz")`
+- When I call `pos_workflow(action="get_metrics", session_id="xyz")`
 - Then I receive timing data, progress metrics, and phase duration analysis
 - And I can identify bottlenecks for optimization
 
@@ -196,10 +196,10 @@ User stories describe the feature from the user's perspective.
 
 **Acceptance Criteria:**
 - Given I need to integrate workflow management
-- When I discover the `aos_workflow` tool
+- When I discover the `pos_workflow` tool
 - Then I see all 18 actions documented in one place
 - And the parameter patterns are consistent (action + session_id + action-specific params)
-- And it follows the same pattern as `aos_browser` for consistency
+- And it follows the same pattern as `pos_browser` for consistency
 
 **Priority:** High
 
@@ -223,7 +223,7 @@ User stories describe the feature from the user's perspective.
 ## 3.2 Supporting Documentation
 
 User needs from supporting documents:
-- **Consolidated Workflow Tool Design**: AI agents need comprehensive workflow management through a consistent interface (similar to aos_browser). Tool consolidation addresses LLM performance requirements (reduced context pollution, faster tool selection).
+- **Consolidated Workflow Tool Design**: AI agents need comprehensive workflow management through a consistent interface (similar to pos_browser). Tool consolidation addresses LLM performance requirements (reduced context pollution, faster tool selection).
 
 See `supporting-docs/INSIGHTS.md` for complete user need analysis.
 
@@ -235,14 +235,14 @@ Functional requirements specify capabilities the system must provide.
 
 ### FR-001: Single Consolidated Tool Interface
 
-**Description:** The system shall provide all workflow operations through a single `aos_workflow` tool with an action parameter for operation dispatch.
+**Description:** The system shall provide all workflow operations through a single `pos_workflow` tool with an action parameter for operation dispatch.
 
 **Priority:** Critical
 
 **Related User Stories:** Story 7
 
 **Acceptance Criteria:**
-- Tool is named `aos_workflow` (matches `aos_browser` naming pattern)
+- Tool is named `pos_workflow` (matches `pos_browser` naming pattern)
 - All operations accessible via `action` parameter
 - Consistent parameter structure across all actions
 - Single comprehensive docstring documents all actions
@@ -374,7 +374,7 @@ Functional requirements specify capabilities the system must provide.
 
 **Acceptance Criteria:**
 - Old workflow tools (start_workflow, get_current_phase, etc.) removed completely
-- Single `aos_workflow` tool registered
+- Single `pos_workflow` tool registered
 - No deprecation wrappers or compatibility shims
 - Clean tool surface with 5 total tools
 
@@ -526,7 +526,7 @@ NFRs define quality attributes and system constraints.
 - Logging integrated with existing logger
 
 **NFR-C3: Pattern Consistency**
-- Follows `aos_browser` consolidation pattern exactly
+- Follows `pos_browser` consolidation pattern exactly
 - Action dispatch structure consistent
 - Parameter naming conventions consistent
 - Error response format consistent
@@ -542,7 +542,7 @@ NFRs define quality attributes and system constraints.
 - Comprehensive error messages with remediation
 
 **NFR-U2: Discoverability**
-- Tool name clearly indicates purpose (`aos_workflow`)
+- Tool name clearly indicates purpose (`pos_workflow`)
 - Action list visible in tool documentation
 - Parameter requirements obvious from docstring
 - Related actions grouped in documentation
@@ -574,7 +574,7 @@ NFRs define quality attributes and system constraints.
 ## 5.7 Supporting Documentation
 
 NFRs informed by:
-- **Consolidated Workflow Tool Design**: Performance requirements (5-tool surface, LLM optimization), pattern consistency with aos_browser, testing strategy, clean cutover approach
+- **Consolidated Workflow Tool Design**: Performance requirements (5-tool surface, LLM optimization), pattern consistency with pos_browser, testing strategy, clean cutover approach
 
 See `supporting-docs/INSIGHTS.md` for complete non-functional requirements analysis.
 
