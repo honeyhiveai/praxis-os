@@ -15,7 +15,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://honeyhiveai.github.io/praxis-os/img/agent-os-social-card.jpg',
+        content: 'https://honeyhiveai.github.io/praxis-os/img/praxis-os-homepage-preview.png',
       },
     },
     {
