@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pytest
 
+from mcp_server.core.query_tracker import QueryTracker, get_tracker
 from mcp_server.port_manager import PortManager
 from mcp_server.project_info import ProjectInfoDiscovery
 
@@ -282,6 +283,254 @@ class TestThreadSafety:
 
         # Cleanup
         port_mgr.cleanup_state()
+
+
+class TestQueryTrackerThreadSafety:
+    """Test thread safety of QueryTracker singleton in dual-transport mode."""
+
+    def test_concurrent_session_creation(self):
+        """
+        Test that multiple threads creating the same session concurrently
+        results in only ONE session being created (double-checked locking).
+        """
+        tracker = get_tracker()
+
+        # Reset for clean test
+        tracker.reset_session("test_session")
+
+        results = []
+        errors = []
+        lock = threading.Lock()
+
+        def create_and_query(thread_id):
+            """Simulate concurrent access from stdio and HTTP threads."""
+            try:
+                # All threads try to record to same session simultaneously
+                angle = tracker.record_query("test_session", f"query_{thread_id}")
+                with lock:
+                    results.append((thread_id, angle))
+            except Exception as e:
+                with lock:
+                    errors.append((thread_id, e))
+
+        # Simulate 20 concurrent requests (10 stdio + 10 HTTP)
+        with ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(create_and_query, i) for i in range(20)]
+            for future in as_completed(futures):
+                future.result()  # Wait for completion
+
+        # Verify no errors occurred
+        assert len(errors) == 0, f"Errors occurred: {errors}"
+
+        # Verify all queries recorded
+        assert len(results) == 20
+
+        # Verify session stats are correct
+        stats = tracker.get_stats("test_session")
+        assert stats.total_queries == 20
+        assert stats.unique_queries == 20  # All queries were unique
+
+        # Cleanup
+        tracker.reset_session("test_session")
+
+    def test_concurrent_query_recording(self):
+        """
+        Test that concurrent record_query calls correctly update statistics
+        without race conditions.
+        """
+        tracker = get_tracker()
+        tracker.reset_session("concurrent_test")
+
+        errors = []
+        lock = threading.Lock()
+
+        def record_many_queries(thread_id, count=100):
+            """Record many queries from a single thread."""
+            try:
+                for i in range(count):
+                    query = f"thread_{thread_id}_query_{i}"
+                    tracker.record_query("concurrent_test", query)
+            except Exception as e:
+                with lock:
+                    errors.append((thread_id, e))
+
+        # 10 threads each recording 100 queries = 1000 total
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [executor.submit(record_many_queries, i, 100) for i in range(10)]
+            for future in as_completed(futures):
+                future.result()
+
+        # Verify no errors
+        assert len(errors) == 0, f"Errors occurred: {errors}"
+
+        # Verify total count is correct
+        stats = tracker.get_stats("concurrent_test")
+        assert (
+            stats.total_queries == 1000
+        ), f"Expected 1000 queries, got {stats.total_queries}"
+
+        # Verify unique count is correct (all queries were unique)
+        assert (
+            stats.unique_queries == 1000
+        ), f"Expected 1000 unique queries, got {stats.unique_queries}"
+
+        # Verify history is bounded to 10
+        assert len(stats.query_history) == 10
+
+        # Cleanup
+        tracker.reset_session("concurrent_test")
+
+    def test_concurrent_reads(self):
+        """
+        Test that concurrent get_stats calls are safe and return
+        consistent data.
+        """
+        tracker = get_tracker()
+        tracker.reset_session("read_test")
+
+        # Populate some data
+        for i in range(50):
+            tracker.record_query("read_test", f"query_{i}")
+
+        results = []
+        errors = []
+        lock = threading.Lock()
+
+        def read_stats(thread_id):
+            """Read stats concurrently."""
+            try:
+                for _ in range(100):
+                    stats = tracker.get_stats("read_test")
+                    with lock:
+                        results.append(stats.total_queries)
+            except Exception as e:
+                with lock:
+                    errors.append((thread_id, e))
+
+        # 20 threads reading concurrently
+        with ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(read_stats, i) for i in range(20)]
+            for future in as_completed(futures):
+                future.result()
+
+        # Verify no errors
+        assert len(errors) == 0, f"Errors occurred: {errors}"
+
+        # Verify all reads returned valid data (50 queries)
+        assert len(results) == 2000  # 20 threads × 100 reads
+        assert all(
+            count == 50 for count in results
+        ), f"Inconsistent read results: {set(results)}"
+
+        # Cleanup
+        tracker.reset_session("read_test")
+
+    def test_dual_transport_simulation(self):
+        """
+        Simulate real dual-transport scenario:
+        - Main thread (stdio) recording queries
+        - HTTP thread (sub-agents) recording queries
+        Both accessing the singleton concurrently.
+        """
+        tracker = get_tracker()
+        tracker.reset_session("stdio_session")
+        tracker.reset_session("http_session")
+
+        errors = []
+        lock = threading.Lock()
+
+        def stdio_thread():
+            """Simulate stdio transport (primary IDE)."""
+            try:
+                for i in range(100):
+                    tracker.record_query("stdio_session", f"stdio_query_{i}")
+                    time.sleep(0.001)  # Simulate realistic timing
+            except Exception as e:
+                with lock:
+                    errors.append(("stdio", e))
+
+        def http_thread():
+            """Simulate HTTP transport (sub-agents)."""
+            try:
+                for i in range(100):
+                    tracker.record_query("http_session", f"http_query_{i}")
+                    time.sleep(0.001)  # Simulate realistic timing
+            except Exception as e:
+                with lock:
+                    errors.append(("http", e))
+
+        # Run both transports concurrently
+        stdio = threading.Thread(target=stdio_thread, name="stdio")
+        http = threading.Thread(target=http_thread, name="http", daemon=True)
+
+        stdio.start()
+        http.start()
+
+        stdio.join()
+        http.join()
+
+        # Verify no errors
+        assert len(errors) == 0, f"Errors occurred: {errors}"
+
+        # Verify both sessions have correct counts
+        stdio_stats = tracker.get_stats("stdio_session")
+        http_stats = tracker.get_stats("http_session")
+
+        assert stdio_stats.total_queries == 100
+        assert http_stats.total_queries == 100
+        assert stdio_stats.unique_queries == 100
+        assert http_stats.unique_queries == 100
+
+        # Verify session isolation (no cross-contamination)
+        assert stdio_stats.query_history != http_stats.query_history
+
+        # Cleanup
+        tracker.reset_session("stdio_session")
+        tracker.reset_session("http_session")
+
+    def test_stress_test_many_sessions(self):
+        """
+        Stress test: Many threads creating many sessions concurrently.
+        Verifies no deadlocks or race conditions under load.
+        """
+        tracker = get_tracker()
+
+        errors = []
+        lock = threading.Lock()
+
+        def worker(thread_id):
+            """Each thread creates its own session and records queries."""
+            session_id = f"stress_session_{thread_id}"
+            try:
+                for i in range(50):
+                    tracker.record_query(session_id, f"query_{i}")
+            except Exception as e:
+                with lock:
+                    errors.append((thread_id, e))
+
+        # 50 threads × 50 queries = 2500 queries across 50 sessions
+        start_time = time.time()
+
+        with ThreadPoolExecutor(max_workers=50) as executor:
+            futures = [executor.submit(worker, i) for i in range(50)]
+            for future in as_completed(futures):
+                future.result()
+
+        elapsed = time.time() - start_time
+
+        # Verify no errors
+        assert len(errors) == 0, f"Errors occurred: {errors}"
+
+        # Verify reasonable performance (<5 seconds for 2500 queries)
+        assert elapsed < 5.0, f"Stress test took too long: {elapsed:.2f}s"
+
+        # Verify all sessions have correct counts
+        for i in range(50):
+            session_id = f"stress_session_{i}"
+            stats = tracker.get_stats(session_id)
+            assert stats.total_queries == 50
+            assert stats.unique_queries == 50
+            tracker.reset_session(session_id)
 
 
 class TestDocumentation:

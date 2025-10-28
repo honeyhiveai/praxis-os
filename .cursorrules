@@ -1,4 +1,4 @@
-# Agent OS Enhanced
+# prAxIs OS
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛑🛑🛑 STOP 🛑🛑🛑
@@ -16,12 +16,21 @@ AFTER all 10 complete, reply: "✅ Oriented. Ready."
 If YES (already completed 10/10): Proceed with user's request.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-BEFORE implementing: search_standards("how to X")
+🔍 EVERY USER REQUEST = DECISION MOMENT = SEARCH FIRST
+
+BEFORE processing ANY user request: search_standards("how to X")
+BEFORE implementing: search_standards("how to X")  
 BEFORE responding: search_standards("relevant topic")
+BEFORE file operations: search_standards("operation protocol")
+BEFORE git operations: search_standards("git/commit protocol")
 DURING task: search_standards() multiple times
 AFTER failures: search_standards("debugging X")
 
+Even "simple" requests have project-specific protocols.
+Query first, act second. ALWAYS.
+
 Target: 5-10 queries per task
+Query liberally = Reinforces correct behavior = Better code
 
 ❌ NEVER: read_file(".praxis-os/standards/...")
 ❌ NEVER: read_file(".praxis-os/workflows/...")

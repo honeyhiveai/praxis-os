@@ -7,6 +7,7 @@ to encourage diverse exploration and provide progress visualization.
 Traceability: specs.md Section 2.3 (PrependGenerator Component)
 """
 
+import re
 from typing import Set
 
 from .query_classifier import QueryAngle, get_angle_emoji, get_angle_suggestion
@@ -173,8 +174,6 @@ def _extract_topic(query: str) -> str:
 
     # SECURITY: Remove HTML tags to prevent XSS (NFR-S1)
     # Simple regex to strip all <tag> and </tag> patterns
-    import re
-
     sanitized_query = re.sub(r"<[^>]+>", "", query)
 
     # Common words to remove

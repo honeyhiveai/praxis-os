@@ -17,7 +17,7 @@ from typing import Dict, Optional
 try:
     from fastmcp import Context
 except ImportError:
-    Context = None  # type: ignore[misc,assignment]
+    Context = None  # type: ignore[assignment,misc]
 
 
 @dataclass
@@ -231,13 +231,13 @@ def _extract_client_id(ctx: Optional["Context"]) -> str:
             client_id = getattr(ctx, "client_id", None)
             if client_id:
                 return str(client_id)
-        except Exception:
+        except (AttributeError, ValueError, TypeError):
             pass  # Fall through to next option
 
     # Fallback to process ID
     try:
         return f"pid_{os.getpid()}"
-    except Exception:
+    except (OSError, AttributeError):
         pass  # Fall through to last resort
 
     # Last resort: default identifier

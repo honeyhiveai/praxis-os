@@ -138,6 +138,9 @@ class SpecTasksParser(SourceParser):
         phases: List[DynamicPhase] = []
         current_phase_data = None
 
+        if doc.children is None:
+            return phases
+
         for node in doc.children:
             # Semantic check: match content pattern on ANY heading level
             if isinstance(node, Heading):

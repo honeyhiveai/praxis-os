@@ -20,14 +20,14 @@ def reset_tracker():
     from mcp_server.core import session_id_extractor
 
     tracker = get_tracker()
-    tracker._session_stats = {}  # pylint: disable=protected-access
+    tracker._sessions = {}  # pylint: disable=protected-access
 
     # Also reset session_id_extractor state
     session_id_extractor._session_states = {}  # pylint: disable=protected-access
 
     yield
 
-    tracker._session_stats = {}  # pylint: disable=protected-access
+    tracker._sessions = {}  # pylint: disable=protected-access
     session_id_extractor._session_states = {}  # pylint: disable=protected-access
 
 
@@ -92,32 +92,31 @@ async def test_search_returns_results_with_prepend(search_standards_func):
 
     first_result = result["results"][0]
     assert "content" in first_result
-    assert first_result["content"].startswith("🔍🔍🔍🔍🔍")
-    assert "QUERIES = KNOWLEDGE = ACCURACY = QUALITY" in first_result["content"]
+    # New format starts with progress emoji and stats
+    assert first_result["content"].startswith("📊")
+    assert "Queries:" in first_result["content"]
+    assert "Angles:" in first_result["content"]
 
 
 @pytest.mark.asyncio
 async def test_prepend_format_matches_specification(search_standards_func):
-    """Test that prepend format matches specs.md requirements."""
+    """Test that prepend format matches updated specs (no header line)."""
     result = await search_standards_func("What is validation?")
+    # Make second query to test format
+    result = await search_standards_func("Where is validation?")
 
     first_content = result["results"][0]["content"]
     lines = first_content.split("\n")
 
-    # Check header line
-    assert lines[0] == "🔍🔍🔍🔍🔍 QUERIES = KNOWLEDGE = ACCURACY = QUALITY ⭐⭐⭐⭐⭐"
+    # Check progress line (first line now, no header anymore)
+    assert lines[0].startswith("📊")
+    assert "Queries:" in lines[0]
+    assert "/5" in lines[0]
+    assert "Unique:" in lines[0]
+    assert "Angles:" in lines[0]
 
-    # Check blank line
-    assert lines[1] == ""
-
-    # Check progress line (format: "Queries: X/5 | Unique: Y | Angles: ...")
-    assert "Queries:" in lines[2]
-    assert "/5" in lines[2]
-    assert "Unique:" in lines[2]
-    assert "Angles:" in lines[2]
-
-    # Check suggestion or completion line
-    assert lines[3].startswith("💡") or lines[3].startswith("🎉")
+    # Check suggestion or completion line (second line)
+    assert lines[1].startswith("💡") or lines[1].startswith("🎉")
 
     # Check separator
     assert "---" in first_content
@@ -182,7 +181,7 @@ async def test_session_isolation(search_standards_func, mock_rag_engine):
         result1b = await search_standards_func("Where is validation?")
 
         content1b = result1b["results"][0]["content"]
-        assert "Queries: 2/5" in content1b
+        assert "Queries: 2/5" in content1b  # 2nd query in session 1
 
     # Session 2: 1 query (should start fresh)
     with patch(
@@ -225,13 +224,13 @@ async def test_second_result_unchanged(search_standards_func):
 
     assert len(result["results"]) >= 2
 
-    # First result has prepend
+    # First result has prepend (starts with progress emoji)
     first_content = result["results"][0]["content"]
-    assert first_content.startswith("🔍🔍🔍🔍🔍")
+    assert first_content.startswith("📊")
 
     # Second result does NOT have prepend (original content)
     second_content = result["results"][1]["content"]
-    assert not second_content.startswith("🔍🔍🔍🔍🔍")
+    assert not second_content.startswith("📊")
     assert second_content == "Test content 2"
 
 

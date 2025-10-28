@@ -30,7 +30,7 @@ class TestRegisterServerInfoTools:
             mock_mcp, mock_project_discovery, transport_mode="stdio"
         )
 
-        assert count == 1  # Should register 1 tool
+        assert count == 2  # Should register 2 tools (get_server_info + current_date)
         assert mock_mcp.tool.called  # Should call mcp.tool decorator
 
     def test_registers_with_all_transport_modes(self):
@@ -42,7 +42,7 @@ class TestRegisterServerInfoTools:
             count = register_server_info_tools(
                 mock_mcp, mock_project_discovery, transport_mode=mode
             )
-            assert count == 1
+            assert count == 2  # Two tools registered
 
     def test_default_transport_mode(self):
         """Test that default transport mode is stdio."""
@@ -52,7 +52,7 @@ class TestRegisterServerInfoTools:
         # Register without specifying transport_mode
         count = register_server_info_tools(mock_mcp, mock_project_discovery)
 
-        assert count == 1
+        assert count == 2  # Two tools registered
 
 
 class TestGetServerInfoTool:
@@ -66,14 +66,16 @@ class TestGetServerInfoTool:
             {"name": "search_standards"},
             {"name": "start_workflow"},
             {"name": "get_server_info"},
+            {"name": "current_date"},
         ]
 
-        # Mock the decorator to capture the function
-        self._registered_func = None
+        # Mock the decorator to capture BOTH functions by name
+        self._registered_funcs = {}
 
         def tool_decorator():
             def decorator(func):
-                self._registered_func = func
+                # Store by function name
+                self._registered_funcs[func.__name__] = func
                 return func
 
             return decorator
@@ -101,11 +103,11 @@ class TestGetServerInfoTool:
     @pytest.mark.asyncio
     async def test_returns_complete_info(self, mock_mcp, mock_project_discovery):
         """Test that get_server_info returns all expected sections."""
-        # Register the tool
+        # Register the tools
         register_server_info_tools(mock_mcp, mock_project_discovery, "dual")
 
-        # Get the registered function
-        tool_func = self._registered_func
+        # Get the get_server_info function specifically
+        tool_func = self._registered_funcs.get("get_server_info")
         assert tool_func is not None
 
         # Call the tool
@@ -120,7 +122,7 @@ class TestGetServerInfoTool:
     async def test_server_metadata(self, mock_mcp, mock_project_discovery):
         """Test server metadata section."""
         register_server_info_tools(mock_mcp, mock_project_discovery, "http")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
         server = result["server"]
@@ -143,7 +145,7 @@ class TestGetServerInfoTool:
     async def test_project_metadata(self, mock_mcp, mock_project_discovery):
         """Test project metadata section."""
         register_server_info_tools(mock_mcp, mock_project_discovery, "stdio")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
         project = result["project"]
@@ -164,7 +166,7 @@ class TestGetServerInfoTool:
     async def test_capabilities_metadata(self, mock_mcp, mock_project_discovery):
         """Test capabilities metadata section."""
         register_server_info_tools(mock_mcp, mock_project_discovery, "dual")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
         capabilities = result["capabilities"]
@@ -178,7 +180,7 @@ class TestGetServerInfoTool:
         assert "http_transport" in capabilities
 
         # Verify dual mode capabilities
-        assert capabilities["tools_available"] == 3  # From mock
+        assert capabilities["tools_available"] == 4  # From mock (4 tools now)
         assert capabilities["rag_enabled"] is True
         assert capabilities["workflow_enabled"] is True
         assert capabilities["browser_enabled"] is True
@@ -189,7 +191,7 @@ class TestGetServerInfoTool:
     async def test_stdio_mode_capabilities(self, mock_mcp, mock_project_discovery):
         """Test capabilities for stdio-only mode."""
         register_server_info_tools(mock_mcp, mock_project_discovery, "stdio")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
         capabilities = result["capabilities"]
@@ -202,7 +204,7 @@ class TestGetServerInfoTool:
     async def test_http_mode_capabilities(self, mock_mcp, mock_project_discovery):
         """Test capabilities for HTTP-only mode."""
         register_server_info_tools(mock_mcp, mock_project_discovery, "http")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
         capabilities = result["capabilities"]
@@ -215,7 +217,7 @@ class TestGetServerInfoTool:
     async def test_uptime_calculation(self, mock_mcp, mock_project_discovery):
         """Test that uptime is calculated correctly."""
         register_server_info_tools(mock_mcp, mock_project_discovery, "stdio")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         # Get initial uptime
         result1 = await tool_func()
@@ -243,7 +245,7 @@ class TestGetServerInfoTool:
         )
 
         register_server_info_tools(mock_mcp, mock_project_discovery, "stdio")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
 
@@ -266,7 +268,7 @@ class TestGetServerInfoTool:
         mock_mcp.list_tools.side_effect = Exception("Cannot list tools")
 
         register_server_info_tools(mock_mcp, mock_project_discovery, "stdio")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
 
@@ -285,7 +287,7 @@ class TestGetServerInfoTool:
         }
 
         register_server_info_tools(mock_mcp, mock_project_discovery, "dual")
-        tool_func = self._registered_func
+        tool_func = self._registered_funcs.get("get_server_info")
 
         result = await tool_func()
 

@@ -24,16 +24,17 @@ from mcp_server.core.query_tracker import QueryTracker
 class TestGenerateQueryPrepend:
     """Test main prepend generation function."""
 
-    def test_prepend_includes_header_line(self) -> None:
-        """Test prepend includes header with emojis and tagline."""
+    def test_prepend_includes_progress_line_format(self) -> None:
+        """Test prepend includes progress line with query stats."""
         tracker = QueryTracker()
         tracker.record_query("session1", "What is X?")
 
         prepend = generate_query_prepend(tracker, "session1", "What is X?")
 
-        assert "🔍🔍🔍🔍🔍" in prepend
-        assert "QUERIES = KNOWLEDGE = ACCURACY = QUALITY" in prepend
-        assert "⭐⭐⭐⭐⭐" in prepend
+        # New format: 📊 Queries: X/5 | Unique: Y | Angles: ...
+        assert "📊" in prepend
+        assert "Queries:" in prepend
+        assert "/5" in prepend
 
     def test_prepend_includes_progress_line(self) -> None:
         """Test prepend includes progress line with query counts and angles."""
@@ -70,7 +71,7 @@ class TestGenerateQueryPrepend:
         prepend = generate_query_prepend(tracker, "session1", "What is A?")
 
         assert "🎉" in prepend
-        assert "Great exploration" in prepend
+        assert "Keep exploring" in prepend  # Updated message
         assert "💡 Try:" not in prepend  # No suggestion when complete
 
     def test_prepend_includes_separator(self) -> None:
@@ -92,8 +93,8 @@ class TestGenerateQueryPrepend:
         # Split into lines, filter empty lines
         lines = [line for line in prepend.split("\n") if line.strip()]
 
-        # Should have: header, progress, suggestion/completion, separator
-        assert len(lines) == 4
+        # Should have: progress, suggestion/completion, separator (no header line anymore)
+        assert len(lines) == 3
 
     def test_prepend_token_count_within_budget(self) -> None:
         """Test prepend token count ≤120 tokens maximum."""
@@ -167,8 +168,8 @@ class TestGenerateQueryPrepend:
 
         avg_tokens = sum(token_counts) / len(token_counts)
         assert (
-            75 <= avg_tokens <= 95
-        ), f"Average token count {avg_tokens:.1f} not within 75-95 range"
+            50 <= avg_tokens <= 70
+        ), f"Average token count {avg_tokens:.1f} not within 50-70 range"
 
     def test_prepend_performance(self) -> None:
         """Test generate_query_prepend meets ≤10ms performance target."""
@@ -323,8 +324,8 @@ def test_full_prepend_workflow() -> None:
     tracker.record_query("integration", "What is checkpoint?")
     prepend = generate_query_prepend(tracker, "integration", "What is checkpoint?")
 
-    # Verify structure
-    assert "🔍🔍🔍🔍🔍" in prepend
+    # Verify structure (no header line anymore)
+    assert "📊" in prepend  # Progress emoji
     assert "Queries: 1/5" in prepend
     assert "Unique: 1" in prepend
     assert "📖✓" in prepend  # definition covered

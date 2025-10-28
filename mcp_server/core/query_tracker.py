@@ -7,6 +7,7 @@ angle coverage, and query history for progress visualization.
 Traceability: specs.md Section 2.2 (QueryTracker Component)
 """
 
+import threading
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Dict, List, Set
@@ -71,7 +72,7 @@ class QueryTracker:
         - Memory: ~1KB per session
 
     Thread Safety:
-        Not thread-safe. Use separate instances for concurrent contexts.
+        Thread-safe via RLock for dual-transport HTTP/stdio concurrent access.
 
     Examples:
         >>> tracker = QueryTracker()
@@ -89,14 +90,21 @@ class QueryTracker:
         - NFR-R2: Session isolation
     """
 
+    singleton_instance: "QueryTracker | None" = None
+
     def __init__(self) -> None:
         """
         Initialize query tracker with empty session storage.
 
         Creates an empty dictionary for session statistics.
         Each session_id maps to its own QueryStats instance.
+
+        Thread Safety:
+            RLock protects _sessions dictionary from concurrent access
+            in dual-transport mode (stdio + HTTP threads).
         """
         self._sessions: Dict[str, QueryStats] = {}
+        self._sessions_lock = threading.RLock()
 
     def record_query(self, session_id: str, query: str) -> QueryAngle:
         """
@@ -142,32 +150,40 @@ class QueryTracker:
         # Classify query angle
         angle = classify_query_angle(query)
 
-        # Get or create session stats
-        if session_id not in self._sessions:
-            self._sessions[session_id] = QueryStats()
+        # Double-checked locking for session creation (thread-safe)
+        # Fast path: check without lock (common case for existing sessions)
+        if session_id in self._sessions:
+            stats = self._sessions[session_id]
+        else:
+            # Slow path: acquire lock for session creation
+            with self._sessions_lock:
+                # Re-check after acquiring lock (another thread may have created it)
+                if session_id not in self._sessions:
+                    self._sessions[session_id] = QueryStats()
+                stats = self._sessions[session_id]
 
-        stats = self._sessions[session_id]
+        # Update stats (lock protects mutations to shared QueryStats object)
+        with self._sessions_lock:
+            # Update total count
+            stats.total_queries += 1
 
-        # Update total count
-        stats.total_queries += 1
+            # Check if query is unique (normalized comparison)
+            normalized_query = query.lower().strip()
+            normalized_history = [q.lower().strip() for q in stats.query_history]
 
-        # Check if query is unique (normalized comparison)
-        normalized_query = query.lower().strip()
-        normalized_history = [q.lower().strip() for q in stats.query_history]
+            if normalized_query not in normalized_history:
+                stats.unique_queries += 1
 
-        if normalized_query not in normalized_history:
-            stats.unique_queries += 1
+            # Add angle to covered set
+            stats.angles_covered.add(angle)
 
-        # Add angle to covered set
-        stats.angles_covered.add(angle)
+            # Add to query history (FIFO, max 10)
+            stats.query_history.append(query)
+            if len(stats.query_history) > 10:
+                stats.query_history.pop(0)  # Remove oldest
 
-        # Add to query history (FIFO, max 10)
-        stats.query_history.append(query)
-        if len(stats.query_history) > 10:
-            stats.query_history.pop(0)  # Remove oldest
-
-        # Update timestamp
-        stats.last_query_time = datetime.now()
+            # Update timestamp
+            stats.last_query_time = datetime.now()
 
         return angle
 
@@ -198,10 +214,11 @@ class QueryTracker:
         Traceability:
             - FR-001: Retrieve session statistics
         """
-        if session_id not in self._sessions:
-            return QueryStats()
+        with self._sessions_lock:
+            if session_id not in self._sessions:
+                return QueryStats()
 
-        return self._sessions[session_id]
+            return self._sessions[session_id]
 
     def get_uncovered_angles(self, session_id: str) -> Set[QueryAngle]:
         """
@@ -241,11 +258,12 @@ class QueryTracker:
             "error_prevention",
         }
 
-        if session_id not in self._sessions:
-            return all_angles
+        with self._sessions_lock:
+            if session_id not in self._sessions:
+                return all_angles
 
-        stats = self._sessions[session_id]
-        return all_angles - stats.angles_covered
+            stats = self._sessions[session_id]
+            return all_angles - stats.angles_covered
 
     def reset_session(self, session_id: str) -> None:
         """
@@ -269,12 +287,9 @@ class QueryTracker:
         Traceability:
             - Testing utility for session isolation
         """
-        if session_id in self._sessions:
-            del self._sessions[session_id]
-
-
-# Global singleton instance
-_tracker: QueryTracker | None = None
+        with self._sessions_lock:
+            if session_id in self._sessions:
+                del self._sessions[session_id]
 
 
 def get_tracker() -> QueryTracker:
@@ -282,7 +297,7 @@ def get_tracker() -> QueryTracker:
     Get the global query tracker instance.
 
     Uses singleton pattern to ensure a single QueryTracker instance
-    per process. Thread-safe initialization.
+    per process.
 
     Returns:
         QueryTracker: The global tracker instance
@@ -294,12 +309,11 @@ def get_tracker() -> QueryTracker:
         True
 
     Traceability:
-        - Implementation note: Global singleton pattern
+        - Implementation note: Class-attribute singleton pattern
     """
-    global _tracker
-    if _tracker is None:
-        _tracker = QueryTracker()
-    return _tracker
+    if QueryTracker.singleton_instance is None:
+        QueryTracker.singleton_instance = QueryTracker()
+    return QueryTracker.singleton_instance
 
 
 __all__ = [
