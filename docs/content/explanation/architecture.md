@@ -305,7 +305,7 @@ import StandardsGenerationFlow from '@site/src/components/StandardsGenerationFlo
 
 <StandardsGenerationFlow />
 
-:::info Universal Standard Structure Example
+**Universal Standard Structure Example:**
 
 **Race Conditions (Universal)**
 
@@ -331,9 +331,9 @@ Race condition occurs when:
 - Use race detectors
 - Property-based testing with random scheduling
 
-:::
+---
 
-:::tip Generated Python-Specific Standard Example
+**Generated Python-Specific Standard Example:**
 
 **Race Conditions (Python)**
 
@@ -391,8 +391,6 @@ def test_race_condition():
     
     assert counter == 10000  # Would fail without lock
 ```
-
-:::
 
 **Generation process:**
 1. **Detect project language** (pyproject.toml, package.json, go.mod, etc.)

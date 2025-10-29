@@ -86,16 +86,16 @@ if validate_test_artifacts(evidence):
 
 **Implementation:**
 
-```text
-❌ Commit blocked
+**Example error message:**
 
-Error: Code formatting failed
-→ Run: black mcp_server/
-→ Run: isort mcp_server/
-→ Then: git add -u && git commit
-
-Why: Pre-commit hooks enforce style automatically
-```
+> **❌ Commit blocked**
+>
+> **Error:** Code formatting failed  
+> → Run: `black mcp_server/`  
+> → Run: `isort mcp_server/`  
+> → Then: `git add -u && git commit`
+>
+> **Why:** Pre-commit hooks enforce style automatically
 
 ### 3. Information Asymmetry
 

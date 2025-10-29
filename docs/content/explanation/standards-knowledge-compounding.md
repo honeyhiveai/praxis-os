@@ -88,15 +88,9 @@ This page explains how **standards** create knowledge compounding in prAxIs OS t
 
 ### 1. AI Queries Heavily (5-10+ Times Per Task)
 
-```
-AI starting new task
-  ↓
-search_standards("how to handle API errors in this project")
-  ↓
-Discovers: Universal patterns + Project conventions
-  ↓
-Implements using established patterns
-```
+import StandardsQueryFlow from '@site/src/components/StandardsQueryFlow';
+
+<StandardsQueryFlow />
 
 **Key:** AI *always* queries before implementing. This is the foundation of the system.
 
@@ -175,23 +169,9 @@ search_standards("API error handling")
 
 ### The Reinforcing Mechanism
 
-```
-AI queries before implementing
-  ↓
-Discovers existing standards
-  ↓
-Follows consistent patterns
-  ↓
-Human identifies new pattern worth documenting
-  ↓
-AI creates standard (using standard-creation standards)
-  ↓
-RAG indexes new standard
-  ↓
-Future AI discovers via queries
-  ↓
-Pattern reinforces and compounds
-```
+import SelfReinforcingLoopDiagram from '@site/src/components/SelfReinforcingLoopDiagram';
+
+<SelfReinforcingLoopDiagram />
 
 **Each standard makes the next 10 tasks better.**
 
@@ -209,28 +189,16 @@ Pattern reinforces and compounds
 
 ## The Compounding Effect Over Time
 
+import StandardsProgression from '@site/src/components/StandardsProgression';
+
+<StandardsProgression />
+
+**The timeline shows how standards accumulate:**
+
 ### Week 1: Foundation
-
-```
-Universal standards: 100 documents
-Project standards: 0 documents
-Query quality: Good (generic patterns)
-AI knowledge: Universal CS fundamentals
-```
-
 **Output:** Good code using universal best practices.
 
----
-
 ### Week 4: Project Awareness
-
-```
-Universal standards: 100 documents
-Project standards: 15 documents (documented by AI)
-Query quality: Very Good (universal + project-specific)
-AI knowledge: Your naming, error handling, API conventions
-```
-
 **Output:** Consistent code following YOUR patterns.
 
 **What changed:**
@@ -240,17 +208,7 @@ AI knowledge: Your naming, error handling, API conventions
 - Code organization defined
 - Integration approaches captured
 
----
-
 ### Week 12: Project Expertise
-
-```
-Universal standards: 100 documents
-Project standards: 50 documents
-Query quality: Excellent (deep project knowledge)
-AI knowledge: Your architecture, integration patterns, domain logic
-```
-
 **Output:** Expert-level code, fewer explanations needed, faster velocity.
 
 **What changed:**
@@ -260,18 +218,7 @@ AI knowledge: Your architecture, integration patterns, domain logic
 - Security practices standardized
 - Deployment procedures defined
 
----
-
 ### Week 24: Organizational Memory
-
-```
-Universal standards: 100 documents  
-Project standards: 100+ documents
-Query quality: Exceptional (comprehensive knowledge base)
-AI knowledge: Complete understanding of your codebase conventions
-New AI agents: Onboard instantly via queries
-```
-
 **Output:** AI delivers expert-level work automatically. New team members (human or AI) ramp up by querying standards.
 
 **What changed:**

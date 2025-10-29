@@ -38,7 +38,7 @@
 
 .approachTitle {
   margin: 0 0 0.75rem 0;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
 }
@@ -49,7 +49,7 @@
   background: var(--ifm-color-emphasis-200);
   border: 2px solid var(--ifm-color-emphasis-400);
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   font-weight: 600;
   color: var(--ifm-heading-color);
 }
@@ -71,7 +71,7 @@
 
 .sectionTitle {
   margin: 0 0 0.75rem 0;
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   color: var(--ifm-color-emphasis-700);
   text-transform: uppercase;
@@ -93,7 +93,7 @@
 }
 
 .model code {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   color: var(--ifm-heading-color);
   background: transparent;
   padding: 0;
@@ -107,7 +107,7 @@
 
 .list li {
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-font-color-base);
   line-height: 1.5;
 }
@@ -132,7 +132,7 @@
 }
 
 .summaryTitle {
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
   text-align: center;
@@ -162,7 +162,7 @@
 }
 
 .summaryLabel {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   font-weight: 700;
   color: var(--ifm-color-emphasis-700);
   text-transform: uppercase;
@@ -170,7 +170,7 @@
 }
 
 .summaryFormula {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-family: var(--ifm-font-family-monospace);
   color: var(--ifm-heading-color);
   font-weight: 600;
@@ -178,7 +178,7 @@
 
 .summaryTagline {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   color: var(--honeyhive-orange);
   padding: 1rem;
   background: var(--ifm-background-color);
@@ -235,11 +235,11 @@
   }
 
   .approachTitle {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 
   .badge {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
     padding: 0.3rem 0.6rem;
   }
 
@@ -248,15 +248,15 @@
   }
 
   .sectionTitle {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .model code {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 
   .list li {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .summary {
@@ -264,15 +264,15 @@
   }
 
   .summaryTitle {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 
   .summaryFormula {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 
   .summaryTagline {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 }
 

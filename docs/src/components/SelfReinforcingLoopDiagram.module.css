@@ -48,20 +48,20 @@
   flex-shrink: 0;
   background: var(--ifm-color-primary);
   color: white;
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 700;
   border-radius: 50%;
 }
 
 .stepText {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   color: var(--ifm-heading-color);
   line-height: 1.4;
 }
 
 /* Arrow */
 .arrow {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   color: var(--ifm-color-primary);
   line-height: 1;
   margin: 0.25rem 0;
@@ -90,13 +90,13 @@
   flex-shrink: 0;
   background: var(--ifm-color-success);
   color: white;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   border-radius: 50%;
 }
 
 .resultText {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 700;
   color: var(--ifm-color-success-darkest);
 }
@@ -110,13 +110,13 @@
 }
 
 .loopArrow {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--ifm-color-primary-dark);
   line-height: 1;
 }
 
 .loopLabel {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   font-weight: 600;
   color: var(--ifm-color-emphasis-700);
   font-style: italic;
@@ -131,7 +131,7 @@
 }
 
 .whyTitle {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.75rem;
@@ -144,7 +144,7 @@
 }
 
 .whyList li {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   line-height: 1.6;
   color: var(--ifm-color-emphasis-800);
   margin-bottom: 0.5rem;
@@ -207,15 +207,15 @@
   .resultIcon {
     width: 24px;
     height: 24px;
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   }
 
   .stepText {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 
   .resultText {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .whyBox {
@@ -223,7 +223,7 @@
   }
 
   .whyList li {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 }
 

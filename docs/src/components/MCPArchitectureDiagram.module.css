@@ -20,14 +20,14 @@
 }
 
 .boxTitle {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.25rem;
 }
 
 .boxSubtitle {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   color: var(--ifm-color-emphasis-700);
 }
 
@@ -40,13 +40,13 @@
 }
 
 .connectorLabel {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   font-weight: 600;
   color: var(--ifm-color-primary);
 }
 
 .arrow {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   color: var(--ifm-color-primary);
   line-height: 1;
 }
@@ -64,7 +64,7 @@
 }
 
 .serverTitle {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   text-align: center;
@@ -80,7 +80,7 @@
 }
 
 .registryTitle {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.5rem;
@@ -94,7 +94,7 @@
 }
 
 .tool {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   color: var(--ifm-color-emphasis-800);
   font-family: var(--ifm-font-family-monospace);
 }
@@ -114,7 +114,7 @@
 }
 
 .engineTitle {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.5rem;
@@ -128,7 +128,7 @@
 }
 
 .feature {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   color: var(--ifm-color-emphasis-700);
 }
 
@@ -148,14 +148,14 @@
 }
 
 .storageTitle {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.5rem;
 }
 
 .storagePath {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   color: var(--ifm-color-emphasis-700);
   font-family: var(--ifm-font-family-monospace);
   margin-bottom: 0.15rem;
@@ -202,13 +202,13 @@
 
   .boxTitle,
   .serverTitle {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 
   .registryTitle,
   .engineTitle,
   .storageTitle {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 }
 

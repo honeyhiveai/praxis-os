@@ -26,7 +26,7 @@
 }
 
 .scenarioHeader {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   text-align: center;
   padding: 0.5rem;
@@ -49,14 +49,14 @@
 }
 
 .decisionLabel {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   font-weight: 700;
   color: var(--ifm-color-emphasis-700);
   margin-bottom: 0.35rem;
 }
 
 .decisionText {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 2vw, 0.85rem);
   color: var(--ifm-heading-color);
   font-style: italic;
 }
@@ -70,14 +70,14 @@
 }
 
 .contextLabel {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   font-weight: 700;
   color: var(--ifm-color-emphasis-700);
   margin-bottom: 0.35rem;
 }
 
 .contextText {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   color: var(--ifm-color-emphasis-800);
   margin-bottom: 0.25rem;
 }
@@ -105,13 +105,13 @@
 }
 
 .probLabel {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   color: var(--ifm-color-emphasis-700);
   flex: 1;
 }
 
 .probValue {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   font-family: var(--ifm-font-family-monospace);
@@ -139,14 +139,14 @@
 }
 
 .resultLabel {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   font-weight: 700;
   color: var(--ifm-color-emphasis-700);
   margin-bottom: 0.35rem;
 }
 
 .resultText {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   font-weight: 600;
   color: var(--ifm-heading-color);
 }
@@ -157,7 +157,7 @@
   background: var(--ifm-color-primary-lightest);
   border-left: 4px solid var(--ifm-color-primary);
   border-radius: 4px;
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
   line-height: 1.5;
   color: var(--ifm-color-emphasis-900);
 }
@@ -217,7 +217,7 @@
 
   .insight {
     padding: 0.875rem 1rem;
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 2vw, 0.8rem);
   }
 }
 

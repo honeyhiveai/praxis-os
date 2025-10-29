@@ -5,7 +5,7 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   text-align: center;
@@ -13,7 +13,7 @@
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   color: var(--ifm-color-emphasis-600);
   text-align: center;
   margin-bottom: 2rem;
@@ -35,7 +35,7 @@
 }
 
 .stageIcon {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   width: 3rem;
   height: 3rem;
   display: flex;
@@ -60,7 +60,7 @@
 }
 
 .stageTitle {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.5rem;
@@ -68,7 +68,7 @@
 
 .stageCode {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   line-height: 1.5;
   background: var(--ifm-code-background);
   color: var(--ifm-code-color);
@@ -111,7 +111,7 @@
 }
 
 .insight {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   color: var(--ifm-heading-color);
   text-align: center;
   padding: 1.25rem;
@@ -145,11 +145,11 @@
   }
 
   .title {
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
   }
 
   .subtitle {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 
   .stage {
@@ -157,7 +157,7 @@
   }
 
   .stageIcon {
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
     width: 2.5rem;
     height: 2.5rem;
   }
@@ -167,11 +167,11 @@
   }
 
   .stageTitle {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 
   .stageCode {
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.75rem);
     padding: 0.5rem;
   }
 
@@ -181,7 +181,7 @@
   }
 
   .insight {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
     padding: 1rem;
   }
 }

@@ -36,7 +36,7 @@
 }
 
 .cycleNumber {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 700;
   color: white;
   background: var(--honeyhive-orange);
@@ -51,19 +51,19 @@
 }
 
 .cycleTitle {
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.15rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.25rem;
 }
 
 .cycleSubtitle {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-color-emphasis-600);
 }
 
 .toggleIcon {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
   color: var(--honeyhive-orange);
   margin-left: 1rem;
   transition: transform 0.2s ease;
@@ -87,7 +87,7 @@
 }
 
 .phaseIcon {
-  font-size: 1.75rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
   line-height: 1;
   flex-shrink: 0;
 }
@@ -98,7 +98,7 @@
 }
 
 .phaseTitle {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
   margin-bottom: 0.5rem;
@@ -106,7 +106,7 @@
 
 .code {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   line-height: 1.5;
   background: var(--ifm-code-background);
   color: var(--ifm-code-color);
@@ -150,17 +150,17 @@
   }
 
   .cycleNumber {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
     padding: 0.2rem 0.5rem;
     margin-right: 0.75rem;
   }
 
   .cycleTitle {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 
   .cycleSubtitle {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 
   .cycleContent {
@@ -174,11 +174,11 @@
   }
 
   .phaseIcon {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
   }
 
   .code {
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.75rem);
     padding: 0.5rem;
   }
 }

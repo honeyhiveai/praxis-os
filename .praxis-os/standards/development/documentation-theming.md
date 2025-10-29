@@ -1,6 +1,6 @@
 # Documentation Theming Standards
 
-**Keywords for search**: Docusaurus theming, CSS variables, light dark mode, theme compatibility, ifm variables, documentation styling, responsive design, theme testing, color variables, spacing variables
+**Keywords for search**: Docusaurus theming, CSS variables, light dark mode, theme compatibility, ifm variables, documentation styling, responsive design, fluid typography, clamp font sizes, viewport units vw, theme testing, color variables, spacing variables
 
 ---
 
@@ -251,6 +251,94 @@ border-radius: 12px;  /* Extra large */
 - `768px` - Tablet
 - `480px` - Mobile
 
+### Fluid Typography (Modern Responsive Pattern)
+
+**Critical principle:** Use `clamp()` for font sizes to scale smoothly with viewport width. This provides better responsive behavior than fixed sizes or media queries.
+
+**Pattern:**
+```css
+font-size: clamp(min, preferred, max);
+```
+
+- **`min`**: Minimum size (small viewports) - use `rem`
+- **`preferred`**: Fluid size that scales - use `vw` units
+- **`max`**: Maximum size (large viewports) - use `rem`
+
+✅ **Correct - fluid typography:**
+```css
+.heading {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  /* Scales from 1.5rem (mobile) to 2.5rem (desktop) at 4% of viewport width */
+}
+
+.bodyText {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  /* Scales from 0.875rem (small) to 1.125rem (large) */
+}
+
+.label {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  /* Small text that scales proportionally */
+}
+```
+
+❌ **Incorrect - fixed px font sizes:**
+```css
+.heading {
+  font-size: 24px; /* Doesn't scale with viewport */
+}
+
+.bodyText {
+  font-size: 16px; /* Fixed size, poor mobile UX */
+}
+```
+
+**Spacing can also be fluid:**
+```css
+.container {
+  gap: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+```
+
+**Flex item sizing tip:**
+```css
+.flexItem {
+  flex: 1;
+  min-width: 0; /* CRITICAL: Allows flex items to shrink below content size */
+}
+```
+
+**Why fluid typography matters:**
+- ✅ Smooth scaling across all viewport sizes (no jumps)
+- ✅ Fewer media queries needed
+- ✅ Better UX on tablets and intermediate sizes
+- ✅ Text always fits cards/containers
+- ✅ Modern, professional responsive behavior
+
+**Common fluid patterns for components:**
+```css
+/* Card title */
+.cardTitle {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+}
+
+/* Icon size */
+.icon {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Badge/pill text */
+.badge {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+/* Responsive gap */
+.grid {
+  gap: clamp(1rem, 3vw, 2rem);
+}
+```
+
 ---
 
 ## Checklist
@@ -262,6 +350,9 @@ border-radius: 12px;  /* Extra large */
 - [ ] No hardcoded pixel values for spacing (use `rem`)
 - [ ] Using semantic variables (`--ifm-color-emphasis-*` not random colors)
 - [ ] Responsive design considered (flexbox/grid, media queries)
+- [ ] **Font sizes use `clamp()` for fluid typography** (not fixed `px` or `rem`)
+- [ ] Spacing uses fluid units where appropriate (`clamp()` for gaps/padding)
+- [ ] Flex items have `min-width: 0` to allow proper shrinking
 
 **After writing CSS:**
 
@@ -464,24 +555,52 @@ border-radius: 12px;  /* Extra large */
 
 **Fix:** Use CSS variables.
 
+### ❌ Fixed Font Sizes (Not Responsive)
+
+```css
+.cardTitle {
+  font-size: 18px;  /* Fixed size, doesn't scale with viewport */
+}
+
+.badge {
+  font-size: 14px;  /* Same size on all devices */
+}
+```
+
+**Problem:** 
+- Doesn't scale with viewport width
+- Poor UX on mobile (too large) or large displays (too small)
+- Text may overflow containers on narrow viewports
+
+**Fix:** Use fluid typography with `clamp()`:
+```css
+.cardTitle {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  /* Scales smoothly from 0.875rem (mobile) to 1.125rem (desktop) */
+}
+
+.badge {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  /* Smaller text scales proportionally */
+}
+```
+
 ### ❌ Pixel-Based Spacing
 
 ```css
 .container {
   padding: 24px;
   margin: 16px;
-  font-size: 14px;
 }
 ```
 
 **Problem:** Doesn't respect user font size preferences, not accessible.
 
-**Fix:** Use `rem` units:
+**Fix:** Use `rem` units (or `clamp()` for fluid spacing):
 ```css
 .container {
-  padding: 1.5rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
   margin: 1rem;
-  font-size: 0.875rem;
 }
 ```
 
@@ -663,7 +782,7 @@ border-radius: 12px;  /* Extra large */
 - Test theme compatibility across all components
 - Update examples with new patterns
 
-**Last reviewed:** 2025-10-13
+**Last reviewed:** 2025-10-29
 
 ---
 

@@ -21,7 +21,7 @@
   background: var(--ifm-background-color);
   border-left: 3px solid var(--honeyhive-orange);
   border-radius: 4px;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   color: var(--ifm-heading-color);
   text-align: center;
   line-height: 1.5;
@@ -39,7 +39,7 @@
 }
 
 .arrow {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   color: var(--honeyhive-orange);
   font-weight: bold;
 }
@@ -56,13 +56,13 @@
 }
 
 .conditionLabel {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
 }
 
 .conditionAction {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-heading-color);
   padding-left: 1rem;
   font-family: var(--ifm-font-family-monospace);
@@ -89,7 +89,7 @@
 
   .step {
     padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
   }
 
   .conditional {
@@ -98,11 +98,11 @@
 
   .conditionLabel,
   .conditionAction {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
   }
 
   .arrow {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
   }
 }
 

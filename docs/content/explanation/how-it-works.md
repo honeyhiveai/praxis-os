@@ -157,7 +157,8 @@ import DiscoveryComparison from '@site/src/components/DiscoveryComparison';
 
 Standards are written with **multiple query angles** to maximize discoverability:
 
-:::tip Query Hooks Example
+**Query Hooks Example:**
+
 **❓ Questions This Answers:**
 1. "How do I handle race conditions?"
 2. "What are concurrency best practices?"
@@ -166,9 +167,9 @@ Standards are written with **multiple query angles** to maximize discoverability
 5. "How to test concurrent code?"
 
 **Keywords for search:** race conditions, concurrency, deadlocks, shared state, mutex, goroutines, async
-:::
 
-:::tip TL;DR Section Example
+**TL;DR Section Example:**
+
 **🚨 Race Conditions Quick Reference**
 
 **Critical:** Always query before implementing
@@ -179,7 +180,6 @@ Standards are written with **multiple query angles** to maximize discoverability
 4. Document locking strategy
 
 **Keywords:** race conditions, concurrency, shared state
-:::
 
 **Why This Works:**
 - High keyword density → Returns in top 3 results
@@ -195,7 +195,8 @@ Each chunk includes:
 - **Relevance score**: For ranking (cosine similarity)
 - **Token count**: For context management
 
-:::info Metadata Structure Example
+**Metadata Structure Example:**
+
 ```json
 {
   "content": "Query standards before implementing...",
@@ -205,7 +206,6 @@ Each chunk includes:
   "tokens": 156
 }
 ```
-:::
 
 ---
 
@@ -244,11 +244,9 @@ import SeparationComparison from '@site/src/components/SeparationComparison';
 
 Agents learn to query multiple times from different angles:
 
-:::note Multi-Query Pattern
 **Query 1 - General concept:** `search_standards("error handling best practices")`  
 **Query 2 - Specific concern:** `search_standards("error handling network timeouts")`  
 **Query 3 - Testing angle:** `search_standards("how to test error handling")`
-:::
 
 **Why:** Each query reinforces querying behavior, creating thorough investigation patterns.
 
@@ -256,12 +254,10 @@ Agents learn to query multiple times from different angles:
 
 Agents learn to check standards before making assumptions:
 
-:::note Verification Pattern
 **Instead of guessing** → Query standards first  
 **Query confirms** → Implement based on verified pattern  
 **Query includes reminder** → "Always verify patterns before implementing"  
 **Next time** → Agent more likely to query first
-:::
 
 **Why:** Behavioral reminders in query results create self-reinforcing verification habits.
 
@@ -269,11 +265,9 @@ Agents learn to check standards before making assumptions:
 
 Agents learn to approach problems from multiple perspectives:
 
-:::note Multi-Angle Query Pattern
 **Functional angle:** `search_standards("user authentication implementation")`  
 **Security angle:** `search_standards("authentication security best practices")`  
 **Testing angle:** `search_standards("testing authentication flows")`
-:::
 
 **Why:** Standards teach "consider multiple angles," which prompts more queries, which reinforces the pattern.
 
@@ -281,7 +275,6 @@ Agents learn to approach problems from multiple perspectives:
 
 Agents learn that systematic approaches (query → implement → test) succeed more reliably than quick shortcuts:
 
-:::note Pattern Evolution
 **❌ Inherited human pattern: Act quickly**  
 → Skip querying  
 → Implement based on probability  
@@ -293,7 +286,6 @@ Agents learn that systematic approaches (query → implement → test) succeed m
 → Implement verified pattern  
 → Success rate 6x higher  
 → Reinforces systematic approach
-:::
 
 **Why:** Each query retrieves "be systematic" message, counteracting inherited efficiency pressure.
 

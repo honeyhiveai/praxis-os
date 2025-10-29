@@ -160,22 +160,9 @@ read_file(".praxis-os/specs/2025-01-15-authentication-system/specs.md")
 
 ### The Accumulation Effect
 
-```
-Week 1: 0 specs
-→ No historical context
+import SpecsProgression from '@site/src/components/SpecsProgression';
 
-Month 1: 3 specs (auth, API design, database schema)
-→ Major decisions documented
-
-Month 3: 10 specs (core features documented)
-→ Architecture rationale preserved
-
-Month 6: 20 specs (most features have specs)
-→ Comprehensive decision history
-
-Year 1: 40+ specs
-→ Complete project evolution documented
-```
+<SpecsProgression />
 
 ### What Compounds
 
@@ -206,39 +193,29 @@ Year 1: 40+ specs
 ### Use Cases for Spec Reading
 
 **1. Understanding Historical Decisions**
-```
-Question: "Why did we implement it this way?"
-Action: Read the spec for that feature
-Result: Understand rationale and trade-offs
-```
+- **Question:** "Why did we implement it this way?"
+- **Action:** Read the spec for that feature
+- **Result:** Understand rationale and trade-offs
 
 **2. Onboarding to Complex Features**
-```
-Situation: Working on authentication for first time
-Action: Read authentication spec
-Result: Understand architecture before touching code
-```
+- **Situation:** Working on authentication for first time
+- **Action:** Read authentication spec
+- **Result:** Understand architecture before touching code
 
 **3. Refactoring Decisions**
-```
-Concern: "Should we refactor this?"
-Action: Read original spec to understand requirements
-Result: Make informed decision based on original intent
-```
+- **Concern:** "Should we refactor this?"
+- **Action:** Read original spec to understand requirements
+- **Result:** Make informed decision based on original intent
 
 **4. Debugging Architectural Issues**
-```
-Problem: System behavior unclear
-Action: Read specs to understand intended design
-Result: Identify if bug or misunderstood architecture
-```
+- **Problem:** System behavior unclear
+- **Action:** Read specs to understand intended design
+- **Result:** Identify if bug or misunderstood architecture
 
 **5. Planning Related Features**
-```
-Task: Build feature related to existing system
-Action: Read related specs to understand integration points
-Result: Consistent with existing architecture
-```
+- **Task:** Build feature related to existing system
+- **Action:** Read related specs to understand integration points
+- **Result:** Consistent with existing architecture
 
 ---
 

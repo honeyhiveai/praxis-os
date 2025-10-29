@@ -34,7 +34,7 @@
 }
 
 .approachBadge {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -63,7 +63,7 @@
 }
 
 .timelineLabel {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
   padding-bottom: 0.5rem;
@@ -78,7 +78,7 @@
 }
 
 .step {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-heading-color);
   line-height: 1.5;
   padding: 0.25rem 0;
@@ -131,7 +131,7 @@
   }
 
   .approachBadge {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
     padding: 0.4rem 0.75rem;
   }
 
@@ -140,11 +140,11 @@
   }
 
   .timelineLabel {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .step {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 }
 

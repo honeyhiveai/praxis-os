@@ -24,7 +24,7 @@
 }
 
 .arrow {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   color: var(--ifm-color-emphasis-600);
   margin: 0.25rem 0;
 }
@@ -40,7 +40,7 @@
 }
 
 .decisionLabel {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   color: var(--ifm-color-warning-dark);
 }
 
@@ -64,7 +64,7 @@
 
 .branchLabel {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   color: var(--ifm-color-emphasis-700);
 }
 
@@ -94,7 +94,7 @@
 
 .resultDetails {
   margin-top: 0.5rem;
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   font-weight: 400;
   text-align: left;
   line-height: 1.6;

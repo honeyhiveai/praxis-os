@@ -51,6 +51,7 @@ const sidebars: SidebarsConfig = {
         'explanation/knowledge-compounding',
         'explanation/standards-knowledge-compounding',
         'explanation/specs-knowledge-compounding',
+        'explanation/economics',
       ],
     },
     

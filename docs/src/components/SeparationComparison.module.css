@@ -40,7 +40,7 @@
 }
 
 .scenarioBadge {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -75,7 +75,7 @@
 }
 
 .structureLabel {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   font-family: var(--ifm-font-family-monospace);
@@ -102,20 +102,20 @@
 }
 
 .arrow {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--honeyhive-orange);
   font-weight: bold;
   flex-shrink: 0;
 }
 
 .flowText {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-heading-color);
   line-height: 1.4;
 }
 
 .insight {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   color: var(--ifm-heading-color);
   text-align: center;
   padding: 1.25rem;
@@ -181,7 +181,7 @@
   }
 
   .scenarioBadge {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
     padding: 0.4rem 0.75rem;
   }
 
@@ -194,15 +194,15 @@
   }
 
   .structureLabel {
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
   }
 
   .flowText {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .insight {
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
     padding: 1rem;
   }
 }

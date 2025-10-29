@@ -45,12 +45,12 @@
 }
 
 .fileIcon {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 .fileName {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 600;
   color: var(--ifm-heading-color);
   word-break: break-all;
@@ -58,13 +58,13 @@
 
 .fileDescription {
   padding: 0.75rem 1.25rem;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-color-emphasis-700);
   font-style: italic;
 }
 
 .arrow {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--honeyhive-orange);
   font-weight: bold;
 }
@@ -75,7 +75,7 @@
   background: var(--ifm-background-color);
   border-left: 3px solid var(--honeyhive-orange);
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-heading-color);
   text-align: center;
 }
@@ -112,21 +112,21 @@
   }
 
   .fileName {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 
   .fileDescription {
     padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .processStep {
     padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .arrow {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
   }
 }
 

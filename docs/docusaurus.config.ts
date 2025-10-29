@@ -15,7 +15,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://honeyhiveai.github.io/praxis-os/img/praxis-os-homepage-preview.png',
+        content: 'https://honeyhiveai.github.io/praxis-os/img/praxis-os-social-card.png',
       },
     },
     {
@@ -105,7 +105,7 @@ const config: Config = {
       theme: {light: 'base', dark: 'dark'},
     },
     // Social card for link previews
-    image: 'img/praxis-os-social-card.jpg',
+    image: 'img/praxis-os-social-card.png',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,

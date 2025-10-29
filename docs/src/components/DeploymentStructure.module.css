@@ -24,11 +24,11 @@
 }
 
 .dirIcon {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 .dirName {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
 }
@@ -70,19 +70,19 @@
 }
 
 .fileIcon {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
   flex-shrink: 0;
 }
 
 .itemName {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-heading-color);
   font-weight: 600;
   min-width: 150px;
 }
 
 .itemDesc {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   color: var(--ifm-color-emphasis-700);
   font-style: italic;
 }
@@ -119,11 +119,11 @@
   }
 
   .dirIcon {
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
   }
 
   .dirName {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 
   .children {
@@ -146,16 +146,16 @@
   }
 
   .fileIcon {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 
   .itemName {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
     min-width: auto;
   }
 
   .itemDesc {
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.75rem);
     padding-left: 0;
   }
 }

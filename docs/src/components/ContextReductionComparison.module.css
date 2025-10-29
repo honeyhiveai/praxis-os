@@ -34,7 +34,7 @@
 }
 
 .badge {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -71,7 +71,7 @@
 }
 
 .metricLabel {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   font-weight: 700;
   color: var(--ifm-color-emphasis-700);
   text-transform: uppercase;
@@ -79,7 +79,7 @@
 }
 
 .metricValue {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   color: var(--ifm-heading-color);
   font-family: var(--ifm-font-family-monospace);
   font-weight: 600;
@@ -127,7 +127,7 @@
   }
 
   .badge {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
     padding: 0.4rem 0.75rem;
   }
 
@@ -136,11 +136,11 @@
   }
 
   .metricLabel {
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.75rem);
   }
 
   .metricValue {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 }
 

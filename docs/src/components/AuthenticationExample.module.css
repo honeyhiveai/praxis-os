@@ -8,7 +8,7 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   text-align: center;
@@ -32,7 +32,7 @@
 }
 
 .layerBadge {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   font-weight: 700;
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
@@ -43,7 +43,7 @@
 }
 
 .layerTitle {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
 }
@@ -70,7 +70,7 @@
 }
 
 .flowLabel {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
   text-transform: uppercase;
@@ -78,13 +78,13 @@
 }
 
 .flowText {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--ifm-heading-color);
   line-height: 1.5;
 }
 
 .flowArrow {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   color: var(--honeyhive-orange);
   text-align: center;
   font-weight: bold;
@@ -115,7 +115,7 @@
 }
 
 .phaseTitle {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-bottom: 0.75rem;
@@ -128,7 +128,7 @@
 }
 
 .phaseItem {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   color: var(--ifm-color-emphasis-700);
   font-family: var(--ifm-font-family-monospace);
   line-height: 1.6;
@@ -158,12 +158,12 @@
 }
 
 .command code {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   color: var(--honeyhive-orange);
 }
 
 .precommitTitle {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   font-weight: 700;
   color: var(--ifm-heading-color);
   margin-top: 0.5rem;
@@ -180,7 +180,7 @@
 }
 
 .check {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   color: var(--ifm-color-emphasis-700);
   font-family: var(--ifm-font-family-monospace);
   line-height: 1.6;
@@ -191,7 +191,7 @@
   background: var(--honeyhive-orange-bg);
   border: 2px solid var(--honeyhive-orange-border);
   border-radius: 4px;
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   color: var(--ifm-heading-color);
   text-align: center;
 }
@@ -217,7 +217,7 @@
   }
 
   .title {
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
   }
 
   .layerHeader {
@@ -241,7 +241,7 @@
   .flowText,
   .phaseItem,
   .check {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 }
 

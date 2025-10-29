@@ -1,18 +1,17 @@
-# Agent OS - Ephemeral content (regenerated, not tracked)
-.agent-os/.cache/
-.agent-os/venv/
-.agent-os/mcp_server/__pycache__/
-.agent-os/scripts/__pycache__/
-.agent-os.backup.*
-.agent-os/.upgrade_lock
-.agent-os/.mcp_server_state.json
+# prAxIs OS - Ephemeral content (regenerated, not tracked)
+.praxis-os/.cache/
+.praxis-os/venv/
+.praxis-os/mcp_server/__pycache__/
+.praxis-os/scripts/__pycache__/
+.praxis-os.backup.*
+.praxis-os/.upgrade_lock
+.praxis-os/.mcp_server_state.json
 
-# Agent OS - Working documents (analysis, session notes, temporary files)
-working-docs/
-.agent-os/workspace/
+# prAxIs OS - Working documents (analysis, session notes, temporary files)
+.praxis-os/workspace/
 
-# Agent OS - Everything else is TRACKED as reference example for consumers
-# (.agent-os/ serves as dogfooding example of proper installation)
+# prAxIs OS - Everything else is TRACKED as reference example for consumers
+# (.praxis-os/ serves as dogfooding example of proper installation)
 
 # Python
 __pycache__/

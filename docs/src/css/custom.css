@@ -230,24 +230,82 @@ h1 {
   font-weight: 500;
 }
 
-/* Tables (HoneyHive refined) */
+/* Tables (Clean minimal style with fluid typography) */
 [data-theme='dark'] table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #2d3139;
-  border-radius: 6px;
-  overflow: hidden;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 1.5rem auto;
 }
 
 [data-theme='dark'] th {
-  background-color: #13151a;
-  color: #ffffff;
+  background-color: transparent;
+  color: var(--ifm-heading-color);
   font-weight: 600;
-  border-bottom: 2px solid #ff8c5d;
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  text-align: left;
+  padding: 0.75rem 1rem;
 }
 
-[data-theme='dark'] tr:hover {
-  background-color: rgba(255, 255, 255, 0.03);
+[data-theme='dark'] td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  color: var(--ifm-font-color-base);
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
+  line-height: 1.6;
+}
+
+/* First column (labels) - always left-aligned, slightly bolder */
+[data-theme='dark'] td:first-child,
+[data-theme='dark'] th:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Remove bottom border from last row */
+[data-theme='dark'] tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Light mode tables */
+:root table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 1.5rem auto;
+}
+
+:root th {
+  background-color: transparent;
+  color: var(--ifm-heading-color);
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  text-align: left;
+  padding: 0.75rem 1rem;
+}
+
+:root td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  color: var(--ifm-font-color-base);
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
+  line-height: 1.6;
+}
+
+:root td:first-child,
+:root th:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+:root tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* Mermaid diagrams (HoneyHive orange accents) */

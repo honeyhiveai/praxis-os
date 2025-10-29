@@ -18,7 +18,7 @@
 }
 
 .scenarioTitle {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 700;
   color: var(--honeyhive-orange);
   margin-bottom: 1rem;
@@ -43,13 +43,13 @@
 }
 
 .itemLabel {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   font-weight: 600;
   color: var(--ifm-color-emphasis-600);
 }
 
 .itemValue {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   color: var(--ifm-heading-color);
   font-family: var(--ifm-font-family-monospace);
 }
@@ -65,14 +65,14 @@
 }
 
 .arrow {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
   color: var(--honeyhive-orange);
   font-weight: bold;
   flex-shrink: 0;
 }
 
 .resultText {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
   color: var(--ifm-heading-color);
   line-height: 1.4;
 }
@@ -83,7 +83,7 @@
 }
 
 .evolutionArrow {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--honeyhive-orange);
   text-align: center;
   padding: 0.75rem 0;
@@ -91,7 +91,7 @@
 }
 
 .insight {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   color: var(--ifm-heading-color);
   text-align: center;
   padding: 1.25rem;
@@ -129,28 +129,28 @@
   }
 
   .scenarioTitle {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
   }
 
   .itemLabel {
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
   }
 
   .itemValue {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .resultText {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.85rem);
   }
 
   .evolutionArrow {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
     padding: 0.5rem 0;
   }
 
   .insight {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
     padding: 1rem;
   }
 }

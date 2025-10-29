@@ -144,17 +144,15 @@ pytest tests/ --quiet                           # Target: All pass
 
 ### The Compound Effect
 
-:::note Traditional Approach
-Prompt → Response → Manual validation → Iterate until quality  
-**Time:** Variable (2-10 iterations common)  
-**Quality:** Probabilistic (depends on prompt quality)
-:::
+**Traditional Approach:**
+- Prompt → Response → Manual validation → Iterate until quality
+- **Time:** Variable (2-10 iterations common)
+- **Quality:** Probabilistic (depends on prompt quality)
 
-:::tip prAxIs OS Approach
-Prompt → RAG-enhanced response → Workflow execution → Pre-commit validation  
-**Time:** Deterministic (single pass if framework followed)  
-**Quality:** Guaranteed (gates enforce standards)
-:::
+**prAxIs OS Approach:**
+- Prompt → RAG-enhanced response → Workflow execution → Pre-commit validation
+- **Time:** Deterministic (single pass if framework followed)
+- **Quality:** Guaranteed (gates enforce standards)
 
 ### Measuring System Effectiveness
 
@@ -259,12 +257,12 @@ Even validated work is verified because:
 
 ### Combined Result: Deterministic Quality
 
-:::tip Key Insight
+**Key Insight:**
+
 **Traditional:** Good prompt × Probabilistic AI = Variable quality  
 **prAxIs OS:** Any prompt × Three-layer system = Consistent quality
 
 **We don't optimize prompts. We build systems that guarantee outcomes.**
-:::
 
 ---
 
