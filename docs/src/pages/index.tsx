@@ -21,6 +21,7 @@ function HomepageHeader() {
             </p>
             <p className={styles.heroDescription}>
               Transform AI from helpful assistant to velocity-enhancing partner. 
+              <strong>71% fewer messages. 54% lower costs. 44% less rework.</strong>{' '}
               Built with MCP, RAG, and architectural phase gating for production-ready results.
             </p>
             <div className={styles.heroButtons}>
@@ -125,7 +126,7 @@ function KeyFeatures() {
     {
       icon: '🎯',
       title: 'MCP/RAG Architecture',
-      description: '90% context reduction. Semantic search delivers exactly what AI needs, nothing more.',
+      description: '71% fewer messages through behavioral reinforcement. Semantic search delivers just-in-time context that drives query-first behavior.',
       link: '/docs/explanation/architecture',
     },
     {
@@ -197,7 +198,7 @@ function TheJourney() {
     {
       icon: '💡',
       phase: 'Discovery',
-      title: 'Found BuilderMethods prAxIs OS',
+      title: 'Found BuilderMethods Agent OS',
       description: '3-layer doc structure (Standards/Product/Specs)',
       highlight: 'Quality and velocity dramatically improved',
     },
@@ -212,8 +213,8 @@ function TheJourney() {
       icon: '🚀',
       phase: 'Infrastructure Built',
       title: 'MCP + RAG + Workflows + State',
-      description: '90% context reduction, phase gating, persistent sessions',
-      highlight: '50KB → 2-5KB per request',
+      description: 'Query-first behavior, 71% fewer correction cycles, phase gating',
+      highlight: '50KB → 2-5KB per request, 54% cost reduction',
     },
     {
       icon: '📦',
@@ -253,7 +254,7 @@ function TheJourney() {
           <p>
             🙏 <strong>Built on the shoulders of giants:</strong>{' '}
             <a href="https://buildermethods.com/praxis-os" target="_blank" rel="noopener noreferrer" className={styles.journeyLink}>
-              BuilderMethods prAxIs OS
+              BuilderMethods Agent OS
             </a>
             {' '}provided the 3-layer structure and philosophical foundation. 
             We built the infrastructure to scale it.
@@ -265,12 +266,12 @@ function TheJourney() {
             className="button button--secondary button--lg"
             to="https://buildermethods.com/praxis-os"
             target="_blank">
-            Visit Original prAxIs OS →
+            Visit Original Agent OS →
           </Link>
           <Link
             className="button button--primary button--lg"
             to="/docs/tutorials/intro">
-            Explore Enhanced Version →
+            Explore prAxIs OS →
           </Link>
         </div>
       </div>
@@ -281,19 +282,19 @@ function TheJourney() {
 function WhyAgentOS() {
   const benefits = [
     {
-      stat: '90%',
-      label: 'Context Reduction',
-      description: 'RAG delivers 2-5KB targeted chunks vs 50KB files',
+      stat: '71%',
+      label: 'Fewer Messages',
+      description: 'Query-first behavior eliminates correction cycles',
     },
     {
-      stat: '24x',
-      label: 'Better Relevance',
-      description: 'From 4% to 95% relevant content in AI context',
+      stat: '54%',
+      label: 'Cost Reduction',
+      description: 'Even with 59% more expensive model per message',
     },
     {
-      stat: '100%',
-      label: 'Phase Compliance',
-      description: 'Architectural gating prevents workflow bypassing',
+      stat: '44%',
+      label: 'Less Rework',
+      description: 'First-time correctness from just-in-time context',
     },
   ];
 
@@ -318,6 +319,11 @@ function WhyAgentOS() {
         <div className="text--center margin-top--xl">
           <Link
             className="button button--primary button--lg"
+            to="/docs/explanation/economics">
+            See the Full Data Analysis →
+          </Link>
+          <Link
+            className="button button--secondary button--lg margin-left--md"
             to="/docs/explanation/how-it-works">
             Learn How It Works →
           </Link>

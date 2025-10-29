@@ -9,9 +9,9 @@ doc_type: tutorial
 
 ## What is prAxIs OS?
 
-prAxIs OS builds on the foundation of [prAxIs OS by Brian Casel](https://buildermethods.com/praxis-os), addressing key limitations discovered through production use:
+prAxIs OS builds on the foundation of [Agent OS by Brian Casel](https://buildermethods.com/praxis-os), addressing key limitations discovered through production use:
 
-- **90% context reduction** through semantic search (MCP/RAG)
+- **71% fewer messages** through query-first behavior (driven by MCP/RAG)
 - **Architectural phase gating** that enforces workflows in code
 - **Universal + generated standards** that work across any language
 - **Specialized sub-agents** for design validation, concurrency analysis, and more
@@ -79,7 +79,7 @@ Instead of reading entire 50KB files, the MCP server uses semantic search to del
 
 - **Before:** AI reads full file, 4% relevant content, 12,500 tokens
 - **After:** Vector search returns relevant chunks, 95% relevant, 625 tokens
-- **Result:** 24x better relevance, 95% reduction in token usage
+- **Result:** 24x better relevance per query, 71% fewer messages overall, 54% cost reduction
 
 ### Universal Standards
 

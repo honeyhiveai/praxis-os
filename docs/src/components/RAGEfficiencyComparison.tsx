@@ -4,7 +4,7 @@ import styles from './RAGEfficiencyComparison.module.css';
 export default function RAGEfficiencyComparison(): React.ReactElement {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Context Efficiency: The 90% Reduction</div>
+      <div className={styles.title}>Context Efficiency: 90% Per-Query Reduction</div>
       
       <div className={styles.comparison}>
         {/* Option A */}

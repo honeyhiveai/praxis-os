@@ -96,7 +96,7 @@ import RAGDecisionFlowDiagram from '@site/src/components/RAGDecisionFlowDiagram'
 
 ---
 
-## Context Efficiency: The 90% Reduction
+## Context Efficiency: Technical Foundation for Behavioral Change
 
 ### The Traditional Problem
 
@@ -128,6 +128,30 @@ LLM attention degrades as context fills:
 | 90%+ | under 50% | under 40% |
 
 **prAxIs OS Design:** Keep context at 15-25% utilization through targeted retrieval, maintaining 90-95% attention quality throughout long conversations.
+
+### The Real Impact: Behavioral Efficiency
+
+While 90% context reduction per query is real and measurable, the business value comes from how this technical foundation drives behavioral change:
+
+**Technical Efficiency (Per Query):**
+- 50KB → 2-5KB context per query = 90% reduction
+- 4% → 95% relevant content = 24x improvement
+- Maintains 90-95% attention quality
+
+**Behavioral Efficiency (Overall Work):**
+- **71% fewer messages needed** - Query-first behavior eliminates correction cycles
+- **54% lower costs** - Even with 59% more expensive model per message
+- **44% less rework** - First-time correctness from just-in-time context
+
+**The Mechanism:**
+
+RAG doesn't just compress context - it **reinforces query-first behavior**. Every retrieved chunk includes reminders to "query before implementing," creating a self-reinforcing loop that makes AI work smarter, not just with less context.
+
+**Why This Matters:**
+
+Traditional optimization focuses on token compression (marginal gains of 5-15%). prAxIs OS focuses on behavioral improvement (massive gains of 50-70% cost reduction). The 90% context reduction enables the behavioral change, but the behavioral change drives the value.
+
+[See full economic analysis with billing data](./economics)
 
 ---
 

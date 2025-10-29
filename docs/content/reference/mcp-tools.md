@@ -31,7 +31,7 @@ prAxIs OS provides tools for semantic search, workflow execution, and browser au
 
 Semantic search over universal standards, usage guides, and workflows.
 
-**Purpose:** 90% context reduction - find relevant chunks without reading entire files.
+**Purpose:** Find relevant chunks without reading entire files (90% context reduction per query). Drives query-first behavior that reduces overall messages by 71%.
 
 **Parameters:**
 

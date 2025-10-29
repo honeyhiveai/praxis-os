@@ -14,7 +14,7 @@ prAxIs OS's architecture addresses three fundamental challenges in AI-assisted d
 prAxIs OS consists of four integrated systems:
 
 1. **MCP Server** - Model Context Protocol server providing tool discovery and execution
-2. **RAG Engine** - Semantic search over standards with 90% context reduction
+2. **RAG Engine** - Semantic search driving query-first behavior and 71% fewer messages
 3. **Workflow Engine** - Phase-gated execution with architectural enforcement
 4. **Standards System** - Universal patterns with language-specific generation
 
@@ -57,7 +57,7 @@ import MCPArchitectureDiagram from '@site/src/components/MCPArchitectureDiagram'
 
 | Benefit | Limitation |
 |---------|------------|
-| 90% context reduction | Requires indexing (60s first run) |
+| 90% context reduction per query | Requires indexing (60s first run) |
 | Semantic discovery (not keyword-dependent) | Vector search ~50ms overhead |
 | Local embeddings (no API costs) | ~200MB memory footprint |
 | Works offline | Index rebuild needed on content changes |
@@ -513,8 +513,12 @@ import ThreeTierArchitecture from '@site/src/components/ThreeTierArchitecture';
 |--------|--------|-------|-------------|
 | Context per query | 50KB+ | 2-5KB | 90% reduction |
 | Relevant content | 4% | 95% | 24x improvement |
+| Messages needed | Baseline | -71% | Behavioral change |
+| Cost per month | Baseline | -54% | Even with +59% model cost |
 | Success rate | 70% | 92% | 31% improvement |
 | Phase skipping rate | 68% | 0% | 100% elimination |
+
+**Key insight:** Technical efficiency (90% context reduction per query) enables behavioral change (71% fewer messages), which drives cost reduction (54%). See [Economics](./economics) for full analysis.
 
 ---
 

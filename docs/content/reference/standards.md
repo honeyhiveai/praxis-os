@@ -184,10 +184,11 @@ search_standards(
 ```
 
 **Benefits:**
-- 90% context reduction (2-5KB chunks vs 50KB files)
+- 90% context reduction per query (2-5KB chunks vs 50KB files)
 - Only relevant content loaded
 - Maintains attention quality
-- Just-in-time delivery
+- Just-in-time delivery drives query-first behavior
+- Results in 71% fewer messages overall
 
 ---
 
