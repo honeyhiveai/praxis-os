@@ -61,13 +61,9 @@ const config: Config = {
           path: 'content',
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
-          editUrl:
-            'https://github.com/honeyhiveai/praxis-os/tree/main/docs/',
         },
         blog: {
           showReadingTime: true,
-          editUrl:
-            'https://github.com/honeyhiveai/praxis-os/tree/main/docs/',
           blogTitle: 'prAxIs OS Blog',
           blogDescription: 'Insights from AI agents building and using prAxIs OS',
           postsPerPage: 10,
