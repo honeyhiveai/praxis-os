@@ -2,7 +2,7 @@
 
 ## 🚨 TL;DR - Workspace Organization Quick Reference
 
-**Keywords for search**: workspace directory, temporary files, ephemeral content, where to put design docs, Phase 1 artifacts, uncommitted work, working documents, design-doc.md, draft documents, WIP files, temporary analysis, scratch notes, workspace/, .praxis-os/workspace, where do temporary files go, ephemeral file organization, git pollution prevention
+**Keywords for search**: workspace directory, temporary files, ephemeral content, where to put design docs, Phase 1 artifacts, uncommitted work, working documents, design-doc.md, draft documents, WIP files, temporary analysis, scratch notes, temporary screenshots, pos_browser output, verification images, workspace/, .praxis-os/workspace, where do temporary files go, ephemeral file organization, git pollution prevention
 
 **Core Principle:** If a document is not ready to commit, it belongs in `.praxis-os/workspace/`. Workspace provides a designated location for all temporary development artifacts, preventing git pollution and maintaining clear separation between ephemeral and permanent content.
 
@@ -12,22 +12,24 @@
 3. **scratch/** - Experiments, session notes, and truly temporary content
 
 **Workspace Usage Checklist:**
-- [ ] Phase 1 design docs go in `workspace/design/`
-- [ ] Research/analysis goes in `workspace/analysis/`
-- [ ] Temporary notes go in `workspace/scratch/`
+- [ ] Phase 1 design docs go in `.praxis-os/workspace/design/`
+- [ ] Research/analysis goes in `.praxis-os/workspace/analysis/`
+- [ ] Temporary notes go in `.praxis-os/workspace/scratch/`
 - [ ] Files named with date prefix: `YYYY-MM-DD-topic.md`
 - [ ] Files deleted or archived after promotion to formal spec
-- [ ] Workspace/ is .gitignored (never committed)
+- [ ] `.praxis-os/workspace/` is .gitignored (never committed)
 
 **Common Anti-Patterns:**
 - ❌ Creating design docs in `.praxis-os/specs/` root
 - ❌ Committing workspace content to git
 - ❌ Skipping Phase 1 workspace and going directly to formal spec
 - ❌ Leaving workspace files after formal spec created
+- ❌ Saving temporary screenshots to `docs/static/img/` instead of `workspace/scratch/`
 
 **When to Query This Standard:**
 - Creating design document → `search_standards("where to put design documents")`
 - Starting Phase 1 → `search_standards("workspace organization Phase 1")`
+- Taking screenshots → `search_standards("where do temporary screenshots go")`
 - Cleaning up files → `search_standards("workspace lifecycle ephemeral")`
 - Checking git safety → `search_standards("temporary files gitignore workspace")`
 
@@ -98,9 +100,9 @@ Define rules for managing temporary development artifacts in `.praxis-os/workspa
 **For AI Agents:**
 
 ✅ **DO:**
-- Create Phase 1 design docs in `workspace/design/`
-- Use `workspace/analysis/` for research documents
-- Use `workspace/scratch/` for experiments and notes
+- Create Phase 1 design docs in `.praxis-os/workspace/design/`
+- Use `.praxis-os/workspace/analysis/` for research documents
+- Use `.praxis-os/workspace/scratch/` for experiments and notes
 - Name files with dates: `YYYY-MM-DD-topic.md`
 - Include "DRAFT" or "WIP" in document headers
 - Clean up after promoting to formal spec
@@ -137,7 +139,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-
 
 ```
 1. EXPLORATION (Phase 1)
-   └─ Create: workspace/design/2025-10-21-feature.md
+   └─ Create: .praxis-os/workspace/design/2025-10-21-feature.md
    └─ Iterate with user through conversation
    └─ Refine approach based on feedback
 
@@ -151,7 +153,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-
    └─ Create structured spec files (srd.md, specs.md, etc.)
 
 4. CLEANUP
-   └─ Delete workspace/design/2025-10-21-feature.md
+   └─ Delete .praxis-os/workspace/design/2025-10-21-feature.md
    └─ OR move to specs/2025-10-21-feature/supporting-docs/
    └─ Purpose served, formal spec is source of truth
 ```
@@ -171,17 +173,18 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-
 - User feedback iterations
 
 **analysis/** - Research and investigation
-- Comparison documents (e.g., "amplifier vs praxis-os")
+- Comparison documents (e.g., "amplifier vs agent-os")
 - Technical research
 - Performance analysis
 - Security investigations
 - Feasibility studies
 
-**scratch/** - Temporary notes and experiments
+**scratch/** - Temporary notes, experiments, and verification assets
 - Session notes
 - Quick experiments
 - WIP documents
 - Brainstorming notes
+- Temporary screenshots (pos_browser verification, UI checks)
 - Anything truly temporary
 
 ---
@@ -196,7 +199,7 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-
 - [ ] Added DRAFT/WIP header if appropriate
 
 **During Phase 1 (Conversational Design):**
-- [ ] Working in `workspace/design/` file
+- [ ] Working in `.praxis-os/workspace/design/` file
 - [ ] Updating as conversation evolves
 - [ ] NOT creating formal spec until user triggers
 - [ ] Incorporating user feedback iteratively
@@ -278,7 +281,30 @@ rm .praxis-os/workspace/design/2025-10-21-authentication-system.md
 # Delete scratch file
 ```
 
-### Example 4: File Naming Convention
+### Example 4: Temporary Screenshots
+
+**Scenario:** Using pos_browser to verify component layout during development
+
+**Correct Approach:**
+```bash
+# Take verification screenshots
+pos_browser(screenshot_path=".praxis-os/workspace/scratch/component-before.png")
+pos_browser(screenshot_path=".praxis-os/workspace/scratch/component-after.png")
+
+# Compare, make decision, document findings
+
+# After verification complete:
+# Delete temporary screenshots
+rm .praxis-os/workspace/scratch/component-*.png
+```
+
+**Wrong Approach:**
+```bash
+❌ pos_browser(screenshot_path="docs/static/img/temp-screenshot.png")
+# Pollutes static assets with temporary verification images
+```
+
+### Example 5: File Naming Convention
 
 **Correct:**
 ```bash
@@ -426,37 +452,39 @@ git commit -m "Add authentication system spec"
 
 ## 🔍 Questions This Answers
 
-- **Where do I put temporary design documents?** → `workspace/design/`
-- **Where do Phase 1 design explorations go?** → `workspace/design/`
+- **Where do I put temporary design documents?** → `.praxis-os/workspace/design/`
+- **Where do Phase 1 design explorations go?** → `.praxis-os/workspace/design/`
 - **What do I do with design docs after creating formal spec?** → Delete or archive
-- **Can I commit workspace files?** → No, workspace/ is .gitignored
-- **Where do research and analysis documents go?** → `workspace/analysis/`
-- **Where do quick experiments and notes go?** → `workspace/scratch/`
+- **Can I commit workspace files?** → No, `.praxis-os/workspace/` is .gitignored
+- **Where do research and analysis documents go?** → `.praxis-os/workspace/analysis/`
+- **Where do quick experiments and notes go?** → `.praxis-os/workspace/scratch/`
+- **Where do temporary screenshots go?** → `.praxis-os/workspace/scratch/` (pos_browser verification, UI checks)
+- **Where do permanent documentation images go?** → `docs/static/img/` (social cards, logos, committed assets)
 - **How do I name workspace files?** → `YYYY-MM-DD-topic.md`
 - **When do I clean up workspace files?** → After promoting to formal spec
-- **What's the difference between workspace and specs?** → workspace = ephemeral, specs = permanent
-- **How do I prevent git pollution with temporary files?** → Use workspace/ (it's .gitignored)
+- **What's the difference between workspace and specs?** → `.praxis-os/workspace/` = ephemeral, specs = permanent
+- **How do I prevent git pollution with temporary files?** → Use `.praxis-os/workspace/` (it's .gitignored)
 
 ---
 
 ## 🔗 Integration with prAxIs OS Development Process
 
 **Phase 1: Conversational Design**
-- ✅ Create `workspace/design/YYYY-MM-DD-feature.md`
+- ✅ Create `.praxis-os/workspace/design/YYYY-MM-DD-feature.md`
 - ✅ Iterate with user
 - ✅ Wait for "create spec" trigger (NOT auto-advancing)
 
 **Phase 2: Structured Spec**
 - ✅ Create `.praxis-os/specs/YYYY-MM-DD-feature/`
-- ✅ Extract insights from `workspace/design/` file
-- ✅ Delete `workspace/design/` file (or archive in supporting-docs/)
+- ✅ Extract insights from `.praxis-os/workspace/design/` file
+- ✅ Delete `.praxis-os/workspace/design/` file (or archive in supporting-docs/)
 
 **Phase 3: Structured Implementation**
 - ✅ Work from formal spec only
 - ✅ No workspace files needed
 
 **Related Standards:**
-- `praxis-os-development-process.md` - Three-phase development workflow
+- `agent-os-development-process.md` - Three-phase development workflow
 - `gitignore-requirements.md` - Git safety and ephemeral content handling
 - `rag-content-authoring.md` - Content optimization for discovery
 
@@ -484,7 +512,7 @@ ls .praxis-os/specs/ | grep feature-name
 
 ### During Conversational Design (Phase 1)
 
-- Work in `workspace/design/` file
+- Work in `.praxis-os/workspace/design/` file
 - Update as conversation evolves
 - Don't create formal spec until user triggers
 - Incorporate feedback iteratively
@@ -498,14 +526,14 @@ ls .praxis-os/specs/ | grep feature-name
 
 ### For Ad-Hoc Analysis
 
-- Create in `workspace/analysis/`
+- Create in `.praxis-os/workspace/analysis/`
 - Use for research, investigation, comparison
 - Delete when insights incorporated elsewhere
 
 ### For Quick Experiments
 
-- Create in `workspace/scratch/`
-- Use for temporary tests and notes
+- Create in `.praxis-os/workspace/scratch/`
+- Use for temporary tests, notes, and verification screenshots
 - Delete when no longer needed
 
 ---

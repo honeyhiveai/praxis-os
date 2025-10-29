@@ -2,7 +2,7 @@
 
 ## 🚨 TL;DR - Workspace Organization Quick Reference
 
-**Keywords for search**: workspace directory, temporary files, ephemeral content, where to put design docs, Phase 1 artifacts, uncommitted work, working documents, design-doc.md, draft documents, WIP files, temporary analysis, scratch notes, workspace/, .praxis-os/workspace, where do temporary files go, ephemeral file organization, git pollution prevention
+**Keywords for search**: workspace directory, temporary files, ephemeral content, where to put design docs, Phase 1 artifacts, uncommitted work, working documents, design-doc.md, draft documents, WIP files, temporary analysis, scratch notes, temporary screenshots, pos_browser output, verification images, workspace/, .praxis-os/workspace, where do temporary files go, ephemeral file organization, git pollution prevention
 
 **Core Principle:** If a document is not ready to commit, it belongs in `.praxis-os/workspace/`. Workspace provides a designated location for all temporary development artifacts, preventing git pollution and maintaining clear separation between ephemeral and permanent content.
 
@@ -24,10 +24,12 @@
 - ❌ Committing workspace content to git
 - ❌ Skipping Phase 1 workspace and going directly to formal spec
 - ❌ Leaving workspace files after formal spec created
+- ❌ Saving temporary screenshots to `docs/static/img/` instead of `workspace/scratch/`
 
 **When to Query This Standard:**
 - Creating design document → `search_standards("where to put design documents")`
 - Starting Phase 1 → `search_standards("workspace organization Phase 1")`
+- Taking screenshots → `search_standards("where do temporary screenshots go")`
 - Cleaning up files → `search_standards("workspace lifecycle ephemeral")`
 - Checking git safety → `search_standards("temporary files gitignore workspace")`
 
@@ -177,11 +179,12 @@ Creating temporary design docs, analysis, or WIP files anywhere except `.praxis-
 - Security investigations
 - Feasibility studies
 
-**scratch/** - Temporary notes and experiments
+**scratch/** - Temporary notes, experiments, and verification assets
 - Session notes
 - Quick experiments
 - WIP documents
 - Brainstorming notes
+- Temporary screenshots (pos_browser verification, UI checks)
 - Anything truly temporary
 
 ---
@@ -278,7 +281,30 @@ rm .praxis-os/workspace/design/2025-10-21-authentication-system.md
 # Delete scratch file
 ```
 
-### Example 4: File Naming Convention
+### Example 4: Temporary Screenshots
+
+**Scenario:** Using pos_browser to verify component layout during development
+
+**Correct Approach:**
+```bash
+# Take verification screenshots
+pos_browser(screenshot_path=".praxis-os/workspace/scratch/component-before.png")
+pos_browser(screenshot_path=".praxis-os/workspace/scratch/component-after.png")
+
+# Compare, make decision, document findings
+
+# After verification complete:
+# Delete temporary screenshots
+rm .praxis-os/workspace/scratch/component-*.png
+```
+
+**Wrong Approach:**
+```bash
+❌ pos_browser(screenshot_path="docs/static/img/temp-screenshot.png")
+# Pollutes static assets with temporary verification images
+```
+
+### Example 5: File Naming Convention
 
 **Correct:**
 ```bash
@@ -432,6 +458,8 @@ git commit -m "Add authentication system spec"
 - **Can I commit workspace files?** → No, `.praxis-os/workspace/` is .gitignored
 - **Where do research and analysis documents go?** → `.praxis-os/workspace/analysis/`
 - **Where do quick experiments and notes go?** → `.praxis-os/workspace/scratch/`
+- **Where do temporary screenshots go?** → `.praxis-os/workspace/scratch/` (pos_browser verification, UI checks)
+- **Where do permanent documentation images go?** → `docs/static/img/` (social cards, logos, committed assets)
 - **How do I name workspace files?** → `YYYY-MM-DD-topic.md`
 - **When do I clean up workspace files?** → After promoting to formal spec
 - **What's the difference between workspace and specs?** → `.praxis-os/workspace/` = ephemeral, specs = permanent
@@ -505,7 +533,7 @@ ls .praxis-os/specs/ | grep feature-name
 ### For Quick Experiments
 
 - Create in `.praxis-os/workspace/scratch/`
-- Use for temporary tests and notes
+- Use for temporary tests, notes, and verification screenshots
 - Delete when no longer needed
 
 ---
