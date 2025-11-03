@@ -1,433 +1,427 @@
-# Dogfooding Architecture - Design Document
+# Dogfooding Model - Development in Consumer Environment
 
-**Date:** 2025-10-06  
-**Status:** Design Approved, Implementation Pending  
-**Critical:** This document defines how prAxIs OS development validates installation/updates
+**Purpose:** How to develop prAxIs OS by using it exactly like consumers do
 
----
+**Audience:** prAxIs OS framework developers
 
-## 🎯 Core Principle
+**Status:** Active - Canonical development workflow
 
-**"Use prAxIs OS exactly like consumers do"**
+**Keywords:** local-first development, installation testing, edit-test loop, copy up to skeleton, deployed directory structure, praxis-os installation paths, skeleton source versus installed target, hot reload cycle, reinstall validation purpose, server implementation file location, task definition file placement, helper script storage, end-user pathing, rapid iteration mechanics, where files live during development
 
-If we use special symlinks or shortcuts, we can't validate:
-- Installation process
-- Update process  
-- Real-world consumer experience
-- Path resolution bugs
-- File copy/distribution issues
+**NOT covered here (see `meta-development-patterns.md`):** documentation decisions, error diagnosis mindset, API design choices, information architecture (what goes where in docs)
 
 ---
 
-## ❌ Current Architecture (WRONG)
+## 🎯 TL;DR - Local-First Development Rule
 
-### What We Have Now
+**"Develop EVERYTHING in `.praxis-os/` first, copy up to skeleton when shipping"**
+
+This standard covers ITERATION MECHANICS: where files live during development, how to test changes, when to promote to source.
+
+- ✅ Edit in `.praxis-os/` (installed environment, real paths)
+- ✅ Validate locally (hot reload, semantic queries, task execution)
+- ✅ Promote to skeleton (`universal/`, `scripts/`, `mcp_server/`) when shipping to users
+- ✅ Full reinstall = QA checkpoint (not iteration step)
+
+**No exceptions.** This validates installation process, real paths, and end-user experience.
+
+**Note:** For documentation philosophy (what to write where, error diagnosis, API exposure), see `meta-development-patterns.md`.
+
+---
+
+## ❌ The Problem - Source-Directory Editing
+
+**Anti-pattern:** Modifying source directories (`universal/`, `scripts/`, `mcp_server/`)
+
+**Why this fails:**
+
+1. **Not Runtime Environment**
+   - Users execute from `.praxis-os/` installed paths
+   - You're modifying distribution source
+   - Path conflicts, task execution issues hidden
+
+2. **Can't Validate Install Process**
+   - Never test installation procedure during iteration
+   - Copy issues only found when users install
+
+3. **Different Testing Cycle**
+   - You: Modify source → changes work instantly (edit-in-place)
+   - Users: Must reinstall to see changes
+   - Different experience = missed defects
+
+4. **Task Execution Paths Wrong**
+   - Tasks execute from `.praxis-os/workflows/` in runtime environment
+   - Editing in `universal/workflows/` doesn't test actual execution paths
+
+**Result:** Framework authors have fundamentally different experience than downstream users.
+
+---
+
+## ✅ The Solution - Installed-Location Editing
+
+**Canonical architecture:**
 
 ```
 praxis-os/
-├── universal/                    # Framework source
-│   └── standards/
-│       └── ai-safety/
-│           └── production-code-checklist.md
+├── scripts/                      # SOURCE (distribution origin)
+├── universal/                    # SOURCE (distribution origin)
+├── mcp_server/                   # SOURCE (distribution origin)
 │
-└── .praxis-os/                    # Local install (SPECIAL CASE)
-    └── standards/
-        └── universal/  → ../../universal/standards/  # ❌ SYMLINK
-```
-
-### Problems
-
-1. **Not Real Dogfooding**
-   - Consumers get COPIED files
-   - We have symlinks (instant updates)
-   - We can't catch copy/path bugs
-
-2. **Can't Validate Installation**
-   - Never test real installation flow
-   - Installation bugs only found by consumers
-
-3. **Can't Validate Updates**
-   - Our "updates" are instant (symlink)
-   - Consumers must re-install or pull
-   - We don't test update process
-
-4. **Confusing Mental Model**
-   - Edit `universal/` → instant change via symlink
-   - Consumers: Edit source → must re-install → change
-   - Different workflow = missed bugs
-
----
-
-## ✅ Correct Architecture (TRUE DOGFOODING)
-
-### What We Should Have
-
-```
-praxis-os/
-├── universal/                    # Framework SOURCE (for distribution)
-│   ├── standards/                # Edit these to change framework
-│   ├── usage/
-│   └── workflows/
-│
-├── .praxis-os/                    # LOCAL INSTALL (like any consumer)
-│   ├── standards/                # REAL COPIED FILES (no symlinks)
-│   │   ├── universal/            # ✅ Copied from ../universal/standards/
-│   │   ├── ai-safety/            # ✅ Copied framework content
-│   │   └── development/          # Project-specific additions
-│   ├── usage/                    # ✅ Copied from ../universal/usage/
-│   ├── workflows/                # ✅ Copied from ../universal/workflows/
+├── .praxis-os/                   # INSTALLED (runtime environment)
+│   ├── scripts/                  # ← EDIT HERE for published scripts
+│   ├── standards/
+│   │   ├── universal/            # ← EDIT HERE for shipped docs
+│   │   └── development/          # ← EDIT HERE for internal docs
+│   ├── workflows/                # ← EDIT HERE for task definitions
+│   ├── mcp_server/               # ← EDIT HERE for server modules
 │   ├── venv/
-│   ├── .cache/
-│   └── config.json
+│   └── .cache/
 │
-└── mcp_server/                   # MCP server SOURCE (for distribution)
-    └── praxis_os_rag.py
+└── .praxis-os/bin/               # INTERNAL TOOLS (never distributed)
 ```
+
+**The rule:** Edit in `.praxis-os/` (runtime paths), promote to source when distributing.
 
 ### Benefits
 
-1. ✅ **True Dogfooding** - Exact same setup as consumers
-2. ✅ **Validates Installation** - We run real installation process
-3. ✅ **Validates Updates** - We test update workflow
-4. ✅ **Catches Path Bugs** - File copy/path resolution tested
-5. ✅ **Clear Mental Model** - Edit source → re-install → change (same as consumers)
+1. ✅ **Actual Runtime Environment** - Exact paths, execution context as users experience
+2. ✅ **Rapid Testing** - No reinstall for validation (hot reload, service restart)
+3. ✅ **Validates Paths** - Task execution, imports, file resolution tested
+4. ✅ **Promotion Validates Install** - Reinstall = QA checkpoint
+5. ✅ **Same Mental Model** - Your testing cycle = user experience
 
 ---
 
-## 🔄 Development Workflows
+## 🔄 Development Workflows - All Start Local
 
-### Workflow 1: Edit Framework Source
+### Workflow 1: MCP Server Development
 
-**Use Case:** Changing universal standards, usage docs, workflows
+**Use Case:** Adding features, fixing bugs in MCP server
 
 **Steps:**
 ```bash
-# 1. Edit framework source
-vim universal/standards/ai-safety/production-code-checklist.md
+# 1. Dev in local install (consumer environment)
+vim .praxis-os/mcp_server/rag_engine.py
 
-# 2. Re-install locally (like a consumer updating)
-python scripts/install_agent_os.py --force
-# OR
-python .praxis-os/scripts/build_rag_index.py --force
+# 2. Restart MCP to test
+# Cursor → Cmd+Shift+P → "MCP: Restart Server"
 
-# 3. Verify in Cursor
-# Query MCP: "What is the production code checklist?"
-# Should return updated content
+# 3. Test with queries/tools
+# Changes visible immediately in consumer environment
 
-# 4. Commit source changes
-git add universal/standards/ai-safety/production-code-checklist.md
-git commit -m "docs(standards): update production code checklist"
+# 4. When ready to ship, copy up
+cp .praxis-os/mcp_server/rag_engine.py mcp_server/
+
+# 5. Reinstall = QA validation
+python scripts/install-praxis-os.py --force
+# Verify copied file works correctly via installation
 ```
 
-**Why this is GOOD:**
-- ✅ Tests installation script
-- ✅ Tests index rebuild
-- ✅ Tests path resolution
-- ✅ Same as consumers do
+**Why installed-location editing:**
+- ✅ Test in exact runtime paths
+- ✅ Rapid iteration (restart, not reinstall)
+- ✅ Validate import paths, file resolution
 
 ---
 
-### Workflow 2: Edit Project-Specific Standards
+### Workflow 2: Consumer Script Development
 
-**Use Case:** Python-specific guidance for this project only
+**Use Case:** Helper scripts for multi-agent setup, utilities
 
 **Steps:**
 ```bash
-# 1. Edit project-specific file directly
-vim .praxis-os/standards/development/python-concurrency.md
+# 1. Dev in local install
+vim .praxis-os/scripts/new-helper-tool.py
+chmod +x .praxis-os/scripts/new-helper-tool.py
+
+# 2. Test immediately
+python .praxis-os/scripts/new-helper-tool.py
+
+# 3. Iterate until working
+# No reinstall needed - direct execution
+
+# 4. When ready to ship, copy up
+cp .praxis-os/scripts/new-helper-tool.py scripts/
+
+# 5. Reinstall = QA validation
+python scripts/install-praxis-os.py --force
+ls -la .praxis-os/scripts/new-helper-tool.py
+```
+
+**Why local-first:**
+- ✅ Test from installed location
+- ✅ Fast iteration cycle
+- ✅ Validate consumer experience
+
+---
+
+### Workflow 3: Workflow Development
+
+**Use Case:** Creating new workflows for consumers
+
+**Steps:**
+```bash
+# 1. Dev in local install (where workflows execute)
+mkdir -p .praxis-os/workflows/my-new-workflow
+vim .praxis-os/workflows/my-new-workflow/metadata.json
+vim .praxis-os/workflows/my-new-workflow/phase-1.md
+
+# 2. Test workflow execution
+# Use pos_workflow tool to run from .praxis-os/workflows/
+
+# 3. Iterate on phases, gates, evidence
+# Workflows execute from .praxis-os/ - you're testing real paths
+
+# 4. When ready to ship, copy up
+cp -r .praxis-os/workflows/my-new-workflow \
+      universal/workflows/
+
+# 5. Reinstall = QA validation
+python scripts/install-praxis-os.py --force
+# Verify workflow still works after installation
+```
+
+**Why local-first:**
+- ✅ Workflows execute from `.praxis-os/workflows/` in consumer env
+- ✅ Test actual execution paths, not source paths
+- ✅ Catch path/reference bugs early
+
+---
+
+### Workflow 4: Universal Standards Development
+
+**Use Case:** Creating standards that will ship to consumers
+
+**Steps:**
+```bash
+# 1. Dev in local install (where standards are queried from)
+vim .praxis-os/standards/universal/testing/new-pattern.md
 
 # 2. File watcher auto-rebuilds index
-# (or manually: python .praxis-os/scripts/build_rag_index.py)
+# Or manually: python .praxis-os/scripts/build_rag_index.py
 
-# 3. No re-install needed (not framework source)
+# 3. Query to validate
+# Search: "new testing pattern"
+# Verify content is discoverable and useful
+
+# 4. When ready to ship, copy up
+cp .praxis-os/standards/universal/testing/new-pattern.md \
+   universal/standards/testing/
+
+# 5. Reinstall = QA validation
+python scripts/install-praxis-os.py --force
+# Verify standard is still queryable after installation
 ```
 
-**Why this is GOOD:**
-- These files are NOT distributed
-- Safe to edit in place
-- Same as consumers adding their own standards
+**Why local-first:**
+- ✅ Test RAG indexing from installed location
+- ✅ Validate search discoverability
+- ✅ Fast query iteration
 
 ---
 
-### Workflow 3: Edit MCP Server Code
+### Workflow 5: Local-Only Standards Development
 
-**Use Case:** Changing MCP server functionality
+**Use Case:** Project-specific guidance (never ships)
 
 **Steps:**
 ```bash
-# 1. Edit source
-vim mcp_server/praxis_os_rag.py
+# 1. Dev in local install
+vim .praxis-os/standards/development/local-dev-scripts.md
 
-# 2. Restart MCP server
-# Cursor → Settings → MCP → Restart agent-os-rag
+# 2. File watcher auto-rebuilds index
 
-# 3. Test changes
-# Use Cursor AI with updated MCP tools
+# 3. Query to validate
+# Search: "dev scripts organization"
+
+# 4. NEVER copy up (local-only)
+# Commit directly to repo
+git add .praxis-os/standards/development/local-dev-scripts.md
+git commit -m "Add local dev scripts standard"
 ```
 
-**Note:** MCP server code is in source tree, not copied to `.praxis-os/`
+**Why local-only:**
+- ✅ Framework dev knowledge
+- ✅ Not relevant to consumers
+- ✅ Committed but never shipped
 
 ---
 
-## 📦 Installation Process
+## 📋 Copy-Up Decision Tree
 
-### Initial Installation
+**When you're ready to ship from `.praxis-os/` to skeleton:**
 
-**What consumers do (and we should do):**
-
-```bash
-# Clone framework (consumers: install from package)
-git clone https://github.com/honeyhiveai/praxis-os.git
-cd praxis-os
-
-# Run installation script
-python scripts/install_agent_os.py
-
-# Installation creates:
-# - .praxis-os/ directory
-# - Copies universal/ → .praxis-os/standards/universal/
-# - Copies universal/usage/ → .praxis-os/usage/
-# - Copies universal/workflows/ → .praxis-os/workflows/
-# - Creates .praxis-os/venv/
-# - Builds RAG index
-# - Creates .praxis-os/config.json
 ```
-
-**We test this EVERY time we re-install after editing source.**
-
----
-
-### Update Process
-
-**What consumers do (and we should test):**
-
-```bash
-# Option 1: Pull new version and re-install
-git pull origin main
-python scripts/install_agent_os.py --force
-
-# Option 2: Package update (for distributed version)
-pip install --upgrade praxis-os
-agent-os update
-```
-
-**We validate this by:**
-1. Editing `universal/` source
-2. Running re-install
-3. Verifying `.praxis-os/` updated correctly
-4. Checking MCP finds new content
+Is this ready to ship to consumers?
+├─ YES
+│  └─ Copy up to skeleton:
+│     ├─ .praxis-os/mcp_server/*.py      → mcp_server/
+│     ├─ .praxis-os/scripts/*.py         → scripts/
+│     ├─ .praxis-os/workflows/my-wf/     → universal/workflows/
+│     └─ .praxis-os/standards/universal/ → universal/standards/
+│
+└─ NO (dev-only or not ready)
+   └─ Keep in .praxis-os/:
+      ├─ .praxis-os/standards/development/ (never ship)
+      ├─ .praxis-os/bin/ (dev tools, never ship)
+      └─ .praxis-os/* (work in progress)
 
 ---
 
 ## 🔍 File Watching Behavior
 
-### Current Behavior (WRONG with symlinks)
+**The file watcher:**
+- ✅ Watches `.praxis-os/standards/` (installed/development location)
+- ❌ Does NOT watch skeleton directories (`universal/`, `scripts/`, `mcp_server/`)
+
+**This is correct:**
 
 ```python
-# File watcher watches .praxis-os/standards/
+# File watcher configuration
 observer.schedule(watcher, ".praxis-os/standards", recursive=True)
 
-# Because of symlink:
-# Edit universal/standards/foo.md
-# → Visible as .praxis-os/standards/universal/foo.md (symlink)
-# → File watcher triggers rebuild
-# → Appears to work (but special case!)
+# Scenario 1: Edit in .praxis-os/ (dogfooding workflow)
+vim .praxis-os/standards/universal/testing/new-pattern.md
+# → File watcher detects change
+# → Auto-rebuilds index
+# → Immediately queryable
+# ✅ Fast iteration!
+
+# Scenario 2: Edit skeleton (anti-pattern)
+vim universal/standards/testing/new-pattern.md
+# → File watcher does NOT detect (different directory)
+# → Index not rebuilt
+# → NOT queryable until reinstall
+# ❌ Slow iteration, breaks dogfooding
+
+# Scenario 3: Copy-up for shipping
+cp .praxis-os/standards/universal/testing/new-pattern.md \
+   universal/standards/testing/
+# → Skeleton updated for distribution
+# → Reinstall validates installation process
 ```
 
-### Correct Behavior (NO symlinks)
+**Key Insight:** Develop in `.praxis-os/` for fast iteration with file watcher.
 
-```python
-# File watcher watches .praxis-os/standards/
-observer.schedule(watcher, ".praxis-os/standards", recursive=True)
+---
 
-# With real files:
-# Edit universal/standards/foo.md
-# → NOT visible in .praxis-os/ (different file)
-# → File watcher does NOT trigger
-# → Must re-install to update .praxis-os/
-# → This is CORRECT (same as consumers)
+## 🚨 Critical Distinctions - Skeleton vs Local Install
+
+### Directory Purpose Matrix
+
+| Location | Purpose | Dev Location | Shipping Destination |
+|----------|---------|--------------|---------------------|
+| `.praxis-os/mcp_server/` | **DEV HERE** | Fast iteration | → `mcp_server/` |
+| `.praxis-os/scripts/` | **DEV HERE** | Fast iteration | → `scripts/` |
+| `.praxis-os/workflows/` | **DEV HERE** | Real execution paths | → `universal/workflows/` |
+| `.praxis-os/standards/universal/` | **DEV HERE** | RAG testing | → `universal/standards/` |
+| `.praxis-os/standards/development/` | **DEV HERE** | Local-only (never ship) | (committed, not shipped) |
+| `.praxis-os/bin/` | **DEV HERE** | Dev tools only | (committed, not shipped) |
+| `mcp_server/` | Skeleton | Copy-up target | Shipped to consumers |
+| `scripts/` | Skeleton | Copy-up target | Shipped to consumers |
+| `universal/` | Skeleton | Copy-up target | Shipped to consumers |
+
+**The Rule:**
+1. **ALWAYS dev in `.praxis-os/`** (consumer environment)
+2. **NEVER dev in skeleton** (`universal/`, `scripts/`, `mcp_server/`)
+3. **Copy up when ready to ship** (QA via reinstall)
+4. **Reinstall = validation** (not iteration)
+
+---
+
+## 🎓 Reinstall Purpose - QA Validation
+
+**Reinstall is NOT for iteration:**
+- ❌ Don't reinstall to test every change
+- ❌ Don't use reinstall as part of dev loop
+
+**Reinstall IS for validation:**
+- ✅ After copy-up, verify installation works
+- ✅ Periodic QA check (weekly dogfooding validation)
+- ✅ Before releasing new version
+- ✅ Testing installation script changes
+
+**Fast iteration cycle:**
+```bash
+# ✅ CORRECT: Dev in .praxis-os/, test immediately
+vim .praxis-os/mcp_server/rag_engine.py
+# Restart MCP → test → iterate
+
+# ❌ WRONG: Dev in skeleton, reinstall each time
+vim mcp_server/rag_engine.py
+python scripts/install-praxis-os.py --force  # Slow!
+# Restart MCP → test → reinstall again → slow!
 ```
 
-**Key Insight:**
-- File watcher ONLY watches `.praxis-os/` (installed files)
-- Does NOT watch `universal/` (framework source)
-- Editing source requires re-install (correct behavior)
+**When to reinstall:**
+1. After copy-up (QA the installation)
+2. Weekly validation (ensure dogfooding still works)
+3. Before git commit (final check)
+4. When installation script changes
 
 ---
 
-## 🚨 Critical Distinctions
+## 📊 Workflow Comparison
 
-### Framework Source vs. Installed Files
-
-| Location | Purpose | Who Edits | Distribution |
-|----------|---------|-----------|--------------|
-| `universal/` | Framework source | Framework developers | YES (copied to consumers) |
-| `.praxis-os/standards/universal/` | Installed framework | NO ONE (managed by install) | NO (consumer-local) |
-| `.praxis-os/standards/development/` | Project-specific | Project developers | NO (project-local) |
-| `mcp_server/` | MCP server source | Framework developers | YES (imported by install) |
-
-**Rules:**
-1. **NEVER edit `.praxis-os/standards/universal/`** (it's managed by install script)
-2. **ALWAYS edit `universal/`** (source of truth)
-3. **ALWAYS re-install** after editing framework source
-4. **Project-specific files** can be edited directly in `.praxis-os/standards/development/`
-
----
-
-## 🔧 Implementation Tasks
-
-### Phase 1: Remove Symlinks
-
-1. **Backup current `.praxis-os/`**
-   ```bash
-   mv .praxis-os .praxis-os.backup
-   ```
-
-2. **Remove from `.gitignore`** temporarily
-   ```bash
-   # We need to track that .praxis-os/ structure exists
-   # But not the content (venv, cache)
-   ```
-
-3. **Update `.gitignore`**
-   ```
-   # .praxis-os/ content that should be ignored
-   .praxis-os/venv/
-   .praxis-os/.cache/
-   .praxis-os/standards/universal/  # Installed, not source
-   .praxis-os/standards/ai-safety/  # Installed, not source
-   .praxis-os/usage/                # Installed, not source
-   .praxis-os/workflows/            # Installed, not source
-   
-   # Track these (project-specific)
-   !.praxis-os/standards/development/
-   !.praxis-os/config.json
-   ```
-
----
-
-### Phase 2: Update Installation Script
-
-**File:** `scripts/install_agent_os.py`
-
-**Add:**
-```python
-def install_framework_content(target_dir: Path, source_dir: Path):
-    """
-    Copy framework content to target directory.
-    
-    This is how consumers install framework files.
-    We use the EXACT same process for dogfooding.
-    """
-    import shutil
-    
-    # Remove existing (for updates)
-    if target_dir.exists():
-        shutil.rmtree(target_dir)
-    
-    # Copy source to target (deep copy, NOT symlink)
-    shutil.copytree(source_dir, target_dir, symlinks=False)
-    
-    logger.info(f"✅ Copied {source_dir} → {target_dir}")
-
-# During installation:
-install_framework_content(
-    target_dir=Path(".praxis-os/standards/universal"),
-    source_dir=Path("universal/standards")
-)
-
-install_framework_content(
-    target_dir=Path(".praxis-os/usage"),
-    source_dir=Path("universal/usage")
-)
-
-install_framework_content(
-    target_dir=Path(".praxis-os/workflows"),
-    source_dir=Path("universal/workflows")
-)
-```
-
----
-
-### Phase 3: Update Documentation
-
-1. **Update `ARCHITECTURE.md`** with correct dogfooding model
-2. **Update `CONTRIBUTING.md`** with edit/re-install workflow
-3. **Add to `README.md`** about dogfooding approach
-4. **Update `.cursorrules`** to query MCP about architecture before changes
-
----
-
-### Phase 4: Validate
-
-1. **Clean install:**
-   ```bash
-   rm -rf .praxis-os
-   python scripts/install_agent_os.py
-   ```
-
-2. **Test framework edit:**
-   ```bash
-   echo "# TEST" >> universal/standards/test.md
-   python scripts/install_agent_os.py --force
-   # Verify: .praxis-os/standards/universal/test.md exists
-   ```
-
-3. **Test MCP search:**
-   ```
-   Query: "test standard"
-   # Should find the new test.md
-   ```
-
-4. **Test file watcher:**
-   ```bash
-   # Edit .praxis-os/standards/development/python-testing.md
-   # File watcher should trigger rebuild
-   # Query MCP to verify
-   ```
-
----
-
-## 📊 Comparison Matrix
-
-| Scenario | Current (Symlinks) | Correct (Copies) |
-|----------|-------------------|------------------|
-| Edit `universal/standards/foo.md` | Instant change (symlink) | Must re-install |
-| File watcher triggers | YES (via symlink) | NO (different file) |
-| Tests installation | NO (special case) | YES (real process) |
-| Tests updates | NO (instant) | YES (re-install) |
-| Same as consumers | NO (symlinks) | YES (copies) |
+| Scenario | Skeleton-First (Anti-pattern) | Local-First (Dogfooding) |
+|----------|-------------------------------|--------------------------|
+| Edit location | `universal/standards/foo.md` | `.praxis-os/standards/universal/foo.md` |
+| File watcher | NO (wrong directory) | YES (instant rebuild) |
+| Testing cycle | Edit → reinstall → test | Edit → test (instant) |
+| Validates paths | NO (source paths) | YES (consumer paths) |
+| Iteration speed | Slow (reinstall each time) | Fast (direct testing) |
+| Consumer environment | ❌ Different | ✅ Identical |
 | Dogfooding validity | ❌ Fake | ✅ Real |
 
 ---
 
-## 🎯 Success Criteria
+## 🔍 Questions This Answers
 
-After implementation:
+**"Where should I develop MCP server code?"**
+→ `.praxis-os/mcp_server/` (consumer environment, fast iteration)
 
-- [ ] No symlinks in `.praxis-os/`
-- [ ] All files in `.praxis-os/` are real copies
-- [ ] Editing `universal/` requires re-install to see changes
-- [ ] File watcher only triggers on `.praxis-os/` edits (not `universal/`)
-- [ ] Installation script tested on EVERY framework edit
-- [ ] Same workflow as consumers
-- [ ] Documentation explains edit → re-install → verify cycle
-- [ ] `.gitignore` properly separates source (tracked) vs installed (ignored)
+**"Where should I create a new workflow?"**
+→ `.praxis-os/workflows/` (real execution paths, test where it runs)
+
+**"Where should I write a new universal standard?"**
+→ `.praxis-os/standards/universal/` (RAG testing, query validation)
+
+**"When do I copy up to skeleton?"**
+→ When ready to ship to consumers (validated locally first)
+
+**"Why not develop in `universal/` or `scripts/`?"**
+→ Wrong paths, slow iteration, doesn't test consumer environment
+
+**"What's the purpose of reinstall?"**
+→ QA validation of installation, not iteration loop
+
+**"How do I know if it's ready to ship?"**
+→ Tested in `.praxis-os/`, works correctly, validated with dogfooding
+
+**"What's the iteration cycle?"**
+→ Edit `.praxis-os/` → test → iterate (no reinstall until copy-up)
+
+**"Where do local-only standards go?"**
+→ `.praxis-os/standards/development/` (never copy up, committed but not shipped)
+
+**"What about dev tools like validators?"**
+→ `.praxis-os/bin/` (dev-only, never shipped)
 
 ---
 
-## 🚀 Next Steps
+## Related Standards
 
-1. **Review this design** with team
-2. **Approve architecture change**
-3. **Implement Phase 1-4** (remove symlinks, update install, docs, validate)
-4. **Update `.cursorrules`** to enforce this model
-5. **Create "Contributing to Framework" guide** explaining the workflow
+**Development workflow (this document's domain):**
+- `local-dev-scripts.md` - Where dev-only scripts live (bin/ vs scripts/)
+- `multi-agent-architecture.md` - Secondary agent setup
+
+**Standards creation mindset (different domain):**
+- `meta-development-patterns.md` - Where to document knowledge, bug attribution, abstraction boundaries
+
+**Clear separation:**
+- **This doc answers:** "Where do I edit this file?" "How do I iterate?" "When do I copy up?"
+- **Meta-dev answers:** "Should I document this in universal/?" "Is this a bug?" "Should consumers see this?"
 
 ---
 
-**Related Documents:**
-- `ARCHITECTURE.md` - Current architecture (needs update)
-- `CONTRIBUTING.md` - How to contribute (needs update)
-- `scripts/install_agent_os.py` - Installation script (needs update)
-- `.cursorrules` - AI behavior rules (needs update)
+**Remember:** Develop where consumers use it (`.praxis-os/`), copy up when shipping (skeleton). Reinstall = QA validation, not iteration.

@@ -366,7 +366,7 @@ After updating, verify:
 
 - [ ] Server restarts successfully
 - [ ] No import errors in logs
-- [ ] Can query standards: `search_standards("test")`
+- [ ] Can query standards: `pos_search(content_type="standards", query="test")`
 - [ ] Can start workflows: `start_workflow(...)`
 - [ ] New tools appear (if applicable)
 - [ ] Existing workflows still work
@@ -643,7 +643,7 @@ Content: Synced from universal/
 EOF
 
 echo "✅ Update complete!"
-echo "💡 Verify by testing: search_standards('test')"
+echo "💡 Verify by testing: pos_search('test')"
 echo "📋 Check logs: Cursor > Settings > MCP Servers > agent-os-rag > View Logs"
 ```
 
@@ -655,33 +655,33 @@ This guide is most valuable when:
 
 1. **Updating MCP Server Software**
    - Situation: Need to update Python server code
-   - Query: `search_standards("how to update MCP server")`
+   - Query: `pos_search(content_type="standards", query="how to update MCP server")`
 
 2. **Server Restart Questions**
    - Situation: Unsure if restart needed after update
-   - Query: `search_standards("MCP server restart required")`
+   - Query: `pos_search(content_type="standards", query="MCP server restart required")`
 
 3. **Dependency Updates**
    - Situation: Need to update server dependencies
-   - Query: `search_standards("update MCP server dependencies")`
+   - Query: `pos_search(content_type="standards", query="update MCP server dependencies")`
 
 4. **Breaking Changes**
    - Situation: Checking for breaking changes in update
-   - Query: `search_standards("MCP server breaking changes")`
+   - Query: `pos_search(content_type="standards", query="MCP server breaking changes")`
 
 5. **Rollback Scenarios**
    - Situation: Need to roll back failed server update
-   - Query: `search_standards("rollback MCP server update")`
+   - Query: `pos_search(content_type="standards", query="rollback MCP server update")`
 
 ### Query by Use Case
 
 | Use Case | Example Query |
 |----------|---------------|
-| Server update | `search_standards("update MCP server")` |
-| Restart required | `search_standards("MCP server restart")` |
-| Dependencies | `search_standards("MCP server dependencies")` |
-| Testing updates | `search_standards("test MCP server update")` |
-| Rollback | `search_standards("rollback MCP server")` |
+| Server update | `pos_search(content_type="standards", query="update MCP server")` |
+| Restart required | `pos_search(content_type="standards", query="MCP server restart")` |
+| Dependencies | `pos_search(content_type="standards", query="MCP server dependencies")` |
+| Testing updates | `pos_search(content_type="standards", query="test MCP server update")` |
+| Rollback | `pos_search(content_type="standards", query="rollback MCP server")` |
 
 ---
 
@@ -689,23 +689,23 @@ This guide is most valuable when:
 
 **Update Standards:**
 - `standards/installation/update-procedures.md` - Content update procedures
-  → `search_standards("prAxIs OS update standards")`
+  → `pos_search(content_type="standards", query="prAxIs OS update standards")`
 
 **Workflows:**
 - `workflows/praxis_os_upgrade_v1/` - Automated upgrade workflow (handles both content and server)
-  → `search_standards("agent OS upgrade workflow")`
+  → `pos_search(content_type="standards", query="agent OS upgrade workflow")`
 
 **MCP Documentation:**
 - `usage/mcp-usage-guide.md` - How to use MCP tools
-  → `search_standards("MCP tools guide")`
+  → `pos_search(content_type="standards", query="MCP tools guide")`
 - `mcp_server/CHANGELOG.md` - Server version history
 
 **Query workflow:**
-1. **Before Update**: `search_standards("how to update MCP server")` → Learn process
+1. **Before Update**: `pos_search(content_type="standards", query="how to update MCP server")` → Learn process
 2. **Check Changes**: Read CHANGELOG.md for breaking changes
 3. **Execute**: Use `praxis_os_upgrade_v1` workflow (recommended) or manual method
 4. **Validate**: Test MCP tools after restart
-5. **Troubleshoot**: `search_standards("MCP server update issues")` if needed
+5. **Troubleshoot**: `pos_search(content_type="standards", query="MCP server update issues")` if needed
 
 ---
 
@@ -737,7 +737,7 @@ cp -r /path/to/praxis-os/mcp_server /path/to/your-project/.praxis-os/
 pkill -f "mcp.*agent-os-rag"  # Cursor will auto-restart
 
 # Verify
-search_standards("test")  # Should work without errors
+pos_search(content_type="standards", query="test")  # Should work without errors
 ```
 
 ---

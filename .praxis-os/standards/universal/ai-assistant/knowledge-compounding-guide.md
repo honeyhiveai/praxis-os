@@ -19,7 +19,7 @@ Knowledge density increases → Quality compounds automatically
 ```
 
 **Pattern: Search → Implement → Document**
-1. Query before implementing: `search_standards("how to [task]")`
+1. Query before implementing: `pos_search(content_type="standards", query="how to [task]")`
 2. Implement following patterns
 3. Discover new project-specific pattern
 4. Document learning: `create_standard("project/[domain]", "[pattern-name]", content)`
@@ -89,7 +89,7 @@ This standard defines how to capture learnings as project-specific standards, en
 
 ✅ Agent 2 (Week 3):
 - Needs JWT pattern
-- Queries: search_standards("JWT refresh pattern")
+- Queries: pos_search(content_type="standards", query="JWT refresh pattern")
 - RAG returns Agent 1's documentation
 - Uses consistent pattern
 - No reinvention
@@ -114,7 +114,7 @@ This standard defines how to capture learnings as project-specific standards, en
 **1. Query Before Implementing (Discovery)**
 ```
 Before writing code:
-search_standards("how to [implement task in domain]")
+pos_search(content_type="standards", query="how to [implement task in domain]")
 
 Purpose: Learn from existing patterns
 Benefit: Don't reinvent, follow conventions
@@ -224,8 +224,8 @@ create_standard(
 
 ## Related Patterns
 
-- Related standard 1: `search_standards("[query]")`
-- Related standard 2: `search_standards("[query]")`
+- Related standard 1: `pos_search(content_type="standards", query="[query]")`
+- Related standard 2: `pos_search(content_type="standards", query="[query]")`
 ```
 
 ---
@@ -448,7 +448,7 @@ Agent: [Solves complex integration problem]
 Agent: "This integration pattern is reusable"
 Agent: create_standard("project/integrations", "api-retry-pattern", "...")
 Learning: Captured and discoverable
-Future agents: search_standards("API retry") → Find and reuse
+Future agents: pos_search(content_type="standards", query="API retry") → Find and reuse
 ```
 
 ### Anti-Pattern 2: Documentation Dump
@@ -552,19 +552,19 @@ Week 24:
 
 **Query workflow for knowledge compounding:**
 
-1. **Before implementing** → `search_standards("how to [task]")`
-2. **Learn pattern creation** → `search_standards("how to create standards")`
-3. **RAG optimization** → `search_standards("RAG content authoring")`
+1. **Before implementing** → `pos_search(content_type="standards", query="how to [task]")`
+2. **Learn pattern creation** → `pos_search(content_type="standards", query="how to create standards")`
+3. **RAG optimization** → `pos_search(content_type="standards", query="RAG content authoring")`
 4. **After implementing** → Use this guide to document
 
 **By Category:**
 
 **Standards Creation:**
-- `standards/ai-assistant/standards-creation-process.md` → `search_standards("standards creation process")`
-- `standards/documentation/rag-content-authoring.md` → `search_standards("RAG content authoring")`
+- `standards/ai-assistant/standards-creation-process.md` → `pos_search(content_type="standards", query="standards creation process")`
+- `standards/documentation/rag-content-authoring.md` → `pos_search(content_type="standards", query="RAG content authoring")`
 
 **Tool Discovery:**
-- `standards/ai-assistant/mcp-tool-discovery.md` → `search_standards("MCP tool discovery")`
+- `standards/ai-assistant/mcp-tool-discovery.md` → `pos_search(content_type="standards", query="MCP tool discovery")`
 
 ---
 
@@ -586,7 +586,7 @@ Week 24:
 → Yes! If you discover improvements or refinements, update the standard. Knowledge evolves.
 
 **How do I make sure my standard is discoverable?**
-→ Follow RAG optimization: keywords, query hooks, TL;DR, natural language headers. See: `search_standards("RAG content authoring")`
+→ Follow RAG optimization: keywords, query hooks, TL;DR, natural language headers. See: `pos_search(content_type="standards", query="RAG content authoring")`
 
 ---
 

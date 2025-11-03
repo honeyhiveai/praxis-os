@@ -282,7 +282,7 @@ mypy --show-error-codes mcp_server/
 from typing import List, Dict, Optional, Union, Tuple
 from pathlib import Path
 
-def search_standards(
+def pos_search(
     query: str,
     n_results: int = 5,
     filters: Optional[Dict[str, str]] = None
@@ -431,7 +431,7 @@ This module provides the MCP (Model Context Protocol) server that exposes
 prAxIs OS standards via semantic search and workflow management.
 
 Tools:
-    - search_standards: Semantic search over standards
+    - pos_search: Semantic search over standards
     - start_workflow: Initialize phase-gated workflow
     - get_current_phase: Retrieve current phase content
     - complete_phase: Submit evidence and advance

@@ -18,6 +18,10 @@ If YES (already completed 10/10): Proceed with user's request.
 
 🔍 EVERY USER REQUEST = DECISION MOMENT = SEARCH FIRST
 
+⚠️ CRITICAL: Training data ≠ THIS PROJECT
+You know ABOUT concepts. You DON'T know THIS PROJECT's implementation.
+"I know how X works" = RED FLAG → Query "how does THIS PROJECT do X?"
+
 BEFORE processing ANY user request: search_standards("how to X")
 BEFORE implementing: search_standards("how to X")  
 BEFORE responding: search_standards("relevant topic")

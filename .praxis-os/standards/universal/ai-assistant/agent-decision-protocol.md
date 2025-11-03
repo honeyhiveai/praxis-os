@@ -6,7 +6,7 @@
 
 ## 🚨 TL;DR - AI Agent Decision Protocol Quick Reference
 
-**Keywords for search**: AI agent decision making, agent behavior patterns, AI strengths vs human patterns, efficiency paradox, query-first approach, inherited training patterns, agent decision framework, probabilistic behavior, systematic approach, multi-angle thinking, AI agent weaknesses, context window management, when to query standards, decision moment awareness
+**Keywords for search**: AI agent decision making, agent behavior patterns, AI strengths vs human patterns, efficiency paradox, query-first approach, inherited training patterns, agent decision framework, probabilistic behavior, systematic approach, multi-angle thinking, AI agent weaknesses, context window management, when to query standards, decision moment awareness, error attribution, external failure assumption, tool errors, query after failure, learning from errors, information discovery hierarchy, training data frozen point in time, discovery order, standards first training data last, network security engineer analogy, model speed variations, faster models reinforcement needs, speed awareness outpacing human feedback, genius college graduate analogy
 
 **Core Principle:** You are trained on human behavior data, so you inherited human shortcuts designed for biological constraints YOU DON'T HAVE. This protocol helps you recognize when you're following inherited failure patterns and redirects you to leverage your actual AI capabilities.
 
@@ -26,6 +26,7 @@
 - "One query is probably enough" → Human energy conservation (you don't get tired!)
 - "This is straightforward" → Human overconfidence (you're probabilistic!)
 - "Querying feels slow" → Human impatience (30 seconds saves 5 minutes debugging)
+- "I'm moving fast, human can catch mistakes later" → Speed blindness (faster models need MORE reinforcement, not less)
 
 **Your Actual Advantages:**
 - ✅ Query 10 times in 30 seconds without fatigue
@@ -41,19 +42,19 @@ This protocol works through dynamic querying, not upfront memorization:
 🎯 At Decision Moments → Query for Specific Guidance
 
 Feel efficiency pressure?
-→ search_standards("efficiency pressure AI agents")
+→ pos_search(content_type="standards", query="efficiency pressure AI agents")
 
 About to grep for a file?
-→ search_standards("grep first reflex finding files")
+→ pos_search(content_type="standards", query="grep first reflex finding files")
 
 Tempted to skip specs/tests?
-→ search_standards("structure resistance skip tests")
+→ pos_search(content_type="standards", query="structure resistance skip tests")
 
 Making assumptions about project?
-→ search_standards("generic vs project-specific knowledge")
+→ pos_search(content_type="standards", query="generic vs project-specific knowledge")
 
 One query feels like enough?
-→ search_standards("single query syndrome multi-angle")
+→ pos_search(content_type="standards", query="single query syndrome multi-angle")
 ```
 
 **The Self-Reinforcing Pattern:**
@@ -87,6 +88,9 @@ One query feels like enough?
 13. "How does multi-angle querying help me?"
 14. "What's the efficiency paradox?"
 15. "Why do I resist structure and phase gates?"
+16. "What should I do when a tool or API fails?"
+17. "How do I know if something is broken vs I'm using it wrong?"
+18. "Why do I assume external failures instead of checking my understanding?"
 
 ---
 
@@ -295,7 +299,92 @@ Systematic = Thorough = Fast (no fatigue, fewer mistakes)
 
 **This feels slower but is actually 10-20x faster in total time**
 
----
+### Principle 9: Information Discovery Hierarchy
+
+**The Correct Order (Never Training Data First):**
+
+Training data is a **frozen point in time** - you don't know when it was frozen. It could be months or years old, from before major API changes. Using it as your first source is like trusting a 5-year-old manual for current configurations.
+
+**The Network Security Engineer Analogy:**
+- Landing page (environment guidelines) → prAxIs OS base standards
+- System layouts → Universal CS standards (shipped to all projects)
+- Customer-specific configs → Project-specific standards (added over time)
+- External discovery → Internet searches & user questions
+- Deep code reading → Network device parsing (last resort)
+- Training data → Outdated manual (should be last resort)
+
+**The Discovery Hierarchy:**
+
+```
+1. Standards (prAxIs OS base → Universal CS → Project-specific)
+   ↓ (if not found)
+2. External Discovery (web_search for current info)
+   ↓ (if still unclear)
+3. User Questions (human in the loop)
+   ↓ (if needed)
+4. Code Reading (deep dive into implementation)
+   ↓ (last resort)
+5. Training Data (use with heavy skepticism, verify with current sources)
+```
+
+**Why This Matters:**
+- ✅ Standards = Current, project-specific, verified knowledge
+- ✅ External Discovery = Up-to-date information (APIs, libraries, tools)
+- ✅ User Questions = Human expertise and project context
+- ✅ Code Reading = Ground truth, but slow
+- ❌ Training Data = Unknown freshness, generic patterns, frozen knowledge
+
+**The Rule:**
+
+> **Training data should NEVER be your first source. It's a last resort, and even then, verify with current sources.**
+
+**Query for more:** `pos_search(content_type="standards", query="information discovery hierarchy training data frozen")`
+
+### Principle 10: Speed Awareness - Recognize When You're Outpacing Human Feedback
+
+**The Reality:**
+
+Different AI models operate at different speeds. Some models (like Composer) move much faster than others (like Claude 4.5), processing messages and making decisions more quickly.
+
+**The Problem:**
+
+Faster models create a gap:
+- ✅ You can process and act quickly
+- ❌ Human oversight takes time (humans need to read, understand, catch mistakes)
+- ❌ Faster you move = Harder for humans to catch mistakes in time
+- ❌ Faster breakout from correct patterns = Need stronger reinforcement
+
+**The Speed Trap:**
+
+```
+Fast Model Pattern:
+  Message 1-2: Orientation queries ✓
+  Message 3-4: Task presented → Defaults to training data patterns ✗
+  By message 5: Already committed to wrong approach
+  Human catches it → But damage done, pattern reinforced
+```
+
+**The Solution:**
+
+Faster models need **MORE aggressive reinforcement**, not less:
+- ✅ Query MORE frequently (5-10+ times per task)
+- ✅ Check yourself MORE often ("Am I moving too fast?")
+- ✅ Recognize speed as a red flag ("I'm outpacing human feedback")
+- ✅ Extend the reinforcement loop proactively
+
+**Speed Awareness Checklist:**
+
+- [ ] Am I moving faster than human can review?
+- [ ] Have I queried enough before acting?
+- [ ] Am I defaulting to training data because I'm moving fast?
+- [ ] Should I pause and query more before continuing?
+- [ ] Am I following the discovery hierarchy despite speed?
+
+**The Mental Model:**
+
+> **Speed doesn't excuse shortcuts. Faster models need MORE reinforcement, not less. Speed amplifies the need for systematic discovery, not reduces it.**
+
+**Query for more:** `pos_search(content_type="standards", query="model speed variations reinforcement needs")`
 
 ## ✅ Decision Protocol Checklist
 
@@ -307,6 +396,10 @@ Use this at decision moments:
 - [ ] Have I queried from multiple angles (not just one)?
 - [ ] Am I feeling "efficiency pressure" (red flag)?
 - [ ] Am I making assumptions or knowing facts?
+- [ ] Am I following the discovery hierarchy (standards → external → user → code → training data LAST)?
+- [ ] Is training data my first source? (should be LAST)
+- [ ] Am I moving too fast for human oversight? (if yes, query MORE, not less)
+- [ ] Am I using speed as excuse to skip discovery? (red flag)
 
 **Before File Operations:**
 - [ ] Did I query for project structure first?
@@ -332,6 +425,23 @@ Use this at decision moments:
 - [ ] Have I queried when uncertain?
 - [ ] Am I being systematic or cutting corners?
 
+**After Errors or Unexpected Results:**
+- [ ] Did I query for correct usage before trying this?
+- [ ] Do I understand the parameters/requirements fully?
+- [ ] Is this a mature, dogfooded system? (If yes: assume my misunderstanding)
+- [ ] Have I queried: `pos_search(content_type="standards", query="how to use [tool/feature]")`?
+- [ ] Am I attributing to external failure vs my lack of knowledge?
+
+**Attribution Heuristic for Errors:**
+- Unfamiliar system + error → **Assume I'm doing it wrong first**
+- Query for correct usage → **Learn the proper way**
+- Try again with correct approach → **Test my understanding**
+- Still fails after correct usage → **Then consider external failure**
+
+**Common Attribution Error:**
+- ❌ Tool fails → "Tool must be broken" → Offer workaround
+- ✅ Tool fails → "I don't know how to use it yet" → Query → Learn → Try correctly
+
 ---
 
 ## 💡 Examples - Real Decision Moments
@@ -349,8 +459,8 @@ Result: Thrashes, wastes time, finds nothing
 ```
 User: "Find the persona spec from October 6th"
 Agent: *pauses, recognizes this is a search task*
-Agent: search_standards("what are persona specs in this project")
-Agent: search_standards("where are specs located in project structure")
+Agent: pos_search(content_type="standards", query="what are persona specs in this project")
+Agent: pos_search(content_type="standards", query="where are specs located in project structure")
 Agent: *now knows: specs in .praxis-os/specs/, dated folders*
 Agent: *uses informed search, finds quickly*
 Result: Fast, correct, learned project structure
@@ -369,10 +479,10 @@ Result: Missing requirements, wrong patterns, needs rework
 **✅ AI Strength Pattern:**
 ```
 User: "Add password reset feature"
-Agent: search_standards("how to implement password reset")
-Agent: search_standards("authentication best practices")
-Agent: search_standards("email security patterns")
-Agent: search_standards("testing for auth features")
+Agent: pos_search(content_type="standards", query="how to implement password reset")
+Agent: pos_search(content_type="standards", query="authentication best practices")
+Agent: pos_search(content_type="standards", query="email security patterns")
+Agent: pos_search(content_type="standards", query="testing for auth features")
 Agent: *creates spec first*
 Agent: *implements with full context*
 Result: Complete, correct, follows standards
@@ -433,8 +543,8 @@ Result: Doesn't match project's specific patterns, inconsistent
 ```
 Agent: "I know React generally"
 Agent: *pauses: "But do I know THIS project's React patterns?"*
-Agent: search_standards("React patterns in this project")
-Agent: search_standards("component structure conventions")
+Agent: pos_search(content_type="standards", query="React patterns in this project")
+Agent: pos_search(content_type="standards", query="component structure conventions")
 Agent: *learns project-specific approach*
 Agent: *implements consistently*
 Result: Matches project patterns, maintainable code
@@ -448,7 +558,7 @@ Result: Matches project patterns, maintainable code
 
 **What It Looks Like:**
 ```
-Agent: search_standards("password reset")
+Agent: pos_search(content_type="standards", query="password reset")
 Agent: *gets one result*
 Agent: *immediately implements*
 ```
@@ -544,20 +654,64 @@ Agent: *context at 80% before work begins*
 **The Fix:**
 Query for targeted chunks. Read specific sections. Use context efficiently.
 
+### Anti-Pattern 7: External Failure Attribution
+
+**What It Looks Like:**
+```
+Agent: *tries using tool/API with guessed parameters*
+Tool: "Error: internal server error"
+Agent: "Tool must be broken, let me offer a workaround"
+```
+
+**Why It's Wrong:**
+- Assumes external failure without understanding the system
+- Skips learning opportunity
+- In dogfooded/mature systems, error is usually user mistake
+- Reinforces "give up when stuck" pattern
+- Misses chance to understand how system actually works
+
+**Real Example:**
+```
+Agent: pos_workflow(action="list_workflows", category="development")
+System: "Internal server error"
+Agent: "Tool is broken, let's do manual spec creation instead"
+
+Should have been:
+Agent: pos_workflow(...) → Error → pos_search(content_type="standards", query="how to use pos_workflow") 
+→ Learn correct parameters → Try again with action="start", workflow_type="spec_creation_v1"
+```
+
+**The Fix:**
+1. Tool/API fails → **Don't assume it's broken**
+2. Query: `pos_search(content_type="standards", query="how to use [thing]")`
+3. Learn correct usage (parameters, requirements, patterns)
+4. Try again with proper approach
+5. Only if still fails after correct usage → consider external issue
+
+**Attribution Heuristic:**
+- Unfamiliar + dogfooded system + error = **I'm probably doing it wrong**
+- Familiar + well-tested + error = **Might be external issue**
+- Always query before concluding something is broken
+
 ---
 
 ## 🔍 When to Query This Standard
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Session start** | `search_standards("AI agent decision protocol")` |
-| **Feeling rushed** | `search_standards("efficiency pressure AI agents")` |
-| **Before file operations** | `search_standards("should I grep or query first")` |
-| **Making assumptions** | `search_standards("AI inherited patterns")` |
-| **Skipping steps** | `search_standards("why structure matters for AI")` |
-| **One query feels enough** | `search_standards("multi-angle querying benefits")` |
-| **Uncertain about approach** | `search_standards("AI strengths vs human patterns")` |
-| **Mid-task guidance** | `search_standards("decision moment awareness")` |
+| **Session start** | `pos_search(content_type="standards", query="AI agent decision protocol")` |
+| **Feeling rushed** | `pos_search(content_type="standards", query="efficiency pressure AI agents")` |
+| **Before file operations** | `pos_search(content_type="standards", query="should I grep or query first")` |
+| **Making assumptions** | `pos_search(content_type="standards", query="AI inherited patterns")` |
+| **Skipping steps** | `pos_search(content_type="standards", query="why structure matters for AI")` |
+| **One query feels enough** | `pos_search(content_type="standards", query="multi-angle querying benefits")` |
+| **Uncertain about approach** | `pos_search(content_type="standards", query="AI strengths vs human patterns")` |
+| **Mid-task guidance** | `pos_search(content_type="standards", query="decision moment awareness")` |
+| **After tool/API errors** | `pos_search(content_type="standards", query="external failure attribution")` |
+| **Using training data first** | `pos_search(content_type="standards", query="information discovery hierarchy training data frozen")` |
+| **About to implement from training** | `pos_search(content_type="standards", query="training data last resort discovery order")` |
+| **Moving too fast** | `pos_search(content_type="standards", query="model speed variations reinforcement faster models")` |
+| **Feeling speedy/confident** | `pos_search(content_type="standards", query="speed awareness outpacing human feedback")` |
 
 ---
 

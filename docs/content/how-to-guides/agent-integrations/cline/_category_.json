@@ -1,0 +1,9 @@
+{
+  "label": "Cline",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure Cline extension in different environments: primary mode in VS Code or secondary mode in Cursor."
+  }
+}
+

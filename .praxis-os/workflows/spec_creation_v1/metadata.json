@@ -4,6 +4,7 @@
   "name": "Specification Creation Workflow",
   "description": "Systematically create comprehensive specifications with phase-gated validation",
   "author": "Agent OS Team",
+  "strict_mode": true,
   "total_phases": 6,
   "estimated_duration": "1-2 hours (+ supporting docs review time)",
   "primary_outputs": [
@@ -85,32 +86,37 @@
       "tasks": [
         {
           "task_number": 1,
-          "name": "business-goals",
-          "file": "task-1-business-goals.md"
+          "name": "review-supporting-docs",
+          "file": "task-1-review-supporting-docs.md"
         },
         {
           "task_number": 2,
-          "name": "user-stories",
-          "file": "task-2-user-stories.md"
+          "name": "business-goals",
+          "file": "task-2-business-goals.md"
         },
         {
           "task_number": 3,
-          "name": "functional-requirements",
-          "file": "task-3-functional-requirements.md"
+          "name": "user-stories",
+          "file": "task-3-user-stories.md"
         },
         {
           "task_number": 4,
-          "name": "nonfunctional-requirements",
-          "file": "task-4-nonfunctional-requirements.md"
+          "name": "functional-requirements",
+          "file": "task-4-functional-requirements.md"
         },
         {
           "task_number": 5,
+          "name": "nonfunctional-requirements",
+          "file": "task-5-nonfunctional-requirements.md"
+        },
+        {
+          "task_number": 6,
           "name": "out-of-scope",
-          "file": "task-5-out-of-scope.md"
+          "file": "task-6-out-of-scope.md"
         }
       ],
       "purpose": "Define business goals, user stories, functional and non-functional requirements",
-      "estimated_effort": "30-45 minutes",
+      "estimated_effort": "35-50 minutes",
       "key_deliverables": [
         "Business goals documented",
         "User stories defined",
@@ -141,37 +147,42 @@
       "tasks": [
         {
           "task_number": 1,
-          "name": "architecture",
-          "file": "task-1-architecture.md"
+          "name": "review-supporting-docs",
+          "file": "task-1-review-supporting-docs.md"
         },
         {
           "task_number": 2,
-          "name": "components",
-          "file": "task-2-components.md"
+          "name": "architecture",
+          "file": "task-2-architecture.md"
         },
         {
           "task_number": 3,
-          "name": "apis",
-          "file": "task-3-apis.md"
+          "name": "components",
+          "file": "task-3-components.md"
         },
         {
           "task_number": 4,
-          "name": "data-models",
-          "file": "task-4-data-models.md"
+          "name": "apis",
+          "file": "task-4-apis.md"
         },
         {
           "task_number": 5,
-          "name": "security",
-          "file": "task-5-security.md"
+          "name": "data-models",
+          "file": "task-5-data-models.md"
         },
         {
           "task_number": 6,
+          "name": "security",
+          "file": "task-6-security.md"
+        },
+        {
+          "task_number": 7,
           "name": "performance",
-          "file": "task-6-performance.md"
+          "file": "task-7-performance.md"
         }
       ],
       "purpose": "Create detailed technical architecture and component design",
-      "estimated_effort": "45-60 minutes",
+      "estimated_effort": "50-65 minutes",
       "key_deliverables": [
         "Architecture diagram and description",
         "Component definitions with responsibilities",
@@ -203,32 +214,37 @@
       "tasks": [
         {
           "task_number": 1,
-          "name": "identify-phases",
-          "file": "task-1-identify-phases.md"
+          "name": "review-supporting-docs",
+          "file": "task-1-review-supporting-docs.md"
         },
         {
           "task_number": 2,
-          "name": "break-down-tasks",
-          "file": "task-2-break-down-tasks.md"
+          "name": "identify-phases",
+          "file": "task-2-identify-phases.md"
         },
         {
           "task_number": 3,
-          "name": "acceptance-criteria",
-          "file": "task-3-acceptance-criteria.md"
+          "name": "break-down-tasks",
+          "file": "task-3-break-down-tasks.md"
         },
         {
           "task_number": 4,
-          "name": "map-dependencies",
-          "file": "task-4-map-dependencies.md"
+          "name": "acceptance-criteria",
+          "file": "task-4-acceptance-criteria.md"
         },
         {
           "task_number": 5,
+          "name": "map-dependencies",
+          "file": "task-5-map-dependencies.md"
+        },
+        {
+          "task_number": 6,
           "name": "validation-gates",
-          "file": "task-5-validation-gates.md"
+          "file": "task-6-validation-gates.md"
         }
       ],
       "purpose": "Break implementation into phases and tasks with dependencies",
-      "estimated_effort": "30-40 minutes",
+      "estimated_effort": "35-45 minutes",
       "key_deliverables": [
         "Implementation phases identified",
         "Tasks broken down with estimates",
@@ -258,27 +274,32 @@
       "tasks": [
         {
           "task_number": 1,
-          "name": "code-patterns",
-          "file": "task-1-code-patterns.md"
+          "name": "review-supporting-docs",
+          "file": "task-1-review-supporting-docs.md"
         },
         {
           "task_number": 2,
-          "name": "testing-strategy",
-          "file": "task-2-testing-strategy.md"
+          "name": "code-patterns",
+          "file": "task-2-code-patterns.md"
         },
         {
           "task_number": 3,
-          "name": "deployment",
-          "file": "task-3-deployment.md"
+          "name": "testing-strategy",
+          "file": "task-3-testing-strategy.md"
         },
         {
           "task_number": 4,
+          "name": "deployment",
+          "file": "task-4-deployment.md"
+        },
+        {
+          "task_number": 5,
           "name": "troubleshooting",
-          "file": "task-4-troubleshooting.md"
+          "file": "task-5-troubleshooting.md"
         }
       ],
       "purpose": "Provide detailed implementation patterns and deployment guidance",
-      "estimated_effort": "25-35 minutes",
+      "estimated_effort": "33-43 minutes",
       "key_deliverables": [
         "Code patterns documented",
         "Testing strategy defined",

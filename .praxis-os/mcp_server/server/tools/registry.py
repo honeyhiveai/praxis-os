@@ -14,6 +14,7 @@ import logging
 from typing import Any, List, Optional
 
 from .browser_tools import register_browser_tools
+from .pos_search import register_pos_search_tools
 from .rag_tools import register_rag_tools
 from .server_info_tools import register_server_info_tools
 from .workflow_tools import register_workflow_tools
@@ -23,6 +24,7 @@ logger = logging.getLogger(__name__)
 
 def register_all_tools(
     mcp: Any,
+    index_manager: Optional[Any],
     rag_engine: Any,
     workflow_engine: Any,
     framework_generator: Any,
@@ -40,7 +42,8 @@ def register_all_tools(
     This function monitors tool count and enables selective loading.
 
     :param mcp: FastMCP server instance
-    :param rag_engine: RAG engine for search tools
+    :param index_manager: IndexManager for unified pos_search tool (Phase 8)
+    :param rag_engine: RAG engine for legacy search_standards tool
     :param workflow_engine: Workflow engine for workflow tools
     :param framework_generator: Generator for create_workflow tool
     :param workflow_validator: WorkflowValidator class for validate_workflow tool
@@ -66,9 +69,15 @@ def register_all_tools(
         logger.info("✅ Registered %s server info tool(s)", count)
 
     if "rag" in enabled_groups:
-        count = register_rag_tools(mcp, rag_engine)
-        tool_count += count
-        logger.info("✅ Registered %s RAG tool(s)", count)
+        # Register unified pos_search tool (Phase 8 - clean cutover)
+        # Fallback to grep + file access is built into StandardsIndex, not a separate tool
+        if index_manager:
+            count = register_pos_search_tools(mcp, index_manager)
+            tool_count += count
+            logger.info("✅ Registered %s unified search tool(s) (pos_search with built-in grep fallback)", count)
+        else:
+            logger.error("❌ IndexManager unavailable - RAG search will not work")
+            logger.error("This is a fatal error. Check .praxis-os/config/index_config.yaml")
 
     if "workflow" in enabled_groups:
         count = register_workflow_tools(

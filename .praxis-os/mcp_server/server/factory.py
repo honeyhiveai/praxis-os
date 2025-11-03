@@ -65,9 +65,15 @@ class ServerFactory:
 
         # Ensure RAG index exists
         self._ensure_index()
+        
+        # Ensure code indexes exist (if enabled)
+        self._ensure_code_indexes()
 
         # Create core components (dependency injection!)
-        rag_engine = self._create_rag_engine()
+        logger.info("🔍 DEBUG: About to create IndexManager...")
+        index_manager = self._create_index_manager()
+        logger.info("🔍 DEBUG: IndexManager creation returned: %s", index_manager)
+        rag_engine = self._create_rag_engine(index_manager)
         state_manager = self._create_state_manager()
         workflow_engine = self._create_workflow_engine(rag_engine, state_manager)
         framework_generator = self._create_framework_generator(rag_engine)
@@ -78,6 +84,7 @@ class ServerFactory:
 
         # Create MCP server and register tools
         mcp = self._create_mcp_server(
+            index_manager=index_manager,
             rag_engine=rag_engine,
             workflow_engine=workflow_engine,
             framework_generator=framework_generator,
@@ -129,13 +136,129 @@ class ServerFactory:
         except Exception as e:
             logger.error("❌ Failed to build index: %s", e, exc_info=True)
             raise ValueError(f"Could not build RAG index: {e}") from e
+    
+    def _ensure_code_indexes(self) -> None:
+        """Ensure code indexes exist (AST), build if missing and enabled."""
+        # Load index config to check if code indexing is enabled
+        try:
+            import yaml
+            config_path = self.config.base_path / "config" / "index_config.yaml"
+            
+            if not config_path.exists():
+                logger.debug("No index_config.yaml found, skipping code indexes")
+                return
+            
+            with open(config_path, 'r', encoding='utf-8') as f:
+                index_config = yaml.safe_load(f)
+            
+            code_config = index_config.get('indexes', {}).get('code', {})
+            
+            if not code_config.get('enabled', False):
+                logger.debug("Code indexing disabled in config, skipping")
+                return
+            
+            # Code indexing is enabled - check if AST index exists
+            ast_index_path = self.config.base_path / ".cache" / "ast" / "praxis_os_code_ast.lance"
+            
+            if ast_index_path.exists():
+                logger.info("✅ AST code index found")
+                return
+            
+            logger.info("⚠️  Code indexing enabled but AST index not found, building...")
+            
+            # Import ASTIndex
+            from .indexes.ast_index import ASTIndex
+            
+            # Get configuration
+            # Note: languages is now a dict (config-driven structure)
+            # Old format: languages: [python, javascript]
+            # New format: languages: {python: {file_extensions: [...], node_types: {...}}}
+            languages_config = code_config.get('languages', {})
+            if not languages_config:
+                # Fallback to default
+                languages_config = {
+                    "python": {
+                        "file_extensions": [".py"],
+                        "node_types": {
+                            "function_definition": "function",
+                            "class_definition": "class"
+                        }
+                    }
+                }
+            
+            source_paths = code_config.get('source_paths', ['mcp_server/'])
+            exclude_patterns = code_config.get('exclude_patterns', [])
+            query_strategy = code_config.get('query_strategy', {})
+            
+            language_names = list(languages_config.keys())
+            logger.info("Building AST index for languages: %s", language_names)
+            logger.info("Source paths: %s", source_paths)
+            if exclude_patterns:
+                logger.info("Exclude patterns: %s", exclude_patterns)
+            
+            # Create AST index with full config (pass entire code_config)
+            cache_path = self.config.base_path / ".cache" / "ast"
+            ast_index = ASTIndex(
+                cache_path=cache_path,
+                config=code_config,  # Pass entire code config (has languages dict)
+                base_path=self.config.base_path
+            )
+            
+            # Build index
+            ast_index.build(source_paths=source_paths, force=False)
 
-    def _create_rag_engine(self) -> RAGEngine:
-        """Create RAG engine with configured paths."""
+            # Check if any tables have symbols
+            total_symbols = sum(table.count_rows() for table in ast_index.tables.values())
+            if total_symbols > 0:
+                logger.info("✅ AST index built: %d symbols across %d language(s)",
+                           total_symbols, len(ast_index.tables))
+            else:
+                logger.warning("⚠️  AST index build completed but no symbols extracted")
+            
+        except ImportError as e:
+            logger.warning("⚠️  Could not load dependencies for code indexing: %s", e)
+            logger.info("Install Tree-sitter with: pip install tree-sitter tree-sitter-python")
+        except Exception as e:
+            logger.error("❌ Failed to build code indexes: %s", e, exc_info=True)
+            # Don't raise - code indexing is optional, server should still start
+            logger.warning("⚠️  Server will start without code indexing")
+
+    def _create_index_manager(self):
+        """Create IndexManager for multi-index orchestration.
+        
+        Phase 8, Task 8.1: Creates unified IndexManager for all search operations.
+        
+        Returns IndexManager instance configured with index_config.yaml.
+        """
+        from .indexes.index_manager import IndexManager
+        
+        logger.info("Creating IndexManager for multi-index orchestration...")
+        cache_path = self.paths["index_path"].parent
+        config_path = self.config.base_path / "config" / "index_config.yaml"
+        
+        try:
+            index_manager = IndexManager(
+                base_path=cache_path,
+                config_path=config_path if config_path.exists() else None
+            )
+            logger.info("✅ IndexManager created successfully")
+            logger.debug(f"IndexManager creation returned: {index_manager}")
+            
+            # Auto-build all indexes
+            index_manager._auto_build_indexes()
+            
+            return index_manager
+        except Exception as e:
+            logger.warning("⚠️  Failed to create IndexManager: %s", e, exc_info=True)
+            logger.warning("pos_search tool will not be available")
+            return None
+
+    def _create_rag_engine(self, index_manager: Optional[Any]) -> RAGEngine:
+        """Create RAG engine with IndexManager delegation."""
         logger.info("Creating RAG engine...")
         return RAGEngine(
-            index_path=self.paths["index_path"],
             standards_path=self.config.base_path.parent,
+            index_manager=index_manager,
         )
 
     def _create_state_manager(self) -> StateManager:
@@ -202,6 +325,7 @@ class ServerFactory:
 
     def _create_mcp_server(
         self,
+        index_manager: Optional[Any],
         rag_engine: RAGEngine,
         workflow_engine: WorkflowEngine,
         framework_generator: FrameworkGenerator,
@@ -219,6 +343,7 @@ class ServerFactory:
         # Register tools with selective loading
         tool_count = register_all_tools(
             mcp=mcp,
+            index_manager=index_manager,
             rag_engine=rag_engine,
             workflow_engine=workflow_engine,
             framework_generator=framework_generator,

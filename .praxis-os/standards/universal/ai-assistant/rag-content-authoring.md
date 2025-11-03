@@ -37,12 +37,12 @@
 - ❌ Duplicating content instead of linking
 - ❌ Hardcoding instructions instead of teaching discovery
 
-**Testing:** `search_standards("your expected query")` - Should return your content in top 3 results
+**Testing:** `pos_search(content_type="standards", query="your expected query")` - Should return your content in top 3 results
 
 **When to Query This Standard:**
-- Writing new standard → `search_standards("how to write RAG-optimized content")`
-- Content not discoverable → `search_standards("RAG optimization techniques")`
-- Improving search ranking → `search_standards("content authoring for semantic search")`
+- Writing new standard → `pos_search(content_type="standards", query="how to write RAG-optimized content")`
+- Content not discoverable → `pos_search(content_type="standards", query="RAG optimization techniques")`
+- Improving search ranking → `pos_search(content_type="standards", query="content authoring for semantic search")`
 
 ---
 
@@ -324,19 +324,19 @@ After writing content, TEST if it's discoverable **from multiple perspectives**:
 # Don't just test one query - test how agents would think about this from different perspectives
 
 # Angle 1: Direct question
-search_standards("how to execute a specification")
+pos_search(content_type="standards", query="how to execute a specification")
 
 # Angle 2: User intent phrasing
-search_standards("user wants to implement a spec")
+pos_search(content_type="standards", query="user wants to implement a spec")
 
 # Angle 3: Decision-making query
-search_standards("when should I use workflows")
+pos_search(content_type="standards", query="when should I use workflows")
 
 # Angle 4: Problem-solving query
-search_standards("what workflow for spec execution")
+pos_search(content_type="standards", query="what workflow for spec execution")
 
 # Angle 5: Tool discovery query
-search_standards("what tools for implementing specs")
+pos_search(content_type="standards", query="what tools for implementing specs")
 ```
 
 **Why multi-angle testing matters:**
@@ -447,7 +447,7 @@ start_workflow("test_generation_v3", target, options={...})
 **You discover workflows dynamically through querying:**
 
 When uncertain about what workflow to use:
-→ search_standards("what workflow for [your task]?")
+→ pos_search(content_type="standards", query="what workflow for [your task]?")
 
 Examples:
 - "what workflow for executing a spec?"
@@ -479,7 +479,7 @@ def test_spec_execution_discoverable():
     ]
     
     for query in queries:
-        results = search_standards(query, n_results=5)
+        results = pos_search(query, n_results=5)
         
         # Should return workflow documentation
         assert any("spec_execution_v1" in chunk.content 
@@ -529,7 +529,7 @@ Guide for writing effective tests in your testing framework...
 ```markdown
 ## Configuration Guide
 
-Query search_standards("configuration guide") to load configuration guide.
+Query pos_search(content_type="standards", query="configuration guide") to load configuration guide.
 ```
 
 **Right:**
@@ -578,7 +578,7 @@ For complete guide, continue reading below.
 ## ❓ Frequently Asked Questions
 
 **How do I test if my content is discoverable?**
-→ Use search_standards() with natural queries you expect agents to use
+→ Use pos_search() with natural queries you expect agents to use
 
 **How do I know what queries agents will use?**
 → Think about how you would ask the question naturally. Include those phrases as query hooks.
@@ -595,12 +595,12 @@ For complete guide, continue reading below.
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Writing new standard** | `search_standards("how to write RAG-optimized content")` |
-| **Content not being found** | `search_standards("RAG optimization techniques")` |
-| **Improving discoverability** | `search_standards("content authoring for semantic search")` |
-| **Optimizing headers** | `search_standards("how to write query-oriented headers")` |
-| **Adding query hooks** | `search_standards("what are query hooks")` |
-| **Testing content** | `search_standards("test content discoverability")` |
+| **Writing new standard** | `pos_search(content_type="standards", query="how to write RAG-optimized content")` |
+| **Content not being found** | `pos_search(content_type="standards", query="RAG optimization techniques")` |
+| **Improving discoverability** | `pos_search(content_type="standards", query="content authoring for semantic search")` |
+| **Optimizing headers** | `pos_search(content_type="standards", query="how to write query-oriented headers")` |
+| **Adding query hooks** | `pos_search(content_type="standards", query="what are query hooks")` |
+| **Testing content** | `pos_search(content_type="standards", query="test content discoverability")` |
 
 ---
 
@@ -608,25 +608,25 @@ For complete guide, continue reading below.
 
 **Query workflow for content authoring mastery:**
 
-1. **Start with RAG content authoring** → `search_standards("RAG content authoring")` (this document)
-2. **Learn standards creation** → `search_standards("standards creation process")` → `standards/meta-workflow/standards-creation-process.md`
-3. **Understand workflow metadata** → `search_standards("workflow metadata standards")` → `standards/workflows/workflow-metadata-standards.md`
-4. **Master orientation principles** → `search_standards("prAxIs OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
+1. **Start with RAG content authoring** → `pos_search(content_type="standards", query="RAG content authoring")` (this document)
+2. **Learn standards creation** → `pos_search(content_type="standards", query="standards creation process")` → `standards/meta-workflow/standards-creation-process.md`
+3. **Understand workflow metadata** → `pos_search(content_type="standards", query="workflow metadata standards")` → `standards/workflows/workflow-metadata-standards.md`
+4. **Master orientation principles** → `pos_search(content_type="standards", query="prAxIs OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
 
 **By Category:**
 
 **AI Assistant:**
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Teaching agents to query → `search_standards("prAxIs OS orientation")`
-- `standards/ai-assistant/standards-creation-process.md` - Creating standards → `search_standards("standards creation")`
-- `standards/ai-assistant/MCP-TOOLS-GUIDE.md` - Dynamic discovery → `search_standards("MCP dynamic discovery")`
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Teaching agents to query → `pos_search(content_type="standards", query="prAxIs OS orientation")`
+- `standards/ai-assistant/standards-creation-process.md` - Creating standards → `pos_search(content_type="standards", query="standards creation")`
+- `standards/ai-assistant/MCP-TOOLS-GUIDE.md` - Dynamic discovery → `pos_search(content_type="standards", query="MCP dynamic discovery")`
 
 **Meta-Framework:**
-- `standards/meta-workflow/standards-creation-process.md` - How to create standards → `search_standards("meta-workflow standards creation")`
-- `standards/meta-workflow/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/meta-workflow/standards-creation-process.md` - How to create standards → `pos_search(content_type="standards", query="meta-workflow standards creation")`
+- `standards/meta-workflow/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
 
 **Workflows:**
-- `standards/workflows/workflow-metadata-standards.md` - Workflow-specific metadata → `search_standards("workflow metadata")`
-- `standards/workflows/mcp-rag-configuration.md` - RAG indexing config → `search_standards("MCP RAG configuration")`
+- `standards/workflows/workflow-metadata-standards.md` - Workflow-specific metadata → `pos_search(content_type="standards", query="workflow metadata")`
+- `standards/workflows/mcp-rag-configuration.md` - RAG indexing config → `pos_search(content_type="standards", query="MCP RAG configuration")`
 
 ---
 
@@ -634,8 +634,8 @@ For complete guide, continue reading below.
 
 **Query this standard anytime:**
 ```python
-search_standards("how to write content for RAG")
-search_standards("content authoring for semantic search")
-search_standards("making documentation discoverable")
+pos_search(content_type="standards", query="how to write content for RAG")
+pos_search(content_type="standards", query="content authoring for semantic search")
+pos_search(content_type="standards", query="making documentation discoverable")
 ```
 

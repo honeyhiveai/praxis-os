@@ -30,6 +30,7 @@ Switched from ChromaDB to LanceDB for:
 # Justification: Complex search logic with filtering, ranking, and fallback
 # requires multiple intermediate variables for clarity
 
+import fcntl
 import hashlib
 import json
 import logging
@@ -42,6 +43,8 @@ from typing import Any, Dict, List, Optional, cast
 import lancedb
 
 from .models.rag import SearchResult
+from .server.indexes.index_manager import IndexManager
+from .server.indexes.standards_index import StandardsIndex
 
 logger = logging.getLogger(__name__)
 
@@ -49,69 +52,58 @@ logger = logging.getLogger(__name__)
 class RAGEngine:
     """
     Semantic search engine for prAxIs OS standards.
+    
+    REFACTORED: Delegates to IndexManager instead of creating duplicate StandardsIndex.
 
     Features:
-    - Vector similarity search via LanceDB
-    - Metadata filtering at DB level (phase, tags, framework)
-    - Relevance ranking with critical content boosting
+    - Delegates to IndexManager's StandardsIndex (uses correct config)
     - Grep fallback for offline/error scenarios
-    - Query result caching (TTL: 1 hour)
+    - Legacy query caching (for backward compatibility)
     """
 
     def __init__(
         self,
-        index_path: Path,
         standards_path: Path,
-        embedding_provider: str = "local",
-        embedding_model: str = "all-MiniLM-L6-v2",
+        index_manager: Optional[Any] = None,
         cache_ttl_seconds: int = 3600,
     ):
         """
-        Initialize RAG engine.
+        Initialize RAG engine with IndexManager delegation.
 
         Args:
-            index_path: Path to LanceDB index
             standards_path: Path to prAxIs OS standards for grep fallback
-            embedding_provider: Provider for embeddings ("local" default or "openai")
-            embedding_model: Model to use for embeddings
+            index_manager: IndexManager instance (provides StandardsIndex)
             cache_ttl_seconds: Cache time-to-live in seconds (default: 1 hour)
         """
-        self.index_path = index_path
         self.standards_path = standards_path
-        self.embedding_provider = embedding_provider
-        self.embedding_model = embedding_model
         self.cache_ttl_seconds = cache_ttl_seconds
+        self.index_manager = index_manager
 
-        # Query cache: {query_hash: (result, timestamp)}
+        # Query cache and lock for backward compatibility and thread safety
+        # NOTE: StandardsIndex has its own cache, but we keep this for
+        # legacy callers and as a second-level cache
         self._query_cache: Dict[str, tuple] = {}
+        self._lock = threading.RLock()
 
-        # Concurrency control for safe hot reload
-        self._lock = threading.RLock()  # Reentrant lock for nested calls
-        self._rebuilding = threading.Event()  # Signal when rebuild in progress
-
-        # Initialize embedding model
-        self.local_model: Any = None
-        if self.embedding_provider == "local":
-            from sentence_transformers import SentenceTransformer
-
-            self.local_model = SentenceTransformer(embedding_model)
+        # Get StandardsIndex from IndexManager (no duplicate creation!)
+        if self.index_manager:
+            try:
+                logger.info("Initializing RAG engine with IndexManager delegation")
+                self.standards_index = self.index_manager.get_index("standards")
+                self.vector_search_available = self.standards_index is not None
+                if self.vector_search_available:
+                    logger.info("✅ RAG engine using IndexManager's StandardsIndex")
+                else:
+                    logger.warning("⚠️  StandardsIndex not available, grep fallback only")
+            except Exception as e:
+                logger.warning("Failed to get StandardsIndex from IndexManager: %s", e)
+                logger.warning("Vector search unavailable, grep fallback will be used")
+                self.vector_search_available = False
+                self.standards_index = None
         else:
-            self.local_model = None
-
-        # Initialize LanceDB connection
-        try:
-            logger.info("Initializing RAG engine with index at %s", index_path)
-            self.db = lancedb.connect(str(index_path))
-            self.table = self.db.open_table("praxis_os_standards")
-            chunk_count = self.table.count_rows()
-            logger.info("LanceDB table loaded: %s chunks", chunk_count)
-            self.vector_search_available = True
-        except Exception as e:
-            logger.warning("Failed to initialize LanceDB: %s", e)
-            logger.warning("Vector search unavailable, grep fallback will be used")
+            logger.warning("No IndexManager provided to RAGEngine, grep fallback only")
             self.vector_search_available = False
-            self.db = None
-            self.table = None
+            self.standards_index = None
 
     def search(
         self,
@@ -122,12 +114,14 @@ class RAGEngine:
         """
         Search prAxIs OS standards with intelligent retrieval.
 
+        This method now delegates to StandardsIndex for vector search while
+        maintaining backward compatibility with the existing API.
+
         Steps:
         1. Check cache for recent identical query
-        2. Generate query embedding
-        3. Vector search with metadata filtering (WHERE clauses)
-        4. Rank and boost critical content
-        5. Return structured results
+        2. Delegate to StandardsIndex.search()
+        3. Convert new SearchResult format to legacy format
+        4. Return structured results
 
         If vector search fails, falls back to grep.
 
@@ -141,7 +135,7 @@ class RAGEngine:
                 - is_critical: bool (only critical content)
 
         Returns:
-            SearchResult with chunks, metadata, and metrics
+            SearchResult with chunks, metadata, and metrics (legacy format)
 
         Example:
             # Get Phase 1 requirements
@@ -151,12 +145,6 @@ class RAGEngine:
                 filters={"phase": 1}
             )
         """
-        # Wait if rebuild in progress (timeout: 30s)
-        if self._rebuilding.is_set():
-            logger.debug("Waiting for index rebuild to complete...")
-            if not self._rebuilding.wait(timeout=30):
-                logger.warning("Rebuild timeout, proceeding with current index")
-
         start_time = time.time()
 
         # Check cache
@@ -166,41 +154,90 @@ class RAGEngine:
             logger.debug("Cache hit for query: %s...", query[:50])
             return cached_result
 
-        # Acquire read lock for safe concurrent access during index queries
-        with self._lock:
-            # Try vector search
-            if self.vector_search_available:
-                try:
-                    result = self._vector_search(query, n_results, filters)
-                    elapsed_ms = (time.time() - start_time) * 1000
-                    result.query_time_ms = elapsed_ms
+        # Try delegating to StandardsIndex
+        if self.vector_search_available and self.standards_index:
+            try:
+                # Delegate to new architecture
+                new_results = self.standards_index.search(
+                    query=query,
+                    filters=filters,
+                    n=n_results
+                )
+                
+                # Convert to legacy format
+                result = self._convert_to_legacy_format(new_results)
+                elapsed_ms = (time.time() - start_time) * 1000
+                result.query_time_ms = elapsed_ms
 
-                    # Cache result
-                    self._cache_result(cache_key, result)
+                # Cache result
+                self._cache_result(cache_key, result)
 
-                    logger.info(
-                        "Vector search completed: %s chunks in %.1fms",
-                        len(result.chunks),
-                        elapsed_ms,
-                    )
-                    return result
+                logger.info(
+                    "Vector search completed: %s chunks in %.1fms",
+                    len(result.chunks),
+                    elapsed_ms,
+                )
+                return result
 
-                except Exception as e:
-                    logger.error("Vector search failed: %s", e, exc_info=True)
-                    logger.info("Falling back to grep search")
+            except Exception as e:
+                logger.error("StandardsIndex search failed: %s", e, exc_info=True)
+                logger.info("Falling back to grep search")
 
-            # Grep fallback
-            result = self._grep_fallback(query, n_results)
-            elapsed_ms = (time.time() - start_time) * 1000
-            result.query_time_ms = elapsed_ms
+        # Grep fallback
+        result = self._grep_fallback(query, n_results)
+        elapsed_ms = (time.time() - start_time) * 1000
+        result.query_time_ms = elapsed_ms
 
-            logger.info(
-                "Grep search completed: %s chunks in %.1fms",
-                len(result.chunks),
-                elapsed_ms,
-            )
-            return result
+        logger.info(
+            "Grep search completed: %s chunks in %.1fms",
+            len(result.chunks),
+            elapsed_ms,
+        )
+        return result
 
+    def _convert_to_legacy_format(
+        self,
+        new_results: List[Any]
+    ) -> SearchResult:
+        """Convert new SearchResult format to legacy format.
+        
+        Args:
+            new_results: List of SearchResult objects from StandardsIndex
+        
+        Returns:
+            SearchResult in legacy format (with chunks list)
+        """
+        chunks = []
+        relevance_scores = []
+        total_tokens = 0
+        
+        for result in new_results:
+            # Convert each new SearchResult to legacy chunk format
+            chunk = {
+                "content": result.content,
+                "file_path": result.file_path,
+                "section_header": result.metadata.get("section_header", ""),
+                "parent_headers": result.metadata.get("parent_headers", []),
+                "token_count": result.metadata.get("token_count", 0),
+                "phase": result.metadata.get("phase", 0),
+                "framework_type": result.metadata.get("framework_type", ""),
+                "category": result.metadata.get("category", ""),
+                "is_critical": result.metadata.get("is_critical", False),
+                "tags": result.metadata.get("tags", []),
+            }
+            chunks.append(chunk)
+            relevance_scores.append(result.relevance_score)
+            total_tokens += chunk["token_count"]
+        
+        return SearchResult(
+            chunks=chunks,
+            total_tokens=total_tokens,
+            retrieval_method="vector",
+            query_time_ms=0.0,  # Will be set by caller
+            relevance_scores=relevance_scores,
+            cache_hit=False
+        )
+    
     def _vector_search(
         self, query: str, n_results: int, filters: Optional[Dict]
     ) -> SearchResult:
@@ -512,14 +549,13 @@ class RAGEngine:
             "vector_search_available": self.vector_search_available,
             "index_path": str(self.index_path),
             "standards_path": str(self.standards_path),
-            "cache_size": len(self._query_cache),
             "embedding_provider": self.embedding_provider,
         }
 
-        if self.vector_search_available:
+        if self.vector_search_available and self.standards_index:
             try:
-                if self.table is not None:
-                    health["chunk_count"] = self.table.count_rows()
+                if self.standards_index.table is not None:
+                    health["chunk_count"] = self.standards_index.table.count_rows()
                     health["status"] = "healthy"
                 else:
                     health["status"] = "degraded"
@@ -535,15 +571,13 @@ class RAGEngine:
     def reload_index(self) -> None:
         """Reload LanceDB index for hot reload after rebuild.
 
-        Reconnects to LanceDB and reopens the table after index rebuild.
-        Clears query cache to ensure fresh results. Unlike ChromaDB, LanceDB
-        has no singleton conflicts making hot reload clean and simple.
+        Delegates to StandardsIndex for index reload. Clears RAGEngine's
+        query cache to ensure fresh results.
 
         **Thread Safety:**
 
-        Uses write lock to prevent concurrent queries during reload. Blocks
-        all search operations until reload completes. Sets `_rebuilding` event
-        to signal queries to wait.
+        StandardsIndex handles its own locking. RAGEngine clears its cache
+        after delegate completes.
 
         **Example:**
 
@@ -557,30 +591,19 @@ class RAGEngine:
         This is typically called automatically by the file watcher when
         prAxIs OS content changes are detected.
         """
-        # Acquire write lock to block all reads during reload
-        with self._lock:
-            self._rebuilding.set()  # Signal rebuild in progress
+        logger.info("Reloading index...")
+        
+        if self.standards_index:
             try:
-                logger.info("Reloading LanceDB index...")
-
-                # Close old connections cleanly
-                if hasattr(self, "table"):
-                    del self.table
-                if hasattr(self, "db"):
-                    del self.db
-
-                # Reconnect to index
-                self.db = lancedb.connect(str(self.index_path))
-                self.table = self.db.open_table("praxis_os_standards")
-                chunk_count = self.table.count_rows()
-                logger.info("Index reloaded: %s chunks", chunk_count)
-                self.vector_search_available = True
-
-                # Clear cache after reload
+                # Delegate to StandardsIndex
+                self.standards_index.reload_index()
+                
+                # Clear RAGEngine's cache
                 self._query_cache.clear()
-
+                
+                logger.info("Index reload complete")
             except Exception as e:
                 logger.error("Failed to reload index: %s", e)
                 self.vector_search_available = False
-            finally:
-                self._rebuilding.clear()  # Signal rebuild complete
+        else:
+            logger.warning("No StandardsIndex to reload")

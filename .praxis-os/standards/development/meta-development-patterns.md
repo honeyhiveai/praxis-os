@@ -1,31 +1,45 @@
 # Meta-Development Patterns: Building prAxIs OS
 
-**Keywords for search**: meta-development, building agent os enhanced, dogfooding agent os, framework development, recursive development, builder vs consumer, framework standards vs project standards, bug attribution, design for consumers, meta-complexity, building what you use
+**Keywords for search**: recursive development mindset, documentation philosophy, error diagnosis is this bug or misuse, API design what to expose to users, foundation code versus project code, shipped docs versus internal docs, framework author psychology, downstream developer psychology, information architecture decisions, what to write where, self-hosting complexity mental model, asymmetric complexity design
 
-**Core Principle:** Building prAxIs OS WITH prAxIs OS is meta-development - you face recursive complexity that consumers don't. Design for THEIR simpler experience (99%), not YOUR complex experience (1%).
+**Core Principle:** When authoring prAxIs OS, your cognitive model must separate framework author knowledge (recursive, meta-level) from downstream developer knowledge (linear, usage-level). This guides WHERE to write documentation and WHAT to reveal in public APIs.
+
+**Note:** For iteration mechanics (where to edit source files, promotion process), see `dogfooding-model.md`. This standard is about COGNITIVE MODEL and DOCUMENTATION ARCHITECTURE.
 
 ---
 
-## 🎯 TL;DR - Meta-Development Quick Reference
+## 🎯 TL;DR - Documentation Philosophy & Information Architecture
 
-**The Key Distinction:**
-- **You (Builder)**: Meta-development, recursive complexity, using incomplete tools to build those tools
-- **Consumers**: Domain-development, linear complexity, using stable tools for project work
+**This standard answers: "Where should I write this information?"**
 
-**Critical Insights:**
-1. Your experience is HARDER than consumer experience (intentionally)
-2. You absorb complexity so consumers don't have to
-3. Framework standards serve consumers (99%), not builders (1%)
-4. Bug attribution is complex (framework OR usage?)
-5. Design for their clean experience, not your recursive experience
+**Decision Tree for Documentation Placement:**
+```
+Is this information about:
+├─ Using prAxIs OS capabilities? → universal/standards/ (publish to users)
+├─ Authoring prAxIs OS foundation? → .praxis-os/standards/development/ (internal only)
+└─ Unclear? → Ask: Would downstream developers need this?
+   ├─ YES → universal/ (assume stable foundation, teach usage patterns)
+   └─ NO → local/ (author-specific, meta-level complexity)
+```
 
-**When Creating Framework Standards:**
-- ✅ Think like a consumer using stable tools
-- ✅ Assume framework works correctly
-- ✅ Teach patterns, not internals
-- ✅ Preserve abstraction boundaries
-- ❌ Don't document builder pain points (not representative)
-- ❌ Don't expose internals consumers don't need
+**Error Diagnosis Decision:**
+```
+Encountered an error. Is it:
+├─ Foundation defect? → Fix in source, redistribute to users
+├─ Misuse pattern? → Clarify documentation
+└─ Unclear? → This standard helps you diagnose
+```
+
+**API Exposure Decision:**
+```
+Should downstream developers see this?
+├─ Validation schemas? → Usually NO (internal machinery)
+├─ Function signatures? → YES (public contract)
+├─ Implementation internals? → NO (hide complexity)
+└─ Usage patterns? → YES (teach approaches, not mechanisms)
+```
+
+**Critical: This is about COGNITIVE MODEL (where info belongs), not ITERATION MECHANICS (where source lives during edits). For iteration mechanics, see `dogfooding-model.md`.**
 
 ---
 
@@ -52,18 +66,33 @@ Define behavioral patterns for developing prAxIs OS itself using prAxIs OS. This
 
 ---
 
-## ❓ Questions This Answers
+## ❓ Questions This Answers (Information Architecture & Cognitive Model)
 
-1. "Why is building prAxIs OS harder than using it?"
-2. "Should I document this framework bug in consumer standards?"
-3. "How do I know if error is framework bug or my usage mistake?"
-4. "Why do I need to understand internals when consumers don't?"
-5. "Should framework standards include implementation details?"
-6. "How do I design standards for consumers vs builders?"
-7. "What's the difference between framework and project standards?"
-8. "Why does my experience feel more complex than consumer examples?"
-9. "Should I expose validation schemas to reduce friction?"
-10. "How do I separate builder knowledge from consumer knowledge?"
+**Documentation Placement:**
+1. "Should I write this in universal/ or local/?"
+2. "Is this framework-author info or downstream-developer info?"
+3. "Should users see this implementation mechanism?"
+4. "Does this belong in published documentation?"
+
+**Error Diagnosis:**
+5. "Is this malfunction in foundation or misuse of API?"
+6. "Should I clarify this error in public docs?"
+7. "Why does validation reject - defect or incorrect invocation?"
+
+**API Design:**
+8. "Should I expose validation schemas to users?"
+9. "How much internal machinery should docs reveal?"
+10. "What implementation internals can I hide?"
+
+**Cognitive Model:**
+11. "Why is authoring prAxIs OS harder than using it?"
+12. "Why does my experience feel more complex than examples?"
+13. "How do I design APIs for users vs framework authors?"
+
+**NOT answered here (see `dogfooding-model.md`):**
+- ❌ "Where do I edit server implementation files?" (iteration mechanics)
+- ❌ "When do I promote to source directories?" (publish process)
+- ❌ "How does hot reload work?" (testing cycle)
 
 ---
 
@@ -493,26 +522,29 @@ Query this standard when working on prAxIs OS:
 
 ---
 
-## 🎓 The Meta-Lesson
+## 🎓 The Meta-Lesson: Asymmetric Complexity Design
 
-**Why dogfooding at meta-level works:**
+**The Builder's Burden:**
 
-1. **Hardest possible test**: If framework works for meta-development, it works for everything
-2. **Real pain discovery**: Building with incomplete tools reveals issues
-3. **Quality forcing function**: Framework must be good enough to build itself
-4. **Consumer validation**: If complex case works, simple case definitely works
+You intentionally face harder problems so consumers face easier ones:
 
-**But remember:**
-- Your experience (1%) ≠ Consumer experience (99%)
-- Your pain points ≠ Their pain points
-- Design for THEIR simplicity, not YOUR complexity
-- Meta-development enables clean domain-development
+| Your Experience (Builder 1%) | Their Experience (Consumer 99%) |
+|------------------------------|--------------------------------|
+| Debug dispatcher internals | Call workflow tool, it works |
+| Understand validation schemas | Follow clear error messages |
+| Navigate recursive complexity | Linear, predictable workflows |
+| Test framework + usage simultaneously | Test only their domain logic |
+| Incomplete tools (building them) | Stable tools (using them) |
 
-**The goal:**
-- You face hard problems → They face easy problems
-- You understand internals → They use abstractions
-- You debug framework → They debug domain logic
+**Design Principle:**
+- Your pain points → Better abstractions
 - Your complexity → Their simplicity
+- Your internal knowledge → Their clean interface
+
+**The Goal:**
+When creating standards, ask: "Does this document MY complex experience or THEIR simple experience?"
+- ✅ Document their simple experience (assume stable framework)
+- ❌ Don't document your complex experience (not representative)
 
 ---
 

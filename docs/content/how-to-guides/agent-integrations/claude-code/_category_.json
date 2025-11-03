@@ -1,0 +1,9 @@
+{
+  "label": "Claude Code",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure Claude Code in different modes: terminal CLI, VS Code integration, or as secondary agent in Cursor."
+  }
+}
+

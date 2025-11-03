@@ -16,9 +16,9 @@
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [
-        "search_standards",
-        "get_current_phase",
-        "get_workflow_state",
+        "pos_search",
+        "pos_workflow",
+        "pos_browser",
         "get_server_info"
       ]
     }

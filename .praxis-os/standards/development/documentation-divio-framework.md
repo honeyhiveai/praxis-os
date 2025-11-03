@@ -406,7 +406,7 @@ doc_type: reference
 
 Complete reference of all MCP tools available in prAxIs OS.
 
-## search_standards
+## pos_search
 
 **Purpose:** Semantic search over prAxIs OS standards
 
@@ -425,7 +425,7 @@ Complete reference of all MCP tools available in prAxIs OS.
 
 **Example:**
 ```python
-search_standards("how to write tests")
+pos_search(content_type="standards", query="how to write tests")
 ```
 
 ## pos_browser

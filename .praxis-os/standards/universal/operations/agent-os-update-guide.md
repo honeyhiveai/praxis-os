@@ -519,7 +519,7 @@ During update:
 
 After update:
 - [ ] Wait for file watcher to rebuild index (~10-30 seconds)
-- [ ] Test with a simple query: `search_standards("test patterns")`
+- [ ] Test with a simple query: `pos_search(content_type="standards", query="test patterns")`
 - [ ] Verify workflows still work (if used)
 - [ ] Update `.praxis-os/VERSION.txt` (optional)
 - [ ] Delete backup if everything works
@@ -653,33 +653,33 @@ This guide is most valuable when:
 
 1. **Updating prAxIs OS**
    - Situation: Need to get latest standards and workflows
-   - Query: `search_standards("how to update prAxIs OS")`
+   - Query: `pos_search(content_type="standards", query="how to update prAxIs OS")`
 
 2. **Unsure About Sync Source**
    - Situation: Don't know if I should sync from `.praxis-os` or `universal`
-   - Query: `search_standards("sync from universal or agent-os")`
+   - Query: `pos_search(content_type="standards", query="sync from universal or agent-os")`
 
 3. **RAG Index Questions**
    - Situation: Wondering if I need to rebuild RAG index
-   - Query: `search_standards("RAG index auto rebuild")`
+   - Query: `pos_search(content_type="standards", query="RAG index auto rebuild")`
 
 4. **MCP Server Updates**
    - Situation: Need to update MCP server code
-   - Query: `search_standards("update MCP server")`
+   - Query: `pos_search(content_type="standards", query="update MCP server")`
 
 5. **Update Frequency**
    - Situation: How often should I update?
-   - Query: `search_standards("prAxIs OS update frequency")`
+   - Query: `pos_search(content_type="standards", query="prAxIs OS update frequency")`
 
 ### Query by Use Case
 
 | Use Case | Example Query |
 |----------|---------------|
-| Update process | `search_standards("how to update prAxIs OS")` |
-| Sync source | `search_standards("sync from universal")` |
-| Safe upgrade | `search_standards("safe upgrade prAxIs OS")` |
-| RAG index | `search_standards("RAG index rebuild")` |
-| MCP server update | `search_standards("update MCP server")` |
+| Update process | `pos_search(content_type="standards", query="how to update prAxIs OS")` |
+| Sync source | `pos_search(content_type="standards", query="sync from universal")` |
+| Safe upgrade | `pos_search(content_type="standards", query="safe upgrade prAxIs OS")` |
+| RAG index | `pos_search(content_type="standards", query="RAG index rebuild")` |
+| MCP server update | `pos_search(content_type="standards", query="update MCP server")` |
 
 ---
 
@@ -687,21 +687,21 @@ This guide is most valuable when:
 
 **Update Standards:**
 - `standards/installation/update-procedures.md` - Update procedures standard (discovery guide)
-  → `search_standards("prAxIs OS update standards")`
+  → `pos_search(content_type="standards", query="prAxIs OS update standards")`
 
 **Workflows:**
 - `workflows/praxis_os_upgrade_v1/` - Automated safe upgrade workflow
-  → `search_standards("agent OS upgrade workflow")`
+  → `pos_search(content_type="standards", query="agent OS upgrade workflow")`
 
 **Installation:**
 - `usage/installation-guide.md` - Initial installation (if available)
-  → `search_standards("prAxIs OS installation")`
+  → `pos_search(content_type="standards", query="prAxIs OS installation")`
 
 **Query workflow:**
-1. **Before Update**: `search_standards("how to update prAxIs OS")` → Learn process
+1. **Before Update**: `pos_search(content_type="standards", query="how to update prAxIs OS")` → Learn process
 2. **Execute**: Use `praxis_os_upgrade_v1` workflow for safe update
 3. **Verify**: Check RAG index rebuilt automatically
-4. **Troubleshoot**: `search_standards("prAxIs OS update issues")` if needed
+4. **Troubleshoot**: `pos_search(content_type="standards", query="prAxIs OS update issues")` if needed
 
 ---
 

@@ -508,7 +508,7 @@ Proven practices for effective workflow usage and creation.
 
 ```python
 # Discover workflow capabilities first
-discovery = await search_standards(
+discovery = await pos_search(
     query="What does test_generation_v3 workflow produce?",
     n_results=3
 )
@@ -564,16 +564,16 @@ if not result["checkpoint_passed"]:
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Understanding workflows** | `search_standards("workflow system")` |
-| **Starting workflow** | `search_standards("how to start workflow")` |
-| **Phase gating** | `search_standards("phase gating")` |
-| **Horizontal scaling** | `search_standards("workflow horizontal scaling")` |
-| **Workflow discovery** | `search_standards("workflow discovery")` |
-| **Available workflows** | `search_standards("standard workflows")` |
-| **Creating workflow** | `search_standards("create new workflow")` |
-| **State management** | `search_standards("workflow state")` |
-| **MCP tools** | `search_standards("workflow MCP tools")` |
-| **Best practices** | `search_standards("workflow best practices")` |
+| **Understanding workflows** | `pos_search(content_type="standards", query="workflow system")` |
+| **Starting workflow** | `pos_search(content_type="standards", query="how to start workflow")` |
+| **Phase gating** | `pos_search(content_type="standards", query="phase gating")` |
+| **Horizontal scaling** | `pos_search(content_type="standards", query="workflow horizontal scaling")` |
+| **Workflow discovery** | `pos_search(content_type="standards", query="workflow discovery")` |
+| **Available workflows** | `pos_search(content_type="standards", query="standard workflows")` |
+| **Creating workflow** | `pos_search(content_type="standards", query="create new workflow")` |
+| **State management** | `pos_search(content_type="standards", query="workflow state")` |
+| **MCP tools** | `pos_search(content_type="standards", query="workflow MCP tools")` |
+| **Best practices** | `pos_search(content_type="standards", query="workflow best practices")` |
 
 ---
 
@@ -581,27 +581,27 @@ if not result["checkpoint_passed"]:
 
 **Query workflow for complete workflow understanding:**
 
-1. **Start with system overview** → `search_standards("workflow system")` (this document)
-2. **Learn metadata structure** → `search_standards("workflow metadata")` → `standards/workflows/workflow-metadata-standards.md`
-3. **Understand construction** → `search_standards("workflow construction")` → `standards/workflows/workflow-construction-standards.md`
-4. **Learn RAG configuration** → `search_standards("MCP RAG configuration")` → `standards/workflows/mcp-rag-configuration.md`
+1. **Start with system overview** → `pos_search(content_type="standards", query="workflow system")` (this document)
+2. **Learn metadata structure** → `pos_search(content_type="standards", query="workflow metadata")` → `standards/workflows/workflow-metadata-standards.md`
+3. **Understand construction** → `pos_search(content_type="standards", query="workflow construction")` → `standards/workflows/workflow-construction-standards.md`
+4. **Learn RAG configuration** → `pos_search(content_type="standards", query="MCP RAG configuration")` → `standards/workflows/mcp-rag-configuration.md`
 
 **By Category:**
 
 **Workflows:**
-- `standards/workflows/workflow-metadata-standards.md` - metadata.json structure → `search_standards("workflow metadata")`
-- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
-- `standards/workflows/mcp-rag-configuration.md` - RAG indexing → `search_standards("MCP RAG configuration")`
+- `standards/workflows/workflow-metadata-standards.md` - metadata.json structure → `pos_search(content_type="standards", query="workflow metadata")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
+- `standards/workflows/mcp-rag-configuration.md` - RAG indexing → `pos_search(content_type="standards", query="MCP RAG configuration")`
 
 **Meta-Framework:**
-- `standards/meta-workflow/validation-gates.md` - Checkpoint validation → `search_standards("validation gates")`
-- `standards/meta-workflow/command-language.md` - Command symbols → `search_standards("command language")`
-- `standards/meta-workflow/framework-creation-principles.md` - Framework design → `search_standards("framework creation principles")`
-- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+- `standards/meta-workflow/validation-gates.md` - Checkpoint validation → `pos_search(content_type="standards", query="validation gates")`
+- `standards/meta-workflow/command-language.md` - Command symbols → `pos_search(content_type="standards", query="command language")`
+- `standards/meta-workflow/framework-creation-principles.md` - Framework design → `pos_search(content_type="standards", query="framework creation principles")`
+- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `pos_search(content_type="standards", query="horizontal decomposition")`
 
 **Usage:**
-- `usage/mcp-usage-guide.md` - Using MCP tools → `search_standards("MCP usage guide")`
-- `usage/operating-model.md` - prAxIs OS principles → `search_standards("prAxIs OS operating model")`
+- `usage/mcp-usage-guide.md` - Using MCP tools → `pos_search(content_type="standards", query="MCP usage guide")`
+- `usage/operating-model.md` - prAxIs OS principles → `pos_search(content_type="standards", query="prAxIs OS operating model")`
 
 ---
 

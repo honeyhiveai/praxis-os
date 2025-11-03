@@ -7,10 +7,31 @@ to encourage diverse exploration and provide progress visualization.
 Traceability: specs.md Section 2.3 (PrependGenerator Component)
 """
 
+import random
+import re
 from typing import Set
 
 from .query_classifier import QueryAngle, get_angle_emoji, get_angle_suggestion
 from .query_tracker import QueryTracker
+
+# Completion messages pool for rotation (keeps reminders fresh)
+# Mix of "query more" encouragement + "training data ≠ THIS PROJECT" reminders
+COMPLETION_MESSAGES = [
+    # Query encouragement (original messages)
+    "🎉 Keep exploring! Query liberally to deepen your knowledge.",
+    "🎉 Great querying! Continue exploring from multiple angles.",
+    "🎉 Excellent coverage! Keep querying to maintain project understanding.",
+    
+    # Training data vs project knowledge reminders
+    "🎯 Remember: Training data = concepts. THIS PROJECT = implementation. Always verify.",
+    "🎯 You know ABOUT things. You don't know THIS PROJECT until you search/read it.",
+    "🎯 Recognition from training ≠ knowledge of THIS PROJECT. Query first, implement second.",
+    "🎯 'I know how X works' is a red flag. Ask: 'How does THIS PROJECT do X?'",
+    "🎯 Training patterns are generic. THIS PROJECT has specific conventions. Search/read them.",
+    "🎯 Feeling confident? Stop. Verify THIS PROJECT's approach before implementing.",
+    "🎯 Training data taught you possibilities. Querying/reading teaches you THIS PROJECT.",
+    "🎯 Don't assume based on training. Discover THIS PROJECT's actual implementation.",
+]
 
 
 def generate_query_prepend(
@@ -22,10 +43,13 @@ def generate_query_prepend(
     Generate dynamic prepend message based on query history.
 
     Creates a 3-line feedback message with:
-    - Header with emoji tagline
     - Progress line (query counts and angle coverage visualization)
-    - Suggestion (if <5 queries) or completion message (if ≥5 queries + ≥4 angles)
+    - Randomized feedback (training data reminder OR query angle suggestion)
     - Visual separator
+    
+    Feedback probability:
+    - Queries 1-2: 50% reminder, 50% suggestion
+    - Queries 3+: 70% reminder, 30% suggestion
 
     Args:
         tracker: The query tracker instance with session statistics
@@ -52,7 +76,7 @@ def generate_query_prepend(
         After 5 queries with 4+ angles:
         >>> # ... record 4 more queries ...
         >>> prepend = generate_query_prepend(tracker, "s1", "query")
-        >>> "Keep exploring" in prepend
+        >>> any(emoji in prepend for emoji in ["🎉", "🎯"])
         True
 
     Token Budget:
@@ -81,12 +105,21 @@ def generate_query_prepend(
         f"Angles: {angle_indicators}"
     )
 
-    # Generate suggestion or completion message
-    if stats.total_queries >= 5 and len(stats.angles_covered) >= 4:
-        # Completion message
-        feedback_line = "🎉 Keep exploring! Query liberally to deepen your knowledge."
+    # Generate feedback with randomized reminders at all query counts
+    # Early stage: 50% reminder, 50% suggestion
+    # Later stage: 70% reminder, 30% suggestion
+    if stats.total_queries < 3:
+        # Early stage - balanced approach
+        show_reminder = random.random() < 0.5
     else:
-        # Generate suggestion for uncovered angle
+        # Later stage - increase reminder frequency when efficiency pressure peaks
+        show_reminder = random.random() < 0.7
+    
+    if show_reminder:
+        # Show training data reminder
+        feedback_line = random.choice(COMPLETION_MESSAGES)
+    else:
+        # Show query angle suggestion
         uncovered_angles = tracker.get_uncovered_angles(session_id)
         topic = _extract_topic(current_query)
         suggestion = _generate_suggestion(uncovered_angles, topic)
@@ -147,7 +180,7 @@ def _extract_topic(query: str) -> str:
 
     Strips common query words (what, how, where, is, are, the, a, an)
     to extract the core topic for suggestion generation.
-    
+
     **Security**: Sanitizes HTML tags to prevent XSS injection in suggestions.
 
     Args:
@@ -173,8 +206,7 @@ def _extract_topic(query: str) -> str:
 
     # SECURITY: Remove HTML tags to prevent XSS (NFR-S1)
     # Simple regex to strip all <tag> and </tag> patterns
-    import re
-    sanitized_query = re.sub(r'<[^>]+>', '', query)
+    sanitized_query = re.sub(r"<[^>]+>", "", query)
 
     # Common words to remove
     common_words = {
@@ -259,4 +291,3 @@ def _generate_suggestion(uncovered_angles: Set[QueryAngle], topic: str) -> str:
 __all__ = [
     "generate_query_prepend",
 ]
-

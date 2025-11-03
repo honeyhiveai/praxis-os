@@ -51,7 +51,7 @@
 
 **How it works:**
 - Cursor loads MCP server via `mcp.json`
-- MCP server exposes 7 tools (search_standards, start_workflow, etc.)
+- MCP server exposes 7 tools (pos_search, start_workflow, etc.)
 - AI agent calls MCP tools as needed
 - RAG system provides context from indexed docs
 
@@ -175,7 +175,7 @@ Query the prAxIs OS standards via MCP.
 - "Show me the production code checklist"
 
 **Implementation:**
-Use the `search_standards` MCP tool with the user's query.
+Use the `pos_search` MCP tool with the user's query.
 ```
 
 **Benefits:**

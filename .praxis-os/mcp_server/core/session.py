@@ -201,6 +201,22 @@ class WorkflowSession:
             parser=parser,
         )
 
+        # Update session metadata with actual parsed phase count
+        # Phase 0 + dynamically parsed phases from source
+        parsed_phases = self.dynamic_registry.get_total_phases()
+        total_phases = parsed_phases + 1  # Add Phase 0
+        self.state.metadata["total_phases"] = total_phases
+        
+        # Persist updated state to disk
+        self.state_manager.save_state(self.state)
+        
+        logger.info(
+            "Session %s: Parser discovered %d phases, total_phases updated to %d (persisted)",
+            self.session_id,
+            parsed_phases,
+            total_phases,
+        )
+
     def get_current_phase(self) -> Dict[str, Any]:
         """
         Get current phase content.

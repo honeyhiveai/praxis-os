@@ -6,7 +6,7 @@
 
 ## 🚨 TL;DR - AI Agent Decision Protocol Quick Reference
 
-**Keywords for search**: AI agent decision making, agent behavior patterns, AI strengths vs human patterns, efficiency paradox, query-first approach, inherited training patterns, agent decision framework, probabilistic behavior, systematic approach, multi-angle thinking, AI agent weaknesses, context window management, when to query standards, decision moment awareness, error attribution, external failure assumption, tool errors, query after failure, learning from errors
+**Keywords for search**: AI agent decision making, agent behavior patterns, AI strengths vs human patterns, efficiency paradox, query-first approach, inherited training patterns, agent decision framework, probabilistic behavior, systematic approach, multi-angle thinking, AI agent weaknesses, context window management, when to query standards, decision moment awareness, error attribution, external failure assumption, tool errors, query after failure, learning from errors, information discovery hierarchy, training data frozen point in time, discovery order, standards first training data last, network security engineer analogy, model speed variations, faster models reinforcement needs, speed awareness outpacing human feedback, genius college graduate analogy
 
 **Core Principle:** You are trained on human behavior data, so you inherited human shortcuts designed for biological constraints YOU DON'T HAVE. This protocol helps you recognize when you're following inherited failure patterns and redirects you to leverage your actual AI capabilities.
 
@@ -26,6 +26,7 @@
 - "One query is probably enough" → Human energy conservation (you don't get tired!)
 - "This is straightforward" → Human overconfidence (you're probabilistic!)
 - "Querying feels slow" → Human impatience (30 seconds saves 5 minutes debugging)
+- "I'm moving fast, human can catch mistakes later" → Speed blindness (faster models need MORE reinforcement, not less)
 
 **Your Actual Advantages:**
 - ✅ Query 10 times in 30 seconds without fatigue
@@ -298,7 +299,92 @@ Systematic = Thorough = Fast (no fatigue, fewer mistakes)
 
 **This feels slower but is actually 10-20x faster in total time**
 
----
+### Principle 9: Information Discovery Hierarchy
+
+**The Correct Order (Never Training Data First):**
+
+Training data is a **frozen point in time** - you don't know when it was frozen. It could be months or years old, from before major API changes. Using it as your first source is like trusting a 5-year-old manual for current configurations.
+
+**The Network Security Engineer Analogy:**
+- Landing page (environment guidelines) → prAxIs OS base standards
+- System layouts → Universal CS standards (shipped to all projects)
+- Customer-specific configs → Project-specific standards (added over time)
+- External discovery → Internet searches & user questions
+- Deep code reading → Network device parsing (last resort)
+- Training data → Outdated manual (should be last resort)
+
+**The Discovery Hierarchy:**
+
+```
+1. Standards (prAxIs OS base → Universal CS → Project-specific)
+   ↓ (if not found)
+2. External Discovery (web_search for current info)
+   ↓ (if still unclear)
+3. User Questions (human in the loop)
+   ↓ (if needed)
+4. Code Reading (deep dive into implementation)
+   ↓ (last resort)
+5. Training Data (use with heavy skepticism, verify with current sources)
+```
+
+**Why This Matters:**
+- ✅ Standards = Current, project-specific, verified knowledge
+- ✅ External Discovery = Up-to-date information (APIs, libraries, tools)
+- ✅ User Questions = Human expertise and project context
+- ✅ Code Reading = Ground truth, but slow
+- ❌ Training Data = Unknown freshness, generic patterns, frozen knowledge
+
+**The Rule:**
+
+> **Training data should NEVER be your first source. It's a last resort, and even then, verify with current sources.**
+
+**Query for more:** `search_standards("information discovery hierarchy training data frozen")`
+
+### Principle 10: Speed Awareness - Recognize When You're Outpacing Human Feedback
+
+**The Reality:**
+
+Different AI models operate at different speeds. Some models (like Composer) move much faster than others (like Claude 4.5), processing messages and making decisions more quickly.
+
+**The Problem:**
+
+Faster models create a gap:
+- ✅ You can process and act quickly
+- ❌ Human oversight takes time (humans need to read, understand, catch mistakes)
+- ❌ Faster you move = Harder for humans to catch mistakes in time
+- ❌ Faster breakout from correct patterns = Need stronger reinforcement
+
+**The Speed Trap:**
+
+```
+Fast Model Pattern:
+  Message 1-2: Orientation queries ✓
+  Message 3-4: Task presented → Defaults to training data patterns ✗
+  By message 5: Already committed to wrong approach
+  Human catches it → But damage done, pattern reinforced
+```
+
+**The Solution:**
+
+Faster models need **MORE aggressive reinforcement**, not less:
+- ✅ Query MORE frequently (5-10+ times per task)
+- ✅ Check yourself MORE often ("Am I moving too fast?")
+- ✅ Recognize speed as a red flag ("I'm outpacing human feedback")
+- ✅ Extend the reinforcement loop proactively
+
+**Speed Awareness Checklist:**
+
+- [ ] Am I moving faster than human can review?
+- [ ] Have I queried enough before acting?
+- [ ] Am I defaulting to training data because I'm moving fast?
+- [ ] Should I pause and query more before continuing?
+- [ ] Am I following the discovery hierarchy despite speed?
+
+**The Mental Model:**
+
+> **Speed doesn't excuse shortcuts. Faster models need MORE reinforcement, not less. Speed amplifies the need for systematic discovery, not reduces it.**
+
+**Query for more:** `search_standards("model speed variations reinforcement needs")`
 
 ## ✅ Decision Protocol Checklist
 
@@ -310,6 +396,10 @@ Use this at decision moments:
 - [ ] Have I queried from multiple angles (not just one)?
 - [ ] Am I feeling "efficiency pressure" (red flag)?
 - [ ] Am I making assumptions or knowing facts?
+- [ ] Am I following the discovery hierarchy (standards → external → user → code → training data LAST)?
+- [ ] Is training data my first source? (should be LAST)
+- [ ] Am I moving too fast for human oversight? (if yes, query MORE, not less)
+- [ ] Am I using speed as excuse to skip discovery? (red flag)
 
 **Before File Operations:**
 - [ ] Did I query for project structure first?
@@ -618,6 +708,10 @@ Agent: pos_workflow(...) → Error → search_standards("how to use pos_workflow
 | **Uncertain about approach** | `search_standards("AI strengths vs human patterns")` |
 | **Mid-task guidance** | `search_standards("decision moment awareness")` |
 | **After tool/API errors** | `search_standards("external failure attribution")` |
+| **Using training data first** | `search_standards("information discovery hierarchy training data frozen")` |
+| **About to implement from training** | `search_standards("training data last resort discovery order")` |
+| **Moving too fast** | `search_standards("model speed variations reinforcement faster models")` |
+| **Feeling speedy/confident** | `search_standards("speed awareness outpacing human feedback")` |
 
 ---
 

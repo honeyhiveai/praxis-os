@@ -132,7 +132,7 @@ mcp>=1.0.0                    # Model Context Protocol
 watchdog>=3.0.0               # File watching
 ```
 
-### 5. Configure Cursor
+### 5. Configure Cursor (Primary Agent)
 
 Create `.cursor/mcp.json`:
 
@@ -166,17 +166,31 @@ Create `.cursor/mcp.json`:
 ```
 
 **Transport Modes:**
-- `dual`: stdio (IDE) + HTTP (sub-agents) - **Recommended**
-- `stdio`: IDE communication only (traditional mode)
+- `dual`: stdio (IDE) + HTTP (enables secondary agents) - **Always used for primary agents**
+- `stdio`: IDE communication only (not recommended - disables secondary agents)
 - `http`: Network communication only (for testing or services)
+
+**Why Primary Agents Use Dual Transport:**
+- ✅ Primary agents (Cursor, Cline, Claude Code) **always** use `--transport dual`
+- ✅ Enables HTTP endpoint for secondary agents to connect
+- ✅ Primary agent uses stdio for its own connection (fast, native)
+- ✅ Secondary agents connect via HTTP (no server launch needed)
 
 **Restart Cursor** to activate MCP server.
 
-**Dual-Transport Benefits:**
-- ✅ IDE integration via stdio
-- ✅ Sub-agent access via HTTP (http://127.0.0.1:4242/mcp)
-- ✅ Zero port conflicts (automatic port allocation)
+**Dual-Transport Benefits (standard for all primary agents):**
+- ✅ IDE integration via stdio (primary agent's connection)
+- ✅ HTTP endpoint automatically enabled (for secondary agents)
+- ✅ Zero port conflicts (automatic port allocation 4242-5242 range)
 - ✅ Multi-project support (each project gets its own port)
+- ✅ Port written to `.praxis-os/.mcp_server_state.json` for secondary agents
+- ✅ Secondary agents can connect anytime without reconfiguring primary
+
+**Dynamic Port Allocation:**
+- Server automatically finds available port in range 4242-5242
+- Port written to `.praxis-os/.mcp_server_state.json` on startup
+- Secondary agents read port from state file
+- Helper scripts (`update-cline-mcp.py`) automatically configure secondary agents
 
 ### 6. Build RAG Index
 
@@ -212,23 +226,27 @@ Index built in 58s
 
 Should return relevant chunks from universal/development standards.
 
-### Check Dual-Transport (if using dual mode)
+### Check Dual-Transport (standard for primary agents)
 
 ```bash
-# Check state file
+# Check state file (created automatically on startup with dual transport)
 cat .praxis-os/.mcp_server_state.json
 
 # Should show:
 # - transport: "dual"
-# - port: 4242 (or another available port)
-# - url: "http://127.0.0.1:4242/mcp"
+# - port: 4242 (or another available port in 4242-5242 range)
+# - url: "http://127.0.0.1:4242/mcp" (or different port)
 # - project info
 
-# Test HTTP endpoint
+# Test HTTP endpoint (for secondary agents)
+PORT=$(cat .praxis-os/.mcp_server_state.json | grep -o '"port": [0-9]*' | grep -o '[0-9]*')
+curl http://127.0.0.1:${PORT}/mcp  # Use port from state file
+# Should return MCP server response
+
 # In Cursor, say:
 "Call get_server_info tool"
 
-# Should show server info including transport mode
+# Should show server info including transport mode (dual)
 ```
 
 ### Check Workflows

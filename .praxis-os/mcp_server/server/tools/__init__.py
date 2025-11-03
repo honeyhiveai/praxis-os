@@ -6,6 +6,7 @@ performance degradation (research shows 85% drop with >20 tools).
 """
 
 from .browser_tools import register_browser_tools
+from .pos_search import register_pos_search_tools
 from .rag_tools import register_rag_tools
 from .registry import register_all_tools
 from .server_info_tools import register_server_info_tools
@@ -13,6 +14,7 @@ from .workflow_tools import register_workflow_tools
 
 __all__ = [
     "register_all_tools",
+    "register_pos_search_tools",
     "register_rag_tools",
     "register_workflow_tools",
     "register_browser_tools",

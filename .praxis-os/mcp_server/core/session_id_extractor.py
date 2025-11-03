@@ -17,7 +17,7 @@ from typing import Dict, Optional
 try:
     from fastmcp import Context
 except ImportError:
-    Context = None  # type: ignore[misc,assignment]
+    Context = None  # type: ignore[assignment,misc]
 
 
 @dataclass
@@ -207,9 +207,10 @@ def _extract_client_id(ctx: Optional["Context"]) -> str:
     Extract client ID with fallback chain.
 
     Tries:
-    1. MCP context client info (if available)
-    2. Process ID (PID)
-    3. "default" as last resort
+    1. MCP context session_id (UUID from FastMCP) - preferred for multi-agent
+    2. MCP context client_id (if populated)
+    3. Process ID (PID)
+    4. "default" as last resort
 
     Args:
         ctx: FastMCP Context object (optional)
@@ -224,20 +225,32 @@ def _extract_client_id(ctx: Optional["Context"]) -> str:
 
     Traceability:
         - NFR-R1: Graceful degradation
+        - Multi-agent context tracking (2025-10-30)
     """
     # Try to extract from MCP context (if available)
-    if ctx is not None and hasattr(ctx, "client_id"):
-        try:
-            client_id = getattr(ctx, "client_id", None)
-            if client_id:
-                return str(client_id)
-        except Exception:
-            pass  # Fall through to next option
+    if ctx is not None:
+        # Prefer session_id (UUID) - this is populated by FastMCP
+        if hasattr(ctx, "session_id"):
+            try:
+                session_id = getattr(ctx, "session_id", None)
+                if session_id:
+                    return f"mcp_{session_id}"  # Prefix to identify MCP sessions
+            except (AttributeError, ValueError, TypeError):
+                pass  # Fall through to next option
+        
+        # Try client_id (may not be populated)
+        if hasattr(ctx, "client_id"):
+            try:
+                client_id = getattr(ctx, "client_id", None)
+                if client_id:
+                    return str(client_id)
+            except (AttributeError, ValueError, TypeError):
+                pass  # Fall through to next option
 
     # Fallback to process ID
     try:
         return f"pid_{os.getpid()}"
-    except Exception:
+    except (OSError, AttributeError):
         pass  # Fall through to last resort
 
     # Last resort: default identifier
@@ -353,4 +366,3 @@ __all__ = [
     "cleanup_stale_sessions",
     "get_session_stats",
 ]
-

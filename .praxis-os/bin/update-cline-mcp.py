@@ -10,16 +10,95 @@ Usage:
 
 The script will:
 1. Read current MCP server port from state file
-2. Locate Cline's cline_mcp_settings.json
-3. Update or create agent-os-rag server configuration
-4. Preserve other MCP server configurations
+2. Detect project name (from git or directory name)
+3. Locate Cline's cline_mcp_settings.json
+4. Update or create project-specific server configuration (using project name)
+5. Preserve other MCP server configurations
 """
 
 import json
 import os
+import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Dict, Any, Optional
+
+
+def find_project_root() -> Optional[Path]:
+    """
+    Find project root directory containing .praxis-os.
+    
+    :return: Path to project root or None if not found
+    """
+    # Try current directory
+    if (Path.cwd() / ".praxis-os").exists():
+        return Path.cwd()
+    
+    # Try parent directories (up to 5 levels)
+    for parent in Path.cwd().parents[:5]:
+        if (parent / ".praxis-os").exists():
+            return parent
+    
+    return None
+
+
+def get_project_name(project_root: Path) -> str:
+    """
+    Get project name dynamically.
+    
+    Priority:
+    1. Git repository name (extracted from remote URL)
+    2. Directory name (fallback for non-git projects)
+    
+    :param project_root: Path to project root directory
+    :return: Project name (sanitized for use as MCP server name)
+    """
+    # Try git repo name first
+    git_name = _get_git_repo_name(project_root)
+    if git_name:
+        return git_name
+    
+    # Fallback to directory name
+    return project_root.name
+
+
+def _get_git_repo_name(project_root: Path) -> Optional[str]:
+    """
+    Extract repository name from git remote URL.
+    
+    :param project_root: Path to project root directory
+    :return: Repository name or None if not a git repo or can't determine
+    """
+    try:
+        # Get git remote URL
+        result = subprocess.run(
+            ["git", "config", "--get", "remote.origin.url"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False
+        )
+        
+        if result.returncode != 0:
+            return None
+        
+        remote_url = result.stdout.strip()
+        if not remote_url:
+            return None
+        
+        # Extract repo name from various URL formats
+        # git@github.com:user/repo.git -> repo
+        # https://github.com/user/repo.git -> repo
+        # https://github.com/user/repo -> repo
+        match = re.search(r"[:/]([^/:]+?)(?:\.git)?/?$", remote_url)
+        if match:
+            return match.group(1)
+        
+        return None
+    except (subprocess.TimeoutExpired, subprocess.SubprocessError, Exception):
+        return None
 
 
 def find_mcp_state_file() -> Optional[Path]:
@@ -28,14 +107,9 @@ def find_mcp_state_file() -> Optional[Path]:
     
     :return: Path to state file or None if not found
     """
-    # Try current directory
-    state_file = Path.cwd() / ".praxis-os" / ".mcp_server_state.json"
-    if state_file.exists():
-        return state_file
-    
-    # Try parent directories (up to 3 levels)
-    for parent in Path.cwd().parents[:3]:
-        state_file = parent / ".praxis-os" / ".mcp_server_state.json"
+    project_root = find_project_root()
+    if project_root:
+        state_file = project_root / ".praxis-os" / ".mcp_server_state.json"
         if state_file.exists():
             return state_file
     
@@ -96,11 +170,12 @@ def find_cline_config() -> Optional[Path]:
     return None
 
 
-def update_cline_config(config_file: Path, url: str, port: int) -> None:
+def update_cline_config(config_file: Path, server_name: str, url: str, port: int) -> None:
     """
     Update Cline MCP config with prAxIs OS server settings.
     
     :param config_file: Path to cline_mcp_settings.json
+    :param server_name: Project-specific MCP server name (from project name)
     :param url: MCP server URL
     :param port: MCP server port
     """
@@ -115,11 +190,11 @@ def update_cline_config(config_file: Path, url: str, port: int) -> None:
     if "mcpServers" not in config:
         config["mcpServers"] = {}
     
-    # Update or create agent-os-rag configuration
+    # Update or create project-specific configuration
     # CRITICAL: Must specify "type": "streamableHttp" explicitly!
     # Cline's schema checks in order: stdio, sse, streamableHttp
     # Without type, URL-only configs default to SSE (deprecated)
-    config["mcpServers"]["agent-os-rag"] = {
+    config["mcpServers"][server_name] = {
         "type": "streamableHttp",
         "url": url,
         "alwaysAllow": [
@@ -140,6 +215,7 @@ def update_cline_config(config_file: Path, url: str, port: int) -> None:
         json.dump(config, f, indent=2)
     
     print(f"✅ Updated Cline MCP config at: {config_file}")
+    print(f"   Server name: {server_name}")
     print(f"   Server URL: {url}")
     print(f"   Port: {port}")
 
@@ -167,7 +243,16 @@ def main() -> int:
     
     print(f"✅ Found state file: {state_file}")
     
-    # Step 2: Read current port
+    # Step 2: Detect project name
+    project_root = find_project_root()
+    if not project_root:
+        print("❌ ERROR: Could not determine project root")
+        return 1
+    
+    server_name = get_project_name(project_root)
+    print(f"✅ Detected project name: {server_name}")
+    
+    # Step 3: Read current port
     print("\n📖 Reading MCP server state...")
     try:
         state = read_mcp_state(state_file)
@@ -178,7 +263,7 @@ def main() -> int:
         print(f"❌ ERROR: {e}")
         return 1
     
-    # Step 3: Find Cline config
+    # Step 4: Find Cline config
     print("\n🔍 Searching for Cline MCP config...")
     config_file = find_cline_config()
     
@@ -191,19 +276,20 @@ def main() -> int:
         print("  2. Go to Configure tab")
         print("  3. Click 'Configure MCP Servers'")
         print(f"  4. Add remote server with URL: {url}")
+        print(f"  5. Use server name: {server_name}")
         return 1
     
     print(f"✅ Found config file: {config_file}")
     
-    # Step 4: Update config
+    # Step 5: Update config
     print("\n✏️  Updating Cline MCP configuration...")
     try:
-        update_cline_config(config_file, url, port)
+        update_cline_config(config_file, server_name, url, port)
         print("\n" + "=" * 60)
         print("🎉 SUCCESS! Cline is now configured for prAxIs OS")
         print("\nNext steps:")
         print("  1. Restart Cline (reload VSCode/Cursor window)")
-        print("  2. Open Cline and verify 'agent-os-rag' server is connected")
+        print(f"  2. Open Cline and verify '{server_name}' server is connected")
         print("  3. Try: 'search standards for orientation'")
         return 0
     except Exception as e:

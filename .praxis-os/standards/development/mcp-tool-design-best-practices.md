@@ -104,7 +104,7 @@ get_workflow_state()    # 1 responsibility
 ```python
 # Tools organized by category
 server/tools/
-├── rag_tools.py          # search_standards
+├── rag_tools.py          # pos_search
 ├── workflow_tools.py     # start_workflow, get_task, complete_phase
 └── sub_agent_tools/
     ├── design_validator.py
@@ -164,7 +164,7 @@ async def get_current_phase(session_id: str, validation_token: str) -> Dict:
 
 **Good Examples:**
 ```
-search_standards      # verb-noun
+pos_search      # verb-noun
 start_workflow        # verb-noun
 get_current_phase     # verb-noun-modifier
 complete_phase        # verb-noun
@@ -312,7 +312,7 @@ def register_all_tools(
 **Approach:**
 ```
 Phase 1: Core tools (7 tools)
-  - search_standards
+  - pos_search
   - start_workflow
   - get_current_phase
   - get_task
@@ -430,7 +430,7 @@ async def get_current_phase_tasks(session_id: str) -> List:
 - ✅ Always used together in sequence
 - ✅ Implementation is trivial dispatch
 
-**Example:** `search(query, filter="all")` vs `search_standards()`, `search_usage()` (acceptable either way)
+**Example:** `search(query, filter="all")` vs `pos_search()`, `search_usage()` (acceptable either way)
 
 ---
 
@@ -465,7 +465,7 @@ Our current workflow tools follow MCP best practices:
 4. complete_phase()        # Validate and advance
 5. get_workflow_state()    # Debug/resume
 6. create_workflow()       # Generate framework
-7. search_standards()      # RAG search
+7. pos_search()      # RAG search
 ```
 
 **Why this is good:**

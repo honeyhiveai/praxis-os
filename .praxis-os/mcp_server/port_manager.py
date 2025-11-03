@@ -146,14 +146,32 @@ class PortManager:
         }
 
         # Atomic write: temp file + rename (POSIX atomic operation)
-        temp_file = self.state_file.with_suffix(".tmp")
-        temp_file.write_text(json.dumps(state, indent=2), encoding="utf-8")
-        temp_file.rename(self.state_file)
+        # Use PID-specific temp file to avoid race conditions between multiple server instances
+        temp_file = self.state_file.with_suffix(f".tmp.{os.getpid()}")
+        try:
+            temp_file.write_text(json.dumps(state, indent=2), encoding="utf-8")
+            temp_file.rename(self.state_file)
 
-        # Set restrictive permissions (owner read/write only)
-        self.state_file.chmod(0o600)
+            # Set restrictive permissions (owner read/write only)
+            self.state_file.chmod(0o600)
 
-        logger.info("State file written: %s", self.state_file)
+            logger.info("State file written: %s", self.state_file)
+        except FileNotFoundError as e:
+            # Race condition: another process may have moved our temp file or deleted state file
+            # This can happen when multiple server instances start simultaneously
+            logger.warning(
+                "State file write race condition (likely multiple servers starting): %s", e
+            )
+            # Clean up our temp file if it still exists
+            if temp_file.exists():
+                temp_file.unlink()
+            # Re-raise to let caller handle
+            raise
+        except Exception:
+            # Clean up temp file on any other error
+            if temp_file.exists():
+                temp_file.unlink()
+            raise
 
     @classmethod
     def read_state(cls, base_path: Path) -> Optional[Dict]:
@@ -220,10 +238,13 @@ class PortManager:
             True if port is available, False otherwise
 
         Note:
-            Uses SO_REUSEADDR to handle TIME_WAIT state properly.
+            Uses SO_REUSEADDR to match Uvicorn's binding behavior.
+            This allows reusing ports in TIME_WAIT state, which is
+            necessary for rapid restarts and matches production behavior.
         """
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                # Use SO_REUSEADDR to match Uvicorn's binding behavior
                 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
                 sock.bind(("127.0.0.1", port))
                 return True

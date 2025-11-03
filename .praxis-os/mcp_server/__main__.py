@@ -31,9 +31,11 @@ def find_praxis_os_directory() -> Path:
 
     Search order:
     1. AGENT_OS_BASE_PATH env var (if set)
-    2. Current directory / .praxis-os
-    3. Home directory / .praxis-os
-    4. Parent of __file__ / .praxis-os
+    2. Current directory if it IS .praxis-os (for `cd .praxis-os && python -m mcp_server`)
+    3. Current directory / .praxis-os (for running from project root)
+    4. Walk up directory tree looking for .praxis-os
+    5. Home directory / .praxis-os
+    6. Parent of __file__ / .praxis-os
 
     Returns:
         Path to .praxis-os directory
@@ -43,8 +45,10 @@ def find_praxis_os_directory() -> Path:
     """
     # Priority 1: Check AGENT_OS_BASE_PATH env var (for IDEs with wrong cwd)
     if base_env := os.getenv("AGENT_OS_BASE_PATH"):
-        base_path = Path(base_env) / ".praxis-os"
-        if base_path.exists():
+        base_path = Path(base_env)
+        if not base_path.name == ".praxis-os":
+            base_path = base_path / ".praxis-os"
+        if base_path.exists() and base_path.name == ".praxis-os":
             logger.info("Using AGENT_OS_BASE_PATH: %s", base_path)
             return base_path
         logger.warning(
@@ -52,37 +56,56 @@ def find_praxis_os_directory() -> Path:
             base_env,
         )
 
-    # Priority 2: Current directory (for well-behaved IDEs)
-    base_path = Path.cwd() / ".praxis-os"
+    # Priority 2: Check if we're ALREADY in .praxis-os directory
+    cwd = Path.cwd()
+    if cwd.name == ".praxis-os" and (cwd / "mcp_server").exists():
+        logger.info("Already in .praxis-os directory: %s", cwd)
+        return cwd
 
-    if not base_path.exists():
-        # Try common alternative locations
-        alternatives = [
-            Path.home() / ".praxis-os",
-            Path(__file__).parent.parent.parent / ".praxis-os",
-        ]
+    # Priority 3: Check if .praxis-os exists in current directory
+    base_path = cwd / ".praxis-os"
+    if base_path.exists():
+        return base_path
 
-        for alt in alternatives:
-            if alt.exists():
-                base_path = alt
-                break
-        else:
-            logger.error(
-                "Could not find .praxis-os directory. Tried:\n"
-                "  - AGENT_OS_BASE_PATH env var: %s\n"
-                "  - %s\n"
-                "  - %s\n"
-                "  - %s\n"
-                "Please run from project root, set AGENT_OS_BASE_PATH, "
-                "or ensure .praxis-os exists.",
-                os.getenv("AGENT_OS_BASE_PATH", "not set"),
-                Path.cwd() / ".praxis-os",
-                Path.home() / ".praxis-os",
-                Path(__file__).parent.parent.parent / ".praxis-os",
-            )
-            sys.exit(1)
+    # Priority 4: Walk up directory tree looking for .praxis-os
+    current = cwd
+    while current != current.parent:
+        candidate = current / ".praxis-os"
+        if candidate.exists():
+            logger.info("Found .praxis-os in parent directory: %s", candidate)
+            return candidate
+        current = current.parent
 
-    return base_path
+    # Priority 5: Try common alternative locations
+    alternatives = [
+        Path.home() / ".praxis-os",
+        Path(__file__).parent.parent,  # mcp_server is IN .praxis-os
+    ]
+
+    for alt in alternatives:
+        if alt.exists() and alt.name == ".praxis-os":
+            base_path = alt
+            logger.info("Found .praxis-os at: %s", base_path)
+            return base_path
+
+    # Nothing found
+    logger.error(
+        "Could not find .praxis-os directory. Tried:\n"
+        "  - AGENT_OS_BASE_PATH env var: %s\n"
+        "  - Current directory: %s\n"
+        "  - Current directory / .praxis-os: %s\n"
+        "  - Parent directories (walked up)\n"
+        "  - Home directory: %s\n"
+        "  - Module path: %s\n"
+        "Please run from project root, set AGENT_OS_BASE_PATH, "
+        "or ensure .praxis-os exists.",
+        os.getenv("AGENT_OS_BASE_PATH", "not set"),
+        cwd,
+        cwd / ".praxis-os",
+        Path.home() / ".praxis-os",
+        Path(__file__).parent.parent,
+    )
+    sys.exit(1)
 
 
 def main() -> None:  # pylint: disable=too-many-statements
