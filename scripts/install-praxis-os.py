@@ -36,42 +36,47 @@ def main():
     print()
     
     # Check prerequisites
-    print("Step 1/8: Checking prerequisites")
+    print("Step 1/9: Checking prerequisites")
     check_prerequisites(target)
     print()
-    
+
     # Clone repository
-    print("Step 2/8: Cloning repository")
+    print("Step 2/9: Cloning repository")
     temp_dir = clone_repository()
     print()
-    
+
     # Create directory structure
-    print("Step 3/8: Creating directory structure")
+    print("Step 3/9: Creating directory structure")
     create_directories(target)
     print()
-    
+
     # Copy files
-    print("Step 4/8: Copying files")
+    print("Step 4/9: Copying files")
     stats = copy_files(temp_dir, target)
     print()
-    
+
     # Create venv and install dependencies
-    print("Step 5/8: Creating virtual environment")
+    print("Step 5/9: Creating virtual environment")
     create_venv_and_install(target)
     print()
-    
+
     # Configure .gitignore
-    print("Step 6/8: Configuring .gitignore")
+    print("Step 6/9: Configuring .gitignore")
     configure_gitignore(target)
     print()
-    
+
+    # Configure Claude Code MCP
+    print("Step 7/9: Configuring Claude Code MCP")
+    configure_claude_code(target)
+    print()
+
     # Create rebuild flag for RAG index
-    print("Step 7/8: Scheduling RAG index build")
+    print("Step 8/9: Scheduling RAG index build")
     create_rebuild_flag(target)
     print()
-    
+
     # Validate installation
-    print("Step 8/8: Validating installation")
+    print("Step 9/9: Validating installation")
     validate_installation(target, stats)
     print()
     
@@ -503,6 +508,46 @@ def configure_gitignore(target: Path):
     print("  These files are ephemeral and should not be committed.")
 
 
+def configure_claude_code(target: Path):
+    """
+    Configure Claude Code MCP settings for prAxIs OS.
+
+    Runs the configure-claude-code.py script to automatically set up
+    Claude Code's MCP server configuration.
+
+    Args:
+        target: Target installation directory
+    """
+    config_script = target / ".praxis-os" / "scripts" / "configure-claude-code.py"
+    venv_python = target / ".praxis-os" / "venv" / "bin" / "python"
+
+    # Run configuration script
+    try:
+        result = subprocess.run(
+            [str(venv_python), str(config_script), str(target)],
+            capture_output=True,
+            text=True,
+            check=False  # Don't raise on non-zero exit (we handle it below)
+        )
+
+        # Script outputs its own detailed messages, just print them
+        if result.stdout:
+            print(result.stdout, end='')
+
+        if result.returncode != 0:
+            # Configuration failed (e.g., Claude Code not installed)
+            # Script already printed helpful message, just note it's optional
+            print()
+            print("  Note: Claude Code configuration is optional")
+            print("        You can configure manually later if needed")
+
+    except Exception as e:
+        print(f"⚠️  Could not run Claude Code configuration: {e}")
+        print()
+        print("  Note: This is optional - you can configure manually later")
+        print("  See: .praxis-os/mcp_server/README.md for configuration details")
+
+
 def create_rebuild_flag(target: Path):
     """
     Create .rebuild_index flag to trigger RAG index build on MCP startup.
@@ -552,7 +597,7 @@ def print_success(target: Path, stats: Dict[str, int]):
     """
     print()
     print("=" * 60)
-    print("✅ MECHANICAL INSTALLATION COMPLETE")
+    print("✅ INSTALLATION COMPLETE")
     print("=" * 60)
     print()
     print(f"Installed to: {target}/.praxis-os")
@@ -564,14 +609,28 @@ def print_success(target: Path, stats: Dict[str, int]):
     print(f"  • Scripts: {stats['scripts']} files")
     print(f"  • Total: {stats['total']} files")
     print()
-    print("Environment:")
+    print("Configuration:")
     print(f"  • Virtual environment: .praxis-os/venv/")
     print(f"  • Dependencies: Installed from requirements.txt")
     print(f"  • .gitignore: Configured (ephemeral files excluded)")
+    print(f"  • Claude Code MCP: Configured (if Claude Code installed)")
     print(f"  • RAG index: Scheduled (.rebuild_index flag created)")
     print()
     print("=" * 60)
-    print("NEXT STEPS (for LLM):")
+    print("READY TO USE WITH CLAUDE CODE")
+    print("=" * 60)
+    print()
+    print("For Claude Code users:")
+    print("  1. Restart Claude Code to load new MCP configuration")
+    print("  2. Open this project in Claude Code")
+    print("  3. MCP server will start automatically")
+    print("  4. Test with: search_standards('praxis os orientation')")
+    print()
+    print("To validate configuration:")
+    print(f"  .praxis-os/venv/bin/python .praxis-os/scripts/validate-mcp-config.py")
+    print()
+    print("=" * 60)
+    print("NEXT STEPS (for LLM in other editors):")
     print("=" * 60)
     print()
     print("1. Detect project language")
@@ -582,24 +641,16 @@ def print_success(target: Path, stats: Dict[str, int]):
     print("   → Create standards in .praxis-os/standards/development/")
     print("   → Follow language-specific patterns")
     print()
-    print("3. Agent integration (branch based on agent/editor)")
+    print("3. Agent integration (for Cursor/VS Code)")
     print("   → Cursor: .cursorrules + .cursor/mcp.json")
     print("   → Cline (Cursor): Cline settings + MCP config")
     print("   → Cline (VS Code): Cline settings + MCP config")
     print("   → Copilot (VS Code): Copilot config + MCP config")
     print()
-    print("4. Start MCP server")
-    print("   → Restart editor to load MCP config")
-    print("   → MCP server auto-starts")
-    print("   → Watcher detects .rebuild_index flag")
-    print("   → RAG index builds automatically (all standards)")
-    print()
-    print("5. Validate installation")
+    print("4. Validate installation")
     print("   → Test search_standards() tool")
     print("   → Test workflow tools")
     print("   → Confirm connectivity")
-    print()
-    print("Estimated time: 5-7 minutes")
     print()
     print("=" * 60)
 
