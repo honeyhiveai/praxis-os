@@ -9,9 +9,11 @@ extensibility, maintainability, and prevent technical debt accumulation.
 """
 
 from .base import ParseError, SourceParser
+from .yaml import WorkflowDefinitionParser
 
 __all__ = [
     "ParseError",
     "SourceParser",
+    "WorkflowDefinitionParser",
 ]
 

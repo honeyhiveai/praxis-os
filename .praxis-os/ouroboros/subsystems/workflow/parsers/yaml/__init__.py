@@ -4,5 +4,9 @@ YAML parsers for workflow definitions.
 Parses metadata.json and workflow definition YAML files.
 """
 
-__all__ = []
+from .workflow_definition import WorkflowDefinitionParser
+
+__all__ = [
+    "WorkflowDefinitionParser",
+]
 
