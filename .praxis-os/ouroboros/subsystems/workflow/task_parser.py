@@ -1,14 +1,16 @@
 """
 Task parsers for dynamic workflow content.
 
-Provides abstract interface and concrete implementations for parsing
-external sources (like spec tasks.md files) into structured workflow data.
+DEPRECATED: This module is kept for backward compatibility.
+Use ouroboros.subsystems.workflow.parsers instead.
 
-This module is critical for dynamic workflows (spec_execution_v1, workflow_creation_v1)
-that adapt their structure based on external specifications.
+New import:
+    from ouroboros.subsystems.workflow.parsers import SourceParser, ParseError
 
-Ported from mcp_server/core/parsers.py with full functionality preserved.
+This module will be removed in version 2.0.
 """
+
+import warnings
 
 # pylint: disable=too-many-lines
 # Justification: Parser module contains 2 parser implementations with semantic
@@ -19,7 +21,6 @@ Ported from mcp_server/core/parsers.py with full functionality preserved.
 # future phase-specific task processing logic
 
 import re
-from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -33,43 +34,18 @@ from mistletoe.block_token import ListItem, Paragraph
 from mistletoe.span_token import LineBreak, RawText, Strong
 
 from ouroboros.subsystems.workflow.models import DynamicPhase, DynamicTask
-from ouroboros.utils.errors import ActionableError
 
+# Import base classes from new location
+from ouroboros.subsystems.workflow.parsers.base import ParseError, SourceParser
 
-class ParseError(ActionableError):
-    """Raised when source parsing fails."""
-
-    def __init__(self, message: str):
-        """Create parse error with default guidance."""
-        super().__init__(
-            what_failed="Source parsing",
-            why_failed=message,
-            how_to_fix="Check source file format and structure. See documentation for expected format.",
-        )
-
-
-class SourceParser(ABC):
-    """
-    Abstract parser for dynamic workflow sources.
-
-    Subclasses implement parsing for specific source formats
-    (e.g., tasks.md files, YAML workflow definitions, etc.).
-    """
-
-    @abstractmethod
-    def parse(self, source_path: Path) -> List[DynamicPhase]:
-        """
-        Parse source into structured phase/task data.
-
-        Args:
-            source_path: Path to source file or directory
-
-        Returns:
-            List of DynamicPhase objects with populated tasks
-
-        Raises:
-            ParseError: If source is invalid or cannot be parsed
-        """
+# Emit deprecation warning
+warnings.warn(
+    "task_parser module is deprecated. "
+    "Use 'from ouroboros.subsystems.workflow.parsers import SourceParser, ParseError' instead. "
+    "This module will be removed in version 2.0.",
+    DeprecationWarning,
+    stacklevel=2
+)
 
 
 class SpecTasksParser(SourceParser):

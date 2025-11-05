@@ -8,6 +8,10 @@ This is a modular refactor of the monolithic task_parser.py to improve
 extensibility, maintainability, and prevent technical debt accumulation.
 """
 
-# Public API exports will be populated during refactor phases
-__all__ = []
+from .base import ParseError, SourceParser
+
+__all__ = [
+    "ParseError",
+    "SourceParser",
+]
 

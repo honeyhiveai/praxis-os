@@ -1,0 +1,573 @@
+# RAG Search Quality Evaluation Dataset - Ouroboros Edition
+# Generated: 2025-11-04
+# Source: standards/universal (66 stable files)
+#
+# Relevance Scale:
+#   3 = Highly relevant (directly answers query, must-have result)
+#   2 = Relevant (related, helpful context)
+#   1 = Somewhat relevant (tangentially related)
+#   0 = Not relevant
+#
+# min_rank: Maximum acceptable rank for this result (1-10)
+#   - Highly relevant docs should appear in top 3
+#   - Relevant docs should appear in top 5
+
+test_queries:
+  # ============================================================================
+  # AI ASSISTANT BEHAVIOR (20 files)
+  # ============================================================================
+
+  - id: q1
+    query: "How do I discover and use MCP tools?"
+    category: "ai_assistant"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/ai-assistant/mcp-tool-discovery.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-assistant/MCP-TOOLS-GUIDE.md"
+        relevance: 3
+        min_rank: 2
+      - path: "standards/universal/ai-assistant/mcp-usage-guide.md"
+        relevance: 2
+        min_rank: 5
+
+  - id: q2
+    query: "What is the agent decision protocol?"
+    category: "ai_assistant"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/ai-assistant/agent-decision-protocol.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-assistant/operating-model.md"
+        relevance: 2
+        min_rank: 4
+
+  - id: q3
+    query: "How to construct effective search queries?"
+    category: "ai_assistant"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/ai-assistant/query-construction-patterns.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-assistant/training-data-versus-project-knowledge.md"
+        relevance: 2
+        min_rank: 5
+
+  - id: q4
+    query: "training data versus project knowledge"
+    category: "ai_assistant"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/ai-assistant/training-data-versus-project-knowledge.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q5
+    query: "How do I commit changes properly?"
+    category: "ai_assistant"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/ai-assistant/commit-protocol.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-safety/git-safety-rules.md"
+        relevance: 2
+        min_rank: 3
+
+  - id: q6
+    query: "What is knowledge compounding?"
+    category: "ai_assistant"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/ai-assistant/knowledge-compounding-guide.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-assistant/rag-content-authoring.md"
+        relevance: 2
+        min_rank: 5
+
+  # ============================================================================
+  # WORKFLOWS (6 files)
+  # ============================================================================
+
+  - id: q7
+    query: "How do I create a specification document?"
+    category: "workflows"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/workflows/creating-specs.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-assistant/spec-lifecycle-organization.md"
+        relevance: 2
+        min_rank: 4
+
+  - id: q8
+    query: "workflow construction standards"
+    category: "workflows"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/workflows/workflow-construction-standards.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/workflows/workflow-metadata-standards.md"
+        relevance: 2
+        min_rank: 3
+      - path: "standards/universal/workflows/workflow-system-overview.md"
+        relevance: 2
+        min_rank: 5
+
+  - id: q9
+    query: "How to estimate time for tasks?"
+    category: "workflows"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/workflows/time-estimation-standards.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q10
+    query: "How do I configure RAG search?"
+    category: "workflows"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/workflows/mcp-rag-configuration.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q11
+    query: "What is the workflow system?"
+    category: "workflows"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/workflows/workflow-system-overview.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/workflows/workflow-construction-standards.md"
+        relevance: 2
+        min_rank: 4
+
+  # ============================================================================
+  # AI SAFETY (5 files)
+  # ============================================================================
+
+  - id: q12
+    query: "How to protect credentials and secrets?"
+    category: "ai_safety"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/ai-safety/credential-file-protection.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q13
+    query: "What are the git safety rules?"
+    category: "ai_safety"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/ai-safety/git-safety-rules.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-assistant/commit-protocol.md"
+        relevance: 2
+        min_rank: 4
+
+  - id: q14
+    query: "production code checklist"
+    category: "ai_safety"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/ai-safety/production-code-checklist.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q15
+    query: "How should I handle dates in code?"
+    category: "ai_safety"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/ai-safety/date-usage-policy.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q16
+    query: "import verification and validation"
+    category: "ai_safety"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/ai-safety/import-verification-rules.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # ARCHITECTURE (4 files)
+  # ============================================================================
+
+  - id: q17
+    query: "What are SOLID principles?"
+    category: "architecture"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/architecture/solid-principles.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/architecture/separation-of-concerns.md"
+        relevance: 2
+        min_rank: 4
+
+  - id: q18
+    query: "How to implement dependency injection?"
+    category: "architecture"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/architecture/dependency-injection.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q19
+    query: "API design best practices"
+    category: "architecture"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/architecture/api-design-principles.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q20
+    query: "separation of concerns"
+    category: "architecture"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/architecture/separation-of-concerns.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/architecture/solid-principles.md"
+        relevance: 2
+        min_rank: 4
+
+  # ============================================================================
+  # CONCURRENCY (4 files)
+  # ============================================================================
+
+  - id: q21
+    query: "How to prevent race conditions?"
+    category: "concurrency"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/concurrency/race-conditions.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/concurrency/locking-strategies.md"
+        relevance: 2
+        min_rank: 3
+
+  - id: q22
+    query: "What causes deadlocks?"
+    category: "concurrency"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/concurrency/deadlocks.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/concurrency/locking-strategies.md"
+        relevance: 2
+        min_rank: 4
+
+  - id: q23
+    query: "shared state analysis"
+    category: "concurrency"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/concurrency/shared-state-analysis.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q24
+    query: "locking strategies and patterns"
+    category: "concurrency"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/concurrency/locking-strategies.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # TESTING (4 files)
+  # ============================================================================
+
+  - id: q25
+    query: "What is the test pyramid?"
+    category: "testing"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/testing/test-pyramid.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q26
+    query: "How to write integration tests?"
+    category: "testing"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/testing/integration-testing.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q27
+    query: "test doubles mocks stubs fakes"
+    category: "testing"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/testing/test-doubles.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q28
+    query: "property based testing"
+    category: "testing"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/testing/property-based-testing.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # FAILURE MODES (4 files)
+  # ============================================================================
+
+  - id: q29
+    query: "How to implement retry logic?"
+    category: "failure_modes"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/failure-modes/retry-strategies.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q30
+    query: "What is a circuit breaker?"
+    category: "failure_modes"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/failure-modes/circuit-breakers.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q31
+    query: "graceful degradation patterns"
+    category: "failure_modes"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/failure-modes/graceful-degradation.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q32
+    query: "timeout patterns and strategies"
+    category: "failure_modes"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/failure-modes/timeout-patterns.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # META FRAMEWORK (5 files)
+  # ============================================================================
+
+  - id: q33
+    query: "What are validation gates?"
+    category: "meta_framework"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/meta-framework/validation-gates.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q34
+    query: "three tier architecture"
+    category: "meta_framework"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/meta-framework/three-tier-architecture.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q35
+    query: "horizontal decomposition"
+    category: "meta_framework"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/meta-framework/horizontal-decomposition.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q36
+    query: "framework creation principles"
+    category: "meta_framework"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/meta-framework/framework-creation-principles.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # DOCUMENTATION (5 files)
+  # ============================================================================
+
+  - id: q37
+    query: "How to write good API documentation?"
+    category: "documentation"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/documentation/api-documentation.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q38
+    query: "code comments best practices"
+    category: "documentation"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/documentation/code-comments.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q39
+    query: "pre-commit checklist"
+    category: "documentation"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/documentation/pre-commit-checklist.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q40
+    query: "change impact analysis"
+    category: "documentation"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/documentation/change-impact-analysis.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # OPERATIONS (2 files)
+  # ============================================================================
+
+  - id: q41
+    query: "How to update MCP server?"
+    category: "operations"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/operations/mcp-server-update-guide.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q42
+    query: "agent-os update procedures"
+    category: "operations"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/operations/agent-os-update-guide.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # INSTALLATION (3 files)
+  # ============================================================================
+
+  - id: q43
+    query: "gitignore requirements"
+    category: "installation"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/installation/gitignore-requirements.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q44
+    query: "How to organize workspace?"
+    category: "installation"
+    difficulty: "easy"
+    expected_docs:
+      - path: "standards/universal/installation/workspace-organization.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # MISCELLANEOUS
+  # ============================================================================
+
+  - id: q45
+    query: "database patterns and best practices"
+    category: "database"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/database/database-patterns.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q46
+    query: "performance optimization"
+    category: "performance"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/performance/optimization-patterns.md"
+        relevance: 3
+        min_rank: 1
+
+  - id: q47
+    query: "security patterns and guidelines"
+    category: "security"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/security/security-patterns.md"
+        relevance: 3
+        min_rank: 1
+
+  # ============================================================================
+  # MULTI-CONCEPT QUERIES (Test hybrid/RRF effectiveness)
+  # ============================================================================
+
+  - id: q48
+    query: "How to test concurrency issues like race conditions?"
+    category: "multi_concept"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/concurrency/race-conditions.md"
+        relevance: 3
+        min_rank: 2
+      - path: "standards/universal/testing/integration-testing.md"
+        relevance: 2
+        min_rank: 5
+
+  - id: q49
+    query: "workflow validation gates and evidence"
+    category: "multi_concept"
+    difficulty: "hard"
+    expected_docs:
+      - path: "standards/universal/meta-framework/validation-gates.md"
+        relevance: 3
+        min_rank: 2
+      - path: "standards/universal/workflows/workflow-construction-standards.md"
+        relevance: 2
+        min_rank: 4
+
+  - id: q50
+    query: "AI safety rules for production code"
+    category: "multi_concept"
+    difficulty: "medium"
+    expected_docs:
+      - path: "standards/universal/ai-safety/production-code-checklist.md"
+        relevance: 3
+        min_rank: 1
+      - path: "standards/universal/ai-safety/git-safety-rules.md"
+        relevance: 2
+        min_rank: 3
+      - path: "standards/universal/ai-safety/credential-file-protection.md"
+        relevance: 2
+        min_rank: 5
