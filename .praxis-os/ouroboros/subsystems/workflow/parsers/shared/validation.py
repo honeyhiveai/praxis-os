@@ -12,7 +12,7 @@ from typing import List, Optional, Tuple
 
 def validate_phase_sequence(phase_numbers: List[int]) -> Tuple[bool, Optional[str]]:
     """
-    Validate that phases are sequential with no gaps.
+    Validate that phases are sequential with no gaps or duplicates.
 
     Args:
         phase_numbers: List of phase numbers
@@ -27,9 +27,21 @@ def validate_phase_sequence(phase_numbers: List[int]) -> Tuple[bool, Optional[st
         (True, None)
         >>> validate_phase_sequence([1, 3, 4])
         (False, "Phase sequence has gaps: missing phase 2")
+        >>> validate_phase_sequence([0, 0, 1, 2])
+        (False, "Phase sequence has duplicates: [0]")
     """
     if not phase_numbers:
         return False, "No phases provided"
+
+    # Check for duplicates
+    if len(phase_numbers) != len(set(phase_numbers)):
+        from collections import Counter
+        counts = Counter(phase_numbers)
+        duplicates = [num for num, count in counts.items() if count > 1]
+        return (
+            False,
+            f"Phase sequence has duplicates: {sorted(duplicates)}",
+        )
 
     sorted_phases = sorted(phase_numbers)
     min_phase = sorted_phases[0]
