@@ -28,8 +28,8 @@ from ouroboros.subsystems.workflow.evidence_validator import EvidenceValidator
 from ouroboros.subsystems.workflow.guidance import add_workflow_guidance
 from ouroboros.subsystems.workflow.hidden_schemas import HiddenSchemas
 from ouroboros.subsystems.workflow.models import PhaseTimingInfo, WorkflowMetadata, WorkflowState
+from ouroboros.subsystems.workflow.parsers import SpecTasksParser
 from ouroboros.subsystems.workflow.phase_gates import PhaseAdvanceResult, PhaseGates
-from ouroboros.subsystems.workflow.task_parser import SpecTasksParser
 from ouroboros.subsystems.workflow.workflow_renderer import WorkflowRenderer
 from ouroboros.utils.errors import ActionableError, WorkflowExecutionError
 
