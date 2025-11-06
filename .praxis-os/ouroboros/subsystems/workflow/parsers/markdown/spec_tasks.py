@@ -153,8 +153,11 @@ class SpecTasksParser(SourceParser):
         # Step 4: Build phases with shift applied
         phases = []
         for i, header in enumerate(phase_headers):
+            # Determine next phase header for content boundary
+            next_header = phase_headers[i + 1] if i + 1 < len(phase_headers) else None
+            
             phase = self._build_phase_from_header(
-                header, doc, phase_numbers[i], phase_shift
+                header, doc, phase_numbers[i], phase_shift, next_header
             )
             if phase:
                 phases.append(phase)
@@ -192,6 +195,7 @@ class SpecTasksParser(SourceParser):
         doc: Document,
         original_phase_num: int,
         phase_shift: int,
+        next_phase_header: Optional[Heading] = None,
     ) -> Optional[DynamicPhase]:
         """
         Build DynamicPhase from header and following content.
@@ -201,6 +205,7 @@ class SpecTasksParser(SourceParser):
             doc: Full document
             original_phase_num: Original phase number from markdown
             phase_shift: Shift to apply (+1 if Phase 0 exists, else 0)
+            next_phase_header: Next phase header (for content boundary)
 
         Returns:
             DynamicPhase object or None if invalid
@@ -209,7 +214,9 @@ class SpecTasksParser(SourceParser):
         workflow_phase_num = original_phase_num + phase_shift
 
         # Extract phase content (nodes between this header and next phase)
-        phase_content = self._extract_content_after_header(header, doc)
+        phase_content = self._extract_content_after_header(
+            header, doc, next_phase_header
+        )
 
         # Extract metadata
         header_text = traversal.get_text_content(header)
@@ -240,38 +247,37 @@ class SpecTasksParser(SourceParser):
         )
 
     def _extract_content_after_header(
-        self, header: Heading, doc: Document
+        self, header: Heading, doc: Document, next_phase_header: Optional[Heading] = None
     ) -> str:
         """
-        Extract content between header and next same-level header.
+        Extract content between header and next phase header.
 
         Args:
             header: Starting header
             doc: Full document
+            next_phase_header: Next phase header (explicit boundary)
 
         Returns:
             Content string
         """
-        # Find header position in document
+        # Find header positions in document
         header_index = -1
+        next_index = len(doc.children)  # Default: end of document
+        
         for i, child in enumerate(doc.children):
             if child is header:
                 header_index = i
-                break
+            if next_phase_header and child is next_phase_header:
+                next_index = i
 
         if header_index == -1:
             return ""
 
-        # Collect content until next same-level header
+        # Collect content between the two headers
         content_parts = []
-        for i in range(header_index + 1, len(doc.children)):
+        for i in range(header_index + 1, next_index):
             child = doc.children[i]
-
-            # Stop at next phase header
-            if isinstance(child, Heading) and child.level <= header.level:
-                if scoring.score_phase_header(child) >= 0.5:
-                    break
-
+            
             # Collect content
             text = traversal.get_text_content(child)
             if text:
