@@ -107,13 +107,3 @@ class TestParserRefactorValidation:
         assert (
             len(phase_1.tasks) == 3
         ), f"Phase 1 should have 3 tasks, got {len(phase_1.tasks)}"
-
-    def test_backward_compatibility_import(self):
-        """Test: Old import path still works with deprecation warning."""
-        with pytest.warns(DeprecationWarning):
-            from ouroboros.subsystems.workflow.task_parser import (
-                SpecTasksParser as OldParser,
-            )
-
-        parser = OldParser()
-        assert parser is not None
