@@ -229,10 +229,20 @@ class SpecTasksParser(SourceParser):
         objective = phase_info.get("objective", "")
         estimated_duration = phase_info.get("estimated_duration", "Variable")
 
-        # Extract tasks
+        # Extract tasks from phase content
         tasks = self._extract_tasks_from_content(
             phase_content, workflow_phase_num, phase_shift
         )
+        
+        # If no tasks found in brief content, look for detailed section
+        if not tasks:
+            detailed_content = self._find_detailed_task_section(
+                doc, original_phase_num
+            )
+            if detailed_content:
+                tasks = self._extract_tasks_from_content(
+                    detailed_content, workflow_phase_num, phase_shift
+                )
 
         # Extract validation gate
         validation_gate = extraction.extract_validation_gate(phase_content)
@@ -284,6 +294,72 @@ class SpecTasksParser(SourceParser):
                 content_parts.append(text)
 
         return "\n\n".join(content_parts)
+
+    def _find_detailed_task_section(
+        self, doc: Document, phase_number: int
+    ) -> Optional[str]:
+        """
+        Find 'Phase N Tasks (Detailed)' section in document.
+        
+        Some tasks.md files have a structure where phase headers are brief,
+        and detailed tasks are in separate sections later in the document.
+        
+        Args:
+            doc: Full document
+            phase_number: Original phase number from markdown (before shift)
+        
+        Returns:
+            Content of detailed section, or None if not found
+        """
+        # Look for "### Phase N Tasks (Detailed)" pattern
+        target_patterns = [
+            f"phase {phase_number} tasks",
+            f"phase {phase_number}:",
+            f"### phase {phase_number}",
+        ]
+        
+        all_headers = traversal.find_headers(doc)
+        
+        for header in all_headers:
+            if header.level != 3:  # Looking for ### headers
+                continue
+                
+            text = traversal.get_text_content(header).lower()
+            
+            # Check if this is a detailed task section for our phase
+            if any(pattern in text for pattern in target_patterns):
+                # Extract content after this header until next same-level header
+                header_index = -1
+                for i, child in enumerate(doc.children):
+                    if child is header:
+                        header_index = i
+                        break
+                
+                if header_index == -1:
+                    continue
+                
+                # Collect content until next ## or ### header
+                # (stop at any section boundary)
+                content_parts = []
+                for i in range(header_index + 1, len(doc.children)):
+                    child = doc.children[i]
+                    
+                    # Stop at any heading level 2 or 3 (section boundaries)
+                    if isinstance(child, Heading) and child.level <= 3:
+                        # Also stop at horizontal rules (---) which often separate sections
+                        break
+                    
+                    text = traversal.get_text_content(child)
+                    if text:
+                        # Skip horizontal rules and separators
+                        if text.strip() in ('---', '***', '___'):
+                            break
+                        content_parts.append(text)
+                
+                if content_parts:
+                    return "\n\n".join(content_parts)
+        
+        return None
 
     def _extract_tasks_from_content(
         self, content: str, phase_number: int, phase_shift: int
@@ -370,8 +446,9 @@ class SpecTasksParser(SourceParser):
         blocks = []
 
         # Strategy 1: Split on task patterns
-        # Match "Task N.N" or "N.N:" at start of line
-        pattern = r"(?:^|\n)(?:[-*]\s*\[[ x]\]\s*)?(?:\*\*)?(?:[Tt]ask\s+)?(\d+\.\d+)"
+        # Match "Task N.N" at start of line OR after checkbox marker
+        # Handles both "Task 0.1:" and "[ ] Task 0.1:" with/without newlines
+        pattern = r"(?:^|\n|\[[ x]\]\s+)(?:\*\*)?[Tt]ask\s+(\d+\.\d+)"
         
         split_positions = [0]
         for match in re.finditer(pattern, content):
