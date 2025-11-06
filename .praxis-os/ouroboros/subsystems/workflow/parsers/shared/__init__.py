@@ -5,5 +5,11 @@ Pure functions for text processing, dependency resolution, and validation
 that can be reused across different parser implementations.
 """
 
-__all__ = []
+from . import dependencies, text, validation
+
+__all__ = [
+    "text",
+    "dependencies",
+    "validation",
+]
 
