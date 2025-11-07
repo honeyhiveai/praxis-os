@@ -251,7 +251,7 @@ find .praxis-os/standards -name "*.md" | wc -l
 **Expected**:
 - 60-80 standards files
 - 20-50MB index size
-- <1 second per query
+- Less than 1 second per query
 
 **Solutions**:
 - Rebuild index: Delete `.praxis-os/.cache/vector_index/`, reload window

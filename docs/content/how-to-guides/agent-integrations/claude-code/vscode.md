@@ -285,7 +285,7 @@ top
 ```
 
 **Expected**:
-- <1 second per query
+- Less than 1 second per query
 - 20-50MB index
 
 **Solutions**:

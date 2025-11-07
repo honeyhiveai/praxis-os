@@ -279,7 +279,7 @@ du -sh .praxis-os/.cache/vector_index/
 ```
 
 **Expected**:
-- <1 second per query
+- Less than 1 second per query
 - 20-50MB index size
 
 **Solutions**:
