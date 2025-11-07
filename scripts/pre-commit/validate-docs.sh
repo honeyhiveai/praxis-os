@@ -68,10 +68,21 @@ if [[ ! -f "scripts/validate-links.py" ]]; then
     echo -e "${YELLOW}⚠️  Link validation script not found, skipping${NC}"
 else
     # Run link validation (skip external for speed)
-    if python scripts/validate-links.py --skip-external 2>&1 | grep -q "FAIL"; then
+    # Capture output and exit code (matching python-sdk pattern)
+    LINK_OUTPUT=$(python scripts/validate-links.py --skip-external 2>&1)
+    LINK_EXIT_CODE=$?
+    
+    if [[ $LINK_EXIT_CODE -ne 0 ]]; then
         echo -e "${RED}❌ Link validation failed (broken internal links found)${NC}"
-        echo -e "${YELLOW}💡 Fix: Review broken links above${NC}"
-        echo -e "${YELLOW}   - Update broken paths to match new structure${NC}"
+        echo ""
+        # Show broken link details (extract the "Broken Links:" section)
+        echo -e "${YELLOW}Broken links:${NC}"
+        # Extract from "Broken Links:" section to "Status:" section
+        echo "$LINK_OUTPUT" | sed -n '/Broken Links:/,/Status:/p' | head -50
+        echo ""
+        echo -e "${YELLOW}💡 Fix:${NC}"
+        echo -e "${YELLOW}   - Review broken links above for file paths and line numbers${NC}"
+        echo -e "${YELLOW}   - Update broken paths to match actual file locations${NC}"
         echo -e "${YELLOW}   - Verify target files exist${NC}"
         echo -e "${YELLOW}   - Run: python scripts/validate-links.py --skip-external${NC}"
         VALIDATION_FAILED=1
