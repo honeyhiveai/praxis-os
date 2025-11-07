@@ -1,0 +1,14 @@
+{
+  "session_id": "workflow_default_eb26b484-ae4a-43c9-affe-7b768d68bddb",
+  "workflow_type": "spec_creation_v1",
+  "target_file": ".praxis-os/specs/final-system-test",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "evidence_submitted": {},
+  "created_at": "2025-11-04T21:39:36.144087",
+  "updated_at": "2025-11-04T21:39:36.144089",
+  "metadata": {},
+  "status": "active"
+}

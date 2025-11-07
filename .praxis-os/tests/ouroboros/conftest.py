@@ -24,9 +24,12 @@ def test_base_path(tmp_path):
     
     # Create required subdirectories
     (base_path / "config").mkdir()
-    (base_path / "cache" / "indexes").mkdir(parents=True)
+    (base_path / ".cache" / "indexes" / "standards").mkdir(parents=True)
+    (base_path / ".cache" / "indexes" / "code").mkdir(parents=True)
+    (base_path / ".cache" / "locks").mkdir(parents=True)
     (base_path / "standards").mkdir()
     (base_path / "workflows").mkdir()
+    (base_path / "usage").mkdir()
     
     return base_path
 

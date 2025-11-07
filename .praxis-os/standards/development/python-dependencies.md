@@ -1,6 +1,52 @@
 # Python Dependencies Standards
 # Generated for: praxis-os
 
+## Questions This Answers
+
+- **What version pinning strategy should I use for Python dependencies?**
+- **What's the difference between `~=`, `==`, and `>=` for version specifiers?**
+- **How do I manage dependencies in praxis-os with requirements.txt?**
+- **Should I use compatible release (`~=`) or exact pin (`==`) for dependencies?**
+- **What's wrong with using `>=X.Y.Z` without an upper bound?**
+- **How do I handle optional dependencies like OpenAI or HoneyHive?**
+- **What are the current praxis-os dependencies and their recommended pins?**
+- **How do I avoid dependency conflicts between packages?**
+- **What's the best practice for freezing dependencies for reproducible builds?**
+- **How do I document why a specific dependency version is required?**
+
+## Quick Reference: Python Dependency Management
+
+**Recommended Pinning Strategy:**
+- **`~=X.Y.Z`** (Compatible Release): ✅ **Default choice** - allows patches (e.g., `~=0.25.0` → `0.25.1` OK, `0.26.0` NO)
+- **`==X.Y.Z`** (Exact): Use for critical stability/security
+- **`>=X,<Y`** (Range): Use for major version boundaries (e.g., `>=1.0,<2.0`)
+- **`>=X`** (Minimum): ❌ **Avoid** - non-deterministic builds
+
+**prAxisOS Current Dependencies:**
+```txt
+lancedb~=0.25.0               # ✅ Good
+mcp~=1.0.0                    # Recommended
+sentence-transformers~=2.0.0   # Recommended
+watchdog~=3.0.0               # Recommended
+```
+
+**Key Pattern:**
+```txt
+# Core dependencies with compatible release
+package~=X.Y.Z
+
+# Optional features in separate section
+# Optional: Feature name
+# optional-package~=X.Y.Z
+```
+
+**Why `~=`?**
+- Balances stability (no breaking changes) with bug fixes (patches OK)
+- Prevents non-reproducible builds
+- Industry best practice
+
+---
+
 ## Universal Dependency Principles
 
 > **See universal standards:**
@@ -19,7 +65,7 @@ This document applies universal dependency management principles to Python-speci
 | `>=X.Y.Z,<A.B` | **Version range** | Broad compatibility | `pydantic>=1.0,<2.0` |
 | `>=X.Y.Z` | **Minimum version** | ❌ **Avoid** (non-deterministic) | ❌ `requests>=2.0` |
 
-### Explanation
+### Version Specifier Explanation
 
 - **`~=X.Y.Z`** (Compatible Release): Allows patch versions (e.g., `~=0.25.0` → `0.25.1` OK, `0.26.0` NOT OK)
 - **`==X.Y.Z`** (Exact): Pins to exact version, no flexibility
@@ -96,7 +142,7 @@ which python  # Should point to venv/bin/python
 pip install -r mcp_server/requirements.txt
 ```
 
-### Deactivation
+### Virtual Environment Deactivation
 
 ```bash
 deactivate
@@ -274,7 +320,7 @@ def process_with_embedder(embedder: Embedder, text: str):
 ❌ **No lock file**: Consider adding for reproducibility  
 ❌ **Version specifiers**: Could be more restrictive (`~=` instead of `>=`)
 
-### Recommendations
+### Dependency Management Recommendations
 
 #### 1. Split Dependencies
 

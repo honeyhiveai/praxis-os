@@ -42,7 +42,7 @@ export default function InstallationStructure(): React.ReactElement {
             </div>
             <div className={styles.item}>
               <span className={styles.fileIcon}>📁</span>
-              <span className={styles.itemName}>mcp_server/</span>
+              <span className={styles.itemName}>ouroboros/</span>
               <span className={styles.itemDesc}># MCP/RAG server</span>
             </div>
             <div className={styles.item}>

@@ -4,6 +4,19 @@
 
 ---
 
+## Questions This Answers
+
+- **When should I use admonishments vs blockquotes?**
+- **How do I avoid overusing colored boxes in documentation?**
+- **What's the semantic meaning of code blocks vs admonishments?**
+- **How do I create clean, modern documentation like HoneyHive?**
+- **When are blockquotes appropriate for documentation content?**
+- **What's the rule for using code blocks in docs?**
+- **How do I balance visual elements with clean typography?**
+- **What are common anti-patterns in documentation formatting?**
+- **How many admonishments should a page have?**
+- **What's the priority order for content formatting elements?**
+
 ## 🎯 TL;DR - Content Patterns Quick Reference
 
 **Critical content rules:**
@@ -22,7 +35,7 @@
 
 ---
 
-## Purpose
+## Content Patterns Purpose
 
 Ensure prAxIs OS documentation uses markdown content patterns semantically and aesthetically, creating clean, modern documentation that guides users without visual clutter. Content should flow naturally with typography providing hierarchy, reserving special containers (admonishments, blockquotes, code blocks) for their intended semantic purposes.
 
@@ -453,7 +466,7 @@ What type of content are you writing?
 
 ---
 
-## Checklist
+## Content Pattern Checklist
 
 **Before writing documentation content:**
 
@@ -482,7 +495,7 @@ What type of content are you writing?
 
 ---
 
-## Examples
+## Content Pattern Examples
 
 ### Example 1: Refactoring from Boxy to Clean
 

@@ -28,6 +28,11 @@ const sidebars: SidebarsConfig = {
       label: '📋 How-To Guides',
       collapsible: true,
       items: [
+        'how-to-guides/creating-project-standards',
+        'how-to-guides/create-custom-workflows',
+        'how-to-guides/setup-quality-gates',
+        'how-to-guides/debug-workflow-failures',
+        'how-to-guides/upgrading',
         {
           type: 'category',
           label: '🤖 Agent Integrations',
@@ -35,36 +40,37 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           items: [
             'how-to-guides/agent-integrations/README',
-            'how-to-guides/agent-integrations/cursor/index',
             {
               type: 'category',
-              label: 'Claude Code',
-              collapsible: true,
-              collapsed: false,
-              items: [
-                'how-to-guides/agent-integrations/claude-code/terminal',
-                'how-to-guides/agent-integrations/claude-code/vscode',
-                'how-to-guides/agent-integrations/claude-code/cursor',
-              ],
+              label: 'Cursor',
+              items: ['how-to-guides/agent-integrations/cursor/index'],
             },
             {
               type: 'category',
               label: 'Cline',
-              collapsible: true,
-              collapsed: false,
               items: [
                 'how-to-guides/agent-integrations/cline/vscode',
                 'how-to-guides/agent-integrations/cline/cursor',
               ],
             },
-            'how-to-guides/agent-integrations/github-copilot/index',
+            {
+              type: 'category',
+              label: 'Claude Code',
+              items: [
+                'how-to-guides/agent-integrations/claude-code/vscode',
+                'how-to-guides/agent-integrations/claude-code/terminal',
+                'how-to-guides/agent-integrations/claude-code/cursor',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'GitHub Copilot',
+              items: [
+                'how-to-guides/agent-integrations/github-copilot/index',
+              ],
+            },
           ],
         },
-        'how-to-guides/creating-project-standards',
-        'how-to-guides/create-custom-workflows',
-        'how-to-guides/setup-quality-gates',
-        'how-to-guides/debug-workflow-failures',
-        'how-to-guides/upgrading',
       ],
     },
 
@@ -94,8 +100,9 @@ const sidebars: SidebarsConfig = {
       collapsible: true,
       items: [
         'reference/mcp-tools',
-        'reference/standards',
+        'reference/config-reference',
         'reference/workflows',
+        'reference/standards',
       ],
     },
   ],

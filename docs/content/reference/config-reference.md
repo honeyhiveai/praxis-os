@@ -265,7 +265,7 @@ file_watcher:
 | `enabled` | boolean | `true` | Enable automatic index rebuilding |
 | `debounce_ms` | integer | `500` | Milliseconds to wait after last change |
 
-**Disable if:** You want manual rebuilds only (use `build_rag_index.py` script).
+**Disable if:** You want manual rebuilds only (use `IndexManager.rebuild_index()` programmatically).
 
 ---
 
@@ -480,7 +480,7 @@ logging:
 1. Check `code.source_paths` in `mcp.yaml`
 2. Verify paths are relative to `.praxis-os/` directory
 3. Ensure paths exist (use `../src/` not `src/`)
-4. Rebuild index: `python .praxis-os/scripts/build_rag_index.py`
+4. Rebuild index: Restart MCP server (auto-builds) or use `IndexManager.rebuild_index()`
 
 ### "Index not found" errors
 
@@ -488,7 +488,7 @@ logging:
 
 **Fix:**
 1. Wait 10-30 seconds for file watcher to build indexes
-2. Or manually rebuild: `python .praxis-os/scripts/build_rag_index.py`
+2. Or restart MCP server (auto-builds missing indexes)
 3. Check `.praxis-os/.cache/indexes/` directory exists
 
 ### "Parser not found" for AST search

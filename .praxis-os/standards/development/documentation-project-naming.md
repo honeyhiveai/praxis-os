@@ -4,6 +4,19 @@
 
 ---
 
+## Questions This Answers
+
+- **What is the correct capitalization for "prAxIs OS"?**
+- **How do I distinguish between this project and the parent prAxIs OS?**
+- **When should I acknowledge the BuilderMethods parent project?**
+- **What's the meaning behind the prAxIs OS capitalization?**
+- **How do I reference prAxIs OS in documentation consistently?**
+- **What's the official tagline for prAxIs OS?**
+- **How do I credit the parent project in documentation?**
+- **What are common naming mistakes to avoid?**
+- **Where should parent project acknowledgement appear?**
+- **What's the link to the parent prAxIs OS project?**
+
 ## 🎯 TL;DR - Project Naming Quick Reference
 
 **Critical naming rules:**
@@ -20,7 +33,7 @@
 
 ---
 
-## Purpose
+## Naming Convention Purpose
 
 Maintain clear distinction between this project (prAxIs OS) and its parent (BuilderMethods prAxIs OS) while properly acknowledging the foundation we built upon. The name "prAxIs OS" embeds both the philosophy (praxis) and what it is (AI OS) in one elegant package. Consistent naming prevents confusion and gives proper credit.
 
@@ -118,7 +131,7 @@ The operating system where theory meets practice.
 
 ---
 
-## Checklist
+## Naming Verification Checklist
 
 **Before publishing documentation:**
 
@@ -133,7 +146,7 @@ The operating system where theory meets practice.
 
 ---
 
-## Examples
+## Naming Convention Examples
 
 ### Documentation Headers
 

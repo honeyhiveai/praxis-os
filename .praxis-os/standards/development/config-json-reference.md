@@ -4,6 +4,54 @@
 
 ---
 
+## Questions This Answers
+
+- **How do I customize prAxIs OS directory paths using config.json?**
+- **Where should I place the config.json file?**
+- **What are the available configuration fields for RAG paths?**
+- **How are paths resolved relative to project root?**
+- **Do I need config.json if I use default directory structure?**
+- **How do I configure split directories across different locations?**
+- **How can I verify my config.json is loading correctly?**
+- **Why isn't my workflow metadata loading after configuration?**
+- **What's the difference between paths relative to project root vs .praxis-os/?**
+- **How do I migrate from symlinks to config.json?**
+
+## Quick Reference: config.json Configuration
+
+**File Location:** `.praxis-os/config.json` (place in this directory)
+
+**Optional:** No config.json needed if using default paths (`universal/standards`, `universal/usage`, `universal/workflows`)
+
+**Schema:**
+```json
+{
+  "rag": {
+    "standards_path": ".praxis-os-source/standards",
+    "usage_path": ".praxis-os-source/usage",
+    "workflows_path": ".praxis-os-source/workflows"
+  }
+}
+```
+
+**Path Resolution:** All paths are relative to **project root** (parent of `.praxis-os/`)
+
+**Verification:** Check logs with `tail -f .praxis-os/.cache/mcp_server.log`
+
+**Common Issue:** Paths not resolving? Remember they're relative to project root, NOT `.praxis-os/`
+
+**Example (Custom Source):**
+```json
+{
+  "rag": {
+    "workflows_path": "custom/workflows"
+  }
+}
+```
+Result: Custom workflow path, other paths use defaults
+
+---
+
 ## 🎯 Purpose
 
 The `config.json` file allows consuming projects to customize directory paths for standards, usage docs, and workflow metadata. This is essential for projects with non-standard directory structures.

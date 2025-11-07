@@ -1,0 +1,195 @@
+{
+  "session_id": "workflow_default_9c793813-4643-4685-98b1-d82ff23c19c9",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "parser-submodule-refactor",
+  "current_phase": 6,
+  "completed_phases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "phase_artifacts": {},
+  "checkpoints": {
+    "0": "passed",
+    "1": "passed",
+    "2": "passed",
+    "3": "passed",
+    "4": "passed",
+    "5": "passed"
+  },
+  "evidence_submitted": {
+    "0": {
+      "spec_directory_created": true,
+      "directory_format_valid": true,
+      "supporting_docs_directory_exists": true,
+      "documents_processed": true,
+      "index_created": true,
+      "insights_extracted": true,
+      "mode_documented": true,
+      "cross_reference_complete": true,
+      "directory_location": ".praxis-os/specs/review/2025-11-05-parser-submodule-refactor",
+      "directory_naming": "2025-11-05-parser-submodule-refactor",
+      "processing_mode": "embedded",
+      "documents_count": 2,
+      "insights_total": 52,
+      "insights_by_category": {
+        "requirements": 16,
+        "design": 26,
+        "implementation": 10
+      },
+      "documents_list": [
+        "2025-11-05-parser-submodule-architecture.md",
+        "2025-11-05-defensive-task-parser-with-phase-shift.md"
+      ],
+      "multi_source_validated_themes": 5,
+      "conflicts_identified": 0,
+      "high_priority_items": 5,
+      "coverage_gaps_identified": 5
+    },
+    "1": {
+      "supporting_docs_reviewed": true,
+      "srd_created": true,
+      "business_goals_defined": true,
+      "user_stories_documented": true,
+      "functional_requirements_listed": true,
+      "nonfunctional_requirements_addressed": true,
+      "out_of_scope_stated": true,
+      "requirements_specific_measurable": true,
+      "business_goals_count": 3,
+      "user_stories_count": 5,
+      "critical_stories": 3,
+      "high_priority_stories": 2,
+      "functional_requirements_count": 11,
+      "critical_requirements": 5,
+      "high_priority_requirements": 6,
+      "nonfunctional_requirements_count": 16,
+      "nfr_categories": 9,
+      "traceability_matrix_complete": true,
+      "supporting_docs_referenced": true,
+      "total_insights_leveraged": 52
+    },
+    "2": {
+      "supporting_docs_reviewed": true,
+      "specs_created": true,
+      "components_defined": true,
+      "security_threat_model": true,
+      "design_traceable_to_requirements": true,
+      "architectural_decisions_count": 6,
+      "technology_stack_defined": true,
+      "architecture_pattern": "Modular Plugin Architecture",
+      "performance_targets_set": true,
+      "architecture_documented": true,
+      "component_interfaces_count": 9,
+      "security_addressed": true,
+      "requirements_traceability": true,
+      "apis_specified": true,
+      "performance_documented": true,
+      "data_models_complete": true,
+      "module_structure_defined": true,
+      "component_count": 11
+    },
+    "3": {
+      "validation_gates_specified": true,
+      "dependencies_documented": true,
+      "minimum_three_tasks_per_phase": true,
+      "average_criteria_per_task": 4,
+      "parallel_task_groups": 5,
+      "all_tasks_have_criteria": true,
+      "critical_path_hours": 8,
+      "acceptance_criteria_complete": true,
+      "phases_defined": true,
+      "phase_count": 9,
+      "task_count": 40,
+      "tasks_md_created": true,
+      "tasks_created": true,
+      "time_estimates_provided": true,
+      "dependencies_mapped": true,
+      "supporting_docs_reviewed": true,
+      "tasks_defined": true
+    },
+    "4": {
+      "implementation_created": true,
+      "code_patterns_documented": true,
+      "examples_concrete_actionable": true,
+      "supporting_docs_reviewed": true,
+      "testing_strategy_defined": true,
+      "code_patterns_count": 8,
+      "troubleshooting_tips_provided": true,
+      "testing_strategies_defined": true,
+      "deployment_guidance_documented": true,
+      "deployment_guidance_specified": true
+    },
+    "5": {
+      "readme_created": true,
+      "specs_complete": true,
+      "srd_complete": true,
+      "tasks_complete": true,
+      "implementation_complete": true,
+      "consistency_verified": true,
+      "terminology_consistent": true,
+      "cross_references_valid": true,
+      "ready_for_implementation": true,
+      "final_package_generated": true,
+      "documents_ready_for_implementation": true,
+      "required_files_count": 5,
+      "completeness_verified": true,
+      "package_complete": true
+    }
+  },
+  "phase_timings": {
+    "0": {
+      "phase": 0,
+      "started_at": "2025-11-05T13:04:42.060754",
+      "completed_at": "2025-11-05T13:09:39.443670",
+      "duration_seconds": 297.382916
+    },
+    "1": {
+      "phase": 1,
+      "started_at": "2025-11-05T13:09:39.443670",
+      "completed_at": "2025-11-05T13:16:03.289898",
+      "duration_seconds": 383.846228
+    },
+    "2": {
+      "phase": 2,
+      "started_at": "2025-11-05T13:16:03.289898",
+      "completed_at": "2025-11-05T13:27:39.583549",
+      "duration_seconds": 696.293651
+    },
+    "3": {
+      "phase": 3,
+      "started_at": "2025-11-05T13:27:39.583549",
+      "completed_at": "2025-11-05T13:34:49.487691",
+      "duration_seconds": 429.904142
+    },
+    "4": {
+      "phase": 4,
+      "started_at": "2025-11-05T13:34:49.487691",
+      "completed_at": "2025-11-05T13:38:35.666935",
+      "duration_seconds": 226.179244
+    },
+    "5": {
+      "phase": 5,
+      "started_at": "2025-11-05T13:38:35.666935",
+      "completed_at": "2025-11-05T13:41:25.622809",
+      "duration_seconds": 169.955874
+    },
+    "6": {
+      "phase": 6,
+      "started_at": "2025-11-05T13:41:25.622809",
+      "completed_at": null,
+      "duration_seconds": null
+    }
+  },
+  "created_at": "2025-11-05T13:04:42.060775",
+  "updated_at": "2025-11-05T13:41:25.622809",
+  "completed_at": "2025-11-05T13:41:25.622867",
+  "metadata": {
+    "design_doc_path": ".praxis-os/workspace/design/2025-11-05-parser-submodule-architecture.md",
+    "context": "Architectural refactor to create parsers/ submodule with clean separation of concerns. Prevents tech debt accumulation before adding defensive parsing logic. Uses design doc as primary input.",
+    "spec_type": "architectural_refactor"
+  },
+  "status": "completed"
+}

@@ -20,16 +20,169 @@ Cursor has **native MCP support**, making it the simplest integration. You need:
 2. `.cursor/mcp.json` (MCP server configuration)
 3. Restart Cursor to load MCP server
 
-## Step 1: Copy .cursorrules
+## Step 1: Handle .cursorrules File
 
-The `.cursorrules` file triggers prAxIs OS behavioral patterns.
+The `.cursorrules` file triggers prAxIs OS behavioral patterns. **⚠️ CRITICAL: Never blindly overwrite existing `.cursorrules` files!**
 
-```bash
-# If .cursorrules doesn't exist
-cp /path/to/praxis-os-source/.cursorrules .cursorrules
+### Check for Existing File
 
-# If .cursorrules already exists
-# See: "Merging Existing Rules" section below
+```python
+import os
+import shutil
+from datetime import datetime
+
+if not os.path.exists(".cursorrules"):
+    print("✅ No existing .cursorrules - safe to copy directly")
+    # Copy from source
+    shutil.copy("/path/to/praxis-os-source/.cursorrules", ".cursorrules")
+    print("✅ .cursorrules installed")
+else:
+    print("⚠️  Existing .cursorrules detected!")
+    print("   Cannot blindly overwrite - must handle safely")
+    # Continue to merge protocol below
+```
+
+### Merge Protocol (If File Exists)
+
+**⚠️ Never destroy user's existing configuration!**
+
+#### Step 1: Read Both Files
+
+```python
+# Read existing rules
+with open(".cursorrules", "r") as f:
+    existing_rules = f.read()
+
+# Read prAxIs OS rules
+with open("/path/to/praxis-os-source/.cursorrules", "r") as f:
+    praxis_os_rules = f.read()
+
+print(f"📄 Your existing rules: {len(existing_rules.splitlines())} lines")
+print(f"📄 prAxIs OS rules: {len(praxis_os_rules.splitlines())} lines")
+```
+
+#### Step 2: Present Options to User
+
+```python
+print("""
+⚠️  Your project has existing .cursorrules
+
+prAxIs OS rules MUST be at the TOP of your .cursorrules file.
+
+Why top placement matters:
+1. **Technical (Cursor)**: Cursor processes rules sequentially - prAxIs OS behavioral triggers must run first
+2. **Attention span (All agents)**: LLMs read files top-to-bottom. Instructions at the top have the best chance of being followed, ensuring the orientation hook point is triggered
+
+Options:
+1. [Recommended] Auto-merge: prAxIs OS rules at top, your rules below
+2. Manual merge: Show both files, you merge them yourself
+3. Backup and replace: Use prAxIs OS rules only (your rules backed up)
+
+Which option? (1/2/3): """)
+
+user_choice = input().strip()
+```
+
+#### Step 3: Execute User's Choice
+
+**Option 1: Auto-Merge (Recommended)**
+
+```python
+if user_choice == "1":
+    # Create merged content
+    merged_content = f"""# prAxIs OS Rules
+# (Added during prAxIs OS installation on {datetime.now().strftime('%Y-%m-%d')})
+
+{praxis_os_rules}
+
+# ============================================================================
+# Existing Project Rules (preserved from original .cursorrules)
+# ============================================================================
+
+{existing_rules}
+"""
+    
+    # Backup original
+    shutil.copy(".cursorrules", ".cursorrules.backup")
+    
+    # Write merged file
+    with open(".cursorrules", "w") as f:
+        f.write(merged_content)
+    
+    print("✅ Rules merged successfully!")
+    print("   Structure: prAxIs OS rules (top) + Your rules (below)")
+    print("   Backup: .cursorrules.backup")
+    print("   Note: Top placement ensures orientation hook point is triggered")
+```
+
+**Option 2: Manual Merge**
+
+```python
+elif user_choice == "2":
+    # Save prAxIs OS rules to temp file for user reference
+    with open(".cursorrules.praxis-os", "w") as f:
+        f.write(praxis_os_rules)
+    
+    print("""
+📄 Files for manual merge:
+
+Your existing rules:  .cursorrules
+prAxIs OS rules:       .cursorrules.praxis-os
+
+Instructions:
+1. Open both files
+2. Copy prAxIs OS rules from .cursorrules.praxis-os
+3. Paste at the TOP of .cursorrules (critical for attention span and hook point)
+4. Ensure your existing rules remain below
+5. Save .cursorrules
+6. Delete .cursorrules.praxis-os when done
+
+Press Enter when you've completed the manual merge...
+    """)
+    
+    input()  # Wait for user
+    print("✅ Manual merge completed")
+```
+
+**Option 3: Backup and Replace**
+
+```python
+else:  # Option 3 or invalid input
+    # Backup with timestamp
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    backup_path = f".cursorrules.backup.{timestamp}"
+    
+    shutil.copy(".cursorrules", backup_path)
+    
+    # Replace with prAxIs OS rules
+    shutil.copy("/path/to/praxis-os-source/.cursorrules", ".cursorrules")
+    
+    print(f"✅ Original rules backed up to: {backup_path}")
+    print("   prAxIs OS rules are now active")
+    print("\n💡 To restore your rules:")
+    print("   1. Copy your rules from the backup")
+    print("   2. Append them below prAxIs OS rules in .cursorrules")
+```
+
+### Verify .cursorrules Configuration
+
+```python
+# Check file exists
+if not os.path.exists(".cursorrules"):
+    print("❌ .cursorrules missing!")
+    exit(1)
+
+# Check it has prAxIs OS content
+with open(".cursorrules", "r") as f:
+    content = f.read()
+
+has_praxis_os = "prAxIs OS" in content or "MANDATORY FIRST ACTION" in content
+
+if not has_praxis_os:
+    print("⚠️  .cursorrules exists but doesn't contain prAxIs OS rules")
+    print("   Verify prAxIs OS rules are present at the top")
+else:
+    print("✅ .cursorrules configured with prAxIs OS rules")
 ```
 
 **What it does:**
@@ -49,7 +202,7 @@ Create `.cursor/mcp.json` to connect Cursor to the prAxIs OS MCP server:
       "command": ".praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -168,12 +321,12 @@ cp /path/to/praxis-os-source/.cursorrules .cursorrules
 ls -la .praxis-os/venv/
 
 # Test MCP server manually
-.praxis-os/venv/bin/python -m mcp_server
+.praxis-os/venv/bin/python -m ouroboros
 ```
 
 **Solutions**:
 - Re-run: `python3 -m venv .praxis-os/venv`
-- Re-install: `.praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt`
+- Re-install: `.praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt`
 - Check Python version: Must be 3.9+
 
 ### Tools Available But search_standards Returns Empty
@@ -212,17 +365,17 @@ wc -l .cursorrules
 - Restart Cursor (rules load on startup)
 - Explicitly trigger: "Run the 10 mandatory orientation queries"
 
-### "Module not found: mcp_server"
+### "Module not found: ouroboros"
 
 **Symptom**: Python import error when MCP server starts
 
 **Check**:
 ```bash
-# Verify mcp_server directory exists
-ls -la .praxis-os/mcp_server/
+# Verify ouroboros directory exists
+ls -la .praxis-os/ouroboros/
 
 # Check __main__.py exists
-ls .praxis-os/mcp_server/__main__.py
+ls .praxis-os/ouroboros/__main__.py
 ```
 
 **Solutions**:

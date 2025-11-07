@@ -21,7 +21,11 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+# dist/ - REMOVED: dist/ contains distributable source files (ouroboros, universal, scripts)
+# But ignore build artifacts within dist/
+dist/**/__pycache__/
+dist/**/*.pyc
+dist/**/*.pyo
 downloads/
 eggs/
 .eggs/

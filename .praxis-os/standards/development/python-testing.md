@@ -1,6 +1,56 @@
 # Python Testing Standards
 # Generated for: praxis-os
 
+## Questions This Answers
+
+- **Should I use pytest directly or tox for running tests?**
+- **What's the difference between pytest, unittest, and doctest?**
+- **How do I set up pytest with coverage tracking?**
+- **What test directory structure should I use for Python projects?**
+- **How do I write parametrized tests with pytest?**
+- **How do I test async Python code with pytest-asyncio?**
+- **What fixtures should I create for common test setups?**
+- **How do I mock external dependencies in Python tests?**
+- **What's the correct pytest configuration in pytest.ini?**
+- **How do I test concurrent Python code safely?**
+
+## Quick Reference: Python Testing
+
+**Critical Rule:** If `tox.ini` exists → Use `tox`, NOT `pytest` directly
+
+**Test Execution:**
+```bash
+tox -e unit          # Run unit tests (ALWAYS use if tox.ini exists)
+tox -e integration   # Run integration tests
+pytest tests/        # ONLY if no tox.ini
+```
+
+**Recommended Stack:**
+- **pytest**: Modern, fixture-based testing (recommended)
+- **pytest-cov**: Code coverage tracking
+- **pytest-mock**: Mocking support
+- **tox**: Multi-environment testing
+
+**Test Structure:**
+```
+project/
+├── src/module/       # Source code
+├── tests/
+│   ├── unit/         # Fast, isolated tests
+│   ├── integration/  # End-to-end tests
+│   └── conftest.py   # Shared fixtures
+└── tox.ini           # Test environments
+```
+
+**Key Principles:**
+- Unit tests: Fast, isolated, mocked dependencies
+- Integration tests: Real dependencies, slower
+- Coverage target: ≥60% overall, ≥80% new code
+- Use fixtures for setup/teardown
+- Parametrize tests for multiple scenarios
+
+---
+
 ## 🚨 CRITICAL: AI Test Execution Protocol
 
 ### Rule: Use tox for Test Execution
@@ -86,7 +136,7 @@ Since this is a **Python MCP server package**, we recommend:
 
 ## Pytest Patterns (Recommended)
 
-### Installation
+### Pytest Installation Steps
 
 ```bash
 pip install pytest pytest-cov pytest-mock
@@ -327,7 +377,7 @@ def test_with_pytest_mock(mocker):
 
 ---
 
-## Testing Concurrency
+## Testing Concurrent Python Code
 
 ### Thread Safety Tests
 
@@ -393,7 +443,7 @@ def test_workflow_state_concurrent_writes(temp_dir):
 
 ## Test Coverage
 
-### Configuration (`pytest.ini`)
+### Pytest Configuration in pytest.ini
 
 ```ini
 [pytest]
@@ -576,11 +626,11 @@ async def test_mcp_tool_input_validation():
     """Test that MCP tools validate input."""
     # Test missing required parameters
     with pytest.raises(ValueError):
-        await pos_search(query=None)
+        await pos_search_project(query=None)
     
     # Test invalid parameter types
     with pytest.raises(TypeError):
-        await pos_search(query=123)
+        await pos_search_project(query=123)
 ```
 
 ### 2. Test with Real Standards Files

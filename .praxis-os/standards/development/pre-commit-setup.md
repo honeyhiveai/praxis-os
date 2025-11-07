@@ -2,7 +2,46 @@
 
 **🎯 Automatic quality enforcement before every commit**
 
-## Overview
+## Questions This Answers
+
+- **How do I install pre-commit hooks for prAxIs OS?**
+- **What quality checks run automatically before each commit?**
+- **Why do my commits get blocked by pre-commit hooks?**
+- **How do I fix Pylint violations caught by pre-commit?**
+- **What's the zero-tolerance policy for MyPy errors?**
+- **How do I bypass pre-commit hooks in emergencies?**
+- **What's the difference between prAxIs OS and python-sdk pre-commit setup?**
+- **How do I troubleshoot "tox: command not found" errors?**
+- **What quality standards are enforced by pre-commit hooks?**
+- **How do I run pre-commit hooks manually on all files?**
+
+## Quick Reference: Pre-commit Hook Setup
+
+**One-Time Installation:**
+```bash
+pip install pre-commit
+cd /path/to/praxis-os
+pre-commit install
+```
+
+**Quality Checks (Run Automatically on Commit):**
+1. **Format** - `tox -e format` (Black + isort, auto-fix)
+2. **Lint** - `tox -e lint` (Pylint ≥8.0/10.0, target: 10.0/10.0)
+3. **Type** - `tox -e type` (MyPy ZERO errors - MANDATORY)
+4. **Test** - `tox -e unit` (100% pass rate required)
+
+**Key Standards:**
+- Pylint: ≥8.0/10.0 (current: 8.33/10.0, target: 10.0/10.0)
+- MyPy: ZERO errors (no exceptions, no bypasses)
+- Tests: 100% pass rate, ≥60% coverage overall
+
+**Emergency Bypass:** `git commit --no-verify` (use with extreme caution!)
+
+**Manual Execution:** `pre-commit run --all-files`
+
+---
+
+## Pre-commit Hooks Overview
 
 Pre-commit hooks automatically enforce code quality standards before allowing commits. This prevents quality violations from entering the codebase and ensures consistency across all contributors.
 
@@ -215,12 +254,12 @@ git commit -m "refactor: improve code quality"
 
 ## 📊 Quality Standards Enforced
 
-### Formatting
+### Formatting Standards (Black + isort)
 - **Black**: 88-character line length
 - **isort**: Black profile, sorted imports
 - **Enforcement**: Auto-fix, then verify
 
-### Static Analysis
+### Static Analysis Standards (Pylint + MyPy)
 - **Pylint**: ≥8.0/10.0 (currently 8.33/10.0)
   - Target: 10.0/10.0 for all new code
   - Path: Systematic violation fixing
@@ -228,7 +267,7 @@ git commit -m "refactor: improve code quality"
   - All type errors must be fixed
   - No exceptions or bypasses allowed
 
-### Testing
+### Testing Standards (Unit Tests)
 - **Unit Tests**: 100% pass rate
 - **Coverage**: Minimum 60% overall, 80% for new code
 - **Speed**: Fast execution (mocked dependencies)

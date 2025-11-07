@@ -42,7 +42,7 @@ your-project/
 │   ├── standards/
 │   │   ├── universal/        # Timeless CS fundamentals
 │   │   └── development/      # Language-specific guidance
-│   ├── mcp_server/           # MCP/RAG server
+│   ├── ouroboros/           # MCP/RAG server
 │   └── .cache/vector_index/  # Semantic search index
 └── .cursor/
     └── mcp.json              # MCP configuration

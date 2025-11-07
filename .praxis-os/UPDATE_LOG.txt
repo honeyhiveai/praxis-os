@@ -1,8 +1,0 @@
-Agent OS Update Log
-
-2025-10-06 19:12:58 | N/A | v1.0.0 - Added spec_execution_v1 workflow
-  - Dynamic workflow for executing spec tasks systematically
-  - Meta-framework principles encoded in templates
-  - Phase 0: Spec analysis (3 tasks)
-  - Dynamic phase/task generation from tasks.md
-  - Tier 2 methodology files (parser, resolver, validator)

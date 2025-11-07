@@ -1,0 +1,233 @@
+# ============================================================================
+# Ouroboros MCP Server Configuration
+# ============================================================================
+# This file configures what prAxIs OS indexes and how it searches your project.
+#
+# ⚠️ INSTALLATION NOTE: You MUST customize code indexing paths below
+#    to match your project's source code layout!
+#
+# Path Resolution:
+#   - All paths are relative to .praxis-os/ directory (not project root)
+#   - Example: If your code is at project-root/src/, use "../src/"
+#   - Example: If your code is at project-root/lib/, use "../lib/"
+#
+# After installation, update the 'code' and 'ast' sections below with your
+# project's actual source code paths and languages.
+
+version: "1.0"
+
+# ============================================================================
+# RAG Subsystem Configuration
+# ============================================================================
+# Configures what gets indexed and how search works.
+#
+# Three types of indexes:
+#   1. Standards: Documentation/markdown files (usually fine as-is)
+#   2. Code: Source code semantic search + call graph (MUST customize paths!)
+#   3. AST: Structural code search (MUST customize paths!)
+
+indexes:
+  # ========================================================================
+  # Standards Index (Documentation/Markdown)
+  # ========================================================================
+  # Indexes your project's standards, docs, and markdown files.
+  # Usually fine as-is unless you have custom documentation locations.
+  #
+  # What it does:
+  #   - Hybrid search: Combines semantic (vector) + keyword (FTS) search
+  #   - Vector search: Finds docs by MEANING (e.g., "error handling" finds
+  #                    docs about exceptions, try/catch, etc.)
+  #   - FTS search: Finds docs by EXACT WORDS (e.g., "MCP server" finds
+  #                 only docs with that exact phrase)
+  #   - Together: Best of both worlds (concepts + terminology)
+  #
+  # Chunking Strategy:
+  #   - chunk_size: 800 tokens (~2-3 paragraphs) - larger chunks = more context
+  #   - chunk_overlap: 100 tokens (~1-2 sentences) - prevents concept splitting
+  #   - Why larger? Docs need context, code needs precision
+  #
+  # Metadata Filtering:
+  #   - Pre-filters by domain/phase before searching (faster, more accurate)
+  #   - Uses scalar indexes (BTREE/BITMAP) for sub-millisecond filtering
+  #   - Usually fine as-is (auto-generated from headers/keywords)
+  standards:
+    source_paths:
+      - "standards/"  # Relative to .praxis-os/ (usually fine as-is)
+
+    vector:
+      # BGE models (BAAI General Embedding) - More accurate than MiniLM
+      # Options:
+      #   - BAAI/bge-small-en-v1.5: DEFAULT - Good balance (134MB, fast, 384 dim)
+      #   - BAAI/bge-base-en-v1.5: Better accuracy (438MB, medium, 768 dim)
+      #   - BAAI/bge-large-en-v1.5: Best accuracy (1.3GB, slow, 1024 dim)
+      model: "BAAI/bge-small-en-v1.5"  # MIT licensed, zero cost, offline
+      dimension: 384  # Model-specific (384 for small, 768 for base, 1024 for large)
+      chunk_size: 800  # Larger chunks = more context for docs
+      chunk_overlap: 100  # Prevents concept splitting at boundaries
+
+    fts: {}  # Use all defaults (enabled=True, tokenizer="default")
+
+    metadata_filtering:
+      enabled: true
+      scalar_indexes:
+        - column: "domain"  # High cardinality (workflow, rag, browser, etc.)
+          index_type: "BTREE"
+        - column: "phase"  # Low cardinality (0-8 phases)
+          index_type: "BITMAP"
+        - column: "section"  # Medium-high cardinality
+          index_type: "BTREE"
+      auto_generate: true  # Extract metadata from headers/keywords (zero cost)
+      llm_enhance: false  # Optional: Better metadata (costs money, usually not needed)
+
+  # ========================================================================
+  # Code Index (CRITICAL: Customize for Your Project!)
+  # ========================================================================
+  # ⚠️ YOU MUST UPDATE source_paths BELOW to match your project structure!
+  #
+  # What it does:
+  #   - Semantic code search: Find functions/classes by meaning
+  #   - Call graph: Find who calls what (recursive traversal)
+  #   - Hybrid search: Vector + FTS (same as standards)
+  #
+  # Common Project Patterns:
+  #   Python:
+  #     - Standard: ["../src/", "../lib/"]
+  #     - Root-level: ["../"] (if .py files at project root)
+  #     - Package: ["../mypackage/"]
+  #
+  #   JavaScript/TypeScript:
+  #     - Standard: ["../src/", "../app/", "../components/"]
+  #     - Next.js: ["../app/", "../components/", "../lib/"]
+  #     - Monorepo: ["../packages/*/src/", "../apps/*/src/"]
+  #
+  #   Go:
+  #     - Standard: ["../cmd/", "../pkg/", "../internal/"]
+  #     - Simple: ["../"] (if .go files at project root)
+  #
+  #   Rust:
+  #     - Standard: ["../src/"]
+  #
+  #   Multi-language:
+  #     - ["../src/python/", "../src/typescript/", "../src/go/"]
+  #
+  # Languages:
+  #   - Add languages you use: ["python", "typescript", "javascript", "go", "rust"]
+  #   - Supported: python, javascript, typescript, go, rust
+  #   - More languages can be added via config (no code changes needed)
+  #
+  # Chunking Strategy:
+  #   - chunk_size: 200 tokens (~1 function) - smaller chunks = more precision
+  #   - chunk_overlap: 20 tokens (~few lines) - prevents function splitting
+  #   - Why smaller? Code search needs function-level precision, not doc-level context
+  code:
+    source_paths:
+      # ⚠️ CHANGE THIS: Replace with your project's source code paths
+      # Examples:
+      #   - "../src/"           # Python/JS standard layout
+      #   - "../lib/"           # Alternative layout
+      #   - "../"               # Root-level files
+      #   - "../packages/*/src/" # Monorepo pattern
+      - "ouroboros/"  # ⚠️ TEMPLATE: Replace this!
+
+    languages:
+      # ⚠️ UPDATE THIS: Add languages your project uses
+      # Supported: python, javascript, typescript, go, rust
+      # Example: ["python", "typescript"] for Python + TypeScript project
+      - "python"  # ⚠️ TEMPLATE: Add your languages here
+
+    vector:
+      # CodeBERT - Specifically designed for code embeddings
+      # Better semantic understanding of code than general-purpose models
+      # Options:
+      #   - microsoft/codebert-base: DEFAULT - Best for code (768 dim)
+      #   - microsoft/codebert-base-mlm: Alternative CodeBERT variant
+      model: "microsoft/codebert-base"  # MIT licensed, zero cost, offline
+      dimension: 768  # CodeBERT-base uses 768 dimensions
+      chunk_size: 200  # Smaller chunks = function-level precision
+      chunk_overlap: 20  # Prevents function splitting
+
+    fts: {}  # Use all defaults (enabled=True)
+
+    graph: {}  # Use all defaults (max_depth=10, etc.)
+
+    duckdb_path: ".cache/code.duckdb"  # Call graph database (usually fine as-is)
+
+  # ========================================================================
+  # AST Index (CRITICAL: Customize for Your Project!)
+  # ========================================================================
+  # ⚠️ YOU MUST UPDATE source_paths BELOW to match your project structure!
+  #
+  # What it does:
+  #   - Structural code search: Find code by AST patterns
+  #   - Examples: "all async functions", "all classes with method X",
+  #               "all error handling blocks"
+  #   - Uses Tree-sitter parsers for language-specific AST parsing
+  #
+  # Paths should match code.source_paths above (same directories).
+  #
+  # Auto-install Parsers:
+  #   - If auto_install_parsers: true, server will automatically install
+  #     missing Tree-sitter parsers (e.g., tree-sitter-python)
+  #   - Requires internet access on first startup
+  #   - Set to false for air-gapped environments (install manually)
+  ast:
+    source_paths:
+      # ⚠️ CHANGE THIS: Should match code.source_paths above
+      - "ouroboros/"  # ⚠️ TEMPLATE: Replace this!
+
+    languages:
+      # ⚠️ UPDATE THIS: Should match code.languages above
+      - "python"  # ⚠️ TEMPLATE: Add your languages here
+
+    auto_install_parsers: true  # Auto-install missing parsers (requires internet)
+    venv_path: "venv/"  # Isolated venv for parser installation (usually fine as-is)
+
+  # ========================================================================
+  # File Watcher (Incremental Updates)
+  # ========================================================================
+  # Automatically rebuilds indexes when files change.
+  #
+  # What it does:
+  #   - Watches source files for changes
+  #   - Automatically rebuilds affected indexes (standards, code, AST)
+  #   - Debounces rapid changes (waits 500ms before rebuilding)
+  #
+  # Usually fine as-is (enabled=True, debounce_ms=500).
+  # Disable if you want manual rebuilds only.
+  file_watcher: {}  # Use all defaults (enabled=True, debounce_ms=500)
+
+# ============================================================================
+# Workflow Subsystem Configuration
+# ============================================================================
+# Configures phase-gated workflow execution.
+#
+# Usually fine as-is unless you have custom workflow locations or need
+# different session timeouts.
+workflow:
+  workflows_dir: "workflows/"  # Workflow definitions (usually fine as-is)
+  state_dir: ".cache/state/"  # Workflow state persistence (usually fine as-is)
+  session_timeout_minutes: 1440  # 24 hours (reasonable default)
+
+# ============================================================================
+# Browser Subsystem Configuration
+# ============================================================================
+# Configures browser automation (Playwright).
+#
+# Usually fine as-is unless you need different browser type or session limits.
+browser:
+  browser_type: "chromium"  # Options: chromium, firefox, webkit
+  headless: true  # Run without UI (set false for debugging)
+  max_sessions: 10  # Max concurrent browser sessions
+  session_timeout_minutes: 30  # Auto-cleanup idle sessions
+
+# ============================================================================
+# Logging Configuration
+# ============================================================================
+# Configures structured logging and behavioral metrics.
+#
+# Usually fine as-is unless you need different log levels or formats.
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "text"  # Options: "text" (human-readable) or "json" (structured)
+  log_dir: ".cache/logs/"  # Log file location (usually fine as-is)
+  behavioral_metrics_enabled: true  # Track query diversity, trends, prepend effectiveness

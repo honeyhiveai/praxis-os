@@ -16,7 +16,7 @@ echo "Validating installation documentation completeness..."
 REQUIRED_FILES=(
     "installation/00-START.md"
     "installation/02-copy-files.md"
-    "scripts/build_rag_index.py"
+    # Note: build_rag_index.py removed - Ouroboros auto-builds indexes
     ".praxis-os/standards/development/code-quality.md"
 )
 

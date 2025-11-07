@@ -1,0 +1,98 @@
+{
+  "session_id": "workflow_default_0fddea59-0f4e-479c-9abc-6fb2369be087",
+  "workflow_type": "spec_creation_v1",
+  "target_file": ".praxis-os/specs/rag-index-submodule",
+  "current_phase": 6,
+  "completed_phases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "phase_artifacts": {},
+  "checkpoints": {
+    "0": "passed",
+    "1": "passed",
+    "2": "passed",
+    "3": "passed",
+    "4": "passed",
+    "5": "passed"
+  },
+  "evidence_submitted": {
+    "0": {
+      "spec_directory_created": true,
+      "supporting_docs_directory_exists": true,
+      "documents_processed": true,
+      "index_created": true,
+      "insights_extracted": true,
+      "mode_documented": true,
+      "cross_reference_complete": true
+    },
+    "1": {
+      "supporting_docs_reviewed": true,
+      "srd_created": true,
+      "nonfunctional_requirements_addressed": true,
+      "business_goals_defined": true,
+      "out_of_scope_stated": true,
+      "user_stories_documented": true,
+      "requirements_specific_measurable": true,
+      "functional_requirements_listed": true,
+      "supporting_docs_referenced": true
+    },
+    "2": {
+      "specs_created": true,
+      "components_defined": true,
+      "design_traceable_to_requirements": true,
+      "security_addressed": true,
+      "performance_documented": true,
+      "data_models_complete": true,
+      "apis_specified": true,
+      "architecture_documented": true,
+      "supporting_docs_reviewed": true,
+      "requirements_traceability": true
+    },
+    "3": {
+      "validation_gates_specified": true,
+      "supporting_docs_reviewed": true,
+      "acceptance_criteria_complete": true,
+      "tasks_defined": true,
+      "tasks_created": true,
+      "phases_defined": true,
+      "tasks_md_created": true,
+      "time_estimates_provided": true,
+      "dependencies_mapped": true
+    },
+    "4": {
+      "troubleshooting_tips_provided": true,
+      "supporting_docs_reviewed": true,
+      "implementation_created": true,
+      "examples_concrete_actionable": true,
+      "code_patterns_documented": true,
+      "testing_strategy_defined": true,
+      "implementation_md_created": true,
+      "deployment_guidance_specified": true
+    },
+    "5": {
+      "readme_created": true,
+      "specs_complete": true,
+      "srd_complete": true,
+      "tasks_complete": true,
+      "implementation_complete": true,
+      "ready_for_implementation": true,
+      "cross_references_valid": true,
+      "documents_ready": true,
+      "terminology_consistent": true,
+      "all_sections_complete": true
+    }
+  },
+  "created_at": "2025-11-04T22:25:14.530242",
+  "updated_at": "2025-11-04T23:10:12.644861",
+  "metadata": {
+    "supporting_docs": [
+      ".praxis-os/specs/completed/2025-11-03-ouroboros-mcp-server/supporting-docs/rag-index-submodule-pattern.md"
+    ]
+  },
+  "status": "completed"
+}

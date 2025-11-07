@@ -1,6 +1,41 @@
 # Python Code Quality Standards
 # Generated for: praxis-os
 
+## Questions This Answers
+
+- **How do I set up Black for Python code formatting?**
+- **What MyPy configuration should I use for strict type checking?**
+- **How do I configure Pylint to enforce Python code quality standards?**
+- **What's the correct import order for Python modules?**
+- **How do I set up pre-commit hooks for automatic formatting?**
+- **What docstring format should I use for Python documentation?**
+- **How do I fix common Pylint errors like line-too-long or too-many-arguments?**
+- **What type hints should I add to Python functions and classes?**
+- **How do I integrate isort with Black for import sorting?**
+
+## Quick Reference: Python Code Quality Toolchain
+
+**Essential Tools:** Black (formatting) + isort (imports) + Pylint (linting) + MyPy (types)
+
+**Key Commands:**
+```bash
+black mcp_server/          # Format code
+isort mcp_server/          # Sort imports  
+pylint mcp_server/         # Static analysis (target: 10.0/10)
+mypy mcp_server/           # Type checking
+```
+
+**Configuration:** All tools configured in `pyproject.toml` with:
+- Line length: 100 characters
+- Python version: 3.8+
+- Black-compatible isort profile
+- Strict MyPy type checking
+- Sphinx-format docstrings (mandatory)
+
+**Pre-commit:** Auto-format on commit with `pre-commit install`
+
+---
+
 ## Code Quality Tools
 
 ### Your Project Status
@@ -17,13 +52,13 @@
 
 ## Black: Code Formatting
 
-### Installation
+### Black Installation Steps
 
 ```bash
 pip install black
 ```
 
-### Configuration (`pyproject.toml`)
+### Black Configuration in pyproject.toml
 
 ```toml
 [tool.black]
@@ -45,7 +80,7 @@ extend-exclude = '''
 '''
 ```
 
-### Usage
+### Black Command-Line Usage
 
 ```bash
 # Format all files
@@ -82,13 +117,13 @@ pre-commit install
 
 ## isort: Import Sorting
 
-### Installation
+### isort Installation Steps
 
 ```bash
 pip install isort
 ```
 
-### Configuration (`pyproject.toml`)
+### isort Configuration in pyproject.toml
 
 ```toml
 [tool.isort]
@@ -101,7 +136,7 @@ use_parentheses = true
 ensure_newline_before_comments = true
 ```
 
-### Usage
+### isort Command-Line Usage
 
 ```bash
 # Sort imports
@@ -138,13 +173,13 @@ from workflow_engine import WorkflowEngine
 
 ## Pylint: Static Analysis
 
-### Installation
+### Pylint Installation Steps
 
 ```bash
 pip install pylint
 ```
 
-### Configuration (`pyproject.toml`)
+### Pylint Configuration in pyproject.toml
 
 ```toml
 [tool.pylint.main]
@@ -172,7 +207,7 @@ max-returns = 6
 max-statements = 50
 ```
 
-### Usage
+### Pylint Command-Line Usage
 
 ```bash
 # Analyze all files
@@ -231,13 +266,13 @@ def create_engine(config: EngineConfig):
 
 ## MyPy: Type Checking
 
-### Installation
+### MyPy Installation Steps
 
 ```bash
 pip install mypy
 ```
 
-### Configuration (`pyproject.toml`)
+### MyPy Configuration in pyproject.toml
 
 ```toml
 [tool.mypy]
@@ -261,7 +296,7 @@ module = [
 ignore_missing_imports = true
 ```
 
-### Usage
+### MyPy Command-Line Usage
 
 ```bash
 # Type check all files
@@ -282,7 +317,7 @@ mypy --show-error-codes mcp_server/
 from typing import List, Dict, Optional, Union, Tuple
 from pathlib import Path
 
-def pos_search(
+def pos_search_project(
     query: str,
     n_results: int = 5,
     filters: Optional[Dict[str, str]] = None

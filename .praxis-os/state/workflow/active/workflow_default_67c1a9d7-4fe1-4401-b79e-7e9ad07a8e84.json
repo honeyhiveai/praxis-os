@@ -1,0 +1,14 @@
+{
+  "session_id": "workflow_default_67c1a9d7-4fe1-4401-b79e-7e9ad07a8e84",
+  "workflow_type": "spec_creation_v1",
+  "target_file": ".praxis-os/specs/debug-path-test-2",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "evidence_submitted": {},
+  "created_at": "2025-11-04T21:24:31.288015",
+  "updated_at": "2025-11-04T21:24:31.288017",
+  "metadata": {},
+  "status": "active"
+}

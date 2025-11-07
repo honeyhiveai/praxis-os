@@ -4,6 +4,19 @@
 
 ---
 
+## Questions This Answers
+
+- **What CSS variables should I use for Docusaurus theming?**
+- **How do I make components work in both light and dark mode?**
+- **What are the semantic ifm variables for colors and spacing?**
+- **How do I test components in different themes?**
+- **Why should I avoid hardcoded colors in documentation?**
+- **What responsive design units should I use for spacing?**
+- **How do I use fluid typography with clamp()?**
+- **What are common theming anti-patterns to avoid?**
+- **How do I maintain theme compatibility across components?**
+- **What's the checklist for theme-aware component creation?**
+
 ## 🎯 TL;DR - Documentation Theming Quick Reference
 
 **Critical theming rules:**
@@ -22,7 +35,7 @@
 
 ---
 
-## Purpose
+## Theming Standards Purpose
 
 Ensure all prAxIs OS documentation components respect Docusaurus theming, work in both light and dark modes, and provide a consistent, professional appearance. Using CSS variables makes components theme-aware and maintainable.
 
@@ -341,7 +354,7 @@ font-size: clamp(min, preferred, max);
 
 ---
 
-## Checklist
+## Theme-Aware Component Checklist
 
 **Before writing CSS for documentation components:**
 
@@ -369,7 +382,7 @@ font-size: clamp(min, preferred, max);
 
 ---
 
-## Examples
+## Theming Implementation Examples
 
 ### Example 1: Card Component (Theme-Aware)
 

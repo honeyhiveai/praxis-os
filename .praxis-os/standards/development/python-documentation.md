@@ -1,6 +1,59 @@
 # Python Documentation Standards
 # Generated for: praxis-os
 
+## Questions This Answers
+
+- **What docstring format should I use for Python documentation?**
+- **How do I set up Sphinx for auto-generating Python API documentation?**
+- **What's the difference between Sphinx and Google docstring formats?**
+- **How do I document Python functions with proper parameter descriptions?**
+- **What tools are available for Python documentation generation?**
+- **How do I write comprehensive module and class docstrings?**
+- **What's the recommended structure for README.md in Python projects?**
+- **How do I include code examples in Python docstrings?**
+- **What documentation should I add for type hints and return values?**
+- **How do I configure Sphinx with autodoc for Python projects?**
+
+## Quick Reference: Python Documentation
+
+**Recommended Format:** Sphinx (industry standard with excellent tooling)
+
+**Sphinx Docstring Template:**
+```python
+def function_name(param1: str, param2: int = 5) -> List[Result]:
+    """
+    Brief one-line description.
+    
+    Detailed explanation of what the function does,
+    how it works, and any important context.
+    
+    :param param1: Description of param1
+    :param param2: Description of param2 (default: 5)
+    :returns: Description of return value
+    :rtype: List[Result]
+    :raises ValueError: When condition occurs
+    
+    Example:
+        >>> result = function_name("test", 10)
+        >>> print(result)
+    """
+```
+
+**Key Elements:**
+- Brief one-liner at top
+- Detailed explanation (2-3 sentences)
+- All parameters documented with `:param`
+- Return value with `:returns` and `:rtype`
+- Exceptions with `:raises`
+- Usage example with `>>>`
+
+**Tools:**
+- **Sphinx**: Auto-generate API docs from docstrings
+- **pydoc**: Built-in doc viewer (`python -m pydoc module`)
+- **mkdocs**: Alternative Markdown-based documentation
+
+---
+
 ## Universal Documentation Principles
 
 > **See universal standards:**
@@ -32,7 +85,7 @@ This document applies universal documentation principles to Python-specific cont
 **Why:** Industry standard, excellent tooling, autodoc integration
 
 ```python
-def pos_search(
+def pos_search_project(
     query: str,
     n_results: int = 5,
     filters: Optional[Dict[str, str]] = None
@@ -55,7 +108,7 @@ def pos_search(
     :raises RuntimeError: If the index is not initialized
     
     Example:
-        >>> results = pos_search("race conditions", n_results=3)
+        >>> results = pos_search_project("race conditions", n_results=3)
         >>> for result in results:
         ...     print(result.content)
         
@@ -72,7 +125,7 @@ def pos_search(
 ### Google Format (Alternative)
 
 ```python
-def pos_search(query, n_results=5, filters=None):
+def pos_search_project(query, n_results=5, filters=None):
     """Search the prAxIs OS standards using semantic search.
     
     Performs vector similarity search over the indexed standards
@@ -91,7 +144,7 @@ def pos_search(query, n_results=5, filters=None):
         RuntimeError: If the index is not initialized
     
     Example:
-        >>> results = pos_search("race conditions", n_results=3)
+        >>> results = pos_search_project("race conditions", n_results=3)
         >>> for result in results:
         ...     print(result.content)
     """
@@ -101,7 +154,7 @@ def pos_search(query, n_results=5, filters=None):
 ### NumPy Format (Scientific)
 
 ```python
-def pos_search(query, n_results=5, filters=None):
+def pos_search_project(query, n_results=5, filters=None):
     """
     Search the prAxIs OS standards using semantic search.
     
@@ -128,7 +181,7 @@ def pos_search(query, n_results=5, filters=None):
     
     Examples
     --------
-    >>> results = pos_search("race conditions", n_results=3)
+    >>> results = pos_search_project("race conditions", n_results=3)
     >>> for result in results:
     ...     print(result.content)
     """
@@ -139,7 +192,7 @@ def pos_search(query, n_results=5, filters=None):
 
 ## Sphinx Documentation Setup
 
-### Installation
+### Sphinx Installation Steps
 
 ```bash
 pip install sphinx sphinx-rtd-theme sphinx-autodoc-typehints
@@ -165,7 +218,7 @@ praxis-os/
 │   └── make.bat              # Windows
 ```
 
-### Configuration (`docs/source/conf.py`)
+### Sphinx Configuration in docs/source/conf.py
 
 ```python
 """Sphinx configuration for prAxIs OS."""
@@ -453,7 +506,7 @@ def calculate_median(values):
 ❌ **No usage examples**  
 ❌ **No changelog** (though CHANGELOG.md exists in mcp_server)
 
-### Recommendations
+### Documentation Setup Recommendations
 
 1. **Set up Sphinx:**
    ```bash

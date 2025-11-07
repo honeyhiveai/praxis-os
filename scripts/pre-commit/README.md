@@ -29,8 +29,9 @@ These scripts are called by `.pre-commit-config.yaml` hooks to perform validatio
 **Checks**:
 - `installation/00-START.md` - Installation entry point
 - `installation/02-copy-files.md` - File copy instructions
-- `scripts/build_rag_index.py` - RAG index builder (CRITICAL)
 - `.praxis-os/standards/development/code-quality.md` - Quality standards
+
+**Note**: `build_rag_index.py` removed - Ouroboros auto-builds indexes on server start
 
 **Usage**:
 ```bash

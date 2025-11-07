@@ -7,6 +7,8 @@ doc_type: how-to
 
 Configure prAxIs OS to work with Claude Code extension in VS Code as your primary AI agent.
 
+**Note**: Claude Code also supports CLI/terminal mode. See [Claude Code Terminal](./terminal.md) if you prefer command-line interface.
+
 ## Prerequisites
 
 - ✅ Mechanical installation complete (via `install-praxis-os.py`)
@@ -24,7 +26,7 @@ Claude Code for VS Code is an editor-integrated AI assistant. As the **primary a
 4. Provide inline suggestions, diffs, and editor integration
 
 You need:
-1. `.cursorrules` file (behavioral triggers)
+1. `.claude/CLAUDE.md` file (behavioral triggers - Claude Code's equivalent to `.cursorrules`)
 2. VS Code MCP configuration for Claude Code
 3. Reload VS Code window
 
@@ -51,21 +53,27 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 # Add to ~/.zshrc or ~/.bashrc for persistence
 ```
 
-## Step 3: Copy .cursorrules
+## Step 3: Handle .claude/CLAUDE.md File
 
-```bash
-# If .cursorrules doesn't exist
-cp /path/to/praxis-os-source/.cursorrules .cursorrules
+The `.claude/CLAUDE.md` file triggers prAxIs OS behavioral patterns in Claude Code. **⚠️ CRITICAL: Never blindly overwrite existing `.claude/CLAUDE.md` files!**
 
-# .cursorrules affects LLM behavior via context
-```
+**Note**: `.claude/CLAUDE.md` is Claude Code-specific (similar to `.cursorrules` for Cursor). It provides behavioral triggers for the LLM.
 
-**What it does**:
-- Triggers orientation queries
-- Enforces search-first protocol
-- Prevents direct file reads of indexed content
+### Handling Existing .claude/CLAUDE.md
+
+If `.claude/CLAUDE.md` already exists, follow the merge protocol from the [Cursor guide](../cursor/index.md#merge-protocol-if-file-exists). The merge logic is the same:
+
+1. **Check if file exists** → If no, copy directly
+2. **If exists** → Use merge protocol (auto-merge, manual merge, or backup-and-replace)
+3. **prAxIs OS rules must be at the TOP** - Critical for:
+   - **Attention span**: LLMs read files sequentially - instructions at the top have the best chance of being followed
+   - **Hook point**: Ensures orientation queries are triggered before other rules
+
+**Quick reference**: See [Cursor guide - Step 1: Handle .cursorrules File](../cursor/index.md#step-1-handle-cursorrules-file) for the complete merge protocol with code examples (replace `.cursorrules` with `.claude/CLAUDE.md`).
 
 ## Step 4: Configure Claude Code for MCP
+
+**Note**: Claude Code uses `.claude/CLAUDE.md` for behavioral patterns. If you want to trigger orientation queries, they'll be automatic via this file.
 
 Edit VS Code workspace settings (`.vscode/settings.json`):
 
@@ -76,7 +84,7 @@ Edit VS Code workspace settings (`.vscode/settings.json`):
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -106,7 +114,8 @@ On reload, Claude Code will:
 1. Start prAxIs OS MCP server
 2. Connect to MCP server
 3. Detect `.rebuild_index` flag → Build RAG index
-4. Load `.cursorrules` via context
+4. Read `.claude/CLAUDE.md` → Loads behavioral patterns
+5. Tools become available
 
 **Expected startup**: 5-10 seconds for first RAG build
 
@@ -187,7 +196,7 @@ Claude executes commands and interprets output.
 **Check**:
 ```bash
 # Test MCP server manually
-.praxis-os/venv/bin/python -m mcp_server
+.praxis-os/venv/bin/python -m ouroboros
 
 # Check VS Code Output panel
 # View → Output → Select "Claude Code" from dropdown
@@ -198,7 +207,7 @@ Claude executes commands and interprets output.
 - Check venv exists: `ls .praxis-os/venv/`
 - Re-install dependencies:
   ```bash
-  .praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt
+  .praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt
   ```
 - Use absolute path if `${workspaceFolder}` doesn't resolve
 - Check Claude Code documentation for current config format
@@ -241,35 +250,26 @@ find .praxis-os/standards -name "*.md" | wc -l
 - Check Claude Code output for indexing errors
 - Verify permissions: `chmod -R u+rw .praxis-os/.cache/`
 
-### Claude Code Doesn't Follow .cursorrules
+### Claude Code Doesn't Follow .claude/CLAUDE.md
 
-**Symptom**: Claude doesn't run orientation or query liberally
+**Symptom**: Agent doesn't run orientation queries or query liberally
 
-**Root cause**: `.cursorrules` is Cursor-specific
+**Root cause**: `.claude/CLAUDE.md` file missing or not at top of file
+
+**Check**:
+```bash
+# Verify .claude/CLAUDE.md in project root
+ls -la .claude/CLAUDE.md
+
+# Check file size (should be ~2KB with prAxIs OS rules)
+wc -l .claude/CLAUDE.md
+```
 
 **Solutions**:
-
-**Option 1: Custom instructions in Claude Code settings**
-
-In Claude Code settings, add system prompt:
-```
-MANDATORY: Before any task, run search_standards("orientation bootstrap queries"). Follow all 10 queries. Query liberally (5-10 times per task). Never read indexed files directly.
-```
-
-**Option 2: Workspace settings**
-
-In `.vscode/settings.json`:
-```json
-{
-  "claude-code.systemPrompt": "MANDATORY: Run 10 orientation queries before starting. Query liberally. Use search_standards, never read .praxis-os files directly."
-}
-```
-
-**Option 3: Mention in first message**
-
-```
-"Read .cursorrules and follow all patterns throughout this session"
-```
+- Ensure `.claude/CLAUDE.md` is in project root (not `.praxis-os/`)
+- Restart VS Code (rules load on startup)
+- Explicitly trigger: "Run the 10 mandatory orientation queries"
+- Verify prAxIs OS rules are at the TOP of the file
 
 ### Slow Performance
 
@@ -333,7 +333,7 @@ Commit `.vscode/settings.json` for team consistency:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],

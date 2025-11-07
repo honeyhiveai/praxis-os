@@ -6,9 +6,11 @@
 
 ## 🎯 Quick Start (For LLMs)
 
+**⚠️ IMPORTANT: Use the automated script (recommended). Manual files are for reference/troubleshooting only.**
+
 When a user asks to install prAxIs OS, follow this two-phase approach:
 
-### Phase 1: Mechanical Installation (Automated Script)
+### Phase 1: Mechanical Installation (Automated Script) ⭐ RECOMMENDED
 
 Run the installation script:
 
@@ -37,8 +39,13 @@ After the script completes, configure the specific agent:
    - `"...for Cursor"` → Primary Cursor setup
    - `"...for Cline in VS Code"` → Primary Cline
    - `"...for Cline in Cursor"` → Secondary Cline (HTTP)
-   - `"...for Claude Code"` → CLI mode
-   - `"...for Claude Code in VS Code"` → Primary Claude Code
+   - `"...for Claude Code"` → **CLI/terminal mode** (default when no IDE specified)
+   - `"...for Claude Code in VS Code"` → **VS Code extension** (when IDE specified)
+   
+   **Branching Logic for Claude Code:**
+   - If user says `"for Claude Code"` → Route to `claude-code/terminal.md` (CLI mode)
+   - If user says `"for Claude Code in VS Code"` → Route to `claude-code/vscode.md` (VS Code extension)
+   - If user is IN VS Code but says `"for Claude Code"` → Consider asking if they want VS Code extension or CLI
 
 2. **Read agent-specific guide**:
    - See `docs/content/how-to-guides/agent-integrations/`
@@ -79,14 +86,16 @@ python /path/to/praxis-os/scripts/install-praxis-os.py .
 
 **Time:** 2-3 minutes (mechanical operations only)
 
-### Method 2: Manual Sequential Files (Legacy)
+### Method 2: Manual Sequential Files (Reference/Troubleshooting)
 
-For environments where script can't run, use horizontally-scaled guides:
+**Note**: These files are primarily for **understanding the installation process** and **troubleshooting**. Use the automated script unless you have a specific reason to install manually.
+
+For environments where script can't run, or for understanding/troubleshooting, use these sequential guides:
 
 ```
 00-START.md → 01-directories.md → 02-copy-files.md → 
-03-cursorrules.md → 04-gitignore.md → 05-venv-mcp.md → 
-06-validate.md → COMPLETE
+03-agent-configuration.md → 04-config-customization.md → 05-gitignore.md → 
+06-venv-mcp.md → 07-validate.md → COMPLETE
 ```
 
 **Each file:** ~200-250 lines, designed for vanilla LLM attention spans
@@ -151,8 +160,8 @@ In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`. The entry po
 
 ### Installation Process
 
-1. **install-praxis-os.py** - Automated mechanical installation (recommended)
-2. **00-START.md through 06-validate.md** - Manual sequential guides (legacy/fallback)
+1. **install-praxis-os.py** - ⭐ **Automated mechanical installation (RECOMMENDED)**
+2. **00-START.md through 06-validate.md** - Manual sequential guides (reference/troubleshooting only)
 3. **This README** - Overview and decision guidance
 
 ### Agent Integration (After Mechanical Installation)
@@ -183,10 +192,11 @@ praxis-os/
 │   ├── 00-START.md       ← Entry point
 │   ├── 01-directories.md
 │   ├── 02-copy-files.md
-│   ├── 03-cursorrules.md
-│   ├── 04-gitignore.md
-│   ├── 05-venv-mcp.md
-│   └── 06-validate.md
+│   ├── 03-agent-configuration.md  ← Routes to agent-specific guides
+│   ├── 04-config-customization.md  ← Customize mcp.yaml for project
+│   ├── 05-gitignore.md
+│   ├── 06-venv-mcp.md
+│   └── 07-validate.md
 ├── universal/             ← Content to copy
 │   ├── standards/
 │   ├── usage/

@@ -683,7 +683,7 @@ class IndexesConfig(BaseConfig):
         - file_watcher: File monitoring configuration
 
     Cache Structure:
-        .praxis-os/cache/indexes/
+        .praxis-os/.cache/indexes/
         ├── standards/        # Standards vector index (LanceDB)
         ├── code/             # Code vector index (LanceDB) + graph (DuckDB)
         └── ast/              # AST index (SQLite)
@@ -697,7 +697,7 @@ class IndexesConfig(BaseConfig):
         ...     standards=StandardsIndexConfig(...),
         ...     code=CodeIndexConfig(...),
         ...     ast=ASTIndexConfig(...),
-        ...     cache_path=Path("cache/indexes"),  # Relative to base_path
+        ...     cache_path=Path(".cache/indexes"),  # Relative to base_path
         ...     file_watcher=FileWatcherConfig(enabled=True)
         ... )
 
@@ -721,7 +721,7 @@ class IndexesConfig(BaseConfig):
     )
 
     cache_path: Path = Field(
-        default=Path("cache/indexes"),
+        default=Path(".cache/indexes"),
         description="Base cache path for all indexes (relative to base_path)",
     )
 

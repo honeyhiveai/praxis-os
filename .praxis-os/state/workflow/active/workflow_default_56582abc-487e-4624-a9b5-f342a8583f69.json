@@ -1,0 +1,14 @@
+{
+  "session_id": "workflow_default_56582abc-487e-4624-a9b5-f342a8583f69",
+  "workflow_type": "spec_creation_v1",
+  "target_file": ".praxis-os/specs/complete-system-validation",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "evidence_submitted": {},
+  "created_at": "2025-11-04T21:41:45.446050",
+  "updated_at": "2025-11-04T21:41:45.446052",
+  "metadata": {},
+  "status": "active"
+}

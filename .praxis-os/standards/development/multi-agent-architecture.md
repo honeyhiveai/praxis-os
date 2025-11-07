@@ -524,10 +524,10 @@ If you need multiple agents collaborating:
 
 **Query for related patterns:**
 ```python
-pos_search(content_type="standards", query="dual transport architecture MCP server")
-pos_search(content_type="standards", query="installation helper scripts secondary agents")
-pos_search(content_type="standards", query="dogfooding model source vs installed files")
-pos_search(content_type="standards", query="MCP connection types stdio HTTP")
+pos_search_project(content_type="standards", query="dual transport architecture MCP server")
+pos_search_project(content_type="standards", query="installation helper scripts secondary agents")
+pos_search_project(content_type="standards", query="dogfooding model source vs installed files")
+pos_search_project(content_type="standards", query="MCP connection types stdio HTTP")
 ```
 
 **Key related documents:**

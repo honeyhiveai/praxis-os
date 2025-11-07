@@ -8,6 +8,51 @@
 
 ---
 
+## Questions This Answers
+
+- **Should I use React diagrams, Mermaid, or ASCII art?**
+- **What are the size constraints for documentation diagrams?**
+- **How do I maintain HoneyHive branding in diagrams?**
+- **What's the compact horizontal flow pattern for React diagrams?**
+- **When should I use a React component vs Docusaurus admonishment?**
+- **What are the existing diagram component examples?**
+- **How do I make diagrams that fit in viewport without dominating?**
+- **What's the BuilderMethods-inspired visual structure approach?**
+- **What CSS module patterns should I follow for diagrams?**
+- **How do I balance visual structure with readability?**
+
+## Quick Reference: Diagramming Philosophy
+
+**Core Rule:** Use React components for diagrams, keep them compact, HoneyHive branding
+
+**Recommended Approach:** Compact React Components with horizontal flow
+
+**Size Constraints:**
+- Max width: 800px (centered)
+- Box padding: 0.6rem 1rem (compact)
+- Icons: 1.25rem (small)
+- Font: 0.8rem labels, weight 600
+- Height: ~60-80px for single row
+
+**HoneyHive Branding:**
+- Primary: `#ff8c5d` (orange)
+- Border: `#ff6b35` (darker orange)
+- Background: `rgba(255, 140, 93, 0.08)` (subtle tint)
+
+**Existing Components:**
+- `RAGQueryFlow.tsx` - Horizontal 4-box flow
+- `DataFlowDiagram.tsx` - Horizontal with split middle
+- `StandardsFlowDiagram.tsx` - Two-tier layout
+
+**Pattern Priority:**
+1. Compact React component (key concepts)
+2. Markdown lists + typography (most cases)
+3. Docusaurus admonishments (supplementary)
+4. ❌ Never ASCII art
+5. ❌ Never Mermaid
+
+---
+
 ## The BuilderMethods Philosophy
 
 ### What They Do:
@@ -404,7 +449,7 @@ graph LR
 
 ---
 
-## Implementation Guide
+## Diagram Creation Implementation Guide
 
 ### For AI Agents (Me):
 
@@ -477,7 +522,7 @@ code here
 
 ---
 
-## Examples to Follow
+## Diagram Implementation Examples
 
 ### ✅ Perfect (Compact React Component):
 **See:** `docs/content/standards.md` - StandardsFlowDiagram
@@ -546,7 +591,7 @@ Navigate to your project and install.
 
 ---
 
-## Maintenance
+## Diagram Maintenance Guidelines
 
 ### Adding New Docs:
 

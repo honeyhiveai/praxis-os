@@ -1,6 +1,52 @@
 # Python Concurrency Standards
 # Generated for: praxis-os
 
+## Questions This Answers
+
+- **What is the GIL and when does it matter for Python concurrency?**
+- **Should I use threading, multiprocessing, or asyncio for my task?**
+- **How does the GIL affect CPU-bound vs I/O-bound operations?**
+- **What's the difference between threading.Lock and threading.RLock?**
+- **How do I safely share state between threads in Python?**
+- **When should I use asyncio instead of threading?**
+- **What are common concurrency anti-patterns in Python?**
+- **How do I test concurrent Python code effectively?**
+- **What's the correct pattern for thread-safe file operations?**
+- **How does asyncio work with the event loop?**
+
+## Quick Reference: Python Concurrency
+
+**GIL Impact:**
+- **CPU-bound**: Threading doesn't help (GIL prevents parallelism) → Use multiprocessing
+- **I/O-bound**: Threading works well (GIL released during I/O) → Use threading or asyncio
+- **Mixed**: Profile first, then choose
+
+**Three Models:**
+1. **Threading** (`threading`): Best for I/O-bound (network, disk, DB)
+2. **Multiprocessing** (`multiprocessing`): Best for CPU-bound (computations)
+3. **Asyncio** (`asyncio`): Best for many concurrent I/O operations (thousands of connections)
+
+**Thread Safety:**
+- Use `threading.Lock` for exclusive access
+- Use `threading.RLock` if same thread needs to re-acquire
+- Use `queue.Queue` for thread-safe data sharing
+
+**Common Pattern (Thread-safe file operations):**
+```python
+import threading
+
+class ThreadSafeCache:
+    def __init__(self):
+        self._lock = threading.Lock()
+        self._cache = {}
+    
+    def get(self, key):
+        with self._lock:
+            return self._cache.get(key)
+```
+
+---
+
 ## Universal Concurrency Principles
 
 > **See universal standards:**

@@ -47,11 +47,17 @@ function HomepageHeader() {
               </div>
               <div className={styles.codeBody}>
                 <pre>
-{`# Open your project in Cursor, Claude Code,
-# Cline, or GitHub Copilot and say:
+{`# In your IDE/agent, say:
 
 "Install prAxIs OS from 
- github.com/honeyhiveai/praxis-os"
+ github.com/honeyhiveai/praxis-os 
+ for <AGENT>"
+
+# Examples:
+# "for Cursor"                    → Cursor IDE
+# "for Cline in VS Code"          → Cline extension
+# "for Claude Code"               → CLI/terminal mode
+# "for Claude Code in VS Code"    → VS Code extension
 
 # The agent will:
 ✓ Analyze your project structure

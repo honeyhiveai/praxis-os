@@ -47,7 +47,7 @@ Edit `.cursor/mcp.json` to use dual transport mode:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual",
         "--log-level",
@@ -247,7 +247,7 @@ netstat -ano | findstr :${PORT}  # Windows
 **Solutions**:
 - Server automatically finds next available port (no manual config needed)
 - If all ports 4242-5242 are in use, close other MCP server instances
-- Check for stale processes: `ps aux | grep mcp_server`
+- Check for stale processes: `ps aux | grep ouroboros`
 - Restart Cursor to retry port allocation
 
 ### Both Agents See Different State
@@ -258,8 +258,8 @@ netstat -ano | findstr :${PORT}  # Windows
 
 **Check**:
 ```bash
-# Count Python processes running mcp_server
-ps aux | grep mcp_server
+# Count Python processes running ouroboros
+ps aux | grep ouroboros
 # Should see only ONE process
 ```
 
@@ -374,5 +374,7 @@ Now:
 4. **Iterate**: Refine multi-agent workflow based on experience
 
 See also:
-- [Cline in VS Code](./vscode.md) - VS Code integration
+- [Cursor Integration (Primary)](./cursor.md)
+- [Cline in VS Code (Primary)](./vscode.md)
+- [Understanding Workflows](../../../tutorials/understanding-praxis-os-workflows.md)
 

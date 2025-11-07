@@ -82,8 +82,14 @@ else
     
     # Run link validation (skip external for speed)
     # This now validates the staged files (what's actually being committed)
-    LINK_OUTPUT=$(python scripts/validate-links.py --skip-external 2>&1)
+    # Add timeout to prevent hanging (30 seconds should be enough)
+    LINK_OUTPUT=$(timeout 30 python scripts/validate-links.py --skip-external 2>&1 || echo "TIMEOUT: Link validation took too long")
     LINK_EXIT_CODE=$?
+    
+    # If timeout occurred, treat as failure
+    if echo "$LINK_OUTPUT" | grep -q "TIMEOUT"; then
+        LINK_EXIT_CODE=1
+    fi
     
     # Restore stashed changes if we stashed them
     if [[ $STASHED -eq 1 ]]; then

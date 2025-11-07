@@ -19,10 +19,11 @@ installation/
 ├── 00-START.md                    ← Entry point (~210 lines)
 ├── 01-directories.md              ← Create directories (~240 lines)
 ├── 02-copy-files.md               ← Copy files (~260 lines)
-├── 03-cursorrules.md              ← Handle .cursorrules (~336 lines)
-├── 04-gitignore.md                ← Configure .gitignore (~322 lines) [NEW]
-├── 05-venv-mcp.md                 ← Python venv + mcp.json (~250 lines)
-├── 06-validate.md                 ← Validate + cleanup (~352 lines)
+├── 03-agent-configuration.md      ← Route to agent-specific guides (~200 lines)
+├── 04-config-customization.md     ← Customize mcp.yaml (~250 lines)
+├── 05-gitignore.md                ← Configure .gitignore (~322 lines)
+├── 06-venv-mcp.md                 ← Python venv + mcp.json (~250 lines)
+└── 07-validate.md                 ← Validate + cleanup (~352 lines)
 ├── SYSTEM-SUMMARY.md              ← This file
 ├── installation-guide.md          ← Detailed reference (800+ lines)
 ├── CURSORRULES_MERGE_GUIDE.md     ← Merge protocol details
@@ -43,13 +44,15 @@ LLM reads: 01-directories.md
     ↓ (creates 8 directories)
 LLM reads: 02-copy-files.md
     ↓ (copies ~106 files)
-LLM reads: 03-cursorrules.md
-    ↓ (handles .cursorrules safely)
-LLM reads: 04-gitignore.md
+LLM reads: 03-agent-configuration.md
+    ↓ (routes to agent-specific guide)
+LLM reads: 04-config-customization.md
+    ↓ (customizes mcp.yaml)
+LLM reads: 05-gitignore.md
     ↓ (configures .gitignore from standards)
-LLM reads: 05-venv-mcp.md
+LLM reads: 06-venv-mcp.md
     ↓ (creates venv + mcp.json)
-LLM reads: 06-validate.md
+LLM reads: 07-validate.md
     ↓ (validates + DELETES temp clone)
 COMPLETE! ✅
 ```
@@ -100,7 +103,7 @@ Based on user feedback (Windows WSL2 Ubuntu installation failure):
 | Missing workflows/ directory | MCP server won't start | Added to directory creation | 01-directories.md |
 | Wrong module name in mcp.json | Python module error | Use `"mcp_server"` not `"mcp_server.praxis_os_rag"` | 05-venv-mcp.md |
 | Missing workflow files | Empty workflows directory | Added explicit copy step | 02-copy-files.md |
-| Blindly overwriting .cursorrules | Destroys user's rules | Check and offer merge options | 03-cursorrules.md |
+| Blindly overwriting config files | Destroys user's rules | Agent guides handle merge | Agent-specific guides |
 | Missing .gitignore configuration | 2.7GB ephemeral files committed | Read from standards and append | 04-gitignore.md |
 | Git repo left in project | Litters consumer repo | Delete temp directory | 06-validate.md |
 
@@ -161,11 +164,12 @@ checks = {
 
 - **Checkpoint #1**: Directories created (step 01)
 - **Checkpoint #2**: Files copied (step 02)
-- **Checkpoint #3**: .cursorrules handled (step 03)
-- **Checkpoint #4**: .gitignore configured (step 04)
-- **Checkpoint #5A**: Python venv working (step 05)
-- **Checkpoint #5B**: MCP config valid (step 05)
-- **Final Validation**: All checks pass + cleanup (step 06)
+- **Checkpoint #3**: Agent configuration routed (step 03)
+- **Checkpoint #4**: Config customized (step 04)
+- **Checkpoint #5**: .gitignore configured (step 05)
+- **Checkpoint #6A**: Python venv working (step 06)
+- **Checkpoint #6B**: MCP config valid (step 06)
+- **Final Validation**: All checks pass + cleanup (step 07)
 
 ### Validation Commands
 
@@ -213,12 +217,14 @@ else:
 
 ### Critical Checks Before Release
 
-- [ ] All 7 files exist and chain correctly (00-06)
+- [ ] All 8 files exist and chain correctly (00-07)
 - [ ] Each file ~200-350 lines
 - [ ] All validation checkpoints work
-- [ ] .gitignore configured from standards (step 04)
-- [ ] Temp cleanup happens in step 06
-- [ ] .cursorrules merge is safe
+- [ ] .gitignore configured from standards (step 05)
+- [ ] Config customized for project (step 04)
+- [ ] Temp cleanup happens in step 07
+- [ ] Agent configuration routing works (step 03)
+- [ ] Agent guides handle file merging safely
 - [ ] Module name is correct (`"mcp_server"`)
 - [ ] Tested on Linux, macOS, Windows WSL2
 

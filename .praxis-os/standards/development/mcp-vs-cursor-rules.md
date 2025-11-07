@@ -5,6 +5,44 @@
 
 ---
 
+## Questions This Answers
+
+- **What's the difference between MCP-based approach and `.cursor/rules/` approach?**
+- **Should prAxIs OS adopt Builder Methods' `.cursor/rules/` pattern?**
+- **What are the advantages of MCP over Cursor-specific `.mdc` files?**
+- **Is RAG semantic search better than static markdown files for context?**
+- **How does prAxIs OS workflow engine compare to Builder Methods?**
+- **Can we use both MCP and `.cursor/rules/` together?**
+- **Why is MCP more portable than `.cursor/rules/`?**
+- **What are the complexity trade-offs between the two approaches?**
+- **Should I prioritize simplicity or capability for my project?**
+- **What's the recommended hybrid approach combining both methods?**
+
+## Quick Reference: MCP vs `.cursor/rules/` Comparison
+
+**Builder Methods (`.cursor/rules/`):**
+- ✅ Simpler (just markdown files)
+- ✅ Cursor-native UI integration
+- ✅ No server required
+- ❌ Cursor-specific (not portable)
+- ❌ Static context (no semantic search)
+- ❌ No workflow state management
+
+**prAxIs OS (MCP + RAG):**
+- ✅ Universal protocol (works with Cursor, Claude Desktop, etc.)
+- ✅ Intelligent RAG semantic search
+- ✅ Stateful workflow engine with phase gating
+- ✅ Research-based tool design (stay under 20-tool limit)
+- ❌ More complex (requires MCP server)
+- ❌ Python runtime required
+
+**Recommendation: Hybrid Approach**
+- **Core:** Keep MCP + RAG architecture (future-proof, powerful)
+- **Enhancement:** Add `.cursor/rules/` for Cursor-specific shortcuts
+- **Benefit:** Best of both worlds - simple commands + powerful tools
+
+---
+
 ## 🔍 Key Difference
 
 ### Builder Methods prAxIs OS Approach
@@ -117,7 +155,7 @@
 
 ## 🤔 Should We Adopt `.cursor/rules/`?
 
-### Analysis
+### Technical Trade-offs Analysis
 
 **Builder Methods' `.cursor/rules/` approach is:**
 - ✅ Simpler for basic use cases

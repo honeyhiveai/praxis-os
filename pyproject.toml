@@ -69,9 +69,9 @@ disable = [
     "import-error",            # Handled by mypy and testing
 ]
 
-# Goal: Achieve ≥10.0/10.0 pylint score
-# Current: 8.33/10.0
-# Path: Address violations systematically using standards docs
+# Goal: Achieve 10.0/10.0 pylint score (REQUIRED)
+# Enforcement: --fail-under=10 in tox and pre-commit hooks
+# Current: Working toward 10.0/10.0
 
 [tool.pylint.format]
 max-line-length = 88  # Match Black
@@ -105,7 +105,7 @@ warn_unused_ignores = true
 # Current: Permissive for legacy code, but zero errors required
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = [".praxis-os/tests/ouroboros"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
@@ -113,7 +113,7 @@ addopts = [
     "-v",
     "--strict-markers",
     "--tb=short",
-    "--cov=mcp_server",
+    "--cov=dist.ouroboros",
     "--cov-report=term-missing",
     "--cov-report=html",
 ]
@@ -122,13 +122,18 @@ markers = [
     "integration: Integration tests (slower, real dependencies)",
     "asyncio: Async tests using pytest-asyncio",
     "browser: Tests requiring real browser installation (Playwright)",
+    "critical: Critical tests that prevent production bugs",
+    "performance: Performance tests measuring NFR metrics",
+    "slow: Tests that take >5 seconds to run",
+    "functional: Functional tests (end-to-end tool usage)",
+    "tools: Tests for MCP tools (critical AI interface)",
 ]
 
 [tool.pytest_asyncio]
 asyncio_mode = "auto"
 
 [tool.coverage.run]
-source = ["mcp_server"]
+source = ["dist.ouroboros"]
 omit = [
     "*/tests/*",
     "*/__pycache__/*",

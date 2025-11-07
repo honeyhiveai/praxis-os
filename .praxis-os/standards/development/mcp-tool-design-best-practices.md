@@ -8,6 +8,55 @@
 
 ---
 
+## Questions This Answers
+
+- **Should I use granular tools or parameterized mega-tools for MCP?**
+- **How do I design MCP tools that LLMs can understand and use correctly?**
+- **What's the recommended tool count limit for optimal LLM performance?**
+- **How do I enforce workflow order using token-based orchestration?**
+- **What naming conventions should MCP tools follow?**
+- **How do I write effective docstrings for MCP tools?**
+- **When should I create separate tools vs consolidate functionality?**
+- **How do I provide actionable error messages for LLM tool usage?**
+- **What are the performance implications of having 20+ tools?**
+- **How do I test MCP tools independently before LLM integration?**
+
+## Quick Reference: MCP Tool Design Standards
+
+**Core Principle:** Granular over parameterized - focused tools > monolithic tools
+
+**Optimal Tool Counts:**
+- <10 tools: Optimal LLM performance
+- 10-20 tools: Good performance  
+- >20 tools: Performance degrades (up to 85%)
+- >40 tools: Platform hard limits
+
+**Design Guidelines:**
+1. **Single responsibility** per tool
+2. **Verb-noun naming** pattern (e.g., `start_workflow`, `get_task`)
+3. **Comprehensive docstrings** with params, returns, raises, examples
+4. **Token-based orchestration** for workflow sequences
+5. **Actionable error messages** that guide LLM to correct usage
+6. **Selective loading** by category (rag, workflow, sub_agent)
+
+**Good Example:**
+```python
+@mcp.tool()
+async def start_workflow(workflow_type: str, target_file: str) -> Dict:
+    """Initialize workflow session."""  # Single responsibility
+```
+
+**Bad Example:**
+```python
+@mcp.tool()
+async def workflow(action: str, **kwargs) -> Dict:
+    """Do workflow operations."""  # Parameterized mega-tool
+```
+
+**Decision Framework:** Use separate tools if actions are conceptually distinct, have different parameters, or are used independently.
+
+---
+
 ## 🎯 Core Principle: Granular Over Parameterized
 
 **Research Finding:** MCP best practices recommend **granular tool design** - focused tools that perform specific tasks well, rather than monolithic functions with complex parameters.
@@ -430,7 +479,7 @@ async def get_current_phase_tasks(session_id: str) -> List:
 - ✅ Always used together in sequence
 - ✅ Implementation is trivial dispatch
 
-**Example:** `search(query, filter="all")` vs `pos_search()`, `search_usage()` (acceptable either way)
+**Example:** `search(query, filter="all")` vs `pos_search_project()`, `search_usage()` (acceptable either way)
 
 ---
 
@@ -465,7 +514,7 @@ Our current workflow tools follow MCP best practices:
 4. complete_phase()        # Validate and advance
 5. get_workflow_state()    # Debug/resume
 6. create_workflow()       # Generate framework
-7. pos_search()      # RAG search
+7. pos_search_project()      # RAG search
 ```
 
 **Why this is good:**

@@ -9,6 +9,53 @@
 
 ---
 
+## Questions This Answers
+
+- **What production code standards must ALL prAxIs OS code meet?**
+- **How do I handle configuration management in prAxIs OS?**
+- **What's the single source of truth for configuration defaults?**
+- **How do I write error messages that guide users to fixes?**
+- **What testing is required before committing code?**
+- **How do I ensure paths are resolved correctly relative to project root?**
+- **What validation is required for user-provided configuration?**
+- **How do I document configuration options for users?**
+- **What concurrency protections are needed for shared state?**
+- **Why is there zero tolerance for shortcuts in framework code?**
+
+## Quick Reference: Production Code Standards
+
+**Core Principle:** AI has no excuse for shortcuts - especially when building a quality framework.
+
+**Tier 1 - MANDATORY FOR ALL CODE:**
+1. **Configuration Management**
+   - Single source of truth for defaults (dataclasses)
+   - User override via config.json
+   - Paths relative to project root
+   - Graceful handling of missing config
+2. **Error Handling**
+   - Actionable error messages (what/why/how-to-fix)
+   - User-friendly guidance, no jargon
+3. **Testing**
+   - Test after code changes
+   - Verify edge cases
+4. **Documentation**
+   - Clear docstrings
+   - Configuration options documented
+
+**Tier 2 - Conditional:**
+- **Concurrency** (if shared state): Thread-safe operations
+- **Persistence** (if state saved): Atomic writes, corruption recovery
+- **Dependencies** (if external deps): Graceful degradation
+
+**Before Commit Checklist:**
+- [ ] Configuration pattern correct?
+- [ ] Error messages actionable?
+- [ ] Tests passing?
+- [ ] Docstrings complete?
+- [ ] MCP query made to verify approach?
+
+---
+
 ## 🎯 Core Principle
 
 **"AI has no excuse for shortcuts - especially when building a quality framework."**

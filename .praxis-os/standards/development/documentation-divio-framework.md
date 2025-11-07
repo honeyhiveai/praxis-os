@@ -4,6 +4,19 @@
 
 ---
 
+## Questions This Answers
+
+- **What is the Divio documentation framework and why use it?**
+- **What are the four documentation types in Divio?**
+- **How do I categorize documentation by user intent?**
+- **When should I write a tutorial vs how-to guide?**
+- **What's the difference between reference and explanation docs?**
+- **How do I add doc_type frontmatter to documentation?**
+- **What are common anti-patterns mixing documentation types?**
+- **How do I organize documentation by Divio quadrants?**
+- **What makes a good tutorial vs a good reference doc?**
+- **How do I audit existing documentation for Divio compliance?**
+
 ## 🎯 TL;DR - Divio Documentation Quick Reference
 
 **Critical Divio principles:**
@@ -26,7 +39,7 @@
 
 ---
 
-## Purpose
+## Divio Framework Purpose
 
 Ensure all prAxIs OS documentation follows the Divio Documentation Framework, organizing content by user intent (learning, problem-solving, lookup, understanding) rather than by topic or feature. This makes documentation discoverable and useful based on what users want to accomplish.
 
@@ -220,7 +233,7 @@ doc_type: tutorial  # or: how-to, reference, explanation
 ```markdown
 # Getting Started
 
-## Installation (Tutorial)
+## Example: Installation Tutorial
 [Step-by-step setup]
 
 ## API Reference (Reference)
@@ -273,7 +286,7 @@ const sidebars: SidebarsConfig = {
 
 ---
 
-## Checklist
+## Documentation Creation Checklist
 
 **Before creating new documentation:**
 
@@ -425,7 +438,7 @@ Complete reference of all MCP tools available in prAxIs OS.
 
 **Example:**
 ```python
-pos_search(content_type="standards", query="how to write tests")
+pos_search_project(content_type="standards", query="how to write tests")
 ```
 
 ## pos_browser

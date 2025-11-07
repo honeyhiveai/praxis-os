@@ -4,6 +4,45 @@
 
 Use this checklist when creating or reviewing React diagram components.
 
+## Questions This Answers
+
+- **What size constraints should React diagrams follow for documentation?**
+- **How do I implement HoneyHive orange branding in diagrams?**
+- **Should I use solid fills or outline style for diagram elements?**
+- **What CSS custom properties are available for HoneyHive colors?**
+- **How do I create a horizontal flow diagram that fits in viewport?**
+- **What's the difference between horizontal flow and two-tier layouts?**
+- **How do I ensure diagrams work in both light and dark modes?**
+- **What are the accessibility requirements for React diagrams?**
+- **Which example diagrams should I use as templates?**
+- **Why should I use CSS custom properties instead of hardcoded colors?**
+
+## Quick Reference: Compact Diagram Standards
+
+**Preferred Layout:** Horizontal flow (single line, 60-80px height, max-width 800px)
+
+**HoneyHive Branding:**
+- **All cards use orange theme** (no rainbow colors)
+- **Use outline style**: `border: 2px solid var(--honeyhive-orange-border)`
+- **NOT solid fills**: ❌ `backgroundColor: var(--honeyhive-orange)`
+- **CSS variables**: `var(--honeyhive-orange)`, `var(--honeyhive-orange-border)`, `var(--honeyhive-orange-bg)`, `var(--honeyhive-orange-shadow)`
+
+**Size Constraints (Horizontal):**
+- Container: max-width 800px, centered
+- Box padding: 0.6rem 1rem
+- Icon size: 1.25rem
+- Font: 0.8rem, weight 600
+- Must fit MacBook viewport (1280x800) without scrolling
+
+**Example Templates:**
+- `RAGQueryFlow.tsx` - 4-box horizontal (gold standard)
+- `DataFlowDiagram.tsx` - Horizontal with split middle
+- `StandardsFlowDiagram.tsx` - Two-tier comparison
+
+**Workflow:** Copy example → Adapt content → Use checklist to verify
+
+---
+
 ## Size Requirements ✅
 
 **Horizontal Flow (Preferred):**
@@ -80,7 +119,7 @@ Use this checklist when creating or reviewing React diagram components.
 - [ ] No conflicts with global styles
 - [ ] Works with Docusaurus build
 
-## Examples
+## Reference Implementation Templates
 
 **Horizontal Flow (Gold Standard):**
 - `RAGQueryFlow.tsx` - 4-box horizontal flow

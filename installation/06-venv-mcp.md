@@ -363,30 +363,27 @@ ls -ld .praxis-os
 
 ---
 
-## 🔍 Step 5.4: Build RAG Index
+## 🔍 Step 5.4: RAG Index Auto-Build
 
-⚠️ **CRITICAL STEP**: Without the RAG index, `search_standards` won't work!
+✅ **AUTOMATIC**: Ouroboros automatically builds RAG indexes on first server start!
 
-The RAG (Retrieval Augmented Generation) index enables semantic search over prAxIs OS standards.
+The RAG (Retrieval Augmented Generation) index enables semantic search over prAxIs OS standards. Ouroboros will automatically build indexes when the MCP server starts if they don't exist.
 
-**Linux/macOS/WSL2:**
-```bash
-.praxis-os/venv/bin/python .praxis-os/scripts/build_rag_index.py \
-  --index-path .praxis-os/.cache/vector_index \
-  --standards-path .praxis-os/standards \
-  --usage-path .praxis-os/usage \
-  --workflows-path .praxis-os/workflows
+**No manual build needed** - indexes are built automatically when you start the server.
+
+**Index location**: `.praxis-os/.cache/indexes/`
+- Standards index: `.praxis-os/.cache/indexes/standards/`
+- Code index: `.praxis-os/.cache/indexes/code/`
+
+**Expected behavior on first server start:**
 ```
-
-**Windows:**
-```bash
-.praxis-os\venv\Scripts\python.exe .praxis-os\scripts\build_rag_index.py --index-path .praxis-os\.cache\vector_index --standards-path .praxis-os\standards --usage-path .praxis-os\usage --workflows-path .praxis-os\workflows
-```
-
-**Expected output:**
-```
-INFO - Initializing LanceDB at .praxis-os/.cache/vector_index
-INFO - Including usage docs from: .praxis-os/usage
+INFO - IndexManager initialized with 2 indexes
+INFO - 🔍 Checking health of all indexes...
+INFO - 🔨 Building 2 missing/empty index(es)...
+INFO -   Building standards index (full rebuild)...
+INFO -   Building code index (full rebuild)...
+INFO - ✅ StandardsIndex initialized
+INFO - ✅ CodeIndex initialized
 INFO - Including workflow metadata from: .praxis-os/workflows
 INFO - Processing 98 markdown files
 INFO - Generated 1247 chunks from 98 files

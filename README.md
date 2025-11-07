@@ -75,7 +75,12 @@ After the script completes, configure the specific agent:
    - "for Cursor" → Primary Cursor setup
    - "for Cline in VS Code" → Primary Cline
    - "for Cline in Cursor" → Secondary Cline (HTTP)
-   - "for Claude Code" → CLI mode
+   - "for Claude Code" → **CLI/terminal mode** (default when no IDE specified)
+   - "for Claude Code in VS Code" → **VS Code extension** (when IDE specified)
+   
+   **Branching Logic for Claude Code:**
+   - `"for Claude Code"` → Route to `claude-code/terminal.md` (CLI mode)
+   - `"for Claude Code in VS Code"` → Route to `claude-code/vscode.md` (VS Code extension)
 
 2. **Read agent-specific guide**:
    - See [`docs/content/how-to-guides/agent-integrations/`](docs/content/how-to-guides/agent-integrations/)
@@ -87,7 +92,7 @@ After the script completes, configure the specific agent:
    - Copy helper scripts (for secondary agents only)
    - Verify installation
 
-**Alternative**: For manual/sequential installation, start at [`installation/00-START.md`](installation/00-START.md)
+**Reference**: For understanding the installation process or troubleshooting, see [`installation/00-START.md`](installation/00-START.md) (manual sequential guides)
 
 ### What Gets Installed
 
@@ -115,7 +120,7 @@ praxis-os/
 │   ├── 00-START.md              # Entry point - clone to temp, setup
 │   ├── 01-directories.md        # Create all required directories
 │   ├── 02-copy-files.md         # Copy files from source
-│   ├── 03-cursorrules.md        # Safe .cursorrules handling
+│   ├── 03-agent-configuration.md  # Route to agent-specific guides
 │   ├── 04-venv-mcp.md           # Python venv + mcp.json
 │   ├── 05-validate.md           # Validate + cleanup temp files
 │   └── README.md                # Installation system overview

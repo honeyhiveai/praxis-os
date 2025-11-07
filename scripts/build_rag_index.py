@@ -60,56 +60,53 @@ def main() -> None:
         type=str,
         help="Override config file path (default: .praxis-os/config/index_config.yaml)",
     )
-    
+
     args = parser.parse_args()
-    
+
     # Determine paths
     base_path = Path(__file__).parent.parent / ".praxis-os"
-    
+
     if args.config_path:
         config_path = Path(args.config_path)
     else:
         config_path = base_path / "config" / "index_config.yaml"
-    
+
     if args.index_path:
         cache_path = Path(args.index_path)
     else:
         cache_path = base_path / ".cache" / "standards"
-    
+
     # Load config
     if not config_path.exists():
         logger.error(f"Config file not found: {config_path}")
         sys.exit(1)
-    
-    with open(config_path, 'r', encoding='utf-8') as f:
+
+    with open(config_path, "r", encoding="utf-8") as f:
         full_config = yaml.safe_load(f)
-    
+
     # Extract standards-specific config
     if "indexes" not in full_config or "standards" not in full_config["indexes"]:
         logger.error("Config missing 'indexes.standards' section")
         sys.exit(1)
-    
+
     standards_config = full_config["indexes"]["standards"]
     source_paths = standards_config.get("source_paths", [])
-    
+
     if not source_paths:
         logger.error("No source_paths configured for standards")
         sys.exit(1)
-    
+
     # Create StandardsIndex instance
     logger.info("Initializing StandardsIndex...")
     logger.info(f"Cache path: {cache_path}")
     logger.info(f"Source paths: {source_paths}")
-    
-    index = StandardsIndex(
-        cache_path=cache_path,
-        config=standards_config
-    )
-    
+
+    index = StandardsIndex(cache_path=cache_path, config=standards_config)
+
     # Build index
     try:
         incremental = not args.no_incremental
-        
+
         if args.force:
             logger.info("🔄 Force rebuild requested")
             index.build(source_paths=source_paths, force=True, incremental=False)
@@ -119,9 +116,9 @@ def main() -> None:
         else:
             logger.info("🔄 Full build mode")
             index.build(source_paths=source_paths, force=False, incremental=False)
-        
+
         logger.info("✅ Index build complete!")
-        
+
     except Exception as e:
         logger.error(f"❌ Index build failed: {e}", exc_info=True)
         sys.exit(1)

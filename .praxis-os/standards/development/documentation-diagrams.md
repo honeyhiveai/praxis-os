@@ -4,6 +4,19 @@
 
 ---
 
+## Questions This Answers
+
+- **Should I use React components, ASCII art, or Mermaid for diagrams?**
+- **What are the existing React diagram components I can use?**
+- **When should I use React components vs Docusaurus admonitions?**
+- **How do I maintain consistent HoneyHive branding in diagrams?**
+- **What's the process for creating a new diagram component?**
+- **Why are ASCII and Mermaid diagrams not recommended?**
+- **What are the theming issues with Mermaid diagrams?**
+- **How do I make diagrams work with dark/light mode?**
+- **What CSS module patterns should diagram components follow?**
+- **Where should I place new diagram component files?**
+
 ## 🎯 TL;DR - Diagram Standards Quick Reference
 
 **Critical diagram rules:**
@@ -22,7 +35,7 @@
 
 ---
 
-## Purpose
+## Diagram Standards Purpose
 
 Maintain professional, consistent, themeable diagram appearance across all prAxIs OS documentation by using custom React components instead of ASCII art or Mermaid diagrams. Ensure diagrams work seamlessly with site theming and provide a modern user experience.
 
@@ -334,7 +347,7 @@ The diagram above shows...
 
 ---
 
-## Checklist
+## Diagram Creation Checklist
 
 **Before creating a new diagram:**
 
@@ -362,7 +375,7 @@ The diagram above shows...
 
 ---
 
-## Examples
+## Diagram Component Examples
 
 ### Example 1: Simple Linear Flow (Compact)
 

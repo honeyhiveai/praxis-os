@@ -9,43 +9,67 @@ Comprehensive API reference for prAxIs OS MCP (Model Context Protocol) tools.
 
 ## Overview
 
-prAxIs OS provides tools for semantic search, workflow execution, and browser automation. Tools are organized into groups for selective loading to maintain optimal LLM performance (under 20 tools).
+prAxIs OS provides unified, action-based tools for semantic search, workflow execution, browser automation, and file operations. Tools follow a consistent action-dispatch pattern for discoverability and ease of use.
 
-**Tool Groups:**
-- `rag` - Semantic search over standards and documentation
-- `workflow` - Phase-gated workflow execution and creation
-- `browser` - Browser automation with Playwright
+**Available Tools:**
+- `pos_search_project` - Unified search (6 actions across 4 indexes)
+- `pos_workflow` - Workflow management (14 actions for lifecycle)
+- `pos_browser` - Browser automation (24 actions for Playwright)
+- `pos_filesystem` - File operations (12 actions for CRUD)
+- `get_server_info` - Server status/health/metrics (4 actions)
+- `current_date` - Current date/time (prevents date errors)
 
-**Configuration:** Enable/disable groups in `.praxis-os/config.json`:
-```json
-{
-  "enabled_tool_groups": ["rag", "workflow", "browser"]
-}
+**Total:** 6 tools, ~60 actions
+
+**Configuration:** Configure indexes and tools in `.praxis-os/config/mcp.yaml`:
+```yaml
+indexes:
+  standards:
+    enabled: true
+  code:
+    enabled: true
+  ast:
+    enabled: true
+  graph:
+    enabled: true
 ```
 
 ---
 
-## RAG Tools
+## Search Tools
 
-### `search_standards`
+### `pos_search_project`
 
-Semantic search over universal standards, usage guides, and workflows.
+Unified search tool for all project knowledge (standards, code, AST, call graphs).
 
-**Purpose:** Find relevant chunks without reading entire files (90% context reduction per query). Drives query-first behavior that reduces overall messages by 71%.
+**Purpose:** Single tool providing semantic search across multiple indexes. Find relevant chunks without reading entire files (90% context reduction per query). Drives query-first behavior that reduces overall messages by 71%.
+
+**Actions:**
+- `search_standards` - Hybrid search over standards documentation (vector + FTS + RRF + rerank)
+- `search_code` - Semantic code search using CodeBERT embeddings
+- `search_ast` - Structural AST search using Tree-sitter patterns
+- `find_callers` - Graph traversal: who calls this symbol?
+- `find_dependencies` - Graph traversal: what does this symbol call?
+- `find_call_paths` - Graph traversal: show call chain between two symbols
 
 **Parameters:**
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `query` | string | Yes | Natural language question about standards/workflows |
+| `action` | string | Yes | One of: `search_standards`, `search_code`, `search_ast`, `find_callers`, `find_dependencies`, `find_call_paths` |
+| `query` | string | Yes | Natural language question or symbol name |
+| `method` | string | No | Search method: `hybrid` (default), `vector`, or `fts` |
 | `n_results` | integer | No | Number of results to return (default: 5) |
-| `filter_phase` | integer | No | Filter by workflow phase number (1-8) |
-| `filter_tags` | array[string] | No | Filter by tags (e.g., `["testing", "concurrency"]`) |
+| `max_depth` | integer | No | Max traversal depth for graph actions (default: 10) |
+| `to_symbol` | string | No | Target symbol for `find_call_paths` (required for that action) |
+| `filters` | dict | No | Metadata filters (e.g., `{"domain": "workflow", "phase": 3, "tags": ["async"]}`) |
 
 **Returns:** `Dict[str, Any]` - Search results with content chunks, file paths, and relevance scores.
 
 ```python
 {
+  "status": "success",
+  "action": "search_standards",
   "results": [
     {
       "content": "Chunk content...",
@@ -55,32 +79,45 @@ Semantic search over universal standards, usage guides, and workflows.
       "tokens": 156
     }
   ],
-  "total_tokens": 753,
-  "retrieval_method": "vector",
-  "query_time_ms": 132.8
+  "count": 5,
+  "metadata": {
+    "total_tokens": 753,
+    "retrieval_method": "hybrid",
+    "query_time_ms": 132.8
+  }
 }
 ```
 
 **Examples:**
 
 ```python
-# Basic query
-search_standards(
-    query="How do I handle race conditions in shared state?",
-    n_results=3
-)
-
-# Filtered by phase
-search_standards(
-    query="testing concurrency",
-    filter_phase=3,
+# Search standards docs
+pos_search_project(
+    action="search_standards",
+    query="How does the workflow system work?",
     n_results=5
 )
 
-# Filtered by tags
-search_standards(
-    query="mocking best practices",
-    filter_tags=["testing", "mocking"]
+# Search code semantically
+pos_search_project(
+    action="search_code",
+    query="authentication middleware",
+    n_results=5
+)
+
+# Find who calls a function
+pos_search_project(
+    action="find_callers",
+    query="process_workflow_phase",
+    max_depth=5
+)
+
+# Find call path between two functions
+pos_search_project(
+    action="find_call_paths",
+    query="start_workflow",
+    to_symbol="execute_phase",
+    max_depth=10
 )
 ```
 
@@ -88,18 +125,19 @@ search_standards(
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `No results found` | Query too specific or no indexed content | Broaden query terms, check `.praxis-os/.cache/vector_index/` exists |
+| `No results found` | Query too specific or no indexed content | Broaden query terms, check `.praxis-os/cache/indexes/` exists |
 | `Index not found` | RAG not initialized | Wait 10-30s for file watcher to build index |
+| `Invalid action` | Unknown action parameter | Use valid action from list above |
 
-**Related:** [current_date](#current_date)
+**Related:** [pos_workflow](#pos_workflow), [current_date](#current_date)
 
 ---
 
 ### `current_date`
 
-Get current date/time for preventing date errors in AI-generated content.
+Get current date and time for preventing date errors in AI-generated content.
 
-**Purpose:** AI assistants frequently use cached/incorrect dates. This tool provides reliable current date/time.
+**Purpose:** AI assistants frequently make date mistakes (using wrong dates, inconsistent formats). This tool provides the reliable current date/time that should be used for creating specifications, generating directory names with timestamps, adding date headers to documentation, and any content requiring accurate current date.
 
 **Parameters:** None
 
@@ -107,17 +145,18 @@ Get current date/time for preventing date errors in AI-generated content.
 
 ```python
 {
-  "iso_date": "2025-10-12",
-  "iso_datetime": "2025-10-12T14:30:00.123456",
-  "day_of_week": "Sunday",
-  "month": "October",
+  "iso_date": "2025-11-06",
+  "iso_datetime": "2025-11-06T22:30:00.123456",
+  "day_of_week": "Wednesday",
+  "month": "November",
   "year": 2025,
-  "unix_timestamp": 1728744600,
+  "unix_timestamp": 1728768600,
   "formatted": {
-    "spec_directory": "2025-10-12-",
-    "header": "**Date**: 2025-10-12",
-    "full_readable": "Sunday, October 12, 2025"
-  }
+    "spec_directory": "2025-11-06-",
+    "header": "**Date**: 2025-11-06",
+    "full_readable": "Wednesday, November 6, 2025"
+  },
+  "usage_note": "Use iso_date for file names, iso_datetime for timestamps"
 }
 ```
 
@@ -134,7 +173,7 @@ header = f"# Feature Spec\n{date_info['formatted']['header']}\n"
 
 **Errors:** None (always succeeds)
 
-**Related:** [search_standards](#search_standards)
+**Related:** [pos_search_project](#pos_search_project)
 
 ---
 
@@ -142,498 +181,97 @@ header = f"# Feature Spec\n{date_info['formatted']['header']}\n"
 
 ### `pos_workflow`
 
-Consolidated workflow management tool following action-based dispatch pattern.
+Unified workflow management tool using action-based dispatch.
 
 **Purpose:** Single unified interface for all workflow operations - discovery, execution, management, and recovery.
 
-#### Common Parameters
+**Actions:**
 
-All actions accept these parameters:
+#### Discovery (1 action)
+- `list_workflows` - List available workflows with optional category filtering
+
+#### Execution (5 actions)
+- `start` - Start new workflow session
+- `get_phase` - Get current phase content
+- `get_task` - Get specific task details
+- `complete_phase` - Submit evidence and complete phase
+- `get_state` - Get complete workflow state
+
+#### Management (3 actions)
+- `list_sessions` - List all workflow sessions
+- `get_session` - Get session details
+- `delete_session` - Delete workflow session
+
+#### Recovery (5 actions)
+- `pause` - Pause workflow session
+- `resume` - Resume paused workflow session
+- `retry_phase` - Retry failed phase
+- `rollback` - Rollback to previous phase
+- `get_errors` - Get errors for failed session
+
+**Common Parameters:**
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `action` | string | Yes | Operation to perform (see actions below) |
+| `action` | string | Yes | Operation to perform (see actions above) |
 | `session_id` | string | Conditional | Session identifier (required for most operations) |
+| `workflow_type` | string | Conditional | Workflow type (required for `start`) |
+| `target_file` | string | Conditional | Target file path (required for `start`) |
+| `options` | dict/string | No | Optional workflow configuration (for `start`) |
+| `phase` | integer | Conditional | Phase number (for `get_task`, `complete_phase`, `retry_phase`) |
+| `task_number` | integer | Conditional | Task number (for `get_task`) |
+| `evidence` | dict | Conditional | Evidence dictionary (required for `complete_phase`) |
+| `category` | string | No | Workflow category filter (for `list_workflows`) |
+| `status` | string | No | Session status filter (for `list_sessions`) |
+| `reason` | string | No | Pause/resume reason (for `pause`, `resume`) |
+| `checkpoint_note` | string | No | Note for pause checkpoint (for `pause`) |
+| `reset_evidence` | boolean | No | Reset evidence on retry (for `retry_phase`) |
+| `to_phase` | integer | No | Target phase for rollback (for `rollback`) |
 
-#### Discovery Actions
-
-**`list_workflows`** - List available workflows
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `category` | string | No | Filter by category (`"testing"`, `"documentation"`, etc.) |
+**Examples:**
 
 ```python
+# Start a workflow
+pos_workflow(
+    action="start",
+    workflow_type="spec_execution_v1",
+    target_file="specs/ouroboros.md"
+)
+
+# Get current phase
+pos_workflow(
+    action="get_phase",
+    session_id="550e8400-..."
+)
+
+# Complete phase with evidence
+pos_workflow(
+    action="complete_phase",
+    session_id="550e8400-...",
+    phase=1,
+    evidence={"tests_passed": 15, "coverage": 95}
+)
+
 # List all workflows
 pos_workflow(action="list_workflows")
 
-# Filter by category
-pos_workflow(action="list_workflows", category="testing")
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "list_workflows",
-  "workflows": [
-    {
-      "workflow_type": "spec_creation_v1",
-      "name": "Spec Creation",
-      "category": "documentation",
-      "version": "1.0.0"
-    }
-  ],
-  "count": 5
-}
-```
-
-#### Execution Actions
-
-**`start`** - Start new workflow session
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `workflow_type` | string | Yes | Workflow identifier (`spec_creation_v1`, etc.) |
-| `target_file` | string | Yes | File or feature being worked on |
-
-```python
-pos_workflow(
-    action="start",
-    workflow_type="spec_creation_v1",
-    target_file="user_authentication"
-)
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "start",
-  "session_id": "ed5481fe-7334-427c-bea4-c8e6103a592b",
-  "workflow_type": "spec_creation_v1",
-  "current_phase": 0
-}
-```
-
----
-
-**`get_phase`** - Get current phase content
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-
-```python
-pos_workflow(
-    action="get_phase",
-    session_id="ed5481fe..."
-)
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "get_phase",
-  "current_phase": 2,
-  "phase_content": {
-    "title": "Phase 2: Technical Design",
-    "objectives": [...],
-    ...
-  }
-}
-```
-
----
-
-**`get_task`** - Get specific task details
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-| `phase` | integer | Yes | Phase number |
-| `task_number` | integer | Yes | Task number within phase |
-
-```python
-pos_workflow(
-    action="get_task",
-    session_id="ed5481fe...",
-    phase=2,
-    task_number=1
-)
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "get_task",
-  "task_content": {
-    "title": "Design Data Model",
-    "steps": [...],
-    ...
-  }
-}
-```
-
----
-
-**`complete_phase`** - Submit evidence and complete phase
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-| `phase` | integer | Yes | Phase number being completed |
-| `evidence` | object | Yes | Evidence matching checkpoint criteria (max 10MB) |
-
-```python
-pos_workflow(
-    action="complete_phase",
-    session_id="ed5481fe...",
-    phase=1,
-    evidence={
-        "srd_created": true,
-        "requirements_documented": true
-    }
-)
-```
-
-**Returns (Success):**
-```python
-{
-  "status": "success",
-  "action": "complete_phase",
-  "checkpoint_passed": true,
-  "next_phase": 2
-}
-```
-
-**Returns (Failure):**
-```python
-{
-  "status": "error",
-  "action": "complete_phase",
-  "checkpoint_passed": false,
-  "missing_evidence": ["srd_created"]
-}
-```
-
----
-
-**`get_state`** - Get complete workflow state
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-
-```python
-pos_workflow(
-    action="get_state",
-    session_id="ed5481fe..."
-)
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "get_state",
-  "workflow_state": {
-    "workflow_type": "spec_creation_v1",
-    "current_phase": 3,
-    "completed_phases": [0, 1, 2],
-    ...
-  }
-}
-```
-
-#### Management Actions
-
-**`list_sessions`** - List all workflow sessions
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `status` | string | No | Filter by status (`"active"`, `"paused"`, `"completed"`, `"error"`) |
-
-```python
-# List all sessions
-pos_workflow(action="list_sessions")
-
-# Filter by status
+# List active sessions
 pos_workflow(action="list_sessions", status="active")
 ```
 
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "list_sessions",
-  "sessions": [
-    {
-      "session_id": "ed5481fe...",
-      "workflow_type": "spec_creation_v1",
-      "status": "active",
-      "current_phase": 2
-    }
-  ],
-  "count": 3
-}
-```
+**Returns:** Action-specific response dictionary with `status`, `action`, and result data.
 
----
-
-**`get_session`** - Get session details
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-
-```python
-pos_workflow(
-    action="get_session",
-    session_id="ed5481fe..."
-)
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "get_session",
-  "session_id": "ed5481fe...",
-  "workflow_type": "spec_creation_v1",
-  "target_file": "user_auth",
-  "current_phase": 2
-}
-```
-
----
-
-**`delete_session`** - Delete workflow session
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `session_id` | string | Yes | Workflow session identifier |
-
-```python
-pos_workflow(
-    action="delete_session",
-    session_id="ed5481fe..."
-)
-```
-
-**Returns:**
-```python
-{
-  "status": "success",
-  "action": "delete_session",
-  "session_id": "ed5481fe...",
-  "deleted": true
-}
-```
-
-#### Complete Example
-
-```python
-# Workflow execution lifecycle
-result = pos_workflow(
-    action="start",
-    workflow_type="spec_creation_v1",
-    target_file="auth_system"
-)
-session_id = result["session_id"]
-
-# Get current phase
-phase = pos_workflow(
-    action="get_phase",
-    session_id=session_id
-)
-
-# Get specific task
-task = pos_workflow(
-    action="get_task",
-    session_id=session_id,
-    phase=1,
-    task_number=1
-)
-
-# Complete phase
-pos_workflow(
-    action="complete_phase",
-    session_id=session_id,
-    phase=1,
-    evidence={"requirements_complete": true}
-)
-
-# Check state
-state = pos_workflow(
-    action="get_state",
-    session_id=session_id
-)
-
-# Cleanup
-pos_workflow(
-    action="delete_session",
-    session_id=session_id
-)
-```
-
-#### Error Responses
-
-All actions return structured error responses:
-
-```python
-{
-  "status": "error",
-  "action": "start",
-  "error": "Invalid target_file: directory traversal detected",
-  "error_type": "ValueError",
-  "remediation": "Provide relative path within workspace"
-}
-```
-
-**Common Errors:**
+**Errors:**
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `Unknown action` | Invalid `action` parameter | Use valid action (see `valid_actions` in error) |
+| `Unknown action` | Invalid `action` parameter | Use valid action from list above |
 | `SessionNotFound` | Invalid `session_id` | Check session ID or start new workflow |
 | `Invalid session_id format` | Malformed UUID | Provide valid UUID format |
 | `directory traversal detected` | Security violation in `target_file` | Use relative paths only |
 | `Evidence too large` | Evidence exceeds 10MB limit | Reduce evidence payload size |
 
-**Related:** [create_workflow](#create_workflow), [validate_workflow](#validate_workflow)
-
----
-
-## Workflow Creation Tools
-
-### `create_workflow`
-
-Generate new workflow framework using meta-workflow principles.
-
-**Purpose:** Create compliant workflow structure with three-tier architecture and validation gates.
-
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `name` | string | Yes | Framework name (e.g., `"api-documentation"`) |
-| `workflow_type` | string | Yes | Type (e.g., `"documentation"`, `"testing"`) |
-| `phases` | array[string] | Yes | Phase names (e.g., `["Analysis", "Generation"]`) |
-| `target_language` | string | No | Programming language (default: `"python"`) |
-| `quick_start` | boolean | No | Use minimal template (default: `true`) |
-| `output_path` | string | No | Custom output path |
-
-**Returns:** `Dict[str, Any]` - Framework details, file paths, and compliance report.
-
-```python
-{
-  "workflow_name": "api-documentation",
-  "phases": 3,
-  "files_created": [
-    ".praxis-os/workflows/api-documentation/metadata.json",
-    ".praxis-os/workflows/api-documentation/phases/0/phase.md",
-    ...
-  ],
-  "compliance": {
-    "three_tier_architecture": true,
-    "command_language": true,
-    "validation_gates": true,
-    "task_files_under_100_lines": true
-  }
-}
-```
-
-**Examples:**
-
-```python
-# Create minimal workflow
-create_workflow(
-    name="api-docs",
-    workflow_type="documentation",
-    phases=["Analysis", "Generation", "Validation"]
-)
-
-# Create workflow with custom settings
-create_workflow(
-    name="integration-tests",
-    workflow_type="testing",
-    phases=["Setup", "Execution", "Reporting"],
-    target_language="typescript",
-    quick_start=false,
-    output_path=".praxis-os/workflows/custom/"
-)
-```
-
-**Errors:**
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `WorkflowExists` | Workflow with name already exists | Choose different name or delete existing |
-| `InvalidPhaseCount` | Too few phases (under 2) or too many (over 8) | Use 2-8 phases |
-| `InvalidName` | Name contains invalid characters | Use alphanumeric and hyphens only |
-
-**Related:** [validate_workflow](#validate_workflow)
-
----
-
-### `validate_workflow`
-
-Validate workflow structure against construction standards.
-
-**Purpose:** Check compliance with directory structure, file naming, and size standards.
-
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `workflow_path` | string | Yes | Path to workflow directory (e.g., `"universal/workflows/my_workflow_v1"`) |
-
-**Returns:** `Dict[str, Any]` - Compliance status, score, issues, and warnings.
-
-```python
-{
-  "workflow_path": "universal/workflows/my_workflow_v1",
-  "compliant": true,
-  "compliance_score": 0.95,
-  "issues": [],
-  "warnings": [
-    {
-      "type": "file_size",
-      "severity": "minor",
-      "file": "phases/2/task-1-implement.md",
-      "message": "Task file is 185 lines (recommended: 100-170)"
-    }
-  ],
-  "summary": "✅ Workflow compliant with standards"
-}
-```
-
-**Examples:**
-
-```python
-# Validate before committing
-result = validate_workflow(
-    workflow_path=".praxis-os/workflows/my_custom_workflow_v1"
-)
-
-if result["compliant"]:
-    print("Ready to commit!")
-else:
-    for issue in result["issues"]:
-        print(f"Fix: {issue['message']}")
-```
-
-**Errors:**
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `WorkflowNotFound` | Path doesn't exist | Check path is correct |
-| `InvalidStructure` | Missing required files/directories | Ensure `metadata.json` and `phases/` exist |
-
-**Related:** [create_workflow](#create_workflow)
+**Related:** [pos_browser](#pos_browser), [pos_filesystem](#pos_filesystem)
 
 ---
 
@@ -645,359 +283,86 @@ Comprehensive browser automation with Playwright.
 
 **Purpose:** Browser testing, automation, and inspection with persistent sessions.
 
-#### Common Parameters
+**Actions:**
 
-All actions accept these parameters:
+#### Navigation (1 action)
+- `navigate` - Navigate to URL
+
+#### Inspection (6 actions)
+- `screenshot` - Capture page screenshot
+- `console` - Get console messages
+- `query` - Query elements by selector
+- `evaluate` - Execute JavaScript
+- `get_cookies` - Get all cookies
+- `get_local_storage` - Get local storage item
+
+#### Interaction (4 actions)
+- `click` - Click element
+- `type` - Type text with keyboard
+- `fill` - Fill input field
+- `select` - Select dropdown option
+
+#### Waiting (1 action)
+- `wait` - Wait for element state
+
+#### Context (3 actions)
+- `emulate_media` - Set color scheme/media features
+- `viewport` - Resize browser viewport
+- `set_cookies` - Set cookies
+
+#### Advanced (9 actions)
+- `run_test` - Execute Playwright test script
+- `intercept_network` - Intercept/mock network requests
+- `new_tab` - Create new tab
+- `switch_tab` - Switch to tab by ID
+- `close_tab` - Close tab by ID
+- `list_tabs` - List all tabs
+- `upload_file` - Upload file to input
+- `download_file` - Download file from page
+- `close` - Close session and release resources
+
+**Common Parameters:**
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `action` | string | Yes | Action to perform (see sections below) |
+| `action` | string | Yes | Action to perform (see actions above) |
 | `session_id` | string | No | Session identifier for isolation |
-| `browser_type` | string | No | Browser (`"chromium"`, `"firefox"`, `"webkit"`) (default: `"chromium"`) |
+| `browser_type` | string | No | Browser (`chromium`, `firefox`, `webkit`) (default: `chromium`) |
 | `headless` | boolean | No | Run headless (default: `true`) |
 | `timeout` | integer | No | Operation timeout in ms (default: 30000) |
+| `url` | string | Conditional | Target URL (for `navigate`) |
+| `selector` | string | Conditional | CSS/XPath selector (for `query`, `click`, etc.) |
+| `text` | string | Conditional | Text to type (for `type`) |
+| `value` | string | Conditional | Value to fill/select (for `fill`, `select`) |
+| `screenshot_path` | string | Conditional | File path to save screenshot (for `screenshot`) |
+| `script` | string | Conditional | JavaScript to execute (for `evaluate`) |
+| `cookies` | list | Conditional | Cookies to set (for `set_cookies`) |
+| `file_path` | string | Conditional | Path to file for upload/download |
 
-#### Navigation Actions
-
-**`navigate`** - Navigate to URL
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `url` | string | Yes | Target URL |
-| `wait_until` | string | No | Wait condition (`"load"`, `"domcontentloaded"`, `"networkidle"`) |
+**Examples:**
 
 ```python
+# Navigate to URL
 pos_browser(
     action="navigate",
-    url="http://localhost:3000",
-    wait_until="networkidle",
+    url="https://example.com",
     session_id="test-1"
 )
-```
 
-#### Inspection Actions
-
-**`screenshot`** - Capture page screenshot
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `screenshot_path` | string | Yes | File path to save screenshot |
-| `screenshot_full_page` | boolean | No | Capture full scrollable page |
-| `screenshot_format` | string | No | Format (`"png"`, `"jpeg"`) |
-
-```python
+# Take screenshot
 pos_browser(
     action="screenshot",
     screenshot_path="/tmp/page.png",
-    screenshot_full_page=true,
+    screenshot_full_page=True,
     session_id="test-1"
 )
-```
 
-**`query`** - Query elements by selector
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | CSS/XPath selector |
-| `query_all` | boolean | No | Return all matches vs first |
-
-```python
-result = pos_browser(
-    action="query",
-    selector=".error-message",
-    query_all=true,
-    session_id="test-1"
-)
-```
-
-**`evaluate`** - Execute JavaScript
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `script` | string | Yes | JavaScript code to execute |
-
-```python
-result = pos_browser(
-    action="evaluate",
-    script="document.title",
-    session_id="test-1"
-)
-```
-
-**`get_cookies`** - Get all cookies
-
-```python
-cookies = pos_browser(action="get_cookies", session_id="test-1")
-```
-
-**`get_local_storage`** - Get local storage item
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `storage_key` | string | Yes | Local storage key |
-
-```python
-value = pos_browser(
-    action="get_local_storage",
-    storage_key="auth_token",
-    session_id="test-1"
-)
-```
-
-#### Interaction Actions
-
-**`click`** - Click element
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | CSS/XPath selector |
-| `button` | string | No | Mouse button (`"left"`, `"right"`, `"middle"`) |
-| `click_count` | integer | No | Number of clicks (1-3) |
-| `modifiers` | array[string] | No | Keyboard modifiers (`["Alt", "Control", "Shift"]`) |
-
-```python
+# Click element
 pos_browser(
     action="click",
     selector="#submit-button",
     session_id="test-1"
 )
-```
-
-**`type`** - Type text with keyboard
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | CSS/XPath selector |
-| `text` | string | Yes | Text to type |
-
-```python
-pos_browser(
-    action="type",
-    selector="#username",
-    text="user@example.com",
-    session_id="test-1"
-)
-```
-
-**`fill`** - Fill input field
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | CSS/XPath selector |
-| `value` | string | Yes | Value to fill |
-
-```python
-pos_browser(
-    action="fill",
-    selector="#password",
-    value="secret123",
-    session_id="test-1"
-)
-```
-
-**`select`** - Select dropdown option
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | CSS/XPath selector |
-| `value` | string | Yes | Option value to select |
-
-```python
-pos_browser(
-    action="select",
-    selector="#country",
-    value="US",
-    session_id="test-1"
-)
-```
-
-#### Waiting Actions
-
-**`wait`** - Wait for element state
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | CSS/XPath selector |
-| `wait_for_state` | string | No | State (`"visible"`, `"hidden"`, `"attached"`, `"detached"`) |
-| `wait_for_timeout` | integer | No | Timeout in ms (default: 30000) |
-
-```python
-pos_browser(
-    action="wait",
-    selector=".loading",
-    wait_for_state="hidden",
-    session_id="test-1"
-)
-```
-
-#### Context Actions
-
-**`emulate_media`** - Set color scheme/media features
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `color_scheme` | string | No | `"light"`, `"dark"`, `"no-preference"` |
-| `reduced_motion` | string | No | `"reduce"`, `"no-preference"` |
-
-```python
-pos_browser(
-    action="emulate_media",
-    color_scheme="dark",
-    session_id="test-1"
-)
-```
-
-**`viewport`** - Resize browser viewport
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `viewport_width` | integer | Yes | Width in pixels |
-| `viewport_height` | integer | Yes | Height in pixels |
-
-```python
-pos_browser(
-    action="viewport",
-    viewport_width=1920,
-    viewport_height=1080,
-    session_id="test-1"
-)
-```
-
-**`set_cookies`** - Set cookies
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `cookies` | array[object] | Yes | Cookie objects with name, value, domain, path |
-
-```python
-pos_browser(
-    action="set_cookies",
-    cookies=[{
-        "name": "session",
-        "value": "abc123",
-        "domain": "localhost",
-        "path": "/"
-    }],
-    session_id="test-1"
-)
-```
-
-#### Tab Management Actions
-
-**`new_tab`** - Create new tab
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `new_tab_url` | string | No | URL for new tab |
-
-```python
-result = pos_browser(
-    action="new_tab",
-    new_tab_url="https://example.com",
-    session_id="test-1"
-)
-# Returns: {"tab_id": "tab-uuid-2"}
-```
-
-**`switch_tab`** - Switch to tab by ID
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `tab_id` | string | Yes | Tab identifier from `list_tabs` or `new_tab` |
-
-```python
-pos_browser(
-    action="switch_tab",
-    tab_id="tab-uuid-2",
-    session_id="test-1"
-)
-```
-
-**`close_tab`** - Close tab by ID
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `tab_id` | string | Yes | Tab identifier |
-
-```python
-pos_browser(
-    action="close_tab",
-    tab_id="tab-uuid-2",
-    session_id="test-1"
-)
-```
-
-**`list_tabs`** - List all tabs
-
-```python
-result = pos_browser(action="list_tabs", session_id="test-1")
-# Returns: {"tabs": [{"id": "tab-uuid-1", "active": true}, ...]}
-```
-
-#### File Operations Actions
-
-**`upload_file`** - Upload file to input
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `selector` | string | Yes | File input selector |
-| `file_path` | string | Yes | Path to file to upload |
-
-```python
-pos_browser(
-    action="upload_file",
-    selector="#file-input",
-    file_path="/path/to/file.pdf",
-    session_id="test-1"
-)
-```
-
-**`download_file`** - Download file from page
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `download_trigger_selector` | string | Yes | Selector to trigger download |
-| `file_path` | string | No | Path to save file |
-
-```python
-pos_browser(
-    action="download_file",
-    download_trigger_selector="#download-button",
-    file_path="/tmp/downloaded.zip",
-    session_id="test-1"
-)
-```
-
-#### Session Management Actions
-
-**`close`** - Close session and release resources
-
-```python
-pos_browser(action="close", session_id="test-1")
-```
-
-#### Complete Example
-
-```python
-# Dark mode testing workflow
-session_id = "dark-mode-test"
-
-# Navigate
-pos_browser(action="navigate", url="http://localhost:3000", session_id=session_id)
-
-# Set dark mode
-pos_browser(action="emulate_media", color_scheme="dark", session_id=session_id)
-
-# Screenshot
-pos_browser(
-    action="screenshot",
-    screenshot_path="/tmp/dark.png",
-    screenshot_full_page=true,
-    session_id=session_id
-)
-
-# Cleanup
-pos_browser(action="close", session_id=session_id)
 ```
 
 **Errors:**
@@ -1008,18 +373,157 @@ pos_browser(action="close", session_id=session_id)
 | `SelectorNotFound` | Element not found | Check selector is correct, wait for element to load |
 | `NavigationTimeout` | Page didn't load in time | Increase `timeout` or check URL |
 | `BrowserNotInstalled` | Playwright browser not installed | Run `playwright install chromium` |
-| `ActionNotSupported` | Invalid `action` | Check action name is correct |
 
-**Related:** None (standalone tool)
+**Related:** [pos_filesystem](#pos_filesystem)
+
+---
+
+## Filesystem Tools
+
+### `pos_filesystem`
+
+Unified file operations with safe defaults.
+
+**Purpose:** Provides comprehensive filesystem operations with security validation:
+- Path traversal prevention (no "..", no absolute paths outside workspace)
+- Gitignore respect (won't modify ignored files without override)
+- Safe defaults (no recursive delete without explicit flag)
+- Actionable error messages with remediation guidance
+
+**Actions:**
+
+#### Content Operations (3 actions)
+- `read` - Read file contents (encoding configurable)
+- `write` - Write content to file (creates if not exists)
+- `append` - Append content to file (creates if not exists)
+
+#### File Management (3 actions)
+- `delete` - Delete file or directory (requires recursive=True for dirs)
+- `move` - Move/rename file or directory
+- `copy` - Copy file or directory
+
+#### Discovery (4 actions)
+- `list` - List directory contents (recursive optional)
+- `exists` - Check if path exists
+- `stat` - Get file/directory metadata (size, modified time, etc.)
+- `glob` - Search for files matching pattern
+
+#### Directory Operations (2 actions)
+- `mkdir` - Create directory (create_parents for nested dirs)
+- `rmdir` - Remove empty directory
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `action` | string | Yes | File operation to perform (required) |
+| `path` | string | Yes | File or directory path (required, relative to workspace) |
+| `content` | string | Conditional | Content to write/append (for `write`, `append`) |
+| `destination` | string | Conditional | Destination path (for `move`, `copy`) |
+| `recursive` | boolean | No | Enable recursive operations (delete dirs, list subdirs) |
+| `follow_symlinks` | boolean | No | Follow symbolic links |
+| `encoding` | string | No | Text encoding (default: utf-8) |
+| `create_parents` | boolean | No | Create parent directories if needed (`mkdir`, `write`) |
+| `override_gitignore` | boolean | No | Allow operations on gitignored files |
+
+**Examples:**
+
+```python
+# Read file
+pos_filesystem(
+    action="read",
+    path="src/module.py"
+)
+
+# Write file with parent creation
+pos_filesystem(
+    action="write",
+    path="output/results.txt",
+    content="Hello, World!",
+    create_parents=True
+)
+
+# List directory recursively
+pos_filesystem(
+    action="list",
+    path="src/",
+    recursive=True
+)
+
+# Delete directory (requires recursive flag)
+pos_filesystem(
+    action="delete",
+    path="tmp/",
+    recursive=True
+)
+```
+
+**Returns:** Dictionary with `status`, `action`, `path`, and action-specific result data.
+
+**Errors:**
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `PathTraversalError` | Path contains ".." or absolute path | Use relative paths within workspace |
+| `GitignoreViolation` | Attempting to modify gitignored file | Set `override_gitignore=True` if intentional |
+| `FileNotFound` | Path doesn't exist | Check path is correct |
+| `DirectoryNotEmpty` | Attempting to delete non-empty directory | Set `recursive=True` |
+
+**Related:** [pos_browser](#pos_browser)
+
+---
+
+## Server Information Tools
+
+### `get_server_info`
+
+Get server and project information for observability.
+
+**Purpose:** Provides comprehensive server metadata, health status, behavioral metrics, and version information for monitoring, debugging, and observing AI improvement.
+
+**Actions:**
+- `status` - Server runtime (uptime, config, subsystems initialized)
+- `health` - Index health status, parsers installed, config validation
+- `behavioral_metrics` - Query frequency, diversity, trends (from query_tracker)
+- `version` - Server version, Python version, key dependencies
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `action` | string | No | Information type to retrieve (default: `status`) |
+
+**Returns:** Dictionary with `status`, `action`, and action-specific information.
+
+**Examples:**
+
+```python
+# Get server status
+get_server_info(action="status")
+
+# Check index health
+get_server_info(action="health")
+
+# View behavioral metrics
+get_server_info(action="behavioral_metrics")
+
+# Get version info
+get_server_info(action="version")
+```
+
+**Errors:** None (always succeeds)
+
+**Related:** [pos_search_project](#pos_search_project)
 
 ---
 
 ## Performance Guidelines
 
-- **Tool Count:** Keep at most 20 tools enabled (selective loading)
+- **Tool Count:** prAxIs OS provides 6 unified tools (~60 actions total)
 - **RAG Queries:** Query once, implement from results
 - **Workflow State:** Sessions persist across restarts
 - **Browser Sessions:** Reuse sessions for test suites
+- **File Operations:** Use `pos_filesystem` instead of direct file reads
 
 ---
 
@@ -1027,24 +531,33 @@ pos_browser(action="close", session_id=session_id)
 
 ### Tool not found
 
-Check enabled tool groups in `.praxis-os/config.json`:
-```json
-{
-  "enabled_tool_groups": ["rag", "workflow", "browser"]
-}
+Check that MCP server is running and tools are registered:
+```bash
+# Check server status
+get_server_info(action="status")
+
+# Verify tools available
+# (Check in your IDE's MCP tools list)
 ```
 
-### No results from search_standards
+### No results from pos_search_project
 
-1. Check vector index exists: `.praxis-os/.cache/vector_index/`
+1. Check vector index exists: `.praxis-os/cache/indexes/`
 2. Wait 10-30s for file watcher rebuild
 3. Use broader query terms
+4. Verify index is enabled in `mcp.yaml`
 
 ### Browser tool errors
 
 1. Install Playwright: `pip install playwright && playwright install chromium`
 2. Check browser manager initialized
 3. Verify headless mode in CI/CD environments
+
+### Filesystem tool errors
+
+1. Verify path is relative to workspace root
+2. Check `.gitignore` if operation fails (may need `override_gitignore=True`)
+3. Ensure `recursive=True` for directory deletion
 
 ---
 
@@ -1053,3 +566,4 @@ Check enabled tool groups in `.praxis-os/config.json`:
 - [Architecture](../explanation/architecture.md) - How MCP/RAG works
 - [Workflows](./workflows.md) - Workflow system overview
 - [Standards](./standards.md) - Universal standards indexed by RAG
+- [Agent Integrations](../how-to-guides/agent-integrations/README.md) - Setup guides for each agent

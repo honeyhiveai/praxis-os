@@ -5,24 +5,32 @@ doc_type: tutorial
 
 # Installation
 
-Install prAxIs OS in any project with a simple conversation. Works with Cursor, Claude Code, Cline, and GitHub Copilot.
+Install prAxIs OS in any project with a simple conversation. Your AI agent handles everything automatically.
 
 ## Quick Start
 
 ```bash
-# Open your project in Cursor, Claude Code, Cline, or GitHub Copilot and say:
-"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
+# In your IDE/agent, say:
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT>"
+
+# Examples:
+# "for Cursor"                    → Cursor IDE
+# "for Cline in VS Code"          → Cline extension
+# "for Claude Code"               → CLI/terminal mode
+# "for Claude Code in VS Code"    → VS Code extension
 ```
 
-The agent will:
+Your agent will:
 1. **Analyze your project** - Detect language, frameworks, tools
 2. **Copy universal standards** - Timeless CS fundamentals
 3. **Generate language-specific standards** - Tailored to your stack
 4. **Install MCP server** - Local Python process
-5. **Configure your agent** - MCP integration (agent-specific)
+5. **Configure your agent** - MCP integration
 6. **Build RAG index** - Semantic search ready
 
 **Time:** ~5 minutes for complete installation
+
+**📖 Need agent-specific setup?** See [Agent Integrations](../how-to-guides/agent-integrations/README.md) for detailed guides for Cursor, Cline, Claude Code, and more.
 
 ## What Gets Installed
 
@@ -45,7 +53,7 @@ your-project/
 │   ├── workflows/                # Phase-gated workflows
 │   │   ├── spec_creation_v1/
 │   │   └── spec_execution_v1/
-│   ├── mcp_server/               # MCP/RAG server (copied)
+│   ├── ouroboros/                # MCP/RAG server (copied)
 │   │   ├── __main__.py
 │   │   ├── rag_engine.py
 │   │   ├── workflow_engine.py
@@ -114,14 +122,14 @@ Cursor agent generates standards for your specific language:
 
 ```bash
 # Copy MCP server code
-cp -r praxis-os/mcp_server/ .praxis-os/mcp_server/
+cp -r praxis-os/dist/ouroboros/ .praxis-os/ouroboros/
 
 # Create virtualenv
 cd .praxis-os
 python -m venv venv
 
 # Install dependencies
-./venv/bin/pip install -r mcp_server/requirements.txt
+./venv/bin/pip install -r ouroboros/requirements.txt
 ```
 
 **Dependencies installed:**
@@ -132,7 +140,31 @@ mcp>=1.0.0                    # Model Context Protocol
 watchdog>=3.0.0               # File watching
 ```
 
-### 5. Configure Cursor (Primary Agent)
+### 5. Customize Configuration
+
+**⚠️ CRITICAL:** Before building the RAG index, customize `.praxis-os/config/mcp.yaml` to match your project's source code structure.
+
+**Quick steps:**
+1. Open `.praxis-os/config/mcp.yaml`
+2. Update `code.source_paths` to point to your source directories (e.g., `["../src/"]`)
+3. Update `code.languages` to list your languages (e.g., `["python", "typescript"]`)
+4. Update `ast.source_paths` and `ast.languages` to match `code` settings
+
+**📖 See [Configuration Reference](../reference/config-reference) for complete documentation and examples.**
+
+**For detailed step-by-step instructions**: See [Manual Installation - Step 4](https://github.com/honeyhiveai/praxis-os/blob/main/installation/04-config-customization.md)
+
+### 6. Configure Your Agent
+
+After the mechanical installation completes, configure your specific agent. The configuration varies by agent and IDE:
+
+**📖 See [Agent Integrations](../how-to-guides/agent-integrations/README.md) for complete setup guides:**
+- **[Cursor](../how-to-guides/agent-integrations/cursor/)** - Native MCP support
+- **[Cline in VS Code](../how-to-guides/agent-integrations/cline/vscode)** - VS Code extension
+- **[Claude Code](../how-to-guides/agent-integrations/claude-code/vscode)** - VS Code integration
+- **[Claude Code Terminal](../how-to-guides/agent-integrations/claude-code/terminal)** - CLI mode
+
+**Example: Cursor Configuration**
 
 Create `.cursor/mcp.json`:
 
@@ -143,7 +175,7 @@ Create `.cursor/mcp.json`:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual",
         "--log-level",
@@ -155,10 +187,10 @@ Create `.cursor/mcp.json`:
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [
-        "search_standards",
-        "get_current_phase",
-        "get_workflow_state",
-        "get_server_info"
+        "pos_search_project",
+        "pos_workflow",
+        "get_server_info",
+        "current_date"
       ]
     }
   }
@@ -290,9 +322,11 @@ The `praxis_os_upgrade_v1` workflow will:
 
 For detailed upgrade documentation, see **[Upgrading prAxIs OS](../how-to-guides/upgrading.md)**
 
-## Manual Installation (Advanced)
+## Manual Installation (Reference/Troubleshooting)
 
-If you prefer manual control:
+**Note**: The automated script is recommended. Use manual installation only for troubleshooting or understanding the process.
+
+If you need manual control or want to understand each step:
 
 ```bash
 # 1. Clone repo
@@ -302,12 +336,12 @@ git clone https://github.com/honeyhiveai/praxis-os.git
 cd your-project
 cp praxis-os/.cursorrules .
 cp -r praxis-os/universal .praxis-os/standards/universal
-cp -r praxis-os/mcp_server .praxis-os/mcp_server
+cp -r praxis-os/dist/ouroboros .praxis-os/ouroboros
 
 # 3. Setup MCP server
 cd .praxis-os
 python -m venv venv
-./venv/bin/pip install -r mcp_server/requirements.txt
+./venv/bin/pip install -r ouroboros/requirements.txt
 
 # 4. Configure Cursor
 # Create .cursor/mcp.json (see above)
@@ -336,7 +370,7 @@ cat ~/.cursor/logs/mcp.log
 # Manual rebuild
 cd .praxis-os
 ./venv/bin/python -c "
-from mcp_server.rag_engine import RAGEngine
+from ouroboros.subsystems.rag.index_manager import IndexManager
 engine = RAGEngine(project_root='.')
 engine.build_index()
 "
@@ -354,13 +388,14 @@ cp praxis-os/language-instructions/python.md .praxis-os/
 
 ## Requirements
 
-- **Cursor**: Latest version
+- **AI Agent**: Cursor, Cline, Claude Code, or any MCP-compatible agent
 - **Python**: 3.9+ (for MCP server)
 - **Disk space**: ~500MB (includes embeddings model)
 - **Memory**: ~200MB (MCP server runtime)
 
 ## Next Steps
 
+- **[Agent Integrations](../how-to-guides/agent-integrations/README.md)** - Complete setup guides for your specific agent
 - **[Architecture](../explanation/architecture)** - Understand how it works
 - **[Standards](../reference/standards)** - Browse universal standards
 - **[Workflows](../reference/workflows)** - Start using workflows

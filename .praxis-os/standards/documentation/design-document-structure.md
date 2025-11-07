@@ -4,6 +4,19 @@
 
 ---
 
+## Questions This Answers
+
+- **When should I write a design doc vs. going straight to a spec?**
+- **What should I include in a design doc?**
+- **How much detail is appropriate?**
+- **What should I leave out of a design doc?**
+- **How does a design doc fit into the prAxIs OS workflow?**
+- **What's the difference between a design doc and a spec?**
+- **How do design docs support AI agent development?**
+- **What's the standard structure for a design document?**
+- **How do design docs inform the spec_creation_v1 workflow?**
+- **What are common anti-patterns in design docs?**
+
 ## 🚨 Quick Reference
 
 **Keywords for search**: design doc, design document, architecture design, planning document, technical design, design doc vs spec, what to include in design, design document structure, design document template, strategic planning
@@ -20,19 +33,7 @@
 
 ---
 
-## 🔍 What Questions Does This Answer?
-
-- When should I write a design doc vs. going straight to a spec?
-- What should I include in a design doc?
-- How much detail is appropriate?
-- What should I leave out of a design doc?
-- How does a design doc fit into the prAxIs OS workflow?
-- What's the difference between a design doc and a spec?
-- How do design docs support AI agent development?
-
----
-
-## 📖 Purpose
+## 📖 Design Document Purpose
 
 Design documents bridge strategic thinking and systematic execution. They:
 
@@ -412,11 +413,11 @@ Before finalizing your design doc:
 ## 📚 Related Standards
 
 **See also:**
-- `pos_search(content_type="standards", query="rag content authoring")` - How to write for discoverability
-- `pos_search(content_type="standards", query="specification structure")` - How specs differ from design docs
-- `pos_search(content_type="standards", query="workflow creation")` - When to use workflows vs. tools
-- `pos_search(content_type="standards", query="documentation completeness")` - Quality standards for all docs
-- `pos_search(content_type="standards", query="knowledge compounding")` - How to capture learnings
+- `pos_search_project(content_type="standards", query="rag content authoring")` - How to write for discoverability
+- `pos_search_project(content_type="standards", query="specification structure")` - How specs differ from design docs
+- `pos_search_project(content_type="standards", query="workflow creation")` - When to use workflows vs. tools
+- `pos_search_project(content_type="standards", query="documentation completeness")` - Quality standards for all docs
+- `pos_search_project(content_type="standards", query="knowledge compounding")` - How to capture learnings
 
 ---
 

@@ -5,11 +5,12 @@
       "transport": "http",
       "url": "http://127.0.0.1:4242/mcp",
       "autoApprove": [
-        "pos_search",
+        "pos_search_project",
         "pos_workflow",
         "get_server_info",
         "current_date",
-        "pos_browser"
+        "pos_browser",
+        "pos_filesystem"
       ]
     }
   }

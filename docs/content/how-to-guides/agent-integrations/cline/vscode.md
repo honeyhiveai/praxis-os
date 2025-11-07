@@ -22,7 +22,7 @@ Cline is a VS Code extension that supports MCP. As the **primary agent**, Cline 
 3. Manage the RAG index and workflows
 
 You need:
-1. `.cursorrules` file (behavioral triggers - yes, even for VS Code!)
+1. `.clinerules` file (behavioral triggers - Cline's equivalent to `.cursorrules`)
 2. Cline MCP configuration (via VS Code settings or Cline's UI)
 3. Reload VS Code window to activate
 
@@ -37,23 +37,25 @@ code --install-extension saoudrizwan.claude-dev
 
 **Verify installation**: Cline icon should appear in VS Code sidebar
 
-## Step 2: Copy .cursorrules
+## Step 2: Handle .clinerules File
 
-The `.cursorrules` file works across all agents (Cursor, Cline, Claude Code, etc.):
+The `.clinerules` file triggers prAxIs OS behavioral patterns in Cline. **⚠️ CRITICAL: Never blindly overwrite existing `.clinerules` files!**
 
-```bash
-# If .cursorrules doesn't exist
-cp /path/to/praxis-os-source/.cursorrules .cursorrules
+**Note**: `.clinerules` is Cline-specific (similar to `.cursorrules` for Cursor). It provides behavioral triggers for the LLM.
 
-# If .cursorrules already exists
-# See "Merging Existing Rules" in cursor.md guide
-```
+### Handling Existing .clinerules
 
-**Note**: Even though Cline is in VS Code, `.cursorrules` still affects LLM behavior through context.
+If `.clinerules` already exists, follow the merge protocol from the [Cursor guide](./cursor.md#merge-protocol-if-file-exists). The merge logic is the same:
+
+1. **Check if file exists** → If no, copy directly
+2. **If exists** → Use merge protocol (auto-merge, manual merge, or backup-and-replace)
+3. **prAxIs OS rules must be at the TOP** - Critical for:
+   - **Attention span**: LLMs read files sequentially - instructions at the top have the best chance of being followed
+   - **Hook point**: Ensures orientation queries are triggered before other rules
+
+**Quick reference**: See [Cursor guide - Step 1: Handle .cursorrules File](./cursor.md#step-1-handle-cursorrules-file) for the complete merge protocol with code examples (replace `.cursorrules` with `.clinerules`).
 
 ## Step 3: Configure Cline for MCP
-
-Cline supports two methods for MCP configuration:
 
 ### Method A: VS Code Settings (Recommended)
 
@@ -70,7 +72,7 @@ Open VS Code settings (`Cmd+,` or `Ctrl+,`), then:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -95,7 +97,7 @@ Open VS Code settings (`Cmd+,` or `Ctrl+,`), then:
 4. Add server with:
    - **Name**: `praxis-os`
    - **Command**: `.praxis-os/venv/bin/python`
-   - **Args**: `-m mcp_server --transport dual`
+   - **Args**: `-m ouroboros --transport dual`
    - **Working Dir**: `.praxis-os`
 
 **Important**: Primary agents always use `--transport dual` to enable HTTP endpoint for secondary agents.
@@ -110,7 +112,7 @@ Open VS Code settings (`Cmd+,` or `Ctrl+,`), then:
 ```
 
 On reload, Cline will:
-1. Read `.cursorrules` via context
+1. Read `.clinerules` → Loads behavioral patterns
 2. Start prAxIs OS MCP server
 3. Connect to MCP server
 4. Detect `.rebuild_index` flag → Build RAG index
@@ -157,14 +159,14 @@ Should return relevant chunks from `.praxis-os/standards/`
 ls -la .praxis-os/venv/
 
 # Test MCP server manually
-.praxis-os/venv/bin/python -m mcp_server
+.praxis-os/venv/bin/python -m ouroboros
 ```
 
 **Solutions**:
 - Check Cline output panel (View → Output → select "Cline" dropdown)
 - Verify Python path in settings: Use absolute path if `${workspaceFolder}` doesn't work
 - Re-create venv: `python3 -m venv .praxis-os/venv`
-- Re-install deps: `.praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt`
+- Re-install deps: `.praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt`
 
 ### Tools Available But No Results
 
@@ -184,47 +186,35 @@ ls .praxis-os/standards/.rebuild_index
 - Reload VS Code window → Index rebuilds
 - Check Cline output panel for indexing errors
 
-### Cline Doesn't Follow .cursorrules
+### Cline Doesn't Follow .clinerules
 
-**Symptom**: Cline doesn't run orientation or query liberally
+**Symptom**: Agent doesn't run orientation queries or query liberally
 
-**Root cause**: `.cursorrules` is Cursor-specific. Cline doesn't automatically read it.
-
-**Solutions**:
-
-**Option 1: Include in every chat (manual)**
-```
-"Read .cursorrules and follow all patterns, especially the 10 mandatory orientation queries"
-```
-
-**Option 2: Cline custom instructions (better)**
-
-In Cline settings, add custom instructions:
-```
-BEFORE starting any task:
-1. Run search_standards("orientation bootstrap queries mandatory ten queries")
-2. Follow the 10 bootstrap queries returned
-3. Query liberally (5-10 times per task) using search_standards
-4. Never read .praxis-os/standards/ files directly - always use search_standards
-```
-
-**Option 3: Workspace-level prompt (best)**
-
-Create `.vscode/settings.json`:
-```json
-{
-  "cline.systemPrompt": "MANDATORY: Before any task, run search_standards('orientation bootstrap'). Follow all 10 bootstrap queries. Query liberally (5-10 times per task). Never read indexed files directly."
-}
-```
-
-### Python Module Not Found
-
-**Symptom**: `ModuleNotFoundError: No module named 'mcp_server'`
+**Root cause**: `.clinerules` file missing or not at top of file
 
 **Check**:
 ```bash
-# Verify mcp_server exists
-ls -la .praxis-os/mcp_server/__main__.py
+# Verify .clinerules in project root
+ls -la .clinerules
+
+# Check file size (should be ~2KB with prAxIs OS rules)
+wc -l .clinerules
+```
+
+**Solutions**:
+- Ensure `.clinerules` is in project root (not `.praxis-os/`)
+- Restart VS Code (rules load on startup)
+- Explicitly trigger: "Run the 10 mandatory orientation queries"
+- Verify prAxIs OS rules are at the TOP of the file
+
+### Python Module Not Found
+
+**Symptom**: `ModuleNotFoundError: No module named 'ouroboros'`
+
+**Check**:
+```bash
+# Verify ouroboros exists
+ls -la .praxis-os/ouroboros/__main__.py
 
 # Check working directory in settings
 cat .vscode/settings.json | grep cwd
@@ -265,7 +255,7 @@ If you also use Cursor and want both agents:
 1. **Cursor** (primary) - Controls MCP server
 2. **Cline in Cursor** (secondary) - Connects via HTTP
 
-See [Cline in Cursor](./cursor.md) for secondary agent configuration.
+See [cursor.md](./cursor.md) for secondary agent configuration.
 
 **Note**: Don't run Cline (primary) and Cursor simultaneously - they'll conflict over MCP server.
 
@@ -297,7 +287,7 @@ For team consistency, commit `.vscode/settings.json` with Cline MCP config:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -318,11 +308,13 @@ For team consistency, commit `.vscode/settings.json` with Cline MCP config:
 ✅ **Installation complete!**
 
 Now:
-1. **Run orientation**: Say "Run the 10 mandatory orientation queries"
+1. **Run orientation**: Start any chat with orientation queries (automatic via `.clinerules`)
 2. **Test search**: "Query prAxIs OS standards for [topic]"
 3. **Create spec**: "Create a spec for [feature]"
 4. **Build with guidance**: prAxIs OS provides context throughout
 
 See also:
-- [Cline in Cursor](./cursor.md) - If using both Cursor + Cline
+- [Creating Project Standards](../../creating-project-standards.md)
+- [Understanding Workflows](../../../tutorials/understanding-praxis-os-workflows.md)
+- [Cline in Cursor (Secondary)](./cursor.md) - If using both Cursor + Cline
 

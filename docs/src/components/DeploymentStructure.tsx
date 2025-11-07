@@ -19,7 +19,7 @@ export default function DeploymentStructure(): React.ReactElement {
           <div className={styles.subChildren}>
             <div className={styles.item}>
               <span className={styles.fileIcon}>📁</span>
-              <span className={styles.itemName}>mcp_server/</span>
+              <span className={styles.itemName}>ouroboros/</span>
               <span className={styles.itemDesc}># Complete server copy</span>
             </div>
             <div className={styles.item}>

@@ -4,6 +4,51 @@
 
 This document defines the mandatory code quality standards, tools, and processes that ensure consistent, maintainable, and reliable code across the project.
 
+## Questions This Answers
+
+- **What are the mandatory code quality gates before committing in prAxIs OS?**
+- **What Pylint score is required and how do I improve it?**
+- **Why is MyPy zero-error tolerance enforced and how do I fix type errors?**
+- **What is the correct pre-commit validation workflow?**
+- **How do I check my current Pylint score and identify violations?**
+- **What are the priority levels for fixing Pylint violations?**
+- **What test coverage requirements must be met?**
+- **How do I run quality checks locally before committing?**
+- **What causes automatic CI/CD failures?**
+- **How do I fix common Pylint violations like W1203 or W0718?**
+
+## Quick Reference: Code Quality Requirements
+
+**Mandatory Quality Gates:**
+1. **Format**: `tox -e format` (100% compliance)
+2. **Lint**: `tox -e lint` (≥8.0/10.0, target: 10.0/10.0)
+3. **Type**: `tox -e type` (ZERO errors - MANDATORY)
+4. **Test**: `tox -e unit` (100% pass rate)
+
+**Pre-Commit Checklist:**
+```bash
+tox -e format          # Auto-fix formatting
+tox -e lint            # Must pass ≥8.0/10.0
+tox -e type            # ZERO errors (no exceptions)
+tox -e unit            # All tests pass
+```
+
+**Current Status:**
+- Pylint: 8.33/10.0 → Target: 10.0/10.0
+- MyPy: Zero errors (STRICTLY ENFORCED)
+- Tests: All passing
+- Coverage: ≥60% overall, ≥80% new features
+
+**Priority Order for Fixing Violations:**
+1. **Errors (E)** - Fix first
+2. **Warnings (W)** - Fix systematically  
+3. **Conventions (C)** - Fix for style
+4. **Refactor (R)** - Address last
+
+**Zero Tolerance:** MyPy errors must be fixed immediately, no exceptions!
+
+---
+
 ## 🚨 MANDATORY Quality Gates
 
 **All code MUST pass these quality gates before commit:**

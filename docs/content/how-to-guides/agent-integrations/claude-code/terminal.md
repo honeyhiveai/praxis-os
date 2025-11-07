@@ -7,6 +7,8 @@ doc_type: how-to
 
 Configure prAxIs OS to work with Claude Code CLI as your primary AI agent.
 
+**Note**: Claude Code also supports VS Code integration. See [Claude Code in VS Code](./vscode.md) if you prefer editor integration.
+
 ## Prerequisites
 
 - ✅ Mechanical installation complete (via `install-praxis-os.py`)
@@ -48,14 +50,23 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 echo 'export ANTHROPIC_API_KEY="sk-ant-..."' >> ~/.zshrc
 ```
 
-## Step 3: Copy .cursorrules
+## Step 3: Handle .claude/CLAUDE.md File
 
-```bash
-# If .cursorrules doesn't exist
-cp /path/to/praxis-os-source/.cursorrules .cursorrules
+The `.claude/CLAUDE.md` file triggers prAxIs OS behavioral patterns in Claude Code. **⚠️ CRITICAL: Never blindly overwrite existing `.claude/CLAUDE.md` files!**
 
-# .cursorrules affects LLM behavior via context
-```
+**Note**: `.claude/CLAUDE.md` is Claude Code-specific (similar to `.cursorrules` for Cursor). It provides behavioral triggers for the LLM.
+
+### Handling Existing .claude/CLAUDE.md
+
+If `.claude/CLAUDE.md` already exists, follow the merge protocol from the [Cursor guide](../cursor/index.md#merge-protocol-if-file-exists). The merge logic is the same:
+
+1. **Check if file exists** → If no, copy directly
+2. **If exists** → Use merge protocol (auto-merge, manual merge, or backup-and-replace)
+3. **prAxIs OS rules must be at the TOP** - Critical for:
+   - **Attention span**: LLMs read files sequentially - instructions at the top have the best chance of being followed
+   - **Hook point**: Ensures orientation queries are triggered before other rules
+
+**Quick reference**: See [Cursor guide - Step 1: Handle .cursorrules File](../cursor/index.md#step-1-handle-cursorrules-file) for the complete merge protocol with code examples (replace `.cursorrules` with `.claude/CLAUDE.md`).
 
 **What it does**:
 - Triggers orientation (10 bootstrap queries)
@@ -63,6 +74,8 @@ cp /path/to/praxis-os-source/.cursorrules .cursorrules
 - Prevents direct file reads of indexed content
 
 ## Step 4: Configure MCP for Claude Code
+
+**Note**: Claude Code uses `.claude/CLAUDE.md` for behavioral patterns. If you want to trigger orientation queries, they'll be automatic via this file.
 
 Claude Code uses a configuration file for MCP servers. Location varies by installation:
 
@@ -80,7 +93,7 @@ Create or edit the MCP configuration:
       "command": ".praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -103,7 +116,7 @@ Create or edit the MCP configuration:
       "command": "/absolute/path/to/project/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -135,7 +148,9 @@ On startup, Claude Code will:
 1. Load MCP configuration
 2. Start prAxIs OS MCP server
 3. Connect to MCP server
-4. Detect `.rebuild_index` flag → Build RAG index (first run)
+4. Read `.claude/CLAUDE.md` → Loads behavioral patterns
+5. Detect `.rebuild_index` flag → Build RAG index (first run)
+6. Tools become available
 
 **Expected startup**: 5-10 seconds for first RAG build
 
@@ -177,10 +192,10 @@ Should return relevant chunks from `.praxis-os/standards/`
 
 ```bash
 # First thing in any session
-> "Run the 10 mandatory orientation queries from .cursorrules"
+> "Run the 10 mandatory orientation queries from .claude/CLAUDE.md"
 ```
 
-Claude Code will read `.cursorrules` via context and execute queries.
+Claude Code will read `.claude/CLAUDE.md` and execute queries.
 
 ### Creating Specs
 
@@ -216,7 +231,7 @@ Manages phase-gated workflow via `pos_workflow`.
 ```bash
 # Test MCP server manually
 cd .praxis-os
-./venv/bin/python -m mcp_server
+./venv/bin/python -m ouroboros
 ```
 
 **Solutions**:
@@ -224,7 +239,7 @@ cd .praxis-os
 - Check virtual environment exists: `ls .praxis-os/venv/`
 - Re-install dependencies:
   ```bash
-  .praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt
+  .praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt
   ```
 - Check MCP config path: `claude-code --show-config`
 
@@ -308,7 +323,7 @@ Claude Code has two primary modes:
 - ✅ Good for server/remote development
 - ❌ No GUI/editor integration
 
-### VS Code Mode (See claude-code-vscode.md)
+### VS Code Mode (See [vscode.md](./vscode.md))
 - ✅ Editor integration
 - ✅ Visual diff, inline suggestions
 - ✅ File tree, debugging
@@ -330,7 +345,7 @@ cat > .claude-code/mcp.json << 'EOF'
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -355,7 +370,7 @@ cat > ~/.config/claude-code/mcp.json << 'EOF'
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -379,7 +394,7 @@ If you work on multiple projects with prAxIs OS:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual"
       ],
@@ -403,5 +418,6 @@ Now:
 
 See also:
 - [Claude Code in VS Code](./vscode.md) - Editor integration
-- [Claude Code in Cursor](./cursor.md) - Cursor integration
+- [Creating Project Standards](../../creating-project-standards.md)
+- [Understanding Workflows](../../../tutorials/understanding-praxis-os-workflows.md)
 

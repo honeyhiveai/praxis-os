@@ -1,0 +1,490 @@
+DETAILED ANALYSIS BY FILE
+================================================================================
+
+
+NEEDS_WORK FILES
+--------------------------------------------------------------------------------
+
+File: standards/development/python-code-quality.md
+Score: 25/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Some broad headers (17/41), Few/no query hooks found
+Broad headers: 'Installation', 'Configuration (`pyproject.toml`)', 'Usage', 'Installation', 'Configuration (`pyproject.toml`)'
+
+File: standards/development/code-quality.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+
+File: standards/development/compact-diagram-checklist.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+Broad headers: 'Examples'
+
+File: standards/development/config-json-reference.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+
+File: standards/development/mcp-vs-cursor-rules.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+Broad headers: 'Analysis'
+
+File: standards/development/pre-commit-setup.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+Broad headers: 'Overview', 'Formatting', 'Testing', 'DO:', "DON'T:"
+
+File: standards/development/production-code-checklist.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+
+File: standards/development/python-documentation.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+Broad headers: 'Installation', 'Configuration (`docs/source/conf.py`)', 'Recommendations', 'Documentation Checklist', 'References'
+
+File: standards/development/python-testing.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+Broad headers: 'Installation', 'Testing Concurrency', 'Configuration (`pytest.ini`)', 'Configuration (`tox.ini`)', 'References'
+
+File: universal/documentation/change-impact-analysis.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+
+File: universal/documentation/pre-commit-checklist.md
+Score: 40/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section, Few/no query hooks found
+
+File: standards/development/documentation-project-naming.md
+Score: 45/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Some broad headers (7/23), Few/no query hooks found
+Broad headers: 'Purpose', 'Checklist', 'Examples', 'Documentation Headers', 'Acknowledgements'
+
+File: standards/development/agent-os-architecture.md
+Score: 50/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section
+
+File: standards/development/mcp-tool-design-best-practices.md
+Score: 50/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section
+
+File: standards/development/mcp-tool-scalability.md
+Score: 50/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section
+Broad headers: 'Architecture', 'Scalability', 'Performance', 'Maintainability', 'Flexibility'
+
+File: standards/development/python-concurrency.md
+Score: 50/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section
+Broad headers: 'References'
+
+File: standards/development/python-dependencies.md
+Score: 50/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section
+Broad headers: 'Explanation', 'Recommendations', 'Deactivation', 'Recommendations', 'Installation'
+
+File: standards/development/python-virtual-environments.md
+Score: 50/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Missing TL;DR/Quick Reference section
+Broad headers: 'Overview', 'Installation Process', 'Troubleshooting'
+
+File: standards/development/documentation-divio-framework.md
+Score: 55/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Some broad headers (19/52)
+Broad headers: 'Purpose', 'Installation (Tutorial)', 'Checklist', 'Examples', 'Prerequisites'
+
+
+MEDIUM FILES
+--------------------------------------------------------------------------------
+
+File: standards/development/documentation-theming.md
+Score: 60/100
+Issues: Missing 'Questions This Answers' section (CRITICAL), Few/no query hooks found
+Broad headers: 'Purpose', 'Background Colors', 'Checklist', 'Examples', 'Anti-Patterns'
+
+File: standards/development/diagramming-philosophy.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+Broad headers: 'Philosophy:', 'Installation Process', 'Benefits', 'Implementation Guide', 'Installation Process'
+
+File: standards/development/documentation-content-patterns.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+Broad headers: 'Purpose', 'Installation', 'Overview', 'Summary', 'Checklist'
+
+File: standards/development/documentation-diagrams.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+Broad headers: 'Purpose', 'Checklist', 'Examples', 'Anti-Patterns', 'Maintenance'
+
+File: standards/documentation/design-document-structure.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+Broad headers: 'Architecture', 'API/Interfaces', 'Testing Approach'
+
+File: universal/ai-assistant/knowledge-compounding-guide.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+Broad headers: 'Context', 'Context', 'Context'
+
+File: universal/ai-assistant/mcp-tool-discovery.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+Broad headers: 'pos_search', 'start_workflow'
+
+File: universal/ai-assistant/training-data-versus-project-knowledge.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+
+File: universal/installation/update-procedures.md
+Score: 70/100
+Issues: Missing 'Questions This Answers' section (CRITICAL)
+
+
+GOOD FILES
+--------------------------------------------------------------------------------
+
+File: universal/ai-assistant/pre-generation-validation.md
+Score: 85/100
+Issues: Keyword stuffing detected (1 instances)
+Broad headers: 'Purpose', 'Checklist', 'Purpose', 'Checklist', 'Purpose'
+
+File: universal/ai-assistant/rag-content-authoring.md
+Score: 85/100
+Issues: Keyword stuffing detected (2 instances)
+Broad headers: 'Usage', 'Options', 'Workflows', 'Testing', 'Operations'
+
+File: universal/concurrency/locking-strategies.md
+Score: 85/100
+Issues: Some broad headers (12/40)
+Broad headers: 'Characteristics', 'Example', 'Characteristics', 'Example', 'Characteristics'
+
+File: universal/documentation/readme-templates.md
+Score: 85/100
+Issues: Some broad headers (58/137)
+Broad headers: 'What is this?', 'Installation', 'Usage', 'Documentation', 'Contributing'
+
+File: universal/meta-framework/three-tier-architecture.md
+Score: 85/100
+Issues: Some broad headers (17/53)
+Broad headers: 'Purpose', 'Characteristics', 'Examples', 'Objective', 'Steps'
+
+File: standards/development/local-dev-scripts.md
+Score: 90/100
+Issues: Few/no query hooks found
+
+File: standards/development/adversarial-design-for-ai-systems.md
+Score: 100/100
+Issues: None
+
+File: standards/development/behavioral-engineering-patterns.md
+Score: 100/100
+Issues: None
+Broad headers: 'Examples'
+
+File: standards/development/config-driven-dynamic-logic.md
+Score: 100/100
+Issues: None
+
+File: standards/development/cursor-data-discovery.md
+Score: 100/100
+Issues: None
+
+File: standards/development/dev-vs-distribution-workflow.md
+Score: 100/100
+Issues: None
+
+File: standards/development/dogfooding-model.md
+Score: 100/100
+Issues: None
+Broad headers: 'Benefits'
+
+File: standards/development/error-messages-that-enable-action.md
+Score: 100/100
+Issues: None
+
+File: standards/development/meta-development-patterns.md
+Score: 100/100
+Issues: None
+
+File: standards/development/middleware-architecture-patterns.md
+Score: 100/100
+Issues: None
+
+File: standards/development/multi-agent-architecture.md
+Score: 100/100
+Issues: None
+
+File: standards/development/pydantic-configuration-patterns.md
+Score: 100/100
+Issues: None
+
+File: standards/development/pylint-disable-policy.md
+Score: 100/100
+Issues: None
+
+File: standards/development/rag-scaling-patterns.md
+Score: 100/100
+Issues: None
+
+File: standards/development/session-history-analysis.md
+Score: 100/100
+Issues: None
+Broad headers: 'Metrics', 'Insights'
+
+File: standards/development/structured-logging-observability.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/AGENT-OS-ORIENTATION.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/MCP-TOOLS-GUIDE.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/agent-decision-protocol.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/agent-os-development-process.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/ai-agent-quickstart.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/ai-capabilities-trust.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/analysis-methodology.md
+Score: 100/100
+Issues: None
+Broad headers: 'Completeness', 'Thoroughness', 'Actionability', 'Presentation', 'Methodology'
+
+File: universal/ai-assistant/commit-protocol.md
+Score: 100/100
+Issues: None
+Broad headers: '[Added/Changed/Fixed/Removed/Security/Deprecated]', 'Recommendation', '[Category]', 'Changed', 'Added'
+
+File: universal/ai-assistant/compliance-protocol.md
+Score: 100/100
+Issues: None
+Broad headers: 'Interpretation', 'Patterns Found'
+
+File: universal/ai-assistant/mcp-usage-guide.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/operating-model.md
+Score: 100/100
+Issues: None
+Broad headers: 'Implementation Phase'
+
+File: universal/ai-assistant/query-construction-patterns.md
+Score: 100/100
+Issues: None
+Broad headers: 'Context'
+
+File: universal/ai-assistant/spec-lifecycle-organization.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-assistant/standards-creation-process.md
+Score: 100/100
+Issues: None
+Broad headers: 'Introduction', 'Background', 'What Is [Topic]?'
+
+File: universal/ai-assistant/workflow-discovery-patterns.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-safety/credential-file-protection.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-safety/date-usage-policy.md
+Score: 100/100
+Issues: None
+Broad headers: 'Overview'
+
+File: universal/ai-safety/git-safety-rules.md
+Score: 100/100
+Issues: None
+
+File: universal/ai-safety/import-verification-rules.md
+Score: 100/100
+Issues: None
+Broad headers: 'Python', 'JavaScript/TypeScript', 'Go', 'Rust'
+
+File: universal/ai-safety/production-code-checklist.md
+Score: 100/100
+Issues: None
+
+File: universal/architecture/api-design-principles.md
+Score: 100/100
+Issues: None
+
+File: universal/architecture/dependency-injection.md
+Score: 100/100
+Issues: None
+Broad headers: 'Python', 'Java', 'C#', 'JavaScript/TypeScript', 'Go'
+
+File: universal/architecture/separation-of-concerns.md
+Score: 100/100
+Issues: None
+Broad headers: 'Rules:'
+
+File: universal/architecture/solid-principles.md
+Score: 100/100
+Issues: None
+Broad headers: 'Cross-References'
+
+File: universal/concurrency/deadlocks.md
+Score: 100/100
+Issues: None
+Broad headers: 'Testing Techniques'
+
+File: universal/concurrency/race-conditions.md
+Score: 100/100
+Issues: None
+Broad headers: 'Testing Techniques'
+
+File: universal/concurrency/shared-state-analysis.md
+Score: 100/100
+Issues: None
+
+File: universal/database/database-patterns.md
+Score: 100/100
+Issues: None
+
+File: universal/documentation/api-documentation.md
+Score: 100/100
+Issues: None
+Broad headers: 'Prerequisites', 'Added', 'Changed', 'Deprecated', 'Fixed'
+
+File: universal/documentation/code-comments.md
+Score: 100/100
+Issues: None
+Broad headers: 'Python', 'Java', 'JavaScript', 'Go'
+
+File: universal/failure-modes/circuit-breakers.md
+Score: 100/100
+Issues: None
+Broad headers: 'Logging', 'Alerts'
+
+File: universal/failure-modes/graceful-degradation.md
+Score: 100/100
+Issues: None
+
+File: universal/failure-modes/retry-strategies.md
+Score: 100/100
+Issues: None
+Broad headers: 'What is Idempotency?', 'Alerts'
+
+File: universal/failure-modes/timeout-patterns.md
+Score: 100/100
+Issues: None
+Broad headers: 'What are Timeouts?', 'Alerts'
+
+File: universal/installation/gitignore-requirements.md
+Score: 100/100
+Issues: None
+Broad headers: 'Installation Workflows'
+
+File: universal/installation/workspace-organization.md
+Score: 100/100
+Issues: None
+Broad headers: 'Recommendation'
+
+File: universal/meta-framework/command-language.md
+Score: 100/100
+Issues: None
+Broad headers: 'Completion', 'Validation', 'Implementation Guide', 'Usage'
+
+File: universal/meta-framework/framework-creation-principles.md
+Score: 100/100
+Issues: None
+
+File: universal/meta-framework/horizontal-decomposition.md
+Score: 100/100
+Issues: None
+Broad headers: 'Maintenance'
+
+File: universal/meta-framework/validation-gates.md
+Score: 100/100
+Issues: None
+Broad headers: 'Implementation Pattern', 'Completion'
+
+File: universal/operations/agent-os-update-guide.md
+Score: 100/100
+Issues: None
+Broad headers: 'Rollback', 'Requirements'
+
+File: universal/operations/mcp-server-update-guide.md
+Score: 100/100
+Issues: None
+
+File: universal/performance/optimization-patterns.md
+Score: 100/100
+Issues: None
+
+File: universal/security/security-patterns.md
+Score: 100/100
+Issues: None
+
+File: universal/testing/integration-testing.md
+Score: 100/100
+Issues: None
+
+File: universal/testing/property-based-testing.md
+Score: 100/100
+Issues: None
+Broad headers: 'Example', 'Python', 'JavaScript/TypeScript', 'Java', 'Scala'
+
+File: universal/testing/test-doubles.md
+Score: 100/100
+Issues: None
+Broad headers: 'Example', 'Example', 'Example', 'Example', 'Example'
+
+File: universal/testing/test-pyramid.md
+Score: 100/100
+Issues: None
+Broad headers: 'Cross-References'
+
+File: universal/workflows/creating-specs.md
+Score: 100/100
+Issues: None
+Broad headers: 'Components', 'Authentication', 'Authorization', 'Dependencies', 'Configuration'
+
+File: universal/workflows/mcp-rag-configuration.md
+Score: 100/100
+Issues: None
+
+File: universal/workflows/time-estimation-standards.md
+Score: 100/100
+Issues: None
+Broad headers: 'Notes'
+
+File: universal/workflows/workflow-construction-standards.md
+Score: 100/100
+Issues: None
+Broad headers: 'Prerequisites', 'Steps', 'Prerequisites', 'Steps'
+
+File: universal/workflows/workflow-metadata-standards.md
+Score: 100/100
+Issues: None
+Broad headers: 'Examples'
+
+File: universal/workflows/workflow-system-overview.md
+Score: 100/100
+Issues: None
+Broad headers: 'Structure', 'Location', 'Benefits', 'test_generation_v3', 'production_code_v2'
+
+File: standards/validation/gate-definition-yaml.md
+Score: 100/100
+Issues: None
+

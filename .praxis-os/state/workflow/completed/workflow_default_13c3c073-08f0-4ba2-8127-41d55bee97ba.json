@@ -1,0 +1,42 @@
+{
+  "session_id": "workflow_default_13c3c073-08f0-4ba2-8127-41d55bee97ba",
+  "workflow_type": "spec_execution_v1",
+  "target_file": ".praxis-os/specs/review/2025-11-05-parser-submodule-refactor/tasks.md",
+  "current_phase": 1,
+  "completed_phases": [
+    0
+  ],
+  "phase_artifacts": {},
+  "checkpoints": {
+    "0": "passed"
+  },
+  "evidence_submitted": {
+    "0": {
+      "spec_structure_validated": true,
+      "tasks_parsed": true,
+      "standards_queried": true,
+      "execution_plan_complete": true,
+      "phases_extracted": true,
+      "dependencies_mapped": true
+    }
+  },
+  "phase_timings": {
+    "0": {
+      "phase": 0,
+      "started_at": "2025-11-05T13:50:00.025598",
+      "completed_at": "2025-11-05T13:53:26.528220",
+      "duration_seconds": 206.502622
+    },
+    "1": {
+      "phase": 1,
+      "started_at": "2025-11-05T13:53:26.528220",
+      "completed_at": null,
+      "duration_seconds": null
+    }
+  },
+  "created_at": "2025-11-05T13:50:00.025612",
+  "updated_at": "2025-11-05T13:53:26.528220",
+  "completed_at": "2025-11-05T13:53:26.528316",
+  "metadata": {},
+  "status": "completed"
+}

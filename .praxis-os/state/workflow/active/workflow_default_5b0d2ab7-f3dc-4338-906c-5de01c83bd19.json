@@ -1,0 +1,18 @@
+{
+  "session_id": "workflow_default_5b0d2ab7-f3dc-4338-906c-5de01c83bd19",
+  "workflow_type": "spec_creation_v1",
+  "target_file": ".praxis-os/specs/test-spec",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "evidence_submitted": {},
+  "created_at": "2025-11-04T22:23:34.855612",
+  "updated_at": "2025-11-04T22:23:34.855614",
+  "metadata": {
+    "supporting_docs": [
+      ".praxis-os/standards/development/rag-index-submodule-pattern.md"
+    ]
+  },
+  "status": "active"
+}

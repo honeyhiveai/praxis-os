@@ -153,7 +153,7 @@ phase: ["development"]
 **RAG Enhancement:**
 ```python
 # Query with filters
-pos_search(
+pos_search_project(
     query="where to edit",
     filter_domain="iteration",
     filter_role="framework-author"

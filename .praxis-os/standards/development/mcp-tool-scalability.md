@@ -5,6 +5,57 @@
 
 ---
 
+## Questions This Answers
+
+- **What's the recommended tool count limit for MCP servers?**
+- **Why does performance degrade with more than 20 tools?**
+- **How do I scale MCP tools without hitting performance limits?**
+- **What is the "Lost in the Middle" effect for LLM tool selection?**
+- **How do I implement selective tool loading by category?**
+- **What's the architecture for modular MCP tools?**
+- **How many tools will prAxIs OS have with sub-agents?**
+- **How do I configure which tool groups to load?**
+- **What performance monitoring should I add for tool count?**
+- **What are best practices for organizing large tool sets?**
+
+## Quick Reference: MCP Tool Scalability
+
+**Critical Limits:**
+- <10 tools: Optimal performance
+- 10-20 tools: Good performance ✅
+- 20-30 tools: Performance degrades ⚠️
+- 30+ tools: Significant accuracy loss (up to 85%)
+
+**Solution: Selective Loading by Category**
+
+**Architecture:**
+```
+server/tools/
+├── rag_tools.py              # 1-2 tools
+├── workflow_tools.py         # 6-7 tools
+└── sub_agent_tools/          # 10-15 tools (opt-in)
+    ├── design_validator.py
+    ├── concurrency_analyzer.py
+    └── test_generator.py
+```
+
+**Configuration:**
+```json
+{
+  "mcp": {
+    "enabled_tool_groups": ["rag", "workflow"]
+  }
+}
+```
+
+**Current State:** 7 tools (safe zone)  
+**Future Projection:** 20-30 tools with sub-agents  
+**Strategy:** Load core tools (7) by default, enable sub-agents on demand
+
+**Performance Monitoring:** Log warning when >20 tools loaded
+
+---
+
 ## 🔍 Research Findings
 
 ### Hard Limits
@@ -49,7 +100,7 @@ With sub-agents, we could have:
 
 ## ✅ Solution: Modular Tools with Selective Loading
 
-### Architecture
+### Modular Tools Directory Structure
 
 ```
 mcp_server/
@@ -122,17 +173,17 @@ if tool_count > 20:
 
 ## 🎯 Benefits
 
-### Scalability
+### Scalability Benefits of Selective Loading
 - Add new tools without touching existing code
 - Each category is independent
 - Can grow to 50+ tools without merge conflicts
 
-### Performance
+### Performance Benefits of Tool Grouping
 - Load only needed tools
 - Stay under 20-tool limit
 - Monitor tool count automatically
 
-### Maintainability
+### Maintainability Advantages
 - Each file < 200 lines
 - Clear organization
 - Easy to find specific tools

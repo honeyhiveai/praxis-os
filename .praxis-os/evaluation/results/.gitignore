@@ -1,0 +1,7 @@
+# Ignore all evaluation results
+*.json
+*.md
+
+# Except this gitignore
+!.gitignore
+

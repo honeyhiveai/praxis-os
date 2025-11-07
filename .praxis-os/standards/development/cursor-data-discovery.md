@@ -473,10 +473,10 @@ python .praxis-os/scripts/build_rag_index.py --force
 
 **Query for related patterns:**
 ```python
-pos_search(content_type="standards", query="file watcher automatic rebuild RAG index")
-pos_search(content_type="standards", query="MCP server debugging troubleshooting logs")
-pos_search(content_type="standards", query="LanceDB index corruption graceful degradation")
-pos_search(content_type="standards", query="grep fallback timeout RAG search")
+pos_search_project(content_type="standards", query="file watcher automatic rebuild RAG index")
+pos_search_project(content_type="standards", query="MCP server debugging troubleshooting logs")
+pos_search_project(content_type="standards", query="LanceDB index corruption graceful degradation")
+pos_search_project(content_type="standards", query="grep fallback timeout RAG search")
 ```
 
 **Key related documents:**

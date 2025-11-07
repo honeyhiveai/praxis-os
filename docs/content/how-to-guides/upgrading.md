@@ -30,9 +30,10 @@ The `praxis_os_upgrade_v1` workflow provides a safe, automated upgrade process:
 
 ```python
 # Via MCP tools
-start_workflow(
+pos_workflow(
+    action="start",
     workflow_type="praxis_os_upgrade_v1",
-    target_file="mcp_server",
+    target_file="ouroboros",
     options={
         "source_path": "/path/to/praxis-os",  # Or GitHub URL
         "dry_run": false,
@@ -63,7 +64,7 @@ The workflow updates:
    - `praxis_os_upgrade_v1`
    - Any new workflows
 
-4. **MCP Server** (`.praxis-os/mcp_server/`)
+4. **MCP Server** (`.praxis-os/ouroboros/`)
    - Server code
    - Dependencies
    - Bug fixes
@@ -255,11 +256,11 @@ rsync -av --delete praxis-os/universal/workflows/ .praxis-os/workflows/
 
 ```bash
 # Copy server code
-rsync -av --delete praxis-os/mcp_server/ .praxis-os/mcp_server/
+rsync -av --delete praxis-os/dist/ouroboros/ .praxis-os/ouroboros/
 
 # Update dependencies
 cd .praxis-os
-./venv/bin/pip install -r mcp_server/requirements.txt
+./venv/bin/pip install -r ouroboros/requirements.txt
 
 # Restart Cursor
 ```
@@ -294,7 +295,7 @@ cd .praxis-os
 rm -rf .praxis-os/venv
 cd .praxis-os
 python -m venv venv
-./venv/bin/pip install -r mcp_server/requirements.txt
+./venv/bin/pip install -r ouroboros/requirements.txt
 
 # Restart Cursor
 ```
@@ -334,7 +335,7 @@ rm -rf .praxis-os.backup.20251001_*
 
 **Added:**
 - `.gitignore` management (prevents 2.7GB of ephemeral files)
-- `validate_workflow` MCP tool
+- Workflow execution via `pos_workflow` MCP tool
 - `current_date` MCP tool for preventing date errors
 - Installation step 04: gitignore configuration
 - Single source of truth for gitignore requirements
@@ -362,7 +363,7 @@ rm -rf .praxis-os.backup.20251001_*
 
 ### Earlier Versions
 
-See [CHANGELOG.md](https://github.com/honeyhiveai/praxis-os/blob/main/mcp_server/CHANGELOG.md) for complete history.
+See [CHANGELOG.md](https://github.com/honeyhiveai/praxis-os/blob/main/dist/ouroboros/CHANGELOG.md) for complete history.
 
 ---
 

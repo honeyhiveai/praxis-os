@@ -1,6 +1,53 @@
 # Python Virtual Environment Configuration
 
-## Overview
+## Questions This Answers
+
+- **Why does prAxIs OS require two separate virtual environments?**
+- **Where should the prAxIs OS MCP server venv be located?**
+- **How do I configure .cursor/mcp.json to use the correct venv?**
+- **What's the difference between the prAxIs OS venv and project venv?**
+- **How does the installation script detect my project's venv?**
+- **What happens if I don't have a project venv when installing prAxIs OS?**
+- **How do I activate the correct venv for development vs MCP server?**
+- **What dependencies go in each venv?**
+- **How do I troubleshoot venv-related issues?**
+- **Why can't the MCP server and project share a single venv?**
+
+## Quick Reference: Dual-Venv Architecture
+
+**Why Two Venvs?** Isolation between prAxIs OS infrastructure and project dependencies
+
+**prAxIs OS MCP Server Venv:**
+- Location: `.praxis-os/venv/`
+- Purpose: Run MCP server (RAG, workflow engine)
+- Dependencies: lancedb, mcp, sentence-transformers, watchdog
+- Usage: Configured in `.cursor/mcp.json`
+- **DO NOT use for project code**
+
+**Project Venv:**
+- Location: User-specified (`.venv/`, `venv/`, `env/`)
+- Purpose: Run project code, tests, linting
+- Dependencies: Project-specific (from requirements.txt)
+- Usage: Development, testing, deployment
+- **DO NOT use for MCP server**
+
+**Configuration:**
+```json
+{
+  "mcpServers": {
+    "agent-os-rag": {
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
+      "args": ["-m", "mcp_server"]
+    }
+  }
+}
+```
+
+**Key Rule:** Never mix the two venvs - they serve different purposes!
+
+---
+
+## Two-Venv Architecture Overview
 
 Python projects using prAxIs OS require **two separate virtual environments** to maintain isolation between prAxIs OS infrastructure and project dependencies.
 
@@ -68,7 +115,7 @@ python -m venv .praxis-os/venv
 
 ---
 
-## Installation Process
+## prAxIs OS Installation Process
 
 ### Step 1: Identify or Create Project venv
 
@@ -211,7 +258,7 @@ os.system(f"{project_python} -m pylint mcp_server/")
 
 ---
 
-## Troubleshooting
+## Virtual Environment Troubleshooting
 
 ### Issue: Tests fail with import errors
 

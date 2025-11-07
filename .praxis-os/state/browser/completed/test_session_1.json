@@ -1,0 +1,9 @@
+{
+  "session_id": "test_session_1",
+  "browser_type": "chromium",
+  "headless": true,
+  "created_at": "2025-11-06T23:10:23.707705",
+  "last_access": "2025-11-06T23:10:24.018400",
+  "tab_ids": {},
+  "status": "completed"
+}

@@ -140,7 +140,7 @@ else:
     for check, passed in rag_checks.items():
         if not passed:
             print(f"     Missing: {check}")
-    errors.append("RAG index not built - run: .praxis-os/venv/bin/python .praxis-os/scripts/build_rag_index.py")
+    errors.append("RAG index not built - start the MCP server and it will auto-build indexes")
 
 # Summary
 print("\n" + "="*60)

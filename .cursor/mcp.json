@@ -4,7 +4,7 @@
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual",
         "--log-level",
@@ -16,9 +16,11 @@
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [
-        "pos_search",
+        "pos_search_project",
         "pos_workflow",
         "pos_browser",
+        "pos_filesystem",
+        "current_date",
         "get_server_info"
       ]
     }

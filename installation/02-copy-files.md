@@ -2,7 +2,7 @@
 
 **Previous**: `01-directories.md` (created directories)  
 **Current**: Copying all required files  
-**Next**: `03-cursorrules.md`
+**Next**: `03-agent-configuration.md`
 
 ---
 
@@ -14,7 +14,7 @@ Copy all required content from the source repository (`praxis-os/`) to your proj
 1. Universal standards (CS fundamentals)
 2. Usage documentation (how to use prAxIs OS)
 3. Workflows (spec_creation_v1, spec_execution_v1)
-4. MCP server code (Python code that runs the server)
+4. Ouroboros server code (MCP server - Python code that runs the server)
 
 **Time**: ~1-2 minutes (depends on file system speed)
 
@@ -24,23 +24,23 @@ Copy all required content from the source repository (`praxis-os/`) to your proj
 
 ### Copy #1: Universal Standards
 
-**Source**: `{AGENT_OS_SOURCE}/universal/standards/`  
+**Source**: `{PRAXIS_OS_SOURCE}/dist/universal/standards/`  
 **Destination**: `.praxis-os/standards/universal/`  
 **Contents**: ~30 markdown files with CS fundamentals
 
 ```python
 import shutil
 
-# Use AGENT_OS_SOURCE from step 00
+# Use PRAXIS_OS_SOURCE from step 00
 shutil.copytree(
-    f"{AGENT_OS_SOURCE}/universal/standards",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/standards",
     ".praxis-os/standards/universal",
     dirs_exist_ok=True
 )
 print("✅ Copied universal standards")
 ```
 
-**Note**: `AGENT_OS_SOURCE` is the temp directory you created in step 00.
+**Note**: `PRAXIS_OS_SOURCE` is the temp directory you created in step 00.
 
 **What's in there**: Architecture patterns, concurrency, testing, security, etc.
 
@@ -48,13 +48,13 @@ print("✅ Copied universal standards")
 
 ### Copy #2: Usage Documentation
 
-**Source**: `praxis-os/universal/usage/`  
+**Source**: `{PRAXIS_OS_SOURCE}/dist/universal/usage/`  
 **Destination**: `.praxis-os/usage/`  
 **Contents**: ~5 markdown files explaining how to use prAxIs OS
 
 ```python
 shutil.copytree(
-    "praxis-os/universal/usage",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/usage",
     ".praxis-os/usage",
     dirs_exist_ok=True
 )
@@ -67,7 +67,7 @@ print("✅ Copied usage documentation")
 
 ### Copy #3: Workflows (CRITICAL!)
 
-**Source**: `praxis-os/universal/workflows/`  
+**Source**: `{PRAXIS_OS_SOURCE}/dist/universal/workflows/`  
 **Destination**: `.praxis-os/workflows/`  
 **Contents**: ~50 files (spec_creation_v1 + spec_execution_v1)
 
@@ -75,7 +75,7 @@ print("✅ Copied usage documentation")
 
 ```python
 shutil.copytree(
-    "praxis-os/universal/workflows",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/workflows",
     ".praxis-os/workflows",
     dirs_exist_ok=True
 )
@@ -90,22 +90,22 @@ print("✅ Copied workflows")
 
 ---
 
-### Copy #4: MCP Server Code
+### Copy #4: Ouroboros Server Code
 
-**Source**: `praxis-os/mcp_server/`  
-**Destination**: `.praxis-os/mcp_server/`  
+**Source**: `{PRAXIS_OS_SOURCE}/dist/ouroboros/`  
+**Destination**: `.praxis-os/ouroboros/`  
 **Contents**: ~20 Python files + requirements.txt
 
 ```python
 shutil.copytree(
-    "praxis-os/mcp_server",
-    ".praxis-os/mcp_server",
+    f"{PRAXIS_OS_SOURCE}/dist/ouroboros",
+    ".praxis-os/ouroboros",
     dirs_exist_ok=True
 )
-print("✅ Copied MCP server")
+print("✅ Copied Ouroboros server")
 ```
 
-**What's in there**: RAG engine, workflow engine, server factory, etc.
+**What's in there**: RAG engine, workflow engine, server factory, MCP tools, etc.
 
 ---
 
@@ -143,7 +143,7 @@ print("✅ Copied scripts")
 import shutil
 import os
 
-# AGENT_OS_SOURCE from step 00 (temp directory)
+# PRAXIS_OS_SOURCE from step 00 (temp directory)
 # Make sure this variable is still available!
 
 def copy_with_status(src, dest, name):
@@ -159,39 +159,39 @@ def copy_with_status(src, dest, name):
         return False
 
 print("Starting file copy operations...\n")
-print(f"Source: {AGENT_OS_SOURCE}\n")
+print(f"Source: {PRAXIS_OS_SOURCE}\n")
 
 # Copy #1: Universal standards
 success1 = copy_with_status(
-    f"{AGENT_OS_SOURCE}/universal/standards",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/standards",
     ".praxis-os/standards/universal",
     "Universal standards"
 )
 
 # Copy #2: Usage docs
 success2 = copy_with_status(
-    f"{AGENT_OS_SOURCE}/universal/usage",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/usage",
     ".praxis-os/usage",
     "Usage documentation"
 )
 
 # Copy #3: Workflows (CRITICAL!)
 success3 = copy_with_status(
-    f"{AGENT_OS_SOURCE}/universal/workflows",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/workflows",
     ".praxis-os/workflows",
     "Workflows"
 )
 
-# Copy #4: MCP server
+# Copy #4: Ouroboros server
 success4 = copy_with_status(
-    f"{AGENT_OS_SOURCE}/mcp_server",
-    ".praxis-os/mcp_server",
-    "MCP server"
+    f"{PRAXIS_OS_SOURCE}/dist/ouroboros",
+    ".praxis-os/ouroboros",
+    "Ouroboros server"
 )
 
 # Copy #5: Scripts (CRITICAL!)
 success5 = copy_with_status(
-    f"{AGENT_OS_SOURCE}/scripts",
+    f"{PRAXIS_OS_SOURCE}/scripts",
     ".praxis-os/scripts",
     "Scripts"
 )
@@ -203,8 +203,8 @@ success5 = copy_with_status(
 print("\n" + "="*50)
 if all([success1, success2, success3, success4, success5]):
     print("✅ ALL FILES COPIED SUCCESSFULLY")
-    print(f"\n📝 Temp source still at: {AGENT_OS_SOURCE}")
-    print("   (Will be deleted in step 05)")
+    print(f"\n📝 Temp source still at: {PRAXIS_OS_SOURCE}")
+    print("   (Will be deleted in step 06)")
 else:
     print("❌ SOME COPIES FAILED - Review errors above")
     exit(1)
@@ -217,7 +217,7 @@ Starting file copy operations...
 ✅ Universal standards: 31 files copied
 ✅ Usage documentation: 5 files copied
 ✅ Workflows: 47 files copied
-✅ MCP server: 23 files copied
+✅ Ouroboros server: 23 files copied
 ✅ Scripts: 3 files copied
 
 ==================================================
@@ -246,9 +246,9 @@ critical_files = [
     ".praxis-os/workflows/spec_creation_v1/metadata.json",
     ".praxis-os/workflows/spec_execution_v1/metadata.json",
     
-    # MCP Server
-    ".praxis-os/mcp_server/__main__.py",
-    ".praxis-os/mcp_server/requirements.txt",
+    # Ouroboros Server
+    ".praxis-os/ouroboros/__main__.py",
+    ".praxis-os/ouroboros/requirements.txt",
     
     # Scripts (CRITICAL!)
     ".praxis-os/scripts/build_rag_index.py",  # Required for RAG index building!
@@ -320,9 +320,10 @@ for workflow_dir in workflow_dirs:
 import os
 
 # Check if source repo is accessible
-if not os.path.exists("praxis-os/universal"):
+if not os.path.exists(f"{PRAXIS_OS_SOURCE}/dist/universal"):
     print("❌ Source repository not found")
     print("Current directory:", os.getcwd())
+    print(f"Source path: {PRAXIS_OS_SOURCE}")
     print("\nFix: Ensure praxis-os is cloned/available")
     exit(1)
 ```
@@ -348,7 +349,7 @@ ls -ld .praxis-os
 import shutil
 
 shutil.copytree(
-    "praxis-os/universal/workflows",
+    f"{PRAXIS_OS_SOURCE}/dist/universal/workflows",
     ".praxis-os/workflows",
     dirs_exist_ok=True
 )
@@ -367,7 +368,7 @@ print(f"Workflow files: {count}")  # Should be ~47
 # Identify what's missing, then copy just that
 if not os.path.exists(".praxis-os/workflows/spec_creation_v1"):
     shutil.copytree(
-        "praxis-os/universal/workflows/spec_creation_v1",
+        f"{PRAXIS_OS_SOURCE}/dist/universal/workflows/spec_creation_v1",
         ".praxis-os/workflows/spec_creation_v1"
     )
 ```
@@ -380,7 +381,7 @@ At this point you should have:
 - ✅ ~31 files in `.praxis-os/standards/universal/`
 - ✅ ~5 files in `.praxis-os/usage/`
 - ✅ ~47 files in `.praxis-os/workflows/` (across 2 workflows)
-- ✅ ~23 files in `.praxis-os/mcp_server/`
+- ✅ ~23 files in `.praxis-os/ouroboros/`
 - ✅ ~3 files in `.praxis-os/scripts/` (including `build_rag_index.py`!)
 - ✅ All validation checkpoints passed
 
@@ -396,25 +397,24 @@ You've copied all the content files. Now you need to handle `.cursorrules`.
 
 **Why `.cursorrules` is special**: It might already exist in the target project. If it does, you CANNOT blindly overwrite it (that would destroy the user's existing Cursor configuration).
 
-**Next step**: Safely handle `.cursorrules` file.
+**Next step**: Route to agent-specific configuration guide.
 
 ---
 
 ## ➡️ NEXT STEP
 
-**Read file**: `installation/03-cursorrules.md`
+**Read file**: `installation/03-agent-configuration.md`
 
 That file will:
-1. Check if `.cursorrules` already exists
-2. If no: Copy directly (safe)
-3. If yes: Ask user how to merge (preserve their rules!)
-4. Validate merge was successful
-5. Direct you to step 04
+1. Parse user's command to identify the agent (Cursor, Cline, Claude Code, etc.)
+2. Route to the correct agent-specific configuration guide
+3. Guide you through agent-specific file handling (.cursorrules, mcp.json, etc.)
+4. Direct you to step 04 (gitignore)
 
 ---
 
 **Status**: Step 2 Complete ✅  
 **Copied**: ~106 files  
-**Next File**: `03-cursorrules.md`  
-**Step**: 3 of 5
+**Next File**: `03-agent-configuration.md`  
+**Step**: 2 of 7
 

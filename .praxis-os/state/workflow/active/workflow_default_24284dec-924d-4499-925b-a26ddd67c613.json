@@ -1,0 +1,23 @@
+{
+  "session_id": "workflow_default_24284dec-924d-4499-925b-a26ddd67c613",
+  "workflow_type": "spec_execution_v1",
+  "target_file": "rag-index-submodule-refactor",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "evidence_submitted": {},
+  "phase_timings": {
+    "0": {
+      "phase": 0,
+      "started_at": "2025-11-05T17:52:21.206987",
+      "completed_at": null,
+      "duration_seconds": null
+    }
+  },
+  "created_at": "2025-11-05T17:52:21.207025",
+  "updated_at": "2025-11-05T17:52:21.207026",
+  "completed_at": null,
+  "metadata": {},
+  "status": "active"
+}

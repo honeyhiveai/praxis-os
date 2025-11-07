@@ -45,7 +45,7 @@ Edit `.cursor/mcp.json`:
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
-        "mcp_server",
+        "ouroboros",
         "--transport",
         "dual",
         "--log-level",
@@ -256,7 +256,7 @@ netstat -ano | findstr :${PORT}  # Windows
 **Solutions**:
 - Server automatically finds next available port (no manual config needed)
 - If all ports 4242-5242 are in use, close other MCP server instances
-- Check for stale processes: `ps aux | grep mcp_server`
+- Check for stale processes: `ps aux | grep ouroboros`
 - Restart Cursor to retry port allocation
 
 ### Both Agents Show Different State
@@ -267,8 +267,8 @@ netstat -ano | findstr :${PORT}  # Windows
 
 **Check**:
 ```bash
-# Should see only ONE mcp_server process
-ps aux | grep mcp_server
+# Should see only ONE ouroboros process
+ps aux | grep ouroboros
 ```
 
 **Solutions**:

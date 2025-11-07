@@ -5,6 +5,42 @@
 
 ---
 
+## Questions This Answers
+
+- **Why does prAxis OS use real copied files instead of symlinks for dogfooding?**
+- **What is the two-venv architecture and why is it important?**
+- **How do I edit universal framework standards and propagate changes?**
+- **What's the workflow for editing project-specific standards?**
+- **What MCP tools are available in the prAxIs OS server?**
+- **How does the file watcher detect changes and rebuild the RAG index?**
+- **Where should I edit framework source vs installed files?**
+- **What is the correct development workflow for MCP server code changes?**
+- **How is prAxIs OS configured via config.json?**
+- **Why can't I edit .praxis-os/standards/universal/ directly?**
+
+## Quick Reference: prAxIs OS Architecture
+
+**Core Principles:** Dogfooding (real copies), Two-Venv Architecture, MCP-First, No Symlinks
+
+**Key Directories:**
+- `universal/` - Framework source (edit here)
+- `.praxis-os/standards/universal/` - Installed framework (copied, do not edit)
+- `.praxis-os/standards/development/` - Project-specific standards (edit directly)
+- `mcp_server/` - MCP server source code
+
+**Development Workflow:**
+1. Edit framework source in `universal/`
+2. Copy to `.praxis-os/` (like consumers do)
+3. File watcher auto-rebuilds RAG index
+4. Restart MCP server if needed
+5. Test in Cursor
+
+**MCP Tools:** `pos_search`, `start_workflow`, `get_current_phase`, `get_task`, `complete_phase`, `get_workflow_state`, `create_workflow`, `current_date`
+
+**File Watcher:** Watches `.praxis-os/` (installed files), NOT `universal/` (source)
+
+---
+
 ## 🎯 Core Principles
 
 1. **Dogfooding** - We use prAxIs OS exactly like consumers do

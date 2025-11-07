@@ -45,7 +45,7 @@ QueryAngle = Literal[
 
 # Keyword patterns for each angle (case-insensitive matching)
 # Ordered by specificity - more specific patterns checked first
-_ANGLE_KEYWORDS: dict[str, list[str]] = {
+_ANGLE_KEYWORDS: dict[QueryAngle, list[str]] = {
     "critical": [
         "best practice",
         "recommended",
@@ -264,7 +264,7 @@ class QueryClassifier:
             for keyword in keywords:
                 if keyword in query_lower:
                     # Track longest keyword match for this angle (more specific)
-                    current_max = angle_matches.get(angle, 0)
+                    current_max = angle_matches.get(angle, 0) if angle in angle_matches else 0
                     angle_matches[angle] = max(current_max, len(keyword))
                     break  # Move to next angle once matched
 
@@ -365,7 +365,7 @@ class QueryClassifier:
             >>> assert "conceptual" in angles
             >>> assert len(angles) == 5
         """
-        return list(_ANGLE_KEYWORDS.keys())  # type: ignore
+        return list(_ANGLE_KEYWORDS.keys())
 
 
 __all__ = ["QueryAngle", "QueryAngleResult", "QueryClassifier"]

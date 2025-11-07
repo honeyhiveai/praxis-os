@@ -1,0 +1,44 @@
+{
+  "session_id": "workflow_default_32eb9cd0-448d-4785-a9c4-9908b518e6ee",
+  "workflow_type": "spec_execution_v1",
+  "target_file": "2025-11-04-rag-index-submodule-refactor",
+  "current_phase": 1,
+  "completed_phases": [
+    0
+  ],
+  "phase_artifacts": {},
+  "checkpoints": {
+    "0": "passed"
+  },
+  "evidence_submitted": {
+    "0": {
+      "spec_structure_validated": true,
+      "tasks_parsed": true,
+      "dependencies_mapped": true,
+      "phases_extracted": true,
+      "standards_queried": true,
+      "execution_plan_complete": true
+    }
+  },
+  "phase_timings": {
+    "0": {
+      "phase": 0,
+      "started_at": "2025-11-05T12:06:09.089299",
+      "completed_at": "2025-11-05T12:07:44.658586",
+      "duration_seconds": 95.569287
+    },
+    "1": {
+      "phase": 1,
+      "started_at": "2025-11-05T12:07:44.658586",
+      "completed_at": null,
+      "duration_seconds": null
+    }
+  },
+  "created_at": "2025-11-05T12:06:09.089335",
+  "updated_at": "2025-11-05T12:07:44.658586",
+  "completed_at": "2025-11-05T12:07:44.658647",
+  "metadata": {
+    "spec_path": ".praxis-os/specs/review/2025-11-04-rag-index-submodule-refactor"
+  },
+  "status": "completed"
+}

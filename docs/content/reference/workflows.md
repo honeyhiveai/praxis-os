@@ -409,11 +409,11 @@ get_workflow_state(
 Use the meta-workflow to create your own workflows:
 
 ```python
-create_workflow(
-    name="api_documentation_v1",
-    workflow_type="documentation",
-    phases=["Analysis", "Generation", "Review"],
-    target_language="python"
+# Use pos_workflow to start and manage workflows
+pos_workflow(
+    action="start",
+    workflow_type="spec_creation_v1",
+    target_file="my-feature"
 )
 ```
 
@@ -436,8 +436,11 @@ create_workflow(
 
 **Validation:**
 ```python
-validate_workflow(
-    workflow_path=".praxis-os/workflows/api_documentation_v1"
+# Workflows are validated automatically during execution
+# Use pos_workflow(action="get_state") to check workflow status
+pos_workflow(
+    action="get_state",
+    session_id="your-session-id"
 )
 ```
 

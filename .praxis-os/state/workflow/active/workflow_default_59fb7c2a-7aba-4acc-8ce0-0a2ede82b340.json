@@ -1,0 +1,14 @@
+{
+  "session_id": "workflow_default_59fb7c2a-7aba-4acc-8ce0-0a2ede82b340",
+  "workflow_type": "spec_creation_v1",
+  "target_file": "test.md",
+  "current_phase": 0,
+  "completed_phases": [],
+  "phase_artifacts": {},
+  "checkpoints": {},
+  "evidence_submitted": {},
+  "created_at": "2025-11-04T20:26:46.008757",
+  "updated_at": "2025-11-04T20:26:46.008759",
+  "metadata": {},
+  "status": "active"
+}

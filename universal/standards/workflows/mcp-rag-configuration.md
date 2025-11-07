@@ -118,17 +118,16 @@ IndexBuilder is the core component that creates and maintains the vector index f
 ### Initialization Parameters
 
 ```python
-from pathlib import Path
-from scripts.build_rag_index import IndexBuilder
+# Ouroboros automatically builds indexes on server start
+# No manual build needed - indexes are in .praxis-os/cache/indexes/
 
-builder = IndexBuilder(
-    index_path=Path(".praxis-os/.cache/vector_index"),
-    standards_path=Path("universal/standards"),
-    usage_path=Path("universal/usage"),          # Optional
-    workflows_path=Path("universal/workflows"),  # NEW: Required for workflow discovery
-    embedding_provider="local",  # or "openai"
-    embedding_model="all-MiniLM-L6-v2"  # Free, offline
-)
+# If you need to rebuild programmatically:
+from ouroboros.subsystems.rag.index_manager import IndexManager
+from ouroboros.config.loader import load_config
+
+config = load_config()
+index_manager = IndexManager(config.indexes, base_path=Path(".praxis-os"))
+index_manager.rebuild_index("standards", force=True)
 ```
 
 ### Parameter Descriptions
@@ -481,7 +480,7 @@ When upgrading existing repos to support workflow indexing:
 - [ ] Add workflows directory to file watcher
 - [ ] Update `_ensure_index_exists` to pass workflows_path
 - [ ] Update `create_server` to pass workflows_path
-- [ ] Force rebuild index: `python scripts/build_rag_index.py --force`
+- [ ] Force rebuild index: Restart MCP server (auto-builds) or use `IndexManager.rebuild_index(force=True)`
 - [ ] Test workflow discovery via search
 - [ ] Verify `start_workflow` includes overview
 
