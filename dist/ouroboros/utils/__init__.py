@@ -35,5 +35,5 @@ See Also:
     - metrics: Behavioral metrics tracking
 """
 
-__all__ = []
+__all__: list[str] = []
 

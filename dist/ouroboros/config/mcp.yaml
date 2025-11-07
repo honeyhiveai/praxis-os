@@ -10,9 +10,17 @@
 #   - All paths are relative to .praxis-os/ directory (not project root)
 #   - Example: If your code is at project-root/src/, use "../src/"
 #   - Example: If your code is at project-root/lib/, use "../lib/"
+#   - ✅ NEW: You can safely use top-level paths like ["../"] because
+#            prAxIs OS automatically respects your .gitignore file!
 #
 # After installation, update the 'code' and 'ast' sections below with your
 # project's actual source code paths and languages.
+#
+# ✅ NEW FEATURE: Automatic File Exclusion
+#    - prAxIs OS automatically respects your project's .gitignore file
+#    - Build artifacts (node_modules/, __pycache__/, dist/, etc.) are
+#      automatically excluded - no manual configuration needed!
+#    - See the 'code' section below for detailed exclusion options
 
 version: "1.0"
 
@@ -88,27 +96,35 @@ indexes:
   #   - Semantic code search: Find functions/classes by meaning
   #   - Call graph: Find who calls what (recursive traversal)
   #   - Hybrid search: Vector + FTS (same as standards)
+  #   - ✅ NEW: Automatic file exclusion via .gitignore (see below)
   #
   # Common Project Patterns:
   #   Python:
   #     - Standard: ["../src/", "../lib/"]
-  #     - Root-level: ["../"] (if .py files at project root)
+  #     - Root-level: ["../"] (✅ Now safe! .gitignore automatically excludes build artifacts)
   #     - Package: ["../mypackage/"]
   #
   #   JavaScript/TypeScript:
   #     - Standard: ["../src/", "../app/", "../components/"]
   #     - Next.js: ["../app/", "../components/", "../lib/"]
   #     - Monorepo: ["../packages/*/src/", "../apps/*/src/"]
+  #     - Root-level: ["../"] (✅ Now safe! node_modules/ automatically excluded)
   #
   #   Go:
   #     - Standard: ["../cmd/", "../pkg/", "../internal/"]
-  #     - Simple: ["../"] (if .go files at project root)
+  #     - Simple: ["../"] (✅ Now safe! vendor/ automatically excluded)
   #
   #   Rust:
   #     - Standard: ["../src/"]
+  #     - Root-level: ["../"] (✅ Now safe! target/ automatically excluded)
   #
   #   Multi-language:
   #     - ["../src/python/", "../src/typescript/", "../src/go/"]
+  #
+  # ✅ TIP: You can now safely point to top-level directories (e.g., ["../"])
+  #         because prAxIs OS automatically respects your .gitignore file!
+  #         Build artifacts (node_modules/, __pycache__/, dist/, etc.) are
+  #         automatically excluded - no need to manually list them.
   #
   # Languages:
   #   - Add languages you use: ["python", "typescript", "javascript", "go", "rust"]
@@ -151,6 +167,66 @@ indexes:
     graph: {}  # Use all defaults (max_depth=10, etc.)
 
     duckdb_path: ".cache/code.duckdb"  # Call graph database (usually fine as-is)
+
+    # ========================================================================
+    # File Exclusion System (NEW: Automatic .gitignore Support!)
+    # ========================================================================
+    # prAxIs OS automatically excludes unwanted files using a three-tier system:
+    #
+    # Tier 1: .gitignore patterns (if respect_gitignore: true)
+    #   - Automatically reads and respects your project's .gitignore file
+    #   - Zero-config for most projects - works out of the box!
+    #   - Files ignored by git are automatically excluded from indexing
+    #   - Uses proper gitignore pattern matching (not simple substring matching)
+    #
+    # Tier 2: Built-in defaults (when no .gitignore exists or respect_gitignore: false)
+    #   - Comprehensive patterns covering 200+ common build artifacts
+    #   - Python: __pycache__/, .tox/, .pytest_cache/, dist/, build/, etc.
+    #   - JavaScript: node_modules/, .next/, dist/, build/, etc.
+    #   - Rust: target/, Go: vendor/, Java: .gradle/, etc.
+    #   - IDEs, OS files, logs, databases, secrets, etc.
+    #   - Uses proper gitignore pattern matching (same as Tier 1)
+    #
+    # Tier 3: Config exclude_patterns (additive override)
+    #   - Additional patterns you specify in config
+    #   - Merged with .gitignore (both apply)
+    #   - Use gitignore format: "custom_build/", "*.generated.py"
+    #   - Uses proper gitignore pattern matching (same as Tier 1)
+    #
+    # Benefits:
+    #   ✅ Zero-config: Most projects work out-of-the-box with .gitignore
+    #   ✅ No crashes: Build artifacts automatically excluded
+    #   ✅ Clean search: Only source code indexed, not dependencies
+    #   ✅ Flexible: Add custom patterns when needed
+    #   ✅ Proper matching: Uses gitignore-parser library (required dependency)
+    #
+    # Examples:
+    #   # Use .gitignore automatically (default - recommended)
+    #   respect_gitignore: true
+    #   exclude_patterns: null
+    #
+    #   # Disable .gitignore, use built-in defaults only
+    #   respect_gitignore: false
+    #   exclude_patterns: null
+    #
+    #   # Use .gitignore + additional custom patterns
+    #   respect_gitignore: true
+    #   exclude_patterns:
+    #     - "custom_build_dir/**"
+    #     - "*.generated.py"
+    #     - "test_fixtures/"
+    #
+    #   # Custom patterns only (no .gitignore, no built-in defaults)
+    #   respect_gitignore: false
+    #   exclude_patterns:
+    #     - "my_custom_exclude/"
+    #     - "*.temp"
+    #
+    # Note: Pattern matching uses the gitignore-parser library (required dependency)
+    #       for accurate gitignore-compatible behavior. All patterns follow standard
+    #       gitignore syntax rules (wildcards, negation with !, etc.).
+    respect_gitignore: true  # ✅ Default: Automatically respect .gitignore patterns (recommended)
+    exclude_patterns: null  # Optional: Additional exclusion patterns in gitignore format
 
   # ========================================================================
   # AST Index (CRITICAL: Customize for Your Project!)

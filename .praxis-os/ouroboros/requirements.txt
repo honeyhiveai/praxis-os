@@ -20,4 +20,7 @@ PyYAML>=6.0.0
 
 # Utilities
 httpx>=0.25.0
+gitignore-parser>=0.1.11
+types-PyYAML>=6.0.12
+watchdog>=3.0.0
 

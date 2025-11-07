@@ -605,6 +605,16 @@ class CodeIndexConfig(BaseConfig):
         description="Graph traversal configuration",
     )
 
+    respect_gitignore: bool = Field(
+        default=True,
+        description="Respect .gitignore patterns when indexing files (recommended: True)",
+    )
+
+    exclude_patterns: Optional[list[str]] = Field(
+        default=None,
+        description="Additional exclusion patterns in gitignore format (merged with .gitignore if present)",
+    )
+
 
 
 class ASTIndexConfig(BaseConfig):

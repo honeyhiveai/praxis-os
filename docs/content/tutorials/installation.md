@@ -153,8 +153,15 @@ watchdog>=3.0.0               # File watching
 **Quick steps:**
 1. Open `.praxis-os/config/mcp.yaml`
 2. Update `code.source_paths` to point to your source directories (e.g., `["../src/"]`)
+   - ✅ **Tip:** You can now point to top-level directories like `../src/` - prAxIs OS automatically respects your `.gitignore` file!
 3. Update `code.languages` to list your languages (e.g., `["python", "typescript"]`)
 4. Update `ast.source_paths` and `ast.languages` to match `code` settings
+
+**✅ Automatic File Exclusion:**
+- prAxIs OS automatically respects your project's `.gitignore` file (enabled by default)
+- Build artifacts (`node_modules/`, `__pycache__/`, `dist/`, etc.) are automatically excluded
+- No need to manually list excluded directories - it just works!
+- See [Configuration Reference](../reference/config-reference) for advanced exclusion options
 
 **📖 See [Configuration Reference](../reference/config-reference) for complete documentation and examples.**
 

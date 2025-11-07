@@ -22,12 +22,14 @@ Use CodeIndex (container.py) as the public interface.
 import hashlib
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Callable
 
 from ouroboros.config.schemas.indexes import CodeIndexConfig
 from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
+from ouroboros.subsystems.rag.code.constants import DEFAULT_EXCLUDE_PATTERNS
 from ouroboros.subsystems.rag.utils.lancedb_helpers import EmbeddingModelLoader, LanceDBConnection
 from ouroboros.utils.errors import ActionableError, IndexError
+from gitignore_parser import parse_gitignore
 
 logger = logging.getLogger(__name__)
 
@@ -78,6 +80,10 @@ class SemanticIndex(BaseIndex):
         
         # Lazy-load reranker (optional)
         self._reranker = None
+        
+        # Gitignore caching
+        self._gitignore_path: Optional[Path] = None
+        self._gitignore_parser: Optional[Callable[[str], bool]] = None
         
         logger.info("SemanticIndex (code) initialized (lazy-load mode)")
     
@@ -185,13 +191,15 @@ class SemanticIndex(BaseIndex):
             # Collect code files matching configured languages
             if resolved_path.is_file():
                 if resolved_path.suffix in file_extensions:
-                    chunks.extend(self._chunk_file(resolved_path))
+                    # Check exclusion for single file
+                    if not self._should_exclude_file(resolved_path):
+                        chunks.extend(self._chunk_file(resolved_path))
             else:
                 # Recursively find code files
                 for ext in file_extensions:
                     for code_file in resolved_path.rglob(f"*{ext}"):
-                        # Skip common non-source directories
-                        if self._should_skip_path(code_file):
+                        # Three-tier exclusion check
+                        if self._should_exclude_file(code_file):
                             continue
                         chunks.extend(self._chunk_file(code_file))
         
@@ -228,29 +236,181 @@ class SemanticIndex(BaseIndex):
         
         return extensions
     
-    def _should_skip_path(self, path: Path) -> bool:
-        """Check if path should be skipped (node_modules, venv, etc.).
+    def _find_gitignore_file(self) -> Optional[Path]:
+        """Find .gitignore file starting from project root (base_path.parent).
+        
+        Walks up from project root to support monorepos. Caches result.
+        
+        Returns:
+            Path to .gitignore if found, None otherwise
+        """
+        if self._gitignore_path is not None:
+            return self._gitignore_path
+        
+        # base_path is .praxis-os/, project root is base_path.parent
+        # Start from project root and walk up (for monorepos)
+        current = self.base_path.parent
+        while current != current.parent:  # Stop at filesystem root
+            gitignore = current / ".gitignore"
+            if gitignore.exists():
+                self._gitignore_path = gitignore
+                return gitignore
+            current = current.parent
+        
+        self._gitignore_path = None
+        return None
+    
+    def _has_gitignore(self) -> bool:
+        """Check if .gitignore file exists.
+        
+        Returns:
+            True if .gitignore exists, False otherwise
+        """
+        return self._find_gitignore_file() is not None
+    
+    def _load_gitignore(self) -> Optional[Callable[[str], bool]]:
+        """Load and parse .gitignore file using gitignore-parser.
+        
+        Caches parser instance. Returns None if .gitignore not found.
+        
+        Returns:
+            Parser function that takes an absolute path string and returns bool (True = ignored)
+            or None if .gitignore not found
+        """
+        if self._gitignore_parser is not None:
+            return self._gitignore_parser
+        
+        gitignore_path = self._find_gitignore_file()
+        if gitignore_path is None:
+            return None
+        
+        try:
+            # gitignore-parser needs base_dir to resolve relative paths
+            gitignore_dir = gitignore_path.parent
+            self._gitignore_parser = parse_gitignore(str(gitignore_path), base_dir=str(gitignore_dir))
+            logger.info("Loaded .gitignore from: %s", gitignore_path)
+            return self._gitignore_parser
+        except Exception as e:
+            logger.warning("Failed to parse .gitignore: %s", e)
+            return None
+    
+    def _gitignore_matches(self, file_path: Path) -> bool:
+        """Check if file path matches .gitignore patterns.
         
         Args:
-            path: File path to check
+            file_path: File path to check
             
         Returns:
-            True if path should be skipped
+            True if file matches .gitignore patterns (should be excluded)
         """
-        skip_patterns = [
-            "node_modules",
-            "__pycache__",
-            ".venv",
-            "venv",
-            "dist",
-            "build",
-            ".git",
-            "vendor",
-            "target",  # Rust
-        ]
+        parser = self._load_gitignore()
+        if parser is None:
+            return False
         
-        path_str = str(path)
-        return any(pattern in path_str for pattern in skip_patterns)
+        # Convert absolute path to relative path from gitignore location
+        gitignore_path = self._find_gitignore_file()
+        if gitignore_path is None:
+            return False
+        
+        try:
+            # gitignore-parser expects absolute paths
+            return parser(str(file_path.resolve()))
+        except Exception as e:
+            logger.warning("Error checking gitignore match for %s: %s", file_path, e)
+            return False
+    
+    def _builtin_default_matches(self, file_path: Path) -> bool:
+        """Check if file matches built-in default exclusion patterns.
+        
+        Uses gitignore-parser to match against DEFAULT_EXCLUDE_PATTERNS.
+        
+        Args:
+            file_path: File path to check
+            
+        Returns:
+            True if file matches any built-in pattern (should be excluded)
+        """
+        try:
+            # Create temporary gitignore file with patterns
+            import tempfile
+            project_root = self.base_path.parent
+            
+            with tempfile.TemporaryDirectory() as tmpdir:
+                temp_gitignore = Path(tmpdir) / ".gitignore"
+                temp_gitignore.write_text("\n".join(DEFAULT_EXCLUDE_PATTERNS))
+                
+                parser = parse_gitignore(str(temp_gitignore), base_dir=str(project_root))
+                
+                # gitignore-parser expects absolute paths
+                result = parser(str(file_path.resolve()))
+                return bool(result)
+        except Exception as e:
+            logger.error("Error checking builtin patterns for %s: %s", file_path, e)
+            # If pattern matching fails, err on the side of caution and exclude
+            return False
+    
+    def _config_patterns_match(self, file_path: Path, patterns: List[str]) -> bool:
+        """Check if file matches config exclude_patterns.
+        
+        Args:
+            file_path: File path to check
+            patterns: List of gitignore-format patterns (from config.exclude_patterns)
+            
+        Returns:
+            True if file matches any pattern (should be excluded)
+        """
+        if not patterns:
+            return False
+        
+        # Create parser for patterns (recreate each time since patterns come from config)
+        # This ensures we always use the current config patterns
+        try:
+            import tempfile
+            project_root = self.base_path.parent
+            
+            with tempfile.TemporaryDirectory() as tmpdir:
+                temp_gitignore = Path(tmpdir) / ".gitignore"
+                temp_gitignore.write_text("\n".join(patterns))
+                
+                # Create parser with project root as base_dir
+                parser = parse_gitignore(str(temp_gitignore), base_dir=str(project_root))
+                
+                # gitignore-parser expects absolute paths
+                result = parser(str(file_path.resolve()))
+                return bool(result)
+        except Exception as e:
+            logger.error("Error checking config patterns for %s: %s", file_path, e)
+            return False
+    
+    def _should_exclude_file(self, file_path: Path) -> bool:
+        """Check if file should be excluded using three-tier system.
+        
+        Tier 1: .gitignore patterns (if respect_gitignore=True)
+        Tier 2: Built-in defaults (if no .gitignore or respect_gitignore=False)
+        Tier 3: Config exclude_patterns (additive)
+        
+        Args:
+            file_path: File path to check
+            
+        Returns:
+            True if file should be excluded
+        """
+        # Tier 1: Check .gitignore
+        if self.config.respect_gitignore:
+            if self._gitignore_matches(file_path):
+                return True
+        
+        # Tier 2: Built-in defaults (fallback or if gitignore disabled)
+        if not self.config.respect_gitignore or not self._has_gitignore():
+            if self._builtin_default_matches(file_path):
+                return True
+        
+        # Tier 3: Config exclude_patterns (additive)
+        if self.config.exclude_patterns:
+            if self._config_patterns_match(file_path, self.config.exclude_patterns):
+                return True
+        
+        return False
     
     def _chunk_file(self, file_path: Path) -> List[Dict[str, Any]]:
         """Chunk a single code file.

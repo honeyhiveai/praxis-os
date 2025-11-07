@@ -180,7 +180,7 @@ class FileWatcher:
         if event.is_directory:
             return
         
-        file_path = Path(str(event.src_path))
+        file_path = Path(event.src_path)
         event_type = event.event_type  # 'created', 'modified', 'deleted'
         
         # Determine which indexes need updating
@@ -329,17 +329,17 @@ class _FileChangeHandler(FileSystemEventHandler):
     
     def on_created(self, event: FileSystemEvent) -> None:
         """Handle file creation."""
-        if not event.is_directory and self._should_process(Path(str(event.src_path))):
+        if not event.is_directory and self._should_process(Path(event.src_path)):
             self.watcher._on_file_event(event)
     
     def on_modified(self, event: FileSystemEvent) -> None:
         """Handle file modification."""
-        if not event.is_directory and self._should_process(Path(str(event.src_path))):
+        if not event.is_directory and self._should_process(Path(event.src_path)):
             self.watcher._on_file_event(event)
     
     def on_deleted(self, event: FileSystemEvent) -> None:
         """Handle file deletion."""
-        if not event.is_directory and self._should_process(Path(str(event.src_path))):
+        if not event.is_directory and self._should_process(Path(event.src_path)):
             self.watcher._on_file_event(event)
 
 

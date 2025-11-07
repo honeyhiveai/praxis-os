@@ -122,6 +122,9 @@ code:
   graph: {}  # Call graph defaults (max_depth=10)
   
   duckdb_path: ".cache/code.duckdb"  # Call graph database location
+  
+  respect_gitignore: true  # ✅ Automatically respect .gitignore patterns (recommended)
+  exclude_patterns: []  # Optional: Additional exclusion patterns (gitignore format)
 ```
 
 **Options:**
@@ -135,6 +138,55 @@ code:
 | `vector.chunk_size` | integer | `200` | Tokens per chunk (smaller = more precision) |
 | `vector.chunk_overlap` | integer | `20` | Overlap between chunks |
 | `duckdb_path` | string | `".cache/code.duckdb"` | Call graph database location |
+| `respect_gitignore` | boolean | `true` | **✅ NEW:** Automatically respect `.gitignore` patterns (recommended) |
+| `exclude_patterns` | list[string] | `null` | **✅ NEW:** Additional exclusion patterns in gitignore format (merged with `.gitignore`) |
+
+**File Exclusion System:**
+
+prAxIs OS uses a **three-tier exclusion system** to automatically skip unwanted files. All pattern matching uses proper gitignore syntax via the `gitignore-parser` library (required dependency).
+
+1. **Tier 1: `.gitignore` patterns** (if `respect_gitignore: true`)
+   - Automatically reads and respects your project's `.gitignore` file
+   - Zero-config for most projects
+   - Works exactly like `git status` - files ignored by git are excluded from indexing
+   - Uses proper gitignore pattern matching (not simple substring matching)
+
+2. **Tier 2: Built-in defaults** (when no `.gitignore` exists or `respect_gitignore: false`)
+   - Comprehensive patterns covering 200+ common build artifacts
+   - Python: `__pycache__/`, `.tox/`, `.pytest_cache/`, `dist/`, `build/`, etc.
+   - JavaScript: `node_modules/`, `.next/`, `dist/`, `build/`, etc.
+   - Rust: `target/`, Go: `vendor/`, Java: `.gradle/`, etc.
+   - IDEs, OS files, logs, databases, secrets, etc.
+   - Uses proper gitignore pattern matching (same as Tier 1)
+
+3. **Tier 3: Config `exclude_patterns`** (additive override)
+   - Additional patterns you specify in config
+   - Merged with `.gitignore` (both apply)
+   - Use gitignore format: `"custom_build/", "*.generated.py"`
+   - Uses proper gitignore pattern matching (same as Tier 1)
+
+**Example with Custom Exclusions:**
+
+```yaml
+code:
+  source_paths:
+    - "../src/"  # ✅ Can now use top-level directory!
+  
+  respect_gitignore: true  # Default - respects .gitignore automatically
+  exclude_patterns:  # Additional patterns beyond .gitignore
+    - "custom_build_dir/**"
+    - "*.generated.py"
+    - "test_fixtures/"
+  
+  languages: ["python"]
+```
+
+**Benefits:**
+- ✅ **Zero-config:** Most projects work out-of-the-box with `.gitignore`
+- ✅ **No crashes:** Build artifacts automatically excluded
+- ✅ **Clean search:** Only source code indexed, not dependencies
+- ✅ **Flexible:** Add custom patterns when needed
+- ✅ **Proper pattern matching:** Uses `gitignore-parser` library for accurate gitignore-compatible pattern matching (required dependency)
 
 **Common Project Patterns:**
 
@@ -474,13 +526,29 @@ logging:
 
 ### "No results from code search"
 
-**Cause:** Code paths not configured correctly.
+**Cause:** Code paths not configured correctly or all files excluded.
 
 **Fix:**
 1. Check `code.source_paths` in `mcp.yaml`
 2. Verify paths are relative to `.praxis-os/` directory
 3. Ensure paths exist (use `../src/` not `src/`)
-4. Rebuild index: Restart MCP server (auto-builds) or use `IndexManager.rebuild_index()`
+4. Check if files are being excluded:
+   - Verify `.gitignore` isn't excluding your source files
+   - Check `exclude_patterns` in config
+   - Temporarily set `respect_gitignore: false` to test
+5. Rebuild index: Restart MCP server (auto-builds) or use `IndexManager.rebuild_index()`
+
+### "Files being excluded that shouldn't be"
+
+**Cause:** Exclusion patterns too aggressive.
+
+**Fix:**
+1. Check your `.gitignore` file - it's automatically respected (uses proper gitignore pattern matching)
+2. Use negation patterns in `.gitignore`: `!important_file.py`
+3. Or disable gitignore: `respect_gitignore: false` (uses built-in defaults only, still with proper pattern matching)
+4. Or add negation to `exclude_patterns`: `["!important_file.py"]`
+
+**Note:** Pattern matching uses the `gitignore-parser` library (required dependency) for accurate gitignore-compatible behavior. All patterns follow standard gitignore syntax rules.
 
 ### "Index not found" errors
 

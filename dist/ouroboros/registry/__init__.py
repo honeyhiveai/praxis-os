@@ -24,5 +24,5 @@ See Also:
     - types: ToolDefinition, ToolMetadata for tool metadata
 """
 
-__all__ = []
+__all__: list[str] = []
 
