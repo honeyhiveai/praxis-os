@@ -11,6 +11,8 @@
 
 /* Import Inter font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Import Libre Baskerville for hero title (serif font with clear serifs on capital I) */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
 
 /* Light mode: Clean and minimal (like HoneyHive) */
 :root {

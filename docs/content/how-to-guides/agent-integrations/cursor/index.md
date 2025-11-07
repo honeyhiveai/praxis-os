@@ -187,7 +187,7 @@ else:
 
 **What it does:**
 - Enforces orientation (10 mandatory bootstrap queries)
-- Triggers `search_standards()` before actions
+- Triggers `pos_search_project()` before actions
 - Prevents direct file reads of indexed content
 - Enforces "query liberally" pattern (5-10 queries per task)
 
@@ -198,32 +198,55 @@ Create `.cursor/mcp.json` to connect Cursor to the prAxIs OS MCP server:
 ```json
 {
   "mcpServers": {
-    "praxis-os": {
-      "command": ".praxis-os/venv/bin/python",
+    "project-name": {
+      "command": "/absolute/path/to/project/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "ouroboros",
         "--transport",
         "dual"
       ],
-      "cwd": ".praxis-os",
       "env": {
-        "PYTHONPATH": "."
-      }
+        "PYTHONPATH": "/absolute/path/to/project/.praxis-os"
+      },
+      "autoApprove": [
+        "pos_search_project",
+        "pos_workflow",
+        "pos_browser",
+        "pos_filesystem",
+        "get_server_info",
+        "current_date"
+      ]
     }
   }
 }
 ```
 
-**Important**: Primary agents always use `--transport dual` to enable HTTP endpoint for secondary agents.
+**⚠️ CRITICAL Configuration Requirements:**
 
-**Windows users**: Change `venv/bin/python` to `venv\Scripts\python.exe`
+1. **Use absolute paths** - Cursor does **NOT** expand `&#36;{workspaceFolder}` variables in MCP configuration. You must use absolute paths for both `command` and `PYTHONPATH`.
+
+2. **Replace placeholders:**
+   - Replace `"project-name"` with your actual project name (e.g., `"python-sdk"`, `"my-api"`, `"frontend"`)
+   - Replace `/absolute/path/to/project/` with your actual project path (e.g., `/Users/josh/src/github.com/honeyhiveai/python-sdk`)
+
+3. **Do NOT use `cwd` setting** - It causes path resolution issues. Use absolute `PYTHONPATH` instead.
+
+4. **Project-specific server name** - Use your project name (not generic `"praxis-os"`) to:
+   - Reinforce it as THE authoritative source for this project
+   - Prevent conflicts when working on multiple projects
+   - Make it clear which project's MCP server is running
+
+**Windows users**: 
+- Use forward slashes or double backslashes: `C:/Users/...` or `C:\\Users\\...`
+- Change `venv/bin/python` to `venv\\Scripts\\python.exe`
 
 **What this does:**
 - Tells Cursor where to find the MCP server
-- Points to the virtual environment Python
-- Sets working directory to `.praxis-os/`
+- Points to the virtual environment Python using absolute path
+- Sets PYTHONPATH to absolute path (no `cwd` needed)
 - MCP server auto-starts when Cursor opens the project
+- Auto-approves common tools for smoother workflow
 
 ## Step 3: Restart Cursor
 
@@ -248,7 +271,7 @@ Test that MCP tools are available:
 
 In Cursor chat, say:
 ```
-"Run search_standards with query: orientation bootstrap"
+"Run pos_search_project with query: orientation bootstrap"
 ```
 
 **Expected output**: RAG results with orientation content
@@ -256,9 +279,10 @@ In Cursor chat, say:
 ### Test 2: Verify Tool Availability
 
 The following tools should be available (Cursor autocompletes them):
-- `search_standards` - Semantic search over standards
+- `pos_search_project` - Semantic search over standards and code
 - `pos_workflow` - Workflow management
 - `pos_browser` - Browser automation (if needed)
+- `pos_filesystem` - File operations
 - `current_date` - Get current date/time
 - `get_server_info` - MCP server metadata
 
@@ -290,7 +314,7 @@ cat /path/to/praxis-os-source/.cursorrules
 **Key sections to add from prAxIs OS:**
 1. Orientation section (mandatory bootstrap queries)
 2. Search-first protocol (query before acting)
-3. Never read indexed files (use search_standards)
+3. Never read indexed files (use pos_search_project)
 
 ### Option B: Append (Simple)
 
@@ -320,23 +344,26 @@ cp /path/to/praxis-os-source/.cursorrules .cursorrules
 # Verify virtual environment exists
 ls -la .praxis-os/venv/
 
-# Test MCP server manually
-.praxis-os/venv/bin/python -m ouroboros
+# Test MCP server manually (use absolute path)
+cd /path/to/project
+PYTHONPATH=/path/to/project/.praxis-os .praxis-os/venv/bin/python -m ouroboros
 ```
 
 **Solutions**:
+- **Check configuration** - Ensure `mcp.json` uses absolute paths (not `&#36;{workspaceFolder}` or relative paths)
+- **Check Cursor logs** - Look at `~/Library/Application Support/Cursor/logs/` for actual error messages
 - Re-run: `python3 -m venv .praxis-os/venv`
 - Re-install: `.praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt`
 - Check Python version: Must be 3.9+
 
 ### Tools Available But search_standards Returns Empty
 
-**Symptom**: `search_standards` tool exists but returns no results
+**Symptom**: `pos_search_project` tool exists but returns no results
 
 **Check**:
 ```bash
 # Verify RAG index exists
-ls -la .praxis-os/.cache/vector_index/
+ls -la .praxis-os/.cache/indexes/
 
 # Check for rebuild flag (should be gone after first start)
 ls .praxis-os/standards/.rebuild_index
@@ -367,7 +394,7 @@ wc -l .cursorrules
 
 ### "Module not found: ouroboros"
 
-**Symptom**: Python import error when MCP server starts
+**Symptom**: Python import error when MCP server starts (`ModuleNotFoundError: No module named ouroboros`)
 
 **Check**:
 ```bash
@@ -376,12 +403,28 @@ ls -la .praxis-os/ouroboros/
 
 # Check __main__.py exists
 ls .praxis-os/ouroboros/__main__.py
+
+# Test import manually (replace with your actual project path)
+cd /path/to/project
+PYTHONPATH=/path/to/project/.praxis-os .praxis-os/venv/bin/python -c "import ouroboros; print('✅ Success')"
 ```
 
 **Solutions**:
-- Re-run mechanical installation
-- Verify cwd in mcp.json is `.praxis-os`
-- Check PYTHONPATH in mcp.json includes current directory
+- **Use absolute paths** - Ensure both `command` and `PYTHONPATH` in `mcp.json` use absolute paths (not relative or `&#36;{workspaceFolder}`)
+- **Remove `cwd` setting** - It causes path resolution issues. Use absolute `PYTHONPATH` instead
+- Re-run mechanical installation if ouroboros directory is missing
+- Check Cursor logs at `~/Library/Application Support/Cursor/logs/` for actual errors
+
+### "spawn workspaceFolder variable/... ENOENT"
+
+**Symptom**: Cursor error: `spawn &#36;{workspaceFolder}/.praxis-os/venv/bin/python ENOENT`
+
+**Root Cause**: Cursor does **NOT** expand `&#36;{workspaceFolder}` variables in MCP configuration. It tries to literally execute a command with that string.
+
+**Solution**: 
+- Replace all `&#36;{workspaceFolder}` references with absolute paths
+- Use `/absolute/path/to/project/.praxis-os/venv/bin/python` instead of `&#36;{workspaceFolder}/.praxis-os/venv/bin/python`
+- Use `/absolute/path/to/project/.praxis-os` for `PYTHONPATH` instead of `&#36;{workspaceFolder}/.praxis-os`
 
 ### RAG Index Slow or Incomplete
 
@@ -393,7 +436,7 @@ ls .praxis-os/ouroboros/__main__.py
 find .praxis-os/standards -name "*.md" | wc -l
 
 # Check index size
-du -sh .praxis-os/.cache/vector_index/
+du -sh .praxis-os/.cache/indexes/
 ```
 
 **Expected**:
@@ -402,7 +445,7 @@ du -sh .praxis-os/.cache/vector_index/
 - 5-15 second initial build time
 
 **Solutions**:
-- Delete and rebuild: `rm -rf .praxis-os/.cache/vector_index/`
+- Delete and rebuild: `rm -rf .praxis-os/.cache/indexes/`
 - Create flag: `touch .praxis-os/standards/.rebuild_index`
 - Restart Cursor → Rebuilds from scratch
 

@@ -46,28 +46,48 @@ function HomepageHeader() {
                 <span className={styles.codeTitle}>Install prAxIs OS</span>
               </div>
               <div className={styles.codeBody}>
-                <pre>
-{`# In your IDE/agent, say:
-
-"Install prAxIs OS from 
- github.com/honeyhiveai/praxis-os 
- for <AGENT> (optional: in <IDE>)"
-
-# Examples:
-# "for Cursor"                    → Cursor IDE
-# "for Cline in VS Code"          → Cline extension
-# "for Claude Code"               → CLI/terminal mode
-# "for Claude Code in VS Code"    → VS Code extension
-# "for GitHub Copilot"            → GitHub Copilot
-
-# The agent will:
-✓ Run mechanical installation script
-✓ Copy universal standards  
-✓ Install MCP server
-✓ Parse agent/IDE from command
-✓ Route to agent-specific config guide
-✓ Configure everything automatically`}
-                </pre>
+                <code className={styles.codeBlock}>
+                  <span className={styles.codeComment}># In your IDE/agent, say:</span>
+                  <br />
+                  <br />
+                  <span className={styles.codeString}>"Install prAxIs OS from </span>
+                  <br />
+                  <span className={styles.codeString}> github.com/honeyhiveai/praxis-os </span>
+                  <br />
+                  <span className={styles.codeString}> for &lt;AGENT&gt; (optional: in &lt;IDE&gt;)"</span>
+                  <br />
+                  <br />
+                  <span className={styles.codeComment}># Examples:</span>
+                  <br />
+                  <span className={styles.codeComment}># "for Cursor"                    → Cursor IDE</span>
+                  <br />
+                  <span className={styles.codeComment}># "for Cline in VS Code"          → Cline extension</span>
+                  <br />
+                  <span className={styles.codeComment}># "for Claude Code"               → CLI/terminal mode</span>
+                  <br />
+                  <span className={styles.codeComment}># ... and more</span>
+                  <br />
+                  <br />
+                  <span className={styles.codeComment}># See full list: </span>
+                  <Link to="/docs/how-to-guides/agent-integrations" className={styles.codeLink}>
+                    /docs/how-to-guides/agent-integrations
+                  </Link>
+                  <br />
+                  <br />
+                  <span className={styles.codeComment}># The agent will:</span>
+                  <br />
+                  <span>✓ Run mechanical installation script</span>
+                  <br />
+                  <span>✓ Copy universal standards  </span>
+                  <br />
+                  <span>✓ Install MCP server</span>
+                  <br />
+                  <span>✓ Parse agent/IDE from command</span>
+                  <br />
+                  <span>✓ Route to agent-specific config guide</span>
+                  <br />
+                  <span>✓ Configure everything automatically</span>
+                </code>
               </div>
             </div>
           </div>

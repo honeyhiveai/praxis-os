@@ -41,8 +41,8 @@ Edit `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "praxis-os-rag": {
-      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
+    "project-name": {
+      "command": "/absolute/path/to/project/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "ouroboros",
@@ -52,21 +52,35 @@ Edit `.cursor/mcp.json`:
         "INFO"
       ],
       "env": {
-        "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
+        "PROJECT_ROOT": "/absolute/path/to/project",
+        "PYTHONPATH": "/absolute/path/to/project/.praxis-os",
         "PYTHONUNBUFFERED": "1"
-      }
+      },
+      "autoApprove": [
+        "pos_search_project",
+        "pos_workflow",
+        "pos_browser",
+        "pos_filesystem",
+        "get_server_info",
+        "current_date"
+      ]
     }
   }
 }
 ```
+
+**⚠️ CRITICAL**: Cursor does **NOT** expand `${workspaceFolder}` variables. You must use absolute paths:
+- Replace `"project-name"` with your actual project name (e.g., `"python-sdk"`)
+- Replace `/absolute/path/to/project/` with your actual project path (e.g., `/Users/josh/src/github.com/honeyhiveai/python-sdk`)
 
 **What this does:**
 - `--transport dual` → Enables both stdio (IDE) + HTTP (sub-agents)
 - Port automatically allocated (4242-5242 range)
 - Port written to `.praxis-os/.mcp_server_state.json` for secondary agents
 
-**Windows**: `venv\Scripts\python.exe`
+**Windows**: 
+- Use forward slashes or double backslashes: `C:/Users/...` or `C:\\Users\\...`
+- Change `venv/bin/python` to `venv\\Scripts\\python.exe`
 
 ## Step 2: Restart Cursor
 
@@ -132,7 +146,7 @@ Edit `~/.config/claude-code/mcp.json` or project `.mcp.json`:
 ```json
 {
   "mcpServers": {
-    "praxis-os-rag": {
+    "praxis-os": {
       "type": "streamableHttp",
       "url": "http://127.0.0.1:4242/mcp",
       "transport": "http"
@@ -152,7 +166,7 @@ Edit VS Code's `.vscode/settings.json`:
 ```json
 {
   "claude-code.mcpServers": {
-    "praxis-os-rag": {
+    "praxis-os": {
       "type": "streamableHttp",
       "url": "http://127.0.0.1:4242/mcp",
       "transport": "http"
@@ -179,7 +193,7 @@ Edit VS Code's `.vscode/settings.json`:
 
 In Cursor:
 ```
-"Use search_standards to query: orientation bootstrap"
+"Use pos_search_project to query: orientation bootstrap"
 ```
 
 **Expected**: Native MCP works
@@ -188,7 +202,7 @@ In Cursor:
 
 In Claude Code:
 ```
-"Use search_standards to query: python testing patterns"
+"Use pos_search_project to query: python testing patterns"
 ```
 
 **Expected**: HTTP connection works, same results as Cursor
@@ -231,9 +245,11 @@ curl http://127.0.0.1:${PORT}/mcp
 
 **Solutions**:
 - Ensure Cursor is running
+- **Check Cursor configuration** - Ensure `.cursor/mcp.json` uses absolute paths (not `${workspaceFolder}`)
 - Verify dual transport in `.cursor/mcp.json` (`--transport dual`)
 - Check port allocation: `cat .praxis-os/.mcp_server_state.json`
 - Verify port not blocked: `lsof -i :${PORT}` (Mac/Linux) or `netstat -ano | findstr :${PORT}` (Windows)
+- Check Cursor logs at `~/Library/Application Support/Cursor/logs/` for actual errors
 - Try different port (server automatically finds next available)
 - Restart Cursor
 
@@ -337,7 +353,7 @@ cat ~/.config/claude-code/mcp.json  # or appropriate path
 
 1. **Cursor**: Frontend development
 2. **Claude Code**: Backend development
-3. Shared: Both use same `pos_workflow` and `search_standards`
+3. Shared: Both use same `pos_workflow` and `pos_search_project`
 
 ## Security Considerations
 

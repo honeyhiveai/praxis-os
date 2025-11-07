@@ -43,8 +43,8 @@ Edit `.cursor/mcp.json` to use dual transport mode:
 ```json
 {
   "mcpServers": {
-    "praxis-os-rag": {
-      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
+    "project-name": {
+      "command": "/absolute/path/to/project/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "ouroboros",
@@ -54,21 +54,35 @@ Edit `.cursor/mcp.json` to use dual transport mode:
         "INFO"
       ],
       "env": {
-        "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
+        "PROJECT_ROOT": "/absolute/path/to/project",
+        "PYTHONPATH": "/absolute/path/to/project/.praxis-os",
         "PYTHONUNBUFFERED": "1"
-      }
+      },
+      "autoApprove": [
+        "pos_search_project",
+        "pos_workflow",
+        "pos_browser",
+        "pos_filesystem",
+        "get_server_info",
+        "current_date"
+      ]
     }
   }
 }
 ```
+
+**⚠️ CRITICAL**: Cursor does **NOT** expand `${workspaceFolder}` variables. You must use absolute paths:
+- Replace `"project-name"` with your actual project name (e.g., `"python-sdk"`)
+- Replace `/absolute/path/to/project/` with your actual project path (e.g., `/Users/josh/src/github.com/honeyhiveai/python-sdk`)
 
 **What this does:**
 - `--transport dual` → Enables both stdio (IDE) + HTTP (sub-agents)
 - Port automatically allocated (4242-5242 range)
 - Port written to `.praxis-os/.mcp_server_state.json` for secondary agents
 
-**Windows users**: Change `venv/bin/python` to `venv\Scripts\python.exe`
+**Windows users**: 
+- Use forward slashes or double backslashes: `C:/Users/...` or `C:\\Users\\...`
+- Change `venv/bin/python` to `venv\\Scripts\\python.exe`
 
 ## Step 2: Restart Cursor
 
@@ -135,12 +149,12 @@ Open Cline settings in Cursor:
   "agent-os-rag": {
     "type": "streamableHttp",
     "url": "http://127.0.0.1:4242/mcp",
-    "alwaysAllow": [
-      "search_standards",
-      "get_current_phase",
-      "get_workflow_state",
-      "get_server_info"
-    ]
+      "alwaysAllow": [
+        "pos_search_project",
+        "pos_workflow",
+        "get_server_info",
+        "current_date"
+      ]
   }
 }
 ```
@@ -169,7 +183,7 @@ After reload:
 
 In Cursor chat:
 ```
-"Use search_standards to query: orientation bootstrap"
+"Use pos_search_project to query: orientation bootstrap"
 ```
 
 **Expected**: Native MCP connection works
@@ -178,7 +192,7 @@ In Cursor chat:
 
 In Cline panel:
 ```
-"Use search_standards to query: python testing patterns"
+"Use pos_search_project to query: python testing patterns"
 ```
 
 **Expected**: HTTP connection works, returns same results as Cursor
@@ -223,9 +237,11 @@ curl http://127.0.0.1:${PORT}/mcp
 
 **Solutions**:
 - Verify Cursor is running and MCP server started
+- **Check Cursor configuration** - Ensure `.cursor/mcp.json` uses absolute paths (not `${workspaceFolder}`)
 - Check port allocation: `cat .praxis-os/.mcp_server_state.json`
 - Verify port not in use: `lsof -i :${PORT}` (Mac/Linux) or `netstat -ano | findstr :${PORT}` (Windows)
 - Ensure using `--transport dual` (not `--http`)
+- Check Cursor logs at `~/Library/Application Support/Cursor/logs/` for actual errors
 - Restart Cursor to restart MCP server with dual transport
 
 ### Port Already in Use
@@ -368,7 +384,7 @@ Both agents share workflow state. This means:
 ✅ **Multi-agent setup complete!**
 
 Now:
-1. **Test both agents**: Verify both can search_standards
+1. **Test both agents**: Verify both can use pos_search_project
 2. **Define roles**: Decide which agent does what
 3. **Coordinate**: Use shared workflow state effectively
 4. **Iterate**: Refine multi-agent workflow based on experience

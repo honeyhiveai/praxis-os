@@ -10,7 +10,7 @@ Configure prAxIs OS for your specific AI agent and IDE. Choose based on your pri
 ## Installation Command Pattern
 
 ```bash
-"Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> [in <IDE>]"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)"
 ```
 
 **Examples:**
@@ -19,6 +19,7 @@ Configure prAxIs OS for your specific AI agent and IDE. Choose based on your pri
 - `for Cline in Cursor` → Cline as secondary agent (connects to Cursor's MCP server)
 - `for Claude Code` → **Claude Code CLI** (primary, terminal) - **default when no IDE specified**
 - `for Claude Code in VS Code` → **Claude Code VS Code extension** (primary) - **when IDE specified**
+- `for GitHub Copilot` → GitHub Copilot (primary, VS Code, JetBrains, Xcode, Eclipse)
 
 **Branching Logic for Claude Code:**
 - `"for Claude Code"` (no IDE specified) → Route to `claude-code/terminal.md` (CLI/terminal mode)
@@ -101,15 +102,21 @@ When running secondary agents, the **primary agent** must use `--transport dual`
 ```json
 {
   "mcpServers": {
-    "praxis-os-rag": {
-      "command": ".praxis-os/venv/bin/python",
+    "praxis-os": {
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "ouroboros",
         "--transport",
-        "dual"
+        "dual",
+        "--log-level",
+        "INFO"
       ],
-      "cwd": ".praxis-os"
+      "env": {
+        "PROJECT_ROOT": "${workspaceFolder}",
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
+        "PYTHONUNBUFFERED": "1"
+      }
     }
   }
 }

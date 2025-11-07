@@ -28,9 +28,10 @@
 }
 
 .heroTitle {
+  font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   font-size: 3.5rem !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.04em !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
   line-height: 1.1 !important;
   margin-bottom: 1.5rem !important;
   background: linear-gradient(135deg, var(--ifm-font-color-base) 0%, var(--ifm-color-primary) 100%);
@@ -155,9 +156,19 @@
 
 .codeBody {
   padding: 1.5rem;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  margin: 0.75rem;
 }
 
-.codeBody pre {
+[data-theme='dark'] .codeBody {
+  background: #000000;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.codeBody pre,
+.codeBody code {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
@@ -166,8 +177,70 @@
   white-space: pre-wrap;
 }
 
-[data-theme='dark'] .codeBody pre {
-  color: #e6edf3;
+.codeBlock {
+  display: block;
+  white-space: pre-wrap;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0;
+  background-color: transparent !important;
+}
+
+[data-theme='dark'] .codeBody pre,
+[data-theme='dark'] .codeBody code {
+  color: #ffffff;
+}
+
+/* Override global code styling for our terminal code block - higher specificity */
+.codeBody .codeBlock,
+[data-theme='dark'] .codeBody .codeBlock {
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+}
+
+/* Code syntax highlighting for terminal aesthetic */
+.codeComment {
+  color: #888888;
+}
+
+[data-theme='dark'] .codeComment {
+  color: #888888;
+}
+
+.codeString {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .codeString {
+  color: #ffffff;
+}
+
+.codeLink {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 140, 93, 0.4);
+  transition: all 0.2s ease;
+  display: inline;
+}
+
+.codeLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .codeLink {
+  color: #ff8c5d;
+  text-decoration-color: rgba(255, 140, 93, 0.5);
+}
+
+[data-theme='dark'] .codeLink:hover {
+  color: #ffa17a;
+  text-decoration-color: #ffa17a;
 }
 
 /* ===== SECTION HEADERS (Mintlify style) ===== */
