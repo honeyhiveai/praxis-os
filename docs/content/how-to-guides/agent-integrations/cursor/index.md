@@ -294,7 +294,7 @@ Now try:
 4. **Build with guidance**: prAxIs OS provides context at every decision point
 
 See also:
-- [Creating Your First Standard](../creating-project-standards.md)
-- [Understanding Workflows](../../tutorials/understanding-praxis-os-workflows.md)
-- [Upgrading prAxIs OS](../upgrading.md)
+- [Creating Your First Standard](../../creating-project-standards.md)
+- [Understanding Workflows](../../../tutorials/understanding-praxis-os-workflows.md)
+- [Upgrading prAxIs OS](../../upgrading.md)
 
