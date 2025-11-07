@@ -156,7 +156,7 @@ The most common mistake: forgetting `.praxis-os/workflows/` directory. The MCP s
 
 ### 4. Use Correct Module Name
 
-In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`. The entry point is `mcp_server/__main__.py`.
+In `mcp.json`, use `"ouroboros"` NOT `"mcp_server"` or `"mcp_server.praxis_os_rag"`. The entry point is `ouroboros/__main__.py`.
 
 ---
 
@@ -205,7 +205,7 @@ praxis-os/
 │   ├── standards/
 │   ├── usage/
 │   └── workflows/
-├── mcp_server/            ← Server code to copy
+├── dist/ouroboros/        ← Server code to copy
 └── .cursorrules           ← Cursor behavioral triggers (agent-specific files handled in step 03)
 ```
 
@@ -224,7 +224,7 @@ target-project/
 │   ├── standards/
 │   ├── usage/
 │   ├── workflows/
-│   ├── mcp_server/
+│   ├── ouroboros/
 │   ├── venv/
 │   └── .cache/
 ├── [agent-specific file]  ← Copied or merged based on agent:
@@ -249,9 +249,9 @@ After installation, these should all be true:
 checks = {
     ".praxis-os/workflows/": exists and has ~47 files,
     ".praxis-os/venv/": exists with working Python,
-    ".praxis-os/.cache/vector_index/": exists with RAG index,
+    ".praxis-os/.cache/indexes/": exists with RAG index,
     ".cursorrules": exists with prAxIs OS rules,
-    ".cursor/mcp.json": exists with "mcp_server" module,
+    ".cursor/mcp.json": exists with "ouroboros" module,
     "Temp directory": deleted (cleaned up),
 }
 ```
@@ -263,7 +263,7 @@ checks = {
 | Issue | Cause | Fix |
 |-------|-------|-----|
 | Missing workflows/ | Forgot step 01 | Create `.praxis-os/workflows/` |
-| Wrong module name | Used `mcp_server.praxis_os_rag` | Change to `ouroboros` in mcp.json |
+| Wrong module name | Used `mcp_server` or `mcp_server.praxis_os_rag` | Change to `ouroboros` in mcp.json |
 | Empty workflows/ | Forgot step 02 | Copy files from `universal/workflows/` |
 | Git repo left behind | Forgot step 05 | Delete temp directory manually |
 | Agent file overwritten | Didn't follow step 03 | Restore from backup (`.cursorrules.backup`, `.clinerules.backup`, etc.) |

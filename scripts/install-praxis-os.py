@@ -182,7 +182,7 @@ def create_directories(target: Path):
         # Workflows (no universal/ prefix - flattened)
         base / "workflows",
         # MCP Server
-        base / "mcp_server",
+        base / "ouroboros",
         # Specs (organized by status)
         base / "specs" / "approved",
         base / "specs" / "completed",
@@ -238,7 +238,7 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
     Behavior:
       - universal/workflows → .praxis-os/workflows (flatten)
       - universal/standards → .praxis-os/standards/universal (keep namespace)
-      - mcp_server → .praxis-os/mcp_server (direct copy)
+      - dist/ouroboros → .praxis-os/ouroboros (direct copy)
       - scripts → .praxis-os/scripts (RAG index builder, etc.)
 
     After each copy, validates that source and destination file counts match.
@@ -264,7 +264,7 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
         ".pytest_cache",
         ".mypy_cache",
         ".praxis-os",
-        ".cursor",  # Don't copy nested artifacts from mcp_server
+        ".cursor",  # Don't copy nested artifacts from ouroboros
     )
 
     try:
@@ -292,12 +292,12 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
 
         # 3. MCP Server (entire Python package)
         print("  Copying MCP server...", end=" ", flush=True)
-        src_mcp = source / "mcp_server"
-        dest_mcp = base / "mcp_server"
+        src_mcp = source / "dist" / "ouroboros"
+        dest_mcp = base / "ouroboros"
         shutil.copytree(src_mcp, dest_mcp, dirs_exist_ok=True, ignore=ignore_patterns)
-        validate_directory_copy(src_mcp, dest_mcp, "mcp_server")
-        stats["mcp_server"] = count_files(dest_mcp)
-        print(f"✓ {stats['mcp_server']} files")
+        validate_directory_copy(src_mcp, dest_mcp, "ouroboros")
+        stats["ouroboros"] = count_files(dest_mcp)
+        print(f"✓ {stats['ouroboros']} files")
 
         # 4. Scripts (RAG index builder and other utilities)
         print("  Copying scripts...", end=" ", flush=True)
@@ -380,7 +380,7 @@ def validate_installation(target: Path, stats: Dict[str, int]):
         base / "workflows",
         base / "standards" / "universal",
         base / "standards" / "development",
-        base / "mcp_server",
+        base / "ouroboros",
         base / "scripts",
         base / "specs" / "approved",
         base / "specs" / "completed",
@@ -444,7 +444,7 @@ def create_venv_and_install(target: Path):
                 "install",
                 "--quiet",
                 "-r",
-                str(base / "mcp_server" / "requirements.txt"),
+                str(base / "ouroboros" / "requirements.txt"),
             ],
             check=True,
             capture_output=True,
@@ -562,7 +562,7 @@ def print_success(target: Path, stats: Dict[str, int]):
     print("Files copied:")
     print(f"  • Standards: {stats['standards']} files")
     print(f"  • Workflows: {stats['workflows']} files")
-    print(f"  • MCP Server: {stats['mcp_server']} files")
+    print(f"  • MCP Server: {stats['ouroboros']} files")
     print(f"  • Helper Scripts: {stats['scripts']} scripts")
     print(f"  • Total: {stats['total']} files")
     print()

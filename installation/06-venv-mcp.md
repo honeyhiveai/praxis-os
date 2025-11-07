@@ -343,7 +343,7 @@ INFO - Creating new table with 1247 records...
 - Scans all markdown files in `standards/`, `usage/`, and `workflows/` directories
 - Chunks content using semantic-aware chunking (preserves section headers and metadata)
 - Generates embeddings using local model (sentence-transformers, FREE & OFFLINE)
-- Stores vectors in LanceDB at `.praxis-os/.cache/vector_index/`
+- Stores vectors in LanceDB at `.praxis-os/.cache/indexes/`
 
 **Indexed content:**
 - ✅ Standards (~46 files) - Universal CS fundamentals
@@ -363,25 +363,25 @@ Verify RAG index was created:
 
 **Linux/macOS/WSL2:**
 ```bash
-ls -la .praxis-os/.cache/vector_index/
+ls -la .praxis-os/.cache/indexes/
 ```
 
 **Windows:**
 ```bash
-dir .praxis-os\.cache\vector_index\
+dir .praxis-os\.cache\indexes\
 ```
 
 **You should see:**
-- `praxis_os_standards.lance/` - LanceDB table directory
-- `metadata.json` - Build metadata (timestamps, file counts, etc.)
+- `standards/` - Standards vector index directory (LanceDB)
+- `code/` - Code vector + graph index directory (LanceDB + DuckDB)
 
 **Quick test:**
 ```bash
 # Linux/macOS/WSL2
-test -f .praxis-os/.cache/vector_index/metadata.json && echo "✅ RAG index built" || echo "❌ RAG index missing"
+test -d .praxis-os/.cache/indexes/standards && echo "✅ RAG index built" || echo "❌ RAG index missing"
 
 # Windows
-if exist .praxis-os\.cache\vector_index\metadata.json (echo ✅ RAG index built) else (echo ❌ RAG index missing)
+if exist .praxis-os\.cache\indexes\standards (echo ✅ RAG index built) else (echo ❌ RAG index missing)
 ```
 
 ---

@@ -131,7 +131,7 @@ print("✅ Copied scripts")
 - `generate-manifest.py` - Workflow manifest generator
 - `safe-upgrade.py` - Safe upgrade utilities
 
-**Why it's critical**: The MCP server's `factory.py` imports `IndexBuilder` from this script to build the RAG index when `.praxis-os/.cache/vector_index/` doesn't exist. Without it, installation fails.
+**Why it's critical**: Ouroboros automatically builds RAG indexes on server start when `.praxis-os/.cache/indexes/` doesn't exist. The server code includes all necessary index building functionality.
 
 ---
 

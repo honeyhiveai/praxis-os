@@ -41,7 +41,7 @@ Install prAxIs OS into the target project. This will:
 
 ### Mistake #2: Wrong Module Name in mcp.json
 **What happens**: Python module not found error  
-**Wrong**: `"mcp_server.praxis_os_rag"`  
+**Wrong**: `"mcp_server"` or `"mcp_server.praxis_os_rag"`  
 **Correct**: `"ouroboros"`  
 **Prevention**: Step 05 has the exact JSON to copy
 

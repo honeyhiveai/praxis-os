@@ -26,7 +26,7 @@ The MCP server requires exactly these directories:
 │   └── universal/          # Universal CS fundamentals
 ├── usage/                   # prAxIs OS usage docs
 ├── workflows/               # Workflow definitions (CRITICAL!)
-├── mcp_server/              # MCP server code
+├── ouroboros/               # MCP server code
 ├── .cache/                  # Vector index and state files
 └── specs/                   # User-created specs
     ├── review/              # Specs awaiting approval
@@ -49,7 +49,7 @@ The MCP server's `ConfigValidator` explicitly checks for:
 - `.praxis-os/usage/`
 - `.praxis-os/workflows/` ← **If this is missing, server won't start!**
 
-From `mcp_server/config/validator.py`:
+From `ouroboros/config/schemas/mcp.py`:
 ```python
 for name in ["standards_path", "usage_path", "workflows_path"]:
     if not path.exists():
@@ -73,7 +73,7 @@ directories = [
     ".praxis-os/specs/review",       # Specs awaiting approval
     ".praxis-os/specs/approved",     # Specs ready to implement
     ".praxis-os/specs/completed",    # Finished implementations
-    ".praxis-os/mcp_server",
+    ".praxis-os/ouroboros",
     ".praxis-os/.cache",
     ".cursor",
 ]
@@ -95,7 +95,7 @@ mkdir -p .praxis-os/workflows
 mkdir -p .praxis-os/specs/review
 mkdir -p .praxis-os/specs/approved
 mkdir -p .praxis-os/specs/completed
-mkdir -p .praxis-os/mcp_server
+mkdir -p .praxis-os/ouroboros
 mkdir -p .praxis-os/.cache
 mkdir -p .cursor
 ```
@@ -108,7 +108,7 @@ New-Item -ItemType Directory -Force -Path ".praxis-os\workflows"
 New-Item -ItemType Directory -Force -Path ".praxis-os\specs\review"
 New-Item -ItemType Directory -Force -Path ".praxis-os\specs\approved"
 New-Item -ItemType Directory -Force -Path ".praxis-os\specs\completed"
-New-Item -ItemType Directory -Force -Path ".praxis-os\mcp_server"
+New-Item -ItemType Directory -Force -Path ".praxis-os\ouroboros"
 New-Item -ItemType Directory -Force -Path ".praxis-os\.cache"
 New-Item -ItemType Directory -Force -Path ".cursor"
 ```
@@ -129,7 +129,7 @@ required_dirs = [
     ".praxis-os/specs/review",
     ".praxis-os/specs/approved",
     ".praxis-os/specs/completed",
-    ".praxis-os/mcp_server",
+    ".praxis-os/ouroboros",
     ".praxis-os/.cache",
     ".cursor",
 ]
@@ -163,7 +163,7 @@ ls -la .praxis-os/
 **Expected output**:
 ```
 drwxr-xr-x  .cache/
-drwxr-xr-x  mcp_server/
+drwxr-xr-x  ouroboros/
 drwxr-xr-x  specs/
 drwxr-xr-x  standards/
 drwxr-xr-x  usage/

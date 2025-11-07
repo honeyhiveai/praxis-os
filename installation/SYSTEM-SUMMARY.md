@@ -101,7 +101,7 @@ Based on user feedback (Windows WSL2 Ubuntu installation failure):
 | Issue | Impact | Fix | File |
 |-------|--------|-----|------|
 | Missing workflows/ directory | MCP server won't start | Added to directory creation | 01-directories.md |
-| Wrong module name in mcp.json | Python module error | Use `"mcp_server"` not `"mcp_server.praxis_os_rag"` | 05-venv-mcp.md |
+| Wrong module name in mcp.json | Python module error | Use `"ouroboros"` not `"mcp_server"` or `"mcp_server.praxis_os_rag"` | 06-venv-mcp.md |
 | Missing workflow files | Empty workflows directory | Added explicit copy step | 02-copy-files.md |
 | Blindly overwriting config files | Destroys user's rules | Agent guides handle merge | Agent-specific guides |
 | Missing .gitignore configuration | 2.7GB ephemeral files committed | Read from standards and append | 04-gitignore.md |
@@ -119,7 +119,7 @@ checks = {
     ".praxis-os/standards/universal/": exists,
     ".praxis-os/usage/": exists,
     ".praxis-os/workflows/": exists and has ~47 files,
-    ".praxis-os/mcp_server/": exists and has ~23 files,
+    ".praxis-os/ouroboros/": exists and has ~23 files,
     ".praxis-os/venv/": exists with working Python,
     ".praxis-os/.cache/": exists,
     ".cursor/": exists,
@@ -129,7 +129,7 @@ checks = {
     ".cursor/mcp.json": exists with correct config,
     
     # Configuration
-    "mcp.json module": "mcp_server" (not "mcp_server.praxis_os_rag"),
+    "mcp.json module": "ouroboros" (not "mcp_server" or "mcp_server.praxis_os_rag"),
     "Python venv": working and has dependencies installed,
     "Config validation": passes MCP server validation,
     
@@ -225,7 +225,7 @@ else:
 - [ ] Temp cleanup happens in step 07
 - [ ] Agent configuration routing works (step 03)
 - [ ] Agent guides handle file merging safely
-- [ ] Module name is correct (`"mcp_server"`)
+- [ ] Module name is correct (`"ouroboros"`)
 - [ ] Tested on Linux, macOS, Windows WSL2
 
 ---

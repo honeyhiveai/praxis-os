@@ -43,7 +43,7 @@ required_dirs = [
     ".praxis-os/standards/universal",
     ".praxis-os/usage",
     ".praxis-os/workflows",
-    ".praxis-os/mcp_server",
+    ".praxis-os/ouroboros",
     ".praxis-os/.cache",
     ".praxis-os/venv",
 ]
@@ -66,8 +66,8 @@ print("\n📄 Checking critical files...")
 critical_files = [
     ".praxis-os/workflows/spec_creation_v1/metadata.json",
     ".praxis-os/workflows/spec_execution_v1/metadata.json",
-    ".praxis-os/mcp_server/__main__.py",
-    ".praxis-os/mcp_server/requirements.txt",
+    ".praxis-os/ouroboros/__main__.py",
+    ".praxis-os/ouroboros/requirements.txt",
 ]
 
 # Check for agent-specific behavioral files (if they exist)

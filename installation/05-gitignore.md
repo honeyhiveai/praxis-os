@@ -238,7 +238,7 @@ if not verify_gitignore():
 .praxis-os/usage/            # Documentation + your custom docs
 .praxis-os/workflows/        # Workflow definitions
 .praxis-os/specs/            # YOUR project specifications (important!)
-.praxis-os/mcp_server/       # MCP server code (if customized)
+.praxis-os/ouroboros/        # MCP server code (if customized)
 .cursor/mcp.json            # Cursor MCP configuration
 .cursorrules                # AI assistant behavioral triggers
 ```
