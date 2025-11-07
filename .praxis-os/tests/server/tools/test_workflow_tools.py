@@ -532,6 +532,90 @@ class TestStartAction:
         )
 
     @pytest.mark.asyncio
+    async def test_start_with_options_as_json_string(self):
+        """
+        Verify start handles options parameter as JSON string (MCP serialization bug).
+        
+        MCP sometimes serializes dict parameters as JSON strings.
+        This tests the defensive parsing added to handle that case.
+        
+        Reference: Bug discovered by Composer 2025-11-05
+        """
+        from ouroboros.tools.pos_workflow import WorkflowTool
+        
+        mock_engine = Mock()
+        mock_engine.start_workflow = Mock(
+            return_value={"session_id": "test-123", "workflow_type": "spec_execution_v1"}
+        )
+        
+        mock_mcp = Mock()
+        tool = WorkflowTool(mock_mcp, mock_engine)
+        
+        # MCP serializes options as JSON string (the bug Composer hit)
+        options_as_json_string = '{"spec_path": ".praxis-os/specs/approved/rag-refactor"}'
+        
+        result = await tool._handle_start(
+            workflow_type="spec_execution_v1",
+            target_file="rag-refactor",
+            options=options_as_json_string,  # String, not dict!
+        )
+        
+        # Assert: Tool defensively parses JSON string
+        mock_engine.start_workflow.assert_called_once_with(
+            workflow_type="spec_execution_v1",
+            target_file="rag-refactor",
+            spec_path=".praxis-os/specs/approved/rag-refactor"  # Unpacked from JSON
+        )
+        
+        assert result["session_id"] == "test-123"
+    
+    @pytest.mark.asyncio
+    async def test_start_with_malformed_options_json_string(self):
+        """
+        Verify start rejects malformed JSON string in options.
+        
+        Tests error handling for malformed JSON in options parameter.
+        """
+        from ouroboros.tools.pos_workflow import WorkflowTool
+        
+        mock_engine = Mock()
+        mock_mcp = Mock()
+        tool = WorkflowTool(mock_mcp, mock_engine)
+        
+        # Malformed JSON string
+        malformed_json = '{"spec_path": invalid json}'
+        
+        with pytest.raises(ValueError, match="options parameter must be valid JSON"):
+            await tool._handle_start(
+                workflow_type="spec_execution_v1",
+                target_file="rag-refactor",
+                options=malformed_json,
+            )
+    
+    @pytest.mark.asyncio
+    async def test_start_with_options_wrong_type(self):
+        """
+        Verify start rejects options with wrong type (not dict or string).
+        
+        Tests defensive type checking for options parameter.
+        """
+        from ouroboros.tools.pos_workflow import WorkflowTool
+        
+        mock_engine = Mock()
+        mock_mcp = Mock()
+        tool = WorkflowTool(mock_mcp, mock_engine)
+        
+        # Wrong type (list instead of dict or string)
+        wrong_type_options = ["spec_path", "value"]
+        
+        with pytest.raises(ValueError, match="must be dict or JSON string"):
+            await tool._handle_start(
+                workflow_type="spec_execution_v1",
+                target_file="rag-refactor",
+                options=wrong_type_options,
+            )
+
+    @pytest.mark.asyncio
     async def test_start_integration_with_dispatcher(self):
         """Verify start works through the full dispatcher."""
         from mcp_server.server.tools.workflow_tools import register_workflow_tools

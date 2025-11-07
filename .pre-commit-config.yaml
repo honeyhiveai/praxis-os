@@ -80,7 +80,7 @@ repos:
         entry: scripts/pre-commit/validate-docstrings.sh
         language: system
         pass_filenames: false
-        files: '^(mcp_server|scripts)/.*\.py$'
+        files: '^(dist/ouroboros|scripts)/.*\.py$'
         stages: [pre-commit]
         verbose: true
 
@@ -92,7 +92,7 @@ repos:
         entry: tox -e format
         language: system
         pass_filenames: false
-        files: '^(mcp_server/.*\.py|scripts/.*\.py|tests/.*\.py)$'
+        files: '^(dist/ouroboros/.*\.py|scripts/.*\.py)$'
         stages: [pre-commit]
         verbose: true
 
@@ -100,11 +100,11 @@ repos:
       # PHASE 2: Static Analysis (ZERO TOLERANCE)
       # ============================================================
       - id: tox-lint
-        name: "Code Quality (Pylint ≥8.0/10.0, Target: 10.0)"
+        name: "Code Quality (Pylint 10.0/10.0 REQUIRED)"
         entry: tox -e lint
         language: system
         pass_filenames: false
-        files: '^(mcp_server/.*\.py|scripts/.*\.py)$'
+        files: '^(dist/ouroboros/.*\.py|scripts/.*\.py)$'
         stages: [pre-commit]
         verbose: true
 
@@ -113,7 +113,7 @@ repos:
         entry: tox -e type
         language: system
         pass_filenames: false
-        files: '^(mcp_server/.*\.py|scripts/.*\.py)$'
+        files: '^(dist/ouroboros/.*\.py|scripts/.*\.py)$'
         stages: [pre-commit]
         verbose: true
 
@@ -125,14 +125,14 @@ repos:
         entry: tox -e unit
         language: system
         pass_filenames: false
-        files: '^(mcp_server/.*\.py|tests/unit/.*\.py)$'
+        files: '^(dist/ouroboros/.*\.py)$'
         stages: [pre-commit]
         verbose: true
 
       # Note: Integration tests can be added here if needed
       # - id: integration-tests
       #   entry: tox -e integration
-      #   files: '^(mcp_server/.*\.py|tests/integration/.*\.py)$'
+      #   files: '^(dist/ouroboros/.*\.py|tests/integration/.*\.py)$'
 
       # ============================================================
       # PHASE 4: Documentation Validation
@@ -187,7 +187,7 @@ repos:
 # - Tests: 100% pass rate required
 #
 # Current Status:
-# - Pylint: 8.33/10.0 (passing enforcement, working toward 10.0)
+# - Pylint: 10.0/10.0 REQUIRED (enforced with --fail-under=10)
 # - MyPy: Enforced (zero tolerance)
 # - Tests: All passing
 #
