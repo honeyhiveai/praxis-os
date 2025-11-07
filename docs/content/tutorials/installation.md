@@ -11,22 +11,23 @@ Install prAxIs OS in any project with a simple conversation. Your AI agent handl
 
 ```bash
 # In your IDE/agent, say:
-"Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT>"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)"
 
 # Examples:
 # "for Cursor"                    → Cursor IDE
 # "for Cline in VS Code"          → Cline extension
 # "for Claude Code"               → CLI/terminal mode
 # "for Claude Code in VS Code"    → VS Code extension
+# "for GitHub Copilot"            → GitHub Copilot
 ```
 
 Your agent will:
-1. **Analyze your project** - Detect language, frameworks, tools
-2. **Copy universal standards** - Timeless CS fundamentals
-3. **Generate language-specific standards** - Tailored to your stack
-4. **Install MCP server** - Local Python process
-5. **Configure your agent** - MCP integration
-6. **Build RAG index** - Semantic search ready
+1. **Run installation script** - Mechanical file operations (clone, copy, venv)
+2. **Parse agent/IDE from command** - Routes to correct agent-specific guide
+3. **Copy universal standards** - Timeless CS fundamentals
+4. **Install MCP server** - Local Python process (Ouroboros)
+5. **Configure your agent** - Agent-specific MCP integration files
+6. **Build RAG index** - Auto-built by Ouroboros on server start
 
 **Time:** ~5 minutes for complete installation
 
@@ -36,7 +37,7 @@ Your agent will:
 
 ```
 your-project/
-├── .cursorrules                  # 26 lines - AI behavioral triggers
+├── [agent-specific behavioral file]  # .cursorrules, .clinerules, .claude/CLAUDE.md, etc.
 ├── .praxis-os/
 │   ├── standards/
 │   │   ├── universal/            # Copied from repo
@@ -55,29 +56,34 @@ your-project/
 │   │   └── spec_execution_v1/
 │   ├── ouroboros/                # MCP/RAG server (copied)
 │   │   ├── __main__.py
-│   │   ├── rag_engine.py
-│   │   ├── workflow_engine.py
+│   │   ├── subsystems/
+│   │   ├── tools/
 │   │   └── requirements.txt
 │   ├── .cache/                   # Not tracked in git
-│   │   └── vector_index/         # RAG index (auto-built)
+│   │   └── indexes/              # RAG indexes (auto-built)
+│   │       ├── standards/         # Standards vector index
+│   │       └── code/             # Code vector + graph index
 │   └── venv/                     # MCP server virtualenv
-└── .cursor/
-    └── mcp.json                  # MCP server configuration
+└── [agent-specific MCP config]   # .cursor/mcp.json, .vscode/settings.json, etc.
 ```
 
 ## Installation Steps (Detailed)
 
-### 1. Project Analysis
+### 1. Mechanical Installation (Automated Script)
 
-Cursor agent analyzes your project:
+The installation script handles mechanical operations:
 
-```python
-# Detects:
-- Programming language (go.mod, package.json, pyproject.toml)
-- Frameworks (Django, FastAPI, React, Next.js)
-- Tools (pytest, jest, mypy, eslint)
-- Patterns (async/await, REST, GraphQL)
+```bash
+# Script automatically:
+- Clones repository to temp directory
+- Creates .praxis-os/ directory structure
+- Copies standards, workflows, MCP server
+- Creates Python venv and installs dependencies
+- Configures .gitignore
+- Cleans up temp files
 ```
+
+**Time:** 2-3 minutes
 
 ### 2. Copy Universal Standards
 
@@ -98,11 +104,11 @@ cp -r praxis-os/universal/workflows/ .praxis-os/workflows/
 
 ### 3. Generate Language-Specific Standards
 
-Cursor agent generates standards for your specific language:
+Your AI agent generates standards for your specific language:
 
 **Python project example:**
 ```bash
-# Cursor agent generates:
+# Your AI agent generates:
 .praxis-os/standards/development/
 ├── python-concurrency.md        # GIL, threading, asyncio
 ├── python-testing.md            # pytest, unittest, coverage
@@ -156,22 +162,28 @@ watchdog>=3.0.0               # File watching
 
 ### 6. Configure Your Agent
 
-After the mechanical installation completes, configure your specific agent. The configuration varies by agent and IDE:
+After the mechanical installation completes, your agent parses the command to route to the correct agent-specific guide:
+
+**Command Pattern:**
+```
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)
+```
 
 **📖 See [Agent Integrations](../how-to-guides/agent-integrations/README.md) for complete setup guides:**
 - **[Cursor](../how-to-guides/agent-integrations/cursor/)** - Native MCP support
 - **[Cline in VS Code](../how-to-guides/agent-integrations/cline/vscode)** - VS Code extension
 - **[Claude Code](../how-to-guides/agent-integrations/claude-code/vscode)** - VS Code integration
 - **[Claude Code Terminal](../how-to-guides/agent-integrations/claude-code/terminal)** - CLI mode
+- **[GitHub Copilot](../how-to-guides/agent-integrations/github-copilot/)** - GitHub Copilot
 
 **Example: Cursor Configuration**
 
-Create `.cursor/mcp.json`:
+Create `.cursor/mcp.json` (Cursor-specific):
 
 ```json
 {
   "mcpServers": {
-    "praxis-os-rag": {
+    "praxis-os": {
       "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
@@ -208,7 +220,7 @@ Create `.cursor/mcp.json`:
 - ✅ Primary agent uses stdio for its own connection (fast, native)
 - ✅ Secondary agents connect via HTTP (no server launch needed)
 
-**Restart Cursor** to activate MCP server.
+**Restart your agent/IDE** to activate MCP server (agent-specific restart instructions in agent guides).
 
 **Dual-Transport Benefits (standard for all primary agents):**
 - ✅ IDE integration via stdio (primary agent's connection)
@@ -252,8 +264,8 @@ Index built in 58s
 ### Check MCP Server
 
 ```bash
-# In Cursor, say:
-"Query MCP: What are race conditions?"
+# In your agent, say:
+"Search standards for race conditions"
 ```
 
 Should return relevant chunks from universal/development standards.
@@ -275,7 +287,7 @@ PORT=$(cat .praxis-os/.mcp_server_state.json | grep -o '"port": [0-9]*' | grep -
 curl http://127.0.0.1:${PORT}/mcp  # Use port from state file
 # Should return MCP server response
 
-# In Cursor, say:
+# In your agent, say:
 "Call get_server_info tool"
 
 # Should show server info including transport mode (dual)
@@ -284,7 +296,7 @@ curl http://127.0.0.1:${PORT}/mcp  # Use port from state file
 ### Check Workflows
 
 ```bash
-# In Cursor, say:
+# In your agent, say:
 "Start spec creation workflow for user authentication"
 ```
 
@@ -306,7 +318,7 @@ ls -la .praxis-os/standards/development/
 When new versions are released, use the upgrade workflow:
 
 ```bash
-# In Cursor, say:
+# In your agent, say:
 "Run the prAxIs OS upgrade workflow"
 ```
 
@@ -334,7 +346,6 @@ git clone https://github.com/honeyhiveai/praxis-os.git
 
 # 2. Copy to your project
 cd your-project
-cp praxis-os/.cursorrules .
 cp -r praxis-os/universal .praxis-os/standards/universal
 cp -r praxis-os/dist/ouroboros .praxis-os/ouroboros
 
@@ -343,11 +354,16 @@ cd .praxis-os
 python -m venv venv
 ./venv/bin/pip install -r ouroboros/requirements.txt
 
-# 4. Configure Cursor
-# Create .cursor/mcp.json (see above)
+# 4. Configure your agent
+# See installation/03-agent-configuration.md to route to agent-specific guide
+# Each agent has different MCP config file locations:
+# - Cursor: .cursor/mcp.json
+# - Cline: .vscode/settings.json (with cline.mcpServers key)
+# - Claude Code: .vscode/settings.json (with claude-code.mcpServers key) or .mcp.json (CLI)
+# - GitHub Copilot: .vscode/mcp.json
 
 # 5. Generate language-specific standards
-# Use Cursor agent or manual creation
+# Use your AI agent or manual creation
 ```
 
 ## Troubleshooting
@@ -355,13 +371,15 @@ python -m venv venv
 ### MCP Server Not Starting
 
 ```bash
-# Check logs
-cat ~/.cursor/logs/mcp.log
+# Check logs (agent-specific locations):
+# - Cursor: Settings → MCP logs
+# - VS Code: Output panel → MCP logs
+# - Claude Code CLI: Check terminal output
 
 # Common issues:
 - Python version < 3.9
 - Missing dependencies
-- Invalid mcp.json config
+- Invalid MCP config (check agent-specific config file)
 ```
 
 ### RAG Index Not Building
@@ -378,7 +396,7 @@ engine.build_index()
 
 ### No Language-Specific Standards
 
-Cursor agent may not have generated them. Manually create:
+Your AI agent may not have generated them. Manually create:
 
 ```bash
 # Python example

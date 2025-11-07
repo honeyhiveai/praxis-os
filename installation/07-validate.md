@@ -25,6 +25,7 @@ Run this complete validation script:
 import os
 import sys
 import json
+from pathlib import Path
 
 print("="*60)
 print("prAxIs OS INSTALLATION - FINAL VALIDATION")
@@ -32,6 +33,9 @@ print("="*60)
 
 errors = []
 warnings = []
+
+# Note: Agent detection logic is in installation/03-agent-configuration.md
+# This validation script just checks what files exist and validates them
 
 # Check 1: All directories exist
 print("\n📁 Checking directories...")
@@ -42,8 +46,13 @@ required_dirs = [
     ".praxis-os/mcp_server",
     ".praxis-os/.cache",
     ".praxis-os/venv",
-    ".cursor",
 ]
+
+# Check for common agent directories (if they exist)
+if Path(".cursor").exists():
+    required_dirs.append(".cursor")
+if Path(".vscode").exists():
+    required_dirs.append(".vscode")
 
 for d in required_dirs:
     if os.path.exists(d):
@@ -59,9 +68,30 @@ critical_files = [
     ".praxis-os/workflows/spec_execution_v1/metadata.json",
     ".praxis-os/mcp_server/__main__.py",
     ".praxis-os/mcp_server/requirements.txt",
-    ".cursorrules",
-    ".cursor/mcp.json",
 ]
+
+# Check for agent-specific behavioral files (if they exist)
+agent_behavioral_files = [
+    ".cursorrules",  # Cursor
+    ".clinerules",  # Cline
+    ".claude/CLAUDE.md",  # Claude Code
+    "CLAUDE.md",  # Claude Code CLI
+    ".github/copilot-instructions.md",  # GitHub Copilot
+]
+for behavioral_file in agent_behavioral_files:
+    if os.path.exists(behavioral_file):
+        critical_files.append(behavioral_file)
+
+# Check for MCP config files (if they exist)
+mcp_config_files = [
+    ".cursor/mcp.json",  # Cursor
+    ".vscode/settings.json",  # VS Code agents (Cline, Claude Code, GitHub Copilot)
+    ".vscode/mcp.json",  # GitHub Copilot (alternative)
+    ".mcp.json",  # Claude Code CLI (project-level)
+]
+for mcp_file in mcp_config_files:
+    if os.path.exists(mcp_file):
+        critical_files.append(mcp_file)
 
 for f in critical_files:
     if os.path.exists(f):
@@ -92,44 +122,102 @@ else:
     print(f"  ❌ Python venv missing")
     errors.append("Python venv not found")
 
-# Check 5: mcp.json has correct module name
-print("\n⚙️  Checking mcp.json configuration...")
-try:
-    with open(".cursor/mcp.json", "r") as f:
-        mcp_config = json.load(f)
-    
-    module_name = mcp_config["mcpServers"]["praxis-os-rag"]["args"][1]
-    if module_name == "mcp_server":
-        print(f"  ✅ Module name correct: {module_name}")
-    else:
-        print(f"  ❌ Wrong module name: {module_name}")
-        errors.append(f"Module should be 'mcp_server', not '{module_name}'")
-        
-except Exception as e:
-    print(f"  ❌ mcp.json parse error: {e}")
-    errors.append("mcp.json is invalid")
+# Check 5: MCP configuration file validation
+print("\n⚙️  Checking MCP configuration files...")
+found_mcp_config = False
 
-# Check 6: .cursorrules has prAxIs OS content
-print("\n📜 Checking .cursorrules...")
-try:
-    with open(".cursorrules", "r") as f:
-        cursorrules = f.read()
-    
-    if "prAxIs OS" in cursorrules or "MANDATORY FIRST ACTION" in cursorrules:
-        print("  ✅ prAxIs OS rules present")
-    else:
-        print("  ⚠️  prAxIs OS rules not detected")
-        warnings.append("cursorrules may not have prAxIs OS content")
-except Exception as e:
-    print(f"  ❌ Error reading .cursorrules: {e}")
-    errors.append(".cursorrules unreadable")
+# Check all possible MCP config file locations
+mcp_config_locations = [
+    (".cursor/mcp.json", "mcpServers", "Cursor"),
+    (".vscode/settings.json", "cline.mcpServers", "Cline"),
+    (".vscode/settings.json", "claude-code.mcpServers", "Claude Code"),
+    (".vscode/mcp.json", "mcpServers", "GitHub Copilot"),
+    (".mcp.json", "mcpServers", "Claude Code CLI"),
+]
+
+for mcp_file, config_key, agent_name in mcp_config_locations:
+    if os.path.exists(mcp_file):
+        found_mcp_config = True
+        print(f"  ✅ Found {mcp_file} ({agent_name})")
+        try:
+            with open(mcp_file, "r") as f:
+                mcp_config = json.load(f)
+            
+            # Check for MCP server configuration
+            if config_key == "mcpServers":
+                # Direct mcpServers key (Cursor, GitHub Copilot, Claude Code CLI)
+                if "mcpServers" in mcp_config:
+                    if "praxis-os" in mcp_config["mcpServers"]:
+                        module_name = mcp_config["mcpServers"]["praxis-os"]["args"][1]
+                        if module_name == "ouroboros":
+                            print(f"    ✅ MCP server 'praxis-os' configured correctly")
+                        else:
+                            print(f"    ⚠️  Module name: {module_name} (expected 'ouroboros')")
+                            warnings.append(f"{mcp_file}: Module name is '{module_name}', expected 'ouroboros'")
+                    else:
+                        print(f"    ⚠️  MCP servers found but 'praxis-os' not configured")
+                        warnings.append(f"{mcp_file}: MCP servers exist but 'praxis-os' missing")
+                else:
+                    print(f"    ⚠️  'mcpServers' key not found")
+                    warnings.append(f"{mcp_file}: Missing 'mcpServers' key")
+            else:
+                # Nested key in settings.json (Cline, Claude Code VS Code)
+                if config_key in mcp_config:
+                    if "praxis-os" in mcp_config[config_key]:
+                        print(f"    ✅ MCP server 'praxis-os' configured correctly")
+                    else:
+                        print(f"    ⚠️  {config_key} found but 'praxis-os' not configured")
+                        warnings.append(f"{mcp_file}: {config_key} exists but 'praxis-os' missing")
+                else:
+                    print(f"    ⚠️  '{config_key}' key not found")
+                    warnings.append(f"{mcp_file}: Missing '{config_key}' key")
+                    
+        except Exception as e:
+            print(f"    ❌ Parse error: {e}")
+            errors.append(f"{mcp_file} is invalid JSON")
+
+if not found_mcp_config:
+    print("  ⚠️  No MCP configuration files found")
+    print("     Expected one of: .cursor/mcp.json, .vscode/settings.json, .vscode/mcp.json, .mcp.json")
+    warnings.append("No MCP configuration file found - agent may not be configured")
+
+# Check 6: Agent behavioral files have prAxIs OS content
+print("\n📜 Checking agent behavioral files...")
+behavioral_files_checked = False
+behavioral_files = [
+    ".cursorrules",  # Cursor
+    ".clinerules",  # Cline
+    ".claude/CLAUDE.md",  # Claude Code
+    "CLAUDE.md",  # Claude Code CLI
+    ".github/copilot-instructions.md",  # GitHub Copilot
+]
+
+for behavioral_file in behavioral_files:
+    if os.path.exists(behavioral_file):
+        behavioral_files_checked = True
+        print(f"  ✅ Found {behavioral_file}")
+        try:
+            with open(behavioral_file, "r") as f:
+                content = f.read()
+            if "prAxIs OS" in content or "MANDATORY FIRST ACTION" in content:
+                print(f"    ✅ Contains prAxIs OS content")
+            else:
+                print(f"    ⚠️  May not contain prAxIs OS content")
+                warnings.append(f"{behavioral_file} may not have prAxIs OS content")
+        except Exception as e:
+            print(f"    ❌ Error reading: {e}")
+            errors.append(f"{behavioral_file} unreadable")
+
+if not behavioral_files_checked:
+    print("  ⚠️  No agent behavioral files found")
+    warnings.append("No agent behavioral file found - agent may not be configured")
 
 # Check 7: RAG index exists
 print("\n📚 Checking RAG index...")
 rag_checks = {
-    "Index directory": os.path.exists(".praxis-os/.cache/vector_index"),
-    "LanceDB data": os.path.exists(".praxis-os/.cache/vector_index/praxis_os_standards.lance"),
-    "Metadata file": os.path.exists(".praxis-os/.cache/vector_index/metadata.json"),
+    "Index directory": os.path.exists(".praxis-os/.cache/indexes"),
+    "Standards index": os.path.exists(".praxis-os/.cache/indexes/standards"),
+    "Code index": os.path.exists(".praxis-os/.cache/indexes/code"),
 }
 
 all_rag_passed = all(rag_checks.values())
@@ -218,10 +306,10 @@ Installation Summary:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ .praxis-os/ directory structure created
 ✅ ~106 files copied from source repository
-✅ .cursorrules configured (or merged with existing)
+✅ Agent configuration files configured (or merged with existing)
 ✅ Python virtual environment created
 ✅ MCP server dependencies installed
-✅ .cursor/mcp.json configured
+✅ MCP configuration file configured
 ✅ Temp files cleaned up
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -230,28 +318,32 @@ Next Steps:
 
 1. 🔄 Enable MCP Server:
 
-   Option A: Restart Cursor (easiest)
-   - Close and reopen Cursor
-   - MCP server will start automatically
-
-   Option B: Enable without restarting
-   - Open Cursor Settings (Cmd/Ctrl + ,)
-   - Navigate to: Features → Model Context Protocol
-   - Find "praxis-os-rag" server
-   - Click "Enable" or toggle it on
+   The steps depend on your agent/IDE:
+   
+   **Cursor:**
+   - Option A: Restart Cursor (easiest)
+   - Option B: Open Cursor Settings → Features → Model Context Protocol → Enable "praxis-os"
+   
+   **VS Code (Cline/Claude Code/GitHub Copilot):**
+   - Restart VS Code or reload window
+   - MCP server should start automatically if configured correctly
+   
+   **Claude Code CLI:**
+   - MCP server starts automatically when you run Claude Code commands
 
 2. ✅ Verify MCP Server is Running:
 
    You should see MCP tools available in chat:
-   - search_standards
-   - start_workflow
-   - get_current_phase
-   - pos_browser
+   - pos_search_project (search standards and code)
+   - pos_workflow (workflow management)
+   - pos_browser (browser automation)
+   - pos_filesystem (file operations)
+   - current_date, get_server_info
    - And more...
 
 3. 🎯 Try It Out:
 
-   Say to me: "Search standards for concurrency patterns"
+   Say to your agent: "Search standards for concurrency patterns"
 
    Or: "Start the spec creation workflow for building a rate limiter"
 
@@ -286,14 +378,16 @@ Troubleshooting:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 If MCP server doesn't start:
-1. Check Cursor's MCP logs
-2. Verify .cursor/mcp.json exists and is valid
+1. Check your agent's MCP logs (Cursor: Settings → MCP logs, VS Code: Output panel)
+2. Verify MCP configuration file exists and is valid:
+   - Cursor: `.cursor/mcp.json`
+   - VS Code: `.vscode/settings.json` or `.vscode/mcp.json`
+   - Claude Code CLI: `.mcp.json`
 3. Run validation: .praxis-os/venv/bin/python -c "
    from pathlib import Path
-   from mcp_server.config import ConfigLoader, ConfigValidator
-   config = ConfigLoader.load(Path('.praxis-os'))
-   errors = ConfigValidator.validate(config)
-   print('✅ Valid' if not errors else f'❌ {errors}')
+   from ouroboros.config.loader import load_config
+   config = load_config(Path('.praxis-os/config/mcp.yaml'))
+   print('✅ Config loaded successfully')
    "
 
 If you need help: Check installation/README.md
@@ -324,11 +418,20 @@ Before you finish, double-check:
 final_checks = {
     "Directories created": os.path.exists(".praxis-os/workflows"),
     "Files copied": os.path.exists(".praxis-os/workflows/spec_creation_v1/metadata.json"),
-    ".cursorrules handled": os.path.exists(".cursorrules"),
     "Python venv created": os.path.exists(".praxis-os/venv"),
-    "mcp.json created": os.path.exists(".cursor/mcp.json"),
     "Temp directory deleted": not os.path.exists(PRAXIS_OS_SOURCE) if 'PRAXIS_OS_SOURCE' in globals() else True,
 }
+
+# Add agent-specific checks (if files exist)
+behavioral_files = [".cursorrules", ".clinerules", ".claude/CLAUDE.md", "CLAUDE.md", ".github/copilot-instructions.md"]
+for behavioral_file in behavioral_files:
+    if os.path.exists(behavioral_file):
+        final_checks[f"Agent behavioral file ({behavioral_file})"] = True
+
+mcp_config_files = [".cursor/mcp.json", ".vscode/settings.json", ".vscode/mcp.json", ".mcp.json"]
+for mcp_file in mcp_config_files:
+    if os.path.exists(mcp_file):
+        final_checks[f"MCP config ({mcp_file})"] = True
 
 all_done = all(final_checks.values())
 
@@ -352,14 +455,14 @@ The installation followed these steps:
 1. ✅ Cloned source to temp directory (step 00)
 2. ✅ Created all required directories (step 01)
 3. ✅ Copied all content files (step 02)
-4. ✅ Handled .cursorrules safely (step 03)
+4. ✅ Configured agent-specific files safely (step 03)
 5. ✅ Configured .gitignore (step 04)
-6. ✅ Created Python venv, mcp.json, and RAG index (step 05)
+6. ✅ Created Python venv, MCP config, and RAG index (step 05)
 7. ✅ Validated and cleaned up (step 06)
 
 **No further steps required.**
 
-The user should restart Cursor to activate the MCP server.
+The user should restart their agent/IDE to activate the MCP server.
 
 ---
 

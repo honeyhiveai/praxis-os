@@ -53,7 +53,11 @@ After the script completes, configure the specific agent:
 
 3. **Follow the guide to**:
    - Configure MCP server settings
-   - Set up system prompts/rules (`.cursorrules` or equivalent)
+   - Set up agent-specific behavioral trigger files:
+     - **Cursor**: `.cursorrules` (project root)
+     - **Cline**: `.clinerules` (project root)
+     - **Claude Code**: `.claude/CLAUDE.md` (or `CLAUDE.md` for CLI)
+     - **GitHub Copilot**: `.github/copilot-instructions.md`
    - Copy helper scripts (for secondary agents only)
    - Verify installation
 
@@ -202,7 +206,7 @@ praxis-os/
 │   ├── usage/
 │   └── workflows/
 ├── mcp_server/            ← Server code to copy
-└── .cursorrules           ← Rules to copy/merge
+└── .cursorrules           ← Cursor behavioral triggers (agent-specific files handled in step 03)
 ```
 
 **During Installation** (temp directory):
@@ -223,9 +227,16 @@ target-project/
 │   ├── mcp_server/
 │   ├── venv/
 │   └── .cache/
-├── .cursorrules           ← Copied or merged
-└── .cursor/
-    └── mcp.json           ← Created fresh
+├── [agent-specific file]  ← Copied or merged based on agent:
+│                           - Cursor: .cursorrules
+│                           - Cline: .clinerules
+│                           - Claude Code: .claude/CLAUDE.md or CLAUDE.md
+│                           - GitHub Copilot: .github/copilot-instructions.md
+└── [agent config dir]/    ← Agent-specific config directory:
+    └── mcp.json            - Cursor: .cursor/mcp.json
+                              - Cline: .vscode/settings.json
+                              - Claude Code: .vscode/settings.json or ~/.config/claude-code/mcp.json
+                              - GitHub Copilot: .vscode/mcp.json or IDE-specific
 ```
 
 ---
@@ -252,10 +263,11 @@ checks = {
 | Issue | Cause | Fix |
 |-------|-------|-----|
 | Missing workflows/ | Forgot step 01 | Create `.praxis-os/workflows/` |
-| Wrong module name | Used `mcp_server.praxis_os_rag` | Change to `mcp_server` in mcp.json |
+| Wrong module name | Used `mcp_server.praxis_os_rag` | Change to `ouroboros` in mcp.json |
 | Empty workflows/ | Forgot step 02 | Copy files from `universal/workflows/` |
 | Git repo left behind | Forgot step 05 | Delete temp directory manually |
-| .cursorrules overwritten | Didn't follow step 03 | Restore from `.cursorrules.backup` |
+| Agent file overwritten | Didn't follow step 03 | Restore from backup (`.cursorrules.backup`, `.clinerules.backup`, etc.) |
+| Wrong agent file | Used wrong file for agent | Check agent detection in step 03, use correct file |
 
 ---
 

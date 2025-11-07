@@ -393,9 +393,15 @@ At this point you should have:
 
 ## 🎯 What's Next
 
-You've copied all the content files. Now you need to handle `.cursorrules`.
+You've copied all the content files. Now you need to handle agent-specific behavioral trigger files.
 
-**Why `.cursorrules` is special**: It might already exist in the target project. If it does, you CANNOT blindly overwrite it (that would destroy the user's existing Cursor configuration).
+**Why these files are special**: Each agent uses different files that might already exist in the target project:
+- **Cursor**: `.cursorrules` (project root)
+- **Cline**: `.clinerules` (project root)
+- **Claude Code**: `.claude/CLAUDE.md` (or `CLAUDE.md` for CLI)
+- **GitHub Copilot**: `.github/copilot-instructions.md`
+
+If these files exist, you CANNOT blindly overwrite them (that would destroy the user's existing configuration).
 
 **Next step**: Route to agent-specific configuration guide.
 
@@ -406,10 +412,10 @@ You've copied all the content files. Now you need to handle `.cursorrules`.
 **Read file**: `installation/03-agent-configuration.md`
 
 That file will:
-1. Parse user's command to identify the agent (Cursor, Cline, Claude Code, etc.)
+1. **Parse** the agent/IDE from the user's installation command (`"for <AGENT> (optional: in <IDE>)"`)
 2. Route to the correct agent-specific configuration guide
-3. Guide you through agent-specific file handling (.cursorrules, mcp.json, etc.)
-4. Direct you to step 04 (gitignore)
+3. Guide you through agent-specific file handling (`.cursorrules`, `.clinerules`, `.claude/CLAUDE.md`, `.github/copilot-instructions.md`, etc.)
+4. Direct you to step 04 (config customization)
 
 ---
 

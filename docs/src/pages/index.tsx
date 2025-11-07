@@ -51,18 +51,21 @@ function HomepageHeader() {
 
 "Install prAxIs OS from 
  github.com/honeyhiveai/praxis-os 
- for <AGENT>"
+ for <AGENT> (optional: in <IDE>)"
 
 # Examples:
 # "for Cursor"                    → Cursor IDE
 # "for Cline in VS Code"          → Cline extension
 # "for Claude Code"               → CLI/terminal mode
 # "for Claude Code in VS Code"    → VS Code extension
+# "for GitHub Copilot"            → GitHub Copilot
 
 # The agent will:
-✓ Analyze your project structure
+✓ Run mechanical installation script
 ✓ Copy universal standards  
 ✓ Install MCP server
+✓ Parse agent/IDE from command
+✓ Route to agent-specific config guide
 ✓ Configure everything automatically`}
                 </pre>
               </div>

@@ -26,7 +26,7 @@ The documentation site includes:
 
 ### For Users
 
-In your project, ask your AI agent:
+**Open your project in Cursor, Claude Code, Cline, or GitHub Copilot and say:**
 
 ```
 "Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> [in <IDE>]"
@@ -37,6 +37,8 @@ In your project, ask your AI agent:
 - `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cline in VS Code"`
 - `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cline in Cursor"` (secondary)
 - `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Claude Code"` (CLI)
+- `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Claude Code in VS Code"` (VS Code extension)
+- `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for GitHub Copilot"`
 
 Your AI agent will handle the complete installation automatically.
 
@@ -46,9 +48,11 @@ Your AI agent will handle the complete installation automatically.
 
 ### For LLMs (You Are Here!)
 
-When a user asks to install prAxIs OS, follow this flow:
+When a user asks to install prAxIs OS, follow this two-phase approach:
 
-**Phase 1: Mechanical Installation (Automated)**
+**⚠️ IMPORTANT: Use the automated script (recommended). Manual files are for reference/troubleshooting only.**
+
+#### Phase 1: Mechanical Installation (Automated Script) ⭐ RECOMMENDED
 
 Run the installation script:
 
@@ -59,40 +63,123 @@ curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/i
 # Windows: Not yet supported
 ```
 
-This script:
-- Clones source to temp directory
+**What it does:**
+- Clones repository to temp directory
 - Creates `.praxis-os/` directory structure
-- Copies universal standards, workflows, MCP server, scripts
+- Copies standards, workflows, MCP server, scripts
 - Creates Python venv and installs dependencies
-- Configures .gitignore (ephemeral files excluded)
+- Configures .gitignore
 - Cleans up temp files
 
-**Phase 2: Agent Configuration (Intelligent)**
+**Time:** 2-3 minutes
 
-After the script completes, configure the specific agent:
+#### Phase 2: Agent Configuration (LLM-Guided)
 
-1. **Parse the agent from user's command**:
-   - "for Cursor" → Primary Cursor setup
-   - "for Cline in VS Code" → Primary Cline
-   - "for Cline in Cursor" → Secondary Cline (HTTP)
-   - "for Claude Code" → **CLI/terminal mode** (default when no IDE specified)
-   - "for Claude Code in VS Code" → **VS Code extension** (when IDE specified)
+After the script completes, **parse the user's command** and route to the correct agent-specific guide:
+
+**⚠️ CRITICAL: The LLM calling this installation knows what agent/IDE it's running in. Parse the agent/IDE from the user's installation command.**
+
+**Command Pattern:**
+```
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)
+```
+
+**Required**: `for <AGENT>`  
+**Optional**: `in <IDE>` (if not specified, IDE is implied based on agent)
+
+1. **Parse User's Command**:
    
-   **Branching Logic for Claude Code:**
-   - `"for Claude Code"` → Route to `claude-code/terminal.md` (CLI mode)
-   - `"for Claude Code in VS Code"` → Route to `claude-code/vscode.md` (VS Code extension)
+   ```python
+   # Extract agent from user's command
+   # Pattern: "Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)"
+   
+   user_command = "Install prAxIs OS from github.com/honeyhiveai/praxis-os for Claude Code in VS Code"
+   # Examples:
+   #   "for Cursor" → Cursor (IDE implied: Cursor)
+   #   "for Cline in VS Code" → Cline in VS Code
+   #   "for Cline in Cursor" → Cline in Cursor (secondary)
+   #   "for Claude Code" → Claude Code CLI (no IDE = terminal)
+   #   "for Claude Code in VS Code" → Claude Code in VS Code
+   #   "for GitHub Copilot" → GitHub Copilot (IDE implied: VS Code)
+   
+   detected = None
+   if "for Cursor" in user_command:
+       detected = {"agent": "cursor", "ide": "cursor", "mode": "primary"}
+   elif "for Cline in VS Code" in user_command:
+       detected = {"agent": "cline", "ide": "vscode", "mode": "primary"}
+   elif "for Cline in Cursor" in user_command:
+       detected = {"agent": "cline", "ide": "cursor", "mode": "secondary"}
+   elif "for Claude Code in VS Code" in user_command:
+       detected = {"agent": "claude-code", "ide": "vscode", "mode": "primary"}
+   elif "for Claude Code" in user_command:
+       detected = {"agent": "claude-code", "ide": "terminal", "mode": "primary"}
+   elif "for GitHub Copilot" in user_command or "for Copilot" in user_command:
+       detected = {"agent": "github-copilot", "ide": "vscode", "mode": "primary"}
+   
+   if not detected:
+       print("⚠️  Agent/IDE not specified in command")
+       print("Please specify: 'for Cursor', 'for Cline in VS Code', 'for Claude Code', etc.")
+   ```
 
-2. **Read agent-specific guide**:
+2. **Route to Correct Agent-Specific Guide**:
+   
+   ```python
+   routing_table = {
+       ("cursor", "cursor", "primary"): "docs/content/how-to-guides/agent-integrations/cursor/index.md",
+       ("cline", "vscode", "primary"): "docs/content/how-to-guides/agent-integrations/cline/vscode.md",
+       ("cline", "cursor", "secondary"): "docs/content/how-to-guides/agent-integrations/cline/cursor.md",
+       ("claude-code", "vscode", "primary"): "docs/content/how-to-guides/agent-integrations/claude-code/vscode.md",
+       ("claude-code", "terminal", "primary"): "docs/content/how-to-guides/agent-integrations/claude-code/terminal.md",
+       ("claude-code", "cursor", "secondary"): "docs/content/how-to-guides/agent-integrations/claude-code/cursor.md",
+       ("github-copilot", "vscode", "primary"): "docs/content/how-to-guides/agent-integrations/github-copilot/index.md",
+   }
+   
+   key = (detected["agent"], detected["ide"], detected["mode"])
+   guide_path = routing_table.get(key)
+   
+   if not guide_path:
+       print(f"❌ Unknown agent/IDE combination: {detected}")
+       print("Available options:")
+       print("  - Cursor (primary)")
+       print("  - Cline in VS Code (primary)")
+       print("  - Cline in Cursor (secondary)")
+       print("  - Claude Code (CLI/terminal)")
+       print("  - Claude Code in VS Code")
+       print("  - GitHub Copilot")
+   ```
+
+3. **Read Agent-Specific Guide**:
    - See [`docs/content/how-to-guides/agent-integrations/`](docs/content/how-to-guides/agent-integrations/)
    - Each agent has detailed setup instructions
 
-3. **Follow the guide**:
-   - Configure MCP server settings
-   - Set up system prompts/rules (`.cursorrules` or equivalent)
+4. **Follow the Guide to**:
+   - Configure MCP server settings (agent-specific config files)
+   - Set up agent-specific behavioral trigger files:
+     - **Cursor**: `.cursorrules` (project root)
+     - **Cline**: `.clinerules` (project root)
+     - **Claude Code**: `.claude/CLAUDE.md` (or `CLAUDE.md` for CLI)
+     - **GitHub Copilot**: `.github/copilot-instructions.md`
    - Copy helper scripts (for secondary agents only)
    - Verify installation
 
-**Reference**: For understanding the installation process or troubleshooting, see [`installation/00-START.md`](installation/00-START.md) (manual sequential guides)
+**Time:** 2-5 minutes
+
+**📖 For complete command parsing logic and routing table**: See [`installation/03-agent-configuration.md`](installation/03-agent-configuration.md)
+
+---
+
+### Installation Documentation
+
+**For LLMs installing prAxIs OS:**
+
+- **Quick Start**: See [`installation/README.md`](installation/README.md) for the complete installation flow
+- **Automated Script**: Recommended approach (handles mechanical operations)
+- **Manual Guides**: See [`installation/00-START.md`](installation/00-START.md) through [`installation/07-validate.md`](installation/07-validate.md) for step-by-step manual installation (reference/troubleshooting only)
+
+**For Users:**
+
+- **Agent-Specific Setup**: After mechanical installation, see [`docs/content/how-to-guides/agent-integrations/`](docs/content/how-to-guides/agent-integrations/) for your specific agent/IDE combination
+- **Troubleshooting**: See [`installation/README.md`](installation/README.md) for common issues and solutions
 
 ### What Gets Installed
 

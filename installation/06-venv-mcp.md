@@ -1,7 +1,7 @@
 # Step 6: Python venv, MCP Configuration, and RAG Index
 
 **Previous**: `05-gitignore.md` (configured .gitignore)  
-**Current**: Creating Python venv, configuring Cursor MCP, and building RAG index  
+**Current**: Creating Python venv, configuring MCP, and building RAG index  
 **Next**: `07-validate.md`
 
 ---
@@ -10,8 +10,8 @@
 
 1. Create isolated Python virtual environment
 2. Install MCP server dependencies
-3. Create `.cursor/mcp.json` configuration file
-4. **Build RAG index** (enables semantic search)
+3. Configure MCP server (agent-specific - see `03-agent-configuration.md`)
+4. **Build RAG index** (enables semantic search - auto-built by Ouroboros on server start)
 5. Validate Python setup
 
 **Why isolated venv**: Prevents prAxIs OS dependencies from conflicting with your project's dependencies.
@@ -59,7 +59,7 @@ print(f"📥 Installing MCP server dependencies...")
 
 result = subprocess.run([
     pip_path, "install", 
-    "-r", ".praxis-os/mcp_server/requirements.txt"
+    "-r", ".praxis-os/ouroboros/requirements.txt"
 ], capture_output=True, text=True)
 
 if result.returncode != 0:
@@ -100,7 +100,7 @@ else:
 
 # Test module can be imported
 result = subprocess.run([
-    python_path, "-c", "import mcp_server"
+    python_path, "-c", "import ouroboros"
 ], capture_output=True, text=True, 
    env={**os.environ, "PYTHONPATH": ".praxis-os"}
 )
@@ -108,83 +108,43 @@ result = subprocess.run([
 if result.returncode == 0:
     print("✅ MCP server module importable")
 else:
-    print("❌ Cannot import mcp_server:")
+    print("❌ Cannot import ouroboros:")
     print(result.stderr)
     exit(1)
 ```
 
 ---
 
-## 🔧 Step 5.3: Create .cursor/mcp.json
+## 🔧 Step 5.3: Configure MCP Server (Agent-Specific)
 
-⚠️ **CRITICAL**: Use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`!
+⚠️ **CRITICAL**: MCP configuration is agent-specific. Each agent uses different config files:
 
-```python
-import json
-import os
+- **Cursor**: `.cursor/mcp.json`
+- **Cline**: `.vscode/settings.json` (with `cline.mcpServers` key)
+- **Claude Code (VS Code)**: `.vscode/settings.json` (with `claude-code.mcpServers` key)
+- **Claude Code (CLI)**: `.mcp.json` or `~/.config/claude-code/mcp.json`
+- **GitHub Copilot**: `.vscode/mcp.json`
 
-# Determine correct Python path for mcp.json
-if os.name == "nt":
-    # Windows native
-    python_cmd = "${workspaceFolder}/.praxis-os/venv/Scripts/python.exe"
-else:
-    # Linux, macOS, WSL2
-    python_cmd = "${workspaceFolder}/.praxis-os/venv/bin/python"
+**Next step**: Route to agent-specific configuration guide.
 
-mcp_config = {
-    "mcpServers": {
-        "praxis-os-rag": {
-            "command": python_cmd,
-            "args": [
-                "-m",
-                "mcp_server",
-                "--transport",
-                "dual",  # ← Enable dual-transport (stdio + HTTP)
-                "--log-level",
-                "INFO"
-            ],
-            "env": {
-                "PROJECT_ROOT": "${workspaceFolder}",
-                "PYTHONPATH": "${workspaceFolder}/.praxis-os",
-                "PYTHONUNBUFFERED": "1"
-            },
-            "autoApprove": [
-                "search_standards",
-                "get_current_phase",
-                "get_workflow_state",
-                "get_server_info"
-            ]
-        }
-    }
-}
+**Read file**: `installation/03-agent-configuration.md`
 
-# Write mcp.json
-with open(".cursor/mcp.json", "w") as f:
-    json.dump(mcp_config, f, indent=2)
-
-print("✅ .cursor/mcp.json created")
-print(f"   Platform: {'Windows' if os.name == 'nt' else 'Unix-like'}")
-print(f"   Python: {python_cmd}")
-print("   Module: mcp_server")
-print("   Transport: dual (stdio + HTTP)")
-print("   HTTP endpoint: http://127.0.0.1:4242/mcp (auto-allocated port)")
-```
+That file will:
+1. Parse the agent/IDE from the user's installation command
+2. Route to the correct agent-specific guide
+3. Guide you through creating the appropriate MCP configuration file for your agent
 
 **About Dual-Transport Mode:**
 
 The `--transport dual` argument enables both:
-- **stdio**: For Cursor IDE communication (traditional MCP)
-- **HTTP**: For sub-agent access via `http://127.0.0.1:4242/mcp`
+- **stdio**: For IDE communication (traditional MCP)
+- **HTTP**: For sub-agent access via `http://127.0.0.1:4242/mcp` (auto-allocated port)
 
 **Benefits:**
 - ✅ IDE integration works as before
 - ✅ Sub-agents can connect via HTTP
 - ✅ Zero port conflicts (automatic port allocation per project)
 - ✅ Multi-project support (each gets its own port)
-
-**Alternative Modes** (if needed):
-- `stdio`: IDE only (no HTTP) - use if you don't need sub-agents
-- `http`: HTTP only (no stdio) - use for services/testing
 
 **State File:**
 
@@ -198,23 +158,29 @@ This file is automatically managed (created on start, deleted on shutdown) and a
 
 ---
 
-## 📄 Verify mcp.json Content
+## 📄 Verify MCP Configuration
 
-Check that the file was created correctly:
+After configuring your agent-specific MCP file, verify it was created correctly:
 
 ```python
 import json
+from pathlib import Path
 
-# Read and verify
-with open(".cursor/mcp.json", "r") as f:
-    config = json.load(f)
+# Determine which MCP config file to check based on agent
+# (This should be done after routing via 03-agent-configuration.md)
 
-# Critical checks
-checks = {
-    "praxis-os-rag server configured": "praxis-os-rag" in config.get("mcpServers", {}),
-    "Module name is 'mcp_server'": config["mcpServers"]["praxis-os-rag"]["args"][1] == "mcp_server",
-    "PYTHONPATH is set": "PYTHONPATH" in config["mcpServers"]["praxis-os-rag"]["env"],
-}
+# Example for Cursor:
+mcp_file = Path(".cursor/mcp.json")
+if mcp_file.exists():
+    with open(mcp_file, "r") as f:
+        config = json.load(f)
+    
+    # Critical checks
+    checks = {
+        "praxis-os server configured": "praxis-os" in config.get("mcpServers", {}),
+        "Module name is 'ouroboros'": config["mcpServers"]["praxis-os"]["args"][1] == "ouroboros",
+        "PYTHONPATH is set": "PYTHONPATH" in config["mcpServers"]["praxis-os"]["env"],
+    }
 
 all_passed = all(checks.values())
 
@@ -235,30 +201,11 @@ print("\n✅ mcp.json configured correctly")
 You can manually check the mcp.json file:
 
 ```bash
-cat .cursor/mcp.json
+# Check your agent-specific MCP config file
+# (determined by routing via 03-agent-configuration.md)
 ```
 
-**Should look like this** (Linux/macOS/WSL2):
-```json
-{
-  "mcpServers": {
-    "praxis-os-rag": {
-      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
-      "args": ["-m", "mcp_server"],
-      "env": {
-        "PROJECT_ROOT": "${workspaceFolder}",
-        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
-        "PYTHONUNBUFFERED": "1"
-      },
-      "autoApprove": [
-        "search_standards",
-        "get_current_phase",
-        "get_workflow_state"
-      ]
-    }
-  }
-}
-```
+**Note**: The exact MCP configuration format depends on your agent. See `installation/03-agent-configuration.md` to route to your agent-specific guide, which will show the correct configuration format for your agent.
 
 **For Windows native**, the `command` should use `Scripts/python.exe` instead of `bin/python`.
 
@@ -287,18 +234,16 @@ import sys
 from pathlib import Path
 sys.path.insert(0, '.praxis-os')
 
-from mcp_server.config import ConfigLoader, ConfigValidator
+from ouroboros.config.loader import load_config
 
-config = ConfigLoader.load(Path('.praxis-os'))
-errors = ConfigValidator.validate(config)
-
-if errors:
-    print('VALIDATION_FAILED')
-    for error in errors:
-        print(f'  {error}')
-    sys.exit(1)
-else:
+try:
+    config = load_config(Path('.praxis-os/config/mcp.yaml'))
+    # Config validation happens automatically on load
     print('VALIDATION_PASSED')
+except Exception as e:
+    print('VALIDATION_FAILED')
+    print(f'  {e}')
+    sys.exit(1)
 """
 
 result = subprocess.run([
@@ -350,7 +295,7 @@ ls -ld .praxis-os
 **Fix**:
 ```bash
 # Retry with verbose output
-.praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt -v
+.praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt -v
 ```
 
 ### Issue: Config validation fails with "workflows_path does not exist"
@@ -449,7 +394,7 @@ if exist .praxis-os\.cache\vector_index\metadata.json (echo ✅ RAG index built)
 
 **Fix**:
 ```bash
-.praxis-os/venv/bin/pip install -r .praxis-os/mcp_server/requirements.txt
+.praxis-os/venv/bin/pip install -r .praxis-os/ouroboros/requirements.txt
 ```
 
 ### Issue: Build takes too long (>5 minutes)
@@ -471,9 +416,9 @@ if exist .praxis-os\.cache\vector_index\metadata.json (echo ✅ RAG index built)
 At this point you should have:
 - ✅ Python venv at `.praxis-os/venv/`
 - ✅ MCP server dependencies installed
-- ✅ `.cursor/mcp.json` created with correct config
-- ✅ Module name is `"mcp_server"` (not `"mcp_server.praxis_os_rag"`)
-- ✅ **RAG index built at `.praxis-os/.cache/vector_index/`** (NEW!)
+- ✅ Agent-specific MCP configuration file created (see `03-agent-configuration.md` for routing)
+- ✅ Module name is `"ouroboros"` (not `"mcp_server"`)
+- ✅ **RAG index built at `.praxis-os/.cache/indexes/`** (auto-built by Ouroboros on server start)
 - ✅ Config validation passes
 - ✅ All validation checkpoints passed
 
@@ -483,7 +428,7 @@ At this point you should have:
 
 ## 🎯 What's Next
 
-You've set up the Python environment, Cursor configuration, and RAG index. Now for the final step:
+You've set up the Python environment, MCP configuration, and RAG index. Now for the final step:
 1. Run comprehensive validation
 2. **Clean up temp directory** (critical!)
 3. Inform user of successful installation

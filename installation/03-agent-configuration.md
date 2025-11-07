@@ -16,49 +16,59 @@ After mechanical installation completes, you need to configure your specific AI 
 
 ---
 
-## 🔀 Branch Handler: Parse User's Command
+## 🔀 Step 1: Parse User's Command
 
-The user's installation command contains the agent specification. Parse it to route to the correct guide:
+**⚠️ CRITICAL: The LLM calling this installation knows what agent/IDE it's running in. Parse the agent/IDE from the user's installation command.**
+
+The user's installation command follows this pattern:
+```
+Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)
+```
+
+**Required**: `for <AGENT>`  
+**Optional**: `in <IDE>` (if not specified, IDE is implied based on agent)
+
+Parse it to route to the correct guide:
 
 ```python
 # Extract agent from user's command
-# Pattern: "Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> [in <IDE>]"
+# Pattern: "Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> (optional: in <IDE>)"
 
 user_command = "Install prAxIs OS from github.com/honeyhiveai/praxis-os for Claude Code in VS Code"
-# Or: "for Cursor"
-# Or: "for Cline in VS Code"
-# Or: "for Claude Code" (CLI mode)
+# Examples:
+#   "for Cursor" → Cursor (IDE implied: Cursor)
+#   "for Cline in VS Code" → Cline in VS Code
+#   "for Cline in Cursor" → Cline in Cursor (secondary)
+#   "for Claude Code" → Claude Code CLI (no IDE = terminal)
+#   "for Claude Code in VS Code" → Claude Code in VS Code
+#   "for GitHub Copilot" → GitHub Copilot (IDE implied: VS Code)
 
-# Parse agent specification
+# Parse agent specification from user's command
+detected = None
+
 if "for Cursor" in user_command:
-    agent = "cursor"
-    guide = "docs/content/how-to-guides/agent-integrations/cursor/index.md"
+    detected = {"agent": "cursor", "ide": "cursor", "mode": "primary"}
     
 elif "for Cline in VS Code" in user_command:
-    agent = "cline-vscode"
-    guide = "docs/content/how-to-guides/agent-integrations/cline/vscode.md"
+    detected = {"agent": "cline", "ide": "vscode", "mode": "primary"}
     
 elif "for Cline in Cursor" in user_command:
-    agent = "cline-cursor"
-    guide = "docs/content/how-to-guides/agent-integrations/cline/cursor.md"
+    detected = {"agent": "cline", "ide": "cursor", "mode": "secondary"}
     
 elif "for Claude Code in VS Code" in user_command:
-    agent = "claude-code-vscode"
-    guide = "docs/content/how-to-guides/agent-integrations/claude-code/vscode.md"
+    detected = {"agent": "claude-code", "ide": "vscode", "mode": "primary"}
     
 elif "for Claude Code" in user_command:
     # Default to CLI when no IDE specified
-    agent = "claude-code-terminal"
-    guide = "docs/content/how-to-guides/agent-integrations/claude-code/terminal.md"
+    detected = {"agent": "claude-code", "ide": "terminal", "mode": "primary"}
     
 elif "for GitHub Copilot" in user_command or "for Copilot" in user_command:
-    agent = "github-copilot"
-    guide = "docs/content/how-to-guides/agent-integrations/github-copilot/index.md"
-    
-else:
-    # Fallback: Show all options
-    print("⚠️  Could not parse agent from command")
-    print("Available options:")
+    detected = {"agent": "github-copilot", "ide": "vscode", "mode": "primary"}
+
+if not detected:
+    # User didn't specify agent - show all options
+    print("⚠️  Agent/IDE not specified in command")
+    print("Please specify in your command:")
     print("  - 'for Cursor'")
     print("  - 'for Cline in VS Code'")
     print("  - 'for Cline in Cursor'")
@@ -67,8 +77,38 @@ else:
     print("  - 'for GitHub Copilot' or 'for Copilot'")
     exit(1)
 
+print(f"✅ Parsed from command: Agent={detected['agent']}, IDE={detected['ide']}, Mode={detected['mode']}")
+```
+
+## 🗺️ Step 2: Route to Correct Guide
+
+```python
+routing_table = {
+    ("cursor", "cursor", "primary"): "docs/content/how-to-guides/agent-integrations/cursor/index.md",
+    ("cline", "vscode", "primary"): "docs/content/how-to-guides/agent-integrations/cline/vscode.md",
+    ("cline", "cursor", "secondary"): "docs/content/how-to-guides/agent-integrations/cline/cursor.md",
+    ("claude-code", "vscode", "primary"): "docs/content/how-to-guides/agent-integrations/claude-code/vscode.md",
+    ("claude-code", "terminal", "primary"): "docs/content/how-to-guides/agent-integrations/claude-code/terminal.md",
+    ("claude-code", "cursor", "secondary"): "docs/content/how-to-guides/agent-integrations/claude-code/cursor.md",
+    ("github-copilot", "vscode", "primary"): "docs/content/how-to-guides/agent-integrations/github-copilot/index.md",
+}
+
+key = (detected["agent"], detected["ide"], detected["mode"])
+guide = routing_table.get(key)
+
+if not guide:
+    print(f"❌ Unknown agent/IDE combination: {detected}")
+    print("Available options:")
+    print("  - Cursor (primary)")
+    print("  - Cline in VS Code (primary)")
+    print("  - Cline in Cursor (secondary)")
+    print("  - Claude Code (CLI/terminal)")
+    print("  - Claude Code in VS Code")
+    print("  - GitHub Copilot")
+    exit(1)
+
 print(f"✅ Routing to: {guide}")
-print(f"   Agent: {agent}")
+print(f"   Agent: {detected['agent']}, IDE: {detected['ide']}, Mode: {detected['mode']}")
 ```
 
 ---
