@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "project-name": {
-      "command": "/absolute/path/to/project/.praxis-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "ouroboros",
@@ -11,8 +11,8 @@
         "INFO"
       ],
       "env": {
-        "PROJECT_ROOT": "/absolute/path/to/project",
-        "PYTHONPATH": "/absolute/path/to/project/.praxis-os",
+        "PROJECT_ROOT": "${workspaceFolder}",
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [

@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "praxis-os": {
-      "command": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os/venv/bin/python",
+      "command": "${workspaceFolder}/.praxis-os/venv/bin/python",
       "args": [
         "-m",
         "ouroboros",
@@ -11,8 +11,8 @@
         "INFO"
       ],
       "env": {
-        "PROJECT_ROOT": "/Users/josh/src/github.com/honeyhiveai/praxis-os",
-        "PYTHONPATH": "/Users/josh/src/github.com/honeyhiveai/praxis-os/.praxis-os",
+        "PROJECT_ROOT": "${workspaceFolder}",
+        "PYTHONPATH": "${workspaceFolder}/.praxis-os",
         "PYTHONUNBUFFERED": "1"
       },
       "autoApprove": [
