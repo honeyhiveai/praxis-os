@@ -83,7 +83,60 @@ fi
 echo ""
 
 # ============================================================================
-# 3. Optional: Full Docusaurus Build Check
+# 3. MDX Compilation Check (Catches syntax errors before CI/CD)
+# ============================================================================
+
+echo -e "${BLUE}🔨 Running MDX compilation check...${NC}"
+
+if [[ ! -d "docs" ]] || [[ ! -f "docs/package.json" ]]; then
+    echo -e "${YELLOW}⚠️  Docusaurus project not found, skipping MDX check${NC}"
+else
+    cd docs
+    
+    # Check if node_modules exists, install if needed
+    if [[ ! -d "node_modules" ]]; then
+        echo -e "${YELLOW}⚠️  node_modules not found, installing dependencies...${NC}"
+        npm ci > /dev/null 2>&1 || {
+            echo -e "${RED}❌ Failed to install dependencies${NC}"
+            cd ..
+            VALIDATION_FAILED=1
+            echo ""
+        }
+    fi
+    
+    if [[ $VALIDATION_FAILED -eq 0 ]]; then
+        # Run build to catch MDX compilation errors
+        # Capture both stdout and stderr to show errors
+        # Note: Docusaurus build will fail fast on MDX errors
+        BUILD_OUTPUT=$(npm run build 2>&1) || BUILD_FAILED=1
+        
+        if [[ "${BUILD_FAILED:-0}" == "1" ]]; then
+            echo -e "${RED}❌ MDX compilation failed${NC}"
+            echo ""
+            echo -e "${YELLOW}Build errors:${NC}"
+            # Extract and show relevant error lines (MDX errors, file paths, line numbers)
+            echo "$BUILD_OUTPUT" | grep -E "(Error|ERROR|failed|Failed|MDX compilation)" | head -30
+            echo ""
+            echo -e "${YELLOW}💡 Common MDX issues:${NC}"
+            echo -e "${YELLOW}   - '<1' interpreted as JSX tag → use 'Less than 1'${NC}"
+            echo -e "${YELLOW}   - Unclosed JSX tags → check angle brackets${NC}"
+            echo -e "${YELLOW}   - Invalid component names → must start with letter${NC}"
+            echo ""
+            echo -e "${YELLOW}💡 Fix:${NC}"
+            echo -e "${YELLOW}   - Review errors above for file paths and line numbers${NC}"
+            echo -e "${YELLOW}   - Run 'cd docs && npm run build' for full details${NC}"
+            cd ..
+            VALIDATION_FAILED=1
+        else
+            echo -e "${GREEN}✅ MDX compilation check passed${NC}"
+            cd ..
+        fi
+    fi
+    echo ""
+fi
+
+# ============================================================================
+# 4. Optional: Full Docusaurus Build Check (for comprehensive validation)
 # ============================================================================
 
 if [[ "${DOCS_FULL_BUILD:-0}" == "1" ]]; then
@@ -94,10 +147,10 @@ if [[ "${DOCS_FULL_BUILD:-0}" == "1" ]]; then
     else
         cd docs
         if npm run build > /dev/null 2>&1; then
-            echo -e "${GREEN}✅ Docusaurus build passed${NC}"
+            echo -e "${GREEN}✅ Full Docusaurus build passed${NC}"
             cd ..
         else
-            echo -e "${RED}❌ Docusaurus build failed${NC}"
+            echo -e "${RED}❌ Full Docusaurus build failed${NC}"
             echo -e "${YELLOW}💡 Fix: Run 'cd docs && npm run build' for details${NC}"
             cd ..
             VALIDATION_FAILED=1
