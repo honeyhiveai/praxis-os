@@ -20,7 +20,7 @@ from ..base import ParseError, SourceParser
 from ..shared import dependencies as dep_utils
 from ..shared import text as text_utils
 from ..shared import validation as val_utils
-from . import extraction, scoring, traversal
+from . import extraction, pattern_discovery, scoring, traversal
 
 
 class SpecTasksParser(SourceParser):
@@ -108,12 +108,13 @@ class SpecTasksParser(SourceParser):
         Extract phases using semantic scoring and defensive parsing.
 
         Strategy:
-        1. Find all headers, score them for "phase-ness"
-        2. Group by confidence, use high-confidence headers as phases
-        3. Extract phase numbers, detect Phase 0
-        4. Apply phase shift if needed
-        5. Extract tasks for each phase
-        6. Normalize task IDs and dependencies
+        1. Discover document patterns (dynamic analysis)
+        2. Find all headers, score them using discovered patterns
+        3. Group by confidence, use high-confidence headers as phases
+        4. Extract phase numbers, detect Phase 0
+        5. Apply phase shift if needed
+        6. Extract tasks for each phase
+        7. Normalize task IDs and dependencies
 
         Args:
             doc: Parsed markdown document
@@ -122,19 +123,22 @@ class SpecTasksParser(SourceParser):
         Returns:
             List of DynamicPhase objects with normalized numbering
         """
-        # Step 1: Find and score all headers
+        # Step 1: Discover patterns from document structure
+        patterns = pattern_discovery.discover_patterns(doc)
+        
+        # Step 2: Find and score all headers using discovered patterns
         all_headers = traversal.find_headers(doc)
         
         if not all_headers:
             raise ParseError(f"No headers found in {source_path}")
 
-        # Step 2: Classify headers by confidence
-        phase_headers = self._identify_phase_headers(all_headers)
+        # Step 3: Classify headers by confidence (using discovered patterns)
+        phase_headers = self._identify_phase_headers(all_headers, patterns)
 
         if not phase_headers:
             raise ParseError(f"No phase headers identified in {source_path}")
 
-        # Step 3: Extract phase numbers and detect shift requirement
+        # Step 4: Extract phase numbers and detect shift requirement
         phase_numbers = [
             scoring.extract_phase_number_defensively(
                 traversal.get_text_content(h)
@@ -165,16 +169,21 @@ class SpecTasksParser(SourceParser):
         return phases
 
     def _identify_phase_headers(
-        self, headers: List[Heading], threshold: float = 0.7
+        self, 
+        headers: List[Heading], 
+        patterns: Optional[pattern_discovery.DocumentPatterns] = None,
+        threshold: float = 0.7
     ) -> List[Heading]:
         """
-        Identify which headers represent phases using scoring.
+        Identify which headers represent phases using discovered patterns.
 
-        Uses higher threshold (0.7) to filter out metadata sections
-        that score 0.5 but aren't actually phases.
+        Uses discovered patterns for adaptive scoring, falling back to
+        heuristics if patterns unavailable. Higher threshold (0.7) filters
+        out metadata sections.
 
         Args:
             headers: All headers in document
+            patterns: Discovered document patterns (optional)
             threshold: Confidence threshold for phase classification (default 0.7)
 
         Returns:
@@ -183,7 +192,7 @@ class SpecTasksParser(SourceParser):
         phase_headers = []
 
         for header in headers:
-            score = scoring.score_phase_header(header)
+            score = scoring.score_phase_header(header, patterns)
             if score >= threshold:
                 phase_headers.append(header)
 
@@ -272,9 +281,10 @@ class SpecTasksParser(SourceParser):
         """
         # Find header positions in document
         header_index = -1
-        next_index = len(doc.children)  # Default: end of document
+        children_list = list(doc.children) if doc.children else []
+        next_index = len(children_list)  # Default: end of document
         
-        for i, child in enumerate(doc.children):
+        for i, child in enumerate(children_list):
             if child is header:
                 header_index = i
             if next_phase_header and child is next_phase_header:
@@ -286,7 +296,7 @@ class SpecTasksParser(SourceParser):
         # Collect content between the two headers
         content_parts = []
         for i in range(header_index + 1, next_index):
-            child = doc.children[i]
+            child = children_list[i]
             
             # Collect content
             text = traversal.get_text_content(child)
@@ -312,7 +322,13 @@ class SpecTasksParser(SourceParser):
             Content of detailed section, or None if not found
         """
         # Look for "### Phase N Tasks (Detailed)" pattern
-        target_patterns = [
+        # PRIORITY 1: Look for "(Detailed)" sections first
+        detailed_patterns = [
+            f"phase {phase_number} tasks (detailed)",
+            f"phase {phase_number} tasks detailed",
+        ]
+        # PRIORITY 2: Fallback to generic patterns
+        fallback_patterns = [
             f"phase {phase_number} tasks",
             f"phase {phase_number}:",
             f"### phase {phase_number}",
@@ -320,17 +336,19 @@ class SpecTasksParser(SourceParser):
         
         all_headers = traversal.find_headers(doc)
         
+        # FIRST PASS: Look for detailed sections (priority)
         for header in all_headers:
-            if header.level != 3:  # Looking for ### headers
+            if header.level != 3:
                 continue
                 
             text = traversal.get_text_content(header).lower()
             
-            # Check if this is a detailed task section for our phase
-            if any(pattern in text for pattern in target_patterns):
+            # Check for detailed patterns first
+            if any(pattern in text for pattern in detailed_patterns):
                 # Extract content after this header until next same-level header
                 header_index = -1
-                for i, child in enumerate(doc.children):
+                children_list = list(doc.children) if doc.children else []
+                for i, child in enumerate(children_list):
                     if child is header:
                         header_index = i
                         break
@@ -341,8 +359,8 @@ class SpecTasksParser(SourceParser):
                 # Collect content until next ## or ### header
                 # (stop at any section boundary)
                 content_parts = []
-                for i in range(header_index + 1, len(doc.children)):
-                    child = doc.children[i]
+                for i in range(header_index + 1, len(children_list)):
+                    child = children_list[i]
                     
                     # Stop at any heading level 2 or 3 (section boundaries)
                     if isinstance(child, Heading) and child.level <= 3:
@@ -352,6 +370,44 @@ class SpecTasksParser(SourceParser):
                     text = traversal.get_text_content(child)
                     if text:
                         # Skip horizontal rules and separators
+                        if text.strip() in ('---', '***', '___'):
+                            break
+                        content_parts.append(text)
+                
+                if content_parts:
+                    return "\n\n".join(content_parts)
+        
+        # SECOND PASS: Fallback to generic patterns if no detailed section found
+        for header in all_headers:
+            if header.level != 3:
+                continue
+                
+            text = traversal.get_text_content(header).lower()
+            
+            # Check fallback patterns
+            if any(pattern in text for pattern in fallback_patterns):
+                # Extract content after this header until next same-level header
+                header_index = -1
+                children_list = list(doc.children) if doc.children else []
+                for i, child in enumerate(children_list):
+                    if child is header:
+                        header_index = i
+                        break
+                
+                if header_index == -1:
+                    continue
+                
+                # Collect content until next ## or ### header
+                content_parts = []
+                for i in range(header_index + 1, len(children_list)):
+                    child = children_list[i]
+                    
+                    # Stop at any heading level 2 or 3
+                    if isinstance(child, Heading) and child.level <= 3:
+                        break
+                    
+                    text = traversal.get_text_content(child)
+                    if text:
                         if text.strip() in ('---', '***', '___'):
                             break
                         content_parts.append(text)

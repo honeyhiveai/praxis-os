@@ -163,7 +163,8 @@ class WorkflowEngine:
             target_file=target,
             current_phase=0,  # Start at Phase 0
             phase_timings=initial_timing,
-            metadata=kwargs or {}
+            metadata=kwargs or {},
+            completed_at=None,
         )
         
         # Save state via helper (automatic serialization)
@@ -228,14 +229,22 @@ class WorkflowEngine:
             )
 
         # Get phase content (route via dynamic registry if dynamic workflow)
+        # Note: Phase 0 is always static (setup/analysis), even for dynamic workflows
         try:
-            if self._is_dynamic(state):
-                # Dynamic workflow: parse from spec's tasks.md
+            is_dynamic = self._is_dynamic(state)
+            logger.info(
+                f"get_phase: phase={phase}, phase_type={type(phase)}, is_dynamic={is_dynamic}, phase>0={phase > 0}"
+            )
+            
+            if is_dynamic and phase > 0:
+                # Dynamic workflow: parse from spec's tasks.md (phases 1+)
+                logger.info(f"Using dynamic registry for phase {phase}")
                 registry = self._get_or_create_dynamic_registry(session_id, state)
                 phase_content = registry.get_phase_content(phase)
             else:
-                # Static workflow: load from filesystem
-                phase_content = self._renderer.get_phase_content(state.workflow_type, phase)
+                # Static workflow OR Phase 0 (always static): load from filesystem
+                logger.info(f"Using static renderer for phase {phase}")
+                phase_content = self._renderer.get_phase_content(state.workflow_type, phase)  # type: ignore[assignment]
         except DynamicRegistryError as e:
             raise WorkflowExecutionError(
                 what_failed=f"Getting phase {phase} content (dynamic)",
@@ -294,14 +303,22 @@ class WorkflowEngine:
             )
 
         # Get task content (route via dynamic registry if dynamic workflow)
+        # Note: Phase 0 is always static (setup/analysis), even for dynamic workflows
         try:
-            if self._is_dynamic(state):
-                # Dynamic workflow: parse from spec's tasks.md
+            is_dynamic = self._is_dynamic(state)
+            logger.info(
+                f"get_task: phase={phase}, task_number={task_number}, phase_type={type(phase)}, task_type={type(task_number)}, is_dynamic={is_dynamic}, phase>0={phase > 0}"
+            )
+            
+            if is_dynamic and phase > 0:
+                # Dynamic workflow: parse from spec's tasks.md (phases 1+)
+                logger.info(f"Using dynamic registry for phase {phase} task {task_number}")
                 registry = self._get_or_create_dynamic_registry(session_id, state)
                 task_content = registry.get_task_content(phase, task_number)
             else:
-                # Static workflow: load from filesystem
-                task_content = self._renderer.get_task_content(state.workflow_type, phase, task_number)
+                # Static workflow OR Phase 0 (always static): load from filesystem
+                logger.info(f"Using static renderer for phase {phase} task {task_number}")
+                task_content = self._renderer.get_task_content(state.workflow_type, phase, task_number)  # type: ignore[assignment]
         except DynamicRegistryError as e:
             raise WorkflowExecutionError(
                 what_failed=f"Getting task {task_number} in phase {phase} (dynamic)",

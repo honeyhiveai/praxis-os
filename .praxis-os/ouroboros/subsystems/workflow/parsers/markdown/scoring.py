@@ -2,38 +2,44 @@
 Semantic scoring for markdown structure identification.
 
 Implements defensive parsing with semantic scoring to identify phases and tasks
-even when format varies. Uses heuristics and confidence scoring rather than
-rigid pattern matching.
+even when format varies. Uses discovered patterns from document analysis for
+adaptive scoring rather than rigid pattern matching.
 
 Target: ~200 lines
 """
 
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from mistletoe.block_token import Heading
 
+from .pattern_discovery import DocumentPatterns
 
-def score_phase_header(header: Heading) -> float:
+
+def score_phase_header(
+    header: Heading, 
+    patterns: Optional[DocumentPatterns] = None
+) -> float:
     """
     Calculate confidence score that a header represents a phase.
 
-    Uses semantic indicators:
-    - Level 2 headers (##) get higher score
-    - Contains "Phase" keyword at start
-    - Followed by number and colon
-    - Not a subsection (Task, Validation, etc.)
+    Uses discovered patterns from document analysis for adaptive scoring:
+    - Matches discovered phase pattern = high score
+    - Matches discovered phase level = bonus
+    - Contains discovered metadata keywords = penalty
+    - Falls back to heuristics if no patterns available
 
     Args:
         header: Heading node to score
+        patterns: Discovered document patterns (optional, uses heuristics if None)
 
     Returns:
         Confidence score (0.0-1.0, higher = more likely a phase)
 
     Examples:
-        >>> score_phase_header(heading("## Phase 1: Setup"))
+        >>> score_phase_header(heading("## Phase 1: Setup"), patterns)
         0.95
-        >>> score_phase_header(heading("### Task 1.1"))
+        >>> score_phase_header(heading("### Task 1.1"), patterns)
         0.0
     """
     score = 0.0
@@ -42,65 +48,153 @@ def score_phase_header(header: Heading) -> float:
     from .traversal import get_text_content
     text = get_text_content(header).strip()
     text_lower = text.lower()
+    
+    # Use discovered patterns if available
+    if patterns:
+        score = _score_with_patterns(header, text, text_lower, patterns)
+    else:
+        # Fallback to heuristic scoring
+        score = _score_with_heuristics(header, text, text_lower)
+    
+    return min(max(score, 0.0), 1.0)
 
-    # Level 2 headers are standard for phases
+
+def _score_with_patterns(
+    header: Heading,
+    text: str,
+    text_lower: str,
+    patterns: DocumentPatterns
+) -> float:
+    """
+    Score header using discovered patterns (dynamic approach).
+    
+    Strategy:
+    1. Strong positive: Matches discovered phase pattern + level
+    2. Moderate positive: Matches level but not pattern
+    3. Strong negative: Contains metadata keywords
+    4. Moderate negative: Wrong level
+    
+    Returns:
+        Confidence score
+    """
+    score = 0.0
+    
+    # Positive signals from discovered patterns
+    if patterns.phase_pattern:
+        if re.match(patterns.phase_pattern, text_lower):
+            score += 0.6  # Strong match to discovered pattern
+        elif "phase" in text_lower and re.search(r"\d+", text):
+            score += 0.2  # Weak match (has phase + number)
+    
+    if patterns.phase_header_level:
+        if header.level == patterns.phase_header_level:
+            score += 0.3  # Matches discovered level
+        elif header.level > patterns.phase_header_level:
+            score -= 0.4  # Too deep (subsection)
+    
+    # Negative signals from discovered metadata keywords
+    # Only penalize if header matches metadata patterns, not just because it contains "phase"
+    if patterns.metadata_keywords:
+        text_words = set(text_lower.split())
+        matched_keywords = text_words & patterns.metadata_keywords
+        
+        # Don't penalize if it's a phase header pattern (would be caught by positive signals)
+        # Only penalize if it looks like metadata (contains "tasks", "acceptance", etc.)
+        is_metadata_pattern = any(kw in text_lower for kw in ["tasks", "acceptance", "validation", "gate", "dependencies", "execution", "order"])
+        
+        if matched_keywords and is_metadata_pattern:
+            # Strong penalty if matches multiple metadata keywords AND looks like metadata
+            score -= len(matched_keywords) * 0.3
+            # Extra penalty for common metadata patterns
+            if any(kw in text_lower for kw in ["tasks", "acceptance", "validation", "gate"]):
+                score -= 0.5
+    
+    # Additional negative signals (common metadata patterns)
+    if re.search(r"phase\s+\d+\s+tasks", text_lower):
+        score -= 1.0  # "Phase N Tasks" is definitely not a phase header
+    
+    if re.search(r"phase\s+\d+\s+(acceptance|validation|gate)", text_lower):
+        score -= 1.0  # Metadata sections
+    
+    if re.search(r"phase\s+\d+\s*[→→-]", text_lower):
+        score -= 1.0  # Dependency notation
+    
+    if "execution order" in text_lower:
+        score -= 0.8
+    
+    # Too short to be a phase header
+    if len(text) < 8:
+        score -= 0.3
+    
+    return score
+
+
+def _score_with_heuristics(header: Heading, text: str, text_lower: str) -> float:
+    """
+    Score header using static heuristics (fallback when no patterns available).
+    
+    Returns:
+        Confidence score
+    """
+    score = 0.0
+    
+    # Level-based scoring
     if header.level == 2:
         score += 0.5
     elif header.level == 1:
         score += 0.3
     elif header.level >= 3:
-        # Level 3+ are subsections, heavily penalize
         score -= 0.5
-
-    # "Phase N:" pattern at start is very strong indicator
+    
+    # Pattern matching
     if re.match(r"^phase\s+\d+\s*:", text_lower):
         score += 0.5
-
-    # Just "phase" keyword (weaker)
     elif "phase" in text_lower:
         score += 0.2
-
-    # Negative signals - these are NOT phases
-    if "task" in text_lower and re.search(r"\d+\.\d+", text):
-        score -= 0.8  # Task headers (e.g., "Task 1.1")
     
-    if "validation gate" in text_lower:
+    # Negative signals
+    if re.search(r"phase\s+\d+\s+tasks", text_lower):
+        score -= 1.0
+    
+    if re.search(r"phase\s+\d+\s+(acceptance|validation|gate)", text_lower):
+        score -= 1.0
+    
+    if re.search(r"phase\s+\d+\s*[→→-]", text_lower):
+        score -= 1.0
+    
+    if any(kw in text_lower for kw in ["validation gate", "acceptance criteria", 
+                                       "execution order", "dependencies"]):
         score -= 0.7
     
-    if "acceptance criteria" in text_lower:
-        score -= 0.7
-    
-    if "dependencies" in text_lower:
-        score -= 0.6
-    
-    if "estimated" in text_lower or "duration" in text_lower:
-        score -= 0.6  # Metadata sections
-
-    # Too short to be a phase header
     if len(text) < 8:
         score -= 0.3
+    
+    return score
 
-    return min(max(score, 0.0), 1.0)
 
-
-def classify_header(header: Heading, threshold: float = 0.5) -> str:
+def classify_header(
+    header: Heading, 
+    threshold: float = 0.5,
+    patterns: Optional[DocumentPatterns] = None
+) -> str:
     """
     Classify header as phase, section, or other.
 
     Args:
         header: Heading node
         threshold: Confidence threshold for phase classification
+        patterns: Discovered document patterns (optional)
 
     Returns:
         Classification string: "phase", "section", or "other"
 
     Examples:
-        >>> classify_header(heading("## Phase 2: Build"))
+        >>> classify_header(heading("## Phase 2: Build"), patterns=patterns)
         "phase"
-        >>> classify_header(heading("### Validation Gate"))
+        >>> classify_header(heading("### Validation Gate"), patterns=patterns)
         "section"
     """
-    score = score_phase_header(header)
+    score = score_phase_header(header, patterns)
     
     if score >= threshold:
         return "phase"
@@ -237,7 +331,9 @@ def extract_task_id_defensively(text: str) -> str:
 
 
 def group_headers_by_confidence(
-    headers: List[Heading], threshold: float = 0.5
+    headers: List[Heading], 
+    threshold: float = 0.5,
+    patterns: Optional[DocumentPatterns] = None
 ) -> Dict[str, List[Heading]]:
     """
     Group headers by classification confidence.
@@ -245,12 +341,13 @@ def group_headers_by_confidence(
     Args:
         headers: List of Heading nodes
         threshold: Phase classification threshold
+        patterns: Discovered document patterns (optional)
 
     Returns:
         Dictionary mapping classification to headers
 
     Examples:
-        >>> groups = group_headers_by_confidence(all_headers)
+        >>> groups = group_headers_by_confidence(all_headers, patterns=patterns)
         >>> len(groups["phase"])  # How many phase headers
         3
     """
@@ -261,7 +358,7 @@ def group_headers_by_confidence(
     }
 
     for header in headers:
-        classification = classify_header(header, threshold)
+        classification = classify_header(header, threshold, patterns)
         groups[classification].append(header)
 
     return groups

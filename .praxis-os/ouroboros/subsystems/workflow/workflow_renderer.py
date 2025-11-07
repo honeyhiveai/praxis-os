@@ -199,7 +199,7 @@ class WorkflowRenderer:
         Returns:
             Dictionary of workflow_type -> WorkflowMetadata
         """
-        workflows = {}
+        workflows: Dict[str, Any] = {}
 
         if not self.workflows_dir.exists():
             logger.warning("Workflows directory does not exist", extra={"workflows_dir": str(self.workflows_dir)})

@@ -7,7 +7,7 @@ headers, lists, and other markdown elements.
 Target: ~200 lines
 """
 
-from typing import List
+from typing import List, Optional
 
 from mistletoe import Document
 from mistletoe.block_token import Heading, List as MarkdownList, ListItem, Paragraph
@@ -194,7 +194,7 @@ def extract_checklist_items(node) -> List[str]:
     return items
 
 
-def find_headers(doc: Document, level: int = None) -> List[Heading]:
+def find_headers(doc: Document, level: Optional[int] = None) -> List[Heading]:
     """
     Find all headers in document, optionally filtered by level.
 
@@ -219,7 +219,8 @@ def find_headers(doc: Document, level: int = None) -> List[Heading]:
             for child in node.children:
                 traverse(child)
 
-    for child in doc.children:
+    children = doc.children or []
+    for child in children:
         traverse(child)
 
     return headers

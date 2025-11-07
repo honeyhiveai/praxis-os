@@ -121,7 +121,7 @@ def detect_circular_dependencies(
         ["1.1", "1.2", "1.3", "1.1"]
     """
     visited = set()
-    path = []
+    path: List[str] = []
 
     def dfs(current: str) -> List[str]:
         if current in visited:

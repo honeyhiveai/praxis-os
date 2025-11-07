@@ -11,7 +11,7 @@ Target: ~150 lines after extraction
 from pathlib import Path
 from typing import List, Optional
 
-import yaml
+import yaml  # type: ignore[import-untyped]
 
 from ouroboros.subsystems.workflow.models import DynamicPhase, DynamicTask
 
