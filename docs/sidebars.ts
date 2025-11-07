@@ -28,6 +28,38 @@ const sidebars: SidebarsConfig = {
       label: '📋 How-To Guides',
       collapsible: true,
       items: [
+        {
+          type: 'category',
+          label: '🤖 Agent Integrations',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'how-to-guides/agent-integrations/README',
+            'how-to-guides/agent-integrations/cursor/index',
+            {
+              type: 'category',
+              label: 'Claude Code',
+              collapsible: true,
+              collapsed: false,
+              items: [
+                'how-to-guides/agent-integrations/claude-code/terminal',
+                'how-to-guides/agent-integrations/claude-code/vscode',
+                'how-to-guides/agent-integrations/claude-code/cursor',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Cline',
+              collapsible: true,
+              collapsed: false,
+              items: [
+                'how-to-guides/agent-integrations/cline/vscode',
+                'how-to-guides/agent-integrations/cline/cursor',
+              ],
+            },
+            'how-to-guides/agent-integrations/github-copilot/index',
+          ],
+        },
         'how-to-guides/creating-project-standards',
         'how-to-guides/create-custom-workflows',
         'how-to-guides/setup-quality-gates',

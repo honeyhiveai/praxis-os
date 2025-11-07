@@ -5,21 +5,21 @@ doc_type: tutorial
 
 # Installation
 
-Install prAxIs OS in any project with a simple conversation. The Cursor agent handles everything automatically.
+Install prAxIs OS in any project with a simple conversation. Works with Cursor, Claude Code, Cline, and GitHub Copilot.
 
 ## Quick Start
 
 ```bash
-# Open your project in Cursor and say:
+# Open your project in Cursor, Claude Code, Cline, or GitHub Copilot and say:
 "Install prAxIs OS from github.com/honeyhiveai/praxis-os"
 ```
 
-The Cursor agent will:
+The agent will:
 1. **Analyze your project** - Detect language, frameworks, tools
 2. **Copy universal standards** - Timeless CS fundamentals
 3. **Generate language-specific standards** - Tailored to your stack
 4. **Install MCP server** - Local Python process
-5. **Configure Cursor** - MCP integration
+5. **Configure your agent** - MCP integration (agent-specific)
 6. **Build RAG index** - Semantic search ready
 
 **Time:** ~5 minutes for complete installation

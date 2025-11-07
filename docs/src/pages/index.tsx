@@ -47,7 +47,8 @@ function HomepageHeader() {
               </div>
               <div className={styles.codeBody}>
                 <pre>
-{`# Open your project in Cursor and say:
+{`# Open your project in Cursor, Claude Code,
+# Cline, or GitHub Copilot and say:
 
 "Install prAxIs OS from 
  github.com/honeyhiveai/praxis-os"
