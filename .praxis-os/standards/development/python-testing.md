@@ -211,9 +211,9 @@ async def mcp_server():
 
 @pytest.mark.asyncio
 async def test_search_standards_tool(mcp_server):
-    """Test search_standards MCP tool."""
+    """Test pos_search MCP tool."""
     result = await mcp_server.call_tool(
-        "search_standards",
+        "pos_search",
         {
             "query": "concurrency patterns",
             "n_results": 3
@@ -576,11 +576,11 @@ async def test_mcp_tool_input_validation():
     """Test that MCP tools validate input."""
     # Test missing required parameters
     with pytest.raises(ValueError):
-        await search_standards(query=None)
+        await pos_search(query=None)
     
     # Test invalid parameter types
     with pytest.raises(TypeError):
-        await search_standards(query=123)
+        await pos_search(query=123)
 ```
 
 ### 2. Test with Real Standards Files

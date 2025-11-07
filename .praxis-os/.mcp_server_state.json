@@ -5,8 +5,8 @@
   "host": "127.0.0.1",
   "path": "/mcp",
   "url": "http://127.0.0.1:4242/mcp",
-  "pid": 50855,
-  "started_at": "2025-10-27T23:26:37.092169+00:00",
+  "pid": 33975,
+  "started_at": "2025-11-03T03:45:06.058420+00:00",
   "project": {
     "name": "praxis-os",
     "root": "/Users/josh/src/github.com/honeyhiveai/praxis-os"

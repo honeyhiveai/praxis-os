@@ -298,14 +298,14 @@ Cannot proceed to Phase 2 until:
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Quality assurance** | `search_standards("validation gates")` |
-| **Phase checkpoints** | `search_standards("phase checkpoints")` |
-| **Preventing shortcuts** | `search_standards("prevent AI shortcuts")` |
-| **Quality gates** | `search_standards("quality gates")` |
-| **Validation criteria** | `search_standards("validation criteria")` |
-| **Evidence-based validation** | `search_standards("evidence-based validation")` |
-| **Gate enforcement** | `search_standards("gate enforcement")` |
-| **Ensuring completion** | `search_standards("ensure AI completes work")` |
+| **Quality assurance** | `pos_search(content_type="standards", query="validation gates")` |
+| **Phase checkpoints** | `pos_search(content_type="standards", query="phase checkpoints")` |
+| **Preventing shortcuts** | `pos_search(content_type="standards", query="prevent AI shortcuts")` |
+| **Quality gates** | `pos_search(content_type="standards", query="quality gates")` |
+| **Validation criteria** | `pos_search(content_type="standards", query="validation criteria")` |
+| **Evidence-based validation** | `pos_search(content_type="standards", query="evidence-based validation")` |
+| **Gate enforcement** | `pos_search(content_type="standards", query="gate enforcement")` |
+| **Ensuring completion** | `pos_search(content_type="standards", query="ensure AI completes work")` |
 
 ---
 
@@ -313,30 +313,30 @@ Cannot proceed to Phase 2 until:
 
 **Query workflow for complete validation understanding:**
 
-1. **Start with gates** → `search_standards("validation gates")` (this document)
-2. **Learn framework principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
-3. **Add commands** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
-4. **Understand architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
-5. **Apply decomposition** → `search_standards("horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
+1. **Start with gates** → `pos_search(content_type="standards", query="validation gates")` (this document)
+2. **Learn framework principles** → `pos_search(content_type="standards", query="framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+3. **Add commands** → `pos_search(content_type="standards", query="command language")` → `standards/meta-workflow/command-language.md`
+4. **Understand architecture** → `pos_search(content_type="standards", query="three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
+5. **Apply decomposition** → `pos_search(content_type="standards", query="horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
 
 **By Category:**
 
 **Meta-Framework (Complete Set):**
-- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
-- `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
-- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
-- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `pos_search(content_type="standards", query="framework creation principles")`
+- `standards/meta-workflow/command-language.md` - Binding instructions → `pos_search(content_type="standards", query="command language")`
+- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `pos_search(content_type="standards", query="three-tier architecture")`
+- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `pos_search(content_type="standards", query="horizontal decomposition")`
 
 **Workflows:**
-- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
-- `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
+- `standards/workflows/workflow-system-overview.md` - Workflow system → `pos_search(content_type="standards", query="workflow system overview")`
 
 **Testing:**
-- `standards/testing/test-pyramid.md` - Test coverage targets → `search_standards("test pyramid")`
-- `standards/testing/integration-testing.md` - Integration testing patterns → `search_standards("integration testing")`
+- `standards/testing/test-pyramid.md` - Test coverage targets → `pos_search(content_type="standards", query="test pyramid")`
+- `standards/testing/integration-testing.md` - Integration testing patterns → `pos_search(content_type="standards", query="integration testing")`
 
 **AI Safety:**
-- `standards/ai-safety/production-code-checklist.md` - Production validation → `search_standards("production code checklist")`
+- `standards/ai-safety/production-code-checklist.md` - Production validation → `pos_search(content_type="standards", query="production code checklist")`
 
 ---
 

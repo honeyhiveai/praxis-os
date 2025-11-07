@@ -24,24 +24,70 @@ The documentation site includes:
 
 ## 🚀 Installation
 
-### For Users (In Your Project)
+### For Users
+
+In your project, ask your AI agent:
 
 ```
-Open your project in Cursor and say:
-"Install prAxIs OS from github.com/honeyhiveai/praxis-os"
+"Install prAxIs OS from github.com/honeyhiveai/praxis-os for <AGENT> [in <IDE>]"
 ```
 
-The Cursor agent will follow the installation guide in `installation/` directory:
-1. Clone source to temp directory
-2. Create all required directories
-3. Copy universal standards, workflows, and MCP server
-4. Handle .cursorrules safely (won't overwrite existing!)
-5. Create Python venv and configure Cursor
-6. Clean up temp files
+**Examples:**
+- `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cursor"`
+- `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cline in VS Code"`
+- `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Cline in Cursor"` (secondary)
+- `"Install prAxIs OS from github.com/honeyhiveai/praxis-os for Claude Code"` (CLI)
 
-**For LLMs**: Start at [`installation/00-START.md`](installation/00-START.md)
+Your AI agent will handle the complete installation automatically.
 
-**Total time**: ~5-10 minutes
+**Time:** ~5-10 minutes
+
+---
+
+### For LLMs (You Are Here!)
+
+When a user asks to install prAxIs OS, follow this flow:
+
+**Phase 1: Mechanical Installation (Automated)**
+
+Run the installation script:
+
+```bash
+# macOS / Linux
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/install-praxis-os.py | python3 -
+
+# Windows: Not yet supported
+```
+
+This script:
+- Clones source to temp directory
+- Creates `.praxis-os/` directory structure
+- Copies universal standards, workflows, MCP server, scripts
+- Creates Python venv and installs dependencies
+- Configures .gitignore (ephemeral files excluded)
+- Cleans up temp files
+
+**Phase 2: Agent Configuration (Intelligent)**
+
+After the script completes, configure the specific agent:
+
+1. **Parse the agent from user's command**:
+   - "for Cursor" → Primary Cursor setup
+   - "for Cline in VS Code" → Primary Cline
+   - "for Cline in Cursor" → Secondary Cline (HTTP)
+   - "for Claude Code" → CLI mode
+
+2. **Read agent-specific guide**:
+   - See [`docs/content/how-to-guides/agent-integrations/`](docs/content/how-to-guides/agent-integrations/)
+   - Each agent has detailed setup instructions
+
+3. **Follow the guide**:
+   - Configure MCP server settings
+   - Set up system prompts/rules (`.cursorrules` or equivalent)
+   - Copy helper scripts (for secondary agents only)
+   - Verify installation
+
+**Alternative**: For manual/sequential installation, start at [`installation/00-START.md`](installation/00-START.md)
 
 ### What Gets Installed
 

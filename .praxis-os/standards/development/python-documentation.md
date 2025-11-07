@@ -32,7 +32,7 @@ This document applies universal documentation principles to Python-specific cont
 **Why:** Industry standard, excellent tooling, autodoc integration
 
 ```python
-def search_standards(
+def pos_search(
     query: str,
     n_results: int = 5,
     filters: Optional[Dict[str, str]] = None
@@ -55,7 +55,7 @@ def search_standards(
     :raises RuntimeError: If the index is not initialized
     
     Example:
-        >>> results = search_standards("race conditions", n_results=3)
+        >>> results = pos_search("race conditions", n_results=3)
         >>> for result in results:
         ...     print(result.content)
         
@@ -72,7 +72,7 @@ def search_standards(
 ### Google Format (Alternative)
 
 ```python
-def search_standards(query, n_results=5, filters=None):
+def pos_search(query, n_results=5, filters=None):
     """Search the prAxIs OS standards using semantic search.
     
     Performs vector similarity search over the indexed standards
@@ -91,7 +91,7 @@ def search_standards(query, n_results=5, filters=None):
         RuntimeError: If the index is not initialized
     
     Example:
-        >>> results = search_standards("race conditions", n_results=3)
+        >>> results = pos_search("race conditions", n_results=3)
         >>> for result in results:
         ...     print(result.content)
     """
@@ -101,7 +101,7 @@ def search_standards(query, n_results=5, filters=None):
 ### NumPy Format (Scientific)
 
 ```python
-def search_standards(query, n_results=5, filters=None):
+def pos_search(query, n_results=5, filters=None):
     """
     Search the prAxIs OS standards using semantic search.
     
@@ -128,7 +128,7 @@ def search_standards(query, n_results=5, filters=None):
     
     Examples
     --------
-    >>> results = search_standards("race conditions", n_results=3)
+    >>> results = pos_search("race conditions", n_results=3)
     >>> for result in results:
     ...     print(result.content)
     """

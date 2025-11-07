@@ -208,7 +208,7 @@ If commit hashes differ, an update is available.
 
 ```python
 # Discover the workflow first
-search_standards("agent os upgrade workflow")
+pos_search(content_type="standards", query="agent os upgrade workflow")
 
 # Start the workflow
 start_workflow(
@@ -269,11 +269,11 @@ test ! -d .praxis-os/standards/ai-assistant/ && echo "✅ No flat structure"
 
 ```python
 # Test RAG search
-search_standards("testing standards")
+pos_search(content_type="standards", query="testing standards")
 # Should return results
 
 # Test workflow discovery
-search_standards("test generation workflow")
+pos_search(content_type="standards", query="test generation workflow")
 # Should return test_generation_v3
 
 # Test browser tool (if applicable)
@@ -452,21 +452,21 @@ The workflow maintains this automatically.
 
 **To find this standard:**
 ```python
-search_standards("how to update agent os")
-search_standards("agent os upgrade procedure")
-search_standards("sync from universal directory")
+pos_search(content_type="standards", query="how to update agent os")
+pos_search(content_type="standards", query="agent os upgrade procedure")
+pos_search(content_type="standards", query="sync from universal directory")
 ```
 
 **To find the workflow:**
 ```python
-search_standards("agent os upgrade workflow")
-search_standards("automated upgrade with rollback")
+pos_search(content_type="standards", query="agent os upgrade workflow")
+pos_search(content_type="standards", query="automated upgrade with rollback")
 ```
 
 **To understand directory structure:**
 ```python
-search_standards("agent os directory structure universal namespace")
-search_standards("why nested standards structure")
+pos_search(content_type="standards", query="agent os directory structure universal namespace")
+pos_search(content_type="standards", query="why nested standards structure")
 ```
 
 ---

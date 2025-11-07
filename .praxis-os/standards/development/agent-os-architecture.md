@@ -187,7 +187,7 @@ Server code changes require manual restart.
 - Watch installed files for changes (`.praxis-os/`)
 
 **MCP Tools:**
-- `search_standards` - Semantic search over prAxIs OS documentation
+- `pos_search` - Semantic search over prAxIs OS documentation
 - `start_workflow` - Begin phase-gated workflow with overview
 - `get_current_phase` - Get current phase content and task metadata
 - `get_task` - Get full content for one task (horizontal scaling)

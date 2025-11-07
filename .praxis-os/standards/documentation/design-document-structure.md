@@ -412,11 +412,11 @@ Before finalizing your design doc:
 ## 📚 Related Standards
 
 **See also:**
-- `search_standards("rag content authoring")` - How to write for discoverability
-- `search_standards("specification structure")` - How specs differ from design docs
-- `search_standards("workflow creation")` - When to use workflows vs. tools
-- `search_standards("documentation completeness")` - Quality standards for all docs
-- `search_standards("knowledge compounding")` - How to capture learnings
+- `pos_search(content_type="standards", query="rag content authoring")` - How to write for discoverability
+- `pos_search(content_type="standards", query="specification structure")` - How specs differ from design docs
+- `pos_search(content_type="standards", query="workflow creation")` - When to use workflows vs. tools
+- `pos_search(content_type="standards", query="documentation completeness")` - Quality standards for all docs
+- `pos_search(content_type="standards", query="knowledge compounding")` - How to capture learnings
 
 ---
 

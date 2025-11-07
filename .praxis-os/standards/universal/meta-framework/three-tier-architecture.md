@@ -412,14 +412,14 @@ def validate_tier_compliance(framework_path):
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Organizing workflows** | `search_standards("three-tier architecture")` |
-| **File structure design** | `search_standards("workflow structure")` |
-| **README phase task** | `search_standards("README phase task structure")` |
-| **Context overflow** | `search_standards("prevent context overflow")` |
-| **File size guidance** | `search_standards("workflow file sizes")` |
-| **Tier differences** | `search_standards("tier 1 tier 2 tier 3")` |
-| **Output artifacts** | `search_standards("output artifacts")` |
-| **Framework organization** | `search_standards("framework organization")` |
+| **Organizing workflows** | `pos_search(content_type="standards", query="three-tier architecture")` |
+| **File structure design** | `pos_search(content_type="standards", query="workflow structure")` |
+| **README phase task** | `pos_search(content_type="standards", query="README phase task structure")` |
+| **Context overflow** | `pos_search(content_type="standards", query="prevent context overflow")` |
+| **File size guidance** | `pos_search(content_type="standards", query="workflow file sizes")` |
+| **Tier differences** | `pos_search(content_type="standards", query="tier 1 tier 2 tier 3")` |
+| **Output artifacts** | `pos_search(content_type="standards", query="output artifacts")` |
+| **Framework organization** | `pos_search(content_type="standards", query="framework organization")` |
 
 ---
 
@@ -427,27 +427,27 @@ def validate_tier_compliance(framework_path):
 
 **Query workflow for complete architecture understanding:**
 
-1. **Start with tiers** → `search_standards("three-tier architecture")` (this document)
-2. **Learn decomposition** → `search_standards("horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
-3. **Add commands** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
-4. **Understand principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
-5. **Implement gates** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
+1. **Start with tiers** → `pos_search(content_type="standards", query="three-tier architecture")` (this document)
+2. **Learn decomposition** → `pos_search(content_type="standards", query="horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
+3. **Add commands** → `pos_search(content_type="standards", query="command language")` → `standards/meta-workflow/command-language.md`
+4. **Understand principles** → `pos_search(content_type="standards", query="framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+5. **Implement gates** → `pos_search(content_type="standards", query="validation gates")` → `standards/meta-workflow/validation-gates.md`
 
 **By Category:**
 
 **Meta-Framework (Complete Set):**
-- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
-- `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
-- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
-- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `pos_search(content_type="standards", query="framework creation principles")`
+- `standards/meta-workflow/command-language.md` - Binding instructions → `pos_search(content_type="standards", query="command language")`
+- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `pos_search(content_type="standards", query="horizontal decomposition")`
+- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `pos_search(content_type="standards", query="validation gates")`
 
 **Workflows:**
-- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
-- `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
+- `standards/workflows/workflow-system-overview.md` - Workflow system → `pos_search(content_type="standards", query="workflow system overview")`
 
 **Architecture:**
-- `standards/architecture/solid-principles.md` - Single Responsibility → `search_standards("SOLID principles")`
-- `standards/architecture/separation-of-concerns.md` - Concern separation → `search_standards("separation of concerns")`
+- `standards/architecture/solid-principles.md` - Single Responsibility → `pos_search(content_type="standards", query="SOLID principles")`
+- `standards/architecture/separation-of-concerns.md` - Concern separation → `pos_search(content_type="standards", query="separation of concerns")`
 
 ---
 

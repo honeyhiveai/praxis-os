@@ -4,57 +4,126 @@
 
 ---
 
-## 🎯 Quick Start
+## 🎯 Quick Start (For LLMs)
 
-When a user says: **"Install prAxIs OS from github.com/honeyhiveai/praxis-os"**
+When a user asks to install prAxIs OS, follow this two-phase approach:
 
-**Start here** → Read `00-START.md` and follow the chain.
+### Phase 1: Mechanical Installation (Automated Script)
+
+Run the installation script:
+
+```bash
+# macOS / Linux
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/install-praxis-os.py | python3 -
+
+# Windows: Not yet supported
+```
+
+**What it does:**
+- Clones repository to temp directory
+- Creates `.praxis-os/` directory structure
+- Copies standards, workflows, MCP server, scripts
+- Creates Python venv and installs dependencies
+- Configures .gitignore
+- Cleans up temp files
+
+**Time:** 2-3 minutes
+
+### Phase 2: Agent Configuration (LLM-Guided)
+
+After the script completes, configure the specific agent:
+
+1. **Parse the agent from user's install command**:
+   - `"...for Cursor"` → Primary Cursor setup
+   - `"...for Cline in VS Code"` → Primary Cline
+   - `"...for Cline in Cursor"` → Secondary Cline (HTTP)
+   - `"...for Claude Code"` → CLI mode
+   - `"...for Claude Code in VS Code"` → Primary Claude Code
+
+2. **Read agent-specific guide**:
+   - See `docs/content/how-to-guides/agent-integrations/`
+   - Each agent has detailed setup instructions
+
+3. **Follow the guide to**:
+   - Configure MCP server settings
+   - Set up system prompts/rules (`.cursorrules` or equivalent)
+   - Copy helper scripts (for secondary agents only)
+   - Verify installation
+
+**Time:** 2-5 minutes
 
 ---
 
-## 📖 Installation Files (Horizontally Scaled)
+## 📖 Installation Methods
 
-These files use **horizontal scaling** - each file is ~200-250 lines and chains to the next. This works around vanilla LLM attention span constraints.
+### Method 1: Automated Script (Recommended)
 
-### Sequential Installation Chain
+Run `install-praxis-os.py` for fast, reliable installation:
 
-```
-00-START.md           ← START HERE (clone to temp, setup)
-    ↓
-01-directories.md     Create all 8 required directories
-    ↓
-02-copy-files.md      Copy ~106 files from source
-    ↓
-03-cursorrules.md     Handle .cursorrules safely (don't overwrite!)
-    ↓
-04-gitignore.md       Configure .gitignore (prevent committing 2.6GB!)
-    ↓
-05-venv-mcp.md        Create Python venv + mcp.json + BUILD RAG INDEX
-    ↓
-06-validate.md        Validate + CLEANUP temp directory
-    ↓
-COMPLETE! ✅
+```bash
+# From praxis-os repository
+python scripts/install-praxis-os.py /path/to/target/project
+
+# Or from target project  
+python /path/to/praxis-os/scripts/install-praxis-os.py .
 ```
 
-**Each file**:
-- ~200-250 lines (manageable for vanilla LLMs)
-- Explicit validation checkpoints
-- Clear "Next Step" at the end
-- Can be re-read if confused
+**What it does:**
+- Clones repository to temp directory
+- Creates `.praxis-os/` directory structure
+- Copies all files (standards, workflows, MCP server)
+- Creates Python venv and installs dependencies
+- Configures .gitignore
+- Schedules RAG index build
+- Cleans up temp directory
+
+**Time:** 2-3 minutes (mechanical operations only)
+
+### Method 2: Manual Sequential Files (Legacy)
+
+For environments where script can't run, use horizontally-scaled guides:
+
+```
+00-START.md → 01-directories.md → 02-copy-files.md → 
+03-cursorrules.md → 04-gitignore.md → 05-venv-mcp.md → 
+06-validate.md → COMPLETE
+```
+
+**Each file:** ~200-250 lines, designed for vanilla LLM attention spans
+
+**Time:** 5-10 minutes (manual steps + validation)
 
 ---
 
-## 🎯 Design Principle: Bootstrapping Problem
+## 🎯 Design Principles
 
-**The Problem**: prAxIs OS helps LLMs follow complex instructions, but we need an LLM to install prAxIs OS (before it has our enhancements).
+### Phase 1: Mechanical Installation
 
-**The Solution**: These guides work for **vanilla LLMs**:
-- ✅ Short files (~250 lines each)
-- ✅ One task per file
-- ✅ Validation after each step
-- ✅ Critical mistakes listed upfront
-- ✅ Visual separators (emojis, headers, code blocks)
-- ✅ Chain navigation (explicit "Next Step")
+**The automated script handles "mechanical" operations:**
+- File system operations (copy, create directories)
+- Python venv creation
+- Dependency installation
+- Validation of file counts and structure
+
+**Why script-based:**
+- Fast (2-3 minutes vs 5-10 manual)
+- Reliable (exact file counts, validated copies)
+- No LLM attention span issues
+- Repeatable and testable
+
+### Phase 2: Agent Configuration
+
+**Documentation handles "intelligent" decisions:**
+- Which agent/IDE combination to use
+- How to configure MCP for specific environment
+- Primary vs secondary agent setup
+- Troubleshooting agent-specific issues
+
+**Why doc-based:**
+- Each agent/IDE has unique configuration
+- LLM can read and adapt instructions
+- Troubleshooting requires understanding
+- Reference material for users
 
 ---
 
@@ -78,24 +147,30 @@ In `mcp.json`, use `"mcp_server"` NOT `"mcp_server.praxis_os_rag"`. The entry po
 
 ---
 
-## 📚 Reference Documents
+## 📚 Documentation Structure
 
-### For LLMs During Installation
+### Installation Process
 
-- **00-START.md** → Entry point, critical mistakes, setup
-- **01-directories.md** → Directory creation with validation
-- **02-copy-files.md** → File copying with validation  
-- **03-cursorrules.md** → Safe .cursorrules handling
-- **04-gitignore.md** → Configure .gitignore to prevent commits of ephemeral files
-- **05-venv-mcp.md** → Python venv + mcp.json creation + **RAG index build**
-- **06-validate.md** → Final validation + cleanup
+1. **install-praxis-os.py** - Automated mechanical installation (recommended)
+2. **00-START.md through 06-validate.md** - Manual sequential guides (legacy/fallback)
+3. **This README** - Overview and decision guidance
 
-### For Deep Dives (if needed)
+### Agent Integration (After Mechanical Installation)
 
-- **installation-guide.md** (800+ lines) - Comprehensive detailed guide
-- **CURSORRULES_MERGE_GUIDE.md** - Complete merge protocol
-- **INSTALLATION_CHECKLIST.md** - Validation checklist
-- **INSTALLATION_GUIDE_UPDATE_SUMMARY.md** - Change history
+Located in `docs/content/how-to-guides/agent-integrations/`:
+
+**Primary Agents (Control MCP Server):**
+- `cursor/` - Cursor IDE with native MCP support
+- `cline/vscode.md` - Cline extension in VS Code
+- `claude-code/terminal.md` - Claude Code CLI
+- `claude-code/vscode.md` - Claude Code in VS Code
+
+**Secondary Agents (Connect via HTTP):**
+- `cline/cursor.md` - Cline connecting to Cursor's MCP server
+- `claude-code/cursor.md` - Claude Code connecting to Cursor's MCP server
+
+**Overview:**
+- `README.md` - Decision tree, primary vs secondary, LLM support
 
 ---
 

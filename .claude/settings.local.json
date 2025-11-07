@@ -19,7 +19,8 @@
       "Bash(then echo \"=== $dir ===\")",
       "Bash(fi)",
       "Bash(cat:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(lsof:*)"
     ],
     "deny": [],
     "ask": []

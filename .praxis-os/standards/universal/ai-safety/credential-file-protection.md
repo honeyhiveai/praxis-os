@@ -446,14 +446,14 @@ Language-specific patterns for credential file detection and protection.
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Writing to .env** | `search_standards("can I write to .env")` |
-| **Credential protection** | `search_standards("credential file protection")` |
-| **Protected files** | `search_standards("what files protected AI")` |
-| **Safe alternatives** | `search_standards("safe alternatives credential files")` |
-| **Example files** | `search_standards("create env example")` |
-| **Enforcement** | `search_standards("credential protection enforcement")` |
-| **Testing safety** | `search_standards("test credential safety")` |
-| **Violation response** | `search_standards("credential file modified")` |
+| **Writing to .env** | `pos_search(content_type="standards", query="can I write to .env")` |
+| **Credential protection** | `pos_search(content_type="standards", query="credential file protection")` |
+| **Protected files** | `pos_search(content_type="standards", query="what files protected AI")` |
+| **Safe alternatives** | `pos_search(content_type="standards", query="safe alternatives credential files")` |
+| **Example files** | `pos_search(content_type="standards", query="create env example")` |
+| **Enforcement** | `pos_search(content_type="standards", query="credential protection enforcement")` |
+| **Testing safety** | `pos_search(content_type="standards", query="test credential safety")` |
+| **Violation response** | `pos_search(content_type="standards", query="credential file modified")` |
 
 ---
 
@@ -461,23 +461,23 @@ Language-specific patterns for credential file detection and protection.
 
 **Query workflow for credential safety:**
 
-1. **Start with protection rules** → `search_standards("credential file protection")` (this document)
-2. **Learn git safety** → `search_standards("git safety rules")` → `standards/ai-safety/git-safety-rules.md`
-3. **Understand security patterns** → `search_standards("security patterns")` → `standards/security/security-patterns.md`
-4. **Learn production checklist** → `search_standards("production code checklist")` → `standards/ai-safety/production-code-checklist.md`
+1. **Start with protection rules** → `pos_search(content_type="standards", query="credential file protection")` (this document)
+2. **Learn git safety** → `pos_search(content_type="standards", query="git safety rules")` → `standards/ai-safety/git-safety-rules.md`
+3. **Understand security patterns** → `pos_search(content_type="standards", query="security patterns")` → `standards/security/security-patterns.md`
+4. **Learn production checklist** → `pos_search(content_type="standards", query="production code checklist")` → `standards/ai-safety/production-code-checklist.md`
 
 **By Category:**
 
 **AI Safety:**
-- `standards/ai-safety/git-safety-rules.md` - Git operations safety → `search_standards("git safety rules")`
-- `standards/ai-safety/production-code-checklist.md` - Production code requirements → `search_standards("production code checklist")`
-- `standards/ai-safety/import-verification-rules.md` - Import safety → `search_standards("import verification")`
+- `standards/ai-safety/git-safety-rules.md` - Git operations safety → `pos_search(content_type="standards", query="git safety rules")`
+- `standards/ai-safety/production-code-checklist.md` - Production code requirements → `pos_search(content_type="standards", query="production code checklist")`
+- `standards/ai-safety/import-verification-rules.md` - Import safety → `pos_search(content_type="standards", query="import verification")`
 
 **Security:**
-- `standards/security/security-patterns.md` - Universal security practices → `search_standards("security patterns")`
+- `standards/security/security-patterns.md` - Universal security practices → `pos_search(content_type="standards", query="security patterns")`
 
 **Installation:**
-- `standards/installation/gitignore-requirements.md` - Gitignore patterns → `search_standards("gitignore requirements")`
+- `standards/installation/gitignore-requirements.md` - Gitignore patterns → `pos_search(content_type="standards", query="gitignore requirements")`
 
 ---
 

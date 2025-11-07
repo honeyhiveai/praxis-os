@@ -12,14 +12,16 @@ Usage:
     python .praxis-os/bin/configure-claude-code-mcp.py
 
 The script will:
-1. Read current MCP server port from .praxis-os/.mcp_server_state.json
-2. Create or update .mcp.json in project root
-3. Configure agent-os-rag server with HTTP transport
-4. Preserve other MCP server configurations
+1. Detect project name from git repository or directory name
+2. Read current MCP server port from .praxis-os/.mcp_server_state.json
+3. Create or update .mcp.json in project root
+4. Configure project-specific MCP server with HTTP transport
+5. Preserve other MCP server configurations
 """
 
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 from typing import Dict, Any, Optional
@@ -28,22 +30,90 @@ from typing import Dict, Any, Optional
 def find_project_root() -> Optional[Path]:
     """
     Find project root containing .praxis-os directory.
-    
+
     :return: Path to project root or None if not found
     """
     # Start from current directory
     current = Path.cwd()
-    
+
     # Check current directory
     if (current / ".praxis-os").exists():
         return current
-    
+
     # Check parent directories (up to 5 levels)
     for parent in current.parents[:5]:
         if (parent / ".praxis-os").exists():
             return parent
-    
+
     return None
+
+
+def get_project_name(project_root: Path) -> str:
+    """
+    Get project name dynamically.
+
+    Priority:
+    1. Git repository name (extracted from remote URL)
+    2. Directory name (fallback for non-git projects)
+
+    :param project_root: Path to project root directory
+    :return: Project name (sanitized for use as MCP server name)
+    """
+    # Try git repo name first
+    git_name = _get_git_repo_name(project_root)
+    if git_name:
+        return git_name
+
+    # Fallback to directory name
+    return project_root.name
+
+
+def _get_git_repo_name(project_root: Path) -> Optional[str]:
+    """
+    Extract repository name from git remote URL.
+
+    :param project_root: Path to project root directory
+    :return: Repository name or None if not a git repo or can't determine
+    """
+    try:
+        # Get git remote URL
+        result = subprocess.run(
+            ["git", "config", "--get", "remote.origin.url"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False
+        )
+
+        if result.returncode != 0:
+            return None
+
+        remote_url = result.stdout.strip()
+        if not remote_url:
+            return None
+
+        # Extract repo name from various URL formats
+        # git@github.com:user/repo.git -> repo
+        # https://github.com/user/repo.git -> repo
+        # https://github.com/user/repo -> repo
+
+        # Remove .git suffix if present
+        if remote_url.endswith('.git'):
+            remote_url = remote_url[:-4]
+
+        # Remove trailing slash if present
+        remote_url = remote_url.rstrip('/')
+
+        # Get last part after / or :
+        if '/' in remote_url:
+            return remote_url.split('/')[-1]
+        elif ':' in remote_url:
+            return remote_url.split(':')[-1].split('/')[-1]
+
+        return None
+    except (subprocess.TimeoutExpired, subprocess.SubprocessError, Exception):
+        return None
 
 
 def read_mcp_state(project_root: Path) -> Dict[str, Any]:
@@ -77,44 +147,53 @@ def read_mcp_state(project_root: Path) -> Dict[str, Any]:
         raise ValueError(f"Invalid JSON in state file: {e}")
 
 
-def create_claude_code_config(url: str) -> Dict[str, Any]:
+def create_claude_code_config(server_name: str, url: str) -> Dict[str, Any]:
     """
     Create Claude Code MCP configuration for prAxIs OS.
-    
+
+    :param server_name: Project-specific MCP server name (from project name)
     :param url: HTTP URL of running MCP server
     :return: Configuration dictionary
     """
     # CRITICAL: Must specify "type": "streamableHttp" explicitly!
     # Without type, URL-only configs may default to SSE (deprecated)
     return {
-        "agent-os-rag": {
+        server_name: {
             "type": "streamableHttp",
             "transport": "http",
-            "url": url
+            "url": url,
+            "autoApprove": [
+                "pos_search",
+                "pos_workflow",
+                "get_server_info",
+                "current_date",
+                "pos_browser"
+            ]
         }
     }
 
 
-def update_mcp_json(project_root: Path, url: str, port: int) -> None:
+def update_mcp_json(project_root: Path, server_name: str, url: str, port: int) -> None:
     """
     Update .mcp.json with prAxIs OS server configuration using official CLI.
-    
+
     Uses 'claude mcp add --scope project' to write project-local config.
     This is the official method per https://docs.claude.com/en/docs/claude-code/mcp.md
-    
+
     :param project_root: Path to project root
+    :param server_name: Project-specific MCP server name (from project name)
     :param url: HTTP URL of MCP server
     :param port: Port number
     """
     import subprocess
-    
+
     # Use official 'claude mcp add' with --scope project
     # This writes to .mcp.json (project-local, shareable)
     cmd = [
         "claude", "mcp", "add",
         "--scope", "project",
         "--transport", "http",
-        "agent-os-rag",
+        server_name,
         url
     ]
     
@@ -129,37 +208,39 @@ def update_mcp_json(project_root: Path, url: str, port: int) -> None:
         
         # Parse output to find the modified file path
         output_lines = result.stdout.strip().split('\n')
-        
+
         print(f"✅ Updated {project_root / '.mcp.json'}")
+        print(f"   Server name: {server_name}")
         print(f"   Server URL: {url}")
         print(f"   Port: {port}")
-        
+
     except subprocess.CalledProcessError as e:
         # Fall back to manual JSON editing if CLI fails
         print(f"⚠️  'claude mcp add' failed, using manual config...")
-        
+
         mcp_json = project_root / ".mcp.json"
-        
+
         # Read existing config or create new
         if mcp_json.exists():
             with open(mcp_json, 'r', encoding='utf-8') as f:
                 config = json.load(f)
         else:
             config = {"mcpServers": {}}
-        
+
         # Ensure mcpServers exists
         if "mcpServers" not in config:
             config["mcpServers"] = {}
-        
-        # Update or create agent-os-rag configuration
-        praxis_os_config = create_claude_code_config(url)
+
+        # Update or create project-specific configuration
+        praxis_os_config = create_claude_code_config(server_name, url)
         config["mcpServers"].update(praxis_os_config)
-        
+
         # Write updated config
         with open(mcp_json, 'w', encoding='utf-8') as f:
             json.dump(config, f, indent=2)
-        
+
         print(f"✅ Updated {mcp_json}")
+        print(f"   Server name: {server_name}")
         print(f"   Server URL: {url}")
         print(f"   Port: {port}")
 
@@ -256,8 +337,12 @@ def main() -> int:
         return 1
     
     print(f"✅ Found project root: {project_root}")
-    
-    # Step 2: Read MCP server state
+
+    # Step 2: Detect project name
+    server_name = get_project_name(project_root)
+    print(f"✅ Detected project name: {server_name}")
+
+    # Step 3: Read MCP server state
     print("\n📖 Reading MCP server state...")
     try:
         state = read_mcp_state(project_root)
@@ -271,8 +356,8 @@ def main() -> int:
         print("  2. Verify MCP server started (check Cursor output)")
         print("  3. Check .praxis-os/.mcp_server_state.json exists")
         return 1
-    
-    # Step 3: Enable project MCP servers in .claude/settings.local.json
+
+    # Step 4: Enable project MCP servers in .claude/settings.local.json
     print("\n✏️  Enabling project MCP servers...")
     try:
         ensure_project_mcp_enabled(project_root)
@@ -286,11 +371,11 @@ def main() -> int:
     except Exception as e:
         print(f"⚠️  Warning: {e}")
     
-    # Step 4: Update .mcp.json using official CLI
+    # Step 5: Update .mcp.json using official CLI
     print("\n✏️  Configuring .mcp.json (via 'claude mcp add')...")
     try:
-        update_mcp_json(project_root, url, port)
-        
+        update_mcp_json(project_root, server_name, url, port)
+
         print("\n" + "=" * 60)
         print("🎉 SUCCESS! Claude Code is now configured for prAxIs OS")
         print("\nConfiguration:")
@@ -301,10 +386,11 @@ def main() -> int:
         print("  - Transport: HTTP (connects to existing server)")
         print("  - Primary IDE: Cursor (launches server)")
         print("  - Claude Code: Secondary agent (via HTTP)")
+        print(f"  - Server name: {server_name} (project-specific)")
         print("\nNext steps:")
         print("  1. Reload VS Code/Cursor window")
         print("  2. Open Claude Code extension")
-        print("  3. Verify 'agent-os-rag' server is connected")
+        print(f"  3. Verify '{server_name}' server is connected")
         print("  4. Try: 'search standards for orientation'")
         return 0
         

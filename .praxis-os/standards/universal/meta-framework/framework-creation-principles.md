@@ -381,14 +381,14 @@ A framework is successful when:
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Creating new framework** | `search_standards("framework creation principles")` |
-| **AI inconsistent execution** | `search_standards("AI execution consistency")` |
-| **Context overflow issues** | `search_standards("LLM constraints")` |
-| **Workflow design** | `search_standards("AI workflow design")` |
-| **File size optimization** | `search_standards("optimal file size AI")` |
-| **Validation gates** | `search_standards("validation gates")` |
-| **Horizontal decomposition** | `search_standards("horizontal decomposition")` |
-| **Meta-framework concepts** | `search_standards("meta-workflow")` |
+| **Creating new framework** | `pos_search(content_type="standards", query="framework creation principles")` |
+| **AI inconsistent execution** | `pos_search(content_type="standards", query="AI execution consistency")` |
+| **Context overflow issues** | `pos_search(content_type="standards", query="LLM constraints")` |
+| **Workflow design** | `pos_search(content_type="standards", query="AI workflow design")` |
+| **File size optimization** | `pos_search(content_type="standards", query="optimal file size AI")` |
+| **Validation gates** | `pos_search(content_type="standards", query="validation gates")` |
+| **Horizontal decomposition** | `pos_search(content_type="standards", query="horizontal decomposition")` |
+| **Meta-framework concepts** | `pos_search(content_type="standards", query="meta-workflow")` |
 
 ---
 
@@ -396,26 +396,26 @@ A framework is successful when:
 
 **Query workflow for complete framework creation:**
 
-1. **Start with principles** → `search_standards("framework creation principles")` (this document)
-2. **Learn architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
-3. **Add commands** → `search_standards("command language")` → `standards/meta-workflow/command-language.md`
-4. **Implement gates** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
-5. **Decompose tasks** → `search_standards("horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
+1. **Start with principles** → `pos_search(content_type="standards", query="framework creation principles")` (this document)
+2. **Learn architecture** → `pos_search(content_type="standards", query="three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
+3. **Add commands** → `pos_search(content_type="standards", query="command language")` → `standards/meta-workflow/command-language.md`
+4. **Implement gates** → `pos_search(content_type="standards", query="validation gates")` → `standards/meta-workflow/validation-gates.md`
+5. **Decompose tasks** → `pos_search(content_type="standards", query="horizontal decomposition")` → `standards/meta-workflow/horizontal-decomposition.md`
 
 **By Category:**
 
 **Meta-Framework (Complete Set):**
-- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
-- `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
-- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
-- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `pos_search(content_type="standards", query="three-tier architecture")`
+- `standards/meta-workflow/command-language.md` - Binding instructions → `pos_search(content_type="standards", query="command language")`
+- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `pos_search(content_type="standards", query="validation gates")`
+- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `pos_search(content_type="standards", query="horizontal decomposition")`
 
 **Workflows:**
-- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
-- `standards/workflows/workflow-metadata-standards.md` - Workflow metadata → `search_standards("workflow metadata")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
+- `standards/workflows/workflow-metadata-standards.md` - Workflow metadata → `pos_search(content_type="standards", query="workflow metadata")`
 
 **Usage:**
-- `usage/creating-specs.md` - Specification structure → `search_standards("how to create specs")`
+- `usage/creating-specs.md` - Specification structure → `pos_search(content_type="standards", query="how to create specs")`
 
 ---
 

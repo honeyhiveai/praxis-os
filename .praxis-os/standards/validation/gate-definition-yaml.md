@@ -71,11 +71,11 @@ validators:
 - ❌ Validators with dangerous operations (os, sys, exec, eval)
 
 **When to Query This Standard:**
-- Creating new workflow with validation → `search_standards("how to create gate-definition.yaml")`
-- Understanding checkpoint validation → `search_standards("checkpoint validation YAML structure")`
-- Writing validator functions → `search_standards("validator lambda patterns safe")`
-- Debugging validation failures → `search_standards("gate-definition.yaml troubleshooting")`
-- Migration to gates → `search_standards("add validation gates existing workflow")`
+- Creating new workflow with validation → `pos_search(content_type="standards", query="how to create gate-definition.yaml")`
+- Understanding checkpoint validation → `pos_search(content_type="standards", query="checkpoint validation YAML structure")`
+- Writing validator functions → `pos_search(content_type="standards", query="validator lambda patterns safe")`
+- Debugging validation failures → `pos_search(content_type="standards", query="gate-definition.yaml troubleshooting")`
+- Migration to gates → `pos_search(content_type="standards", query="add validation gates existing workflow")`
 
 ---
 
@@ -729,14 +729,14 @@ assert len(missing) > 0
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Creating gates** | `search_standards("how to create gate-definition.yaml")` |
-| **Understanding structure** | `search_standards("gate-definition.yaml structure fields")` |
-| **Validator patterns** | `search_standards("validator lambda patterns examples")` |
-| **Strict vs lenient** | `search_standards("when to use strict mode gates")` |
-| **Troubleshooting** | `search_standards("gate validation failing debug")` |
-| **Migration** | `search_standards("add validation gates existing workflow")` |
-| **Security** | `search_standards("validator security restrictions safe")` |
-| **Three-tier fallback** | `search_standards("three-tier fallback validation strategy")` |
+| **Creating gates** | `pos_search(content_type="standards", query="how to create gate-definition.yaml")` |
+| **Understanding structure** | `pos_search(content_type="standards", query="gate-definition.yaml structure fields")` |
+| **Validator patterns** | `pos_search(content_type="standards", query="validator lambda patterns examples")` |
+| **Strict vs lenient** | `pos_search(content_type="standards", query="when to use strict mode gates")` |
+| **Troubleshooting** | `pos_search(content_type="standards", query="gate validation failing debug")` |
+| **Migration** | `pos_search(content_type="standards", query="add validation gates existing workflow")` |
+| **Security** | `pos_search(content_type="standards", query="validator security restrictions safe")` |
+| **Three-tier fallback** | `pos_search(content_type="standards", query="three-tier fallback validation strategy")` |
 
 ---
 
@@ -744,21 +744,21 @@ assert len(missing) > 0
 
 **Query workflow for validation mastery:**
 
-1. **Start with gate structure** → `search_standards("gate-definition.yaml structure")` (this document)
-2. **Learn validation system** → `search_standards("evidence validation system overview")` → `standards/validation/evidence-validation-overview.md`
-3. **Understand CheckpointLoader** → `search_standards("CheckpointLoader three-tier fallback")` → `standards/validation/checkpoint-loader.md`
-4. **Learn ValidatorExecutor** → `search_standards("safe validator execution security")` → `standards/validation/validator-executor.md`
+1. **Start with gate structure** → `pos_search(content_type="standards", query="gate-definition.yaml structure")` (this document)
+2. **Learn validation system** → `pos_search(content_type="standards", query="evidence validation system overview")` → `standards/validation/evidence-validation-overview.md`
+3. **Understand CheckpointLoader** → `pos_search(content_type="standards", query="CheckpointLoader three-tier fallback")` → `standards/validation/checkpoint-loader.md`
+4. **Learn ValidatorExecutor** → `pos_search(content_type="standards", query="safe validator execution security")` → `standards/validation/validator-executor.md`
 
 **By Category:**
 
 **Validation:**
-- `standards/validation/evidence-validation-overview.md` - System overview → `search_standards("evidence validation system")`
-- `standards/validation/checkpoint-loader.md` - Three-tier fallback → `search_standards("CheckpointLoader fallback")`
-- `standards/validation/validator-executor.md` - Safe execution → `search_standards("validator execution security")`
+- `standards/validation/evidence-validation-overview.md` - System overview → `pos_search(content_type="standards", query="evidence validation system")`
+- `standards/validation/checkpoint-loader.md` - Three-tier fallback → `pos_search(content_type="standards", query="CheckpointLoader fallback")`
+- `standards/validation/validator-executor.md` - Safe execution → `pos_search(content_type="standards", query="validator execution security")`
 
 **Workflows:**
-- `standards/workflows/workflow-construction-standards.md` - Workflow structure → `search_standards("workflow construction standards")`
-- `standards/workflows/workflow-metadata-standards.md` - Metadata format → `search_standards("workflow metadata")`
+- `standards/workflows/workflow-construction-standards.md` - Workflow structure → `pos_search(content_type="standards", query="workflow construction standards")`
+- `standards/workflows/workflow-metadata-standards.md` - Metadata format → `pos_search(content_type="standards", query="workflow metadata")`
 
 ---
 

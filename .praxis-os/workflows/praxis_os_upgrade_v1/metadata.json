@@ -4,6 +4,7 @@
   "name": "Agent OS Upgrade Workflow",
   "description": "AI-guided Agent OS upgrade with validation and rollback",
   "author": "Agent OS Team",
+  "strict_mode": true,
   "created_date": "2025-10-08",
   "total_phases": 6,
   "estimated_duration": "3-5 minutes",

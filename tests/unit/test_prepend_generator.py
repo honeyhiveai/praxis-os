@@ -48,14 +48,18 @@ class TestGenerateQueryPrepend:
         assert "Angles:" in prepend
 
     def test_prepend_includes_suggestion_when_incomplete(self) -> None:
-        """Test prepend includes suggestion when <5 queries."""
+        """Test prepend includes either suggestion or reminder (randomized at all query counts)."""
         tracker = QueryTracker()
         tracker.record_query("session1", "What is X?")
 
         prepend = generate_query_prepend(tracker, "session1", "What is X?")
 
-        assert "💡 Try:" in prepend
-        assert "'" in prepend  # Suggestion wrapped in quotes
+        # Should include either a suggestion OR a reminder (randomized)
+        has_suggestion = "💡 Try:" in prepend
+        has_reminder = any(emoji in prepend for emoji in ["🎉", "🎯"])
+        assert (
+            has_suggestion or has_reminder
+        ), "Should have either suggestion or reminder"
 
     def test_prepend_includes_completion_message_when_complete(self) -> None:
         """Test prepend includes completion message when ≥5 queries and ≥4 angles."""
@@ -70,8 +74,8 @@ class TestGenerateQueryPrepend:
 
         prepend = generate_query_prepend(tracker, "session1", "What is A?")
 
-        assert "🎉" in prepend
-        assert "Keep exploring" in prepend  # Updated message
+        # Completion message (randomly selected from pool)
+        assert any(emoji in prepend for emoji in ["🎉", "🎯"])
         assert "💡 Try:" not in prepend  # No suggestion when complete
 
     def test_prepend_includes_separator(self) -> None:
@@ -329,7 +333,10 @@ def test_full_prepend_workflow() -> None:
     assert "Queries: 1/5" in prepend
     assert "Unique: 1" in prepend
     assert "📖✓" in prepend  # definition covered
-    assert "💡 Try:" in prepend
+    # Should have either suggestion OR reminder (randomized)
+    has_suggestion = "💡 Try:" in prepend
+    has_reminder = any(emoji in prepend for emoji in ["🎉", "🎯"])
+    assert has_suggestion or has_reminder
     assert "---" in prepend
 
     # Record more queries
@@ -340,8 +347,8 @@ def test_full_prepend_workflow() -> None:
 
     prepend = generate_query_prepend(tracker, "integration", "Avoid errors?")
 
-    # Should have completion message now
-    assert "🎉" in prepend
+    # Should have completion message now (randomly selected from pool)
+    assert any(emoji in prepend for emoji in ["🎉", "🎯"])
     assert "Queries: 5/5" in prepend
 
 

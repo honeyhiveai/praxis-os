@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "name": "Workflow Creation v1",
   "description": "Systematic workflow creation using meta-workflow principles. Converts design documents or YAML definitions into complete, compliant workflows with phase-gated validation, command language enforcement, and quality auditing for Python, TypeScript, JavaScript, and multi-language projects.",
+  "strict_mode": true,
   "total_phases": 6,
   "estimated_duration": "3-5 hours",
   "primary_outputs": [

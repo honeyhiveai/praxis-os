@@ -1,0 +1,75 @@
+# Ouroboros MCP Server Configuration
+# Minimal working config for Task 7.1 (Server Entry Point)
+
+version: "1.0"
+
+# RAG Subsystem Configuration
+indexes:
+  # Standards Index (documentation/markdown)
+  standards:
+    source_paths:
+      - "standards/"
+    vector:
+      model: "sentence-transformers/all-MiniLM-L6-v2"
+      dimension: 384
+      chunk_size: 800
+      chunk_overlap: 100
+    fts: {}  # Use all defaults
+    metadata_filtering:
+      enabled: true
+      scalar_indexes:
+        - column: "domain"
+          index_type: "BTREE"  # High cardinality (workflow, rag, browser, etc.)
+        - column: "phase"
+          index_type: "BITMAP"  # Low cardinality (0-8)
+        - column: "section"
+          index_type: "BTREE"  # Medium-high cardinality
+      auto_generate: false
+      llm_enhance: false
+
+  # Code Index (semantic search + call graph)
+  code:
+    source_paths:
+      - "ouroboros/"  # Index the Ouroboros code
+    languages:
+      - "python"
+    vector:
+      model: "sentence-transformers/all-MiniLM-L6-v2"
+      dimension: 384
+      chunk_size: 200
+      chunk_overlap: 20
+    fts: {}
+    graph: {}  # Use all defaults (max_depth=10, etc.)
+    duckdb_path: ".cache/code.duckdb"
+
+  # AST Index (structural code search)
+  ast:
+    source_paths:
+      - "ouroboros/"
+    languages:
+      - "python"
+    auto_install_parsers: true
+    venv_path: "venv/"
+
+  # File Watcher (incremental updates)
+  file_watcher: {}  # Use all defaults (enabled=True, debounce_ms=500)
+
+# Workflow Subsystem Configuration
+workflow:
+  workflows_dir: "workflows/"
+  state_dir: ".cache/state/"
+  session_timeout_minutes: 1440
+
+# Browser Subsystem Configuration
+browser:
+  browser_type: "chromium"
+  headless: true
+  max_sessions: 10
+  session_timeout_minutes: 30
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "text"
+  log_dir: ".cache/logs/"
+  behavioral_metrics_enabled: true

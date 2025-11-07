@@ -33,9 +33,9 @@
 - **Cline Tasks:** `~/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/tasks/`
 
 **When to Query This Standard:**
-- `search_standards("how to analyze session history")`
-- `search_standards("AI collaboration metrics")`
-- `search_standards("Cursor conversation analysis")`
+- `pos_search(content_type="standards", query="how to analyze session history")`
+- `pos_search(content_type="standards", query="AI collaboration metrics")`
+- `pos_search(content_type="standards", query="Cursor conversation analysis")`
 
 ---
 
@@ -476,10 +476,10 @@ Teach new team members to query 5-10 times per task.
 
 **Query for complete context:**
 
-- `search_standards("RAG content authoring")` - How to document findings
-- `search_standards("compliance checking")` - How to validate patterns
-- `search_standards("standards creation")` - How to turn insights into standards
-- `search_standards("agent decision protocol")` - Understanding AI behavior patterns
+- `pos_search(content_type="standards", query="RAG content authoring")` - How to document findings
+- `pos_search(content_type="standards", query="compliance checking")` - How to validate patterns
+- `pos_search(content_type="standards", query="standards creation")` - How to turn insights into standards
+- `pos_search(content_type="standards", query="agent decision protocol")` - Understanding AI behavior patterns
 
 **Related documentation:**
 - `usage/operating-model.md` - Partnership roles and dynamics

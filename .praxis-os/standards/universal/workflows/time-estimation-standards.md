@@ -31,10 +31,10 @@
 - Reveals parallel work multiplication (100-400x)
 
 **Query for details:**
-- `search_standards("how to calculate wall clock duration")`
-- `search_standards("what counts as human active time")`
-- `search_standards("parallel multiplier effect")`
-- `search_standards("task estimation calibration")`
+- `pos_search(content_type="standards", query="how to calculate wall clock duration")`
+- `pos_search(content_type="standards", query="what counts as human active time")`
+- `pos_search(content_type="standards", query="parallel multiplier effect")`
+- `pos_search(content_type="standards", query="task estimation calibration")`
 
 ---
 
@@ -605,10 +605,10 @@ Can orchestrate: 20 similar tasks in parallel
 
 **Query anytime:**
 ```python
-search_standards("how to estimate AI agent tasks")
-search_standards("dual estimation formula")
-search_standards("what is leverage multiplier")
-search_standards("parallel work multiplication")
+pos_search(content_type="standards", query="how to estimate AI agent tasks")
+pos_search(content_type="standards", query="dual estimation formula")
+pos_search(content_type="standards", query="what is leverage multiplier")
+pos_search(content_type="standards", query="parallel work multiplication")
 ```
 
 ---

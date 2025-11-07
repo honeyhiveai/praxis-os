@@ -293,14 +293,14 @@ find phases/ -name "*.md" -exec sh -c '
 
 | Situation | Example Query |
 |-----------|---------------|
-| **Large file failures** | `search_standards("AI failing large files")` |
-| **Breaking down workflows** | `search_standards("horizontal decomposition")` |
-| **Optimal file size** | `search_standards("optimal file size AI")` |
-| **Context overflow** | `search_standards("AI context overflow")` |
-| **Task structure** | `search_standards("how to structure tasks")` |
-| **Decomposition strategies** | `search_standards("task decomposition strategies")` |
-| **Workflow organization** | `search_standards("workflow organization")` |
-| **File size limits** | `search_standards("AI file size limits")` |
+| **Large file failures** | `pos_search(content_type="standards", query="AI failing large files")` |
+| **Breaking down workflows** | `pos_search(content_type="standards", query="horizontal decomposition")` |
+| **Optimal file size** | `pos_search(content_type="standards", query="optimal file size AI")` |
+| **Context overflow** | `pos_search(content_type="standards", query="AI context overflow")` |
+| **Task structure** | `pos_search(content_type="standards", query="how to structure tasks")` |
+| **Decomposition strategies** | `pos_search(content_type="standards", query="task decomposition strategies")` |
+| **Workflow organization** | `pos_search(content_type="standards", query="workflow organization")` |
+| **File size limits** | `pos_search(content_type="standards", query="AI file size limits")` |
 
 ---
 
@@ -308,25 +308,25 @@ find phases/ -name "*.md" -exec sh -c '
 
 **Query workflow for complete decomposition understanding:**
 
-1. **Start with decomposition** → `search_standards("horizontal decomposition")` (this document)
-2. **Learn framework principles** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
-3. **Understand architecture** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
-4. **Apply validation** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
+1. **Start with decomposition** → `pos_search(content_type="standards", query="horizontal decomposition")` (this document)
+2. **Learn framework principles** → `pos_search(content_type="standards", query="framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+3. **Understand architecture** → `pos_search(content_type="standards", query="three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
+4. **Apply validation** → `pos_search(content_type="standards", query="validation gates")` → `standards/meta-workflow/validation-gates.md`
 
 **By Category:**
 
 **Meta-Framework:**
-- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `search_standards("framework creation principles")`
-- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
-- `standards/meta-workflow/command-language.md` - Binding instructions → `search_standards("command language")`
-- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
+- `standards/meta-workflow/framework-creation-principles.md` - Core principles → `pos_search(content_type="standards", query="framework creation principles")`
+- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `pos_search(content_type="standards", query="three-tier architecture")`
+- `standards/meta-workflow/command-language.md` - Binding instructions → `pos_search(content_type="standards", query="command language")`
+- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `pos_search(content_type="standards", query="validation gates")`
 
 **Workflows:**
-- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
 
 **Architecture:**
-- `standards/architecture/solid-principles.md` - Single Responsibility Principle → `search_standards("SOLID principles")`
-- `standards/architecture/separation-of-concerns.md` - Concern separation → `search_standards("separation of concerns")`
+- `standards/architecture/solid-principles.md` - Single Responsibility Principle → `pos_search(content_type="standards", query="SOLID principles")`
+- `standards/architecture/separation-of-concerns.md` - Concern separation → `pos_search(content_type="standards", query="separation of concerns")`
 
 ---
 

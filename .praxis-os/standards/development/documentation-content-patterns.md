@@ -528,7 +528,7 @@ Query standards before implementing to reduce correction cycles.
 
 Despite 54% overall cost reduction, **cost per message increased 2.3%**. Why?
 
-**The mechanism:** More search_standards queries added upfront cost per message, but dramatically reduced correction cycles. The tradeoff: slightly higher per-message cost for massively fewer total messages.
+**The mechanism:** More pos_search queries added upfront cost per message, but dramatically reduced correction cycles. The tradeoff: slightly higher per-message cost for massively fewer total messages.
 
 ### Sample Correction Patterns (September)
 

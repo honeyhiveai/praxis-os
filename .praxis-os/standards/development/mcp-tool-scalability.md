@@ -26,7 +26,7 @@
 
 ### Current State
 **7 tools** (safe zone):
-1. `search_standards` (RAG)
+1. `pos_search` (RAG)
 2. `start_workflow` (Workflow)
 3. `get_current_phase` (Workflow)
 4. `get_task` (Workflow)

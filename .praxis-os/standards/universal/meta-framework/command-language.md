@@ -497,14 +497,14 @@ When done, move to the next phase.
 
 | Situation | Example Query |
 |-----------|---------------|
-| **AI skipping steps** | `search_standards("AI skipping steps")` |
-| **Creating workflows** | `search_standards("workflow commands")` |
-| **Enforcing quality gates** | `search_standards("quality gates")` |
-| **Binding instructions** | `search_standards("binding AI instructions")` |
-| **Command symbols** | `search_standards("command language")` |
-| **AI compliance issues** | `search_standards("AI follow instructions")` |
-| **Workflow execution** | `search_standards("workflow execution patterns")` |
-| **Evidence gathering** | `search_standards("evidence commands")` |
+| **AI skipping steps** | `pos_search(content_type="standards", query="AI skipping steps")` |
+| **Creating workflows** | `pos_search(content_type="standards", query="workflow commands")` |
+| **Enforcing quality gates** | `pos_search(content_type="standards", query="quality gates")` |
+| **Binding instructions** | `pos_search(content_type="standards", query="binding AI instructions")` |
+| **Command symbols** | `pos_search(content_type="standards", query="command language")` |
+| **AI compliance issues** | `pos_search(content_type="standards", query="AI follow instructions")` |
+| **Workflow execution** | `pos_search(content_type="standards", query="workflow execution patterns")` |
+| **Evidence gathering** | `pos_search(content_type="standards", query="evidence commands")` |
 
 ---
 
@@ -512,25 +512,25 @@ When done, move to the next phase.
 
 **Query workflow for complete meta-workflow understanding:**
 
-1. **Start with commands** → `search_standards("command language")` (this document)
-2. **Framework structure** → `search_standards("three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
-3. **Quality gates** → `search_standards("validation gates")` → `standards/meta-workflow/validation-gates.md`
-4. **Framework creation** → `search_standards("framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
+1. **Start with commands** → `pos_search(content_type="standards", query="command language")` (this document)
+2. **Framework structure** → `pos_search(content_type="standards", query="three-tier architecture")` → `standards/meta-workflow/three-tier-architecture.md`
+3. **Quality gates** → `pos_search(content_type="standards", query="validation gates")` → `standards/meta-workflow/validation-gates.md`
+4. **Framework creation** → `pos_search(content_type="standards", query="framework creation principles")` → `standards/meta-workflow/framework-creation-principles.md`
 
 **By Category:**
 
 **Meta-Framework:**
-- `standards/meta-workflow/framework-creation-principles.md` - Creating new frameworks → `search_standards("framework creation principles")`
-- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `search_standards("three-tier architecture")`
-- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `search_standards("validation gates")`
-- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `search_standards("horizontal decomposition")`
+- `standards/meta-workflow/framework-creation-principles.md` - Creating new frameworks → `pos_search(content_type="standards", query="framework creation principles")`
+- `standards/meta-workflow/three-tier-architecture.md` - README/phase/task structure → `pos_search(content_type="standards", query="three-tier architecture")`
+- `standards/meta-workflow/validation-gates.md` - Quality checkpoints → `pos_search(content_type="standards", query="validation gates")`
+- `standards/meta-workflow/horizontal-decomposition.md` - Task breakdown → `pos_search(content_type="standards", query="horizontal decomposition")`
 
 **Workflows:**
-- `standards/workflows/workflow-construction-standards.md` - Building workflows → `search_standards("workflow construction")`
-- `standards/workflows/workflow-system-overview.md` - Workflow system → `search_standards("workflow system overview")`
+- `standards/workflows/workflow-construction-standards.md` - Building workflows → `pos_search(content_type="standards", query="workflow construction")`
+- `standards/workflows/workflow-system-overview.md` - Workflow system → `pos_search(content_type="standards", query="workflow system overview")`
 
 **AI Assistant:**
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core AI behavior → `search_standards("prAxIs OS orientation")`
+- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core AI behavior → `pos_search(content_type="standards", query="prAxIs OS orientation")`
 
 ---
 
