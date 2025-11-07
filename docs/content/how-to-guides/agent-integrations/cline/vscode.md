@@ -265,7 +265,7 @@ If you also use Cursor and want both agents:
 1. **Cursor** (primary) - Controls MCP server
 2. **Cline in Cursor** (secondary) - Connects via HTTP
 
-See [cline-in-cursor.md](./cline-in-cursor.md) for secondary agent configuration.
+See [Cline in Cursor](./cursor.md) for secondary agent configuration.
 
 **Note**: Don't run Cline (primary) and Cursor simultaneously - they'll conflict over MCP server.
 
@@ -324,7 +324,5 @@ Now:
 4. **Build with guidance**: prAxIs OS provides context throughout
 
 See also:
-- [Creating Project Standards](../creating-project-standards.md)
-- [Understanding Workflows](../../tutorials/understanding-praxis-os-workflows.md)
-- [Cline in Cursor (Secondary)](./cline-in-cursor.md) - If using both Cursor + Cline
+- [Cline in Cursor](./cursor.md) - If using both Cursor + Cline
 

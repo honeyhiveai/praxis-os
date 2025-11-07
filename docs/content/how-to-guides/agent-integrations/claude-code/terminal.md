@@ -402,7 +402,6 @@ Now:
 4. **Build with guidance**: prAxIs OS provides context throughout
 
 See also:
-- [Claude Code in VS Code](./claude-code-vscode.md) - Editor integration
-- [Creating Project Standards](../creating-project-standards.md)
-- [Understanding Workflows](../../tutorials/understanding-praxis-os-workflows.md)
+- [Claude Code in VS Code](./vscode.md) - Editor integration
+- [Claude Code in Cursor](./cursor.md) - Cursor integration
 

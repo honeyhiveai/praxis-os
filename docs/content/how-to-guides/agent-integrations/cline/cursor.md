@@ -374,7 +374,5 @@ Now:
 4. **Iterate**: Refine multi-agent workflow based on experience
 
 See also:
-- [Cursor Integration (Primary)](./cursor.md)
-- [Cline in VS Code (Primary)](./cline-vscode.md)
-- [Understanding Workflows](../../tutorials/understanding-praxis-os-workflows.md)
+- [Cline in VS Code](./vscode.md) - VS Code integration
 
