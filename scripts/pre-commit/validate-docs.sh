@@ -67,10 +67,28 @@ echo -e "${BLUE}🔗 Running internal link validation...${NC}"
 if [[ ! -f "scripts/validate-links.py" ]]; then
     echo -e "${YELLOW}⚠️  Link validation script not found, skipping${NC}"
 else
+    # CRITICAL: Validate staged files, not working directory
+    # Stash any unstaged docs changes, validate staged files, then restore
+    # This ensures we catch broken links in what's actually being committed
+    UNSTAGED_DOCS=$(git diff --name-only | grep '^docs/.*\.md$' || true)
+    
+    if [[ -n "$UNSTAGED_DOCS" ]]; then
+        echo -e "${YELLOW}⚠️  Unstaged docs changes detected - stashing to validate staged files only${NC}"
+        git stash push -q -m "pre-commit-docs-validation-$$" -- docs/ 2>/dev/null || true
+        STASHED=1
+    else
+        STASHED=0
+    fi
+    
     # Run link validation (skip external for speed)
-    # Capture output and exit code (matching python-sdk pattern)
+    # This now validates the staged files (what's actually being committed)
     LINK_OUTPUT=$(python scripts/validate-links.py --skip-external 2>&1)
     LINK_EXIT_CODE=$?
+    
+    # Restore stashed changes if we stashed them
+    if [[ $STASHED -eq 1 ]]; then
+        git stash pop -q 2>/dev/null || true
+    fi
     
     if [[ $LINK_EXIT_CODE -ne 0 ]]; then
         echo -e "${RED}❌ Link validation failed (broken internal links found)${NC}"
