@@ -256,20 +256,30 @@ class QueryClassifier:
         # Normalize query
         query_lower = query.lower().strip()
 
-        # Detect all matching angles
-        detected_angles: list[QueryAngle] = []
+        # Detect all matching angles with specificity scoring
+        # Track matches with their longest keyword match (more specific = longer keyword)
+        angle_matches: dict[QueryAngle, int] = {}  # angle -> longest keyword length
+        
         for angle, keywords in _ANGLE_KEYWORDS.items():
             for keyword in keywords:
                 if keyword in query_lower:
-                    if angle not in detected_angles:
-                        detected_angles.append(angle)  # type: ignore
+                    # Track longest keyword match for this angle (more specific)
+                    current_max = angle_matches.get(angle, 0)
+                    angle_matches[angle] = max(current_max, len(keyword))
                     break  # Move to next angle once matched
 
         # No matches → default to conceptual
-        if not detected_angles:
+        if not angle_matches:
             return self._create_result("conceptual", [])
 
-        # Primary is first match, secondary are remaining
+        # Sort angles by specificity (longest keyword match first), then by dictionary order
+        # This ensures more specific patterns are prioritized as stated in the comment
+        detected_angles = sorted(
+            angle_matches.keys(),
+            key=lambda a: (-angle_matches[a], list(_ANGLE_KEYWORDS.keys()).index(a))
+        )
+
+        # Primary is most specific match, secondary are remaining
         primary = detected_angles[0]
         secondary = detected_angles[1:] if len(detected_angles) > 1 else []
 
