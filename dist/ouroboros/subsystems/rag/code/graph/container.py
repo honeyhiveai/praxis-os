@@ -261,6 +261,11 @@ class GraphIndex(BaseIndex):
                 relationships
             )
         
+        # CRITICAL: Checkpoint WAL to make data visible to other connections
+        # Without this, data stays in WAL and new connections see empty tables
+        logger.info("Checkpointing WAL to merge data into main database...")
+        conn.execute("PRAGMA wal_checkpoint(FULL)")
+        
         logger.info("✅ Graph index built: %d AST nodes, %d symbols, %d relationships",
                    len(ast_nodes), len(symbols), len(relationships))
     
@@ -461,7 +466,11 @@ class GraphIndex(BaseIndex):
         logger.warning("GraphIndex.update() not yet implemented. Use build(force=True) for full rebuild.")
     
     def health_check(self) -> HealthStatus:
-        """Check health of graph index.
+        """Check health of graph index with dynamic validation.
+        
+        Verifies:
+        1. Tables exist and have data
+        2. Can actually perform queries (test symbol search + AST query)
         
         Returns:
             HealthStatus object
@@ -469,21 +478,61 @@ class GraphIndex(BaseIndex):
         try:
             stats = self.traversal.get_stats()
             
-            is_healthy = (
-                stats["ast_node_count"] > 0 and
-                stats["symbol_count"] > 0
-            )
+            # Static check: Has data?
+            if stats["ast_node_count"] == 0 or stats["symbol_count"] == 0:
+                return HealthStatus(
+                    healthy=False,
+                    message="Graph index empty or unhealthy",
+                    details={
+                        "ast_node_count": stats["ast_node_count"],
+                        "symbol_count": stats["symbol_count"],
+                        "relationship_count": stats["relationship_count"],
+                        "database_path": str(self.db_path),
+                    }
+                )
             
-            return HealthStatus(
-                healthy=is_healthy,
-                message="Graph index healthy" if is_healthy else "Graph index empty or unhealthy",
-                details={
-                    "ast_node_count": stats["ast_node_count"],
-                    "symbol_count": stats["symbol_count"],
-                    "relationship_count": stats["relationship_count"],
-                    "database_path": str(self.db_path),
-                }
-            )
+            # DYNAMIC CHECK: Test actual queries
+            try:
+                # Test 1: Try a simple symbol search (validates symbols table + query logic)
+                test_symbols = self.traversal.search_symbols("test", n_results=1)
+                
+                # Test 2: Try a simple AST query (validates ast_nodes table + query logic)
+                test_ast = self.traversal.search_ast("test", n_results=1)
+                
+                # If we got here, DuckDB queries are working
+                return HealthStatus(
+                    healthy=True,
+                    message="Graph index healthy",
+                    details={
+                        "ast_node_count": stats["ast_node_count"],
+                        "symbol_count": stats["symbol_count"],
+                        "relationship_count": stats["relationship_count"],
+                        "database_path": str(self.db_path),
+                    }
+                )
+                
+            except Exception as query_error:
+                # Queries failed - index is corrupted or schema is invalid
+                error_msg = str(query_error).lower()
+                
+                # Check for common issues
+                if "table" in error_msg and "not" in error_msg:
+                    reason = "DuckDB table missing or schema corrupted"
+                elif "column" in error_msg:
+                    reason = "DuckDB schema mismatch (needs rebuild)"
+                else:
+                    reason = f"DuckDB not operational: {query_error}"
+                
+                return HealthStatus(
+                    healthy=False,
+                    message=f"Graph index corrupted or incompatible: {reason}",
+                    details={
+                        "ast_node_count": stats["ast_node_count"],
+                        "symbol_count": stats["symbol_count"],
+                        "test_error": str(query_error),
+                        "needs_rebuild": True
+                    }
+                )
             
         except Exception as e:
             logger.warning("Health check failed: %s", e)

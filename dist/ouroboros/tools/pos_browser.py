@@ -293,10 +293,10 @@ class BrowserTool(ActionDispatchMixin):
             # Middleware Integration: SessionMapper
             # Map conversation context → browser_session_id for session isolation
             if not session_id:
-                # SessionMapper extracts conversation ID from context and maps it
-                browser_session_id = self.session_mapper.get_browser_session_id(None)
+                # SessionMapper creates generic session_id for browser subsystem
+                browser_session_id = self.session_mapper.create_session_id("browser", conversation_id=None)
                 logger.debug(
-                    "SessionMapper auto-mapped conversation → browser_session_id: %s",
+                    "SessionMapper auto-created browser_session_id: %s",
                     browser_session_id
                 )
             else:
@@ -850,11 +850,14 @@ class BrowserTool(ActionDispatchMixin):
         **kwargs
     ) -> Dict[str, Any]:
         """Close session and release resources."""
-        return await self.browser_manager.close_session(  # type: ignore[no-any-return]
-            session_id=browser_session_id,
-            browser_type=browser_type,
-            headless=headless,
-        )
+        # BrowserManager.close_session() only needs session_id
+        # browser_type and headless are stored in the session already
+        await self.browser_manager.close_session(session_id=browser_session_id)
+        
+        return {
+            "status": "success",
+            "message": "Browser session closed successfully"
+        }
 
 
 def register_browser_tool(mcp: Any, browser_manager: Any, session_mapper: Any) -> int:

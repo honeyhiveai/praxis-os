@@ -16,7 +16,7 @@ from typing import Dict, List, Optional, Set
 from mistletoe import Document
 from mistletoe.block_token import Heading
 
-from . import traversal
+from . import traversal  # type: ignore[attr-defined]
 
 
 class DocumentPatterns:
@@ -128,8 +128,8 @@ def _discover_phase_level(phase_candidates: List[Heading]) -> Optional[int]:
         return None
     
     level_counts = Counter(h.level for h in phase_candidates)
-    most_common = level_counts.most_common(1)
-    return most_common[0][0] if most_common else None
+    result = level_counts.most_common(1)[0][0]
+    return int(result) if result is not None else None
 
 
 def _discover_phase_pattern(phase_candidates: List[Heading]) -> Optional[str]:

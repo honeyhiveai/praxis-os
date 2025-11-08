@@ -35,5 +35,5 @@ See Also:
 Note: SessionMapper moved to foundation layer (foundation.session_mapper)
 """
 
-__all__: list[str] = []
+__all__ = []
 

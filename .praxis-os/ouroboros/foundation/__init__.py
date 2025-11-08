@@ -14,6 +14,7 @@ Traceability:
     Foundation layer components used by all other layers
 """
 
+from ouroboros.foundation.init_lock import InitLock
 from ouroboros.foundation.port_manager import PortManager
 from ouroboros.foundation.project_info import ProjectInfoDiscovery
 from ouroboros.foundation.session_mapper import SessionMapper
@@ -21,6 +22,7 @@ from ouroboros.foundation.session_state_helper import SessionStateHelper
 from ouroboros.foundation.transport_manager import TransportManager
 
 __all__ = [
+    "InitLock",
     "SessionMapper",
     "SessionStateHelper",
     "ProjectInfoDiscovery",

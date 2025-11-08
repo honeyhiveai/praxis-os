@@ -29,6 +29,18 @@ import os
 import sys
 from pathlib import Path
 
+# CRITICAL: Configure joblib to avoid Python 3.13 + loky semaphore leak
+# Must be set BEFORE imports that use joblib (sentence-transformers, etc.)
+try:
+    import joblib
+    # Set threading as default backend to avoid loky semaphore leaks on Python 3.13
+    joblib.parallel.register_parallel_backend('threading', joblib.parallel.ThreadingBackend, make_default=True)
+    logging.basicConfig(level=logging.INFO)
+    logging.info("✅ Configured joblib to use threading backend (avoids Python 3.13 semaphore leak)")
+except ImportError:
+    # joblib not yet installed, will be handled by dependency checks
+    pass
+
 from ouroboros.foundation import PortManager, ProjectInfoDiscovery, TransportManager
 
 logger = logging.getLogger(__name__)
@@ -156,11 +168,24 @@ Examples:
     # Initialize components (for cleanup in finally block)
     port_manager = None
     transport_mgr = None
+    init_lock = None
     
     try:
         # Find and validate .praxis-os directory
         base_path = find_praxis_os_directory()
         logger.info("Base path: %s", base_path)
+        
+        # Acquire initialization lock (defends against concurrent spawns)
+        from ouroboros.foundation.init_lock import InitLock
+        
+        init_lock = InitLock(base_path, timeout_seconds=10)
+        if not init_lock.acquire():
+            # Another process is initializing - exit gracefully
+            logger.info(
+                "Another MCP server instance is initializing. "
+                "Exiting gracefully (this is normal with misbehaving MCP clients)."
+            )
+            sys.exit(0)
         
         # Initialize project discovery and port manager
         project_discovery = ProjectInfoDiscovery(base_path)
@@ -219,13 +244,16 @@ Examples:
         logger.error("Server failed: %s", e, exc_info=True)
         sys.exit(1)
     finally:
-        # Cleanup: Always cleanup state file and shutdown transports
+        # Cleanup: Always cleanup state file, shutdown transports, and release lock
         if port_manager:
             port_manager.cleanup_state()
             logger.info("State file cleaned up")
         
         if transport_mgr:
             transport_mgr.shutdown()
+        
+        if init_lock:
+            init_lock.release()
         
         logger.info("Shutdown complete")
 

@@ -18,9 +18,7 @@ Extract all functional and non-functional requirements from srd.md to create a c
 
 ⚠️ MUST-READ: Query testing standards
 
-```
-MCP: pos_search_project(query="requirements traceability test coverage")
-```
+Query: `pos_search_project(action="search_standards", query="requirements traceability test coverage")`
 
 ---
 

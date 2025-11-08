@@ -1,29 +1,28 @@
 """
-Ouroboros MCP Server - Clean Architecture Rewrite.
+Tool registry for automatic MCP tool discovery and registration.
 
-A ground-up rebuild of the praxis-os MCP server with behavioral engineering
-as the PRIMARY mission. Implements mission-driven layered architecture with
-zero cross-talk, config-driven extensibility, and fail-fast validation.
+Provides dynamic tool discovery from the tools/ directory, extracting:
+    - Function signatures with type hints
+    - Literal type hints for action enums
+    - Docstrings for tool descriptions
+    - Parameter schemas for MCP registration
 
-Architecture Layers:
-    - Tools Layer: AI agent interface (domain abstraction pattern)
-    - Middleware Layer: Behavioral engineering (self-reinforcing loop)
-    - Subsystems Layer: RAG, Workflow, Browser (isolated implementations)
-    - Foundation Layer: Config, Utils, Errors, Logging
+The registry scans tools/ at startup and registers all discovered tools
+with FastMCP automatically.
 
-Key Principles:
-    1. Behavioral Engineering First - Praxis is the mission
-    2. Fail-Fast Validation - Invalid state crashes with actionable errors
-    3. Config-Driven Extensibility - Add features via YAML, not code
-    4. Test at All Layers - Unit → Integration → Performance → Validation
-    5. Zero Cross-Talk - Subsystems never call each other directly
+Example Usage:
+    >>> from ouroboros.registry.loader import ToolRegistry
+    >>> from ouroboros.config.loader import load_config
+    >>> 
+    >>> config = load_config()
+    >>> registry = ToolRegistry(tools_dir=Path("ouroboros/tools"))
+    >>> tools = registry.discover_tools()
+    >>> print(f"Discovered {len(tools)} tools")
 
-Version: 1.0.0
-License: MIT
+See Also:
+    - loader: ToolRegistry for tool discovery
+    - types: ToolDefinition, ToolMetadata for tool metadata
 """
 
-__version__ = "1.0.0"
-__author__ = "praxis-os Team"
-
-__all__ = ["__version__", "__author__"]
+__all__: list[str] = []
 

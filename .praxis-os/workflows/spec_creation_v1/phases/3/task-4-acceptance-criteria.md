@@ -18,9 +18,13 @@ Add specific, measurable acceptance criteria to each task. Acceptance criteria d
 
 - All tasks must be defined in tasks.md
 
-⚠️ MUST-READ: Reference template
+⚠️ MUST-READ: Query acceptance criteria standards
 
-See `core/tasks-template.md` for acceptance criteria guidelines and INVEST criteria.
+Query: `pos_search_project(action="search_standards", query="acceptance criteria format measurable testable")`
+
+Apply standards to this spec's complexity and domain.
+
+🚨 FRAMEWORK-VIOLATION: Using training data format instead of project standards
 
 ---
 

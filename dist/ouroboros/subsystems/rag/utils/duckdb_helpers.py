@@ -115,6 +115,10 @@ class DuckDBConnection:
 
                         # Connect to database
                         self._local.connection = duckdb.connect(str(self.db_path))
+                        
+                        # Enable checkpoint on shutdown for clean single-file state
+                        self._local.connection.execute("PRAGMA enable_checkpoint_on_shutdown")
+                        
                         logger.debug(
                             "✅ DuckDB connection created for thread %s: %s",
                             threading.current_thread().name,

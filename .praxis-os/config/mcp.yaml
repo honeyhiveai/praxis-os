@@ -1,75 +1,302 @@
+# ============================================================================
 # Ouroboros MCP Server Configuration
-# Minimal working config for Task 7.1 (Server Entry Point)
+# ============================================================================
+# This file configures what prAxIs OS indexes and how it searches your project.
+#
+# ⚠️ INSTALLATION NOTE: You MUST customize code indexing paths below
+#    to match your project's source code layout!
+#
+# Path Resolution:
+#   - All paths are relative to .praxis-os/ directory (not project root)
+#   - Example: If your code is at project-root/src/, use "../src/"
+#   - Example: If your code is at project-root/lib/, use "../lib/"
+#   - ✅ NEW: You can safely use top-level paths like ["../"] because
+#            prAxIs OS automatically respects your .gitignore file!
+#
+# After installation, update the 'code' and 'ast' sections below with your
+# project's actual source code paths and languages.
+#
+# ✅ NEW FEATURE: Automatic File Exclusion
+#    - prAxIs OS automatically respects your project's .gitignore file
+#    - Build artifacts (node_modules/, __pycache__/, dist/, etc.) are
+#      automatically excluded - no manual configuration needed!
+#    - See the 'code' section below for detailed exclusion options
 
 version: "1.0"
 
+# ============================================================================
 # RAG Subsystem Configuration
+# ============================================================================
+# Configures what gets indexed and how search works.
+#
+# Three types of indexes:
+#   1. Standards: Documentation/markdown files (usually fine as-is)
+#   2. Code: Source code semantic search + call graph (MUST customize paths!)
+#   3. AST: Structural code search (MUST customize paths!)
+
 indexes:
-  # Standards Index (documentation/markdown)
+  # ========================================================================
+  # Standards Index (Documentation/Markdown)
+  # ========================================================================
+  # Indexes your project's standards, docs, and markdown files.
+  # Usually fine as-is unless you have custom documentation locations.
+  #
+  # What it does:
+  #   - Hybrid search: Combines semantic (vector) + keyword (FTS) search
+  #   - Vector search: Finds docs by MEANING (e.g., "error handling" finds
+  #                    docs about exceptions, try/catch, etc.)
+  #   - FTS search: Finds docs by EXACT WORDS (e.g., "MCP server" finds
+  #                 only docs with that exact phrase)
+  #   - Together: Best of both worlds (concepts + terminology)
+  #
+  # Chunking Strategy:
+  #   - chunk_size: 800 tokens (~2-3 paragraphs) - larger chunks = more context
+  #   - chunk_overlap: 100 tokens (~1-2 sentences) - prevents concept splitting
+  #   - Why larger? Docs need context, code needs precision
+  #
+  # Metadata Filtering:
+  #   - Pre-filters by domain/phase before searching (faster, more accurate)
+  #   - Uses scalar indexes (BTREE/BITMAP) for sub-millisecond filtering
+  #   - Usually fine as-is (auto-generated from headers/keywords)
   standards:
     source_paths:
-      - "standards/"
+      - "standards/"  # Relative to .praxis-os/ (usually fine as-is)
+
     vector:
-      model: "sentence-transformers/all-MiniLM-L6-v2"
-      dimension: 384
-      chunk_size: 800
-      chunk_overlap: 100
-    fts: {}  # Use all defaults
+      # BGE models (BAAI General Embedding) - More accurate than MiniLM
+      # Options:
+      #   - BAAI/bge-small-en-v1.5: DEFAULT - Good balance (134MB, fast, 384 dim)
+      #   - BAAI/bge-base-en-v1.5: Better accuracy (438MB, medium, 768 dim)
+      #   - BAAI/bge-large-en-v1.5: Best accuracy (1.3GB, slow, 1024 dim)
+      model: "BAAI/bge-small-en-v1.5"  # MIT licensed, zero cost, offline
+      dimension: 384  # Model-specific (384 for small, 768 for base, 1024 for large)
+      chunk_size: 800  # Larger chunks = more context for docs
+      chunk_overlap: 100  # Prevents concept splitting at boundaries
+
+    fts: {}  # Use all defaults (enabled=True, tokenizer="default")
+
     metadata_filtering:
       enabled: true
       scalar_indexes:
-        - column: "domain"
-          index_type: "BTREE"  # High cardinality (workflow, rag, browser, etc.)
-        - column: "phase"
-          index_type: "BITMAP"  # Low cardinality (0-8)
-        - column: "section"
-          index_type: "BTREE"  # Medium-high cardinality
-      auto_generate: false
-      llm_enhance: false
+        - column: "domain"  # High cardinality (workflow, rag, browser, etc.)
+          index_type: "BTREE"
+        - column: "phase"  # Low cardinality (0-8 phases)
+          index_type: "BITMAP"
+        - column: "section"  # Medium-high cardinality
+          index_type: "BTREE"
+      auto_generate: true  # Extract metadata from headers/keywords (zero cost)
+      llm_enhance: false  # Optional: Better metadata (costs money, usually not needed)
 
-  # Code Index (semantic search + call graph)
+  # ========================================================================
+  # Code Index (CRITICAL: Customize for Your Project!)
+  # ========================================================================
+  # ⚠️ YOU MUST UPDATE source_paths BELOW to match your project structure!
+  #
+  # What it does:
+  #   - Semantic code search: Find functions/classes by meaning
+  #   - Call graph: Find who calls what (recursive traversal)
+  #   - Hybrid search: Vector + FTS (same as standards)
+  #   - ✅ NEW: Automatic file exclusion via .gitignore (see below)
+  #
+  # Common Project Patterns:
+  #   Python:
+  #     - Standard: ["../src/", "../lib/"]
+  #     - Root-level: ["../"] (✅ Now safe! .gitignore automatically excludes build artifacts)
+  #     - Package: ["../mypackage/"]
+  #
+  #   JavaScript/TypeScript:
+  #     - Standard: ["../src/", "../app/", "../components/"]
+  #     - Next.js: ["../app/", "../components/", "../lib/"]
+  #     - Monorepo: ["../packages/*/src/", "../apps/*/src/"]
+  #     - Root-level: ["../"] (✅ Now safe! node_modules/ automatically excluded)
+  #
+  #   Go:
+  #     - Standard: ["../cmd/", "../pkg/", "../internal/"]
+  #     - Simple: ["../"] (✅ Now safe! vendor/ automatically excluded)
+  #
+  #   Rust:
+  #     - Standard: ["../src/"]
+  #     - Root-level: ["../"] (✅ Now safe! target/ automatically excluded)
+  #
+  #   Multi-language:
+  #     - ["../src/python/", "../src/typescript/", "../src/go/"]
+  #
+  # ✅ TIP: You can now safely point to top-level directories (e.g., ["../"])
+  #         because prAxIs OS automatically respects your .gitignore file!
+  #         Build artifacts (node_modules/, __pycache__/, dist/, etc.) are
+  #         automatically excluded - no need to manually list them.
+  #
+  # Languages:
+  #   - Add languages you use: ["python", "typescript", "javascript", "go", "rust"]
+  #   - Supported: python, javascript, typescript, go, rust
+  #   - More languages can be added via config (no code changes needed)
+  #
+  # Chunking Strategy:
+  #   - chunk_size: 200 tokens (~1 function) - smaller chunks = more precision
+  #   - chunk_overlap: 20 tokens (~few lines) - prevents function splitting
+  #   - Why smaller? Code search needs function-level precision, not doc-level context
   code:
     source_paths:
-      - "ouroboros/"  # Index the Ouroboros code
-    languages:
-      - "python"
-    vector:
-      model: "sentence-transformers/all-MiniLM-L6-v2"
-      dimension: 384
-      chunk_size: 200
-      chunk_overlap: 20
-    fts: {}
-    graph: {}  # Use all defaults (max_depth=10, etc.)
-    duckdb_path: ".cache/code.duckdb"
+      # Dogfooding: Index the actual ouroboros source code
+      - "ouroboros/"
 
-  # AST Index (structural code search)
+    languages:
+      # ⚠️ UPDATE THIS: Add languages your project uses
+      # Supported: python, javascript, typescript, go, rust
+      # Example: ["python", "typescript"] for Python + TypeScript project
+      - "python"  # ⚠️ TEMPLATE: Add your languages here
+
+    vector:
+      # CodeBERT - Specifically designed for code embeddings
+      # Better semantic understanding of code than general-purpose models
+      # Options:
+      #   - microsoft/codebert-base: DEFAULT - Best for code (768 dim)
+      #   - microsoft/codebert-base-mlm: Alternative CodeBERT variant
+      model: "microsoft/codebert-base"  # MIT licensed, zero cost, offline
+      dimension: 768  # CodeBERT-base uses 768 dimensions
+      chunk_size: 200  # Smaller chunks = function-level precision
+      chunk_overlap: 20  # Prevents function splitting
+
+    fts: {}  # Use all defaults (enabled=True)
+
+    graph: {}  # Use all defaults (max_depth=10, etc.)
+
+    duckdb_path: ".cache/code.duckdb"  # Call graph database (usually fine as-is)
+
+    # ========================================================================
+    # File Exclusion System (NEW: Automatic .gitignore Support!)
+    # ========================================================================
+    # prAxIs OS automatically excludes unwanted files using a three-tier system:
+    #
+    # Tier 1: .gitignore patterns (if respect_gitignore: true)
+    #   - Automatically reads and respects your project's .gitignore file
+    #   - Zero-config for most projects - works out of the box!
+    #   - Files ignored by git are automatically excluded from indexing
+    #   - Uses proper gitignore pattern matching (not simple substring matching)
+    #
+    # Tier 2: Built-in defaults (when no .gitignore exists or respect_gitignore: false)
+    #   - Comprehensive patterns covering 200+ common build artifacts
+    #   - Python: __pycache__/, .tox/, .pytest_cache/, dist/, build/, etc.
+    #   - JavaScript: node_modules/, .next/, dist/, build/, etc.
+    #   - Rust: target/, Go: vendor/, Java: .gradle/, etc.
+    #   - IDEs, OS files, logs, databases, secrets, etc.
+    #   - Uses proper gitignore pattern matching (same as Tier 1)
+    #
+    # Tier 3: Config exclude_patterns (additive override)
+    #   - Additional patterns you specify in config
+    #   - Merged with .gitignore (both apply)
+    #   - Use gitignore format: "custom_build/", "*.generated.py"
+    #   - Uses proper gitignore pattern matching (same as Tier 1)
+    #
+    # Benefits:
+    #   ✅ Zero-config: Most projects work out-of-the-box with .gitignore
+    #   ✅ No crashes: Build artifacts automatically excluded
+    #   ✅ Clean search: Only source code indexed, not dependencies
+    #   ✅ Flexible: Add custom patterns when needed
+    #   ✅ Proper matching: Uses gitignore-parser library (required dependency)
+    #
+    # Examples:
+    #   # Use .gitignore automatically (default - recommended)
+    #   respect_gitignore: true
+    #   exclude_patterns: null
+    #
+    #   # Disable .gitignore, use built-in defaults only
+    #   respect_gitignore: false
+    #   exclude_patterns: null
+    #
+    #   # Use .gitignore + additional custom patterns
+    #   respect_gitignore: true
+    #   exclude_patterns:
+    #     - "custom_build_dir/**"
+    #     - "*.generated.py"
+    #     - "test_fixtures/"
+    #
+    #   # Custom patterns only (no .gitignore, no built-in defaults)
+    #   respect_gitignore: false
+    #   exclude_patterns:
+    #     - "my_custom_exclude/"
+    #     - "*.temp"
+    #
+    # Note: Pattern matching uses the gitignore-parser library (required dependency)
+    #       for accurate gitignore-compatible behavior. All patterns follow standard
+    #       gitignore syntax rules (wildcards, negation with !, etc.).
+    respect_gitignore: true  # ✅ Default: Automatically respect .gitignore patterns (recommended)
+    exclude_patterns: null  # Optional: Additional exclusion patterns in gitignore format
+
+  # ========================================================================
+  # AST Index (CRITICAL: Customize for Your Project!)
+  # ========================================================================
+  # ⚠️ YOU MUST UPDATE source_paths BELOW to match your project structure!
+  #
+  # What it does:
+  #   - Structural code search: Find code by AST patterns
+  #   - Examples: "all async functions", "all classes with method X",
+  #               "all error handling blocks"
+  #   - Uses Tree-sitter parsers for language-specific AST parsing
+  #
+  # Paths should match code.source_paths above (same directories).
+  #
+  # Auto-install Parsers:
+  #   - If auto_install_parsers: true, server will automatically install
+  #     missing Tree-sitter parsers (e.g., tree-sitter-python)
+  #   - Requires internet access on first startup
+  #   - Set to false for air-gapped environments (install manually)
   ast:
     source_paths:
+      # Dogfooding: Index the actual ouroboros source code (matches code.source_paths)
       - "ouroboros/"
-    languages:
-      - "python"
-    auto_install_parsers: true
-    venv_path: "venv/"
 
-  # File Watcher (incremental updates)
+    languages:
+      # Python (matches code.languages)
+      - "python"
+
+    auto_install_parsers: true  # Auto-install missing parsers (requires internet)
+    venv_path: "venv/"  # Isolated venv for parser installation (usually fine as-is)
+
+  # ========================================================================
+  # File Watcher (Incremental Updates)
+  # ========================================================================
+  # Automatically rebuilds indexes when files change.
+  #
+  # What it does:
+  #   - Watches source files for changes
+  #   - Automatically rebuilds affected indexes (standards, code, AST)
+  #   - Debounces rapid changes (waits 500ms before rebuilding)
+  #
+  # Usually fine as-is (enabled=True, debounce_ms=500).
+  # Disable if you want manual rebuilds only.
   file_watcher: {}  # Use all defaults (enabled=True, debounce_ms=500)
 
+# ============================================================================
 # Workflow Subsystem Configuration
+# ============================================================================
+# Configures phase-gated workflow execution.
+#
 workflow:
   workflows_dir: "workflows/"
-  state_dir: ".cache/state/"
-  session_timeout_minutes: 1440
+  state_dir: ".cache/state/"  # Workflow state persistence (usually fine as-is)
+  session_timeout_minutes: 1440  # 24 hours (reasonable default)
 
+# ============================================================================
 # Browser Subsystem Configuration
+# ============================================================================
+# Configures browser automation (Playwright).
+#
+# Usually fine as-is unless you need different browser type or session limits.
 browser:
-  browser_type: "chromium"
-  headless: true
-  max_sessions: 10
-  session_timeout_minutes: 30
+  browser_type: "chromium"  # Options: chromium, firefox, webkit
+  headless: true  # Run without UI (set false for debugging)
+  max_sessions: 10  # Max concurrent browser sessions
+  session_timeout_minutes: 30  # Auto-cleanup idle sessions
 
+# ============================================================================
 # Logging Configuration
+# ============================================================================
+# Configures structured logging and behavioral metrics.
+#
+# Usually fine as-is unless you need different log levels or formats.
 logging:
-  level: "INFO"
-  format: "text"
-  log_dir: ".cache/logs/"
-  behavioral_metrics_enabled: true
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "text"  # Options: "text" (human-readable) or "json" (structured)
+  log_dir: ".cache/logs/"  # Log file location (usually fine as-is)
+  behavioral_metrics_enabled: true  # Track query diversity, trends, prepend effectiveness

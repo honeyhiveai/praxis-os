@@ -342,46 +342,71 @@ def create_server(base_path: Path, transport_mode: str = "stdio") -> FastMCP:
         ) from e
     
     # ========================================================================
-    # 7. Start Background Tasks
+    # 7. Prepare Background Tasks (lazy start via middleware)
     # ========================================================================
     import asyncio
     
+    # Define cleanup task coroutine
     async def cleanup_task():
         """Background task for automatic session cleanup."""
-        logger.info("Starting background cleanup task...")
+        logger.info("✅ Background cleanup task started")
         
         while True:
             try:
-                # Wait 1 hour between cleanups
-                await asyncio.sleep(3600)
-                
-                # Cleanup idle browser sessions (30 min timeout)
+                # Browser sessions: Cleanup idle ACTIVE sessions (30 min timeout)
+                # Browser sessions are short-lived (minutes to hours)
+                # If idle for 30+ minutes, likely abandoned → move to error
                 browser_cleaned = session_mapper.cleanup_by_timeout("browser", idle_timeout_minutes=30)
                 if browser_cleaned > 0:
                     logger.info("Cleaned up %d idle browser sessions", browser_cleaned)
                 
-                # Cleanup old completed workflows (30 days)
-                workflow_completed = session_mapper.cleanup_by_age("workflow", "completed", older_than_days=30)
-                if workflow_completed > 0:
-                    logger.info("Cleaned up %d old completed workflows", workflow_completed)
+                # Workflow sessions: DO NOT cleanup active sessions!
+                # Workflows are long-lived (days/weeks) and must survive server restarts
+                # Active workflows can wait indefinitely for human approval/review
+                # Only cleanup COMPLETED and ERROR workflows by age
                 
-                # Cleanup old errors (7 days)
+                # Cleanup old COMPLETED sessions (30 days)
+                workflow_completed = session_mapper.cleanup_by_age("workflow", "completed", older_than_days=30)
+                browser_completed = session_mapper.cleanup_by_age("browser", "completed", older_than_days=30)
+                if workflow_completed > 0 or browser_completed > 0:
+                    logger.info("Cleaned up %d old completed sessions", workflow_completed + browser_completed)
+                
+                # Cleanup old ERROR sessions (7 days)
                 workflow_errors = session_mapper.cleanup_by_age("workflow", "error", older_than_days=7)
                 browser_errors = session_mapper.cleanup_by_age("browser", "error", older_than_days=7)
                 if workflow_errors > 0 or browser_errors > 0:
                     logger.info("Cleaned up %d old error sessions", workflow_errors + browser_errors)
+                
+                # Wait 1 hour before next cleanup
+                await asyncio.sleep(3600)
                     
             except Exception as e:
                 logger.error("Error in cleanup task: %s", e, exc_info=True)
-                # Continue running even if cleanup fails
+                # Wait before retrying on error
+                await asyncio.sleep(60)
     
-    # Schedule cleanup task to run in background
-    try:
-        asyncio.create_task(cleanup_task())
-        logger.info("✅ Background cleanup task scheduled")
-    except Exception as e:
-        logger.warning("Failed to start cleanup task: %s", e)
-        # Non-critical, server can still function
+    # Store state for lazy startup
+    # We can't use asyncio.create_task() during synchronous initialization
+    # because FastMCP's event loop hasn't started yet (mcp.run() starts it later)
+    cleanup_started = False
+    
+    async def start_cleanup_once():
+        """Start cleanup task on first request (lazy init)."""
+        nonlocal cleanup_started
+        if not cleanup_started:
+            cleanup_started = True
+            asyncio.create_task(cleanup_task())
+            logger.info("🚀 Background cleanup task scheduled (lazy init on first MCP request)")
+    
+    # Add middleware to start background tasks on first request
+    # This ensures the event loop is running before we schedule tasks
+    @mcp.add_middleware  # type: ignore[arg-type]
+    async def startup_middleware(context, call_next):
+        """Middleware to lazily start background tasks on first request."""
+        await start_cleanup_once()
+        return await call_next(context)
+    
+    logger.info("⏳ Background cleanup task will start on first MCP request")
     
     # ========================================================================
     # 8. Server Ready

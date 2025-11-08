@@ -833,12 +833,13 @@ class SemanticIndex(BaseIndex):
             logger.warning("Failed to delete chunks for %s: %s", relative_path, e)
     
     def health_check(self) -> HealthStatus:
-        """Check index health.
+        """Check index health with dynamic validation.
         
         Verifies:
         1. Table exists and has data
-        2. FTS index exists (if enabled)
-        3. Scalar indexes exist
+        2. Can actually perform a test search (catches dimension mismatches, schema errors)
+        3. FTS index exists (if enabled)
+        4. Scalar indexes exist
         
         Returns:
             HealthStatus with diagnostic info
@@ -857,12 +858,46 @@ class SemanticIndex(BaseIndex):
                     details={"chunk_count": 0}
                 )
             
-            return HealthStatus(
-                healthy=True,
-                message=f"Code index operational ({stats} chunks)",
-                details={"chunk_count": stats},
-                last_updated=None
-            )
+            # DYNAMIC CHECK: Try to actually use the index with a test query
+            # This catches dimension mismatches, schema incompatibilities, etc.
+            try:
+                # Load embedding model and generate test vector
+                embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
+                test_query = "test"
+                test_vector = embedding_model.encode(test_query).tolist()
+                
+                # Try a simple vector search (limit 1 to minimize overhead)
+                _ = self._table.search(test_vector).limit(1).to_list()
+                
+                # If we got here, index is actually working
+                return HealthStatus(
+                    healthy=True,
+                    message=f"Code index operational ({stats} chunks)",
+                    details={"chunk_count": stats},
+                    last_updated=None
+                )
+                
+            except Exception as test_error:
+                # Test query failed - index is corrupted or incompatible
+                error_msg = str(test_error).lower()
+                
+                # Check for common incompatibility issues
+                if "dim" in error_msg and "match" in error_msg:
+                    reason = "Model dimension mismatch (config changed, index needs rebuild)"
+                elif "schema" in error_msg:
+                    reason = "Schema incompatibility (LanceDB version or config changed)"
+                else:
+                    reason = f"Index not operational: {test_error}"
+                
+                return HealthStatus(
+                    healthy=False,
+                    message=f"Code index corrupted or incompatible: {reason}",
+                    details={
+                        "chunk_count": stats,
+                        "test_error": str(test_error),
+                        "needs_rebuild": True
+                    }
+                )
             
         except Exception as e:
             return HealthStatus(

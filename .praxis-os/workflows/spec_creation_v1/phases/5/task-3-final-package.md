@@ -24,15 +24,13 @@ Create a final summary document (README.md) that provides an overview of all spe
 
 ### Step 1: Create README.md from Template
 
-⚠️ MUST-READ: Use template from `core/readme-template.md`
+⚠️ MUST-READ: Query README template structure
 
-Create README.md with full template structure (document index, quick start by role, metrics, next steps). Customize with project-specific details from specs.md, srd.md, and tasks.md.
+Query: `pos_search_project(action="search_standards", query="README spec template structure quick start")`
 
-```bash
-# Copy template and customize
-cat core/readme-template.md > .praxis-os/specs/{SPEC_DIR}/README.md
-# Then edit with project specifics
-```
+Create README.md with structure from standards (document index, quick start by role, metrics, next steps). Customize with project-specific details from specs.md, srd.md, and tasks.md.
+
+🚨 FRAMEWORK-VIOLATION: Creating README from training data instead of project template
 
 ### Step 2: Validate Package Completeness
 
