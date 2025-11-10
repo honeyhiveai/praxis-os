@@ -21,24 +21,7 @@ Review all specification documents to ensure every required section is present a
 - tasks.md must exist
 - implementation.md must exist
 
----
-
-## 🚨 CRITICAL: README.md Status
-
-**README.md does NOT exist yet and should NOT exist at this stage.**
-
-- ❌ **DO NOT create README.md now**
-- ✅ **README.md will be created in Task 3** (final package)
-- ⚠️ **Phase 5 is NOT complete without README.md**
-
-**Why this order?**
-1. Task 1: Verify completeness of 4 core docs
-2. Task 2: Check consistency across docs
-3. Task 3: Create README.md as executive summary (requires complete, consistent docs)
-
-**If README.md already exists:** Something went wrong. Delete it and recreate in Task 3.
-
----
+⚠️ NOTE: README.md does NOT exist yet - it will be created in Task 3 after completeness and consistency reviews.
 
 ---
 
@@ -166,19 +149,13 @@ Before proceeding:
 - [ ] All tasks.md sections complete ✅/❌
 - [ ] All implementation.md sections complete ✅/❌
 - [ ] No TODOs or placeholders remain ✅/❌
-
-🚨 CRITICAL VERIFICATION:
-- [ ] README.md does NOT exist yet ✅/❌
-  - If it exists: DELETE IT (will be created properly in Task 3)
-  - If it doesn't exist: CORRECT (this is expected)
+- [ ] README.md does NOT exist yet (Task 3 will create it) ✅/❌
 
 🚨 FRAMEWORK-VIOLATION: Incomplete sections
 
 Cannot proceed to consistency review with missing sections. All content must be complete first.
 
-🚨 FRAMEWORK-VIOLATION: README.md exists prematurely
-
-README.md should NOT exist at this stage. If it exists, delete it. Task 3 will create it properly as the final executive summary after completeness and consistency reviews.
+⚠️ REMINDER: README.md is intentionally absent at this stage - it will be created in Task 3.
 
 ---
 

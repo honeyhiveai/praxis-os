@@ -3,7 +3,6 @@
 # Purpose: Validate workflow tested, refined, and production-ready
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

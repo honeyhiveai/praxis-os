@@ -3,7 +3,6 @@
 # Purpose: Validate specification analysis and execution plan complete
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: false
 

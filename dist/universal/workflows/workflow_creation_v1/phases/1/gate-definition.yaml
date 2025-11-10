@@ -3,7 +3,6 @@
 # Purpose: Validate workflow definition loaded and valid
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

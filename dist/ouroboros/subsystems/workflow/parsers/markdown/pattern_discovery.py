@@ -129,7 +129,9 @@ def _discover_phase_level(phase_candidates: List[Heading]) -> Optional[int]:
     
     level_counts = Counter(h.level for h in phase_candidates)
     most_common = level_counts.most_common(1)
-    return most_common[0][0] if most_common else None
+    if not most_common:
+        return None
+    return int(most_common[0][0])
 
 
 def _discover_phase_pattern(phase_candidates: List[Heading]) -> Optional[str]:

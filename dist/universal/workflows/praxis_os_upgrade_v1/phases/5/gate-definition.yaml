@@ -3,7 +3,6 @@
 # Purpose: Validate cleanup and documentation complete
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

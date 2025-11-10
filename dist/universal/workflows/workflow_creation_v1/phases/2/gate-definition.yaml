@@ -3,7 +3,6 @@
 # Purpose: Validate workflow directory structure created
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

@@ -1,10 +1,8 @@
-# Gate Definition - Phase 4: Implementation Guidance & Testing
+# Gate Definition - Phase 4: Implementation Guidance
 # Created: 2025-10-20
-# Updated: 2025-11-06 - Added comprehensive testing requirements
-# Purpose: Validate implementation guidance and testing plan documented in implementation.md
+# Purpose: Validate implementation guidance documented in implementation.md
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: true
 
@@ -24,40 +22,10 @@ evidence_schema:
     required: true
     description: "Code patterns documented"
 
-  requirements_extracted_for_testing:
+  testing_strategy_defined:
     type: boolean
     required: true
-    description: "All FRs and NFRs extracted from srd.md into testing/requirements-list.md"
-
-  traceability_matrix_created:
-    type: boolean
-    required: true
-    description: "Requirements traceability matrix created mapping each requirement to tests"
-
-  all_frs_have_test_plans:
-    type: boolean
-    required: true
-    description: "Every functional requirement has detailed test cases in testing/functional-tests.md"
-
-  all_nfrs_have_test_plans:
-    type: boolean
-    required: true
-    description: "Every non-functional requirement has verification tests in testing/nonfunctional-tests.md"
-
-  unit_testing_strategy_defined:
-    type: boolean
-    required: true
-    description: "Unit testing patterns and approach documented in testing/test-strategy.md"
-
-  integration_testing_strategy_defined:
-    type: boolean
-    required: true
-    description: "Integration testing patterns and approach documented in testing/test-strategy.md"
-
-  test_plan_complete:
-    type: boolean
-    required: true
-    description: "Complete testing plan consolidated in implementation.md section 4"
+    description: "Testing strategy defined"
 
   deployment_guidance_specified:
     type: boolean

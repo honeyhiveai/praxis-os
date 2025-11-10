@@ -63,9 +63,12 @@ class ASTExtractor:
             try:
                 from tree_sitter import Language, Parser
                 from tree_sitter_language_pack import get_language
+                from typing import cast, Any
                 
                 # Get language grammar and create parser
-                lang = get_language(language)  # type: ignore[arg-type]
+                # Cast to Any to handle get_language's strict Literal type signature
+                # Runtime will validate if language is supported
+                lang = get_language(cast(Any, language))
                 parser = Parser(lang)
                 
                 self._parsers[language] = parser

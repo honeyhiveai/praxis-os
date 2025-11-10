@@ -3,7 +3,6 @@
 # Purpose: Validate implementation tasks documented in tasks.md
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: true
 

@@ -93,15 +93,18 @@ Store validation results:
 - `yaml_syntax_valid`: True
 - `definition_ready_for_phase1`: True
 
-### Step 5: Verify Phase 0 Complete
+### Step 5: Prepare Evidence for Gate
 
-Confirm all Phase 0 tasks are complete:
-- ✅ Input validated and document read
-- ✅ Design document converted to YAML (if applicable)
-- ✅ Standard definition generated at correct path
-- ✅ YAML syntax validated and parseable
+Collect all evidence for Phase 0 validation gate:
 
-Phase 0 is ready for checkpoint submission.
+```yaml
+evidence:
+  input_type: "{input_type}"  # From Task 1
+  input_document_read: true  # From Task 2
+  design_document_converted: {yaml_generated}  # From Task 4
+  standard_definition_path: "{standard_definition_path}"  # From Task 4
+  yaml_syntax_valid: true  # From this task
+```
 
 ---
 
@@ -111,6 +114,16 @@ Phase 0 is ready for checkpoint submission.
 - `yaml_syntax_valid`: Boolean (True)
 - `definition_ready_for_phase1`: Boolean (True)
 - `top_level_keys_found`: Array (list of keys present)
+
+**Checkpoint Evidence** (for Phase 0 gate):
+```yaml
+evidence:
+  input_type: string
+  input_document_read: boolean
+  design_document_converted: boolean
+  standard_definition_path: string
+  yaml_syntax_valid: boolean
+```
 
 ---
 
@@ -125,14 +138,19 @@ Phase 0 is ready for checkpoint submission.
 
 ## Checkpoint Submission
 
-After this task completes, Phase 0 is ready for validation. This phase is complete when:
-- ✅ Input type identified and document read
-- ✅ Design document converted to standard YAML definition (if applicable)
-- ✅ Definition file generated at correct path
-- ✅ YAML syntax validated and parseable
-- ✅ Ready for Phase 1 comprehensive validation
+After this task completes, return to phase.md to submit evidence for Phase 0 validation gate.
 
-Submit checkpoint evidence to advance to Phase 1.
+Submit evidence:
+```yaml
+evidence:
+  input_type: "design_document"  # or "yaml_definition"
+  input_document_read: true
+  design_document_converted: true  # or false if YAML input
+  standard_definition_path: "/path/to/definition.yaml"
+  yaml_syntax_valid: true
+```
+
+🚨 **CRITICAL**: All evidence fields must be present and valid to pass Phase 0 gate.
 
 ---
 

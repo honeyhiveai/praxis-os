@@ -112,6 +112,6 @@ Every pattern must have concrete code examples. See `core/implementation-templat
 
 ## Next Task
 
-🎯 NEXT-MANDATORY: [task-3-discover-requirements-for-testing.md](task-3-discover-requirements-for-testing.md)
+🎯 NEXT-MANDATORY: [task-2-testing-strategy.md](task-2-testing-strategy.md)
 
 Continue to define testing strategy.

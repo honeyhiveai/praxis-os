@@ -3,7 +3,6 @@
 # Purpose: Validate verification and testing complete
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

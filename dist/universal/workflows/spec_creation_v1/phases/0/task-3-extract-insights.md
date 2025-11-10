@@ -136,14 +136,30 @@ Insights must be specific ("response time < 200ms" not "improve performance"), a
 
 ## Phase 0 Completion
 
-🎯 PHASE-COMPLETE: Supporting documents processed
+🎯 PHASE-COMPLETE: Submit checkpoint evidence
 
-This phase is complete when you have:
-- ✅ Created spec directory in correct location (`.praxis-os/specs/review/YYYY-MM-DD-name`)
-- ✅ Copied all supporting documents to `supporting-docs/` subdirectory
-- ✅ Created INDEX.md cataloging all documents with metadata
-- ✅ Extracted categorized insights (requirements, design, implementation)
-- ✅ Identified cross-references, conflicts, and high-priority items
-- ✅ Added quantitative summary to INDEX.md
+All Phase 0 tasks are now complete. Submit evidence to advance to Phase 1:
 
-Submit checkpoint evidence to advance to Phase 1 (Requirements Gathering) where these insights will inform the creation of srd.md.
+```python
+complete_phase(
+    session_id=session_id,
+    phase=0,
+    evidence={
+        "spec_directory_created": True,
+        "spec_dir": "review/YYYY-MM-DD-descriptive-name",  # From Task 0
+        "supporting_docs_accessible": True,
+        "document_index_created": True,
+        "insights_extracted": {
+            "requirements": [number],
+            "design": [number],
+            "implementation": [number]
+        },
+        "total_documents": [number],
+        "processing_mode": "[embedded/referenced]",
+        "conflicts_identified": [number],
+        "high_priority_items": [number]
+    }
+)
+```
+
+Upon successful validation, proceed to Phase 1 (Requirements Gathering) where these insights will inform the creation of srd.md.

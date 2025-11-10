@@ -3,7 +3,6 @@
 # Purpose: Validate all phase and task files generated
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

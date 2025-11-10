@@ -3,7 +3,6 @@
 # Purpose: Validate core files and documentation created
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

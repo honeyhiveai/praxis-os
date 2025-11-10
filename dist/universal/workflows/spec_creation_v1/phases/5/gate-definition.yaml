@@ -3,7 +3,6 @@
 # Purpose: Validate all specification documents reviewed and finalized
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: true
 
@@ -28,24 +27,19 @@ evidence_schema:
     required: true
     description: "All sections in implementation.md complete"
 
-  readme_created:
-    type: boolean
-    required: true
-    description: "README.md created with all required sections (created in Task 3)"
-
   cross_references_valid:
     type: boolean
     required: true
-    description: "Cross-references between documents are valid"
+    description: "Cross-references valid"
 
   terminology_consistent:
     type: boolean
     required: true
-    description: "Terminology consistent across all documents"
+    description: "Terminology consistent"
 
   ready_for_implementation:
     type: boolean
     required: true
-    description: "All 5 spec files complete, consistent, and ready for implementation"
+    description: "Documents ready for implementation"
 
 validators: {}

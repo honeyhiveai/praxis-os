@@ -3,7 +3,6 @@
 # Purpose: Validate technical architecture and design documented in specs.md
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: true
 

@@ -24,15 +24,13 @@ Create a final summary document (README.md) that provides an overview of all spe
 
 ### Step 1: Create README.md from Template
 
-⚠️ MUST-READ: Use template from `core/readme-template.md`
+⚠️ MUST-READ: Query README template structure
 
-Create README.md with full template structure (document index, quick start by role, metrics, next steps). Customize with project-specific details from specs.md, srd.md, and tasks.md.
+Query: `pos_search_project(action="search_standards", query="README spec template structure quick start")`
 
-```bash
-# Copy template and customize
-cat core/readme-template.md > .praxis-os/specs/{SPEC_DIR}/README.md
-# Then edit with project specifics
-```
+Create README.md with structure from standards (document index, quick start by role, metrics, next steps). Customize with project-specific details from specs.md, srd.md, and tasks.md.
+
+🚨 FRAMEWORK-VIOLATION: Creating README from training data instead of project template
 
 ### Step 2: Validate Package Completeness
 
@@ -80,13 +78,21 @@ Specification package is complete and includes:
 - ✅ implementation.md (code guidance)
 - ✅ README.md (package overview)
 
-This phase is complete when you have:
-- ✅ Reviewed all spec documents for completeness and accuracy
-- ✅ Verified cross-document references are correct
-- ✅ Ensured consistent terminology across all documents
-- ✅ Created README.md as the spec package entry point
-- ✅ Validated the entire package is ready for implementation teams
+All documents are complete, consistent, and ready for implementation teams.
 
-Submit checkpoint evidence to complete the workflow.
+Submit final checkpoint evidence:
+
+```python
+complete_phase(
+    session_id=session_id,
+    phase=5,
+    evidence={
+        "all_documents_complete": True,
+        "all_documents_consistent": True,
+        "readme_created": True,
+        "package_ready": True
+    }
+)
+```
 
 🎉 **Workflow Complete!** Specifications are ready for implementation.

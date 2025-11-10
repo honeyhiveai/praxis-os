@@ -3,7 +3,6 @@
 # Purpose: Validate comprehensive requirements documented in srd.md
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: true
 

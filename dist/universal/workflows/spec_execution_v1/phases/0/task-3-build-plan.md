@@ -142,15 +142,21 @@ The production code checklist and language-specific standards are MANDATORY. Pro
 
 🛑 VALIDATE-GATE: Phase 0 Checkpoint
 
-This phase is complete when you have:
-- ✅ Located and validated the specification package
-- ✅ Parsed all phases and tasks from tasks.md
-- ✅ Mapped dependencies between tasks
-- ✅ Queried relevant standards via MCP
-- ✅ Created comprehensive execution plan summary
-- ✅ Identified the first task to execute
+Submit evidence to complete Phase 0:
 
-Submit checkpoint evidence to complete Phase 0.
+```python
+MCP: complete_phase(
+    session_id=session_id,
+    phase=0,
+    evidence={
+        "spec_validated": true,
+        "phases_extracted": [number],
+        "tasks_extracted": [number],
+        "standards_queried": [list],
+        "execution_plan_complete": true
+    }
+)
+```
 
 ---
 

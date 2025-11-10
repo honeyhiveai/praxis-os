@@ -119,12 +119,29 @@ Before proceeding:
 
 🎯 PHASE-COMPLETE: Task breakdown complete
 
-This phase is complete when tasks.md contains:
-- ✅ Implementation phases clearly defined with purpose
-- ✅ All tasks broken down with specific action items
-- ✅ Acceptance criteria for each task (measurable outcomes)
-- ✅ Dependencies mapped between tasks (what blocks what)
-- ✅ Validation gates specified for each phase
-- ✅ Time estimates provided for effort planning
+tasks.md should now contain:
+- ✅ Implementation phases defined
+- ✅ All tasks with action items
+- ✅ Acceptance criteria for each task
+- ✅ Dependencies mapped
+- ✅ Validation gates specified
+- ✅ Time estimates provided
 
-Submit checkpoint evidence to advance to Phase 4 (Implementation Guidance) where you'll document code patterns and testing strategies.
+Submit checkpoint evidence to advance to Phase 4:
+
+```python
+complete_phase(
+    session_id=session_id,
+    phase=3,
+    evidence={
+        "tasks_created": True,
+        "phases_defined": [number],
+        "all_tasks_have_acceptance_criteria": True,
+        "dependencies_mapped": True,
+        "validation_gates_specified": True,
+        "time_estimates_provided": True
+    }
+)
+```
+
+Upon successful validation, proceed to Phase 4 (Implementation Guidance) to document code patterns and testing strategies.

@@ -54,8 +54,7 @@
           "file": "task-3-build-plan.md",
           "purpose": "Create execution plan, query standards, prepare for implementation"
         }
-      ],
-      "evidence_gate_enabled": true
+      ]
     },
     {
       "phase_number": "1-N",
@@ -81,8 +80,7 @@
         "phase_template": "dynamic/phase-template.md",
         "approach": "horizontal_scaling",
         "description": "Use get_task(session_id, phase, task_number) to retrieve one task at a time, execute it completely with full production quality, then move to next task"
-      },
-      "evidence_gate_enabled": true
+      }
     }
   ],
   "core_utilities": [
@@ -174,3 +172,4 @@
     "parser": "spec_tasks_parser"
   }
 }
+

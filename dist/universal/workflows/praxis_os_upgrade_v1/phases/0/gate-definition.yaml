@@ -3,7 +3,6 @@
 # Purpose: Validate source and target before modifications
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

@@ -3,7 +3,6 @@
 # Purpose: Validate configuration updates complete
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

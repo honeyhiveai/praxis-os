@@ -21,8 +21,9 @@ Use CodeIndex (container.py) as the public interface.
 
 import hashlib
 import logging
+import threading
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Callable
+from typing import Any, Dict, List, Optional, Callable, Set, Tuple
 
 from ouroboros.config.schemas.indexes import CodeIndexConfig
 from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
@@ -32,6 +33,9 @@ from ouroboros.utils.errors import ActionableError, IndexError
 from gitignore_parser import parse_gitignore
 
 logger = logging.getLogger(__name__)
+
+# Constants for edge case handling
+MAX_GITIGNORE_SIZE = 1 * 1024 * 1024  # 1MB maximum .gitignore file size
 
 
 class SemanticIndex(BaseIndex):
@@ -81,9 +85,17 @@ class SemanticIndex(BaseIndex):
         # Lazy-load reranker (optional)
         self._reranker = None
         
-        # Gitignore caching
+        # Gitignore caching (thread-safe)
         self._gitignore_path: Optional[Path] = None
         self._gitignore_parser: Optional[Callable[[str], bool]] = None
+        self._gitignore_lock = threading.Lock()
+        
+        # Cached parsers for performance (thread-safe)
+        # Note: Builtin parser is NOT cached because gitignore-parser requires a real file
+        # and we can't keep temp files alive for the lifetime of the index
+        self._config_parser: Optional[Callable[[str], bool]] = None
+        self._config_patterns_hash: Optional[str] = None  # Track config changes
+        self._parser_lock = threading.Lock()
         
         logger.info("SemanticIndex (code) initialized (lazy-load mode)")
     
@@ -170,6 +182,11 @@ class SemanticIndex(BaseIndex):
     def _collect_and_chunk(self, source_paths: List[Path]) -> List[Dict[str, Any]]:
         """Collect code files and chunk them.
         
+        Includes symlink detection and cycle prevention to avoid:
+        - Infinite loops from circular symlinks
+        - Duplicate indexing from symlinks to already-indexed directories
+        - Security issues from symlinks escaping project boundaries
+        
         Args:
             source_paths: Paths to scan for code files
             
@@ -177,6 +194,9 @@ class SemanticIndex(BaseIndex):
             List of chunk dictionaries with content, metadata, etc.
         """
         chunks = []
+        
+        # Track seen inodes to prevent symlink cycles and duplicates
+        seen_inodes: Set[Tuple[int, int]] = set()
         
         # Build file patterns from configured languages
         file_extensions = self._get_file_extensions()
@@ -198,6 +218,47 @@ class SemanticIndex(BaseIndex):
                 # Recursively find code files
                 for ext in file_extensions:
                     for code_file in resolved_path.rglob(f"*{ext}"):
+                        # Symlink detection and cycle prevention
+                        if code_file.is_symlink():
+                            try:
+                                # Resolve symlink and get inode
+                                resolved_file = code_file.resolve(strict=True)
+                                file_stat = resolved_file.stat()
+                                inode = (file_stat.st_dev, file_stat.st_ino)
+                                
+                                # Check if we've already seen this file
+                                if inode in seen_inodes:
+                                    logger.debug(
+                                        "Skipping duplicate file via symlink: %s -> %s",
+                                        code_file, resolved_file
+                                    )
+                                    continue
+                                
+                                seen_inodes.add(inode)
+                                logger.debug("Following symlink: %s -> %s", code_file, resolved_file)
+                                
+                            except (OSError, RuntimeError) as e:
+                                # Broken symlink or circular reference
+                                logger.warning(
+                                    "Skipping broken/circular symlink: %s (%s: %s)",
+                                    code_file, type(e).__name__, e
+                                )
+                                continue
+                        else:
+                            # Regular file - track inode to detect duplicates
+                            try:
+                                file_stat = code_file.stat()
+                                inode = (file_stat.st_dev, file_stat.st_ino)
+                                
+                                if inode in seen_inodes:
+                                    logger.debug("Skipping duplicate inode: %s", code_file)
+                                    continue
+                                
+                                seen_inodes.add(inode)
+                            except OSError as e:
+                                logger.warning("Failed to stat file: %s (%s)", code_file, e)
+                                continue
+                        
                         # Three-tier exclusion check
                         if self._should_exclude_file(code_file):
                             continue
@@ -269,33 +330,60 @@ class SemanticIndex(BaseIndex):
         return self._find_gitignore_file() is not None
     
     def _load_gitignore(self) -> Optional[Callable[[str], bool]]:
-        """Load and parse .gitignore file using gitignore-parser.
+        """Load and parse .gitignore file using gitignore-parser (thread-safe).
+        
+        Includes security checks:
+        - Size limit (1MB) to prevent DoS from malicious large files
+        - Thread-safe caching to prevent race conditions
         
         Caches parser instance. Returns None if .gitignore not found.
         
         Returns:
             Parser function that takes an absolute path string and returns bool (True = ignored)
-            or None if .gitignore not found
+            or None if .gitignore not found or too large
         """
-        if self._gitignore_parser is not None:
-            return self._gitignore_parser
-        
-        gitignore_path = self._find_gitignore_file()
-        if gitignore_path is None:
-            return None
-        
-        try:
-            # gitignore-parser needs base_dir to resolve relative paths
-            gitignore_dir = gitignore_path.parent
-            self._gitignore_parser = parse_gitignore(str(gitignore_path), base_dir=str(gitignore_dir))
-            logger.info("Loaded .gitignore from: %s", gitignore_path)
-            return self._gitignore_parser
-        except Exception as e:
-            logger.warning("Failed to parse .gitignore: %s", e)
-            return None
+        with self._gitignore_lock:
+            # Check cache first (inside lock for thread safety)
+            if self._gitignore_parser is not None:
+                return self._gitignore_parser
+            
+            gitignore_path = self._find_gitignore_file()
+            if gitignore_path is None:
+                return None
+            
+            try:
+                # Security: Check file size
+                gitignore_size = gitignore_path.stat().st_size
+                if gitignore_size > MAX_GITIGNORE_SIZE:
+                    logger.warning(
+                        ".gitignore file is very large (%d bytes, max: %d bytes). "
+                        "Skipping to prevent performance issues. "
+                        "Falling back to built-in exclusion patterns.",
+                        gitignore_size, MAX_GITIGNORE_SIZE
+                    )
+                    return None
+                
+                # gitignore-parser needs base_dir to resolve relative paths
+                # CRITICAL: Must resolve() to handle symlinks (e.g., /var -> /private/var on macOS)
+                gitignore_dir = gitignore_path.parent.resolve()
+                self._gitignore_parser = parse_gitignore(str(gitignore_path), base_dir=str(gitignore_dir))
+                logger.info("Loaded .gitignore from: %s (%d bytes)", gitignore_path, gitignore_size)
+                return self._gitignore_parser
+            except Exception as e:
+                logger.error(
+                    "Failed to parse .gitignore at %s: %s. "
+                    "Falling back to built-in exclusion patterns.",
+                    gitignore_path, e,
+                    exc_info=True
+                )
+                return None
     
     def _gitignore_matches(self, file_path: Path) -> bool:
         """Check if file path matches .gitignore patterns.
+        
+        gitignore-parser with base_dir expects absolute paths as input and internally
+        converts them to relative paths for pattern matching. The key fix for the
+        production bug was resolving base_dir to handle symlinks (e.g., /var -> /private/var).
         
         Args:
             file_path: File path to check
@@ -307,13 +395,9 @@ class SemanticIndex(BaseIndex):
         if parser is None:
             return False
         
-        # Convert absolute path to relative path from gitignore location
-        gitignore_path = self._find_gitignore_file()
-        if gitignore_path is None:
-            return False
-        
         try:
-            # gitignore-parser expects absolute paths
+            # gitignore-parser expects absolute paths (it converts internally)
+            # The fix: resolved base_dir in _load_gitignore() handles symlinks correctly
             return parser(str(file_path.resolve()))
         except Exception as e:
             logger.warning("Error checking gitignore match for %s: %s", file_path, e)
@@ -323,6 +407,8 @@ class SemanticIndex(BaseIndex):
         """Check if file matches built-in default exclusion patterns.
         
         Uses gitignore-parser to match against DEFAULT_EXCLUDE_PATTERNS.
+        Note: Parser is NOT cached because gitignore-parser requires a real file
+        that must exist for the parser's lifetime.
         
         Args:
             file_path: File path to check
@@ -346,11 +432,14 @@ class SemanticIndex(BaseIndex):
                 return bool(result)
         except Exception as e:
             logger.error("Error checking builtin patterns for %s: %s", file_path, e)
-            # If pattern matching fails, err on the side of caution and exclude
+            # If pattern matching fails, err on the side of caution and don't exclude
             return False
     
     def _config_patterns_match(self, file_path: Path, patterns: List[str]) -> bool:
         """Check if file matches config exclude_patterns.
+        
+        Note: Parser is NOT cached because gitignore-parser requires a real file
+        that must exist for the parser's lifetime.
         
         Args:
             file_path: File path to check
@@ -362,9 +451,8 @@ class SemanticIndex(BaseIndex):
         if not patterns:
             return False
         
-        # Create parser for patterns (recreate each time since patterns come from config)
-        # This ensures we always use the current config patterns
         try:
+            # Create temporary gitignore file with patterns
             import tempfile
             project_root = self.base_path.parent
             
@@ -486,10 +574,21 @@ class SemanticIndex(BaseIndex):
         # Detect language from file extension
         language = self._detect_language(file_path)
         
+        # Handle files that may be outside base_path (e.g., via symlinks or absolute source_paths)
+        try:
+            rel_file_path = str(file_path.relative_to(self.base_path))
+        except ValueError:
+            # File is outside base_path, use absolute path as fallback
+            rel_file_path = str(file_path.resolve())
+            logger.debug(
+                "File outside base_path, using absolute path: %s",
+                rel_file_path
+            )
+        
         return {
             "chunk_id": chunk_id,
             "content": content,
-            "file_path": str(file_path.relative_to(self.base_path)),
+            "file_path": rel_file_path,
             "start_line": start_line,
             "end_line": end_line,
             "language": language,
@@ -820,10 +919,21 @@ class SemanticIndex(BaseIndex):
     def _delete_file_chunks(self, file_path: Path) -> None:
         """Delete all chunks for a given file.
         
+        Handles files that may be outside base_path (e.g., via symlinks or absolute source_paths).
+        
         Args:
             file_path: File whose chunks should be deleted
         """
-        relative_path = str(file_path.relative_to(self.base_path))
+        # Handle files that may be outside base_path
+        try:
+            relative_path = str(file_path.relative_to(self.base_path))
+        except ValueError:
+            # File is outside base_path, use absolute path (matches what was stored in _chunk_file)
+            relative_path = str(file_path.resolve())
+            logger.debug(
+                "File outside base_path for deletion, using absolute path: %s",
+                relative_path
+            )
         
         try:
             assert self._table is not None

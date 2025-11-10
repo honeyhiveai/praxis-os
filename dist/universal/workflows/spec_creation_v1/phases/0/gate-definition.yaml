@@ -3,7 +3,6 @@
 # Purpose: Validate supporting documents have been properly processed
 
 checkpoint:
-  enabled: true
   strict: true
   allow_override: true
 

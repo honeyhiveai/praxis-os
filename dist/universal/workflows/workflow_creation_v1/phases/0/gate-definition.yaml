@@ -3,7 +3,6 @@
 # Purpose: Validate input conversion to YAML definition
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 

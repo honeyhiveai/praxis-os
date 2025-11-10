@@ -26,12 +26,10 @@
       "checkpoint": {
         "required_evidence": [
           "spec_directory_created",
-          "supporting_docs_directory_exists",
-          "documents_processed",
-          "index_created",
-          "insights_extracted",
-          "mode_documented",
-          "cross_reference_complete"
+          "spec_dir",
+          "supporting_docs_accessible",
+          "document_index_created",
+          "insights_extracted"
         ]
       },
       "tasks": [
@@ -69,8 +67,7 @@
         "All documents accessible in spec directory",
         "index.md contains structured metadata for each document",
         "insights.md contains categorized findings"
-      ],
-      "evidence_gate_enabled": true
+      ]
     },
     {
       "phase_number": 1,
@@ -132,8 +129,7 @@
         "At least 3 user stories documented",
         "All functional requirements have clear acceptance criteria",
         "NFRs include performance, security, and maintainability"
-      ],
-      "evidence_gate_enabled": true
+      ]
     },
     {
       "phase_number": 2,
@@ -200,8 +196,7 @@
         "All components have clear interfaces",
         "Security threats identified and mitigated",
         "Performance requirements met by design"
-      ],
-      "evidence_gate_enabled": true
+      ]
     },
     {
       "phase_number": 3,
@@ -262,26 +257,18 @@
         "Each task has clear acceptance criteria",
         "Dependencies are explicit",
         "No circular dependencies"
-      ],
-      "evidence_gate_enabled": true
+      ]
     },
     {
       "phase_number": 4,
-      "phase_name": "Implementation Guidance & Testing",
+      "phase_name": "Implementation Guidance",
       "phase_file": "phases/4/phase.md",
       "checkpoint": {
         "required_evidence": [
           "implementation_created",
           "code_patterns_documented",
-          "requirements_extracted_for_testing",
-          "traceability_matrix_created",
-          "all_frs_have_test_plans",
-          "all_nfrs_have_test_plans",
-          "unit_testing_strategy_defined",
-          "integration_testing_strategy_defined",
-          "test_plan_complete",
-          "deployment_guidance_specified",
-          "troubleshooting_tips_provided"
+          "testing_strategy_defined",
+          "deployment_guidance_specified"
         ]
       },
       "tasks": [
@@ -297,64 +284,34 @@
         },
         {
           "task_number": 3,
-          "name": "discover-requirements-for-testing",
-          "file": "task-3-discover-requirements-for-testing.md"
+          "name": "testing-strategy",
+          "file": "task-3-testing-strategy.md"
         },
         {
           "task_number": 4,
-          "name": "requirements-traceability-matrix",
-          "file": "task-4-requirements-traceability-matrix.md"
+          "name": "deployment",
+          "file": "task-4-deployment.md"
         },
         {
           "task_number": 5,
-          "name": "functional-tests-plan",
-          "file": "task-5-functional-tests-plan.md"
-        },
-        {
-          "task_number": 6,
-          "name": "nonfunctional-tests-plan",
-          "file": "task-6-nonfunctional-tests-plan.md"
-        },
-        {
-          "task_number": 7,
-          "name": "unit-integration-strategy",
-          "file": "task-7-unit-integration-strategy.md"
-        },
-        {
-          "task_number": 8,
-          "name": "consolidate-test-plan",
-          "file": "task-8-consolidate-test-plan.md"
-        },
-        {
-          "task_number": 9,
-          "name": "deployment",
-          "file": "task-9-deployment.md"
-        },
-        {
-          "task_number": 10,
           "name": "troubleshooting",
-          "file": "task-10-troubleshooting.md"
+          "file": "task-5-troubleshooting.md"
         }
       ],
-      "purpose": "Provide implementation patterns and comprehensive testing strategy",
-      "estimated_effort": "75-85 minutes",
+      "purpose": "Provide detailed implementation patterns and deployment guidance",
+      "estimated_effort": "33-43 minutes",
       "key_deliverables": [
         "Code patterns documented",
-        "Requirements traceability matrix",
-        "Functional and non-functional test plans",
         "Testing strategy defined",
         "Deployment process specified",
         "Troubleshooting guide created"
       ],
       "validation_criteria": [
         "implementation.md contains concrete code examples",
-        "All requirements mapped to tests (100% traceability)",
-        "Test cases defined for all FRs and NFRs",
-        "Testing strategy covers unit and integration patterns",
+        "Testing strategy covers unit, integration, and e2e",
         "Deployment steps are actionable",
         "Common issues documented with solutions"
-      ],
-      "evidence_gate_enabled": true
+      ]
     },
     {
       "phase_number": 5,
@@ -398,8 +355,7 @@
         "No contradictions between documents",
         "All required sections complete",
         "Spec approved for implementation"
-      ],
-      "evidence_gate_enabled": true
+      ]
     }
   ]
 }

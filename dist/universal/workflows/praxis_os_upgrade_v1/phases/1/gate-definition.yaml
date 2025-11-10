@@ -3,7 +3,6 @@
 # Purpose: Validate backup and preparation complete
 
 checkpoint:
-  enabled: true
   strict: false
   allow_override: true
 
