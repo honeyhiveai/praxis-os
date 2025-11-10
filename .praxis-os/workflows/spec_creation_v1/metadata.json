@@ -284,30 +284,62 @@
         },
         {
           "task_number": 3,
-          "name": "testing-strategy",
-          "file": "task-3-testing-strategy.md"
+          "name": "discover-requirements-for-testing",
+          "file": "task-3-discover-requirements-for-testing.md"
         },
         {
           "task_number": 4,
-          "name": "deployment",
-          "file": "task-4-deployment.md"
+          "name": "requirements-traceability-matrix",
+          "file": "task-4-requirements-traceability-matrix.md"
         },
         {
           "task_number": 5,
+          "name": "functional-tests-plan",
+          "file": "task-5-functional-tests-plan.md"
+        },
+        {
+          "task_number": 6,
+          "name": "nonfunctional-tests-plan",
+          "file": "task-6-nonfunctional-tests-plan.md"
+        },
+        {
+          "task_number": 7,
+          "name": "unit-integration-strategy",
+          "file": "task-7-unit-integration-strategy.md"
+        },
+        {
+          "task_number": 8,
+          "name": "consolidate-test-plan",
+          "file": "task-8-consolidate-test-plan.md"
+        },
+        {
+          "task_number": 9,
+          "name": "deployment",
+          "file": "task-9-deployment.md"
+        },
+        {
+          "task_number": 10,
           "name": "troubleshooting",
-          "file": "task-5-troubleshooting.md"
+          "file": "task-10-troubleshooting.md"
         }
       ],
-      "purpose": "Provide detailed implementation patterns and deployment guidance",
-      "estimated_effort": "33-43 minutes",
+      "purpose": "Provide detailed implementation patterns, comprehensive testing plans, and deployment guidance",
+      "estimated_effort": "60-80 minutes",
       "key_deliverables": [
-        "Code patterns documented",
-        "Testing strategy defined",
+        "Code patterns documented with examples",
+        "Testing requirements extracted (requirements-list.md)",
+        "Functional tests plan created (functional-tests.md)",
+        "Non-functional tests plan created (nonfunctional-tests.md)",
+        "Unit/integration strategy defined (test-strategy.md)",
+        "Test plan consolidated in implementation.md",
         "Deployment process specified",
         "Troubleshooting guide created"
       ],
       "validation_criteria": [
         "implementation.md contains concrete code examples",
+        "All requirements have traceability to tests",
+        "Functional tests cover all FRs with specific test cases",
+        "NFR tests have measurable pass/fail criteria",
         "Testing strategy covers unit, integration, and e2e",
         "Deployment steps are actionable",
         "Common issues documented with solutions"
