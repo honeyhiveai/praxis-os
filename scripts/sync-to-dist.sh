@@ -83,9 +83,10 @@ show_diff() {
         "$src/" "$dest/" 2>&1 || true)
     
     # Count changes (rsync itemize format: >f+++++++++ = new file, *deleting = deleted)
-    files_to_update=$(echo "$rsync_output" | grep -cE '^>f|^\.f|^<f')
-    files_to_delete=$(echo "$rsync_output" | grep -cE '^\*deleting.*\.(py|md|yaml|yml|txt|sh|json)$')
-    dirs_to_create=$(echo "$rsync_output" | grep -cE '^cd\+')
+    # Note: grep -c returns exit code 1 when count is 0, so we add || echo 0
+    files_to_update=$(echo "$rsync_output" | grep -cE '^>f|^\.f|^<f' || echo 0)
+    files_to_delete=$(echo "$rsync_output" | grep -cE '^\*deleting.*\.(py|md|yaml|yml|txt|sh|json)$' || echo 0)
+    dirs_to_create=$(echo "$rsync_output" | grep -cE '^cd\+' || echo 0)
     
     if [[ $files_to_update -eq 0 && $files_to_delete -eq 0 && $dirs_to_create -eq 0 ]]; then
         echo -e "  ${GREEN}✅ Already in sync (no changes)${NC}"

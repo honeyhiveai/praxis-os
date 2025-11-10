@@ -693,7 +693,7 @@ This guide is most valuable when:
 
 **Workflows:**
 - `workflows/praxis_os_upgrade_v1/` - Automated upgrade workflow (handles both content and server)
-  → `pos_search_project(content_type="standards", query="agent OS upgrade workflow")`
+  → `pos_search_project(content_type="standards", query="praxis os upgrade workflow")`
 
 **MCP Documentation:**
 - `usage/mcp-usage-guide.md` - How to use MCP tools

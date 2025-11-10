@@ -809,7 +809,7 @@ This guide is most valuable when:
 ## Cross-References and Related Guides
 
 **Core Orientation:**
-- `usage/ai-assistant/AGENT-OS-ORIENTATION.md` - Foundational principles and philosophy
+- `usage/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Foundational principles and philosophy
   → `pos_search_project(content_type="standards", query="prAxIs OS orientation guide")`
 - `usage/operating-model.md` - Detailed role definition and boundaries
   → `pos_search_project(content_type="standards", query="prAxIs OS operating model")`

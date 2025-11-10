@@ -659,7 +659,7 @@ Result: Fix consistent with existing concurrency approach, follows project patte
 - `standards/ai-assistant/pre-generation-validation.md` - What to validate before code → `pos_search_project(content_type="standards", query="pre-generation validation")`
 - `standards/ai-assistant/commit-protocol.md` - Review and commit changes → `pos_search_project(content_type="standards", query="commit protocol")`
 - `standards/ai-assistant/analysis-methodology.md` - Comprehensive analysis → `pos_search_project(content_type="standards", query="analysis methodology")`
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core principles → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
+- `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Core principles → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
 
 **AI Safety:**
 - `standards/ai-safety/production-code-checklist.md` - Code quality requirements → `pos_search_project(content_type="standards", query="production code checklist")`

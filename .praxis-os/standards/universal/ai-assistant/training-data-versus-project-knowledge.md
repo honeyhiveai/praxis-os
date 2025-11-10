@@ -520,7 +520,7 @@ Before implementing anything, verify:
 
 - **[Agent Decision Protocol](./agent-decision-protocol.md)** - Query: "decision protocol generic knowledge"
 - **[Query Construction Patterns](./query-construction-patterns.md)** - Query: "how to construct effective queries"
-- **[prAxIs OS Orientation](./AGENT-OS-ORIENTATION.md)** - Query: "orientation project-specific knowledge"
+- **[prAxIs OS Orientation](./PRAXIS-OS-ORIENTATION.md)** - Query: "orientation project-specific knowledge"
 
 ---
 

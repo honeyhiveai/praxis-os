@@ -685,7 +685,7 @@ Always current. No maintenance. Self-reinforcing.
 - `rag-content-authoring.md` → `pos_search_project(content_type="standards", query="RAG content authoring")`
 
 **AI Behavior:**
-- `AGENT-OS-ORIENTATION.md` → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
+- `PRAXIS-OS-ORIENTATION.md` → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
 - `operating-model.md` → `pos_search_project(content_type="standards", query="operating model")`
 
 ---

@@ -367,7 +367,7 @@ Test API endpoints, database interactions, and service integration...
 **Example of drift:**
 
 ```markdown
-# File: standards/ai-assistant/AGENT-OS-ORIENTATION.md
+# File: standards/ai-assistant/PRAXIS-OS-ORIENTATION.md
 When user says "execute spec": start_workflow("spec_execution_v1", ...)
 
 # File: usage/creating-specs.md  
@@ -854,12 +854,12 @@ For complete guide, continue reading below.
 1. **Start with RAG content authoring** → `pos_search_project(content_type="standards", query="RAG content authoring")` (this document)
 2. **Learn standards creation** → `pos_search_project(content_type="standards", query="standards creation process")` → `standards/meta-workflow/standards-creation-process.md`
 3. **Understand workflow metadata** → `pos_search_project(content_type="standards", query="workflow metadata standards")` → `standards/workflows/workflow-metadata-standards.md`
-4. **Master orientation principles** → `pos_search_project(content_type="standards", query="prAxIs OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
+4. **Master orientation principles** → `pos_search_project(content_type="standards", query="prAxIs OS orientation")` → `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md`
 
 **By Category:**
 
 **AI Assistant:**
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Teaching agents to query → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
+- `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Teaching agents to query → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
 - `standards/ai-assistant/standards-creation-process.md` - Creating standards → `pos_search_project(content_type="standards", query="standards creation")`
 - `standards/ai-assistant/mcp-tool-discovery-pattern.md` - Query-first tool discovery → `pos_search_project(content_type="standards", query="tool discovery pattern")`
 

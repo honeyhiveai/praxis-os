@@ -301,7 +301,7 @@ prAxIs OS uses RAG to reduce context. The prAxIs OS MCP server provides...
 → "BuilderMethods prAxIs OS", "prAxIs OS by Brian Casel", or link to buildermethods.com/agent-os
 
 **What if I'm writing about agent OS concepts generally?**
-→ Then "agent operating systems" or "agent OS paradigm" (lowercase) works. Our name is specifically: "prAxIs OS"
+→ Use "prAxIs OS" - that's our name. Only use "agent os" (lowercase) when acknowledging BuilderMethods agent os (the parent project we forked from).
 
 ---
 

@@ -619,7 +619,7 @@ Then:
 
 **Related Standards:**
 - `standards/ai-assistant/rag-content-authoring.md` - How to WRITE content for RAG (authoring side)
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Overall prAxIs OS usage
+- `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Overall prAxIs OS usage
 - `standards/ai-assistant/standards-creation-process.md` - Creating new standards
 
 **Query anytime:**

@@ -325,14 +325,14 @@ pos_search(content_type="standards", query="how to test web UI with pos_browser"
 **Query workflow for tool mastery:**
 
 1. **Start with dynamic discovery** → `pos_search(content_type="standards", query="MCP dynamic discovery")` (this document)
-2. **Learn orientation** → `pos_search(content_type="standards", query="prAxIs OS orientation")` → `standards/ai-assistant/AGENT-OS-ORIENTATION.md`
+2. **Learn orientation** → `pos_search(content_type="standards", query="prAxIs OS orientation")` → `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md`
 3. **See practical examples** → `pos_search(content_type="standards", query="AI agent examples")` → `usage/ai-agent-quickstart.md`
 4. **Understand workflows** → `pos_search(content_type="standards", query="workflow system")` → `standards/workflows/workflow-system-overview.md`
 
 **By Category:**
 
 **AI Assistant:**
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core prAxIs OS concepts → `pos_search(content_type="standards", query="prAxIs OS orientation")`
+- `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Core prAxIs OS concepts → `pos_search(content_type="standards", query="prAxIs OS orientation")`
 - `usage/mcp-usage-guide.md` - MCP protocol usage → `pos_search(content_type="standards", query="MCP usage guide")`
 
 **Usage:**

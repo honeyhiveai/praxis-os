@@ -732,7 +732,7 @@ Agent: pos_workflow(...) → Error → pos_search_project(content_type="standard
 
 ## 📚 Related Standards
 
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core prAxIs OS principles
+- `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Core prAxIs OS principles
 - `standards/ai-assistant/rag-content-authoring.md` - Why multi-angle querying works
 - `usage/ai-agent-quickstart.md` - Practical behavior examples
 - `usage/operating-model.md` - Human vs AI roles

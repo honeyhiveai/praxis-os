@@ -691,7 +691,7 @@ This guide is most valuable when:
 
 **Workflows:**
 - `workflows/praxis_os_upgrade_v1/` - Automated safe upgrade workflow
-  → `pos_search_project(content_type="standards", query="agent OS upgrade workflow")`
+  → `pos_search_project(content_type="standards", query="praxis os upgrade workflow")`
 
 **Installation:**
 - `usage/installation-guide.md` - Initial installation (if available)

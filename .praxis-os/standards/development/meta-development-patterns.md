@@ -556,7 +556,7 @@ When creating standards, ask: "Does this document MY complex experience or THEIR
 - Testing standards
 
 **Framework Standards (for consuming prAxIs OS):**
-- **[prAxIs OS Orientation](../../universal/standards/ai-assistant/AGENT-OS-ORIENTATION.md)** - Query: "orientation bootstrap"
+- **[prAxIs OS Orientation](../../universal/standards/ai-assistant/PRAXIS-OS-ORIENTATION.md)** - Query: "orientation bootstrap"
 - **[Workflow Discovery Patterns](../../universal/standards/ai-assistant/workflow-discovery-patterns.md)** - Query: "workflow lifecycle patterns"
 - **[Agent Decision Protocol](../../universal/standards/ai-assistant/agent-decision-protocol.md)** - Query: "decision protocol"
 
@@ -567,12 +567,12 @@ When creating standards, ask: "Does this document MY complex experience or THEIR
 This standard is discoverable from meta-development queries:
 
 **Tested queries that should return this standard:**
-- "building agent os enhanced"
+- "building praxis os enhanced"
 - "meta-development patterns"
 - "framework development complexity"
 - "builder vs consumer experience"
 - "should consumers know internals"
-- "dogfooding agent os"
+- "dogfooding praxis os"
 - "recursive development"
 
 **RAG optimization checklist:**

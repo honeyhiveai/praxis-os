@@ -19,7 +19,7 @@
 
 ## 🚨 prAxIs OS Update Quick Reference (TL;DR)
 
-**Keywords for search**: agent os update, upgrade agent os, how to update agent os, agent os installation update, update standards workflows, sync from universal, agent os upgrade workflow, update procedure
+**Keywords for search**: praxis os update, upgrade praxis os, how to update praxis os, praxis os installation update, update standards workflows, sync from universal, praxis os upgrade workflow, update procedure
 
 **Critical: Use the automated workflow, not manual commands!**
 
@@ -213,7 +213,7 @@ If commit hashes differ, an update is available.
 
 ```python
 # Discover the workflow first
-pos_search_project(content_type="standards", query="agent os upgrade workflow")
+pos_search_project(content_type="standards", query="praxis os upgrade workflow")
 
 # Start the workflow
 start_workflow(
@@ -457,20 +457,20 @@ The workflow maintains this automatically.
 
 **To find this standard:**
 ```python
-pos_search_project(content_type="standards", query="how to update agent os")
-pos_search_project(content_type="standards", query="agent os upgrade procedure")
+pos_search_project(content_type="standards", query="how to update praxis os")
+pos_search_project(content_type="standards", query="praxis os upgrade procedure")
 pos_search_project(content_type="standards", query="sync from universal directory")
 ```
 
 **To find the workflow:**
 ```python
-pos_search_project(content_type="standards", query="agent os upgrade workflow")
+pos_search_project(content_type="standards", query="praxis os upgrade workflow")
 pos_search_project(content_type="standards", query="automated upgrade with rollback")
 ```
 
 **To understand directory structure:**
 ```python
-pos_search_project(content_type="standards", query="agent os directory structure universal namespace")
+pos_search_project(content_type="standards", query="praxis os directory structure universal namespace")
 pos_search_project(content_type="standards", query="why nested standards structure")
 ```
 

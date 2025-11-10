@@ -170,8 +170,8 @@ class WorkflowEngine:
         # Save state via helper (automatic serialization)
         self._state_helper.save(state, status="active")
 
-        # Get initial phase content
-        phase_content = self._renderer.get_phase_content(workflow_type, state.current_phase)
+        # Note: Phase content is NOT included in response (just-in-time disclosure)
+        # AI agents must explicitly call get_phase() to receive phase content
 
         logger.info(
             "Started workflow session",
@@ -194,10 +194,16 @@ class WorkflowEngine:
                 "description": metadata.description,
                 "max_phase": metadata.max_phase,
             },
-            "phase_content": phase_content,
+            # phase_content removed for just-in-time disclosure (FR-001)
+            # AI agents must explicitly call get_phase() to receive phase content
         }
         
-        return add_workflow_guidance(response)
+        # Generate breadcrumb navigation to guide AI to next action
+        breadcrumb = {
+            "⚡_NEXT_ACTION": "get_phase(phase=0)",
+        }
+        
+        return add_workflow_guidance(response, breadcrumb=breadcrumb)
 
     def get_phase(self, session_id: str, phase: int) -> Dict[str, Any]:
         """
@@ -270,7 +276,29 @@ class WorkflowEngine:
             "phase_content": phase_content,
         }
         
-        return add_workflow_guidance(response)
+        # Generate task count aware breadcrumb (FR-002)
+        task_count = self._get_task_count_for_phase(state, phase)
+        
+        if task_count is not None and task_count > 0:
+            # Phase has tasks: guide to first task
+            breadcrumb = {
+                "📊_PHASE_INFO": f"Phase {phase} has {task_count} tasks",
+                "⚡_NEXT_ACTION": f"get_task(phase={phase}, task_number=1)",
+            }
+        elif task_count == 0:
+            # Edge case: Phase has no tasks, go straight to complete_phase
+            breadcrumb = {
+                "📊_PHASE_INFO": f"Phase {phase} has 0 tasks",
+                "⚡_NEXT_ACTION": f"complete_phase(phase={phase}, evidence={{...}})",
+            }
+        else:
+            # Task count retrieval failed (graceful degradation)
+            # Provide generic guidance without specific task count
+            breadcrumb = {
+                "⚡_NEXT_ACTION": f"get_task(phase={phase}, task_number=1)",
+            }
+        
+        return add_workflow_guidance(response, breadcrumb=breadcrumb)
     
     def get_task(self, session_id: str, phase: int, task_number: int) -> Dict[str, Any]:
         """
@@ -345,7 +373,34 @@ class WorkflowEngine:
             "task_content": task_content,
         }
         
-        return add_workflow_guidance(response)
+        # Generate dynamic position-aware breadcrumb (FR-003)
+        task_count = self._get_task_count_for_phase(state, phase)
+        
+        if task_count is not None:
+            # Task count available: generate position-aware breadcrumb
+            # API is 1-based: task_number ∈ [1, task_count]
+            # Final task is when task_number == task_count
+            if task_number < task_count:
+                # Not the final task: guide to next task
+                breadcrumb = {
+                    "🎯_CURRENT_POSITION": f"Task {task_number}/{task_count}",
+                    "⚡_NEXT_ACTION": f"get_task(phase={phase}, task_number={task_number + 1})",
+                }
+            else:
+                # Final task: guide to complete_phase
+                breadcrumb = {
+                    "🎯_CURRENT_POSITION": f"Task {task_number}/{task_count} (final)",
+                    "⚡_NEXT_ACTION": f"complete_phase(phase={phase}, evidence={{...}})",
+                }
+        else:
+            # Task count retrieval failed (graceful degradation)
+            # Provide generic position indicator without specific count
+            breadcrumb = {
+                "🎯_CURRENT_POSITION": f"Task {task_number}",
+                "⚡_NEXT_ACTION": f"get_task(phase={phase}, task_number={task_number + 1})",
+            }
+        
+        return add_workflow_guidance(response, breadcrumb=breadcrumb)
 
     def complete_phase(self, session_id: str, phase: int, evidence: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -415,7 +470,22 @@ class WorkflowEngine:
                 "validation": result.validation_result.to_dict() if result.validation_result else None,
                 "message": result.reason,
             }
-            return add_workflow_guidance(response)
+            
+            # Generate next phase or completion breadcrumb (FR-004)
+            if workflow_complete:
+                # Workflow complete: celebration breadcrumb (no next action)
+                breadcrumb = {
+                    "🎉_WORKFLOW_COMPLETE": f"All {max_phase + 1} phases completed successfully!",
+                }
+            else:
+                # More phases remaining: guide to next phase
+                next_phase = result.new_state.current_phase
+                breadcrumb = {
+                    "✅_PHASE_COMPLETE": f"Phase {phase} completed. Advanced to Phase {next_phase}.",
+                    "⚡_NEXT_ACTION": f"get_phase(phase={next_phase})",
+                }
+            
+            return add_workflow_guidance(response, breadcrumb=breadcrumb)
         else:
             logger.warning(
                 "Phase completion failed",
@@ -676,6 +746,72 @@ class WorkflowEngine:
                 raise DynamicRegistryError(
                     f"Failed to create dynamic content registry: {e}"
                 ) from e
+
+    def _get_task_count_for_phase(self, state: WorkflowState, phase: int) -> Optional[int]:
+        """
+        Get the number of tasks in a phase, routing to appropriate backend.
+
+        This helper routes task count retrieval based on workflow type:
+        - Static workflows: Count task files via WorkflowRenderer.get_task_count()
+        - Dynamic workflows: Get cached count from DynamicContentRegistry.get_phase_metadata()
+
+        **Graceful Degradation:** If task count retrieval fails, returns None and logs error.
+        This allows workflows to continue execution without breadcrumb navigation rather than
+        failing completely. Breadcrumbs are a UX enhancement, not a critical requirement.
+
+        Args:
+            state: Workflow state containing workflow_type and metadata
+            phase: Phase number (0-based indexing)
+
+        Returns:
+            Number of tasks in the phase, or None if retrieval fails.
+            None indicates breadcrumb generation should be skipped for this action.
+
+        Note:
+            - Thread-safe (no shared state modification)
+            - Never raises exceptions (fail-safe design)
+            - Errors logged at ERROR level for monitoring
+        """
+        try:
+            # Check if workflow uses dynamic content
+            if self._is_dynamic(state):
+                # Dynamic workflow: Get from registry
+                # Note: Dynamic registry caches task_count during parsing
+                registry = self._get_or_create_dynamic_registry(state.session_id, state)
+                phase_metadata = registry.get_phase_metadata(phase)
+                task_count = phase_metadata.get("task_count")
+                
+                logger.debug(
+                    "Task count retrieved from dynamic registry",
+                    extra={"workflow_type": state.workflow_type, "phase": phase, "task_count": task_count},
+                )
+                
+                return task_count
+            else:
+                # Static workflow: Count files via renderer
+                task_count = self._renderer.get_task_count(state.workflow_type, phase)
+                
+                logger.debug(
+                    "Task count retrieved from static renderer",
+                    extra={"workflow_type": state.workflow_type, "phase": phase, "task_count": task_count},
+                )
+                
+                return task_count
+
+        except Exception as e:
+            # Graceful degradation: Log error, return None
+            # Workflow continues without breadcrumb navigation
+            logger.error(
+                "Failed to retrieve task count for phase (breadcrumb navigation disabled for this action)",
+                extra={
+                    "workflow_type": state.workflow_type,
+                    "phase": phase,
+                    "error": str(e),
+                    "error_type": type(e).__name__,
+                },
+                exc_info=True,
+            )
+            return None
 
     def _load_state(self, session_id: str) -> WorkflowState:
         """Load session state, raise error if not found."""

@@ -498,7 +498,7 @@ This guide is most valuable when:
 **Core Orientation:**
 - `usage/ai-agent-quickstart.md` - Practical examples of using MCP tools
   → `pos_search(content_type="standards", query="AI agent quickstart")`
-- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - MCP in context of prAxIs OS principles
+- `standards/universal/ai-assistant/PRAXIS-OS-ORIENTATION.md` - MCP in context of prAxIs OS principles
   → `pos_search(content_type="standards", query="prAxIs OS orientation")`
 
 **Workflows:**

@@ -84,7 +84,7 @@
    - Run linter → fix errors → clean
    - Only then present work to human
 
-**For complete 750-line prAxIs OS orientation guide**: Query `pos_search_project(content_type="standards", query="prAxIs OS orientation guide")` or see `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md`
+**For complete 750-line prAxIs OS orientation guide**: Query `pos_search_project(content_type="standards", query="prAxIs OS orientation guide")` or see `standards/universal/ai-assistant/PRAXIS-OS-ORIENTATION.md`
 
 **After internalizing these principles**, read the detailed operating model below.
 
@@ -281,7 +281,7 @@ This guide is most valuable when:
 **Core Orientation:**
 - `usage/ai-agent-quickstart.md` - Practical examples of correct behavior
   → `pos_search_project(content_type="standards", query="AI agent quickstart")`
-- `standards/universal/ai-assistant/AGENT-OS-ORIENTATION.md` - Complete orientation guide
+- `standards/universal/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Complete orientation guide
   → `pos_search_project(content_type="standards", query="prAxIs OS orientation guide")`
 
 **Tool Usage:**

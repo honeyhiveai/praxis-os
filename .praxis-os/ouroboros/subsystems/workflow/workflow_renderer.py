@@ -134,12 +134,15 @@ class WorkflowRenderer:
     
     def get_task_content(self, workflow_type: str, phase: int, task_number: int) -> Dict[str, Any]:
         """
-        Get individual task content.
+        Get individual task content with defensive 0-based/1-based normalization.
+        
+        External API is always 1-based (task_number=1 for first task).
+        This method defensively handles workflows that may have 0-based task files.
 
         Args:
             workflow_type: Workflow type identifier
             phase: Phase number
-            task_number: Task number within phase
+            task_number: Task number within phase (1-based from API)
 
         Returns:
             Dictionary with task content
@@ -156,8 +159,20 @@ class WorkflowRenderer:
                 how_to_fix=f"Create phase directory: mkdir -p {phase_dir}",
             )
 
-        # Find task file matching pattern: task-{task_number}-*.md
-        task_files = list(phase_dir.glob(f"task-{task_number}-*.md"))
+        # Defensive: Try both 1-based and 0-based file naming
+        # API is 1-based, but workflows might be 0-based or 1-based
+        # Try task_number first (1-based), then task_number-1 (0-based compatibility)
+        task_files = None
+        for file_num in [task_number, task_number - 1]:
+            if file_num >= 0:  # Don't try negative numbers
+                task_files = list(phase_dir.glob(f"task-{file_num}-*.md"))
+                if task_files:
+                    if file_num != task_number:
+                        logger.debug(
+                            "0-based task file found (defensive normalization)",
+                            extra={"phase": phase, "api_task_number": task_number, "file_task_number": file_num}
+                        )
+                    break
         
         if not task_files:
             raise RendererError(
@@ -191,6 +206,72 @@ class WorkflowRenderer:
             "content": task_content,
             "file": task_file.name,
         }
+
+    def get_task_count(self, workflow_type: str, phase: int) -> int:
+        """
+        Get the number of tasks in a phase for static workflows.
+
+        Counts task files in the phase directory using glob pattern `task-*-*.md`.
+        This method is specifically for static workflows where tasks are stored as
+        individual markdown files. Dynamic workflows should use DynamicContentRegistry
+        for task count retrieval.
+
+        **Performance:** < 5ms for directories with < 50 files (NFR-P1 requirement).
+
+        Args:
+            workflow_type: Workflow type identifier (e.g., "spec_creation_v1")
+            phase: Phase number (0-based indexing)
+
+        Returns:
+            Number of task files found in the phase directory.
+            Returns 0 if phase directory exists but contains no task files.
+
+        Raises:
+            RendererError: If phase directory does not exist.
+                Error includes actionable mkdir command for remediation.
+
+        Example:
+            >>> renderer = WorkflowRenderer(Path(".praxis-os/workflows"))
+            >>> count = renderer.get_task_count("spec_creation_v1", phase=0)
+            >>> count
+            5
+
+        Note:
+            - Task files must follow naming pattern: `task-{number}-{name}.md`
+            - File system glob is fast for typical phase sizes (< 50 files)
+            - Thread-safe (no shared state modification)
+        """
+        phase_dir = self.workflows_dir / workflow_type / "phases" / str(phase)
+
+        if not phase_dir.exists():
+            raise RendererError(
+                what_failed="Task count retrieval",
+                why_failed=f"Phase directory not found: {phase_dir}",
+                how_to_fix=f"Create phase directory: mkdir -p {phase_dir}",
+            )
+
+        # Count task files using glob pattern
+        # Pattern: task-*-*.md (e.g., task-1-validate-spec.md, task-2-parse-tasks.md)
+        task_files = list(phase_dir.glob("task-*-*.md"))
+        
+        # Extract unique task numbers (handle duplicates like task-1-name1.md, task-1-name2.md)
+        task_numbers = set()
+        for task_file in task_files:
+            # Extract task number from filename: task-{number}-{name}.md
+            filename = task_file.name
+            if filename.startswith("task-") and filename.endswith(".md"):
+                parts = filename[5:-3].split("-", 1)  # Remove "task-" prefix and ".md" suffix
+                if parts and parts[0].isdigit():
+                    task_numbers.add(int(parts[0]))
+        
+        task_count = len(task_numbers)
+
+        logger.debug(
+            "Task count retrieved",
+            extra={"workflow_type": workflow_type, "phase": phase, "task_count": task_count, "task_files": len(task_files)},
+        )
+
+        return task_count
 
     def list_workflows(self) -> Dict[str, WorkflowMetadata]:
         """

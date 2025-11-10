@@ -540,7 +540,7 @@ Action: Build comprehensive correlation matrices
 **AI Assistant:**
 - `standards/ai-assistant/compliance-protocol.md` - Check standards before analysis → `pos_search_project(content_type="standards", query="compliance protocol")`
 - `standards/ai-assistant/standards-creation-process.md` - Creating standards → `pos_search_project(content_type="standards", query="standards creation")`
-- `standards/ai-assistant/AGENT-OS-ORIENTATION.md` - Core principles → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
+- `standards/ai-assistant/PRAXIS-OS-ORIENTATION.md` - Core principles → `pos_search_project(content_type="standards", query="prAxIs OS orientation")`
 
 **AI Safety:**
 - `standards/ai-safety/production-code-checklist.md` - Analysis is step 1 → `pos_search_project(content_type="standards", query="production code checklist")`
