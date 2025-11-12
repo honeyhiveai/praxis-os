@@ -144,7 +144,9 @@ indexes:
       # ⚠️ UPDATE THIS: Add languages your project uses
       # Supported: python, javascript, typescript, go, rust
       # Example: ["python", "typescript"] for Python + TypeScript project
-      - "python"  # ⚠️ TEMPLATE: Add your languages here
+      - "python"
+      - "javascript"
+      - "typescript"
 
     vector:
       # CodeBERT - Specifically designed for code embeddings
@@ -223,6 +225,262 @@ indexes:
     respect_gitignore: true  # ✅ Default: Automatically respect .gitignore patterns (recommended)
     exclude_patterns: null  # Optional: Additional exclusion patterns in gitignore format
 
+    # ========================================================================
+    # AST-Aware Code Chunking Configuration (NEW)
+    # ========================================================================
+    # Enables intelligent code chunking at function/class boundaries using Tree-sitter AST parsing.
+    #
+    # What it does:
+    #   - Chunks code at logical boundaries (functions, classes) instead of arbitrary lines
+    #   - Applies "import penalty" to de-prioritize import-heavy chunks in search
+    #   - Gracefully falls back to line-based chunking if AST parsing fails
+    #   - Config-driven: Add new languages without code changes
+    #
+    # Chunking Strategy:
+    #   - "ast": AST-aware chunking (recommended for Python, TypeScript, Go)
+    #   - "line": Line-based fallback (simple, but less precise)
+    #
+    # Import Penalty:
+    #   - Chunks with >50% import statements get penalized by this multiplier
+    #   - 0.3 = imports rank 3x lower than implementation code
+    #   - 1.0 = no penalty, 0.0 = filter out entirely
+    #
+    # Language Configs:
+    #   - Define AST node types for each language
+    #   - import_nodes: Nodes representing import/export statements
+    #   - definition_nodes: Nodes representing function/class definitions
+    #   - split_boundary_nodes: Nodes representing control flow (if, for, etc.)
+    #
+    # Benefits:
+    #   ✅ More relevant search results: Implementation code ranks higher than imports
+    #   ✅ Function-level precision: Chunks align with logical code boundaries
+    #   ✅ Graceful degradation: Falls back to line-based if AST parsing fails
+    #   ✅ Config-driven: Add new languages by updating this config (no code changes)
+    #
+    # Rollback:
+    #   - To disable AST chunking, set chunking_strategy: "line"
+    #   - Or remove language_configs section entirely
+    chunking_strategy: "ast"  # Options: "ast" (AST-aware, recommended) or "line" (fallback)
+
+    language_configs:
+      python:
+        chunking:
+          import_nodes:
+            - "import_statement"
+            - "import_from_statement"
+          definition_nodes:
+            - "function_definition"
+            - "async_function_definition"
+            - "class_definition"
+          split_boundary_nodes:
+            - "if_statement"
+            - "for_statement"
+            - "while_statement"
+            - "try_statement"
+            - "with_statement"
+          import_penalty: 0.3  # Imports rank 3x lower than implementation code
+
+      typescript:
+        chunking:
+          import_nodes:
+            - "import_statement"
+            - "export_statement"
+          definition_nodes:
+            - "function_declaration"
+            - "function"
+            - "arrow_function"
+            - "method_definition"
+            - "class_declaration"
+          split_boundary_nodes:
+            - "if_statement"
+            - "for_statement"
+            - "while_statement"
+            - "try_statement"
+          import_penalty: 0.3
+
+      go:
+        chunking:
+          import_nodes:
+            - "import_declaration"
+            - "import_spec"
+          definition_nodes:
+            - "function_declaration"
+            - "method_declaration"
+            - "type_declaration"
+            - "struct_type"
+          split_boundary_nodes:
+            - "if_statement"
+            - "for_statement"
+            - "select_statement"
+            - "switch_statement"
+            - "defer_statement"
+          import_penalty: 0.3
+
+    # ========================================================================
+    # Multi-Repo Partitioning Configuration (NEW)
+    # ========================================================================
+    # Enables multi-repository code intelligence with isolated partitions.
+    #
+    # What it does:
+    #   - Separate logical collections of repositories
+    #   - Isolated indexing for different purposes (primary code vs. instrumentors)
+    #   - Per-partition performance targets
+    #   - Configurable cross-repo call graph edges
+    #
+    # Partitions:
+    #   - primary: Main project code (praxis-os, python-sdk)
+    #   - instrumentors: External instrumentation frameworks to analyze
+    #
+    # Repository Fields:
+    #   - name: Unique identifier for the repository
+    #   - path: Local filesystem path (relative to .praxis-os/)
+    #   - url: Git repository URL (for future sync support)
+    #   - provider: Source (e.g., "honeyhive", "openlit", "traceloop", "arize")
+    #   - sparse_paths: Optional list of subdirectories to index
+    #   - enabled: Whether to index this repository
+    #
+    # Performance Targets:
+    #   - semantic: p50/p95/p99 latency (ms) for semantic search
+    #   - ast: p50/p95/p99 latency (ms) for AST queries
+    #   - graph: p50/p95/p99 latency (ms) for graph traversal
+    #
+    # graph_cross_repo:
+    #   - true: Allow cross-repo edges in call graph (primary partition)
+    #   - false: Isolate repos in call graph (instrumentors partition)
+    # Multi-Repo Partitioning (Simplified Architecture)
+    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # One partition = one repository. Define multiple domains (code/tests/docs)
+    # per repository with flexible include/exclude patterns.
+    #
+    # Design Philosophy:
+    #   - Simple: partition name = repo name (1:1 mapping)
+    #   - Flexible: define domains that match YOUR project structure
+    #   - Domain-agnostic: works for any project type
+    #
+    # Example:
+    #   partitions:
+    #     my-project:
+    #       path: ../
+    #       domains:
+    #         code:
+    #           include_paths: [src/, lib/]
+    #           exclude_patterns: null
+    #         tests:
+    #           include_paths: [tests/]
+    #           exclude_patterns: null
+    #
+    partitions:
+      praxis-os:
+        path: .
+        domains:
+          code:
+            include_paths: [ouroboros/, scripts/]
+            exclude_patterns: null
+            metadata: null  # No special metadata needed for main code
+          tests:
+            include_paths: [tests/]
+            exclude_patterns: null
+            metadata:
+              type: tests  # Tag for filtering: "only search test code"
+
+      python-sdk:
+        path: ../../python-sdk
+        domains:
+          code:
+            include_paths: [src/]
+            exclude_patterns: null
+            metadata:
+              project: python-sdk
+              type: library
+
+      hive-kube:
+        path: ../../hive-kube/kubernetes
+        domains:
+          backend:
+            include_paths: [backend_service/app/]
+            exclude_patterns: null
+            metadata:
+              service: backend
+              type: api
+              language: typescript
+          frontend:
+            include_paths: [frontend_service/app/, frontend_service/src/]
+            exclude_patterns: null
+            metadata:
+              service: frontend
+              type: ui
+              language: typescript
+              framework: nextjs
+          ingestion:
+            include_paths: [ingestion_service/app/]
+            exclude_patterns: null
+            metadata:
+              service: ingestion
+              type: data-pipeline
+              language: typescript
+          beekeeper:
+            include_paths: [beekeeper_service/app/]
+            exclude_patterns: null
+            metadata:
+              service: beekeeper
+              type: cron-jobs
+              language: typescript
+          evaluation:
+            include_paths: [evaluation_service/app/]
+            exclude_patterns: null
+            metadata:
+              service: evaluation
+              type: llm-eval
+              language: typescript
+          enrichment:
+            include_paths: [enrichment_service/app/]
+            exclude_patterns: null
+            metadata:
+              service: enrichment
+              type: data-pipeline
+              language: typescript
+          notification:
+            include_paths: [notification_service/app/]
+            exclude_patterns: null
+            metadata:
+              service: notification
+              type: messaging
+              language: typescript
+          llm_proxy:
+            include_paths: [llm_proxy_service/]
+            exclude_patterns: [__pycache__/]
+            metadata:
+              service: llm-proxy
+              type: proxy
+              language: python
+          python_metrics:
+            include_paths: [python_metric_service/]
+            exclude_patterns: [__pycache__/]
+            metadata:
+              service: python-metrics
+              type: metrics
+              language: python
+
+      # Example: External instrumentor repository
+      # Uncomment when ready to index external dependencies
+      # openlit:
+      #   path: ../deps/openlit
+      #   domains:
+      #     openai-instrumentor:
+      #       include_paths: [sdk/python/src/openlit/instrumentation/openai/]
+      #       exclude_patterns: null
+      #       metadata:
+      #         framework: openai
+      #         type: instrumentor
+      #         provider: openlit
+      #     anthropic-instrumentor:
+      #       include_paths: [sdk/python/src/openlit/instrumentation/anthropic/]
+      #       exclude_patterns: null
+      #       metadata:
+      #         framework: anthropic
+      #         type: instrumentor
+      #         provider: openlit
+
   # ========================================================================
   # AST Index (CRITICAL: Customize for Your Project!)
   # ========================================================================
@@ -247,8 +505,10 @@ indexes:
       - "ouroboros/"
 
     languages:
-      # Python (matches code.languages)
+      # Python, JavaScript, TypeScript (matches code.languages for multi-repo support)
       - "python"
+      - "javascript"
+      - "typescript"
 
     auto_install_parsers: true  # Auto-install missing parsers (requires internet)
     venv_path: "venv/"  # Isolated venv for parser installation (usually fine as-is)

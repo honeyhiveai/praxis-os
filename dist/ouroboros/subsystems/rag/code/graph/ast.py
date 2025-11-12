@@ -31,21 +31,36 @@ class ASTExtractor:
     Attributes:
         languages: List of languages to support (e.g., ["python", "javascript"])
         base_path: Base path for resolving relative file paths
+        lang_configs: Language-specific AST node type configurations
         _parsers: Cached tree-sitter parsers (language -> Parser)
     """
     
-    def __init__(self, languages: List[str], base_path: Path):
+    def __init__(self, languages: List[str], base_path: Path, config: Optional[Dict[str, Any]] = None):
         """Initialize AST extractor.
         
         Args:
             languages: List of language names (e.g., ["python", "typescript"])
             base_path: Base path for resolving relative paths
+            config: Optional code index config with language_configs section
         """
-        self.languages = languages
+        # Safety: Ensure languages is never None (defensive against misconfiguration)
+        self.languages = languages if languages is not None else ["python"]
+        if self.languages is None:
+            logger.error("❌ CRITICAL BUG: self.languages is STILL None after defensive assignment!")
+        logger.info("✅ ASTExtractor.__init__: languages param=%s → self.languages=%s", languages, self.languages)
         self.base_path = base_path
         self._parsers: Dict[str, Any] = {}  # Language -> tree-sitter Parser
         
-        logger.info("ASTExtractor initialized for languages: %s", languages)
+        # Extract language configs from full code config
+        # Config structure: {"language_configs": {"python": {"chunking": {...}}, ...}}
+        self.lang_configs: Dict[str, Dict[str, Any]] = {}
+        if config and "language_configs" in config:
+            lang_cfg = config["language_configs"]
+            # Safety: Ensure lang_configs is never None
+            self.lang_configs = lang_cfg if lang_cfg is not None else {}
+        
+        logger.info("ASTExtractor initialized for languages: %s (config-driven=%s)", 
+                   self.languages, bool(self.lang_configs))
     
     def ensure_parser(self, language: str):
         """Ensure tree-sitter parser is loaded for a language.
@@ -367,45 +382,63 @@ class ASTExtractor:
         return relationships
     
     def _get_significant_node_types(self, language: str) -> set:
-        """Get significant AST node types for a language."""
-        # Python
+        """Get significant AST node types for a language.
+        
+        Reads from self.lang_configs if available, otherwise falls back to defaults.
+        Significant nodes = import_nodes + definition_nodes + split_boundary_nodes.
+        
+        Args:
+            language: Language name (e.g., "python", "typescript")
+            
+        Returns:
+            Set of AST node type names for structural analysis
+        """
+        # Config-driven path: Read from mcp.yaml
+        # Safety: Ensure lang_configs is not None before checking membership
+        if self.lang_configs and language in self.lang_configs:
+            lang_config = self.lang_configs[language]
+            if "chunking" in lang_config:
+                chunking = lang_config["chunking"]
+                # Union of all configured node types
+                significant = set()
+                significant.update(chunking.get("import_nodes", []))
+                significant.update(chunking.get("definition_nodes", []))
+                significant.update(chunking.get("split_boundary_nodes", []))
+                logger.debug(
+                    "Using config-driven node types for %s: %d types",
+                    language, len(significant)
+                )
+                return significant
+        
+        # Fallback: Hardcoded defaults (backward compatibility)
+        # Log warning for unconfigured languages to guide users toward config-driven approach
+        logger.warning(
+            "Language '%s' not found in config, falling back to hardcoded defaults. "
+            "Consider adding '%s' to mcp.yaml language_configs for better control.",
+            language, language
+        )
+        
         if language == "python":
             return {
-                "function_definition",
-                "async_function_definition",
-                "class_definition",
-                "if_statement",
-                "for_statement",
-                "while_statement",
-                "try_statement",
-                "with_statement",
-                "import_statement",
-                "import_from_statement",
+                "function_definition", "async_function_definition", "class_definition",
+                "if_statement", "for_statement", "while_statement", "try_statement", "with_statement",
+                "import_statement", "import_from_statement",
             }
-        
-        # JavaScript/TypeScript
         if language in ["javascript", "typescript", "tsx", "jsx"]:
             return {
-                "function_declaration",
-                "function",
-                "arrow_function",
-                "method_definition",
-                "class_declaration",
-                "if_statement",
-                "for_statement",
-                "while_statement",
-                "try_statement",
-                "import_statement",
-                "export_statement",
+                "function_declaration", "function", "arrow_function", "method_definition", "class_declaration",
+                "if_statement", "for_statement", "while_statement", "try_statement",
+                "import_statement", "export_statement",
             }
         
-        # Default: common patterns
-        return {
-            "function_definition",
-            "function_declaration",
-            "class_definition",
-            "class_declaration",
-        }
+        # Ultimate fallback: generic node types for completely unconfigured languages
+        logger.warning(
+            "No hardcoded defaults for language '%s', using generic fallback: "
+            "['function_definition', 'class_definition']. "
+            "Add language config to mcp.yaml for proper support.",
+            language
+        )
+        return {"function_definition", "function_declaration", "class_definition", "class_declaration"}
     
     def _get_symbol_node_types(self, language: str) -> set:
         """Get symbol node types (callable elements) for a language."""
@@ -574,6 +607,11 @@ class ASTExtractor:
             "php": [".php"],
         }
         
+        # Safety: Handle None languages gracefully
+        if self.languages is None:
+            logger.warning("ASTExtractor.languages is None in get_file_extensions()")
+            return []
+        
         extensions = []
         for lang in self.languages:
             lang_lower = lang.lower()
@@ -591,6 +629,11 @@ class ASTExtractor:
         Returns:
             Language name or None if not supported
         """
+        # CRITICAL SAFETY: If languages is None, we cannot detect anything
+        if self.languages is None:
+            logger.warning("❌ detect_language called but self.languages is None! File: %s", file_path)
+            return None
+        
         suffix = file_path.suffix.lower()
         
         # Map extension to language
@@ -627,6 +670,10 @@ class ASTExtractor:
     def should_skip_path(self, path: Path) -> bool:
         """Check if path should be skipped during indexing.
         
+        Checks if any path component (directory or file name) matches
+        a skip pattern. Uses exact component matching, not substring matching,
+        to avoid false positives (e.g., "rebuild" matching "build" pattern).
+        
         Args:
             path: Path to check
             
@@ -647,6 +694,8 @@ class ASTExtractor:
             ".mypy_cache",
         ]
         
-        path_str = str(path)
-        return any(pattern in path_str for pattern in skip_patterns)
+        # Check each path component (not substring matching!)
+        # This prevents false positives like "rebuild" matching "build"
+        path_parts = path.parts
+        return any(pattern == part for part in path_parts for pattern in skip_patterns)
 

@@ -168,6 +168,9 @@ class WorkflowMetadata(BaseModel):
     dynamic_phases: bool = Field(False, description="Whether workflow has dynamic phases")
     dynamic_config: Optional[Dict[str, Any]] = Field(None, description="Dynamic workflow configuration")
     
+    # Workflow invocation requirements
+    required_options: List[str] = Field(default_factory=list, description="Required options for start_workflow()")
+    
     # Metadata and quality
     strict_mode: bool = Field(True, description="Whether strict validation is enabled")
     estimated_duration: Optional[str] = Field(None, description="Estimated completion time")
@@ -182,6 +185,26 @@ class WorkflowMetadata(BaseModel):
     # Timestamps
     created: Optional[str] = Field(None, description="Creation date")
     updated: Optional[str] = Field(None, description="Last update date")
+
+    def model_post_init(self, __context: Any) -> None:
+        """
+        Calculate max_phase after initialization if not explicitly set.
+        
+        For static workflows: max_phase = highest phase_number in phases array
+        For dynamic workflows: max_phase stays 0 until runtime calculation
+        
+        BUG FIX: Prevents premature workflow completion when max_phase defaults to 0.
+        Previously: current_phase (3) > max_phase (0) = True (marks complete incorrectly)
+        Now: current_phase (3) > max_phase (5) = False (correct for 6-phase workflow)
+        """
+        # Only calculate if max_phase is still default (0) and workflow is static
+        if self.max_phase == 0 and not self.dynamic_phases and self.phases:
+            # Calculate from phases array (find highest phase_number)
+            phase_numbers = [p.get("phase_number", 0) for p in self.phases if isinstance(p, dict)]
+            if phase_numbers:
+                calculated_max = max(phase_numbers)
+                # Use object.__setattr__ since model is frozen
+                object.__setattr__(self, "max_phase", calculated_max)
 
 
 class DynamicTask(BaseModel):

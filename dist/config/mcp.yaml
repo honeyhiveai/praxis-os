@@ -13,7 +13,7 @@
 #   - ✅ NEW: You can safely use top-level paths like ["../"] because
 #            prAxIs OS automatically respects your .gitignore file!
 #
-# After installation, update the 'code' and 'ast' sections below with your
+# After installation, update the 'code' section below with your
 # project's actual source code paths and languages.
 #
 # ✅ NEW FEATURE: Automatic File Exclusion
@@ -21,6 +21,12 @@
 #    - Build artifacts (node_modules/, __pycache__/, dist/, etc.) are
 #      automatically excluded - no manual configuration needed!
 #    - See the 'code' section below for detailed exclusion options
+#
+# 🚀 NEW FEATURE: Multi-Repo Code Intelligence
+#    - Search across MULTIPLE local repositories simultaneously!
+#    - Example: Search both your main app AND SDKs/libraries you develop
+#    - Configure multiple "partitions" (repos) in the code section below
+#    - See detailed multi-repo configuration examples in the code section
 
 version: "1.0"
 
@@ -32,7 +38,11 @@ version: "1.0"
 # Three types of indexes:
 #   1. Standards: Documentation/markdown files (usually fine as-is)
 #   2. Code: Source code semantic search + call graph (MUST customize paths!)
-#   3. AST: Structural code search (MUST customize paths!)
+#   3. AST: Structural code search (DEPRECATED - now unified with Code)
+#
+# 🆕 The AST index is now part of the Code index (partition-based architecture).
+#    The ast: section still exists for backward compatibility but is not used
+#    in multi-repo mode. Configure everything in the code: section below.
 
 indexes:
   # ========================================================================
@@ -90,173 +100,402 @@ indexes:
   # ========================================================================
   # Code Index (CRITICAL: Customize for Your Project!)
   # ========================================================================
-  # ⚠️ YOU MUST UPDATE source_paths BELOW to match your project structure!
+  # ⚠️ YOU MUST UPDATE THIS SECTION to match your project structure!
+  #
+  # 🚀 NEW: Multi-Repo Support - Two Configuration Modes:
+  #
+  # MODE 1: Single-Repo (Legacy) - Simple, single codebase
+  # MODE 2: Multi-Repo (NEW) - Search across multiple local repositories
+  #
+  # ========================================================================
+  # MODE 1: SINGLE-REPO CONFIGURATION (Legacy)
+  # ========================================================================
+  # Use this if you only have ONE codebase to index.
   #
   # What it does:
   #   - Semantic code search: Find functions/classes by meaning
   #   - Call graph: Find who calls what (recursive traversal)
+  #   - AST search: Find code by structure (e.g., all async functions)
   #   - Hybrid search: Vector + FTS (same as standards)
-  #   - ✅ NEW: Automatic file exclusion via .gitignore (see below)
+  #   - ✅ Automatic file exclusion via .gitignore
   #
-  # Common Project Patterns:
+  # Common Single-Repo Patterns:
   #   Python:
-  #     - Standard: ["../src/", "../lib/"]
-  #     - Root-level: ["../"] (✅ Now safe! .gitignore automatically excludes build artifacts)
-  #     - Package: ["../mypackage/"]
+  #     source_paths: ["../src/", "../lib/"]
+  #     languages: ["python"]
   #
   #   JavaScript/TypeScript:
-  #     - Standard: ["../src/", "../app/", "../components/"]
-  #     - Next.js: ["../app/", "../components/", "../lib/"]
-  #     - Monorepo: ["../packages/*/src/", "../apps/*/src/"]
-  #     - Root-level: ["../"] (✅ Now safe! node_modules/ automatically excluded)
+  #     source_paths: ["../src/", "../app/", "../components/"]
+  #     languages: ["javascript", "typescript"]
   #
   #   Go:
-  #     - Standard: ["../cmd/", "../pkg/", "../internal/"]
-  #     - Simple: ["../"] (✅ Now safe! vendor/ automatically excluded)
+  #     source_paths: ["../cmd/", "../pkg/", "../internal/"]
+  #     languages: ["go"]
   #
   #   Rust:
-  #     - Standard: ["../src/"]
-  #     - Root-level: ["../"] (✅ Now safe! target/ automatically excluded)
+  #     source_paths: ["../src/"]
+  #     languages: ["rust"]
   #
   #   Multi-language:
-  #     - ["../src/python/", "../src/typescript/", "../src/go/"]
+  #     source_paths: ["../src/python/", "../src/typescript/"]
+  #     languages: ["python", "typescript"]
   #
   # ✅ TIP: You can now safely point to top-level directories (e.g., ["../"])
   #         because prAxIs OS automatically respects your .gitignore file!
-  #         Build artifacts (node_modules/, __pycache__/, dist/, etc.) are
-  #         automatically excluded - no need to manually list them.
   #
-  # Languages:
-  #   - Add languages you use: ["python", "typescript", "javascript", "go", "rust"]
-  #   - Supported: python, javascript, typescript, go, rust
-  #   - More languages can be added via config (no code changes needed)
+  # EXAMPLE SINGLE-REPO CONFIG:
+  # code:
+  #   source_paths:
+  #     - "../src/"
+  #   languages:
+  #     - "python"
+  #   vector:
+  #     model: "microsoft/codebert-base"
+  #     dimension: 768
+  #     chunk_size: 200
+  #     chunk_overlap: 20
+  #   fts: {}
+  #   graph: {}
+  #   duckdb_path: ".cache/code.duckdb"
+  #   respect_gitignore: true
+  #   exclude_patterns: null
   #
-  # Chunking Strategy:
-  #   - chunk_size: 200 tokens (~1 function) - smaller chunks = more precision
-  #   - chunk_overlap: 20 tokens (~few lines) - prevents function splitting
-  #   - Why smaller? Code search needs function-level precision, not doc-level context
+  # ========================================================================
+  # MODE 2: MULTI-REPO CONFIGURATION (NEW - Recommended!)
+  # ========================================================================
+  # Use this to search across MULTIPLE local repositories simultaneously.
+  #
+  # 🎯 Use Cases:
+  #   - Search your main app + SDKs/libraries you develop
+  #   - Search across microservices in a monorepo
+  #   - Compare implementations across different projects
+  #   - Trace bugs across multiple codebases
+  #   - Understand how your SDK integrates with your framework
+  #
+  # 🏗️ Architecture: Partition-Based
+  #   - Each repository = one "partition" (isolated index)
+  #   - Partitions can be searched together OR individually
+  #   - Call graphs are per-partition (don't cross repo boundaries)
+  #   - Semantic search works across ALL partitions
+  #
+  # 📦 What is a Partition?
+  #   - A partition is an independent code repository with its own:
+  #     * Source code path (can be outside project root!)
+  #     * Semantic index (CodeBERT embeddings for search)
+  #     * AST index (Tree-sitter parsed syntax)
+  #     * Call graph (DuckDB for "who calls what")
+  #   - Partitions are indexed separately but searchable together
+  #   - Example: "praxis-os" partition + "python-sdk" partition
+  #
+  # 📂 How Multi-Repo Works:
+  #   1. Define multiple partitions below (each = one repository)
+  #   2. prAxIs OS indexes each partition independently
+  #   3. Search queries can target:
+  #      - ALL partitions (default) - find concepts across all repos
+  #      - SPECIFIC partition - focus on one repo
+  #   4. Results include partition metadata (which repo it's from)
+  #
+  # 🔍 Search Patterns:
+  #   # Search ALL repos (default)
+  #   pos_search_project(action="search_code", query="async HTTP client")
+  #   → Returns: Results from ALL partitions, ranked by relevance
+  #
+  #   # Search SPECIFIC repo
+  #   pos_search_project(
+  #       action="search_code",
+  #       query="async HTTP client",
+  #       filters={"partition": "python-sdk"}
+  #   )
+  #   → Returns: Results ONLY from python-sdk partition
+  #
+  #   # Call graph (MUST specify partition)
+  #   pos_search_project(
+  #       action="find_callers",
+  #       query="HoneyHiveTracer.__init__",
+  #       filters={"partition": "python-sdk"}
+  #   )
+  #   → Returns: Who calls this function (within python-sdk only)
+  #
+  # ⚠️ CRITICAL: Call graph operations (find_callers, find_dependencies,
+  #             find_call_paths) REQUIRE partition specification because
+  #             call graphs don't cross repository boundaries.
+  #
+  # 📁 Directory Layout:
+  #   praxis-os/
+  #   ├── .praxis-os/
+  #   │   ├── config/
+  #   │   │   └── mcp.yaml  # ← This file
+  #   │   ├── ouroboros/    # Framework code (partition 1)
+  #   │   └── .cache/
+  #   │       └── indexes/
+  #   │           └── code/
+  #   │               ├── praxis-os/       # Partition 1 indexes
+  #   │               │   ├── semantic/    # LanceDB vector index
+  #   │               │   └── graph.duckdb # Call graph
+  #   │               └── python-sdk/      # Partition 2 indexes
+  #   │                   ├── semantic/
+  #   │                   └── graph.duckdb
+  #   └── ../python-sdk/    # SDK code (partition 2)
+  #       └── src/
+  #
+  # 🎨 Multi-Repo Configuration Examples:
+  #
+  # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ EXAMPLE 1: Framework + SDK (Recommended Pattern)                    │
+  # └─────────────────────────────────────────────────────────────────────┘
+  # Use case: Search your main framework AND the SDK you're developing
+  #
+  # code:
+  #   enabled: true
+  #   partitions:
+  #     praxis-os:                          # Partition 1: Your framework
+  #       path: .                            # Current directory (.praxis-os/)
+  #       domains:
+  #         code:
+  #           include_paths:                 # Index these directories
+  #             - ouroboros/                 # Main source code
+  #             - scripts/                   # Helper scripts
+  #           exclude_patterns: null         # Use .gitignore (default)
+  #           metadata:                      # Optional: Tag results
+  #             project: praxis-os
+  #             type: framework
+  #         tests:                           # Optional: Separate test domain
+  #           include_paths:
+  #             - tests/
+  #           metadata:
+  #             type: tests
+  #
+  #     python-sdk:                          # Partition 2: Your SDK
+  #       path: ../../python-sdk             # Relative to .praxis-os/
+  #       domains:
+  #         code:
+  #           include_paths:
+  #             - src/                       # Only index src/ (not venv/)
+  #           exclude_patterns: null         # Use .gitignore in SDK repo
+  #           metadata:
+  #             project: python-sdk
+  #             type: library
+  #
+  #   languages: ["python"]                  # Applies to ALL partitions
+  #   vector:                                # Applies to ALL partitions
+  #     model: "microsoft/codebert-base"
+  #     dimension: 768
+  #     chunk_size: 200
+  #     chunk_overlap: 20
+  #   fts: {}
+  #   graph: {}
+  #
+  # Benefits:
+  #   ✅ Search "rate limiting" → finds implementations in BOTH repos
+  #   ✅ Search "HoneyHiveTracer" with partition filter → SDK only
+  #   ✅ Compare error handling patterns across projects
+  #   ✅ Trace bugs from SDK to framework (or vice versa)
+  #   ✅ Understand how SDK integrates with framework
+  #
+  # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ EXAMPLE 2: Monorepo with Multiple Services                          │
+  # └─────────────────────────────────────────────────────────────────────┘
+  # Use case: Search across microservices in a monorepo
+  #
+  # code:
+  #   enabled: true
+  #   partitions:
+  #     api-service:
+  #       path: ../services/api
+  #       domains:
+  #         code:
+  #           include_paths: [src/]
+  #           metadata: {service: api, type: backend}
+  #
+  #     auth-service:
+  #       path: ../services/auth
+  #       domains:
+  #         code:
+  #           include_paths: [src/]
+  #           metadata: {service: auth, type: backend}
+  #
+  #     frontend:
+  #       path: ../apps/web
+  #       domains:
+  #         code:
+  #           include_paths: [src/, app/, components/]
+  #           metadata: {type: frontend}
+  #
+  #   languages: ["typescript", "javascript"]
+  #   vector: {model: "microsoft/codebert-base", dimension: 768}
+  #
+  # Benefits:
+  #   ✅ Find all authentication code across services
+  #   ✅ Compare API patterns between microservices
+  #   ✅ Find where frontend calls backend APIs
+  #
+  # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ EXAMPLE 3: Multi-Language Project                                   │
+  # └─────────────────────────────────────────────────────────────────────┘
+  # Use case: Search across backend (Python) + frontend (TypeScript)
+  #
+  # code:
+  #   enabled: true
+  #   partitions:
+  #     backend:
+  #       path: ../backend
+  #       domains:
+  #         code:
+  #           include_paths: [src/]
+  #           metadata: {language: python, type: backend}
+  #
+  #     frontend:
+  #       path: ../frontend
+  #       domains:
+  #         code:
+  #           include_paths: [src/, components/]
+  #           metadata: {language: typescript, type: frontend}
+  #
+  #   languages: ["python", "typescript", "javascript"]
+  #   vector: {model: "microsoft/codebert-base", dimension: 768}
+  #
+  # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ EXAMPLE 4: Framework + Multiple SDKs                                │
+  # └─────────────────────────────────────────────────────────────────────┘
+  # Use case: Main framework + Python SDK + TypeScript SDK
+  #
+  # code:
+  #   enabled: true
+  #   partitions:
+  #     framework:
+  #       path: .
+  #       domains:
+  #         code:
+  #           include_paths: [ouroboros/]
+  #
+  #     python-sdk:
+  #       path: ../../sdks/python-sdk
+  #       domains:
+  #         code:
+  #           include_paths: [src/]
+  #           metadata: {sdk: python}
+  #
+  #     typescript-sdk:
+  #       path: ../../sdks/typescript-sdk
+  #       domains:
+  #         code:
+  #           include_paths: [src/]
+  #           metadata: {sdk: typescript}
+  #
+  #   languages: ["python", "typescript"]
+  #   vector: {model: "microsoft/codebert-base", dimension: 768}
+  #
+  # Benefits:
+  #   ✅ Compare SDK implementations (Python vs TypeScript)
+  #   ✅ Find how each SDK integrates with framework
+  #   ✅ Ensure consistency across SDK APIs
+  #
+  # ========================================================================
+  # ACTUAL CONFIGURATION (Choose Single-Repo OR Multi-Repo)
+  # ========================================================================
+  #
+  # 🎯 CURRENT CONFIG: Single-Repo (Template - Must Customize!)
+  #
+  # ⚠️ TO ENABLE MULTI-REPO:
+  #    1. Comment out the single-repo config below
+  #    2. Uncomment one of the multi-repo examples above
+  #    3. Adjust paths/languages to match your project
+  #    4. Restart the MCP server
+  #
   code:
+    # ──────────────────────────────────────────────────────────────────
+    # SINGLE-REPO MODE (Current - Template)
+    # ──────────────────────────────────────────────────────────────────
+    # ⚠️ CHANGE THIS: Replace with your project's source code paths
     source_paths:
-      # ⚠️ CHANGE THIS: Replace with your project's source code paths
-      # Examples:
-      #   - "../src/"           # Python/JS standard layout
-      #   - "../lib/"           # Alternative layout
-      #   - "../"               # Root-level files
-      #   - "../packages/*/src/" # Monorepo pattern
       - "ouroboros/"  # ⚠️ TEMPLATE: Replace this!
 
+    # ⚠️ UPDATE THIS: Add languages your project uses
+    # Supported: python, javascript, typescript, go, rust
     languages:
-      # ⚠️ UPDATE THIS: Add languages your project uses
-      # Supported: python, javascript, typescript, go, rust
-      # Example: ["python", "typescript"] for Python + TypeScript project
       - "python"  # ⚠️ TEMPLATE: Add your languages here
 
     vector:
       # CodeBERT - Specifically designed for code embeddings
       # Better semantic understanding of code than general-purpose models
-      # Options:
-      #   - microsoft/codebert-base: DEFAULT - Best for code (768 dim)
-      #   - microsoft/codebert-base-mlm: Alternative CodeBERT variant
       model: "microsoft/codebert-base"  # MIT licensed, zero cost, offline
       dimension: 768  # CodeBERT-base uses 768 dimensions
       chunk_size: 200  # Smaller chunks = function-level precision
       chunk_overlap: 20  # Prevents function splitting
 
     fts: {}  # Use all defaults (enabled=True)
+    graph: {}  # Use all defaults (max_depth=10)
+    duckdb_path: ".cache/code.duckdb"  # Call graph database
 
-    graph: {}  # Use all defaults (max_depth=10, etc.)
+    # ────────────────────────────────────────────────────────────────
+    # File Exclusion (Applies to Single-Repo mode)
+    # ────────────────────────────────────────────────────────────────
+    # ✅ Automatic .gitignore support (zero-config for most projects)
+    respect_gitignore: true
+    exclude_patterns: null
 
-    duckdb_path: ".cache/code.duckdb"  # Call graph database (usually fine as-is)
-
-    # ========================================================================
-    # File Exclusion System (NEW: Automatic .gitignore Support!)
-    # ========================================================================
-    # prAxIs OS automatically excludes unwanted files using a three-tier system:
+    # ──────────────────────────────────────────────────────────────────
+    # MULTI-REPO MODE (Commented Out - Uncomment to Enable)
+    # ──────────────────────────────────────────────────────────────────
+    # enabled: true
+    # partitions:
+    #   praxis-os:                        # Partition 1: This framework
+    #     path: .                          # Current directory
+    #     domains:
+    #       code:
+    #         include_paths:
+    #           - ouroboros/              # Framework code
+    #           - scripts/                # Helper scripts
+    #         exclude_patterns: null      # Use .gitignore
+    #         metadata:
+    #           project: praxis-os
+    #           type: framework
+    #       tests:
+    #         include_paths:
+    #           - tests/
+    #         metadata:
+    #           type: tests
     #
-    # Tier 1: .gitignore patterns (if respect_gitignore: true)
-    #   - Automatically reads and respects your project's .gitignore file
-    #   - Zero-config for most projects - works out of the box!
-    #   - Files ignored by git are automatically excluded from indexing
-    #   - Uses proper gitignore pattern matching (not simple substring matching)
+    #   python-sdk:                       # Partition 2: Your SDK
+    #     path: ../../python-sdk          # Relative to .praxis-os/
+    #     domains:
+    #       code:
+    #         include_paths:
+    #           - src/                    # Index only src/ (not venv/)
+    #         exclude_patterns: null
+    #         metadata:
+    #           project: python-sdk
+    #           type: library
     #
-    # Tier 2: Built-in defaults (when no .gitignore exists or respect_gitignore: false)
-    #   - Comprehensive patterns covering 200+ common build artifacts
-    #   - Python: __pycache__/, .tox/, .pytest_cache/, dist/, build/, etc.
-    #   - JavaScript: node_modules/, .next/, dist/, build/, etc.
-    #   - Rust: target/, Go: vendor/, Java: .gradle/, etc.
-    #   - IDEs, OS files, logs, databases, secrets, etc.
-    #   - Uses proper gitignore pattern matching (same as Tier 1)
-    #
-    # Tier 3: Config exclude_patterns (additive override)
-    #   - Additional patterns you specify in config
-    #   - Merged with .gitignore (both apply)
-    #   - Use gitignore format: "custom_build/", "*.generated.py"
-    #   - Uses proper gitignore pattern matching (same as Tier 1)
-    #
-    # Benefits:
-    #   ✅ Zero-config: Most projects work out-of-the-box with .gitignore
-    #   ✅ No crashes: Build artifacts automatically excluded
-    #   ✅ Clean search: Only source code indexed, not dependencies
-    #   ✅ Flexible: Add custom patterns when needed
-    #   ✅ Proper matching: Uses gitignore-parser library (required dependency)
-    #
-    # Examples:
-    #   # Use .gitignore automatically (default - recommended)
-    #   respect_gitignore: true
-    #   exclude_patterns: null
-    #
-    #   # Disable .gitignore, use built-in defaults only
-    #   respect_gitignore: false
-    #   exclude_patterns: null
-    #
-    #   # Use .gitignore + additional custom patterns
-    #   respect_gitignore: true
-    #   exclude_patterns:
-    #     - "custom_build_dir/**"
-    #     - "*.generated.py"
-    #     - "test_fixtures/"
-    #
-    #   # Custom patterns only (no .gitignore, no built-in defaults)
-    #   respect_gitignore: false
-    #   exclude_patterns:
-    #     - "my_custom_exclude/"
-    #     - "*.temp"
-    #
-    # Note: Pattern matching uses the gitignore-parser library (required dependency)
-    #       for accurate gitignore-compatible behavior. All patterns follow standard
-    #       gitignore syntax rules (wildcards, negation with !, etc.).
-    respect_gitignore: true  # ✅ Default: Automatically respect .gitignore patterns (recommended)
-    exclude_patterns: null  # Optional: Additional exclusion patterns in gitignore format
+    # languages: ["python"]               # Applies to ALL partitions
+    # vector:
+    #   model: "microsoft/codebert-base"
+    #   dimension: 768
+    #   chunk_size: 200
+    #   chunk_overlap: 20
+    # fts: {}
+    # graph: {}
 
   # ========================================================================
-  # AST Index (CRITICAL: Customize for Your Project!)
+  # AST Index (DEPRECATED - Use code.partitions instead)
   # ========================================================================
-  # ⚠️ YOU MUST UPDATE source_paths BELOW to match your project structure!
+  # ⚠️ The AST index is now unified with the Code index in multi-repo mode.
+  #    This section exists for backward compatibility with single-repo mode.
   #
-  # What it does:
-  #   - Structural code search: Find code by AST patterns
-  #   - Examples: "all async functions", "all classes with method X",
-  #               "all error handling blocks"
-  #   - Uses Tree-sitter parsers for language-specific AST parsing
+  # In single-repo mode: AST is a separate index (legacy behavior)
+  # In multi-repo mode: AST is part of each partition's GraphIndex
   #
-  # Paths should match code.source_paths above (same directories).
-  #
-  # Auto-install Parsers:
-  #   - If auto_install_parsers: true, server will automatically install
-  #     missing Tree-sitter parsers (e.g., tree-sitter-python)
-  #   - Requires internet access on first startup
-  #   - Set to false for air-gapped environments (install manually)
+  # If using multi-repo mode, this section is ignored.
+  # If using single-repo mode, this section should match code.source_paths.
   ast:
     source_paths:
-      # ⚠️ CHANGE THIS: Should match code.source_paths above
-      - "ouroboros/"  # ⚠️ TEMPLATE: Replace this!
+      - "ouroboros/"  # ⚠️ TEMPLATE: Should match code.source_paths
 
     languages:
-      # ⚠️ UPDATE THIS: Should match code.languages above
-      - "python"  # ⚠️ TEMPLATE: Add your languages here
+      - "python"  # ⚠️ TEMPLATE: Should match code.languages
 
-    auto_install_parsers: true  # Auto-install missing parsers (requires internet)
-    venv_path: "venv/"  # Isolated venv for parser installation (usually fine as-is)
+    auto_install_parsers: true  # Auto-install missing Tree-sitter parsers
+    venv_path: "venv/"  # Isolated venv for parser installation
 
   # ========================================================================
   # File Watcher (Incremental Updates)
@@ -267,6 +506,7 @@ indexes:
   #   - Watches source files for changes
   #   - Automatically rebuilds affected indexes (standards, code, AST)
   #   - Debounces rapid changes (waits 500ms before rebuilding)
+  #   - Works across ALL partitions in multi-repo mode
   #
   # Usually fine as-is (enabled=True, debounce_ms=500).
   # Disable if you want manual rebuilds only.

@@ -170,6 +170,7 @@
       "task": "phases/dynamic/task-template.md"
     },
     "parser": "spec_tasks_parser"
-  }
+  },
+  "required_options": ["spec_path"]
 }
 

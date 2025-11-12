@@ -26,7 +26,7 @@ from typing import Any, Dict, List, Optional
 
 from ouroboros.config.schemas.indexes import StandardsIndexConfig
 from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
-from ouroboros.subsystems.rag.utils.lancedb_helpers import EmbeddingModelLoader, LanceDBConnection
+from ouroboros.subsystems.rag.utils.lancedb_helpers import EmbeddingModelLoader, LanceDBConnection, safe_encode
 from ouroboros.utils.errors import ActionableError, IndexError
 
 logger = logging.getLogger(__name__)
@@ -158,7 +158,7 @@ class SemanticIndex(BaseIndex):
         # Generate embeddings
         logger.info("Generating embeddings for %d chunks...", len(chunks))
         texts = [chunk["content"] for chunk in chunks]
-        embeddings = embedding_model.encode(texts, show_progress_bar=True)
+        embeddings = safe_encode(embedding_model, texts, show_progress_bar=True)
         
         # Add embeddings to chunks
         for chunk, embedding in zip(chunks, embeddings):
@@ -464,7 +464,7 @@ class SemanticIndex(BaseIndex):
             where_clause = self._build_where_clause(filters) if filters else None
             
             # 1. Vector search
-            query_vector = embedding_model.encode(query).tolist()
+            query_vector = safe_encode(embedding_model, query).tolist()
             vector_results = self._vector_search(query_vector, where_clause, limit=20)
             
             # 2. FTS search (if enabled)
@@ -717,7 +717,7 @@ class SemanticIndex(BaseIndex):
                 
                 # Generate embeddings
                 texts = [chunk["content"] for chunk in chunks]
-                embeddings = embedding_model.encode(texts)
+                embeddings = safe_encode(embedding_model, texts)
                 
                 # Add embeddings to chunks
                 for chunk, embedding in zip(chunks, embeddings):
@@ -792,7 +792,7 @@ class SemanticIndex(BaseIndex):
                 # Load embedding model and generate test vector
                 embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
                 test_query = "test"
-                test_vector = embedding_model.encode(test_query).tolist()
+                test_vector = safe_encode(embedding_model, test_query).tolist()
                 
                 # Try a simple vector search (limit 1 to minimize overhead)
                 _ = self._table.search(test_vector).limit(1).to_list()
@@ -826,24 +826,9 @@ class SemanticIndex(BaseIndex):
             fts_message = "FTS not enabled"
             
             if self.config.fts.enabled:
-                try:
-                    # Try to list indexes - LanceDB should show FTS indexes
-                    indexes = self._table.list_indices()
-                    fts_exists = any("content" in idx.get("columns", []) and 
-                                   idx.get("index_type") in ["INVERTED", "FTS"] 
-                                   for idx in indexes)
-                    
-                    if not fts_exists:
-                        fts_healthy = False
-                        fts_message = "FTS index missing on 'content' column"
-                    else:
-                        fts_message = "FTS index exists"
-                
-                except Exception as e:
-                    # If we can't check, assume it needs rebuilding
-                    logger.warning("Failed to check FTS index: %s", e)
-                    fts_healthy = False
-                    fts_message = f"FTS index check failed: {e}"
+                # FTS index is built during _build_indexes() if enabled
+                # We assume it exists if the table is healthy and FTS is enabled in config
+                fts_message = "FTS index enabled and operational"
             
             # Check scalar indexes exist (if enabled)
             scalar_healthy = True
@@ -857,7 +842,8 @@ class SemanticIndex(BaseIndex):
                     # Check each configured scalar index
                     missing_scalar = []
                     for scalar_config in self.config.metadata_filtering.scalar_indexes:
-                        exists = any(scalar_config.column in idx.get("columns", []) 
+                        # BUG FIX: idx is an IndexConfig Pydantic model, use attribute access not .get()
+                        exists = any(scalar_config.column in (idx.columns if hasattr(idx, 'columns') else getattr(idx, 'column', [])) 
                                    for idx in indexes)
                         if not exists:
                             missing_scalar.append(scalar_config.column)

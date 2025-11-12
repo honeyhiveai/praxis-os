@@ -139,6 +139,17 @@ class WorkflowEngine:
                 how_to_fix=f"Check that workflow exists in {self.workflows_dir}/{workflow_type}/metadata.json",
             ) from e
 
+        # Validate workflow-specific required options
+        if metadata.required_options:
+            missing = [opt for opt in metadata.required_options if opt not in kwargs]
+            if missing:
+                raise WorkflowExecutionError(
+                    what_failed=f"Starting workflow '{workflow_type}'",
+                    why_failed=f"Missing required workflow options: {missing}",
+                    how_to_fix=f"Provide required options when starting workflow. "
+                               f"Example: workflow_type='{workflow_type}', options={{{', '.join(f'{k}=\"...\"' for k in missing)}}}",
+                )
+
         # Create new session
         target = target_file or "unknown"
         
@@ -426,6 +437,25 @@ class WorkflowEngine:
         # Get max phase for this workflow
         metadata = self._renderer.load_metadata(state.workflow_type)
         max_phase = metadata.max_phase
+        
+        # CRITICAL: For dynamic workflows, calculate max_phase from parsed tasks.md
+        # Static workflows: max_phase is pre-calculated in metadata.json
+        # Dynamic workflows: max_phase defaults to 0 in metadata, MUST calculate at runtime
+        if metadata.dynamic_phases:
+            try:
+                registry = self._get_or_create_dynamic_registry(session_id, state)
+                # Find highest phase_number in parsed phases
+                if registry.content.phases:
+                    max_phase = max(p.phase_number for p in registry.content.phases)
+                    logger.debug(
+                        "Dynamic workflow max_phase calculated",
+                        extra={"session_id": session_id, "max_phase": max_phase}
+                    )
+            except Exception as e:
+                logger.warning(
+                    "Failed to calculate dynamic max_phase, using metadata default",
+                    extra={"session_id": session_id, "error": str(e)}
+                )
 
         # Create PhaseGates for validation
         evidence_validator = EvidenceValidator()

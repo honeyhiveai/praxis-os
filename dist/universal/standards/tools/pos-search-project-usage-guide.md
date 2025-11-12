@@ -1,6 +1,6 @@
 # pos_search_project Usage Guide
 
-**Keywords for search**: pos_search_project, code search, semantic search, AST search, call graph, find callers, find dependencies, call paths, structural search, tree-sitter, CodeBERT embeddings, how to search code, how to find function callers, how to trace dependencies, graph traversal, code intelligence, symbol search, node type search
+**Keywords for search**: pos_search_project, code search, semantic search, AST search, call graph, find callers, find dependencies, call paths, structural search, tree-sitter, CodeBERT embeddings, how to search code, how to find function callers, how to trace dependencies, graph traversal, code intelligence, symbol search, node type search, multi-repo search, partition filtering, cross-repository search, search multiple repos, search across repositories
 
 **This standard defines how to use the `pos_search_project` tool for comprehensive code intelligence, semantic search, and call graph analysis.**
 
@@ -81,6 +81,11 @@ pos_search_project(action="search_ast", query="function_definition", n_results=3
 - **When should I use pos_search_project vs grep vs read_file?**
 - **What's the cognitive load difference between code index and manual grep?**
 - **How do I build understanding systematically with multiple queries?**
+- **How do I search across multiple repositories simultaneously?**
+- **What are partitions and how do I use partition filters?**
+- **How do I compare implementations across different projects?**
+- **When do I need to specify a partition filter?**
+- **How do I trace bugs across multiple repositories?**
 
 ---
 
@@ -1104,6 +1109,568 @@ pos_search_project(
 - Each result is an array representing one path
 - Paths show intermediate function calls
 - Multiple paths indicate different routes to same destination
+
+---
+
+## 🚀 Multi-Repo Code Intelligence - Searching Across Repositories
+
+**New Feature:** pos_search_project now supports **multi-repo search** - search across multiple local repositories simultaneously using a partition-based architecture.
+
+### What Are Partitions?
+
+**Partitions** = Independent code repositories indexed separately but searchable together.
+
+**Example Setup:**
+```
+praxis-os/               # Partition 1: "praxis-os"
+├── .praxis-os/
+│   └── ouroboros/      # Framework code
+│
+python-sdk/              # Partition 2: "python-sdk"
+└── src/
+    └── honeyhive/      # SDK code
+```
+
+**Both repositories** are indexed and searchable through a single unified interface.
+
+---
+
+### How to Search Across Repositories
+
+**Pattern 1: Search ALL Partitions (Default)**
+
+```python
+# Searches BOTH praxis-os AND python-sdk
+pos_search_project(
+    action="search_code",
+    query="tracer initialization setup",
+    n_results=10
+)
+# Returns: Results from BOTH repositories, ranked by relevance
+```
+
+**When to use:** Discovery phase - finding concepts across entire codebase.
+
+---
+
+**Pattern 2: Search SPECIFIC Partition**
+
+```python
+# Search ONLY the python-sdk partition
+pos_search_project(
+    action="search_code",
+    query="HoneyHiveTracer initialization",
+    n_results=5,
+    filters={"partition": "python-sdk"}
+)
+# Returns: Results ONLY from python-sdk repository
+```
+
+**When to use:** Focused search - you know which repo has the code.
+
+---
+
+### Multi-Repo Search for All Actions
+
+**All 6 actions** support multi-repo search with partition filtering:
+
+#### 1. Standards Search (Single Repo Only)
+```python
+# Standards are always in praxis-os (no multi-repo)
+pos_search_project(
+    action="search_standards",
+    query="dogfooding model development"
+)
+```
+
+#### 2. Semantic Code Search (Multi-Repo)
+```python
+# Search all repos
+pos_search_project(
+    action="search_code",
+    query="async HTTP client requests",
+    n_results=10
+)
+
+# Search specific repo
+pos_search_project(
+    action="search_code",
+    query="async HTTP client requests",
+    n_results=10,
+    filters={"partition": "python-sdk"}
+)
+```
+
+#### 3. AST Search (Multi-Repo)
+```python
+# Find all async functions in python-sdk
+pos_search_project(
+    action="search_ast",
+    query="async_function_definition",
+    n_results=10,
+    filters={"partition": "python-sdk"}
+)
+
+# Find all classes across all repos
+pos_search_project(
+    action="search_ast",
+    query="class_definition",
+    n_results=20
+)
+```
+
+#### 4. Find Callers (Single Partition)
+```python
+# MUST specify partition for call graph operations
+pos_search_project(
+    action="find_callers",
+    query="HoneyHiveTracer.__init__",
+    max_depth=2,
+    filters={"partition": "python-sdk"}
+)
+```
+
+**⚠️ Important:** Call graph actions (`find_callers`, `find_dependencies`, `find_call_paths`) **require partition specification** because call graphs don't cross repository boundaries.
+
+#### 5. Find Dependencies (Single Partition)
+```python
+# Find what HoneyHiveTracer.__init__ calls
+pos_search_project(
+    action="find_dependencies",
+    query="HoneyHiveTracer.__init__",
+    max_depth=2,
+    filters={"partition": "python-sdk"}
+)
+```
+
+#### 6. Find Call Paths (Single Partition)
+```python
+# Trace initialization path in python-sdk
+pos_search_project(
+    action="find_call_paths",
+    query="HoneyHiveTracer.__init__",
+    to_symbol="configure",
+    max_depth=5,
+    filters={"partition": "python-sdk"}
+)
+```
+
+---
+
+### Multi-Repo Workflow Patterns
+
+#### Pattern 1: Cross-Repo Discovery
+
+**Goal:** Find similar implementations across multiple projects.
+
+```python
+# Phase 1: Search all repos for concept
+pos_search_project(
+    action="search_code",
+    query="rate limiting throttling requests",
+    n_results=10
+)
+# → Returns: Results from praxis-os AND python-sdk
+
+# Phase 2: Compare implementations
+# Review results, note differences in approach
+
+# Phase 3: Deep dive on specific implementation
+pos_search_project(
+    action="search_ast",
+    query="function_definition",
+    n_results=10,
+    filters={"partition": "python-sdk"}
+)
+# → Find specific functions in python-sdk
+```
+
+**Use Case:** Understanding how different projects solve the same problem.
+
+---
+
+#### Pattern 2: SDK Integration Analysis
+
+**Goal:** Understand how SDK integrates with framework.
+
+```python
+# Step 1: Find SDK's public API
+pos_search_project(
+    action="search_ast",
+    query="class_definition",
+    n_results=10,
+    filters={"partition": "python-sdk"}
+)
+# → Identify: HoneyHiveTracer, Client, Configuration, etc.
+
+# Step 2: Find tracer initialization
+pos_search_project(
+    action="search_code",
+    query="HoneyHiveTracer initialization setup",
+    n_results=5,
+    filters={"partition": "python-sdk"}
+)
+# → Understand: How tracer is set up
+
+# Step 3: Map tracer dependencies
+pos_search_project(
+    action="find_dependencies",
+    query="HoneyHiveTracer.__init__",
+    max_depth=2,
+    filters={"partition": "python-sdk"}
+)
+# → Understand: What tracer depends on
+
+# Step 4: Find who uses tracer
+pos_search_project(
+    action="find_callers",
+    query="HoneyHiveTracer.__init__",
+    max_depth=2,
+    filters={"partition": "python-sdk"}
+)
+# → Understand: How tracer is instantiated
+
+# Step 5: Search framework for integration patterns
+pos_search_project(
+    action="search_code",
+    query="SDK integration tracer setup patterns",
+    n_results=5,
+    filters={"partition": "praxis-os"}
+)
+# → Understand: How framework integrates SDKs
+```
+
+**Use Case:** Learning SDK architecture and integration points.
+
+---
+
+#### Pattern 3: Bug Tracing Across Repos
+
+**Goal:** Trace a bug from SDK to framework (or vice versa).
+
+```python
+# Step 1: Find error in SDK
+pos_search_project(
+    action="search_code",
+    query="error message text from logs",
+    n_results=5,
+    filters={"partition": "python-sdk"}
+)
+# → Found: Where error originates
+
+# Step 2: Map SDK call stack
+pos_search_project(
+    action="find_callers",
+    query="function_that_errors",
+    max_depth=3,
+    filters={"partition": "python-sdk"}
+)
+# → Understand: SDK-internal call chain
+
+# Step 3: Search framework for SDK usage
+pos_search_project(
+    action="search_code",
+    query="python-sdk HoneyHive integration",
+    n_results=10,
+    filters={"partition": "praxis-os"}
+)
+# → Understand: How framework calls SDK
+
+# Step 4: Trace framework side
+pos_search_project(
+    action="find_call_paths",
+    query="sdk_entry_point",
+    to_symbol="function_that_errors",
+    max_depth=5,
+    filters={"partition": "praxis-os"}
+)
+# → Understand: Full execution path
+```
+
+**Use Case:** Debugging issues that span multiple repositories.
+
+---
+
+#### Pattern 4: Architecture Comparison
+
+**Goal:** Compare architectural patterns between projects.
+
+```python
+# Find error handling in praxis-os
+pos_search_project(
+    action="search_ast",
+    query="try_statement",
+    n_results=20,
+    filters={"partition": "praxis-os"}
+)
+# → Found: 127 try statements in praxis-os
+
+# Find error handling in python-sdk
+pos_search_project(
+    action="search_ast",
+    query="try_statement",
+    n_results=20,
+    filters={"partition": "python-sdk"}
+)
+# → Found: 43 try statements in python-sdk
+
+# Compare error patterns semantically
+pos_search_project(
+    action="search_code",
+    query="exception handling error recovery retry",
+    n_results=10
+)
+# → Returns: Both repos, compare approaches
+```
+
+**Use Case:** Learning different architectural approaches, identifying best practices.
+
+---
+
+### Multi-Repo Best Practices
+
+#### ✅ DO:
+
+1. **Start broad, then narrow**
+   ```python
+   # First: Search all repos
+   search_code("authentication patterns")
+   
+   # Then: Focus on specific repo
+   search_code("authentication patterns", filters={"partition": "python-sdk"})
+   ```
+
+2. **Use partition filters for call graph operations**
+   ```python
+   # ALWAYS specify partition for call graphs
+   find_callers("symbol_name", filters={"partition": "python-sdk"})
+   ```
+
+3. **Search semantically across repos for discovery**
+   ```python
+   # Good: Find concepts everywhere
+   search_code("rate limiting implementation")
+   ```
+
+4. **Use AST search to compare structures**
+   ```python
+   # Compare: How many classes in each repo?
+   search_ast("class_definition", filters={"partition": "praxis-os"})
+   search_ast("class_definition", filters={"partition": "python-sdk"})
+   ```
+
+#### ❌ DON'T:
+
+1. **Don't forget partition filter for call graphs**
+   ```python
+   # ❌ Wrong: Will fail without partition
+   find_callers("HoneyHiveTracer.__init__")
+   
+   # ✅ Correct: Specify partition
+   find_callers("HoneyHiveTracer.__init__", filters={"partition": "python-sdk"})
+   ```
+
+2. **Don't assume results are from one repo**
+   ```python
+   # Be aware: Results may mix repos
+   search_code("HTTP client")
+   # → Check result metadata to see which partition it's from
+   ```
+
+3. **Don't search across repos for repo-specific symbols**
+   ```python
+   # ❌ Inefficient: Searching all repos for SDK-specific class
+   search_code("HoneyHiveTracer initialization")
+   
+   # ✅ Better: Target the right repo
+   search_code("HoneyHiveTracer initialization", filters={"partition": "python-sdk"})
+   ```
+
+---
+
+### Understanding Multi-Repo Results
+
+**Result Metadata Includes Partition Information:**
+
+```json
+{
+  "status": "success",
+  "action": "search_code",
+  "results": [
+    {
+      "content": "class HoneyHiveTracer:\n    def __init__(...)...",
+      "file_path": "src/honeyhive/tracer.py",
+      "relevance_score": 0.82,
+      "metadata": {
+        "language": "python",
+        "partition": "python-sdk",      // <-- Partition metadata
+        "repo_name": "python-sdk"       // <-- Repository name
+      }
+    },
+    {
+      "content": "class Tracer:\n    def __init__(...)...",
+      "file_path": "ouroboros/observability/tracer.py",
+      "relevance_score": 0.75,
+      "metadata": {
+        "language": "python",
+        "partition": "praxis-os",       // <-- Different partition
+        "repo_name": "praxis-os"
+      }
+    }
+  ]
+}
+```
+
+**Use `_partition` or `partition` in metadata to identify source repository.**
+
+---
+
+### Multi-Repo Configuration
+
+**Partition configuration is defined in `.praxis-os/config/mcp.yaml`:**
+
+```yaml
+indexes:
+  code:
+    enabled: true
+    partitions:
+      praxis-os:                        # Partition name
+        path: .                         # Relative to config file
+        domains:
+          code:
+            include_paths: [ouroboros/, scripts/]
+            
+      python-sdk:                       # Another partition
+        path: ../../python-sdk          # Relative to config file
+        domains:
+          code:
+            include_paths: [src/]       # Index only src/ directory
+            metadata:
+              project: python-sdk
+              type: library
+```
+
+**Key Points:**
+- Each partition has a unique name (`praxis-os`, `python-sdk`)
+- `path` is relative to the config file location
+- `include_paths` specifies which directories to index (e.g., `src/` only, not `venv/`)
+- Metadata is optional but useful for filtering
+
+---
+
+### When to Use Multi-Repo Search
+
+#### ✅ Use Multi-Repo When:
+
+- **Learning across projects** - "How do different projects handle authentication?"
+- **Finding patterns** - "Where is rate limiting implemented?"
+- **Cross-repo discovery** - "What repos have async HTTP clients?"
+- **Architecture comparison** - "Compare error handling across SDKs"
+- **Integration understanding** - "How does SDK integrate with framework?"
+
+#### ✅ Use Single-Repo (Partition Filter) When:
+
+- **Focused implementation** - "How does `python-sdk` handle retries?"
+- **Call graph analysis** - "Who calls this SDK function?"
+- **Repo-specific features** - "Find all tracer implementations in SDK"
+- **Performance** - Faster to search one repo when you know where it is
+
+---
+
+### Multi-Repo Search Performance
+
+| Operation | Single Repo | Multi-Repo (2 partitions) | Multi-Repo (5 partitions) |
+|-----------|-------------|---------------------------|---------------------------|
+| `search_code` | 200-400ms | 400-800ms | 1-2s |
+| `search_ast` | 50-150ms | 100-300ms | 250-750ms |
+| `find_callers` | 50-200ms | N/A (single partition only) | N/A |
+| `find_dependencies` | 50-200ms | N/A (single partition only) | N/A |
+| `find_call_paths` | 100-400ms | N/A (single partition only) | N/A |
+
+**Key Insights:**
+- Multi-repo semantic search scales linearly with partition count
+- AST search is fast even across multiple repos
+- Call graph operations are always single-partition (fast)
+
+---
+
+### Multi-Repo Query Examples
+
+```python
+# Example 1: Find async patterns across all repos
+pos_search_project(
+    action="search_code",
+    query="async await asyncio patterns",
+    n_results=15
+)
+# → Returns: Async code from ALL repos, ranked by relevance
+
+# Example 2: Find all classes in python-sdk
+pos_search_project(
+    action="search_ast",
+    query="class_definition",
+    n_results=20,
+    filters={"partition": "python-sdk"}
+)
+# → Returns: All classes ONLY in python-sdk
+
+# Example 3: Trace SDK initialization
+pos_search_project(
+    action="find_dependencies",
+    query="HoneyHiveTracer.__init__",
+    max_depth=3,
+    filters={"partition": "python-sdk"}
+)
+# → Returns: What __init__ calls (SDK-internal only)
+
+# Example 4: Compare error handling
+search_code("exception handling retry backoff", n_results=10)
+# → Returns: Error handling from BOTH repos
+
+# Example 5: Find SDK usage in framework
+pos_search_project(
+    action="search_code",
+    query="HoneyHiveTracer integration setup usage",
+    n_results=5,
+    filters={"partition": "praxis-os"}
+)
+# → Returns: How praxis-os uses the SDK
+```
+
+---
+
+### Multi-Repo Troubleshooting
+
+**Problem:** "No results when searching specific repo"
+
+```python
+# Check if partition exists
+pos_search_project(
+    action="search_code",
+    query="test",  # Generic query
+    n_results=1,
+    filters={"partition": "python-sdk"}
+)
+# If returns 0 results, partition might not be indexed
+```
+
+**Problem:** "Call graph search fails"
+
+```python
+# ❌ Error: "Partition not specified"
+find_callers("my_function")
+
+# ✅ Fix: Add partition filter
+find_callers("my_function", filters={"partition": "praxis-os"})
+```
+
+**Problem:** "Results from wrong repo"
+
+```python
+# Always check result metadata
+result = search_code("my_function")
+print(result["results"][0]["metadata"]["partition"])  # Which repo?
+```
 
 ---
 

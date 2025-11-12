@@ -30,7 +30,7 @@ Traceability:
 
 import logging
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 
 from fastmcp import FastMCP
 
@@ -172,23 +172,19 @@ def create_server(base_path: Path, transport_mode: str = "stdio") -> FastMCP:
         logger.info("✅ IndexManager initialized with %d indexes", 
                    len(index_manager._indexes))
         
-        # Auto-build missing indexes (user requirement: "mcp should build indexes if they do not exist")
-        # Delegate all health checking, rebuilding, and repair to IndexManager
-        result = index_manager.ensure_all_indexes_healthy(auto_build=True)
+        # Check health status (fast, non-blocking)
+        # Note: We do NOT auto-build during init to avoid blocking stdio transport
+        # Index building will happen in background task if needed
+        result = index_manager.ensure_all_indexes_healthy(auto_build=False)
         
-        # Log summary
-        if result["indexes_rebuilt"]:
-            logger.info("📊 Rebuilt %d index(es): %s", 
-                       len(result["indexes_rebuilt"]), 
-                       ", ".join(result["indexes_rebuilt"]))
-        
-        if result["indexes_failed"]:
-            logger.warning("⚠️  Failed to rebuild %d index(es): %s", 
-                          len(result["indexes_failed"]), 
-                          ", ".join(result["indexes_failed"]))
-        
+        # Log summary (just health check, not rebuild)
         if result["all_healthy"]:
             logger.info("✅ All indexes healthy and operational")
+        else:
+            unhealthy = [name for name in result.get("index_status", {}).keys() 
+                        if not result["index_status"][name].get("healthy", False)]
+            logger.info("⏳ Some indexes need building: %s (will build in background)", 
+                       ", ".join(unhealthy))
         
     except Exception as e:
         logger.warning("⚠️  IndexManager initialization failed: %s", e)
@@ -346,6 +342,109 @@ def create_server(base_path: Path, transport_mode: str = "stdio") -> FastMCP:
     # ========================================================================
     import asyncio
     
+    # Define index building task coroutine
+    async def index_building_task():
+        """Background task for building/rebuilding indexes.
+        
+        Runs synchronous index building in a thread pool to avoid blocking
+        the event loop. This allows the MCP server to respond to requests
+        while indexes are being built.
+        """
+        logger.info("✅ Background index building task started")
+        
+        try:
+            if index_manager:
+                # Build indexes in background thread (non-blocking for event loop)
+                logger.info("🔨 Building indexes in background thread...")
+                
+                # Run sync method in thread pool using asyncio.to_thread()
+                # This keeps the event loop responsive during long-running builds
+                result = await asyncio.to_thread(
+                    index_manager.ensure_all_indexes_healthy,
+                    auto_build=True
+                )
+                
+                # Log summary with detailed statistics
+                if result["indexes_rebuilt"]:
+                    logger.info("📊 Rebuilt %d index(es): %s", 
+                              len(result["indexes_rebuilt"]), 
+                              ", ".join(result["indexes_rebuilt"]))
+                    
+                    # Log detailed stats for each rebuilt index
+                    health_status = result.get("health_status", {})
+                    for index_name in result["indexes_rebuilt"]:
+                        # Get stats directly from the index
+                        try:
+                            index = index_manager.get_index(index_name)
+                            stats = index.get_stats() if index else {}
+                            stats_msg = []
+                            
+                            # Code index stats (multi-partition)
+                            if "partition_count" in stats:
+                                stats_msg.append(f"{stats['partition_count']} partitions")
+                            if "chunk_count" in stats:
+                                stats_msg.append(f"{stats['chunk_count']} chunks")
+                            if "ast_node_count" in stats:
+                                stats_msg.append(f"{stats['ast_node_count']} AST nodes")
+                            if "symbol_count" in stats:
+                                stats_msg.append(f"{stats['symbol_count']} symbols")
+                            if "relationship_count" in stats:
+                                stats_msg.append(f"{stats['relationship_count']} relationships")
+                            
+                            # Standards index stats (no partition_count)
+                            if "chunk_count" in stats and "partition_count" not in stats:
+                                stats_msg.append(f"{stats['chunk_count']} chunks")
+                            
+                            stats_str = ", ".join(stats_msg) if stats_msg else "no detailed stats"
+                        except Exception as e:
+                            stats_str = f"stats unavailable ({e})"
+                        
+                        # Get health status
+                        final_health = health_status.get(index_name, {})
+                        is_healthy = final_health.get("healthy", False)
+                        health_msg = final_health.get("message", "Unknown status")
+                        
+                        logger.info(
+                            "  ✅ %s: %s | Health: %s (%s)",
+                            index_name,
+                            stats_str,
+                            "HEALTHY" if is_healthy else "UNHEALTHY",
+                            health_msg
+                        )
+                        
+                        # If multi-partition code index, show per-partition breakdown
+                        if index_name == "code" and stats.get("mode") == "multi-partition":
+                            # Get the actual index to query partition stats
+                            code_index = index_manager._indexes.get("code")
+                            if code_index and hasattr(code_index, '_partitions'):
+                                for partition_name, partition in code_index._partitions.items():
+                                    try:
+                                        p_chunks = partition.semantic.get_stats().get("chunk_count", 0) if partition.semantic else 0
+                                        p_ast = partition.graph.get_stats().get("ast_node_count", 0) if partition.graph else 0
+                                        p_symbols = partition.graph.get_stats().get("symbol_count", 0) if partition.graph else 0
+                                        p_rels = partition.graph.get_stats().get("relationship_count", 0) if partition.graph else 0
+                                        
+                                        logger.info(
+                                            "    ├─ %s: %d chunks, %d AST nodes, %d symbols, %d relationships",
+                                            partition_name,
+                                            p_chunks,
+                                            p_ast,
+                                            p_symbols,
+                                            p_rels
+                                        )
+                                    except Exception as pe:
+                                        logger.warning("    ├─ %s: stats unavailable (%s)", partition_name, pe)
+                
+                if result["indexes_failed"]:
+                    logger.warning("⚠️  Failed to rebuild %d index(es): %s", 
+                                  len(result["indexes_failed"]), 
+                                  ", ".join(result["indexes_failed"]))
+                
+                if result["all_healthy"]:
+                    logger.info("✅ All indexes built and healthy")
+        except Exception as e:
+            logger.error("❌ Index building task failed: %s", e, exc_info=True)
+    
     # Define cleanup task coroutine
     async def cleanup_task():
         """Background task for automatic session cleanup."""
@@ -385,28 +484,191 @@ def create_server(base_path: Path, transport_mode: str = "stdio") -> FastMCP:
                 # Wait before retrying on error
                 await asyncio.sleep(60)
     
+    # Define periodic health check poller coroutine
+    async def health_check_poller():
+        """Background task for periodic index health monitoring.
+        
+        Prevents index corruption from going undetected by periodically checking
+        index health and triggering rebuilds if corruption is detected.
+        
+        Features:
+        - Grace period on startup (5 min) - no rebuilds during this time
+        - Periodic polling (every 1 min) to detect corruption
+        - Backoff/cooldown (2 min) to prevent cascading rebuilds
+        - Auto-rebuild on corruption detection (after grace period)
+        """
+        logger.info("✅ Background health check poller started")
+        
+        # Track server startup time for grace period
+        import time
+        startup_time = time.time()
+        rebuild_grace_period_seconds = 5 * 60  # 5 minutes - no rebuilds during this time
+        logger.info("⏳ Health check poller: %d second grace period for rebuilds after startup", rebuild_grace_period_seconds)
+        
+        # Cooldown tracking: Prevent rebuilding the same index too frequently
+        last_rebuild_time: Dict[str, float] = {}  # index_name -> timestamp
+        rebuild_cooldown_seconds = 2 * 60  # 2 minutes minimum between rebuilds
+        
+        while True:
+            try:
+                if index_manager:
+                    logger.info("🏥 Periodic health check: Checking all indexes...")
+                    
+                    # Run health check in background thread (non-blocking)
+                    health_status = await asyncio.to_thread(
+                        index_manager.health_check_all
+                    )
+                    
+                    # Check each index
+                    current_time = time.time()
+                    time_since_startup = current_time - startup_time
+                    in_grace_period = time_since_startup < rebuild_grace_period_seconds
+                    
+                    for index_name, health in health_status.items():
+                        is_healthy = health.healthy
+                        
+                        if not is_healthy:
+                            logger.warning("⚠️  Index '%s' is unhealthy: %s", 
+                                         index_name, 
+                                         health.message)
+                            
+                            # Check startup grace period: Don't rebuild during initial startup
+                            if in_grace_period:
+                                remaining = int(rebuild_grace_period_seconds - time_since_startup)
+                                logger.info("⏸️  Index '%s' unhealthy but in startup grace period (%d seconds remaining)", 
+                                          index_name, remaining)
+                                continue
+                            
+                            # Check cooldown: Has it been long enough since last rebuild?
+                            last_rebuild = last_rebuild_time.get(index_name, 0)
+                            time_since_rebuild = current_time - last_rebuild
+                            
+                            if time_since_rebuild < rebuild_cooldown_seconds:
+                                remaining = int(rebuild_cooldown_seconds - time_since_rebuild)
+                                logger.info("⏸️  Index '%s' rebuild on cooldown (%d seconds remaining)", 
+                                          index_name, remaining)
+                                continue
+                            
+                            # Trigger rebuild (in background thread)
+                            logger.info("🔨 Triggering rebuild for unhealthy index '%s'...", index_name)
+                            try:
+                                result = await asyncio.to_thread(
+                                    index_manager.ensure_all_indexes_healthy,
+                                    auto_build=True
+                                )
+                                
+                                if index_name in result.get("indexes_rebuilt", []):
+                                    # Get stats directly from the index
+                                    try:
+                                        index = index_manager.get_index(index_name)
+                                        stats = index.get_stats() if index else {}
+                                        stats_msg = []
+                                        
+                                        # Code index stats (multi-partition)
+                                        if "partition_count" in stats:
+                                            stats_msg.append(f"{stats['partition_count']} partitions")
+                                        if "chunk_count" in stats:
+                                            stats_msg.append(f"{stats['chunk_count']} chunks")
+                                        if "ast_node_count" in stats:
+                                            stats_msg.append(f"{stats['ast_node_count']} AST nodes")
+                                        if "symbol_count" in stats:
+                                            stats_msg.append(f"{stats['symbol_count']} symbols")
+                                        if "relationship_count" in stats:
+                                            stats_msg.append(f"{stats['relationship_count']} relationships")
+                                        
+                                        # Standards index stats (no partition_count)
+                                        if "chunk_count" in stats and "partition_count" not in stats:
+                                            stats_msg.append(f"{stats['chunk_count']} chunks")
+                                        
+                                        stats_str = ", ".join(stats_msg) if stats_msg else "no detailed stats"
+                                    except Exception as e:
+                                        stats_str = f"stats unavailable ({e})"
+                                    
+                                    # Get health status
+                                    final_health = result.get("health_status", {}).get(index_name, {})
+                                    is_healthy = final_health.get("healthy", False)
+                                    health_msg = final_health.get("message", "Unknown status")
+                                    
+                                    logger.info(
+                                        "✅ Successfully rebuilt index '%s': %s | Health: %s (%s)",
+                                        index_name,
+                                        stats_str,
+                                        "HEALTHY" if is_healthy else "UNHEALTHY",
+                                        health_msg
+                                    )
+                                    
+                                    # If multi-partition code index, show per-partition breakdown
+                                    if index_name == "code" and stats.get("mode") == "multi-partition":
+                                        # Get the actual index to query partition stats
+                                        code_index = index_manager._indexes.get("code")
+                                        if code_index and hasattr(code_index, '_partitions'):
+                                            for partition_name, partition in code_index._partitions.items():
+                                                try:
+                                                    p_chunks = partition.semantic.get_stats().get("chunk_count", 0) if partition.semantic else 0
+                                                    p_ast = partition.graph.get_stats().get("ast_node_count", 0) if partition.graph else 0
+                                                    p_symbols = partition.graph.get_stats().get("symbol_count", 0) if partition.graph else 0
+                                                    p_rels = partition.graph.get_stats().get("relationship_count", 0) if partition.graph else 0
+                                                    
+                                                    logger.info(
+                                                        "  ├─ %s: %d chunks, %d AST nodes, %d symbols, %d relationships",
+                                                        partition_name,
+                                                        p_chunks,
+                                                        p_ast,
+                                                        p_symbols,
+                                                        p_rels
+                                                    )
+                                                except Exception as pe:
+                                                    logger.warning("  ├─ %s: stats unavailable (%s)", partition_name, pe)
+                                    
+                                    last_rebuild_time[index_name] = current_time
+                                elif index_name in result.get("indexes_failed", []):
+                                    logger.error("❌ Failed to rebuild index '%s'", index_name)
+                                    last_rebuild_time[index_name] = current_time  # Still set cooldown to prevent spam
+                            except Exception as rebuild_error:
+                                logger.error("❌ Error rebuilding index '%s': %s", 
+                                           index_name, rebuild_error, exc_info=True)
+                                last_rebuild_time[index_name] = current_time  # Set cooldown even on error
+                        else:
+                            logger.debug("✅ Index '%s' is healthy", index_name)
+                    
+                    logger.info("🏥 Periodic health check complete")
+                
+                # Wait 1 minute before next health check
+                poll_interval_seconds = 1 * 60  # 1 minute
+                await asyncio.sleep(poll_interval_seconds)
+                
+            except Exception as e:
+                logger.error("Error in health check poller: %s", e, exc_info=True)
+                # Wait before retrying on error
+                await asyncio.sleep(60)
+    
     # Store state for lazy startup
     # We can't use asyncio.create_task() during synchronous initialization
     # because FastMCP's event loop hasn't started yet (mcp.run() starts it later)
-    cleanup_started = False
+    tasks_started = False
     
-    async def start_cleanup_once():
-        """Start cleanup task on first request (lazy init)."""
-        nonlocal cleanup_started
-        if not cleanup_started:
-            cleanup_started = True
+    async def start_background_tasks_once():
+        """Start background tasks on first request (lazy init)."""
+        nonlocal tasks_started
+        if not tasks_started:
+            tasks_started = True
+            # Start index building task (one-time, exits after build)
+            asyncio.create_task(index_building_task())
+            # Start cleanup task (continuous, runs forever)
             asyncio.create_task(cleanup_task())
-            logger.info("🚀 Background cleanup task scheduled (lazy init on first MCP request)")
+            # Start health check poller (continuous, runs forever)
+            asyncio.create_task(health_check_poller())
+            logger.info("🚀 Background tasks scheduled (lazy init on first MCP request)")
     
     # Add middleware to start background tasks on first request
     # This ensures the event loop is running before we schedule tasks
     @mcp.add_middleware  # type: ignore[arg-type]
     async def startup_middleware(context, call_next):
         """Middleware to lazily start background tasks on first request."""
-        await start_cleanup_once()
+        await start_background_tasks_once()
         return await call_next(context)
     
-    logger.info("⏳ Background cleanup task will start on first MCP request")
+    logger.info("⏳ Background tasks (index building, cleanup, health monitoring) will start on first MCP request")
     
     # ========================================================================
     # 8. Server Ready

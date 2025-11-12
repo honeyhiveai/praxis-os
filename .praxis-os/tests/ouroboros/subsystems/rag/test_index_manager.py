@@ -1,146 +1,188 @@
-"""
-Test IndexManager for dynamic action routing and index orchestration.
+"""Tests for IndexManager orchestration."""
 
-Tests:
-- Index initialization and registration
-- Action routing (search_standards, search_code, find_callers, etc.)
-- Error handling for invalid actions
-- Index retrieval
-- Health checks
-
-Traceability:
-    Phase 8, Task 8.2: RAG subsystem unit tests
-    FR-029: Index Manager (dynamic routing)
-"""
+from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import pytest
+from ouroboros.config.schemas.indexes import (
+    CodeIndexConfig,
+    FTSConfig,
+    IndexesConfig,
+    RerankingConfig,
+    StandardsIndexConfig,
+    VectorConfig,
+)
 from ouroboros.subsystems.rag.index_manager import IndexManager
-from ouroboros.utils.errors import ActionableError
+from ouroboros.utils.errors import ActionableError, IndexError
+
+
+@pytest.fixture
+def minimal_indexes_config():
+    """Minimal IndexesConfig for testing.
+
+    Uses the same structure as tests/ouroboros/config/test_mcp_schemas.py
+    """
+    from ouroboros.config.schemas.indexes import (
+        ASTIndexConfig,
+        CodeIndexConfig,
+        FileWatcherConfig,
+        GraphConfig,
+    )
+
+    return IndexesConfig(
+        standards=StandardsIndexConfig(
+            source_paths=["standards/"],
+            vector=VectorConfig(),  # Use defaults
+            fts=FTSConfig(),  # Use defaults (enabled=True)
+            reranking=None,
+        ),
+        code=CodeIndexConfig(
+            source_paths=["src/"],
+            languages=["python"],
+            vector=VectorConfig(),
+            fts=FTSConfig(),
+            graph=GraphConfig(),
+        ),
+        ast=ASTIndexConfig(source_paths=["src/"], languages=["python"]),
+        file_watcher=FileWatcherConfig(),  # Use defaults
+    )
 
 
 class TestIndexManager:
-    """Test IndexManager dynamic routing and orchestration."""
-    
-    @pytest.fixture
-    def index_manager(self, test_config, test_base_path):
-        """
-        Create IndexManager with isolated test config.
-        
-        Uses test fixtures that create temporary directories and configs.
-        No production code touched - pure dependency injection.
-        """
-        return IndexManager(
-            config=test_config.indexes,
-            base_path=test_base_path
-        )
-    
-    def test_initialization(self, index_manager):
-        """Test IndexManager initializes correctly."""
-        assert index_manager is not None
-        assert hasattr(index_manager, "_indexes")
-        assert isinstance(index_manager._indexes, dict)
-    
-    def test_has_standards_index(self, index_manager):
-        """Test standards index is registered."""
-        assert "standards" in index_manager._indexes
-        standards_index = index_manager._indexes["standards"]
-        assert standards_index is not None
-    
-    def test_has_code_index(self, index_manager):
-        """Test code index is registered."""
-        assert "code" in index_manager._indexes
-        code_index = index_manager._indexes["code"]
-        assert code_index is not None
-    
-    def test_code_index_has_ast_capabilities(self, index_manager):
-        """Test CodeIndex has AST search capabilities via GraphIndex."""
-        assert "code" in index_manager._indexes
-        code_index = index_manager._indexes["code"]
-        
-        # CodeIndex should have search_ast method (delegates to GraphIndex)
-        assert hasattr(code_index, "search_ast"), "CodeIndex should have search_ast method"
-        
-        # CodeIndex should have internal _graph_index
-        assert hasattr(code_index, "_graph_index"), "CodeIndex should have _graph_index attribute"
-        assert code_index._graph_index is not None
-    
-    def test_code_index_has_graph_capabilities(self, index_manager):
-        """Test CodeIndex has graph traversal capabilities via GraphIndex."""
-        assert "code" in index_manager._indexes
-        code_index = index_manager._indexes["code"]
-        
-        # CodeIndex should have graph traversal methods (delegates to GraphIndex)
-        assert hasattr(code_index, "find_callers"), "CodeIndex should have find_callers method"
-        assert hasattr(code_index, "find_dependencies"), "CodeIndex should have find_dependencies method"
-        assert hasattr(code_index, "find_call_paths"), "CodeIndex should have find_call_paths method"
-        
-        # CodeIndex should have internal _graph_index
-        assert hasattr(code_index, "_graph_index"), "CodeIndex should have _graph_index attribute"
-        assert code_index._graph_index is not None
-    
-    def test_get_index_valid(self, index_manager):
-        """Test get_index returns correct index."""
-        standards_index = index_manager.get_index("standards")
-        assert standards_index is not None
-        assert hasattr(standards_index, "search")
-    
-    def test_get_index_invalid(self, index_manager):
-        """Test get_index returns None for invalid index."""
-        result = index_manager.get_index("nonexistent")
-        assert result is None
-    
-    def test_route_action_invalid(self, index_manager):
-        """Test route_action rejects invalid actions."""
-        with pytest.raises(ActionableError) as exc_info:
-            index_manager.route_action(
-                action="invalid_action",
-                query="test"
-            )
-        
-        error = exc_info.value
-        assert "invalid_action" in str(error).lower() or "unknown" in str(error).lower()
-        assert hasattr(error, "how_to_fix")
-    
-    def test_route_action_valid_actions(self, index_manager):
-        """Test all valid actions are in registry."""
-        valid_actions = [
-            "search_standards",
-            "search_code",
-            "search_ast",
-            "find_callers",
-            "find_dependencies",
-            "find_call_paths"
-        ]
-        
-        # Just verify the actions don't raise "unknown action" errors
-        # (they may fail due to index not being built, which is fine)
-        for action in valid_actions:
-            try:
-                index_manager.route_action(action=action, query="test")
-            except ActionableError as e:
-                # Should not be "unknown action" error from routing
-                error_str = str(e).lower()
-                # OK if index has errors, NOT OK if action itself is unknown
-                if "unknown" in error_str:
-                    assert "action" not in error_str  # "unknown action" is bad
-                    # "unknown error" from LanceDB/Rust is fine
-            except Exception:
-                # Other errors are fine (index not built, etc.)
-                pass
-    
-    def test_health_check_all(self, index_manager):
-        """Test health_check_all returns status for all indexes."""
-        health = index_manager.health_check_all()
-        
-        assert isinstance(health, dict)
-        # Should have health status for each index
-        assert len(health) > 0
-    
-    def test_get_stats(self, index_manager):
-        """Test get_stats returns stats for all indexes."""
-        stats = index_manager.get_stats()
-        
-        assert isinstance(stats, dict)
-        # Should have stats for each index
-        assert len(stats) > 0
+    """Tests for IndexManager initialization and routing."""
 
+    def test_init_with_standards_index(self, minimal_indexes_config, tmp_path):
+        """Test IndexManager initializes with all configured indexes."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        # All indexes should be initialized
+        # Note: graph and ast are now part of code index, not separate
+        assert "standards" in manager._indexes
+        assert "code" in manager._indexes
+        assert len(manager._indexes) == 2  # standards, code (code contains graph+ast)
+
+    def test_init_logs_warning_when_code_not_implemented(
+        self, minimal_indexes_config, tmp_path
+    ):
+        """Test IndexManager logs warnings for stub indexes."""
+        # Code and AST indexes are stubs, so they should log warnings
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        # Should have only standards index (code/ast are stubs)
+        assert "standards" in manager._indexes
+        # Code and AST might be present but will show as not implemented
+
+    def test_get_index_returns_standards(self, minimal_indexes_config, tmp_path):
+        """Test getting standards index by name."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        standards_index = manager.get_index("standards")
+        assert standards_index is not None
+
+    def test_get_index_returns_none_for_missing(self, minimal_indexes_config, tmp_path):
+        """Test getting non-existent index returns None."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        missing_index = manager.get_index("nonexistent")
+        assert missing_index is None
+
+    def test_route_action_search_standards(self, minimal_indexes_config, tmp_path):
+        """Test routing search_standards action."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        # Mock the standards index search method
+        manager._indexes["standards"].search = MagicMock(return_value=[])
+
+        result = manager.route_action(
+            action="search_standards", query="test query", n_results=5
+        )
+
+        assert result["status"] == "success"
+        assert "results" in result
+        assert "count" in result
+
+    def test_route_action_invalid_action(self, minimal_indexes_config, tmp_path):
+        """Test routing invalid action raises error."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        with pytest.raises(ActionableError) as exc_info:
+            manager.route_action(action="invalid_action")
+
+        assert "Unknown action" in str(exc_info.value)
+
+    def test_route_action_search_code_not_built(self, minimal_indexes_config, tmp_path):
+        """Test searching code when index is not built yet."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        # CodeIndex is now a real implementation, so it should raise IndexError
+        # when trying to search an index that hasn't been built yet
+        with pytest.raises(IndexError) as exc_info:
+            manager.route_action(action="search_code", query="test query")
+
+        assert "search_code" in str(exc_info.value)
+        error_msg = str(exc_info.value).lower()
+        # Error could be "not built" or "table not found" (both indicate unbuilt index)
+        assert ("not built" in error_msg or "not found" in error_msg)
+
+    def test_health_check_all_returns_statuses(self, minimal_indexes_config, tmp_path):
+        """Test health_check_all returns status for all indexes."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        statuses = manager.health_check_all()
+
+        assert "standards" in statuses
+        assert statuses["standards"].healthy is False  # Index not built yet
+
+    def test_rebuild_index_unknown_index(self, minimal_indexes_config, tmp_path):
+        """Test rebuilding unknown index raises error."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        with pytest.raises(ActionableError) as exc_info:
+            manager.rebuild_index("nonexistent")
+
+        assert "Index not found" in str(exc_info.value)
+
+    def test_get_stats_returns_dict(self, minimal_indexes_config, tmp_path):
+        """Test get_stats returns stats for all indexes."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        stats = manager.get_stats()
+
+        assert isinstance(stats, dict)
+        assert "standards" in stats
+
+    def test_update_from_watcher_unknown_index(self, minimal_indexes_config, tmp_path):
+        """Test updating unknown index logs warning but doesn't crash."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        # Should not raise, just log warning
+        manager.update_from_watcher("nonexistent", [tmp_path / "test.md"])
+
+    def test_update_from_watcher_standards(self, minimal_indexes_config, tmp_path):
+        """Test updating standards index from file watcher."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        # Mock the standards index update method
+        manager._indexes["standards"].update = MagicMock()
+
+        changed_files = [tmp_path / "standards" / "test.md"]
+        manager.update_from_watcher("standards", changed_files)
+
+        manager._indexes["standards"].update.assert_called_once_with(changed_files)
+
+
+class TestIndexManagerWithMultipleIndexes:
+    """Tests for IndexManager with multiple indexes configured."""
+
+    # Use shared fixture instead of redefining
+
+    def test_health_check_all_multiple_indexes(self, minimal_indexes_config, tmp_path):
+        """Test health check with multiple indexes."""
+        manager = IndexManager(config=minimal_indexes_config, base_path=tmp_path)
+
+        statuses = manager.health_check_all()
+
+        assert len(statuses) >= 1  # At least standards
+        for status in statuses.values():
+            assert hasattr(status, "healthy")
+            assert hasattr(status, "message")

@@ -269,6 +269,231 @@ languages:
 
 ---
 
+### Multi-Repo Code Intelligence 🚀
+
+**NEW:** Index and search across multiple local repositories simultaneously!
+
+prAxIs OS now supports multi-repo code intelligence, allowing you to search and analyze code across multiple related repositories (framework + SDK, monorepo services, multi-language projects, etc.).
+
+#### Configuration Modes
+
+**Single-Repo Mode (Legacy):**
+```yaml
+code:
+  source_paths: ["../src/"]
+  languages: ["python"]
+```
+
+**Multi-Repo Mode (NEW):**
+```yaml
+code:
+  partitions:
+    praxis-os:
+      path: .  # Relative to .praxis-os/
+      domains:
+        code:
+          include_paths: [ouroboros/, scripts/]
+        tests:
+          include_paths: [tests/]
+    
+    python-sdk:
+      path: ../../python-sdk  # Sibling repository
+      domains:
+        code:
+          include_paths: [src/]
+          metadata:
+            project: python-sdk
+            type: library
+```
+
+#### Multi-Repo Concepts
+
+**What is a Partition?**
+- A partition is an isolated code index for a single repository
+- Each partition has its own semantic index and call graph
+- Partitions can be searched individually or together
+- Changes in one partition don't affect others
+
+**What are Domains?**
+- Domains are logical groupings within a partition (code, tests, docs)
+- Each domain can have different `include_paths` and metadata
+- Allows fine-grained control over what gets indexed
+
+**Directory Layout:**
+```
+.praxis-os/
+├── .cache/indexes/code/
+│   ├── praxis-os/         # Partition 1
+│   │   ├── semantic/      # LanceDB vector index
+│   │   └── graph.duckdb   # DuckDB call graph
+│   └── python-sdk/        # Partition 2
+│       ├── semantic/      # LanceDB vector index
+│       └── graph.duckdb   # DuckDB call graph
+```
+
+#### Multi-Repo Examples
+
+**Example 1: Framework + SDK**
+```yaml
+code:
+  partitions:
+    praxis-os:
+      path: .
+      domains:
+        code:
+          include_paths: [ouroboros/]
+        tests:
+          include_paths: [tests/]
+    
+    python-sdk:
+      path: ../../python-sdk
+      domains:
+        code:
+          include_paths: [src/]
+        tests:
+          include_paths: [tests/]
+```
+
+**Use Case:** Search across framework implementation and SDK client code simultaneously
+
+**Example 2: Monorepo with Multiple Services**
+```yaml
+code:
+  partitions:
+    api-service:
+      path: ../services/api
+      domains:
+        code:
+          include_paths: [src/]
+    
+    worker-service:
+      path: ../services/worker
+      domains:
+        code:
+          include_paths: [src/]
+    
+    shared-lib:
+      path: ../packages/shared
+      domains:
+        code:
+          include_paths: [lib/]
+```
+
+**Use Case:** Analyze interactions between microservices and shared libraries
+
+**Example 3: Multi-Language Project**
+```yaml
+code:
+  partitions:
+    backend:
+      path: ../backend
+      domains:
+        code:
+          include_paths: [src/]
+      metadata:
+        language: python
+    
+    frontend:
+      path: ../frontend
+      domains:
+        code:
+          include_paths: [src/, components/]
+      metadata:
+        language: typescript
+```
+
+**Use Case:** Understand full-stack architecture across language boundaries
+
+#### Multi-Repo Search Patterns
+
+**Search all repositories:**
+```python
+pos_search_project(
+    action="search_code",
+    query="authentication logic",
+    n_results=10
+)
+```
+
+**Search specific repository:**
+```python
+pos_search_project(
+    action="search_code",
+    query="tracer implementation",
+    filters={"partition": "python-sdk"},
+    n_results=5
+)
+```
+
+**Graph traversal (requires partition filter):**
+```python
+# ⚠️ CRITICAL: Call graph actions MUST specify partition
+pos_search_project(
+    action="find_callers",
+    query="HoneyHiveTracer.__init__",
+    filters={"partition": "python-sdk"},
+    max_depth=5
+)
+```
+
+#### Multi-Repo Configuration Options
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `partitions` | dict | Yes | Dictionary of partition configs (key = partition name) |
+| `partitions.<name>.path` | string | Yes | Repository path relative to `.praxis-os/` |
+| `partitions.<name>.domains` | dict | Yes | Domain configs (code, tests, docs, etc.) |
+| `partitions.<name>.domains.<domain>.include_paths` | list[string] | Yes | Paths to index within the repository |
+| `partitions.<name>.domains.<domain>.exclude_patterns` | list[string] | No | Additional gitignore patterns |
+| `partitions.<name>.domains.<domain>.metadata` | dict | No | Custom metadata tags |
+
+#### Critical Notes
+
+1. **Path Resolution:** All paths are relative to `.praxis-os/` directory
+   - Current repo: `path: .`
+   - Parent directory: `path: ..`
+   - Sibling repo: `path: ../../other-repo`
+
+2. **Call Graph Requirement:** Graph traversal actions (`find_callers`, `find_dependencies`, `find_call_paths`) **require** a partition filter in multi-repo mode because call graphs are partition-specific.
+
+3. **Declarative Reconciliation:** When you modify the config, the system automatically:
+   - Creates new partition indexes on startup
+   - Deletes removed partition indexes
+   - No manual commands needed - just edit config and restart
+
+4. **Use `include_paths` for selective indexing:** Instead of indexing entire repositories, specify exact directories (e.g., `[src/]`) to avoid indexing virtual environments, build artifacts, etc.
+
+#### Migration from Single-Repo to Multi-Repo
+
+**Before (Single-Repo):**
+```yaml
+code:
+  source_paths: ["../src/"]
+  languages: ["python"]
+```
+
+**After (Multi-Repo):**
+```yaml
+code:
+  partitions:
+    my-project:
+      path: ..
+      domains:
+        code:
+          include_paths: [src/]
+  languages: ["python"]  # Still needed at top level
+```
+
+#### Multi-Repo Benefits
+
+- ✅ **Cross-Repo Search:** Find similar code patterns across all repositories
+- ✅ **SDK Integration Analysis:** Understand how SDKs integrate with frameworks
+- ✅ **Bug Tracing:** Trace issues that span multiple repositories
+- ✅ **Architecture Comparison:** Compare implementation patterns between projects
+- ✅ **Zero Maintenance:** Declarative config auto-reconciles on startup
+
+---
+
 ### AST Index
 
 **⚠️ CRITICAL: Must customize for your project!**
@@ -518,6 +743,58 @@ browser:
 logging:
   level: "DEBUG"
   format: "json"  # Structured logging
+```
+
+### Multi-Repo Configuration (Framework + SDK)
+
+```yaml
+version: "1.0"
+
+indexes:
+  standards:
+    source_paths: ["standards/"]
+  
+  code:
+    partitions:
+      praxis-os:
+        path: .
+        domains:
+          code:
+            include_paths: [ouroboros/, scripts/]
+          tests:
+            include_paths: [tests/]
+            metadata:
+              type: tests
+      
+      python-sdk:
+        path: ../../python-sdk
+        domains:
+          code:
+            include_paths: [src/]
+            metadata:
+              project: python-sdk
+              type: library
+          tests:
+            include_paths: [tests/]
+            metadata:
+              project: python-sdk
+              type: tests
+    
+    languages: ["python"]
+    vector:
+      model: "microsoft/codebert-base"
+      dimension: 768
+  
+  ast:
+    source_paths: ["../src/"]  # Not used in multi-repo mode
+    languages: ["python"]
+  
+  file_watcher:
+    enabled: true
+
+workflow: {}
+browser: {}
+logging: {}
 ```
 
 ---

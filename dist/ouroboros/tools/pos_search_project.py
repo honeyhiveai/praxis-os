@@ -174,6 +174,8 @@ class SearchTool(ActionDispatchMixin):
         self, query: str, n_results: int = 5, filters: Optional[Dict] = None, session_id: Optional[str] = None, task_session_id: Optional[str] = None, **kwargs
     ) -> Dict[str, Any]:
         """Search standards documentation."""
+        # Let the index handle graceful degradation - don't block on health checks
+        
         params = {"query": query, "n_results": n_results}
         if filters:
             params["filters"] = filters
@@ -199,6 +201,8 @@ class SearchTool(ActionDispatchMixin):
         self, query: str, n_results: int = 5, filters: Optional[Dict] = None, session_id: Optional[str] = None, task_session_id: Optional[str] = None, **kwargs
     ) -> Dict[str, Any]:
         """Search code semantically."""
+        # Let the index handle graceful degradation - don't block on health checks
+        
         params = {"query": query, "n_results": n_results}
         if filters:
             params["filters"] = filters
@@ -224,6 +228,8 @@ class SearchTool(ActionDispatchMixin):
         self, query: str, n_results: int = 5, filters: Optional[Dict] = None, session_id: Optional[str] = None, task_session_id: Optional[str] = None, **kwargs
     ) -> Dict[str, Any]:
         """Search AST structures."""
+        # Let the index handle graceful degradation - don't block on health checks
+        
         params = {"query": query, "n_results": n_results}
         if filters:
             params["filters"] = filters
@@ -246,29 +252,47 @@ class SearchTool(ActionDispatchMixin):
         return result  # type: ignore[no-any-return]
     
     def _handle_find_callers(
-        self, query: str, max_depth: int = 10, **kwargs
+        self, query: str, max_depth: int = 10, filters: Optional[Dict[str, Any]] = None, **kwargs
     ) -> Dict[str, Any]:
         """Find who calls a symbol."""
+        # Let the index handle graceful degradation - don't block on health checks
+        
+        # Extract partition from filters for multi-repo mode
+        partition = None
+        if filters and isinstance(filters, dict):
+            partition = filters.get("partition")
+        
         return self.index_manager.route_action(  # type: ignore[no-any-return]
             "find_callers",
             symbol_name=query,
-            max_depth=max_depth
+            max_depth=max_depth,
+            partition=partition
         )
     
     def _handle_find_dependencies(
-        self, query: str, max_depth: int = 10, **kwargs
+        self, query: str, max_depth: int = 10, filters: Optional[Dict[str, Any]] = None, **kwargs
     ) -> Dict[str, Any]:
         """Find what a symbol calls."""
+        # Let the index handle graceful degradation - don't block on health checks
+        
+        # Extract partition from filters for multi-repo mode
+        partition = None
+        if filters and isinstance(filters, dict):
+            partition = filters.get("partition")
+        
         return self.index_manager.route_action(  # type: ignore[no-any-return]
             "find_dependencies",
             symbol_name=query,
-            max_depth=max_depth
+            max_depth=max_depth,
+            partition=partition
         )
     
     def _handle_find_call_paths(
-        self, query: str, to_symbol: Optional[str], max_depth: int = 10, **kwargs
+        self, query: str, to_symbol: Optional[str], max_depth: int = 10, filters: Optional[Dict[str, Any]] = None, **kwargs
     ) -> Dict[str, Any]:
         """Find call path between two symbols."""
+        # Let the index handle graceful degradation - don't block on health checks
+        
         if not to_symbol:
             raise ValueError(
                 "find_call_paths requires 'to_symbol' parameter. "
@@ -276,11 +300,17 @@ class SearchTool(ActionDispatchMixin):
                 "pos_search_project(action='find_call_paths', query='start', to_symbol='end')"
             )
         
+        # Extract partition from filters for multi-repo mode
+        partition = None
+        if filters and isinstance(filters, dict):
+            partition = filters.get("partition")
+        
         return self.index_manager.route_action(  # type: ignore[no-any-return]
             "find_call_paths",
             from_symbol=query,
             to_symbol=to_symbol,
-            max_depth=max_depth
+            max_depth=max_depth,
+            partition=partition
         )
 
 

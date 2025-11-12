@@ -29,14 +29,29 @@ import os
 import sys
 from pathlib import Path
 
-# CRITICAL: Configure joblib to avoid Python 3.13 + loky semaphore leak
-# Must be set BEFORE imports that use joblib (sentence-transformers, etc.)
+# CRITICAL: Prevent semaphore leaks in Python 3.13
+# Must be set BEFORE imports that use joblib/tokenizers (sentence-transformers, etc.)
+
+# 1. Disable tokenizers parallelism (prevents fork-after-parallelism issues)
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+
+# 2. Configure joblib to use threading instead of loky (no semaphores)
 try:
     import joblib
-    # Set threading as default backend to avoid loky semaphore leaks on Python 3.13
+    # Register threading backend as default
     joblib.parallel.register_parallel_backend('threading', joblib.parallel.ThreadingBackend, make_default=True)
+    
+    # AGGRESSIVE: Override Parallel class to force threading backend
+    original_parallel_init = joblib.Parallel.__init__
+    def patched_parallel_init(self, *args, **kwargs):
+        # Force backend to threading, ignore whatever was passed
+        kwargs['backend'] = 'threading'
+        kwargs['prefer'] = 'threads'
+        original_parallel_init(self, *args, **kwargs)
+    joblib.Parallel.__init__ = patched_parallel_init
+    
     logging.basicConfig(level=logging.INFO)
-    logging.info("✅ Configured joblib to use threading backend (avoids Python 3.13 semaphore leak)")
+    logging.info("✅ Aggressively configured joblib to ONLY use threading (Python 3.13 compat)")
 except ImportError:
     # joblib not yet installed, will be handled by dependency checks
     pass

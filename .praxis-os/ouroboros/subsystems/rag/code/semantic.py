@@ -28,7 +28,8 @@ from typing import Any, Dict, List, Optional, Callable, Set, Tuple
 from ouroboros.config.schemas.indexes import CodeIndexConfig
 from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
 from ouroboros.subsystems.rag.code.constants import DEFAULT_EXCLUDE_PATTERNS
-from ouroboros.subsystems.rag.utils.lancedb_helpers import EmbeddingModelLoader, LanceDBConnection
+from ouroboros.subsystems.rag.code.ast_chunker import UniversalASTChunker, CodeChunk
+from ouroboros.subsystems.rag.utils.lancedb_helpers import EmbeddingModelLoader, LanceDBConnection, safe_encode
 from ouroboros.utils.errors import ActionableError, IndexError
 from gitignore_parser import parse_gitignore
 
@@ -61,21 +62,35 @@ class SemanticIndex(BaseIndex):
     - No lock manager integration yet (will be added when container orchestrates)
     """
     
-    def __init__(self, config: CodeIndexConfig, base_path: Path):
+    def __init__(
+        self, 
+        config: CodeIndexConfig, 
+        base_path: Path, 
+        index_path: Optional[Path] = None,
+        partition_name: Optional[str] = None
+    ):
         """Initialize Semantic Index for code.
         
         Args:
             config: CodeIndexConfig from MCPConfig
             base_path: Base path for resolving relative paths
+            index_path: Optional explicit index path (defaults to base_path/.cache/indexes/code)
+            partition_name: Optional partition name for multi-repo mode (used to tag chunks)
             
         Raises:
             ActionableError: If initialization fails
         """
         self.config = config
         self.base_path = base_path
+        self.partition_name = partition_name or "default"  # Store for chunk tagging
         
-        # Resolve index path
-        self.index_path = base_path / ".cache" / "indexes" / "code"
+        # Resolve index path: explicit path or sane default
+        if index_path is not None:
+            self.index_path = index_path
+        else:
+            # Sane default: base_path/.cache/indexes/code (backward compatible)
+            self.index_path = base_path / ".cache" / "indexes" / "code"
+        
         self.index_path.mkdir(parents=True, exist_ok=True)
         
         # Use LanceDBConnection helper for lazy initialization
@@ -96,6 +111,9 @@ class SemanticIndex(BaseIndex):
         self._config_parser: Optional[Callable[[str], bool]] = None
         self._config_patterns_hash: Optional[str] = None  # Track config changes
         self._parser_lock = threading.Lock()
+        
+        # AST chunking fallback tracking (for health metrics)
+        self._ast_fallback_count: int = 0
         
         logger.info("SemanticIndex (code) initialized (lazy-load mode)")
     
@@ -160,7 +178,7 @@ class SemanticIndex(BaseIndex):
         # Generate embeddings
         logger.info("Generating embeddings for %d chunks...", len(chunks))
         texts = [chunk["content"] for chunk in chunks]
-        embeddings = embedding_model.encode(texts, show_progress_bar=True)
+        embeddings = safe_encode(embedding_model, texts, show_progress_bar=True)
         
         # Add embeddings to chunks
         for chunk, embedding in zip(chunks, embeddings):
@@ -501,15 +519,111 @@ class SemanticIndex(BaseIndex):
         return False
     
     def _chunk_file(self, file_path: Path) -> List[Dict[str, Any]]:
-        """Chunk a single code file.
+        """Chunk a single code file using AST-aware or line-based strategy.
         
-        Strategy:
-        - Simple line-based chunking (200-line chunks with 20-line overlap)
-        - TODO: AST-aware chunking at function/class boundaries (future enhancement)
+        Strategy selection (based on config.chunking_strategy):
+        - "ast": AST-aware chunking at function/class boundaries (recommended)
+        - "line" or missing: Line-based chunking (fallback)
+        
+        AST strategy uses UniversalASTChunker for:
+        - Function/class boundary detection
+        - Import grouping with penalty
+        - Config-driven language support
         
         Args:
             file_path: Path to code file
             
+        Returns:
+            List of chunk dictionaries ready for LanceDB
+        """
+        # Check chunking strategy from config
+        strategy = getattr(self.config, "chunking_strategy", "line")
+        
+        if strategy == "ast":
+            # Use AST-aware chunking
+            return self._chunk_file_ast(file_path)
+        else:
+            # Use line-based fallback
+            return self._chunk_file_lines(file_path)
+    
+    def _chunk_file_ast(self, file_path: Path) -> List[Dict[str, Any]]:
+        """Chunk file using AST-aware chunking (function/class boundaries).
+        
+        Args:
+            file_path: Path to code file
+        
+        Returns:
+            List of chunk dictionaries
+        """
+        # Detect language from file extension
+        language = self._detect_language(file_path)
+        
+        # Check if language is configured for AST chunking
+        if not hasattr(self.config, "language_configs") or not self.config.language_configs:
+            logger.warning(
+                "AST chunking enabled but no language_configs found, falling back to line-based for %s",
+                file_path
+            )
+            return self._chunk_file_lines(file_path)
+        
+        if language not in self.config.language_configs:
+            logger.debug(
+                "Language '%s' not configured for AST chunking, falling back to line-based for %s",
+                language,
+                file_path.name
+            )
+            return self._chunk_file_lines(file_path)
+        
+        try:
+            # Initialize UniversalASTChunker for this language
+            chunker = UniversalASTChunker(
+                language=language,
+                config=self.config.model_dump(),  # Pass full config dict
+                base_path=self.base_path
+            )
+            
+            # Chunk the file
+            code_chunks: List[CodeChunk] = chunker.chunk_file(file_path)
+            
+            # Convert CodeChunk objects to dict format for LanceDB
+            chunks = []
+            for code_chunk in code_chunks:
+                chunks.append(self._create_chunk(
+                    content=code_chunk.content,
+                    file_path=code_chunk.file_path,
+                    start_line=code_chunk.start_line,
+                    end_line=code_chunk.end_line,
+                    chunk_type=code_chunk.chunk_type,
+                    symbols=code_chunk.symbols,
+                    import_ratio=code_chunk.import_ratio,
+                    import_penalty=code_chunk.import_penalty
+                ))
+            
+            logger.debug(
+                "AST chunked %s: %d chunks (%s)",
+                file_path.name,
+                len(chunks),
+                ", ".join(set(c.get("chunk_type", "unknown") for c in chunks))
+            )
+            
+            return chunks
+            
+        except Exception as e:
+            self._ast_fallback_count += 1
+            logger.warning(
+                "AST chunking failed for %s: %s, falling back to line-based (fallback #%d)",
+                file_path,
+                str(e),
+                self._ast_fallback_count
+            )
+            return self._chunk_file_lines(file_path)
+    
+    def _chunk_file_lines(self, file_path: Path) -> List[Dict[str, Any]]:
+        """Chunk file using simple line-based chunking (fallback).
+        
+        Args:
+            file_path: Path to code file
+        
         Returns:
             List of chunk dictionaries
         """
@@ -523,7 +637,6 @@ class SemanticIndex(BaseIndex):
         chunks = []
         
         # Simple line-based chunking (200 lines per chunk, 20 line overlap)
-        # This is a fallback; AST-aware chunking would be better
         chunk_size = 200
         overlap = 20
         
@@ -553,7 +666,14 @@ class SemanticIndex(BaseIndex):
         content: str,
         file_path: Path,
         start_line: int,
-        end_line: int
+        end_line: int,
+        chunk_type: Optional[str] = None,
+        symbols: Optional[List[str]] = None,
+        import_ratio: Optional[float] = None,
+        import_penalty: Optional[float] = None,
+        partition: Optional[str] = None,
+        domain: Optional[str] = None,
+        metadata: Optional[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """Create chunk dictionary with metadata.
         
@@ -562,6 +682,13 @@ class SemanticIndex(BaseIndex):
             file_path: Source file path
             start_line: Starting line number (1-indexed)
             end_line: Ending line number (1-indexed)
+            chunk_type: AST chunk type ("import", "function", "class") - optional
+            symbols: List of symbols in chunk (function/class names) - optional
+            import_ratio: Ratio of import lines (0.0-1.0) - optional
+            import_penalty: Penalty multiplier for search ranking - optional
+            partition: Partition name (repo name) - optional, defaults to "default"
+            domain: Domain name within partition (e.g., "code", "tests") - optional, defaults to "code"
+            metadata: Domain metadata for query filtering (e.g., {"framework": "openai"}) - optional
             
         Returns:
             Chunk dictionary ready for LanceDB
@@ -585,7 +712,8 @@ class SemanticIndex(BaseIndex):
                 rel_file_path
             )
         
-        return {
+        # Build base chunk dict
+        chunk = {
             "chunk_id": chunk_id,
             "content": content,
             "file_path": rel_file_path,
@@ -593,7 +721,24 @@ class SemanticIndex(BaseIndex):
             "end_line": end_line,
             "language": language,
             "content_type": "code",
+            # Multi-repo partitioning fields (with defaults for backward compatibility)
+            "partition": partition if partition is not None else self.partition_name,  # Use instance partition_name
+            "domain": domain if domain is not None else "code",
+            "repo_name": partition if partition is not None else self.partition_name,  # Use instance partition_name
+            "metadata": metadata if metadata is not None else {},
         }
+        
+        # Add AST-specific metadata if provided
+        if chunk_type is not None:
+            chunk["chunk_type"] = chunk_type
+        if symbols is not None:
+            chunk["symbols"] = symbols
+        if import_ratio is not None:
+            chunk["import_ratio"] = import_ratio
+        if import_penalty is not None:
+            chunk["import_penalty"] = import_penalty
+        
+        return chunk
     
     def _detect_language(self, file_path: Path) -> str:
         """Detect programming language from file extension.
@@ -691,6 +836,8 @@ class SemanticIndex(BaseIndex):
         self._ensure_table()
         
         # Load embedding model via helper (caching)
+        logger.info("🔍 Code search: Loading model '%s' (dim: %d) for query: %s", 
+                   self.config.vector.model, self.config.vector.dimension, query[:50])
         embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
         
         try:
@@ -698,7 +845,7 @@ class SemanticIndex(BaseIndex):
             where_clause = self._build_where_clause(filters) if filters else None
             
             # 1. Vector search (semantic)
-            query_vector = embedding_model.encode(query).tolist()
+            query_vector = safe_encode(embedding_model, query).tolist()
             vector_results = self._vector_search(query_vector, where_clause, limit=20)
             
             # 2. FTS search (if enabled)
@@ -847,13 +994,30 @@ class SemanticIndex(BaseIndex):
         # Sort by RRF score
         sorted_chunk_ids = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
         
-        # Build final results list
+        # Build final results list with import penalty applied
         merged_results = []
         for chunk_id, score in sorted_chunk_ids:
             result = result_map[chunk_id].copy()
             result["score"] = score
             result["search_type"] = "hybrid_rrf"
+            
+            # Apply import penalty if present (de-prioritize import-heavy chunks)
+            import_penalty = result.get("import_penalty")
+            if import_penalty is not None and import_penalty < 1.0:
+                original_score = result["score"]
+                result["score"] = original_score * import_penalty
+                logger.debug(
+                    "Applied import penalty %.2f to chunk %s (score: %.4f → %.4f)",
+                    import_penalty,
+                    chunk_id,
+                    original_score,
+                    result["score"]
+                )
+            
             merged_results.append(result)
+        
+        # Re-sort after applying penalties (imports should rank lower)
+        merged_results.sort(key=lambda x: x["score"], reverse=True)
         
         return merged_results
     
@@ -874,21 +1038,38 @@ class SemanticIndex(BaseIndex):
         embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
         
         try:
+            # Check for active parse cache (fractal delegation optimization)
+            from ouroboros.subsystems.rag.code.indexer import get_active_parse_cache
+            parse_cache = get_active_parse_cache()
+            cache_hits = 0
+            cache_misses = 0
+            
             for file_path in changed_files:
                 # Check if file still exists
                 if not file_path.exists():
                     self._delete_file_chunks(file_path)
                     continue
                 
-                # Re-chunk file
-                chunks = self._chunk_file(file_path)
+                # Try to get cached parse result (parse-once-index-thrice optimization)
+                chunks = None
+                if parse_cache:
+                    cached = parse_cache.get_cached_parse(file_path)
+                    if cached and "semantic_chunks" in cached:
+                        chunks = cached["semantic_chunks"]
+                        cache_hits += 1
+                        logger.debug("Using cached chunks for %s (parse-once optimization)", file_path.name)
+                
+                # Fallback: parse file ourselves if no cache available
+                if chunks is None:
+                    chunks = self._chunk_file(file_path)
+                    cache_misses += 1
                 
                 if not chunks:
                     continue
                 
                 # Generate embeddings
                 texts = [chunk["content"] for chunk in chunks]
-                embeddings = embedding_model.encode(texts)
+                embeddings = safe_encode(embedding_model, texts)
                 
                 # Add embeddings to chunks
                 for chunk, embedding in zip(chunks, embeddings):
@@ -906,7 +1087,15 @@ class SemanticIndex(BaseIndex):
                 logger.info("Rebuilding FTS index after updates...")
                 self._build_indexes()
             
-            logger.info("✅ Code index updated")
+            # Log cache statistics
+            if parse_cache:
+                logger.info(
+                    "✅ SemanticIndex updated (parse-once: %d cache hits, %d cache misses)",
+                    cache_hits,
+                    cache_misses
+                )
+            else:
+                logger.info("✅ SemanticIndex updated")
             
         except Exception as e:
             logger.error("Failed to update code index: %s", e, exc_info=True)
@@ -955,11 +1144,14 @@ class SemanticIndex(BaseIndex):
             HealthStatus with diagnostic info
         """
         try:
+            logger.info("🏥 CodeSemanticIndex health check: partition=%s", self.partition_name)
             self._ensure_table()
             assert self._table is not None
+            logger.info("  ✅ Table loaded: %s", self._table)
             
             # Get table stats
             stats = self._table.count_rows()
+            logger.info("  📊 Row count: %d", stats)
             
             if stats == 0:
                 return HealthStatus(
@@ -971,13 +1163,17 @@ class SemanticIndex(BaseIndex):
             # DYNAMIC CHECK: Try to actually use the index with a test query
             # This catches dimension mismatches, schema incompatibilities, etc.
             try:
+                logger.info("  🔍 Testing index with query...")
                 # Load embedding model and generate test vector
                 embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
+                logger.info("  ✅ Model loaded: %s", self.config.vector.model)
                 test_query = "test"
-                test_vector = embedding_model.encode(test_query).tolist()
+                test_vector = safe_encode(embedding_model, test_query).tolist()
+                logger.info("  ✅ Test vector generated: dim=%d", len(test_vector))
                 
                 # Try a simple vector search (limit 1 to minimize overhead)
                 _ = self._table.search(test_vector).limit(1).to_list()
+                logger.info("  ✅ Test search succeeded!")
                 
                 # If we got here, index is actually working
                 return HealthStatus(
@@ -988,6 +1184,7 @@ class SemanticIndex(BaseIndex):
                 )
                 
             except Exception as test_error:
+                logger.error("  ❌ Health check test query failed: %s", test_error, exc_info=True)
                 # Test query failed - index is corrupted or incompatible
                 error_msg = str(test_error).lower()
                 

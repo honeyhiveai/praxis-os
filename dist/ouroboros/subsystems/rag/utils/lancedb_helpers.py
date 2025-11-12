@@ -34,11 +34,34 @@ Traceability:
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from ouroboros.utils.errors import ActionableError
 
 logger = logging.getLogger(__name__)
+
+
+def safe_encode(model: Any, texts: Union[str, List[str]], **kwargs) -> Any:
+    """Safely encode text using sentence-transformers with threading backend.
+    
+    Forces joblib to use threading backend to avoid Python 3.13 semaphore leaks.
+    
+    Args:
+        model: SentenceTransformer model instance
+        texts: Single text or list of texts to encode
+        **kwargs: Additional arguments to pass to model.encode()
+    
+    Returns:
+        Embeddings array
+    """
+    try:
+        import joblib
+        # Force threading backend for this encode call
+        with joblib.parallel_backend('threading'):
+            return model.encode(texts, **kwargs)
+    except ImportError:
+        # Fallback if joblib not available (shouldn't happen)
+        return model.encode(texts, **kwargs)
 
 
 class LanceDBConnection:

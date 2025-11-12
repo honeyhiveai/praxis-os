@@ -36,7 +36,7 @@ See Also:
 from pathlib import Path
 from typing import Optional
 
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 
 from ouroboros.config.schemas.base import BaseConfig
 
@@ -530,6 +530,338 @@ class StandardsIndexConfig(BaseConfig):
 
 
 
+class ChunkingConfig(BaseConfig):
+    """
+    AST-aware chunking configuration for a language.
+
+    Defines how code should be chunked at AST boundaries and how import
+    statements should be penalized in search ranking.
+
+    Key Settings:
+        - import_nodes: AST node types for import/export statements
+        - definition_nodes: AST node types for function/class definitions
+        - split_boundary_nodes: AST node types for control flow boundaries
+        - import_penalty: Score multiplier for import-heavy chunks (0.0-1.0)
+
+    Chunking Strategy:
+        1. Parse code with Tree-sitter into AST
+        2. Identify chunks at definition boundaries (functions, classes)
+        3. Group consecutive imports into single chunks
+        4. Apply penalty to chunks with high import ratio
+
+    Example:
+        >>> from ouroboros.config.schemas.indexes import ChunkingConfig
+        >>> 
+        >>> # Python chunking config
+        >>> config = ChunkingConfig(
+        ...     import_nodes=["import_statement", "import_from_statement"],
+        ...     definition_nodes=["function_definition", "class_definition"],
+        ...     split_boundary_nodes=["if_statement", "for_statement"],
+        ...     import_penalty=0.3
+        ... )
+
+    Validation Rules:
+        - import_nodes: At least one node type required
+        - definition_nodes: At least one node type required
+        - split_boundary_nodes: Can be empty (no control flow chunking)
+        - import_penalty: Float between 0.0 and 1.0
+    """
+
+    import_nodes: list[str] = Field(
+        ...,
+        min_length=1,
+        description="AST node types for imports/exports (e.g., ['import_statement', 'export_statement'])",
+    )
+
+    definition_nodes: list[str] = Field(
+        ...,
+        min_length=1,
+        description="AST node types for definitions (e.g., ['function_definition', 'class_definition'])",
+    )
+
+    split_boundary_nodes: list[str] = Field(
+        default_factory=list,
+        description="AST node types for control flow splits (e.g., ['if_statement', 'for_statement'])",
+    )
+
+    import_penalty: float = Field(
+        default=0.3,
+        ge=0.0,
+        le=1.0,
+        description="Score multiplier for import-heavy chunks (0.0=filter out, 1.0=no penalty)",
+    )
+
+
+class LanguageConfig(BaseConfig):
+    """
+    Language-specific configuration for AST chunking.
+
+    Defines all AST node types and chunking behavior for a programming language.
+    Enables adding new languages via config without code changes.
+
+    Key Settings:
+        - chunking: AST-aware chunking configuration
+
+    Config-Driven Design:
+        - Add support for new languages by adding YAML entry
+        - No code changes required per language
+        - All logic driven by Tree-sitter node types
+
+    Example:
+        >>> from ouroboros.config.schemas.indexes import (
+        ...     LanguageConfig, ChunkingConfig
+        ... )
+        >>> 
+        >>> # Python language config
+        >>> config = LanguageConfig(
+        ...     chunking=ChunkingConfig(
+        ...         import_nodes=["import_statement", "import_from_statement"],
+        ...         definition_nodes=["function_definition", "async_function_definition", "class_definition"],
+        ...         split_boundary_nodes=["if_statement", "for_statement", "while_statement"],
+        ...         import_penalty=0.3
+        ...     )
+        ... )
+
+    Usage in mcp.yaml:
+        indexes:
+          code:
+            language_configs:
+              python:
+                chunking:
+                  import_nodes: ["import_statement", "import_from_statement"]
+                  definition_nodes: ["function_definition", "class_definition"]
+                  split_boundary_nodes: ["if_statement", "for_statement"]
+                  import_penalty: 0.3
+              typescript:
+                chunking:
+                  import_nodes: ["import_statement", "export_statement"]
+                  definition_nodes: ["function_declaration", "class_declaration"]
+                  split_boundary_nodes: ["if_statement", "for_statement"]
+                  import_penalty: 0.3
+    """
+
+    chunking: ChunkingConfig = Field(
+        ...,
+        description="AST-aware chunking configuration",
+    )
+
+
+class DomainConfig(BaseConfig):
+    """
+    Configuration for a domain within a partition (e.g., code, tests, docs).
+
+    Defines what content to index within a repository using include/exclude patterns.
+    Leverages existing .gitignore support with additional exclusion flexibility.
+
+    Key Settings:
+        - include_paths: Directories to index within the repo
+        - exclude_patterns: Additional exclusion patterns (gitignore format)
+        - metadata: Arbitrary key-value pairs for query filtering
+
+    Metadata Field (NEW - AI-Friendly Querying):
+        Optional dict of string key-value pairs that get attached to all chunks
+        from this domain. Makes it easy for AI to filter searches without parsing
+        file paths or guessing repo structure.
+
+        Common metadata patterns:
+            - framework: "openai", "anthropic", "langchain"
+            - type: "instrumentor", "core", "tests"
+            - provider: "openlit", "traceloop", "arize"
+            - language: "python", "typescript", "go"
+            - Custom: any domain-specific tags
+
+    Exclusion Strategy (3-tier system):
+        1. Language-specific defaults (node_modules/, target/, etc.)
+        2. .gitignore patterns (automatically respected)
+        3. exclude_patterns (config override for additional exclusions)
+
+    Example:
+        >>> from ouroboros.config.schemas.indexes import DomainConfig
+        >>> 
+        >>> # Index source code directories
+        >>> code_domain = DomainConfig(
+        ...     include_paths=["ouroboros/", "scripts/"],
+        ...     exclude_patterns=None,
+        ...     metadata=None
+        ... )
+        >>> 
+        >>> # Index instrumentor with rich metadata for filtering
+        >>> openai_instrumentor = DomainConfig(
+        ...     include_paths=["instrumentation/openai/"],
+        ...     exclude_patterns=None,
+        ...     metadata={
+        ...         "framework": "openai",
+        ...         "type": "instrumentor",
+        ...         "provider": "openlit"
+        ...     }
+        ... )
+        >>> 
+        >>> # Index tests with custom exclusions
+        >>> tests_domain = DomainConfig(
+        ...     include_paths=["tests/"],
+        ...     exclude_patterns=["tests/__pycache__/"],
+        ...     metadata={"type": "tests"}
+        ... )
+
+    Usage in mcp.yaml:
+        partitions:
+          praxis-os:
+            path: ../
+            domains:
+              code:
+                include_paths: [ouroboros/, scripts/]
+                exclude_patterns: null
+                metadata: null
+              tests:
+                include_paths: [tests/]
+                exclude_patterns: null
+                metadata:
+                  type: tests
+          
+          openlit:
+            path: ../deps/openlit
+            domains:
+              openai-instrumentor:
+                include_paths: [instrumentation/openai/]
+                exclude_patterns: null
+                metadata:
+                  framework: openai
+                  type: instrumentor
+                  provider: openlit
+    """
+
+    include_paths: list[str] = Field(
+        ...,
+        min_length=1,
+        description="Directories to index within the repository (e.g., ['src/', 'lib/'])",
+    )
+
+    exclude_patterns: Optional[list[str]] = Field(
+        default=None,
+        description="Additional exclusion patterns in gitignore format (e.g., ['*.log', 'tmp/'])",
+    )
+
+    metadata: Optional[dict[str, str]] = Field(
+        default=None,
+        description="Arbitrary metadata for query filtering (e.g., {'framework': 'openai', 'type': 'instrumentor'})",
+    )
+
+
+class PartitionConfig(BaseConfig):
+    """
+    Configuration for a single repository partition.
+
+    One partition = one repository with multiple domains (code, tests, docs).
+    Each domain defines what directories to index with include/exclude patterns.
+
+    Design Philosophy:
+        - Simple 1:1 mapping (partition name = repo name)
+        - Domain-agnostic (works for any project type)
+        - Flexible indexing (different patterns per domain)
+        - Leverages existing .gitignore support
+
+    Key Settings:
+        - path: Repository location (relative to .praxis-os/)
+        - domains: Dict of domain configs (code, tests, docs, etc.)
+
+    Example:
+        >>> from ouroboros.config.schemas.indexes import PartitionConfig, DomainConfig
+        >>> 
+        >>> # Single repo with code and tests domains
+        >>> praxis_partition = PartitionConfig(
+        ...     path="../",
+        ...     domains={
+        ...         "code": DomainConfig(
+        ...             include_paths=["ouroboros/", "scripts/"],
+        ...             exclude_patterns=None
+        ...         ),
+        ...         "tests": DomainConfig(
+        ...             include_paths=["tests/"],
+        ...             exclude_patterns=None
+        ...         )
+        ...     }
+        ... )
+
+    Usage in mcp.yaml:
+        partitions:
+          praxis-os:              # Partition name = repo name
+            path: ../             # Repo location
+            domains:              # Explicit domains field
+              code:               # Domain: source code
+                include_paths: [ouroboros/, scripts/]
+                exclude_patterns: null
+              tests:              # Domain: tests
+                include_paths: [tests/]
+                exclude_patterns: null
+          
+          python-sdk:             # Another repo
+            path: ../python-sdk
+            domains:
+              code:
+                include_paths: [src/]
+                exclude_patterns: null
+
+    Domain Names:
+        - Common: code, tests, docs, examples
+        - Custom: Any string works (e.g., "frontend", "backend", "api")
+        - Flexible: Define domains that match your project structure
+
+    Validation Rules:
+        - path must be a non-empty string
+        - domains must have at least one entry
+        - domain names must be valid Python identifiers (no spaces/special chars)
+    """
+
+    path: str = Field(
+        ...,
+        min_length=1,
+        description="Repository path relative to .praxis-os/ (e.g., '../', '../python-sdk/')",
+    )
+
+    domains: dict[str, DomainConfig] = Field(
+        ...,
+        min_length=1,
+        description="Domain configurations (e.g., {'code': DomainConfig(...), 'tests': DomainConfig(...)})",
+    )
+
+    @field_validator("domains")
+    @classmethod
+    def validate_domain_names(cls, v: dict[str, DomainConfig]) -> dict[str, DomainConfig]:
+        """
+        Ensure domain names are valid identifiers.
+
+        Domain names should be simple, descriptive strings that work as
+        Python identifiers (used in code and queries).
+
+        Args:
+            v: domains dict
+
+        Returns:
+            dict[str, DomainConfig]: Validated domains
+
+        Raises:
+            ValueError: If domain name contains invalid characters
+
+        Example:
+            >>> # Valid domain names
+            >>> domains = {"code": DomainConfig(...), "tests": DomainConfig(...)}  # ✅
+            >>> 
+            >>> # Invalid: spaces and special chars
+            >>> domains = {"my code": DomainConfig(...)}  # ❌
+            >>> domains = {"code-v2": DomainConfig(...)}  # ❌
+        """
+        for domain_name in v.keys():
+            if not domain_name.isidentifier():
+                raise ValueError(
+                    f"Invalid domain name '{domain_name}': must be a valid Python identifier\n"
+                    f"Domain names should be simple strings like: code, tests, docs, examples\n"
+                    f"Avoid spaces, hyphens, and special characters\n"
+                    f"Remediation: Use '{domain_name.replace('-', '_').replace(' ', '_')}' instead"
+                )
+        
+        return v
+
+
 class CodeIndexConfig(BaseConfig):
     """
     Configuration for code index (LanceDB semantic + DuckDB graph).
@@ -545,14 +877,24 @@ class CodeIndexConfig(BaseConfig):
         - fts: Full-text search config
         - duckdb_path: DuckDB database path
         - graph: Graph traversal config
+        - language_configs: Language-specific AST chunking configs (optional)
+        - chunking_strategy: "ast" (AST-aware) or "line" (line-based fallback)
+        - partitions: Multi-repo partitioning configuration (NEW)
 
     Supported Languages:
         - Python, TypeScript, JavaScript, Go, Rust
         - Config-driven: Add via YAML, no code changes
 
+    AST-Aware Chunking (NEW):
+        - chunking_strategy="ast": Use Tree-sitter to chunk at function/class boundaries
+        - Applies import_penalty to de-prioritize import-heavy chunks
+        - Graceful fallback to line-based chunking if AST parsing fails
+        - Config-driven via language_configs (no hardcoded logic)
+
     Example:
         >>> from ouroboros.config.schemas.indexes import (
-        ...     CodeIndexConfig, VectorConfig, FTSConfig, GraphConfig
+        ...     CodeIndexConfig, VectorConfig, FTSConfig, GraphConfig,
+        ...     LanguageConfig, ChunkingConfig
         ... )
         >>> 
         >>> config = CodeIndexConfig(
@@ -565,12 +907,24 @@ class CodeIndexConfig(BaseConfig):
         ...     ),
         ...     fts=FTSConfig(enabled=True),
         ...     duckdb_path=Path(".praxis-os/code.duckdb"),
-        ...     graph=GraphConfig(max_depth=10)
+        ...     graph=GraphConfig(max_depth=10),
+        ...     chunking_strategy="ast",
+        ...     language_configs={
+        ...         "python": LanguageConfig(
+        ...             chunking=ChunkingConfig(
+        ...                 import_nodes=["import_statement", "import_from_statement"],
+        ...                 definition_nodes=["function_definition", "class_definition"],
+        ...                 split_boundary_nodes=["if_statement", "for_statement"],
+        ...                 import_penalty=0.3
+        ...             )
+        ...         )
+        ...     }
         ... )
 
     Validation Rules:
         - source_paths: At least one path required
         - languages: At least one language required
+        - chunking_strategy: Must be "ast" or "line"
     """
 
     source_paths: list[str] = Field(
@@ -613,6 +967,22 @@ class CodeIndexConfig(BaseConfig):
     exclude_patterns: Optional[list[str]] = Field(
         default=None,
         description="Additional exclusion patterns in gitignore format (merged with .gitignore if present)",
+    )
+
+    chunking_strategy: str = Field(
+        default="ast",
+        pattern=r"^(ast|line)$",
+        description="Chunking strategy: 'ast' (AST-aware, recommended) or 'line' (line-based fallback)",
+    )
+
+    language_configs: Optional[dict[str, LanguageConfig]] = Field(
+        default=None,
+        description="Language-specific AST chunking configs (e.g., {'python': LanguageConfig(...)})",
+    )
+
+    partitions: Optional[dict[str, PartitionConfig]] = Field(
+        default=None,
+        description="Multi-repo partitions (e.g., {'primary': PartitionConfig(...), 'instrumentors': PartitionConfig(...)})",
     )
 
 
@@ -747,9 +1117,14 @@ __all__ = [
     "RerankingConfig",
     "GraphConfig",
     "FileWatcherConfig",
+    "ChunkingConfig",
+    "LanguageConfig",
+    "DomainConfig",
+    "PartitionConfig",
     "StandardsIndexConfig",
     "CodeIndexConfig",
     "ASTIndexConfig",
     "IndexesConfig",
+    "MetadataFilteringConfig",
 ]
 

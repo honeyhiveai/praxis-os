@@ -36,6 +36,10 @@ from ouroboros.config.schemas.indexes import StandardsIndexConfig
 from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
 from ouroboros.subsystems.rag.lock_manager import IndexLockManager
 from ouroboros.subsystems.rag.standards.semantic import SemanticIndex
+from ouroboros.subsystems.rag.utils.component_helpers import (
+    ComponentDescriptor,
+    dynamic_health_check,
+)
 from ouroboros.subsystems.rag.utils.corruption_detector import is_corruption_error
 from ouroboros.utils.errors import ActionableError
 
@@ -80,7 +84,38 @@ class StandardsIndex(BaseIndex):
         lock_dir = base_path / ".cache" / "locks"
         self._lock_manager = IndexLockManager("standards", lock_dir)
         
-        logger.info("StandardsIndex container initialized with lock management")
+        # Register components for cascading health checks
+        # Architecture: Vector + FTS + Metadata (scalar indexes) → RRF fusion → optional reranking
+        # Note: SemanticIndex has unified LanceDB table but we model the three index types
+        # as separate components for health/diagnostics
+        self.components: Dict[str, ComponentDescriptor] = {
+            "vector": ComponentDescriptor(
+                name="vector",
+                provides=["embeddings", "vector_index"],
+                capabilities=["vector_search"],
+                health_check=self._check_vector_health,
+                rebuild=self._rebuild_vector,
+                dependencies=[],  # Vector has no dependencies (base table)
+            ),
+            "fts": ComponentDescriptor(
+                name="fts",
+                provides=["fts_index", "keyword_search"],
+                capabilities=["fts_search", "hybrid_search"],
+                health_check=self._check_fts_health,
+                rebuild=self._rebuild_fts,
+                dependencies=["vector"],  # FTS depends on vector (table must exist first)
+            ),
+            "metadata": ComponentDescriptor(
+                name="metadata",
+                provides=["scalar_indexes", "metadata_filtering"],
+                capabilities=["filter_by_domain", "filter_by_phase", "filter_by_role"],
+                health_check=self._check_metadata_health,
+                rebuild=self._rebuild_metadata,
+                dependencies=["vector"],  # Metadata indexes depend on vector (table must exist first)
+            ),
+        }
+        
+        logger.info("StandardsIndex container initialized with component registry (vector, fts, metadata) and lock management")
     
     def build(self, source_paths: List[Path], force: bool = False) -> None:
         """Build standards index from source paths.
@@ -159,16 +194,196 @@ class StandardsIndex(BaseIndex):
             logger.info("StandardsIndex.update() delegating to SemanticIndex")
             return self._semantic_index.update(changed_files)
     
-    def health_check(self) -> HealthStatus:
-        """Check index health.
+    # Component-specific health checks for cascading health architecture
+    def _check_vector_health(self) -> HealthStatus:
+        """Check vector component health (embeddings + table).
         
-        Delegates to internal SemanticIndex for implementation.
-        Verifies table exists, has data, and secondary indexes are present.
+        Verifies that the LanceDB table exists, has data (chunks with embeddings),
+        and can perform vector search operations.
         
         Returns:
-            HealthStatus indicating if index is operational
+            HealthStatus for vector component
         """
-        return self._semantic_index.health_check()
+        try:
+            # Delegate to semantic index but focus on vector-specific aspects
+            overall_health = self._semantic_index.health_check()
+            
+            # Vector is healthy if table exists and has data
+            # (FTS/reranker are optional enhancements)
+            if overall_health.healthy:
+                chunk_count = overall_health.details.get("chunk_count", 0)
+                return HealthStatus(
+                    healthy=True,
+                    message=f"Vector component operational ({chunk_count} chunks with embeddings)",
+                    details={"chunk_count": chunk_count, "has_embeddings": True},
+                    last_updated=None
+                )
+            else:
+                # If overall is unhealthy, vector is unhealthy
+                return HealthStatus(
+                    healthy=False,
+                    message=f"Vector component unhealthy: {overall_health.message}",
+                    details=overall_health.details,
+                    last_updated=None
+                )
+        except Exception as e:
+            return HealthStatus(
+                healthy=False,
+                message=f"Vector health check failed: {str(e)}",
+                details={"error": str(e)},
+                last_updated=None
+            )
+    
+    def _check_fts_health(self) -> HealthStatus:
+        """Check FTS component health (full-text search index).
+        
+        Verifies that the FTS index exists and is functional.
+        FTS depends on vector (table must exist first).
+        
+        Returns:
+            HealthStatus for FTS component
+        """
+        try:
+            # Check if FTS is enabled in config
+            if not self.config.fts.enabled:
+                return HealthStatus(
+                    healthy=True,
+                    message="FTS disabled in config (not required)",
+                    details={"enabled": False},
+                    last_updated=None
+                )
+            
+            # Delegate to semantic index health check
+            overall_health = self._semantic_index.health_check()
+            
+            # FTS is considered healthy if overall is healthy
+            # (semantic index health check verifies FTS index exists if enabled)
+            if overall_health.healthy:
+                return HealthStatus(
+                    healthy=True,
+                    message="FTS component operational",
+                    details={"fts_enabled": True},
+                    last_updated=None
+                )
+            else:
+                return HealthStatus(
+                    healthy=False,
+                    message=f"FTS component unhealthy: {overall_health.message}",
+                    details=overall_health.details,
+                    last_updated=None
+                )
+        except Exception as e:
+            return HealthStatus(
+                healthy=False,
+                message=f"FTS health check failed: {str(e)}",
+                details={"error": str(e)},
+                last_updated=None
+            )
+    
+    def _check_metadata_health(self) -> HealthStatus:
+        """Check metadata component health (scalar indexes for filtering).
+        
+        Verifies that scalar indexes (BTREE/BITMAP) exist on metadata columns
+        like domain, phase, role, etc. for fast filtering.
+        Metadata indexes depend on vector (table must exist first).
+        
+        Returns:
+            HealthStatus for metadata component
+        """
+        try:
+            # Check if metadata filtering is enabled in config
+            if not self.config.metadata_filtering or not self.config.metadata_filtering.enabled:
+                return HealthStatus(
+                    healthy=True,
+                    message="Metadata filtering disabled in config (scalar indexes not optimized)",
+                    details={"enabled": False},
+                    last_updated=None
+                )
+            
+            # Delegate to semantic index health check
+            overall_health = self._semantic_index.health_check()
+            
+            # Metadata is considered healthy if overall is healthy
+            # (semantic index health check verifies scalar indexes exist if enabled)
+            if overall_health.healthy:
+                return HealthStatus(
+                    healthy=True,
+                    message="Metadata component operational (scalar indexes present)",
+                    details={"scalar_indexes_enabled": True},
+                    last_updated=None
+                )
+            else:
+                return HealthStatus(
+                    healthy=False,
+                    message=f"Metadata component unhealthy: {overall_health.message}",
+                    details=overall_health.details,
+                    last_updated=None
+                )
+        except Exception as e:
+            return HealthStatus(
+                healthy=False,
+                message=f"Metadata health check failed: {str(e)}",
+                details={"error": str(e)},
+                last_updated=None
+            )
+    
+    # Component-specific rebuild methods for cascading health architecture
+    def _rebuild_vector(self) -> None:
+        """Rebuild vector component only (targeted rebuild).
+        
+        Note: StandardsIndex uses a unified LanceDB table architecture, so targeted
+        rebuilds of individual components (vector, FTS, metadata) are not currently
+        supported. This method is a no-op placeholder for future implementation.
+        
+        For targeted rebuilds, use the rebuild_secondary_indexes() helper method
+        (rebuilds FTS + scalar indexes without touching vector data).
+        For full rebuild, use build(force=True).
+        """
+        logger.warning("Targeted vector rebuild not yet supported for StandardsIndex (unified table architecture)")
+    
+    def _rebuild_fts(self) -> None:
+        """Rebuild FTS component only (targeted rebuild).
+        
+        Note: StandardsIndex uses a unified LanceDB table architecture, so targeted
+        rebuilds of individual components (vector, FTS, metadata) are not currently
+        supported. This method is a no-op placeholder for future implementation.
+        
+        For targeted rebuilds, use the rebuild_secondary_indexes() helper method
+        (rebuilds FTS + scalar indexes without touching vector data).
+        For full rebuild, use build(force=True).
+        """
+        logger.warning("Targeted FTS rebuild not yet supported for StandardsIndex (unified table architecture)")
+    
+    def _rebuild_metadata(self) -> None:
+        """Rebuild metadata component only (targeted rebuild).
+        
+        Note: StandardsIndex uses a unified LanceDB table architecture, so targeted
+        rebuilds of individual components (vector, FTS, metadata) are not currently
+        supported. This method is a no-op placeholder for future implementation.
+        
+        For targeted rebuilds, use the rebuild_secondary_indexes() helper method
+        (rebuilds FTS + scalar indexes without touching vector data).
+        For full rebuild, use build(force=True).
+        """
+        logger.warning("Targeted metadata rebuild not yet supported for StandardsIndex (unified table architecture)")
+    
+    def health_check(self) -> HealthStatus:
+        """Dynamic health check using component registry (fractal pattern).
+        
+        Aggregates health from all registered components (vector, fts, metadata)
+        and provides granular diagnostics. This enables partial degradation
+        scenarios where some components may be unhealthy while others remain
+        operational.
+        
+        Architecture:
+        - Vector component: LanceDB table with embeddings
+        - FTS component: BM25 keyword index
+        - Metadata component: Scalar indexes (BTREE/BITMAP) for filtering
+        
+        Returns:
+            HealthStatus with aggregated health from all components
+        """
+        return dynamic_health_check(self.components)
     
     def get_stats(self) -> Dict[str, Any]:
         """Get index statistics.

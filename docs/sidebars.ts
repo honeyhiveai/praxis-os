@@ -29,6 +29,7 @@ const sidebars: SidebarsConfig = {
       collapsible: true,
       items: [
         'how-to-guides/creating-project-standards',
+        'how-to-guides/using-code-intelligence',
         'how-to-guides/create-custom-workflows',
         'how-to-guides/setup-quality-gates',
         'how-to-guides/debug-workflow-failures',
@@ -84,6 +85,7 @@ const sidebars: SidebarsConfig = {
         'explanation/praxis',
         'explanation/how-it-works',
         'explanation/architecture',
+        'explanation/code-intelligence',
         'explanation/adversarial-design',
         'explanation/measuring-outcomes-not-prompts',
         'explanation/knowledge-compounding',

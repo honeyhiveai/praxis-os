@@ -44,13 +44,15 @@ Unified search tool for all project knowledge (standards, code, AST, call graphs
 
 **Purpose:** Single tool providing semantic search across multiple indexes. Find relevant chunks without reading entire files (90% context reduction per query). Drives query-first behavior that reduces overall messages by 71%.
 
+🚀 **NEW:** Multi-repo support - search across multiple local repositories simultaneously using partition filters!
+
 **Actions:**
 - `search_standards` - Hybrid search over standards documentation (vector + FTS + RRF + rerank)
-- `search_code` - Semantic code search using CodeBERT embeddings
-- `search_ast` - Structural AST search using Tree-sitter patterns
-- `find_callers` - Graph traversal: who calls this symbol?
-- `find_dependencies` - Graph traversal: what does this symbol call?
-- `find_call_paths` - Graph traversal: show call chain between two symbols
+- `search_code` - Semantic code search using CodeBERT embeddings (**multi-repo**)
+- `search_ast` - Structural AST search using Tree-sitter patterns (**multi-repo**)
+- `find_callers` - Graph traversal: who calls this symbol? (**requires partition filter**)
+- `find_dependencies` - Graph traversal: what does this symbol call? (**requires partition filter**)
+- `find_call_paths` - Graph traversal: show call chain between two symbols (**requires partition filter**)
 
 **Parameters:**
 
@@ -62,7 +64,7 @@ Unified search tool for all project knowledge (standards, code, AST, call graphs
 | `n_results` | integer | No | Number of results to return (default: 5) |
 | `max_depth` | integer | No | Max traversal depth for graph actions (default: 10) |
 | `to_symbol` | string | No | Target symbol for `find_call_paths` (required for that action) |
-| `filters` | dict | No | Metadata filters (e.g., `{"domain": "workflow", "phase": 3, "tags": ["async"]}`) |
+| `filters` | dict | No | Metadata filters including **`partition`** for multi-repo search (e.g., `{"partition": "python-sdk", "domain": "workflow"}`) |
 
 **Returns:** `Dict[str, Any]` - Search results with content chunks, file paths, and relevance scores.
 
@@ -105,18 +107,28 @@ pos_search_project(
     n_results=5
 )
 
-# Find who calls a function
+# Find who calls a function (REQUIRES partition filter in multi-repo)
 pos_search_project(
     action="find_callers",
-    query="process_workflow_phase",
+    query="HoneyHiveTracer.__init__",
+    filters={"partition": "python-sdk"},
     max_depth=5
 )
 
-# Find call path between two functions
+# Search code in SPECIFIC repository
+pos_search_project(
+    action="search_code",
+    query="How does tracing work in the SDK?",
+    filters={"partition": "python-sdk"},
+    n_results=5
+)
+
+# Find call path between two functions (REQUIRES partition filter)
 pos_search_project(
     action="find_call_paths",
     query="start_workflow",
     to_symbol="execute_phase",
+    filters={"partition": "praxis-os"},
     max_depth=10
 )
 ```

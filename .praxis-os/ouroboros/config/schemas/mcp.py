@@ -253,7 +253,7 @@ class MCPConfig(BaseConfig):
             - Invalid YAML → yaml.YAMLError with line number
             - Validation failure → ValidationError with field path and guidance
         """
-        import yaml  # type: ignore[import-untyped]
+        import yaml
 
         # Check file exists
         if not path.exists():
