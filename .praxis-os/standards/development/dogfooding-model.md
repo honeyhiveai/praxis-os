@@ -20,7 +20,7 @@ This standard covers ITERATION MECHANICS: where files live during development, h
 
 - ✅ Edit in `.praxis-os/` (installed environment, real paths)
 - ✅ Validate locally (hot reload, semantic queries, task execution)
-- ✅ Promote to skeleton (`universal/`, `scripts/`, `mcp_server/`) when shipping to users
+- ✅ Promote to dist/ (`dist/ouroboros/`, `dist/universal/`, `dist/scripts/`) when shipping to users
 - ✅ Full reinstall = QA checkpoint (not iteration step)
 
 **No exceptions.** This validates installation process, real paths, and end-user experience.
@@ -31,7 +31,7 @@ This standard covers ITERATION MECHANICS: where files live during development, h
 
 ## ❌ The Problem - Source-Directory Editing
 
-**Anti-pattern:** Modifying source directories (`universal/`, `scripts/`, `mcp_server/`)
+**Anti-pattern:** Modifying distribution artifacts (`dist/ouroboros/`, `dist/universal/`, `dist/scripts/`)
 
 **Why this fails:**
 
@@ -51,7 +51,7 @@ This standard covers ITERATION MECHANICS: where files live during development, h
 
 4. **Task Execution Paths Wrong**
    - Tasks execute from `.praxis-os/workflows/` in runtime environment
-   - Editing in `universal/workflows/` doesn't test actual execution paths
+   - Editing in `dist/universal/workflows/` doesn't test actual execution paths
 
 **Result:** Framework authors have fundamentally different experience than downstream users.
 
@@ -63,17 +63,20 @@ This standard covers ITERATION MECHANICS: where files live during development, h
 
 ```
 praxis-os/
-├── scripts/                      # SOURCE (distribution origin)
-├── universal/                    # SOURCE (distribution origin)
-├── mcp_server/                   # SOURCE (distribution origin)
+├── dist/                         # DISTRIBUTION ARTIFACTS (build output)
+│   ├── ouroboros/               # Built server code → ships to users
+│   ├── universal/               # Built standards + workflows → ships to users
+│   ├── config/                  # Built config template → ships to users
+│   └── scripts/                 # Built helper scripts → ships to users
 │
+├── scripts/                      # REPOSITORY TOOLING (install, sync-to-dist, etc.)
 ├── .praxis-os/                   # INSTALLED (runtime environment)
-│   ├── scripts/                  # ← EDIT HERE for published scripts
+│   ├── ouroboros/               # ← EDIT HERE for server code
+│   ├── scripts/                  # ← EDIT HERE for helper scripts
 │   ├── standards/
 │   │   ├── universal/            # ← EDIT HERE for shipped docs
 │   │   └── development/          # ← EDIT HERE for internal docs
 │   ├── workflows/                # ← EDIT HERE for task definitions
-│   ├── mcp_server/               # ← EDIT HERE for server modules
 │   ├── venv/
 │   └── .cache/
 │
@@ -101,7 +104,7 @@ praxis-os/
 **Steps:**
 ```bash
 # 1. Dev in local install (consumer environment)
-vim .praxis-os/mcp_server/rag_engine.py
+vim .praxis-os/ouroboros/server.py
 
 # 2. Restart MCP to test
 # Cursor → Cmd+Shift+P → "MCP: Restart Server"
@@ -109,12 +112,13 @@ vim .praxis-os/mcp_server/rag_engine.py
 # 3. Test with queries/tools
 # Changes visible immediately in consumer environment
 
-# 4. When ready to ship, copy up
-cp .praxis-os/mcp_server/rag_engine.py mcp_server/
+# 4. When ready to ship, sync to dist/
+./scripts/sync-to-dist.sh --sync
+# Or manually: cp .praxis-os/ouroboros/server.py dist/ouroboros/
 
 # 5. Reinstall = QA validation
-python scripts/install-praxis-os.py --force
-# Verify copied file works correctly via installation
+python scripts/install-praxis-os.py
+# Verify synced file works correctly via installation
 ```
 
 **Why installed-location editing:**
@@ -140,11 +144,12 @@ python .praxis-os/scripts/new-helper-tool.py
 # 3. Iterate until working
 # No reinstall needed - direct execution
 
-# 4. When ready to ship, copy up
-cp .praxis-os/scripts/new-helper-tool.py scripts/
+# 4. When ready to ship, sync to dist/
+./scripts/sync-to-dist.sh --sync
+# Note: Helper scripts may need manual copy to scripts/ (repository tooling)
 
 # 5. Reinstall = QA validation
-python scripts/install-praxis-os.py --force
+python scripts/install-praxis-os.py
 ls -la .praxis-os/scripts/new-helper-tool.py
 ```
 
@@ -172,12 +177,12 @@ vim .praxis-os/workflows/my-new-workflow/phase-1.md
 # 3. Iterate on phases, gates, evidence
 # Workflows execute from .praxis-os/ - you're testing real paths
 
-# 4. When ready to ship, copy up
-cp -r .praxis-os/workflows/my-new-workflow \
-      universal/workflows/
+# 4. When ready to ship, sync to dist/
+./scripts/sync-to-dist.sh --sync
+# Syncs: .praxis-os/workflows/ → dist/universal/workflows/
 
 # 5. Reinstall = QA validation
-python scripts/install-praxis-os.py --force
+python scripts/install-praxis-os.py
 # Verify workflow still works after installation
 ```
 
@@ -204,12 +209,12 @@ vim .praxis-os/standards/universal/testing/new-pattern.md
 # Search: "new testing pattern"
 # Verify content is discoverable and useful
 
-# 4. When ready to ship, copy up
-cp .praxis-os/standards/universal/testing/new-pattern.md \
-   universal/standards/testing/
+# 4. When ready to ship, sync to dist/
+./scripts/sync-to-dist.sh --sync
+# Syncs: .praxis-os/standards/universal/ → dist/universal/standards/
 
 # 5. Reinstall = QA validation
-python scripts/install-praxis-os.py --force
+python scripts/install-praxis-os.py
 # Verify standard is still queryable after installation
 ```
 
@@ -254,11 +259,11 @@ git commit -m "Add local dev scripts standard"
 ```
 Is this ready to ship to consumers?
 ├─ YES
-│  └─ Copy up to skeleton:
-│     ├─ .praxis-os/mcp_server/*.py      → mcp_server/
-│     ├─ .praxis-os/scripts/*.py         → scripts/
-│     ├─ .praxis-os/workflows/my-wf/     → universal/workflows/
-│     └─ .praxis-os/standards/universal/ → universal/standards/
+│  └─ Sync to dist/ (via sync-to-dist.sh):
+│     ├─ .praxis-os/ouroboros/*.py           → dist/ouroboros/
+│     ├─ .praxis-os/workflows/my-wf/         → dist/universal/workflows/
+│     └─ .praxis-os/standards/universal/     → dist/universal/standards/
+│     Note: scripts/ may need manual copy (repository tooling vs distribution)
 │
 └─ NO (dev-only or not ready)
    └─ Keep in .praxis-os/:
@@ -272,7 +277,7 @@ Is this ready to ship to consumers?
 
 **The file watcher:**
 - ✅ Watches `.praxis-os/standards/` (installed/development location)
-- ❌ Does NOT watch skeleton directories (`universal/`, `scripts/`, `mcp_server/`)
+- ❌ Does NOT watch distribution artifacts (`dist/ouroboros/`, `dist/universal/`, `dist/scripts/`)
 
 **This is correct:**
 
@@ -287,17 +292,16 @@ vim .praxis-os/standards/universal/testing/new-pattern.md
 # → Immediately queryable
 # ✅ Fast iteration!
 
-# Scenario 2: Edit skeleton (anti-pattern)
-vim universal/standards/testing/new-pattern.md
+# Scenario 2: Edit dist/ (anti-pattern)
+vim dist/universal/standards/testing/new-pattern.md
 # → File watcher does NOT detect (different directory)
 # → Index not rebuilt
 # → NOT queryable until reinstall
 # ❌ Slow iteration, breaks dogfooding
 
-# Scenario 3: Copy-up for shipping
-cp .praxis-os/standards/universal/testing/new-pattern.md \
-   universal/standards/testing/
-# → Skeleton updated for distribution
+# Scenario 3: Sync to dist/ for shipping
+./scripts/sync-to-dist.sh --sync
+# → dist/ updated for distribution
 # → Reinstall validates installation process
 ```
 
@@ -311,20 +315,20 @@ cp .praxis-os/standards/universal/testing/new-pattern.md \
 
 | Location | Purpose | Dev Location | Shipping Destination |
 |----------|---------|--------------|---------------------|
-| `.praxis-os/mcp_server/` | **DEV HERE** | Fast iteration | → `mcp_server/` |
-| `.praxis-os/scripts/` | **DEV HERE** | Fast iteration | → `scripts/` |
-| `.praxis-os/workflows/` | **DEV HERE** | Real execution paths | → `universal/workflows/` |
-| `.praxis-os/standards/universal/` | **DEV HERE** | RAG testing | → `universal/standards/` |
+| `.praxis-os/ouroboros/` | **DEV HERE** | Fast iteration | → `dist/ouroboros/` |
+| `.praxis-os/scripts/` | **DEV HERE** | Fast iteration | → `dist/scripts/` |
+| `.praxis-os/workflows/` | **DEV HERE** | Real execution paths | → `dist/universal/workflows/` |
+| `.praxis-os/standards/universal/` | **DEV HERE** | RAG testing | → `dist/universal/standards/` |
 | `.praxis-os/standards/development/` | **DEV HERE** | Local-only (never ship) | (committed, not shipped) |
 | `.praxis-os/bin/` | **DEV HERE** | Dev tools only | (committed, not shipped) |
-| `mcp_server/` | Skeleton | Copy-up target | Shipped to consumers |
-| `scripts/` | Skeleton | Copy-up target | Shipped to consumers |
-| `universal/` | Skeleton | Copy-up target | Shipped to consumers |
+| `dist/ouroboros/` | Build artifact | Sync target | Shipped to consumers |
+| `dist/scripts/` | Build artifact | Sync target | Shipped to consumers |
+| `dist/universal/` | Build artifact | Sync target | Shipped to consumers |
 
 **The Rule:**
 1. **ALWAYS dev in `.praxis-os/`** (consumer environment)
-2. **NEVER dev in skeleton** (`universal/`, `scripts/`, `mcp_server/`)
-3. **Copy up when ready to ship** (QA via reinstall)
+2. **NEVER dev in dist/** (`dist/ouroboros/`, `dist/universal/`, `dist/scripts/`)
+3. **Sync to dist/ when ready to ship** (`./scripts/sync-to-dist.sh --sync`)
 4. **Reinstall = validation** (not iteration)
 
 ---
@@ -344,17 +348,17 @@ cp .praxis-os/standards/universal/testing/new-pattern.md \
 **Fast iteration cycle:**
 ```bash
 # ✅ CORRECT: Dev in .praxis-os/, test immediately
-vim .praxis-os/mcp_server/rag_engine.py
+vim .praxis-os/ouroboros/server.py
 # Restart MCP → test → iterate
 
-# ❌ WRONG: Dev in skeleton, reinstall each time
-vim mcp_server/rag_engine.py
-python scripts/install-praxis-os.py --force  # Slow!
+# ❌ WRONG: Dev in dist/, reinstall each time
+vim dist/ouroboros/server.py
+python scripts/install-praxis-os.py  # Slow!
 # Restart MCP → test → reinstall again → slow!
 ```
 
 **When to reinstall:**
-1. After copy-up (QA the installation)
+1. After sync-to-dist (QA the installation)
 2. Weekly validation (ensure dogfooding still works)
 3. Before git commit (final check)
 4. When installation script changes
@@ -378,7 +382,7 @@ python scripts/install-praxis-os.py --force  # Slow!
 ## 🔍 Questions This Answers
 
 **"Where should I develop MCP server code?"**
-→ `.praxis-os/mcp_server/` (consumer environment, fast iteration)
+→ `.praxis-os/ouroboros/` (consumer environment, fast iteration)
 
 **"Where should I create a new workflow?"**
 → `.praxis-os/workflows/` (real execution paths, test where it runs)
@@ -386,11 +390,11 @@ python scripts/install-praxis-os.py --force  # Slow!
 **"Where should I write a new universal standard?"**
 → `.praxis-os/standards/universal/` (RAG testing, query validation)
 
-**"When do I copy up to skeleton?"**
-→ When ready to ship to consumers (validated locally first)
+**"When do I sync to dist/?"**
+→ When ready to ship to consumers (validated locally first, use `./scripts/sync-to-dist.sh --sync`)
 
-**"Why not develop in `universal/` or `scripts/`?"**
-→ Wrong paths, slow iteration, doesn't test consumer environment
+**"Why not develop in `dist/ouroboros/` or `dist/universal/`?"**
+→ Wrong paths, slow iteration, doesn't test consumer environment, dist/ is build output
 
 **"What's the purpose of reinstall?"**
 → QA validation of installation, not iteration loop
@@ -424,4 +428,4 @@ python scripts/install-praxis-os.py --force  # Slow!
 
 ---
 
-**Remember:** Develop where consumers use it (`.praxis-os/`), copy up when shipping (skeleton). Reinstall = QA validation, not iteration.
+**Remember:** Develop where consumers use it (`.praxis-os/`), sync to dist/ when shipping (`./scripts/sync-to-dist.sh --sync`). Reinstall = QA validation, not iteration.

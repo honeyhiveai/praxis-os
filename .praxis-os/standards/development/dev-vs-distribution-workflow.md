@@ -14,11 +14,11 @@
                            ✅ Live, running code
                            ✅ Make all changes here
 
-universal/               ← 🔵 DISTRIBUTION ARTIFACTS
-mcp_server/              ← 🔵 DISTRIBUTION ARTIFACTS
+dist/ouroboros/          ← 🔵 DISTRIBUTION ARTIFACTS
+dist/universal/          ← 🔵 DISTRIBUTION ARTIFACTS
                            ❌ STALE until shipped
                            ❌ READ ONLY until "ship it"
-                           ✅ Copy UP only when told
+                           ✅ Sync UP only when told (sync-to-dist.sh)
 ```
 
 **Workflow:**
@@ -54,7 +54,7 @@ mcp_server/              ← 🔵 DISTRIBUTION ARTIFACTS
 
 ## 🎯 Purpose
 
-Define the ONE-WAY workflow for praxis-os development: changes flow from dev environment (`.praxis-os/`) to distribution artifacts (`universal/`, `mcp_server/`), **NEVER the reverse**. This prevents lost work, file corruption, and hours of debugging from copying stale distribution files back into the live dev environment.
+Define the ONE-WAY workflow for praxis-os development: changes flow from dev environment (`.praxis-os/`) to distribution artifacts (`dist/universal/`, `dist/ouroboros/`), **NEVER the reverse**. This prevents lost work, file corruption, and hours of debugging from copying stale distribution files back into the live dev environment.
 
 **Core Principle:** `.praxis-os/` is the source of truth during development. Distribution artifacts are read-only snapshots copied UP when ready to ship.
 
@@ -82,16 +82,16 @@ Agent confusion about file locations led to copying `universal/config/index_conf
 ```
 .praxis-os/
 ├── config/                    ← Config files (active, live)
-│   └── index_config.yaml
-├── mcp_server/                ← MCP server code (active, running)
+│   └── mcp.yaml
+├── ouroboros/                 ← MCP server code (active, running)
 │   ├── __main__.py
-│   ├── server/
-│   │   ├── indexes/
-│   │   │   ├── standards_index.py
-│   │   │   ├── ast_index.py
+│   ├── subsystems/
+│   │   ├── rag/
+│   │   │   ├── standards/
+│   │   │   ├── code/
 │   │   │   └── index_manager.py
-│   │   └── tools/
-│   └── ...
+│   │   └── workflow/
+│   └── tools/
 ├── standards/                 ← Standards (active, indexed)
 │   ├── development/
 │   │   └── this-file.md      ← You are here!
