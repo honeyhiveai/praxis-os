@@ -377,6 +377,7 @@ class GraphConfig(BaseConfig):
         - find_call_paths: Show call chain from A to B
 
     Key Settings:
+        - enabled: Enable graph traversal index
         - max_depth: Maximum recursion depth (1-100)
         - relationship_types: Relationship types to track
 
@@ -389,6 +390,7 @@ class GraphConfig(BaseConfig):
         >>> from ouroboros.config.schemas.indexes import GraphConfig
         >>> 
         >>> config = GraphConfig(
+        ...     enabled=True,
         ...     max_depth=10,
         ...     relationship_types=["calls", "imports", "inherits"]
         ... )
@@ -401,6 +403,11 @@ class GraphConfig(BaseConfig):
     Security:
         max_depth prevents infinite recursion in circular call graphs.
     """
+
+    enabled: bool = Field(
+        default=True,
+        description="Enable graph traversal index (DuckDB call graph)",
+    )
 
     max_depth: int = Field(
         default=10,
@@ -997,6 +1004,7 @@ class ASTIndexConfig(BaseConfig):
         - Find all error handling blocks
 
     Key Settings:
+        - enabled: Enable AST structural search index
         - source_paths: Code directories to parse
         - languages: Languages to support (Tree-sitter parsers)
         - auto_install_parsers: Auto-install missing parsers
@@ -1010,6 +1018,7 @@ class ASTIndexConfig(BaseConfig):
         >>> from ouroboros.config.schemas.indexes import ASTIndexConfig
         >>> 
         >>> config = ASTIndexConfig(
+        ...     enabled=True,
         ...     source_paths=["src/", "lib/"],
         ...     languages=["python", "typescript", "rust"],
         ...     auto_install_parsers=True,
@@ -1023,6 +1032,11 @@ class ASTIndexConfig(BaseConfig):
     Security:
         Parser installation uses isolated venv (no system pollution).
     """
+
+    enabled: bool = Field(
+        default=True,
+        description="Enable AST structural search index (Tree-sitter)",
+    )
 
     source_paths: list[str] = Field(
         ...,

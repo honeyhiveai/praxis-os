@@ -139,12 +139,18 @@ class CodeIndex(BaseIndex):
             
             # Create internal indexes (legacy single-repo)
             self._semantic_index = SemanticIndex(config, base_path)
-            self._graph_index = GraphIndex(
-                config.graph, 
-                base_path, 
-                languages=config.languages,
-                code_config=config.model_dump()  # Pass full config dict for language_configs
-            )
+            
+            # Graph index is optional (only create if enabled)
+            if config.graph.enabled:
+                self._graph_index = GraphIndex(
+                    config.graph, 
+                    base_path, 
+                    languages=config.languages,
+                    code_config=config.model_dump()  # Pass full config dict for language_configs
+                )
+            else:
+                self._graph_index = None  # type: ignore[assignment]
+            
             logger.info("CodeIndex initialized in SINGLE-REPO mode (legacy)")
         
         # Create lock manager for concurrency control
@@ -152,9 +158,13 @@ class CodeIndex(BaseIndex):
         self._lock_manager = IndexLockManager("code", lock_dir)
         
         # Register components for cascading health checks
+        # Conditional Registration: Components are only registered if enabled in config.
+        # This ensures health checks only count enabled components, preventing false negatives.
+        self.components: Dict[str, ComponentDescriptor]
+        
         if self._multi_partition_mode:
             # In multi-partition mode, components are the partitions themselves
-            self.components: Dict[str, ComponentDescriptor] = {
+            self.components = {
                 partition_name: ComponentDescriptor(
                     name=f"partition:{partition_name}",
                     provides=["code_chunks", "embeddings", "ast_nodes", "symbols"],
@@ -169,26 +179,32 @@ class CodeIndex(BaseIndex):
             # Legacy single-repo component registry
             # Use default argument binding (lambda idx=self._semantic_index) to avoid late binding issues
             # where lambda captures variables by reference, not value
-            self.components = {
-                "semantic": ComponentDescriptor(
-                    name="semantic",
-                    provides=["code_chunks", "embeddings", "fts_index"],
-                    capabilities=["search"],
-                    health_check=lambda idx=self._semantic_index: idx.health_check(),
-                    rebuild=lambda: None,  # SemanticIndex doesn't have targeted rebuild yet (full rebuild only)
-                    dependencies=[],
-                ),
-                "graph": ComponentDescriptor(
+            self.components = {}
+            
+            # Semantic index is always registered (vector + optional FTS)
+            # Note: FTS within semantic is conditionally enabled via config.fts.enabled
+            self.components["semantic"] = ComponentDescriptor(
+                name="semantic",
+                provides=["code_chunks", "embeddings", "fts_index"],
+                capabilities=["search"],
+                health_check=lambda idx=self._semantic_index: idx.health_check(),
+                rebuild=lambda: None,  # SemanticIndex doesn't have targeted rebuild yet (full rebuild only)
+                dependencies=[],
+            )
+            
+            # Graph index is optional (conditional registration)
+            if config.graph.enabled:
+                self.components["graph"] = ComponentDescriptor(
                     name="graph",
                     provides=["ast_nodes", "symbols", "relationships"],
                     capabilities=["search_ast", "find_callers", "find_dependencies", "find_call_paths"],
                     health_check=lambda idx=self._graph_index: idx.health_check(),
                     rebuild=lambda: None,  # GraphIndex has component-level rebuilds internally, not at container level
                     dependencies=[],
-                ),
-            }
+                )
         
-        logger.info("CodeIndex container initialized with component registry and lock management")
+        component_names = list(self.components.keys())
+        logger.info("CodeIndex container initialized with component registry (%s) and lock management", ", ".join(component_names))
     
     def _initialize_partitions(self, config: CodeIndexConfig, base_path: Path) -> Dict[str, Any]:
         """Initialize partitions from config (multi-repo mode).
@@ -783,6 +799,12 @@ class CodeIndex(BaseIndex):
                     return all_results[:n_results]
             else:
                 # Legacy single-repo mode
+                if self._graph_index is None:
+                    raise ActionableError(
+                        what_failed="Search AST",
+                        why_failed="Graph index is disabled",
+                        how_to_fix="Enable graph index in config: graph.enabled = true"
+                    )
                 return self._graph_index.search_ast(pattern, n_results, filters)
     
     def find_callers(self, symbol_name: str, max_depth: int = 10, partition: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -829,6 +851,12 @@ class CodeIndex(BaseIndex):
                 return self._partitions[partition].search(symbol_name, "find_callers", max_depth=max_depth)  # type: ignore[no-any-return]
             else:
                 # Legacy single-repo mode
+                if self._graph_index is None:
+                    raise ActionableError(
+                        what_failed="Find callers",
+                        why_failed="Graph index is disabled",
+                        how_to_fix="Enable graph index in config: graph.enabled = true"
+                    )
                 return self._graph_index.find_callers(symbol_name, max_depth)
     
     def find_dependencies(self, symbol_name: str, max_depth: int = 10, partition: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -875,6 +903,12 @@ class CodeIndex(BaseIndex):
                 return self._partitions[partition].search(symbol_name, "find_dependencies", max_depth=max_depth)  # type: ignore[no-any-return]
             else:
                 # Legacy single-repo mode
+                if self._graph_index is None:
+                    raise ActionableError(
+                        what_failed="Find dependencies",
+                        why_failed="Graph index is disabled",
+                        how_to_fix="Enable graph index in config: graph.enabled = true"
+                    )
                 return self._graph_index.find_dependencies(symbol_name, max_depth)
     
     def find_call_paths(
@@ -934,4 +968,10 @@ class CodeIndex(BaseIndex):
                 )
             else:
                 # Legacy single-repo mode
+                if self._graph_index is None:
+                    raise ActionableError(
+                        what_failed="Find call paths",
+                        why_failed="Graph index is disabled",
+                        how_to_fix="Enable graph index in config: graph.enabled = true"
+                    )
                 return self._graph_index.find_call_paths(from_symbol, to_symbol, max_depth)

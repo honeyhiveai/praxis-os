@@ -38,23 +38,36 @@ from ouroboros.subsystems.rag.index_manager import IndexManager
 
 @pytest.fixture
 def unhealthy_indexes_config(tmp_path):
-    """Config for IndexManager with unhealthy indexes (not built yet)."""
+    """Config for IndexManager with unhealthy indexes (not built yet).
+    
+    Note: We only enable vector indexes (not FTS, reranking, graph, AST) to keep
+    the test focused on the background building mechanism itself, not all index types.
+    """
+    # Create test directories and files
+    standards_dir = tmp_path / "standards"
+    standards_dir.mkdir()
+    (standards_dir / "test_standard.md").write_text("# Test Standard\nThis is a test standard.")
+    
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    (src_dir / "test_module.py").write_text("def test_function():\n    pass\n")
+    
     return IndexesConfig(
         standards=StandardsIndexConfig(
-            source_paths=["standards/"],
+            source_paths=[str(standards_dir)],
             vector=VectorConfig(),
-            fts=FTSConfig(),
+            fts=FTSConfig(enabled=False),  # Disable FTS to simplify test
             reranking=None,
         ),
         code=CodeIndexConfig(
-            source_paths=["src/"],
+            source_paths=[str(src_dir)],
             languages=["python"],
             vector=VectorConfig(),
-            fts=FTSConfig(),
-            graph=GraphConfig(),
+            fts=FTSConfig(enabled=False),  # Disable FTS to simplify test
+            graph=GraphConfig(enabled=False),  # Disable graph to simplify test
         ),
-        ast=ASTIndexConfig(source_paths=["src/"], languages=["python"]),
-        file_watcher=FileWatcherConfig(),  # Use defaults
+        ast=ASTIndexConfig(enabled=False, source_paths=[str(src_dir)], languages=["python"]),  # Disable AST to simplify test
+        file_watcher=FileWatcherConfig(enabled=False),  # Disable file watcher for test
     )
 
 
@@ -91,11 +104,7 @@ class TestBackgroundIndexBuilding:
         This test simulates the actual background thread behavior from server.py
         (lines 199-240) to ensure the threading pattern works correctly.
         """
-        # Create dummy source files
-        standards_dir = tmp_path / "standards"
-        standards_dir.mkdir(parents=True)
-        (standards_dir / "test.md").write_text("# Test\n\nTest content")
-
+        # Use the fixture's config which already has source files
         manager = IndexManager(config=unhealthy_indexes_config, base_path=tmp_path)
 
         # Check initial health (like server startup does)
@@ -129,7 +138,7 @@ class TestBackgroundIndexBuilding:
         # Check results
         assert build_exception is None, f"Background build raised: {build_exception}"
         assert build_result is not None
-        assert build_result["all_healthy"], "Standards index should be healthy after build"
+        assert build_result["all_healthy"], "Indexes should be healthy after build"
 
     def test_background_thread_graceful_error_handling(
         self, unhealthy_indexes_config, tmp_path
@@ -181,11 +190,7 @@ class TestBackgroundIndexBuilding:
             4. If unhealthy, start background thread (lines 198-240)
             5. Server continues to start while background builds
         """
-        # Create dummy source files
-        standards_dir = tmp_path / "standards"
-        standards_dir.mkdir(parents=True)
-        (standards_dir / "test.md").write_text("# Test\n\nTest content")
-
+        # Use the fixture's config which already has source files
         # Step 1: Initialize IndexManager (like server.py line 171)
         manager = IndexManager(config=unhealthy_indexes_config, base_path=tmp_path)
 
@@ -229,7 +234,7 @@ class TestBackgroundIndexBuilding:
         # After background build, check health again
         final_result = manager.ensure_all_indexes_healthy(auto_build=False)
 
-        # Standards should be healthy now
+        # Indexes should be healthy after background build
         assert final_result["all_healthy"], "Indexes should be healthy after background build"
 
 
@@ -246,11 +251,7 @@ class TestBackgroundBuildingArchitecture:
 
         This is the architectural choice made in the fix (server.py lines 195-197).
         """
-        # Create dummy source files
-        standards_dir = tmp_path / "standards"
-        standards_dir.mkdir(parents=True)
-        (standards_dir / "test.md").write_text("# Test\n\nTest content")
-
+        # Use the fixture's config which already has source files
         manager = IndexManager(config=unhealthy_indexes_config, base_path=tmp_path)
 
         # Time 0: Server starts, indexes unhealthy
@@ -279,7 +280,7 @@ class TestBackgroundBuildingArchitecture:
         assert build_complete.wait(timeout=30.0)
         result_t3 = manager.ensure_all_indexes_healthy(auto_build=False)
 
-        # Standards should be healthy after background build
+        # Indexes should be healthy after background build
         assert result_t3["all_healthy"], "Indexes should be healthy after background build"
 
     def test_nonblocking_startup_is_fast(self, unhealthy_indexes_config, tmp_path):
@@ -288,11 +289,7 @@ class TestBackgroundBuildingArchitecture:
         This validates the key benefit of the fix: server starts immediately
         without waiting for index building, which can take 30s+ for large indexes.
         """
-        # Create dummy source files
-        standards_dir = tmp_path / "standards"
-        standards_dir.mkdir(parents=True)
-        (standards_dir / "test.md").write_text("# Test\n\nTest content")
-
+        # Use the fixture's config which already has source files
         manager = IndexManager(config=unhealthy_indexes_config, base_path=tmp_path)
 
         # NON-BLOCKING STARTUP (the fix)

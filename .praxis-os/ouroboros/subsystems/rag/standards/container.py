@@ -88,34 +88,47 @@ class StandardsIndex(BaseIndex):
         # Architecture: Vector + FTS + Metadata (scalar indexes) → RRF fusion → optional reranking
         # Note: SemanticIndex has unified LanceDB table but we model the three index types
         # as separate components for health/diagnostics
-        self.components: Dict[str, ComponentDescriptor] = {
-            "vector": ComponentDescriptor(
-                name="vector",
-                provides=["embeddings", "vector_index"],
-                capabilities=["vector_search"],
-                health_check=self._check_vector_health,
-                rebuild=self._rebuild_vector,
-                dependencies=[],  # Vector has no dependencies (base table)
-            ),
-            "fts": ComponentDescriptor(
+        #
+        # Conditional Registration: Components are only registered if enabled in config.
+        # This ensures health checks only count enabled components, preventing false negatives.
+        self.components: Dict[str, ComponentDescriptor] = {}
+        
+        # Vector is always required (base table)
+        self.components["vector"] = ComponentDescriptor(
+            name="vector",
+            provides=["embeddings", "vector_index"],
+            capabilities=["vector_search"],
+            health_check=self._check_vector_health,
+            rebuild=self._rebuild_vector,
+            dependencies=[],  # Vector has no dependencies (base table)
+        )
+        
+        # FTS is optional (conditional registration)
+        if config.fts.enabled:
+            self.components["fts"] = ComponentDescriptor(
                 name="fts",
                 provides=["fts_index", "keyword_search"],
                 capabilities=["fts_search", "hybrid_search"],
                 health_check=self._check_fts_health,
                 rebuild=self._rebuild_fts,
                 dependencies=["vector"],  # FTS depends on vector (table must exist first)
-            ),
-            "metadata": ComponentDescriptor(
-                name="metadata",
-                provides=["scalar_indexes", "metadata_filtering"],
-                capabilities=["filter_by_domain", "filter_by_phase", "filter_by_role"],
-                health_check=self._check_metadata_health,
-                rebuild=self._rebuild_metadata,
-                dependencies=["vector"],  # Metadata indexes depend on vector (table must exist first)
-            ),
-        }
+            )
         
-        logger.info("StandardsIndex container initialized with component registry (vector, fts, metadata) and lock management")
+        # Metadata is optional (conditional registration based on MetadataFilteringConfig)
+        # Note: metadata component is registered if config has metadata filtering enabled
+        # For now, we always register it since it's part of the base SemanticIndex
+        # TODO: Make this conditional when MetadataFilteringConfig is added to StandardsIndexConfig
+        self.components["metadata"] = ComponentDescriptor(
+            name="metadata",
+            provides=["scalar_indexes", "metadata_filtering"],
+            capabilities=["filter_by_domain", "filter_by_phase", "filter_by_role"],
+            health_check=self._check_metadata_health,
+            rebuild=self._rebuild_metadata,
+            dependencies=["vector"],  # Metadata indexes depend on vector (table must exist first)
+        )
+        
+        component_names = list(self.components.keys())
+        logger.info("StandardsIndex container initialized with component registry (%s) and lock management", ", ".join(component_names))
     
     def build(self, source_paths: List[Path], force: bool = False) -> None:
         """Build standards index from source paths.
