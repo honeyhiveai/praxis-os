@@ -487,6 +487,7 @@ def configure_gitignore(target: Path):
         ".praxis-os/.cache/",
         ".praxis-os/venv/",
         ".praxis-os/workspace/",
+        ".praxis-os/.backups/",
         ".praxis-os/.mcp_server_state.json",
         "",
     ]
@@ -514,6 +515,7 @@ def configure_gitignore(target: Path):
     print("    • .praxis-os/.cache/          (RAG index, ~50MB)")
     print("    • .praxis-os/venv/            (Python dependencies, ~250MB)")
     print("    • .praxis-os/workspace/       (Temporary working files)")
+    print("    • .praxis-os/.backups/        (Upgrade backups)")
     print("    • .praxis-os/.mcp_server_state.json  (MCP runtime state)")
     print()
     print("  These files are ephemeral and should not be committed.")
