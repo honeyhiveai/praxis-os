@@ -16,27 +16,31 @@ Create the complete `.praxis-os/` directory structure that the MCP server requir
 
 ---
 
-## 📁 Required Directories (8 total)
+## 📁 Required Directories
 
-The MCP server requires exactly these directories:
+The installation creates this directory structure:
 
 ```
 .praxis-os/
 ├── standards/
-│   └── universal/          # Universal CS fundamentals
-├── usage/                   # prAxIs OS usage docs
-├── workflows/               # Workflow definitions (CRITICAL!)
-├── ouroboros/               # MCP server code
-├── .cache/                  # Vector index and state files
-└── specs/                   # User-created specs
-    ├── review/              # Specs awaiting approval
-    ├── approved/            # Specs ready to implement
-    └── completed/           # Finished implementations
-
-.cursor/                     # Cursor configuration
+│   ├── universal/          # Universal CS fundamentals (from framework)
+│   └── development/        # Project-specific standards (LLM-generated)
+├── workflows/              # Workflow definitions (CRITICAL!)
+├── ouroboros/              # MCP server code
+├── scripts/                # Helper scripts (RAG index builder, etc.)
+├── workspace/              # Temporary working files
+│   ├── design/             # Design documents
+│   ├── analysis/           # Analysis artifacts
+│   └── scratch/            # Scratch space
+├── specs/                  # User-created specs
+│   ├── review/             # Specs awaiting approval
+│   ├── approved/           # Specs ready to implement
+│   └── completed/          # Finished implementations
+├── .cache/                 # RAG index and state files (ephemeral)
+└── venv/                   # Python virtual environment (ephemeral)
 ```
 
-**Total**: 7 directories under `.praxis-os/` + 1 `.cursor/` directory
+**Note**: The install script creates these automatically. No manual creation needed.
 
 ---
 
@@ -44,38 +48,35 @@ The MCP server requires exactly these directories:
 
 **Most commonly forgotten directory**: `.praxis-os/workflows/`
 
-The MCP server's `ConfigValidator` explicitly checks for:
-- `.praxis-os/standards/`
-- `.praxis-os/usage/`
-- `.praxis-os/workflows/` ← **If this is missing, server won't start!**
+The MCP server requires this directory to exist. If missing, workflow tools will fail.
 
-From `ouroboros/config/schemas/mcp.py`:
-```python
-for name in ["standards_path", "usage_path", "workflows_path"]:
-    if not path.exists():
-        errors.append(f"❌ {name} does not exist: {path}")
-```
+**Good news**: The `install-praxis-os.py` script creates all directories automatically, so you don't need to worry about this when using the script.
 
 ---
 
-## 🔨 Commands to Create Directories
+## 🔨 Manual Directory Creation (If Script Fails)
 
-### Option A: Python (Recommended)
+**⚠️ IMPORTANT**: Use the `install-praxis-os.py` script instead. This manual path is only for troubleshooting.
+
+### Option A: Python
 
 ```python
 import os
 
-# Create all required directories
+# Create all required directories (matches install script)
 directories = [
     ".praxis-os/standards/universal",
-    ".praxis-os/usage",
-    ".praxis-os/workflows",          # ← Don't forget this!
-    ".praxis-os/specs/review",       # Specs awaiting approval
-    ".praxis-os/specs/approved",     # Specs ready to implement
-    ".praxis-os/specs/completed",    # Finished implementations
+    ".praxis-os/standards/development",
+    ".praxis-os/workflows",
     ".praxis-os/ouroboros",
-    ".praxis-os/.cache",
-    ".cursor",
+    ".praxis-os/scripts",
+    ".praxis-os/workspace/design",
+    ".praxis-os/workspace/analysis",
+    ".praxis-os/workspace/scratch",
+    ".praxis-os/specs/review",
+    ".praxis-os/specs/approved",
+    ".praxis-os/specs/completed",
+    ".praxis-os/.cache/vector_index",
 ]
 
 for directory in directories:
@@ -90,27 +91,29 @@ print("\n✅ All directories created")
 **Linux / macOS / WSL2**:
 ```bash
 mkdir -p .praxis-os/standards/universal
-mkdir -p .praxis-os/usage
+mkdir -p .praxis-os/standards/development
 mkdir -p .praxis-os/workflows
-mkdir -p .praxis-os/specs/review
-mkdir -p .praxis-os/specs/approved
-mkdir -p .praxis-os/specs/completed
 mkdir -p .praxis-os/ouroboros
-mkdir -p .praxis-os/.cache
-mkdir -p .cursor
+mkdir -p .praxis-os/scripts
+mkdir -p .praxis-os/workspace/{design,analysis,scratch}
+mkdir -p .praxis-os/specs/{review,approved,completed}
+mkdir -p .praxis-os/.cache/vector_index
 ```
 
 **Windows (PowerShell)**:
 ```powershell
 New-Item -ItemType Directory -Force -Path ".praxis-os\standards\universal"
-New-Item -ItemType Directory -Force -Path ".praxis-os\usage"
+New-Item -ItemType Directory -Force -Path ".praxis-os\standards\development"
 New-Item -ItemType Directory -Force -Path ".praxis-os\workflows"
+New-Item -ItemType Directory -Force -Path ".praxis-os\ouroboros"
+New-Item -ItemType Directory -Force -Path ".praxis-os\scripts"
+New-Item -ItemType Directory -Force -Path ".praxis-os\workspace\design"
+New-Item -ItemType Directory -Force -Path ".praxis-os\workspace\analysis"
+New-Item -ItemType Directory -Force -Path ".praxis-os\workspace\scratch"
 New-Item -ItemType Directory -Force -Path ".praxis-os\specs\review"
 New-Item -ItemType Directory -Force -Path ".praxis-os\specs\approved"
 New-Item -ItemType Directory -Force -Path ".praxis-os\specs\completed"
-New-Item -ItemType Directory -Force -Path ".praxis-os\ouroboros"
-New-Item -ItemType Directory -Force -Path ".praxis-os\.cache"
-New-Item -ItemType Directory -Force -Path ".cursor"
+New-Item -ItemType Directory -Force -Path ".praxis-os\.cache\vector_index"
 ```
 
 ---

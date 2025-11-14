@@ -183,6 +183,8 @@ def create_directories(target: Path):
         base / "workflows",
         # MCP Server
         base / "ouroboros",
+        # Config directory
+        base / "config",
         # Specs (organized by status)
         base / "specs" / "approved",
         base / "specs" / "completed",
@@ -240,6 +242,7 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
       - universal/standards → .praxis-os/standards/universal (keep namespace)
       - dist/ouroboros → .praxis-os/ouroboros (direct copy)
       - scripts → .praxis-os/scripts (RAG index builder, etc.)
+      - dist/config/mcp.yaml → .praxis-os/config/mcp.yaml (template, LLM customizes)
 
     After each copy, validates that source and destination file counts match.
 
@@ -309,6 +312,14 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
         validate_directory_copy(src_scripts, dest_scripts, "scripts")
         stats["scripts"] = count_files(dest_scripts)
         print(f"✓ {stats['scripts']} files")
+
+        # 5. Config template (mcp.yaml - LLM will customize during agent setup)
+        print("  Copying config template...", end=" ", flush=True)
+        src_config = source / "dist" / "config" / "mcp.yaml"
+        dest_config = base / "config" / "mcp.yaml"
+        shutil.copy2(src_config, dest_config)
+        stats["config"] = 1
+        print(f"✓ {stats['config']} file")
 
         stats["total"] = sum(stats.values())
         return stats
@@ -381,6 +392,7 @@ def validate_installation(target: Path, stats: Dict[str, int]):
         base / "standards" / "universal",
         base / "standards" / "development",
         base / "ouroboros",
+        base / "config",
         base / "scripts",
         base / "specs" / "approved",
         base / "specs" / "completed",
@@ -563,6 +575,7 @@ def print_success(target: Path, stats: Dict[str, int]):
     print(f"  • Standards: {stats['standards']} files")
     print(f"  • Workflows: {stats['workflows']} files")
     print(f"  • MCP Server: {stats['ouroboros']} files")
+    print(f"  • Config Template: {stats['config']} file")
     print(f"  • Helper Scripts: {stats['scripts']} scripts")
     print(f"  • Total: {stats['total']} files")
     print()
