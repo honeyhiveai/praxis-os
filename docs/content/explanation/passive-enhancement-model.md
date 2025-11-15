@@ -295,6 +295,15 @@ prAxIs OS installation is **LLM-guided and executed** - your AI agent handles ev
 - First evidence that the AI can be trusted with real work
 - Sets the foundation for the human-AI collaboration model
 
+**The Learning Parallel:**
+
+AI agents, like people, improve through guidance and accessible knowledge. When a junior developer joins your team, you don't expect perfection—you provide:
+- **Standards and conventions** - How we do things here
+- **Accessible documentation** - Knowledge when they need it  
+- **Mentorship and feedback** - Evidence of understanding
+
+prAxIs OS provides the same infrastructure for AI agents. The installation is your first "pair programming" session—the AI successfully completes a complex task using the tools it will rely on going forward. Mistakes will happen (as with any developer), but each one becomes impossible to repeat once captured as a standard. The system gets smarter with every session.
+
 **Next steps:**
 - [How It Works](./how-it-works.md) - RAG mechanism
 - [Architecture](./architecture.md) - System design
