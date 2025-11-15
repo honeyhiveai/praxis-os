@@ -1546,7 +1546,9 @@ class FileUpgrader:
             return  # Gracefully handle missing source
 
         before_snapshot = self._snapshot_directory(dst)
-        self._rsync(src, dst, delete=True)
+        self._rsync(
+            src, dst, delete=False
+        )  # No need to delete - dirs_exist_ok overwrites
         after_snapshot = self._snapshot_directory(dst)
 
         self._track_changes("standards/universal", before_snapshot, after_snapshot)
@@ -1582,7 +1584,9 @@ class FileUpgrader:
             return
 
         before_snapshot = self._snapshot_directory(dst)
-        self._rsync(src, dst, delete=True)
+        self._rsync(
+            src, dst, delete=False
+        )  # No need to delete - dirs_exist_ok overwrites
         after_snapshot = self._snapshot_directory(dst)
 
         self._track_changes("workflows", before_snapshot, after_snapshot)
@@ -1633,7 +1637,9 @@ class FileUpgrader:
         before_snapshot = self._snapshot_directory(dst)
         print(f"  Before snapshot: {len(before_snapshot)} files")
 
-        self._rsync(src, dst, delete=True)
+        self._rsync(
+            src, dst, delete=False
+        )  # No need to delete - dirs_exist_ok overwrites
 
         after_snapshot = self._snapshot_directory(dst)
         print(f"  After snapshot: {len(after_snapshot)} files")
@@ -1674,7 +1680,9 @@ class FileUpgrader:
             return
 
         before_snapshot = self._snapshot_directory(dst)
-        self._rsync(src, dst, delete=True)
+        self._rsync(
+            src, dst, delete=False
+        )  # No need to delete - dirs_exist_ok overwrites
         after_snapshot = self._snapshot_directory(dst)
 
         self._track_changes("scripts", before_snapshot, after_snapshot)
@@ -1683,10 +1691,14 @@ class FileUpgrader:
         """
         Copy files from source to destination with ignore patterns.
 
+        Uses dirs_exist_ok=True to overwrite existing files without
+        needing to delete the destination directory first.
+
         Args:
             src: Source directory
             dst: Destination directory
-            delete: If True, delete destination before copying
+            delete: DEPRECATED - kept for compatibility but ignored.
+                    dirs_exist_ok=True handles overwrites safely.
 
         Raises:
             IOError: If copy operation fails
@@ -1710,7 +1722,6 @@ class FileUpgrader:
         print(f"\n[DEBUG] _rsync:")
         print(f"  src={src}")
         print(f"  dst={dst}")
-        print(f"  delete={delete}")
         print(f"  src.exists()={src.exists()}")
         print(f"  dst.exists()={dst.exists()}")
 
@@ -1726,12 +1737,9 @@ class FileUpgrader:
         )
 
         try:
-            if delete and dst.exists():
-                print(f"  [ACTION] Deleting {dst}")
-                shutil.rmtree(dst)
-                print(f"  [DONE] Deleted {dst}")
-
-            print(f"  [ACTION] Copying {src} -> {dst}")
+            # NO DELETION - dirs_exist_ok=True safely overwrites files
+            # This preserves sibling directories like venv/ that shouldn't be touched
+            print(f"  [ACTION] Copying {src} -> {dst} (overwrite mode)")
             shutil.copytree(src, dst, dirs_exist_ok=True, ignore=ignore)
             print(f"  [DONE] Copy complete")
 
