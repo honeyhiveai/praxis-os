@@ -30,6 +30,7 @@ from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
 from ouroboros.subsystems.rag.code.constants import DEFAULT_EXCLUDE_PATTERNS
 from ouroboros.subsystems.rag.code.ast_chunker import UniversalASTChunker, CodeChunk
 from ouroboros.subsystems.rag.utils.lancedb_helpers import EmbeddingModelLoader, LanceDBConnection, safe_encode
+from ouroboros.subsystems.rag.utils.progress_file import ProgressFileManager
 from ouroboros.utils.errors import ActionableError, IndexError
 from gitignore_parser import parse_gitignore
 
@@ -115,6 +116,14 @@ class SemanticIndex(BaseIndex):
         # AST chunking fallback tracking (for health metrics)
         self._ast_fallback_count: int = 0
         
+        # Progress file manager for build progress reporting
+        progress_cache_dir = base_path / ".praxis-os" / ".cache" / "rag" / "build-progress"
+        self._progress_manager = ProgressFileManager(
+            cache_dir=progress_cache_dir,
+            index_name="code",
+            component="semantic"
+        )
+        
         logger.info("SemanticIndex (code) initialized (lazy-load mode)")
     
     def _ensure_table(self):
@@ -153,49 +162,74 @@ class SemanticIndex(BaseIndex):
         """
         logger.info("Building code index from %d source paths", len(source_paths))
         
-        # Check if index already exists
-        db = self.db_connection.connect()
-        existing_tables = db.table_names()
+        try:
+            # Write initial progress (0%)
+            self._progress_manager.write_progress(0.0, "Starting build...")
+            
+            # Check if index already exists
+            db = self.db_connection.connect()
+            existing_tables = db.table_names()
+            
+            if "code" in existing_tables and not force:
+                logger.info("Code index already exists. Use force=True to rebuild.")
+                # Cleanup progress file on early return
+                self._progress_manager.delete_progress()
+                return
+            
+            # Load embedding model via helper (caching)
+            self._progress_manager.write_progress(5.0, "Loading CodeBERT embedding model...")
+            embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
+            
+            # Collect and chunk code files
+            self._progress_manager.write_progress(10.0, "Discovering and chunking code files...")
+            chunks = self._collect_and_chunk(source_paths)
+            logger.info("Collected %d code chunks from source paths", len(chunks))
+            
+            if not chunks:
+                # Cleanup progress file on error
+                self._progress_manager.delete_progress()
+                raise ActionableError(
+                    what_failed="Build code index",
+                    why_failed="No code files found in source paths",
+                    how_to_fix=f"Check that source paths contain code files for languages: {self.config.languages}"
+                )
+            
+            # Generate embeddings with progress reporting
+            logger.info("Generating embeddings for %d chunks...", len(chunks))
+            texts = [chunk["content"] for chunk in chunks]
+            
+            # Report progress during embedding (20% -> 70% of total progress)
+            self._progress_manager.write_progress(20.0, f"Generating embeddings for {len(chunks)} code chunks...")
+            embeddings = safe_encode(embedding_model, texts, show_progress_bar=True)
+            self._progress_manager.write_progress(70.0, f"Embeddings generated for {len(chunks)} chunks")
+            
+            # Add embeddings to chunks
+            for chunk, embedding in zip(chunks, embeddings):
+                chunk["vector"] = embedding.tolist()
+            
+            # Create table (drop existing if force=True)
+            if "code" in existing_tables and force:
+                logger.info("Dropping existing code table (force rebuild)")
+                db.drop_table("code")
+            
+            self._progress_manager.write_progress(75.0, f"Creating LanceDB table with {len(chunks)} chunks...")
+            logger.info("Creating code table with %d chunks", len(chunks))
+            self._table = db.create_table("code", data=chunks)
+            
+            # Build indexes
+            self._progress_manager.write_progress(85.0, "Building FTS and metadata indexes...")
+            self._build_indexes()
+            
+            # Success - cleanup progress file
+            self._progress_manager.write_progress(100.0, "Build complete!")
+            self._progress_manager.delete_progress()
+            
+            logger.info("✅ Code index built successfully")
         
-        if "code" in existing_tables and not force:
-            logger.info("Code index already exists. Use force=True to rebuild.")
-            return
-        
-        # Load embedding model via helper (caching)
-        embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
-        
-        # Collect and chunk code files
-        chunks = self._collect_and_chunk(source_paths)
-        logger.info("Collected %d code chunks from source paths", len(chunks))
-        
-        if not chunks:
-            raise ActionableError(
-                what_failed="Build code index",
-                why_failed="No code files found in source paths",
-                how_to_fix=f"Check that source paths contain code files for languages: {self.config.languages}"
-            )
-        
-        # Generate embeddings
-        logger.info("Generating embeddings for %d chunks...", len(chunks))
-        texts = [chunk["content"] for chunk in chunks]
-        embeddings = safe_encode(embedding_model, texts, show_progress_bar=True)
-        
-        # Add embeddings to chunks
-        for chunk, embedding in zip(chunks, embeddings):
-            chunk["vector"] = embedding.tolist()
-        
-        # Create table (drop existing if force=True)
-        if "code" in existing_tables and force:
-            logger.info("Dropping existing code table (force rebuild)")
-            db.drop_table("code")
-        
-        logger.info("Creating code table with %d chunks", len(chunks))
-        self._table = db.create_table("code", data=chunks)
-        
-        # Build indexes
-        self._build_indexes()
-        
-        logger.info("✅ Code index built successfully")
+        except Exception as e:
+            # Cleanup progress file on failure
+            self._progress_manager.delete_progress()
+            raise
     
     def _collect_and_chunk(self, source_paths: List[Path]) -> List[Dict[str, Any]]:
         """Collect code files and chunk them.
@@ -1130,6 +1164,23 @@ class SemanticIndex(BaseIndex):
             logger.info("Deleted chunks for file: %s", relative_path)
         except Exception as e:
             logger.warning("Failed to delete chunks for %s: %s", relative_path, e)
+    
+    def build_status(self) -> "BuildStatus":  # type: ignore[name-defined]
+        """Check build status (not implemented for internal semantic index).
+        
+        This is an internal implementation class. Build status is handled
+        by the container class (CodeIndex).
+        
+        Returns:
+            BuildStatus indicating BUILT (stub implementation)
+        """
+        from ouroboros.subsystems.rag.base import BuildStatus, IndexBuildState
+        
+        return BuildStatus(
+            state=IndexBuildState.BUILT,
+            message="Internal semantic index (build status tracked by container)",
+            progress_percent=100.0,
+        )
     
     def health_check(self) -> HealthStatus:
         """Check index health with dynamic validation.

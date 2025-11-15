@@ -43,7 +43,7 @@ LLM reads: 00-START.md
 LLM reads: 01-directories.md
     ↓ (creates 8 directories)
 LLM reads: 02-copy-files.md
-    ↓ (copies ~106 files)
+    ↓ (copies all required files)
 LLM reads: 03-agent-configuration.md
     ↓ (routes to agent-specific guide)
 LLM reads: 04-config-customization.md
@@ -117,9 +117,9 @@ Installation is successful when:
 checks = {
     # Directories
     ".praxis-os/standards/universal/": exists,
-    ".praxis-os/usage/": exists,
-    ".praxis-os/workflows/": exists and has ~47 files,
-    ".praxis-os/ouroboros/": exists and has ~23 files,
+    ".praxis-os/workflows/": exists and populated,
+    ".praxis-os/ouroboros/": exists and populated,
+    ".praxis-os/config/": exists,
     ".praxis-os/venv/": exists with working Python,
     ".praxis-os/.cache/": exists,
     ".cursor/": exists,
@@ -153,7 +153,7 @@ checks = {
 - Expected success rate: 100%
 - User experience: Smooth, automated, validated
 - Time: ~5-10 minutes
-- Files installed: ~106 files
+- Files installed: Complete installation (standards, workflows, server code)
 - Temp cleanup: Automatic
 
 ---

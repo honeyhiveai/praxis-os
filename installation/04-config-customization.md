@@ -2,7 +2,7 @@
 
 **Previous**: `03-agent-configuration.md` (routed to agent-specific guide)  
 **Current**: Customizing `mcp.yaml` for your project  
-**Next**: `05-gitignore.md`
+**Next**: `05-venv-mcp.md`
 
 ---
 
@@ -356,28 +356,31 @@ At this point you should have:
 ## 🎯 What's Next
 
 You've customized the config for your project. Now you need to:
-1. Configure `.gitignore` (prevent committing 2.6GB of ephemeral files)
-2. Create Python venv and install dependencies
+1. Create Python venv and install dependencies
+2. Configure MCP server for your agent
 3. Build RAG index (will use your customized config)
 
-**Next step**: Configure `.gitignore` to prevent committing cache files.
+**Next step**: Create Python virtual environment and configure MCP server.
+
+**Note**: The install script automatically handles `.gitignore` configuration, so you can skip that step.
 
 ---
 
 ## ➡️ NEXT STEP
 
-**Read file**: `installation/05-gitignore.md`
+**Read file**: `installation/05-venv-mcp.md`
 
 That file will:
-1. Read gitignore requirements from standards
-2. Append prAxIs OS entries to your `.gitignore`
-3. Verify gitignore is working correctly
-4. Direct you to step 06 (venv and mcp setup)
+1. Create Python virtual environment
+2. Install MCP server dependencies
+3. Configure MCP server (agent-specific)
+4. Build RAG index (automatic on server start)
+5. Direct you to step 06 (final validation)
 
 ---
 
 **Status**: Step 4 Complete ✅  
 **Customized**: `mcp.yaml` config file  
-**Next File**: `05-gitignore.md`  
-**Step**: 4 of 7
+**Next File**: `05-venv-mcp.md`  
+**Step**: 4 of 6
 

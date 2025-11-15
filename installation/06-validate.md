@@ -1,6 +1,6 @@
-# Step 7: Final Validation and Cleanup
+# Step 6: Final Validation and Cleanup
 
-**Previous**: `06-venv-mcp.md` (created venv, mcp.json, and RAG index)  
+**Previous**: `05-venv-mcp.md` (created venv, mcp.json, and RAG index)  
 **Current**: Final validation and cleanup  
 **Next**: Installation complete!
 
@@ -41,9 +41,9 @@ warnings = []
 print("\n📁 Checking directories...")
 required_dirs = [
     ".praxis-os/standards/universal",
-    ".praxis-os/usage",
     ".praxis-os/workflows",
     ".praxis-os/ouroboros",
+    ".praxis-os/config",
     ".praxis-os/.cache",
     ".praxis-os/venv",
 ]
@@ -103,7 +103,7 @@ for f in critical_files:
 # Check 3: Workflows directory populated
 print("\n🔄 Checking workflows...")
 workflow_count = sum(len(files) for _, _, files in os.walk(".praxis-os/workflows"))
-if workflow_count >= 40:  # Should have ~47 files
+if workflow_count >= 40:  # Should have multiple workflow definitions
     print(f"  ✅ Workflows populated ({workflow_count} files)")
 else:
     print(f"  ⚠️  Workflows sparse ({workflow_count} files, expected ~47)")
@@ -305,7 +305,7 @@ The installation is complete, but the MCP server won't start until Cursor is res
 Installation Summary:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ .praxis-os/ directory structure created
-✅ ~106 files copied from source repository
+✅ All required files copied (standards, workflows, server code)
 ✅ Agent configuration files configured (or merged with existing)
 ✅ Python virtual environment created
 ✅ MCP server dependencies installed
@@ -367,10 +367,8 @@ What's Installed:
    - Browser automation (Playwright integration)
    - Sub-agents (design validator, concurrency analyzer, etc.)
 
-📝 Documentation:
-   - .praxis-os/usage/creating-specs.md
-   - .praxis-os/usage/operating-model.md
-   - .praxis-os/usage/mcp-usage-guide.md
+📝 Configuration:
+   - .praxis-os/config/mcp.yaml (customized for your project)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -468,6 +466,6 @@ The user should restart their agent/IDE to activate the MCP server.
 
 **Status**: Installation Complete ✅  
 **Duration**: ~5-10 minutes  
-**Files Installed**: ~106 files  
+**Files Installed**: Complete installation (see script output for counts)  
 **Temp Files**: Cleaned up ✅
 

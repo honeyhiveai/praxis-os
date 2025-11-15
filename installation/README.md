@@ -15,8 +15,14 @@ When a user asks to install prAxIs OS, follow this two-phase approach:
 Run the installation script:
 
 ```bash
-# macOS / Linux
+# macOS / Linux (installs to current directory)
 curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/install-praxis-os.py | python3 -
+
+# To install to a different directory:
+# 1. Download the script first
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/install-praxis-os.py -o install-praxis-os.py
+# 2. Run with target directory
+python3 install-praxis-os.py /path/to/target/project
 
 # Windows: Not yet supported
 ```
@@ -41,6 +47,10 @@ After the script completes, configure the specific agent:
    - `"...for Cline in Cursor"` → Secondary Cline (HTTP)
    - `"...for Claude Code"` → **CLI/terminal mode** (default when no IDE specified)
    - `"...for Claude Code in VS Code"` → **VS Code extension** (when IDE specified)
+   
+   **If no agent specified**: Ask user which agent/IDE they're using:
+   - "Which agent/IDE would you like to use? (Cursor, Cline, Claude Code, GitHub Copilot)"
+   - Then route to the appropriate guide based on their response
    
    **Branching Logic for Claude Code:**
    - If user says `"for Claude Code"` → Route to `claude-code/terminal.md` (CLI mode)
@@ -72,11 +82,15 @@ After the script completes, configure the specific agent:
 Run `install-praxis-os.py` for fast, reliable installation:
 
 ```bash
-# From praxis-os repository
-python scripts/install-praxis-os.py /path/to/target/project
+# Option 1: Direct from GitHub (installs to current directory)
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/install-praxis-os.py | python3 -
 
-# Or from target project  
-python /path/to/praxis-os/scripts/install-praxis-os.py .
+# Option 2: Download first, then specify target directory
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/scripts/install-praxis-os.py -o install-praxis-os.py
+python3 install-praxis-os.py /path/to/target/project
+
+# Option 3: If you have praxis-os cloned locally (for development/testing)
+python scripts/install-praxis-os.py /path/to/target/project
 ```
 
 **What it does:**
@@ -98,8 +112,8 @@ For environments where script can't run, or for understanding/troubleshooting, u
 
 ```
 00-START.md → 01-directories.md → 02-copy-files.md → 
-03-agent-configuration.md → 04-config-customization.md → 05-gitignore.md → 
-06-venv-mcp.md → 07-validate.md → COMPLETE
+03-agent-configuration.md → 04-config-customization.md → 
+05-venv-mcp.md → 06-validate.md → COMPLETE
 ```
 
 **Each file:** ~200-250 lines, designed for vanilla LLM attention spans
@@ -198,12 +212,10 @@ praxis-os/
 │   ├── 02-copy-files.md
 │   ├── 03-agent-configuration.md  ← Routes to agent-specific guides
 │   ├── 04-config-customization.md  ← Customize mcp.yaml for project
-│   ├── 05-gitignore.md
-│   ├── 06-venv-mcp.md
-│   └── 07-validate.md
+│   ├── 05-venv-mcp.md
+│   └── 06-validate.md
 ├── universal/             ← Content to copy
 │   ├── standards/
-│   ├── usage/
 │   └── workflows/
 ├── dist/ouroboros/        ← Server code to copy
 └── .cursorrules           ← Cursor behavioral triggers (agent-specific files handled in step 03)
@@ -214,7 +226,7 @@ praxis-os/
 /tmp/praxis-os-install-xyz/
 └── [same structure as above]
     ← Cloned here temporarily
-    ← Deleted at end of step 05
+    ← Deleted at final validation step
 ```
 
 **Target Project** (consumer):
@@ -222,9 +234,9 @@ praxis-os/
 target-project/
 ├── .praxis-os/             ← Created during installation
 │   ├── standards/
-│   ├── usage/
 │   ├── workflows/
 │   ├── ouroboros/
+│   ├── config/
 │   ├── venv/
 │   └── .cache/
 ├── [agent-specific file]  ← Copied or merged based on agent:
@@ -247,7 +259,7 @@ After installation, these should all be true:
 
 ```python
 checks = {
-    ".praxis-os/workflows/": exists and has ~47 files,
+    ".praxis-os/workflows/": exists and populated,
     ".praxis-os/venv/": exists with working Python,
     ".praxis-os/.cache/indexes/": exists with RAG index,
     ".cursorrules": exists with prAxIs OS rules,
@@ -293,8 +305,8 @@ checks = {
 ## 🎯 Success Criteria
 
 Installation is successful when:
-- ✅ All 8 directories created
-- ✅ ~106 files copied
+- ✅ Complete directory structure created
+- ✅ All required files copied (standards, workflows, server code)
 - ✅ .cursorrules handled safely
 - ✅ Python venv working
 - ✅ **RAG index built** (enables semantic search)
@@ -307,5 +319,5 @@ Installation is successful when:
 
 ---
 
-**Last Updated**: October 8, 2025  
-**Version**: 2.0 (Horizontally-scaled, bootstrapping-friendly)
+**Last Updated**: November 14, 2024  
+**Version**: 2.1 (Removed usage/ directory, automated gitignore, qualitative descriptions)

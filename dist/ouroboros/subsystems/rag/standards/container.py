@@ -30,14 +30,15 @@ Traceability:
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 from ouroboros.config.schemas.indexes import StandardsIndexConfig
-from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
+from ouroboros.subsystems.rag.base import BaseIndex, BuildStatus, HealthStatus, IndexBuildState, SearchResult
 from ouroboros.subsystems.rag.lock_manager import IndexLockManager
 from ouroboros.subsystems.rag.standards.semantic import SemanticIndex
 from ouroboros.subsystems.rag.utils.component_helpers import (
     ComponentDescriptor,
+    dynamic_build_status,
     dynamic_health_check,
 )
 from ouroboros.subsystems.rag.utils.corruption_detector import is_corruption_error
@@ -77,6 +78,9 @@ class StandardsIndex(BaseIndex):
         self.config = config
         self.base_path = base_path
         
+        # Corruption handler for auto-repair (set by IndexManager)
+        self._corruption_handler: Optional[Callable[[Exception], None]] = None
+        
         # Create internal semantic index
         self._semantic_index = SemanticIndex(config, base_path)
         
@@ -99,6 +103,7 @@ class StandardsIndex(BaseIndex):
             provides=["embeddings", "vector_index"],
             capabilities=["vector_search"],
             health_check=self._check_vector_health,
+            build_status_check=self._check_vector_build_status,
             rebuild=self._rebuild_vector,
             dependencies=[],  # Vector has no dependencies (base table)
         )
@@ -110,6 +115,7 @@ class StandardsIndex(BaseIndex):
                 provides=["fts_index", "keyword_search"],
                 capabilities=["fts_search", "hybrid_search"],
                 health_check=self._check_fts_health,
+                build_status_check=self._check_fts_build_status,
                 rebuild=self._rebuild_fts,
                 dependencies=["vector"],  # FTS depends on vector (table must exist first)
             )
@@ -123,6 +129,7 @@ class StandardsIndex(BaseIndex):
             provides=["scalar_indexes", "metadata_filtering"],
             capabilities=["filter_by_domain", "filter_by_phase", "filter_by_role"],
             health_check=self._check_metadata_health,
+            build_status_check=self._check_metadata_build_status,
             rebuild=self._rebuild_metadata,
             dependencies=["vector"],  # Metadata indexes depend on vector (table must exist first)
         )
@@ -131,9 +138,10 @@ class StandardsIndex(BaseIndex):
         logger.info("StandardsIndex container initialized with component registry (%s) and lock management", ", ".join(component_names))
     
     def build(self, source_paths: List[Path], force: bool = False) -> None:
-        """Build standards index from source paths.
+        """Build standards index from source paths with corruption detection.
         
         Acquires exclusive lock before building to prevent concurrent corruption.
+        If corruption is detected during build, triggers auto-repair.
         Delegates to internal SemanticIndex for implementation.
         
         Args:
@@ -146,7 +154,29 @@ class StandardsIndex(BaseIndex):
         logger.info("StandardsIndex.build() acquiring exclusive lock")
         with self._lock_manager.exclusive_lock():
             logger.info("StandardsIndex.build() delegating to SemanticIndex")
-            return self._semantic_index.build(source_paths, force)
+            try:
+                return self._semantic_index.build(source_paths, force)
+            except Exception as e:
+                # Check if this is a corruption error
+                if is_corruption_error(e):
+                    logger.error("Corruption detected during build, triggering auto-repair...")
+                    
+                    # Call corruption handler if set (triggers background rebuild)
+                    if self._corruption_handler:
+                        try:
+                            self._corruption_handler(e)
+                        except Exception as handler_error:
+                            logger.error(f"Corruption handler failed: {handler_error}", exc_info=True)
+                    
+                    # Re-raise as ActionableError
+                    raise ActionableError(
+                        what_failed="Build standards index",
+                        why_failed=f"Index corrupted during build: {e}",
+                        how_to_fix="Auto-repair has been triggered. Wait for rebuild to complete or manually rebuild with force=True."
+                    ) from e
+                else:
+                    # Not a corruption error, re-raise
+                    raise
     
     def search(
         self,
@@ -178,22 +208,30 @@ class StandardsIndex(BaseIndex):
             except Exception as e:
                 # Check if this is a corruption error
                 if is_corruption_error(e):
-                    logger.warning("Corruption detected during search, attempting auto-repair...")
-                    # Release shared lock before acquiring exclusive lock for rebuild
-                    # (context manager will handle release)
+                    logger.warning("Corruption detected during search, triggering auto-repair...")
+                    
+                    # Call corruption handler if set (triggers background rebuild)
+                    if self._corruption_handler:
+                        try:
+                            self._corruption_handler(e)
+                        except Exception as handler_error:
+                            logger.error(f"Corruption handler failed: {handler_error}", exc_info=True)
+                    
+                    # Raise actionable error to inform caller
                     raise ActionableError(
                         what_failed="Search standards index",
                         why_failed=f"Index corrupted: {e}",
-                        how_to_fix="Auto-repair required. Call rebuild_secondary_indexes() or rebuild index."
+                        how_to_fix="Auto-repair has been triggered. Wait for rebuild to complete or manually rebuild the index."
                     ) from e
                 else:
                     # Not a corruption error, re-raise
                     raise
     
     def update(self, changed_files: List[Path]) -> None:
-        """Incrementally update index for changed files.
+        """Incrementally update index for changed files with corruption detection.
         
         Acquires exclusive lock before updating to prevent concurrent corruption.
+        If corruption is detected during update, triggers auto-repair.
         Delegates to internal SemanticIndex for implementation.
         
         Args:
@@ -205,7 +243,29 @@ class StandardsIndex(BaseIndex):
         logger.info("StandardsIndex.update() acquiring exclusive lock")
         with self._lock_manager.exclusive_lock():
             logger.info("StandardsIndex.update() delegating to SemanticIndex")
-            return self._semantic_index.update(changed_files)
+            try:
+                return self._semantic_index.update(changed_files)
+            except Exception as e:
+                # Check if this is a corruption error
+                if is_corruption_error(e):
+                    logger.error("Corruption detected during update, triggering auto-repair...")
+                    
+                    # Call corruption handler if set (triggers background rebuild)
+                    if self._corruption_handler:
+                        try:
+                            self._corruption_handler(e)
+                        except Exception as handler_error:
+                            logger.error(f"Corruption handler failed: {handler_error}", exc_info=True)
+                    
+                    # Re-raise as ActionableError
+                    raise ActionableError(
+                        what_failed="Update standards index",
+                        why_failed=f"Index corrupted during update: {e}",
+                        how_to_fix="Auto-repair has been triggered. Wait for rebuild to complete or manually rebuild the index."
+                    ) from e
+                else:
+                    # Not a corruption error, re-raise
+                    raise
     
     # Component-specific health checks for cascading health architecture
     def _check_vector_health(self) -> HealthStatus:
@@ -380,6 +440,158 @@ class StandardsIndex(BaseIndex):
         """
         logger.warning("Targeted metadata rebuild not yet supported for StandardsIndex (unified table architecture)")
     
+    # Component-specific build status checks for fractal pattern
+    def _check_vector_build_status(self) -> BuildStatus:
+        """Check vector component build status.
+        
+        Verifies whether the LanceDB table exists and has embeddings.
+        This is the foundation component - if vector is not built, nothing works.
+        
+        Checks (in order):
+        1. Progress file (if building) - returns BUILDING state
+        2. Table exists and has rows - returns BUILT state
+        3. Table doesn't exist - returns NOT_BUILT state
+        
+        Returns:
+            BuildStatus for vector component
+        """
+        try:
+            # Check for progress file first (indicates active build)
+            progress_data = self._semantic_index._progress_manager.read_progress()
+            if progress_data:
+                return BuildStatus(
+                    state=IndexBuildState.BUILDING,
+                    message=progress_data.message,
+                    progress_percent=progress_data.progress_percent,
+                    details={
+                        "timestamp": progress_data.timestamp,
+                        "component": progress_data.component,
+                    },
+                )
+            
+            # Check if table exists and has data
+            stats = self._semantic_index.get_stats()
+            chunk_count = stats.get("chunk_count", 0)
+            
+            if chunk_count > 0:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message=f"Vector index built ({chunk_count} chunks)",
+                    progress_percent=100.0,
+                    details={"chunk_count": chunk_count},
+                )
+            else:
+                return BuildStatus(
+                    state=IndexBuildState.NOT_BUILT,
+                    message="Vector index not built (no chunks)",
+                    progress_percent=0.0,
+                    details={"chunk_count": 0},
+                )
+        
+        except Exception as e:
+            logger.error(f"Vector build status check failed: {e}", exc_info=True)
+            return BuildStatus(
+                state=IndexBuildState.FAILED,
+                message=f"Vector build status check failed: {type(e).__name__}",
+                progress_percent=0.0,
+                error=str(e),
+                details={"error": str(e), "error_type": type(e).__name__},
+            )
+    
+    def _check_fts_build_status(self) -> BuildStatus:
+        """Check FTS component build status.
+        
+        Verifies whether the FTS index exists and is functional.
+        FTS is optional - if disabled in config, returns BUILT (not required).
+        
+        Returns:
+            BuildStatus for FTS component
+        """
+        try:
+            # Check if FTS is enabled in config
+            if not self.config.fts.enabled:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message="FTS disabled in config (not required)",
+                    progress_percent=100.0,
+                    details={"enabled": False},
+                )
+            
+            # Check if FTS index exists (delegate to health check logic)
+            health = self._check_fts_health()
+            
+            if health.healthy:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message="FTS index built and functional",
+                    progress_percent=100.0,
+                    details=health.details,
+                )
+            else:
+                return BuildStatus(
+                    state=IndexBuildState.NOT_BUILT,
+                    message="FTS index not built or unhealthy",
+                    progress_percent=0.0,
+                    details=health.details,
+                )
+        
+        except Exception as e:
+            logger.error(f"FTS build status check failed: {e}", exc_info=True)
+            return BuildStatus(
+                state=IndexBuildState.FAILED,
+                message=f"FTS build status check failed: {type(e).__name__}",
+                progress_percent=0.0,
+                error=str(e),
+                details={"error": str(e), "error_type": type(e).__name__},
+            )
+    
+    def _check_metadata_build_status(self) -> BuildStatus:
+        """Check metadata component build status.
+        
+        Verifies whether scalar indexes exist on metadata columns.
+        Metadata filtering is optional - if disabled, returns BUILT (not required).
+        
+        Returns:
+            BuildStatus for metadata component
+        """
+        try:
+            # Check if metadata filtering is enabled in config
+            if not self.config.metadata_filtering or not self.config.metadata_filtering.enabled:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message="Metadata filtering disabled in config (not required)",
+                    progress_percent=100.0,
+                    details={"enabled": False},
+                )
+            
+            # Check if metadata indexes exist (delegate to health check logic)
+            health = self._check_metadata_health()
+            
+            if health.healthy:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message="Metadata indexes built and functional",
+                    progress_percent=100.0,
+                    details=health.details,
+                )
+            else:
+                return BuildStatus(
+                    state=IndexBuildState.NOT_BUILT,
+                    message="Metadata indexes not built or unhealthy",
+                    progress_percent=0.0,
+                    details=health.details,
+                )
+        
+        except Exception as e:
+            logger.error(f"Metadata build status check failed: {e}", exc_info=True)
+            return BuildStatus(
+                state=IndexBuildState.FAILED,
+                message=f"Metadata build status check failed: {type(e).__name__}",
+                progress_percent=0.0,
+                error=str(e),
+                details={"error": str(e), "error_type": type(e).__name__},
+            )
+    
     def health_check(self) -> HealthStatus:
         """Dynamic health check using component registry (fractal pattern).
         
@@ -398,6 +610,18 @@ class StandardsIndex(BaseIndex):
         """
         return dynamic_health_check(self.components)
     
+    def build_status(self) -> BuildStatus:
+        """Dynamic build status check using component registry (fractal pattern).
+        
+        Aggregates build status from all registered components (vector, fts, metadata)
+        using priority-based selection (worst state bubbles up). This provides
+        granular visibility into build progress and enables partial build scenarios.
+        
+        Returns:
+            BuildStatus with aggregated state from all components
+        """
+        return dynamic_build_status(self.components)
+    
     def get_stats(self) -> Dict[str, Any]:
         """Get index statistics.
         
@@ -407,6 +631,23 @@ class StandardsIndex(BaseIndex):
             Dictionary with stats like chunk_count, embedding_model, etc.
         """
         return self._semantic_index.get_stats()
+    
+    def set_corruption_handler(self, handler: Optional[Callable[[str, Exception], None]]) -> None:
+        """Set callback for corruption detection (enables auto-repair).
+        
+        Overrides BaseIndex.set_corruption_handler() to store the handler.
+        When corruption is detected during operations, this handler is called
+        to trigger automatic rebuild.
+        
+        Args:
+            handler: Callback function that takes (index_name, exception) and triggers repair.
+                     Typically set by IndexManager to trigger background rebuild.
+        """
+        # Wrap handler to match internal signature (Exception only)
+        if handler:
+            self._corruption_handler = lambda e: handler("standards", e)
+        else:
+            self._corruption_handler = None
     
     # Additional helper method (not in BaseIndex)
     def rebuild_secondary_indexes(self) -> None:

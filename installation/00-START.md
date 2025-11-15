@@ -22,7 +22,7 @@ Install prAxIs OS into the target project. This will:
 1. Create `.praxis-os/` directory structure
 2. Copy standards, workflows, and Ouroboros server code
 3. Create Python virtual environment
-4. Configure Cursor to use MCP server
+4. Configure your agent/IDE to use MCP server
 5. **Build RAG index** (enables semantic search over standards)
 
 **Total Time**: ~5-10 minutes  
@@ -37,7 +37,7 @@ Install prAxIs OS into the target project. This will:
 ### Mistake #1: Forgetting `.praxis-os/workflows/` Directory
 **What happens**: MCP server validation fails  
 **Error message**: `❌ workflows_path does not exist`  
-**Prevention**: Step 01 has a checklist - verify ALL 8 directories exist
+**Prevention**: Step 01 has a checklist - verify all required directories exist
 
 ### Mistake #2: Wrong Module Name in mcp.json
 **What happens**: Python module not found error  
@@ -65,9 +65,8 @@ You'll follow these files in order:
 02-copy-files.md      Copy all content from source repo
 03-agent-configuration.md  Route to agent-specific configuration guide
 04-config-customization.md  Customize mcp.yaml for your project
-05-gitignore.md       Configure .gitignore (prevent committing 2.6GB!)
-06-venv-mcp.md        Create venv, mcp.json, and BUILD RAG INDEX
-07-validate.md        Final validation and cleanup temp files
+05-venv-mcp.md        Create venv, mcp.json, and BUILD RAG INDEX
+06-validate.md        Final validation and cleanup temp files
 ```
 
 Each file:
@@ -89,13 +88,11 @@ Each file:
 │   ├── 02-copy-files.md
 │   ├── 03-agent-configuration.md
 │   ├── 04-config-customization.md
-│   ├── 05-gitignore.md
-│   ├── 06-venv-mcp.md
-│   └── 07-validate.md
+│   ├── 05-venv-mcp.md
+│   └── 06-validate.md
 ├── dist/                       ← Distribution source (what gets copied)
 │   ├── universal/             ← Content to copy
 │   │   ├── standards/
-│   │   ├── usage/
 │   │   └── workflows/
 │   └── ouroboros/             ← MCP server code to copy
 └── .cursorrules                ← File to copy (or merge)
@@ -108,9 +105,9 @@ Each file:
 target-project/                 ← Where you're installing TO
 ├── .praxis-os/                  ← Will be created
 │   ├── standards/
-│   ├── usage/
 │   ├── workflows/
 │   ├── ouroboros/              ← MCP server (copied from dist/ouroboros/)
+│   ├── config/                 ← Config template (mcp.yaml)
 │   └── venv/
 ├── .cursorrules                ← Copy or merge
 └── .cursor/

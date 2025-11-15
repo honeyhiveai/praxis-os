@@ -130,6 +130,7 @@ class GraphIndex(BaseIndex):
                 provides=["ast_nodes"],
                 capabilities=["search_ast"],
                 health_check=self._check_ast_health,
+                build_status_check=self._stub_build_status,
                 rebuild=self._rebuild_ast,
                 dependencies=[],
             ),
@@ -138,6 +139,7 @@ class GraphIndex(BaseIndex):
                 provides=["symbols", "relationships"],
                 capabilities=["find_callers", "find_dependencies", "find_call_paths"],
                 health_check=self._check_graph_health,
+                build_status_check=self._stub_build_status,
                 rebuild=self._rebuild_graph,
                 dependencies=[],
             ),
@@ -802,6 +804,34 @@ class GraphIndex(BaseIndex):
         
         except Exception as e:
             logger.warning("Failed to delete old data for %s: %s", file_path, str(e))
+    
+    def _stub_build_status(self) -> "BuildStatus":  # type: ignore[name-defined]
+        """Stub build status check for components.
+        
+        Returns:
+            BuildStatus indicating BUILT
+        """
+        from ouroboros.subsystems.rag.base import BuildStatus, IndexBuildState
+        
+        return BuildStatus(
+            state=IndexBuildState.BUILT,
+            message="Built",
+            progress_percent=100.0,
+        )
+    
+    def build_status(self) -> "BuildStatus":  # type: ignore[name-defined]
+        """Check build status (stub for GraphIndex).
+        
+        Returns:
+            BuildStatus indicating BUILT (stub implementation)
+        """
+        from ouroboros.subsystems.rag.base import BuildStatus, IndexBuildState
+        
+        return BuildStatus(
+            state=IndexBuildState.BUILT,
+            message="Graph index (build status not yet implemented)",
+            progress_percent=100.0,
+        )
     
     def health_check(self) -> HealthStatus:
         """Dynamic health check using component registry (fractal pattern).

@@ -46,30 +46,11 @@ print("✅ Copied universal standards")
 
 ---
 
-### Copy #2: Usage Documentation
-
-**Source**: `{PRAXIS_OS_SOURCE}/dist/universal/usage/`  
-**Destination**: `.praxis-os/usage/`  
-**Contents**: ~5 markdown files explaining how to use prAxIs OS
-
-```python
-shutil.copytree(
-    f"{PRAXIS_OS_SOURCE}/dist/universal/usage",
-    ".praxis-os/usage",
-    dirs_exist_ok=True
-)
-print("✅ Copied usage documentation")
-```
-
-**What's in there**: Creating specs, operating model, MCP usage guide
-
----
-
-### Copy #3: Workflows (CRITICAL!)
+### Copy #2: Workflows (CRITICAL!)
 
 **Source**: `{PRAXIS_OS_SOURCE}/dist/universal/workflows/`  
 **Destination**: `.praxis-os/workflows/`  
-**Contents**: ~50 files (spec_creation_v1 + spec_execution_v1)
+**Contents**: Complete workflow definitions (spec_creation_v1 + spec_execution_v1)
 
 ⚠️ **This is the one people forget!**
 
@@ -90,7 +71,7 @@ print("✅ Copied workflows")
 
 ---
 
-### Copy #4: Ouroboros Server Code
+### Copy #3: Ouroboros Server Code
 
 **Source**: `{PRAXIS_OS_SOURCE}/dist/ouroboros/`  
 **Destination**: `.praxis-os/ouroboros/`  
@@ -109,7 +90,7 @@ print("✅ Copied Ouroboros server")
 
 ---
 
-### Copy #5: Scripts (CRITICAL - RAG Index Builder!)
+### Copy #4: Scripts (CRITICAL - RAG Index Builder!)
 
 **Source**: `praxis-os/scripts/`  
 **Destination**: `.praxis-os/scripts/`  
@@ -168,40 +149,33 @@ success1 = copy_with_status(
     "Universal standards"
 )
 
-# Copy #2: Usage docs
+# Copy #2: Workflows (CRITICAL!)
 success2 = copy_with_status(
-    f"{PRAXIS_OS_SOURCE}/dist/universal/usage",
-    ".praxis-os/usage",
-    "Usage documentation"
-)
-
-# Copy #3: Workflows (CRITICAL!)
-success3 = copy_with_status(
     f"{PRAXIS_OS_SOURCE}/dist/universal/workflows",
     ".praxis-os/workflows",
     "Workflows"
 )
 
-# Copy #4: Ouroboros server
-success4 = copy_with_status(
+# Copy #3: Ouroboros server
+success3 = copy_with_status(
     f"{PRAXIS_OS_SOURCE}/dist/ouroboros",
     ".praxis-os/ouroboros",
     "Ouroboros server"
 )
 
-# Copy #5: Scripts (CRITICAL!)
-success5 = copy_with_status(
+# Copy #4: Scripts (CRITICAL!)
+success4 = copy_with_status(
     f"{PRAXIS_OS_SOURCE}/scripts",
     ".praxis-os/scripts",
     "Scripts"
 )
 
-# Copy #6: .cursorrules (we'll handle merge in step 03, but copy for now)
+# Copy #5: .cursorrules (we'll handle merge in step 03, but copy for now)
 # This will be overwritten in step 03 if needed
 
 # Summary
 print("\n" + "="*50)
-if all([success1, success2, success3, success4, success5]):
+if all([success1, success2, success3, success4]):
     print("✅ ALL FILES COPIED SUCCESSFULLY")
     print(f"\n📝 Temp source still at: {PRAXIS_OS_SOURCE}")
     print("   (Will be deleted in step 06)")
@@ -237,10 +211,6 @@ critical_files = [
     # Standards
     ".praxis-os/standards/universal/architecture/solid-principles.md",
     ".praxis-os/standards/universal/testing/test-pyramid.md",
-    
-    # Usage
-    ".praxis-os/usage/creating-specs.md",
-    ".praxis-os/usage/mcp-usage-guide.md",
     
     # Workflows (MOST IMPORTANT!)
     ".praxis-os/workflows/spec_creation_v1/metadata.json",
@@ -378,14 +348,13 @@ if not os.path.exists(".praxis-os/workflows/spec_creation_v1"):
 ## 📊 Progress Check
 
 At this point you should have:
-- ✅ ~31 files in `.praxis-os/standards/universal/`
-- ✅ ~5 files in `.praxis-os/usage/`
-- ✅ ~47 files in `.praxis-os/workflows/` (across 2 workflows)
-- ✅ ~23 files in `.praxis-os/ouroboros/`
-- ✅ ~3 files in `.praxis-os/scripts/` (including `build_rag_index.py`!)
+- ✅ Standards files in `.praxis-os/standards/universal/`
+- ✅ Workflow files in `.praxis-os/workflows/` (2 complete workflows)
+- ✅ MCP server code in `.praxis-os/ouroboros/`
+- ✅ Helper scripts in `.praxis-os/scripts/` (including `build_rag_index.py`!)
 - ✅ All validation checkpoints passed
 
-**Total**: ~109 files copied
+**Note**: The install script provides exact file counts during installation.
 
 **If anything above is ❌, stop and fix before continuing.**
 
@@ -420,7 +389,7 @@ That file will:
 ---
 
 **Status**: Step 2 Complete ✅  
-**Copied**: ~106 files  
+**Copied**: All required files (standards, workflows, server code, scripts)  
 **Next File**: `03-agent-configuration.md`  
 **Step**: 2 of 7
 

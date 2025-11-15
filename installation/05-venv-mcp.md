@@ -1,8 +1,10 @@
-# Step 6: Python venv, MCP Configuration, and RAG Index
+# Step 5: Python venv, MCP Configuration, and RAG Index
 
-**Previous**: `05-gitignore.md` (configured .gitignore)  
+**Previous**: `04-config-customization.md` (customized mcp.yaml)  
 **Current**: Creating Python venv, configuring MCP, and building RAG index  
-**Next**: `07-validate.md`
+**Next**: `06-validate.md`
+
+**Note**: The install script automatically handles `.gitignore` configuration, so you can skip that manual step.
 
 ---
 
@@ -340,17 +342,16 @@ INFO - Creating new table with 1247 records...
 
 **What this does:**
 - Auto-detects installed location (`.praxis-os/`)
-- Scans all markdown files in `standards/`, `usage/`, and `workflows/` directories
+- Scans all markdown files in `standards/` and `workflows/` directories
 - Chunks content using semantic-aware chunking (preserves section headers and metadata)
 - Generates embeddings using local model (sentence-transformers, FREE & OFFLINE)
 - Stores vectors in LanceDB at `.praxis-os/.cache/indexes/`
 
 **Indexed content:**
-- ✅ Standards (~46 files) - Universal CS fundamentals
-- ✅ Usage docs (~5 files) - How to use prAxIs OS
-- ✅ Workflows (~47 files) - Phase-gated workflow definitions
+- ✅ Standards - Universal CS fundamentals
+- ✅ Workflows - Phase-gated workflow definitions
 
-**Time**: 1-2 minutes for ~100 files (first run downloads embedding model ~90MB)  
+**Time**: 1-2 minutes (first run downloads embedding model ~90MB)  
 **Disk**: ~20-50 MB for index
 
 **Note**: The script auto-detects all three directories. The index auto-updates on file changes via file watcher in the MCP server, so you only need to build it once during installation.
@@ -439,7 +440,7 @@ You've set up the Python environment, MCP configuration, and RAG index. Now for 
 
 ## ➡️ NEXT STEP
 
-**Read file**: `installation/07-validate.md`
+**Read file**: `installation/06-validate.md`
 
 That file will:
 1. Run comprehensive validation of entire installation
@@ -451,6 +452,6 @@ That file will:
 
 **Status**: Step 5 Complete ✅  
 **Created**: Python venv + mcp.json + RAG index  
-**Next File**: `07-validate.md`  
-**Step**: 6 of 7
+**Next File**: `06-validate.md`  
+**Step**: 5 of 6
 

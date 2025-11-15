@@ -127,11 +127,11 @@ import os
 
 required_dirs = [
     ".praxis-os/standards/universal",
-    ".praxis-os/usage",
     ".praxis-os/workflows",       # ← Most important!
     ".praxis-os/specs/review",
     ".praxis-os/specs/approved",
     ".praxis-os/specs/completed",
+    ".praxis-os/config",
     ".praxis-os/ouroboros",
     ".praxis-os/.cache",
     ".cursor",
@@ -166,10 +166,10 @@ ls -la .praxis-os/
 **Expected output**:
 ```
 drwxr-xr-x  .cache/
+drwxr-xr-x  config/
 drwxr-xr-x  ouroboros/
 drwxr-xr-x  specs/
 drwxr-xr-x  standards/
-drwxr-xr-x  usage/
 drwxr-xr-x  workflows/      ← Must be present!
 ```
 
@@ -259,9 +259,9 @@ You've created the directory structure. Now you need to fill it with content.
 
 That file will:
 1. Copy universal standards
-2. Copy usage documentation
-3. Copy workflows (fills the workflows/ directory you just created!)
-4. Copy MCP server code
+2. Copy workflows (fills the workflows/ directory you just created!)
+3. Copy MCP server code
+4. Copy scripts (including RAG index builder)
 5. Validate all files copied correctly
 6. Direct you to step 03
 

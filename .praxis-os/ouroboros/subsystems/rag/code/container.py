@@ -35,16 +35,17 @@ Traceability:
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 from ouroboros.config.schemas.indexes import CodeIndexConfig
-from ouroboros.subsystems.rag.base import BaseIndex, HealthStatus, SearchResult
+from ouroboros.subsystems.rag.base import BaseIndex, BuildStatus, HealthStatus, IndexBuildState, SearchResult
 from ouroboros.subsystems.rag.code.graph import GraphIndex
 from ouroboros.subsystems.rag.code.reconciler import PartitionReconciler
 from ouroboros.subsystems.rag.code.semantic import SemanticIndex
 from ouroboros.subsystems.rag.lock_manager import IndexLockManager
 from ouroboros.subsystems.rag.utils.component_helpers import (
     ComponentDescriptor,
+    dynamic_build_status,
     dynamic_health_check,
 )
 from ouroboros.subsystems.rag.utils.corruption_detector import is_corruption_error
@@ -100,6 +101,9 @@ class CodeIndex(BaseIndex):
         """
         self.config = config
         self.base_path = base_path
+        
+        # Corruption handler for auto-repair (set by IndexManager)
+        self._corruption_handler: Optional[Callable[[Exception], None]] = None
         
         # Initialize incremental indexer for parse-once-index-thrice optimization
         from ouroboros.subsystems.rag.code.indexer import IncrementalIndexer
@@ -170,6 +174,7 @@ class CodeIndex(BaseIndex):
                     provides=["code_chunks", "embeddings", "ast_nodes", "symbols"],
                     capabilities=["search", "search_ast", "find_callers", "find_dependencies"],
                     health_check=lambda p=partition: p.health_check(),
+                    build_status_check=lambda p=partition: p.build_status(),
                     rebuild=lambda: None,
                     dependencies=[],
                 )
@@ -188,6 +193,7 @@ class CodeIndex(BaseIndex):
                 provides=["code_chunks", "embeddings", "fts_index"],
                 capabilities=["search"],
                 health_check=lambda idx=self._semantic_index: idx.health_check(),
+                build_status_check=self._check_semantic_build_status,
                 rebuild=lambda: None,  # SemanticIndex doesn't have targeted rebuild yet (full rebuild only)
                 dependencies=[],
             )
@@ -199,6 +205,7 @@ class CodeIndex(BaseIndex):
                     provides=["ast_nodes", "symbols", "relationships"],
                     capabilities=["search_ast", "find_callers", "find_dependencies", "find_call_paths"],
                     health_check=lambda idx=self._graph_index: idx.health_check(),
+                    build_status_check=self._check_graph_build_status,
                     rebuild=lambda: None,  # GraphIndex has component-level rebuilds internally, not at container level
                     dependencies=[],
                 )
@@ -450,11 +457,20 @@ class CodeIndex(BaseIndex):
             except Exception as e:
                 # Check if this is a corruption error
                 if is_corruption_error(e):
-                    logger.warning("Corruption detected during search, attempting auto-repair...")
+                    logger.warning("Corruption detected during search, triggering auto-repair...")
+                    
+                    # Call corruption handler if set (triggers background rebuild)
+                    if self._corruption_handler:
+                        try:
+                            self._corruption_handler(e)
+                        except Exception as handler_error:
+                            logger.error(f"Corruption handler failed: {handler_error}", exc_info=True)
+                    
+                    # Raise actionable error to inform caller
                     raise ActionableError(
                         what_failed="Search code index (semantic)",
                         why_failed=f"Index corrupted: {e}",
-                        how_to_fix="Auto-repair required. Rebuild semantic index."
+                        how_to_fix="Auto-repair has been triggered. Wait for rebuild to complete or manually rebuild the index."
                     ) from e
                 else:
                     # Not a corruption error, re-raise
@@ -635,6 +651,110 @@ class CodeIndex(BaseIndex):
                     self._incremental_indexer.clear_cache()
                     raise
     
+    # Component-specific build status checks for fractal pattern
+    def _check_semantic_build_status(self) -> BuildStatus:
+        """Check semantic component build status.
+        
+        Verifies whether the LanceDB table exists and has code embeddings.
+        
+        Checks (in order):
+        1. Progress file (if building) - returns BUILDING state
+        2. Table exists and has rows - returns BUILT state
+        3. Table doesn't exist - returns NOT_BUILT state
+        
+        Returns:
+            BuildStatus for semantic component
+        """
+        try:
+            # Check for progress file first (indicates active build)
+            progress_data = self._semantic_index._progress_manager.read_progress()
+            if progress_data:
+                return BuildStatus(
+                    state=IndexBuildState.BUILDING,
+                    message=progress_data.message,
+                    progress_percent=progress_data.progress_percent,
+                    details={
+                        "timestamp": progress_data.timestamp,
+                        "component": progress_data.component,
+                    },
+                )
+            
+            # Check if table exists and has data
+            stats = self._semantic_index.get_stats()
+            chunk_count = stats.get("chunk_count", 0)
+            
+            if chunk_count > 0:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message=f"Semantic index built ({chunk_count} chunks)",
+                    progress_percent=100.0,
+                    details={"chunk_count": chunk_count},
+                )
+            else:
+                return BuildStatus(
+                    state=IndexBuildState.NOT_BUILT,
+                    message="Semantic index not built (no chunks)",
+                    progress_percent=0.0,
+                    details={"chunk_count": 0},
+                )
+        
+        except Exception as e:
+            logger.error(f"Semantic build status check failed: {e}", exc_info=True)
+            return BuildStatus(
+                state=IndexBuildState.FAILED,
+                message=f"Semantic build status check failed: {type(e).__name__}",
+                progress_percent=0.0,
+                error=str(e),
+                details={"error": str(e), "error_type": type(e).__name__},
+            )
+    
+    def _check_graph_build_status(self) -> BuildStatus:
+        """Check graph component build status.
+        
+        Verifies whether the DuckDB tables (AST + graph) exist and have data.
+        Graph is optional - if disabled in config, returns BUILT (not required).
+        
+        Returns:
+            BuildStatus for graph component
+        """
+        try:
+            # Check if graph is enabled in config
+            if not self.config.graph.enabled:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message="Graph disabled in config (not required)",
+                    progress_percent=100.0,
+                    details={"enabled": False},
+                )
+            
+            # Check if graph tables exist (delegate to health check logic)
+            health = self._graph_index.health_check()
+            
+            if health.healthy:
+                return BuildStatus(
+                    state=IndexBuildState.BUILT,
+                    message="Graph index built and functional",
+                    progress_percent=100.0,
+                    details=health.details,
+                )
+            else:
+                return BuildStatus(
+                    state=IndexBuildState.NOT_BUILT,
+                    message="Graph index not built or unhealthy",
+                    progress_percent=0.0,
+                    details=health.details,
+                )
+        
+        except Exception as e:
+            logger.error(f"Graph build status check failed: {e}", exc_info=True)
+            return BuildStatus(
+                state=IndexBuildState.FAILED,
+                message=f"Graph build status check failed: {type(e).__name__}",
+                progress_percent=0.0,
+                error=str(e),
+                details={"error": str(e), "error_type": type(e).__name__},
+            )
+    
     def health_check(self) -> HealthStatus:
         """Dynamic health check using component registry (fractal pattern).
         
@@ -653,6 +773,18 @@ class CodeIndex(BaseIndex):
             HealthStatus with nested components dict showing health of semantic and graph
         """
         return dynamic_health_check(self.components)
+    
+    def build_status(self) -> BuildStatus:
+        """Dynamic build status check using component registry (fractal pattern).
+        
+        Aggregates build status from all registered components (semantic, graph)
+        using priority-based selection (worst state bubbles up). This provides
+        granular visibility into build progress and enables partial build scenarios.
+        
+        Returns:
+            BuildStatus with aggregated state from all components
+        """
+        return dynamic_build_status(self.components)
     
     def get_stats(self) -> Dict[str, Any]:
         """Get code index statistics (aggregated from semantic + graph).
@@ -718,6 +850,23 @@ class CodeIndex(BaseIndex):
                 "total_symbols": graph_stats.get("symbol_count", 0),
                 "total_relationships": graph_stats.get("relationship_count", 0),
             }
+    
+    def set_corruption_handler(self, handler: Optional[Callable[[str, Exception], None]]) -> None:
+        """Set callback for corruption detection (enables auto-repair).
+        
+        Overrides BaseIndex.set_corruption_handler() to store the handler.
+        When corruption is detected during operations, this handler is called
+        to trigger automatic rebuild.
+        
+        Args:
+            handler: Callback function that takes (index_name, exception) and triggers repair.
+                     Typically set by IndexManager to trigger background rebuild.
+        """
+        # Wrap handler to match internal signature (Exception only)
+        if handler:
+            self._corruption_handler = lambda e: handler("code", e)
+        else:
+            self._corruption_handler = None
     
     # ========================================================================
     # Extended Methods (not in BaseIndex, specific to code index)
