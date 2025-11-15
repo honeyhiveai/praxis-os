@@ -29,14 +29,18 @@ The AI will use the `praxis_os_upgrade_v1` workflow to safely upgrade your insta
 For direct command-line upgrades:
 
 ```bash
-# Upgrade from GitHub (latest)
-python scripts/upgrade-praxis-os.py /path/to/your/project
+# Download and run directly (recommended - always latest)
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/dist/scripts/upgrade-praxis-os.py | python3 - /path/to/your/project
 
-# Upgrade from local source
-python scripts/upgrade-praxis-os.py /path/to/your/project --source /path/to/praxis-os
+# Or download first, then run
+curl -O https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/dist/scripts/upgrade-praxis-os.py
+python3 upgrade-praxis-os.py /path/to/your/project
 
-# Skip dependency updates (faster, for content-only updates)
-python scripts/upgrade-praxis-os.py /path/to/your/project --skip-deps
+# Upgrade from local praxis-os source (for development)
+python3 upgrade-praxis-os.py /path/to/your/project --source /path/to/praxis-os
+
+# Skip dependency updates (faster, for testing)
+python3 upgrade-praxis-os.py /path/to/your/project --skip-deps
 ```
 
 **Total Time:** ~2-3 minutes
@@ -259,13 +263,16 @@ Use the standalone script when:
 ### Script Usage
 
 ```bash
-# Basic usage (upgrade from GitHub latest)
-python scripts/upgrade-praxis-os.py /path/to/your/project
+# Download and run directly (recommended - always latest)
+curl -sSL https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/dist/scripts/upgrade-praxis-os.py | python3 - /path/to/your/project
 
-# Common options
-python scripts/upgrade-praxis-os.py /path/to/your/project --source /path/to/praxis-os  # Local source
-python scripts/upgrade-praxis-os.py /path/to/your/project --skip-deps               # Skip pip install
+# Or download first, then run with options
+curl -O https://raw.githubusercontent.com/honeyhiveai/praxis-os/main/dist/scripts/upgrade-praxis-os.py
+python3 upgrade-praxis-os.py /path/to/your/project --source /path/to/praxis-os  # Local source
+python3 upgrade-praxis-os.py /path/to/your/project --skip-deps                  # Skip pip install
 ```
+
+**Note:** The script is self-contained (stdlib only) and can be run immediately without any dependencies.
 
 ### What the Script Does
 
