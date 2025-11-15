@@ -1613,12 +1613,32 @@ class FileUpgrader:
         src = self.source / "dist" / "ouroboros"
         dst = self.target / ".praxis-os" / "ouroboros"
 
+        print(f"\n[DEBUG] _upgrade_ouroboros:")
+        print(f"  Source: {src}")
+        print(f"  Source exists: {src.exists()}")
+        if src.exists():
+            src_py_files = list(src.rglob("*.py"))
+            print(f"  Source has {len(src_py_files)} Python files")
+        print(f"  Dest: {dst}")
+        print(f"  Dest exists: {dst.exists()}")
+        if dst.exists():
+            dst_py_files_before = list(dst.rglob("*.py"))
+            print(f"  Dest has {len(dst_py_files_before)} Python files BEFORE")
+
         if not src.exists():
+            print(f"  [ERROR] Source does not exist, skipping!")
             return
 
         before_snapshot = self._snapshot_directory(dst)
+        print(f"  Before snapshot: {len(before_snapshot)} files")
+
         self._rsync(src, dst, delete=True)
+
         after_snapshot = self._snapshot_directory(dst)
+        print(f"  After snapshot: {len(after_snapshot)} files")
+        if dst.exists():
+            dst_py_files_after = list(dst.rglob("*.py"))
+            print(f"  Dest has {len(dst_py_files_after)} Python files AFTER")
 
         self._track_changes("ouroboros", before_snapshot, after_snapshot)
 
@@ -1686,6 +1706,13 @@ class FileUpgrader:
         """
         import shutil
 
+        print(f"\n[DEBUG] _rsync:")
+        print(f"  src={src}")
+        print(f"  dst={dst}")
+        print(f"  delete={delete}")
+        print(f"  src.exists()={src.exists()}")
+        print(f"  dst.exists()={dst.exists()}")
+
         # Ignore patterns matching install-praxis-os.py
         ignore = shutil.ignore_patterns(
             "__pycache__",
@@ -1699,9 +1726,24 @@ class FileUpgrader:
 
         try:
             if delete and dst.exists():
+                print(f"  [ACTION] Deleting {dst}")
                 shutil.rmtree(dst)
+                print(f"  [DONE] Deleted {dst}")
+
+            print(f"  [ACTION] Copying {src} -> {dst}")
             shutil.copytree(src, dst, dirs_exist_ok=True, ignore=ignore)
+            print(f"  [DONE] Copy complete")
+
+            # Count what was copied
+            if dst.exists():
+                copied_files = list(dst.rglob("*"))
+                copied_files = [f for f in copied_files if f.is_file()]
+                copied_py = [f for f in copied_files if f.suffix == ".py"]
+                print(
+                    f"  [RESULT] Copied {len(copied_files)} total files, {len(copied_py)} Python files"
+                )
         except Exception as e:
+            print(f"  [ERROR] Copy failed: {e}")
             raise IOError(f"Failed to copy {src} to {dst}: {e}") from e
 
     def _snapshot_directory(self, directory: Path) -> Dict[str, str]:
@@ -1759,17 +1801,32 @@ class FileUpgrader:
         after_files = set(after.keys())
 
         # Track added files
-        for file_path in after_files - before_files:
+        added = after_files - before_files
+        for file_path in added:
             self.changes.files_added.append(f"{category}/{file_path}")
 
         # Track deleted files
-        for file_path in before_files - after_files:
+        deleted = before_files - after_files
+        for file_path in deleted:
             self.changes.files_deleted.append(f"{category}/{file_path}")
 
         # Track modified files
+        modified = set()
         for file_path in before_files & after_files:
             if before[file_path] != after[file_path]:
                 self.changes.files_modified.append(f"{category}/{file_path}")
+                modified.add(file_path)
+
+        print(f"\n[DEBUG] _track_changes for {category}:")
+        print(f"  Added: {len(added)} files")
+        if len(added) <= 10:
+            for f in list(added)[:10]:
+                print(f"    + {f}")
+        print(f"  Deleted: {len(deleted)} files")
+        if len(deleted) <= 10:
+            for f in list(deleted)[:10]:
+                print(f"    - {f}")
+        print(f"  Modified: {len(modified)} files")
 
     def _verify_checksums(self) -> None:
         """
