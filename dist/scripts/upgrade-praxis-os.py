@@ -2222,11 +2222,15 @@ class DependencyUpdater:
         self.source = source
         self.target = target
 
-    def update_dependencies(self) -> None:
+    def update_dependencies(self, skip_install: bool = False) -> None:
         """
-        Update all dependency files.
+        Update all dependency files and reinstall packages.
 
-        Updates requirements.txt and package.json if they exist.
+        Updates requirements.txt and package.json if they exist,
+        then reinstalls Python packages into .praxis-os/venv.
+
+        Args:
+            skip_install: If True, only update files without reinstalling packages
 
         Examples:
             >>> import tempfile
@@ -2240,12 +2244,15 @@ class DependencyUpdater:
             ...     (source / "requirements.txt").write_text("package==1.0.0")
             ...     (target / "requirements.txt").write_text("package==0.9.0")
             ...     updater = DependencyUpdater(source, target)
-            ...     updater.update_dependencies()
+            ...     updater.update_dependencies(skip_install=True)
             ...     (target / "requirements.txt").read_text()
             'package==1.0.0'
         """
         self._update_requirements_txt()
         self._update_package_json()
+
+        if not skip_install:
+            self._reinstall_python_packages()
 
     def _update_requirements_txt(self) -> None:
         """
@@ -2300,6 +2307,82 @@ class DependencyUpdater:
 
         if source_file.exists():
             shutil.copy(source_file, target_file)
+
+    def _reinstall_python_packages(self) -> None:
+        """
+        Reinstall Python packages in existing venv.
+
+        Uses the updated requirements.txt from .praxis-os/ouroboros/
+        to update packages in .praxis-os/venv.
+
+        Raises:
+            RuntimeError: If venv not found or pip install fails
+
+        Examples:
+            >>> import tempfile
+            >>> from pathlib import Path
+            >>> with tempfile.TemporaryDirectory() as tmpdir:
+            ...     tmp_path = Path(tmpdir)
+            ...     (tmp_path / ".praxis-os" / "venv" / "bin").mkdir(parents=True)
+            ...     (tmp_path / ".praxis-os" / "venv" / "bin" / "python").touch()
+            ...     (tmp_path / ".praxis-os" / "ouroboros").mkdir(parents=True)
+            ...     (tmp_path / ".praxis-os" / "ouroboros" / "requirements.txt").write_text("requests==2.31.0")
+            ...     updater = DependencyUpdater(Path("."), tmp_path)
+            ...     # updater._reinstall_python_packages()  # Would fail without real venv
+            True
+        """
+        import subprocess
+        import sys
+
+        venv_python = self.target / ".praxis-os" / "venv" / "bin" / "python"
+        requirements = self.target / ".praxis-os" / "ouroboros" / "requirements.txt"
+
+        print(f"\n[DEBUG] _reinstall_python_packages:")
+        print(f"  venv: {venv_python}")
+        print(f"  venv exists: {venv_python.exists()}")
+        print(f"  requirements: {requirements}")
+        print(f"  requirements exists: {requirements.exists()}")
+
+        if not venv_python.exists():
+            print(f"  [WARNING] Virtual environment not found at {venv_python}")
+            print(
+                f"  Skipping package reinstall - user should recreate venv after upgrade"
+            )
+            return
+
+        if not requirements.exists():
+            print(f"  [WARNING] Requirements file not found at {requirements}")
+            print(f"  Skipping package reinstall")
+            return
+
+        print(f"  [ACTION] Running pip install -r {requirements}")
+        try:
+            result = subprocess.run(
+                [
+                    str(venv_python),
+                    "-m",
+                    "pip",
+                    "install",
+                    "--upgrade",
+                    "--quiet",
+                    "-r",
+                    str(requirements),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=300,  # 5 minute timeout
+            )
+
+            if result.returncode == 0:
+                print(f"  [OK] Packages reinstalled successfully")
+            else:
+                print(f"  [ERROR] pip install failed:")
+                print(f"  {result.stderr}")
+                raise RuntimeError(f"Failed to reinstall packages: {result.stderr}")
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("Package reinstall timed out after 5 minutes")
+        except Exception as e:
+            raise RuntimeError(f"Failed to reinstall packages: {e}") from e
 
 
 class UpgradeValidator:
@@ -2797,8 +2880,12 @@ class UpgradeOrchestrator:
         print("Phase 5: Updating Dependencies")
         print("=" * 60)
         dep_updater = DependencyUpdater(source_dir, self.target)
-        dep_updater.update_dependencies()
-        print("✓ Dependencies updated\n")
+        skip_install = getattr(self.args, "skip_deps", False)
+        dep_updater.update_dependencies(skip_install=skip_install)
+        if skip_install:
+            print("✓ Dependencies updated (install skipped)\n")
+        else:
+            print("✓ Dependencies updated and packages reinstalled\n")
 
         # Phase 6: Rebuild index trigger
         print("=" * 60)
