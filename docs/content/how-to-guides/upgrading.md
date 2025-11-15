@@ -9,7 +9,11 @@ Keep your prAxIs OS installation up-to-date with new features, standards, and im
 
 ## Quick Upgrade
 
-The simplest way to upgrade:
+There are two ways to upgrade prAxIs OS:
+
+### 1. Workflow Approach (Recommended)
+
+The simplest way for most users:
 
 ```bash
 # In Cursor, say:
@@ -20,11 +24,32 @@ The AI will use the `praxis_os_upgrade_v1` workflow to safely upgrade your insta
 
 **Total Time:** ~3-4 minutes
 
+### 2. Standalone Script
+
+For direct command-line upgrades:
+
+```bash
+# Upgrade from GitHub (latest)
+python scripts/upgrade-praxis-os.py /path/to/your/project
+
+# Upgrade from local source
+python scripts/upgrade-praxis-os.py /path/to/your/project --source /path/to/praxis-os
+
+# Skip dependency updates (faster, for content-only updates)
+python scripts/upgrade-praxis-os.py /path/to/your/project --skip-deps
+```
+
+**Total Time:** ~2-3 minutes
+
 ---
 
 ## Upgrade Workflow (Recommended)
 
-The `praxis_os_upgrade_v1` workflow provides a safe, automated upgrade process:
+The `praxis_os_upgrade_v1` workflow provides a safe, automated upgrade process.
+
+:::info Workflow Under Review
+The workflow is being updated to leverage the new standalone script capabilities. Check the [Standalone Script](#standalone-script-advanced) section below for the latest upgrade features.
+:::
 
 ### Start the Workflow
 
@@ -218,7 +243,117 @@ Skip upgrading when:
 
 ---
 
-## Manual Upgrade (Advanced)
+## Standalone Script (Advanced)
+
+The `scripts/upgrade-praxis-os.py` script provides direct command-line access to the upgrade system.
+
+### When to Use the Script
+
+Use the standalone script when:
+
+- 🤖 **CI/CD pipelines** - Automated upgrades in deployment scripts
+- 🔧 **Manual control** - You want direct control over the upgrade process
+- ⚡ **Speed** - Skip workflow overhead (~1 minute faster)
+- 🧪 **Testing** - Dry-run upgrades before workflow execution
+
+### Script Usage
+
+```bash
+# Basic usage (upgrade from GitHub latest)
+python scripts/upgrade-praxis-os.py /path/to/your/project
+
+# Common options
+python scripts/upgrade-praxis-os.py /path/to/your/project --source /path/to/praxis-os  # Local source
+python scripts/upgrade-praxis-os.py /path/to/your/project --skip-deps               # Skip pip install
+```
+
+### What the Script Does
+
+The script performs the same operations as the workflow:
+
+1. **Validation** - Pre-flight checks (Python version, disk space, etc.)
+2. **Backup** - Creates timestamped backup with checksums
+3. **Content Upgrade** - Updates standards, workflows, usage docs
+4. **MCP Server Upgrade** - Updates ouroboros code
+5. **Dependency Update** - Runs `pip install -r requirements.txt` (unless `--skip-deps`)
+6. **Verification** - Validates checksums and structure
+7. **Cleanup** - Archives old backups, generates report
+
+### Script vs. Workflow
+
+| Feature | Standalone Script | Workflow |
+|---------|------------------|----------|
+| **Speed** | ~2-3 minutes | ~3-4 minutes |
+| **Backup** | ✅ Automatic | ✅ Automatic |
+| **Rollback** | ✅ Automatic | ✅ Automatic |
+| **MCP Restart** | ⚠️ Manual | ✅ Automatic |
+| **Resume After Restart** | ❌ No | ✅ Yes |
+| **AI Guidance** | ❌ No | ✅ Yes |
+| **CI/CD Friendly** | ✅ Yes | ❌ No |
+
+:::tip When to use which?
+- **Workflow**: Best for interactive upgrades in Cursor with AI assistance
+- **Script**: Best for automated deployments, CI/CD, or when you want direct control
+:::
+
+### CLI Options
+
+```bash
+python scripts/upgrade-praxis-os.py --help
+```
+
+**Available options:**
+
+- `target_dir` (required) - Path to project directory containing `.praxis-os/`
+- `--source PATH` - Path to local praxis-os source (default: clone from GitHub)
+- `--skip-deps` - Skip `pip install -r requirements.txt` (faster, content-only upgrade)
+
+### Examples
+
+```bash
+# Upgrade from GitHub latest (most common)
+cd /path/to/your/project
+python scripts/upgrade-praxis-os.py .
+
+# Upgrade from local development copy
+python scripts/upgrade-praxis-os.py . --source ~/dev/praxis-os
+
+# Content-only upgrade (skip dependency installation)
+python scripts/upgrade-praxis-os.py . --skip-deps
+
+# Upgrade multiple projects
+for project in project-a project-b project-c; do
+    python scripts/upgrade-praxis-os.py "$project"
+done
+```
+
+### Troubleshooting Script Upgrades
+
+**"Target directory does not exist"**
+
+Fix: Provide absolute or correct relative path
+```bash
+python scripts/upgrade-praxis-os.py /full/path/to/project
+```
+
+**"Not a praxis-os installation"**
+
+Fix: Directory must contain `.praxis-os/` directory
+```bash
+ls .praxis-os  # Should exist
+```
+
+**"Upgrade failed: checksums don't match"**
+
+Fix: Corruption detected, rollback automatic
+```bash
+# Backup is at: .praxis-os.backup.YYYYMMDD_HHMMSS/
+# Restoration happens automatically on failure
+```
+
+---
+
+## Manual Upgrade (Legacy)
 
 If you need manual control:
 
