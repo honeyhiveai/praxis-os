@@ -238,10 +238,10 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
     Copy files from source to target using simple recursive copies.
 
     Behavior:
-      - universal/workflows → .praxis-os/workflows (flatten)
-      - universal/standards → .praxis-os/standards/universal (keep namespace)
+      - dist/universal/workflows → .praxis-os/workflows (flatten)
+      - dist/universal/standards → .praxis-os/standards/universal (keep namespace)
       - dist/ouroboros → .praxis-os/ouroboros (direct copy)
-      - scripts → .praxis-os/scripts (RAG index builder, etc.)
+      - dist/scripts → .praxis-os/scripts (RAG index builder, etc.)
       - dist/config/mcp.yaml → .praxis-os/config/mcp.yaml (template, LLM customizes)
 
     After each copy, validates that source and destination file counts match.
@@ -273,7 +273,7 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
     try:
         # 1. Workflows (flatten - no universal/ prefix in consumer installs)
         print("  Copying workflows...", end=" ", flush=True)
-        src_workflows = source / "universal" / "workflows"
+        src_workflows = source / "dist" / "universal" / "workflows"
         dest_workflows = base / "workflows"
         shutil.copytree(
             src_workflows, dest_workflows, dirs_exist_ok=True, ignore=ignore_patterns
@@ -284,7 +284,7 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
 
         # 2. Standards (keep universal/ namespace to distinguish from development/)
         print("  Copying standards...", end=" ", flush=True)
-        src_standards = source / "universal" / "standards"
+        src_standards = source / "dist" / "universal" / "standards"
         dest_standards = base / "standards" / "universal"
         shutil.copytree(
             src_standards, dest_standards, dirs_exist_ok=True, ignore=ignore_patterns
@@ -304,7 +304,7 @@ def copy_files(source: Path, target: Path) -> Dict[str, int]:
 
         # 4. Scripts (RAG index builder and other utilities)
         print("  Copying scripts...", end=" ", flush=True)
-        src_scripts = source / "scripts"
+        src_scripts = source / "dist" / "scripts"
         dest_scripts = base / "scripts"
         shutil.copytree(
             src_scripts, dest_scripts, dirs_exist_ok=True, ignore=ignore_patterns

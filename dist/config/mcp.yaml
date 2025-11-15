@@ -165,6 +165,76 @@ indexes:
   # ========================================================================
   # Use this to search across MULTIPLE local repositories simultaneously.
   #
+  # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ 🎯 QUICK START: Understanding Multi-Repo Terminology                │
+  # └─────────────────────────────────────────────────────────────────────┘
+  #
+  # PARTITION = One Git Repository
+  #   - Example: "python-sdk" repository is ONE partition
+  #   - Example: "praxis-os" monorepo is ONE partition
+  #   - Path points to the repository root
+  #   - Each partition has its own semantic index and call graph
+  #
+  # DOMAIN = Logical grouping within a repository
+  #   - Example: "code" (production code) is ONE domain
+  #   - Example: "tests" (test files) is ONE domain
+  #   - Example: "docs" (documentation) is ONE domain
+  #   - include_paths are relative to the partition's path
+  #   - Domains let you tag/organize code within a repo
+  #
+  # RULE OF THUMB:
+  #   - Different Git repos? → Different partitions
+  #   - Different services in same repo? → Different domains
+  #   - Different code types (code/tests/docs)? → Different domains
+  #   - Want to filter searches by type? → Use domains
+  #
+  # ⚠️ DOMAIN NAMING RULES (Important!):
+  #   - Use underscores (_), NOT hyphens (-)
+  #   - No spaces or special characters
+  #   - Valid examples: my_service, api_v2, test_fixtures, backend_api
+  #   - Invalid examples: my-service, api-v2, test-fixtures (will error!)
+  #
+  # 📚 WORKING EXAMPLE:
+  #   If you have praxis-os cloned alongside python-sdk, check:
+  #   ../python-sdk/.praxis-os/config/mcp.yaml
+  #
+  #   It shows a real production multi-repo setup with:
+  #   - Python SDK (main project)
+  #   - hive-kube monorepo (10 services as domains)
+  #   - Proper partition/domain structure
+  #
+  # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ 🎯 Why Use Multi-Repo Indexing?                                     │
+  # └─────────────────────────────────────────────────────────────────────┘
+  #
+  # Use Case 1: Feature Parity Validation
+  #   - Porting service from TypeScript to Go?
+  #   - Index BOTH repos to compare implementations
+  #   - Search: "authentication logic" → see both versions side-by-side
+  #   - Ensures you don't miss edge cases or features
+  #
+  # Use Case 2: Integration Contract Discovery
+  #   - Your service outputs events to ClickHouse
+  #   - Backend service queries those events
+  #   - Index backend to see what fields it expects
+  #   - Ensures your output format matches downstream needs
+  #   - Prevents breaking changes to implicit contracts
+  #
+  # Use Case 3: Cross-Service Pattern Learning
+  #   - How does backend handle errors?
+  #   - How does frontend display loading states?
+  #   - Search across all services to find patterns
+  #   - Learn from existing implementations
+  #
+  # Use Case 4: Debugging Data Flow
+  #   - Trace data from ingestion → storage → backend → frontend
+  #   - Find where data transformation happens
+  #   - Understand full system behavior
+  #   - Debug issues that span multiple services
+  #
+  # 💡 Without multi-repo: You code in isolation, break integrations
+  # ✅ With multi-repo: You see the whole system, maintain contracts
+  #
   # 🎯 Use Cases:
   #   - Search your main app + SDKs/libraries you develop
   #   - Search across microservices in a monorepo
@@ -241,13 +311,41 @@ indexes:
   # 🎨 Multi-Repo Configuration Examples:
   #
   # ┌─────────────────────────────────────────────────────────────────────┐
+  # │ ⚠️  CRITICAL: Schema Requirements                                   │
+  # └─────────────────────────────────────────────────────────────────────┘
+  #
+  # In multi-repo mode, you MUST include BOTH:
+  #   1. source_paths: Base paths for THIS project (always required!)
+  #   2. partitions: Additional repositories to index (optional)
+  #
+  # ❌ WRONG (Missing source_paths):
+  #   code:
+  #     partitions:
+  #       my-project:
+  #         path: ../
+  #
+  # ✅ CORRECT (Has both):
+  #   code:
+  #     source_paths: ["../src/"]  # ← REQUIRED for this project
+  #     partitions:                # ← OPTIONAL for other repos
+  #       other-repo:
+  #         path: ../../other-repo
+  #
+  # Why both? source_paths defines YOUR main project, partitions add
+  # ADDITIONAL repositories. Even with partitions, source_paths is required.
+  #
+  # ┌─────────────────────────────────────────────────────────────────────┐
   # │ EXAMPLE 1: Framework + SDK (Recommended Pattern)                    │
   # └─────────────────────────────────────────────────────────────────────┘
   # Use case: Search your main framework AND the SDK you're developing
   #
+  # ⚠️ NOTE: Even though we use partitions, source_paths is still REQUIRED.
+  #          See "CRITICAL: Schema Requirements" section above.
+  #
   # code:
+  #   source_paths: ["ouroboros/", "scripts/"]  # ← REQUIRED: Your main project
   #   enabled: true
-  #   partitions:
+  #   partitions:                               # ← OPTIONAL: Additional repos
   #     praxis-os:                          # Partition 1: Your framework
   #       path: .                            # Current directory (.praxis-os/)
   #       domains:
@@ -298,6 +396,7 @@ indexes:
   # Use case: Search across microservices in a monorepo
   #
   # code:
+  #   source_paths: ["../services/", "../apps/"]  # ← REQUIRED: Base paths
   #   enabled: true
   #   partitions:
   #     api-service:
@@ -335,6 +434,7 @@ indexes:
   # Use case: Search across backend (Python) + frontend (TypeScript)
   #
   # code:
+  #   source_paths: ["../backend/", "../frontend/"]  # ← REQUIRED: Base paths
   #   enabled: true
   #   partitions:
   #     backend:
@@ -360,6 +460,7 @@ indexes:
   # Use case: Main framework + Python SDK + TypeScript SDK
   #
   # code:
+  #   source_paths: ["ouroboros/"]  # ← REQUIRED: Your framework code
   #   enabled: true
   #   partitions:
   #     framework:
@@ -389,6 +490,50 @@ indexes:
   #   ✅ Compare SDK implementations (Python vs TypeScript)
   #   ✅ Find how each SDK integrates with framework
   #   ✅ Ensure consistency across SDK APIs
+  #
+  # ========================================================================
+  # TROUBLESHOOTING MULTI-REPO CONFIG
+  # ========================================================================
+  #
+  # Common Error: "source_paths: Field required"
+  #   Problem: Missing source_paths in multi-repo mode
+  #   Fix: Add source_paths even when using partitions
+  #   Example:
+  #     code:
+  #       source_paths: ["../src/"]  # ← Add this!
+  #       partitions: ...
+  #
+  # Common Error: "List should have at least 1 item after validation"
+  #   Problem: source_paths is empty []
+  #   Fix: Provide at least one path
+  #   Example: source_paths: ["../"]  # Use project root if needed
+  #
+  # Common Error: "Avoid spaces, hyphens, and special characters"
+  #   Problem: Domain name uses hyphens (e.g., my-service)
+  #   Fix: Use underscores instead
+  #   Wrong: my-service, api-v2, test-fixtures
+  #   Right: my_service, api_v2, test_fixtures
+  #
+  # Common Error: "Extra inputs are not permitted"
+  #   Problem: Used 'enabled: true' at code level in single-repo mode
+  #   Fix: Remove 'enabled: true' (only needed in multi-repo mode)
+  #
+  # Common Error: "Path does not exist"
+  #   Problem: Partition path is incorrect or repo not cloned
+  #   Fix: Verify path is relative to .praxis-os/ directory
+  #   Example: If SDK is at /home/user/python-sdk and praxis-os is at
+  #            /home/user/praxis-os, use path: ../../python-sdk
+  #
+  # 💡 TIP: See working multi-repo example
+  #    If you have python-sdk cloned, check:
+  #    ../python-sdk/.praxis-os/config/mcp.yaml
+  #
+  # 💡 TIP: Start simple, iterate
+  #    1. Start with single-repo mode (just source_paths)
+  #    2. Verify it works (restart MCP server)
+  #    3. Add first partition
+  #    4. Verify it works
+  #    5. Add more partitions incrementally
   #
   # ========================================================================
   # ACTUAL CONFIGURATION (Choose Single-Repo OR Multi-Repo)
@@ -437,6 +582,9 @@ indexes:
     # ──────────────────────────────────────────────────────────────────
     # MULTI-REPO MODE (Commented Out - Uncomment to Enable)
     # ──────────────────────────────────────────────────────────────────
+    # ⚠️ REMEMBER: source_paths is REQUIRED even in multi-repo mode!
+    #
+    # source_paths: ["ouroboros/", "scripts/"]  # ← REQUIRED for main project
     # enabled: true
     # partitions:
     #   praxis-os:                        # Partition 1: This framework

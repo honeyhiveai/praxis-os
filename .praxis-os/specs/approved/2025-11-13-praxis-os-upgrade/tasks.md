@@ -33,7 +33,7 @@ Write tests and update documentation
 
 ---
 
-## 📊 Phase 1: Core Infrastructure
+## Phase 1: Core Infrastructure
 
 **Duration:** 4-5 hours  
 **Objective:** Build foundational classes and utilities
@@ -78,10 +78,10 @@ class CheckResult:
 ```
 
 **Acceptance Criteria:**
-- [ ] All data models defined with type hints
-- [ ] Methods implemented (summary(), to_json(), etc.)
-- [ ] Docstrings added for each class
-- [ ] Type checking passes (mypy)
+- [x] All data models defined with type hints
+- [x] Methods implemented (summary(), to_json(), etc.)
+- [x] Docstrings added for each class
+- [x] Type checking passes (mypy)
 
 **Testing:**
 - Unit test: Instantiate each model
@@ -122,11 +122,11 @@ def parse_version(version_str: str) -> tuple:
 ```
 
 **Acceptance Criteria:**
-- [ ] All utility functions implemented
-- [ ] Type hints on all functions
-- [ ] Docstrings with examples
-- [ ] Security checks (path traversal prevention)
-- [ ] Error handling for edge cases
+- [x] All utility functions implemented
+- [x] Type hints on all functions
+- [x] Docstrings with examples
+- [x] Security checks (path traversal prevention)
+- [x] Error handling for edge cases
 
 **Testing:**
 - Unit test: sha256() matches known checksums
@@ -180,11 +180,11 @@ class PreFlightValidator:
 ```
 
 **Acceptance Criteria:**
-- [ ] All 6 pre-flight checks implemented
-- [ ] Breaking change detection for mcp_server → ouroboros
-- [ ] Clear error messages with remediation
-- [ ] Disk space check calculates correct size (exclude .cache/)
-- [ ] Returns ValidationResult with all check results
+- [x] All 6 pre-flight checks implemented
+- [x] Breaking change detection for mcp_server → ouroboros
+- [x] Clear error messages with remediation
+- [x] Disk space check calculates correct size (exclude .cache/)
+- [x] Returns ValidationResult with all check results
 
 **Testing:**
 - Unit test: check_praxis_os_exists() detects missing dir
@@ -245,13 +245,13 @@ class BackupManager:
 ```
 
 **Acceptance Criteria:**
-- [ ] create_backup() creates timestamped directory
-- [ ] Excludes .cache/, workspace/, venv/, __pycache__/
-- [ ] Generates checksum manifest (.backup_manifest.json)
-- [ ] Validates backup integrity
-- [ ] restore_from_backup() fully restores installation
-- [ ] Backup completes in < 10 seconds
-- [ ] Backup size < 100MB
+- [x] create_backup() creates timestamped directory
+- [x] Excludes .cache/, workspace/, venv/, __pycache__/
+- [x] Generates checksum manifest (.backup_manifest.json)
+- [x] Validates backup integrity
+- [x] restore_from_backup() fully restores installation
+- [x] Backup completes in < 10 seconds
+- [x] Backup size < 100MB
 
 **Testing:**
 - Unit test: create_backup() excludes .cache/
@@ -312,13 +312,13 @@ class SourceCloner:
 ```
 
 **Acceptance Criteria:**
-- [ ] Clones from GitHub to temp directory
-- [ ] Supports --source flag for local path
-- [ ] Validates source has dist/ structure
-- [ ] Extracts version from pyproject.toml or __init__.py
-- [ ] Cleanup deletes temp directory
-- [ ] Clone completes in < 60 seconds
-- [ ] Handles network errors gracefully
+- [x] Clones from GitHub to temp directory
+- [x] Supports --source flag for local path
+- [x] Validates source has dist/ structure
+- [x] Extracts version from pyproject.toml or __init__.py
+- [x] Cleanup deletes temp directory
+- [x] Clone completes in < 60 seconds
+- [x] Handles network errors gracefully
 
 **Testing:**
 - Unit test: _validate_local_source() checks structure
@@ -391,12 +391,12 @@ class FileUpgrader:
 ```
 
 **Acceptance Criteria:**
-- [ ] Upgrades standards/, workflows/, ouroboros/, scripts/
-- [ ] Never touches specs/ or standards/development/
-- [ ] Tracks added/modified/deleted files in UpgradeReport
-- [ ] Verifies checksums after copy
-- [ ] Completes in < 90 seconds
-- [ ] Handles missing source directories gracefully
+- [x] Upgrades standards/, workflows/, ouroboros/, scripts/
+- [x] Never touches specs/ or standards/development/
+- [x] Tracks added/modified/deleted files in UpgradeReport
+- [x] Verifies checksums after copy
+- [x] Completes in < 90 seconds
+- [x] Handles missing source directories gracefully
 
 **Testing:**
 - Unit test: _upgrade_standards() copies files correctly
@@ -453,12 +453,12 @@ class ConfigReconciler:
 ```
 
 **Acceptance Criteria:**
-- [ ] Copies mcp.yaml template to .new file
-- [ ] Detects if config changed (diff)
-- [ ] Creates CONFIG_RECONCILIATION_NEEDED.md prompt
-- [ ] Skips reconciliation if no changes
-- [ ] Merges .gitignore additively
-- [ ] Completes in < 15 seconds
+- [x] Copies mcp.yaml template to .new file
+- [x] Detects if config changed (diff)
+- [x] Creates CONFIG_RECONCILIATION_NEEDED.md prompt
+- [x] Skips reconciliation if no changes
+- [x] Merges .gitignore additively
+- [x] Completes in < 15 seconds
 
 **Testing:**
 - Unit test: _configs_identical() detects changes
@@ -470,7 +470,7 @@ class ConfigReconciler:
 
 ---
 
-## 📊 Phase 2: Component Implementation
+## Phase 2: Component Implementation
 
 **Duration:** 5-6 hours  
 **Objective:** Complete remaining components
@@ -995,7 +995,7 @@ if __name__ == "__main__":
 
 ---
 
-## 📊 Phase 3: Integration & CLI
+## Phase 3: Integration & CLI
 
 **Duration:** 2-3 hours  
 **Objective:** Wire everything together and polish UX
@@ -1172,7 +1172,7 @@ Next Steps:
 
 ---
 
-## 📊 Phase 4: Testing & Documentation
+## Phase 4: Testing & Documentation
 
 **Duration:** 1-2 hours  
 **Objective:** Write tests and update docs

@@ -327,10 +327,13 @@ class TestCodePartitionHealthCheck:
         
         assert isinstance(health, HealthStatus)
         assert health.healthy is True
-        assert "test-repo" in health.message
-        assert health.details["domain_count"] == 2
-        assert health.details["domains"] == ["code", "tests"]
-        assert len(health.details["sub_components"]) == 2
+        # Fractal pattern generates generic "All N components healthy" message
+        assert "2 components healthy" in health.message or "All 2" in health.message
+        assert health.details["component_count"] == 2
+        assert len(health.details["components"]) == 2
+        # Check that both components are healthy
+        assert health.details["components"]["semantic"].healthy is True
+        assert health.details["components"]["graph"].healthy is True
     
     def test_health_check_one_degraded(self):
         """Test health check when one sub-index is degraded."""
@@ -367,8 +370,12 @@ class TestCodePartitionHealthCheck:
         
         assert isinstance(health, HealthStatus)
         assert health.healthy is False  # Partition is degraded if any sub-index is
-        assert "degraded" in health.message
-        assert len(health.details["sub_components"]) == 2
+        # Fractal pattern generates "1/2 components healthy" message
+        assert "1/2 components healthy" in health.message
+        assert len(health.details["components"]) == 2
+        # Verify one healthy, one unhealthy
+        assert health.details["components"]["semantic"].healthy is True
+        assert health.details["components"]["graph"].healthy is False
     
     def test_health_check_no_indexes(self):
         """Test health check when no indexes are initialized."""
@@ -389,7 +396,9 @@ class TestCodePartitionHealthCheck:
         health = partition.health_check()
         
         assert isinstance(health, HealthStatus)
-        assert "test-repo" in health.message
+        # Fractal pattern with no components: "No components registered (healthy by default)"
+        assert "No components registered" in health.message or "healthy" in health.message
         assert health.healthy is True  # No indexes = nothing to fail
-        assert len(health.details["sub_components"]) == 0
+        assert health.details["component_count"] == 0
+        assert len(health.details["components"]) == 0
 
