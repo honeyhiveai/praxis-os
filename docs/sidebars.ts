@@ -82,6 +82,7 @@ const sidebars: SidebarsConfig = {
       collapsible: true,
       collapsed: true,
       items: [
+        'explanation/passive-enhancement-model',
         'explanation/praxis',
         'explanation/how-it-works',
         'explanation/architecture',

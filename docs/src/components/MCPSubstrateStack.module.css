@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border-radius: 12px;
+}
+
+.layer {
+  width: 100%;
+  padding: 1.25rem;
+  background: var(--ifm-color-emphasis-100);
+  border: 2px solid #ff6b35;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.layer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  border-color: #ff8c5d;
+}
+
+.layerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  margin-bottom: 0.25rem;
+}
+
+.layerSubtitle {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-left: 2.25rem;
+}
+
+.layerFeatures {
+  margin-top: 0.75rem;
+  margin-left: 2.25rem;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-800);
+  line-height: 1.6;
+}
+
+.feature {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+}
+
+.connectorLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #ff8c5d;
+  font-weight: bold;
+}
+
+/* Dark mode */
+[data-theme='dark'] .layer {
+  background: rgba(255, 140, 93, 0.06);
+  border-color: #ff6b35;
+}
+
+[data-theme='dark'] .layer:hover {
+  background: rgba(255, 140, 93, 0.1);
+  border-color: #ff8c5d;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .layer {
+    padding: 1rem;
+  }
+  
+  .layerTitle {
+    font-size: 1rem;
+  }
+  
+  .layerFeatures {
+    font-size: 0.7rem;
+    margin-left: 1.5rem;
+  }
+}
+
