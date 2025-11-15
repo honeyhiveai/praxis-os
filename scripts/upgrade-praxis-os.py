@@ -1817,7 +1817,7 @@ class FileUpgrader:
 
     def _verify_directory_checksums(self, src: Path, dst: Path) -> None:
         """
-        Verify checksums for a directory pair.
+        Verify checksums for a directory pair (only non-ignored files).
 
         Args:
             src: Source directory
@@ -1846,8 +1846,32 @@ class FileUpgrader:
         if not dst.exists():
             raise ValueError(f"Destination directory not found: {dst}")
 
+        # Skip files that match ignore patterns (same as _rsync)
+        def should_ignore(file_path: Path) -> bool:
+            """Check if file matches ignore patterns"""
+            path_str = str(file_path)
+            # Skip __pycache__ directories and their contents
+            if "__pycache__" in path_str:
+                return True
+            # Skip .pyc files
+            if file_path.suffix == ".pyc":
+                return True
+            # Skip other ignored patterns
+            if any(
+                pattern in file_path.name
+                for pattern in [
+                    ".DS_Store",
+                    ".pytest_cache",
+                    ".mypy_cache",
+                    ".praxis-os",
+                    ".cursor",
+                ]
+            ):
+                return True
+            return False
+
         for src_file in src.rglob("*"):
-            if src_file.is_file():
+            if src_file.is_file() and not should_ignore(src_file):
                 relative_path = src_file.relative_to(src)
                 dst_file = dst / relative_path
 
