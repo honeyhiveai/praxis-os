@@ -448,7 +448,8 @@ def count_files(directory: Path, pattern: str = "*") -> int:
     if not directory.is_dir():
         raise NotADirectoryError(f"Not a directory: {directory}")
 
-    return sum(1 for _ in directory.glob(pattern) if _.is_file())
+    # Use rglob() for recursive search (glob() only searches root directory)
+    return sum(1 for _ in directory.rglob(pattern) if _.is_file())
 
 
 def safe_copy(src: Path, dst: Path, base_dir: Path) -> None:
@@ -2384,7 +2385,12 @@ class UpgradeValidator:
         """
         ouroboros_dir = self.target / ".praxis-os" / "ouroboros"
 
+        print(f"\n[DEBUG] _verify_file_counts:")
+        print(f"  Checking: {ouroboros_dir}")
+        print(f"  Exists: {ouroboros_dir.exists()}")
+
         if not ouroboros_dir.exists():
+            print(f"  [ERROR] Directory does not exist!")
             return CheckResult(
                 passed=False,
                 check_name="File Counts",
@@ -2392,14 +2398,17 @@ class UpgradeValidator:
             )
 
         file_count = count_files(ouroboros_dir, "*.py")
+        print(f"  count_files() returned: {file_count} Python files")
 
         if file_count < 10:  # Sanity check - should have at least 10 Python files
+            print(f"  [ERROR] Only {file_count} files (expected > 10)")
             return CheckResult(
                 passed=False,
                 check_name="File Counts",
                 message=f"Only {file_count} Python files found in ouroboros/ (expected > 10)",
             )
 
+        print(f"  [OK] File counts verified ({file_count} Python files)")
         return CheckResult(
             passed=True,
             check_name="File Counts",
