@@ -961,14 +961,14 @@ class BackupManager:
         backup_dir = self.target / f".praxis-os.backup.{timestamp}"
 
         ignore_patterns = shutil.ignore_patterns(
-            ".cache",
-            "workspace",
-            "venv",
-            "__pycache__",
-            "*.pyc",
-            ".DS_Store",
-            "state",
-            ".backups",
+            ".cache",  # Ephemeral (RAG index, rebuilt from standards)
+            "venv",  # Rebuildable (pip install from requirements.txt)
+            "state",  # Runtime state (browser sessions, workflow state)
+            "__pycache__",  # Build artifact
+            "*.pyc",  # Build artifact
+            ".DS_Store",  # macOS junk
+            ".backups",  # Old backups (avoid recursion)
+            # workspace, specs, standards, config are ALL backed up
         )
 
         try:
@@ -979,13 +979,28 @@ class BackupManager:
         manifest_path = self._generate_checksum_manifest(backup_dir)
         self._validate_backup(backup_dir, manifest_path)
 
+        # Prune old backups (keep last 5)
+        self._prune_old_backups(max_backups=5)
+
         return backup_dir
 
     def restore_from_backup(self, backup_dir: Path) -> None:
         """
-        Restore .praxis-os/ from backup (rollback).
+        Restore user data and framework files from backup (selective restore).
 
-        Removes current installation and restores from backup directory.
+        Selectively restores only the directories that were backed up:
+        - workspace/ (user data)
+        - specs/ (user data)
+        - standards/ (user + framework)
+        - config/ (user config)
+        - ouroboros/ (framework code)
+        - workflows/ (framework code)
+        - scripts/ (framework code)
+
+        Does NOT touch:
+        - venv/ (out of scope, user manages)
+        - .cache/ (ephemeral, will rebuild)
+        - state/ (runtime, not backed up)
 
         Args:
             backup_dir: Path to backup directory to restore from
@@ -1015,14 +1030,70 @@ class BackupManager:
 
         target_dir = self.target / ".praxis-os"
 
+        # Directories that were backed up (selective restore)
+        backed_up_dirs = [
+            "workspace",
+            "specs",
+            "standards",
+            "config",
+            "ouroboros",
+            "workflows",
+            "scripts",
+        ]
+
         try:
-            if target_dir.exists():
-                shutil.rmtree(target_dir)
-            shutil.copytree(backup_dir, target_dir)
+            for item in backed_up_dirs:
+                src = backup_dir / item
+                dst = target_dir / item
+
+                if src.exists():
+                    print(f"  Restoring {item}/...")
+
+                    # Only delete what we're restoring
+                    if dst.exists():
+                        shutil.rmtree(dst)
+
+                    shutil.copytree(src, dst)
+
+            print("  ✓ Backup restored")
+            print(
+                "  Note: venv/ not touched (run 'pip install -r requirements.txt' if needed)"
+            )
+
         except Exception as e:
             raise IOError(f"Failed to restore from backup: {e}") from e
 
         self._validate_restore(target_dir)
+
+    def _prune_old_backups(self, max_backups: int = 5) -> None:
+        """
+        Prune old backups, keeping only the most recent N backups.
+
+        Args:
+            max_backups: Maximum number of backups to keep (default: 5)
+        """
+        import shutil
+
+        backup_root = self.target
+
+        # Get all backup directories sorted by modification time (newest first)
+        backups = sorted(
+            [d for d in backup_root.glob(".praxis-os.backup.*") if d.is_dir()],
+            key=lambda d: d.stat().st_mtime,
+            reverse=True,
+        )
+
+        # Keep the most recent max_backups, delete the rest
+        backups_to_delete = backups[max_backups:]
+
+        if backups_to_delete:
+            print(
+                f"\n[BACKUP PRUNING] Removing {len(backups_to_delete)} old backups (keeping last {max_backups}):"
+            )
+            for backup in backups_to_delete:
+                print(f"  Deleting: {backup.name}")
+                shutil.rmtree(backup)
+            print(f"  ✓ Old backups pruned")
 
     def _generate_checksum_manifest(self, backup_dir: Path) -> Path:
         """
@@ -1456,10 +1527,10 @@ class FileUpgrader:
     """
 
     FRAMEWORK_OWNED = [
-        "standards/universal/",
-        "workflows/",
-        "ouroboros/",
-        "scripts/",
+        "standards/universal/",  # Framework standards
+        "workflows/",  # Framework workflows
+        "ouroboros/",  # MCP server code
+        # scripts/ excluded - don't upgrade while running (self-modification risk)
     ]
 
     USER_OWNED = [
@@ -1483,7 +1554,8 @@ class FileUpgrader:
         """
         Upgrade all framework-owned files.
 
-        Upgrades standards, workflows, ouroboros, and scripts directories.
+        Upgrades standards, workflows, and ouroboros directories.
+        Scripts are NOT upgraded (to avoid self-modification).
         Verifies checksums after copy.
 
         Returns:
@@ -1511,7 +1583,7 @@ class FileUpgrader:
         self._upgrade_standards()
         self._upgrade_workflows()
         self._upgrade_ouroboros()
-        self._upgrade_scripts()
+        # scripts/ NOT upgraded - avoid self-modification while running
         self._verify_checksums()
         return self.changes
 
@@ -1546,9 +1618,7 @@ class FileUpgrader:
             return  # Gracefully handle missing source
 
         before_snapshot = self._snapshot_directory(dst)
-        self._rsync(
-            src, dst, delete=False
-        )  # No need to delete - dirs_exist_ok overwrites
+        self._rsync(src, dst)  # dirs_exist_ok=True handles overwrites safely
         after_snapshot = self._snapshot_directory(dst)
 
         self._track_changes("standards/universal", before_snapshot, after_snapshot)
@@ -1584,9 +1654,7 @@ class FileUpgrader:
             return
 
         before_snapshot = self._snapshot_directory(dst)
-        self._rsync(
-            src, dst, delete=False
-        )  # No need to delete - dirs_exist_ok overwrites
+        self._rsync(src, dst)  # dirs_exist_ok=True handles overwrites safely
         after_snapshot = self._snapshot_directory(dst)
 
         self._track_changes("workflows", before_snapshot, after_snapshot)
@@ -1637,9 +1705,7 @@ class FileUpgrader:
         before_snapshot = self._snapshot_directory(dst)
         print(f"  Before snapshot: {len(before_snapshot)} files")
 
-        self._rsync(
-            src, dst, delete=False
-        )  # No need to delete - dirs_exist_ok overwrites
+        self._rsync(src, dst)  # dirs_exist_ok=True handles overwrites safely
 
         after_snapshot = self._snapshot_directory(dst)
         print(f"  After snapshot: {len(after_snapshot)} files")
@@ -1680,27 +1746,24 @@ class FileUpgrader:
             return
 
         before_snapshot = self._snapshot_directory(dst)
-        self._rsync(
-            src, dst, delete=False
-        )  # No need to delete - dirs_exist_ok overwrites
+        self._rsync(src, dst)  # dirs_exist_ok=True handles overwrites safely
         after_snapshot = self._snapshot_directory(dst)
 
         self._track_changes("scripts", before_snapshot, after_snapshot)
 
-    def _rsync(self, src: Path, dst: Path, delete: bool = False) -> None:
+    def _rsync(self, src: Path, dst: Path) -> None:
         """
-        Copy files from source to destination with ignore patterns.
+        Copy files from source to destination with safe overwrites.
 
-        Uses dirs_exist_ok=True to overwrite existing files without
-        needing to delete the destination directory first.
+        Uses dirs_exist_ok=True to safely overwrite existing files without
+        deleting entire directories. Preserves sibling directories (e.g., venv/).
 
         Args:
             src: Source directory
             dst: Destination directory
-            delete: DEPRECATED - kept for compatibility but ignored.
-                    dirs_exist_ok=True handles overwrites safely.
 
         Raises:
+            FileNotFoundError: If source does not exist
             IOError: If copy operation fails
 
         Examples:
@@ -1724,6 +1787,13 @@ class FileUpgrader:
         print(f"  dst={dst}")
         print(f"  src.exists()={src.exists()}")
         print(f"  dst.exists()={dst.exists()}")
+
+        # Verify source exists BEFORE any operation
+        if not src.exists():
+            raise FileNotFoundError(
+                f"Source directory does not exist: {src}\n"
+                f"Cannot proceed with upgrade. Verify source path is correct."
+            )
 
         # Ignore patterns matching install-praxis-os.py
         ignore = shutil.ignore_patterns(
@@ -1875,11 +1945,7 @@ class FileUpgrader:
             self.target / ".praxis-os" / "ouroboros",
         )
 
-        # Verify scripts
-        self._verify_directory_checksums(
-            self.source / "dist" / "scripts",
-            self.target / ".praxis-os" / "scripts",
-        )
+        # Scripts NOT verified - not upgraded (avoid self-modification)
 
     def _verify_directory_checksums(self, src: Path, dst: Path) -> None:
         """

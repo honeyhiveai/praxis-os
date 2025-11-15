@@ -1,10 +1,12 @@
 # praxis-os Upgrade System Specification
 
-**Status:** 🚧 In Review  
-**Version:** 1.0.0  
+**Status:** ✅ Completed  
+**Version:** 1.1.0  
 **Created:** 2025-11-13  
+**Updated:** 2025-11-15 (Safety Fixes Addendum)  
+**Completed:** 2025-11-15  
 **Author:** AI Agent (Claude)  
-**Workflow:** Created via `spec_creation_v1`
+**Workflow:** Created via `spec_creation_v1`, Safety fixes via addendum
 
 ---
 
@@ -47,6 +49,15 @@ This specification defines a Python-based upgrade script (`upgrade-praxis-os.py`
 ### Supporting Documents
 
 - **[supporting-docs/design-doc.md](supporting-docs/design-doc.md)** - Original conversational design with all 6 design questions resolved
+
+### Addenda
+
+- **[ADDENDUM-SAFETY-FIXES.md](ADDENDUM-SAFETY-FIXES.md)** - Critical safety improvements (v1.1.0, 2025-11-15)
+  - Fixes 7 bugs: delete flag (root cause), nuclear restore, workspace backup, scripts self-upgrade, no backup pruning, no verify mode, requirements not reinstalled
+  - Adds `--verify-only` flag, backup pruning (keep last 5), selective restore
+  - Removes delete flag entirely, uses `dirs_exist_ok=True` for safe overwrites
+  - Venv management: out of scope for backup/restore, updated via `pip install --upgrade -r requirements.txt`
+  - 18 hours additional implementation effort across 7 phases
 
 ---
 
@@ -167,6 +178,7 @@ black scripts/upgrade-praxis-os.py
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0.0 | 2025-11-13 | AI Agent (Claude) | Initial specification via spec_creation_v1 workflow |
+| 1.1.0 | 2025-11-15 | AI Agent (Claude Sonnet 4.5) + Josh Paul | Safety fixes addendum: Remove delete flag, selective restore, backup pruning, verify mode, requirements reinstall |
 
 ---
 
