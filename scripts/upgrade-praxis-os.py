@@ -1660,7 +1660,7 @@ class FileUpgrader:
 
     def _rsync(self, src: Path, dst: Path, delete: bool = False) -> None:
         """
-        Copy files from source to destination.
+        Copy files from source to destination with ignore patterns.
 
         Args:
             src: Source directory
@@ -1686,10 +1686,21 @@ class FileUpgrader:
         """
         import shutil
 
+        # Ignore patterns matching install-praxis-os.py
+        ignore = shutil.ignore_patterns(
+            "__pycache__",
+            "*.pyc",
+            ".DS_Store",
+            ".pytest_cache",
+            ".mypy_cache",
+            ".praxis-os",  # Don't copy nested installs
+            ".cursor",  # Don't copy Cursor artifacts
+        )
+
         try:
             if delete and dst.exists():
                 shutil.rmtree(dst)
-            shutil.copytree(src, dst, dirs_exist_ok=True)
+            shutil.copytree(src, dst, dirs_exist_ok=True, ignore=ignore)
         except Exception as e:
             raise IOError(f"Failed to copy {src} to {dst}: {e}") from e
 
