@@ -452,6 +452,31 @@ indexes:
   #           metadata: {language: typescript, type: frontend}
   #
   #   languages: ["python", "typescript", "javascript"]
+  #
+  #   # Language-specific configuration for AST chunking
+  #   # REQUIRED when using multiple languages to avoid warning spam
+  #   # Each language needs: extensions + tree_sitter_language name
+  #   #
+  #   # Common languages shown below. For other languages, see:
+  #   # https://tree-sitter.github.io/tree-sitter/#available-parsers
+  #   language_configs:
+  #     python:
+  #       extensions: [".py"]
+  #       tree_sitter_language: "python"
+  #     typescript:
+  #       extensions: [".ts", ".tsx"]
+  #       tree_sitter_language: "typescript"
+  #     javascript:
+  #       extensions: [".js", ".jsx", ".mjs"]
+  #       tree_sitter_language: "javascript"
+  #     # Other common languages:
+  #     # rust: {extensions: [".rs"], tree_sitter_language: "rust"}
+  #     # go: {extensions: [".go"], tree_sitter_language: "go"}
+  #     # java: {extensions: [".java"], tree_sitter_language: "java"}
+  #     # cpp: {extensions: [".cpp", ".cc", ".cxx", ".h", ".hpp"], tree_sitter_language: "cpp"}
+  #     # c: {extensions: [".c", ".h"], tree_sitter_language: "c"}
+  #     # ruby: {extensions: [".rb"], tree_sitter_language: "ruby"}
+  #
   #   vector: {model: "microsoft/codebert-base", dimension: 768}
   #
   # ┌─────────────────────────────────────────────────────────────────────┐
@@ -484,6 +509,28 @@ indexes:
   #           metadata: {sdk: typescript}
   #
   #   languages: ["python", "typescript"]
+  #
+  #   # Language-specific configuration for AST chunking
+  #   # REQUIRED when using multiple languages to avoid warning spam
+  #   # Each language needs: extensions + tree_sitter_language name
+  #   #
+  #   # Common languages shown below. For other languages, see:
+  #   # https://tree-sitter.github.io/tree-sitter/#available-parsers
+  #   language_configs:
+  #     python:
+  #       extensions: [".py"]
+  #       tree_sitter_language: "python"
+  #     typescript:
+  #       extensions: [".ts", ".tsx"]
+  #       tree_sitter_language: "typescript"
+  #     # Other common languages:
+  #     # rust: {extensions: [".rs"], tree_sitter_language: "rust"}
+  #     # go: {extensions: [".go"], tree_sitter_language: "go"}
+  #     # java: {extensions: [".java"], tree_sitter_language: "java"}
+  #     # cpp: {extensions: [".cpp", ".cc", ".cxx", ".h", ".hpp"], tree_sitter_language: "cpp"}
+  #     # c: {extensions: [".c", ".h"], tree_sitter_language: "c"}
+  #     # ruby: {extensions: [".rb"], tree_sitter_language: "ruby"}
+  #
   #   vector: {model: "microsoft/codebert-base", dimension: 768}
   #
   # Benefits:
