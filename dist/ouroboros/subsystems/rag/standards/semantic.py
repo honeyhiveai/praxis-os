@@ -78,7 +78,7 @@ class SemanticIndex(BaseIndex):
         self._reranker = None
         
         # Progress file manager for build progress reporting
-        progress_cache_dir = base_path / ".praxis-os" / ".cache" / "rag" / "build-progress"
+        progress_cache_dir = base_path / ".cache" / "rag" / "build-progress"
         self._progress_manager = ProgressFileManager(
             cache_dir=progress_cache_dir,
             index_name="standards",

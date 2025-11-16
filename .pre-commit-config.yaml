@@ -84,6 +84,15 @@ repos:
         stages: [pre-commit]
         verbose: true
 
+      - id: filesystem-layout-check
+        name: "Filesystem Layout Validation (No Nested .praxis-os)"
+        entry: python scripts/validate_filesystem_layout.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+        verbose: true
+
       # ============================================================
       # PHASE 1: Code Formatting (Auto-fix)
       # ============================================================
