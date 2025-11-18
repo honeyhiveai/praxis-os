@@ -124,6 +124,10 @@ class SemanticIndex(BaseIndex):
             component="semantic"
         )
         
+        # Build status tracking (ADDENDUM-2025-11-17: Build Status Integration)
+        self._building = False
+        self._build_lock = threading.Lock()
+        
         logger.info("SemanticIndex (code) initialized (lazy-load mode)")
     
     def _ensure_table(self):
@@ -161,6 +165,10 @@ class SemanticIndex(BaseIndex):
             ActionableError: If build fails
         """
         logger.info("Building code index from %d source paths", len(source_paths))
+        
+        # Set building flag (ADDENDUM-2025-11-17: Build Status Integration)
+        with self._build_lock:
+            self._building = True
         
         try:
             # Write initial progress (0%)
@@ -230,6 +238,10 @@ class SemanticIndex(BaseIndex):
             # Cleanup progress file on failure
             self._progress_manager.delete_progress()
             raise
+        finally:
+            # Clear building flag (ADDENDUM-2025-11-17: Build Status Integration)
+            with self._build_lock:
+                self._building = False
     
     def _collect_and_chunk(self, source_paths: List[Path]) -> List[Dict[str, Any]]:
         """Collect code files and chunk them.
@@ -1166,24 +1178,61 @@ class SemanticIndex(BaseIndex):
             logger.warning("Failed to delete chunks for %s: %s", relative_path, e)
     
     def build_status(self) -> "BuildStatus":  # type: ignore[name-defined]
-        """Check build status (not implemented for internal semantic index).
-        
-        This is an internal implementation class. Build status is handled
-        by the container class (CodeIndex).
+        """Check actual build status (ADDENDUM-2025-11-17: Build Status Integration).
         
         Returns:
-            BuildStatus indicating BUILT (stub implementation)
+            BuildStatus with actual state (BUILDING, BUILT, or NOT_BUILT)
         """
         from ouroboros.subsystems.rag.base import BuildStatus, IndexBuildState
         
+        # Check if currently building
+        with self._build_lock:
+            is_building = self._building
+        
+        if is_building:
+            # Check progress file for actual progress
+            progress_info = self._progress_manager.read_progress()
+            progress_percent = progress_info.progress_percent if progress_info else 50.0
+            progress_message = progress_info.message if progress_info else "Building..."
+            
+            return BuildStatus(
+                state=IndexBuildState.BUILDING,
+                message=f"Building semantic index: {progress_message}",
+                progress_percent=progress_percent,
+                details={"component": "semantic"}
+            )
+        
+        # Check if index has data (has been built)
+        try:
+            db = self.db_connection.connect()
+            existing_tables = db.table_names()
+            
+            if "code" in existing_tables:
+                # Table exists, check if it has data
+                table = db.open_table("code")
+                count = table.count_rows()
+                
+                if count > 0:
+                    return BuildStatus(
+                        state=IndexBuildState.BUILT,
+                        message=f"Semantic index built ({count} chunks)",
+                        progress_percent=100.0,
+                        details={"chunks": count}
+                    )
+        except Exception as e:
+            logger.debug("Error checking semantic index data: %s", e)
+        
+        # No data found - not built yet
         return BuildStatus(
-            state=IndexBuildState.BUILT,
-            message="Internal semantic index (build status tracked by container)",
-            progress_percent=100.0,
+            state=IndexBuildState.NOT_BUILT,
+            message="Semantic index not yet built",
+            progress_percent=0.0
         )
     
     def health_check(self) -> HealthStatus:
         """Check index health with dynamic validation.
+        
+        ADDENDUM-2025-11-17: Now checks build status first, skips validation if building.
         
         Verifies:
         1. Table exists and has data
@@ -1194,70 +1243,65 @@ class SemanticIndex(BaseIndex):
         Returns:
             HealthStatus with diagnostic info
         """
+        # ADDENDUM-2025-11-17: Check build status first, skip validation if building
+        from ouroboros.subsystems.rag.base import IndexBuildState
+        
+        build_status = self.build_status()
+        
+        if build_status.state == IndexBuildState.BUILDING:
+            # Don't validate data during build - it's incomplete!
+            return HealthStatus(
+                healthy=True,  # Not unhealthy, just building
+                message=f"Building ({build_status.progress_percent:.0f}%), skipping health check",
+                details={
+                    "building": True,
+                    "progress": build_status.progress_percent,
+                    "build_message": build_status.message
+                }
+            )
+        
+        # Normal health check (validate data)
+        # NOTE: We do NOT run embedding generation in health checks!
+        # Embeddings are only needed for building and searching, not validation.
+        # Health check should be fast (< 100ms) and cheap (no heavy computation).
         try:
-            logger.info("🏥 CodeSemanticIndex health check: partition=%s", self.partition_name)
-            self._ensure_table()
-            assert self._table is not None
-            logger.info("  ✅ Table loaded: %s", self._table)
+            logger.debug("🏥 CodeSemanticIndex health check: partition=%s", self.partition_name)
             
-            # Get table stats
-            stats = self._table.count_rows()
-            logger.info("  📊 Row count: %d", stats)
+            # Check if table exists
+            db = self.db_connection.connect()
+            existing_tables = db.table_names()
             
-            if stats == 0:
+            if "code" not in existing_tables:
+                return HealthStatus(
+                    healthy=False,
+                    message="Code index not built (table doesn't exist)",
+                    details={"table_exists": False}
+                )
+            
+            # Check if table has data
+            table = db.open_table("code")
+            count = table.count_rows()
+            logger.debug("  📊 Row count: %d", count)
+            
+            if count == 0:
                 return HealthStatus(
                     healthy=False,
                     message="Code index is empty (no chunks)",
                     details={"chunk_count": 0}
                 )
             
-            # DYNAMIC CHECK: Try to actually use the index with a test query
-            # This catches dimension mismatches, schema incompatibilities, etc.
-            try:
-                logger.info("  🔍 Testing index with query...")
-                # Load embedding model and generate test vector
-                embedding_model = EmbeddingModelLoader.load(self.config.vector.model)
-                logger.info("  ✅ Model loaded: %s", self.config.vector.model)
-                test_query = "test"
-                test_vector = safe_encode(embedding_model, test_query).tolist()
-                logger.info("  ✅ Test vector generated: dim=%d", len(test_vector))
-                
-                # Try a simple vector search (limit 1 to minimize overhead)
-                _ = self._table.search(test_vector).limit(1).to_list()
-                logger.info("  ✅ Test search succeeded!")
-                
-                # If we got here, index is actually working
-                return HealthStatus(
-                    healthy=True,
-                    message=f"Code index operational ({stats} chunks)",
-                    details={"chunk_count": stats},
-                    last_updated=None
-                )
-                
-            except Exception as test_error:
-                logger.error("  ❌ Health check test query failed: %s", test_error, exc_info=True)
-                # Test query failed - index is corrupted or incompatible
-                error_msg = str(test_error).lower()
-                
-                # Check for common incompatibility issues
-                if "dim" in error_msg and "match" in error_msg:
-                    reason = "Model dimension mismatch (config changed, index needs rebuild)"
-                elif "schema" in error_msg:
-                    reason = "Schema incompatibility (LanceDB version or config changed)"
-                else:
-                    reason = f"Index not operational: {test_error}"
-                
-                return HealthStatus(
-                    healthy=False,
-                    message=f"Code index corrupted or incompatible: {reason}",
-                    details={
-                        "chunk_count": stats,
-                        "test_error": str(test_error),
-                        "needs_rebuild": True
-                    }
-                )
+            # Table exists and has data - healthy!
+            # Note: Dimension mismatches will be caught when actual searches are performed,
+            # not in periodic health checks. Health checks should be fast and cheap.
+            return HealthStatus(
+                healthy=True,
+                message=f"Code index healthy ({count} chunks)",
+                details={"chunk_count": count},
+                last_updated=None
+            )
             
         except Exception as e:
+            logger.error("Health check failed: %s", e, exc_info=True)
             return HealthStatus(
                 healthy=False,
                 message=f"Code index not healthy: {e}",

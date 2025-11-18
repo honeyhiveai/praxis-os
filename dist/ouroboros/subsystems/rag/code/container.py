@@ -161,6 +161,11 @@ class CodeIndex(BaseIndex):
         lock_dir = base_path / ".cache" / "locks"
         self._lock_manager = IndexLockManager("code", lock_dir)
         
+        # Build status tracking (ADDENDUM-2025-11-17: Build Status Integration)
+        import threading
+        self._building = False
+        self._build_lock = threading.Lock()
+        
         # Register components for cascading health checks
         # Conditional Registration: Components are only registered if enabled in config.
         # This ensures health checks only count enabled components, preventing false negatives.
@@ -331,56 +336,66 @@ class CodeIndex(BaseIndex):
             ActionableError: If build fails or lock cannot be acquired
         """
         logger.info("CodeIndex.build() acquiring exclusive lock")
-        with self._lock_manager.exclusive_lock():
-            if self._multi_partition_mode:
-                # Multi-partition build: iterate over all partitions
-                logger.info("CodeIndex.build() building %d partitions", len(self._partitions))
-                
-                for partition_name, partition in self._partitions.items():
-                    try:
-                        logger.info("Building partition '%s' from path: %s", partition_name, partition.path)
-                        
-                        # Collect source paths from all domains (code, tests, docs, etc.)
-                        source_paths = []
-                        for domain_name, domain_config in partition.domains.items():
-                            if domain_config.include_paths:
-                                # Resolve include_paths relative to partition path
-                                for include_path in domain_config.include_paths:
-                                    full_path = partition.path / include_path
-                                    source_paths.append(full_path)
-                                    logger.info("  Domain '%s' include path: %s", domain_name, full_path)
-                        
-                        # Fallback to partition root if no include_paths specified
-                        if not source_paths:
-                            source_paths = [partition.path]
-                            logger.info("  No include_paths specified, using partition root: %s", partition.path)
-                        
-                        # Build semantic index for this partition
-                        if partition.semantic:
-                            logger.info("  Building semantic index for '%s' with %d source paths", partition_name, len(source_paths))
-                            partition.semantic.build(source_paths, force)
-                        
-                        # Build graph index for this partition
-                        if partition.graph:
-                            logger.info("  Building graph index for '%s' with %d source paths", partition_name, len(source_paths))
-                            partition.graph.build(source_paths, force)
-                        
-                        logger.info("  ✅ Partition '%s' built successfully", partition_name)
+        
+        # Set building flag (ADDENDUM-2025-11-17: Build Status Integration)
+        with self._build_lock:
+            self._building = True
+        
+        try:
+            with self._lock_manager.exclusive_lock():
+                if self._multi_partition_mode:
+                    # Multi-partition build: iterate over all partitions
+                    logger.info("CodeIndex.build() building %d partitions", len(self._partitions))
                     
-                    except Exception as e:
-                        logger.error("Failed to build partition '%s': %s", partition_name, e, exc_info=True)
-                        # Continue with other partitions (graceful degradation)
-                
-                logger.info("✅ CodeIndex multi-partition build complete")
-            else:
-                # Legacy single-repo build
-                logger.info("CodeIndex.build() building semantic index (LanceDB)")
-                self._semantic_index.build(source_paths, force)
-                
-                logger.info("CodeIndex.build() building graph index (DuckDB)")
-                self._graph_index.build(source_paths, force)
-                
-                logger.info("✅ CodeIndex built successfully (semantic + graph)")
+                    for partition_name, partition in self._partitions.items():
+                        try:
+                            logger.info("Building partition '%s' from path: %s", partition_name, partition.path)
+                            
+                            # Collect source paths from all domains (code, tests, docs, etc.)
+                            source_paths = []
+                            for domain_name, domain_config in partition.domains.items():
+                                if domain_config.include_paths:
+                                    # Resolve include_paths relative to partition path
+                                    for include_path in domain_config.include_paths:
+                                        full_path = partition.path / include_path
+                                        source_paths.append(full_path)
+                                        logger.info("  Domain '%s' include path: %s", domain_name, full_path)
+                            
+                            # Fallback to partition root if no include_paths specified
+                            if not source_paths:
+                                source_paths = [partition.path]
+                                logger.info("  No include_paths specified, using partition root: %s", partition.path)
+                            
+                            # Build semantic index for this partition
+                            if partition.semantic:
+                                logger.info("  Building semantic index for '%s' with %d source paths", partition_name, len(source_paths))
+                                partition.semantic.build(source_paths, force)
+                            
+                            # Build graph index for this partition
+                            if partition.graph:
+                                logger.info("  Building graph index for '%s' with %d source paths", partition_name, len(source_paths))
+                                partition.graph.build(source_paths, force)
+                            
+                            logger.info("  ✅ Partition '%s' built successfully", partition_name)
+                        
+                        except Exception as e:
+                            logger.error("Failed to build partition '%s': %s", partition_name, e, exc_info=True)
+                            # Continue with other partitions (graceful degradation)
+                    
+                    logger.info("✅ CodeIndex multi-partition build complete")
+                else:
+                    # Legacy single-repo build
+                    logger.info("CodeIndex.build() building semantic index (LanceDB)")
+                    self._semantic_index.build(source_paths, force)
+                    
+                    logger.info("CodeIndex.build() building graph index (DuckDB)")
+                    self._graph_index.build(source_paths, force)
+                    
+                    logger.info("✅ CodeIndex built successfully (semantic + graph)")
+        finally:
+            # Clear building flag (ADDENDUM-2025-11-17: Build Status Integration)
+            with self._build_lock:
+                self._building = False
     
     def search(
         self,
@@ -758,6 +773,8 @@ class CodeIndex(BaseIndex):
     def health_check(self) -> HealthStatus:
         """Dynamic health check using component registry (fractal pattern).
         
+        ADDENDUM-2025-11-17: Now checks build status first, skips validation if building.
+        
         Delegates to dynamic_health_check() which:
         1. Calls each component's health_check() lambda
         2. Aggregates results into nested structure
@@ -772,10 +789,28 @@ class CodeIndex(BaseIndex):
         Returns:
             HealthStatus with nested components dict showing health of semantic and graph
         """
+        # ADDENDUM-2025-11-17: Check build status first, skip validation if building
+        build_status = self.build_status()
+        
+        if build_status.state == IndexBuildState.BUILDING:
+            # Don't validate data during build - it's incomplete!
+            return HealthStatus(
+                healthy=True,  # Not unhealthy, just building
+                message=f"Building ({build_status.progress_percent:.0f}%), skipping health check",
+                details={
+                    "building": True,
+                    "progress": build_status.progress_percent,
+                    "build_message": build_status.message
+                }
+            )
+        
+        # Normal health check (validate data)
         return dynamic_health_check(self.components)
     
     def build_status(self) -> BuildStatus:
         """Dynamic build status check using component registry (fractal pattern).
+        
+        ADDENDUM-2025-11-17: Now checks container-level building flag first.
         
         Aggregates build status from all registered components (semantic, graph)
         using priority-based selection (worst state bubbles up). This provides
@@ -784,6 +819,19 @@ class CodeIndex(BaseIndex):
         Returns:
             BuildStatus with aggregated state from all components
         """
+        # Check if container is building (ADDENDUM-2025-11-17)
+        with self._build_lock:
+            is_building = self._building
+        
+        if is_building:
+            return BuildStatus(
+                state=IndexBuildState.BUILDING,
+                message="Building code index...",
+                progress_percent=50.0,
+                details={"component": "code"}
+            )
+        
+        # Aggregate from components (fractal pattern)
         return dynamic_build_status(self.components)
     
     def get_stats(self) -> Dict[str, Any]:

@@ -2,8 +2,26 @@
 
 **Feature:** Component Registry Pattern for Dynamic Health Checking  
 **Date:** 2025-11-10  
-**Status:** Ready for Implementation ✅  
+**Status:** Implemented ✅ (See ADDENDUM-2025-11-17 for Build Status Integration)  
 **Workflow:** spec_creation_v1 (Phases 0-5 Complete)
+
+---
+
+## ⚠️ IMPORTANT: ADDENDUM
+
+**Date:** 2025-11-17
+
+A critical gap was identified in production: **health checks were running during builds**, causing rebuild loops. The original spec implemented health aggregation but missed build status tracking integration.
+
+**See:** [ADDENDUM-2025-11-17-build-status-integration.md](ADDENDUM-2025-11-17-build-status-integration.md)
+
+**What was added:**
+- `_building` flag tracking in all indexes
+- `build_status()` methods return actual state (BUILDING/BUILT/NOT_BUILT)
+- `health_check()` methods skip validation when `state == BUILDING`
+- Integration of the two fractal patterns (health + build status)
+
+**Impact:** Fixes infinite rebuild loops, completes the fractal architecture as originally intended.
 
 ---
 

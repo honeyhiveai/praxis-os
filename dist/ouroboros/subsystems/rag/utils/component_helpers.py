@@ -354,6 +354,17 @@ def dynamic_health_check(components: Dict[str, ComponentDescriptor]) -> "HealthS
             status = descriptor.health_check()
             component_health[name] = status
             
+            # DEBUG: Log each component's health status
+            logger.debug(
+                f"  Component '{name}' health: {status.healthy} - {status.message}"
+            )
+            if not status.healthy:
+                logger.warning(
+                    f"  ⚠️  Component '{name}' is UNHEALTHY: {status.message}"
+                )
+                if status.details:
+                    logger.warning(f"      Details: {status.details}")
+            
             # Track healthy count
             if status.healthy:
                 healthy_count += 1
