@@ -332,44 +332,26 @@ class GraphIndex(BaseIndex):
             # Store source paths for targeted rebuilds
             self.source_paths = source_paths
             
-            conn = self.db_connection.get_connection()
-            
-            # Clear existing data if force rebuild
-            # FK order: Delete children before parents to respect constraints
+            # Force rebuild: Delete database file and reinitialize
+            # This is simpler, safer, and more reliable than trying to DELETE with FK constraints
             if force:
-                logger.info("Clearing existing graph data (force rebuild)")
+                logger.info("Deleting existing database file (force rebuild)")
                 
-                # 1. Delete relationships first (child of symbols via FKs)
-                conn.execute("DELETE FROM relationships")
+                # Close existing connection
+                self.db_connection.close()
                 
-                # 2. Delete symbols (no FK dependencies)
-                conn.execute("DELETE FROM symbols")
+                # Delete the database file
+                if self.db_path.exists():
+                    self.db_path.unlink()
+                    logger.info("✅ Deleted database file: %s", self.db_path)
                 
-                # 3. Delete ast_nodes last (self-referential FK - delete in leaf-to-root order)
-                # Since we can't easily determine tree order, just query and delete iteratively
-                # OR use temporary table trick
-                # Simplest: Just accept that DELETE will fail if there are FKs, so we iterate
-                # Actually, for force rebuild, we can just drop and recreate the table
-                conn.execute("DROP TABLE IF EXISTS ast_nodes")
-                conn.execute("""
-                    CREATE TABLE ast_nodes (
-                        id INTEGER PRIMARY KEY,
-                        file_path TEXT NOT NULL,
-                        language TEXT NOT NULL,
-                        node_type TEXT NOT NULL,
-                        symbol_name TEXT,
-                        start_line INTEGER NOT NULL,
-                        end_line INTEGER NOT NULL,
-                        parent_id INTEGER,
-                        FOREIGN KEY (parent_id) REFERENCES ast_nodes(id)
-                    )
-                """)
-                conn.execute("CREATE INDEX idx_ast_file_path ON ast_nodes(file_path)")
-                conn.execute("CREATE INDEX idx_ast_node_type ON ast_nodes(node_type)")
-                conn.execute("CREATE INDEX idx_ast_language ON ast_nodes(language)")
-                conn.execute("CREATE INDEX idx_ast_symbol_name ON ast_nodes(symbol_name)")
-                
-                logger.info("✅ Cleared all tables in FK-safe order (DROP/CREATE for ast_nodes)")
+                # Reinitialize connection and schema
+                from ouroboros.subsystems.rag.utils.duckdb_helpers import DuckDBConnection
+                self.db_connection = DuckDBConnection(self.db_path)
+                self._initialize_schema()
+                logger.info("✅ Reinitialized database with fresh schema")
+            
+            conn = self.db_connection.get_connection()
             
             # Check if index already has data
             ast_count = conn.execute("SELECT COUNT(*) FROM ast_nodes").fetchone()[0]
