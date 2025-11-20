@@ -16,7 +16,6 @@ Design Principles:
 
 import logging
 import threading
-import time
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
@@ -60,6 +59,18 @@ class IndexManager:
         └─ ASTIndex (structural: Tree-sitter)
     """
     
+    # Action registry: maps action → (index_name, method_name, is_search)
+    # Shared by route_action() and _get_required_indexes_for_action()
+    # Note: Graph operations (find_*, search_ast) route to CodeIndex (dual-database architecture)
+    ACTION_REGISTRY = {
+        "search_standards": ("standards", "search", True),
+        "search_code": ("code", "search", True),
+        "search_ast": ("code", "search_ast", False),  # AST search via CodeIndex.search_ast()
+        "find_callers": ("code", "find_callers", False),  # Graph via CodeIndex.find_callers()
+        "find_dependencies": ("code", "find_dependencies", False),  # Graph via CodeIndex.find_dependencies()
+        "find_call_paths": ("code", "find_call_paths", False),  # Graph via CodeIndex.find_call_paths()
+    }
+    
     def __init__(self, config: IndexesConfig, base_path: Path):
         """Initialize IndexManager with configuration.
         
@@ -75,16 +86,6 @@ class IndexManager:
         
         # Index registry: {index_name: BaseIndex}
         self._indexes: Dict[str, BaseIndex] = {}
-        
-        # Build state cache for performance optimization
-        # Maps index_name -> BuildStatus with TTL-based invalidation
-        self._build_state_cache: Dict[str, Any] = {}  # BuildStatus type imported later
-        self._build_state_cache_time: Dict[str, float] = {}
-        self._build_state_cache_lock = threading.RLock()
-        
-        # Cache TTL configuration
-        self._build_state_cache_ttl: float = 60.0  # BUILT state (stable)
-        self._building_state_cache_ttl: float = 5.0  # BUILDING state (dynamic, will be calculated)
         
         # Thread safety for _indexes dict
         self._indexes_lock = threading.RLock()
@@ -195,21 +196,10 @@ class IndexManager:
             This method uses the same ACTION_REGISTRY as route_action() to ensure
             consistency. If the action is not in the registry, returns empty list.
         """
-        # Action registry: maps action pattern → (index_name, method_name, is_search)
-        # This is the same registry used by route_action() for consistency
-        ACTION_REGISTRY = {
-            "search_standards": ("standards", "search", True),
-            "search_code": ("code", "search", True),
-            "search_ast": ("code", "search_ast", False),  # AST search via CodeIndex.search_ast()
-            "find_callers": ("code", "find_callers", False),  # Graph via CodeIndex.find_callers()
-            "find_dependencies": ("code", "find_dependencies", False),  # Graph via CodeIndex.find_dependencies()
-            "find_call_paths": ("code", "find_call_paths", False),  # Graph via CodeIndex.find_call_paths()
-        }
-        
-        if action not in ACTION_REGISTRY:
+        if action not in self.ACTION_REGISTRY:
             return []
         
-        index_name, _, _ = ACTION_REGISTRY[action]
+        index_name, _, _ = self.ACTION_REGISTRY[action]
         return [index_name]
     
     def _check_build_readiness(self, action: str) -> Optional[Dict[str, Any]]:
@@ -464,9 +454,6 @@ class IndexManager:
             "error_message": str(error),
         })
         
-        # Invalidate build cache for this index
-        self._invalidate_build_cache(index_name)
-        
         # Trigger background rebuild
         # Note: This uses threading to avoid blocking the current operation
         import threading
@@ -527,6 +514,27 @@ class IndexManager:
                 "error_type": type(e).__name__,
                 "error_message": str(e),
             })
+    
+    # ========================================================================
+    # Telemetry / Observability Extensibility Hook
+    # ========================================================================
+    # ARCHITECTURAL NOTE:
+    # The telemetry callback infrastructure below has zero callers as of commit 376f44e
+    # (Nov 14, 2025). It was added as part of "Performance Foundation" spec implementation
+    # but is currently unused.
+    #
+    # DECISION: Keep this infrastructure because:
+    # 1. It's a clean extensibility hook for external monitoring (Datadog, Prometheus)
+    # 2. It's well-documented and follows plugin architecture patterns
+    # 3. Removal saves ~90 lines but removes a useful extension point
+    # 4. Alternative (structured logging) exists but doesn't support push-based monitoring
+    #
+    # FUTURE: If monitoring integration is needed, this is ready to use:
+    #   manager.set_telemetry_callback(lambda event, data: send_to_datadog(event, data))
+    #
+    # If this remains unused after 6 months, reconsider removal in favor of structured
+    # logging only.
+    # ========================================================================
     
     def set_telemetry_callback(
         self,
@@ -641,28 +649,16 @@ class IndexManager:
         Raises:
             ActionableError: If action is invalid or execution fails
         """
-        # Action registry: maps action pattern → (index_name, method_name, is_search)
-        # This allows adding new actions without modifying this method
-        # Note: Graph operations (find_*, search_ast) now route to CodeIndex (dual-database architecture)
-        ACTION_REGISTRY = {
-            "search_standards": ("standards", "search", True),
-            "search_code": ("code", "search", True),
-            "search_ast": ("code", "search_ast", False),  # AST search via CodeIndex.search_ast()
-            "find_callers": ("code", "find_callers", False),  # Graph via CodeIndex.find_callers()
-            "find_dependencies": ("code", "find_dependencies", False),  # Graph via CodeIndex.find_dependencies()
-            "find_call_paths": ("code", "find_call_paths", False),  # Graph via CodeIndex.find_call_paths()
-        }
-        
         # Check if action is in registry
-        if action not in ACTION_REGISTRY:
-            valid_actions = ", ".join(ACTION_REGISTRY.keys())
+        if action not in self.ACTION_REGISTRY:
+            valid_actions = ", ".join(self.ACTION_REGISTRY.keys())
             raise ActionableError(
                 what_failed=f"route_action({action})",
                 why_failed=f"Unknown action: {action}",
                 how_to_fix=f"Valid actions: {valid_actions}"
             )
         
-        index_name, method_name, is_search = ACTION_REGISTRY[action]
+        index_name, method_name, is_search = self.ACTION_REGISTRY[action]
         
         # Check if index is available
         if index_name not in self._indexes:
@@ -1099,61 +1095,6 @@ class IndexManager:
                 stats[name] = {"error": str(e)}
         
         return stats
-    
-    # ========================================================================
-    # Build State Cache Methods (Performance Foundation - Phase 0)
-    # ========================================================================
-    
-    def _calculate_building_ttl(self, progress_percent: float) -> float:
-        """Calculate dynamic TTL for BUILDING state based on progress.
-        
-        The TTL adapts to build progress to balance freshness and performance:
-        - Early stage (0-10%): 2s TTL - Fast changes, check frequently
-        - Mid stage (10-50%): 5s TTL - Steady progress, moderate checks
-        - Late stage (50-100%): 10s TTL - Slow near completion, less frequent checks
-        
-        Args:
-            progress_percent: Build progress percentage (0-100)
-            
-        Returns:
-            TTL in seconds (2.0, 5.0, or 10.0)
-            
-        Examples:
-            >>> manager._calculate_building_ttl(5.0)
-            2.0
-            >>> manager._calculate_building_ttl(30.0)
-            5.0
-            >>> manager._calculate_building_ttl(75.0)
-            10.0
-        """
-        if progress_percent < 10:
-            return 2.0
-        elif progress_percent < 50:
-            return 5.0
-        else:
-            return 10.0
-    
-    def _invalidate_build_cache(self, index_name: str) -> None:
-        """Atomically invalidate build state cache for an index.
-        
-        This method is thread-safe and removes both the cached status and timestamp
-        for the specified index. Used when build state changes (e.g., build starts,
-        completes, or fails).
-        
-        Args:
-            index_name: Name of the index to invalidate
-            
-        Thread Safety:
-            Uses RLock to ensure atomic removal from both cache dictionaries.
-            Safe to call from multiple threads simultaneously.
-            
-        Examples:
-            >>> manager._invalidate_build_cache("standards")
-            # Cache entry removed atomically
-        """
-        with self._build_state_cache_lock:
-            self._build_state_cache.pop(index_name, None)
-            self._build_state_cache_time.pop(index_name, None)
     
     def _iter_indexes(self) -> List[tuple[str, BaseIndex]]:
         """Safely iterate over indexes with thread safety.
