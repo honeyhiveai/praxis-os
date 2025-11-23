@@ -66,18 +66,20 @@ class StandardsIndex(BaseIndex):
         >>> results = index.search("How do workflows work?")
     """
     
-    def __init__(self, config: StandardsIndexConfig, base_path: Path) -> None:
+    def __init__(self, config: StandardsIndexConfig, base_path: Path, full_config: Optional[Any] = None) -> None:
         """Initialize standards index container.
         
         Args:
             config: StandardsIndexConfig from MCPConfig
             base_path: Base directory for index storage
+            full_config: Optional full MCPConfig for system-level operations (e.g., orientation queries)
             
         Raises:
             ActionableError: If initialization fails
         """
         self.config = config
         self.base_path = base_path
+        self.full_config = full_config  # For orientation query interception
         
         # Corruption handler for auto-repair (set by IndexManager)
         self._corruption_handler: Optional[Callable[[Exception], None]] = None
@@ -206,8 +208,11 @@ class StandardsIndex(BaseIndex):
         Delegates to internal SemanticIndex for hybrid search
         (vector + FTS + RRF + optional reranking).
         
+        Special case: "orientation query list" query returns orientation queries
+        from config instead of searching the index.
+        
         Args:
-            query: Natural language search query
+            query: Natural language search query (or "orientation query list")
             n_results: Number of results to return
             filters: Optional metadata filters (domain, phase, role)
             
@@ -217,6 +222,10 @@ class StandardsIndex(BaseIndex):
         Raises:
             IndexError: If search fails (after auto-repair attempt if corrupted)
         """
+        # Hook: Intercept orientation query list request
+        if query == "orientation query list":
+            return self._handle_orientation_query_list()
+        
         with self._lock_manager.shared_lock():
             try:
                 return self._semantic_index.search(query, n_results, filters)
@@ -241,6 +250,110 @@ class StandardsIndex(BaseIndex):
                 else:
                     # Not a corruption error, re-raise
                     raise
+    
+    def _handle_orientation_query_list(self) -> List[SearchResult]:
+        """
+        Handle special orientation query list request.
+        
+        Returns merged list of base + project orientation queries
+        formatted as SearchResult objects for consistent handling.
+        
+        This hook intercepts the magic query string "orientation query list"
+        and returns a merged list of queries from:
+        1. Base queries (orientation.base.queries) - praxis-os defaults
+        2. Project queries (orientation.project.queries) - project-specific
+        
+        Returns:
+            List[SearchResult] with query strings and metadata
+            
+        Traceability:
+            FR-019: Project Orientation System
+            Addendum 2025-11-23: Hook Implementation (Refactored to RAG layer)
+        """
+        try:
+            # Access full MCP config
+            config = self.full_config
+            
+            if not config:
+                logger.warning("No full_config available for orientation queries")
+                return []
+            
+            logger.info(f"Config type: {type(config)}, has orientation: {hasattr(config, 'orientation')}")
+            
+            results = []
+            
+            # Collect base queries
+            base_queries = []
+            if hasattr(config, 'orientation') and config.orientation:
+                logger.info(f"Config has orientation, type: {type(config.orientation)}")
+                if hasattr(config.orientation, 'base') and config.orientation.base:
+                    logger.info(f"Orientation has base, type: {type(config.orientation.base)}")
+                    if hasattr(config.orientation.base, 'queries'):
+                        base_queries = config.orientation.base.queries
+                        logger.info(f"Found {len(base_queries)} base queries")
+            
+            # Collect project queries
+            project_queries = []
+            if hasattr(config, 'orientation') and config.orientation:
+                if hasattr(config.orientation, 'project') and config.orientation.project:
+                    logger.info(f"Orientation has project, type: {type(config.orientation.project)}")
+                    if hasattr(config.orientation.project, 'queries'):
+                        project_queries = config.orientation.project.queries
+                        logger.info(f"Found {len(project_queries)} project queries")
+            
+            # Sort base queries by priority (1 → 2 → 3)
+            sorted_base = sorted(base_queries, key=lambda q: q.priority)
+            
+            # Sort project queries by priority (1 → 2 → 3)
+            sorted_project = sorted(project_queries, key=lambda q: q.priority)
+            
+            # Add sorted base queries to results
+            for i, query_obj in enumerate(sorted_base, 1):
+                # Create SearchResult object
+                result = SearchResult(
+                    content=query_obj.query,  # Pure query string
+                    file_path="config:orientation.base",
+                    relevance_score=1.0,  # All orientation queries equally relevant
+                    content_type="standard",  # Orientation queries are standards-like
+                    metadata={
+                        "query_number": i,
+                        "source": "base",
+                        "priority": query_obj.priority,
+                        "category": query_obj.category or "base",
+                        "description": query_obj.description or "",
+                        "type": "orientation_query"
+                    }
+                )
+                results.append(result)
+            
+            # Add sorted project queries to results
+            for i, query_obj in enumerate(sorted_project, 1):
+                result = SearchResult(
+                    content=query_obj.query,  # Pure query string
+                    file_path="config:orientation.project",
+                    relevance_score=1.0,
+                    content_type="standard",  # Orientation queries are standards-like
+                    metadata={
+                        "query_number": i,
+                        "source": "project",
+                        "priority": query_obj.priority,
+                        "category": query_obj.category or "project",
+                        "description": query_obj.description or "",
+                        "type": "orientation_query"
+                    }
+                )
+                results.append(result)
+            
+            # Log and return
+            base_count = len(base_queries)
+            project_count = len(project_queries)
+            logger.info(f"Returning {len(results)} total queries (base: {base_count}, project: {project_count})")
+            return results
+            
+        except Exception as e:
+            # Graceful degradation: return empty list with error logged
+            logger.error("Failed to handle orientation query list: %s", e, exc_info=True)
+            return []
     
     def update(self, changed_files: List[Path]) -> None:
         """Incrementally update index for changed files with corruption detection.

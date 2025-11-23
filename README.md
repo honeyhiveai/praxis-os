@@ -219,9 +219,6 @@ praxis-os/
 │   │   ├── architecture/        # Dependency injection, API design, separation of concerns
 │   │   ├── testing/             # Test pyramid, test doubles, property-based testing
 │   │   └── documentation/       # Code comments, API docs, README templates
-│   ├── usage/                   # prAxIs OS usage documentation
-│   │   ├── creating-specs.md    # How to create specifications
-│   │   ├── operating-model.md   # AI-human collaboration model
 │   │   └── mcp-usage-guide.md   # MCP tool reference
 │   └── workflows/               # Phase-gated workflow definitions
 │       ├── spec_creation_v1/    # Spec creation workflow
@@ -246,9 +243,8 @@ praxis-os/
 ### What's Universal (Copied to All Projects)
 
 - **`.cursorrules`**: Behavioral triggers and MCP routing (26 lines, language-agnostic)
-- **`universal/standards/`**: CS fundamentals (race conditions, test pyramid, API design)
-- **`universal/workflows/`**: Phase-gated workflow definitions
-- **`universal/usage/`**: prAxIs OS usage documentation
+- **`dist/universal/standards/`**: CS fundamentals (race conditions, test pyramid, API design) - distributed
+- **`dist/universal/workflows/`**: Phase-gated workflow definitions - distributed
 
 ### What's Generated (Optional, Context-Aware)
 
@@ -272,15 +268,14 @@ Our `.praxis-os/` directory is a **real installation** with copied files (not sy
 
 ```
 praxis-os/
-├── universal/                    # ← Framework SOURCE (edit this)
-│   ├── standards/
-│   ├── usage/
-│   └── workflows/
+├── dist/
+│   └── universal/              # ← DISTRIBUTION ARTIFACTS (synced to consumers)
+│       ├── standards/
+│       └── workflows/
 │
-├── .praxis-os/                    # ← LOCAL INSTALL (like consumers)
-│   ├── standards/universal/     # ✅ COPIED from ../universal/standards/
-│   ├── usage/                   # ✅ COPIED from ../universal/usage/
-│   ├── workflows/               # ✅ COPIED from ../universal/workflows/
+├── .praxis-os/                  # ← LOCAL INSTALL (dogfooding, like consumers)
+│   ├── standards/               # ✅ SYNCED from dist/universal/standards/
+│   ├── workflows/               # ✅ SYNCED from dist/universal/workflows/
 │   ├── standards/development/   # Project-specific (Python guidance)
 │   ├── .cache/                  # RAG index
 │   └── venv/                    # MCP server virtualenv

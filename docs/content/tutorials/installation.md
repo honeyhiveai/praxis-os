@@ -50,7 +50,6 @@ your-project/
 │   │       ├── python-concurrency.md  # (if Python project)
 │   │       ├── python-testing.md
 │   │       └── python-architecture.md
-│   ├── usage/                    # How to use prAxIs OS
 │   ├── workflows/                # Phase-gated workflows
 │   │   ├── spec_creation_v1/
 │   │   └── spec_execution_v1/
@@ -88,10 +87,9 @@ The installation script handles mechanical operations:
 ### 2. Copy Universal Standards
 
 ```bash
-# From repo → your project
-cp -r praxis-os/universal/standards/ .praxis-os/standards/universal/
-cp -r praxis-os/universal/usage/ .praxis-os/usage/
-cp -r praxis-os/universal/workflows/ .praxis-os/workflows/
+# From repo → your project (using dist/ directory)
+cp -r praxis-os/dist/universal/standards/ .praxis-os/standards/
+cp -r praxis-os/dist/universal/workflows/ .praxis-os/workflows/
 ```
 
 **What's copied:**

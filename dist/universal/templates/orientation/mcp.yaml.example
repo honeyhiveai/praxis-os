@@ -1,0 +1,135 @@
+# Example mcp.yaml with Project Orientation
+# 
+# This file demonstrates how to configure project-specific orientation queries
+# in your mcp.yaml configuration file.
+#
+# Copy the `project:` section below into your actual mcp.yaml file and customize
+# the queries for your project.
+
+version: "1.0"
+
+# ... other configuration sections (indexes, workflow, browser, logging) ...
+
+# ============================================================================
+# PROJECT-SPECIFIC CONFIGURATION
+# ============================================================================
+
+project:
+  # Project Orientation: Customize AI agent context for your project
+  orientation:
+    enabled: true  # Set to false to disable project orientation entirely
+    
+    queries:
+      # ======================================================================
+      # Priority 1: Critical Foundational Knowledge
+      # ======================================================================
+      # These queries execute FIRST and provide essential context that AI
+      # agents need before doing any work in your project.
+      
+      - query: "dogfooding model self-hosting praxis-os development patterns"
+        priority: 1
+        description: "Learn how prAxis OS dogfoods itself"
+        category: "development"
+        # This teaches the AI how we develop prAxis OS using prAxis OS
+      
+      - query: "system architecture components subsystems organization structure"
+        priority: 1
+        description: "Understand the overall system architecture"
+        category: "architecture"
+        # Critical for AI to understand how components fit together
+      
+      - query: "phase-gated workflow execution validation evidence gate"
+        priority: 1
+        description: "Learn the workflow execution model"
+        category: "workflows"
+        # Understanding workflows is essential for systematic task execution
+      
+      # ======================================================================
+      # Priority 2: Important Contextual Knowledge
+      # ======================================================================
+      # These queries execute SECOND and provide important context that guides
+      # AI decisions but isn't absolutely critical.
+      
+      - query: "test location lifecycle where tests belong pytest structure"
+        priority: 2
+        description: "Understand where to write tests"
+        category: "testing"
+        # Helps AI place tests in the correct locations
+      
+      - query: "production code checklist docstrings type hints error handling"
+        priority: 2
+        description: "Production code quality standards"
+        category: "standards"
+        # Ensures AI writes production-quality code
+      
+      # ======================================================================
+      # Priority 3: Supplemental Nice-to-Have Knowledge
+      # ======================================================================
+      # These queries execute LAST and provide supplemental context that's
+      # helpful but not critical.
+      
+      - query: "RAG content authoring standards markdown patterns conventions"
+        priority: 3
+        description: "How to write RAG-discoverable content"
+        category: "documentation"
+        # Useful when AI needs to create new standards
+      
+      - query: "git commit conventions message format semantic versioning"
+        priority: 3
+        description: "Git workflow and commit conventions"
+        category: "git"
+        # Helps AI create proper commit messages
+
+# ============================================================================
+# CUSTOMIZATION GUIDELINES
+# ============================================================================
+#
+# When creating your own project orientation:
+#
+# 1. **Start Small**: Begin with 2-3 critical queries (priority 1)
+# 2. **Be Specific**: Use detailed query strings with multiple keywords
+# 3. **Prioritize Ruthlessly**: Reserve priority 1 for truly foundational knowledge
+# 4. **Test Queries**: Manually run queries to verify they return expected content
+# 5. **Iterate**: Add more queries as you identify knowledge gaps
+# 6. **Document**: Add descriptions so future maintainers understand intent
+#
+# Query Construction Tips:
+#
+# - **Good**: "system architecture microservices event-driven communication patterns"
+# - **Bad**: "architecture" (too vague)
+#
+# - **Good**: "testing strategy unit integration e2e pytest fixtures"
+# - **Bad**: "tests" (too broad)
+#
+# Priority Guidelines:
+#
+# - **Priority 1**: System architecture, core domain concepts, critical constraints
+# - **Priority 2**: Testing patterns, API conventions, code organization
+# - **Priority 3**: Deployment process, tooling, optional enhancements
+#
+# Common Patterns to Consider:
+#
+# - Architecture: "microservices", "event-driven", "domain-driven design"
+# - Domain: "business rules", "entities", "value objects", "aggregates"
+# - Testing: "test strategy", "pytest", "mocking", "fixtures"
+# - API: "REST conventions", "GraphQL", "error handling", "versioning"
+# - Data: "database schema", "migrations", "ORM", "caching"
+# - Security: "authentication", "authorization", "RBAC", "OAuth"
+# - Performance: "caching strategy", "optimization", "profiling"
+# - Deployment: "CI/CD", "containerization", "infrastructure"
+#
+# ============================================================================
+# DISABLING PROJECT ORIENTATION
+# ============================================================================
+#
+# To disable project orientation entirely:
+#
+# project:
+#   orientation:
+#     enabled: false
+#     queries: []
+#
+# Or simply omit the `project:` section - backward compatible!
+#
+# ============================================================================
+

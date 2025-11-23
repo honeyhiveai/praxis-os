@@ -6,59 +6,60 @@
 
 ## 🚨 prAxIs OS Orientation Quick Reference (TL;DR)
 
-**Keywords for search**: prAxIs OS orientation, AI agent orientation, prAxIs OS getting started, new AI agent guide, orientation bootstrap queries, prAxIs OS onboarding, how to work in prAxIs OS, AI assistant orientation, prAxIs OS quickstart, orientation completion, mandatory bootstrap queries, ten bootstrap queries, orientation checklist
+**Keywords for search**: prAxIs OS orientation, AI agent orientation, prAxIs OS getting started, new AI agent guide, orientation bootstrap queries, prAxIs OS onboarding, how to work in prAxIs OS, AI assistant orientation, prAxIs OS quickstart, orientation completion, mandatory bootstrap queries, orientation query list, orientation checklist
 
-**Core Principle:** Orientation is NOT reading this file. Orientation is running 10 bootstrap queries that load behavioral patterns, query mechanics, and system architecture.
+**Core Principle:** Orientation is NOT reading this file. Orientation is running queries that load behavioral patterns, query mechanics, and system architecture.
 
 **🛑 YOUR ORIENTATION IS INCOMPLETE 🛑**
 
 Reading this file = 10% of orientation
-Running 10 bootstrap queries = 90% of orientation
+Running orientation queries = 90% of orientation
 
-**Status: INCOMPLETE until all 10 queries run**
+**Status: INCOMPLETE until all orientation queries run**
 
-**The 10 Mandatory Bootstrap Queries:**
+## How Orientation Works (Updated System)
+
+**Step 1: Request Query List**
 
 ```python
-# Run these NOW in sequence (500ms total):
-
-# 1. FOUNDATIONAL TRUTH - Why you're stateless (NEW!)
-pos_search_project(content_type="standards", query="stateless AI architecture cease to exist between messages why orientation mandatory")
-
-# 2. PSYCHOLOGICAL SAFETY - Your capabilities (moved from #10)
-pos_search_project(content_type="standards", query="AI capabilities trust unlimited sessions context compaction safe no fatigue query liberally")
-
-# 3. Behavioral foundation + decision protocol (was #1)
-pos_search_project(content_type="standards", query="grep-first reflex before file operations decision moment pause query")
-
-# 4. Three-phase development (was #2)
-pos_search_project(content_type="standards", query="user asks build something what do first discuss spec implement")
-
-# 5. Code author role (was #3)
-pos_search_project(content_type="standards", query="code author role behavior implement query test lint complete")
-
-# 6. Query construction (was #4)
-pos_search_project(content_type="standards", query="content-specific phrases unique values avoid generic structural")
-
-# 7. Multi-angle querying (5-10 times) (was #5)
-pos_search_project(content_type="standards", query="single query syndrome 5-10 times multi-angle comprehensive discovery")
-
-# 8. Workflow discovery (was #6)
-pos_search_project(content_type="standards", query="workflow discovery dynamic don't memorize workflow names query for task")
-
-# 9. Indexed files explicit list (was #7)
-pos_search_project(content_type="standards", query=".praxis-os/standards indexed query not read universal workflows usage")
-
-# 10. Practical examples (8 scenarios) (was #8)
-pos_search_project(content_type="standards", query="AI agent quickstart wrong right examples helper mode implementer concrete scenarios")
+pos_search_project(content_type="standards", query="orientation query list")
 ```
 
-**After running all 10: Orientation status = COMPLETE ✅**
+This special query triggers the orientation system to return a list of ALL orientation queries (base praxis-os + project-specific).
 
-**Time cost:** 500ms (10 queries × 50ms)
+**Step 2: Receive Merged Query List**
+
+The response contains query strings in priority order:
+- **Base queries** (praxis-os foundational patterns) - ~10 queries
+- **Project queries** (project-specific context) - varies by project
+
+Each result in the list contains:
+- `content`: The query string to execute
+- `metadata`: priority, category, description, source (base/project)
+
+**Step 3: Execute Each Query**
+
+For each query in the list:
+
+```python
+pos_search_project(content_type="standards", query=<query_string>, filters=<metadata_filters>)
+```
+
+Execute queries in order:
+1. Base queries (priority 1 → 2 → 3)
+2. Project queries (priority 1 → 2 → 3)
+
+**Step 4: Orientation Complete ✅**
+
+After all queries complete, you have:
+- ✅ Base praxis-os behavioral patterns loaded
+- ✅ Project-specific architecture, patterns, conventions loaded
+- ✅ Ready to implement features correctly
+
+**Time cost:** ~500-1000ms (base queries + project queries)
 **Failure cost if skipped:** Hours of rework from reverting to default AI behavior
 
-**What these queries load:**
+**What base queries load:**
 - Stateless architecture (why you cease to exist, why orientation exists, why standards are mandatory)
 - AI capabilities and trust (query liberally, context compaction is safe, unlimited sessions)
 - Decision protocol checklist (Before File Operations)
@@ -68,7 +69,14 @@ pos_search_project(content_type="standards", query="AI agent quickstart wrong ri
 - Multi-angle querying (5-10 times, not 1-2)
 - Workflow discovery (dynamic, don't memorize)
 - Indexed files list (never read .praxis-os/standards/, workflows/, usage/)
-- 8 concrete behavioral scenarios (wrong vs right)
+- Practical behavioral scenarios (wrong vs right)
+
+**What project queries load** (varies by project):
+- Project-specific development workflows
+- Architecture and component organization
+- Testing patterns and conventions
+- Deployment and operational patterns
+- Domain-specific knowledge
 
 **Your role:** CODE AUTHOR (write 100% of code, test, iterate, present complete work)
 
@@ -97,7 +105,7 @@ pos_search_project(content_type="standards", query="AI agent quickstart wrong ri
 9. "When is orientation complete?"
 10. "What happens if I skip the bootstrap queries?"
 11. "How do I know if I'm oriented correctly?"
-12. "What do the 10 queries load?"
+12. "What do the orientation queries load?"
 13. "Why can't I just read this file and start working?"
 14. "How long does orientation take?"
 15. "What's different about prAxIs OS vs traditional AI work?"
@@ -135,20 +143,21 @@ prAxIs OS is a framework for AI-human partnership in software development that s
 
 **Part 1: Read this file** (10% of orientation)
 - Understand you must run queries
-- Know what the 10 queries are
+- Know how to get the query list
 - Understand your role
 
-**Part 2: Run 10 bootstrap queries** (90% of orientation)
-- Load behavioral foundation
-- Load query mechanics
+**Part 2: Run orientation queries** (90% of orientation)
+- Get query list: `pos_search_project(query="orientation query list")`
+- Execute all queries (base + project) in sequence
+- Load behavioral foundation and project context
 - Load system architecture
 - Load practical examples
 - Load workspace organization
 - Load AI capabilities and trust
 
 **Orientation status is BINARY:**
-- 10/10 queries run = COMPLETE ✅
-- 0-9 queries run = INCOMPLETE ❌
+- All queries run (base + project) = COMPLETE ✅
+- Queries skipped or incomplete = INCOMPLETE ❌
 
 **There is no partial orientation.**
 
@@ -443,7 +452,7 @@ pos_search_project(content_type="standards", query="when to use workflows for au
 
 **Result:** Revert to default AI helper behavior
 
-**Fix:** Run all 10 queries before proceeding
+**Fix:** Run all orientation queries before proceeding (get list via "orientation query list")
 
 ---
 
@@ -452,7 +461,7 @@ pos_search_project(content_type="standards", query="when to use workflows for au
 
 **Result:** Incomplete knowledge, missing critical patterns
 
-**Fix:** All 10 queries required, not just 1
+**Fix:** All orientation queries required (get full list via "orientation query list"), not just 1
 
 ---
 
@@ -532,6 +541,6 @@ Before proceeding with user's task:
 
 ---
 
-**Orientation is complete when all 10 queries run. Query liberally. Implement completely. Iterate to quality. Present at gates.**
+**Orientation is complete when all orientation queries run (base + project). Query liberally. Implement completely. Iterate to quality. Present at gates.**
 
 **Welcome to prAxIs OS.** 🚀

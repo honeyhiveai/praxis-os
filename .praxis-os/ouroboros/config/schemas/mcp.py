@@ -32,7 +32,7 @@ See Also:
 """
 
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from pydantic import Field, field_validator
 
@@ -40,6 +40,7 @@ from ouroboros.config.schemas.base import BaseConfig
 from ouroboros.config.schemas.browser import BrowserConfig
 from ouroboros.config.schemas.indexes import IndexesConfig
 from ouroboros.config.schemas.logging import LoggingConfig
+from ouroboros.config.schemas.orientation import OrientationConfig, ProjectConfig
 from ouroboros.config.schemas.workflow import WorkflowConfig
 
 
@@ -115,7 +116,7 @@ class MCPConfig(BaseConfig):
         ...         print(f"Path error: {error}")
 
     Validation Rules:
-        - version: Must match r"^\d+\.\d+$" pattern (e.g., "1.0", "2.1")
+        - version: Must match r"^\\d+\\.\\d+$" pattern (e.g., "1.0", "2.1")
         - base_path: Optional (defaults to ".praxis-os")
         - indexes: Required, must pass IndexesConfig validation
         - workflow: Required, must pass WorkflowConfig validation
@@ -198,6 +199,16 @@ class MCPConfig(BaseConfig):
     logging: LoggingConfig = Field(
         ...,  # Required field
         description="Logging configuration (structured logs, behavioral metrics)",
+    )
+
+    orientation: Optional[OrientationConfig] = Field(
+        default=None,
+        description="Orientation configuration (base + project queries) - optional",
+    )
+
+    project: Optional[ProjectConfig] = Field(
+        default=None,
+        description="Project-specific configuration (deprecated - use top-level orientation) - optional for backward compatibility",
     )
 
     @classmethod
@@ -307,7 +318,7 @@ class MCPConfig(BaseConfig):
             >>> MCPConfig(version="1.0.0", ...)# ❌ ValueError
 
         Version Format:
-            - Pattern: r"^\d+\.\d+$"
+            - Pattern: r"^\\d+\\.\\d+$"
             - Examples: "1.0", "2.1", "10.5"
             - Not allowed: "v1.0", "1", "1.0.0", "1.0-beta"
 

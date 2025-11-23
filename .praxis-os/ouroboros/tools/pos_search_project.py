@@ -173,7 +173,11 @@ class SearchTool(ActionDispatchMixin):
     def _handle_search_standards(
         self, query: str, n_results: int = 3, filters: Optional[Dict] = None, session_id: Optional[str] = None, task_session_id: Optional[str] = None, **kwargs
     ) -> Dict[str, Any]:
-        """Search standards documentation."""
+        """Search standards documentation.
+        
+        Note: Orientation query list hook ("orientation query list") is now handled
+        in the RAG layer (StandardsIndex.search()) for cleaner architecture.
+        """
         # Let the index handle graceful degradation - don't block on health checks
         
         params = {"query": query, "n_results": n_results}

@@ -168,7 +168,8 @@ def create_server(base_path: Path, transport_mode: str = "stdio") -> FastMCP:
         
         index_manager = IndexManager(
             config=config.indexes,
-            base_path=base_path
+            base_path=base_path,
+            full_config=config  # Pass full config for orientation queries
         )
         logger.info("✅ IndexManager initialized with %d indexes", 
                    len(index_manager._indexes))
@@ -347,6 +348,7 @@ def create_server(base_path: Path, transport_mode: str = "stdio") -> FastMCP:
                 "session_mapper": session_mapper,
                 "query_tracker": query_tracker,
                 "workspace_root": base_path.parent,  # for pos_filesystem
+                # Note: config no longer needed - orientation queries now handled in RAG layer
             }
         )
         

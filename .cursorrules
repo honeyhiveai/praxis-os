@@ -4,16 +4,19 @@
 🛑🛑🛑 STOP 🛑🛑🛑
 MANDATORY ORIENTATION - MUST COMPLETE BEFORE RESPONDING:
 
-Have I completed the 10 mandatory bootstrap queries this conversation?
+Have I completed orientation queries this conversation?
 
-If NO, run this query NOW:
-    pos_search_project(content_type="standards", query="orientation bootstrap queries mandatory ten queries")
+If NO, run this query NOW to get the query list:
+    pos_search_project(content_type="standards", query="orientation query list")
 
-Then READ the results. The results will contain 10 queries you MUST run.
-Execute ALL 10 queries IN SEQUENCE.
-AFTER all 10 complete, reply: "✅ Oriented. Ready."
+The response will contain ALL orientation queries (base praxis-os + project-specific).
+Execute EACH query from the list IN SEQUENCE:
+  - Base queries execute first (priority 1 → 2 → 3)
+  - Project queries execute second (priority 1 → 2 → 3)
 
-If YES (already completed 10/10): Proceed with user's request.
+AFTER all queries complete, reply: "✅ Oriented. Ready."
+
+If YES (already completed orientation): Proceed with user's request.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🔍 EVERY USER REQUEST = DECISION MOMENT = SEARCH FIRST

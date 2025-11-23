@@ -560,3 +560,143 @@ logging:
   format: "text"  # Options: "text" (human-readable) or "json" (structured)
   log_dir: ".cache/logs/"  # Log file location (usually fine as-is)
   behavioral_metrics_enabled: true  # Track query diversity, trends, prepend effectiveness
+
+# ============================================================================
+# Project-Specific Configuration
+# ============================================================================
+# prAxIs OS dogfooding: We use our own orientation system!
+
+orientation:
+  base:
+    queries:
+      # Base praxis-os orientation queries (foundational patterns)
+      - query: "stateless AI architecture cease to exist between messages why orientation mandatory"
+        priority: 1
+        category: "foundational"
+        description: "Core architectural truth about AI agent statelessness"
+
+      - query: "AI capabilities trust unlimited sessions context compaction safe query liberally"
+        priority: 1
+        category: "behavioral"
+        description: "Psychological safety for AI agents"
+
+      - query: "query-first decision protocol grep-first before file operations pause query"
+        priority: 1
+        category: "behavioral"
+        description: "Decision protocol and behavioral foundation"
+
+      - query: "user asks build something what do first discuss spec implement three-phase"
+        priority: 2
+        category: "workflow"
+        description: "Three-phase development workflow"
+
+      - query: "code author role behavior implement query test lint complete"
+        priority: 2
+        category: "role"
+        description: "Code author role expectations"
+
+      - query: "content-specific phrases unique values avoid generic structural query construction"
+        priority: 2
+        category: "technical"
+        description: "Query construction patterns"
+
+      - query: "single query syndrome 5-10 times multi-angle comprehensive discovery"
+        priority: 2
+        category: "behavioral"
+        description: "Multi-angle querying best practice"
+
+      - query: "workflow discovery dynamic don't memorize workflow names query for task"
+        priority: 3
+        category: "workflow"
+        description: "Workflow discovery patterns"
+
+      - query: ".praxis-os/standards indexed query not read universal workflows usage"
+        priority: 3
+        category: "technical"
+        description: "Indexed files and read patterns"
+
+      - query: "AI agent quickstart wrong right examples helper mode implementer concrete scenarios"
+        priority: 3
+        category: "practical"
+        description: "Practical behavioral examples"
+
+  project:
+    queries:
+      # ======================================================================
+      # Priority 1: Critical Foundational Knowledge
+      # ======================================================================
+      # These are the queries I wish I had executed at the START of today's session!
+
+      - query: "dogfooding model ouroboros self-hosting where to work dist versus praxis-os directory development workflow"
+        priority: 1
+        description: "Learn where to work: .praxis-os/ (consumer) vs dist/ (distribution)"
+        category: "development"
+        # THIS would have prevented my mistake of writing to dist/ first!
+
+      - query: "glass box architecture plain text markdown source of truth human and AI readable transparent cognition"
+        priority: 1
+        description: "Understand the glass box design philosophy"
+        category: "architecture"
+        # Understanding WHY plain text matters is foundational
+
+      - query: "query-first discovery pattern search before acting pos_search_project training data versus project knowledge"
+        priority: 1
+        description: "Learn to query standards BEFORE implementing"
+        category: "ai-behavior"
+        # The most important behavioral pattern - query liberally!
+
+      - query: "stateless AI architecture assume forgetting orientation bootstrap mandatory queries context loading"
+        priority: 1
+        description: "Why orientation exists: AIs don't remember between sessions"
+        category: "architecture"
+        # Understanding the problem we're solving
+
+      # ======================================================================
+      # Priority 2: Important Contextual Knowledge
+      # ======================================================================
+
+      - query: "operating model slow is smooth measure twice cut once sniper principle ownership responsibility"
+        priority: 2
+        description: "Core development philosophy and quality expectations"
+        category: "philosophy"
+        # The trades wisdom that guides decision-making
+
+      - query: "test location lifecycle where tests belong pytest structure dogfooding test patterns"
+        priority: 2
+        description: "Where to write tests in praxis-os"
+        category: "testing"
+        # Practical guidance for implementation
+
+      - query: "production code checklist docstrings type hints error handling defensive programming standards"
+        priority: 2
+        description: "Production code quality standards"
+        category: "standards"
+        # What "done" looks like
+
+      - query: "RAG content authoring standards markdown optimization chunking keywords questions patterns"
+        priority: 2
+        description: "How to write RAG-discoverable documentation"
+        category: "documentation"
+        # For creating new standards
+
+      # ======================================================================
+      # Priority 3: Supplemental Knowledge
+      # ======================================================================
+
+      - query: "ouroboros MCP server architecture subsystems rag workflow browser foundation components"
+        priority: 3
+        description: "Technical architecture deep dive"
+        category: "architecture"
+        # Detailed system understanding
+
+      - query: "spec-driven development SRD technical specs tasks implementation guidance workflow execution"
+        priority: 3
+        description: "How we build features systematically"
+        category: "workflows"
+        # Understanding the development process
+
+      - query: "git commit conventions semantic versioning changelog maintenance contribution workflow"
+        priority: 3
+        description: "Git workflow and commit conventions"
+        category: "git"
+        # Operational details

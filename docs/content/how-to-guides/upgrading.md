@@ -81,9 +81,7 @@ The workflow updates:
    - Testing strategies
    - Failure modes
    - Security patterns
-
-2. **Usage Documentation** (`.praxis-os/usage/`)
-   - MCP tool guides
+   - MCP tool guides  
    - Operating model
    - Update procedures
 
@@ -109,7 +107,6 @@ Your customizations are **never** overwritten:
 
 - ✅ **User Specs** (`.praxis-os/specs/`) - Completely untouched
 - ✅ **Development Standards** (`.praxis-os/standards/development/`) - Your language-specific standards
-- ✅ **Custom Documentation** (`.praxis-os/usage/`) - New docs added, yours preserved
 - ✅ **Project Configuration** - `.cursorrules`, `mcp.json`
 
 ---
@@ -386,9 +383,6 @@ git clone https://github.com/honeyhiveai/praxis-os.git /tmp/praxis-os-latest
 ```bash
 # Update standards (prAxIs OS owned)
 rsync -av --delete praxis-os/universal/standards/ .praxis-os/standards/universal/
-
-# Update usage (preserve user docs)
-rsync -av praxis-os/universal/usage/ .praxis-os/usage/
 
 # Update workflows
 rsync -av --delete praxis-os/universal/workflows/ .praxis-os/workflows/

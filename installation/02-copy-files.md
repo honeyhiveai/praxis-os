@@ -11,22 +11,21 @@
 Copy all required content from the source repository (`praxis-os/`) to your project.
 
 **What gets copied**:
-1. Universal standards (CS fundamentals)
-2. Usage documentation (how to use prAxIs OS)
-3. Workflows (spec_creation_v1, spec_execution_v1)
-4. Ouroboros server code (MCP server - Python code that runs the server)
+1. Universal standards (CS fundamentals - includes all documentation)
+2. Workflows (spec_creation_v1, spec_execution_v1)
+3. Ouroboros server code (MCP server - Python code that runs the server)
 
 **Time**: ~1-2 minutes (depends on file system speed)
 
 ---
 
-## 📦 Copy Operations (4 total)
+## 📦 Copy Operations (3 total)
 
 ### Copy #1: Universal Standards
 
 **Source**: `{PRAXIS_OS_SOURCE}/dist/universal/standards/`  
 **Destination**: `.praxis-os/standards/universal/`  
-**Contents**: ~30 markdown files with CS fundamentals
+**Contents**: ~70 markdown files with CS fundamentals and all prAxIs OS documentation
 
 ```python
 import shutil
@@ -42,7 +41,7 @@ print("✅ Copied universal standards")
 
 **Note**: `PRAXIS_OS_SOURCE` is the temp directory you created in step 00.
 
-**What's in there**: Architecture patterns, concurrency, testing, security, etc.
+**What's in there**: Architecture patterns, concurrency, testing, security, ai-assistant guides, tools documentation, etc.
 
 ---
 
@@ -90,29 +89,25 @@ print("✅ Copied Ouroboros server")
 
 ---
 
-### Copy #4: Scripts (CRITICAL - RAG Index Builder!)
+### Copy #4: Config Templates
 
-**Source**: `praxis-os/scripts/`  
-**Destination**: `.praxis-os/scripts/`  
-**Contents**: ~3 Python files including `build_rag_index.py`
-
-⚠️ **DO NOT SKIP THIS!** Without `build_rag_index.py`, the MCP server cannot build the RAG index on first startup. AIs will try to create their own version, causing inconsistent implementations.
+**Source**: `{PRAXIS_OS_SOURCE}/dist/config/`  
+**Destination**: `.praxis-os/config/`  
+**Contents**: Config templates (index_config.yaml, etc.)
 
 ```python
 shutil.copytree(
-    "praxis-os/scripts",
-    ".praxis-os/scripts",
+    f"{PRAXIS_OS_SOURCE}/dist/config",
+    ".praxis-os/config",
     dirs_exist_ok=True
 )
-print("✅ Copied scripts")
+print("✅ Copied config templates")
 ```
 
 **What's in there**:
-- `build_rag_index.py` - Canonical IndexBuilder implementation (CRITICAL!)
-- `generate-manifest.py` - Workflow manifest generator
-- `safe-upgrade.py` - Safe upgrade utilities
+- `index_config.yaml` - RAG index configuration template
 
-**Why it's critical**: Ouroboros automatically builds RAG indexes on server start when `.praxis-os/.cache/indexes/` doesn't exist. The server code includes all necessary index building functionality.
+**Note**: The Ouroboros server automatically builds RAG indexes on server start when `.praxis-os/.cache/indexes/` doesn't exist. All index building functionality is built into the server code.
 
 ---
 
@@ -163,15 +158,12 @@ success3 = copy_with_status(
     "Ouroboros server"
 )
 
-# Copy #4: Scripts (CRITICAL!)
+# Copy #4: Config templates
 success4 = copy_with_status(
-    f"{PRAXIS_OS_SOURCE}/scripts",
-    ".praxis-os/scripts",
-    "Scripts"
+    f"{PRAXIS_OS_SOURCE}/dist/config",
+    ".praxis-os/config",
+    "Config templates"
 )
-
-# Copy #5: .cursorrules (we'll handle merge in step 03, but copy for now)
-# This will be overwritten in step 03 if needed
 
 # Summary
 print("\n" + "="*50)
@@ -188,11 +180,10 @@ else:
 ```
 Starting file copy operations...
 
-✅ Universal standards: 31 files copied
-✅ Usage documentation: 5 files copied
-✅ Workflows: 47 files copied
-✅ Ouroboros server: 23 files copied
-✅ Scripts: 3 files copied
+✅ Universal standards: 70 files copied
+✅ Workflows: 172 files copied
+✅ Ouroboros server: 68 files copied
+✅ Config templates: 1 files copied
 
 ==================================================
 ✅ ALL FILES COPIED SUCCESSFULLY
@@ -211,6 +202,7 @@ critical_files = [
     # Standards
     ".praxis-os/standards/universal/architecture/solid-principles.md",
     ".praxis-os/standards/universal/testing/test-pyramid.md",
+    ".praxis-os/standards/universal/ai-assistant/PRAXIS-OS-ORIENTATION.md",
     
     # Workflows (MOST IMPORTANT!)
     ".praxis-os/workflows/spec_creation_v1/metadata.json",
@@ -220,9 +212,8 @@ critical_files = [
     ".praxis-os/ouroboros/__main__.py",
     ".praxis-os/ouroboros/requirements.txt",
     
-    # Scripts (CRITICAL!)
-    ".praxis-os/scripts/build_rag_index.py",  # Required for RAG index building!
-    ".praxis-os/scripts/generate-manifest.py",
+    # Config
+    ".praxis-os/config/index_config.yaml",
 ]
 
 missing = [f for f in critical_files if not os.path.exists(f)]
@@ -348,10 +339,10 @@ if not os.path.exists(".praxis-os/workflows/spec_creation_v1"):
 ## 📊 Progress Check
 
 At this point you should have:
-- ✅ Standards files in `.praxis-os/standards/universal/`
-- ✅ Workflow files in `.praxis-os/workflows/` (2 complete workflows)
-- ✅ MCP server code in `.praxis-os/ouroboros/`
-- ✅ Helper scripts in `.praxis-os/scripts/` (including `build_rag_index.py`!)
+- ✅ Standards files in `.praxis-os/standards/universal/` (~70 markdown files including all documentation)
+- ✅ Workflow files in `.praxis-os/workflows/` (4 complete workflows)
+- ✅ MCP server code in `.praxis-os/ouroboros/` (complete server implementation)
+- ✅ Config templates in `.praxis-os/config/` (index configuration)
 - ✅ All validation checkpoints passed
 
 **Note**: The install script provides exact file counts during installation.

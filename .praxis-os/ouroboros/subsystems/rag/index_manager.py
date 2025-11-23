@@ -60,18 +60,20 @@ class IndexManager:
         └─ ASTIndex (structural: Tree-sitter)
     """
     
-    def __init__(self, config: IndexesConfig, base_path: Path):
+    def __init__(self, config: IndexesConfig, base_path: Path, full_config: Optional[Any] = None):
         """Initialize IndexManager with configuration.
         
         Args:
             config: IndexesConfig from MCPConfig
             base_path: Base path for resolving relative paths (.praxis-os/)
+            full_config: Optional full MCPConfig for system-level operations (e.g., orientation queries)
             
         Raises:
             ActionableError: If initialization fails
         """
         self.config = config
         self.base_path = base_path
+        self.full_config = full_config  # For passing to indexes that need system-level config
         
         # Index registry: {index_name: BaseIndex}
         self._indexes: Dict[str, BaseIndex] = {}
@@ -138,10 +140,18 @@ class IndexManager:
                 index_class = getattr(module, class_name)
                 
                 # Instantiate with standard BaseIndex interface (config + base_path)
-                index_instance = index_class(
-                    config=index_config,
-                    base_path=self.base_path
-                )
+                # StandardsIndex also accepts full_config for orientation query support
+                if index_name == "standards" and self.full_config:
+                    index_instance = index_class(
+                        config=index_config,
+                        base_path=self.base_path,
+                        full_config=self.full_config
+                    )
+                else:
+                    index_instance = index_class(
+                        config=index_config,
+                        base_path=self.base_path
+                    )
                 
                 self._indexes[index_name] = index_instance
                 logger.info(f"✅ {class_name} initialized: {description}")

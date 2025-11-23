@@ -742,3 +742,333 @@ logging:
   format: "text"  # Options: "text" (human-readable) or "json" (structured)
   log_dir: ".cache/logs/"  # Log file location (usually fine as-is)
   behavioral_metrics_enabled: true  # Track query diversity, trends, prepend effectiveness
+
+# ============================================================================
+# Orientation Configuration (AI Agent Onboarding)
+# ============================================================================
+# 🤖 What is Orientation?
+#   When an AI agent starts a new conversation, it executes these queries
+#   to load project-specific knowledge before responding to the user.
+#   Think of it as "onboarding documentation that the AI actually reads."
+#
+# 🎯 Why Do I Need This?
+#   Problem: AI agents are stateless - they cease to exist between messages.
+#            Training data is 6-18 months outdated and generic.
+#            Without orientation, AI agents guess using outdated patterns
+#            instead of learning YOUR project's actual implementation.
+#
+#   Solution: Orientation queries load current, project-specific knowledge
+#             from your RAG indexes at the start of each conversation.
+#
+# 🔧 How It Works:
+#   1. .cursorrules file contains the trigger query:
+#      pos_search_project(query="orientation query list")
+#
+#   2. This "magic query" is intercepted by the StandardsIndex and returns
+#      a merged list of base + project orientation queries (not search results)
+#
+#   3. AI agent executes each query in priority order (1 → 2 → 3):
+#      - Priority 1 queries execute first (critical foundations)
+#      - Priority 2 queries execute second (important context)
+#      - Priority 3 queries execute last (supplemental knowledge)
+#
+#   4. AI agent loads all results into context before responding to user
+#
+# 📊 Priority System:
+#   Priority 1 (Critical): Core truths that shape all behavior
+#                          Example: "AI is stateless, query liberally"
+#   Priority 2 (Important): Workflows, conventions, patterns
+#                           Example: "Three-phase development workflow"
+#   Priority 3 (Supplemental): Nice-to-know, reference material
+#                              Example: "Tool discovery patterns"
+#
+# 🏗️ Structure:
+#   orientation:
+#     base:      # praxis-os framework queries (10 default queries below)
+#       queries: # These teach AI how to USE praxis-os effectively
+#     project:   # YOUR project-specific queries (optional, add below)
+#       queries: # These teach AI how YOUR project works
+#
+# 📝 Adding Project Orientation (Highly Recommended!):
+#   The base queries teach AI how to fish. Project queries tell AI where
+#   the fish are in YOUR pond.
+#
+#   Good project queries:
+#     ✅ "system architecture layering MCP RAG workflow browser subsystems"
+#        → Teaches overall structure
+#     ✅ "dogfooding model develop in .praxis-os sync to dist distribution"
+#        → Teaches YOUR workflow
+#     ✅ "testing patterns pytest fixtures mocks error cases"
+#        → Teaches YOUR conventions
+#
+#   Bad project queries:
+#     ❌ "what is python" (too generic, not project-specific)
+#     ❌ "hello world" (not a real question)
+#     ❌ "functions classes" (too broad, add context about YOUR project)
+#
+# 📚 Full Documentation:
+#   See: dist/universal/standards/ai-assistant/project-orientation-guide.md
+#   Examples: dist/universal/templates/orientation/mcp.yaml.example
+#
+# 🎯 Result: AI agents that understand YOUR project from message #1,
+#            not generic AI that guesses based on outdated training data.
+
+orientation:
+  base:
+    queries:
+      # Priority 1: Critical Foundational Knowledge
+      - query: "stateless AI architecture cease to exist between messages why orientation mandatory"
+        priority: 1
+        category: "foundational"
+        description: "Core architectural truth about AI agent statelessness"
+        filters: {}
+
+      - query: "AI capabilities trust unlimited sessions context compaction safe query liberally"
+        priority: 1
+        category: "behavioral"
+        description: "Psychological safety for AI agents"
+        filters: {}
+
+      - query: "query-first decision protocol grep-first before file operations pause query"
+        priority: 1
+        category: "behavioral"
+        description: "Decision protocol and behavioral foundation"
+        filters: {}
+
+      # Priority 2: Important Contextual Knowledge
+      - query: "user asks build something what do first discuss spec implement three-phase"
+        priority: 2
+        category: "workflow"
+        description: "Three-phase development workflow"
+        filters: {}
+
+      - query: "code author role behavior implement query test lint complete"
+        priority: 2
+        category: "role"
+        description: "Code author role expectations"
+        filters: {}
+
+      - query: "content-specific phrases unique values avoid generic structural query construction"
+        priority: 2
+        category: "technical"
+        description: "Query construction patterns"
+        filters: {}
+
+      - query: "single query syndrome 5-10 times multi-angle comprehensive discovery"
+        priority: 2
+        category: "behavioral"
+        description: "Multi-angle querying best practice"
+        filters: {}
+
+      # Priority 3: Supplemental Knowledge
+      - query: "workflow discovery dynamic don't memorize workflow names query for task"
+        priority: 3
+        category: "workflow"
+        description: "Workflow discovery patterns"
+        filters: {}
+
+      - query: ".praxis-os/standards indexed query not read universal workflows usage"
+        priority: 3
+        category: "technical"
+        description: "Indexed files and read patterns"
+        filters: {}
+
+      - query: "AI agent quickstart wrong right examples helper mode implementer concrete scenarios"
+        priority: 3
+        category: "practical"
+        description: "Practical behavioral examples"
+        filters: {}
+
+# ============================================================================
+# Project Orientation (CUSTOMIZE THIS FOR YOUR PROJECT!)
+# ============================================================================
+# 🎯 You are here: Adding project-specific orientation queries
+#
+# The base queries above teach AI how to USE praxis-os.
+# THIS section teaches AI how YOUR PROJECT works.
+#
+# 📋 What Should I Add?
+#   Ask yourself: "What do new developers need to know about this project?"
+#
+#   Common categories (pick what applies to YOUR project):
+#     🏗️  Architecture: "How is the system organized?"
+#        - Monorepo? Microservices? Layered? Event-driven?
+#        - What are the major components and their relationships?
+#
+#     📐 Conventions: "What patterns do we follow?"
+#        - Naming conventions, code organization, style guides
+#        - Error handling, logging, testing patterns
+#
+#     🔧 Workflows: "How do we develop/test/deploy?"
+#        - Branching strategy, PR process, CI/CD pipeline
+#        - Local development setup, testing requirements
+#
+#     📊 Domain Model: "What are the core business concepts?"
+#        - Key entities, relationships, business rules
+#        - Domain-specific terminology and concepts
+#
+#     🔌 Integration: "How do we integrate with other systems?"
+#        - APIs, databases, message queues, third-party services
+#        - Authentication, rate limiting, retry patterns
+#
+#     ⚠️  Gotchas: "What mistakes do people make?"
+#        - Common pitfalls, edge cases, known issues
+#        - Performance bottlenecks, security considerations
+#
+# 💡 Writing Good Queries:
+#   ✅ DO: Use content-specific phrases from YOUR project's standards/docs
+#          "authentication JWT refresh tokens session management"
+#          "event publishing Kafka schema validation patterns"
+#          "API versioning backward compatibility migration strategy"
+#
+#   ❌ DON'T: Use generic programming terms that apply to any project
+#          "how do functions work"
+#          "what is a class"
+#          "python basics"
+#
+#   ✅ DO: Ask about YOUR project's unique aspects and conventions
+#          "error response format status codes user-facing messages"
+#          "database migrations alembic rollback procedures"
+#          "API client retry backoff rate limiting"
+#
+#   ❌ DON'T: Ask about universal programming concepts AI already knows
+#          "what is REST"
+#          "how does pytest work"
+#          "what is Docker"
+#
+# 🔍 How to Find Good Queries:
+#   1. Read your project's README, CONTRIBUTING.md, architecture docs
+#      → What concepts are explained? Those are orientation candidates.
+#
+#   2. Think: "What do I explain to new team members in their first week?"
+#      → Those explanations should become orientation queries.
+#
+#   3. Test queries interactively:
+#      Run: pos_search_project(action="search_standards", query="YOUR QUERY")
+#      → Does it return relevant, useful content? Good query!
+#      → Returns nothing or irrelevant content? Refine the query.
+#
+#   4. Start small, iterate:
+#      → Begin with 3-5 queries covering architecture + workflow
+#      → Start a new conversation, observe AI behavior
+#      → Add more queries as you discover gaps in AI knowledge
+#
+#   5. Use your project's actual terminology:
+#      → Copy key phrases from your docs/standards
+#      → Use your domain-specific terms (not generic programming terms)
+#      → If your docs say "event publishing", query "event publishing"
+#
+# 📝 To Add Project Orientation:
+#   1. Copy this ENTIRE project: section to .praxis-os/config/mcp.yaml
+#   2. Replace the example queries below with YOUR project queries
+#   3. Restart the MCP server
+#   4. Start a new conversation - AI will execute your queries!
+#
+# ⚠️ IMPORTANT: Add project orientation to .praxis-os/config/mcp.yaml,
+#               NOT this file (dist/config/mcp.yaml is just a template).
+#
+# Example Project Orientation (customize for YOUR project):
+#
+# project:
+#   orientation:
+#     queries:
+#       # ═══════════════════════════════════════════════════════════════════
+#       # Priority 1: Critical Foundational Knowledge (Execute First)
+#       # ═══════════════════════════════════════════════════════════════════
+#       # These shape how AI thinks about your project's core structure
+#
+#       # Example: Monorepo with Multiple Services
+#       - query: "repository structure services organization boundaries shared code"
+#         priority: 1
+#         description: "Understand monorepo layout and service boundaries"
+#         category: "architecture"
+#
+#       # Example: SDK/Library Project
+#       # - query: "SDK architecture client initialization authentication configuration"
+#       #   priority: 1
+#       #   description: "Core SDK design and usage patterns"
+#       #   category: "architecture"
+#
+#       # Example: Web Application
+#       # - query: "application architecture frontend backend API database layers"
+#       #   priority: 1
+#       #   description: "Overall application structure"
+#       #   category: "architecture"
+#
+#       # Example: Data Pipeline
+#       # - query: "data pipeline architecture ingestion processing storage stages"
+#       #   priority: 1
+#       #   description: "Pipeline architecture and data flow"
+#       #   category: "architecture"
+#
+#       - query: "development workflow branching testing deployment release process"
+#         priority: 1
+#         description: "How we develop, test, and ship code"
+#         category: "workflow"
+#
+#       # ═══════════════════════════════════════════════════════════════════
+#       # Priority 2: Important Contextual Knowledge (Execute Second)
+#       # ═══════════════════════════════════════════════════════════════════
+#       # These provide practical working knowledge for day-to-day development
+#
+#       - query: "testing strategy unit integration fixtures mocks coverage requirements"
+#         priority: 2
+#         description: "Testing conventions and quality standards"
+#         category: "testing"
+#
+#       - query: "error handling logging observability monitoring alerting patterns"
+#         priority: 2
+#         description: "How we handle and observe errors"
+#         category: "patterns"
+#
+#       - query: "API design REST GraphQL versioning authentication authorization"
+#         priority: 2
+#         description: "API conventions and patterns"
+#         category: "api"
+#
+#       # Example: For projects with databases
+#       # - query: "database schema migrations ORM patterns query optimization"
+#       #   priority: 2
+#       #   description: "Database patterns and conventions"
+#       #   category: "data"
+#
+#       # Example: For projects with async/event processing
+#       # - query: "event processing async patterns queues workers retry backoff"
+#       #   priority: 2
+#       #   description: "Asynchronous processing patterns"
+#       #   category: "async"
+#
+#       # ═══════════════════════════════════════════════════════════════════
+#       # Priority 3: Supplemental Knowledge (Execute Last)
+#       # ═══════════════════════════════════════════════════════════════════
+#       # Nice-to-know information for context
+#
+#       - query: "deployment infrastructure CI/CD environments configuration secrets"
+#         priority: 3
+#         description: "Deployment and infrastructure context"
+#         category: "operations"
+#
+#       - query: "performance optimization caching scaling bottlenecks profiling"
+#         priority: 3
+#         description: "Performance considerations and patterns"
+#         category: "performance"
+#
+#       # Example: For user-facing applications
+#       # - query: "frontend architecture components state management routing"
+#       #   priority: 3
+#       #   description: "Frontend structure and patterns"
+#       #   category: "frontend"
+#
+#       # Example: For security-critical systems
+#       # - query: "security practices authentication encryption secrets compliance"
+#       #   priority: 3
+#       #   description: "Security requirements and patterns"
+#       #   category: "security"
+#
+# 📚 Full Documentation & Examples:
+#   Guide: dist/universal/standards/ai-assistant/project-orientation-guide.md
+#   YAML Example: dist/universal/templates/orientation/mcp.yaml.example
+#   Markdown Example: dist/universal/templates/orientation/PROJECT-ORIENTATION-EXAMPLE.md
+#
+# 💡 TIP: Start simple (3-5 queries), test with a new conversation, iterate!
+#         You can always add more queries as you discover what AI needs to know.
