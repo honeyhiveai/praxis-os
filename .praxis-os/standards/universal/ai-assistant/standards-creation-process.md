@@ -1,20 +1,23 @@
 # Standards Creation Process
 
-**Standard for creating, structuring, and maintaining standards in prAxIs OS.**
+**Standard for creating, structuring, and maintaining project-specific standards in prAxIs OS.**
+
+**Audience:** Project teams creating standards for how THIS project works.
 
 ---
 
 ## 🎯 TL;DR - Standards Creation Quick Reference
 
-**Keywords for search**: standards creation, creating standards, standards process, how to write standards, standards structure, standards template, standards quality, maintaining standards
+**Keywords for search**: standards creation, creating standards, project standards, how to write standards, standards structure, standards template, standards quality, maintaining standards, project-specific patterns
 
-**Core Principle:** Standards define "how to work" guidelines that shape AI agent behavior and code quality. Create them when you need reusable, consistent processes.
+**Core Principle:** Standards define "how to work" guidelines for THIS PROJECT that shape AI agent behavior and code quality. Create them when you need reusable, consistent processes specific to your project's conventions, architecture, and domain.
 
 **When to Create a Standard:**
-- ✅ Process/methodology needs consistency
-- ✅ Quality criteria needs definition
-- ✅ Best practices need documentation
-- ✅ Constraints/rules need enforcement
+- ✅ THIS PROJECT's process/methodology needs consistency
+- ✅ THIS PROJECT's quality criteria needs definition
+- ✅ THIS PROJECT's best practices need documentation
+- ✅ THIS PROJECT's constraints/rules need enforcement
+- ✅ Patterns you want future AI sessions to learn about THIS project
 - ❌ NOT for one-time tasks or feature designs (use specs)
 
 **Standard Structure (Required Sections):**
@@ -73,36 +76,58 @@
 
 ## 🎯 Purpose
 
-Define how to create new standards, when to create them, and how to structure them for maximum effectiveness. Standards are the "how to work" guidelines that shape agent behavior and code quality.
+Define how to create project-specific standards, when to create them, and how to structure them for maximum effectiveness. Standards are the "how to work" guidelines for THIS PROJECT that shape agent behavior and code quality.
 
 **Key Distinction**: Standards vs Specs
-- **Standards**: Guidelines for HOW to work (this is a standard)
+- **Standards**: Guidelines for HOW THIS PROJECT works (this is a standard)
 - **Specs**: Design docs for WHAT to build (features/implementations)
+
+**What are project-specific standards?**
+Project-specific standards capture THIS PROJECT's conventions, patterns, and architecture decisions. They enable future AI sessions to query: "How does authentication work in THIS project?" or "What's our API design pattern?" or "How do we test components in THIS project?"
+
+**Why project-specific standards matter:**
+- ✅ **Future AI sessions learn YOUR project** - New AI sessions query standards to understand how THIS project works
+- ✅ **Consistent patterns** - Team members (human and AI) follow the same approaches
+- ✅ **Onboarding knowledge** - New developers query to learn project conventions
+- ✅ **Persistent memory** - Standards persist across conversations and sessions
+- ✅ **Discoverable patterns** - RAG-optimized for natural language queries
+
+**Example workflow:**
+```python
+# New AI session starts working on your project
+pos_search_project(content_type="standards", query="how to authenticate API requests in this project")
+# Returns: .praxis-os/standards/development/api-authentication-pattern.md
+
+pos_search_project(content_type="standards", query="how to structure React components here")
+# Returns: .praxis-os/standards/development/react-component-architecture.md
+```
 
 ---
 
 ## When Should I Create a Standard?
 
-Create a standard when you need reusable, consistent guidelines for recurring processes or behaviors.
+Create a standard when you need reusable, consistent guidelines for how THIS PROJECT works.
 
 Create a standard when you need to define:
-- ✅ **Process/methodology** - How to do something consistently
-- ✅ **Quality criteria** - What "good" looks like
-- ✅ **Best practices** - Patterns that work well
-- ✅ **Constraints/rules** - Things that must/must not be done
-- ✅ **Behavioral patterns** - How agents should act
+- ✅ **THIS PROJECT's process/methodology** - How we do something consistently
+- ✅ **THIS PROJECT's quality criteria** - What "good" looks like here
+- ✅ **THIS PROJECT's best practices** - Patterns that work well for us
+- ✅ **THIS PROJECT's constraints/rules** - Things that must/must not be done here
+- ✅ **THIS PROJECT's architecture patterns** - How our systems are designed
+- ✅ **Knowledge for future AI sessions** - "How does X work in THIS project?"
 
-**Examples of standards:**
-- Production code checklist
-- Testing standards  
-- RAG content authoring
-- Git safety rules
-- Documentation patterns
+**Examples of project-specific standards:**
+- Our API authentication pattern (how THIS project does auth)
+- Our database migration workflow (how THIS project handles migrations)
+- Our testing strategy (how THIS project structures tests)
+- Our documentation conventions (how THIS project documents code)
+- Our deployment process (how THIS project deploys)
+- Our component architecture (how THIS project organizes components)
 
 Do NOT create a standard for:
 - ❌ Feature designs (use specs)
 - ❌ One-time tasks (just do them)
-- ❌ Project-specific details (document in project README)
+- ❌ General "getting started" info (put in project README)
 
 ---
 
@@ -469,24 +494,28 @@ pos_search_project(content_type="standards", query="[topic] anti-patterns")
 
 ### Step 7: Place in Correct Directory
 
-**Standards location**: `universal/standards/[category]/[standard-name].md`
+**Project-specific standards location**: `.praxis-os/standards/development/[standard-name].md`
 
-**Categories:**
-- `ai-assistant/` - How AI agents should work
-- `ai-safety/` - Safety constraints and rules
-- `architecture/` - Architectural patterns
-- `concurrency/` - Concurrency standards
-- `database/` - Database patterns
-- `documentation/` - Documentation standards
-- `failure-modes/` - Error handling patterns
-- `installation/` - Installation/upgrade procedures
-- `meta-workflow/` - Framework creation/maintenance
-- `performance/` - Performance optimization
-- `security/` - Security patterns
-- `testing/` - Testing standards
-- `workflows/` - Workflow system standards
+**Naming conventions:**
+- Use descriptive, kebab-case names: `api-authentication-pattern.md`
+- Include domain context: `database-migration-workflow.md` not `migrations.md`
+- Be specific to your project: `react-component-architecture.md` not `components.md`
 
-**Create new category** if none fit (but query first to see if it should merge with existing).
+**Organization tips:**
+- All project-specific standards go in `.praxis-os/standards/development/`
+- No need for subcategories (flat structure works best for project-specific)
+- Name standards for discoverability: future AI sessions should guess the filename
+
+**Examples:**
+```
+.praxis-os/standards/development/
+├── api-authentication-pattern.md
+├── database-migration-workflow.md
+├── react-component-architecture.md
+├── testing-strategy.md
+├── deployment-process.md
+└── documentation-conventions.md
+```
 
 ### Step 8: Test with Real Usage
 
@@ -500,9 +529,9 @@ pos_search_project(content_type="standards", query="[topic] anti-patterns")
 
 **Iterate** based on actual usage.
 
-### Step 9: Ship to `universal/`
+### Step 9: Commit and Verify Indexing
 
-Commit to `universal/standards/[category]/[name].md`.
+Commit to `.praxis-os/standards/development/[name].md`.
 
 File watcher will detect and reindex within 30 seconds.
 
@@ -510,6 +539,8 @@ Verify it's indexed:
 ```python
 pos_search_project(content_type="standards", query="[your standard topic]")
 ```
+
+**Note:** Project-specific standards stay in YOUR project. They don't ship to other projects or get distributed. They're specific to how THIS project works.
 
 ---
 
@@ -569,15 +600,15 @@ Code must:
 
 **Wrong thinking**: "I need to design a new testing approach" → Create spec
 
-**Right thinking**: "I need to define how we test" → Create standard
+**Right thinking**: "I need to define how THIS PROJECT tests" → Create standard
 
-**Test**: Does this define HOW to work (standard) or WHAT to build (spec)?
+**Test**: Does this define HOW THIS PROJECT works (standard) or WHAT to build (spec)?
 
 ---
 
 ### Anti-Pattern 3: Duplicating Existing Standards
 
-**Wrong**: Creating `python-testing-best-practices.md` when `testing/test-pyramid.md` already exists
+**Wrong**: Creating `testing-best-practices.md` when you already have `testing-strategy.md`
 
 **Right**: Update existing standard or link to it
 
@@ -585,6 +616,10 @@ Code must:
 ```python
 pos_search_project(content_type="standards", query="[topic you're covering]")
 ```
+
+**Note:** You may have standards that extend universal standards with project-specific details. That's fine! Example:
+- Universal: `standards/universal/testing/test-pyramid.md` (general principles)
+- Yours: `.praxis-os/standards/development/testing-strategy.md` (how THIS PROJECT applies those principles)
 
 ---
 
@@ -673,14 +708,23 @@ pos_search_project(content_type="standards", query="[topic] anti-patterns")
 
 ## What Examples of Good Standards Exist?
 
-Learn from these exemplar prAxIs OS standards that demonstrate best practices.
+Learn from existing project-specific standards that demonstrate best practices.
 
-Study these as templates:
+**Universal standards** (shipped with Praxis OS - learn from these):
+- `standards/universal/testing/test-pyramid.md` - Testing principles
+- `standards/universal/documentation/rag-content-authoring.md` - RAG optimization
+- `standards/universal/ai-safety/production-code-checklist.md` - Code quality
 
-- `standards/ai-safety/production-code-checklist.md` - Comprehensive checklist format
-- `standards/testing/test-pyramid.md` - Clear principles with examples
-- `standards/workflows/workflow-construction-standards.md` - Structural guidelines
-- `standards/documentation/rag-content-authoring.md` - RAG optimization
+**Project-specific standards examples** (what you'll create):
+- `.praxis-os/standards/development/api-authentication-pattern.md` - How THIS project does auth
+- `.praxis-os/standards/development/database-migration-workflow.md` - How THIS project handles migrations
+- `.praxis-os/standards/development/react-component-architecture.md` - How THIS project structures components
+- `.praxis-os/standards/development/testing-strategy.md` - How THIS project tests code
+
+**Query to see what standards exist in your project:**
+```python
+pos_search_project(content_type="standards", query="project standards development")
+```
 
 ---
 
@@ -754,7 +798,7 @@ Track effectiveness:
 ## 📞 Questions?
 
 **How do I know if something should be a standard vs a spec?**
-→ Ask: "Is this HOW to work (standard) or WHAT to build (spec)?"
+→ Ask: "Is this HOW THIS PROJECT works (standard) or WHAT to build (spec)?"
 
 **Can I create a standard without formal approval?**
 → Yes! prAxIs OS is dogfooded. Experience a need → Create standard → Test it → Ship it.
@@ -812,5 +856,5 @@ Track effectiveness:
 
 ---
 
-**Remember**: Standards emerge from real experience. If you hit a problem that needs consistency, create the standard. Don't wait for permission. Dogfood it. Ship it.
+**Remember**: Project-specific standards are how you teach future AI sessions (and team members) about how THIS PROJECT works. Create them when you establish patterns you want consistently followed. They're persistent knowledge for THIS codebase.
 
