@@ -821,63 +821,53 @@ orientation:
         priority: 1
         category: "foundational"
         description: "Core architectural truth about AI agent statelessness"
-        filters: {}
 
       - query: "AI capabilities trust unlimited sessions context compaction safe query liberally"
         priority: 1
         category: "behavioral"
         description: "Psychological safety for AI agents"
-        filters: {}
 
       - query: "query-first decision protocol grep-first before file operations pause query"
         priority: 1
         category: "behavioral"
         description: "Decision protocol and behavioral foundation"
-        filters: {}
 
       # Priority 2: Important Contextual Knowledge
       - query: "user asks build something what do first discuss spec implement three-phase"
         priority: 2
         category: "workflow"
         description: "Three-phase development workflow"
-        filters: {}
 
       - query: "code author role behavior implement query test lint complete"
         priority: 2
         category: "role"
         description: "Code author role expectations"
-        filters: {}
 
       - query: "content-specific phrases unique values avoid generic structural query construction"
         priority: 2
         category: "technical"
         description: "Query construction patterns"
-        filters: {}
 
       - query: "single query syndrome 5-10 times multi-angle comprehensive discovery"
         priority: 2
         category: "behavioral"
         description: "Multi-angle querying best practice"
-        filters: {}
 
       # Priority 3: Supplemental Knowledge
       - query: "workflow discovery dynamic don't memorize workflow names query for task"
         priority: 3
         category: "workflow"
         description: "Workflow discovery patterns"
-        filters: {}
 
       - query: ".praxis-os/standards indexed query not read universal workflows usage"
         priority: 3
         category: "technical"
         description: "Indexed files and read patterns"
-        filters: {}
 
       - query: "AI agent quickstart wrong right examples helper mode implementer concrete scenarios"
         priority: 3
         category: "practical"
         description: "Practical behavioral examples"
-        filters: {}
 
 # ============================================================================
 # Project Orientation (CUSTOMIZE THIS FOR YOUR PROJECT!)
